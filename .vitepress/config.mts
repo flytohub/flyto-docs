@@ -128,11 +128,48 @@ export default defineConfig({
   description: 'Documentation for Flyto2 — Enterprise Workflow Platform',
   lang: 'en-US',
   cleanUrls: true,
+  sitemap: { hostname: 'https://docs.flyto2.com' },
+  lastUpdated: true,
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
-    ['meta', { name: 'og:type', content: 'website' }],
-    ['meta', { name: 'og:site_name', content: 'Flyto2 Docs' }],
+    ['link', { rel: 'canonical', href: 'https://docs.flyto2.com' }],
+    // Open Graph
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:site_name', content: 'Flyto2 Docs' }],
+    ['meta', { property: 'og:title', content: 'Flyto2 Docs — Enterprise Workflow Platform' }],
+    ['meta', { property: 'og:description', content: 'Documentation for Flyto2 — 412+ modules, MCP server, AI agents, code intelligence, and workflow automation.' }],
+    ['meta', { property: 'og:url', content: 'https://docs.flyto2.com' }],
+    ['meta', { property: 'og:image', content: 'https://docs.flyto2.com/og-image.png' }],
+    ['meta', { property: 'og:locale', content: 'en_US' }],
+    // Twitter Card
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:title', content: 'Flyto2 Docs — Enterprise Workflow Platform' }],
+    ['meta', { name: 'twitter:description', content: 'Documentation for Flyto2 — 412+ modules, MCP server, AI agents, code intelligence, and workflow automation.' }],
+    ['meta', { name: 'twitter:image', content: 'https://docs.flyto2.com/og-image.png' }],
+    // SEO
+    ['meta', { name: 'keywords', content: 'flyto2, workflow automation, MCP server, modules, enterprise platform, code intelligence, AI agents, flyto-core, flyto-ai, flyto-indexer' }],
+    ['meta', { name: 'author', content: 'Flyto2 Team' }],
+    ['meta', { name: 'robots', content: 'index, follow' }],
+    // JSON-LD structured data
+    ['script', { type: 'application/ld+json' }, JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Flyto2 Docs',
+      description: 'Documentation for Flyto2 — Enterprise Workflow Platform with 412+ modules.',
+      url: 'https://docs.flyto2.com',
+      publisher: {
+        '@type': 'Organization',
+        name: 'Flyto2',
+        url: 'https://flyto2.com',
+        logo: { '@type': 'ImageObject', url: 'https://docs.flyto2.com/logo.png' },
+      },
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: 'https://docs.flyto2.com/?q={search_term_string}',
+        'query-input': 'required name=search_term_string',
+      },
+    })],
   ],
 
   locales: {
