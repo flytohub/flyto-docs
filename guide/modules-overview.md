@@ -48,8 +48,10 @@ Each module has:
 
 See individual module pages for details:
 - [Browser](/modules/browser)
-- [File System](/modules/file-system)
+- [File Operations](/modules/file-operations)
 - [Docker](/modules/docker)
-- [Data Parsing](/modules/data-parsing)
+- [Data Transform](/modules/data-transform)
 - [Crypto](/modules/crypto)
-- [Scheduling](/modules/scheduling)
+- [Scheduler](/modules/scheduler)
+
+Browse the full [module reference](/modules/) for all 55 categories.
