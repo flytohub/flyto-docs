@@ -1,4 +1,128 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, type DefaultTheme } from 'vitepress'
+
+// ---------------------------------------------------------------------------
+// Shared sidebar definition (reused across locales)
+// ---------------------------------------------------------------------------
+
+function modulesSidebar(prefix = ''): DefaultTheme.SidebarItem[] {
+  const p = prefix ? `/${prefix}` : ''
+  return [
+    {
+      text: 'Modules',
+      items: [
+        { text: 'Overview', link: `${p}/modules/` },
+      ],
+    },
+    {
+      text: 'Core',
+      collapsed: false,
+      items: [
+        { text: 'Browser Automation', link: `${p}/modules/browser` },
+        { text: 'Atomic', link: `${p}/modules/atomic` },
+        { text: 'Flow Control', link: `${p}/modules/flow-control` },
+        { text: 'File Operations', link: `${p}/modules/file-operations` },
+        { text: 'Sandbox', link: `${p}/modules/sandbox` },
+        { text: 'Element', link: `${p}/modules/element` },
+        { text: 'Stealth', link: `${p}/modules/stealth` },
+      ],
+    },
+    {
+      text: 'Data',
+      collapsed: false,
+      items: [
+        { text: 'Data Transform', link: `${p}/modules/data-transform` },
+        { text: 'Array Operations', link: `${p}/modules/array` },
+        { text: 'String Operations', link: `${p}/modules/string` },
+        { text: 'Object Operations', link: `${p}/modules/object-operations` },
+        { text: 'Text', link: `${p}/modules/text` },
+        { text: 'Regex', link: `${p}/modules/regex` },
+        { text: 'Convert', link: `${p}/modules/convert` },
+        { text: 'Format', link: `${p}/modules/format` },
+        { text: 'Set', link: `${p}/modules/set` },
+        { text: 'Template', link: `${p}/modules/template` },
+        { text: 'Markdown', link: `${p}/modules/markdown` },
+      ],
+    },
+    {
+      text: 'Infrastructure',
+      collapsed: false,
+      items: [
+        { text: 'Cloud Services', link: `${p}/modules/cloud` },
+        { text: 'API Tools', link: `${p}/modules/api-tools` },
+        { text: 'Database', link: `${p}/modules/database` },
+        { text: 'Docker', link: `${p}/modules/docker` },
+        { text: 'Kubernetes', link: `${p}/modules/k8s` },
+        { text: 'Network', link: `${p}/modules/network` },
+        { text: 'Cache', link: `${p}/modules/cache` },
+        { text: 'Queue', link: `${p}/modules/queue` },
+        { text: 'Storage', link: `${p}/modules/storage` },
+        { text: 'GraphQL', link: `${p}/modules/graphql` },
+        { text: 'HTTP', link: `${p}/modules/http` },
+      ],
+    },
+    {
+      text: 'Integrations',
+      collapsed: false,
+      items: [
+        { text: 'AI & LLM', link: `${p}/modules/ai-llm` },
+        { text: 'Notifications', link: `${p}/modules/notification` },
+        { text: 'Productivity', link: `${p}/modules/productivity` },
+        { text: 'Document', link: `${p}/modules/document` },
+        { text: 'Image Processing', link: `${p}/modules/image` },
+      ],
+    },
+    {
+      text: 'Quality',
+      collapsed: false,
+      items: [
+        { text: 'Verify', link: `${p}/modules/verify` },
+        { text: 'Validate', link: `${p}/modules/validate` },
+        { text: 'Check', link: `${p}/modules/check` },
+        { text: 'Analysis', link: `${p}/modules/analysis` },
+        { text: 'Testing', link: `${p}/modules/testing` },
+        { text: 'Compare', link: `${p}/modules/compare` },
+      ],
+    },
+    {
+      text: 'Utilities',
+      collapsed: true,
+      items: [
+        { text: 'Utilities', link: `${p}/modules/utility` },
+        { text: 'Stats', link: `${p}/modules/stats` },
+        { text: 'Crypto', link: `${p}/modules/crypto` },
+        { text: 'Encode / Decode', link: `${p}/modules/encode-decode` },
+        { text: 'Archive', link: `${p}/modules/archive` },
+        { text: 'Path', link: `${p}/modules/path` },
+        { text: 'Math', link: `${p}/modules/math` },
+        { text: 'Logic', link: `${p}/modules/logic` },
+        { text: 'Random', link: `${p}/modules/random` },
+        { text: 'Meta', link: `${p}/modules/meta` },
+        { text: 'Environment', link: `${p}/modules/env` },
+        { text: 'Error Handling', link: `${p}/modules/error-handling` },
+        { text: 'Scheduler', link: `${p}/modules/scheduler` },
+        { text: 'Hash', link: `${p}/modules/hash` },
+        { text: 'Output', link: `${p}/modules/output` },
+      ],
+    },
+  ]
+}
+
+// ---------------------------------------------------------------------------
+// Locale config helper — each locale only has translated module pages,
+// so guide/core/mcp sidebars only appear for the root (en) locale.
+// ---------------------------------------------------------------------------
+
+function localeModulesConfig(prefix: string): DefaultTheme.Config {
+  return {
+    sidebar: {
+      [`/${prefix}/modules/`]: modulesSidebar(prefix),
+    },
+    footer: {
+      message: 'Released under the Apache 2.0 License.',
+      copyright: `Copyright 2025-${new Date().getFullYear()} Flyto2`,
+    },
+  }
+}
 
 export default defineConfig({
   title: 'Flyto2 Docs',
@@ -11,6 +135,83 @@ export default defineConfig({
     ['meta', { name: 'og:type', content: 'website' }],
     ['meta', { name: 'og:site_name', content: 'Flyto2 Docs' }],
   ],
+
+  locales: {
+    root: {
+      label: 'English',
+      lang: 'en-US',
+    },
+    'zh-TW': {
+      label: '繁體中文',
+      lang: 'zh-TW',
+      themeConfig: localeModulesConfig('zh-TW'),
+    },
+    ja: {
+      label: '日本語',
+      lang: 'ja',
+      themeConfig: localeModulesConfig('ja'),
+    },
+    ko: {
+      label: '한국어',
+      lang: 'ko',
+      themeConfig: localeModulesConfig('ko'),
+    },
+    fr: {
+      label: 'Français',
+      lang: 'fr',
+      themeConfig: localeModulesConfig('fr'),
+    },
+    es: {
+      label: 'Español',
+      lang: 'es',
+      themeConfig: localeModulesConfig('es'),
+    },
+    de: {
+      label: 'Deutsch',
+      lang: 'de',
+      themeConfig: localeModulesConfig('de'),
+    },
+    'pt-BR': {
+      label: 'Português (Brasil)',
+      lang: 'pt-BR',
+      themeConfig: localeModulesConfig('pt-BR'),
+    },
+    hi: {
+      label: 'हिन्दी',
+      lang: 'hi',
+      themeConfig: localeModulesConfig('hi'),
+    },
+    vi: {
+      label: 'Tiếng Việt',
+      lang: 'vi',
+      themeConfig: localeModulesConfig('vi'),
+    },
+    id: {
+      label: 'Bahasa Indonesia',
+      lang: 'id',
+      themeConfig: localeModulesConfig('id'),
+    },
+    th: {
+      label: 'ภาษาไทย',
+      lang: 'th',
+      themeConfig: localeModulesConfig('th'),
+    },
+    tr: {
+      label: 'Türkçe',
+      lang: 'tr',
+      themeConfig: localeModulesConfig('tr'),
+    },
+    pl: {
+      label: 'Polski',
+      lang: 'pl',
+      themeConfig: localeModulesConfig('pl'),
+    },
+    it: {
+      label: 'Italiano',
+      lang: 'it',
+      themeConfig: localeModulesConfig('it'),
+    },
+  },
 
   themeConfig: {
     logo: '/logo.png',
@@ -65,105 +266,7 @@ export default defineConfig({
           ],
         },
       ],
-      '/modules/': [
-        {
-          text: 'Modules',
-          items: [
-            { text: 'Overview', link: '/modules/' },
-          ],
-        },
-        {
-          text: 'Core',
-          collapsed: false,
-          items: [
-            { text: 'Browser Automation', link: '/modules/browser' },
-            { text: 'Atomic', link: '/modules/atomic' },
-            { text: 'Flow Control', link: '/modules/flow-control' },
-            { text: 'File Operations', link: '/modules/file-operations' },
-            { text: 'Sandbox', link: '/modules/sandbox' },
-            { text: 'Element', link: '/modules/element' },
-            { text: 'Stealth', link: '/modules/stealth' },
-          ],
-        },
-        {
-          text: 'Data',
-          collapsed: false,
-          items: [
-            { text: 'Data Transform', link: '/modules/data-transform' },
-            { text: 'Array Operations', link: '/modules/array' },
-            { text: 'String Operations', link: '/modules/string' },
-            { text: 'Object Operations', link: '/modules/object-operations' },
-            { text: 'Text', link: '/modules/text' },
-            { text: 'Regex', link: '/modules/regex' },
-            { text: 'Convert', link: '/modules/convert' },
-            { text: 'Format', link: '/modules/format' },
-            { text: 'Set', link: '/modules/set' },
-            { text: 'Template', link: '/modules/template' },
-            { text: 'Markdown', link: '/modules/markdown' },
-          ],
-        },
-        {
-          text: 'Infrastructure',
-          collapsed: false,
-          items: [
-            { text: 'Cloud Services', link: '/modules/cloud' },
-            { text: 'API Tools', link: '/modules/api-tools' },
-            { text: 'Database', link: '/modules/database' },
-            { text: 'Docker', link: '/modules/docker' },
-            { text: 'Kubernetes', link: '/modules/k8s' },
-            { text: 'Network', link: '/modules/network' },
-            { text: 'Cache', link: '/modules/cache' },
-            { text: 'Queue', link: '/modules/queue' },
-            { text: 'Storage', link: '/modules/storage' },
-            { text: 'GraphQL', link: '/modules/graphql' },
-            { text: 'HTTP', link: '/modules/http' },
-          ],
-        },
-        {
-          text: 'Integrations',
-          collapsed: false,
-          items: [
-            { text: 'AI & LLM', link: '/modules/ai-llm' },
-            { text: 'Notifications', link: '/modules/notification' },
-            { text: 'Productivity', link: '/modules/productivity' },
-            { text: 'Document', link: '/modules/document' },
-            { text: 'Image Processing', link: '/modules/image' },
-          ],
-        },
-        {
-          text: 'Quality',
-          collapsed: false,
-          items: [
-            { text: 'Verify', link: '/modules/verify' },
-            { text: 'Validate', link: '/modules/validate' },
-            { text: 'Check', link: '/modules/check' },
-            { text: 'Analysis', link: '/modules/analysis' },
-            { text: 'Testing', link: '/modules/testing' },
-            { text: 'Compare', link: '/modules/compare' },
-          ],
-        },
-        {
-          text: 'Utilities',
-          collapsed: true,
-          items: [
-            { text: 'Utilities', link: '/modules/utility' },
-            { text: 'Stats', link: '/modules/stats' },
-            { text: 'Crypto', link: '/modules/crypto' },
-            { text: 'Encode / Decode', link: '/modules/encode-decode' },
-            { text: 'Archive', link: '/modules/archive' },
-            { text: 'Path', link: '/modules/path' },
-            { text: 'Math', link: '/modules/math' },
-            { text: 'Logic', link: '/modules/logic' },
-            { text: 'Random', link: '/modules/random' },
-            { text: 'Meta', link: '/modules/meta' },
-            { text: 'Environment', link: '/modules/env' },
-            { text: 'Error Handling', link: '/modules/error-handling' },
-            { text: 'Scheduler', link: '/modules/scheduler' },
-            { text: 'Hash', link: '/modules/hash' },
-            { text: 'Output', link: '/modules/output' },
-          ],
-        },
-      ],
+      '/modules/': modulesSidebar(),
     },
 
     socialLinks: [

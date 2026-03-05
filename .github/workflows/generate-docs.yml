@@ -1,0 +1,57 @@
+name: Regenerate Module Docs
+
+on:
+  repository_dispatch:
+    types: [flyto-core-updated, flyto-i18n-updated]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Clone flyto-core
+        uses: actions/checkout@v4
+        with:
+          repository: flytohub/flyto-core
+          path: _flyto-core
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+
+      - name: Clone flyto-i18n
+        uses: actions/checkout@v4
+        with:
+          repository: flytohub/flyto-i18n
+          path: _flyto-i18n
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+
+      - name: Install flyto-core dependencies
+        run: |
+          cd _flyto-core
+          pip install -e . 2>/dev/null || pip install -r requirements.txt 2>/dev/null || true
+
+      - name: Generate module docs
+        env:
+          FLYTO_CORE_PATH: ${{ github.workspace }}/_flyto-core
+          FLYTO_I18N_PATH: ${{ github.workspace }}/_flyto-i18n
+        run: |
+          python scripts/generate-docs.py --all-locales
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add modules/ zh-TW/ ja/ ko/ fr/ es/ de/ pt-BR/ hi/ vi/ id/ th/ tr/ pl/ it/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "docs: regenerate module pages from flyto-core + flyto-i18n"
+            git push
+          fi

@@ -1,0 +1,172 @@
+# Validate
+
+Validate email, URL, phone, IP, UUID, credit card, and JSON Schema.
+
+**7 modules**
+
+| Module | Description |
+|--------|-------------|
+| [Validate Credit Card](#validate-credit-card) | Validate credit card number using Luhn algorithm |
+| [Validate Email](#validate-email) | Validate email address format |
+| [Validate IP](#validate-ip) | Validate IPv4 or IPv6 address format |
+| [Validate JSON Schema](#validate-json-schema) | Validate JSON data against a JSON Schema |
+| [Validate Phone](#validate-phone) | Validate phone number format |
+| [Validate URL](#validate-url) | Validate URL format and structure |
+| [Validar UUID](#validar-uuid) | Validar formato e versão do UUID |
+
+## Modules
+
+### Validate Credit Card
+
+`validate.credit_card`
+
+Validate credit card number using Luhn algorithm
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `card_number` | string | Yes | - | Credit card number to validate |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `valid` | boolean | Credit card number to validate |
+| `card_type` | string | Whether the card number is valid |
+| `masked` | string | Whether the card number is valid |
+| `luhn_valid` | boolean | Masked card number (****1234) |
+
+### Validate Email
+
+`validate.email`
+
+Validate email address format
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `email` | string | Yes | - | Email address to validate |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `valid` | boolean | Email address to validate |
+| `email` | string | Whether the email is valid |
+| `local_part` | string | Whether the email is valid |
+| `domain` | string | The validated email |
+
+### Validate IP
+
+`validate.ip`
+
+Validate IPv4 or IPv6 address format
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `ip` | string | Yes | - | IP address to validate |
+| `version` | string | No | `any` | IP address to validate |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `valid` | boolean | Whether the IP address is valid |
+| `ip` | string | Whether the IP address is valid |
+| `version` | string | Whether the IP address is valid |
+| `is_private` | boolean | The validated IP address |
+| `is_loopback` | boolean | Detected IP version (v4 or v6) |
+
+### Validate JSON Schema
+
+`validate.json_schema`
+
+Validate JSON data against a JSON Schema
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `data` | text | Yes | - | JSON data to validate (string or object) |
+| `schema` | text | Yes | - | JSON data to validate (string or object) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `valid` | boolean | JSON Schema to validate against |
+| `errors` | array | Whether the data is valid |
+| `error_count` | number | Whether the data is valid |
+
+### Validate Phone
+
+`validate.phone`
+
+Validate phone number format
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `phone` | string | Yes | - | Phone number to validate |
+| `region` | string | No | `international` | Phone number to validate |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `valid` | boolean | Whether the phone number is valid |
+| `phone` | string | Whether the phone number is valid |
+| `normalized` | string | Whether the phone number is valid |
+| `region` | string | The validated phone number |
+
+### Validate URL
+
+`validate.url`
+
+Validate URL format and structure
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `url` | string | Yes | - | URL para validar |
+| `require_https` | boolean | No | `False` | URL para validar |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `valid` | boolean | Aceitar apenas URLs HTTPS |
+| `url` | string | Se a URL é válida |
+| `scheme` | string | Se a URL é válida |
+| `host` | string | The validated URL |
+| `port` | number | Esquema de URL (http, https, etc) |
+| `path` | string | Host/domain name |
+| `query` | string | Número da porta, se especificado |
+
+### Validar UUID
+
+`validate.uuid`
+
+Validar formato e versão do UUID
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `uuid` | string | Yes | - | UUID para validar |
+| `version` | number | No | `0` | UUID para validar |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `valid` | boolean | Versão esperada do UUID (1-5, ou 0 para qualquer) |
+| `uuid` | string | Se o UUID é válido |
+| `version` | number | Se o UUID é válido |
+| `variant` | string | O UUID validado |

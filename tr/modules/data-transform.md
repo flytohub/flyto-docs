@@ -1,0 +1,507 @@
+# Data Transform
+
+CSV, JSON, XML, YAML parsing, generation, and pipeline transformations.
+
+**16 modules**
+
+| Module | Description |
+|--------|-------------|
+| [CSV Dosyası Oku](#csv-dosyası-oku) | CSV dosyasını oku ve nesne dizisine ayrıştır |
+| [CSV Dosyası Yaz](#csv-dosyası-yaz) | Nesne dizisini CSV dosyasına yaz |
+| [JSON Ayrıştır](#json-ayrıştır) | JSON dizesini nesneye ayrıştır |
+| [JSON Dizeye Çevir](#json-dizeye-çevir) | Nesneyi JSON dizesine dönüştür |
+| [JSON'dan CSV'ye](#json'dan-csv'ye) | JSON verilerini veya dosyalarını CSV formatına dönüştür |
+| [Veri Hattı](#veri-hattı) | Bir adımda birden fazla veri dönüşümünü zincirleyin |
+| [Metin Şablonu](#metin-şablonu) | Metin şablonunu değişkenlerle doldur |
+| [XML Oluştur](#xml-oluştur) | Nesne veya diziden XML dizesi oluştur |
+| [XML Ayrıştır](#xml-ayrıştır) | XML dizesini nesneye ayrıştır |
+| [YAML Oluştur](#yaml-oluştur) | Nesne veya diziden YAML dizesi oluştur |
+| [YAML Ayrıştır](#yaml-ayrıştır) | YAML dizesini nesneye ayrıştır |
+| [Nesne Anahtarları](#nesne-anahtarları) | Nesneden tüm anahtarları al |
+| [Nesne Birleştir](#nesne-birleştir) | Birden fazla nesneyi tek bir nesneye birleştir |
+| [Nesne Çıkar](#nesne-çıkar) | Nesneden belirli anahtarları çıkar |
+| [Nesne Seç](#nesne-seç) | Nesneden belirli anahtarları seç |
+| [Nesne Değerleri](#nesne-değerleri) | Nesneden tüm değerleri al |
+
+## Modules
+
+### CSV Dosyası Oku
+
+`data.csv.read`
+
+CSV dosyasını oku ve nesne dizisine ayrıştır
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `path` | string | Yes | - | Path to the file |
+| `delimiter` | select (`,`, `;`, `	`, `|`, ` `) | No | `,` | Character used to separate values |
+| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | Character encoding for the file |
+| `skip_header` | boolean | No | `False` | Skip first row (header) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `status` | string | İşlem durumu |
+| `data` | array | İşlem durumu |
+| `rows` | number | İşlem durumu |
+| `columns` | array | Satır nesneleri dizisi |
+
+**Example:** Example
+
+```yaml
+file_path: data/users.csv
+delimiter: ,
+encoding: utf-8
+```
+
+### CSV Dosyası Yaz
+
+`data.csv.write`
+
+Nesne dizisini CSV dosyasına yaz
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `path` | string | Yes | - | Path to the file |
+| `data` | array | Yes | - | Array of data items to process |
+| `delimiter` | select (`,`, `;`, `	`, `|`, ` `) | No | `,` | Character used to separate values |
+| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | Character encoding for the file |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `status` | string | İşlem durumu |
+| `file_path` | string | İşlem durumu |
+| `rows_written` | number | İşlem durumu |
+
+**Example:** Example
+
+```yaml
+file_path: output/results.csv
+data: [{"name": "John", "score": 95}, {"name": "Jane", "score": 87}]
+```
+
+### JSON Ayrıştır
+
+`data.json.parse`
+
+JSON dizesini nesneye ayrıştır
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `json_string` | string | Yes | - | JSON string to parse into an object or array |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `status` | string | İşlem durumu |
+| `data` | object | İşlem durumu |
+
+**Example:** Example
+
+```yaml
+json_string: {"name": "John", "age": 30}
+```
+
+### JSON Dizeye Çevir
+
+`data.json.stringify`
+
+Nesneyi JSON dizesine dönüştür
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `data` | object | Yes | - | Data object to process |
+| `pretty` | boolean | No | `False` | Format with indentation |
+| `indent` | number | No | `2` | Indentation spaces (if pretty=true) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `status` | string | İşlem durumu |
+| `json` | string | İşlem durumu |
+
+**Example:** Example
+
+```yaml
+data: {"name": "John", "age": 30}
+pretty: true
+```
+
+### JSON'dan CSV'ye
+
+`data.json_to_csv`
+
+JSON verilerini veya dosyalarını CSV formatına dönüştür
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `input_data` | any | Yes | - | JSON data (array of objects) or path to JSON file |
+| `output_path` | string | No | `/tmp/output.csv` | Path where the output file will be saved |
+| `delimiter` | select (`,`, `;`, `	`, `|`, ` `) | No | `,` | Character used to separate values |
+| `include_header` | boolean | No | `True` | Include column headers in first row |
+| `flatten_nested` | boolean | No | `True` | Flatten nested objects using dot notation (e.g., address.city) |
+| `columns` | array | No | `[]` | Specific columns to include (empty = all columns) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `output_path` | string | Oluşturulan CSV dosyasının yolu |
+| `row_count` | number | Oluşturulan CSV dosyasının yolu |
+| `column_count` | number | Oluşturulan CSV dosyasının yolu |
+| `columns` | array | Yazılan satır sayısı |
+
+**Example:** Convert JSON array to CSV
+
+```yaml
+input_data: [{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]
+output_path: /tmp/users.csv
+```
+
+**Example:** Convert JSON file
+
+```yaml
+input_data: /path/to/data.json
+output_path: /path/to/output.csv
+```
+
+### Veri Hattı
+
+`data.pipeline`
+
+Bir adımda birden fazla veri dönüşümünü zincirleyin
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `input` | any | Yes | - | Dönüştürülecek giriş verisi (dizi veya nesne) |
+| `steps` | array | Yes | - | Dönüştürülecek giriş verisi (dizi veya nesne) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `result` | any | Uygulanacak dönüşüm adımlarının dizisi |
+| `original_count` | integer | Dönüştürülmüş veri |
+| `result_count` | integer | Dönüştürülmüş veri |
+| `steps_applied` | integer | Dönüşüm sonrası öğe sayısı |
+
+**Example:** Example
+
+```yaml
+input: ${input.users}
+steps: [{"filter": {"field": "active", "condition": "eq", "value": true}}, {"sort": {"field": "name", "order": "asc"}}]
+```
+
+**Example:** Example
+
+```yaml
+input: ${input.records}
+steps: [{"map": {"extract": "id"}}, {"limit": 10}]
+```
+
+**Example:** Example
+
+```yaml
+input: ${input.data}
+steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}, {"pick": ["id", "name", "timestamp"]}, {"sort": {"field": "timestamp", "order": "desc"}}, {"skip": 5}, {"limit": 20}]
+```
+
+### Metin Şablonu
+
+`data.text.template`
+
+Metin şablonunu değişkenlerle doldur
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `template` | string | Yes | - | Text template with {variable} placeholders |
+| `variables` | object | Yes | - | Object with variable values |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `status` | string | İşlem durumu |
+| `result` | string | İşlem durumu |
+
+**Example:** Example
+
+```yaml
+template: Hello {name}, you scored {score} points!
+variables: {"name": "Alice", "score": 95}
+```
+
+### XML Oluştur
+
+`data.xml.generate`
+
+Nesne veya diziden XML dizesi oluştur
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `data` | object | Yes | - | XML'e dönüştürülecek veri |
+| `root_tag` | string | No | `root` | Kök eleman etiket adı |
+| `pretty` | boolean | No | `True` | XML çıktısını güzel yazdır |
+| `encoding` | string | No | `utf-8` | XML çıktısı için karakter kodlaması |
+| `declaration` | boolean | No | `True` | XML deklarasyon başlığını ekle |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `xml` | string | Oluşturulan XML dizesi |
+
+**Example:** Example
+
+```yaml
+data: {"user": {"@attributes": {"id": "1"}, "name": "John", "age": "30"}}
+root_tag: users
+pretty: true
+```
+
+### XML Ayrıştır
+
+`data.xml.parse`
+
+XML dizesini nesneye ayrıştır
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `content` | string | No | - | Ayrıştırılacak XML dizesi |
+| `file_path` | string | No | - | Ayrıştırılacak XML dosyasının yolu |
+| `preserve_attributes` | boolean | No | `True` | Ayrıştırılmış çıktıda XML özniteliklerini koru |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `result` | object | Nesne olarak ayrıştırılmış XML |
+| `root_tag` | string | Kök eleman etiket adı |
+
+**Example:** Example
+
+```yaml
+content: <users><user id="1"><name>John</name></user></users>
+preserve_attributes: true
+```
+
+### YAML Oluştur
+
+`data.yaml.generate`
+
+Nesne veya diziden YAML dizesi oluştur
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `data` | any | Yes | - | YAML'e dönüştürülecek veri |
+| `default_flow_style` | boolean | No | `False` | İç içe yapılar için akış stilini kullan |
+| `sort_keys` | boolean | No | `False` | Anahtarları alfabetik sırayla sırala |
+| `indent` | number | No | `2` | Girinti için boşluk sayısı |
+| `allow_unicode` | boolean | No | `True` | Çıktıda unicode karakterlere izin ver |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `yaml` | string | Oluşturulan YAML dizesi |
+
+**Example:** Example
+
+```yaml
+data: {"name": "John", "age": 30, "cities": ["NYC", "LA"]}
+sort_keys: false
+indent: 2
+```
+
+### YAML Ayrıştır
+
+`data.yaml.parse`
+
+YAML dizesini nesneye ayrıştır
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `content` | string | No | - | Ayrıştırılacak YAML dizesi |
+| `file_path` | string | No | - | Ayrıştırılacak YAML dosyasının yolu |
+| `multi_document` | boolean | No | `False` | Çok belgeli YAML'yi ayrıştır (--- ile ayrılmış) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `result` | any | Nesne veya dizi olarak ayrıştırılmış YAML |
+| `type` | string | Ayrıştırılmış sonucun türü |
+
+**Example:** Example
+
+```yaml
+content: name: John
+age: 30
+cities:
+  - NYC
+  - LA
+multi_document: false
+```
+
+**Example:** Example
+
+```yaml
+content: ---
+name: John
+---
+name: Jane
+multi_document: true
+```
+
+### Nesne Anahtarları
+
+`object.keys`
+
+Nesneden tüm anahtarları al
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `object` | object | Yes | - | Input object/dictionary |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `keys` | array | Nesne anahtarlarının listesi |
+| `count` | number | Nesne anahtarlarının listesi |
+
+**Example:** Get object keys
+
+```yaml
+object: {"name": "John", "age": 30, "city": "NYC"}
+```
+
+### Nesne Birleştir
+
+`object.merge`
+
+Birden fazla nesneyi tek bir nesneye birleştir
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `objects` | array | Yes | - | Array of objects to process |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `result` | object | Birleştirilmiş nesne |
+
+**Example:** Merge user data
+
+```yaml
+objects: [{"name": "John", "age": 30}, {"city": "NYC", "country": "USA"}, {"job": "Engineer"}]
+```
+
+### Nesne Çıkar
+
+`object.omit`
+
+Nesneden belirli anahtarları çıkar
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `object` | object | Yes | - | Input object/dictionary |
+| `keys` | array | Yes | - | Keys to pick or omit |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `result` | object | Çıkarılmış anahtarlar olmadan nesne |
+
+**Example:** Omit sensitive fields
+
+```yaml
+object: {"name": "John", "age": 30, "password": "secret", "ssn": "123-45-6789"}
+keys: ["password", "ssn"]
+```
+
+### Nesne Seç
+
+`object.pick`
+
+Nesneden belirli anahtarları seç
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `object` | object | Yes | - | Input object/dictionary |
+| `keys` | array | Yes | - | Keys to pick or omit |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `result` | object | Sadece seçilen anahtarları içeren nesne |
+
+**Example:** Pick user fields
+
+```yaml
+object: {"name": "John", "age": 30, "email": "john@example.com", "password": "secret"}
+keys: ["name", "email"]
+```
+
+### Nesne Değerleri
+
+`object.values`
+
+Nesneden tüm değerleri al
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `object` | object | Yes | - | Input object/dictionary |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `values` | array | Nesne değerlerinin listesi |
+| `count` | number | Nesne değerlerinin listesi |
+
+**Example:** Get object values
+
+```yaml
+object: {"name": "John", "age": 30, "city": "NYC"}
+```

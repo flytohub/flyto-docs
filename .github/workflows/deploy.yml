@@ -3,6 +3,8 @@ name: Deploy Docs
 on:
   push:
     branches: [main]
+  repository_dispatch:
+    types: [flyto-core-updated, flyto-i18n-updated]
   workflow_dispatch:
 
 permissions:
