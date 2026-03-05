@@ -235,7 +235,7 @@ export default defineConfig({
         ],
       },
       { text: 'Blog', link: 'https://blog.flyto2.com' },
-      { text: 'flyto2.com', link: 'https://flyto2.com' },
+      { text: 'Flyto2', link: 'https://flyto2.com' },
     ],
 
     sidebar: {
