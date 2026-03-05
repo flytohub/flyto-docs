@@ -181,7 +181,7 @@ export default defineConfig({
 
     footer: {
       message: 'Released under the Apache 2.0 License.',
-      copyright: `Copyright 2024-${new Date().getFullYear()} Flyto2`,
+      copyright: `Copyright 2025-${new Date().getFullYear()} Flyto2`,
     },
   },
 })
