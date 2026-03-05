@@ -6,7 +6,7 @@ hero:
   text: Enterprise Workflow Platform
   tagline: Deterministic execution engine for AI agents with 412+ modules
   image:
-    src: /logo.svg
+    src: /logo.png
     alt: Flyto2
   actions:
     - theme: brand
