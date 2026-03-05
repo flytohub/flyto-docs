@@ -14,7 +14,6 @@ flyto-core ships 400+ modules organized into 55 categories. Each module is a sel
 | [File Operations](/modules/file-operations) | 3 | Copy, move, delete files |
 | [Sandbox](/modules/sandbox) | 3 | Execute JS, Python, or shell in isolated environments |
 | [Element](/modules/element) | 3 | Query and extract DOM element data |
-| [Stealth](/modules/stealth) | 2 | Anti-detection browser fingerprinting |
 
 ### Data
 

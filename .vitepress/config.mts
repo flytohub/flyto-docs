@@ -23,7 +23,6 @@ function modulesSidebar(prefix = ''): DefaultTheme.SidebarItem[] {
         { text: 'File Operations', link: `${p}/modules/file-operations` },
         { text: 'Sandbox', link: `${p}/modules/sandbox` },
         { text: 'Element', link: `${p}/modules/element` },
-        { text: 'Stealth', link: `${p}/modules/stealth` },
       ],
     },
     {
@@ -219,9 +218,22 @@ export default defineConfig({
 
     nav: [
       { text: 'Guide', link: '/guide/getting-started' },
-      { text: 'Core Engine', link: '/core/' },
-      { text: 'MCP Server', link: '/mcp/' },
-      { text: 'Modules', link: '/modules/' },
+      {
+        text: 'Platform',
+        items: [
+          { text: 'Core Engine', link: '/core/' },
+          { text: 'MCP Server', link: '/mcp/' },
+          { text: 'Modules', link: '/modules/' },
+        ],
+      },
+      {
+        text: 'Tools',
+        items: [
+          { text: 'flyto-ai', link: '/ai/' },
+          { text: 'flyto-indexer', link: '/indexer/' },
+          { text: 'flyto-blueprint', link: '/blueprint/' },
+        ],
+      },
       { text: 'flyto2.com', link: 'https://flyto2.com' },
     ],
 
@@ -267,6 +279,45 @@ export default defineConfig({
         },
       ],
       '/modules/': modulesSidebar(),
+      '/ai/': [
+        {
+          text: 'flyto-ai',
+          items: [
+            { text: 'Overview', link: '/ai/' },
+            { text: 'Agent Core', link: '/ai/agent' },
+            { text: 'LLM Providers', link: '/ai/providers' },
+            { text: 'Claude Code Agent', link: '/ai/claude-code' },
+            { text: 'Memory', link: '/ai/memory' },
+            { text: 'Channels', link: '/ai/channels' },
+            { text: 'Prompt System', link: '/ai/prompts' },
+            { text: 'CLI Reference', link: '/ai/cli' },
+          ],
+        },
+      ],
+      '/indexer/': [
+        {
+          text: 'flyto-indexer',
+          items: [
+            { text: 'Overview', link: '/indexer/' },
+            { text: 'MCP Tools', link: '/indexer/tools' },
+            { text: 'Configuration', link: '/indexer/configuration' },
+            { text: 'CLI Reference', link: '/indexer/cli' },
+            { text: 'Language Support', link: '/indexer/languages' },
+          ],
+        },
+      ],
+      '/blueprint/': [
+        {
+          text: 'flyto-blueprint',
+          items: [
+            { text: 'Overview', link: '/blueprint/' },
+            { text: 'Builtin Blueprints', link: '/blueprint/blueprints' },
+            { text: 'Learning & Scoring', link: '/blueprint/learning' },
+            { text: 'Storage Backends', link: '/blueprint/storage' },
+            { text: 'API Reference', link: '/blueprint/api' },
+          ],
+        },
+      ],
     },
 
     socialLinks: [
