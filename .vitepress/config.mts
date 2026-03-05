@@ -234,6 +234,7 @@ export default defineConfig({
           { text: 'flyto-blueprint', link: '/blueprint/' },
         ],
       },
+      { text: 'Blog', link: 'https://blog.flyto2.com' },
       { text: 'flyto2.com', link: 'https://flyto2.com' },
     ],
 
