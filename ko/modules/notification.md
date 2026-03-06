@@ -328,17 +328,17 @@ Telegram, Discord, Slack, LINE 또는 웹훅 URL로 알림 보내기
 |------|------|----------|---------|-------------|
 | `url` | string | Yes | - | 웹훅 URL (Telegram, Discord, Slack 또는 사용자 정의) |
 | `message` | string | Yes | - | 알림 메시지 내용 |
-| `title` | string | No | - | 알림 메시지 내용 |
-| `chat_id` | string | No | - | 선택적 제목 (Discord, Slack, Teams용) |
+| `title` | string | No | - | 선택적 제목 (Discord, Slack, Teams용) |
+| `chat_id` | string | No | - | Telegram 채팅 ID (Telegram에 필요) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Telegram 채팅 ID (Telegram에 필요) |
-| `platform` | string | 알림이 성공적으로 전송되었는지 여부 |
-| `status_code` | number | 알림이 성공적으로 전송되었는지 여부 |
-| `response` | object | 감지된 플랫폼 (telegram, discord, slack 등) |
+| `ok` | boolean | 알림이 성공적으로 전송되었는지 여부 |
+| `platform` | string | 감지된 플랫폼 (telegram, discord, slack 등) |
+| `status_code` | number | HTTP 응답 상태 코드 |
+| `response` | object | 웹훅의 응답 |
 
 **Example:** Send Telegram notification
 

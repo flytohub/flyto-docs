@@ -328,17 +328,17 @@ Envoyer une notification à Telegram, Discord, Slack, LINE, ou toute URL de webh
 |------|------|----------|---------|-------------|
 | `url` | string | Yes | - | URL du webhook (Telegram, Discord, Slack, ou personnalisé) |
 | `message` | string | Yes | - | Contenu du message de notification |
-| `title` | string | No | - | Contenu du message de notification |
-| `chat_id` | string | No | - | Titre optionnel (pour Discord, Slack, Teams) |
+| `title` | string | No | - | Titre optionnel (pour Discord, Slack, Teams) |
+| `chat_id` | string | No | - | ID de chat Telegram (requis pour Telegram) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | ID de chat Telegram (requis pour Telegram) |
-| `platform` | string | Si la notification a été envoyée avec succès |
-| `status_code` | number | Si la notification a été envoyée avec succès |
-| `response` | object | Plateforme détectée (telegram, discord, slack, etc.) |
+| `ok` | boolean | Si la notification a été envoyée avec succès |
+| `platform` | string | Plateforme détectée (telegram, discord, slack, etc.) |
+| `status_code` | number | Code de statut de réponse HTTP |
+| `response` | object | Réponse du webhook |
 
 **Example:** Send Telegram notification
 

@@ -328,17 +328,17 @@ Kirim notifikasi ke Telegram, Discord, Slack, LINE, atau URL webhook lainnya
 |------|------|----------|---------|-------------|
 | `url` | string | Yes | - | URL Webhook (Telegram, Discord, Slack, atau kustom) |
 | `message` | string | Yes | - | Konten pesan notifikasi |
-| `title` | string | No | - | Konten pesan notifikasi |
-| `chat_id` | string | No | - | Judul opsional (untuk Discord, Slack, Teams) |
+| `title` | string | No | - | Judul opsional (untuk Discord, Slack, Teams) |
+| `chat_id` | string | No | - | ID chat Telegram (diperlukan untuk Telegram) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | ID chat Telegram (diperlukan untuk Telegram) |
-| `platform` | string | Apakah notifikasi berhasil dikirim |
-| `status_code` | number | Apakah notifikasi berhasil dikirim |
-| `response` | object | Platform terdeteksi (telegram, discord, slack, dll.) |
+| `ok` | boolean | Apakah notifikasi berhasil dikirim |
+| `platform` | string | Platform terdeteksi (telegram, discord, slack, dll.) |
+| `status_code` | number | Kode status respons HTTP |
+| `response` | object | Respons dari webhook |
 
 **Example:** Send Telegram notification
 

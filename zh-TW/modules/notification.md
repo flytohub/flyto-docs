@@ -328,17 +328,17 @@ template_language: en
 |------|------|----------|---------|-------------|
 | `url` | string | Yes | - | Webhook URL（Telegram、Discord、Slack 或自訂） |
 | `message` | string | Yes | - | 通知訊息內容 |
-| `title` | string | No | - | 通知訊息內容 |
-| `chat_id` | string | No | - | 選填標題（適用於 Discord、Slack、Teams） |
+| `title` | string | No | - | 選填標題（適用於 Discord、Slack、Teams） |
+| `chat_id` | string | No | - | Telegram 聊天 ID（Telegram 必需） |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Telegram 聊天 ID（Telegram 必需） |
-| `platform` | string | 通知是否成功發送 |
-| `status_code` | number | 通知是否成功發送 |
-| `response` | object | 偵測到的平台（telegram、discord、slack 等） |
+| `ok` | boolean | 通知是否成功發送 |
+| `platform` | string | 偵測到的平台（telegram、discord、slack 等） |
+| `status_code` | number | HTTP 回應狀態碼 |
+| `response` | object | Webhook 的回應內容 |
 
 **Example:** Send Telegram notification
 
