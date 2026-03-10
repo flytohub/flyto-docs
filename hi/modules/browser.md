@@ -2,7 +2,7 @@
 
 Full web automation: navigation, interaction, data extraction, screenshots, and performance monitoring.
 
-**38 modules**
+**39 modules**
 
 | Module | Description |
 |--------|-------------|
@@ -10,6 +10,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [ब्राउज़र बंद करें](#ब्राउज़र-बंद-करें) | ब्राउज़र इंस्टेंस बंद करें और संसाधन मुक्त करें |
 | [कंसोल कैप्चर करें](#कंसोल-कैप्चर-करें) | ब्राउज़र कंसोल लॉग्स कैप्चर करें (त्रुटियां, चेतावनियां, जानकारी) |
 | [कुकीज़ प्रबंधित करें](#कुकीज़-प्रबंधित-करें) | ब्राउज़र कुकीज़ प्राप्त करें, सेट करें, या साफ़ करें |
+| [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
 | [डायलॉग संभालें](#डायलॉग-संभालें) | अलर्ट, कन्फर्म और प्रॉम्प्ट डायलॉग संभालें |
 | [फ़ाइल डाउनलोड करें](#फ़ाइल-डाउनलोड-करें) | ब्राउज़र से फ़ाइल डाउनलोड करें |
 | [ड्रैग और ड्रॉप](#ड्रैग-और-ड्रॉप) | एलिमेंट्स को ड्रैग और ड्रॉप करें |
@@ -208,6 +209,72 @@ domain: example.com
 
 ```yaml
 action: clear
+```
+
+### Smart Detect
+
+`browser.detect`
+
+Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `text` | string | No | - | Text content of the element to find (e.g. 'Login', 'Submit') |
+| `selector` | string | No | - | CSS/XPath selector to try first. Falls back to text matching if not found. |
+| `alternatives` | string | No | - | Comma-separated alternative texts to try (e.g. 'Sign In, 登入, Log In') |
+| `role` | select (`any`, `button`, `link`, `textbox`, `combobox`, `checkbox`, `radio`, `heading`, `img`) | No | `any` | Expected ARIA role (narrows search) |
+| `near_text` | string | No | - | Find element near this text (e.g. 'Password' to find nearby Submit button) |
+| `match_mode` | select (`exact`, `contains`, `fuzzy`, `best`) | No | `best` | How strictly to match text |
+| `action` | select (`none`, `click`, `type`) | No | `none` | Action to perform on the found element |
+| `action_value` | string | No | - | Text to type into the element (when action is 'type') |
+| `timeout` | number | No | `10000` | Maximum time to wait in milliseconds |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `status` | string | Operation status (success / not_found / ambiguous) |
+| `found` | boolean | Whether an element was found |
+| `selector` | string | Resolved CSS/Playwright selector of the matched element |
+| `strategy` | string | Which detection strategy matched (selector / role / text / label / placeholder / fuzzy / proximity) |
+| `confidence` | number | Match confidence 0-100 |
+| `element` | object | Element info: tag, text, id, ariaLabel, href, etc. |
+| `candidates` | array | Top alternative matches (for debugging) |
+| `action_result` | string | Result of performed action (if any) |
+
+**Example:** Example
+
+```yaml
+text: Login
+alternatives: Sign In, 登入
+role: button
+```
+
+**Example:** Example
+
+```yaml
+text: Submit
+near_text: Password
+action: click
+```
+
+**Example:** Example
+
+```yaml
+text: Enter your email
+role: textbox
+action: type
+action_value: user@example.com
+```
+
+**Example:** Example
+
+```yaml
+selector: #old-login-btn
+text: Login
+match_mode: best
 ```
 
 ### डायलॉग संभालें
