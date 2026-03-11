@@ -1295,8 +1295,8 @@ Pilih opsi dari elemen dropdown
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `selector` | string | Yes | - | CSS selector, XPath, or text selector to find the element |
-| `value` | string | No | - | Option value attribute to select |
-| `label` | string | No | - | Option text content to select (alternative to value) |
+| `select_method` | select (`value`, `label`, `index`) | No | `value` | How to identify which option to select |
+| `target` | string | No | - | The option value or label text to select |
 | `index` | number | No | - | Option index to select (0-based) |
 | `timeout` | number | No | `30000` | Maximum time to wait in milliseconds |
 
@@ -1312,20 +1312,23 @@ Pilih opsi dari elemen dropdown
 
 ```yaml
 selector: select#country
-value: us
+select_method: value
+target: us
 ```
 
 **Example:** Example
 
 ```yaml
 selector: select#country
-label: United States
+select_method: label
+target: United States
 ```
 
 **Example:** Example
 
 ```yaml
 selector: select#country
+select_method: index
 index: 2
 ```
 
