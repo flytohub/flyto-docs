@@ -113,6 +113,9 @@ function modulesSidebar(prefix = ''): DefaultTheme.SidebarItem[] {
 
 function localeModulesConfig(prefix: string): DefaultTheme.Config {
   return {
+    nav: [
+      { text: 'Modules', link: `/${prefix}/modules/` },
+    ],
     sidebar: {
       [`/${prefix}/modules/`]: modulesSidebar(prefix),
     },
@@ -125,10 +128,19 @@ function localeModulesConfig(prefix: string): DefaultTheme.Config {
 
 export default defineConfig({
   title: 'Flyto2 Docs',
-  description: 'Documentation for Flyto2 — Enterprise Workflow Platform',
+  description: 'Documentation for Flyto2 — Automate Repetitive Tasks Without Coding',
   lang: 'en-US',
   cleanUrls: true,
-  sitemap: { hostname: 'https://docs.flyto2.com' },
+  sitemap: {
+    hostname: 'https://docs.flyto2.com',
+    transformItems(items) {
+      // Only keep URLs where the source .md file actually exists
+      // Locale dirs (ja, ko, etc.) only have /modules/ pages
+      // Remove locale/guide/*, locale/core/*, locale/mcp/*, locale/ai/*, etc.
+      const localeOnlyModules = /^\/(ja|ko|zh-TW|de|es|fr|hi|id|it|pl|pt-BR|th|tr|vi)\/(guide|core|mcp|ai|blueprint|indexer)\//
+      return items.filter(item => !localeOnlyModules.test(new URL(item.url).pathname))
+    }
+  },
   lastUpdated: true,
 
   head: [
@@ -137,14 +149,14 @@ export default defineConfig({
     // Open Graph
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: 'Flyto2 Docs' }],
-    ['meta', { property: 'og:title', content: 'Flyto2 Docs — Enterprise Workflow Platform' }],
+    ['meta', { property: 'og:title', content: 'Flyto2 Docs — Automate Repetitive Tasks Without Coding' }],
     ['meta', { property: 'og:description', content: 'Documentation for Flyto2 — 412+ modules, MCP server, AI agents, code intelligence, and workflow automation.' }],
     ['meta', { property: 'og:url', content: 'https://docs.flyto2.com' }],
     ['meta', { property: 'og:image', content: 'https://docs.flyto2.com/og-image.png' }],
     ['meta', { property: 'og:locale', content: 'en_US' }],
     // Twitter Card
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:title', content: 'Flyto2 Docs — Enterprise Workflow Platform' }],
+    ['meta', { name: 'twitter:title', content: 'Flyto2 Docs — Automate Repetitive Tasks Without Coding' }],
     ['meta', { name: 'twitter:description', content: 'Documentation for Flyto2 — 412+ modules, MCP server, AI agents, code intelligence, and workflow automation.' }],
     ['meta', { name: 'twitter:image', content: 'https://docs.flyto2.com/og-image.png' }],
     // SEO
@@ -156,7 +168,7 @@ export default defineConfig({
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'Flyto2 Docs',
-      description: 'Documentation for Flyto2 — Enterprise Workflow Platform with 412+ modules.',
+      description: 'Documentation for Flyto2 — Automate Repetitive Tasks Without Coding with 412+ modules.',
       url: 'https://docs.flyto2.com',
       publisher: {
         '@type': 'Organization',
