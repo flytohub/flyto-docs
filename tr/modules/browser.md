@@ -805,6 +805,7 @@ Playwright ile yeni tarayıcı örneği başlat
 | `width` | number | No | `1280` | Browser viewport width in pixels |
 | `height` | number | No | `720` | Browser viewport height in pixels |
 | `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Kullanılacak tarayıcı motoru (chromium, firefox, webkit) |
+| `channel` | select (``, `chrome`, `msedge`) | No | - | Use system Chrome instead of bundled Chromium for better anti-detection bypass |
 | `proxy` | string | No | - | Proxy sunucu URL'si |
 | `user_agent` | string | No | - | Özel kullanıcı ajanı dizesi |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |

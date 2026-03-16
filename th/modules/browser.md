@@ -805,6 +805,7 @@ timeout_ms: 5000
 | `width` | number | No | `1280` | Browser viewport width in pixels |
 | `height` | number | No | `720` | Browser viewport height in pixels |
 | `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | เอนจินเบราว์เซอร์ที่จะใช้ (chromium, firefox, webkit) |
+| `channel` | select (``, `chrome`, `msedge`) | No | - | Use system Chrome instead of bundled Chromium for better anti-detection bypass |
 | `proxy` | string | No | - | URL ของเซิร์ฟเวอร์พร็อกซี |
 | `user_agent` | string | No | - | สตริง user agent ที่กำหนดเอง |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |

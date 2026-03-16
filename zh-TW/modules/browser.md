@@ -805,6 +805,7 @@ timeout_ms: 5000
 | `width` | number | No | `1280` | Browser viewport width in pixels |
 | `height` | number | No | `720` | Browser viewport height in pixels |
 | `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | 要使用的瀏覽器引擎（chromium、firefox、webkit） |
+| `channel` | select (``, `chrome`, `msedge`) | No | - | Use system Chrome instead of bundled Chromium for better anti-detection bypass |
 | `proxy` | string | No | - | 代理伺服器 URL |
 | `user_agent` | string | No | - | 自訂使用者代理字串 |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |

@@ -805,6 +805,7 @@ Lanzar una nueva instancia del navegador con Playwright
 | `width` | number | No | `1280` | Browser viewport width in pixels |
 | `height` | number | No | `720` | Browser viewport height in pixels |
 | `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Motor de navegador a usar (chromium, firefox, webkit) |
+| `channel` | select (``, `chrome`, `msedge`) | No | - | Use system Chrome instead of bundled Chromium for better anti-detection bypass |
 | `proxy` | string | No | - | URL del servidor proxy |
 | `user_agent` | string | No | - | Cadena de agente de usuario personalizada |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |
