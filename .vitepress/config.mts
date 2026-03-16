@@ -127,7 +127,7 @@ function localeModulesConfig(prefix: string): DefaultTheme.Config {
 }
 
 export default defineConfig({
-  title: 'Flyto2 Docs',
+  title: 'Flyto2 Docs - Automation Engine Documentation',
   description: 'Documentation for Flyto2 — Automate Repetitive Tasks Without Coding',
   lang: 'en-US',
   cleanUrls: true,
