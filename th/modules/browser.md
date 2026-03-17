@@ -2,7 +2,7 @@
 
 Full web automation: navigation, interaction, data extraction, screenshots, and performance monitoring.
 
-**39 modules**
+**40 modules**
 
 | Module | Description |
 |--------|-------------|
@@ -24,6 +24,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [จำลอง Geolocation](#จำลอง-geolocation) | จำลองตำแหน่งทางภูมิศาสตร์ของเบราว์เซอร์ |
 | [ไปยัง URL](#ไปยัง-url) | นำทางไปยัง URL ที่ระบุ |
 | [วางเมาส์เหนือองค์ประกอบ](#วางเมาส์เหนือองค์ประกอบ) | วางเมาส์เหนือองค์ประกอบ |
+| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
 | [เปิดเบราว์เซอร์](#เปิดเบราว์เซอร์) | เปิดอินสแตนซ์เบราว์เซอร์ใหม่ด้วย Playwright |
 | [นำทางประวัติ](#นำทางประวัติ) | นำทางประวัติเบราว์เซอร์ (ย้อนกลับ, ไปข้างหน้า, โหลดซ้ำ) |
 | [ตรวจสอบเครือข่าย](#ตรวจสอบเครือข่าย) | ติดตามและดักจับคำขอเครือข่าย |
@@ -789,6 +790,38 @@ selector: .menu-item
 ```yaml
 selector: #dropdown-trigger
 timeout_ms: 5000
+```
+
+### Browser Interact
+
+`browser.interact`
+
+Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `title` | string | No | `Browser Interaction` | Title displayed to approvers |
+| `description` | string | No | - | Optional description text |
+| `timeout_seconds` | number | No | `0` | Maximum wait time (0 for no timeout) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `__event__` | string | Event for routing (approved/rejected/timeout) |
+| `status` | string | Operation status |
+| `action` | string | Action executed (click/select/type/toggle) |
+| `selector` | string | CSS selector of the interacted element |
+| `value` | string | Value used (for select/type actions) |
+| `url` | string | Page URL at time of interaction |
+
+**Example:** Example
+
+```yaml
+title: Choose a department
+description: Select the department you want to register for
 ```
 
 ### เปิดเบราว์เซอร์

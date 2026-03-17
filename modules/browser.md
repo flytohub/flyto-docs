@@ -2,7 +2,7 @@
 
 Full web automation: navigation, interaction, data extraction, screenshots, and performance monitoring.
 
-**39 modules**
+**40 modules**
 
 | Module | Description |
 |--------|-------------|
@@ -24,6 +24,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Mock Geolocation](#mock-geolocation) | Mock browser geolocation |
 | [Go to URL](#go-to-url) | Navigate to a specific URL |
 | [Hover Element](#hover-element) | Hover mouse over an element |
+| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page |
 | [Launch Browser](#launch-browser) | Launch a new browser instance with Playwright |
 | [Navigate History](#navigate-history) | Navigate browser history (back, forward, reload) |
 | [Network Monitor](#network-monitor) | Monitor and intercept network requests |
@@ -789,6 +790,38 @@ selector: .menu-item
 ```yaml
 selector: #dropdown-trigger
 timeout_ms: 5000
+```
+
+### Browser Interact
+
+`browser.interact`
+
+Pause for user to interact with the browser page
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `title` | string | No | `Browser Interaction` | Title displayed to approvers |
+| `description` | string | No | - | Optional description text |
+| `timeout_seconds` | number | No | `0` | Maximum wait time (0 for no timeout) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `__event__` | string | Event for routing (approved/rejected/timeout) |
+| `status` | string | Operation status |
+| `action` | string | Action executed (click/select/type/toggle) |
+| `selector` | string | CSS selector of the interacted element |
+| `value` | string | Value used (for select/type actions) |
+| `url` | string | Page URL at time of interaction |
+
+**Example:** Example
+
+```yaml
+title: Choose a department
+description: Select the department you want to register for
 ```
 
 ### Launch Browser

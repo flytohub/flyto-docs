@@ -2,7 +2,7 @@
 
 Full web automation: navigation, interaction, data extraction, screenshots, and performance monitoring.
 
-**39 modules**
+**40 modules**
 
 | Module | Description |
 |--------|-------------|
@@ -24,6 +24,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [模擬地理位置](#模擬地理位置) | 模擬瀏覽器地理位置 |
 | [前往網址](#前往網址) | 開啟指定的網址 |
 | [懸停元素](#懸停元素) | 將滑鼠懸停在元素上 |
+| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
 | [啟動瀏覽器](#啟動瀏覽器) | 使用 Playwright 啟動新的瀏覽器實例 |
 | [導航歷史](#導航歷史) | 瀏覽器歷史記錄導航（返回、前進、重新載入） |
 | [網路監控](#網路監控) | 監控和攔截網路請求 |
@@ -789,6 +790,38 @@ selector: .menu-item
 ```yaml
 selector: #dropdown-trigger
 timeout_ms: 5000
+```
+
+### Browser Interact
+
+`browser.interact`
+
+Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `title` | string | No | `Browser Interaction` | Title displayed to approvers |
+| `description` | string | No | - | Optional description text |
+| `timeout_seconds` | number | No | `0` | Maximum wait time (0 for no timeout) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `__event__` | string | Event for routing (approved/rejected/timeout) |
+| `status` | string | Operation status |
+| `action` | string | Action executed (click/select/type/toggle) |
+| `selector` | string | CSS selector of the interacted element |
+| `value` | string | Value used (for select/type actions) |
+| `url` | string | Page URL at time of interaction |
+
+**Example:** Example
+
+```yaml
+title: Choose a department
+description: Select the department you want to register for
 ```
 
 ### 啟動瀏覽器

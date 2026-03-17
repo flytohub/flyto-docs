@@ -2,7 +2,7 @@
 
 Full web automation: navigation, interaction, data extraction, screenshots, and performance monitoring.
 
-**39 modules**
+**40 modules**
 
 | Module | Description |
 |--------|-------------|
@@ -24,6 +24,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Simuler la geolocalisation](#simuler-la-geolocalisation) | Simuler la geolocalisation du navigateur |
 | [Aller a l'URL](#aller-a-l'url) | Naviguer vers une URL specifique |
 | [Survoler l'element](#survoler-l'element) | Survoler un element avec la souris |
+| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
 | [Lancer le navigateur](#lancer-le-navigateur) | Lancer une nouvelle instance de navigateur avec Playwright |
 | [Naviguer dans l'historique](#naviguer-dans-l'historique) | Naviguer dans l'historique du navigateur (retour, avant, recharger) |
 | [Moniteur reseau](#moniteur-reseau) | Surveiller et intercepter les requetes reseau |
@@ -789,6 +790,38 @@ selector: .menu-item
 ```yaml
 selector: #dropdown-trigger
 timeout_ms: 5000
+```
+
+### Browser Interact
+
+`browser.interact`
+
+Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `title` | string | No | `Browser Interaction` | Title displayed to approvers |
+| `description` | string | No | - | Optional description text |
+| `timeout_seconds` | number | No | `0` | Maximum wait time (0 for no timeout) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `__event__` | string | Event for routing (approved/rejected/timeout) |
+| `status` | string | Operation status |
+| `action` | string | Action executed (click/select/type/toggle) |
+| `selector` | string | CSS selector of the interacted element |
+| `value` | string | Value used (for select/type actions) |
+| `url` | string | Page URL at time of interaction |
+
+**Example:** Example
+
+```yaml
+title: Choose a department
+description: Select the department you want to register for
 ```
 
 ### Lancer le navigateur

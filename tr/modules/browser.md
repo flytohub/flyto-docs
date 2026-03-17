@@ -2,7 +2,7 @@
 
 Full web automation: navigation, interaction, data extraction, screenshots, and performance monitoring.
 
-**39 modules**
+**40 modules**
 
 | Module | Description |
 |--------|-------------|
@@ -24,6 +24,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Konum Taklit Et](#konum-taklit-et) | Tarayıcı coğrafi konumunu taklit et |
 | [URL'ye Git](#url'ye-git) | Belirli bir URL'ye git |
 | [Öğe Üzerinde Bekle](#öğe-üzerinde-bekle) | Fareyi bir öğenin üzerine getir |
+| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
 | [Tarayıcı Başlat](#tarayıcı-başlat) | Playwright ile yeni tarayıcı örneği başlat |
 | [Geçmişte Gez](#geçmişte-gez) | Tarayıcı geçmişinde gezin (geri, ileri, yeniden yükle) |
 | [Ağ İzleyici](#ağ-i̇zleyici) | Ağ isteklerini izle ve engelle |
@@ -789,6 +790,38 @@ selector: .menu-item
 ```yaml
 selector: #dropdown-trigger
 timeout_ms: 5000
+```
+
+### Browser Interact
+
+`browser.interact`
+
+Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `title` | string | No | `Browser Interaction` | Title displayed to approvers |
+| `description` | string | No | - | Optional description text |
+| `timeout_seconds` | number | No | `0` | Maximum wait time (0 for no timeout) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `__event__` | string | Event for routing (approved/rejected/timeout) |
+| `status` | string | Operation status |
+| `action` | string | Action executed (click/select/type/toggle) |
+| `selector` | string | CSS selector of the interacted element |
+| `value` | string | Value used (for select/type actions) |
+| `url` | string | Page URL at time of interaction |
+
+**Example:** Example
+
+```yaml
+title: Choose a department
+description: Select the department you want to register for
 ```
 
 ### Tarayıcı Başlat
