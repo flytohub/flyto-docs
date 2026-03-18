@@ -82,7 +82,7 @@ Sequential AI processing chain with multiple steps
 |------|------|----------|---------|-------------|
 | `input` | string | Yes | - | Initial input for the chain |
 | `chain_steps` | array | Yes | - | Initial input for the chain |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | Array of processing steps (each is a prompt template) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Array of processing steps (each is a prompt template) |
 | `model` | string | No | `gpt-4o` | Model name (e.g., gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Model name (e.g., gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | Ollama server URL (only for ollama provider) |

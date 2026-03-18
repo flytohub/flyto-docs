@@ -82,7 +82,7 @@ max_iterations: 10
 |------|------|----------|---------|-------------|
 | `input` | string | Yes | - | チェーンの初期入力 |
 | `chain_steps` | array | Yes | - | チェーンの初期入力 |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | 処理ステップの配列（各ステップはプロンプトテンプレート） |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | 処理ステップの配列（各ステップはプロンプトテンプレート） |
 | `model` | string | No | `gpt-4o` | モデル名（例: gpt-4, llama2, mistral） |
 | `ollama_url` | string | No | `http://localhost:11434` | モデル名（例: gpt-4, llama2, mistral） |
 | `temperature` | number | No | `0.7` | OllamaサーバーURL（ollamaプロバイダーのみ） |

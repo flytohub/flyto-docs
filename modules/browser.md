@@ -2,15 +2,19 @@
 
 Full web automation: navigation, interaction, data extraction, screenshots, and performance monitoring.
 
-**40 modules**
+**54 modules**
 
 | Module | Description |
 |--------|-------------|
+| [Handle Challenge](#handle-challenge) | Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA) |
 | [Click Element](#click-element) | Click an element on the page |
 | [Close Browser](#close-browser) | Close the browser instance and release resources |
+| [Connect Remote](#connect-remote) | Connect to a remote browser service (Browserless, BrowserBase). Real fingerprints, bypass Cloudflare. |
 | [Capture Console](#capture-console) | Capture browser console logs (errors, warnings, info) |
 | [Manage Cookies](#manage-cookies) | Get, set, or clear browser cookies |
+| [Cookies File](#cookies-file) | Import or export browser cookies to/from a JSON file. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
+| [Detect List](#detect-list) | Auto-detect repeating items on any page (articles, products, search results) |
 | [Handle Dialog](#handle-dialog) | Handle alert, confirm, and prompt dialogs |
 | [Download File](#download-file) | Download file from browser |
 | [Drag and Drop](#drag-and-drop) | Drag and drop elements |
@@ -18,6 +22,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Ensure Browser](#ensure-browser) | Ensure a browser session exists (reuse or launch) |
 | [Execute JavaScript](#execute-javascript) | Execute JavaScript code in page context |
 | [Extract Data](#extract-data) | Extract structured data from the page |
+| [Extract Nested](#extract-nested) | Extract tree/nested data (comments, threads, folders). |
 | [Find Elements](#find-elements) | Find elements in page and return element ID list |
 | [Fill Form](#fill-form) | Smart form filling with automatic field detection |
 | [Switch Frame](#switch-frame) | Switch to iframe or frame context |
@@ -26,21 +31,30 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Hover Element](#hover-element) | Hover mouse over an element |
 | [Browser Interact](#browser-interact) | Pause for user to interact with the browser page |
 | [Launch Browser](#launch-browser) | Launch a new browser instance with Playwright |
+| [Login](#login) | Auto-detect and fill login forms with post-login verification. |
 | [Navigate History](#navigate-history) | Navigate browser history (back, forward, reload) |
 | [Network Monitor](#network-monitor) | Monitor and intercept network requests |
 | [List Pages](#list-pages) | List all open browser pages/tabs |
 | [Paginate & Extract](#paginate--extract) | Auto-paginate through pages and extract data |
 | [Generate PDF](#generate-pdf) | Generate PDF from current page |
 | [Performance Metrics](#performance-metrics) | Collect browser performance metrics |
+| [Browser Pool](#browser-pool) | Manage multiple named browser instances for parallel automation. |
 | [Press Key](#press-key) | Press a keyboard key |
+| [Rotate Proxy](#rotate-proxy) | Rotate through a list of proxies with dead proxy detection. |
+| [Extract Article](#extract-article) | Smart article extraction — extracts title, author, date, and main content from any webpage |
 | [Record Actions](#record-actions) | Record user actions as workflow |
 | [Release Browser](#release-browser) | Release browser session (close only if owned) |
+| [Capture Response](#capture-response) | Capture API response bodies (XHR/fetch). Extract JSON from page API calls. |
+| [Check Robots.txt](#check-robots.txt) | Check robots.txt compliance and discover sitemaps. |
 | [Take Screenshot](#take-screenshot) | Take a screenshot of the current page |
 | [Scroll Page](#scroll-page) | Scroll page to element, position, or direction |
 | [Select Option](#select-option) | Select option from dropdown element |
+| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml and extract URLs with metadata. |
 | [DOM Snapshot](#dom-snapshot) | Capture DOM snapshot of the current page |
 | [Browser Storage](#browser-storage) | Access localStorage and sessionStorage |
 | [Manage Tabs](#manage-tabs) | Create, switch, and close browser tabs |
+| [Extract Table](#extract-table) | Extract HTML tables as structured data with auto-detected headers. |
+| [Throttle](#throttle) | Per-domain rate limiting. Waits between requests to avoid bans. |
 | [Browser Trace](#browser-trace) | Start, stop, or save browser performance traces |
 | [Type Text](#type-text) | Type text into an input field |
 | [Upload File](#upload-file) | Upload file to file input element |
@@ -48,6 +62,48 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Wait](#wait) | Wait for a duration or until an element appears |
 
 ## Modules
+
+### Handle Challenge
+
+`browser.challenge`
+
+Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA)
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `auto_wait_seconds` | number | No | `15` | How long to wait for the challenge to auto-resolve before asking for human help. 0 = skip auto-wait. |
+| `human_fallback` | boolean | No | `True` | If auto-wait fails, create a breakpoint for the user to solve the challenge manually. |
+| `human_timeout_seconds` | number | No | `120` | How long to wait for human to solve the challenge. 0 = wait indefinitely. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `status` | string | Result: passed / no_challenge / auto_resolved / human_resolved / timeout |
+| `challenge_type` | string | Type of challenge detected (cloudflare, hcaptcha, recaptcha, generic_verify, none) |
+| `wait_seconds` | number | How long it took to resolve |
+| `required_human` | boolean | Whether human intervention was needed |
+
+**Example:** Example
+
+```yaml
+```
+
+**Example:** Example
+
+```yaml
+auto_wait_seconds: 0
+human_fallback: true
+```
+
+**Example:** Example
+
+```yaml
+auto_wait_seconds: 30
+human_fallback: false
+```
 
 ### Click Element
 
@@ -120,6 +176,48 @@ Close the browser instance and release resources
 **Example:** Example
 
 ```yaml
+```
+
+### Connect Remote
+
+`browser.connect`
+
+Connect to a remote browser service (Browserless, BrowserBase). Real fingerprints, bypass Cloudflare.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `ws_endpoint` | string | Yes | - | CDP WebSocket URL (e.g., wss://chrome.browserless.io?token=xxx). |
+| `viewport_width` | number | No | `1280` |  |
+| `viewport_height` | number | No | `720` |  |
+| `locale` | string | No | `en-US` |  |
+| `timeout_ms` | number | No | `30000` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `connected` | boolean | Whether connection succeeded |
+| `browser_type` | string | Browser type (chromium) |
+| `endpoint` | string | Connected endpoint (redacted) |
+
+**Example:** Example
+
+```yaml
+ws_endpoint: wss://chrome.browserless.io?token=TOKEN
+```
+
+**Example:** Example
+
+```yaml
+ws_endpoint: wss://connect.browserbase.com?apiKey=KEY
+```
+
+**Example:** Example
+
+```yaml
+ws_endpoint: ws://localhost:3000
 ```
 
 ### Capture Console
@@ -212,6 +310,51 @@ domain: example.com
 action: clear
 ```
 
+### Cookies File
+
+`browser.cookies_file`
+
+Import or export browser cookies to/from a JSON file.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `action` | select (`export`, `import`) | Yes | `export` | Export cookies to file or import from file. |
+| `file_path` | string | Yes | - | Path to the JSON cookies file. |
+| `domain_filter` | string | No | - | Only export/import cookies for this domain (e.g., ".github.com"). Empty = all. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `action` | string | Action performed (export/import) |
+| `cookie_count` | number | Number of cookies exported/imported |
+| `file_path` | string | Path to the cookies file |
+| `domains` | array | Unique domains in the cookies |
+
+**Example:** Example
+
+```yaml
+action: export
+file_path: cookies.json
+```
+
+**Example:** Example
+
+```yaml
+action: import
+file_path: cookies.json
+```
+
+**Example:** Example
+
+```yaml
+action: export
+file_path: gh.json
+domain_filter: .github.com
+```
+
 ### Smart Detect
 
 `browser.detect`
@@ -276,6 +419,50 @@ action_value: user@example.com
 selector: #old-login-btn
 text: Login
 match_mode: best
+```
+
+### Detect List
+
+`browser.detect_list`
+
+Auto-detect repeating items on any page (articles, products, search results)
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `min_items` | number | No | `3` | Minimum items to consider a valid list. |
+| `max_items` | number | No | `200` | Maximum items to return. |
+| `include_text` | boolean | No | `True` | Include text content from each item (excluding links). |
+| `selector` | string | No | - | CSS selector for list items. Leave empty for auto-detection. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `items` | array | Detected items [{title, url, image, text, date, _index}] |
+| `count` | number | Number of items found |
+| `selector` | string | CSS selector that matches the items (reusable for browser.extract or browser.pagination) |
+| `auto_detected` | boolean | Whether items were auto-detected or from user selector |
+| `content_found` | boolean | Whether enough items were found |
+| `consistency` | number | Structural consistency score (0-1) |
+
+**Example:** Example
+
+```yaml
+```
+
+**Example:** Example
+
+```yaml
+selector: .post-item
+```
+
+**Example:** Example
+
+```yaml
+min_items: 5
+max_items: 50
 ```
 
 ### Handle Dialog
@@ -570,6 +757,44 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
+### Extract Nested
+
+`browser.extract_nested`
+
+Extract tree/nested data (comments, threads, folders).
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `root_selector` | string | Yes | - | CSS selector for each item (e.g., ".comment", "li.thread"). |
+| `children_selector` | string | No | - | CSS selector for the container holding child items within each item. Leave empty for auto-detect. |
+| `fields` | object | No | `{}` | Custom field extraction: {"name": {"selector": "CSS", "type": "text|html|attribute", "attribute": "href"}}. Leave empty for auto-extract. |
+| `max_depth` | number | No | `10` | Maximum nesting depth to extract. |
+| `limit` | number | No | `0` | Total items to extract (all depths combined). 0 = no limit. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `items` | array | Tree structure [{...fields, children: [{...}]}] |
+| `count` | number | Number of root items |
+| `total_nodes` | number | Total nodes across all depths |
+
+**Example:** Example
+
+```yaml
+root_selector: .comment
+children_selector: .replies
+fields: {"author": {"selector": ".author"}, "text": {"selector": ".body"}, "date": {"selector": "time", "type": "attribute", "attribute": "datetime"}}
+```
+
+**Example:** Example
+
+```yaml
+root_selector: li.item
+```
+
 ### Find Elements
 
 `browser.find`
@@ -842,6 +1067,7 @@ Launch a new browser instance with Playwright
 | `user_agent` | string | No | - | Custom user agent string |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |
 | `slow_mo` | number | No | `0` | Slow down operations by specified milliseconds |
+| `stealth` | boolean | No | `True` | Anti-detection patches: WebGL fingerprint, canvas noise, navigator fixes. Always recommended. |
 | `record_video_dir` | string | No | - | Directory to save recorded videos (enables Playwright video recording) |
 
 **Output:**
@@ -864,6 +1090,50 @@ headless: true
 
 ```yaml
 headless: false
+```
+
+### Login
+
+`browser.login`
+
+Auto-detect and fill login forms with post-login verification.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `username` | string | Yes | - | Login username or email. |
+| `password` | string | Yes | - | Login password. |
+| `success_indicator` | string | No | - | CSS selector or URL pattern to verify login succeeded. Leave empty for auto-detect (URL change). |
+| `username_selector` | string | No | - | CSS selector for username input. Leave empty for auto-detect. |
+| `password_selector` | string | No | - | CSS selector for password input. Leave empty for auto-detect. |
+| `submit_selector` | string | No | - | CSS selector for submit button. Leave empty for auto-detect. |
+| `wait_ms` | number | No | `5000` | Wait for redirect/page load after clicking submit. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `logged_in` | boolean | Whether login appears successful |
+| `url_after` | string | URL after login attempt |
+| `url_changed` | boolean | Whether URL changed after login |
+| `fields_found` | object | Which form fields were auto-detected |
+
+**Example:** Example
+
+```yaml
+username: user@example.com
+password: secret
+```
+
+**Example:** Example
+
+```yaml
+username: admin
+password: pass
+username_selector: #user
+password_selector: #pass
+submit_selector: #login-btn
 ```
 
 ### Navigate History
@@ -1143,6 +1413,50 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
+### Browser Pool
+
+`browser.pool`
+
+Manage multiple named browser instances for parallel automation.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `action` | select (`create`, `switch`, `close`, `list`, `close_all`) | Yes | `create` |  |
+| `name` | string | No | `default` | Unique name for this browser instance. |
+| `headless` | boolean | No | `True` | Run in headless mode (for create action). |
+| `stealth` | boolean | No | `True` | Apply anti-detection patches (for create action). |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `action` | string | Action performed |
+| `name` | string | Browser name |
+| `pool` | array | All active browser names (for list action) |
+| `count` | number | Number of active browsers |
+
+**Example:** Example
+
+```yaml
+action: create
+name: scraper1
+```
+
+**Example:** Example
+
+```yaml
+action: switch
+name: scraper1
+```
+
+**Example:** Example
+
+```yaml
+action: list
+```
+
 ### Press Key
 
 `browser.press`
@@ -1172,6 +1486,110 @@ key: Enter
 
 ```yaml
 key: Escape
+```
+
+### Rotate Proxy
+
+`browser.proxy_rotate`
+
+Rotate through a list of proxies with dead proxy detection.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `action` | select (`init`, `rotate`, `mark_dead`, `status`) | Yes | `rotate` |  |
+| `proxies` | array | No | `[]` | List of proxy URLs (for init action). e.g., ["http://proxy1:8080", "socks5://proxy2:1080"]. |
+| `provider_url` | string | No | - | Proxy provider API endpoint that returns proxy IPs (for init). Fetches fresh IPs from Bright Data, Oxylabs, etc. |
+| `provider_token` | string | No | - | Bearer token for the proxy provider API. |
+| `headless` | boolean | No | `True` | Run browser in headless mode after rotation. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `action` | string | Action performed |
+| `current_proxy` | string | Currently active proxy |
+| `pool_size` | number | Total proxies in pool |
+| `alive` | number | Alive proxies |
+| `dead` | number | Dead proxies |
+
+**Example:** Example
+
+```yaml
+action: init
+proxies: ["http://p1:8080", "http://p2:8080"]
+```
+
+**Example:** Example
+
+```yaml
+action: rotate
+```
+
+### Extract Article
+
+`browser.readability`
+
+Smart article extraction — extracts title, author, date, and main content from any webpage
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `include_images` | boolean | No | `True` | Extract images from the article content. |
+| `include_links` | boolean | No | `False` | Extract links from the article content. |
+| `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
+| `selector` | string | No | - | CSS selector for content area. Leave empty for auto-detection. |
+| `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
+| `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
+| `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
+| `ai_fallback` | boolean | No | `False` | When heuristic extraction fails (content_found=false), fall back to LLM extraction. Requires AI provider configured. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `title` | string | Article title |
+| `author` | string | Author name |
+| `date` | string | Publication date (ISO 8601 or raw) |
+| `content` | string | Clean article text (paragraphs separated by \n\n) |
+| `html` | string | Cleaned HTML of the content area |
+| `excerpt` | string | Short excerpt (first 300 chars or meta description) |
+| `site_name` | string | Website name |
+| `image` | string | Featured image URL |
+| `images` | array | All images in content [{src, alt, width, height}] |
+| `videos` | array | Embedded videos [{src, type}] |
+| `links` | array | All links in content [{href, text}] |
+| `word_count` | number | Word count of extracted content |
+| `language` | string | Page language code |
+| `url` | string | Page URL |
+| `content_found` | boolean | Whether meaningful content was detected |
+
+**Example:** Example
+
+```yaml
+```
+
+**Example:** Example
+
+```yaml
+selector: .entry-content
+include_images: true
+```
+
+**Example:** Example
+
+```yaml
+clean_selectors: [".ad-wrapper", ".promo-box", ".paywall-overlay"]
+wait_ms: 1000
+```
+
+**Example:** Example
+
+```yaml
+title_selector: .article-headline h1
+selector: .article-body
 ```
 
 ### Record Actions
@@ -1244,6 +1662,78 @@ Release browser session (close only if owned)
 
 ```yaml
 force: true
+```
+
+### Capture Response
+
+`browser.response`
+
+Capture API response bodies (XHR/fetch). Extract JSON from page API calls.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `url_pattern` | string | Yes | - | Regex pattern to match response URLs (e.g., "/api/data", "graphql"). |
+| `wait_ms` | number | No | `5000` | How long to listen for matching responses. 0 = capture during next navigation only. |
+| `max_responses` | number | No | `0` | Stop after capturing this many responses. 0 = no limit. |
+| `resource_types` | string | No | `xhr,fetch` | Comma-separated resource types to capture (xhr, fetch, document). Empty = all. |
+| `include_headers` | boolean | No | `False` | Include response headers in output. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `responses` | array | Captured responses [{url, status, body, content_type, headers}] |
+| `count` | number | Number of responses captured |
+
+**Example:** Example
+
+```yaml
+url_pattern: /api/
+wait_ms: 5000
+```
+
+**Example:** Example
+
+```yaml
+url_pattern: graphql
+wait_ms: 3000
+```
+
+### Check Robots.txt
+
+`browser.robots`
+
+Check robots.txt compliance and discover sitemaps.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `check_url` | string | No | - | Specific URL to check if allowed. Empty = just parse robots.txt. |
+| `user_agent` | string | No | `*` | Bot name to check rules for (e.g., "Googlebot", "*"). |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `exists` | boolean | Whether robots.txt exists |
+| `allowed` | boolean | Whether the URL is allowed for scraping |
+| `matched_rule` | string | The robots.txt rule that matched |
+| `crawl_delay` | number | Crawl-delay in seconds (0 if not set) |
+| `sitemaps` | array | Sitemap URLs found in robots.txt |
+| `rule_count` | number | Total number of rules parsed |
+
+**Example:** Example
+
+```yaml
+check_url: /api/data
+```
+
+**Example:** Example
+
+```yaml
 ```
 
 ### Take Screenshot
@@ -1363,6 +1853,42 @@ target: United States
 selector: select#country
 select_method: index
 index: 2
+```
+
+### Parse Sitemap
+
+`browser.sitemap`
+
+Parse sitemap.xml and extract URLs with metadata.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `sitemap_url` | string | No | - | Full URL to sitemap.xml. Leave empty to use current site's /sitemap.xml. |
+| `url_pattern` | string | No | - | Regex to filter URLs (e.g., "/blog/", "/products/"). Empty = all URLs. |
+| `max_urls` | number | No | `0` | Maximum URLs to return. 0 = all. |
+| `follow_index` | boolean | No | `True` | If sitemap is an index, automatically follow child sitemaps. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `urls` | array | URLs found [{url, lastmod, changefreq, priority}] |
+| `count` | number | Number of URLs found |
+| `is_index` | boolean | Whether the sitemap was an index file |
+| `child_sitemaps` | number | Number of child sitemaps (if index) |
+
+**Example:** Example
+
+```yaml
+```
+
+**Example:** Example
+
+```yaml
+url_pattern: /blog/
+max_urls: 100
 ```
 
 ### DOM Snapshot
@@ -1519,6 +2045,77 @@ action: close
 
 ```yaml
 action: list
+```
+
+### Extract Table
+
+`browser.table`
+
+Extract HTML tables as structured data with auto-detected headers.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `selector` | string | No | `table` | CSS selector for the table. Default: first <table> on page. |
+| `table_index` | number | No | `0` | If multiple tables match, which one to extract (0-based). |
+| `max_rows` | number | No | `0` | Maximum rows to extract. 0 = all rows. |
+| `include_html` | boolean | No | `False` | Include raw HTML for each cell (as field_name_html). |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `rows` | array | Table rows as objects [{header: value, ...}] |
+| `headers` | array | Column headers detected |
+| `count` | number | Number of rows extracted |
+| `tables_found` | number | Total tables matching selector |
+
+**Example:** Example
+
+```yaml
+```
+
+**Example:** Example
+
+```yaml
+selector: #results-table
+max_rows: 100
+```
+
+### Throttle
+
+`browser.throttle`
+
+Per-domain rate limiting. Waits between requests to avoid bans.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `min_interval_ms` | number | No | `2000` | Minimum milliseconds between requests to the same domain. |
+| `url` | string | No | - | URL to throttle for. Empty = use current page URL. |
+| `randomize` | boolean | No | `True` | Add ±30% random jitter to the interval (looks more human). |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `domain` | string | Domain that was throttled |
+| `waited_ms` | number | Actual milliseconds waited (0 if no wait needed) |
+| `interval_ms` | number | Configured interval |
+
+**Example:** Example
+
+```yaml
+min_interval_ms: 2000
+```
+
+**Example:** Example
+
+```yaml
+min_interval_ms: 5000
+randomize: true
 ```
 
 ### Browser Trace

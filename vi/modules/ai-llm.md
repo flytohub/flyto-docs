@@ -82,7 +82,7 @@ Chuỗi xử lý AI tuần tự với nhiều bước
 |------|------|----------|---------|-------------|
 | `input` | string | Yes | - | Đầu vào ban đầu cho chuỗi |
 | `chain_steps` | array | Yes | - | Đầu vào ban đầu cho chuỗi |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | Mảng các bước xử lý (mỗi bước là một template prompt) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Mảng các bước xử lý (mỗi bước là một template prompt) |
 | `model` | string | No | `gpt-4o` | Tên model (ví dụ: gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Tên model (ví dụ: gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | URL máy chủ Ollama (chỉ cho provider ollama) |

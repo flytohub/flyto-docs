@@ -82,7 +82,7 @@ max_iterations: 10
 |------|------|----------|---------|-------------|
 | `input` | string | Yes | - | อินพุตเริ่มต้นสำหรับห่วงโซ่ |
 | `chain_steps` | array | Yes | - | อินพุตเริ่มต้นสำหรับห่วงโซ่ |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | อาร์เรย์ของขั้นตอนการประมวลผล (แต่ละตัวคือเทมเพลต prompt) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | อาร์เรย์ของขั้นตอนการประมวลผล (แต่ละตัวคือเทมเพลต prompt) |
 | `model` | string | No | `gpt-4o` | ชื่อโมเดล (เช่น gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | ชื่อโมเดล (เช่น gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | URL เซิร์ฟเวอร์ Ollama (เฉพาะสำหรับผู้ให้บริการ ollama) |

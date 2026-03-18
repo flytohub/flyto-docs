@@ -82,7 +82,7 @@ Sequentielle KI-Verarbeitungskette mit mehreren Schritten
 |------|------|----------|---------|-------------|
 | `input` | string | Yes | - | Anfangseingabe für die Kette |
 | `chain_steps` | array | Yes | - | Anfangseingabe für die Kette |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | Array von Verarbeitungsschritten (jeder ist eine Prompt-Vorlage) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Array von Verarbeitungsschritten (jeder ist eine Prompt-Vorlage) |
 | `model` | string | No | `gpt-4o` | Modellname (z.B. gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Modellname (z.B. gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | Ollama-Server-URL (nur für Ollama-Provider) |

@@ -1,6 +1,6 @@
 # Modules
 
-flyto-core ships 419+ modules. Each module is a self-contained unit of work with defined inputs, outputs, and evidence.
+flyto-core ships 433+ modules. Each module is a self-contained unit of work with defined inputs, outputs, and evidence.
 
 ## Browse by Category
 
@@ -8,7 +8,7 @@ flyto-core ships 419+ modules. Each module is a self-contained unit of work with
 
 | Category | Modules | Description |
 |----------|---------|-------------|
-| [Browser Automation](/pl/modules/browser) | 40 | Full web automation: navigation, interaction, data extraction, screenshots, and performance monitoring. |
+| [Browser Automation](/pl/modules/browser) | 54 | Full web automation: navigation, interaction, data extraction, screenshots, and performance monitoring. |
 | [Atomic](/pl/modules/atomic) | 44 | Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and testing. |
 | [Flow Control](/pl/modules/flow-control) | 24 | Branching, loops, parallelism, subflows, triggers, and error handling. |
 | [File Operations](/pl/modules/file-operations) | 3 | Copy, move, and delete files. |

@@ -82,7 +82,7 @@ max_iterations: 10
 |------|------|----------|---------|-------------|
 | `input` | string | Yes | - | 체인의 초기 입력 |
 | `chain_steps` | array | Yes | - | 체인의 초기 입력 |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | 처리 단계 배열 (각각 프롬프트 템플릿) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | 처리 단계 배열 (각각 프롬프트 템플릿) |
 | `model` | string | No | `gpt-4o` | 모델 이름 (예: gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | 모델 이름 (예: gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | Ollama 서버 URL (ollama 제공자 전용) |

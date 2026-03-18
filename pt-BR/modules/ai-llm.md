@@ -82,7 +82,7 @@ Cadeia de processamento de IA sequencial com multiplos passos
 |------|------|----------|---------|-------------|
 | `input` | string | Yes | - | Entrada inicial para a cadeia |
 | `chain_steps` | array | Yes | - | Entrada inicial para a cadeia |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | Array de passos de processamento (cada um e um template de prompt) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Array de passos de processamento (cada um e um template de prompt) |
 | `model` | string | No | `gpt-4o` | Nome do modelo (ex: gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Nome do modelo (ex: gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | URL do servidor Ollama (apenas para provedor ollama) |

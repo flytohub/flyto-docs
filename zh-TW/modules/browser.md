@@ -2,15 +2,19 @@
 
 Full web automation: navigation, interaction, data extraction, screenshots, and performance monitoring.
 
-**40 modules**
+**54 modules**
 
 | Module | Description |
 |--------|-------------|
+| [處理驗證](#處理驗證) | 自動偵測並處理反機器人驗證（Cloudflare、CAPTCHA） |
 | [點擊元素](#點擊元素) | 點擊頁面上的元素 |
 | [關閉瀏覽器](#關閉瀏覽器) | 關閉瀏覽器實例並釋放資源 |
+| [連接遠端瀏覽器](#連接遠端瀏覽器) | 連接遠端瀏覽器服務（Browserless、BrowserBase），真實指紋繞過 Cloudflare |
 | [擷取主控台](#擷取主控台) | 擷取瀏覽器主控台日誌（錯誤、警告、資訊） |
 | [管理 Cookie](#管理-cookie) | 取得、設定或清除瀏覽器 Cookie |
+| [Cookie 檔案](#cookie-檔案) | 將瀏覽器 Cookie 匯出/匯入 JSON 檔案 |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
+| [偵測列表](#偵測列表) | 自動偵測頁面上的重複項目（文章、商品、搜尋結果） |
 | [處理對話框](#處理對話框) | 處理 alert、confirm 和 prompt 對話框 |
 | [下載檔案](#下載檔案) | 從瀏覽器下載檔案 |
 | [拖放](#拖放) | 拖放元素 |
@@ -18,6 +22,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [確保瀏覽器](#確保瀏覽器) | 確保存在瀏覽器工作階段（重用或啟動） |
 | [執行 JavaScript](#執行-javascript) | 在頁面上下文中執行 JavaScript 程式碼 |
 | [擷取資料](#擷取資料) | 從頁面擷取結構化資料 |
+| [擷取巢狀資料](#擷取巢狀資料) | 提取樹狀/巢狀資料（留言串、討論串、資料夾結構） |
 | [尋找元素](#尋找元素) | 在頁面中尋找元素並回傳元素 ID 列表 |
 | [填寫表單](#填寫表單) | 智慧填表，自動偵測欄位 |
 | [切換框架](#切換框架) | 切換到 iframe 或框架上下文 |
@@ -26,21 +31,30 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [懸停元素](#懸停元素) | 將滑鼠懸停在元素上 |
 | [](#) |  |
 | [啟動瀏覽器](#啟動瀏覽器) | 使用 Playwright 啟動新的瀏覽器實例 |
+| [登入](#登入) | 自動偵測並填寫登入表單，支援登入後驗證 |
 | [導航歷史](#導航歷史) | 瀏覽器歷史記錄導航（返回、前進、重新載入） |
 | [網路監控](#網路監控) | 監控和攔截網路請求 |
 | [列出頁面](#列出頁面) | 列出所有開啟的瀏覽器頁面/分頁 |
 | [翻頁與擷取](#翻頁與擷取) | 自動翻頁並擷取資料 |
 | [產生 PDF](#產生-pdf) | 從目前頁面產生 PDF |
 | [效能指標](#效能指標) | 收集瀏覽器效能指標 |
+| [瀏覽器池](#瀏覽器池) | 管理多個命名瀏覽器實例，支援並行自動化 |
 | [按鍵](#按鍵) | 按下鍵盤按鍵 |
+| [代理輪替](#代理輪替) | 輪替代理伺服器列表，支援死代理偵測 |
+| [擷取文章](#擷取文章) | 智慧文章擷取 — 自動提取標題、作者、日期與正文內容 |
 | [錄製操作](#錄製操作) | 錄製使用者操作為工作流程 |
 | [釋放瀏覽器](#釋放瀏覽器) | 釋放瀏覽器會話（僅在擁有時關閉） |
+| [擷取回應](#擷取回應) | 擷取 API 回應內容（XHR/fetch），提取頁面 API 的 JSON 資料 |
+| [檢查 Robots.txt](#檢查-robots.txt) | 檢查 robots.txt 合規性並發現 sitemap |
 | [截圖](#截圖) | 擷取目前頁面的截圖 |
 | [捲動頁面](#捲動頁面) | 捲動頁面到元素、位置或方向 |
 | [選擇選項](#選擇選項) | 從下拉選單選擇選項 |
+| [解析 Sitemap](#解析-sitemap) | 解析 sitemap.xml 並提取 URL 及中繼資料 |
 | [DOM 快照](#dom-快照) | 擷取當前頁面的 DOM 快照 |
 | [瀏覽器儲存空間](#瀏覽器儲存空間) | 存取 localStorage 和 sessionStorage |
 | [管理分頁](#管理分頁) | 建立、切換和關閉瀏覽器分頁 |
+| [擷取表格](#擷取表格) | 將 HTML 表格提取為結構化資料，自動偵測表頭 |
+| [請求限流](#請求限流) | 按域名限流，避免請求過快被封鎖 |
 | [瀏覽器追蹤](#瀏覽器追蹤) | 開始、停止或儲存瀏覽器效能追蹤 |
 | [輸入文字](#輸入文字) | 在輸入欄位中輸入文字 |
 | [上傳檔案](#上傳檔案) | 上傳檔案到檔案輸入元素 |
@@ -48,6 +62,48 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [等待](#等待) | 等待一段時間或直到元素出現 |
 
 ## Modules
+
+### 處理驗證
+
+`browser.challenge`
+
+自動偵測並處理反機器人驗證（Cloudflare、CAPTCHA）
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `auto_wait_seconds` | number | No | `15` | How long to wait for the challenge to auto-resolve before asking for human help. 0 = skip auto-wait. |
+| `human_fallback` | boolean | No | `True` | If auto-wait fails, create a breakpoint for the user to solve the challenge manually. |
+| `human_timeout_seconds` | number | No | `120` | How long to wait for human to solve the challenge. 0 = wait indefinitely. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `status` | string | Result: passed / no_challenge / auto_resolved / human_resolved / timeout |
+| `challenge_type` | string | Type of challenge detected (cloudflare, hcaptcha, recaptcha, generic_verify, none) |
+| `wait_seconds` | number | How long it took to resolve |
+| `required_human` | boolean | Whether human intervention was needed |
+
+**Example:** Example
+
+```yaml
+```
+
+**Example:** Example
+
+```yaml
+auto_wait_seconds: 0
+human_fallback: true
+```
+
+**Example:** Example
+
+```yaml
+auto_wait_seconds: 30
+human_fallback: false
+```
 
 ### 點擊元素
 
@@ -120,6 +176,48 @@ selector: #submit-button
 **Example:** Example
 
 ```yaml
+```
+
+### 連接遠端瀏覽器
+
+`browser.connect`
+
+連接遠端瀏覽器服務（Browserless、BrowserBase），真實指紋繞過 Cloudflare
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `ws_endpoint` | string | Yes | - | CDP WebSocket URL (e.g., wss://chrome.browserless.io?token=xxx). |
+| `viewport_width` | number | No | `1280` |  |
+| `viewport_height` | number | No | `720` |  |
+| `locale` | string | No | `en-US` |  |
+| `timeout_ms` | number | No | `30000` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `connected` | boolean | Whether connection succeeded |
+| `browser_type` | string | Browser type (chromium) |
+| `endpoint` | string | Connected endpoint (redacted) |
+
+**Example:** Example
+
+```yaml
+ws_endpoint: wss://chrome.browserless.io?token=TOKEN
+```
+
+**Example:** Example
+
+```yaml
+ws_endpoint: wss://connect.browserbase.com?apiKey=KEY
+```
+
+**Example:** Example
+
+```yaml
+ws_endpoint: ws://localhost:3000
 ```
 
 ### 擷取主控台
@@ -212,6 +310,51 @@ domain: example.com
 action: clear
 ```
 
+### Cookie 檔案
+
+`browser.cookies_file`
+
+將瀏覽器 Cookie 匯出/匯入 JSON 檔案
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `action` | select (`export`, `import`) | Yes | `export` | Export cookies to file or import from file. |
+| `file_path` | string | Yes | - | Path to the JSON cookies file. |
+| `domain_filter` | string | No | - | Only export/import cookies for this domain (e.g., ".github.com"). Empty = all. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `action` | string | Action performed (export/import) |
+| `cookie_count` | number | Number of cookies exported/imported |
+| `file_path` | string | Path to the cookies file |
+| `domains` | array | Unique domains in the cookies |
+
+**Example:** Example
+
+```yaml
+action: export
+file_path: cookies.json
+```
+
+**Example:** Example
+
+```yaml
+action: import
+file_path: cookies.json
+```
+
+**Example:** Example
+
+```yaml
+action: export
+file_path: gh.json
+domain_filter: .github.com
+```
+
 ### Smart Detect
 
 `browser.detect`
@@ -276,6 +419,50 @@ action_value: user@example.com
 selector: #old-login-btn
 text: Login
 match_mode: best
+```
+
+### 偵測列表
+
+`browser.detect_list`
+
+自動偵測頁面上的重複項目（文章、商品、搜尋結果）
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `min_items` | number | No | `3` | Minimum items to consider a valid list. |
+| `max_items` | number | No | `200` | Maximum items to return. |
+| `include_text` | boolean | No | `True` | Include text content from each item (excluding links). |
+| `selector` | string | No | - | CSS selector for list items. Leave empty for auto-detection. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `items` | array | Detected items [{title, url, image, text, date, _index}] |
+| `count` | number | Number of items found |
+| `selector` | string | CSS selector that matches the items (reusable for browser.extract or browser.pagination) |
+| `auto_detected` | boolean | Whether items were auto-detected or from user selector |
+| `content_found` | boolean | Whether enough items were found |
+| `consistency` | number | Structural consistency score (0-1) |
+
+**Example:** Example
+
+```yaml
+```
+
+**Example:** Example
+
+```yaml
+selector: .post-item
+```
+
+**Example:** Example
+
+```yaml
+min_items: 5
+max_items: 50
 ```
 
 ### 處理對話框
@@ -570,6 +757,44 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
+### 擷取巢狀資料
+
+`browser.extract_nested`
+
+提取樹狀/巢狀資料（留言串、討論串、資料夾結構）
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `root_selector` | string | Yes | - | CSS selector for each item (e.g., ".comment", "li.thread"). |
+| `children_selector` | string | No | - | CSS selector for the container holding child items within each item. Leave empty for auto-detect. |
+| `fields` | object | No | `{}` | Custom field extraction: {"name": {"selector": "CSS", "type": "text|html|attribute", "attribute": "href"}}. Leave empty for auto-extract. |
+| `max_depth` | number | No | `10` | Maximum nesting depth to extract. |
+| `limit` | number | No | `0` | Total items to extract (all depths combined). 0 = no limit. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `items` | array | Tree structure [{...fields, children: [{...}]}] |
+| `count` | number | Number of root items |
+| `total_nodes` | number | Total nodes across all depths |
+
+**Example:** Example
+
+```yaml
+root_selector: .comment
+children_selector: .replies
+fields: {"author": {"selector": ".author"}, "text": {"selector": ".body"}, "date": {"selector": "time", "type": "attribute", "attribute": "datetime"}}
+```
+
+**Example:** Example
+
+```yaml
+root_selector: li.item
+```
+
 ### 尋找元素
 
 `browser.find`
@@ -840,6 +1065,7 @@ description: Select the department you want to register for
 | `user_agent` | string | No | - | 自訂使用者代理字串 |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |
 | `slow_mo` | number | No | `0` | 以指定毫秒數放慢操作 |
+| `stealth` | boolean | No | `True` | Anti-detection patches: WebGL fingerprint, canvas noise, navigator fixes. Always recommended. |
 | `record_video_dir` | string | No | - | Directory to save recorded videos (enables Playwright video recording) |
 
 **Output:**
@@ -862,6 +1088,50 @@ headless: true
 
 ```yaml
 headless: false
+```
+
+### 登入
+
+`browser.login`
+
+自動偵測並填寫登入表單，支援登入後驗證
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `username` | string | Yes | - | Login username or email. |
+| `password` | string | Yes | - | Login password. |
+| `success_indicator` | string | No | - | CSS selector or URL pattern to verify login succeeded. Leave empty for auto-detect (URL change). |
+| `username_selector` | string | No | - | CSS selector for username input. Leave empty for auto-detect. |
+| `password_selector` | string | No | - | CSS selector for password input. Leave empty for auto-detect. |
+| `submit_selector` | string | No | - | CSS selector for submit button. Leave empty for auto-detect. |
+| `wait_ms` | number | No | `5000` | Wait for redirect/page load after clicking submit. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `logged_in` | boolean | Whether login appears successful |
+| `url_after` | string | URL after login attempt |
+| `url_changed` | boolean | Whether URL changed after login |
+| `fields_found` | object | Which form fields were auto-detected |
+
+**Example:** Example
+
+```yaml
+username: user@example.com
+password: secret
+```
+
+**Example:** Example
+
+```yaml
+username: admin
+password: pass
+username_selector: #user
+password_selector: #pass
+submit_selector: #login-btn
 ```
 
 ### 導航歷史
@@ -1141,6 +1411,50 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
+### 瀏覽器池
+
+`browser.pool`
+
+管理多個命名瀏覽器實例，支援並行自動化
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `action` | select (`create`, `switch`, `close`, `list`, `close_all`) | Yes | `create` |  |
+| `name` | string | No | `default` | Unique name for this browser instance. |
+| `headless` | boolean | No | `True` | Run in headless mode (for create action). |
+| `stealth` | boolean | No | `True` | Apply anti-detection patches (for create action). |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `action` | string | Action performed |
+| `name` | string | Browser name |
+| `pool` | array | All active browser names (for list action) |
+| `count` | number | Number of active browsers |
+
+**Example:** Example
+
+```yaml
+action: create
+name: scraper1
+```
+
+**Example:** Example
+
+```yaml
+action: switch
+name: scraper1
+```
+
+**Example:** Example
+
+```yaml
+action: list
+```
+
 ### 按鍵
 
 `browser.press`
@@ -1170,6 +1484,110 @@ key: Enter
 
 ```yaml
 key: Escape
+```
+
+### 代理輪替
+
+`browser.proxy_rotate`
+
+輪替代理伺服器列表，支援死代理偵測
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `action` | select (`init`, `rotate`, `mark_dead`, `status`) | Yes | `rotate` |  |
+| `proxies` | array | No | `[]` | List of proxy URLs (for init action). e.g., ["http://proxy1:8080", "socks5://proxy2:1080"]. |
+| `provider_url` | string | No | - | Proxy provider API endpoint that returns proxy IPs (for init). Fetches fresh IPs from Bright Data, Oxylabs, etc. |
+| `provider_token` | string | No | - | Bearer token for the proxy provider API. |
+| `headless` | boolean | No | `True` | Run browser in headless mode after rotation. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `action` | string | Action performed |
+| `current_proxy` | string | Currently active proxy |
+| `pool_size` | number | Total proxies in pool |
+| `alive` | number | Alive proxies |
+| `dead` | number | Dead proxies |
+
+**Example:** Example
+
+```yaml
+action: init
+proxies: ["http://p1:8080", "http://p2:8080"]
+```
+
+**Example:** Example
+
+```yaml
+action: rotate
+```
+
+### 擷取文章
+
+`browser.readability`
+
+智慧文章擷取 — 自動提取標題、作者、日期與正文內容
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `include_images` | boolean | No | `True` | Extract images from the article content. |
+| `include_links` | boolean | No | `False` | Extract links from the article content. |
+| `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
+| `selector` | string | No | - | 內容區域的 CSS 選擇器，留空自動偵測 |
+| `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
+| `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
+| `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
+| `ai_fallback` | boolean | No | `False` | When heuristic extraction fails (content_found=false), fall back to LLM extraction. Requires AI provider configured. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `title` | string | Article title |
+| `author` | string | Author name |
+| `date` | string | Publication date (ISO 8601 or raw) |
+| `content` | string | Clean article text (paragraphs separated by \n\n) |
+| `html` | string | Cleaned HTML of the content area |
+| `excerpt` | string | Short excerpt (first 300 chars or meta description) |
+| `site_name` | string | Website name |
+| `image` | string | Featured image URL |
+| `images` | array | All images in content [{src, alt, width, height}] |
+| `videos` | array | Embedded videos [{src, type}] |
+| `links` | array | All links in content [{href, text}] |
+| `word_count` | number | Word count of extracted content |
+| `language` | string | Page language code |
+| `url` | string | Page URL |
+| `content_found` | boolean | Whether meaningful content was detected |
+
+**Example:** Example
+
+```yaml
+```
+
+**Example:** Example
+
+```yaml
+selector: .entry-content
+include_images: true
+```
+
+**Example:** Example
+
+```yaml
+clean_selectors: [".ad-wrapper", ".promo-box", ".paywall-overlay"]
+wait_ms: 1000
+```
+
+**Example:** Example
+
+```yaml
+title_selector: .article-headline h1
+selector: .article-body
 ```
 
 ### 錄製操作
@@ -1242,6 +1660,78 @@ action: get
 
 ```yaml
 force: true
+```
+
+### 擷取回應
+
+`browser.response`
+
+擷取 API 回應內容（XHR/fetch），提取頁面 API 的 JSON 資料
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `url_pattern` | string | Yes | - | Regex pattern to match response URLs (e.g., "/api/data", "graphql"). |
+| `wait_ms` | number | No | `5000` | How long to listen for matching responses. 0 = capture during next navigation only. |
+| `max_responses` | number | No | `0` | Stop after capturing this many responses. 0 = no limit. |
+| `resource_types` | string | No | `xhr,fetch` | Comma-separated resource types to capture (xhr, fetch, document). Empty = all. |
+| `include_headers` | boolean | No | `False` | Include response headers in output. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `responses` | array | Captured responses [{url, status, body, content_type, headers}] |
+| `count` | number | Number of responses captured |
+
+**Example:** Example
+
+```yaml
+url_pattern: /api/
+wait_ms: 5000
+```
+
+**Example:** Example
+
+```yaml
+url_pattern: graphql
+wait_ms: 3000
+```
+
+### 檢查 Robots.txt
+
+`browser.robots`
+
+檢查 robots.txt 合規性並發現 sitemap
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `check_url` | string | No | - | Specific URL to check if allowed. Empty = just parse robots.txt. |
+| `user_agent` | string | No | `*` | Bot name to check rules for (e.g., "Googlebot", "*"). |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `exists` | boolean | Whether robots.txt exists |
+| `allowed` | boolean | Whether the URL is allowed for scraping |
+| `matched_rule` | string | The robots.txt rule that matched |
+| `crawl_delay` | number | Crawl-delay in seconds (0 if not set) |
+| `sitemaps` | array | Sitemap URLs found in robots.txt |
+| `rule_count` | number | Total number of rules parsed |
+
+**Example:** Example
+
+```yaml
+check_url: /api/data
+```
+
+**Example:** Example
+
+```yaml
 ```
 
 ### 截圖
@@ -1361,6 +1851,42 @@ target: United States
 selector: select#country
 select_method: index
 index: 2
+```
+
+### 解析 Sitemap
+
+`browser.sitemap`
+
+解析 sitemap.xml 並提取 URL 及中繼資料
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `sitemap_url` | string | No | - | Full URL to sitemap.xml. Leave empty to use current site's /sitemap.xml. |
+| `url_pattern` | string | No | - | Regex to filter URLs (e.g., "/blog/", "/products/"). Empty = all URLs. |
+| `max_urls` | number | No | `0` | Maximum URLs to return. 0 = all. |
+| `follow_index` | boolean | No | `True` | If sitemap is an index, automatically follow child sitemaps. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `urls` | array | URLs found [{url, lastmod, changefreq, priority}] |
+| `count` | number | Number of URLs found |
+| `is_index` | boolean | Whether the sitemap was an index file |
+| `child_sitemaps` | number | Number of child sitemaps (if index) |
+
+**Example:** Example
+
+```yaml
+```
+
+**Example:** Example
+
+```yaml
+url_pattern: /blog/
+max_urls: 100
 ```
 
 ### DOM 快照
@@ -1517,6 +2043,77 @@ action: close
 
 ```yaml
 action: list
+```
+
+### 擷取表格
+
+`browser.table`
+
+將 HTML 表格提取為結構化資料，自動偵測表頭
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `selector` | string | No | `table` | CSS selector for the table. Default: first <table> on page. |
+| `table_index` | number | No | `0` | If multiple tables match, which one to extract (0-based). |
+| `max_rows` | number | No | `0` | Maximum rows to extract. 0 = all rows. |
+| `include_html` | boolean | No | `False` | Include raw HTML for each cell (as field_name_html). |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `rows` | array | Table rows as objects [{header: value, ...}] |
+| `headers` | array | Column headers detected |
+| `count` | number | Number of rows extracted |
+| `tables_found` | number | Total tables matching selector |
+
+**Example:** Example
+
+```yaml
+```
+
+**Example:** Example
+
+```yaml
+selector: #results-table
+max_rows: 100
+```
+
+### 請求限流
+
+`browser.throttle`
+
+按域名限流，避免請求過快被封鎖
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `min_interval_ms` | number | No | `2000` | Minimum milliseconds between requests to the same domain. |
+| `url` | string | No | - | URL to throttle for. Empty = use current page URL. |
+| `randomize` | boolean | No | `True` | Add ±30% random jitter to the interval (looks more human). |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `domain` | string | Domain that was throttled |
+| `waited_ms` | number | Actual milliseconds waited (0 if no wait needed) |
+| `interval_ms` | number | Configured interval |
+
+**Example:** Example
+
+```yaml
+min_interval_ms: 2000
+```
+
+**Example:** Example
+
+```yaml
+min_interval_ms: 5000
+randomize: true
 ```
 
 ### 瀏覽器追蹤

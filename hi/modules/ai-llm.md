@@ -82,7 +82,7 @@ max_iterations: 10
 |------|------|----------|---------|-------------|
 | `input` | string | Yes | - | चेन के लिए प्रारंभिक इनपुट |
 | `chain_steps` | array | Yes | - | चेन के लिए प्रारंभिक इनपुट |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | प्रोसेसिंग चरणों की सरणी (प्रत्येक एक प्रॉम्प्ट टेम्पलेट है) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | प्रोसेसिंग चरणों की सरणी (प्रत्येक एक प्रॉम्प्ट टेम्पलेट है) |
 | `model` | string | No | `gpt-4o` | मॉडल नाम (जैसे, gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | मॉडल नाम (जैसे, gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | Ollama सर्वर URL (केवल ollama प्रदाता के लिए) |

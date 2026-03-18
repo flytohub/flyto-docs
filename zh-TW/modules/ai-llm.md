@@ -82,7 +82,7 @@ max_iterations: 10
 |------|------|----------|---------|-------------|
 | `input` | string | Yes | - | 鏈式處理的初始輸入 |
 | `chain_steps` | array | Yes | - | 處理步驟陣列（每個都是提示詞範本） |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | LLM 提供者（openai 或 ollama） |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | LLM 提供者（openai 或 ollama） |
 | `model` | string | No | `gpt-4o` | 模型名稱（例如 gpt-4、llama2、mistral） |
 | `ollama_url` | string | No | `http://localhost:11434` | Ollama 伺服器網址（僅限 ollama 提供者） |
 | `temperature` | number | No | `0.7` | 創造力等級（0-2） |

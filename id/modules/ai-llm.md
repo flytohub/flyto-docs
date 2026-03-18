@@ -82,7 +82,7 @@ Rantai pemrosesan AI sekuensial dengan beberapa langkah
 |------|------|----------|---------|-------------|
 | `input` | string | Yes | - | Input awal untuk rantai |
 | `chain_steps` | array | Yes | - | Input awal untuk rantai |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | Array langkah pemrosesan (setiap adalah template prompt) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Array langkah pemrosesan (setiap adalah template prompt) |
 | `model` | string | No | `gpt-4o` | Nama model (mis., gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Nama model (mis., gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | URL server Ollama (hanya untuk provider ollama) |

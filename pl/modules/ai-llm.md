@@ -82,7 +82,7 @@ Sekwencyjny lancuch przetwarzania AI z wieloma krokami
 |------|------|----------|---------|-------------|
 | `input` | string | Yes | - | Poczatkowe dane wejsciowe dla lancucha |
 | `chain_steps` | array | Yes | - | Poczatkowe dane wejsciowe dla lancucha |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | Tablica krokow przetwarzania (kazdy jest szablonem promptu) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Tablica krokow przetwarzania (kazdy jest szablonem promptu) |
 | `model` | string | No | `gpt-4o` | Nazwa modelu (np. gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Nazwa modelu (np. gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | URL serwera Ollama (tylko dla dostawcy ollama) |

@@ -82,7 +82,7 @@ Birden fazla adımla sıralı AI işleme zinciri
 |------|------|----------|---------|-------------|
 | `input` | string | Yes | - | Zincir için başlangıç girdisi |
 | `chain_steps` | array | Yes | - | Zincir için başlangıç girdisi |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | İşleme adımları dizisi (her biri bir istem şablonudur) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | İşleme adımları dizisi (her biri bir istem şablonudur) |
 | `model` | string | No | `gpt-4o` | Model adı (örn: gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Model adı (örn: gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | Ollama sunucu URL'si (sadece ollama sağlayıcı için) |
