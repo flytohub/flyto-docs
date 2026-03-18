@@ -138,7 +138,11 @@ export default defineConfig({
       // Locale dirs (ja, ko, etc.) only have /modules/ pages
       // Remove locale/guide/*, locale/core/*, locale/mcp/*, locale/ai/*, etc.
       const localeOnlyModules = /^\/(ja|ko|zh-TW|de|es|fr|hi|id|it|pl|pt-BR|th|tr|vi)\/(guide|core|mcp|ai|blueprint|indexer)\//
-      return items.filter(item => !localeOnlyModules.test(new URL(item.url).pathname))
+      return items.filter(item => {
+        // item.url may be a path or a full URL
+        const path = item.url.startsWith('http') ? new URL(item.url).pathname : item.url
+        return !localeOnlyModules.test(path)
+      })
     }
   },
   lastUpdated: true,
