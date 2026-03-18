@@ -24,7 +24,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [模擬地理位置](#模擬地理位置) | 模擬瀏覽器地理位置 |
 | [前往網址](#前往網址) | 開啟指定的網址 |
 | [懸停元素](#懸停元素) | 將滑鼠懸停在元素上 |
-| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
+| [](#) |  |
 | [啟動瀏覽器](#啟動瀏覽器) | 使用 Playwright 啟動新的瀏覽器實例 |
 | [導航歷史](#導航歷史) | 瀏覽器歷史記錄導航（返回、前進、重新載入） |
 | [網路監控](#網路監控) | 監控和攔截網路請求 |
@@ -792,11 +792,9 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### Browser Interact
+### 
 
 `browser.interact`
-
-Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
 
 **Parameters:**
 
@@ -810,11 +808,11 @@ Pause for user to interact with the browser page. Shows page elements in a dialo
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Operation status |
-| `action` | string | Action executed (click/select/type/toggle) |
-| `selector` | string | CSS selector of the interacted element |
-| `value` | string | Value used (for select/type actions) |
-| `url` | string | Page URL at time of interaction |
+| `status` | string |  |
+| `action` | string |  |
+| `selector` | string |  |
+| `value` | string |  |
+| `url` | string |  |
 
 **Example:** Example
 

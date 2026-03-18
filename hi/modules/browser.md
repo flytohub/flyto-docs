@@ -24,7 +24,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [जियोलोकेशन मॉक करें](#जियोलोकेशन-मॉक-करें) | ब्राउज़र जियोलोकेशन मॉक करें |
 | [URL पर जाएं](#url-पर-जाएं) | विशिष्ट URL पर नेविगेट करें |
 | [एलिमेंट होवर करें](#एलिमेंट-होवर-करें) | एलिमेंट पर माउस होवर करें |
-| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
+| [](#) |  |
 | [ब्राउज़र लॉन्च करें](#ब्राउज़र-लॉन्च-करें) | Playwright के साथ नया ब्राउज़र इंस्टेंस लॉन्च करें |
 | [इतिहास नेविगेट करें](#इतिहास-नेविगेट-करें) | ब्राउज़र इतिहास में नेविगेट करें (पीछे, आगे, पुनः लोड) |
 | [नेटवर्क मॉनिटर](#नेटवर्क-मॉनिटर) | नेटवर्क अनुरोधों की निगरानी और इंटरसेप्ट करें |
@@ -792,11 +792,9 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### Browser Interact
+### 
 
 `browser.interact`
-
-Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
 
 **Parameters:**
 
@@ -810,11 +808,11 @@ Pause for user to interact with the browser page. Shows page elements in a dialo
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Operation status |
-| `action` | string | Action executed (click/select/type/toggle) |
-| `selector` | string | CSS selector of the interacted element |
-| `value` | string | Value used (for select/type actions) |
-| `url` | string | Page URL at time of interaction |
+| `status` | string |  |
+| `action` | string |  |
+| `selector` | string |  |
+| `value` | string |  |
+| `url` | string |  |
 
 **Example:** Example
 

@@ -24,7 +24,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Simular geolocalizacion](#simular-geolocalizacion) | Simular geolocalizacion del navegador |
 | [Ir a URL](#ir-a-url) | Navegar a una URL especifica |
 | [Hover sobre elemento](#hover-sobre-elemento) | Pasar el mouse sobre un elemento |
-| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
+| [](#) |  |
 | [Lanzar navegador](#lanzar-navegador) | Lanzar una nueva instancia del navegador con Playwright |
 | [Navegar Historial](#navegar-historial) | Navegar por el historial del navegador (atrás, adelante, recargar) |
 | [Monitor de red](#monitor-de-red) | Monitorear e interceptar solicitudes de red |
@@ -792,11 +792,9 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### Browser Interact
+### 
 
 `browser.interact`
-
-Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
 
 **Parameters:**
 
@@ -810,11 +808,11 @@ Pause for user to interact with the browser page. Shows page elements in a dialo
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Operation status |
-| `action` | string | Action executed (click/select/type/toggle) |
-| `selector` | string | CSS selector of the interacted element |
-| `value` | string | Value used (for select/type actions) |
-| `url` | string | Page URL at time of interaction |
+| `status` | string |  |
+| `action` | string |  |
+| `selector` | string |  |
+| `value` | string |  |
+| `url` | string |  |
 
 **Example:** Example
 

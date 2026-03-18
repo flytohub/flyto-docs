@@ -24,7 +24,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Giả lập vị trí địa lý](#giả-lập-vị-trí-địa-lý) | Giả lập vị trí địa lý trình duyệt |
 | [Đi đến URL](#đi-đến-url) | Điều hướng đến một URL cụ thể |
 | [Di chuột qua phần tử](#di-chuột-qua-phần-tử) | Di chuột qua một phần tử |
-| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
+| [](#) |  |
 | [Khởi chạy trình duyệt](#khởi-chạy-trình-duyệt) | Khởi chạy phiên trình duyệt mới với Playwright |
 | [Điều hướng lịch sử](#điều-hướng-lịch-sử) | Điều hướng lịch sử trình duyệt (quay lại, tiến tới, tải lại) |
 | [Giám sát mạng](#giám-sát-mạng) | Giám sát và chặn các yêu cầu mạng |
@@ -792,11 +792,9 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### Browser Interact
+### 
 
 `browser.interact`
-
-Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
 
 **Parameters:**
 
@@ -810,11 +808,11 @@ Pause for user to interact with the browser page. Shows page elements in a dialo
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Operation status |
-| `action` | string | Action executed (click/select/type/toggle) |
-| `selector` | string | CSS selector of the interacted element |
-| `value` | string | Value used (for select/type actions) |
-| `url` | string | Page URL at time of interaction |
+| `status` | string |  |
+| `action` | string |  |
+| `selector` | string |  |
+| `value` | string |  |
+| `url` | string |  |
 
 **Example:** Example
 

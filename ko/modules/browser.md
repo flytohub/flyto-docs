@@ -24,7 +24,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [지오로케이션 모킹](#지오로케이션-모킹) | 브라우저 지오로케이션 모킹 |
 | [URL로 이동](#url로-이동) | 특정 URL로 이동 |
 | [요소 호버](#요소-호버) | 요소 위로 마우스 호버 |
-| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
+| [](#) |  |
 | [브라우저 실행](#브라우저-실행) | Playwright로 새 브라우저 인스턴스 실행 |
 | [기록 탐색](#기록-탐색) | 브라우저 기록 탐색 (뒤로, 앞으로, 새로고침) |
 | [네트워크 모니터](#네트워크-모니터) | 네트워크 요청 모니터링 및 가로채기 |
@@ -792,11 +792,9 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### Browser Interact
+### 
 
 `browser.interact`
-
-Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
 
 **Parameters:**
 
@@ -810,11 +808,11 @@ Pause for user to interact with the browser page. Shows page elements in a dialo
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Operation status |
-| `action` | string | Action executed (click/select/type/toggle) |
-| `selector` | string | CSS selector of the interacted element |
-| `value` | string | Value used (for select/type actions) |
-| `url` | string | Page URL at time of interaction |
+| `status` | string |  |
+| `action` | string |  |
+| `selector` | string |  |
+| `value` | string |  |
+| `url` | string |  |
 
 **Example:** Example
 

@@ -24,7 +24,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [位置情報シミュレート](#位置情報シミュレート) | ブラウザの位置情報をシミュレート |
 | [URLに移動](#urlに移動) | 指定URLに移動 |
 | [ホバー](#ホバー) | 要素にマウスオーバー |
-| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
+| [](#) |  |
 | [ブラウザ起動](#ブラウザ起動) | Playwright で新しいブラウザを起動 |
 | [履歴ナビゲート](#履歴ナビゲート) | ブラウザ履歴をナビゲート（戻る、進む、リロード） |
 | [ネットワーク監視](#ネットワーク監視) | ネットワークリクエストの監視・傍受 |
@@ -792,11 +792,9 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### Browser Interact
+### 
 
 `browser.interact`
-
-Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
 
 **Parameters:**
 
@@ -810,11 +808,11 @@ Pause for user to interact with the browser page. Shows page elements in a dialo
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Operation status |
-| `action` | string | Action executed (click/select/type/toggle) |
-| `selector` | string | CSS selector of the interacted element |
-| `value` | string | Value used (for select/type actions) |
-| `url` | string | Page URL at time of interaction |
+| `status` | string |  |
+| `action` | string |  |
+| `selector` | string |  |
+| `value` | string |  |
+| `url` | string |  |
 
 **Example:** Example
 
