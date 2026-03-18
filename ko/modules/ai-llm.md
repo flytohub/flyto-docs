@@ -40,8 +40,8 @@ AI model integration, text generation, embeddings, and autonomous agents.
 | `goal` | string | Yes | - | 에이전트가 달성할 목표 |
 | `context` | string | No | - | 에이전트가 달성할 목표 |
 | `max_iterations` | number | No | `5` | 추가 컨텍스트 또는 제약 조건 |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | 최대 추론 단계 |
-| `model` | string | No | `gpt-4-turbo-preview` | 모델 이름 (예: gpt-4, llama2, mistral) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | 최대 추론 단계 |
+| `model` | string | No | `gpt-4o` | 모델 이름 (예: gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | 모델 이름 (예: gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | Ollama 서버 URL (ollama 제공자 전용) |
 
@@ -83,7 +83,7 @@ max_iterations: 10
 | `input` | string | Yes | - | 체인의 초기 입력 |
 | `chain_steps` | array | Yes | - | 체인의 초기 입력 |
 | `llm_provider` | select (`openai`, `ollama`) | No | `openai` | 처리 단계 배열 (각각 프롬프트 템플릿) |
-| `model` | string | No | `gpt-4-turbo-preview` | 모델 이름 (예: gpt-4, llama2, mistral) |
+| `model` | string | No | `gpt-4o` | 모델 이름 (예: gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | 모델 이름 (예: gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | Ollama 서버 URL (ollama 제공자 전용) |
 
@@ -576,7 +576,7 @@ Anthropic Claude AI에 채팅 메시지를 보내고 응답 받기
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Anthropic API 키 (기본값: env.ANTHROPIC_API_KEY) |
-| `model` | string | No | `claude-3-5-sonnet-20241022` | 사용할 Claude 모델 |
+| `model` | string | No | `claude-sonnet-4-6` | 사용할 Claude 모델 |
 | `messages` | array | Yes | - | role과 content가 포함된 메시지 객체 배열 |
 | `max_tokens` | number | No | `1024` | 작업에서 반환된 콘텐츠 |
 | `temperature` | number | No | `1.0` | 샘플링 온도 (0-1). 높을수록 출력이 더 무작위 |
@@ -617,7 +617,7 @@ Google Gemini AI에 채팅 메시지를 보내고 응답 받기
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Google AI API 키 (기본값: env.GOOGLE_AI_API_KEY) |
-| `model` | string | No | `gemini-1.5-pro` | 사용할 Gemini 모델 |
+| `model` | string | No | `gemini-2.5-pro` | 사용할 Gemini 모델 |
 | `prompt` | string | Yes | - | Gemini에 보낼 텍스트 프롬프트 |
 | `temperature` | number | No | `1.0` | 무작위성 제어 (0-2). 높을수록 출력이 더 무작위 |
 | `max_output_tokens` | number | No | `2048` | 응답의 최대 토큰 수 |
@@ -655,7 +655,7 @@ OpenAI GPT 모델에 채팅 메시지 전송
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `prompt` | string | Yes | - | GPT에 보낼 메시지 |
-| `model` | select (`gpt-4-turbo-preview`, `gpt-4`, `gpt-3.5-turbo`) | No | `gpt-4-turbo-preview` | GPT에 보낼 메시지 |
+| `model` | select (`gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `o3`, `o3-mini`, `o4-mini`, `gpt-4-turbo-preview`) | No | `gpt-4o` | GPT에 보낼 메시지 |
 | `temperature` | number | No | `0.7` | 샘플링 온도 (0-2) |
 | `max_tokens` | number | No | `1000` | 샘플링 온도 (0-2) |
 | `system_message` | string | No | - | 응답의 최대 토큰 |

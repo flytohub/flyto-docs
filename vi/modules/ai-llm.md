@@ -40,8 +40,8 @@ Agent AI tự điều khiển với bộ nhớ và hành vi hướng mục tiêu
 | `goal` | string | Yes | - | Mục tiêu để agent đạt được |
 | `context` | string | No | - | Mục tiêu để agent đạt được |
 | `max_iterations` | number | No | `5` | Ngữ cảnh hoặc ràng buộc bổ sung |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | Số bước suy luận tối đa |
-| `model` | string | No | `gpt-4-turbo-preview` | Tên model (ví dụ: gpt-4, llama2, mistral) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Số bước suy luận tối đa |
+| `model` | string | No | `gpt-4o` | Tên model (ví dụ: gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Tên model (ví dụ: gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | URL máy chủ Ollama (chỉ cho provider ollama) |
 
@@ -83,7 +83,7 @@ Chuỗi xử lý AI tuần tự với nhiều bước
 | `input` | string | Yes | - | Đầu vào ban đầu cho chuỗi |
 | `chain_steps` | array | Yes | - | Đầu vào ban đầu cho chuỗi |
 | `llm_provider` | select (`openai`, `ollama`) | No | `openai` | Mảng các bước xử lý (mỗi bước là một template prompt) |
-| `model` | string | No | `gpt-4-turbo-preview` | Tên model (ví dụ: gpt-4, llama2, mistral) |
+| `model` | string | No | `gpt-4o` | Tên model (ví dụ: gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Tên model (ví dụ: gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | URL máy chủ Ollama (chỉ cho provider ollama) |
 
@@ -576,7 +576,7 @@ Gửi tin nhắn chat đến Anthropic Claude AI và nhận phản hồi
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Khóa API Anthropic (mặc định là env.ANTHROPIC_API_KEY) |
-| `model` | string | No | `claude-3-5-sonnet-20241022` | Model Claude để sử dụng |
+| `model` | string | No | `claude-sonnet-4-6` | Model Claude để sử dụng |
 | `messages` | array | Yes | - | Mảng các đối tượng tin nhắn với role và content |
 | `max_tokens` | number | No | `1024` | Nội dung trả về từ thao tác |
 | `temperature` | number | No | `1.0` | Nhiệt độ lấy mẫu (0-1). Giá trị cao hơn làm đầu ra ngẫu nhiên hơn |
@@ -617,7 +617,7 @@ Gửi tin nhắn chat đến Google Gemini AI và nhận phản hồi
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Khóa API Google AI (mặc định là env.GOOGLE_AI_API_KEY) |
-| `model` | string | No | `gemini-1.5-pro` | Model Gemini để sử dụng |
+| `model` | string | No | `gemini-2.5-pro` | Model Gemini để sử dụng |
 | `prompt` | string | Yes | - | Prompt văn bản gửi đến Gemini |
 | `temperature` | number | No | `1.0` | Kiểm soát tính ngẫu nhiên (0-2). Giá trị cao hơn làm đầu ra ngẫu nhiên hơn |
 | `max_output_tokens` | number | No | `2048` | Số token tối đa trong phản hồi |
@@ -655,7 +655,7 @@ Gửi tin nhắn chat đến các model GPT OpenAI
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `prompt` | string | Yes | - | Tin nhắn gửi đến GPT |
-| `model` | select (`gpt-4-turbo-preview`, `gpt-4`, `gpt-3.5-turbo`) | No | `gpt-4-turbo-preview` | Tin nhắn gửi đến GPT |
+| `model` | select (`gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `o3`, `o3-mini`, `o4-mini`, `gpt-4-turbo-preview`) | No | `gpt-4o` | Tin nhắn gửi đến GPT |
 | `temperature` | number | No | `0.7` | Nhiệt độ lấy mẫu (0-2) |
 | `max_tokens` | number | No | `1000` | Nhiệt độ lấy mẫu (0-2) |
 | `system_message` | string | No | - | Số token tối đa trong phản hồi |

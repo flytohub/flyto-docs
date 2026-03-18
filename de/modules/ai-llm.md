@@ -40,8 +40,8 @@ Selbstgesteuerter KI-Agent mit Gedächtnis und zielorientiertem Verhalten
 | `goal` | string | Yes | - | Das Ziel, das der Agent erreichen soll |
 | `context` | string | No | - | Das Ziel, das der Agent erreichen soll |
 | `max_iterations` | number | No | `5` | Zusätzlicher Kontext oder Einschränkungen |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | Maximale Denkschritte |
-| `model` | string | No | `gpt-4-turbo-preview` | Modellname (z.B. gpt-4, llama2, mistral) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Maximale Denkschritte |
+| `model` | string | No | `gpt-4o` | Modellname (z.B. gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Modellname (z.B. gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | Ollama-Server-URL (nur für Ollama-Provider) |
 
@@ -83,7 +83,7 @@ Sequentielle KI-Verarbeitungskette mit mehreren Schritten
 | `input` | string | Yes | - | Anfangseingabe für die Kette |
 | `chain_steps` | array | Yes | - | Anfangseingabe für die Kette |
 | `llm_provider` | select (`openai`, `ollama`) | No | `openai` | Array von Verarbeitungsschritten (jeder ist eine Prompt-Vorlage) |
-| `model` | string | No | `gpt-4-turbo-preview` | Modellname (z.B. gpt-4, llama2, mistral) |
+| `model` | string | No | `gpt-4o` | Modellname (z.B. gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Modellname (z.B. gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | Ollama-Server-URL (nur für Ollama-Provider) |
 
@@ -576,7 +576,7 @@ Chatnachricht an Anthropic Claude KI senden und Antwort erhalten
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Anthropic-API-Schlüssel (Standard: env.ANTHROPIC_API_KEY) |
-| `model` | string | No | `claude-3-5-sonnet-20241022` | Zu verwendendes Claude-Modell |
+| `model` | string | No | `claude-sonnet-4-6` | Zu verwendendes Claude-Modell |
 | `messages` | array | Yes | - | Array von Nachrichtenobjekten mit Rolle und Inhalt |
 | `max_tokens` | number | No | `1024` | Von der Operation zurückgegebener Inhalt |
 | `temperature` | number | No | `1.0` | Sampling-Temperatur (0-1). Höhere Werte machen die Ausgabe zufälliger |
@@ -617,7 +617,7 @@ Chatnachricht an Google Gemini KI senden und Antwort erhalten
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Google-AI-API-Schlüssel (Standard: env.GOOGLE_AI_API_KEY) |
-| `model` | string | No | `gemini-1.5-pro` | Zu verwendendes Gemini-Modell |
+| `model` | string | No | `gemini-2.5-pro` | Zu verwendendes Gemini-Modell |
 | `prompt` | string | Yes | - | Der Text-Prompt, der an Gemini gesendet werden soll |
 | `temperature` | number | No | `1.0` | Steuert Zufälligkeit (0-2). Höhere Werte machen die Ausgabe zufälliger |
 | `max_output_tokens` | number | No | `2048` | Maximale Anzahl von Token in der Antwort |
@@ -655,7 +655,7 @@ Chatnachricht an OpenAI-GPT-Modelle senden
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `prompt` | string | Yes | - | Die Nachricht, die an GPT gesendet werden soll |
-| `model` | select (`gpt-4-turbo-preview`, `gpt-4`, `gpt-3.5-turbo`) | No | `gpt-4-turbo-preview` | Die Nachricht, die an GPT gesendet werden soll |
+| `model` | select (`gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `o3`, `o3-mini`, `o4-mini`, `gpt-4-turbo-preview`) | No | `gpt-4o` | Die Nachricht, die an GPT gesendet werden soll |
 | `temperature` | number | No | `0.7` | Sampling-Temperatur (0-2) |
 | `max_tokens` | number | No | `1000` | Sampling-Temperatur (0-2) |
 | `system_message` | string | No | - | Maximale Token in der Antwort |

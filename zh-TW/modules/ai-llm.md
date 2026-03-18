@@ -40,8 +40,8 @@ AI model integration, text generation, embeddings, and autonomous agents.
 | `goal` | string | Yes | - | 代理要達成的目標 |
 | `context` | string | No | - | 額外的上下文或限制條件 |
 | `max_iterations` | number | No | `5` | 最大推理步驟數 |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | LLM 提供者（openai 或 ollama） |
-| `model` | string | No | `gpt-4-turbo-preview` | 模型名稱（例如 gpt-4、llama2、mistral） |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | LLM 提供者（openai 或 ollama） |
+| `model` | string | No | `gpt-4o` | 模型名稱（例如 gpt-4、llama2、mistral） |
 | `ollama_url` | string | No | `http://localhost:11434` | Ollama 伺服器網址（僅限 ollama 提供者） |
 | `temperature` | number | No | `0.7` | 創造力等級（0-2） |
 
@@ -83,7 +83,7 @@ max_iterations: 10
 | `input` | string | Yes | - | 鏈式處理的初始輸入 |
 | `chain_steps` | array | Yes | - | 處理步驟陣列（每個都是提示詞範本） |
 | `llm_provider` | select (`openai`, `ollama`) | No | `openai` | LLM 提供者（openai 或 ollama） |
-| `model` | string | No | `gpt-4-turbo-preview` | 模型名稱（例如 gpt-4、llama2、mistral） |
+| `model` | string | No | `gpt-4o` | 模型名稱（例如 gpt-4、llama2、mistral） |
 | `ollama_url` | string | No | `http://localhost:11434` | Ollama 伺服器網址（僅限 ollama 提供者） |
 | `temperature` | number | No | `0.7` | 創造力等級（0-2） |
 
@@ -576,7 +576,7 @@ model: claude-sonnet-4-20250514
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Anthropic API 金鑰（預設使用 env.ANTHROPIC_API_KEY） |
-| `model` | string | No | `claude-3-5-sonnet-20241022` | 要使用的 Claude 模型 |
+| `model` | string | No | `claude-sonnet-4-6` | 要使用的 Claude 模型 |
 | `messages` | array | Yes | - | 包含角色和內容的訊息物件陣列 |
 | `max_tokens` | number | No | `1024` | 回應的最大 Token 數 |
 | `temperature` | number | No | `1.0` | 取樣溫度（0-1），較高值使輸出更隨機 |
@@ -617,7 +617,7 @@ max_tokens: 500
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Google AI API 金鑰（預設使用 env.GOOGLE_AI_API_KEY） |
-| `model` | string | No | `gemini-1.5-pro` | 要使用的 Gemini 模型 |
+| `model` | string | No | `gemini-2.5-pro` | 要使用的 Gemini 模型 |
 | `prompt` | string | Yes | - | 傳送給 Gemini 的文字提示詞 |
 | `temperature` | number | No | `1.0` | 控制隨機性（0-2），較高值使輸出更隨機 |
 | `max_output_tokens` | number | No | `2048` | 回應的最大 Token 數 |
@@ -655,7 +655,7 @@ max_output_tokens: 500
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `prompt` | string | Yes | - | 傳送給 GPT 的訊息 |
-| `model` | select (`gpt-4-turbo-preview`, `gpt-4`, `gpt-3.5-turbo`) | No | `gpt-4-turbo-preview` | 要使用的 GPT 模型 |
+| `model` | select (`gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `o3`, `o3-mini`, `o4-mini`, `gpt-4-turbo-preview`) | No | `gpt-4o` | 要使用的 GPT 模型 |
 | `temperature` | number | No | `0.7` | 取樣溫度（0-2） |
 | `max_tokens` | number | No | `1000` | 回應的最大 Token 數 |
 | `system_message` | string | No | - | 系統角色訊息（選填） |

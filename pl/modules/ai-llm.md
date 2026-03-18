@@ -40,8 +40,8 @@ Samodzielny agent AI z pamiecia i zachowaniem zorientowanym na cel
 | `goal` | string | Yes | - | Cel do osiagniecia przez agenta |
 | `context` | string | No | - | Cel do osiagniecia przez agenta |
 | `max_iterations` | number | No | `5` | Dodatkowy kontekst lub ograniczenia |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | Maksymalna liczba krokow rozumowania |
-| `model` | string | No | `gpt-4-turbo-preview` | Nazwa modelu (np. gpt-4, llama2, mistral) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Maksymalna liczba krokow rozumowania |
+| `model` | string | No | `gpt-4o` | Nazwa modelu (np. gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Nazwa modelu (np. gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | URL serwera Ollama (tylko dla dostawcy ollama) |
 
@@ -83,7 +83,7 @@ Sekwencyjny lancuch przetwarzania AI z wieloma krokami
 | `input` | string | Yes | - | Poczatkowe dane wejsciowe dla lancucha |
 | `chain_steps` | array | Yes | - | Poczatkowe dane wejsciowe dla lancucha |
 | `llm_provider` | select (`openai`, `ollama`) | No | `openai` | Tablica krokow przetwarzania (kazdy jest szablonem promptu) |
-| `model` | string | No | `gpt-4-turbo-preview` | Nazwa modelu (np. gpt-4, llama2, mistral) |
+| `model` | string | No | `gpt-4o` | Nazwa modelu (np. gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Nazwa modelu (np. gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | URL serwera Ollama (tylko dla dostawcy ollama) |
 
@@ -576,7 +576,7 @@ Wyslij wiadomosc czatu do Anthropic Claude AI i uzyskaj odpowiedz
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Klucz API Anthropic (domyslnie env.ANTHROPIC_API_KEY) |
-| `model` | string | No | `claude-3-5-sonnet-20241022` | Model Claude do uzycia |
+| `model` | string | No | `claude-sonnet-4-6` | Model Claude do uzycia |
 | `messages` | array | Yes | - | Tablica obiektow wiadomosci z rola i trescia |
 | `max_tokens` | number | No | `1024` | Tresc zwrocona przez operacje |
 | `temperature` | number | No | `1.0` | Temperatura probkowania (0-1). Wyzsze wartosci czynia wynik bardziej losowym |
@@ -617,7 +617,7 @@ Wyslij wiadomosc czatu do Google Gemini AI i uzyskaj odpowiedz
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Klucz API Google AI (domyslnie env.GOOGLE_AI_API_KEY) |
-| `model` | string | No | `gemini-1.5-pro` | Model Gemini do uzycia |
+| `model` | string | No | `gemini-2.5-pro` | Model Gemini do uzycia |
 | `prompt` | string | Yes | - | Tekstowy prompt do wyslania do Gemini |
 | `temperature` | number | No | `1.0` | Kontroluje losowosc (0-2). Wyzsze wartosci czynia wynik bardziej losowym |
 | `max_output_tokens` | number | No | `2048` | Maksymalna liczba tokenow w odpowiedzi |
@@ -655,7 +655,7 @@ Wyslij wiadomosc czatu do modeli OpenAI GPT
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `prompt` | string | Yes | - | Wiadomosc do wyslania do GPT |
-| `model` | select (`gpt-4-turbo-preview`, `gpt-4`, `gpt-3.5-turbo`) | No | `gpt-4-turbo-preview` | Wiadomosc do wyslania do GPT |
+| `model` | select (`gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `o3`, `o3-mini`, `o4-mini`, `gpt-4-turbo-preview`) | No | `gpt-4o` | Wiadomosc do wyslania do GPT |
 | `temperature` | number | No | `0.7` | Temperatura probkowania (0-2) |
 | `max_tokens` | number | No | `1000` | Temperatura probkowania (0-2) |
 | `system_message` | string | No | - | Maksymalna liczba tokenow w odpowiedzi |

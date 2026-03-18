@@ -40,8 +40,8 @@ Agen AI mandiri dengan memori dan perilaku berorientasi tujuan
 | `goal` | string | Yes | - | Tujuan yang ingin dicapai agen |
 | `context` | string | No | - | Tujuan yang ingin dicapai agen |
 | `max_iterations` | number | No | `5` | Konteks atau batasan tambahan |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | Langkah penalaran maksimum |
-| `model` | string | No | `gpt-4-turbo-preview` | Nama model (mis., gpt-4, llama2, mistral) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Langkah penalaran maksimum |
+| `model` | string | No | `gpt-4o` | Nama model (mis., gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Nama model (mis., gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | URL server Ollama (hanya untuk provider ollama) |
 
@@ -83,7 +83,7 @@ Rantai pemrosesan AI sekuensial dengan beberapa langkah
 | `input` | string | Yes | - | Input awal untuk rantai |
 | `chain_steps` | array | Yes | - | Input awal untuk rantai |
 | `llm_provider` | select (`openai`, `ollama`) | No | `openai` | Array langkah pemrosesan (setiap adalah template prompt) |
-| `model` | string | No | `gpt-4-turbo-preview` | Nama model (mis., gpt-4, llama2, mistral) |
+| `model` | string | No | `gpt-4o` | Nama model (mis., gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Nama model (mis., gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | URL server Ollama (hanya untuk provider ollama) |
 
@@ -576,7 +576,7 @@ Kirim pesan chat ke Anthropic Claude AI dan dapatkan respons
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | API key Anthropic (default ke env.ANTHROPIC_API_KEY) |
-| `model` | string | No | `claude-3-5-sonnet-20241022` | Model Claude yang digunakan |
+| `model` | string | No | `claude-sonnet-4-6` | Model Claude yang digunakan |
 | `messages` | array | Yes | - | Array objek pesan dengan role dan content |
 | `max_tokens` | number | No | `1024` | Konten yang dikembalikan oleh operasi |
 | `temperature` | number | No | `1.0` | Temperatur sampling (0-1). Nilai lebih tinggi membuat output lebih acak |
@@ -617,7 +617,7 @@ Kirim pesan chat ke Google Gemini AI dan dapatkan respons
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | API key Google AI (default ke env.GOOGLE_AI_API_KEY) |
-| `model` | string | No | `gemini-1.5-pro` | Model Gemini yang digunakan |
+| `model` | string | No | `gemini-2.5-pro` | Model Gemini yang digunakan |
 | `prompt` | string | Yes | - | Prompt teks untuk dikirim ke Gemini |
 | `temperature` | number | No | `1.0` | Mengontrol keacakan (0-2). Nilai lebih tinggi membuat output lebih acak |
 | `max_output_tokens` | number | No | `2048` | Jumlah maksimum token dalam respons |
@@ -655,7 +655,7 @@ Kirim pesan chat ke model OpenAI GPT
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `prompt` | string | Yes | - | Pesan untuk dikirim ke GPT |
-| `model` | select (`gpt-4-turbo-preview`, `gpt-4`, `gpt-3.5-turbo`) | No | `gpt-4-turbo-preview` | Pesan untuk dikirim ke GPT |
+| `model` | select (`gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `o3`, `o3-mini`, `o4-mini`, `gpt-4-turbo-preview`) | No | `gpt-4o` | Pesan untuk dikirim ke GPT |
 | `temperature` | number | No | `0.7` | Temperatur sampling (0-2) |
 | `max_tokens` | number | No | `1000` | Temperatur sampling (0-2) |
 | `system_message` | string | No | - | Token maksimum dalam respons |

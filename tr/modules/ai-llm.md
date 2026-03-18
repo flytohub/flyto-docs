@@ -40,8 +40,8 @@ Bellek ve hedef odaklı davranışa sahip kendi kendine yönetilen AI ajanı
 | `goal` | string | Yes | - | Ajanın ulaşması gereken hedef |
 | `context` | string | No | - | Ajanın ulaşması gereken hedef |
 | `max_iterations` | number | No | `5` | Ek bağlam veya kısıtlamalar |
-| `llm_provider` | select (`openai`, `ollama`) | No | `openai` | Maksimum akıl yürütme adımları |
-| `model` | string | No | `gpt-4-turbo-preview` | Model adı (örn: gpt-4, llama2, mistral) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Maksimum akıl yürütme adımları |
+| `model` | string | No | `gpt-4o` | Model adı (örn: gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Model adı (örn: gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | Ollama sunucu URL'si (sadece ollama sağlayıcı için) |
 
@@ -83,7 +83,7 @@ Birden fazla adımla sıralı AI işleme zinciri
 | `input` | string | Yes | - | Zincir için başlangıç girdisi |
 | `chain_steps` | array | Yes | - | Zincir için başlangıç girdisi |
 | `llm_provider` | select (`openai`, `ollama`) | No | `openai` | İşleme adımları dizisi (her biri bir istem şablonudur) |
-| `model` | string | No | `gpt-4-turbo-preview` | Model adı (örn: gpt-4, llama2, mistral) |
+| `model` | string | No | `gpt-4o` | Model adı (örn: gpt-4, llama2, mistral) |
 | `ollama_url` | string | No | `http://localhost:11434` | Model adı (örn: gpt-4, llama2, mistral) |
 | `temperature` | number | No | `0.7` | Ollama sunucu URL'si (sadece ollama sağlayıcı için) |
 
@@ -576,7 +576,7 @@ Anthropic Claude AI'a sohbet mesajı gönder ve yanıt al
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Anthropic API anahtarı (varsayılan: env.ANTHROPIC_API_KEY) |
-| `model` | string | No | `claude-3-5-sonnet-20241022` | Kullanılacak Claude modeli |
+| `model` | string | No | `claude-sonnet-4-6` | Kullanılacak Claude modeli |
 | `messages` | array | Yes | - | Rol ve içerik içeren mesaj nesneleri dizisi |
 | `max_tokens` | number | No | `1024` | İşlem tarafından döndürülen içerik |
 | `temperature` | number | No | `1.0` | Örnekleme sıcaklığı (0-1). Yüksek değerler çıktıyı daha rastgele yapar |
@@ -617,7 +617,7 @@ Google Gemini AI'a sohbet mesajı gönder ve yanıt al
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Google AI API anahtarı (varsayılan: env.GOOGLE_AI_API_KEY) |
-| `model` | string | No | `gemini-1.5-pro` | Kullanılacak Gemini modeli |
+| `model` | string | No | `gemini-2.5-pro` | Kullanılacak Gemini modeli |
 | `prompt` | string | Yes | - | Gemini'ye gönderilecek metin istemi |
 | `temperature` | number | No | `1.0` | Rastgeleliği kontrol eder (0-2). Yüksek değerler çıktıyı daha rastgele yapar |
 | `max_output_tokens` | number | No | `2048` | Yanıttaki maksimum token sayısı |
@@ -655,7 +655,7 @@ OpenAI GPT modellerine sohbet mesajı gönder
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `prompt` | string | Yes | - | GPT'ye gönderilecek mesaj |
-| `model` | select (`gpt-4-turbo-preview`, `gpt-4`, `gpt-3.5-turbo`) | No | `gpt-4-turbo-preview` | GPT'ye gönderilecek mesaj |
+| `model` | select (`gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `o3`, `o3-mini`, `o4-mini`, `gpt-4-turbo-preview`) | No | `gpt-4o` | GPT'ye gönderilecek mesaj |
 | `temperature` | number | No | `0.7` | Örnekleme sıcaklığı (0-2) |
 | `max_tokens` | number | No | `1000` | Örnekleme sıcaklığı (0-2) |
 | `system_message` | string | No | - | Yanıtta maksimum token |
