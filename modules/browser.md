@@ -810,7 +810,6 @@ Pause for user to interact with the browser page
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event for routing (approved/rejected/timeout) |
 | `status` | string | Operation status |
 | `action` | string | Action executed (click/select/type/toggle) |
 | `selector` | string | CSS selector of the interacted element |
