@@ -6,15 +6,15 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [Handle Challenge](#handle-challenge) | Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop. |
+| [](#) |  |
 | [คลิกองค์ประกอบ](#คลิกองค์ประกอบ) | คลิกองค์ประกอบบนหน้า |
 | [ปิดเบราว์เซอร์](#ปิดเบราว์เซอร์) | ปิดอินสแตนซ์เบราว์เซอร์และปล่อยทรัพยากร |
-| [Connect Remote](#connect-remote) | Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs. |
+| [](#) |  |
 | [จับคอนโซล](#จับคอนโซล) | จับบันทึกคอนโซลเบราว์เซอร์ (ข้อผิดพลาด คำเตือน ข้อมูล) |
 | [จัดการคุกกี้](#จัดการคุกกี้) | รับ ตั้งค่า หรือล้างคุกกี้เบราว์เซอร์ |
-| [Cookies File](#cookies-file) | Import or export browser cookies to/from a JSON file for session persistence. |
+| [](#) |  |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [Detect List](#detect-list) | Auto-detect repeating items on any page (articles, products, search results). No selectors needed. |
+| [](#) |  |
 | [จัดการ Dialog](#จัดการ-dialog) | จัดการกล่องโต้ตอบ alert, confirm และ prompt |
 | [ดาวน์โหลดไฟล์](#ดาวน์โหลดไฟล์) | ดาวน์โหลดไฟล์จากเบราว์เซอร์ |
 | [ลากและวาง](#ลากและวาง) | ลากและวางองค์ประกอบ |
@@ -22,7 +22,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [ตรวจสอบเบราว์เซอร์](#ตรวจสอบเบราว์เซอร์) | ตรวจสอบให้แน่ใจว่ามีเซสชันเบราว์เซอร์อยู่ (ใช้ซ้ำหรือเปิดใหม่) |
 | [รัน JavaScript](#รัน-javascript) | รันโค้ด JavaScript ในบริบทหน้า |
 | [ดึงข้อมูล](#ดึงข้อมูล) | ดึงข้อมูลที่มีโครงสร้างจากหน้า |
-| [Extract Nested](#extract-nested) | Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children. |
+| [](#) |  |
 | [ค้นหาองค์ประกอบ](#ค้นหาองค์ประกอบ) | ค้นหาองค์ประกอบในหน้าและส่งคืนรายการ ID องค์ประกอบ |
 | [กรอกฟอร์ม](#กรอกฟอร์ม) | กรอกฟอร์มอัตโนมัติด้วยการตรวจจับช่องกรอก |
 | [สลับ Frame](#สลับ-frame) | สลับไปยังบริบท iframe หรือ frame |
@@ -31,30 +31,30 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [วางเมาส์เหนือองค์ประกอบ](#วางเมาส์เหนือองค์ประกอบ) | วางเมาส์เหนือองค์ประกอบ |
 | [](#) |  |
 | [เปิดเบราว์เซอร์](#เปิดเบราว์เซอร์) | เปิดอินสแตนซ์เบราว์เซอร์ใหม่ด้วย Playwright |
-| [Login](#login) | Auto-detect and fill login forms. Handles username + password + submit with post-login verification. |
+| [](#) |  |
 | [นำทางประวัติ](#นำทางประวัติ) | นำทางประวัติเบราว์เซอร์ (ย้อนกลับ, ไปข้างหน้า, โหลดซ้ำ) |
 | [ตรวจสอบเครือข่าย](#ตรวจสอบเครือข่าย) | ติดตามและดักจับคำขอเครือข่าย |
 | [รายการหน้า](#รายการหน้า) | แสดงรายการหน้า/แท็บเบราว์เซอร์ที่เปิดอยู่ทั้งหมด |
 | [แบ่งหน้า & ดึงข้อมูล](#แบ่งหน้า--ดึงข้อมูล) | แบ่งหน้าอัตโนมัติและดึงข้อมูล |
 | [สร้าง PDF](#สร้าง-pdf) | สร้าง PDF จากหน้าปัจจุบัน |
 | [ข้อมูลประสิทธิภาพ](#ข้อมูลประสิทธิภาพ) | รวบรวมข้อมูลประสิทธิภาพของเบราว์เซอร์ |
-| [Browser Pool](#browser-pool) | Manage multiple named browser instances for parallel automation. |
+| [](#) |  |
 | [กดปุ่ม](#กดปุ่ม) | กดปุ่มแป้นพิมพ์ |
-| [Rotate Proxy](#rotate-proxy) | Rotate through a list of proxies. Relaunches browser with the next proxy. |
-| [Extract Article](#extract-article) | Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode. |
+| [](#) |  |
+| [](#) |  |
 | [บันทึกการกระทำ](#บันทึกการกระทำ) | บันทึกการกระทำของผู้ใช้เป็น workflow |
 | [ปล่อยเบราว์เซอร์](#ปล่อยเบราว์เซอร์) | ปล่อยเซสชันเบราว์เซอร์ (ปิดเฉพาะถ้าเป็นเจ้าของ) |
-| [Capture Response](#capture-response) | Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls. |
-| [Check Robots.txt](#check-robots.txt) | Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping. |
+| [](#) |  |
+| [](#) |  |
 | [ถ่ายภาพหน้าจอ](#ถ่ายภาพหน้าจอ) | ถ่ายภาพหน้าจอของหน้าปัจจุบัน |
 | [เลื่อนหน้า](#เลื่อนหน้า) | เลื่อนหน้าไปยังองค์ประกอบ ตำแหน่ง หรือทิศทาง |
 | [เลือกตัวเลือก](#เลือกตัวเลือก) | เลือกตัวเลือกจากองค์ประกอบ dropdown |
-| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering. |
+| [](#) |  |
 | [ภาพ DOM](#ภาพ-dom) | จับภาพ DOM ของหน้าปัจจุบัน |
 | [พื้นที่เก็บข้อมูลของเบราว์เซอร์](#พื้นที่เก็บข้อมูลของเบราว์เซอร์) | เข้าถึง localStorage และ sessionStorage |
 | [จัดการแท็บ](#จัดการแท็บ) | สร้าง สลับ และปิดแท็บเบราว์เซอร์ |
-| [Extract Table](#extract-table) | Extract HTML tables as structured data. Auto-detects headers from thead/th. |
-| [Throttle](#throttle) | Per-domain rate limiting. Waits between requests to the same domain to avoid bans. |
+| [](#) |  |
+| [](#) |  |
 | [การติดตามเบราว์เซอร์](#การติดตามเบราว์เซอร์) | เริ่ม หยุด หรือบันทึกการติดตามประสิทธิภาพของเบราว์เซอร์ |
 | [พิมพ์ข้อความ](#พิมพ์ข้อความ) | พิมพ์ข้อความลงในฟิลด์อินพุต |
 | [อัปโหลดไฟล์](#อัปโหลดไฟล์) | อัปโหลดไฟล์ไปยังองค์ประกอบ file input |
@@ -63,11 +63,9 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 ## Modules
 
-### Handle Challenge
+### 
 
 `browser.challenge`
-
-Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop.
 
 **Parameters:**
 
@@ -178,11 +176,9 @@ selector: #submit-button
 ```yaml
 ```
 
-### Connect Remote
+### 
 
 `browser.connect`
-
-Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs.
 
 **Parameters:**
 
@@ -310,11 +306,9 @@ domain: example.com
 action: clear
 ```
 
-### Cookies File
+### 
 
 `browser.cookies_file`
-
-Import or export browser cookies to/from a JSON file for session persistence.
 
 **Parameters:**
 
@@ -421,11 +415,9 @@ text: Login
 match_mode: best
 ```
 
-### Detect List
+### 
 
 `browser.detect_list`
-
-Auto-detect repeating items on any page (articles, products, search results). No selectors needed.
 
 **Parameters:**
 
@@ -757,11 +749,9 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### Extract Nested
+### 
 
 `browser.extract_nested`
-
-Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children.
 
 **Parameters:**
 
@@ -1090,11 +1080,9 @@ headless: true
 headless: false
 ```
 
-### Login
+### 
 
 `browser.login`
-
-Auto-detect and fill login forms. Handles username + password + submit with post-login verification.
 
 **Parameters:**
 
@@ -1411,11 +1399,9 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### Browser Pool
+### 
 
 `browser.pool`
-
-Manage multiple named browser instances for parallel automation.
 
 **Parameters:**
 
@@ -1486,11 +1472,9 @@ key: Enter
 key: Escape
 ```
 
-### Rotate Proxy
+### 
 
 `browser.proxy_rotate`
-
-Rotate through a list of proxies. Relaunches browser with the next proxy.
 
 **Parameters:**
 
@@ -1525,11 +1509,9 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### Extract Article
+### 
 
 `browser.readability`
-
-Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode.
 
 **Parameters:**
 
@@ -1538,7 +1520,7 @@ Smart article extraction — extracts title, author, date, and main content from
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - | CSS selector for the content area. Leave empty for auto-detection. |
+| `selector` | string | No | - |  |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1662,11 +1644,9 @@ action: get
 force: true
 ```
 
-### Capture Response
+### 
 
 `browser.response`
-
-Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls.
 
 **Parameters:**
 
@@ -1699,11 +1679,9 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### Check Robots.txt
+### 
 
 `browser.robots`
-
-Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping.
 
 **Parameters:**
 
@@ -1853,11 +1831,9 @@ select_method: index
 index: 2
 ```
 
-### Parse Sitemap
+### 
 
 `browser.sitemap`
-
-Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering.
 
 **Parameters:**
 
@@ -2045,11 +2021,9 @@ action: close
 action: list
 ```
 
-### Extract Table
+### 
 
 `browser.table`
-
-Extract HTML tables as structured data. Auto-detects headers from thead/th.
 
 **Parameters:**
 
@@ -2081,11 +2055,9 @@ selector: #results-table
 max_rows: 100
 ```
 
-### Throttle
+### 
 
 `browser.throttle`
-
-Per-domain rate limiting. Waits between requests to the same domain to avoid bans.
 
 **Parameters:**
 

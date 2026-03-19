@@ -6,15 +6,15 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [Handle Challenge](#handle-challenge) | Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop. |
+| [](#) |  |
 | [クリック](#クリック) | ページ上の要素をクリック |
 | [ブラウザを閉じる](#ブラウザを閉じる) | ブラウザを閉じてリソースを解放 |
-| [Connect Remote](#connect-remote) | Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs. |
+| [](#) |  |
 | [コンソール取得](#コンソール取得) | ブラウザコンソールログを取得 |
 | [Cookie 管理](#cookie-管理) | Cookie の取得・設定・削除 |
-| [Cookies File](#cookies-file) | Import or export browser cookies to/from a JSON file for session persistence. |
+| [](#) |  |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [Detect List](#detect-list) | Auto-detect repeating items on any page (articles, products, search results). No selectors needed. |
+| [](#) |  |
 | [ダイアログ処理](#ダイアログ処理) | alert・confirm・prompt ダイアログの処理 |
 | [ダウンロード](#ダウンロード) | ブラウザからファイルをダウンロード |
 | [ドラッグ＆ドロップ](#ドラッグ＆ドロップ) | 要素をドラッグ＆ドロップ |
@@ -22,7 +22,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [ブラウザ確認](#ブラウザ確認) | ブラウザセッションが存在することを確認（再利用または起動） |
 | [JavaScript 実行](#javascript-実行) | ページ上でJavaScriptコードを実行 |
 | [データ抽出](#データ抽出) | ページから構造化データを抽出 |
-| [Extract Nested](#extract-nested) | Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children. |
+| [](#) |  |
 | [要素検索](#要素検索) | ページ内の要素を検索し要素ID一覧を返す |
 | [フォーム入力](#フォーム入力) | 自動フィールド検出によるスマートフォーム入力 |
 | [フレーム切替](#フレーム切替) | iframe またはフレームに切り替え |
@@ -31,30 +31,30 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [ホバー](#ホバー) | 要素にマウスオーバー |
 | [](#) |  |
 | [ブラウザ起動](#ブラウザ起動) | Playwright で新しいブラウザを起動 |
-| [Login](#login) | Auto-detect and fill login forms. Handles username + password + submit with post-login verification. |
+| [](#) |  |
 | [履歴ナビゲート](#履歴ナビゲート) | ブラウザ履歴をナビゲート（戻る、進む、リロード） |
 | [ネットワーク監視](#ネットワーク監視) | ネットワークリクエストの監視・傍受 |
 | [ページ一覧](#ページ一覧) | 開いているすべてのブラウザページ/タブを一覧表示 |
 | [ページネート＆抽出](#ページネート＆抽出) | ページを自動でページネートし、データを抽出 |
 | [PDF生成](#pdf生成) | 現在のページからPDFを生成 |
 | [パフォーマンス指標](#パフォーマンス指標) | ブラウザのパフォーマンス指標を収集 |
-| [Browser Pool](#browser-pool) | Manage multiple named browser instances for parallel automation. |
+| [](#) |  |
 | [キー入力](#キー入力) | キーボードキーを押す |
-| [Rotate Proxy](#rotate-proxy) | Rotate through a list of proxies. Relaunches browser with the next proxy. |
-| [Extract Article](#extract-article) | Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode. |
+| [](#) |  |
+| [](#) |  |
 | [操作記録](#操作記録) | ユーザー操作をワークフローとして記録 |
 | [ブラウザを解放](#ブラウザを解放) | ブラウザセッションを解放（所有している場合のみ閉じる） |
-| [Capture Response](#capture-response) | Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls. |
-| [Check Robots.txt](#check-robots.txt) | Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping. |
+| [](#) |  |
+| [](#) |  |
 | [スクリーンショット](#スクリーンショット) | 現在のページのスクリーンショットを撮影 |
 | [スクロール](#スクロール) | 要素・位置・方向にスクロール |
 | [選択](#選択) | ドロップダウンから選択 |
-| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering. |
+| [](#) |  |
 | [DOMスナップショット](#domスナップショット) | 現在のページのDOMスナップショットをキャプチャ |
 | [ストレージ](#ストレージ) | localStorage・sessionStorage にアクセス |
 | [タブ管理](#タブ管理) | タブの作成・切替・閉じる |
-| [Extract Table](#extract-table) | Extract HTML tables as structured data. Auto-detects headers from thead/th. |
-| [Throttle](#throttle) | Per-domain rate limiting. Waits between requests to the same domain to avoid bans. |
+| [](#) |  |
+| [](#) |  |
 | [ブラウザトレース](#ブラウザトレース) | ブラウザのパフォーマンストレースを開始、停止、または保存 |
 | [テキスト入力](#テキスト入力) | 入力フィールドにテキストを入力 |
 | [ファイルアップロード](#ファイルアップロード) | ファイル入力要素にファイルをアップロード |
@@ -63,11 +63,9 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 ## Modules
 
-### Handle Challenge
+### 
 
 `browser.challenge`
-
-Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop.
 
 **Parameters:**
 
@@ -178,11 +176,9 @@ selector: #submit-button
 ```yaml
 ```
 
-### Connect Remote
+### 
 
 `browser.connect`
-
-Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs.
 
 **Parameters:**
 
@@ -310,11 +306,9 @@ domain: example.com
 action: clear
 ```
 
-### Cookies File
+### 
 
 `browser.cookies_file`
-
-Import or export browser cookies to/from a JSON file for session persistence.
 
 **Parameters:**
 
@@ -421,11 +415,9 @@ text: Login
 match_mode: best
 ```
 
-### Detect List
+### 
 
 `browser.detect_list`
-
-Auto-detect repeating items on any page (articles, products, search results). No selectors needed.
 
 **Parameters:**
 
@@ -757,11 +749,9 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### Extract Nested
+### 
 
 `browser.extract_nested`
-
-Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children.
 
 **Parameters:**
 
@@ -1090,11 +1080,9 @@ headless: true
 headless: false
 ```
 
-### Login
+### 
 
 `browser.login`
-
-Auto-detect and fill login forms. Handles username + password + submit with post-login verification.
 
 **Parameters:**
 
@@ -1411,11 +1399,9 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### Browser Pool
+### 
 
 `browser.pool`
-
-Manage multiple named browser instances for parallel automation.
 
 **Parameters:**
 
@@ -1486,11 +1472,9 @@ key: Enter
 key: Escape
 ```
 
-### Rotate Proxy
+### 
 
 `browser.proxy_rotate`
-
-Rotate through a list of proxies. Relaunches browser with the next proxy.
 
 **Parameters:**
 
@@ -1525,11 +1509,9 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### Extract Article
+### 
 
 `browser.readability`
-
-Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode.
 
 **Parameters:**
 
@@ -1538,7 +1520,7 @@ Smart article extraction — extracts title, author, date, and main content from
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - | CSS selector for the content area. Leave empty for auto-detection. |
+| `selector` | string | No | - |  |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1662,11 +1644,9 @@ action: get
 force: true
 ```
 
-### Capture Response
+### 
 
 `browser.response`
-
-Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls.
 
 **Parameters:**
 
@@ -1699,11 +1679,9 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### Check Robots.txt
+### 
 
 `browser.robots`
-
-Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping.
 
 **Parameters:**
 
@@ -1853,11 +1831,9 @@ select_method: index
 index: 2
 ```
 
-### Parse Sitemap
+### 
 
 `browser.sitemap`
-
-Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering.
 
 **Parameters:**
 
@@ -2045,11 +2021,9 @@ action: close
 action: list
 ```
 
-### Extract Table
+### 
 
 `browser.table`
-
-Extract HTML tables as structured data. Auto-detects headers from thead/th.
 
 **Parameters:**
 
@@ -2081,11 +2055,9 @@ selector: #results-table
 max_rows: 100
 ```
 
-### Throttle
+### 
 
 `browser.throttle`
-
-Per-domain rate limiting. Waits between requests to the same domain to avoid bans.
 
 **Parameters:**
 

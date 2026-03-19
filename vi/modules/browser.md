@@ -6,15 +6,15 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [Handle Challenge](#handle-challenge) | Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop. |
+| [](#) |  |
 | [Nhấp phần tử](#nhấp-phần-tử) | Nhấp vào một phần tử trên trang |
 | [Đóng trình duyệt](#đóng-trình-duyệt) | Đóng phiên trình duyệt và giải phóng tài nguyên |
-| [Connect Remote](#connect-remote) | Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs. |
+| [](#) |  |
 | [Chụp Console](#chụp-console) | Chụp nhật ký console trình duyệt (lỗi, cảnh báo, thông tin) |
 | [Quản lý Cookies](#quản-lý-cookies) | Lấy, đặt hoặc xóa cookie trình duyệt |
-| [Cookies File](#cookies-file) | Import or export browser cookies to/from a JSON file for session persistence. |
+| [](#) |  |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [Detect List](#detect-list) | Auto-detect repeating items on any page (articles, products, search results). No selectors needed. |
+| [](#) |  |
 | [Xử lý hộp thoại](#xử-lý-hộp-thoại) | Xử lý hộp thoại alert, confirm và prompt |
 | [Tải tệp](#tải-tệp) | Tải tệp từ trình duyệt |
 | [Kéo và thả](#kéo-và-thả) | Kéo và thả các phần tử |
@@ -22,7 +22,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Đảm bảo Trình duyệt](#đảm-bảo-trình-duyệt) | Đảm bảo phiên trình duyệt tồn tại (tái sử dụng hoặc khởi chạy) |
 | [Thực thi JavaScript](#thực-thi-javascript) | Thực thi mã JavaScript trong ngữ cảnh trang |
 | [Trích xuất dữ liệu](#trích-xuất-dữ-liệu) | Trích xuất dữ liệu có cấu trúc từ trang |
-| [Extract Nested](#extract-nested) | Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children. |
+| [](#) |  |
 | [Tìm phần tử](#tìm-phần-tử) | Tìm các phần tử trong trang và trả về danh sách ID phần tử |
 | [Điền Biểu mẫu](#điền-biểu-mẫu) | Điền biểu mẫu thông minh với phát hiện trường tự động |
 | [Chuyển Frame](#chuyển-frame) | Chuyển sang ngữ cảnh iframe hoặc frame |
@@ -31,30 +31,30 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Di chuột qua phần tử](#di-chuột-qua-phần-tử) | Di chuột qua một phần tử |
 | [](#) |  |
 | [Khởi chạy trình duyệt](#khởi-chạy-trình-duyệt) | Khởi chạy phiên trình duyệt mới với Playwright |
-| [Login](#login) | Auto-detect and fill login forms. Handles username + password + submit with post-login verification. |
+| [](#) |  |
 | [Điều hướng lịch sử](#điều-hướng-lịch-sử) | Điều hướng lịch sử trình duyệt (quay lại, tiến tới, tải lại) |
 | [Giám sát mạng](#giám-sát-mạng) | Giám sát và chặn các yêu cầu mạng |
 | [Danh sách Trang](#danh-sách-trang) | Liệt kê tất cả các trang/tab trình duyệt đang mở |
 | [Phân trang & Trích xuất](#phân-trang--trích-xuất) | Tự động phân trang và trích xuất dữ liệu |
 | [Tạo PDF](#tạo-pdf) | Tạo PDF từ trang hiện tại |
 | [Chỉ số Hiệu suất](#chỉ-số-hiệu-suất) | Thu thập các chỉ số hiệu suất trình duyệt |
-| [Browser Pool](#browser-pool) | Manage multiple named browser instances for parallel automation. |
+| [](#) |  |
 | [Nhấn phím](#nhấn-phím) | Nhấn một phím bàn phím |
-| [Rotate Proxy](#rotate-proxy) | Rotate through a list of proxies. Relaunches browser with the next proxy. |
-| [Extract Article](#extract-article) | Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode. |
+| [](#) |  |
+| [](#) |  |
 | [Ghi hành động](#ghi-hành-động) | Ghi lại các hành động người dùng dưới dạng workflow |
 | [Giải phóng Trình duyệt](#giải-phóng-trình-duyệt) | Giải phóng phiên trình duyệt (chỉ đóng nếu sở hữu) |
-| [Capture Response](#capture-response) | Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls. |
-| [Check Robots.txt](#check-robots.txt) | Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping. |
+| [](#) |  |
+| [](#) |  |
 | [Chụp màn hình](#chụp-màn-hình) | Chụp ảnh màn hình của trang hiện tại |
 | [Cuộn trang](#cuộn-trang) | Cuộn trang đến phần tử, vị trí hoặc hướng |
 | [Chọn tùy chọn](#chọn-tùy-chọn) | Chọn tùy chọn từ phần tử dropdown |
-| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering. |
+| [](#) |  |
 | [Ảnh chụp DOM](#ảnh-chụp-dom) | Chụp ảnh DOM của trang hiện tại |
 | [Lưu trữ trình duyệt](#lưu-trữ-trình-duyệt) | Truy cập localStorage và sessionStorage |
 | [Quản lý Tab](#quản-lý-tab) | Tạo, chuyển và đóng các tab trình duyệt |
-| [Extract Table](#extract-table) | Extract HTML tables as structured data. Auto-detects headers from thead/th. |
-| [Throttle](#throttle) | Per-domain rate limiting. Waits between requests to the same domain to avoid bans. |
+| [](#) |  |
+| [](#) |  |
 | [Dấu vết Trình duyệt](#dấu-vết-trình-duyệt) | Bắt đầu, dừng hoặc lưu dấu vết hiệu suất trình duyệt |
 | [Gõ văn bản](#gõ-văn-bản) | Gõ văn bản vào trường input |
 | [Tải tệp lên](#tải-tệp-lên) | Tải tệp lên phần tử input file |
@@ -63,11 +63,9 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 ## Modules
 
-### Handle Challenge
+### 
 
 `browser.challenge`
-
-Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop.
 
 **Parameters:**
 
@@ -178,11 +176,9 @@ selector: #submit-button
 ```yaml
 ```
 
-### Connect Remote
+### 
 
 `browser.connect`
-
-Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs.
 
 **Parameters:**
 
@@ -310,11 +306,9 @@ domain: example.com
 action: clear
 ```
 
-### Cookies File
+### 
 
 `browser.cookies_file`
-
-Import or export browser cookies to/from a JSON file for session persistence.
 
 **Parameters:**
 
@@ -421,11 +415,9 @@ text: Login
 match_mode: best
 ```
 
-### Detect List
+### 
 
 `browser.detect_list`
-
-Auto-detect repeating items on any page (articles, products, search results). No selectors needed.
 
 **Parameters:**
 
@@ -757,11 +749,9 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### Extract Nested
+### 
 
 `browser.extract_nested`
-
-Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children.
 
 **Parameters:**
 
@@ -1090,11 +1080,9 @@ headless: true
 headless: false
 ```
 
-### Login
+### 
 
 `browser.login`
-
-Auto-detect and fill login forms. Handles username + password + submit with post-login verification.
 
 **Parameters:**
 
@@ -1411,11 +1399,9 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### Browser Pool
+### 
 
 `browser.pool`
-
-Manage multiple named browser instances for parallel automation.
 
 **Parameters:**
 
@@ -1486,11 +1472,9 @@ key: Enter
 key: Escape
 ```
 
-### Rotate Proxy
+### 
 
 `browser.proxy_rotate`
-
-Rotate through a list of proxies. Relaunches browser with the next proxy.
 
 **Parameters:**
 
@@ -1525,11 +1509,9 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### Extract Article
+### 
 
 `browser.readability`
-
-Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode.
 
 **Parameters:**
 
@@ -1538,7 +1520,7 @@ Smart article extraction — extracts title, author, date, and main content from
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - | CSS selector for the content area. Leave empty for auto-detection. |
+| `selector` | string | No | - |  |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1662,11 +1644,9 @@ Giải phóng phiên trình duyệt (chỉ đóng nếu sở hữu)
 force: true
 ```
 
-### Capture Response
+### 
 
 `browser.response`
-
-Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls.
 
 **Parameters:**
 
@@ -1699,11 +1679,9 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### Check Robots.txt
+### 
 
 `browser.robots`
-
-Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping.
 
 **Parameters:**
 
@@ -1853,11 +1831,9 @@ select_method: index
 index: 2
 ```
 
-### Parse Sitemap
+### 
 
 `browser.sitemap`
-
-Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering.
 
 **Parameters:**
 
@@ -2045,11 +2021,9 @@ action: close
 action: list
 ```
 
-### Extract Table
+### 
 
 `browser.table`
-
-Extract HTML tables as structured data. Auto-detects headers from thead/th.
 
 **Parameters:**
 
@@ -2081,11 +2055,9 @@ selector: #results-table
 max_rows: 100
 ```
 
-### Throttle
+### 
 
 `browser.throttle`
-
-Per-domain rate limiting. Waits between requests to the same domain to avoid bans.
 
 **Parameters:**
 

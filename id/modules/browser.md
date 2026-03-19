@@ -6,15 +6,15 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [Handle Challenge](#handle-challenge) | Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop. |
+| [](#) |  |
 | [Klik Elemen](#klik-elemen) | Klik elemen di halaman |
 | [Tutup Browser](#tutup-browser) | Tutup instance browser dan lepaskan sumber daya |
-| [Connect Remote](#connect-remote) | Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs. |
+| [](#) |  |
 | [Tangkap Konsol](#tangkap-konsol) | Tangkap log konsol browser (error, warning, info) |
 | [Kelola Cookie](#kelola-cookie) | Dapatkan, atur, atau hapus cookie browser |
-| [Cookies File](#cookies-file) | Import or export browser cookies to/from a JSON file for session persistence. |
+| [](#) |  |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [Detect List](#detect-list) | Auto-detect repeating items on any page (articles, products, search results). No selectors needed. |
+| [](#) |  |
 | [Tangani Dialog](#tangani-dialog) | Tangani dialog alert, confirm, dan prompt |
 | [Unduh File](#unduh-file) | Unduh file dari browser |
 | [Seret dan Lepas](#seret-dan-lepas) | Seret dan lepas elemen |
@@ -22,7 +22,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Pastikan Browser](#pastikan-browser) | Pastikan sesi browser ada (gunakan kembali atau luncurkan) |
 | [Jalankan JavaScript](#jalankan-javascript) | Jalankan kode JavaScript di konteks halaman |
 | [Ekstrak Data](#ekstrak-data) | Ekstrak data terstruktur dari halaman |
-| [Extract Nested](#extract-nested) | Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children. |
+| [](#) |  |
 | [Temukan Elemen](#temukan-elemen) | Temukan elemen di halaman dan kembalikan daftar ID elemen |
 | [Isi Formulir](#isi-formulir) | Pengisian formulir pintar dengan deteksi bidang otomatis |
 | [Ganti Frame](#ganti-frame) | Beralih ke konteks iframe atau frame |
@@ -31,30 +31,30 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Hover Elemen](#hover-elemen) | Arahkan mouse ke atas elemen |
 | [](#) |  |
 | [Luncurkan Browser](#luncurkan-browser) | Luncurkan instance browser baru dengan Playwright |
-| [Login](#login) | Auto-detect and fill login forms. Handles username + password + submit with post-login verification. |
+| [](#) |  |
 | [Navigasi Riwayat](#navigasi-riwayat) | Menavigasi riwayat browser (mundur, maju, muat ulang) |
 | [Monitor Jaringan](#monitor-jaringan) | Pantau dan cegat permintaan jaringan |
 | [Daftar Halaman](#daftar-halaman) | Daftar semua halaman/tab browser yang terbuka |
 | [Paginasi & Ekstrak](#paginasi--ekstrak) | Auto-paginasi melalui halaman dan ekstrak data |
 | [Hasilkan PDF](#hasilkan-pdf) | Hasilkan PDF dari halaman saat ini |
 | [Metrik Kinerja](#metrik-kinerja) | Kumpulkan metrik kinerja browser |
-| [Browser Pool](#browser-pool) | Manage multiple named browser instances for parallel automation. |
+| [](#) |  |
 | [Tekan Tombol](#tekan-tombol) | Tekan tombol keyboard |
-| [Rotate Proxy](#rotate-proxy) | Rotate through a list of proxies. Relaunches browser with the next proxy. |
-| [Extract Article](#extract-article) | Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode. |
+| [](#) |  |
+| [](#) |  |
 | [Rekam Aksi](#rekam-aksi) | Rekam aksi pengguna sebagai workflow |
 | [Lepaskan Browser](#lepaskan-browser) | Lepaskan sesi browser (tutup hanya jika dimiliki) |
-| [Capture Response](#capture-response) | Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls. |
-| [Check Robots.txt](#check-robots.txt) | Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping. |
+| [](#) |  |
+| [](#) |  |
 | [Ambil Tangkapan Layar](#ambil-tangkapan-layar) | Ambil tangkapan layar halaman saat ini |
 | [Gulir Halaman](#gulir-halaman) | Gulir halaman ke elemen, posisi, atau arah |
 | [Pilih Opsi](#pilih-opsi) | Pilih opsi dari elemen dropdown |
-| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering. |
+| [](#) |  |
 | [Snapshot DOM](#snapshot-dom) | Tangkap snapshot DOM dari halaman saat ini |
 | [Penyimpanan Browser](#penyimpanan-browser) | Akses localStorage dan sessionStorage |
 | [Kelola Tab](#kelola-tab) | Buat, ganti, dan tutup tab browser |
-| [Extract Table](#extract-table) | Extract HTML tables as structured data. Auto-detects headers from thead/th. |
-| [Throttle](#throttle) | Per-domain rate limiting. Waits between requests to the same domain to avoid bans. |
+| [](#) |  |
+| [](#) |  |
 | [Jejak Browser](#jejak-browser) | Mulai, hentikan, atau simpan jejak kinerja browser |
 | [Ketik Teks](#ketik-teks) | Ketik teks ke dalam field input |
 | [Unggah File](#unggah-file) | Unggah file ke elemen input file |
@@ -63,11 +63,9 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 ## Modules
 
-### Handle Challenge
+### 
 
 `browser.challenge`
-
-Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop.
 
 **Parameters:**
 
@@ -178,11 +176,9 @@ Tutup instance browser dan lepaskan sumber daya
 ```yaml
 ```
 
-### Connect Remote
+### 
 
 `browser.connect`
-
-Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs.
 
 **Parameters:**
 
@@ -310,11 +306,9 @@ domain: example.com
 action: clear
 ```
 
-### Cookies File
+### 
 
 `browser.cookies_file`
-
-Import or export browser cookies to/from a JSON file for session persistence.
 
 **Parameters:**
 
@@ -421,11 +415,9 @@ text: Login
 match_mode: best
 ```
 
-### Detect List
+### 
 
 `browser.detect_list`
-
-Auto-detect repeating items on any page (articles, products, search results). No selectors needed.
 
 **Parameters:**
 
@@ -757,11 +749,9 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### Extract Nested
+### 
 
 `browser.extract_nested`
-
-Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children.
 
 **Parameters:**
 
@@ -1090,11 +1080,9 @@ headless: true
 headless: false
 ```
 
-### Login
+### 
 
 `browser.login`
-
-Auto-detect and fill login forms. Handles username + password + submit with post-login verification.
 
 **Parameters:**
 
@@ -1411,11 +1399,9 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### Browser Pool
+### 
 
 `browser.pool`
-
-Manage multiple named browser instances for parallel automation.
 
 **Parameters:**
 
@@ -1486,11 +1472,9 @@ key: Enter
 key: Escape
 ```
 
-### Rotate Proxy
+### 
 
 `browser.proxy_rotate`
-
-Rotate through a list of proxies. Relaunches browser with the next proxy.
 
 **Parameters:**
 
@@ -1525,11 +1509,9 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### Extract Article
+### 
 
 `browser.readability`
-
-Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode.
 
 **Parameters:**
 
@@ -1538,7 +1520,7 @@ Smart article extraction — extracts title, author, date, and main content from
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - | CSS selector for the content area. Leave empty for auto-detection. |
+| `selector` | string | No | - |  |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1662,11 +1644,9 @@ Lepaskan sesi browser (tutup hanya jika dimiliki)
 force: true
 ```
 
-### Capture Response
+### 
 
 `browser.response`
-
-Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls.
 
 **Parameters:**
 
@@ -1699,11 +1679,9 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### Check Robots.txt
+### 
 
 `browser.robots`
-
-Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping.
 
 **Parameters:**
 
@@ -1853,11 +1831,9 @@ select_method: index
 index: 2
 ```
 
-### Parse Sitemap
+### 
 
 `browser.sitemap`
-
-Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering.
 
 **Parameters:**
 
@@ -2045,11 +2021,9 @@ action: close
 action: list
 ```
 
-### Extract Table
+### 
 
 `browser.table`
-
-Extract HTML tables as structured data. Auto-detects headers from thead/th.
 
 **Parameters:**
 
@@ -2081,11 +2055,9 @@ selector: #results-table
 max_rows: 100
 ```
 
-### Throttle
+### 
 
 `browser.throttle`
-
-Per-domain rate limiting. Waits between requests to the same domain to avoid bans.
 
 **Parameters:**
 

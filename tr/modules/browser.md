@@ -6,15 +6,15 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [Handle Challenge](#handle-challenge) | Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop. |
+| [](#) |  |
 | [Öğeye Tıkla](#öğeye-tıkla) | Sayfadaki bir öğeye tıkla |
 | [Tarayıcıyı Kapat](#tarayıcıyı-kapat) | Tarayıcı örneğini kapat ve kaynakları serbest bırak |
-| [Connect Remote](#connect-remote) | Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs. |
+| [](#) |  |
 | [Konsolu Yakala](#konsolu-yakala) | Tarayıcı konsol günlüklerini yakala (hatalar, uyarılar, bilgi) |
 | [Çerezleri Yönet](#çerezleri-yönet) | Tarayıcı çerezlerini al, ayarla veya temizle |
-| [Cookies File](#cookies-file) | Import or export browser cookies to/from a JSON file for session persistence. |
+| [](#) |  |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [Detect List](#detect-list) | Auto-detect repeating items on any page (articles, products, search results). No selectors needed. |
+| [](#) |  |
 | [Diyaloğu İşle](#diyaloğu-i̇şle) | Uyarı, onay ve istem diyaloglarını işle |
 | [Dosya İndir](#dosya-i̇ndir) | Tarayıcıdan dosya indir |
 | [Sürükle ve Bırak](#sürükle-ve-bırak) | Öğeleri sürükle ve bırak |
@@ -22,7 +22,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Tarayıcıyı Sağla](#tarayıcıyı-sağla) | Bir tarayıcı oturumu olduğundan emin olun (yeniden kullan veya başlat) |
 | [JavaScript Çalıştır](#javascript-çalıştır) | Sayfa bağlamında JavaScript kodu çalıştır |
 | [Veri Çıkar](#veri-çıkar) | Sayfadan yapılandırılmış veri çıkar |
-| [Extract Nested](#extract-nested) | Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children. |
+| [](#) |  |
 | [Öğeleri Bul](#öğeleri-bul) | Sayfada öğeleri bul ve öğe kimliği listesi döndür |
 | [Formu Doldur](#formu-doldur) | Otomatik alan algılama ile akıllı form doldurma |
 | [Çerçeve Değiştir](#çerçeve-değiştir) | iframe veya çerçeve bağlamına geç |
@@ -31,30 +31,30 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Öğe Üzerinde Bekle](#öğe-üzerinde-bekle) | Fareyi bir öğenin üzerine getir |
 | [](#) |  |
 | [Tarayıcı Başlat](#tarayıcı-başlat) | Playwright ile yeni tarayıcı örneği başlat |
-| [Login](#login) | Auto-detect and fill login forms. Handles username + password + submit with post-login verification. |
+| [](#) |  |
 | [Geçmişte Gez](#geçmişte-gez) | Tarayıcı geçmişinde gezin (geri, ileri, yeniden yükle) |
 | [Ağ İzleyici](#ağ-i̇zleyici) | Ağ isteklerini izle ve engelle |
 | [Sayfaları Listele](#sayfaları-listele) | Açık tarayıcı sayfalarını/sekmesini listele |
 | [Sayfalandır & Çıkar](#sayfalandır--çıkar) | Sayfaları otomatik olarak gez ve verileri çıkar |
 | [PDF Oluştur](#pdf-oluştur) | Mevcut sayfadan PDF oluştur |
 | [Performans Metrikleri](#performans-metrikleri) | Tarayıcı performans metriklerini topla |
-| [Browser Pool](#browser-pool) | Manage multiple named browser instances for parallel automation. |
+| [](#) |  |
 | [Tuşa Bas](#tuşa-bas) | Klavye tuşuna bas |
-| [Rotate Proxy](#rotate-proxy) | Rotate through a list of proxies. Relaunches browser with the next proxy. |
-| [Extract Article](#extract-article) | Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode. |
+| [](#) |  |
+| [](#) |  |
 | [Eylemleri Kaydet](#eylemleri-kaydet) | Kullanıcı eylemlerini iş akışı olarak kaydet |
 | [Tarayıcıyı Serbest Bırak](#tarayıcıyı-serbest-bırak) | Tarayıcı oturumunu serbest bırak (sadece sahip olunursa kapat) |
-| [Capture Response](#capture-response) | Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls. |
-| [Check Robots.txt](#check-robots.txt) | Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping. |
+| [](#) |  |
+| [](#) |  |
 | [Ekran Görüntüsü Al](#ekran-görüntüsü-al) | Mevcut sayfanın ekran görüntüsünü al |
 | [Sayfayı Kaydır](#sayfayı-kaydır) | Sayfayı öğeye, konuma veya yöne kaydır |
 | [Seçenek Seç](#seçenek-seç) | Açılır öğeden seçenek seç |
-| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering. |
+| [](#) |  |
 | [DOM Anlık Görüntüsü](#dom-anlık-görüntüsü) | Geçerli sayfanın DOM anlık görüntüsünü al |
 | [Tarayıcı Depolama](#tarayıcı-depolama) | localStorage ve sessionStorage'a eriş |
 | [Sekmeleri Yönet](#sekmeleri-yönet) | Tarayıcı sekmelerini oluştur, değiştir ve kapat |
-| [Extract Table](#extract-table) | Extract HTML tables as structured data. Auto-detects headers from thead/th. |
-| [Throttle](#throttle) | Per-domain rate limiting. Waits between requests to the same domain to avoid bans. |
+| [](#) |  |
+| [](#) |  |
 | [Tarayıcı İzi](#tarayıcı-i̇zi) | Tarayıcı performans izlerini başlat, durdur veya kaydet |
 | [Metin Yaz](#metin-yaz) | Giriş alanına metin yaz |
 | [Dosya Yükle](#dosya-yükle) | Dosya giriş öğesine dosya yükle |
@@ -63,11 +63,9 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 ## Modules
 
-### Handle Challenge
+### 
 
 `browser.challenge`
-
-Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop.
 
 **Parameters:**
 
@@ -178,11 +176,9 @@ Tarayıcı örneğini kapat ve kaynakları serbest bırak
 ```yaml
 ```
 
-### Connect Remote
+### 
 
 `browser.connect`
-
-Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs.
 
 **Parameters:**
 
@@ -310,11 +306,9 @@ domain: example.com
 action: clear
 ```
 
-### Cookies File
+### 
 
 `browser.cookies_file`
-
-Import or export browser cookies to/from a JSON file for session persistence.
 
 **Parameters:**
 
@@ -421,11 +415,9 @@ text: Login
 match_mode: best
 ```
 
-### Detect List
+### 
 
 `browser.detect_list`
-
-Auto-detect repeating items on any page (articles, products, search results). No selectors needed.
 
 **Parameters:**
 
@@ -757,11 +749,9 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### Extract Nested
+### 
 
 `browser.extract_nested`
-
-Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children.
 
 **Parameters:**
 
@@ -1090,11 +1080,9 @@ headless: true
 headless: false
 ```
 
-### Login
+### 
 
 `browser.login`
-
-Auto-detect and fill login forms. Handles username + password + submit with post-login verification.
 
 **Parameters:**
 
@@ -1411,11 +1399,9 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### Browser Pool
+### 
 
 `browser.pool`
-
-Manage multiple named browser instances for parallel automation.
 
 **Parameters:**
 
@@ -1486,11 +1472,9 @@ key: Enter
 key: Escape
 ```
 
-### Rotate Proxy
+### 
 
 `browser.proxy_rotate`
-
-Rotate through a list of proxies. Relaunches browser with the next proxy.
 
 **Parameters:**
 
@@ -1525,11 +1509,9 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### Extract Article
+### 
 
 `browser.readability`
-
-Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode.
 
 **Parameters:**
 
@@ -1538,7 +1520,7 @@ Smart article extraction — extracts title, author, date, and main content from
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - | CSS selector for the content area. Leave empty for auto-detection. |
+| `selector` | string | No | - |  |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1662,11 +1644,9 @@ Tarayıcı oturumunu serbest bırak (sadece sahip olunursa kapat)
 force: true
 ```
 
-### Capture Response
+### 
 
 `browser.response`
-
-Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls.
 
 **Parameters:**
 
@@ -1699,11 +1679,9 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### Check Robots.txt
+### 
 
 `browser.robots`
-
-Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping.
 
 **Parameters:**
 
@@ -1853,11 +1831,9 @@ select_method: index
 index: 2
 ```
 
-### Parse Sitemap
+### 
 
 `browser.sitemap`
-
-Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering.
 
 **Parameters:**
 
@@ -2045,11 +2021,9 @@ action: close
 action: list
 ```
 
-### Extract Table
+### 
 
 `browser.table`
-
-Extract HTML tables as structured data. Auto-detects headers from thead/th.
 
 **Parameters:**
 
@@ -2081,11 +2055,9 @@ selector: #results-table
 max_rows: 100
 ```
 
-### Throttle
+### 
 
 `browser.throttle`
-
-Per-domain rate limiting. Waits between requests to the same domain to avoid bans.
 
 **Parameters:**
 
