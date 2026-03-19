@@ -6,15 +6,15 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [](#) |  |
+| [Obsługa Zabezpieczeń](#obsługa-zabezpieczeń) | Automatyczne wykrywanie i obsługa zabezpieczeń anty-bot (Cloudflare, CAPTCHA) |
 | [Kliknij element](#kliknij-element) | Kliknij element na stronie |
 | [Zamknij przegladarke](#zamknij-przegladarke) | Zamknij instancje przegladarki i zwolnij zasoby |
-| [](#) |  |
+| [Połącz Zdalnie](#połącz-zdalnie) | Połącz z zdalną usługą przeglądarki (Browserless, BrowserBase). Prawdziwe fingerprint, bypass Cloudflare. |
 | [Przechwytuj konsole](#przechwytuj-konsole) | Przechwytuj logi konsoli przegladarki (bledy, ostrzezenia, informacje) |
 | [Zarzadzaj ciasteczkami](#zarzadzaj-ciasteczkami) | Pobierz, ustaw lub wyczysc ciasteczka przegladarki |
-| [](#) |  |
+| [Plik Ciasteczek](#plik-ciasteczek) | Importuj lub eksportuj ciasteczka przeglądarki do/z pliku JSON. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [](#) |  |
+| [Wykryj Listę](#wykryj-listę) | Automatyczne wykrywanie powtarzających się elementów na stronie (artykuły, produkty, wyniki wyszukiwania) |
 | [Obsluz okno dialogowe](#obsluz-okno-dialogowe) | Obsluguj okna dialogowe alert, confirm i prompt |
 | [Pobierz plik](#pobierz-plik) | Pobierz plik z przegladarki |
 | [Przeciagnij i upusc](#przeciagnij-i-upusc) | Przeciagnij i upusc elementy |
@@ -22,39 +22,39 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Upewnij się, że przeglądarka](#upewnij-się,-że-przeglądarka) | Upewnij się, że istnieje sesja przeglądarki (ponowne użycie lub uruchomienie) |
 | [Wykonaj JavaScript](#wykonaj-javascript) | Wykonaj kod JavaScript w kontekscie strony |
 | [Wyodrebnij dane](#wyodrebnij-dane) | Wyodrebnij ustrukturyzowane dane ze strony |
-| [](#) |  |
+| [Wyodrębnij Zagnieżdżone](#wyodrębnij-zagnieżdżone) | Wyodrębnij dane drzewiaste/zagnieżdżone (komentarze, wątki, foldery). |
 | [Znajdz elementy](#znajdz-elementy) | Znajdz elementy na stronie i zwroc liste ID elementow |
 | [Wypełnij formularz](#wypełnij-formularz) | Inteligentne wypełnianie formularzy z automatycznym wykrywaniem pól |
 | [Przelacz ramke](#przelacz-ramke) | Przelacz na kontekst iframe lub frame |
 | [Symuluj geolokalizacje](#symuluj-geolokalizacje) | Symuluj geolokalizacje przegladarki |
 | [Przejdz do URL](#przejdz-do-url) | Przejdz do okreslonego URL |
 | [Najedz na element](#najedz-na-element) | Najedz myszka na element |
-| [](#) |  |
+| [Interakcja z Przeglądarką](#interakcja-z-przeglądarką) | Wstrzymaj, aby użytkownik mógł wejść w interakcję ze stroną przeglądarki |
 | [Uruchom przegladarke](#uruchom-przegladarke) | Uruchom nowa instancje przegladarki z Playwright |
-| [](#) |  |
+| [Logowanie](#logowanie) | Automatyczne wykrywanie i wypełnianie formularzy logowania z weryfikacją po zalogowaniu. |
 | [Nawigacja w Historii](#nawigacja-w-historii) | Nawiguj w historii przeglądarki (wstecz, do przodu, odśwież) |
 | [Monitor sieci](#monitor-sieci) | Monitoruj i przechwytuj zadania sieciowe |
 | [Lista Stron](#lista-stron) | Wyświetl wszystkie otwarte strony/karty przeglądarki |
 | [Paginuj i wyodrębnij](#paginuj-i-wyodrębnij) | Automatyczne paginowanie przez strony i wyodrębnianie danych |
 | [Wygeneruj PDF](#wygeneruj-pdf) | Wygeneruj PDF z biezacej strony |
 | [Metryki Wydajności](#metryki-wydajności) | Zbieraj metryki wydajności przeglądarki |
-| [](#) |  |
+| [Pula Przeglądarek](#pula-przeglądarek) | Zarządzanie wieloma nazwanymi instancjami przeglądarki do równoległej automatyzacji. |
 | [Nacisnij klawisz](#nacisnij-klawisz) | Nacisnij klawisz klawiatury |
-| [](#) |  |
-| [](#) |  |
+| [Rotacja Proxy](#rotacja-proxy) | Rotacja między listą proxy z wykrywaniem nieaktywnych proxy. |
+| [Wyodrębnij Artykuł](#wyodrębnij-artykuł) | Inteligentna ekstrakcja artykułów — wyodrębnia tytuł, autora, datę i główną treść z dowolnej strony |
 | [Nagrywaj akcje](#nagrywaj-akcje) | Nagrywaj akcje uzytkownika jako przeplyw |
 | [Zwolnij przeglądarkę](#zwolnij-przeglądarkę) | Zwolnij sesję przeglądarki (zamknij tylko, jeśli posiadasz) |
-| [](#) |  |
-| [](#) |  |
+| [Przechwyć Odpowiedź](#przechwyć-odpowiedź) | Przechwytuj treści odpowiedzi API (XHR/fetch). Wyodrębnij JSON z wywołań API strony. |
+| [Sprawdź Robots.txt](#sprawdź-robots.txt) | Sprawdź zgodność z robots.txt i odkryj mapy witryn. |
 | [Zrob zrzut ekranu](#zrob-zrzut-ekranu) | Zrob zrzut ekranu biezacej strony |
 | [Przewin strone](#przewin-strone) | Przewin strone do elementu, pozycji lub kierunku |
 | [Wybierz opcje](#wybierz-opcje) | Wybierz opcje z elementu rozwijanego |
-| [](#) |  |
+| [Parsuj Mapę Witryny](#parsuj-mapę-witryny) | Parsuj sitemap.xml i wyodrębnij adresy URL z metadanymi. |
 | [Zrzut DOM](#zrzut-dom) | Zrób zrzut DOM bieżącej strony |
 | [Magazyn przegladarki](#magazyn-przegladarki) | Dostep do localStorage i sessionStorage |
 | [Zarzadzaj kartami](#zarzadzaj-kartami) | Tworzenie, przelaczanie i zamykanie kart przegladarki |
-| [](#) |  |
-| [](#) |  |
+| [Wyodrębnij Tabelę](#wyodrębnij-tabelę) | Wyodrębnij tabele HTML jako dane strukturalne z automatycznie wykrytymi nagłówkami. |
+| [Ograniczenie](#ograniczenie) | Ograniczenie częstotliwości żądań na domenę. Czeka między żądaniami, aby uniknąć blokad. |
 | [Ślad Przeglądarki](#ślad-przeglądarki) | Rozpocznij, zatrzymaj lub zapisz ślady wydajności przeglądarki |
 | [Wpisz tekst](#wpisz-tekst) | Wpisz tekst w pole wejsciowe |
 | [Przeslij plik](#przeslij-plik) | Przeslij plik do elementu wejscia pliku |
@@ -63,9 +63,11 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 ## Modules
 
-### 
+### Obsługa Zabezpieczeń
 
 `browser.challenge`
+
+Automatyczne wykrywanie i obsługa zabezpieczeń anty-bot (Cloudflare, CAPTCHA)
 
 **Parameters:**
 
@@ -176,9 +178,11 @@ Zamknij instancje przegladarki i zwolnij zasoby
 ```yaml
 ```
 
-### 
+### Połącz Zdalnie
 
 `browser.connect`
+
+Połącz z zdalną usługą przeglądarki (Browserless, BrowserBase). Prawdziwe fingerprint, bypass Cloudflare.
 
 **Parameters:**
 
@@ -306,9 +310,11 @@ domain: example.com
 action: clear
 ```
 
-### 
+### Plik Ciasteczek
 
 `browser.cookies_file`
+
+Importuj lub eksportuj ciasteczka przeglądarki do/z pliku JSON.
 
 **Parameters:**
 
@@ -415,9 +421,11 @@ text: Login
 match_mode: best
 ```
 
-### 
+### Wykryj Listę
 
 `browser.detect_list`
+
+Automatyczne wykrywanie powtarzających się elementów na stronie (artykuły, produkty, wyniki wyszukiwania)
 
 **Parameters:**
 
@@ -749,9 +757,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### 
+### Wyodrębnij Zagnieżdżone
 
 `browser.extract_nested`
+
+Wyodrębnij dane drzewiaste/zagnieżdżone (komentarze, wątki, foldery).
 
 **Parameters:**
 
@@ -1007,9 +1017,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### 
+### Interakcja z Przeglądarką
 
 `browser.interact`
+
+Wstrzymaj, aby użytkownik mógł wejść w interakcję ze stroną przeglądarki
 
 **Parameters:**
 
@@ -1023,11 +1035,11 @@ timeout_ms: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string |  |
-| `action` | string |  |
-| `selector` | string |  |
-| `value` | string |  |
-| `url` | string |  |
+| `status` | string | Status operacji |
+| `action` | string | Wykonana akcja (kliknięcie/wybór/wpisanie/przełączenie) |
+| `selector` | string | Selektor CSS elementu, z którym wykonano interakcję |
+| `value` | string | Użyta wartość (dla akcji wyboru/wpisywania) |
+| `url` | string | URL strony w momencie interakcji |
 
 **Example:** Example
 
@@ -1080,9 +1092,11 @@ headless: true
 headless: false
 ```
 
-### 
+### Logowanie
 
 `browser.login`
+
+Automatyczne wykrywanie i wypełnianie formularzy logowania z weryfikacją po zalogowaniu.
 
 **Parameters:**
 
@@ -1399,9 +1413,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### 
+### Pula Przeglądarek
 
 `browser.pool`
+
+Zarządzanie wieloma nazwanymi instancjami przeglądarki do równoległej automatyzacji.
 
 **Parameters:**
 
@@ -1472,9 +1488,11 @@ key: Enter
 key: Escape
 ```
 
-### 
+### Rotacja Proxy
 
 `browser.proxy_rotate`
+
+Rotacja między listą proxy z wykrywaniem nieaktywnych proxy.
 
 **Parameters:**
 
@@ -1509,9 +1527,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### 
+### Wyodrębnij Artykuł
 
 `browser.readability`
+
+Inteligentna ekstrakcja artykułów — wyodrębnia tytuł, autora, datę i główną treść z dowolnej strony
 
 **Parameters:**
 
@@ -1520,7 +1540,7 @@ action: rotate
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - |  |
+| `selector` | string | No | - | Selektor CSS dla obszaru treści. Pozostaw puste dla automatycznego wykrywania. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1644,9 +1664,11 @@ Zwolnij sesję przeglądarki (zamknij tylko, jeśli posiadasz)
 force: true
 ```
 
-### 
+### Przechwyć Odpowiedź
 
 `browser.response`
+
+Przechwytuj treści odpowiedzi API (XHR/fetch). Wyodrębnij JSON z wywołań API strony.
 
 **Parameters:**
 
@@ -1679,9 +1701,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### 
+### Sprawdź Robots.txt
 
 `browser.robots`
+
+Sprawdź zgodność z robots.txt i odkryj mapy witryn.
 
 **Parameters:**
 
@@ -1831,9 +1855,11 @@ select_method: index
 index: 2
 ```
 
-### 
+### Parsuj Mapę Witryny
 
 `browser.sitemap`
+
+Parsuj sitemap.xml i wyodrębnij adresy URL z metadanymi.
 
 **Parameters:**
 
@@ -2021,9 +2047,11 @@ action: close
 action: list
 ```
 
-### 
+### Wyodrębnij Tabelę
 
 `browser.table`
+
+Wyodrębnij tabele HTML jako dane strukturalne z automatycznie wykrytymi nagłówkami.
 
 **Parameters:**
 
@@ -2055,9 +2083,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### 
+### Ograniczenie
 
 `browser.throttle`
+
+Ograniczenie częstotliwości żądań na domenę. Czeka między żądaniami, aby uniknąć blokad.
 
 **Parameters:**
 

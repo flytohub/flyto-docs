@@ -6,15 +6,15 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [](#) |  |
+| [챌린지 처리](#챌린지-처리) | 안티봇 챌린지 (Cloudflare, CAPTCHA) 를 자동 감지하고 처리 |
 | [요소 클릭](#요소-클릭) | 페이지의 요소 클릭 |
 | [브라우저 닫기](#브라우저-닫기) | 브라우저 인스턴스 닫기 및 리소스 해제 |
-| [](#) |  |
+| [원격 연결](#원격-연결) | 원격 브라우저 서비스 (Browserless, BrowserBase) 에 연결. 실제 핑거프린트로 Cloudflare 우회. |
 | [콘솔 캡처](#콘솔-캡처) | 브라우저 콘솔 로그 캡처 (오류, 경고, 정보) |
 | [쿠키 관리](#쿠키-관리) | 브라우저 쿠키 가져오기, 설정 또는 지우기 |
-| [](#) |  |
+| [쿠키 파일](#쿠키-파일) | 브라우저 쿠키를 JSON 파일로 가져오기/내보내기. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [](#) |  |
+| [리스트 감지](#리스트-감지) | 페이지의 반복 항목 (기사, 상품, 검색 결과) 을 자동 감지 |
 | [대화상자 처리](#대화상자-처리) | 경고, 확인 및 프롬프트 대화상자 처리 |
 | [파일 다운로드](#파일-다운로드) | 브라우저에서 파일 다운로드 |
 | [드래그 앤 드롭](#드래그-앤-드롭) | 요소 드래그 앤 드롭 |
@@ -22,39 +22,39 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [브라우저 확인](#브라우저-확인) | 브라우저 세션이 존재하는지 확인 (재사용 또는 실행) |
 | [JavaScript 실행](#javascript-실행) | 페이지 컨텍스트에서 JavaScript 코드 실행 |
 | [데이터 추출](#데이터-추출) | 페이지에서 구조화된 데이터 추출 |
-| [](#) |  |
+| [중첩 추출](#중첩-추출) | 트리/중첩 구조 데이터 (댓글, 스레드, 폴더) 를 추출. |
 | [요소 찾기](#요소-찾기) | 페이지에서 요소 찾기 및 요소 ID 목록 반환 |
 | [양식 채우기](#양식-채우기) | 자동 필드 감지로 스마트하게 양식 채우기 |
 | [프레임 전환](#프레임-전환) | iframe 또는 frame 컨텍스트로 전환 |
 | [지오로케이션 모킹](#지오로케이션-모킹) | 브라우저 지오로케이션 모킹 |
 | [URL로 이동](#url로-이동) | 특정 URL로 이동 |
 | [요소 호버](#요소-호버) | 요소 위로 마우스 호버 |
-| [](#) |  |
+| [브라우저 조작](#브라우저-조작) | 사용자가 브라우저 페이지를 조작할 때까지 일시 정지 |
 | [브라우저 실행](#브라우저-실행) | Playwright로 새 브라우저 인스턴스 실행 |
-| [](#) |  |
+| [로그인](#로그인) | 로그인 폼을 자동 감지하여 입력하고, 로그인 후 검증을 수행. |
 | [기록 탐색](#기록-탐색) | 브라우저 기록 탐색 (뒤로, 앞으로, 새로고침) |
 | [네트워크 모니터](#네트워크-모니터) | 네트워크 요청 모니터링 및 가로채기 |
 | [페이지 목록](#페이지-목록) | 열려 있는 모든 브라우저 페이지/탭 목록 |
 | [페이지 넘기기 및 추출](#페이지-넘기기-및-추출) | 페이지를 자동으로 넘기면서 데이터 추출 |
 | [PDF 생성](#pdf-생성) | 현재 페이지에서 PDF 생성 |
 | [성능 지표](#성능-지표) | 브라우저 성능 지표 수집 |
-| [](#) |  |
+| [브라우저 풀](#브라우저-풀) | 병렬 자동화를 위한 여러 개의 명명된 브라우저 인스턴스를 관리. |
 | [키 누르기](#키-누르기) | 키보드 키 누르기 |
-| [](#) |  |
-| [](#) |  |
+| [프록시 순환](#프록시-순환) | 프록시 목록을 순환하며 비활성 프록시를 감지. |
+| [기사 추출](#기사-추출) | 스마트 기사 추출 — 웹페이지에서 제목, 저자, 날짜, 본문을 추출 |
 | [작업 기록](#작업-기록) | 사용자 작업을 워크플로로 기록 |
 | [브라우저 해제](#브라우저-해제) | 브라우저 세션 해제 (소유한 경우에만 닫기) |
-| [](#) |  |
-| [](#) |  |
+| [응답 캡처](#응답-캡처) | API 응답 본문 (XHR/fetch) 을 캡처. 페이지 API 호출에서 JSON 추출. |
+| [Robots.txt 확인](#robots.txt-확인) | robots.txt 준수 여부를 확인하고 사이트맵을 탐색. |
 | [스크린샷 촬영](#스크린샷-촬영) | 현재 페이지의 스크린샷 촬영 |
 | [페이지 스크롤](#페이지-스크롤) | 페이지를 요소, 위치 또는 방향으로 스크롤 |
 | [옵션 선택](#옵션-선택) | 드롭다운 요소에서 옵션 선택 |
-| [](#) |  |
+| [사이트맵 파싱](#사이트맵-파싱) | sitemap.xml을 파싱하여 메타데이터와 함께 URL을 추출. |
 | [DOM 스냅샷](#dom-스냅샷) | 현재 페이지의 DOM 스냅샷 캡처 |
 | [브라우저 저장소](#브라우저-저장소) | localStorage 및 sessionStorage 접근 |
 | [탭 관리](#탭-관리) | 브라우저 탭 생성, 전환 및 닫기 |
-| [](#) |  |
-| [](#) |  |
+| [테이블 추출](#테이블-추출) | HTML 테이블을 헤더 자동 감지로 구조화된 데이터로 추출. |
+| [스로틀](#스로틀) | 도메인별 요청 제한. 차단 방지를 위해 요청 간 대기. |
 | [브라우저 추적](#브라우저-추적) | 브라우저 성능 추적 시작, 중지 또는 저장 |
 | [텍스트 입력](#텍스트-입력) | 입력 필드에 텍스트 입력 |
 | [파일 업로드](#파일-업로드) | 파일 입력 요소에 파일 업로드 |
@@ -63,9 +63,11 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 ## Modules
 
-### 
+### 챌린지 처리
 
 `browser.challenge`
+
+안티봇 챌린지 (Cloudflare, CAPTCHA) 를 자동 감지하고 처리
 
 **Parameters:**
 
@@ -176,9 +178,11 @@ selector: #submit-button
 ```yaml
 ```
 
-### 
+### 원격 연결
 
 `browser.connect`
+
+원격 브라우저 서비스 (Browserless, BrowserBase) 에 연결. 실제 핑거프린트로 Cloudflare 우회.
 
 **Parameters:**
 
@@ -306,9 +310,11 @@ domain: example.com
 action: clear
 ```
 
-### 
+### 쿠키 파일
 
 `browser.cookies_file`
+
+브라우저 쿠키를 JSON 파일로 가져오기/내보내기.
 
 **Parameters:**
 
@@ -415,9 +421,11 @@ text: Login
 match_mode: best
 ```
 
-### 
+### 리스트 감지
 
 `browser.detect_list`
+
+페이지의 반복 항목 (기사, 상품, 검색 결과) 을 자동 감지
 
 **Parameters:**
 
@@ -749,9 +757,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### 
+### 중첩 추출
 
 `browser.extract_nested`
+
+트리/중첩 구조 데이터 (댓글, 스레드, 폴더) 를 추출.
 
 **Parameters:**
 
@@ -1007,9 +1017,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### 
+### 브라우저 조작
 
 `browser.interact`
+
+사용자가 브라우저 페이지를 조작할 때까지 일시 정지
 
 **Parameters:**
 
@@ -1023,11 +1035,11 @@ timeout_ms: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string |  |
-| `action` | string |  |
-| `selector` | string |  |
-| `value` | string |  |
-| `url` | string |  |
+| `status` | string | 작업 상태 |
+| `action` | string | 실행된 액션 (click/select/type/toggle) |
+| `selector` | string | 조작된 요소의 CSS 셀렉터 |
+| `value` | string | 사용된 값 (select/type 액션용) |
+| `url` | string | 조작 시점의 페이지 URL |
 
 **Example:** Example
 
@@ -1080,9 +1092,11 @@ headless: true
 headless: false
 ```
 
-### 
+### 로그인
 
 `browser.login`
+
+로그인 폼을 자동 감지하여 입력하고, 로그인 후 검증을 수행.
 
 **Parameters:**
 
@@ -1399,9 +1413,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### 
+### 브라우저 풀
 
 `browser.pool`
+
+병렬 자동화를 위한 여러 개의 명명된 브라우저 인스턴스를 관리.
 
 **Parameters:**
 
@@ -1472,9 +1488,11 @@ key: Enter
 key: Escape
 ```
 
-### 
+### 프록시 순환
 
 `browser.proxy_rotate`
+
+프록시 목록을 순환하며 비활성 프록시를 감지.
 
 **Parameters:**
 
@@ -1509,9 +1527,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### 
+### 기사 추출
 
 `browser.readability`
+
+스마트 기사 추출 — 웹페이지에서 제목, 저자, 날짜, 본문을 추출
 
 **Parameters:**
 
@@ -1520,7 +1540,7 @@ action: rotate
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - |  |
+| `selector` | string | No | - | 콘텐츠 영역의 CSS 셀렉터. 비워두면 자동 감지. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1644,9 +1664,11 @@ action: get
 force: true
 ```
 
-### 
+### 응답 캡처
 
 `browser.response`
+
+API 응답 본문 (XHR/fetch) 을 캡처. 페이지 API 호출에서 JSON 추출.
 
 **Parameters:**
 
@@ -1679,9 +1701,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### 
+### Robots.txt 확인
 
 `browser.robots`
+
+robots.txt 준수 여부를 확인하고 사이트맵을 탐색.
 
 **Parameters:**
 
@@ -1831,9 +1855,11 @@ select_method: index
 index: 2
 ```
 
-### 
+### 사이트맵 파싱
 
 `browser.sitemap`
+
+sitemap.xml을 파싱하여 메타데이터와 함께 URL을 추출.
 
 **Parameters:**
 
@@ -2021,9 +2047,11 @@ action: close
 action: list
 ```
 
-### 
+### 테이블 추출
 
 `browser.table`
+
+HTML 테이블을 헤더 자동 감지로 구조화된 데이터로 추출.
 
 **Parameters:**
 
@@ -2055,9 +2083,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### 
+### 스로틀
 
 `browser.throttle`
+
+도메인별 요청 제한. 차단 방지를 위해 요청 간 대기.
 
 **Parameters:**
 

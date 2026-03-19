@@ -6,15 +6,15 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [](#) |  |
+| [Tangani Tantangan](#tangani-tantangan) | Deteksi otomatis dan tangani tantangan anti-bot (Cloudflare, CAPTCHA) |
 | [Klik Elemen](#klik-elemen) | Klik elemen di halaman |
 | [Tutup Browser](#tutup-browser) | Tutup instance browser dan lepaskan sumber daya |
-| [](#) |  |
+| [Hubungkan Jarak Jauh](#hubungkan-jarak-jauh) | Hubungkan ke layanan browser jarak jauh (Browserless, BrowserBase). Fingerprint asli, lewati Cloudflare. |
 | [Tangkap Konsol](#tangkap-konsol) | Tangkap log konsol browser (error, warning, info) |
 | [Kelola Cookie](#kelola-cookie) | Dapatkan, atur, atau hapus cookie browser |
-| [](#) |  |
+| [File Cookie](#file-cookie) | Impor atau ekspor cookie browser ke/dari file JSON. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [](#) |  |
+| [Deteksi Daftar](#deteksi-daftar) | Deteksi otomatis item berulang pada halaman (artikel, produk, hasil pencarian) |
 | [Tangani Dialog](#tangani-dialog) | Tangani dialog alert, confirm, dan prompt |
 | [Unduh File](#unduh-file) | Unduh file dari browser |
 | [Seret dan Lepas](#seret-dan-lepas) | Seret dan lepas elemen |
@@ -22,39 +22,39 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Pastikan Browser](#pastikan-browser) | Pastikan sesi browser ada (gunakan kembali atau luncurkan) |
 | [Jalankan JavaScript](#jalankan-javascript) | Jalankan kode JavaScript di konteks halaman |
 | [Ekstrak Data](#ekstrak-data) | Ekstrak data terstruktur dari halaman |
-| [](#) |  |
+| [Ekstrak Bersarang](#ekstrak-bersarang) | Ekstrak data bersarang/hierarki (komentar, thread, folder). |
 | [Temukan Elemen](#temukan-elemen) | Temukan elemen di halaman dan kembalikan daftar ID elemen |
 | [Isi Formulir](#isi-formulir) | Pengisian formulir pintar dengan deteksi bidang otomatis |
 | [Ganti Frame](#ganti-frame) | Beralih ke konteks iframe atau frame |
 | [Mock Geolokasi](#mock-geolokasi) | Mock geolokasi browser |
 | [Pergi ke URL](#pergi-ke-url) | Navigasi ke URL tertentu |
 | [Hover Elemen](#hover-elemen) | Arahkan mouse ke atas elemen |
-| [](#) |  |
+| [Interaksi Browser](#interaksi-browser) | Jeda agar pengguna dapat berinteraksi dengan halaman browser |
 | [Luncurkan Browser](#luncurkan-browser) | Luncurkan instance browser baru dengan Playwright |
-| [](#) |  |
+| [Login](#login) | Deteksi otomatis dan isi form login dengan verifikasi pasca-login. |
 | [Navigasi Riwayat](#navigasi-riwayat) | Menavigasi riwayat browser (mundur, maju, muat ulang) |
 | [Monitor Jaringan](#monitor-jaringan) | Pantau dan cegat permintaan jaringan |
 | [Daftar Halaman](#daftar-halaman) | Daftar semua halaman/tab browser yang terbuka |
 | [Paginasi & Ekstrak](#paginasi--ekstrak) | Auto-paginasi melalui halaman dan ekstrak data |
 | [Hasilkan PDF](#hasilkan-pdf) | Hasilkan PDF dari halaman saat ini |
 | [Metrik Kinerja](#metrik-kinerja) | Kumpulkan metrik kinerja browser |
-| [](#) |  |
+| [Pool Browser](#pool-browser) | Kelola beberapa instance browser untuk otomasi paralel. |
 | [Tekan Tombol](#tekan-tombol) | Tekan tombol keyboard |
-| [](#) |  |
-| [](#) |  |
+| [Rotasi Proxy](#rotasi-proxy) | Rotasi daftar proxy dengan deteksi proxy mati. |
+| [Ekstrak Artikel](#ekstrak-artikel) | Ekstraksi artikel cerdas — ambil judul, penulis, tanggal, dan konten utama dari halaman web apa pun |
 | [Rekam Aksi](#rekam-aksi) | Rekam aksi pengguna sebagai workflow |
 | [Lepaskan Browser](#lepaskan-browser) | Lepaskan sesi browser (tutup hanya jika dimiliki) |
-| [](#) |  |
-| [](#) |  |
+| [Tangkap Respons](#tangkap-respons) | Tangkap isi respons API (XHR/fetch). Ekstrak JSON dari panggilan API pada halaman. |
+| [Periksa Robots.txt](#periksa-robots.txt) | Periksa kepatuhan robots.txt dan temukan sitemap. |
 | [Ambil Tangkapan Layar](#ambil-tangkapan-layar) | Ambil tangkapan layar halaman saat ini |
 | [Gulir Halaman](#gulir-halaman) | Gulir halaman ke elemen, posisi, atau arah |
 | [Pilih Opsi](#pilih-opsi) | Pilih opsi dari elemen dropdown |
-| [](#) |  |
+| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml dan ekstrak URL beserta metadata. |
 | [Snapshot DOM](#snapshot-dom) | Tangkap snapshot DOM dari halaman saat ini |
 | [Penyimpanan Browser](#penyimpanan-browser) | Akses localStorage dan sessionStorage |
 | [Kelola Tab](#kelola-tab) | Buat, ganti, dan tutup tab browser |
-| [](#) |  |
-| [](#) |  |
+| [Ekstrak Tabel](#ekstrak-tabel) | Ekstrak tabel HTML menjadi data terstruktur dengan header yang terdeteksi otomatis. |
+| [Pembatas Kecepatan](#pembatas-kecepatan) | Pembatasan kecepatan per domain. Menunggu antar permintaan untuk menghindari pemblokiran. |
 | [Jejak Browser](#jejak-browser) | Mulai, hentikan, atau simpan jejak kinerja browser |
 | [Ketik Teks](#ketik-teks) | Ketik teks ke dalam field input |
 | [Unggah File](#unggah-file) | Unggah file ke elemen input file |
@@ -63,9 +63,11 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 ## Modules
 
-### 
+### Tangani Tantangan
 
 `browser.challenge`
+
+Deteksi otomatis dan tangani tantangan anti-bot (Cloudflare, CAPTCHA)
 
 **Parameters:**
 
@@ -176,9 +178,11 @@ Tutup instance browser dan lepaskan sumber daya
 ```yaml
 ```
 
-### 
+### Hubungkan Jarak Jauh
 
 `browser.connect`
+
+Hubungkan ke layanan browser jarak jauh (Browserless, BrowserBase). Fingerprint asli, lewati Cloudflare.
 
 **Parameters:**
 
@@ -306,9 +310,11 @@ domain: example.com
 action: clear
 ```
 
-### 
+### File Cookie
 
 `browser.cookies_file`
+
+Impor atau ekspor cookie browser ke/dari file JSON.
 
 **Parameters:**
 
@@ -415,9 +421,11 @@ text: Login
 match_mode: best
 ```
 
-### 
+### Deteksi Daftar
 
 `browser.detect_list`
+
+Deteksi otomatis item berulang pada halaman (artikel, produk, hasil pencarian)
 
 **Parameters:**
 
@@ -749,9 +757,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### 
+### Ekstrak Bersarang
 
 `browser.extract_nested`
+
+Ekstrak data bersarang/hierarki (komentar, thread, folder).
 
 **Parameters:**
 
@@ -1007,9 +1017,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### 
+### Interaksi Browser
 
 `browser.interact`
+
+Jeda agar pengguna dapat berinteraksi dengan halaman browser
 
 **Parameters:**
 
@@ -1023,11 +1035,11 @@ timeout_ms: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string |  |
-| `action` | string |  |
-| `selector` | string |  |
-| `value` | string |  |
-| `url` | string |  |
+| `status` | string | Status operasi |
+| `action` | string | Aksi yang dijalankan (click/select/type/toggle) |
+| `selector` | string | CSS selector dari elemen yang diinteraksi |
+| `value` | string | Nilai yang digunakan (untuk aksi select/type) |
+| `url` | string | URL halaman saat interaksi |
 
 **Example:** Example
 
@@ -1080,9 +1092,11 @@ headless: true
 headless: false
 ```
 
-### 
+### Login
 
 `browser.login`
+
+Deteksi otomatis dan isi form login dengan verifikasi pasca-login.
 
 **Parameters:**
 
@@ -1399,9 +1413,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### 
+### Pool Browser
 
 `browser.pool`
+
+Kelola beberapa instance browser untuk otomasi paralel.
 
 **Parameters:**
 
@@ -1472,9 +1488,11 @@ key: Enter
 key: Escape
 ```
 
-### 
+### Rotasi Proxy
 
 `browser.proxy_rotate`
+
+Rotasi daftar proxy dengan deteksi proxy mati.
 
 **Parameters:**
 
@@ -1509,9 +1527,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### 
+### Ekstrak Artikel
 
 `browser.readability`
+
+Ekstraksi artikel cerdas — ambil judul, penulis, tanggal, dan konten utama dari halaman web apa pun
 
 **Parameters:**
 
@@ -1520,7 +1540,7 @@ action: rotate
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - |  |
+| `selector` | string | No | - | CSS selector untuk area konten. Kosongkan untuk deteksi otomatis. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1644,9 +1664,11 @@ Lepaskan sesi browser (tutup hanya jika dimiliki)
 force: true
 ```
 
-### 
+### Tangkap Respons
 
 `browser.response`
+
+Tangkap isi respons API (XHR/fetch). Ekstrak JSON dari panggilan API pada halaman.
 
 **Parameters:**
 
@@ -1679,9 +1701,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### 
+### Periksa Robots.txt
 
 `browser.robots`
+
+Periksa kepatuhan robots.txt dan temukan sitemap.
 
 **Parameters:**
 
@@ -1831,9 +1855,11 @@ select_method: index
 index: 2
 ```
 
-### 
+### Parse Sitemap
 
 `browser.sitemap`
+
+Parse sitemap.xml dan ekstrak URL beserta metadata.
 
 **Parameters:**
 
@@ -2021,9 +2047,11 @@ action: close
 action: list
 ```
 
-### 
+### Ekstrak Tabel
 
 `browser.table`
+
+Ekstrak tabel HTML menjadi data terstruktur dengan header yang terdeteksi otomatis.
 
 **Parameters:**
 
@@ -2055,9 +2083,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### 
+### Pembatas Kecepatan
 
 `browser.throttle`
+
+Pembatasan kecepatan per domain. Menunggu antar permintaan untuk menghindari pemblokiran.
 
 **Parameters:**
 

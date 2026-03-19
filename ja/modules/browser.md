@@ -6,15 +6,15 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [](#) |  |
+| [チャレンジ対応](#チャレンジ対応) | アンチボットチャレンジ (Cloudflare, CAPTCHA) を自動検出して対処 |
 | [クリック](#クリック) | ページ上の要素をクリック |
 | [ブラウザを閉じる](#ブラウザを閉じる) | ブラウザを閉じてリソースを解放 |
-| [](#) |  |
+| [リモート接続](#リモート接続) | リモートブラウザサービス (Browserless, BrowserBase) に接続。実フィンガープリントで Cloudflare をバイパス。 |
 | [コンソール取得](#コンソール取得) | ブラウザコンソールログを取得 |
 | [Cookie 管理](#cookie-管理) | Cookie の取得・設定・削除 |
-| [](#) |  |
+| [Cookie ファイル](#cookie-ファイル) | ブラウザの Cookie を JSON ファイルにインポート/エクスポート。 |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [](#) |  |
+| [リスト検出](#リスト検出) | ページ上の繰り返し項目 (記事、商品、検索結果) を自動検出 |
 | [ダイアログ処理](#ダイアログ処理) | alert・confirm・prompt ダイアログの処理 |
 | [ダウンロード](#ダウンロード) | ブラウザからファイルをダウンロード |
 | [ドラッグ＆ドロップ](#ドラッグ＆ドロップ) | 要素をドラッグ＆ドロップ |
@@ -22,39 +22,39 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [ブラウザ確認](#ブラウザ確認) | ブラウザセッションが存在することを確認（再利用または起動） |
 | [JavaScript 実行](#javascript-実行) | ページ上でJavaScriptコードを実行 |
 | [データ抽出](#データ抽出) | ページから構造化データを抽出 |
-| [](#) |  |
+| [ネスト抽出](#ネスト抽出) | ツリー/ネスト構造のデータ (コメント、スレッド、フォルダ) を抽出。 |
 | [要素検索](#要素検索) | ページ内の要素を検索し要素ID一覧を返す |
 | [フォーム入力](#フォーム入力) | 自動フィールド検出によるスマートフォーム入力 |
 | [フレーム切替](#フレーム切替) | iframe またはフレームに切り替え |
 | [位置情報シミュレート](#位置情報シミュレート) | ブラウザの位置情報をシミュレート |
 | [URLに移動](#urlに移動) | 指定URLに移動 |
 | [ホバー](#ホバー) | 要素にマウスオーバー |
-| [](#) |  |
+| [ブラウザ操作](#ブラウザ操作) | ユーザーがブラウザページを操作するまで一時停止 |
 | [ブラウザ起動](#ブラウザ起動) | Playwright で新しいブラウザを起動 |
-| [](#) |  |
+| [ログイン](#ログイン) | ログインフォームを自動検出して入力し、ログイン後の検証を行う。 |
 | [履歴ナビゲート](#履歴ナビゲート) | ブラウザ履歴をナビゲート（戻る、進む、リロード） |
 | [ネットワーク監視](#ネットワーク監視) | ネットワークリクエストの監視・傍受 |
 | [ページ一覧](#ページ一覧) | 開いているすべてのブラウザページ/タブを一覧表示 |
 | [ページネート＆抽出](#ページネート＆抽出) | ページを自動でページネートし、データを抽出 |
 | [PDF生成](#pdf生成) | 現在のページからPDFを生成 |
 | [パフォーマンス指標](#パフォーマンス指標) | ブラウザのパフォーマンス指標を収集 |
-| [](#) |  |
+| [ブラウザプール](#ブラウザプール) | 並列自動化のための複数の名前付きブラウザインスタンスを管理。 |
 | [キー入力](#キー入力) | キーボードキーを押す |
-| [](#) |  |
-| [](#) |  |
+| [プロキシローテーション](#プロキシローテーション) | プロキシリストをローテーションし、無効なプロキシを検出。 |
+| [記事抽出](#記事抽出) | スマート記事抽出 — 任意のウェブページからタイトル、著者、日付、本文を抽出 |
 | [操作記録](#操作記録) | ユーザー操作をワークフローとして記録 |
 | [ブラウザを解放](#ブラウザを解放) | ブラウザセッションを解放（所有している場合のみ閉じる） |
-| [](#) |  |
-| [](#) |  |
+| [レスポンスキャプチャ](#レスポンスキャプチャ) | API レスポンスボディ (XHR/fetch) をキャプチャ。ページの API コールから JSON を抽出。 |
+| [Robots.txt チェック](#robots.txt-チェック) | robots.txt の準拠を確認し、サイトマップを検出。 |
 | [スクリーンショット](#スクリーンショット) | 現在のページのスクリーンショットを撮影 |
 | [スクロール](#スクロール) | 要素・位置・方向にスクロール |
 | [選択](#選択) | ドロップダウンから選択 |
-| [](#) |  |
+| [サイトマップ解析](#サイトマップ解析) | sitemap.xml を解析し、メタデータ付きの URL を抽出。 |
 | [DOMスナップショット](#domスナップショット) | 現在のページのDOMスナップショットをキャプチャ |
 | [ストレージ](#ストレージ) | localStorage・sessionStorage にアクセス |
 | [タブ管理](#タブ管理) | タブの作成・切替・閉じる |
-| [](#) |  |
-| [](#) |  |
+| [テーブル抽出](#テーブル抽出) | HTML テーブルをヘッダー自動検出で構造化データとして抽出。 |
+| [スロットル](#スロットル) | ドメインごとのレート制限。アクセス制限を避けるためリクエスト間で待機。 |
 | [ブラウザトレース](#ブラウザトレース) | ブラウザのパフォーマンストレースを開始、停止、または保存 |
 | [テキスト入力](#テキスト入力) | 入力フィールドにテキストを入力 |
 | [ファイルアップロード](#ファイルアップロード) | ファイル入力要素にファイルをアップロード |
@@ -63,9 +63,11 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 ## Modules
 
-### 
+### チャレンジ対応
 
 `browser.challenge`
+
+アンチボットチャレンジ (Cloudflare, CAPTCHA) を自動検出して対処
 
 **Parameters:**
 
@@ -176,9 +178,11 @@ selector: #submit-button
 ```yaml
 ```
 
-### 
+### リモート接続
 
 `browser.connect`
+
+リモートブラウザサービス (Browserless, BrowserBase) に接続。実フィンガープリントで Cloudflare をバイパス。
 
 **Parameters:**
 
@@ -306,9 +310,11 @@ domain: example.com
 action: clear
 ```
 
-### 
+### Cookie ファイル
 
 `browser.cookies_file`
+
+ブラウザの Cookie を JSON ファイルにインポート/エクスポート。
 
 **Parameters:**
 
@@ -415,9 +421,11 @@ text: Login
 match_mode: best
 ```
 
-### 
+### リスト検出
 
 `browser.detect_list`
+
+ページ上の繰り返し項目 (記事、商品、検索結果) を自動検出
 
 **Parameters:**
 
@@ -749,9 +757,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### 
+### ネスト抽出
 
 `browser.extract_nested`
+
+ツリー/ネスト構造のデータ (コメント、スレッド、フォルダ) を抽出。
 
 **Parameters:**
 
@@ -1007,9 +1017,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### 
+### ブラウザ操作
 
 `browser.interact`
+
+ユーザーがブラウザページを操作するまで一時停止
 
 **Parameters:**
 
@@ -1023,11 +1035,11 @@ timeout_ms: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string |  |
-| `action` | string |  |
-| `selector` | string |  |
-| `value` | string |  |
-| `url` | string |  |
+| `status` | string | 操作ステータス |
+| `action` | string | 実行されたアクション (click/select/type/toggle) |
+| `selector` | string | 操作された要素の CSS セレクタ |
+| `value` | string | 使用された値 (select/type アクション用) |
+| `url` | string | 操作時のページ URL |
 
 **Example:** Example
 
@@ -1080,9 +1092,11 @@ headless: true
 headless: false
 ```
 
-### 
+### ログイン
 
 `browser.login`
+
+ログインフォームを自動検出して入力し、ログイン後の検証を行う。
 
 **Parameters:**
 
@@ -1399,9 +1413,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### 
+### ブラウザプール
 
 `browser.pool`
+
+並列自動化のための複数の名前付きブラウザインスタンスを管理。
 
 **Parameters:**
 
@@ -1472,9 +1488,11 @@ key: Enter
 key: Escape
 ```
 
-### 
+### プロキシローテーション
 
 `browser.proxy_rotate`
+
+プロキシリストをローテーションし、無効なプロキシを検出。
 
 **Parameters:**
 
@@ -1509,9 +1527,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### 
+### 記事抽出
 
 `browser.readability`
+
+スマート記事抽出 — 任意のウェブページからタイトル、著者、日付、本文を抽出
 
 **Parameters:**
 
@@ -1520,7 +1540,7 @@ action: rotate
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - |  |
+| `selector` | string | No | - | コンテンツ領域の CSS セレクタ。空にすると自動検出。 |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1644,9 +1664,11 @@ action: get
 force: true
 ```
 
-### 
+### レスポンスキャプチャ
 
 `browser.response`
+
+API レスポンスボディ (XHR/fetch) をキャプチャ。ページの API コールから JSON を抽出。
 
 **Parameters:**
 
@@ -1679,9 +1701,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### 
+### Robots.txt チェック
 
 `browser.robots`
+
+robots.txt の準拠を確認し、サイトマップを検出。
 
 **Parameters:**
 
@@ -1831,9 +1855,11 @@ select_method: index
 index: 2
 ```
 
-### 
+### サイトマップ解析
 
 `browser.sitemap`
+
+sitemap.xml を解析し、メタデータ付きの URL を抽出。
 
 **Parameters:**
 
@@ -2021,9 +2047,11 @@ action: close
 action: list
 ```
 
-### 
+### テーブル抽出
 
 `browser.table`
+
+HTML テーブルをヘッダー自動検出で構造化データとして抽出。
 
 **Parameters:**
 
@@ -2055,9 +2083,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### 
+### スロットル
 
 `browser.throttle`
+
+ドメインごとのレート制限。アクセス制限を避けるためリクエスト間で待機。
 
 **Parameters:**
 

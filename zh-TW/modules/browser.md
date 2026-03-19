@@ -29,7 +29,7 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [模擬地理位置](#模擬地理位置) | 模擬瀏覽器地理位置 |
 | [前往網址](#前往網址) | 開啟指定的網址 |
 | [懸停元素](#懸停元素) | 將滑鼠懸停在元素上 |
-| [](#) |  |
+| [瀏覽器互動](#瀏覽器互動) | 暫停讓使用者與瀏覽器頁面互動 |
 | [啟動瀏覽器](#啟動瀏覽器) | 使用 Playwright 啟動新的瀏覽器實例 |
 | [登入](#登入) | 自動偵測並填寫登入表單，支援登入後驗證 |
 | [導航歷史](#導航歷史) | 瀏覽器歷史記錄導航（返回、前進、重新載入） |
@@ -1017,9 +1017,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### 
+### 瀏覽器互動
 
 `browser.interact`
+
+暫停讓使用者與瀏覽器頁面互動
 
 **Parameters:**
 
@@ -1033,11 +1035,11 @@ timeout_ms: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string |  |
-| `action` | string |  |
-| `selector` | string |  |
-| `value` | string |  |
-| `url` | string |  |
+| `status` | string | 操作狀態 |
+| `action` | string | 執行的動作（點擊/選擇/輸入/切換） |
+| `selector` | string | 互動元素的 CSS 選擇器 |
+| `value` | string | 使用的值（用於選擇/輸入動作） |
+| `url` | string | 互動時的頁面 URL |
 
 **Example:** Example
 

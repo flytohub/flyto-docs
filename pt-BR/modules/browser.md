@@ -6,15 +6,15 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [](#) |  |
+| [Resolver Desafio](#resolver-desafio) | Detectar e resolver desafios anti-bot automaticamente (Cloudflare, CAPTCHA) |
 | [Clicar Elemento](#clicar-elemento) | Clicar em um elemento na pagina |
 | [Fechar Navegador](#fechar-navegador) | Fechar instancia do navegador e liberar recursos |
-| [](#) |  |
+| [Conectar Remoto](#conectar-remoto) | Conectar a um serviço de navegador remoto (Browserless, BrowserBase). Fingerprints reais, bypass do Cloudflare. |
 | [Capturar Console](#capturar-console) | Capturar logs do console do navegador (erros, avisos, info) |
 | [Gerenciar Cookies](#gerenciar-cookies) | Obter, definir ou limpar cookies do navegador |
-| [](#) |  |
+| [Arquivo de Cookies](#arquivo-de-cookies) | Importar ou exportar cookies do navegador de/para um arquivo JSON. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [](#) |  |
+| [Detectar Lista](#detectar-lista) | Detectar automaticamente itens repetidos em qualquer página (artigos, produtos, resultados de busca) |
 | [Lidar com Dialogo](#lidar-com-dialogo) | Lidar com dialogos de alerta, confirmacao e prompt |
 | [Baixar Arquivo](#baixar-arquivo) | Baixar arquivo do navegador |
 | [Arrastar e Soltar](#arrastar-e-soltar) | Arrastar e soltar elementos |
@@ -22,39 +22,39 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Garantir Navegador](#garantir-navegador) | Garantir que uma sessão de navegador exista (reutilizar ou iniciar) |
 | [Executar JavaScript](#executar-javascript) | Executar codigo JavaScript no contexto da pagina |
 | [Extrair Dados](#extrair-dados) | Extrair dados estruturados da pagina |
-| [](#) |  |
+| [Extrair Aninhado](#extrair-aninhado) | Extrair dados em árvore/aninhados (comentários, threads, pastas). |
 | [Encontrar Elementos](#encontrar-elementos) | Encontrar elementos na pagina e retornar lista de IDs de elementos |
 | [Preencher Formulário](#preencher-formulário) | Preenchimento inteligente de formulários com detecção automática de campos |
 | [Alternar Frame](#alternar-frame) | Alternar para contexto de iframe ou frame |
 | [Simular Geolocalizacao](#simular-geolocalizacao) | Simular geolocalizacao do navegador |
 | [Ir para URL](#ir-para-url) | Navegar para URL especifica |
 | [Passar Mouse sobre Elemento](#passar-mouse-sobre-elemento) | Passar mouse sobre um elemento |
-| [](#) |  |
+| [Interação com Navegador](#interação-com-navegador) | Pausar para o usuário interagir com a página do navegador |
 | [Iniciar Navegador](#iniciar-navegador) | Iniciar nova instancia de navegador com Playwright |
-| [](#) |  |
+| [Login](#login) | Detectar e preencher formulários de login automaticamente com verificação pós-login. |
 | [Navegar no Histórico](#navegar-no-histórico) | Navegar no histórico do navegador (voltar, avançar, recarregar) |
 | [Monitor de Rede](#monitor-de-rede) | Monitorar e interceptar requisicoes de rede |
 | [Listar Páginas](#listar-páginas) | Lista todas as páginas/abas abertas do navegador |
 | [Paginar & Extrair](#paginar--extrair) | Paginação automática através de páginas e extração de dados |
 | [Gerar PDF](#gerar-pdf) | Gerar PDF da pagina atual |
 | [Métricas de Desempenho](#métricas-de-desempenho) | Coletar métricas de desempenho do navegador |
-| [](#) |  |
+| [Pool de Navegadores](#pool-de-navegadores) | Gerenciar múltiplas instâncias nomeadas de navegador para automação paralela. |
 | [Pressionar Tecla](#pressionar-tecla) | Pressionar tecla do teclado |
-| [](#) |  |
-| [](#) |  |
+| [Rotacionar Proxy](#rotacionar-proxy) | Alternar entre uma lista de proxies com detecção de proxies inativos. |
+| [Extrair Artigo](#extrair-artigo) | Extração inteligente de artigos — extrai título, autor, data e conteúdo principal de qualquer página |
 | [Gravar Acoes](#gravar-acoes) | Gravar acoes do usuario como workflow |
 | [Liberar Navegador](#liberar-navegador) | Liberar sessão do navegador (fechar apenas se for proprietário) |
-| [](#) |  |
-| [](#) |  |
+| [Capturar Resposta](#capturar-resposta) | Capturar corpos de resposta de API (XHR/fetch). Extrair JSON de chamadas de API da página. |
+| [Verificar Robots.txt](#verificar-robots.txt) | Verificar conformidade com robots.txt e descobrir sitemaps. |
 | [Tirar Captura de Tela](#tirar-captura-de-tela) | Tirar captura de tela da pagina atual |
 | [Rolar Pagina](#rolar-pagina) | Rolar pagina para elemento, posicao ou direcao |
 | [Selecionar Opcao](#selecionar-opcao) | Selecionar opcao de elemento dropdown |
-| [](#) |  |
+| [Analisar Sitemap](#analisar-sitemap) | Analisar sitemap.xml e extrair URLs com metadados. |
 | [Instantâneo do DOM](#instantâneo-do-dom) | Capturar instantâneo do DOM da página atual |
 | [Armazenamento do Navegador](#armazenamento-do-navegador) | Acessar localStorage e sessionStorage |
 | [Gerenciar Abas](#gerenciar-abas) | Criar, alternar e fechar abas do navegador |
-| [](#) |  |
-| [](#) |  |
+| [Extrair Tabela](#extrair-tabela) | Extrair tabelas HTML como dados estruturados com cabeçalhos detectados automaticamente. |
+| [Limitação](#limitação) | Limite de taxa por domínio. Aguarda entre requisições para evitar bloqueios. |
 | [Rastreamento do Navegador](#rastreamento-do-navegador) | Iniciar, parar ou salvar rastreamentos de desempenho do navegador |
 | [Digitar Texto](#digitar-texto) | Digitar texto em campo de entrada |
 | [Fazer Upload de Arquivo](#fazer-upload-de-arquivo) | Fazer upload de arquivo para elemento de entrada de arquivo |
@@ -63,9 +63,11 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 ## Modules
 
-### 
+### Resolver Desafio
 
 `browser.challenge`
+
+Detectar e resolver desafios anti-bot automaticamente (Cloudflare, CAPTCHA)
 
 **Parameters:**
 
@@ -176,9 +178,11 @@ Fechar instancia do navegador e liberar recursos
 ```yaml
 ```
 
-### 
+### Conectar Remoto
 
 `browser.connect`
+
+Conectar a um serviço de navegador remoto (Browserless, BrowserBase). Fingerprints reais, bypass do Cloudflare.
 
 **Parameters:**
 
@@ -306,9 +310,11 @@ domain: example.com
 action: clear
 ```
 
-### 
+### Arquivo de Cookies
 
 `browser.cookies_file`
+
+Importar ou exportar cookies do navegador de/para um arquivo JSON.
 
 **Parameters:**
 
@@ -415,9 +421,11 @@ text: Login
 match_mode: best
 ```
 
-### 
+### Detectar Lista
 
 `browser.detect_list`
+
+Detectar automaticamente itens repetidos em qualquer página (artigos, produtos, resultados de busca)
 
 **Parameters:**
 
@@ -749,9 +757,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### 
+### Extrair Aninhado
 
 `browser.extract_nested`
+
+Extrair dados em árvore/aninhados (comentários, threads, pastas).
 
 **Parameters:**
 
@@ -1007,9 +1017,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### 
+### Interação com Navegador
 
 `browser.interact`
+
+Pausar para o usuário interagir com a página do navegador
 
 **Parameters:**
 
@@ -1023,11 +1035,11 @@ timeout_ms: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string |  |
-| `action` | string |  |
-| `selector` | string |  |
-| `value` | string |  |
-| `url` | string |  |
+| `status` | string | Status da operação |
+| `action` | string | Ação executada (clique/seleção/digitação/alternância) |
+| `selector` | string | Seletor CSS do elemento interagido |
+| `value` | string | Valor usado (para ações de seleção/digitação) |
+| `url` | string | URL da página no momento da interação |
 
 **Example:** Example
 
@@ -1080,9 +1092,11 @@ headless: true
 headless: false
 ```
 
-### 
+### Login
 
 `browser.login`
+
+Detectar e preencher formulários de login automaticamente com verificação pós-login.
 
 **Parameters:**
 
@@ -1399,9 +1413,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### 
+### Pool de Navegadores
 
 `browser.pool`
+
+Gerenciar múltiplas instâncias nomeadas de navegador para automação paralela.
 
 **Parameters:**
 
@@ -1472,9 +1488,11 @@ key: Enter
 key: Escape
 ```
 
-### 
+### Rotacionar Proxy
 
 `browser.proxy_rotate`
+
+Alternar entre uma lista de proxies com detecção de proxies inativos.
 
 **Parameters:**
 
@@ -1509,9 +1527,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### 
+### Extrair Artigo
 
 `browser.readability`
+
+Extração inteligente de artigos — extrai título, autor, data e conteúdo principal de qualquer página
 
 **Parameters:**
 
@@ -1520,7 +1540,7 @@ action: rotate
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - |  |
+| `selector` | string | No | - | Seletor CSS para área de conteúdo. Deixe vazio para detecção automática. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1644,9 +1664,11 @@ Liberar sessão do navegador (fechar apenas se for proprietário)
 force: true
 ```
 
-### 
+### Capturar Resposta
 
 `browser.response`
+
+Capturar corpos de resposta de API (XHR/fetch). Extrair JSON de chamadas de API da página.
 
 **Parameters:**
 
@@ -1679,9 +1701,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### 
+### Verificar Robots.txt
 
 `browser.robots`
+
+Verificar conformidade com robots.txt e descobrir sitemaps.
 
 **Parameters:**
 
@@ -1831,9 +1855,11 @@ select_method: index
 index: 2
 ```
 
-### 
+### Analisar Sitemap
 
 `browser.sitemap`
+
+Analisar sitemap.xml e extrair URLs com metadados.
 
 **Parameters:**
 
@@ -2021,9 +2047,11 @@ action: close
 action: list
 ```
 
-### 
+### Extrair Tabela
 
 `browser.table`
+
+Extrair tabelas HTML como dados estruturados com cabeçalhos detectados automaticamente.
 
 **Parameters:**
 
@@ -2055,9 +2083,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### 
+### Limitação
 
 `browser.throttle`
+
+Limite de taxa por domínio. Aguarda entre requisições para evitar bloqueios.
 
 **Parameters:**
 

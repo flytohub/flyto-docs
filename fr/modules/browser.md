@@ -6,15 +6,15 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [](#) |  |
+| [Résoudre le défi](#résoudre-le-défi) | Détecter et résoudre automatiquement les défis anti-bot (Cloudflare, CAPTCHA) |
 | [Cliquer sur l'element](#cliquer-sur-l'element) | Cliquer sur un element de la page |
 | [Fermer le navigateur](#fermer-le-navigateur) | Fermer l'instance du navigateur et liberer les ressources |
-| [](#) |  |
+| [Connexion distante](#connexion-distante) | Se connecter à un service de navigateur distant (Browserless, BrowserBase). Empreintes réelles, contourner Cloudflare. |
 | [Capturer la console](#capturer-la-console) | Capturer les journaux de la console du navigateur (erreurs, avertissements, infos) |
 | [Gerer les cookies](#gerer-les-cookies) | Obtenir, definir ou effacer les cookies du navigateur |
-| [](#) |  |
+| [Fichier de cookies](#fichier-de-cookies) | Importer ou exporter les cookies du navigateur depuis/vers un fichier JSON. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [](#) |  |
+| [Détecter la liste](#détecter-la-liste) | Détecter automatiquement les éléments répétés sur une page (articles, produits, résultats de recherche) |
 | [Gerer le dialogue](#gerer-le-dialogue) | Gerer les dialogues alert, confirm et prompt |
 | [Telecharger le fichier](#telecharger-le-fichier) | Telecharger un fichier depuis le navigateur |
 | [Glisser-deposer](#glisser-deposer) | Glisser-deposer des elements |
@@ -22,39 +22,39 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Assurer le navigateur](#assurer-le-navigateur) | Assurez-vous qu'une session de navigateur existe (réutiliser ou lancer) |
 | [Executer JavaScript](#executer-javascript) | Executer du code JavaScript dans le contexte de la page |
 | [Extraire les donnees](#extraire-les-donnees) | Extraire des donnees structurees de la page |
-| [](#) |  |
+| [Extraire imbriqué](#extraire-imbriqué) | Extraire des données imbriquées (commentaires, fils, dossiers). |
 | [Trouver des elements](#trouver-des-elements) | Trouver des elements dans la page et retourner la liste des ID |
 | [Remplir le formulaire](#remplir-le-formulaire) | Remplissage intelligent de formulaires avec détection automatique des champs |
 | [Changer de frame](#changer-de-frame) | Basculer vers le contexte iframe ou frame |
 | [Simuler la geolocalisation](#simuler-la-geolocalisation) | Simuler la geolocalisation du navigateur |
 | [Aller a l'URL](#aller-a-l'url) | Naviguer vers une URL specifique |
 | [Survoler l'element](#survoler-l'element) | Survoler un element avec la souris |
-| [](#) |  |
+| [Interaction navigateur](#interaction-navigateur) | Pause pour permettre à l'utilisateur d'interagir avec la page du navigateur |
 | [Lancer le navigateur](#lancer-le-navigateur) | Lancer une nouvelle instance de navigateur avec Playwright |
-| [](#) |  |
+| [Connexion](#connexion) | Détecter et remplir automatiquement les formulaires de connexion avec vérification post-connexion. |
 | [Naviguer dans l'historique](#naviguer-dans-l'historique) | Naviguer dans l'historique du navigateur (retour, avant, recharger) |
 | [Moniteur reseau](#moniteur-reseau) | Surveiller et intercepter les requetes reseau |
 | [Lister les Pages](#lister-les-pages) | Lister toutes les pages/onglets ouverts du navigateur |
 | [Paginer & Extraire](#paginer--extraire) | Pagination automatique à travers les pages et extraction de données |
 | [Generer un PDF](#generer-un-pdf) | Generer un PDF de la page actuelle |
 | [Métriques de Performance](#métriques-de-performance) | Collecter les métriques de performance du navigateur |
-| [](#) |  |
+| [Pool de navigateurs](#pool-de-navigateurs) | Gérer plusieurs instances de navigateur nommées pour l'automatisation en parallèle. |
 | [Appuyer sur une touche](#appuyer-sur-une-touche) | Appuyer sur une touche du clavier |
-| [](#) |  |
-| [](#) |  |
+| [Rotation de proxy](#rotation-de-proxy) | Alterner entre une liste de proxies avec détection des proxies inactifs. |
+| [Extraire l'article](#extraire-l'article) | Extraction intelligente d'articles — extrait titre, auteur, date et contenu principal de toute page web |
 | [Enregistrer les actions](#enregistrer-les-actions) | Enregistrer les actions utilisateur comme workflow |
 | [Libérer le navigateur](#libérer-le-navigateur) | Libérer la session du navigateur (fermer uniquement si possédé) |
-| [](#) |  |
-| [](#) |  |
+| [Capturer la réponse](#capturer-la-réponse) | Capturer les corps de réponses API (XHR/fetch). Extraire le JSON des appels API de la page. |
+| [Vérifier robots.txt](#vérifier-robots.txt) | Vérifier la conformité robots.txt et découvrir les sitemaps. |
 | [Prendre une capture d'ecran](#prendre-une-capture-d'ecran) | Prendre une capture d'ecran de la page actuelle |
 | [Faire defiler la page](#faire-defiler-la-page) | Faire defiler la page vers un element, une position ou une direction |
 | [Selectionner une option](#selectionner-une-option) | Selectionner une option dans un element deroulant |
-| [](#) |  |
+| [Analyser le sitemap](#analyser-le-sitemap) | Analyser sitemap.xml et extraire les URLs avec métadonnées. |
 | [Instantané DOM](#instantané-dom) | Capturer un instantané DOM de la page actuelle |
 | [Stockage du navigateur](#stockage-du-navigateur) | Acceder au localStorage et sessionStorage |
 | [Gerer les onglets](#gerer-les-onglets) | Creer, basculer et fermer des onglets du navigateur |
-| [](#) |  |
-| [](#) |  |
+| [Extraire le tableau](#extraire-le-tableau) | Extraire les tableaux HTML en données structurées avec en-têtes détectés automatiquement. |
+| [Limitation](#limitation) | Limitation de débit par domaine. Attend entre les requêtes pour éviter les blocages. |
 | [Trace du Navigateur](#trace-du-navigateur) | Démarrer, arrêter ou enregistrer les traces de performance du navigateur |
 | [Saisir du texte](#saisir-du-texte) | Saisir du texte dans un champ de saisie |
 | [Telecharger un fichier](#telecharger-un-fichier) | Telecharger un fichier vers un element d'entree de fichier |
@@ -63,9 +63,11 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 ## Modules
 
-### 
+### Résoudre le défi
 
 `browser.challenge`
+
+Détecter et résoudre automatiquement les défis anti-bot (Cloudflare, CAPTCHA)
 
 **Parameters:**
 
@@ -176,9 +178,11 @@ Fermer l'instance du navigateur et liberer les ressources
 ```yaml
 ```
 
-### 
+### Connexion distante
 
 `browser.connect`
+
+Se connecter à un service de navigateur distant (Browserless, BrowserBase). Empreintes réelles, contourner Cloudflare.
 
 **Parameters:**
 
@@ -306,9 +310,11 @@ domain: example.com
 action: clear
 ```
 
-### 
+### Fichier de cookies
 
 `browser.cookies_file`
+
+Importer ou exporter les cookies du navigateur depuis/vers un fichier JSON.
 
 **Parameters:**
 
@@ -415,9 +421,11 @@ text: Login
 match_mode: best
 ```
 
-### 
+### Détecter la liste
 
 `browser.detect_list`
+
+Détecter automatiquement les éléments répétés sur une page (articles, produits, résultats de recherche)
 
 **Parameters:**
 
@@ -749,9 +757,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### 
+### Extraire imbriqué
 
 `browser.extract_nested`
+
+Extraire des données imbriquées (commentaires, fils, dossiers).
 
 **Parameters:**
 
@@ -1007,9 +1017,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### 
+### Interaction navigateur
 
 `browser.interact`
+
+Pause pour permettre à l'utilisateur d'interagir avec la page du navigateur
 
 **Parameters:**
 
@@ -1023,11 +1035,11 @@ timeout_ms: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string |  |
-| `action` | string |  |
-| `selector` | string |  |
-| `value` | string |  |
-| `url` | string |  |
+| `status` | string | Statut de l'opération |
+| `action` | string | Action exécutée (clic/sélection/saisie/basculement) |
+| `selector` | string | Sélecteur CSS de l'élément interagi |
+| `value` | string | Valeur utilisée (pour les actions de sélection/saisie) |
+| `url` | string | URL de la page au moment de l'interaction |
 
 **Example:** Example
 
@@ -1080,9 +1092,11 @@ headless: true
 headless: false
 ```
 
-### 
+### Connexion
 
 `browser.login`
+
+Détecter et remplir automatiquement les formulaires de connexion avec vérification post-connexion.
 
 **Parameters:**
 
@@ -1399,9 +1413,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### 
+### Pool de navigateurs
 
 `browser.pool`
+
+Gérer plusieurs instances de navigateur nommées pour l'automatisation en parallèle.
 
 **Parameters:**
 
@@ -1472,9 +1488,11 @@ key: Enter
 key: Escape
 ```
 
-### 
+### Rotation de proxy
 
 `browser.proxy_rotate`
+
+Alterner entre une liste de proxies avec détection des proxies inactifs.
 
 **Parameters:**
 
@@ -1509,9 +1527,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### 
+### Extraire l'article
 
 `browser.readability`
+
+Extraction intelligente d'articles — extrait titre, auteur, date et contenu principal de toute page web
 
 **Parameters:**
 
@@ -1520,7 +1540,7 @@ action: rotate
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - |  |
+| `selector` | string | No | - | Sélecteur CSS pour la zone de contenu. Laisser vide pour la détection automatique. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1644,9 +1664,11 @@ Libérer la session du navigateur (fermer uniquement si possédé)
 force: true
 ```
 
-### 
+### Capturer la réponse
 
 `browser.response`
+
+Capturer les corps de réponses API (XHR/fetch). Extraire le JSON des appels API de la page.
 
 **Parameters:**
 
@@ -1679,9 +1701,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### 
+### Vérifier robots.txt
 
 `browser.robots`
+
+Vérifier la conformité robots.txt et découvrir les sitemaps.
 
 **Parameters:**
 
@@ -1831,9 +1855,11 @@ select_method: index
 index: 2
 ```
 
-### 
+### Analyser le sitemap
 
 `browser.sitemap`
+
+Analyser sitemap.xml et extraire les URLs avec métadonnées.
 
 **Parameters:**
 
@@ -2021,9 +2047,11 @@ action: close
 action: list
 ```
 
-### 
+### Extraire le tableau
 
 `browser.table`
+
+Extraire les tableaux HTML en données structurées avec en-têtes détectés automatiquement.
 
 **Parameters:**
 
@@ -2055,9 +2083,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### 
+### Limitation
 
 `browser.throttle`
+
+Limitation de débit par domaine. Attend entre les requêtes pour éviter les blocages.
 
 **Parameters:**
 

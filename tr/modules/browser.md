@@ -6,15 +6,15 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [](#) |  |
+| [Güvenlik Çöz](#güvenlik-çöz) | Anti-bot güvenlik önlemlerini otomatik algıla ve çöz (Cloudflare, CAPTCHA) |
 | [Öğeye Tıkla](#öğeye-tıkla) | Sayfadaki bir öğeye tıkla |
 | [Tarayıcıyı Kapat](#tarayıcıyı-kapat) | Tarayıcı örneğini kapat ve kaynakları serbest bırak |
-| [](#) |  |
+| [Uzak Bağlantı](#uzak-bağlantı) | Uzak tarayıcı hizmetine bağlan (Browserless, BrowserBase). Gerçek parmak izleri, Cloudflare bypass. |
 | [Konsolu Yakala](#konsolu-yakala) | Tarayıcı konsol günlüklerini yakala (hatalar, uyarılar, bilgi) |
 | [Çerezleri Yönet](#çerezleri-yönet) | Tarayıcı çerezlerini al, ayarla veya temizle |
-| [](#) |  |
+| [Çerez Dosyası](#çerez-dosyası) | Tarayıcı çerezlerini JSON dosyasına/dosyasından içe/dışa aktarın. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [](#) |  |
+| [Liste Algıla](#liste-algıla) | Herhangi bir sayfadaki tekrarlanan öğeleri otomatik algıla (makaleler, ürünler, arama sonuçları) |
 | [Diyaloğu İşle](#diyaloğu-i̇şle) | Uyarı, onay ve istem diyaloglarını işle |
 | [Dosya İndir](#dosya-i̇ndir) | Tarayıcıdan dosya indir |
 | [Sürükle ve Bırak](#sürükle-ve-bırak) | Öğeleri sürükle ve bırak |
@@ -22,39 +22,39 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Tarayıcıyı Sağla](#tarayıcıyı-sağla) | Bir tarayıcı oturumu olduğundan emin olun (yeniden kullan veya başlat) |
 | [JavaScript Çalıştır](#javascript-çalıştır) | Sayfa bağlamında JavaScript kodu çalıştır |
 | [Veri Çıkar](#veri-çıkar) | Sayfadan yapılandırılmış veri çıkar |
-| [](#) |  |
+| [İç İçe Çıkar](#i̇ç-i̇çe-çıkar) | Ağaç/iç içe verileri çıkar (yorumlar, konular, klasörler). |
 | [Öğeleri Bul](#öğeleri-bul) | Sayfada öğeleri bul ve öğe kimliği listesi döndür |
 | [Formu Doldur](#formu-doldur) | Otomatik alan algılama ile akıllı form doldurma |
 | [Çerçeve Değiştir](#çerçeve-değiştir) | iframe veya çerçeve bağlamına geç |
 | [Konum Taklit Et](#konum-taklit-et) | Tarayıcı coğrafi konumunu taklit et |
 | [URL'ye Git](#url'ye-git) | Belirli bir URL'ye git |
 | [Öğe Üzerinde Bekle](#öğe-üzerinde-bekle) | Fareyi bir öğenin üzerine getir |
-| [](#) |  |
+| [Tarayıcı Etkileşimi](#tarayıcı-etkileşimi) | Kullanıcının tarayıcı sayfasıyla etkileşime girmesi için duraklat |
 | [Tarayıcı Başlat](#tarayıcı-başlat) | Playwright ile yeni tarayıcı örneği başlat |
-| [](#) |  |
+| [Giriş](#giriş) | Giriş formlarını otomatik algıla ve doldur, giriş sonrası doğrulamayla. |
 | [Geçmişte Gez](#geçmişte-gez) | Tarayıcı geçmişinde gezin (geri, ileri, yeniden yükle) |
 | [Ağ İzleyici](#ağ-i̇zleyici) | Ağ isteklerini izle ve engelle |
 | [Sayfaları Listele](#sayfaları-listele) | Açık tarayıcı sayfalarını/sekmesini listele |
 | [Sayfalandır & Çıkar](#sayfalandır--çıkar) | Sayfaları otomatik olarak gez ve verileri çıkar |
 | [PDF Oluştur](#pdf-oluştur) | Mevcut sayfadan PDF oluştur |
 | [Performans Metrikleri](#performans-metrikleri) | Tarayıcı performans metriklerini topla |
-| [](#) |  |
+| [Tarayıcı Havuzu](#tarayıcı-havuzu) | Paralel otomasyon için birden fazla adlandırılmış tarayıcı örneğini yönetin. |
 | [Tuşa Bas](#tuşa-bas) | Klavye tuşuna bas |
-| [](#) |  |
-| [](#) |  |
+| [Proxy Döndür](#proxy-döndür) | Etkin olmayan proxy algılamasıyla proxy listesi arasında geçiş yapın. |
+| [Makale Çıkar](#makale-çıkar) | Akıllı makale çıkarma — herhangi bir sayfadan başlık, yazar, tarih ve ana içeriği çıkarır |
 | [Eylemleri Kaydet](#eylemleri-kaydet) | Kullanıcı eylemlerini iş akışı olarak kaydet |
 | [Tarayıcıyı Serbest Bırak](#tarayıcıyı-serbest-bırak) | Tarayıcı oturumunu serbest bırak (sadece sahip olunursa kapat) |
-| [](#) |  |
-| [](#) |  |
+| [Yanıt Yakala](#yanıt-yakala) | API yanıt gövdelerini yakala (XHR/fetch). Sayfa API çağrılarından JSON çıkar. |
+| [Robots.txt Kontrol](#robots.txt-kontrol) | robots.txt uyumluluğunu kontrol et ve site haritalarını keşfet. |
 | [Ekran Görüntüsü Al](#ekran-görüntüsü-al) | Mevcut sayfanın ekran görüntüsünü al |
 | [Sayfayı Kaydır](#sayfayı-kaydır) | Sayfayı öğeye, konuma veya yöne kaydır |
 | [Seçenek Seç](#seçenek-seç) | Açılır öğeden seçenek seç |
-| [](#) |  |
+| [Site Haritası Ayrıştır](#site-haritası-ayrıştır) | sitemap.xml dosyasını ayrıştır ve meta verilerle URL'leri çıkar. |
 | [DOM Anlık Görüntüsü](#dom-anlık-görüntüsü) | Geçerli sayfanın DOM anlık görüntüsünü al |
 | [Tarayıcı Depolama](#tarayıcı-depolama) | localStorage ve sessionStorage'a eriş |
 | [Sekmeleri Yönet](#sekmeleri-yönet) | Tarayıcı sekmelerini oluştur, değiştir ve kapat |
-| [](#) |  |
-| [](#) |  |
+| [Tablo Çıkar](#tablo-çıkar) | HTML tablolarını otomatik algılanan başlıklarla yapılandırılmış veri olarak çıkar. |
+| [Hız Sınırlama](#hız-sınırlama) | Alan adına göre hız sınırlama. Engellenmeyi önlemek için istekler arasında bekler. |
 | [Tarayıcı İzi](#tarayıcı-i̇zi) | Tarayıcı performans izlerini başlat, durdur veya kaydet |
 | [Metin Yaz](#metin-yaz) | Giriş alanına metin yaz |
 | [Dosya Yükle](#dosya-yükle) | Dosya giriş öğesine dosya yükle |
@@ -63,9 +63,11 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 ## Modules
 
-### 
+### Güvenlik Çöz
 
 `browser.challenge`
+
+Anti-bot güvenlik önlemlerini otomatik algıla ve çöz (Cloudflare, CAPTCHA)
 
 **Parameters:**
 
@@ -176,9 +178,11 @@ Tarayıcı örneğini kapat ve kaynakları serbest bırak
 ```yaml
 ```
 
-### 
+### Uzak Bağlantı
 
 `browser.connect`
+
+Uzak tarayıcı hizmetine bağlan (Browserless, BrowserBase). Gerçek parmak izleri, Cloudflare bypass.
 
 **Parameters:**
 
@@ -306,9 +310,11 @@ domain: example.com
 action: clear
 ```
 
-### 
+### Çerez Dosyası
 
 `browser.cookies_file`
+
+Tarayıcı çerezlerini JSON dosyasına/dosyasından içe/dışa aktarın.
 
 **Parameters:**
 
@@ -415,9 +421,11 @@ text: Login
 match_mode: best
 ```
 
-### 
+### Liste Algıla
 
 `browser.detect_list`
+
+Herhangi bir sayfadaki tekrarlanan öğeleri otomatik algıla (makaleler, ürünler, arama sonuçları)
 
 **Parameters:**
 
@@ -749,9 +757,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### 
+### İç İçe Çıkar
 
 `browser.extract_nested`
+
+Ağaç/iç içe verileri çıkar (yorumlar, konular, klasörler).
 
 **Parameters:**
 
@@ -1007,9 +1017,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### 
+### Tarayıcı Etkileşimi
 
 `browser.interact`
+
+Kullanıcının tarayıcı sayfasıyla etkileşime girmesi için duraklat
 
 **Parameters:**
 
@@ -1023,11 +1035,11 @@ timeout_ms: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string |  |
-| `action` | string |  |
-| `selector` | string |  |
-| `value` | string |  |
-| `url` | string |  |
+| `status` | string | İşlem durumu |
+| `action` | string | Gerçekleştirilen eylem (tıklama/seçme/yazma/değiştirme) |
+| `selector` | string | Etkileşim yapılan öğenin CSS seçicisi |
+| `value` | string | Kullanılan değer (seçme/yazma eylemleri için) |
+| `url` | string | Etkileşim anındaki sayfa URL'si |
 
 **Example:** Example
 
@@ -1080,9 +1092,11 @@ headless: true
 headless: false
 ```
 
-### 
+### Giriş
 
 `browser.login`
+
+Giriş formlarını otomatik algıla ve doldur, giriş sonrası doğrulamayla.
 
 **Parameters:**
 
@@ -1399,9 +1413,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### 
+### Tarayıcı Havuzu
 
 `browser.pool`
+
+Paralel otomasyon için birden fazla adlandırılmış tarayıcı örneğini yönetin.
 
 **Parameters:**
 
@@ -1472,9 +1488,11 @@ key: Enter
 key: Escape
 ```
 
-### 
+### Proxy Döndür
 
 `browser.proxy_rotate`
+
+Etkin olmayan proxy algılamasıyla proxy listesi arasında geçiş yapın.
 
 **Parameters:**
 
@@ -1509,9 +1527,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### 
+### Makale Çıkar
 
 `browser.readability`
+
+Akıllı makale çıkarma — herhangi bir sayfadan başlık, yazar, tarih ve ana içeriği çıkarır
 
 **Parameters:**
 
@@ -1520,7 +1540,7 @@ action: rotate
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - |  |
+| `selector` | string | No | - | İçerik alanı için CSS seçici. Otomatik algılama için boş bırakın. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1644,9 +1664,11 @@ Tarayıcı oturumunu serbest bırak (sadece sahip olunursa kapat)
 force: true
 ```
 
-### 
+### Yanıt Yakala
 
 `browser.response`
+
+API yanıt gövdelerini yakala (XHR/fetch). Sayfa API çağrılarından JSON çıkar.
 
 **Parameters:**
 
@@ -1679,9 +1701,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### 
+### Robots.txt Kontrol
 
 `browser.robots`
+
+robots.txt uyumluluğunu kontrol et ve site haritalarını keşfet.
 
 **Parameters:**
 
@@ -1831,9 +1855,11 @@ select_method: index
 index: 2
 ```
 
-### 
+### Site Haritası Ayrıştır
 
 `browser.sitemap`
+
+sitemap.xml dosyasını ayrıştır ve meta verilerle URL'leri çıkar.
 
 **Parameters:**
 
@@ -2021,9 +2047,11 @@ action: close
 action: list
 ```
 
-### 
+### Tablo Çıkar
 
 `browser.table`
+
+HTML tablolarını otomatik algılanan başlıklarla yapılandırılmış veri olarak çıkar.
 
 **Parameters:**
 
@@ -2055,9 +2083,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### 
+### Hız Sınırlama
 
 `browser.throttle`
+
+Alan adına göre hız sınırlama. Engellenmeyi önlemek için istekler arasında bekler.
 
 **Parameters:**
 

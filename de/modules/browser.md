@@ -6,15 +6,15 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [](#) |  |
+| [Challenge bewältigen](#challenge-bewältigen) | Anti-Bot-Challenges automatisch erkennen und bewältigen (Cloudflare, CAPTCHA) |
 | [Element klicken](#element-klicken) | Element auf der Seite anklicken |
 | [Browser schließen](#browser-schließen) | Browser-Instanz schließen und Ressourcen freigeben |
-| [](#) |  |
+| [Remote verbinden](#remote-verbinden) | Mit einem Remote-Browser-Dienst verbinden (Browserless, BrowserBase). Echte Fingerprints, Cloudflare umgehen. |
 | [Konsole erfassen](#konsole-erfassen) | Browser-Konsolenprotokolle erfassen (Fehler, Warnungen, Info) |
 | [Cookies verwalten](#cookies-verwalten) | Browser-Cookies abrufen, setzen oder löschen |
-| [](#) |  |
+| [Cookie-Datei](#cookie-datei) | Browser-Cookies aus/in eine JSON-Datei importieren oder exportieren. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [](#) |  |
+| [Liste erkennen](#liste-erkennen) | Wiederkehrende Elemente auf einer Seite automatisch erkennen (Artikel, Produkte, Suchergebnisse) |
 | [Dialog behandeln](#dialog-behandeln) | Alert-, Confirm- und Prompt-Dialoge behandeln |
 | [Datei herunterladen](#datei-herunterladen) | Datei vom Browser herunterladen |
 | [Drag & Drop](#drag--drop) | Elemente ziehen und ablegen |
@@ -22,39 +22,39 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Browser sicherstellen](#browser-sicherstellen) | Stellt sicher, dass eine Browsersitzung existiert (wiederverwenden oder starten) |
 | [JavaScript ausführen](#javascript-ausführen) | JavaScript-Code im Seitenkontext ausführen |
 | [Daten extrahieren](#daten-extrahieren) | Strukturierte Daten von der Seite extrahieren |
-| [](#) |  |
+| [Verschachtelt extrahieren](#verschachtelt-extrahieren) | Verschachtelte Daten extrahieren (Kommentare, Threads, Ordner). |
 | [Elemente finden](#elemente-finden) | Elemente auf der Seite finden und Element-ID-Liste zurückgeben |
 | [Formular ausfüllen](#formular-ausfüllen) | Intelligentes Ausfüllen von Formularen mit automatischer Felderkennung |
 | [Frame wechseln](#frame-wechseln) | Zu iframe- oder Frame-Kontext wechseln |
 | [Geolocation simulieren](#geolocation-simulieren) | Browser-Geolocation simulieren |
 | [Zu URL gehen](#zu-url-gehen) | Zu einer bestimmten URL navigieren |
 | [Element überfahren](#element-überfahren) | Maus über ein Element bewegen |
-| [](#) |  |
+| [Browser-Interaktion](#browser-interaktion) | Pausiert, damit der Benutzer mit der Browserseite interagieren kann |
 | [Browser starten](#browser-starten) | Neue Browser-Instanz mit Playwright starten |
-| [](#) |  |
+| [Login](#login) | Login-Formulare automatisch erkennen und ausfüllen mit Verifizierung nach dem Login. |
 | [Verlauf navigieren](#verlauf-navigieren) | Browser-Verlauf navigieren (zurück, vorwärts, neu laden) |
 | [Netzwerk-Monitor](#netzwerk-monitor) | Netzwerkanfragen überwachen und abfangen |
 | [Seiten auflisten](#seiten-auflisten) | Liste aller offenen Browser-Seiten/Tabs |
 | [Paginieren & Extrahieren](#paginieren--extrahieren) | Automatisches Blättern durch Seiten und Extrahieren von Daten |
 | [PDF generieren](#pdf-generieren) | PDF von aktueller Seite generieren |
 | [Leistungsmetriken](#leistungsmetriken) | Erfassen von Browser-Leistungsmetriken |
-| [](#) |  |
+| [Browser-Pool](#browser-pool) | Mehrere benannte Browser-Instanzen für parallele Automatisierung verwalten. |
 | [Taste drücken](#taste-drücken) | Tastaturtaste drücken |
-| [](#) |  |
-| [](#) |  |
+| [Proxy rotieren](#proxy-rotieren) | Durch eine Liste von Proxys rotieren mit Erkennung ausgefallener Proxys. |
+| [Artikel extrahieren](#artikel-extrahieren) | Smarte Artikelextraktion — extrahiert Titel, Autor, Datum und Hauptinhalt von jeder Webseite |
 | [Aktionen aufzeichnen](#aktionen-aufzeichnen) | Benutzeraktionen als Workflow aufzeichnen |
 | [Browser freigeben](#browser-freigeben) | Browser-Sitzung freigeben (nur schließen, wenn im Besitz) |
-| [](#) |  |
-| [](#) |  |
+| [Antwort abfangen](#antwort-abfangen) | API-Antworten abfangen (XHR/fetch). JSON aus Seiten-API-Aufrufen extrahieren. |
+| [Robots.txt prüfen](#robots.txt-prüfen) | robots.txt-Konformität prüfen und Sitemaps entdecken. |
 | [Screenshot erstellen](#screenshot-erstellen) | Screenshot der aktuellen Seite erstellen |
 | [Seite scrollen](#seite-scrollen) | Seite zu Element, Position oder Richtung scrollen |
 | [Option auswählen](#option-auswählen) | Option aus Dropdown-Element auswählen |
-| [](#) |  |
+| [Sitemap parsen](#sitemap-parsen) | Sitemap.xml parsen und URLs mit Metadaten extrahieren. |
 | [DOM-Snapshot](#dom-snapshot) | DOM-Snapshot der aktuellen Seite erfassen |
 | [Browser-Speicher](#browser-speicher) | Auf localStorage und sessionStorage zugreifen |
 | [Tabs verwalten](#tabs-verwalten) | Browser-Tabs erstellen, wechseln und schließen |
-| [](#) |  |
-| [](#) |  |
+| [Tabelle extrahieren](#tabelle-extrahieren) | HTML-Tabellen als strukturierte Daten mit automatisch erkannten Spaltenköpfen extrahieren. |
+| [Drosselung](#drosselung) | Domain-basierte Ratenbegrenzung. Wartet zwischen Anfragen, um Sperren zu vermeiden. |
 | [Browser-Trace](#browser-trace) | Browser-Leistungstraces starten, stoppen oder speichern |
 | [Text eingeben](#text-eingeben) | Text in Eingabefeld eingeben |
 | [Datei hochladen](#datei-hochladen) | Datei zum Datei-Eingabeelement hochladen |
@@ -63,9 +63,11 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 ## Modules
 
-### 
+### Challenge bewältigen
 
 `browser.challenge`
+
+Anti-Bot-Challenges automatisch erkennen und bewältigen (Cloudflare, CAPTCHA)
 
 **Parameters:**
 
@@ -176,9 +178,11 @@ Browser-Instanz schließen und Ressourcen freigeben
 ```yaml
 ```
 
-### 
+### Remote verbinden
 
 `browser.connect`
+
+Mit einem Remote-Browser-Dienst verbinden (Browserless, BrowserBase). Echte Fingerprints, Cloudflare umgehen.
 
 **Parameters:**
 
@@ -306,9 +310,11 @@ domain: example.com
 action: clear
 ```
 
-### 
+### Cookie-Datei
 
 `browser.cookies_file`
+
+Browser-Cookies aus/in eine JSON-Datei importieren oder exportieren.
 
 **Parameters:**
 
@@ -415,9 +421,11 @@ text: Login
 match_mode: best
 ```
 
-### 
+### Liste erkennen
 
 `browser.detect_list`
+
+Wiederkehrende Elemente auf einer Seite automatisch erkennen (Artikel, Produkte, Suchergebnisse)
 
 **Parameters:**
 
@@ -749,9 +757,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### 
+### Verschachtelt extrahieren
 
 `browser.extract_nested`
+
+Verschachtelte Daten extrahieren (Kommentare, Threads, Ordner).
 
 **Parameters:**
 
@@ -1007,9 +1017,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### 
+### Browser-Interaktion
 
 `browser.interact`
+
+Pausiert, damit der Benutzer mit der Browserseite interagieren kann
 
 **Parameters:**
 
@@ -1023,11 +1035,11 @@ timeout_ms: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string |  |
-| `action` | string |  |
-| `selector` | string |  |
-| `value` | string |  |
-| `url` | string |  |
+| `status` | string | Operationsstatus |
+| `action` | string | Ausgeführte Aktion (Klick/Auswahl/Eingabe/Umschalten) |
+| `selector` | string | CSS-Selektor des interagierten Elements |
+| `value` | string | Verwendeter Wert (für Auswahl-/Eingabeaktionen) |
+| `url` | string | Seiten-URL zum Zeitpunkt der Interaktion |
 
 **Example:** Example
 
@@ -1080,9 +1092,11 @@ headless: true
 headless: false
 ```
 
-### 
+### Login
 
 `browser.login`
+
+Login-Formulare automatisch erkennen und ausfüllen mit Verifizierung nach dem Login.
 
 **Parameters:**
 
@@ -1399,9 +1413,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### 
+### Browser-Pool
 
 `browser.pool`
+
+Mehrere benannte Browser-Instanzen für parallele Automatisierung verwalten.
 
 **Parameters:**
 
@@ -1472,9 +1488,11 @@ key: Enter
 key: Escape
 ```
 
-### 
+### Proxy rotieren
 
 `browser.proxy_rotate`
+
+Durch eine Liste von Proxys rotieren mit Erkennung ausgefallener Proxys.
 
 **Parameters:**
 
@@ -1509,9 +1527,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### 
+### Artikel extrahieren
 
 `browser.readability`
+
+Smarte Artikelextraktion — extrahiert Titel, Autor, Datum und Hauptinhalt von jeder Webseite
 
 **Parameters:**
 
@@ -1520,7 +1540,7 @@ action: rotate
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - |  |
+| `selector` | string | No | - | CSS-Selektor für den Inhaltsbereich. Leer lassen für automatische Erkennung. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1644,9 +1664,11 @@ Browser-Sitzung freigeben (nur schließen, wenn im Besitz)
 force: true
 ```
 
-### 
+### Antwort abfangen
 
 `browser.response`
+
+API-Antworten abfangen (XHR/fetch). JSON aus Seiten-API-Aufrufen extrahieren.
 
 **Parameters:**
 
@@ -1679,9 +1701,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### 
+### Robots.txt prüfen
 
 `browser.robots`
+
+robots.txt-Konformität prüfen und Sitemaps entdecken.
 
 **Parameters:**
 
@@ -1831,9 +1855,11 @@ select_method: index
 index: 2
 ```
 
-### 
+### Sitemap parsen
 
 `browser.sitemap`
+
+Sitemap.xml parsen und URLs mit Metadaten extrahieren.
 
 **Parameters:**
 
@@ -2021,9 +2047,11 @@ action: close
 action: list
 ```
 
-### 
+### Tabelle extrahieren
 
 `browser.table`
+
+HTML-Tabellen als strukturierte Daten mit automatisch erkannten Spaltenköpfen extrahieren.
 
 **Parameters:**
 
@@ -2055,9 +2083,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### 
+### Drosselung
 
 `browser.throttle`
+
+Domain-basierte Ratenbegrenzung. Wartet zwischen Anfragen, um Sperren zu vermeiden.
 
 **Parameters:**
 

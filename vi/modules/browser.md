@@ -6,15 +6,15 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [](#) |  |
+| [Xử Lý Thử Thách](#xử-lý-thử-thách) | Tự động phát hiện và xử lý thử thách chống bot (Cloudflare, CAPTCHA) |
 | [Nhấp phần tử](#nhấp-phần-tử) | Nhấp vào một phần tử trên trang |
 | [Đóng trình duyệt](#đóng-trình-duyệt) | Đóng phiên trình duyệt và giải phóng tài nguyên |
-| [](#) |  |
+| [Kết Nối Từ Xa](#kết-nối-từ-xa) | Kết nối dịch vụ trình duyệt từ xa (Browserless, BrowserBase). Fingerprint thật, vượt Cloudflare. |
 | [Chụp Console](#chụp-console) | Chụp nhật ký console trình duyệt (lỗi, cảnh báo, thông tin) |
 | [Quản lý Cookies](#quản-lý-cookies) | Lấy, đặt hoặc xóa cookie trình duyệt |
-| [](#) |  |
+| [Tệp Cookie](#tệp-cookie) | Nhập hoặc xuất cookie trình duyệt từ/đến tệp JSON. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [](#) |  |
+| [Phát Hiện Danh Sách](#phát-hiện-danh-sách) | Tự động phát hiện mục lặp lại trên trang (bài viết, sản phẩm, kết quả tìm kiếm) |
 | [Xử lý hộp thoại](#xử-lý-hộp-thoại) | Xử lý hộp thoại alert, confirm và prompt |
 | [Tải tệp](#tải-tệp) | Tải tệp từ trình duyệt |
 | [Kéo và thả](#kéo-và-thả) | Kéo và thả các phần tử |
@@ -22,39 +22,39 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Đảm bảo Trình duyệt](#đảm-bảo-trình-duyệt) | Đảm bảo phiên trình duyệt tồn tại (tái sử dụng hoặc khởi chạy) |
 | [Thực thi JavaScript](#thực-thi-javascript) | Thực thi mã JavaScript trong ngữ cảnh trang |
 | [Trích xuất dữ liệu](#trích-xuất-dữ-liệu) | Trích xuất dữ liệu có cấu trúc từ trang |
-| [](#) |  |
+| [Trích Xuất Lồng Nhau](#trích-xuất-lồng-nhau) | Trích xuất dữ liệu lồng nhau/dạng cây (bình luận, luồng, thư mục). |
 | [Tìm phần tử](#tìm-phần-tử) | Tìm các phần tử trong trang và trả về danh sách ID phần tử |
 | [Điền Biểu mẫu](#điền-biểu-mẫu) | Điền biểu mẫu thông minh với phát hiện trường tự động |
 | [Chuyển Frame](#chuyển-frame) | Chuyển sang ngữ cảnh iframe hoặc frame |
 | [Giả lập vị trí địa lý](#giả-lập-vị-trí-địa-lý) | Giả lập vị trí địa lý trình duyệt |
 | [Đi đến URL](#đi-đến-url) | Điều hướng đến một URL cụ thể |
 | [Di chuột qua phần tử](#di-chuột-qua-phần-tử) | Di chuột qua một phần tử |
-| [](#) |  |
+| [Tương Tác Trình Duyệt](#tương-tác-trình-duyệt) | Tạm dừng để người dùng tương tác với trang trình duyệt |
 | [Khởi chạy trình duyệt](#khởi-chạy-trình-duyệt) | Khởi chạy phiên trình duyệt mới với Playwright |
-| [](#) |  |
+| [Đăng Nhập](#đăng-nhập) | Tự động phát hiện và điền form đăng nhập với xác minh sau đăng nhập. |
 | [Điều hướng lịch sử](#điều-hướng-lịch-sử) | Điều hướng lịch sử trình duyệt (quay lại, tiến tới, tải lại) |
 | [Giám sát mạng](#giám-sát-mạng) | Giám sát và chặn các yêu cầu mạng |
 | [Danh sách Trang](#danh-sách-trang) | Liệt kê tất cả các trang/tab trình duyệt đang mở |
 | [Phân trang & Trích xuất](#phân-trang--trích-xuất) | Tự động phân trang và trích xuất dữ liệu |
 | [Tạo PDF](#tạo-pdf) | Tạo PDF từ trang hiện tại |
 | [Chỉ số Hiệu suất](#chỉ-số-hiệu-suất) | Thu thập các chỉ số hiệu suất trình duyệt |
-| [](#) |  |
+| [Nhóm Trình Duyệt](#nhóm-trình-duyệt) | Quản lý nhiều phiên trình duyệt cho tự động hóa song song. |
 | [Nhấn phím](#nhấn-phím) | Nhấn một phím bàn phím |
-| [](#) |  |
-| [](#) |  |
+| [Xoay Proxy](#xoay-proxy) | Luân chuyển danh sách proxy với phát hiện proxy lỗi. |
+| [Trích Xuất Bài Viết](#trích-xuất-bài-viết) | Trích xuất bài viết thông minh — lấy tiêu đề, tác giả, ngày và nội dung chính từ mọi trang web |
 | [Ghi hành động](#ghi-hành-động) | Ghi lại các hành động người dùng dưới dạng workflow |
 | [Giải phóng Trình duyệt](#giải-phóng-trình-duyệt) | Giải phóng phiên trình duyệt (chỉ đóng nếu sở hữu) |
-| [](#) |  |
-| [](#) |  |
+| [Bắt Phản Hồi](#bắt-phản-hồi) | Bắt nội dung phản hồi API (XHR/fetch). Trích xuất JSON từ lệnh gọi API trên trang. |
+| [Kiểm Tra Robots.txt](#kiểm-tra-robots.txt) | Kiểm tra tuân thủ robots.txt và khám phá sitemap. |
 | [Chụp màn hình](#chụp-màn-hình) | Chụp ảnh màn hình của trang hiện tại |
 | [Cuộn trang](#cuộn-trang) | Cuộn trang đến phần tử, vị trí hoặc hướng |
 | [Chọn tùy chọn](#chọn-tùy-chọn) | Chọn tùy chọn từ phần tử dropdown |
-| [](#) |  |
+| [Phân Tích Sitemap](#phân-tích-sitemap) | Phân tích sitemap.xml và trích xuất URL kèm metadata. |
 | [Ảnh chụp DOM](#ảnh-chụp-dom) | Chụp ảnh DOM của trang hiện tại |
 | [Lưu trữ trình duyệt](#lưu-trữ-trình-duyệt) | Truy cập localStorage và sessionStorage |
 | [Quản lý Tab](#quản-lý-tab) | Tạo, chuyển và đóng các tab trình duyệt |
-| [](#) |  |
-| [](#) |  |
+| [Trích Xuất Bảng](#trích-xuất-bảng) | Trích xuất bảng HTML thành dữ liệu có cấu trúc với tiêu đề tự động phát hiện. |
+| [Giới Hạn Tốc Độ](#giới-hạn-tốc-độ) | Giới hạn tốc độ theo tên miền. Chờ giữa các yêu cầu để tránh bị chặn. |
 | [Dấu vết Trình duyệt](#dấu-vết-trình-duyệt) | Bắt đầu, dừng hoặc lưu dấu vết hiệu suất trình duyệt |
 | [Gõ văn bản](#gõ-văn-bản) | Gõ văn bản vào trường input |
 | [Tải tệp lên](#tải-tệp-lên) | Tải tệp lên phần tử input file |
@@ -63,9 +63,11 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 ## Modules
 
-### 
+### Xử Lý Thử Thách
 
 `browser.challenge`
+
+Tự động phát hiện và xử lý thử thách chống bot (Cloudflare, CAPTCHA)
 
 **Parameters:**
 
@@ -176,9 +178,11 @@ selector: #submit-button
 ```yaml
 ```
 
-### 
+### Kết Nối Từ Xa
 
 `browser.connect`
+
+Kết nối dịch vụ trình duyệt từ xa (Browserless, BrowserBase). Fingerprint thật, vượt Cloudflare.
 
 **Parameters:**
 
@@ -306,9 +310,11 @@ domain: example.com
 action: clear
 ```
 
-### 
+### Tệp Cookie
 
 `browser.cookies_file`
+
+Nhập hoặc xuất cookie trình duyệt từ/đến tệp JSON.
 
 **Parameters:**
 
@@ -415,9 +421,11 @@ text: Login
 match_mode: best
 ```
 
-### 
+### Phát Hiện Danh Sách
 
 `browser.detect_list`
+
+Tự động phát hiện mục lặp lại trên trang (bài viết, sản phẩm, kết quả tìm kiếm)
 
 **Parameters:**
 
@@ -749,9 +757,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### 
+### Trích Xuất Lồng Nhau
 
 `browser.extract_nested`
+
+Trích xuất dữ liệu lồng nhau/dạng cây (bình luận, luồng, thư mục).
 
 **Parameters:**
 
@@ -1007,9 +1017,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### 
+### Tương Tác Trình Duyệt
 
 `browser.interact`
+
+Tạm dừng để người dùng tương tác với trang trình duyệt
 
 **Parameters:**
 
@@ -1023,11 +1035,11 @@ timeout_ms: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string |  |
-| `action` | string |  |
-| `selector` | string |  |
-| `value` | string |  |
-| `url` | string |  |
+| `status` | string | Trạng thái thao tác |
+| `action` | string | Hành động đã thực hiện (click/select/type/toggle) |
+| `selector` | string | CSS selector của phần tử tương tác |
+| `value` | string | Giá trị sử dụng (cho hành động select/type) |
+| `url` | string | URL trang tại thời điểm tương tác |
 
 **Example:** Example
 
@@ -1080,9 +1092,11 @@ headless: true
 headless: false
 ```
 
-### 
+### Đăng Nhập
 
 `browser.login`
+
+Tự động phát hiện và điền form đăng nhập với xác minh sau đăng nhập.
 
 **Parameters:**
 
@@ -1399,9 +1413,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### 
+### Nhóm Trình Duyệt
 
 `browser.pool`
+
+Quản lý nhiều phiên trình duyệt cho tự động hóa song song.
 
 **Parameters:**
 
@@ -1472,9 +1488,11 @@ key: Enter
 key: Escape
 ```
 
-### 
+### Xoay Proxy
 
 `browser.proxy_rotate`
+
+Luân chuyển danh sách proxy với phát hiện proxy lỗi.
 
 **Parameters:**
 
@@ -1509,9 +1527,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### 
+### Trích Xuất Bài Viết
 
 `browser.readability`
+
+Trích xuất bài viết thông minh — lấy tiêu đề, tác giả, ngày và nội dung chính từ mọi trang web
 
 **Parameters:**
 
@@ -1520,7 +1540,7 @@ action: rotate
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - |  |
+| `selector` | string | No | - | CSS selector cho vùng nội dung. Để trống để tự động phát hiện. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1644,9 +1664,11 @@ Giải phóng phiên trình duyệt (chỉ đóng nếu sở hữu)
 force: true
 ```
 
-### 
+### Bắt Phản Hồi
 
 `browser.response`
+
+Bắt nội dung phản hồi API (XHR/fetch). Trích xuất JSON từ lệnh gọi API trên trang.
 
 **Parameters:**
 
@@ -1679,9 +1701,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### 
+### Kiểm Tra Robots.txt
 
 `browser.robots`
+
+Kiểm tra tuân thủ robots.txt và khám phá sitemap.
 
 **Parameters:**
 
@@ -1831,9 +1855,11 @@ select_method: index
 index: 2
 ```
 
-### 
+### Phân Tích Sitemap
 
 `browser.sitemap`
+
+Phân tích sitemap.xml và trích xuất URL kèm metadata.
 
 **Parameters:**
 
@@ -2021,9 +2047,11 @@ action: close
 action: list
 ```
 
-### 
+### Trích Xuất Bảng
 
 `browser.table`
+
+Trích xuất bảng HTML thành dữ liệu có cấu trúc với tiêu đề tự động phát hiện.
 
 **Parameters:**
 
@@ -2055,9 +2083,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### 
+### Giới Hạn Tốc Độ
 
 `browser.throttle`
+
+Giới hạn tốc độ theo tên miền. Chờ giữa các yêu cầu để tránh bị chặn.
 
 **Parameters:**
 

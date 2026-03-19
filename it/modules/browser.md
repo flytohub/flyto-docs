@@ -6,15 +6,15 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [](#) |  |
+| [Gestisci sfida](#gestisci-sfida) | Rileva e gestisci automaticamente le sfide anti-bot (Cloudflare, CAPTCHA) |
 | [Clicca Elemento](#clicca-elemento) | Clicca un elemento sulla pagina |
 | [Chiudi Browser](#chiudi-browser) | Chiudi l'istanza browser e rilascia risorse |
-| [](#) |  |
+| [Connetti remoto](#connetti-remoto) | Connessione a un servizio browser remoto (Browserless, BrowserBase). Fingerprint reali, aggira Cloudflare. |
 | [Cattura Console](#cattura-console) | Cattura log console browser (errori, avvisi, info) |
 | [Gestisci Cookie](#gestisci-cookie) | Ottieni, imposta o cancella cookie browser |
-| [](#) |  |
+| [File cookie](#file-cookie) | Importa o esporta i cookie del browser da/verso un file JSON. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [](#) |  |
+| [Rileva lista](#rileva-lista) | Rileva automaticamente elementi ripetuti su qualsiasi pagina (articoli, prodotti, risultati di ricerca) |
 | [Gestisci Dialog](#gestisci-dialog) | Gestisci dialog alert, confirm e prompt |
 | [Scarica File](#scarica-file) | Scarica file dal browser |
 | [Trascina e Rilascia](#trascina-e-rilascia) | Trascina e rilascia elementi |
@@ -22,39 +22,39 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 | [Assicurarsi del Browser](#assicurarsi-del-browser) | Assicurarsi che esista una sessione del browser (riutilizzo o avvio) |
 | [Esegui JavaScript](#esegui-javascript) | Esegui codice JavaScript nel contesto pagina |
 | [Estrai Dati](#estrai-dati) | Estrai dati strutturati dalla pagina |
-| [](#) |  |
+| [Estrai annidati](#estrai-annidati) | Estrai dati annidati/gerarchici (commenti, thread, cartelle). |
 | [Trova Elementi](#trova-elementi) | Trova elementi nella pagina e restituisci lista ID elementi |
 | [Compila Modulo](#compila-modulo) | Compilazione intelligente dei moduli con rilevamento automatico dei campi |
 | [Cambia Frame](#cambia-frame) | Passa a contesto iframe o frame |
 | [Simula Geolocalizzazione](#simula-geolocalizzazione) | Simula geolocalizzazione browser |
 | [Vai a URL](#vai-a-url) | Naviga a URL specifico |
 | [Hover Elemento](#hover-elemento) | Passa mouse sopra elemento |
-| [](#) |  |
+| [Interazione browser](#interazione-browser) | Pausa per consentire all'utente di interagire con la pagina del browser |
 | [Avvia Browser](#avvia-browser) | Avvia nuova istanza browser con Playwright |
-| [](#) |  |
+| [Login](#login) | Rileva e compila automaticamente i moduli di login con verifica post-accesso. |
 | [Naviga Cronologia](#naviga-cronologia) | Navigare nella cronologia del browser (indietro, avanti, ricarica) |
 | [Monitor Rete](#monitor-rete) | Monitora e intercetta richieste di rete |
 | [Elenca Pagine](#elenca-pagine) | Elenca tutte le pagine/schede del browser aperte |
 | [Pagina & Estrai](#pagina--estrai) | Paginazione automatica tra le pagine ed estrazione dei dati |
 | [Genera PDF](#genera-pdf) | Genera PDF dalla pagina corrente |
 | [Metriche di Prestazione](#metriche-di-prestazione) | Raccogli metriche di prestazione del browser |
-| [](#) |  |
+| [Pool browser](#pool-browser) | Gestisci più istanze browser nominate per l'automazione in parallelo. |
 | [Premi Tasto](#premi-tasto) | Premi tasto tastiera |
-| [](#) |  |
-| [](#) |  |
+| [Ruota proxy](#ruota-proxy) | Ruota tra una lista di proxy con rilevamento di proxy inattivi. |
+| [Estrai articolo](#estrai-articolo) | Estrazione intelligente di articoli — estrae titolo, autore, data e contenuto principale da qualsiasi pagina web |
 | [Registra Azioni](#registra-azioni) | Registra azioni utente come workflow |
 | [Rilascia Browser](#rilascia-browser) | Rilascia la sessione del browser (chiudi solo se posseduta) |
-| [](#) |  |
-| [](#) |  |
+| [Cattura risposta](#cattura-risposta) | Cattura i corpi delle risposte API (XHR/fetch). Estrai JSON dalle chiamate API della pagina. |
+| [Verifica robots.txt](#verifica-robots.txt) | Verifica conformità robots.txt e scopri le sitemap. |
 | [Cattura Screenshot](#cattura-screenshot) | Cattura screenshot della pagina corrente |
 | [Scorri Pagina](#scorri-pagina) | Scorri pagina a elemento, posizione o direzione |
 | [Seleziona Opzione](#seleziona-opzione) | Seleziona opzione da elemento dropdown |
-| [](#) |  |
+| [Analizza sitemap](#analizza-sitemap) | Analizza sitemap.xml ed estrai URL con metadati. |
 | [Istantanea DOM](#istantanea-dom) | Cattura un'istantanea DOM della pagina corrente |
 | [Storage Browser](#storage-browser) | Accedi localStorage e sessionStorage |
 | [Gestisci Schede](#gestisci-schede) | Crea, cambia e chiudi schede browser |
-| [](#) |  |
-| [](#) |  |
+| [Estrai tabella](#estrai-tabella) | Estrai tabelle HTML come dati strutturati con intestazioni rilevate automaticamente. |
+| [Limitazione](#limitazione) | Limitazione di velocità per dominio. Attende tra le richieste per evitare blocchi. |
 | [Traccia Browser](#traccia-browser) | Avvia, ferma o salva tracce di prestazione del browser |
 | [Digita Testo](#digita-testo) | Digita testo in campo input |
 | [Carica File](#carica-file) | Carica file su elemento input file |
@@ -63,9 +63,11 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 ## Modules
 
-### 
+### Gestisci sfida
 
 `browser.challenge`
+
+Rileva e gestisci automaticamente le sfide anti-bot (Cloudflare, CAPTCHA)
 
 **Parameters:**
 
@@ -176,9 +178,11 @@ Chiudi l'istanza browser e rilascia risorse
 ```yaml
 ```
 
-### 
+### Connetti remoto
 
 `browser.connect`
+
+Connessione a un servizio browser remoto (Browserless, BrowserBase). Fingerprint reali, aggira Cloudflare.
 
 **Parameters:**
 
@@ -306,9 +310,11 @@ domain: example.com
 action: clear
 ```
 
-### 
+### File cookie
 
 `browser.cookies_file`
+
+Importa o esporta i cookie del browser da/verso un file JSON.
 
 **Parameters:**
 
@@ -415,9 +421,11 @@ text: Login
 match_mode: best
 ```
 
-### 
+### Rileva lista
 
 `browser.detect_list`
+
+Rileva automaticamente elementi ripetuti su qualsiasi pagina (articoli, prodotti, risultati di ricerca)
 
 **Parameters:**
 
@@ -749,9 +757,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### 
+### Estrai annidati
 
 `browser.extract_nested`
+
+Estrai dati annidati/gerarchici (commenti, thread, cartelle).
 
 **Parameters:**
 
@@ -1007,9 +1017,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### 
+### Interazione browser
 
 `browser.interact`
+
+Pausa per consentire all'utente di interagire con la pagina del browser
 
 **Parameters:**
 
@@ -1023,11 +1035,11 @@ timeout_ms: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string |  |
-| `action` | string |  |
-| `selector` | string |  |
-| `value` | string |  |
-| `url` | string |  |
+| `status` | string | Stato dell'operazione |
+| `action` | string | Azione eseguita (clic/selezione/digitazione/attivazione) |
+| `selector` | string | Selettore CSS dell'elemento interagito |
+| `value` | string | Valore utilizzato (per azioni di selezione/digitazione) |
+| `url` | string | URL della pagina al momento dell'interazione |
 
 **Example:** Example
 
@@ -1080,9 +1092,11 @@ headless: true
 headless: false
 ```
 
-### 
+### Login
 
 `browser.login`
+
+Rileva e compila automaticamente i moduli di login con verifica post-accesso.
 
 **Parameters:**
 
@@ -1399,9 +1413,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### 
+### Pool browser
 
 `browser.pool`
+
+Gestisci più istanze browser nominate per l'automazione in parallelo.
 
 **Parameters:**
 
@@ -1472,9 +1488,11 @@ key: Enter
 key: Escape
 ```
 
-### 
+### Ruota proxy
 
 `browser.proxy_rotate`
+
+Ruota tra una lista di proxy con rilevamento di proxy inattivi.
 
 **Parameters:**
 
@@ -1509,9 +1527,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### 
+### Estrai articolo
 
 `browser.readability`
+
+Estrazione intelligente di articoli — estrae titolo, autore, data e contenuto principale da qualsiasi pagina web
 
 **Parameters:**
 
@@ -1520,7 +1540,7 @@ action: rotate
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - |  |
+| `selector` | string | No | - | Selettore CSS per l'area di contenuto. Lasciare vuoto per il rilevamento automatico. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1644,9 +1664,11 @@ Rilascia la sessione del browser (chiudi solo se posseduta)
 force: true
 ```
 
-### 
+### Cattura risposta
 
 `browser.response`
+
+Cattura i corpi delle risposte API (XHR/fetch). Estrai JSON dalle chiamate API della pagina.
 
 **Parameters:**
 
@@ -1679,9 +1701,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### 
+### Verifica robots.txt
 
 `browser.robots`
+
+Verifica conformità robots.txt e scopri le sitemap.
 
 **Parameters:**
 
@@ -1831,9 +1855,11 @@ select_method: index
 index: 2
 ```
 
-### 
+### Analizza sitemap
 
 `browser.sitemap`
+
+Analizza sitemap.xml ed estrai URL con metadati.
 
 **Parameters:**
 
@@ -2021,9 +2047,11 @@ action: close
 action: list
 ```
 
-### 
+### Estrai tabella
 
 `browser.table`
+
+Estrai tabelle HTML come dati strutturati con intestazioni rilevate automaticamente.
 
 **Parameters:**
 
@@ -2055,9 +2083,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### 
+### Limitazione
 
 `browser.throttle`
+
+Limitazione di velocità per dominio. Attende tra le richieste per evitare blocchi.
 
 **Parameters:**
 
