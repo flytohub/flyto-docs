@@ -73,8 +73,10 @@ Deteksi otomatis dan tangani tantangan anti-bot (Cloudflare, CAPTCHA)
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `auto_wait_seconds` | number | No | `15` | How long to wait for the challenge to auto-resolve before asking for human help. 0 = skip auto-wait. |
-| `human_fallback` | boolean | No | `True` | If auto-wait fails, create a breakpoint for the user to solve the challenge manually. |
+| `auto_wait_seconds` | number | No | `15` | How long to wait for the challenge to auto-resolve before trying API solver or human help. 0 = skip auto-wait. |
+| `captcha_provider` | select (``, `2captcha`, `capsolver`) | No | - | Third-party API for automatic captcha solving. Leave empty to skip API solving. |
+| `captcha_api_key` | string | No | - | API key for the captcha solving service |
+| `human_fallback` | boolean | No | `True` | If auto-wait and API solver both fail, create a breakpoint for the user to solve manually. |
 | `human_timeout_seconds` | number | No | `120` | How long to wait for human to solve the challenge. 0 = wait indefinitely. |
 
 **Output:**
@@ -605,9 +607,9 @@ Mensimulasikan perangkat atau mengatur viewport kustom
 | `width` | number | No | - | Lebar viewport dalam piksel |
 | `height` | number | No | - | Tinggi viewport dalam piksel |
 | `user_agent` | string | No | - | String user agent kustom |
+| `device_scale_factor` | number | No | - | Rasio piksel perangkat |
 | `is_mobile` | boolean | No | - | Apakah akan mensimulasikan perangkat mobile |
 | `has_touch` | boolean | No | - | Apakah perangkat mendukung sentuhan |
-| `device_scale_factor` | number | No | - | Rasio piksel perangkat |
 
 **Output:**
 
@@ -1063,11 +1065,12 @@ Luncurkan instance browser baru dengan Playwright
 | `height` | number | No | `720` | Browser viewport height in pixels |
 | `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Mesin browser yang digunakan (chromium, firefox, webkit) |
 | `channel` | select (``, `chrome`, `msedge`) | No | - | Use system Chrome instead of bundled Chromium for better anti-detection bypass |
+| `behavior` | select (`fast`, `normal`, `careful`, `human_like`) | No | `fast` | How the browser interacts: fast (no delays), normal, careful (mouse movement), human_like (full simulation) |
+| `stealth` | boolean | No | `True` | Anti-detection patches: WebGL fingerprint, canvas noise, navigator fixes. Always recommended. |
 | `proxy` | string | No | - | URL server proxy |
 | `user_agent` | string | No | - | String user agent kustom |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |
 | `slow_mo` | number | No | `0` | Memperlambat operasi dengan milidetik yang ditentukan |
-| `stealth` | boolean | No | `True` | Anti-detection patches: WebGL fingerprint, canvas noise, navigator fixes. Always recommended. |
 | `record_video_dir` | string | No | - | Directory to save recorded videos (enables Playwright video recording) |
 
 **Output:**
@@ -1079,6 +1082,7 @@ Luncurkan instance browser baru dengan Playwright
 | `browser_type` | string | Jenis browser yang diluncurkan |
 | `headless` | boolean | Apakah browser berjalan tanpa antarmuka |
 | `viewport` | object | Dimensi viewport saat ini |
+| `behavior` | string | Active behavior profile |
 
 **Example:** Example
 
@@ -1090,6 +1094,14 @@ headless: true
 
 ```yaml
 headless: false
+```
+
+**Example:** Example
+
+```yaml
+headless: true
+behavior: human_like
+stealth: true
 ```
 
 ### Login
@@ -1277,12 +1289,15 @@ Auto-paginasi melalui halaman dan ekstrak data
 |------|------|----------|---------|-------------|
 | `mode` | select (`next_button`, `infinite_scroll`, `page_numbers`, `load_more`) | No | `next_button` | How to navigate between pages |
 | `item_selector` | string | Yes | - | CSS selector for items to extract on each page |
-| `fields` | object | No | - | Field definitions {name: {selector, attribute?}} |
 | `next_selector` | string | No | - | CSS selector for next page button |
 | `load_more_selector` | string | No | - | CSS selector for load more button |
+| `fields` | object | No | - | Field definitions {name: {selector, attribute?}} |
 | `max_pages` | number | No | `10` | Maximum number of pages to process (0 = unlimited) |
 | `max_items` | number | No | `0` | Stop after collecting this many items (0 = unlimited) |
-| `wait_between_pages_ms` | number | No | `1000` | Wait time between page navigations |
+| `wait_between_pages_ms` | number | No | `1000` | Fixed wait time between page navigations. For adaptive/human-like delays, use browser.throttle before this node. |
+| `retry_on_error` | boolean | No | `True` | Retry failed page extractions before giving up |
+| `max_retries` | number | No | `3` | Maximum retry attempts per failed page |
+| `checkpoint_path` | string | No | - | Save progress to disk. Resumes from checkpoint on restart. Cleared on successful completion. |
 | `wait_for_selector` | string | No | - | Wait for this element after page change |
 | `scroll_amount` | number | No | `1000` | Pixels to scroll for infinite scroll mode |
 | `no_more_indicator` | string | No | - | Selector that appears when no more pages (stops pagination) |
@@ -1295,6 +1310,8 @@ Auto-paginasi melalui halaman dan ekstrak data
 | `total_items` | integer | Semua item yang diekstrak dari semua halaman |
 | `pages_processed` | integer | Semua item yang diekstrak dari semua halaman |
 | `stopped_reason` | string | Jumlah halaman yang diproses |
+| `retries_used` | integer | Total number of retries across all pages |
+| `resumed` | boolean | Whether execution resumed from a checkpoint |
 
 **Example:** Example
 
@@ -1311,18 +1328,9 @@ max_pages: 5
 ```yaml
 mode: infinite_scroll
 item_selector: .feed-item
-fields: {"content": {"selector": ".content"}, "author": {"selector": ".author"}}
 max_items: 100
 no_more_indicator: .end-of-feed
-```
-
-**Example:** Example
-
-```yaml
-mode: load_more
-item_selector: .list-item
-load_more_selector: button.load-more
-max_pages: 10
+checkpoint_path: /tmp/feed_checkpoint.json
 ```
 
 ### Hasilkan PDF
@@ -1500,9 +1508,11 @@ Rotasi daftar proxy dengan deteksi proxy mati.
 |------|------|----------|---------|-------------|
 | `action` | select (`init`, `rotate`, `mark_dead`, `status`) | Yes | `rotate` |  |
 | `proxies` | array | No | `[]` | List of proxy URLs (for init action). e.g., ["http://proxy1:8080", "socks5://proxy2:1080"]. |
+| `strategy` | select (`round_robin`, `random`, `failover`) | No | `round_robin` | How to cycle through proxies. |
 | `provider_url` | string | No | - | Proxy provider API endpoint that returns proxy IPs (for init). Fetches fresh IPs from Bright Data, Oxylabs, etc. |
 | `provider_token` | string | No | - | Bearer token for the proxy provider API. |
 | `headless` | boolean | No | `True` | Run browser in headless mode after rotation. |
+| `preserve_cookies` | boolean | No | `True` | Export cookies before rotation and import into the new browser. Keeps login sessions alive. |
 
 **Output:**
 
@@ -2093,9 +2103,11 @@ Pembatasan kecepatan per domain. Menunggu antar permintaan untuk menghindari pem
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `min_interval_ms` | number | No | `2000` | Minimum milliseconds between requests to the same domain. |
+| `strategy` | select (`fixed`, `adaptive`, `human_like`) | No | `fixed` | Delay strategy: fixed, adaptive (auto-backoff on errors), human_like (random delays with reading pauses). |
+| `min_interval_ms` | number | No | `2000` | Base delay (fixed) or minimum delay (adaptive/human_like). |
+| `max_interval_ms` | number | No | `15000` | Maximum delay for adaptive/human_like strategies. |
 | `url` | string | No | - | URL to throttle for. Empty = use current page URL. |
-| `randomize` | boolean | No | `True` | Add ±30% random jitter to the interval (looks more human). |
+| `signal` | select (`none`, `success`, `error`, `rate_limit`) | No | `none` | Report success or error to update adaptive delay. |
 
 **Output:**
 
@@ -2103,7 +2115,8 @@ Pembatasan kecepatan per domain. Menunggu antar permintaan untuk menghindari pem
 |-------|------|-------------|
 | `domain` | string | Domain that was throttled |
 | `waited_ms` | number | Actual milliseconds waited (0 if no wait needed) |
-| `interval_ms` | number | Configured interval |
+| `interval_ms` | number | Current effective interval |
+| `strategy` | string | Active strategy |
 
 **Example:** Example
 
@@ -2114,8 +2127,17 @@ min_interval_ms: 2000
 **Example:** Example
 
 ```yaml
-min_interval_ms: 5000
-randomize: true
+strategy: adaptive
+min_interval_ms: 1000
+max_interval_ms: 15000
+```
+
+**Example:** Example
+
+```yaml
+strategy: human_like
+min_interval_ms: 1500
+max_interval_ms: 8000
 ```
 
 ### Jejak Browser

@@ -2,17 +2,19 @@
 
 CSV, JSON, XML, YAML parsing, generation, and pipeline transformations.
 
-**16 modules**
+**18 modules**
 
 | Module | Description |
 |--------|-------------|
 | [CSV फ़ाइल पढ़ें](#csv-फ़ाइल-पढ़ें) | CSV फ़ाइल पढ़ें और ऑब्जेक्ट सरणी में पार्स करें |
 | [CSV फ़ाइल लिखें](#csv-फ़ाइल-लिखें) | ऑब्जेक्ट सरणी को CSV फ़ाइल में लिखें |
+| [Deduplicate Records](#deduplicate-records) | Remove duplicate records from an array by key fields. Optionally persists seen hashes to disk or execution context for cross-run dedup. Use storage=context in cloud/stateless environments where disk is ephemeral. |
 | [JSON पार्स करें](#json-पार्स-करें) | JSON स्ट्रिंग को ऑब्जेक्ट में पार्स करें |
 | [JSON स्ट्रिंगिफाई](#json-स्ट्रिंगिफाई) | ऑब्जेक्ट को JSON स्ट्रिंग में बदलें |
 | [JSON से CSV](#json-से-csv) | JSON डेटा या फ़ाइलों को CSV फ़ॉर्मेट में बदलें |
 | [डेटा पाइपलाइन](#डेटा-पाइपलाइन) | एक ही चरण में कई डेटा रूपांतरणों को जोड़ें |
 | [टेक्स्ट टेम्पलेट](#टेक्स्ट-टेम्पलेट) | टेक्स्ट टेम्पलेट को वेरिएबल्स से भरें |
+| [Validate Records](#validate-records) | Validate extracted records against field rules. Splits output into valid and invalid arrays. |
 | [XML बनाएं](#xml-बनाएं) | ऑब्जेक्ट या एरे से XML स्ट्रिंग बनाएं |
 | [XML पार्स करें](#xml-पार्स-करें) | XML स्ट्रिंग को ऑब्जेक्ट में पार्स करें |
 | [YAML बनाएं](#yaml-बनाएं) | ऑब्जेक्ट या एरे से YAML स्ट्रिंग बनाएं |
@@ -85,6 +87,47 @@ encoding: utf-8
 ```yaml
 file_path: output/results.csv
 data: [{"name": "John", "score": 95}, {"name": "Jane", "score": 87}]
+```
+
+### Deduplicate Records
+
+`data.dedup`
+
+Remove duplicate records from an array by key fields. Optionally persists seen hashes to disk or execution context for cross-run dedup. Use storage=context in cloud/stateless environments where disk is ephemeral.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `items` | array | Yes | - | Array of records to deduplicate. Usually linked from a previous step. |
+| `keys` | array | No | `[]` | Fields to use as dedup key (e.g., ["url", "title"]). Empty = hash all fields. |
+| `storage` | select (`disk`, `context`) | No | `disk` | Where to persist seen hashes for cross-run dedup. disk=local file (not for cloud workers), context=execution context (persisted by engine). |
+| `hash_file` | string | No | - | Path to persist seen hashes. Enables dedup across workflow runs. Leave empty for in-memory only. Not recommended for cloud/stateless workers. |
+| `max_hashes` | number | No | `100000` | Maximum hashes to keep in the hash file (oldest evicted). 0 = unlimited. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `items` | array | Deduplicated records |
+| `total_in` | integer | Input record count |
+| `total_out` | integer | Output record count (after dedup) |
+| `duplicates` | integer | Number of duplicates removed |
+| `hash_count` | integer | Total hashes stored (for cross-run) |
+
+**Example:** Example
+
+```yaml
+items: []
+keys: ["url"]
+```
+
+**Example:** Example
+
+```yaml
+items: []
+keys: ["url"]
+hash_file: /tmp/seen.json
 ```
 
 ### JSON पार्स करें
@@ -248,6 +291,47 @@ steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}
 ```yaml
 template: Hello {name}, you scored {score} points!
 variables: {"name": "Alice", "score": 95}
+```
+
+### Validate Records
+
+`data.validate_records`
+
+Validate extracted records against field rules. Splits output into valid and invalid arrays.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `items` | array | Yes | - | Array of records to validate. |
+| `rules` | object | Yes | - | Field rules: {"field_name": ["required", "is_url"], "price": ["required", "is_number"]}. Available: required, not_empty, is_number, is_url, is_email, min_length:N, max_length:N, matches:REGEX, min_value:N, max_value:N |
+| `mode` | select (`filter`, `flag`, `strict`) | No | `filter` | What to do with invalid records |
+| `drop_fields` | array | No | `[]` | Fields to remove from output (e.g., ["__index", "html"]) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `items` | array | Valid records (filter/flag mode) or all records (flag mode) |
+| `invalid` | array | Invalid records with error details (filter mode only) |
+| `total_in` | integer | Input record count |
+| `valid_count` | integer | Number of valid records |
+| `invalid_count` | integer | Number of invalid records |
+
+**Example:** Example
+
+```yaml
+items: []
+rules: {"url": ["required", "is_url"], "title": ["required", "min_length:3"]}
+```
+
+**Example:** Example
+
+```yaml
+items: []
+rules: {"price": ["required", "is_number"]}
+mode: flag
+drop_fields: ["__index", "html"]
 ```
 
 ### XML बनाएं

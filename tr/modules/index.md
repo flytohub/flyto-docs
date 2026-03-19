@@ -1,6 +1,6 @@
 # Modules
 
-flyto-core ships 433+ modules. Each module is a self-contained unit of work with defined inputs, outputs, and evidence.
+flyto-core ships 435+ modules. Each module is a self-contained unit of work with defined inputs, outputs, and evidence.
 
 ## Browse by Category
 
@@ -19,7 +19,7 @@ flyto-core ships 433+ modules. Each module is a self-contained unit of work with
 
 | Category | Modules | Description |
 |----------|---------|-------------|
-| [Data Transform](/tr/modules/data-transform) | 16 | CSV, JSON, XML, YAML parsing, generation, and pipeline transformations. |
+| [Data Transform](/tr/modules/data-transform) | 18 | CSV, JSON, XML, YAML parsing, generation, and pipeline transformations. |
 | [Array Operations](/tr/modules/array) | 12 | List manipulation — chunk, flatten, group, map, reduce, zip, and more. |
 | [String Operations](/tr/modules/string) | 11 | Text manipulation: case conversion, split, pad, slugify, template, and more. |
 | [Object Operations](/tr/modules/object-operations) | 5 | Deep merge, flatten, dot-path get/set, and unflatten. |

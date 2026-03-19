@@ -2,17 +2,19 @@
 
 CSV, JSON, XML, YAML parsing, generation, and pipeline transformations.
 
-**16 modules**
+**18 modules**
 
 | Module | Description |
 |--------|-------------|
 | [讀取 CSV 檔案](#讀取-csv-檔案) | 讀取並解析 CSV 檔案為物件陣列 |
 | [寫入 CSV 檔案](#寫入-csv-檔案) | 將物件陣列寫入 CSV 檔案 |
+| [Deduplicate Records](#deduplicate-records) | Remove duplicate records from an array by key fields. Optionally persists seen hashes to disk or execution context for cross-run dedup. Use storage=context in cloud/stateless environments where disk is ephemeral. |
 | [解析 JSON](#解析-json) | 將 JSON 字串解析為物件 |
 | [JSON 字串化](#json-字串化) | 將物件轉換為 JSON 字串 |
 | [JSON 轉 CSV](#json-轉-csv) | 將 JSON 資料或檔案轉換為 CSV 格式 |
 | [資料管道](#資料管道) | 在單一步驟中串聯多個資料轉換 |
 | [文字範本](#文字範本) | 用變數填充文字範本 |
+| [Validate Records](#validate-records) | Validate extracted records against field rules. Splits output into valid and invalid arrays. |
 | [生成 XML](#生成-xml) | 從物件或陣列生成 XML 字串 |
 | [解析 XML](#解析-xml) | 將 XML 字串解析為物件 |
 | [生成 YAML](#生成-yaml) | 從物件或陣列生成 YAML 字串 |
@@ -85,6 +87,47 @@ encoding: utf-8
 ```yaml
 file_path: output/results.csv
 data: [{"name": "John", "score": 95}, {"name": "Jane", "score": 87}]
+```
+
+### Deduplicate Records
+
+`data.dedup`
+
+Remove duplicate records from an array by key fields. Optionally persists seen hashes to disk or execution context for cross-run dedup. Use storage=context in cloud/stateless environments where disk is ephemeral.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `items` | array | Yes | - | Array of records to deduplicate. Usually linked from a previous step. |
+| `keys` | array | No | `[]` | Fields to use as dedup key (e.g., ["url", "title"]). Empty = hash all fields. |
+| `storage` | select (`disk`, `context`) | No | `disk` | Where to persist seen hashes for cross-run dedup. disk=local file (not for cloud workers), context=execution context (persisted by engine). |
+| `hash_file` | string | No | - | Path to persist seen hashes. Enables dedup across workflow runs. Leave empty for in-memory only. Not recommended for cloud/stateless workers. |
+| `max_hashes` | number | No | `100000` | Maximum hashes to keep in the hash file (oldest evicted). 0 = unlimited. |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `items` | array | Deduplicated records |
+| `total_in` | integer | Input record count |
+| `total_out` | integer | Output record count (after dedup) |
+| `duplicates` | integer | Number of duplicates removed |
+| `hash_count` | integer | Total hashes stored (for cross-run) |
+
+**Example:** Example
+
+```yaml
+items: []
+keys: ["url"]
+```
+
+**Example:** Example
+
+```yaml
+items: []
+keys: ["url"]
+hash_file: /tmp/seen.json
 ```
 
 ### 解析 JSON
@@ -248,6 +291,47 @@ steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}
 ```yaml
 template: Hello {name}, you scored {score} points!
 variables: {"name": "Alice", "score": 95}
+```
+
+### Validate Records
+
+`data.validate_records`
+
+Validate extracted records against field rules. Splits output into valid and invalid arrays.
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `items` | array | Yes | - | Array of records to validate. |
+| `rules` | object | Yes | - | Field rules: {"field_name": ["required", "is_url"], "price": ["required", "is_number"]}. Available: required, not_empty, is_number, is_url, is_email, min_length:N, max_length:N, matches:REGEX, min_value:N, max_value:N |
+| `mode` | select (`filter`, `flag`, `strict`) | No | `filter` | What to do with invalid records |
+| `drop_fields` | array | No | `[]` | Fields to remove from output (e.g., ["__index", "html"]) |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `items` | array | Valid records (filter/flag mode) or all records (flag mode) |
+| `invalid` | array | Invalid records with error details (filter mode only) |
+| `total_in` | integer | Input record count |
+| `valid_count` | integer | Number of valid records |
+| `invalid_count` | integer | Number of invalid records |
+
+**Example:** Example
+
+```yaml
+items: []
+rules: {"url": ["required", "is_url"], "title": ["required", "min_length:3"]}
+```
+
+**Example:** Example
+
+```yaml
+items: []
+rules: {"price": ["required", "is_number"]}
+mode: flag
+drop_fields: ["__index", "html"]
 ```
 
 ### 生成 XML
