@@ -11,7 +11,7 @@ AI model integration, text generation, embeddings, and autonomous agents.
 | [Agen Penggunaan Alat](#agen-penggunaan-alat) | Agen AI yang dapat memanggil alat/fungsi |
 | [Embedding Teks](#embedding-teks) | Menghasilkan vektor embedding dari teks menggunakan model AI |
 | [Ekstrak AI](#ekstrak-ai) | Ekstrak data terstruktur dari teks menggunakan AI |
-| [Chat Ollama Lokal](#chat-ollama-lokal) | Chat dengan LLM lokal via Ollama |
+| [Chat Ollama Lokal](#chat-ollama-lokal) | Chat dengan LLM lokal via Ollama (sepenuhnya offline) |
 | [Memori AI](#memori-ai) | Memori percakapan untuk Agen AI |
 | [Memori Entitas](#memori-entitas) | Ekstrak dan lacak entitas (orang, tempat, konsep) dari percakapan |
 | [Memori Redis](#memori-redis) | Memori percakapan persisten menggunakan penyimpanan Redis |
@@ -236,7 +236,7 @@ instructions: Extract all invoice fields. Parse amounts as numbers.
 
 `ai.local_ollama.chat`
 
-Chat dengan LLM lokal via Ollama
+Chat dengan LLM lokal via Ollama (sepenuhnya offline)
 
 **Parameters:**
 
