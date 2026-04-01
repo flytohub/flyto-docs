@@ -25,7 +25,7 @@ HTTP GET 요청을 보내고 응답 받기
 | `query` | object | No | `{}` | 키-값 객체로 된 쿼리 문자열 매개변수 |
 | `timeout` | number | No | `30` | 밀리초 단위의 요청 시간 초과 |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
-| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks. Disable only for trusted internal targets. |
+| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
 **Output:**
 

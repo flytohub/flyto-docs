@@ -25,7 +25,7 @@ Enviar solicitud HTTP GET y recibir respuesta
 | `query` | object | No | `{}` | Parámetros de cadena de consulta como objeto clave-valor |
 | `timeout` | number | No | `30` | Tiempo de espera de la solicitud en milisegundos |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
-| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks. Disable only for trusted internal targets. |
+| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
 **Output:**
 

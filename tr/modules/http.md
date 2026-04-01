@@ -25,7 +25,7 @@ HTTP GET isteği gönder ve yanıt al
 | `query` | object | No | `{}` | Anahtar-değer nesnesi olarak sorgu dizesi parametreleri |
 | `timeout` | number | No | `30` | İstek zaman aşımı süresi (milisaniye cinsinden) |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
-| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks. Disable only for trusted internal targets. |
+| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
 **Output:**
 

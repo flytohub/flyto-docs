@@ -549,6 +549,7 @@ Automatically iterate through paginated API endpoints and collect all results
 | `delay_ms` | number | No | `0` | Milliseconds to wait between page requests (rate limiting) |
 | `timeout` | number | No | `30` | Maximum time to wait in seconds |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
+| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
 **Output:**
 
@@ -743,10 +744,11 @@ Send a sequence of HTTP requests with persistent cookies (login → action → l
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `requests` | array | Yes | - | Ordered list of HTTP requests to execute with shared cookies |
-| `auth` | object | No | - | Authentication applied to all requests in the session |
+| `auth` | object | No | - | Authentication credentials for the HTTP request |
 | `stop_on_error` | boolean | No | `True` | Stop executing remaining requests if one fails (non-2xx) |
-| `timeout` | number | No | `30` | Maximum time per individual request |
+| `timeout` | number | No | `30` | Maximum time to wait in seconds |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
+| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
 **Output:**
 
