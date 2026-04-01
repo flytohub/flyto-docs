@@ -11,7 +11,7 @@ AI model integration, text generation, embeddings, and autonomous agents.
 | [工具使用代理](#工具使用代理) | 可以調用工具/功能的 AI 代理 |
 | [文字嵌入](#文字嵌入) | 使用 AI 模型從文字生成向量嵌入 |
 | [AI 提取](#ai-提取) | 使用 AI 從文字提取結構化資料 |
-| [本機 Ollama 對話](#本機-ollama-對話) | 透過 Ollama 與本機 LLM 對話（完全離線） |
+| [本機 Ollama 對話](#本機-ollama-對話) | 透過 Ollama 與本機 LLM 對話 |
 | [AI 記憶](#ai-記憶) | AI Agent 的對話記憶 |
 | [實體記憶](#實體記憶) | 從對話中擷取並追蹤實體（人物、地點、概念） |
 | [Redis 記憶](#redis-記憶) | 使用 Redis 儲存的持久對話記憶 |
@@ -236,7 +236,7 @@ instructions: Extract all invoice fields. Parse amounts as numbers.
 
 `ai.local_ollama.chat`
 
-透過 Ollama 與本機 LLM 對話（完全離線）
+透過 Ollama 與本機 LLM 對話
 
 **Parameters:**
 

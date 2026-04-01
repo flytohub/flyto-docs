@@ -28,5 +28,5 @@ features:
     details: Full execution trace with evidence snapshots. Replay from any step for debugging and auditing.
   - icon: "🏢"
     title: Enterprise Ready
-    details: Human-in-the-loop approval, validation checkpoints, and full audit trails. Works 100% offline.
+    details: Human-in-the-loop approval, validation checkpoints, and full audit trails. Cloud SaaS and enterprise self-hosted deployment.
 ---

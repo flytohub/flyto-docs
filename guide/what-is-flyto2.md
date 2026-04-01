@@ -1,6 +1,6 @@
 # What is Flyto2?
 
-Flyto2 is an **enterprise workflow platform** that combines UI-driven automation with human oversight. At its core is **flyto-core**, an open-source deterministic execution engine with 412+ modules.
+Flyto2 is an **enterprise workflow platform** that combines UI-driven automation with human oversight. At its core is **flyto-core**, an open-source deterministic execution engine with 467+ modules.
 
 ## Key Concepts
 
@@ -14,7 +14,7 @@ A workflow chains modules together into a sequence of steps. Flyto2 executes the
 Every execution produces a full trace with evidence snapshots. You can replay from any step, making debugging and auditing straightforward.
 
 ### MCP Server
-flyto-core runs as an MCP (Model Context Protocol) server, making all 412+ modules available as tools for AI agents.
+flyto-core runs as an MCP (Model Context Protocol) server, making all 467+ modules available as tools for AI agents.
 
 ## Use Cases
 

@@ -11,7 +11,7 @@ AI model integration, text generation, embeddings, and autonomous agents.
 | [Agente Uso Strumenti](#agente-uso-strumenti) | Agente AI che può chiamare strumenti/funzioni |
 | [Incorporamenti Testuali](#incorporamenti-testuali) | Genera incorporamenti vettoriali dal testo usando modelli AI |
 | [Estrazione AI](#estrazione-ai) | Estrai dati strutturati dal testo usando AI |
-| [Chat Ollama Locale](#chat-ollama-locale) | Chatta con LLM locale tramite Ollama (completamente offline) |
+| [Chat Ollama Locale](#chat-ollama-locale) | Chatta con LLM locale tramite Ollama |
 | [Memoria AI](#memoria-ai) | Memoria conversazione per Agente AI |
 | [Memoria Entita](#memoria-entita) | Estrai e traccia entita (persone, luoghi, concetti) dalle conversazioni |
 | [Memoria Redis](#memoria-redis) | Memoria conversazione persistente usando archiviazione Redis |
@@ -236,7 +236,7 @@ instructions: Extract all invoice fields. Parse amounts as numbers.
 
 `ai.local_ollama.chat`
 
-Chatta con LLM locale tramite Ollama (completamente offline)
+Chatta con LLM locale tramite Ollama
 
 **Parameters:**
 
