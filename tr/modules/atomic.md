@@ -625,6 +625,7 @@ HTTP isteği gönder ve yanıt al
 | `retry_count` | number | No | `0` | Number of retries on failure or 429/503 status |
 | `retry_backoff` | string | No | `exponential` | Backoff strategy between retries |
 | `retry_delay` | number | No | `1` | Initial delay between retries in seconds |
+| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
 **Output:**
 

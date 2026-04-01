@@ -25,6 +25,7 @@ HTTP request utilities.
 | `query` | object | No | `{}` | 查詢字串參數作為鍵值對物件 |
 | `timeout` | number | No | `30` | 請求逾時毫秒數 |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
+| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks. Disable only for trusted internal targets. |
 
 **Output:**
 

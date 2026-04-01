@@ -25,6 +25,7 @@ Send HTTP GET request and receive response
 | `query` | object | No | `{}` | Query string parameters as key-value object |
 | `timeout` | number | No | `30` | Request timeout in milliseconds |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
+| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks. Disable only for trusted internal targets. |
 
 **Output:**
 

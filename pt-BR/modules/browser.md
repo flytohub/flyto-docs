@@ -970,6 +970,7 @@ Navegar para URL especifica
 | `url` | string | Yes | - | URL to navigate to |
 | `wait_until` | select (`load`, `domcontentloaded`, `networkidle`) | No | `domcontentloaded` | When to consider navigation complete |
 | `timeout_ms` | number | No | `30000` | Maximum time to wait in milliseconds |
+| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
 **Output:**
 
@@ -2021,6 +2022,7 @@ Criar, alternar e fechar abas do navegador
 | `action` | string | Yes | - | Tab action to perform |
 | `url` | string | No | - | URL to navigate to |
 | `index` | number | No | - | Tab index to switch to or close (0-based) |
+| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
 **Output:**
 

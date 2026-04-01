@@ -25,6 +25,7 @@ Invia una richiesta HTTP GET e ricevi una risposta
 | `query` | object | No | `{}` | Parametri della stringa di query come oggetto chiave-valore |
 | `timeout` | number | No | `30` | Timeout della richiesta in millisecondi |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
+| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks. Disable only for trusted internal targets. |
 
 **Output:**
 

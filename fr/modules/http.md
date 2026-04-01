@@ -25,6 +25,7 @@ Envoyer une requête HTTP GET et recevoir une réponse
 | `query` | object | No | `{}` | Paramètres de la chaîne de requête sous forme d'objet clé-valeur |
 | `timeout` | number | No | `30` | Délai d'attente de la requête en millisecondes |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
+| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks. Disable only for trusted internal targets. |
 
 **Output:**
 

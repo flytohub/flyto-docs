@@ -25,6 +25,7 @@ Kirim permintaan HTTP GET dan terima respons
 | `query` | object | No | `{}` | Parameter query string sebagai objek key-value |
 | `timeout` | number | No | `30` | Batas waktu permintaan dalam milidetik |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
+| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks. Disable only for trusted internal targets. |
 
 **Output:**
 

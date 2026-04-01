@@ -25,6 +25,7 @@ Gửi yêu cầu HTTP GET và nhận phản hồi
 | `query` | object | No | `{}` | Tham số chuỗi truy vấn dưới dạng đối tượng key-value |
 | `timeout` | number | No | `30` | Thời gian chờ yêu cầu tính bằng mili giây |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
+| `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks. Disable only for trusted internal targets. |
 
 **Output:**
 
