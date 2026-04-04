@@ -749,11 +749,6 @@ Agent IA autonome avec connexions multi-ports (modele, memoire, outils)
 | `tools` | array | No | `[]` | Liste des IDs de modules (alternative a la connexion de noeuds d'outils) |
 | `context` | object | No | `{}` | Liste des IDs de modules (alternative a la connexion de noeuds d'outils) |
 | `max_iterations` | number | No | `10` | Donnees de contexte supplementaires pour l'agent |
-| `provider` | select (`openai`, `anthropic`, `ollama`) | No | `openai` | AI model provider |
-| `model` | string | No | `gpt-4o` | Specific model to use |
-| `temperature` | number | No | `0.3` | Creativity level (0=deterministic, 1=creative) |
-| `api_key` | string | No | - | API key (defaults to provider env var) |
-| `base_url` | string | No | - | Custom API base URL (for Ollama or proxies) |
 
 **Output:**
 

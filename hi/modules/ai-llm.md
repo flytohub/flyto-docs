@@ -749,11 +749,6 @@ n: 3
 | `tools` | array | No | `[]` | मॉड्यूल IDs की सूची (टूल नोड्स कनेक्ट करने का विकल्प) |
 | `context` | object | No | `{}` | मॉड्यूल IDs की सूची (टूल नोड्स कनेक्ट करने का विकल्प) |
 | `max_iterations` | number | No | `10` | एजेंट के लिए अतिरिक्त संदर्भ डेटा |
-| `provider` | select (`openai`, `anthropic`, `ollama`) | No | `openai` | AI model provider |
-| `model` | string | No | `gpt-4o` | Specific model to use |
-| `temperature` | number | No | `0.3` | Creativity level (0=deterministic, 1=creative) |
-| `api_key` | string | No | - | API key (defaults to provider env var) |
-| `base_url` | string | No | - | Custom API base URL (for Ollama or proxies) |
 
 **Output:**
 

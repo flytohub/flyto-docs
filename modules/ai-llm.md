@@ -749,11 +749,6 @@ Autonomous AI agent with multi-port connections (model, memory, tools)
 | `tools` | array | No | `[]` | List of module IDs (alternative to connecting tool nodes) |
 | `context` | object | No | `{}` | List of module IDs (alternative to connecting tool nodes) |
 | `max_iterations` | number | No | `10` | Additional context data for the agent |
-| `provider` | select (`openai`, `anthropic`, `ollama`) | No | `openai` | AI model provider |
-| `model` | string | No | `gpt-4o` | Specific model to use |
-| `temperature` | number | No | `0.3` | Creativity level (0=deterministic, 1=creative) |
-| `api_key` | string | No | - | API key (defaults to provider env var) |
-| `base_url` | string | No | - | Custom API base URL (for Ollama or proxies) |
 
 **Output:**
 

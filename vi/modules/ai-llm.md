@@ -749,11 +749,6 @@ Agent AI tự động với kết nối đa cổng (model, memory, tools)
 | `tools` | array | No | `[]` | Danh sách ID module (thay thế cho kết nối các node công cụ) |
 | `context` | object | No | `{}` | Danh sách ID module (thay thế cho kết nối các node công cụ) |
 | `max_iterations` | number | No | `10` | Dữ liệu ngữ cảnh bổ sung cho agent |
-| `provider` | select (`openai`, `anthropic`, `ollama`) | No | `openai` | AI model provider |
-| `model` | string | No | `gpt-4o` | Specific model to use |
-| `temperature` | number | No | `0.3` | Creativity level (0=deterministic, 1=creative) |
-| `api_key` | string | No | - | API key (defaults to provider env var) |
-| `base_url` | string | No | - | Custom API base URL (for Ollama or proxies) |
 
 **Output:**
 

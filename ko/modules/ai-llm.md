@@ -749,11 +749,6 @@ n: 3
 | `tools` | array | No | `[]` | 모듈 ID 목록 (도구 노드 연결 대안) |
 | `context` | object | No | `{}` | 모듈 ID 목록 (도구 노드 연결 대안) |
 | `max_iterations` | number | No | `10` | 에이전트를 위한 추가 컨텍스트 데이터 |
-| `provider` | select (`openai`, `anthropic`, `ollama`) | No | `openai` | AI model provider |
-| `model` | string | No | `gpt-4o` | Specific model to use |
-| `temperature` | number | No | `0.3` | Creativity level (0=deterministic, 1=creative) |
-| `api_key` | string | No | - | API key (defaults to provider env var) |
-| `base_url` | string | No | - | Custom API base URL (for Ollama or proxies) |
 
 **Output:**
 

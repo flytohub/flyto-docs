@@ -749,11 +749,6 @@ Autonomiczny agent AI z wieloportowymi polaczeniami (model, pamiec, narzedzia)
 | `tools` | array | No | `[]` | Lista ID modulow (alternatywa dla laczenia wezlow narzedzi) |
 | `context` | object | No | `{}` | Lista ID modulow (alternatywa dla laczenia wezlow narzedzi) |
 | `max_iterations` | number | No | `10` | Dodatkowe dane kontekstowe dla agenta |
-| `provider` | select (`openai`, `anthropic`, `ollama`) | No | `openai` | AI model provider |
-| `model` | string | No | `gpt-4o` | Specific model to use |
-| `temperature` | number | No | `0.3` | Creativity level (0=deterministic, 1=creative) |
-| `api_key` | string | No | - | API key (defaults to provider env var) |
-| `base_url` | string | No | - | Custom API base URL (for Ollama or proxies) |
 
 **Output:**
 
