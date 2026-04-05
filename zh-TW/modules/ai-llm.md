@@ -457,11 +457,11 @@ AI Agent 的 LLM 模型配置
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `provider` | select (`openai`, `anthropic`, `ollama`) | No | `openai` | AI model provider |
+| `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
 | `model` | string | No | `gpt-4o` | Specific model to use |
 | `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
-| `api_key` | string | No | - | API key (defaults to provider env var) |
-| `base_url` | string | No | - | Custom API base URL (for Ollama or proxies) |
+| `api_key` | string | No | - | API key (leave empty to use environment variable) |
+| `base_url` | string | No | - | Custom API endpoint URL |
 | `max_tokens` | number | No | `4096` | 回應的最大 Token 數量 |
 
 **Output:**
@@ -749,6 +749,11 @@ n: 3
 | `tools` | array | No | `[]` | 模組 ID 列表（可替代連接工具節點） |
 | `context` | object | No | `{}` | 提供給代理的額外上下文資料 |
 | `max_iterations` | number | No | `10` | 代理執行的最大迭代次數 |
+| `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
+| `model` | string | No | `gpt-4o` | Specific model to use |
+| `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
+| `api_key` | string | No | - | API key (leave empty to use environment variable) |
+| `base_url` | string | No | - | Custom API endpoint URL |
 
 **Output:**
 

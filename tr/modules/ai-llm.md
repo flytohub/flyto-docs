@@ -457,11 +457,11 @@ AI Ajanı için LLM model yapılandırması
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `provider` | select (`openai`, `anthropic`, `ollama`) | No | `openai` | AI model provider |
+| `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
 | `model` | string | No | `gpt-4o` | Specific model to use |
 | `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
-| `api_key` | string | No | - | API key (defaults to provider env var) |
-| `base_url` | string | No | - | Custom API base URL (for Ollama or proxies) |
+| `api_key` | string | No | - | API key (leave empty to use environment variable) |
+| `base_url` | string | No | - | Custom API endpoint URL |
 | `max_tokens` | number | No | `4096` | Yanıtta maksimum token |
 
 **Output:**
@@ -749,6 +749,11 @@ n: 3
 | `tools` | array | No | `[]` | Modül kimliklerinin listesi (araç düğümlerini bağlamaya alternatif) |
 | `context` | object | No | `{}` | Modül kimliklerinin listesi (araç düğümlerini bağlamaya alternatif) |
 | `max_iterations` | number | No | `10` | Ajan için ek bağlam verisi |
+| `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
+| `model` | string | No | `gpt-4o` | Specific model to use |
+| `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
+| `api_key` | string | No | - | API key (leave empty to use environment variable) |
+| `base_url` | string | No | - | Custom API endpoint URL |
 
 **Output:**
 

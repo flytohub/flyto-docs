@@ -457,11 +457,11 @@ AI एजेंट के लिए LLM मॉडल कॉन्फ़िगर
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `provider` | select (`openai`, `anthropic`, `ollama`) | No | `openai` | AI model provider |
+| `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
 | `model` | string | No | `gpt-4o` | Specific model to use |
 | `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
-| `api_key` | string | No | - | API key (defaults to provider env var) |
-| `base_url` | string | No | - | Custom API base URL (for Ollama or proxies) |
+| `api_key` | string | No | - | API key (leave empty to use environment variable) |
+| `base_url` | string | No | - | Custom API endpoint URL |
 | `max_tokens` | number | No | `4096` | प्रतिक्रिया में अधिकतम टोकन |
 
 **Output:**
@@ -749,6 +749,11 @@ n: 3
 | `tools` | array | No | `[]` | मॉड्यूल IDs की सूची (टूल नोड्स कनेक्ट करने का विकल्प) |
 | `context` | object | No | `{}` | मॉड्यूल IDs की सूची (टूल नोड्स कनेक्ट करने का विकल्प) |
 | `max_iterations` | number | No | `10` | एजेंट के लिए अतिरिक्त संदर्भ डेटा |
+| `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
+| `model` | string | No | `gpt-4o` | Specific model to use |
+| `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
+| `api_key` | string | No | - | API key (leave empty to use environment variable) |
+| `base_url` | string | No | - | Custom API endpoint URL |
 
 **Output:**
 

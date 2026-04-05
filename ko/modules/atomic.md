@@ -835,13 +835,13 @@ ngrok_token: ${env.NGROK_AUTH_TOKEN}
 | `system_prompt` | string | No | - | System instructions to set AI behavior and context |
 | `context` | object | No | - | Additional context data to include |
 | `messages` | array | No | - | Previous messages for multi-turn conversation |
-| `provider` | select (`openai`, `anthropic`, `ollama`) | No | `openai` | AI model provider |
+| `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
 | `model` | string | No | `gpt-4o` | Specific model to use |
 | `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
 | `max_tokens` | number | No | `2000` | Maximum tokens in response |
 | `response_format` | select (`text`, `json`, `code`, `markdown`) | No | `text` | Expected format of the AI response |
-| `api_key` | string | No | - | API key (defaults to provider env var) |
-| `base_url` | string | No | - | Custom API base URL (for Ollama or proxies) |
+| `api_key` | string | No | - | API key (leave empty to use environment variable) |
+| `base_url` | string | No | - | Custom API endpoint URL |
 
 **Output:**
 
@@ -898,7 +898,7 @@ response_format: json
 | `backup` | boolean | No | `True` | Create .bak backup before modifying files |
 | `context` | string | No | - | Text content to process |
 | `model` | string | No | `gpt-4o` | Specific model to use |
-| `api_key` | string | No | - | API key (defaults to provider env var) |
+| `api_key` | string | No | - | API key (leave empty to use environment variable) |
 
 **Output:**
 

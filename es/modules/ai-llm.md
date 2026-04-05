@@ -457,11 +457,11 @@ Configuracion de modelo LLM para agente de IA
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `provider` | select (`openai`, `anthropic`, `ollama`) | No | `openai` | AI model provider |
+| `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
 | `model` | string | No | `gpt-4o` | Specific model to use |
 | `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
-| `api_key` | string | No | - | API key (defaults to provider env var) |
-| `base_url` | string | No | - | Custom API base URL (for Ollama or proxies) |
+| `api_key` | string | No | - | API key (leave empty to use environment variable) |
+| `base_url` | string | No | - | Custom API endpoint URL |
 | `max_tokens` | number | No | `4096` | Maximo de tokens en respuesta |
 
 **Output:**
@@ -749,6 +749,11 @@ Agente de IA autonomo con conexiones multi-puerto (modelo, memoria, herramientas
 | `tools` | array | No | `[]` | Lista de IDs de modulo (alternativa a conectar nodos de herramientas) |
 | `context` | object | No | `{}` | Lista de IDs de modulo (alternativa a conectar nodos de herramientas) |
 | `max_iterations` | number | No | `10` | Datos de contexto adicionales para el agente |
+| `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
+| `model` | string | No | `gpt-4o` | Specific model to use |
+| `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
+| `api_key` | string | No | - | API key (leave empty to use environment variable) |
+| `base_url` | string | No | - | Custom API endpoint URL |
 
 **Output:**
 

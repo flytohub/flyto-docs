@@ -457,11 +457,11 @@ Konfigurasi model LLM untuk Agen AI
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `provider` | select (`openai`, `anthropic`, `ollama`) | No | `openai` | AI model provider |
+| `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
 | `model` | string | No | `gpt-4o` | Specific model to use |
 | `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
-| `api_key` | string | No | - | API key (defaults to provider env var) |
-| `base_url` | string | No | - | Custom API base URL (for Ollama or proxies) |
+| `api_key` | string | No | - | API key (leave empty to use environment variable) |
+| `base_url` | string | No | - | Custom API endpoint URL |
 | `max_tokens` | number | No | `4096` | Token maksimum dalam respons |
 
 **Output:**
@@ -749,6 +749,11 @@ Agen AI otonom dengan koneksi multi-port (model, memori, tools)
 | `tools` | array | No | `[]` | Daftar ID modul (alternatif untuk menghubungkan node tool) |
 | `context` | object | No | `{}` | Daftar ID modul (alternatif untuk menghubungkan node tool) |
 | `max_iterations` | number | No | `10` | Data konteks tambahan untuk agen |
+| `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
+| `model` | string | No | `gpt-4o` | Specific model to use |
+| `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
+| `api_key` | string | No | - | API key (leave empty to use environment variable) |
+| `base_url` | string | No | - | Custom API endpoint URL |
 
 **Output:**
 
