@@ -745,14 +745,16 @@ n: 3
 
 ` | सरणी आइटम जॉइन करने के लिए सेपरेटर |
 | `max_input_size` | number | No | `10000` | प्रॉम्प्ट के लिए अधिकतम अक्षर (ओवरफ्लो रोकता है) |
+| `agent_type` | select (`tools`, `react`) | No | `tools` | Reasoning strategy for the agent |
 | `system_prompt` | string | No | `You are a helpful AI agent. Use the available tools to complete the task. Think step by step.` | एजेंट व्यवहार के लिए निर्देश |
-| `tools` | array | No | `[]` | मॉड्यूल IDs की सूची (टूल नोड्स कनेक्ट करने का विकल्प) |
+| `response_format` | select (`text`, `json`, `json_schema`) | No | `text` | Expected format of the final answer |
+| `output_schema` | object | No | `{}` | JSON Schema the final answer must match (for json_schema format) |
 | `context` | object | No | `{}` | मॉड्यूल IDs की सूची (टूल नोड्स कनेक्ट करने का विकल्प) |
 | `max_iterations` | number | No | `10` | एजेंट के लिए अतिरिक्त संदर्भ डेटा |
 | `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
 | `model` | string | No | `gpt-4o` | Specific model to use |
-| `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
 | `api_key` | string | No | - | API key (leave empty to use environment variable) |
+| `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
 | `base_url` | string | No | - | Custom API endpoint URL |
 
 **Output:**
@@ -769,7 +771,7 @@ n: 3
 
 ```yaml
 task: Search for the latest news about AI and summarize the top 3 stories
-tools: ["http.request", "data.json_parse"]
+provider: openai
 model: gpt-4o
 ```
 
@@ -777,6 +779,6 @@ model: gpt-4o
 
 ```yaml
 task: Read the CSV file, filter rows where status is "active", and count them
-tools: ["file.read", "data.csv_parse", "array.filter"]
+provider: openai
 model: gpt-4o
 ```
