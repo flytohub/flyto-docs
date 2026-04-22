@@ -6,17 +6,17 @@ Copy, move, and delete files.
 
 | Module | Description |
 |--------|-------------|
-| [Dosya Kopyala](#dosya-kopyala) | Dosyayı başka bir konuma kopyala |
-| [Dosya Sil](#dosya-sil) | Dosya sisteminden dosya sil |
-| [Dosya Taşı](#dosya-taşı) | Dosyayı taşı veya yeniden adlandır |
+| [Copy File](#copy-file) | Copy a file to another location |
+| [Delete File](#delete-file) | Delete a file from the filesystem |
+| [Move File](#move-file) | Move or rename a file |
 
 ## Modules
 
-### Dosya Kopyala
+### Copy File
 
 `file.copy`
 
-Dosyayı başka bir konuma kopyala
+Copy a file to another location
 
 **Parameters:**
 
@@ -30,10 +30,10 @@ Dosyayı başka bir konuma kopyala
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `copied` | boolean | Kopyalanan |
-| `source` | string | Kopyalanan |
-| `destination` | string | Kopyalanan |
-| `size` | number | Kaynak |
+| `copied` | boolean | The copied |
+| `source` | string | The source |
+| `destination` | string | The destination |
+| `size` | number | Size in bytes |
 
 **Example:** Backup file
 
@@ -50,11 +50,11 @@ source: config.yaml
 destination: config.backup.yaml
 ```
 
-### Dosya Sil
+### Delete File
 
 `file.delete`
 
-Dosya sisteminden dosya sil
+Delete a file from the filesystem
 
 **Parameters:**
 
@@ -67,8 +67,8 @@ Dosya sisteminden dosya sil
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deleted` | boolean | Silinen |
-| `file_path` | string | Silinen |
+| `deleted` | boolean | The deleted |
+| `file_path` | string | The file path |
 
 **Example:** Delete temporary file
 
@@ -83,11 +83,11 @@ ignore_missing: true
 file_path: logs/app.log
 ```
 
-### Dosya Taşı
+### Move File
 
 `file.move`
 
-Dosyayı taşı veya yeniden adlandır
+Move or rename a file
 
 **Parameters:**
 
@@ -100,9 +100,9 @@ Dosyayı taşı veya yeniden adlandır
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `moved` | boolean | Taşınan |
-| `source` | string | Taşınan |
-| `destination` | string | Taşınan |
+| `moved` | boolean | The moved |
+| `source` | string | The source |
+| `destination` | string | The destination |
 
 **Example:** Move file to archive
 

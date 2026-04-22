@@ -6,38 +6,38 @@ Build, run, inspect, and manage Docker containers.
 
 | Module | Description |
 |--------|-------------|
-| [Docker इमेज बनाएं](#docker-इमेज-बनाएं) | Dockerfile से एक Docker इमेज बनाएं |
-| [Docker कंटेनर निरीक्षण करें](#docker-कंटेनर-निरीक्षण-करें) | Docker कंटेनर के बारे में विस्तृत जानकारी प्राप्त करें |
-| [कंटेनर लॉग प्राप्त करें](#कंटेनर-लॉग-प्राप्त-करें) | Docker कंटेनर से लॉग प्राप्त करें |
-| [Docker कंटेनर सूचीबद्ध करें](#docker-कंटेनर-सूचीबद्ध-करें) | Docker कंटेनर सूचीबद्ध करें |
-| [Docker कंटेनर चलाएं](#docker-कंटेनर-चलाएं) | इमेज से एक Docker कंटेनर चलाएं |
-| [Docker कंटेनर रोकें](#docker-कंटेनर-रोकें) | चल रहे Docker कंटेनर को रोकें |
+| [Build Docker Image](#build-docker-image) | Build a Docker image from a Dockerfile |
+| [Inspect Docker Container](#inspect-docker-container) | Get detailed information about a Docker container |
+| [Get Container Logs](#get-container-logs) | Get logs from a Docker container |
+| [List Docker Containers](#list-docker-containers) | List Docker containers |
+| [Run Docker Container](#run-docker-container) | Run a Docker container from an image |
+| [Stop Docker Container](#stop-docker-container) | Stop a running Docker container |
 
 ## Modules
 
-### Docker इमेज बनाएं
+### Build Docker Image
 
 `docker.build`
 
-Dockerfile से एक Docker इमेज बनाएं
+Build a Docker image from a Dockerfile
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | बिल्ड संदर्भ डायरेक्टरी का पथ |
-| `tag` | string | Yes | - | इमेज का नाम और टैग (जैसे myapp:latest) |
-| `dockerfile` | string | No | - | Dockerfile का पथ (बिल्ड संदर्भ के सापेक्ष) |
-| `build_args` | object | No | - | बिल्ड-टाइम वेरिएबल्स (जैसे {"NODE_ENV": "production"}) |
-| `no_cache` | boolean | No | `False` | इमेज बनाते समय कैश का उपयोग न करें |
+| `path` | string | Yes | - | Path to the build context directory |
+| `tag` | string | Yes | - | Name and optionally tag the image (e.g. myapp:latest) |
+| `dockerfile` | string | No | - | Path to the Dockerfile (relative to build context) |
+| `build_args` | object | No | - | Build-time variables (e.g. {"NODE_ENV": "production"}) |
+| `no_cache` | boolean | No | `False` | Do not use cache when building the image |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `image_id` | string | बनी हुई इमेज की ID |
-| `tag` | string | इमेज पर लगाया गया टैग |
-| `size` | string | बनी हुई इमेज का आकार |
+| `image_id` | string | ID of the built image |
+| `tag` | string | Tag applied to the image |
+| `size` | string | Size of the built image |
 
 **Example:** Build from current directory
 
@@ -56,29 +56,29 @@ build_args: {"NODE_ENV": "production"}
 no_cache: true
 ```
 
-### Docker कंटेनर निरीक्षण करें
+### Inspect Docker Container
 
 `docker.inspect_container`
 
-Docker कंटेनर के बारे में विस्तृत जानकारी प्राप्त करें
+Get detailed information about a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | निरीक्षण के लिए कंटेनर ID या नाम |
+| `container` | string | Yes | - | Container ID or name to inspect |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | संक्षिप्त कंटेनर ID |
-| `name` | string | कंटेनर का नाम |
-| `state` | object | कंटेनर की स्थिति (स्थिति, चल रहा है, pid, exit_code, आदि) |
-| `image` | string | कंटेनर द्वारा उपयोग की गई इमेज |
-| `network_settings` | object | नेटवर्क कॉन्फ़िगरेशन (IP, पोर्ट्स, नेटवर्क्स) |
-| `mounts` | array | वॉल्यूम और बाइंड माउंट्स |
-| `config` | object | कंटेनर कॉन्फ़िगरेशन (env, cmd, लेबल, आदि) |
+| `id` | string | Short container ID |
+| `name` | string | Container name |
+| `state` | object | Container state (status, running, pid, exit_code, etc.) |
+| `image` | string | Image used by the container |
+| `network_settings` | object | Network configuration (IP, ports, networks) |
+| `mounts` | array | Volume and bind mounts |
+| `config` | object | Container configuration (env, cmd, labels, etc.) |
 
 **Example:** Inspect a container by name
 
@@ -92,27 +92,27 @@ container: my-nginx
 container: a1b2c3d4e5f6
 ```
 
-### कंटेनर लॉग प्राप्त करें
+### Get Container Logs
 
 `docker.logs`
 
-Docker कंटेनर से लॉग प्राप्त करें
+Get logs from a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | कंटेनर ID या नाम |
-| `tail` | number | No | `100` | लॉग के अंत से दिखाने के लिए लाइनों की संख्या |
-| `follow` | boolean | No | `False` | लॉग आउटपुट का अनुसरण करें (टाइमआउट तक स्ट्रीम करता है) |
-| `timestamps` | boolean | No | `False` | लॉग आउटपुट में टाइमस्टैम्प दिखाएं |
+| `container` | string | Yes | - | Container ID or name |
+| `tail` | number | No | `100` | Number of lines to show from the end of the logs |
+| `follow` | boolean | No | `False` | Follow log output (streams until timeout) |
+| `timestamps` | boolean | No | `False` | Show timestamps in log output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `logs` | string | कंटेनर लॉग आउटपुट |
-| `lines` | number | वापस की गई लॉग लाइनों की संख्या |
+| `logs` | string | Container log output |
+| `lines` | number | Number of log lines returned |
 
 **Example:** Get last 50 lines
 
@@ -129,25 +129,25 @@ tail: 100
 timestamps: true
 ```
 
-### Docker कंटेनर सूचीबद्ध करें
+### List Docker Containers
 
 `docker.ps`
 
-Docker कंटेनर सूचीबद्ध करें
+List Docker containers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `all` | boolean | No | `False` | सभी कंटेनर दिखाएं (डिफ़ॉल्ट रूप से केवल चल रहे दिखाता है) |
-| `filters` | object | No | - | कंटेनर फिल्टर करें (जैसे {"name": "my-app", "status": "running"}) |
+| `all` | boolean | No | `False` | Show all containers (default shows just running) |
+| `filters` | object | No | - | Filter containers (e.g. {"name": "my-app", "status": "running"}) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `containers` | array | कंटेनरों की सूची जिसमें id, नाम, इमेज, स्थिति, पोर्ट्स शामिल हैं |
-| `count` | number | पाए गए कंटेनरों की संख्या |
+| `containers` | array | List of containers with id, name, image, status, ports |
+| `count` | number | Number of containers found |
 
 **Example:** List running containers
 
@@ -166,32 +166,32 @@ all: true
 filters: {"name": "nginx"}
 ```
 
-### Docker कंटेनर चलाएं
+### Run Docker Container
 
 `docker.run`
 
-इमेज से एक Docker कंटेनर चलाएं
+Run a Docker container from an image
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image` | string | Yes | - | चलाने के लिए Docker इमेज (जैसे nginx:latest) |
-| `command` | string | No | - | कंटेनर के अंदर चलाने के लिए कमांड |
-| `name` | string | No | - | कंटेनर को एक नाम दें |
-| `ports` | object | No | - | पोर्ट मैपिंग्स होस्ट:कंटेनर के रूप में (जैसे {"8080": "80"}) |
-| `volumes` | object | No | - | वॉल्यूम मैपिंग्स होस्ट_पथ:कंटेनर_पथ के रूप में |
-| `env` | object | No | - | कंटेनर में सेट करने के लिए पर्यावरण वेरिएबल्स |
-| `detach` | boolean | No | `True` | कंटेनर को बैकग्राउंड में चलाएं |
-| `remove` | boolean | No | `False` | कंटेनर के बाहर निकलने पर उसे स्वचालित रूप से हटा दें |
-| `network` | string | No | - | कंटेनर को एक नेटवर्क से जोड़ें |
+| `image` | string | Yes | - | Docker image to run (e.g. nginx:latest) |
+| `command` | string | No | - | Command to run inside the container |
+| `name` | string | No | - | Assign a name to the container |
+| `ports` | object | No | - | Port mappings as host:container (e.g. {"8080": "80"}) |
+| `volumes` | object | No | - | Volume mappings as host_path:container_path |
+| `env` | object | No | - | Environment variables to set in the container |
+| `detach` | boolean | No | `True` | Run container in background |
+| `remove` | boolean | No | `False` | Automatically remove the container when it exits |
+| `network` | string | No | - | Connect the container to a network |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | बने हुए कंटेनर की ID |
-| `status` | string | चलाने के बाद कंटेनर की स्थिति |
+| `container_id` | string | ID of the created container |
+| `status` | string | Container status after run |
 
 **Example:** Run Nginx web server
 
@@ -211,25 +211,25 @@ remove: true
 detach: false
 ```
 
-### Docker कंटेनर रोकें
+### Stop Docker Container
 
 `docker.stop`
 
-चल रहे Docker कंटेनर को रोकें
+Stop a running Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | रोकने के लिए कंटेनर ID या नाम |
-| `timeout` | number | No | `10` | कंटेनर को मारने से पहले सेकंड में प्रतीक्षा करें |
+| `container` | string | Yes | - | Container ID or name to stop |
+| `timeout` | number | No | `10` | Seconds to wait before killing the container |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | रोके गए कंटेनर की ID या नाम |
-| `stopped` | boolean | क्या कंटेनर सफलतापूर्वक रोका गया था |
+| `container_id` | string | ID or name of the stopped container |
+| `stopped` | boolean | Whether the container was successfully stopped |
 
 **Example:** Stop a container by name
 

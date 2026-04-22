@@ -6,115 +6,115 @@ Type casting between data types.
 
 | Module | Description |
 |--------|-------------|
-| [Ke Array](#ke-array) | Ubah nilai ke array |
-| [Ke Boolean](#ke-boolean) | Ubah nilai ke boolean |
-| [Ke Angka](#ke-angka) | Ubah nilai ke angka |
-| [Ke Objek](#ke-objek) | Ubah nilai ke objek |
-| [Ke String](#ke-string) | Ubah nilai apapun ke string |
+| [To Array](#to-array) | Convert value to array |
+| [To Boolean](#to-boolean) | Convert value to boolean |
+| [To Number](#to-number) | Convert value to number |
+| [To Object](#to-object) | Convert value to object |
+| [To String](#to-string) | Convert any value to string |
 
 ## Modules
 
-### Ke Array
+### To Array
 
 `convert.to_array`
 
-Ubah nilai ke array
+Convert value to array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Nilai untuk diubah |
-| `split_string` | boolean | No | `False` | Nilai untuk diubah |
-| `delimiter` | string | No | - | Bagi string menjadi karakter |
+| `value` | any | Yes | - | Value to convert |
+| `split_string` | boolean | No | `False` | Split string into characters |
+| `delimiter` | string | No | - | Delimiter for string splitting |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Pemisah untuk membagi string |
-| `length` | number | Array yang telah diubah |
-| `original_type` | string | Array yang telah diubah |
+| `result` | array | Converted array |
+| `length` | number | Array length |
+| `original_type` | string | Original value type |
 
-### Ke Boolean
+### To Boolean
 
 `convert.to_boolean`
 
-Ubah nilai ke boolean
+Convert value to boolean
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Nilai untuk diubah |
-| `strict` | boolean | No | `False` | Nilai untuk diubah |
+| `value` | any | Yes | - | Value to convert |
+| `strict` | boolean | No | `False` | Only accept true/false strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Hanya terima string true/false |
-| `original_type` | string | Boolean yang telah diubah |
+| `result` | boolean | Converted boolean |
+| `original_type` | string | Original value type |
 
-### Ke Angka
+### To Number
 
 `convert.to_number`
 
-Ubah nilai ke angka
+Convert value to number
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Nilai untuk diubah |
-| `default` | number | No | `0` | Nilai untuk diubah |
-| `integer` | boolean | No | `False` | Nilai default jika konversi gagal |
+| `value` | any | Yes | - | Value to convert |
+| `default` | number | No | `0` | Default value if conversion fails |
+| `integer` | boolean | No | `False` | Convert to integer |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Ubah ke bilangan bulat |
-| `success` | boolean | Angka yang telah diubah |
-| `original_type` | string | Angka yang telah diubah |
+| `result` | number | Converted number |
+| `success` | boolean | Whether conversion succeeded |
+| `original_type` | string | Original value type |
 
-### Ke Objek
+### To Object
 
 `convert.to_object`
 
-Ubah nilai ke objek
+Convert value to object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Nilai untuk diubah |
-| `key_name` | string | No | `value` | Nilai untuk diubah |
+| `value` | any | Yes | - | Value to convert |
+| `key_name` | string | No | `value` | Key name for wrapping non-objects |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Nama kunci untuk membungkus non-objek |
-| `keys` | array | Objek yang telah diubah |
-| `original_type` | string | Objek yang telah diubah |
+| `result` | object | Converted object |
+| `keys` | array | Object keys |
+| `original_type` | string | Original value type |
 
-### Ke String
+### To String
 
 `convert.to_string`
 
-Ubah nilai apapun ke string
+Convert any value to string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Nilai untuk diubah |
-| `pretty` | boolean | No | `False` | Nilai untuk diubah |
+| `value` | any | Yes | - | Value to convert |
+| `pretty` | boolean | No | `False` | Format objects/arrays with indentation |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Format objek/array dengan indentasi |
-| `original_type` | string | Representasi string |
+| `result` | string | String representation |
+| `original_type` | string | Original value type |

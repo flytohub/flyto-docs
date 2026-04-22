@@ -6,10 +6,10 @@ GitHub API, HTTP requests, and search engine integrations.
 
 | Module | Description |
 |--------|-------------|
-| [สร้าง GitHub Issue](#สร้าง-github-issue) | สร้าง issue ใหม่ใน repository GitHub |
+| [Create GitHub Issue](#create-github-issue) | Create a new issue in a GitHub repository |
 | [Create GitHub Pull Request](#create-github-pull-request) | Create a new pull request in a GitHub repository |
-| [รับ GitHub Repository](#รับ-github-repository) | รับข้อมูลเกี่ยวกับ repository GitHub |
-| [ดูรายการ GitHub Issues](#ดูรายการ-github-issues) | ดูรายการ issues จาก repository GitHub |
+| [Get GitHub Repository](#get-github-repository) | Get information about a GitHub repository |
+| [List GitHub Issues](#list-github-issues) | List issues from a GitHub repository |
 | [List GitHub Repositories](#list-github-repositories) | List repositories for a GitHub user or the authenticated user |
 | [Google Search (API)](#google-search-api) | Use Google Custom Search API to search keywords |
 | [HTTP GET Request](#http-get-request) | Send HTTP GET request to any URL |
@@ -18,11 +18,11 @@ GitHub API, HTTP requests, and search engine integrations.
 
 ## Modules
 
-### สร้าง GitHub Issue
+### Create GitHub Issue
 
 `api.github.create_issue`
 
-สร้าง issue ใหม่ใน repository GitHub
+Create a new issue in a GitHub repository
 
 **Parameters:**
 
@@ -94,32 +94,32 @@ head: feature/auth
 base: main
 ```
 
-### รับ GitHub Repository
+### Get GitHub Repository
 
 `api.github.get_repo`
 
-รับข้อมูลเกี่ยวกับ repository GitHub
+Get information about a GitHub repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `owner` | string | Yes | - | เจ้าของ repository (username หรือ organization) |
-| `repo` | string | Yes | - | เจ้าของ repository (username หรือ organization) |
-| `token` | string | No | - | ชื่อ repository |
+| `owner` | string | Yes | - | Repository owner (username or organization) |
+| `repo` | string | Yes | - | Repository name |
+| `token` | string | No | - | GitHub Personal Access Token (optional but recommended) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | GitHub Personal Access Token (ไม่บังคับแต่แนะนำ) |
-| `repo` | object | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `name` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `full_name` | string | ข้อมูล repository |
-| `description` | string | ชื่อรายการ |
-| `stars` | number | ชื่อ repository เต็ม |
-| `forks` | number | คำอธิบายรายการ |
-| `url` | string | ดึงข้อมูลเกี่ยวกับ repository GitHub |
+| `status` | string | Operation status (success/error) |
+| `repo` | object | Repository information |
+| `name` | string | Name of the item |
+| `full_name` | string | Full repository name |
+| `description` | string | Item description |
+| `stars` | number | Number of stars |
+| `forks` | number | Number of forks |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -128,11 +128,11 @@ owner: octocat
 repo: Hello-World
 ```
 
-### ดูรายการ GitHub Issues
+### List GitHub Issues
 
 `api.github.list_issues`
 
-ดูรายการ issues จาก repository GitHub
+List issues from a GitHub repository
 
 **Parameters:**
 
@@ -219,10 +219,10 @@ Use Google Custom Search API to search keywords
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ |
-| `data` | array | ข้อมูลผลลัพธ์การค้นหา |
-| `count` | number | จำนวนผลลัพธ์การค้นหา |
-| `total_results` | number | จำนวนผลลัพธ์ทั้งหมด |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
+| `total_results` | number | Total number of search results available |
 
 **Example:** Search Python tutorials
 
@@ -251,10 +251,10 @@ Send HTTP GET request to any URL
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | รหัสสถานะ HTTP |
-| `headers` | object | ส่วนหัวการตอบกลับ |
-| `body` | string | เนื้อหาการตอบกลับ |
-| `json` | object | การตอบกลับ JSON (ถ้ามี) |
+| `status_code` | number | HTTP status code |
+| `headers` | object | HTTP headers |
+| `body` | string | Response body content |
+| `json` | object | Parsed JSON response data |
 
 **Example:** Fetch API data
 

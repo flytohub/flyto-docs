@@ -6,33 +6,33 @@ Execute JavaScript, Python, or shell commands in isolated environments.
 
 | Module | Description |
 |--------|-------------|
-| [Jalankan JavaScript](#jalankan-javascript) | Jalankan kode JavaScript melalui Node.js dengan batas waktu |
-| [Jalankan Python](#jalankan-python) | Jalankan kode Python dalam subprocess dengan batas waktu |
-| [Jalankan Shell](#jalankan-shell) | Jalankan perintah shell dengan batas waktu dan kontrol lingkungan |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code via Node.js with timeout |
+| [Execute Python](#execute-python) | Execute Python code in a subprocess with timeout |
+| [Execute Shell](#execute-shell) | Execute a shell command with timeout and environment control |
 
 ## Modules
 
-### Jalankan JavaScript
+### Execute JavaScript
 
 `sandbox.execute_js`
 
-Jalankan kode JavaScript melalui Node.js dengan batas waktu
+Execute JavaScript code via Node.js with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | Kode JavaScript untuk dijalankan melalui Node.js |
-| `timeout` | number | No | `10` | Batas waktu eksekusi dalam detik |
+| `code` | string | Yes | - | JavaScript code to execute via Node.js |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | Output standar dari skrip |
-| `stderr` | string | Error standar dari skrip |
-| `exit_code` | number | Kode keluar proses (0 = sukses) |
-| `execution_time_ms` | number | Waktu eksekusi dalam milidetik |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple console.log
 
@@ -48,28 +48,28 @@ code: const data = { name: "test", value: 42 };
 console.log(JSON.stringify(data, null, 2));
 ```
 
-### Jalankan Python
+### Execute Python
 
 `sandbox.execute_python`
 
-Jalankan kode Python dalam subprocess dengan batas waktu
+Execute Python code in a subprocess with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | Kode Python untuk dijalankan |
-| `timeout` | number | No | `10` | Batas waktu eksekusi dalam detik |
-| `allowed_modules` | array | No | - | Daftar putih modul yang dapat diimpor (biarkan kosong untuk mengizinkan semua) |
+| `code` | string | Yes | - | Python code to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `allowed_modules` | array | No | - | Whitelist of importable modules (leave empty to allow all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | Output standar dari skrip |
-| `stderr` | string | Error standar dari skrip |
-| `exit_code` | number | Kode keluar proses (0 = sukses) |
-| `execution_time_ms` | number | Waktu eksekusi dalam milidetik |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple print
 
@@ -86,29 +86,29 @@ print(math.pi)
 allowed_modules: ["math"]
 ```
 
-### Jalankan Shell
+### Execute Shell
 
 `sandbox.execute_shell`
 
-Jalankan perintah shell dengan batas waktu dan kontrol lingkungan
+Execute a shell command with timeout and environment control
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `command` | string | Yes | - | Perintah shell untuk dijalankan |
-| `timeout` | number | No | `10` | Batas waktu eksekusi dalam detik |
-| `working_dir` | string | No | - | Direktori kerja untuk perintah |
-| `env` | object | No | - | Variabel lingkungan tambahan untuk diatur (digabungkan dengan lingkungan saat ini) |
+| `command` | string | Yes | - | Shell command to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `working_dir` | string | No | - | Working directory for the command |
+| `env` | object | No | - | Additional environment variables to set (merged with current env) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | Output standar dari perintah |
-| `stderr` | string | Error standar dari perintah |
-| `exit_code` | number | Kode keluar proses (0 = sukses) |
-| `execution_time_ms` | number | Waktu eksekusi dalam milidetik |
+| `stdout` | string | Standard output from the command |
+| `stderr` | string | Standard error from the command |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple echo
 

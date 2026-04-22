@@ -24,15 +24,15 @@ Get elements in first array but not in others
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `source` | array | Yes | - | Source array |
-| `exclude` | array | Yes | - | Source array |
+| `exclude` | array | Yes | - | Arrays of elements to exclude |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Arrays of elements to exclude |
-| `count` | number | Elements in source but not in exclude arrays |
-| `removed_count` | number | Elements in source but not in exclude arrays |
+| `result` | array | Elements in source but not in exclude arrays |
+| `count` | number | Number of remaining elements |
+| `removed_count` | number | Number of elements removed |
 
 ### Set Intersection
 
@@ -50,8 +50,8 @@ Get intersection of two or more arrays
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Arrays to intersect (array of arrays) |
-| `count` | number | Intersection of all arrays |
+| `result` | array | Intersection of all arrays |
+| `count` | number | Number of common elements |
 
 ### Set Union
 
@@ -69,8 +69,8 @@ Get union of two or more arrays
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Arrays to combine (array of arrays) |
-| `count` | number | Union of all arrays |
+| `result` | array | Union of all arrays |
+| `count` | number | Number of unique elements |
 
 ### Set Unique
 
@@ -83,12 +83,12 @@ Remove duplicate elements from array
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `array` | array | Yes | - | Array to deduplicate |
-| `preserve_order` | boolean | No | `True` | Array to deduplicate |
+| `preserve_order` | boolean | No | `True` | Keep first occurrence order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Keep first occurrence order |
-| `count` | number | Array with unique elements |
-| `duplicates_removed` | number | Array with unique elements |
+| `result` | array | Array with unique elements |
+| `count` | number | Number of unique elements |
+| `duplicates_removed` | number | Number of duplicates removed |

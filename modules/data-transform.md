@@ -15,10 +15,10 @@ CSV, JSON, XML, YAML parsing, generation, and pipeline transformations.
 | [Data Pipeline](#data-pipeline) | Chain multiple data transformations in a single step |
 | [Text Template](#text-template) | Fill text template with variables |
 | [Validate Records](#validate-records) | Validate extracted records against field rules. Splits output into valid and invalid arrays. |
-| [Generate XML](#generate-xml) | Generate XML string from object or array |
-| [Parse XML](#parse-xml) | Parse XML string into object |
-| [Generate YAML](#generate-yaml) | Generate YAML string from object or array |
-| [Parse YAML](#parse-yaml) | Parse YAML string into object |
+| [Generate XML](#generate-xml) | Generate XML string from Python dict |
+| [Parse XML](#parse-xml) | Parse XML string or file into Python dict |
+| [Generate YAML](#generate-yaml) | Generate YAML string from Python object |
+| [Parse YAML](#parse-yaml) | Parse YAML string or file into Python object |
 | [Object Keys](#object-keys) | Get all keys from an object |
 | [Object Merge](#object-merge) | Merge multiple objects into one |
 | [Object Omit](#object-omit) | Omit specific keys from an object |
@@ -47,9 +47,9 @@ Read and parse CSV file into array of objects
 | Field | Type | Description |
 |-------|------|-------------|
 | `status` | string | Operation status |
-| `data` | array | Operation status |
-| `rows` | number | Operation status |
-| `columns` | array | Array of row objects |
+| `data` | array | Array of row objects |
+| `rows` | number | Number of rows |
+| `columns` | array | Column names |
 
 **Example:** Example
 
@@ -79,8 +79,8 @@ Write array of objects to CSV file
 | Field | Type | Description |
 |-------|------|-------------|
 | `status` | string | Operation status |
-| `file_path` | string | Operation status |
-| `rows_written` | number | Operation status |
+| `file_path` | string | Path to written file |
+| `rows_written` | number | Number of rows written |
 
 **Example:** Example
 
@@ -147,7 +147,7 @@ Parse JSON string into object
 | Field | Type | Description |
 |-------|------|-------------|
 | `status` | string | Operation status |
-| `data` | object | Operation status |
+| `data` | object | Parsed object |
 
 **Example:** Example
 
@@ -174,7 +174,7 @@ Convert object to JSON string
 | Field | Type | Description |
 |-------|------|-------------|
 | `status` | string | Operation status |
-| `json` | string | Operation status |
+| `json` | string | JSON string |
 
 **Example:** Example
 
@@ -205,9 +205,9 @@ Convert JSON data or files to CSV format
 | Field | Type | Description |
 |-------|------|-------------|
 | `output_path` | string | Path to the generated CSV file |
-| `row_count` | number | Path to the generated CSV file |
-| `column_count` | number | Path to the generated CSV file |
-| `columns` | array | Number of rows written |
+| `row_count` | number | Number of rows written |
+| `column_count` | number | Number of columns |
+| `columns` | array | List of column names |
 
 **Example:** Convert JSON array to CSV
 
@@ -234,16 +234,16 @@ Chain multiple data transformations in a single step
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `input` | any | Yes | - | Input data to transform (array or object) |
-| `steps` | array | Yes | - | Input data to transform (array or object) |
+| `steps` | array | Yes | - | Array of transformation steps to apply in order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | Array of transformation steps to apply in order |
-| `original_count` | integer | Transformed data |
-| `result_count` | integer | Transformed data |
-| `steps_applied` | integer | Count of items after transformation |
+| `result` | any | Transformed data |
+| `original_count` | integer | Count of items before transformation |
+| `result_count` | integer | Count of items after transformation |
+| `steps_applied` | integer | Number of transformation steps applied |
 
 **Example:** Example
 
@@ -284,7 +284,7 @@ Fill text template with variables
 | Field | Type | Description |
 |-------|------|-------------|
 | `status` | string | Operation status |
-| `result` | string | Operation status |
+| `result` | string | Filled template |
 
 **Example:** Example
 
@@ -338,17 +338,17 @@ drop_fields: ["__index", "html"]
 
 `data.xml.generate`
 
-Generate XML string from object or array
+Generate XML string from Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | object | Yes | - | Data to convert to XML |
-| `root_tag` | string | No | `root` | Root element tag name |
-| `pretty` | boolean | No | `True` | Pretty-print the XML output |
-| `encoding` | string | No | `utf-8` | Character encoding for the XML output |
-| `declaration` | boolean | No | `True` | Include XML declaration header |
+| `data` | object | Yes | - | Python dict or object to convert to XML |
+| `root_tag` | string | No | `root` | Tag name for the root XML element |
+| `pretty` | boolean | No | `True` | Format XML with indentation for readability |
+| `encoding` | string | No | `utf-8` | XML encoding declaration value |
+| `declaration` | boolean | No | `True` | Include <?xml version="1.0"?> declaration at top |
 
 **Output:**
 
@@ -368,21 +368,21 @@ pretty: true
 
 `data.xml.parse`
 
-Parse XML string into object
+Parse XML string or file into Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `content` | string | No | - | XML string to parse |
-| `file_path` | string | No | - | Path to XML file to parse |
-| `preserve_attributes` | boolean | No | `True` | Preserve XML attributes in parsed output |
+| `file_path` | string | No | - | Path to XML file (used if content is empty) |
+| `preserve_attributes` | boolean | No | `True` | Include XML element attributes as @attributes in output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Parsed XML as object |
+| `result` | object | Parsed XML as nested dict |
 | `root_tag` | string | Root element tag name |
 
 **Example:** Example
@@ -396,17 +396,17 @@ preserve_attributes: true
 
 `data.yaml.generate`
 
-Generate YAML string from object or array
+Generate YAML string from Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | any | Yes | - | Data to convert to YAML |
-| `default_flow_style` | boolean | No | `False` | Use flow style for nested structures |
-| `sort_keys` | boolean | No | `False` | Sort keys alphabetically |
+| `data` | any | Yes | - | Python object, array, or value to convert to YAML |
+| `default_flow_style` | boolean | No | `False` | Use inline/flow style (JSON-like) instead of block style |
+| `sort_keys` | boolean | No | `False` | Sort dictionary keys alphabetically |
 | `indent` | number | No | `2` | Number of spaces for indentation |
-| `allow_unicode` | boolean | No | `True` | Allow unicode characters in output |
+| `allow_unicode` | boolean | No | `True` | Allow unicode characters in output without escaping |
 
 **Output:**
 
@@ -426,22 +426,22 @@ indent: 2
 
 `data.yaml.parse`
 
-Parse YAML string into object
+Parse YAML string or file into Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `content` | string | No | - | YAML string to parse |
-| `file_path` | string | No | - | Path to YAML file to parse |
-| `multi_document` | boolean | No | `False` | Parse multi-document YAML (separated by ---) |
+| `file_path` | string | No | - | Path to YAML file (used if content is empty) |
+| `multi_document` | boolean | No | `False` | Parse multiple YAML documents separated by --- (uses safe_load_all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | Parsed YAML as object or array |
-| `type` | string | Type of the parsed result |
+| `result` | any | Parsed YAML data (object, array, or scalar) |
+| `type` | string | Type of parsed result: object, array, or scalar |
 
 **Example:** Example
 
@@ -481,7 +481,7 @@ Get all keys from an object
 | Field | Type | Description |
 |-------|------|-------------|
 | `keys` | array | List of object keys |
-| `count` | number | List of object keys |
+| `count` | number | Number of keys |
 
 **Example:** Get object keys
 
@@ -582,7 +582,7 @@ Get all values from an object
 | Field | Type | Description |
 |-------|------|-------------|
 | `values` | array | List of object values |
-| `count` | number | List of object values |
+| `count` | number | Number of values |
 
 **Example:** Get object values
 

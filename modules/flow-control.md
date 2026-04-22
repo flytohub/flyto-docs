@@ -9,7 +9,7 @@ Branching, loops, parallelism, subflows, triggers, and error handling.
 | [Batch Process](#batch-process) | Process items in batches with configurable size |
 | [Branch](#branch) | Conditional branching based on expression evaluation |
 | [Breakpoint](#breakpoint) | Pause workflow execution for human approval or input |
-| [Circuit Breaker](#circuit-breaker) | Circuit breaker pattern to prevent cascading failures |
+| [Circuit Breaker](#circuit-breaker) | Circuit breaker pattern for fault tolerance |
 | [Container](#container) | Embedded subflow container for organizing complex workflows |
 | [Debounce](#debounce) | Debounce execution to prevent rapid repeated calls |
 | [End](#end) | Explicit workflow end node |
@@ -23,13 +23,13 @@ Branching, loops, parallelism, subflows, triggers, and error handling.
 | [Loop](#loop) | Repeat steps N times using output port routing |
 | [Merge](#merge) | Merge multiple inputs into a single output |
 | [Parallel](#parallel) | Execute multiple tasks in parallel with different strategies |
-| [Rate Limit](#rate-limit) | Rate limit execution using token bucket or sliding window |
-| [Retry](#retry) | Retry failed operations with configurable backoff |
+| [Rate Limit](#rate-limit) | Rate limiter with token bucket strategy |
+| [Retry](#retry) | Retry with exponential backoff |
 | [Start](#start) | Explicit workflow start node |
 | [Subflow](#subflow) | Reference and execute an external workflow |
 | [Switch](#switch) | Multi-way branching based on value matching |
 | [Throttle](#throttle) | Throttle execution rate with minimum interval |
-| [Trigger](#trigger) | Workflow entry point - manual, webhook, schedule, or event |
+| [Trigger](#trigger) | Workflow entry point - manual, webhook, schedule, event, mcp, or polling |
 
 ## Modules
 
@@ -47,19 +47,19 @@ Process items in batches with configurable size
 | `batch_size` | number | Yes | `10` | Number of items per batch |
 | `delay_ms` | number | No | `0` | Milliseconds to wait between batches (for rate limiting) |
 | `continue_on_error` | boolean | No | `False` | Continue processing remaining batches if one fails |
-| `parallel_batches` | number | No | `1` | Continue processing remaining batches if one fails |
+| `parallel_batches` | number | No | `1` | Number of batches to process in parallel (1 for sequential) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Number of batches to process in parallel (1 for sequential) |
-| `batch` | array | Event for routing (batch/completed/error) |
-| `batch_index` | number | Event for routing (batch/completed/error) |
-| `total_batches` | number | Current batch items |
-| `total_items` | number | Current batch index (0-based) |
-| `is_last_batch` | boolean | Total number of batches |
-| `progress` | object | Total number of items |
+| `__event__` | string | Event for routing (batch/completed/error) |
+| `batch` | array | Current batch items |
+| `batch_index` | number | Current batch index (0-based) |
+| `total_batches` | number | Total number of batches |
+| `total_items` | number | Total number of items |
+| `is_last_batch` | boolean | Whether this is the last batch |
+| `progress` | object | Progress information |
 
 **Example:** Example
 
@@ -102,10 +102,10 @@ Conditional branching based on expression evaluation
 | Field | Type | Description |
 |-------|------|-------------|
 | `__event__` | string | Event for routing (true/false/error) |
-| `outputs` | object | Event for routing (true/false/error) |
-| `result` | boolean | The true |
-| `condition` | string | The false |
-| `resolved_condition` | string | Condition evaluation result |
+| `outputs` | object | Output values by port |
+| `result` | boolean | Condition evaluation result |
+| `condition` | string | Original condition expression |
+| `resolved_condition` | string | Condition after variable resolution |
 
 **Example:** Example
 
@@ -143,14 +143,14 @@ Pause workflow execution for human approval or input
 | Field | Type | Description |
 |-------|------|-------------|
 | `__event__` | string | Event for routing (approved/rejected/timeout) |
-| `breakpoint_id` | string | Event for routing (approved/rejected/timeout) |
-| `status` | string | Unique breakpoint identifier |
-| `approved_by` | array | Final status (approved/rejected/timeout/cancelled) |
-| `rejected_by` | array | List of users who approved |
-| `custom_inputs` | object | List of users who rejected |
-| `comments` | array | Values collected from custom fields |
-| `resolved_at` | string | Comments from approvers |
-| `wait_duration_ms` | integer | ISO timestamp of resolution |
+| `breakpoint_id` | string | Unique breakpoint identifier |
+| `status` | string | Final status (approved/rejected/timeout/cancelled) |
+| `approved_by` | array | List of users who approved |
+| `rejected_by` | array | List of users who rejected |
+| `custom_inputs` | object | Values collected from custom fields |
+| `comments` | array | Comments from approvers |
+| `resolved_at` | string | ISO timestamp of resolution |
+| `wait_duration_ms` | integer | Time spent waiting for approval |
 
 **Example:** Example
 
@@ -179,24 +179,24 @@ custom_fields: [{"name": "reason", "label": "Reason", "type": "text", "required"
 
 `flow.circuit_breaker`
 
-Circuit breaker pattern to prevent cascading failures
+Circuit breaker pattern for fault tolerance
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `failure_threshold` | number | Yes | `5` | Number of failures before opening the circuit |
-| `reset_timeout_ms` | number | No | `60000` | Time in milliseconds before circuit transitions to half-open |
-| `half_open_max` | number | No | `1` | Maximum requests allowed in half-open state |
+| `reset_timeout_ms` | number | No | `60000` | Time to wait before transitioning from open to half-open |
+| `half_open_max` | number | No | `1` | Maximum test requests allowed in half-open state |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event for routing (allowed/rejected/half_open) |
-| `state` | string | Circuit state (closed/open/half_open) |
-| `failure_count` | number | Number of consecutive failures |
-| `last_failure_time_ms` | number | Timestamp of last failure in milliseconds |
+| `__event__` | string | Event for routing (closed/open/half_open) |
+| `state` | string | Current circuit breaker state |
+| `failure_count` | number | Current number of consecutive failures |
+| `last_failure_time_ms` | number | Timestamp of last failure |
 | `time_until_half_open_ms` | number | Milliseconds until circuit transitions to half-open |
 
 **Example:** Example
@@ -242,11 +242,11 @@ Embedded subflow container for organizing complex workflows
 | Field | Type | Description |
 |-------|------|-------------|
 | `__event__` | string | Event for routing (success/error) |
-| `outputs` | object | Event for routing (success/error) |
-| `subflow_result` | object | Error message if operation failed |
-| `exported_variables` | object | Result from subflow execution |
-| `node_count` | integer | Variables exported from subflow |
-| `execution_time_ms` | number | Number of nodes in subflow |
+| `outputs` | object | Output values by port |
+| `subflow_result` | object | Result from subflow execution |
+| `exported_variables` | object | Variables exported from subflow |
+| `node_count` | integer | Number of nodes in subflow |
+| `execution_time_ms` | number | Total subflow execution time in milliseconds |
 
 **Example:** Example
 
@@ -272,18 +272,18 @@ Debounce execution to prevent rapid repeated calls
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `delay_ms` | number | Yes | - | Wait time after last call before executing |
-| `leading` | boolean | No | `False` | Execute on the leading edge (first call triggers immediately) |
-| `trailing` | boolean | No | `True` | Execute on the trailing edge (after delay expires) |
+| `delay_ms` | number | Yes | - | Wait time in milliseconds before allowing execution |
+| `leading` | boolean | No | `False` | Execute on the leading edge (first call immediately) |
+| `trailing` | boolean | No | `True` | Execute on the trailing edge (after delay of inactivity) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event for routing (executed/debounced) |
-| `last_call_ms` | number | Timestamp of last call in milliseconds |
-| `calls_debounced` | number | Number of calls debounced since last execution |
-| `time_since_last_ms` | number | Time elapsed since last call in milliseconds |
+| `__event__` | string | Event for routing (executed/skipped) |
+| `last_call_ms` | number | Timestamp of the last call |
+| `calls_debounced` | number | Number of calls that were debounced (skipped) |
+| `time_since_last_ms` | number | Time since last call in milliseconds |
 | `edge` | string | Which edge triggered execution (leading/trailing) |
 
 **Example:** Example
@@ -326,8 +326,8 @@ Explicit workflow end node
 | Field | Type | Description |
 |-------|------|-------------|
 | `__event__` | string | Event for routing (__end__) |
-| `ended_at` | string | Event for routing (__end__) |
-| `workflow_result` | object | Event for routing (__end__) |
+| `ended_at` | string | ISO timestamp of end |
+| `workflow_result` | object | Mapped workflow output |
 
 **Example:** Example
 
@@ -352,16 +352,16 @@ Catches and handles errors from upstream nodes
 |------|------|----------|---------|-------------|
 | `action` | string | Yes | `log_and_continue` | What to do with the error |
 | `include_traceback` | boolean | No | `True` | Include full stack trace in output |
-| `error_code_mapping` | object | No | `{}` | Include full stack trace in output |
-| `fallback_value` | any | No | - | Map error codes to custom actions |
+| `error_code_mapping` | object | No | `{}` | Map error codes to custom actions |
+| `fallback_value` | any | No | - | Value to use when error is suppressed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Value to use when error is suppressed |
-| `outputs` | object | Event for routing (handled/escalate) |
-| `error_info` | object | Event for routing (handled/escalate) |
+| `__event__` | string | Event for routing (handled/escalate) |
+| `outputs` | object | Output values by port |
+| `error_info` | object | Extracted error information |
 | `action_taken` | string | What action was taken |
 
 **Example:** Example
@@ -401,8 +401,8 @@ Entry point for error workflows - triggered when another workflow fails
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Description of this error workflow |
-| `error_context` | object | Event for routing (triggered) |
+| `__event__` | string | Event for routing (triggered) |
+| `error_context` | object | Complete error context from failed workflow |
 | `triggered_at` | string | ISO timestamp when error workflow was triggered |
 
 **Example:** Example
@@ -427,23 +427,23 @@ Iterate over a list and execute steps for each item
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `items` | string | Yes | - | List of items to iterate over (supports ${variable} reference) |
-| `steps` | array | No | - | List of items to iterate over (supports ${variable} reference) |
-| `item_var` | string | No | `item` | Steps to execute for each item (nested mode only, optional for edge mode) |
-| `index_var` | string | No | `index` | Variable name for current item |
-| `output_mode` | string | No | `collect` | Variable name for current index |
+| `items` | string | Yes | - | Array to iterate over — use gear icon to reference a previous step output |
+| `steps` | array | No | - | Steps to execute for each item (nested mode only) |
+| `item_var` | string | No | `item` | Variable name for current item |
+| `index_var` | string | No | `index` | Variable name for current index |
+| `output_mode` | string | No | `collect` | How to collect results: collect (array), last (single), none |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | How to collect results: collect (array), last (single), none |
-| `__set_context` | object | Event for routing (iterate/done) |
-| `outputs` | object | Current item being iterated |
+| `__event__` | string | Event for routing (iterate/done) |
+| `__set_context` | object | Scope variables set on each iteration |
+| `outputs` | object | Output values by port |
 | `iteration` | number | Current iteration index |
-| `status` | string | Current iteration index |
-| `results` | array | Current iteration index |
-| `count` | number | Operation status |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of items processed |
 
 **Example:** Example
 
@@ -476,8 +476,8 @@ Split execution into parallel branches
 | Field | Type | Description |
 |-------|------|-------------|
 | `__event__` | string | Event for routing (fork/error) |
-| `input_data` | any | Event for routing (fork/error) |
-| `branch_count` | integer | Event for routing (fork/error) |
+| `input_data` | any | Input data passed to all branches |
+| `branch_count` | integer | Number of branches created |
 
 **Example:** Example
 
@@ -509,8 +509,8 @@ Unconditional jump to another step
 | Field | Type | Description |
 |-------|------|-------------|
 | `__event__` | string | Event for routing (goto) |
-| `target` | string | Event for routing (goto) |
-| `iteration` | number | Event for routing (goto) |
+| `target` | string | ID of the target step |
+| `iteration` | number | Current iteration count for this goto |
 
 **Example:** Example
 
@@ -544,10 +544,10 @@ Execute an external workflow file
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Parameters to pass to the invoked workflow |
-| `result` | any | Maximum execution time in seconds |
-| `workflow_id` | string | Event for routing (success/error) |
-| `execution_time_ms` | number | Workflow execution result |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Workflow execution result |
+| `workflow_id` | string | Invoked workflow ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 
@@ -585,9 +585,9 @@ Wait for parallel branches to complete
 | Field | Type | Description |
 |-------|------|-------------|
 | `__event__` | string | Event for routing (joined/timeout/error) |
-| `joined_data` | array | Event for routing (joined/timeout/error) |
-| `completed_count` | integer | Event for routing (joined/timeout/error) |
-| `strategy` | string | Data from all completed inputs |
+| `joined_data` | array | Data from all completed inputs |
+| `completed_count` | integer | Number of inputs completed |
+| `strategy` | string | Strategy used for joining |
 
 **Example:** Example
 
@@ -616,20 +616,20 @@ Repeat steps N times using output port routing
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `times` | number | Yes | `1` | Number of times to repeat |
-| `target` | string | No | - | Number of times to repeat |
-| `steps` | array | No | - | DEPRECATED: Use output ports and edges instead |
-| `index_var` | string | No | `index` | Steps to execute for each iteration (nested mode) |
+| `target` | string | No | - | DEPRECATED: Use output ports and edges instead |
+| `steps` | array | No | - | Steps to execute for each iteration (nested mode) |
+| `index_var` | string | No | `index` | Variable name for current index |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Variable name for current index |
-| `outputs` | object | Variable name for current index |
-| `iteration` | number | Output values by port |
-| `status` | string | Current iteration count |
-| `results` | array | Current iteration count |
-| `count` | number | Operation status |
+| `__event__` | string | Event for routing (iterate/done/error) |
+| `outputs` | object | Output values by port |
+| `iteration` | number | Current iteration count |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of iterations completed |
 
 **Example:** Example
 
@@ -662,9 +662,9 @@ Merge multiple inputs into a single output
 | Field | Type | Description |
 |-------|------|-------------|
 | `__event__` | string | Event for routing (merged/error) |
-| `merged_data` | any | Event for routing (merged/error) |
-| `input_count` | integer | Event for routing (merged/error) |
-| `strategy` | string | Merged data based on strategy |
+| `merged_data` | any | Merged data based on strategy |
+| `input_count` | integer | Number of inputs received |
+| `strategy` | string | Strategy used for merging |
 
 **Example:** Example
 
@@ -691,22 +691,22 @@ Execute multiple tasks in parallel with different strategies
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `tasks` | array | Yes | - | Array of task definitions to execute in parallel |
-| `mode` | string | No | `all` | Array of task definitions to execute in parallel |
+| `mode` | string | No | `all` | Parallel execution mode |
 | `timeout_ms` | number | No | `60000` | Maximum wait time in milliseconds |
 | `fail_fast` | boolean | No | `True` | Stop all tasks on first failure (only for mode=all) |
-| `concurrency_limit` | number | No | `0` | Stop all tasks on first failure (only for mode=all) |
+| `concurrency_limit` | number | No | `0` | Maximum number of concurrent tasks (0 for unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Maximum number of concurrent tasks (0 for unlimited) |
-| `results` | array | Event for routing (completed/partial/error) |
-| `completed_count` | number | Event for routing (completed/partial/error) |
-| `failed_count` | number | Results from all tasks |
-| `total_count` | number | Number of successfully completed tasks |
-| `mode` | string | Number of failed tasks |
-| `duration_ms` | number | Total number of tasks |
+| `__event__` | string | Event for routing (completed/partial/error) |
+| `results` | array | Results from all tasks |
+| `completed_count` | number | Number of successfully completed tasks |
+| `failed_count` | number | Number of failed tasks |
+| `total_count` | number | Total number of tasks |
+| `mode` | string | Execution mode used |
+| `duration_ms` | number | Total execution time in milliseconds |
 
 **Example:** Example
 
@@ -734,7 +734,7 @@ mode: settle
 
 `flow.rate_limit`
 
-Rate limit execution using token bucket or sliding window
+Rate limiter with token bucket strategy
 
 **Parameters:**
 
@@ -742,18 +742,18 @@ Rate limit execution using token bucket or sliding window
 |------|------|----------|---------|-------------|
 | `max_requests` | number | Yes | - | Maximum number of requests allowed per window |
 | `window_ms` | number | No | `60000` | Time window in milliseconds |
-| `strategy` | string | No | `token_bucket` | Rate limiting strategy (token_bucket or sliding_window) |
-| `queue_overflow` | string | No | `wait` | Behavior when queue is full (drop or error) |
+| `strategy` | string | No | `token_bucket` | Rate limiting strategy |
+| `queue_overflow` | string | No | `wait` | Behavior when rate limit is exceeded |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event for routing (allowed/limited) |
-| `tokens_remaining` | number | Remaining tokens in bucket |
-| `window_reset_ms` | number | Milliseconds until window resets |
-| `requests_in_window` | number | Number of requests in current window |
-| `wait_ms` | number | Milliseconds to wait before next allowed request |
+| `__event__` | string | Event for routing (allowed/throttled/error) |
+| `tokens_remaining` | number | Number of tokens remaining in the bucket |
+| `window_reset_ms` | number | Milliseconds until the window resets |
+| `requests_in_window` | number | Number of requests made in current window |
+| `wait_ms` | number | Milliseconds to wait before retry (if throttled) |
 
 **Example:** Example
 
@@ -785,7 +785,7 @@ queue_overflow: wait
 
 `flow.retry`
 
-Retry failed operations with configurable backoff
+Retry with exponential backoff
 
 **Parameters:**
 
@@ -793,20 +793,20 @@ Retry failed operations with configurable backoff
 |------|------|----------|---------|-------------|
 | `max_retries` | number | Yes | `3` | Maximum number of retry attempts |
 | `initial_delay_ms` | number | No | `1000` | Initial delay before first retry in milliseconds |
-| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff |
-| `max_delay_ms` | number | No | `30000` | Maximum delay between retries in milliseconds |
-| `retry_on_errors` | array | No | `[]` | Error types to retry on (empty means retry all) |
+| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g. 2.0 doubles delay each retry) |
+| `max_delay_ms` | number | No | `30000` | Maximum delay cap in milliseconds |
+| `retry_on_errors` | array | No | `[]` | Optional list of error codes to retry on (empty = retry on all errors) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event for routing (retry/success/failed) |
-| `attempt` | number | Current attempt number |
-| `max_retries` | number | Maximum number of retries configured |
-| `delay_ms` | number | Delay before next retry in milliseconds |
-| `total_elapsed_ms` | number | Total elapsed time in milliseconds |
-| `last_error` | object | Last error message |
+| `__event__` | string | Event for routing (success/retry/exhausted) |
+| `attempt` | number | Current attempt number (1-based) |
+| `max_retries` | number | Maximum retry attempts configured |
+| `delay_ms` | number | Delay before this attempt in milliseconds |
+| `total_elapsed_ms` | number | Total time elapsed across all attempts |
+| `last_error` | object | Last error that triggered a retry |
 
 **Example:** Example
 
@@ -842,8 +842,8 @@ Explicit workflow start node
 | Field | Type | Description |
 |-------|------|-------------|
 | `__event__` | string | Event for routing (start) |
-| `started_at` | string | Event for routing (start) |
-| `workflow_id` | string | Explicit workflow start node |
+| `started_at` | string | ISO timestamp of start |
+| `workflow_id` | string | Workflow ID if available |
 
 **Example:** Example
 
@@ -871,9 +871,9 @@ Reference and execute an external workflow
 | Field | Type | Description |
 |-------|------|-------------|
 | `__event__` | string | Event for routing (success/error) |
-| `result` | any | Event for routing (success/error) |
-| `execution_id` | string | Event for routing (success/error) |
-| `workflow_ref` | string | Subflow execution result |
+| `result` | any | Subflow execution result |
+| `execution_id` | string | Subflow execution ID (for spawn/async) |
+| `workflow_ref` | string | Referenced workflow |
 
 **Example:** Example
 
@@ -909,9 +909,9 @@ Multi-way branching based on value matching
 | Field | Type | Description |
 |-------|------|-------------|
 | `__event__` | string | Event for routing (case:value or default) |
-| `outputs` | object | Event for routing (case:value or default) |
-| `matched_case` | string | Event for routing (case:value or default) |
-| `value` | any | Output values by port |
+| `outputs` | object | Output values by port |
+| `matched_case` | string | The case that matched |
+| `value` | any | The resolved value that was matched |
 
 **Example:** Example
 
@@ -974,7 +974,7 @@ leading: false
 
 `flow.trigger`
 
-Workflow entry point - manual, webhook, schedule, or event
+Workflow entry point - manual, webhook, schedule, event, mcp, or polling
 
 **Parameters:**
 
@@ -1000,9 +1000,9 @@ Workflow entry point - manual, webhook, schedule, or event
 | Field | Type | Description |
 |-------|------|-------------|
 | `__event__` | string | Event for routing (triggered/error) |
-| `trigger_data` | object | Event for routing (triggered/error) |
-| `trigger_type` | string | Event for routing (triggered/error) |
-| `triggered_at` | string | Data from trigger source |
+| `trigger_data` | object | Data from trigger source |
+| `trigger_type` | string | Type of trigger |
+| `triggered_at` | string | ISO timestamp |
 
 **Example:** Example
 

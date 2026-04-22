@@ -6,41 +6,41 @@ Google Sheets, Notion, Airtable, and Stripe integrations.
 
 | Module | Description |
 |--------|-------------|
-| [Google Sheets 읽기](#google-sheets-읽기) | Google Sheets 스프레드시트에서 데이터 읽기 |
-| [Google Sheets 쓰기](#google-sheets-쓰기) | Google Sheets 스프레드시트에 데이터 쓰기 |
-| [Notion 페이지 생성](#notion-페이지-생성) | Notion 데이터베이스에 새 페이지 생성 |
-| [Notion 데이터베이스 쿼리](#notion-데이터베이스-쿼리) | 필터와 정렬로 Notion 데이터베이스에서 페이지 쿼리 |
-| [Stripe 결제 생성](#stripe-결제-생성) | Stripe로 결제 인텐트 생성 |
-| [Stripe 고객 조회](#stripe-고객-조회) | Stripe에서 고객 정보 조회 |
-| [Stripe 결제 목록](#stripe-결제-목록) | Stripe에서 최근 결제 목록 조회 |
-| [Airtable 레코드 생성](#airtable-레코드-생성) | Airtable 테이블에 새 레코드 생성 |
-| [Airtable 레코드 읽기](#airtable-레코드-읽기) | Airtable 테이블에서 레코드 읽기 |
-| [Airtable 레코드 업데이트](#airtable-레코드-업데이트) | Airtable 테이블의 기존 레코드 업데이트 |
+| [Google Sheets Read](#google-sheets-read) | Read data from Google Sheets spreadsheet |
+| [Google Sheets Write](#google-sheets-write) | Write data to Google Sheets spreadsheet |
+| [Notion Create Page](#notion-create-page) | Create a new page in Notion database |
+| [Notion Query Database](#notion-query-database) | Query pages from Notion database with filters and sorting |
+| [Stripe Create Payment](#stripe-create-payment) | Create a payment intent with Stripe |
+| [Stripe Get Customer](#stripe-get-customer) | Retrieve customer information from Stripe |
+| [Stripe List Charges](#stripe-list-charges) | List recent charges from Stripe |
+| [Airtable Create Record](#airtable-create-record) | Create a new record in Airtable table |
+| [Airtable Read Records](#airtable-read-records) | Read records from Airtable table |
+| [Airtable Update Record](#airtable-update-record) | Update an existing record in Airtable table |
 
 ## Modules
 
-### Google Sheets 읽기
+### Google Sheets Read
 
 `api.google_sheets.read`
 
-Google Sheets 스프레드시트에서 데이터 읽기
+Read data from Google Sheets spreadsheet
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `credentials` | object | No | - | Google 서비스 계정 JSON 자격 증명 (기본값: env.GOOGLE_CREDENTIALS_JSON) |
-| `spreadsheet_id` | string | Yes | - | Google Sheets 스프레드시트 ID (URL에서) |
-| `range` | string | Yes | - | 읽을 A1 표기법 범위 |
-| `include_header` | boolean | No | `True` | 첫 행을 열 헤더로 파싱 |
+| `credentials` | object | No | - | Google service account JSON credentials (defaults to env.GOOGLE_CREDENTIALS_JSON) |
+| `spreadsheet_id` | string | Yes | - | Google Sheets spreadsheet ID (from URL) |
+| `range` | string | Yes | - | A1 notation range to read |
+| `include_header` | boolean | No | `True` | Parse first row as column headers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `values` | array | 첫 행을 열 헤더로 파싱 |
-| `data` | array | 행 배열 (각 행은 값 배열) |
-| `row_count` | number | 행 배열 (각 행은 값 배열) |
+| `values` | array | Array of rows (each row is array of values) |
+| `data` | array | Array of row objects (if include_header=true) |
+| `row_count` | number | Number of rows read |
 
 **Example:** Read with headers
 
@@ -50,30 +50,30 @@ range: Sheet1!A1:D100
 include_header: true
 ```
 
-### Google Sheets 쓰기
+### Google Sheets Write
 
 `api.google_sheets.write`
 
-Google Sheets 스프레드시트에 데이터 쓰기
+Write data to Google Sheets spreadsheet
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `credentials` | object | No | - | Google 서비스 계정 JSON 자격 증명 (기본값: env.GOOGLE_CREDENTIALS_JSON) |
-| `spreadsheet_id` | string | Yes | - | Google Sheets 스프레드시트 ID (URL에서) |
-| `range` | string | Yes | - | Google Sheets 스프레드시트 ID (URL에서) |
-| `values` | array | Yes | - | 쓸 A1 표기법 범위 |
-| `value_input_option` | string | No | `USER_ENTERED` | 입력 값 해석 방법 |
+| `credentials` | object | No | - | Google service account JSON credentials (defaults to env.GOOGLE_CREDENTIALS_JSON) |
+| `spreadsheet_id` | string | Yes | - | Google Sheets spreadsheet ID (from URL) |
+| `range` | string | Yes | - | A1 notation range to write |
+| `values` | array | Yes | - | Array of rows to write (each row is array of values) |
+| `value_input_option` | string | No | `USER_ENTERED` | How to interpret input values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `updated_range` | string | 업데이트된 범위 |
-| `updated_rows` | number | 업데이트된 범위 |
-| `updated_columns` | number | 업데이트된 범위 |
-| `updated_cells` | number | 업데이트된 행 수 |
+| `updated_range` | string | Range that was updated |
+| `updated_rows` | number | Number of rows updated |
+| `updated_columns` | number | Number of columns updated |
+| `updated_cells` | number | Number of cells updated |
 
 **Example:** Write data with headers
 
@@ -83,28 +83,28 @@ range: Sheet1!A1
 values: [["Name", "Email", "Status"], ["John Doe", "john@example.com", "Active"], ["Jane Smith", "jane@example.com", "Active"]]
 ```
 
-### Notion 페이지 생성
+### Notion Create Page
 
 `api.notion.create_page`
 
-Notion 데이터베이스에 새 페이지 생성
+Create a new page in Notion database
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Notion 통합 토큰 (기본값: env.NOTION_API_KEY) |
-| `database_id` | string | Yes | - | Notion 데이터베이스 ID (32자 16진수 문자열) |
-| `properties` | object | Yes | - | 페이지 속성 (제목, 텍스트, 선택 등) |
-| `content` | array | No | - | 페이지 속성 (제목, 텍스트, 선택 등) |
+| `api_key` | string | No | - | Notion integration token (defaults to env.NOTION_API_KEY) |
+| `database_id` | string | Yes | - | Notion database ID (32-char hex string) |
+| `properties` | object | Yes | - | Page properties (title, text, select, etc.) |
+| `content` | array | No | - | Page content as Notion blocks |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `page_id` | string | Notion 블록으로서의 페이지 콘텐츠 |
-| `url` | string | Notion 블록으로서의 페이지 콘텐츠 |
-| `created_time` | string | 생성된 페이지 ID |
+| `page_id` | string | Created page ID |
+| `url` | string | URL to the created page |
+| `created_time` | string | Page creation timestamp |
 
 **Example:** Create task page
 
@@ -113,29 +113,29 @@ database_id: your_database_id
 properties: {"Name": {"title": [{"text": {"content": "New Task"}}]}, "Status": {"select": {"name": "In Progress"}}, "Priority": {"select": {"name": "High"}}}
 ```
 
-### Notion 데이터베이스 쿼리
+### Notion Query Database
 
 `api.notion.query_database`
 
-필터와 정렬로 Notion 데이터베이스에서 페이지 쿼리
+Query pages from Notion database with filters and sorting
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Notion 통합 토큰 (기본값: env.NOTION_API_KEY) |
-| `database_id` | string | Yes | - | Notion 데이터베이스 ID |
-| `filter` | object | No | - | Notion 데이터베이스 ID |
-| `sorts` | array | No | - | 쿼리 필터 조건 |
-| `page_size` | number | No | `100` | 결과 정렬 순서 |
+| `api_key` | string | No | - | Notion integration token (defaults to env.NOTION_API_KEY) |
+| `database_id` | string | Yes | - | Notion database ID |
+| `filter` | object | No | - | Filter conditions for query |
+| `sorts` | array | No | - | Sort order for results |
+| `page_size` | number | No | `100` | Number of results to return |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `results` | array | 반환할 결과 수 |
-| `count` | number | 페이지 객체 배열 |
-| `has_more` | boolean | 페이지 객체 배열 |
+| `results` | array | Array of page objects |
+| `count` | number | Number of results returned |
+| `has_more` | boolean | Whether there are more results |
 
 **Example:** Query all pages
 
@@ -151,31 +151,31 @@ filter: {"property": "Status", "select": {"equals": "In Progress"}}
 sorts: [{"property": "Created", "direction": "descending"}]
 ```
 
-### Stripe 결제 생성
+### Stripe Create Payment
 
 `payment.stripe.create_payment`
 
-Stripe로 결제 인텐트 생성
+Create a payment intent with Stripe
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Stripe 시크릿 키 (또는 STRIPE_API_KEY env 사용) |
-| `amount` | number | Yes | - | Stripe 시크릿 키 (또는 STRIPE_API_KEY env 사용) |
-| `currency` | string | No | `usd` | 센트 단위 금액 (예: 1000 = $10.00) |
-| `description` | string | No | - | 3자리 통화 코드 (예: usd, eur) |
-| `customer` | string | No | - | 결제 설명 |
+| `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `amount` | number | Yes | - | Amount in cents (e.g. 1000 for $10.00) |
+| `currency` | string | No | `usd` | Three-letter currency code (e.g. usd, eur) |
+| `description` | string | No | - | Payment description |
+| `customer` | string | No | - | Stripe customer ID (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | Stripe 고객 ID (선택사항) |
-| `amount` | number | Stripe 고객 ID (선택사항) |
-| `currency` | string | 고유 식별자 |
-| `status` | string | 결제 금액 |
-| `client_secret` | string | 통화 코드 |
+| `id` | string | Unique identifier |
+| `amount` | number | Payment amount |
+| `currency` | string | Currency code |
+| `status` | string | Operation status (success/error) |
+| `client_secret` | string | Client secret for payment |
 
 **Example:** Create $50 payment
 
@@ -194,18 +194,18 @@ customer: cus_XXXXXXXXXXXXXXX
 description: Subscription payment
 ```
 
-### Stripe 고객 조회
+### Stripe Get Customer
 
 `payment.stripe.get_customer`
 
-Stripe에서 고객 정보 조회
+Retrieve customer information from Stripe
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Stripe 시크릿 키 (또는 STRIPE_API_KEY env 사용) |
-| `customer_id` | string | Yes | - | Stripe 시크릿 키 (또는 STRIPE_API_KEY env 사용) |
+| `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `customer_id` | string | Yes | - | Stripe customer ID |
 
 **Output:**
 
@@ -223,19 +223,19 @@ Stripe에서 고객 정보 조회
 customer_id: cus_XXXXXXXXXXXXXXX
 ```
 
-### Stripe 결제 목록
+### Stripe List Charges
 
 `payment.stripe.list_charges`
 
-Stripe에서 최근 결제 목록 조회
+List recent charges from Stripe
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Stripe 시크릿 키 (또는 STRIPE_API_KEY env 사용) |
-| `limit` | number | No | `10` | Stripe 시크릿 키 (또는 STRIPE_API_KEY env 사용) |
-| `customer` | string | No | - | 고객 ID로 필터링 (선택사항) |
+| `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `limit` | number | No | `10` | Number of charges to return (1-100) |
+| `customer` | string | No | - | Filter by customer ID (optional) |
 
 **Output:**
 
@@ -258,20 +258,20 @@ customer: cus_XXXXXXXXXXXXXXX
 limit: 50
 ```
 
-### Airtable 레코드 생성
+### Airtable Create Record
 
 `productivity.airtable.create`
 
-Airtable 테이블에 새 레코드 생성
+Create a new record in Airtable table
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Airtable API 키 (또는 AIRTABLE_API_KEY env 사용) |
-| `base_id` | string | Yes | - | Airtable API 키 (또는 AIRTABLE_API_KEY env 사용) |
-| `table_name` | string | Yes | - | Airtable 베이스 ID |
-| `fields` | json | Yes | - | 테이블 이름 |
+| `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `fields` | json | Yes | - | Record fields as JSON object |
 
 **Output:**
 
@@ -297,28 +297,28 @@ table_name: Tasks
 fields: {"Title": "Review PR", "Assignee": "Alice", "Priority": "High"}
 ```
 
-### Airtable 레코드 읽기
+### Airtable Read Records
 
 `productivity.airtable.read`
 
-Airtable 테이블에서 레코드 읽기
+Read records from Airtable table
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Airtable API 키 (또는 AIRTABLE_API_KEY env 사용) |
-| `base_id` | string | Yes | - | Airtable API 키 (또는 AIRTABLE_API_KEY env 사용) |
-| `table_name` | string | Yes | - | Airtable 베이스 ID |
-| `view` | string | No | - | 테이블 이름 |
-| `max_records` | number | No | `100` | 사용할 뷰 이름 (선택사항) |
+| `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `view` | string | No | - | View name to use (optional) |
+| `max_records` | number | No | `100` | Maximum number of records to return |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `records` | array | 반환할 최대 레코드 수 |
-| `count` | number | 레코드 |
+| `records` | array | The records |
+| `count` | number | Number of items |
 
 **Example:** Read all customers
 
@@ -337,21 +337,21 @@ view: Active Tasks
 max_records: 50
 ```
 
-### Airtable 레코드 업데이트
+### Airtable Update Record
 
 `productivity.airtable.update`
 
-Airtable 테이블의 기존 레코드 업데이트
+Update an existing record in Airtable table
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Airtable API 키 (또는 AIRTABLE_API_KEY env 사용) |
-| `base_id` | string | Yes | - | Airtable API 키 (또는 AIRTABLE_API_KEY env 사용) |
-| `table_name` | string | Yes | - | Airtable 베이스 ID |
-| `record_id` | string | Yes | - | 테이블 이름 |
-| `fields` | json | Yes | - | 업데이트할 레코드 ID |
+| `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `record_id` | string | Yes | - | ID of the record to update |
+| `fields` | json | Yes | - | Fields to update as JSON object |
 
 **Output:**
 

@@ -6,60 +6,60 @@ Branching, loops, parallelism, subflows, triggers, and error handling.
 
 | Module | Description |
 |--------|-------------|
-| [バッチ処理](#バッチ処理) | 設定可能なサイズでアイテムをバッチ処理 |
-| [分岐](#分岐) | 条件式に基づく分岐 |
-| [ブレークポイント](#ブレークポイント) | 人間の承認または入力のためにワークフロー実行を一時停止 |
-| [サーキットブレーカー](#サーキットブレーカー) | 連鎖的な障害を防ぐためのサーキットブレーカーパターン |
-| [コンテナ](#コンテナ) | 複雑なワークフローを整理するための埋め込みサブフローコンテナ |
-| [デバウンス](#デバウンス) | 急速な繰り返し呼び出しを防ぐためのデバウンス実行 |
-| [終了](#終了) | 明示的なワークフロー終了ノード |
-| [エラーハンドラー](#エラーハンドラー) | 上流ノードからのエラーをキャッチして処理 |
-| [エラーワークフロートリガー](#エラーワークフロートリガー) | エラーワークフローのエントリーポイント - 別のワークフローが失敗したときにトリガーされる |
-| [For Each ループ](#for-each-ループ) | リストを反復処理し、各項目に対してステップを実行 |
-| [フォーク](#フォーク) | 実行を並列分岐に分割 |
-| [ジャンプ](#ジャンプ) | 別のステップへ無条件ジャンプ |
-| [ワークフローを呼び出す](#ワークフローを呼び出す) | 外部ワークフローファイルを実行する |
-| [結合](#結合) | 並列分岐の完了を待機 |
-| [ループ](#ループ) | 出力ポートルーティングを使用してステップをN回繰り返す |
-| [マージ](#マージ) | 複数の入力を単一の出力にマージ |
-| [並行](#並行) | 異なる戦略で複数のタスクを並行して実行 |
-| [レート制限](#レート制限) | トークンバケットまたはスライディングウィンドウを使用したレート制限実行 |
-| [再試行](#再試行) | 失敗した操作を再試行し、バックオフを設定可能 |
-| [開始](#開始) | 明示的なワークフロー開始ノード |
-| [サブフロー](#サブフロー) | 外部ワークフローを参照して実行 |
-| [スイッチ](#スイッチ) | 値のマッチングに基づく多路分岐 |
-| [スロットル](#スロットル) | 最小間隔で実行速度を制限 |
-| [トリガー](#トリガー) | ワークフローエントリーポイント - 手動、Webhook、スケジュール、またはイベント |
+| [Batch Process](#batch-process) | Process items in batches with configurable size |
+| [Branch](#branch) | Conditional branching based on expression evaluation |
+| [Breakpoint](#breakpoint) | Pause workflow execution for human approval or input |
+| [Circuit Breaker](#circuit-breaker) | Circuit breaker pattern for fault tolerance |
+| [Container](#container) | Embedded subflow container for organizing complex workflows |
+| [Debounce](#debounce) | Debounce execution to prevent rapid repeated calls |
+| [End](#end) | Explicit workflow end node |
+| [Error Handler](#error-handler) | Catches and handles errors from upstream nodes |
+| [Error Workflow Trigger](#error-workflow-trigger) | Entry point for error workflows - triggered when another workflow fails |
+| [For Each](#for-each) | Iterate over a list and execute steps for each item |
+| [Fork](#fork) | Split execution into parallel branches |
+| [Goto](#goto) | Unconditional jump to another step |
+| [Invoke Workflow](#invoke-workflow) | Execute an external workflow file |
+| [Join](#join) | Wait for parallel branches to complete |
+| [Loop](#loop) | Repeat steps N times using output port routing |
+| [Merge](#merge) | Merge multiple inputs into a single output |
+| [Parallel](#parallel) | Execute multiple tasks in parallel with different strategies |
+| [Rate Limit](#rate-limit) | Rate limiter with token bucket strategy |
+| [Retry](#retry) | Retry with exponential backoff |
+| [Start](#start) | Explicit workflow start node |
+| [Subflow](#subflow) | Reference and execute an external workflow |
+| [Switch](#switch) | Multi-way branching based on value matching |
+| [Throttle](#throttle) | Throttle execution rate with minimum interval |
+| [Trigger](#trigger) | Workflow entry point - manual, webhook, schedule, event, mcp, or polling |
 
 ## Modules
 
-### バッチ処理
+### Batch Process
 
 `flow.batch`
 
-設定可能なサイズでアイテムをバッチ処理
+Process items in batches with configurable size
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `items` | array | Yes | - | Array of items to process. Can be numbers, strings, or objects. |
-| `batch_size` | number | Yes | `10` | バッチごとのアイテム数 |
-| `delay_ms` | number | No | `0` | バッチ間で待機するミリ秒（レート制限用） |
-| `continue_on_error` | boolean | No | `False` | 1つ失敗しても残りのバッチを処理し続ける |
-| `parallel_batches` | number | No | `1` | 1つ失敗しても残りのバッチを処理し続ける |
+| `batch_size` | number | Yes | `10` | Number of items per batch |
+| `delay_ms` | number | No | `0` | Milliseconds to wait between batches (for rate limiting) |
+| `continue_on_error` | boolean | No | `False` | Continue processing remaining batches if one fails |
+| `parallel_batches` | number | No | `1` | Number of batches to process in parallel (1 for sequential) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 並列で処理するバッチ数（1は順次） |
-| `batch` | array | ルーティング用イベント（バッチ/完了/エラー） |
-| `batch_index` | number | ルーティング用イベント（バッチ/完了/エラー） |
-| `total_batches` | number | 現在のバッチアイテム |
-| `total_items` | number | 現在のバッチインデックス（0から始まる） |
-| `is_last_batch` | boolean | バッチの総数 |
-| `progress` | object | アイテムの総数 |
+| `__event__` | string | Event for routing (batch/completed/error) |
+| `batch` | array | Current batch items |
+| `batch_index` | number | Current batch index (0-based) |
+| `total_batches` | number | Total number of batches |
+| `total_items` | number | Total number of items |
+| `is_last_batch` | boolean | Whether this is the last batch |
+| `progress` | object | Progress information |
 
 **Example:** Example
 
@@ -85,11 +85,11 @@ parallel_batches: 3
 continue_on_error: true
 ```
 
-### 分岐
+### Branch
 
 `flow.branch`
 
-条件式に基づく分岐
+Conditional branching based on expression evaluation
 
 **Parameters:**
 
@@ -101,11 +101,11 @@ continue_on_error: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティングイベント (true/false/error) |
-| `outputs` | object | ポート別出力値 |
-| `result` | boolean | 分岐結果 |
-| `condition` | string | 条件値 |
-| `resolved_condition` | string | 条件評価結果 |
+| `__event__` | string | Event for routing (true/false/error) |
+| `outputs` | object | Output values by port |
+| `result` | boolean | Condition evaluation result |
+| `condition` | string | Original condition expression |
+| `resolved_condition` | string | Condition after variable resolution |
 
 **Example:** Example
 
@@ -119,11 +119,11 @@ condition: ${search_step.count} > 0
 condition: ${api_call.status} == success
 ```
 
-### ブレークポイント
+### Breakpoint
 
 `flow.breakpoint`
 
-人間の承認または入力のためにワークフロー実行を一時停止
+Pause workflow execution for human approval or input
 
 **Parameters:**
 
@@ -142,15 +142,15 @@ condition: ${api_call.status} == success
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティングイベント (approved/rejected/timeout) |
-| `breakpoint_id` | string | ブレークポイントID |
-| `status` | string | ステータス |
-| `approved_by` | array | 承認者 |
-| `rejected_by` | array | 却下者 |
-| `custom_inputs` | object | カスタム入力値 |
-| `comments` | array | レビューコメント |
-| `resolved_at` | string | 解決時刻 |
-| `wait_duration_ms` | integer | 待機時間（ミリ秒） |
+| `__event__` | string | Event for routing (approved/rejected/timeout) |
+| `breakpoint_id` | string | Unique breakpoint identifier |
+| `status` | string | Final status (approved/rejected/timeout/cancelled) |
+| `approved_by` | array | List of users who approved |
+| `rejected_by` | array | List of users who rejected |
+| `custom_inputs` | object | Values collected from custom fields |
+| `comments` | array | Comments from approvers |
+| `resolved_at` | string | ISO timestamp of resolution |
+| `wait_duration_ms` | integer | Time spent waiting for approval |
 
 **Example:** Example
 
@@ -175,29 +175,29 @@ title: Adjustment Required
 custom_fields: [{"name": "reason", "label": "Reason", "type": "text", "required": true}, {"name": "amount", "label": "Amount", "type": "number", "required": true}]
 ```
 
-### サーキットブレーカー
+### Circuit Breaker
 
 `flow.circuit_breaker`
 
-連鎖的な障害を防ぐためのサーキットブレーカーパターン
+Circuit breaker pattern for fault tolerance
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `failure_threshold` | number | Yes | `5` | サーキットを開く前の失敗回数 |
-| `reset_timeout_ms` | number | No | `60000` | サーキットが半開に移行するまでの時間（ミリ秒） |
-| `half_open_max` | number | No | `1` | 半開状態で許可される最大リクエスト数 |
+| `failure_threshold` | number | Yes | `5` | Number of failures before opening the circuit |
+| `reset_timeout_ms` | number | No | `60000` | Time to wait before transitioning from open to half-open |
+| `half_open_max` | number | No | `1` | Maximum test requests allowed in half-open state |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティング用イベント（許可/拒否/半開） |
-| `state` | string | サーキットの状態（閉/開/半開） |
-| `failure_count` | number | 連続失敗の回数 |
-| `last_failure_time_ms` | number | 最後の失敗のタイムスタンプ（ミリ秒） |
-| `time_until_half_open_ms` | number | サーキットが半開になるまでのミリ秒 |
+| `__event__` | string | Event for routing (closed/open/half_open) |
+| `state` | string | Current circuit breaker state |
+| `failure_count` | number | Current number of consecutive failures |
+| `last_failure_time_ms` | number | Timestamp of last failure |
+| `time_until_half_open_ms` | number | Milliseconds until circuit transitions to half-open |
 
 **Example:** Example
 
@@ -222,11 +222,11 @@ reset_timeout_ms: 120000
 half_open_max: 3
 ```
 
-### コンテナ
+### Container
 
 `flow.container`
 
-複雑なワークフローを整理するための埋め込みサブフローコンテナ
+Embedded subflow container for organizing complex workflows
 
 **Parameters:**
 
@@ -241,12 +241,12 @@ half_open_max: 3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティングイベント (success/error) |
-| `outputs` | object | ポート別出力値 |
-| `subflow_result` | object | サブフロー結果 |
-| `exported_variables` | object | エクスポートされた変数 |
-| `node_count` | integer | ノード数 |
-| `execution_time_ms` | number | 実行時間（ミリ秒） |
+| `__event__` | string | Event for routing (success/error) |
+| `outputs` | object | Output values by port |
+| `subflow_result` | object | Result from subflow execution |
+| `exported_variables` | object | Variables exported from subflow |
+| `node_count` | integer | Number of nodes in subflow |
+| `execution_time_ms` | number | Total subflow execution time in milliseconds |
 
 **Example:** Example
 
@@ -262,29 +262,29 @@ subflow: {"nodes": [], "edges": []}
 inherit_context: false
 ```
 
-### デバウンス
+### Debounce
 
 `flow.debounce`
 
-急速な繰り返し呼び出しを防ぐためのデバウンス実行
+Debounce execution to prevent rapid repeated calls
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `delay_ms` | number | Yes | - | 最後の呼び出し後に実行するまでの待ち時間 |
-| `leading` | boolean | No | `False` | リーディングエッジで実行（最初の呼び出しが即時トリガー） |
-| `trailing` | boolean | No | `True` | トレーリングエッジで実行（遅延が終了した後） |
+| `delay_ms` | number | Yes | - | Wait time in milliseconds before allowing execution |
+| `leading` | boolean | No | `False` | Execute on the leading edge (first call immediately) |
+| `trailing` | boolean | No | `True` | Execute on the trailing edge (after delay of inactivity) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティング用イベント（実行/デバウンス） |
-| `last_call_ms` | number | 最後の呼び出しのタイムスタンプ（ミリ秒） |
-| `calls_debounced` | number | 最後の実行以来デバウンスされた呼び出しの回数 |
-| `time_since_last_ms` | number | 最後の呼び出しから経過した時間（ミリ秒） |
-| `edge` | string | どのエッジが実行をトリガーしたか（リーディング/トレーリング） |
+| `__event__` | string | Event for routing (executed/skipped) |
+| `last_call_ms` | number | Timestamp of the last call |
+| `calls_debounced` | number | Number of calls that were debounced (skipped) |
+| `time_since_last_ms` | number | Time since last call in milliseconds |
+| `edge` | string | Which edge triggered execution (leading/trailing) |
 
 **Example:** Example
 
@@ -308,11 +308,11 @@ leading: true
 trailing: true
 ```
 
-### 終了
+### End
 
 `flow.end`
 
-明示的なワークフロー終了ノード
+Explicit workflow end node
 
 **Parameters:**
 
@@ -325,9 +325,9 @@ trailing: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティングイベント (__end__) |
-| `ended_at` | string | 終了時刻 |
-| `workflow_result` | object | ワークフロー結果 |
+| `__event__` | string | Event for routing (__end__) |
+| `ended_at` | string | ISO timestamp of end |
+| `workflow_result` | object | Mapped workflow output |
 
 **Example:** Example
 
@@ -340,29 +340,29 @@ trailing: true
 output_mapping: {"result": "${process.output}", "status": "success"}
 ```
 
-### エラーハンドラー
+### Error Handler
 
 `flow.error_handle`
 
-上流ノードからのエラーをキャッチして処理
+Catches and handles errors from upstream nodes
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | `log_and_continue` | エラーに対して何をするか |
-| `include_traceback` | boolean | No | `True` | 出力に完全なスタックトレースを含める |
-| `error_code_mapping` | object | No | `{}` | 出力に完全なスタックトレースを含める |
-| `fallback_value` | any | No | - | エラーコードをカスタムアクションにマップ |
+| `action` | string | Yes | `log_and_continue` | What to do with the error |
+| `include_traceback` | boolean | No | `True` | Include full stack trace in output |
+| `error_code_mapping` | object | No | `{}` | Map error codes to custom actions |
+| `fallback_value` | any | No | - | Value to use when error is suppressed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | エラーが抑制されたときに使用する値 |
-| `outputs` | object | ルーティング用イベント（処理済み/エスカレート） |
-| `error_info` | object | ルーティング用イベント（処理済み/エスカレート） |
-| `action_taken` | string | 取られたアクション |
+| `__event__` | string | Event for routing (handled/escalate) |
+| `outputs` | object | Output values by port |
+| `error_info` | object | Extracted error information |
+| `action_taken` | string | What action was taken |
 
 **Example:** Example
 
@@ -385,11 +385,11 @@ action: transform
 error_code_mapping: {"TIMEOUT": {"retry": true, "delay": 5000}, "NOT_FOUND": {"skip": true}}
 ```
 
-### エラーワークフロートリガー
+### Error Workflow Trigger
 
 `flow.error_workflow_trigger`
 
-エラーワークフローのエントリーポイント - 別のワークフローが失敗したときにトリガーされる
+Entry point for error workflows - triggered when another workflow fails
 
 **Parameters:**
 
@@ -401,9 +401,9 @@ error_code_mapping: {"TIMEOUT": {"retry": true, "delay": 5000}, "NOT_FOUND": {"s
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | このエラーワークフローの説明 |
-| `error_context` | object | ルーティング用イベント（トリガー済み） |
-| `triggered_at` | string | エラーワークフローがトリガーされたときのISOタイムスタンプ |
+| `__event__` | string | Event for routing (triggered) |
+| `error_context` | object | Complete error context from failed workflow |
+| `triggered_at` | string | ISO timestamp when error workflow was triggered |
 
 **Example:** Example
 
@@ -417,33 +417,33 @@ description: Send Slack notification on workflow failure
 description: Log all workflow errors to monitoring system
 ```
 
-### For Each ループ
+### For Each
 
 `flow.foreach`
 
-リストを反復処理し、各項目に対してステップを実行
+Iterate over a list and execute steps for each item
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `items` | string | Yes | - | 反復処理する項目リスト（${variable} 参照対応） |
-| `steps` | array | No | - | 各項目に対して実行するステップ |
-| `item_var` | string | No | `item` | 現在の項目の変数名 |
-| `index_var` | string | No | `index` | 現在のインデックスの変数名 |
-| `output_mode` | string | No | `collect` | 結果収集モード |
+| `items` | string | Yes | - | Array to iterate over — use gear icon to reference a previous step output |
+| `steps` | array | No | - | Steps to execute for each item (nested mode only) |
+| `item_var` | string | No | `item` | Variable name for current item |
+| `index_var` | string | No | `index` | Variable name for current index |
+| `output_mode` | string | No | `collect` | How to collect results: collect (array), last (single), none |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティングイベント (iterate/done) |
-| `__set_context` | object | 設定されたコンテキスト |
-| `outputs` | object | ポート別出力値 |
-| `iteration` | number | 現在の反復インデックス |
-| `status` | string | 操作ステータス |
-| `results` | array | 収集された結果 |
-| `count` | number | 項目総数 |
+| `__event__` | string | Event for routing (iterate/done) |
+| `__set_context` | object | Scope variables set on each iteration |
+| `outputs` | object | Output values by port |
+| `iteration` | number | Current iteration index |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of items processed |
 
 **Example:** Example
 
@@ -459,11 +459,11 @@ item_var: element
 steps: [{"module": "element.text", "params": {"element_id": "${element}"}, "output": "text"}]
 ```
 
-### フォーク
+### Fork
 
 `flow.fork`
 
-実行を並列分岐に分割
+Split execution into parallel branches
 
 **Parameters:**
 
@@ -475,9 +475,9 @@ steps: [{"module": "element.text", "params": {"element_id": "${element}"}, "outp
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティングイベント (fork/error) |
-| `input_data` | any | 入力データ |
-| `branch_count` | integer | 分岐数 |
+| `__event__` | string | Event for routing (fork/error) |
+| `input_data` | any | Input data passed to all branches |
+| `branch_count` | integer | Number of branches created |
 
 **Example:** Example
 
@@ -491,11 +491,11 @@ branch_count: 2
 branch_count: 3
 ```
 
-### ジャンプ
+### Goto
 
 `flow.goto`
 
-別のステップへ無条件ジャンプ
+Unconditional jump to another step
 
 **Parameters:**
 
@@ -508,9 +508,9 @@ branch_count: 3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティングイベント (goto) |
-| `target` | string | ターゲットステップ |
-| `iteration` | number | 反復回数 |
+| `__event__` | string | Event for routing (goto) |
+| `target` | string | ID of the target step |
+| `iteration` | number | Current iteration count for this goto |
 
 **Example:** Example
 
@@ -525,11 +525,11 @@ max_iterations: 10
 target: cleanup_step
 ```
 
-### ワークフローを呼び出す
+### Invoke Workflow
 
 `flow.invoke`
 
-外部ワークフローファイルを実行する
+Execute an external workflow file
 
 **Parameters:**
 
@@ -544,10 +544,10 @@ target: cleanup_step
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 呼び出されたワークフローに渡すパラメータ |
-| `result` | any | 最大実行時間（秒） |
-| `workflow_id` | string | ルーティング用イベント（成功/エラー） |
-| `execution_time_ms` | number | ワークフローの実行結果 |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Workflow execution result |
+| `workflow_id` | string | Invoked workflow ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 
@@ -565,11 +565,11 @@ workflow_params: {"data": "${input.data}"}
 output_mapping: {"processed": "result.data"}
 ```
 
-### 結合
+### Join
 
 `flow.join`
 
-並列分岐の完了を待機
+Wait for parallel branches to complete
 
 **Parameters:**
 
@@ -584,10 +584,10 @@ output_mapping: {"processed": "result.data"}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティングイベント (joined/timeout/error) |
-| `joined_data` | array | 結合されたデータ |
-| `completed_count` | integer | 完了した分岐数 |
-| `strategy` | string | 結合戦略 |
+| `__event__` | string | Event for routing (joined/timeout/error) |
+| `joined_data` | array | Data from all completed inputs |
+| `completed_count` | integer | Number of inputs completed |
+| `strategy` | string | Strategy used for joining |
 
 **Example:** Example
 
@@ -605,31 +605,31 @@ input_count: 3
 cancel_pending: true
 ```
 
-### ループ
+### Loop
 
 `flow.loop`
 
-出力ポートルーティングを使用してステップをN回繰り返す
+Repeat steps N times using output port routing
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `times` | number | Yes | `1` | 繰り返し回数 |
-| `target` | string | No | - | ターゲットステップ（非推奨） |
-| `steps` | array | No | - | 各反復で実行するステップ |
-| `index_var` | string | No | `index` | 現在のインデックスの変数名 |
+| `times` | number | Yes | `1` | Number of times to repeat |
+| `target` | string | No | - | DEPRECATED: Use output ports and edges instead |
+| `steps` | array | No | - | Steps to execute for each iteration (nested mode) |
+| `index_var` | string | No | `index` | Variable name for current index |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティングイベント (iterate/done) |
-| `outputs` | object | ポート別出力値 |
-| `iteration` | number | 現在の反復 |
-| `status` | string | 操作ステータス |
-| `results` | array | 収集された結果 |
-| `count` | number | 反復総数 |
+| `__event__` | string | Event for routing (iterate/done/error) |
+| `outputs` | object | Output values by port |
+| `iteration` | number | Current iteration count |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of iterations completed |
 
 **Example:** Example
 
@@ -644,11 +644,11 @@ times: 5
 steps: [{"module": "browser.click", "params": {"selector": ".next"}}]
 ```
 
-### マージ
+### Merge
 
 `flow.merge`
 
-複数の入力を単一の出力にマージ
+Merge multiple inputs into a single output
 
 **Parameters:**
 
@@ -661,10 +661,10 @@ steps: [{"module": "browser.click", "params": {"selector": ".next"}}]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティングイベント (merged/error) |
-| `merged_data` | any | マージされたデータ |
-| `input_count` | integer | 入力数 |
-| `strategy` | string | マージ戦略 |
+| `__event__` | string | Event for routing (merged/error) |
+| `merged_data` | any | Merged data based on strategy |
+| `input_count` | integer | Number of inputs received |
+| `strategy` | string | Strategy used for merging |
 
 **Example:** Example
 
@@ -680,33 +680,33 @@ strategy: first
 input_count: 2
 ```
 
-### 並行
+### Parallel
 
 `flow.parallel`
 
-異なる戦略で複数のタスクを並行して実行
+Execute multiple tasks in parallel with different strategies
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tasks` | array | Yes | - | 並行して実行するタスク定義の配列 |
-| `mode` | string | No | `all` | 並行して実行するタスク定義の配列 |
+| `tasks` | array | Yes | - | Array of task definitions to execute in parallel |
+| `mode` | string | No | `all` | Parallel execution mode |
 | `timeout_ms` | number | No | `60000` | Maximum wait time in milliseconds |
-| `fail_fast` | boolean | No | `True` | 最初の失敗で全タスクを停止（mode=all の場合のみ） |
-| `concurrency_limit` | number | No | `0` | 最初の失敗で全タスクを停止（mode=all の場合のみ） |
+| `fail_fast` | boolean | No | `True` | Stop all tasks on first failure (only for mode=all) |
+| `concurrency_limit` | number | No | `0` | Maximum number of concurrent tasks (0 for unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 同時実行タスクの最大数（0は無制限） |
-| `results` | array | ルーティング用のイベント（完了/部分/エラー） |
-| `completed_count` | number | ルーティング用イベント（完了/部分/エラー） |
-| `failed_count` | number | すべてのタスクの結果 |
-| `total_count` | number | 正常に完了したタスクの数 |
-| `mode` | string | 失敗したタスクの数 |
-| `duration_ms` | number | タスクの総数 |
+| `__event__` | string | Event for routing (completed/partial/error) |
+| `results` | array | Results from all tasks |
+| `completed_count` | number | Number of successfully completed tasks |
+| `failed_count` | number | Number of failed tasks |
+| `total_count` | number | Total number of tasks |
+| `mode` | string | Execution mode used |
+| `duration_ms` | number | Total execution time in milliseconds |
 
 **Example:** Example
 
@@ -730,30 +730,30 @@ tasks: [{"module": "http.get", "params": {"url": "https://api1.example.com"}}, {
 mode: settle
 ```
 
-### レート制限
+### Rate Limit
 
 `flow.rate_limit`
 
-トークンバケットまたはスライディングウィンドウを使用したレート制限実行
+Rate limiter with token bucket strategy
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `max_requests` | number | Yes | - | ウィンドウごとに許可される最大リクエスト数 |
-| `window_ms` | number | No | `60000` | 時間ウィンドウ（ミリ秒） |
-| `strategy` | string | No | `token_bucket` | レート制限戦略（トークンバケットまたはスライディングウィンドウ） |
-| `queue_overflow` | string | No | `wait` | キューが満杯のときの動作（ドロップまたはエラー） |
+| `max_requests` | number | Yes | - | Maximum number of requests allowed per window |
+| `window_ms` | number | No | `60000` | Time window in milliseconds |
+| `strategy` | string | No | `token_bucket` | Rate limiting strategy |
+| `queue_overflow` | string | No | `wait` | Behavior when rate limit is exceeded |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティング用イベント（許可/制限） |
-| `tokens_remaining` | number | バケット内の残りトークン数 |
-| `window_reset_ms` | number | ウィンドウがリセットされるまでのミリ秒 |
-| `requests_in_window` | number | 現在のウィンドウ内のリクエスト数 |
-| `wait_ms` | number | 次の許可されたリクエストまでの待ち時間（ミリ秒） |
+| `__event__` | string | Event for routing (allowed/throttled/error) |
+| `tokens_remaining` | number | Number of tokens remaining in the bucket |
+| `window_reset_ms` | number | Milliseconds until the window resets |
+| `requests_in_window` | number | Number of requests made in current window |
+| `wait_ms` | number | Milliseconds to wait before retry (if throttled) |
 
 **Example:** Example
 
@@ -781,32 +781,32 @@ strategy: sliding_window
 queue_overflow: wait
 ```
 
-### 再試行
+### Retry
 
 `flow.retry`
 
-失敗した操作を再試行し、バックオフを設定可能
+Retry with exponential backoff
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `max_retries` | number | Yes | `3` | 再試行の最大試行回数 |
-| `initial_delay_ms` | number | No | `1000` | 最初の再試行までの初期遅延（ミリ秒） |
-| `backoff_multiplier` | number | No | `2.0` | 指数バックオフの倍率 |
-| `max_delay_ms` | number | No | `30000` | 再試行間の最大遅延（ミリ秒） |
-| `retry_on_errors` | array | No | `[]` | 再試行するエラータイプ（空の場合はすべて再試行） |
+| `max_retries` | number | Yes | `3` | Maximum number of retry attempts |
+| `initial_delay_ms` | number | No | `1000` | Initial delay before first retry in milliseconds |
+| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g. 2.0 doubles delay each retry) |
+| `max_delay_ms` | number | No | `30000` | Maximum delay cap in milliseconds |
+| `retry_on_errors` | array | No | `[]` | Optional list of error codes to retry on (empty = retry on all errors) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティング用イベント（再試行/成功/失敗） |
-| `attempt` | number | 現在の試行回数 |
-| `max_retries` | number | 設定された最大再試行回数 |
-| `delay_ms` | number | 次の再試行までの遅延時間（ミリ秒） |
-| `total_elapsed_ms` | number | 経過した合計時間（ミリ秒） |
-| `last_error` | object | 最後のエラーメッセージ |
+| `__event__` | string | Event for routing (success/retry/exhausted) |
+| `attempt` | number | Current attempt number (1-based) |
+| `max_retries` | number | Maximum retry attempts configured |
+| `delay_ms` | number | Delay before this attempt in milliseconds |
+| `total_elapsed_ms` | number | Total time elapsed across all attempts |
+| `last_error` | object | Last error that triggered a retry |
 
 **Example:** Example
 
@@ -831,30 +831,30 @@ initial_delay_ms: 2000
 retry_on_errors: ["TIMEOUT", "RATE_LIMIT", "429", "503"]
 ```
 
-### 開始
+### Start
 
 `flow.start`
 
-明示的なワークフロー開始ノード
+Explicit workflow start node
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティングイベント (start) |
-| `started_at` | string | 開始時刻 |
-| `workflow_id` | string | ワークフローID |
+| `__event__` | string | Event for routing (start) |
+| `started_at` | string | ISO timestamp of start |
+| `workflow_id` | string | Workflow ID if available |
 
 **Example:** Example
 
 ```yaml
 ```
 
-### サブフロー
+### Subflow
 
 `flow.subflow`
 
-外部ワークフローを参照して実行
+Reference and execute an external workflow
 
 **Parameters:**
 
@@ -870,10 +870,10 @@ retry_on_errors: ["TIMEOUT", "RATE_LIMIT", "429", "503"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティングイベント (success/error) |
-| `result` | any | 実行結果 |
-| `execution_id` | string | 実行ID |
-| `workflow_ref` | string | ワークフロー参照 |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Subflow execution result |
+| `execution_id` | string | Subflow execution ID (for spawn/async) |
+| `workflow_ref` | string | Referenced workflow |
 
 **Example:** Example
 
@@ -891,11 +891,11 @@ workflow_ref: workflows/send_notifications
 execution_mode: spawn
 ```
 
-### スイッチ
+### Switch
 
 `flow.switch`
 
-値のマッチングに基づく多路分岐
+Multi-way branching based on value matching
 
 **Parameters:**
 
@@ -908,10 +908,10 @@ execution_mode: spawn
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティングイベント (case:value または default) |
-| `outputs` | object | ポート別出力値 |
-| `matched_case` | string | マッチしたケース |
-| `value` | any | マッチした値 |
+| `__event__` | string | Event for routing (case:value or default) |
+| `outputs` | object | Output values by port |
+| `matched_case` | string | The case that matched |
+| `value` | any | The resolved value that was matched |
 
 **Example:** Example
 
@@ -927,28 +927,28 @@ expression: ${input.type}
 cases: [{"id": "img", "value": "image", "label": "Image"}, {"id": "vid", "value": "video", "label": "Video"}, {"id": "txt", "value": "text", "label": "Text"}]
 ```
 
-### スロットル
+### Throttle
 
 `flow.throttle`
 
-最小間隔で実行速度を制限
+Throttle execution rate with minimum interval
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `interval_ms` | number | Yes | - | 実行間の最小時間（ミリ秒） |
-| `leading` | boolean | No | `True` | リーディングエッジで実行（最初の呼び出しは即時通過） |
+| `interval_ms` | number | Yes | - | Minimum time between executions in milliseconds |
+| `leading` | boolean | No | `True` | Execute on the leading edge (first call passes immediately) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティング用イベント（実行済み/スロットル済み） |
-| `last_execution_ms` | number | 最後に許可された実行のタイムスタンプ |
-| `calls_throttled` | number | 最後の実行以降にスロットルされた呼び出し回数 |
-| `time_since_last_ms` | number | 最後の実行から経過した時間（ミリ秒） |
-| `remaining_ms` | number | 次の実行が許可されるまでの残り時間（ミリ秒） |
+| `__event__` | string | Event for routing (executed/throttled) |
+| `last_execution_ms` | number | Timestamp of last allowed execution |
+| `calls_throttled` | number | Number of calls throttled since last execution |
+| `time_since_last_ms` | number | Time elapsed since last execution in milliseconds |
+| `remaining_ms` | number | Milliseconds remaining until next execution is allowed |
 
 **Example:** Example
 
@@ -970,11 +970,11 @@ interval_ms: 5000
 leading: false
 ```
 
-### トリガー
+### Trigger
 
 `flow.trigger`
 
-ワークフローエントリーポイント - 手動、Webhook、スケジュール、またはイベント
+Workflow entry point - manual, webhook, schedule, event, mcp, or polling
 
 **Parameters:**
 
@@ -999,10 +999,10 @@ leading: false
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ルーティングイベント (triggered/error) |
-| `trigger_data` | object | トリガーデータ |
-| `trigger_type` | string | トリガータイプ |
-| `triggered_at` | string | トリガー時刻 |
+| `__event__` | string | Event for routing (triggered/error) |
+| `trigger_data` | object | Data from trigger source |
+| `trigger_type` | string | Type of trigger |
+| `triggered_at` | string | ISO timestamp |
 
 **Example:** Example
 

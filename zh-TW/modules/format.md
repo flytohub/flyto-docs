@@ -6,123 +6,123 @@ Number, currency, duration, filesize, and percentage formatting.
 
 | Module | Description |
 |--------|-------------|
-| [格式化貨幣](#格式化貨幣) | 將數字格式化為貨幣 |
-| [格式化時間](#格式化時間) | 將秒數格式化為可讀的時間 |
-| [格式化檔案大小](#格式化檔案大小) | 將位元組格式化為可讀的檔案大小 |
-| [格式化數字](#格式化數字) | 將數字格式化為帶分隔符和小數點 |
-| [格式化百分比](#格式化百分比) | 將數字格式化為百分比 |
+| [Format Currency](#format-currency) | Format numbers as currency |
+| [Format Duration](#format-duration) | Format seconds as human-readable duration |
+| [Format Filesize](#format-filesize) | Format bytes as human-readable file size |
+| [Format Number](#format-number) | Format numbers with separators and decimals |
+| [Format Percentage](#format-percentage) | Format numbers as percentages |
 
 ## Modules
 
-### 格式化貨幣
+### Format Currency
 
 `format.currency`
 
-將數字格式化為貨幣
+Format numbers as currency
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `amount` | number | Yes | - | 要格式化的金額 |
-| `currency` | string | No | `USD` | 要格式化的金額 |
-| `decimal_places` | number | No | `2` | 小數位數 |
-| `symbol_position` | string | No | `before` | 小數位數 |
+| `amount` | number | Yes | - | Amount to format |
+| `currency` | string | No | `USD` | Currency code (USD, EUR, GBP, etc) |
+| `decimal_places` | number | No | `2` | Number of decimal places |
+| `symbol_position` | string | No | `before` | Position of currency symbol |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 格式化的貨幣字串 |
-| `original` | number | 格式化的貨幣字串 |
-| `symbol` | string | 格式化的貨幣字串 |
+| `result` | string | Formatted currency string |
+| `original` | number | Original amount |
+| `symbol` | string | Currency symbol used |
 
-### 格式化時間
+### Format Duration
 
 `format.duration`
 
-將秒數格式化為可讀的時間
+Format seconds as human-readable duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | Yes | - | 以秒為單位的時間 |
-| `format` | string | No | `short` | 以秒為單位的時間 |
-| `show_zero` | boolean | No | `False` | 顯示為零的單位 |
+| `seconds` | number | Yes | - | Duration in seconds |
+| `format` | string | No | `short` | Output format style |
+| `show_zero` | boolean | No | `False` | Show units that are zero |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 顯示為零的單位 |
-| `original` | number | 格式化的時間字串 |
-| `parts` | object | 格式化的時間字串 |
+| `result` | string | Formatted duration string |
+| `original` | number | Original seconds |
+| `parts` | object | Duration parts (days, hours, minutes, seconds) |
 
-### 格式化檔案大小
+### Format Filesize
 
 `format.filesize`
 
-將位元組格式化為可讀的檔案大小
+Format bytes as human-readable file size
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bytes` | number | Yes | - | 以位元組為單位的大小 |
-| `binary` | boolean | No | `False` | 以位元組為單位的大小 |
-| `decimal_places` | number | No | `2` | 使用二進位單位 (KiB, MiB) 而非十進位 (KB, MB) |
+| `bytes` | number | Yes | - | Size in bytes |
+| `binary` | boolean | No | `False` | Use binary units (KiB, MiB) instead of decimal (KB, MB) |
+| `decimal_places` | number | No | `2` | Number of decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 小數位數 |
-| `original` | number | 格式化的檔案大小字串 |
-| `unit` | string | 格式化的檔案大小字串 |
-| `value` | number | 原始位元組 |
+| `result` | string | Formatted file size string |
+| `original` | number | Original bytes |
+| `unit` | string | Unit used |
+| `value` | number | Numeric value in unit |
 
-### 格式化數字
+### Format Number
 
 `format.number`
 
-將數字格式化為帶分隔符和小數點
+Format numbers with separators and decimals
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `number` | number | Yes | - | 要格式化的數字 |
-| `decimal_places` | number | No | `2` | 要格式化的數字 |
-| `thousand_separator` | string | No | `,` | 小數位數 |
-| `decimal_separator` | string | No | `.` | 千位分隔符 |
+| `number` | number | Yes | - | Number to format |
+| `decimal_places` | number | No | `2` | Number of decimal places |
+| `thousand_separator` | string | No | `,` | Separator for thousands |
+| `decimal_separator` | string | No | `.` | Separator for decimals |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 小數點分隔符 |
-| `original` | number | 格式化的數字字串 |
+| `result` | string | Formatted number string |
+| `original` | number | Original number |
 
-### 格式化百分比
+### Format Percentage
 
 `format.percentage`
 
-將數字格式化為百分比
+Format numbers as percentages
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | number | Yes | - | 要格式化為百分比的值 |
-| `is_ratio` | boolean | No | `True` | 要格式化為百分比的值 |
-| `decimal_places` | number | No | `1` | 輸入是需要乘以 100 的比率 (0-1) |
-| `include_sign` | boolean | No | `False` | 小數位數 |
+| `value` | number | Yes | - | Value to format as percentage |
+| `is_ratio` | boolean | No | `True` | Input is a ratio (0-1) that needs to be multiplied by 100 |
+| `decimal_places` | number | No | `1` | Number of decimal places |
+| `include_sign` | boolean | No | `False` | Include + sign for positive values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 正值包含 + 號 |
-| `original` | number | 格式化的百分比字串 |
-| `numeric` | number | 格式化的百分比字串 |
+| `result` | string | Formatted percentage string |
+| `original` | number | Original value |
+| `numeric` | number | Numeric percentage value |

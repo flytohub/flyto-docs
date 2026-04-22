@@ -6,25 +6,25 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Module | Description |
 |--------|-------------|
-| [字串小寫](#字串小寫) | 將字串轉換為小寫 |
-| [填充字串](#填充字串) | 將字串填充到指定長度 |
-| [字串替換](#字串替換) | 替換字串中的子字串 |
-| [字串反轉](#字串反轉) | 反轉字串中的字元 |
-| [生成短語](#生成短語) | 將文字轉換為 URL 友好的短語 |
-| [分割字串](#分割字串) | 使用分隔符將字串分割為陣列 |
-| [模板](#模板) | 渲染模板並替換變數 |
-| [標題格式字串](#標題格式字串) | 將字串轉換為標題格式 |
-| [字串修剪](#字串修剪) | 移除字串兩端的空白字元 |
-| [截斷字串](#截斷字串) | 將字串截斷到最大長度 |
-| [字串大寫](#字串大寫) | 將字串轉換為大寫 |
+| [String Lowercase](#string-lowercase) | Convert a string to lowercase |
+| [Pad String](#pad-string) | Pad a string to a specified length |
+| [String Replace](#string-replace) | Replace occurrences of a substring in a string |
+| [String Reverse](#string-reverse) | Reverse the characters in a string |
+| [Slugify](#slugify) | Convert text to URL-friendly slug |
+| [Split String](#split-string) | Split a string into an array using a delimiter |
+| [Template](#template) | Render a template with variable substitution |
+| [Title Case String](#title-case-string) | Convert string to title case |
+| [String Trim](#string-trim) | Remove whitespace from both ends of a string |
+| [Truncate String](#truncate-string) | Truncate a string to a maximum length |
+| [String Uppercase](#string-uppercase) | Convert a string to uppercase |
 
 ## Modules
 
-### 字串小寫
+### String Lowercase
 
 `string.lowercase`
 
-將字串轉換為小寫
+Convert a string to lowercase
 
 **Parameters:**
 
@@ -36,38 +36,38 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 小寫轉換後的字串 |
-| `original` | string | 原始字串 |
-| `status` | string | 操作狀態 |
+| `result` | string | Lowercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### 填充字串
+### Pad String
 
 `string.pad`
 
-將字串填充到指定長度
+Pad a string to a specified length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 要填充的文字 |
-| `length` | number | Yes | - | 要填充的文字 |
-| `pad_char` | string | No | ` ` | 目標長度 |
-| `position` | string | No | `end` | 用來填充的字元 |
+| `text` | string | Yes | - | Text to pad |
+| `length` | number | Yes | - | Target length |
+| `pad_char` | string | No | ` ` | Character to pad with |
+| `position` | string | No | `end` | Where to add padding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 填充後的字串 |
-| `original` | string | 填充後的字串 |
-| `added` | number | 填充後的字串 |
+| `result` | string | Padded string |
+| `original` | string | Original string |
+| `added` | number | Characters added |
 
-### 字串替換
+### String Replace
 
 `string.replace`
 
-替換字串中的子字串
+Replace occurrences of a substring in a string
 
 **Parameters:**
 
@@ -81,17 +81,17 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 替換後的字串 |
-| `original` | string | 原始字串 |
-| `search` | string | 被替換的搜尋字串 |
-| `replace` | string | 替換後的字串 |
-| `status` | string | 操作狀態 |
+| `result` | string | String with replacements applied |
+| `original` | string | Original input string |
+| `search` | string | Search string that was replaced |
+| `replace` | string | Replacement string used |
+| `status` | string | Operation status |
 
-### 字串反轉
+### String Reverse
 
 `string.reverse`
 
-反轉字串中的字元
+Reverse the characters in a string
 
 **Parameters:**
 
@@ -103,37 +103,37 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 反轉後的字串 |
-| `original` | string | 原始字串 |
-| `length` | number | 字串長度 |
+| `result` | string | Reversed string |
+| `original` | string | Original input string |
+| `length` | number | String length |
 
-### 生成短語
+### Slugify
 
 `string.slugify`
 
-將文字轉換為 URL 友好的短語
+Convert text to URL-friendly slug
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 要生成短語的文字 |
-| `separator` | string | No | `-` | 要生成短語的文字 |
-| `lowercase` | boolean | No | `True` | 單字分隔符 |
-| `max_length` | number | No | `0` | 轉換為小寫 |
+| `text` | string | Yes | - | Text to slugify |
+| `separator` | string | No | `-` | Word separator |
+| `lowercase` | boolean | No | `True` | Convert to lowercase |
+| `max_length` | number | No | `0` | Maximum slug length (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 最大短語長度（0 = 無限制） |
-| `original` | string | URL 友好的短語 |
+| `result` | string | URL-friendly slug |
+| `original` | string | Original text |
 
-### 分割字串
+### Split String
 
 `string.split`
 
-使用分隔符將字串分割為陣列
+Split a string into an array using a delimiter
 
 **Parameters:**
 
@@ -147,41 +147,41 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `parts` | array | 分割後的字串陣列 |
-| `result` | array | 分割後的字串陣列 |
-| `length` | number | 分割後的部分數量 |
-| `original` | string | 原始字串 |
-| `delimiter` | string | 使用的分隔符 |
-| `status` | string | 操作狀態 |
+| `parts` | array | Array of split string parts |
+| `result` | array | Alias for parts - array of split string parts |
+| `length` | number | Number of parts after split |
+| `original` | string | Original input string |
+| `delimiter` | string | Delimiter used for splitting |
+| `status` | string | Operation status |
 
-### 模板
+### Template
 
 `string.template`
 
-渲染模板並替換變數
+Render a template with variable substitution
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `template` | string | Yes | - | 包含 {<!-- -->{variable}<!-- -->} 提示文字的模板字串 |
-| `variables` | object | Yes | - | 要替換的變數 |
-| `missing_value` | string | No | - | 未定義變數的值 |
-| `preserve_missing` | boolean | No | `False` | 未定義變數的值 |
+| `template` | string | Yes | - | Template string with {<!-- -->{variable}<!-- -->} placeholders |
+| `variables` | object | Yes | - | Variables to substitute |
+| `missing_value` | string | No | - | Value for undefined variables |
+| `preserve_missing` | boolean | No | `False` | Keep placeholder if variable is missing |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 若變數缺失則保留提示文字 |
-| `replaced` | number | 渲染後的模板 |
-| `missing` | array | 渲染後的模板 |
+| `result` | string | Rendered template |
+| `replaced` | number | Number of replacements made |
+| `missing` | array | Missing variable names |
 
-### 標題格式字串
+### Title Case String
 
 `string.titlecase`
 
-將字串轉換為標題格式
+Convert string to title case
 
 **Parameters:**
 
@@ -193,7 +193,7 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 標題格式轉換後的字串 |
+| `result` | string | Title case converted string |
 
 **Example:** Convert to title case
 
@@ -207,11 +207,11 @@ text: hello world from flyto
 text: john doe
 ```
 
-### 字串修剪
+### String Trim
 
 `string.trim`
 
-移除字串兩端的空白字元
+Remove whitespace from both ends of a string
 
 **Parameters:**
 
@@ -223,39 +223,39 @@ text: john doe
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 修剪後的字串 |
-| `original` | string | 原始字串 |
-| `status` | string | 操作狀態 |
+| `result` | string | Trimmed string with whitespace removed |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### 截斷字串
+### Truncate String
 
 `string.truncate`
 
-將字串截斷到最大長度
+Truncate a string to a maximum length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 要截斷的文字 |
-| `length` | number | Yes | - | 要截斷的文字 |
-| `suffix` | string | No | `...` | 最大長度 |
-| `word_boundary` | boolean | No | `False` | 若被截斷時要附加的文字 |
+| `text` | string | Yes | - | Text to truncate |
+| `length` | number | Yes | - | Maximum length |
+| `suffix` | string | No | `...` | Text to append if truncated |
+| `word_boundary` | boolean | No | `False` | Break at word boundary |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 在單字邊界截斷 |
-| `original` | string | 截斷後的字串 |
-| `truncated` | boolean | 截斷後的字串 |
-| `removed` | number | 原始字串 |
+| `result` | string | Truncated string |
+| `original` | string | Original string |
+| `truncated` | boolean | Whether string was truncated |
+| `removed` | number | Characters removed |
 
-### 字串大寫
+### String Uppercase
 
 `string.uppercase`
 
-將字串轉換為大寫
+Convert a string to uppercase
 
 **Parameters:**
 
@@ -267,6 +267,6 @@ text: john doe
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 大寫轉換後的字串 |
-| `original` | string | 原始字串 |
-| `status` | string | 操作狀態 |
+| `result` | string | Uppercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |

@@ -6,37 +6,37 @@ AES encryption/decryption, HMAC, JWT tokens, and secure random generation.
 
 | Module | Description |
 |--------|-------------|
-| [डिक्रिप्ट](#डिक्रिप्ट) | AES एन्क्रिप्शन का उपयोग करके डेटा डिक्रिप्ट करें |
-| [एन्क्रिप्ट](#एन्क्रिप्ट) | AES एन्क्रिप्शन का उपयोग करके डेटा एन्क्रिप्ट करें |
-| [HMAC](#hmac) | HMAC हस्ताक्षर उत्पन्न करें |
-| [JWT बनाएं](#jwt-बनाएं) | एक साइन किया हुआ JWT टोकन बनाएं |
-| [JWT सत्यापित करें](#jwt-सत्यापित-करें) | एक JWT टोकन को सत्यापित और डिकोड करें |
-| [रैंडम बाइट्स](#रैंडम-बाइट्स) | क्रिप्टोग्राफिक रूप से सुरक्षित रैंडम बाइट्स उत्पन्न करें |
-| [रैंडम स्ट्रिंग](#रैंडम-स्ट्रिंग) | क्रिप्टोग्राफिक रूप से सुरक्षित रैंडम स्ट्रिंग उत्पन्न करें |
+| [Decrypt](#decrypt) | AES symmetric decryption |
+| [Encrypt](#encrypt) | AES symmetric encryption |
+| [HMAC](#hmac) | Generate HMAC signature |
+| [Create JWT](#create-jwt) | Create JWT (JSON Web Token) tokens |
+| [Verify JWT](#verify-jwt) | Verify and decode JWT tokens |
+| [Random Bytes](#random-bytes) | Generate cryptographically secure random bytes |
+| [Random String](#random-string) | Generate cryptographically secure random string |
 
 ## Modules
 
-### डिक्रिप्ट
+### Decrypt
 
 `crypto.decrypt`
 
-AES एन्क्रिप्शन का उपयोग करके डेटा डिक्रिप्ट करें
+AES symmetric decryption
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `ciphertext` | string | Yes | - | डिक्रिप्ट करने के लिए एन्क्रिप्टेड डेटा |
-| `key` | string | Yes | - | एन्क्रिप्शन कुंजी |
-| `mode` | select (`CBC`, `GCM`) | No | `GCM` | AES साइफर मोड (CBC, GCM, आदि) |
-| `input_format` | select (`base64`, `hex`) | No | `base64` | इनपुट साइफरटेक्स्ट का प्रारूप (hex या base64) |
+| `ciphertext` | string | Yes | - | Encrypted ciphertext to decrypt |
+| `key` | string | Yes | - | Decryption passphrase (must match encryption passphrase) |
+| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Decryption mode (must match encryption mode) |
+| `input_format` | select (`base64`, `hex`) | No | `base64` | Encoding format of the ciphertext input |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `plaintext` | string | डिक्रिप्टेड प्लेनटेक्स्ट |
-| `algorithm` | string | डिक्रिप्शन के लिए उपयोग किया गया एल्गोरिदम |
+| `plaintext` | string | Decrypted plaintext |
+| `algorithm` | string | Decryption algorithm used |
 
 **Example:** Decrypt AES-GCM ciphertext
 
@@ -46,28 +46,28 @@ key: my-secret-passphrase
 mode: GCM
 ```
 
-### एन्क्रिप्ट
+### Encrypt
 
 `crypto.encrypt`
 
-AES एन्क्रिप्शन का उपयोग करके डेटा एन्क्रिप्ट करें
+AES symmetric encryption
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `plaintext` | string | Yes | - | एन्क्रिप्ट करने के लिए डेटा |
-| `key` | string | Yes | - | एन्क्रिप्शन कुंजी |
-| `mode` | select (`CBC`, `GCM`) | No | `GCM` | AES साइफर मोड (CBC, GCM, आदि) |
-| `output_format` | select (`base64`, `hex`) | No | `base64` | आउटपुट साइफरटेक्स्ट का प्रारूप (hex या base64) |
+| `plaintext` | string | Yes | - | Text to encrypt |
+| `key` | string | Yes | - | Encryption passphrase (key is derived via PBKDF2) |
+| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Encryption mode |
+| `output_format` | select (`base64`, `hex`) | No | `base64` | Encoding format for the ciphertext output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ciphertext` | string | एन्क्रिप्टेड साइफरटेक्स्ट |
-| `algorithm` | string | एन्क्रिप्शन के लिए उपयोग किया गया एल्गोरिदम |
-| `mode` | string | उपयोग किया गया साइफर मोड |
+| `ciphertext` | string | Encrypted ciphertext |
+| `algorithm` | string | Encryption algorithm used |
+| `mode` | string | Encryption mode used |
 
 **Example:** Encrypt with AES-GCM
 
@@ -81,48 +81,48 @@ mode: GCM
 
 `crypto.hmac`
 
-HMAC हस्ताक्षर उत्पन्न करें
+Generate HMAC signature
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `message` | string | Yes | - | हस्ताक्षर करने के लिए संदेश |
-| `key` | string | Yes | - | हस्ताक्षर करने के लिए संदेश |
-| `algorithm` | select (`sha256`, `sha512`, `sha1`, `md5`) | No | `sha256` | HMAC के लिए गुप्त कुंजी |
-| `encoding` | select (`hex`, `base64`) | No | `hex` | आउटपुट एन्कोडिंग प्रारूप |
+| `message` | string | Yes | - | Message to sign |
+| `key` | string | Yes | - | Secret key for HMAC |
+| `algorithm` | select (`sha256`, `sha512`, `sha1`, `md5`) | No | `sha256` | Hash algorithm |
+| `encoding` | select (`hex`, `base64`) | No | `hex` | Output encoding format |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `signature` | string | आउटपुट एन्कोडिंग प्रारूप |
-| `algorithm` | string | HMAC हस्ताक्षर |
+| `signature` | string | HMAC signature |
+| `algorithm` | string | Algorithm used |
 
-### JWT बनाएं
+### Create JWT
 
 `crypto.jwt_create`
 
-एक साइन किया हुआ JWT टोकन बनाएं
+Create JWT (JSON Web Token) tokens
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `payload` | object | Yes | - | JWT पेलोड डेटा (ऑब्जेक्ट) |
-| `secret` | string | Yes | - | टोकन को साइन करने के लिए गुप्त कुंजी |
-| `algorithm` | select (`HS256`, `HS384`, `HS512`, `RS256`) | No | `HS256` | JWT साइनिंग एल्गोरिदम (HS256, RS256, आदि) |
-| `expires_in` | number | No | - | टोकन समाप्ति समय सेकंड में |
-| `issuer` | string | No | - | टोकन जारीकर्ता दावा |
-| `audience` | string | No | - | टोकन के लिए लक्षित दर्शक |
+| `payload` | object | Yes | - | JWT payload claims (JSON object) |
+| `secret` | string | Yes | - | Secret key for signing the token |
+| `algorithm` | select (`HS256`, `HS384`, `HS512`, `RS256`) | No | `HS256` | Signing algorithm |
+| `expires_in` | number | No | - | Token expiration time in seconds (optional) |
+| `issuer` | string | No | - | Token issuer (iss claim) |
+| `audience` | string | No | - | Token audience (aud claim) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `token` | string | उत्पन्न JWT टोकन |
-| `algorithm` | string | साइनिंग के लिए उपयोग किया गया एल्गोरिदम |
-| `expires_at` | string | टोकन समाप्ति समय |
+| `token` | string | Signed JWT token |
+| `algorithm` | string | Algorithm used for signing |
+| `expires_at` | string | Token expiration timestamp (ISO 8601) or null |
 
 **Example:** Create a JWT with expiration
 
@@ -133,30 +133,30 @@ algorithm: HS256
 expires_in: 3600
 ```
 
-### JWT सत्यापित करें
+### Verify JWT
 
 `crypto.jwt_verify`
 
-एक JWT टोकन को सत्यापित और डिकोड करें
+Verify and decode JWT tokens
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `token` | string | Yes | - | सत्यापित करने के लिए JWT टोकन |
-| `secret` | string | Yes | - | टोकन पर हस्ताक्षर करने के लिए प्रयुक्त गुप्त कुंजी |
-| `algorithms` | array | No | `['HS256']` | अनुमत साइनिंग एल्गोरिदम |
-| `verify_exp` | boolean | No | `True` | क्या समाप्ति दावे को सत्यापित करना है |
-| `audience` | string | No | - | अपेक्षित दर्शक दावा |
-| `issuer` | string | No | - | अपेक्षित जारीकर्ता दावा |
+| `token` | string | Yes | - | JWT token to verify and decode |
+| `secret` | string | Yes | - | Secret key for verifying the token signature |
+| `algorithms` | array | No | `['HS256']` | List of allowed signing algorithms |
+| `verify_exp` | boolean | No | `True` | Whether to verify the token expiration |
+| `audience` | string | No | - | Expected audience (aud claim) |
+| `issuer` | string | No | - | Expected issuer (iss claim) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | क्या टोकन मान्य है |
-| `payload` | object | डिकोड किया गया JWT पेलोड |
-| `header` | object | JWT हेडर डेटा |
+| `valid` | boolean | Whether the token is valid |
+| `payload` | object | Decoded JWT payload |
+| `header` | object | Decoded JWT header |
 
 **Example:** Verify a JWT token
 
@@ -167,43 +167,43 @@ algorithms: ["HS256"]
 verify_exp: true
 ```
 
-### रैंडम बाइट्स
+### Random Bytes
 
 `crypto.random_bytes`
 
-क्रिप्टोग्राफिक रूप से सुरक्षित रैंडम बाइट्स उत्पन्न करें
+Generate cryptographically secure random bytes
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | Yes | `32` | बाइट्स की संख्या |
-| `encoding` | string | No | `hex` | आउटपुट एन्कोडिंग |
+| `length` | number | Yes | `32` | Number of bytes |
+| `encoding` | string | No | `hex` | Output encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bytes` | string | रैंडम बाइट्स (एन्कोडेड) |
-| `length` | number | रैंडम बाइट्स (एन्कोडेड) |
+| `bytes` | string | Random bytes (encoded) |
+| `length` | number | Number of bytes generated |
 
-### रैंडम स्ट्रिंग
+### Random String
 
 `crypto.random_string`
 
-क्रिप्टोग्राफिक रूप से सुरक्षित रैंडम स्ट्रिंग उत्पन्न करें
+Generate cryptographically secure random string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | Yes | `16` | स्ट्रिंग की लंबाई |
-| `charset` | string | No | `alphanumeric` | उपयोग करने के लिए अक्षर |
-| `uppercase` | boolean | No | `False` | बड़े अक्षरों में बदलें |
+| `length` | number | Yes | `16` | String length |
+| `charset` | string | No | `alphanumeric` | Characters to use |
+| `uppercase` | boolean | No | `False` | Convert to uppercase |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `string` | string | बड़े अक्षरों में बदलें |
-| `length` | number | रैंडम स्ट्रिंग |
+| `string` | string | Random string |
+| `length` | number | String length |

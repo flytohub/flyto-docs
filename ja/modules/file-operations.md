@@ -6,17 +6,17 @@ Copy, move, and delete files.
 
 | Module | Description |
 |--------|-------------|
-| [ファイルコピー](#ファイルコピー) | ファイルを別の場所にコピーする |
-| [ファイル削除](#ファイル削除) | ファイルシステムからファイルを削除する |
-| [ファイル移動](#ファイル移動) | ファイルを移動または名前変更する |
+| [Copy File](#copy-file) | Copy a file to another location |
+| [Delete File](#delete-file) | Delete a file from the filesystem |
+| [Move File](#move-file) | Move or rename a file |
 
 ## Modules
 
-### ファイルコピー
+### Copy File
 
 `file.copy`
 
-ファイルを別の場所にコピーする
+Copy a file to another location
 
 **Parameters:**
 
@@ -30,10 +30,10 @@ Copy, move, and delete files.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `copied` | boolean | コピーが成功したかどうか |
-| `source` | string | コピー元のパス |
-| `destination` | string | コピー先のパス |
-| `size` | number | ファイルサイズ |
+| `copied` | boolean | The copied |
+| `source` | string | The source |
+| `destination` | string | The destination |
+| `size` | number | Size in bytes |
 
 **Example:** Backup file
 
@@ -50,11 +50,11 @@ source: config.yaml
 destination: config.backup.yaml
 ```
 
-### ファイル削除
+### Delete File
 
 `file.delete`
 
-ファイルシステムからファイルを削除する
+Delete a file from the filesystem
 
 **Parameters:**
 
@@ -67,8 +67,8 @@ destination: config.backup.yaml
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deleted` | boolean | 削除が成功したかどうか |
-| `file_path` | string | 削除されたファイルのパス |
+| `deleted` | boolean | The deleted |
+| `file_path` | string | The file path |
 
 **Example:** Delete temporary file
 
@@ -83,11 +83,11 @@ ignore_missing: true
 file_path: logs/app.log
 ```
 
-### ファイル移動
+### Move File
 
 `file.move`
 
-ファイルを移動または名前変更する
+Move or rename a file
 
 **Parameters:**
 
@@ -100,9 +100,9 @@ file_path: logs/app.log
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `moved` | boolean | 移動が成功したかどうか |
-| `source` | string | 移動元のパス |
-| `destination` | string | 移動先のパス |
+| `moved` | boolean | The moved |
+| `source` | string | The source |
+| `destination` | string | The destination |
 
 **Example:** Move file to archive
 

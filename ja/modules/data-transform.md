@@ -6,32 +6,32 @@ CSV, JSON, XML, YAML parsing, generation, and pipeline transformations.
 
 | Module | Description |
 |--------|-------------|
-| [CSVファイル読み込み](#csvファイル読み込み) | CSVファイルを読み込みオブジェクト配列に変換する |
-| [CSVファイル書き込み](#csvファイル書き込み) | オブジェクト配列をCSVファイルに書き込む |
+| [Read CSV File](#read-csv-file) | Read and parse CSV file into array of objects |
+| [Write CSV File](#write-csv-file) | Write array of objects to CSV file |
 | [Deduplicate Records](#deduplicate-records) | Remove duplicate records from an array by key fields. Optionally persists seen hashes to disk or execution context for cross-run dedup. Use storage=context in cloud/stateless environments where disk is ephemeral. |
-| [JSONパース](#jsonパース) | JSON文字列をオブジェクトに変換する |
-| [JSON文字列化](#json文字列化) | オブジェクトをJSON文字列に変換する |
-| [JSONからCSV変換](#jsonからcsv変換) | JSONデータまたはファイルをCSV形式に変換する |
-| [データパイプライン](#データパイプライン) | 複数のデータ変換を一度にチェーンする |
-| [テキストテンプレート](#テキストテンプレート) | 変数を使用してテキストテンプレートを埋める |
+| [Parse JSON](#parse-json) | Parse JSON string into object |
+| [JSON Stringify](#json-stringify) | Convert object to JSON string |
+| [JSON to CSV](#json-to-csv) | Convert JSON data or files to CSV format |
+| [Data Pipeline](#data-pipeline) | Chain multiple data transformations in a single step |
+| [Text Template](#text-template) | Fill text template with variables |
 | [Validate Records](#validate-records) | Validate extracted records against field rules. Splits output into valid and invalid arrays. |
-| [XML生成](#xml生成) | オブジェクトや配列からXML文字列を生成 |
-| [XML解析](#xml解析) | XML文字列をオブジェクトに解析 |
-| [YAML生成](#yaml生成) | オブジェクトや配列からYAML文字列を生成 |
-| [YAML解析](#yaml解析) | YAML文字列をオブジェクトに解析 |
-| [オブジェクトキー](#オブジェクトキー) | オブジェクトからすべてのキーを取得 |
-| [オブジェクトマージ](#オブジェクトマージ) | 複数のオブジェクトを1つにマージ |
-| [オブジェクト除外](#オブジェクト除外) | オブジェクトから特定のキーを除外 |
-| [オブジェクト選択](#オブジェクト選択) | オブジェクトから特定のキーを選択 |
-| [オブジェクト値](#オブジェクト値) | オブジェクトからすべての値を取得 |
+| [Generate XML](#generate-xml) | Generate XML string from Python dict |
+| [Parse XML](#parse-xml) | Parse XML string or file into Python dict |
+| [Generate YAML](#generate-yaml) | Generate YAML string from Python object |
+| [Parse YAML](#parse-yaml) | Parse YAML string or file into Python object |
+| [Object Keys](#object-keys) | Get all keys from an object |
+| [Object Merge](#object-merge) | Merge multiple objects into one |
+| [Object Omit](#object-omit) | Omit specific keys from an object |
+| [Object Pick](#object-pick) | Pick specific keys from an object |
+| [Object Values](#object-values) | Get all values from an object |
 
 ## Modules
 
-### CSVファイル読み込み
+### Read CSV File
 
 `data.csv.read`
 
-CSVファイルを読み込みオブジェクト配列に変換する
+Read and parse CSV file into array of objects
 
 **Parameters:**
 
@@ -46,10 +46,10 @@ CSVファイルを読み込みオブジェクト配列に変換する
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `data` | array | 行オブジェクトの配列 |
-| `rows` | number | 行数 |
-| `columns` | array | カラム名の配列 |
+| `status` | string | Operation status |
+| `data` | array | Array of row objects |
+| `rows` | number | Number of rows |
+| `columns` | array | Column names |
 
 **Example:** Example
 
@@ -59,11 +59,11 @@ delimiter: ,
 encoding: utf-8
 ```
 
-### CSVファイル書き込み
+### Write CSV File
 
 `data.csv.write`
 
-オブジェクト配列をCSVファイルに書き込む
+Write array of objects to CSV file
 
 **Parameters:**
 
@@ -78,9 +78,9 @@ encoding: utf-8
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `file_path` | string | ファイルパス |
-| `rows_written` | number | 書き込まれた行数 |
+| `status` | string | Operation status |
+| `file_path` | string | Path to written file |
+| `rows_written` | number | Number of rows written |
 
 **Example:** Example
 
@@ -130,11 +130,11 @@ keys: ["url"]
 hash_file: /tmp/seen.json
 ```
 
-### JSONパース
+### Parse JSON
 
 `data.json.parse`
 
-JSON文字列をオブジェクトに変換する
+Parse JSON string into object
 
 **Parameters:**
 
@@ -146,8 +146,8 @@ JSON文字列をオブジェクトに変換する
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `data` | object | パースされたデータ |
+| `status` | string | Operation status |
+| `data` | object | Parsed object |
 
 **Example:** Example
 
@@ -155,11 +155,11 @@ JSON文字列をオブジェクトに変換する
 json_string: {"name": "John", "age": 30}
 ```
 
-### JSON文字列化
+### JSON Stringify
 
 `data.json.stringify`
 
-オブジェクトをJSON文字列に変換する
+Convert object to JSON string
 
 **Parameters:**
 
@@ -173,8 +173,8 @@ json_string: {"name": "John", "age": 30}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `json` | string | JSON文字列 |
+| `status` | string | Operation status |
+| `json` | string | JSON string |
 
 **Example:** Example
 
@@ -183,11 +183,11 @@ data: {"name": "John", "age": 30}
 pretty: true
 ```
 
-### JSONからCSV変換
+### JSON to CSV
 
 `data.json_to_csv`
 
-JSONデータまたはファイルをCSV形式に変換する
+Convert JSON data or files to CSV format
 
 **Parameters:**
 
@@ -204,10 +204,10 @@ JSONデータまたはファイルをCSV形式に変換する
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 生成されたCSVファイルのパス |
-| `row_count` | number | 書き込まれた行数 |
-| `column_count` | number | カラム数 |
-| `columns` | array | カラム名の配列 |
+| `output_path` | string | Path to the generated CSV file |
+| `row_count` | number | Number of rows written |
+| `column_count` | number | Number of columns |
+| `columns` | array | List of column names |
 
 **Example:** Convert JSON array to CSV
 
@@ -223,27 +223,27 @@ input_data: /path/to/data.json
 output_path: /path/to/output.csv
 ```
 
-### データパイプライン
+### Data Pipeline
 
 `data.pipeline`
 
-複数のデータ変換を一度にチェーンする
+Chain multiple data transformations in a single step
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input` | any | Yes | - | 変換する入力データ（配列またはオブジェクト） |
-| `steps` | array | Yes | - | 変換する入力データ（配列またはオブジェクト） |
+| `input` | any | Yes | - | Input data to transform (array or object) |
+| `steps` | array | Yes | - | Array of transformation steps to apply in order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | 適用する変換ステップの配列 |
-| `original_count` | integer | 変換されたデータ |
-| `result_count` | integer | 変換されたデータ |
-| `steps_applied` | integer | 変換後のアイテム数 |
+| `result` | any | Transformed data |
+| `original_count` | integer | Count of items before transformation |
+| `result_count` | integer | Count of items after transformation |
+| `steps_applied` | integer | Number of transformation steps applied |
 
 **Example:** Example
 
@@ -266,11 +266,11 @@ input: ${input.data}
 steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}, {"pick": ["id", "name", "timestamp"]}, {"sort": {"field": "timestamp", "order": "desc"}}, {"skip": 5}, {"limit": 20}]
 ```
 
-### テキストテンプレート
+### Text Template
 
 `data.text.template`
 
-変数を使用してテキストテンプレートを埋める
+Fill text template with variables
 
 **Parameters:**
 
@@ -283,8 +283,8 @@ steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `result` | string | テンプレート結果 |
+| `status` | string | Operation status |
+| `result` | string | Filled template |
 
 **Example:** Example
 
@@ -334,27 +334,27 @@ mode: flag
 drop_fields: ["__index", "html"]
 ```
 
-### XML生成
+### Generate XML
 
 `data.xml.generate`
 
-オブジェクトや配列からXML文字列を生成
+Generate XML string from Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | object | Yes | - | XMLに変換するデータ |
-| `root_tag` | string | No | `root` | ルート要素のタグ名 |
-| `pretty` | boolean | No | `True` | XML出力を整形して表示 |
-| `encoding` | string | No | `utf-8` | XML出力の文字エンコーディング |
-| `declaration` | boolean | No | `True` | XML宣言ヘッダーを含める |
+| `data` | object | Yes | - | Python dict or object to convert to XML |
+| `root_tag` | string | No | `root` | Tag name for the root XML element |
+| `pretty` | boolean | No | `True` | Format XML with indentation for readability |
+| `encoding` | string | No | `utf-8` | XML encoding declaration value |
+| `declaration` | boolean | No | `True` | Include <?xml version="1.0"?> declaration at top |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `xml` | string | 生成されたXML文字列 |
+| `xml` | string | Generated XML string |
 
 **Example:** Example
 
@@ -364,26 +364,26 @@ root_tag: users
 pretty: true
 ```
 
-### XML解析
+### Parse XML
 
 `data.xml.parse`
 
-XML文字列をオブジェクトに解析
+Parse XML string or file into Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | 解析するXML文字列 |
-| `file_path` | string | No | - | 解析するXMLファイルのパス |
-| `preserve_attributes` | boolean | No | `True` | 解析された出力でXML属性を保持 |
+| `content` | string | No | - | XML string to parse |
+| `file_path` | string | No | - | Path to XML file (used if content is empty) |
+| `preserve_attributes` | boolean | No | `True` | Include XML element attributes as @attributes in output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | オブジェクトとして解析されたXML |
-| `root_tag` | string | ルート要素のタグ名 |
+| `result` | object | Parsed XML as nested dict |
+| `root_tag` | string | Root element tag name |
 
 **Example:** Example
 
@@ -392,27 +392,27 @@ content: <users><user id="1"><name>John</name></user></users>
 preserve_attributes: true
 ```
 
-### YAML生成
+### Generate YAML
 
 `data.yaml.generate`
 
-オブジェクトや配列からYAML文字列を生成
+Generate YAML string from Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | any | Yes | - | YAMLに変換するデータ |
-| `default_flow_style` | boolean | No | `False` | ネストされた構造にフロースタイルを使用 |
-| `sort_keys` | boolean | No | `False` | キーをアルファベット順にソート |
-| `indent` | number | No | `2` | インデントのスペース数 |
-| `allow_unicode` | boolean | No | `True` | 出力にユニコード文字を許可 |
+| `data` | any | Yes | - | Python object, array, or value to convert to YAML |
+| `default_flow_style` | boolean | No | `False` | Use inline/flow style (JSON-like) instead of block style |
+| `sort_keys` | boolean | No | `False` | Sort dictionary keys alphabetically |
+| `indent` | number | No | `2` | Number of spaces for indentation |
+| `allow_unicode` | boolean | No | `True` | Allow unicode characters in output without escaping |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `yaml` | string | 生成されたYAML文字列 |
+| `yaml` | string | Generated YAML string |
 
 **Example:** Example
 
@@ -422,26 +422,26 @@ sort_keys: false
 indent: 2
 ```
 
-### YAML解析
+### Parse YAML
 
 `data.yaml.parse`
 
-YAML文字列をオブジェクトに解析
+Parse YAML string or file into Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | 解析するYAML文字列 |
-| `file_path` | string | No | - | 解析するYAMLファイルのパス |
-| `multi_document` | boolean | No | `False` | マルチドキュメントYAMLを解析（---で区切る） |
+| `content` | string | No | - | YAML string to parse |
+| `file_path` | string | No | - | Path to YAML file (used if content is empty) |
+| `multi_document` | boolean | No | `False` | Parse multiple YAML documents separated by --- (uses safe_load_all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | オブジェクトまたは配列として解析されたYAML |
-| `type` | string | 解析された結果のタイプ |
+| `result` | any | Parsed YAML data (object, array, or scalar) |
+| `type` | string | Type of parsed result: object, array, or scalar |
 
 **Example:** Example
 
@@ -464,11 +464,11 @@ name: Jane
 multi_document: true
 ```
 
-### オブジェクトキー
+### Object Keys
 
 `object.keys`
 
-オブジェクトからすべてのキーを取得
+Get all keys from an object
 
 **Parameters:**
 
@@ -480,8 +480,8 @@ multi_document: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `keys` | array | オブジェクトキーのリスト |
-| `count` | number | オブジェクトキーのリスト |
+| `keys` | array | List of object keys |
+| `count` | number | Number of keys |
 
 **Example:** Get object keys
 
@@ -489,11 +489,11 @@ multi_document: true
 object: {"name": "John", "age": 30, "city": "NYC"}
 ```
 
-### オブジェクトマージ
+### Object Merge
 
 `object.merge`
 
-複数のオブジェクトを1つにマージ
+Merge multiple objects into one
 
 **Parameters:**
 
@@ -505,7 +505,7 @@ object: {"name": "John", "age": 30, "city": "NYC"}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | マージされたオブジェクト |
+| `result` | object | Merged object |
 
 **Example:** Merge user data
 
@@ -513,11 +513,11 @@ object: {"name": "John", "age": 30, "city": "NYC"}
 objects: [{"name": "John", "age": 30}, {"city": "NYC", "country": "USA"}, {"job": "Engineer"}]
 ```
 
-### オブジェクト除外
+### Object Omit
 
 `object.omit`
 
-オブジェクトから特定のキーを除外
+Omit specific keys from an object
 
 **Parameters:**
 
@@ -530,7 +530,7 @@ objects: [{"name": "John", "age": 30}, {"city": "NYC", "country": "USA"}, {"job"
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 除外されたキーを含まないオブジェクト |
+| `result` | object | Object without omitted keys |
 
 **Example:** Omit sensitive fields
 
@@ -539,11 +539,11 @@ object: {"name": "John", "age": 30, "password": "secret", "ssn": "123-45-6789"}
 keys: ["password", "ssn"]
 ```
 
-### オブジェクト選択
+### Object Pick
 
 `object.pick`
 
-オブジェクトから特定のキーを選択
+Pick specific keys from an object
 
 **Parameters:**
 
@@ -556,7 +556,7 @@ keys: ["password", "ssn"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 選択されたキーのみを含むオブジェクト |
+| `result` | object | Object with only picked keys |
 
 **Example:** Pick user fields
 
@@ -565,11 +565,11 @@ object: {"name": "John", "age": 30, "email": "john@example.com", "password": "se
 keys: ["name", "email"]
 ```
 
-### オブジェクト値
+### Object Values
 
 `object.values`
 
-オブジェクトからすべての値を取得
+Get all values from an object
 
 **Parameters:**
 
@@ -581,8 +581,8 @@ keys: ["name", "email"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `values` | array | オブジェクト値のリスト |
-| `count` | number | オブジェクト値のリスト |
+| `values` | array | List of object values |
+| `count` | number | Number of values |
 
 **Example:** Get object values
 

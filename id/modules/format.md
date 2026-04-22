@@ -6,123 +6,123 @@ Number, currency, duration, filesize, and percentage formatting.
 
 | Module | Description |
 |--------|-------------|
-| [Format Mata Uang](#format-mata-uang) | Format angka sebagai mata uang |
-| [Format Durasi](#format-durasi) | Format detik sebagai durasi yang mudah dibaca |
-| [Format Ukuran File](#format-ukuran-file) | Format byte sebagai ukuran file yang mudah dibaca |
-| [Format Angka](#format-angka) | Format angka dengan pemisah dan desimal |
-| [Format Persentase](#format-persentase) | Format angka sebagai persentase |
+| [Format Currency](#format-currency) | Format numbers as currency |
+| [Format Duration](#format-duration) | Format seconds as human-readable duration |
+| [Format Filesize](#format-filesize) | Format bytes as human-readable file size |
+| [Format Number](#format-number) | Format numbers with separators and decimals |
+| [Format Percentage](#format-percentage) | Format numbers as percentages |
 
 ## Modules
 
-### Format Mata Uang
+### Format Currency
 
 `format.currency`
 
-Format angka sebagai mata uang
+Format numbers as currency
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `amount` | number | Yes | - | Jumlah yang akan diformat |
-| `currency` | string | No | `USD` | Jumlah yang akan diformat |
-| `decimal_places` | number | No | `2` | Jumlah tempat desimal |
-| `symbol_position` | string | No | `before` | Jumlah tempat desimal |
+| `amount` | number | Yes | - | Amount to format |
+| `currency` | string | No | `USD` | Currency code (USD, EUR, GBP, etc) |
+| `decimal_places` | number | No | `2` | Number of decimal places |
+| `symbol_position` | string | No | `before` | Position of currency symbol |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | String mata uang yang diformat |
-| `original` | number | String mata uang yang diformat |
-| `symbol` | string | String mata uang yang diformat |
+| `result` | string | Formatted currency string |
+| `original` | number | Original amount |
+| `symbol` | string | Currency symbol used |
 
-### Format Durasi
+### Format Duration
 
 `format.duration`
 
-Format detik sebagai durasi yang mudah dibaca
+Format seconds as human-readable duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | Yes | - | Durasi dalam detik |
-| `format` | string | No | `short` | Durasi dalam detik |
-| `show_zero` | boolean | No | `False` | Tampilkan unit yang bernilai nol |
+| `seconds` | number | Yes | - | Duration in seconds |
+| `format` | string | No | `short` | Output format style |
+| `show_zero` | boolean | No | `False` | Show units that are zero |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Tampilkan unit yang bernilai nol |
-| `original` | number | String durasi yang diformat |
-| `parts` | object | String durasi yang diformat |
+| `result` | string | Formatted duration string |
+| `original` | number | Original seconds |
+| `parts` | object | Duration parts (days, hours, minutes, seconds) |
 
-### Format Ukuran File
+### Format Filesize
 
 `format.filesize`
 
-Format byte sebagai ukuran file yang mudah dibaca
+Format bytes as human-readable file size
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bytes` | number | Yes | - | Ukuran dalam byte |
-| `binary` | boolean | No | `False` | Ukuran dalam byte |
-| `decimal_places` | number | No | `2` | Gunakan unit biner (KiB, MiB) daripada desimal (KB, MB) |
+| `bytes` | number | Yes | - | Size in bytes |
+| `binary` | boolean | No | `False` | Use binary units (KiB, MiB) instead of decimal (KB, MB) |
+| `decimal_places` | number | No | `2` | Number of decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Jumlah tempat desimal |
-| `original` | number | String ukuran file yang diformat |
-| `unit` | string | String ukuran file yang diformat |
-| `value` | number | Byte asli |
+| `result` | string | Formatted file size string |
+| `original` | number | Original bytes |
+| `unit` | string | Unit used |
+| `value` | number | Numeric value in unit |
 
-### Format Angka
+### Format Number
 
 `format.number`
 
-Format angka dengan pemisah dan desimal
+Format numbers with separators and decimals
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `number` | number | Yes | - | Angka yang akan diformat |
-| `decimal_places` | number | No | `2` | Angka yang akan diformat |
-| `thousand_separator` | string | No | `,` | Jumlah tempat desimal |
-| `decimal_separator` | string | No | `.` | Pemisah untuk ribuan |
+| `number` | number | Yes | - | Number to format |
+| `decimal_places` | number | No | `2` | Number of decimal places |
+| `thousand_separator` | string | No | `,` | Separator for thousands |
+| `decimal_separator` | string | No | `.` | Separator for decimals |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Pemisah untuk desimal |
-| `original` | number | String angka yang diformat |
+| `result` | string | Formatted number string |
+| `original` | number | Original number |
 
-### Format Persentase
+### Format Percentage
 
 `format.percentage`
 
-Format angka sebagai persentase
+Format numbers as percentages
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | number | Yes | - | Nilai untuk diformat sebagai persentase |
-| `is_ratio` | boolean | No | `True` | Nilai untuk diformat sebagai persentase |
-| `decimal_places` | number | No | `1` | Input adalah rasio (0-1) yang perlu dikalikan dengan 100 |
-| `include_sign` | boolean | No | `False` | Jumlah tempat desimal |
+| `value` | number | Yes | - | Value to format as percentage |
+| `is_ratio` | boolean | No | `True` | Input is a ratio (0-1) that needs to be multiplied by 100 |
+| `decimal_places` | number | No | `1` | Number of decimal places |
+| `include_sign` | boolean | No | `False` | Include + sign for positive values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Sertakan tanda + untuk nilai positif |
-| `original` | number | String persentase yang diformat |
-| `numeric` | number | String persentase yang diformat |
+| `result` | string | Formatted percentage string |
+| `original` | number | Original value |
+| `numeric` | number | Numeric percentage value |

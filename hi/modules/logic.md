@@ -6,114 +6,114 @@ Boolean logic operations: AND, OR, NOT, equals, contains.
 
 | Module | Description |
 |--------|-------------|
-| [लॉजिक AND](#लॉजिक-and) | तार्किक AND ऑपरेशन करें |
-| [लॉजिक कंटेन्स](#लॉजिक-कंटेन्स) | जांचें कि कोई मान दूसरे मान में है या नहीं |
-| [लॉजिक इक्वल्स](#लॉजिक-इक्वल्स) | जांचें कि दो मान समान हैं या नहीं |
-| [लॉजिक NOT](#लॉजिक-not) | तार्किक NOT ऑपरेशन करें |
-| [लॉजिक OR](#लॉजिक-or) | तार्किक OR ऑपरेशन करें |
+| [Logic AND](#logic-and) | Perform logical AND operation |
+| [Logic Contains](#logic-contains) | Check if a value contains another value |
+| [Logic Equals](#logic-equals) | Check if two values are equal |
+| [Logic NOT](#logic-not) | Perform logical NOT operation |
+| [Logic OR](#logic-or) | Perform logical OR operation |
 
 ## Modules
 
-### लॉजिक AND
+### Logic AND
 
 `logic.and`
 
-तार्किक AND ऑपरेशन करें
+Perform logical AND operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | बूलियन मानों को AND करें |
+| `values` | array | Yes | - | Boolean values to AND together |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | बूलियन मानों को AND करें |
-| `true_count` | number | AND ऑपरेशन का परिणाम |
-| `total_count` | number | AND ऑपरेशन का परिणाम |
+| `result` | boolean | Result of AND operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |
 
-### लॉजिक कंटेन्स
+### Logic Contains
 
 `logic.contains`
 
-जांचें कि कोई मान दूसरे मान में है या नहीं
+Check if a value contains another value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `haystack` | text | Yes | - | जिसमें खोज करनी है (स्ट्रिंग, एरे, या ऑब्जेक्ट) |
-| `needle` | text | Yes | - | जिसमें खोज करनी है (स्ट्रिंग, एरे, या ऑब्जेक्ट) |
-| `case_sensitive` | boolean | No | `True` | खोजने के लिए मान |
+| `haystack` | text | Yes | - | Value to search in (string, array, or object) |
+| `needle` | text | Yes | - | Value to search for |
+| `case_sensitive` | boolean | No | `True` | Case sensitive search for strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | स्ट्रिंग्स के लिए केस सेंसिटिव खोज |
-| `position` | number | क्या हेस्टैक में नीडल है |
-| `count` | number | क्या हेस्टैक में नीडल है |
+| `result` | boolean | Whether haystack contains needle |
+| `position` | number | Position/index where found (-1 if not found) |
+| `count` | number | Number of occurrences |
 
-### लॉजिक इक्वल्स
+### Logic Equals
 
 `logic.equals`
 
-जांचें कि दो मान समान हैं या नहीं
+Check if two values are equal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `a` | text | Yes | - | पहला मान तुलना के लिए |
-| `b` | text | Yes | - | पहला मान तुलना के लिए |
-| `strict` | boolean | No | `False` | दूसरा मान तुलना के लिए |
-| `case_sensitive` | boolean | No | `True` | समान प्रकार की आवश्यकता (कोई प्रकार जबरदस्ती नहीं) |
+| `a` | text | Yes | - | First value to compare |
+| `b` | text | Yes | - | Second value to compare |
+| `strict` | boolean | No | `False` | Require same type (no type coercion) |
+| `case_sensitive` | boolean | No | `True` | Case sensitive string comparison |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | केस सेंसिटिव स्ट्रिंग तुलना |
-| `type_a` | string | क्या मान समान हैं |
-| `type_b` | string | क्या मान समान हैं |
+| `result` | boolean | Whether values are equal |
+| `type_a` | string | Type of first value |
+| `type_b` | string | Type of second value |
 
-### लॉजिक NOT
+### Logic NOT
 
 `logic.not`
 
-तार्किक NOT ऑपरेशन करें
+Perform logical NOT operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | boolean | Yes | `False` | नकारने के लिए बूलियन मान |
+| `value` | boolean | Yes | `False` | Boolean value to negate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | नकारने के लिए बूलियन मान |
-| `original` | boolean | नकारात्मक परिणाम |
+| `result` | boolean | Negated result |
+| `original` | boolean | Original value |
 
-### लॉजिक OR
+### Logic OR
 
 `logic.or`
 
-तार्किक OR ऑपरेशन करें
+Perform logical OR operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | बूलियन मानों को OR करें |
+| `values` | array | Yes | - | Boolean values to OR together |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | बूलियन मानों को OR करें |
-| `true_count` | number | OR ऑपरेशन का परिणाम |
-| `total_count` | number | OR ऑपरेशन का परिणाम |
+| `result` | boolean | Result of OR operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |

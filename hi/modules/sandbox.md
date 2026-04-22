@@ -6,33 +6,33 @@ Execute JavaScript, Python, or shell commands in isolated environments.
 
 | Module | Description |
 |--------|-------------|
-| [JavaScript चलाएं](#javascript-चलाएं) | Node.js के माध्यम से टाइमआउट के साथ JavaScript कोड चलाएं |
-| [Python चलाएं](#python-चलाएं) | सबप्रोसेस में टाइमआउट के साथ Python कोड चलाएं |
-| [शेल चलाएं](#शेल-चलाएं) | टाइमआउट और पर्यावरण नियंत्रण के साथ शेल कमांड चलाएं |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code via Node.js with timeout |
+| [Execute Python](#execute-python) | Execute Python code in a subprocess with timeout |
+| [Execute Shell](#execute-shell) | Execute a shell command with timeout and environment control |
 
 ## Modules
 
-### JavaScript चलाएं
+### Execute JavaScript
 
 `sandbox.execute_js`
 
-Node.js के माध्यम से टाइमआउट के साथ JavaScript कोड चलाएं
+Execute JavaScript code via Node.js with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | Node.js के माध्यम से चलाने के लिए JavaScript कोड |
-| `timeout` | number | No | `10` | सेकंड में निष्पादन टाइमआउट |
+| `code` | string | Yes | - | JavaScript code to execute via Node.js |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | स्क्रिप्ट से मानक आउटपुट |
-| `stderr` | string | स्क्रिप्ट से मानक त्रुटि |
-| `exit_code` | number | प्रक्रिया निकास कोड (0 = सफलता) |
-| `execution_time_ms` | number | मिलीसेकंड में निष्पादन समय |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple console.log
 
@@ -48,28 +48,28 @@ code: const data = { name: "test", value: 42 };
 console.log(JSON.stringify(data, null, 2));
 ```
 
-### Python चलाएं
+### Execute Python
 
 `sandbox.execute_python`
 
-सबप्रोसेस में टाइमआउट के साथ Python कोड चलाएं
+Execute Python code in a subprocess with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | चलाने के लिए Python कोड |
-| `timeout` | number | No | `10` | सेकंड में निष्पादन टाइमआउट |
-| `allowed_modules` | array | No | - | इम्पोर्ट करने योग्य मॉड्यूल की श्वेतसूची (सभी की अनुमति के लिए खाली छोड़ें) |
+| `code` | string | Yes | - | Python code to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `allowed_modules` | array | No | - | Whitelist of importable modules (leave empty to allow all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | स्क्रिप्ट से मानक आउटपुट |
-| `stderr` | string | स्क्रिप्ट से मानक त्रुटि |
-| `exit_code` | number | प्रक्रिया निकास कोड (0 = सफलता) |
-| `execution_time_ms` | number | मिलीसेकंड में निष्पादन समय |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple print
 
@@ -86,29 +86,29 @@ print(math.pi)
 allowed_modules: ["math"]
 ```
 
-### शेल चलाएं
+### Execute Shell
 
 `sandbox.execute_shell`
 
-टाइमआउट और पर्यावरण नियंत्रण के साथ शेल कमांड चलाएं
+Execute a shell command with timeout and environment control
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `command` | string | Yes | - | चलाने के लिए शेल कमांड |
-| `timeout` | number | No | `10` | सेकंड में निष्पादन टाइमआउट |
-| `working_dir` | string | No | - | कमांड के लिए कार्य निर्देशिका |
-| `env` | object | No | - | सेट करने के लिए अतिरिक्त पर्यावरण वेरिएबल्स (वर्तमान पर्यावरण के साथ मिलाए गए) |
+| `command` | string | Yes | - | Shell command to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `working_dir` | string | No | - | Working directory for the command |
+| `env` | object | No | - | Additional environment variables to set (merged with current env) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | कमांड से मानक आउटपुट |
-| `stderr` | string | कमांड से मानक त्रुटि |
-| `exit_code` | number | प्रक्रिया निकास कोड (0 = सफलता) |
-| `execution_time_ms` | number | मिलीसेकंड में निष्पादन समय |
+| `stdout` | string | Standard output from the command |
+| `stderr` | string | Standard error from the command |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple echo
 

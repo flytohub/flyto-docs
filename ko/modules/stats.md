@@ -6,178 +6,178 @@ Statistical functions: mean, median, mode, std dev, percentile, and more.
 
 | Module | Description |
 |--------|-------------|
-| [평균](#평균) | 숫자의 산술 평균 계산 |
-| [중앙값](#중앙값) | 숫자의 중앙값 계산 |
-| [최소/최대](#최소최대) | 최소값과 최대값 찾기 |
-| [최빈값](#최빈값) | 가장 자주 나타나는 값 계산 |
-| [백분위수](#백분위수) | 숫자의 백분위수 계산 |
-| [표준 편차](#표준-편차) | 숫자의 표준 편차 계산 |
-| [Sum](#sum) | 숫자의 합 계산 |
-| [분산](#분산) | 숫자의 분산 계산 |
+| [Mean (Average)](#mean-average) | Calculate arithmetic mean of numbers |
+| [Median](#median) | Calculate median (middle value) of numbers |
+| [Min/Max](#minmax) | Find minimum and maximum values |
+| [Mode](#mode) | Calculate mode (most frequent value) |
+| [Percentile](#percentile) | Calculate percentile of numbers |
+| [Standard Deviation](#standard-deviation) | Calculate standard deviation of numbers |
+| [Sum](#sum) | Calculate sum of numbers |
+| [Variance](#variance) | Calculate variance of numbers |
 
 ## Modules
 
-### 평균
+### Mean (Average)
 
 `stats.mean`
 
-숫자의 산술 평균 계산
+Calculate arithmetic mean of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | 숫자 배열 |
-| `precision` | number | No | `2` | 숫자 배열 |
+| `numbers` | array | Yes | - | Array of numbers |
+| `precision` | number | No | `2` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `mean` | number | 소수점 자리수 |
-| `count` | number | 산술 평균 |
-| `sum` | number | 산술 평균 |
+| `mean` | number | Arithmetic mean |
+| `count` | number | Number of values |
+| `sum` | number | Sum of values |
 
-### 중앙값
+### Median
 
 `stats.median`
 
-숫자의 중앙값 계산
+Calculate median (middle value) of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | 숫자 배열 |
+| `numbers` | array | Yes | - | Array of numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `median` | number | 숫자 배열 |
-| `count` | number | 중앙값 |
+| `median` | number | Median value |
+| `count` | number | Number of values |
 
-### 최소/최대
+### Min/Max
 
 `stats.min_max`
 
-최소값과 최대값 찾기
+Find minimum and maximum values
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | 숫자 배열 |
+| `numbers` | array | Yes | - | Array of numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `min` | number | 숫자 배열 |
-| `max` | number | 최소값 |
-| `range` | number | 최소값 |
-| `min_index` | number | 최대값 |
-| `max_index` | number | 범위 (최대 - 최소) |
+| `min` | number | Minimum value |
+| `max` | number | Maximum value |
+| `range` | number | Range (max - min) |
+| `min_index` | number | Index of minimum |
+| `max_index` | number | Index of maximum |
 
-### 최빈값
+### Mode
 
 `stats.mode`
 
-가장 자주 나타나는 값 계산
+Calculate mode (most frequent value)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | 값 배열 |
-| `all_modes` | boolean | No | `False` | 값 배열 |
+| `values` | array | Yes | - | Array of values |
+| `all_modes` | boolean | No | `False` | Return all modes if multiple exist |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `mode` | any | 여러 개 존재 시 모든 최빈값 반환 |
-| `frequency` | number | 가장 자주 나타나는 값 |
-| `count` | number | 가장 자주 나타나는 값 |
+| `mode` | any | Most frequent value(s) |
+| `frequency` | number | Frequency of mode |
+| `count` | number | Number of values |
 
-### 백분위수
+### Percentile
 
 `stats.percentile`
 
-숫자의 백분위수 계산
+Calculate percentile of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | 숫자 배열 |
-| `percentile` | number | Yes | `50` | 숫자 배열 |
+| `numbers` | array | Yes | - | Array of numbers |
+| `percentile` | number | Yes | `50` | Percentile to calculate (0-100) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | number | 계산할 백분위수 (0-100) |
-| `percentile` | number | 백분위수 값 |
+| `value` | number | Percentile value |
+| `percentile` | number | Percentile requested |
 
-### 표준 편차
+### Standard Deviation
 
 `stats.std_dev`
 
-숫자의 표준 편차 계산
+Calculate standard deviation of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | 숫자 배열 |
-| `population` | boolean | No | `False` | 모집단 공식 사용 (N-1 대신 N으로 나누기) |
-| `precision` | number | No | `4` | 모집단 공식 사용 (N-1 대신 N으로 나누기) |
+| `numbers` | array | Yes | - | Array of numbers |
+| `population` | boolean | No | `False` | Use population formula (divide by N instead of N-1) |
+| `precision` | number | No | `4` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `std_dev` | number | 소수점 자리수 |
-| `variance` | number | 표준 편차 |
-| `mean` | number | 표준 편차 |
+| `std_dev` | number | Standard deviation |
+| `variance` | number | Variance |
+| `mean` | number | Mean value |
 
 ### Sum
 
 `stats.sum`
 
-숫자의 합 계산
+Calculate sum of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | 숫자 배열 |
+| `numbers` | array | Yes | - | Array of numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sum` | number | 숫자 배열 |
-| `count` | number | 숫자의 합 |
+| `sum` | number | Sum of numbers |
+| `count` | number | Number of values |
 
-### 분산
+### Variance
 
 `stats.variance`
 
-숫자의 분산 계산
+Calculate variance of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | 숫자 배열 |
-| `population` | boolean | No | `False` | 숫자 배열 |
-| `precision` | number | No | `4` | 모집단 공식 사용 |
+| `numbers` | array | Yes | - | Array of numbers |
+| `population` | boolean | No | `False` | Use population formula |
+| `precision` | number | No | `4` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `variance` | number | 소수점 자리수 |
-| `mean` | number | 분산 값 |
+| `variance` | number | Variance value |
+| `mean` | number | Mean value |

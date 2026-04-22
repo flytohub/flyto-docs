@@ -6,74 +6,74 @@ Cron parsing, delay, and interval calculations.
 
 | Module | Description |
 |--------|-------------|
-| [解析 Cron 表達式](#解析-cron-表達式) | 解析 cron 表達式並計算接下來 N 次執行時間 |
-| [延遲 / 暫停](#延遲--暫停) | 暫停執行指定的時間長度 |
-| [計算間隔](#計算間隔) | 計算間隔時間和下次發生時間 |
+| [Parse Cron Expression](#parse-cron-expression) | Parse cron expression and calculate next N run times |
+| [Delay / Sleep](#delay--sleep) | Pause execution for a specified duration |
+| [Calculate Interval](#calculate-interval) | Calculate interval timing and next occurrences |
 
 ## Modules
 
-### 解析 Cron 表達式
+### Parse Cron Expression
 
 `scheduler.cron_parse`
 
-解析 cron 表達式並計算接下來 N 次執行時間
+Parse cron expression and calculate next N run times
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `expression` | string | Yes | - | 標準的 5 欄位 cron 表達式（例如 "0 9 * * MON-FRI"） |
-| `count` | number | No | `5` | 要計算的下次執行時間次數 |
-| `timezone` | string | No | `0` | 計算用的時區（UTC 偏移如 "+8" 或 "-5"，預設為 "0" 即 UTC） |
+| `expression` | string | Yes | - | Standard 5-field cron expression (e.g. "0 9 * * MON-FRI") |
+| `count` | number | No | `5` | Number of next run times to calculate |
+| `timezone` | string | No | `0` | Timezone for calculation (UTC offset like "+8" or "-5", default "0" for UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `expression` | string | 解析後的 cron 表達式 |
-| `description` | string | 排程的人類可讀描述 |
-| `next_runs` | array | 下次執行時間的 ISO 日期時間字串列表 |
-| `is_valid` | boolean | 表達式是否有效 |
+| `expression` | string | The parsed cron expression |
+| `description` | string | Human-readable description of the schedule |
+| `next_runs` | array | List of next run times as ISO datetime strings |
+| `is_valid` | boolean | Whether the expression is valid |
 
-### 延遲 / 暫停
+### Delay / Sleep
 
 `scheduler.delay`
 
-暫停執行指定的時間長度
+Pause execution for a specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | Yes | - | 要延遲的秒數 |
-| `message` | string | No | - | 結果中包含的可選訊息 |
+| `seconds` | number | Yes | - | Number of seconds to delay |
+| `message` | string | No | - | Optional message to include in the result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `delayed_seconds` | number | 實際延遲的秒數 |
-| `message` | string | 提供的訊息或預設值 |
+| `delayed_seconds` | number | Actual number of seconds delayed |
+| `message` | string | The provided message or default |
 
-### 計算間隔
+### Calculate Interval
 
 `scheduler.interval`
 
-計算間隔時間和下次發生時間
+Calculate interval timing and next occurrences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | No | `0` | 間隔的秒數部分 |
-| `minutes` | number | No | `0` | 間隔的分鐘數部分 |
-| `hours` | number | No | `0` | 間隔的小時數部分 |
-| `start_time` | string | No | - | ISO 8601 格式的開始時間（預設：現在） |
+| `seconds` | number | No | `0` | Interval seconds component |
+| `minutes` | number | No | `0` | Interval minutes component |
+| `hours` | number | No | `0` | Interval hours component |
+| `start_time` | string | No | - | Start time in ISO 8601 format (default: now) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `interval_seconds` | number | 總間隔時間（秒） |
-| `next_runs` | array | 接下來 5 次執行時間的 ISO 日期時間字串列表 |
-| `human_readable` | string | 人類可讀的間隔描述 |
+| `interval_seconds` | number | Total interval in seconds |
+| `next_runs` | array | List of next 5 run times as ISO datetime strings |
+| `human_readable` | string | Human-readable interval description |

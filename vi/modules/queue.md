@@ -6,76 +6,76 @@ In-memory and Redis message queue operations.
 
 | Module | Description |
 |--------|-------------|
-| [Lấy khỏi hàng đợi](#lấy-khỏi-hàng-đợi) | Xóa và trả về một mục từ hàng đợi |
-| [Thêm vào hàng đợi](#thêm-vào-hàng-đợi) | Thêm một mục vào hàng đợi trong bộ nhớ hoặc Redis |
-| [Kích thước hàng đợi](#kích-thước-hàng-đợi) | Lấy kích thước hiện tại của hàng đợi |
+| [Dequeue Item](#dequeue-item) | Remove and return an item from a queue |
+| [Enqueue Item](#enqueue-item) | Add an item to an in-memory or Redis queue |
+| [Queue Size](#queue-size) | Get the current size of a queue |
 
 ## Modules
 
-### Lấy khỏi hàng đợi
+### Dequeue Item
 
 `queue.dequeue`
 
-Xóa và trả về một mục từ hàng đợi
+Remove and return an item from a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Tên của hàng đợi để lấy mục ra |
-| `backend` | string | No | `memory` | Hệ thống phía sau của hàng đợi để sử dụng |
-| `redis_url` | string | No | `redis://localhost:6379` | URL kết nối Redis |
-| `timeout` | number | No | `0` | Thời gian chờ tính bằng giây (0 = không chặn) |
+| `queue_name` | string | Yes | - | Name of the queue to dequeue from |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
+| `timeout` | number | No | `0` | Timeout in seconds (0 = non-blocking) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | any | Mục đã lấy ra (null nếu hàng đợi trống) |
-| `queue_name` | string | Tên của hàng đợi |
-| `remaining` | number | Số mục còn lại trong hàng đợi |
-| `empty` | boolean | Hàng đợi có trống hay không |
+| `data` | any | The dequeued item (null if queue is empty) |
+| `queue_name` | string | Name of the queue |
+| `remaining` | number | Remaining items in the queue |
+| `empty` | boolean | Whether the queue was empty |
 
-### Thêm vào hàng đợi
+### Enqueue Item
 
 `queue.enqueue`
 
-Thêm một mục vào hàng đợi trong bộ nhớ hoặc Redis
+Add an item to an in-memory or Redis queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Tên của hàng đợi để thêm mục vào |
-| `data` | string | Yes | - | Dữ liệu để thêm vào hàng đợi (bất kỳ giá trị nào có thể tuần tự hóa JSON) |
-| `backend` | string | No | `memory` | Hệ thống phía sau của hàng đợi để sử dụng |
-| `redis_url` | string | No | `redis://localhost:6379` | URL kết nối Redis |
+| `queue_name` | string | Yes | - | Name of the queue to add the item to |
+| `data` | string | Yes | - | Data to enqueue (any JSON-serializable value) |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Tên của hàng đợi |
-| `position` | number | Vị trí của mục trong hàng đợi |
-| `queue_size` | number | Kích thước hiện tại của hàng đợi sau khi thêm |
+| `queue_name` | string | Name of the queue |
+| `position` | number | Position of the item in the queue |
+| `queue_size` | number | Current size of the queue after enqueue |
 
-### Kích thước hàng đợi
+### Queue Size
 
 `queue.size`
 
-Lấy kích thước hiện tại của hàng đợi
+Get the current size of a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Tên của hàng đợi để kiểm tra |
-| `backend` | string | No | `memory` | Hệ thống phía sau của hàng đợi để sử dụng |
-| `redis_url` | string | No | `redis://localhost:6379` | URL kết nối Redis |
+| `queue_name` | string | Yes | - | Name of the queue to check |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Tên của hàng đợi |
-| `size` | number | Số mục hiện tại trong hàng đợi |
+| `queue_name` | string | Name of the queue |
+| `size` | number | Current number of items in the queue |

@@ -6,15 +6,15 @@ Threshold-based change detection.
 
 | Module | Description |
 |--------|-------------|
-| [변경 감지](#변경-감지) | 값이 임계값을 초과하여 변경되었는지 감지합니다 (양 또는 비율로) |
+| [Detect Change](#detect-change) | Detect if a value has changed beyond threshold (by amount or percentage) |
 
 ## Modules
 
-### 변경 감지
+### Detect Change
 
 `compare.change`
 
-값이 임계값을 초과하여 변경되었는지 감지합니다 (양 또는 비율로)
+Detect if a value has changed beyond threshold (by amount or percentage)
 
 **Parameters:**
 
@@ -22,22 +22,22 @@ Threshold-based change detection.
 |------|------|----------|---------|-------------|
 | `current_value` | number | Yes | - | The current/new value to compare |
 | `previous_value` | number | Yes | - | The previous/old value to compare against |
-| `mode` | select (`percent`, `absolute`, `any`) | No | `percent` | 비교할 이전/옛 값 |
-| `threshold` | number | No | `5` | 트리거할 최소 변화 (5 = 5% 또는 5 단위) |
-| `direction` | select (`both`, `up`, `down`) | No | `both` | 감지할 변화 방향 |
+| `mode` | select (`percent`, `absolute`, `any`) | No | `percent` | How to measure change |
+| `threshold` | number | No | `5` | Minimum change to trigger (5 = 5% or 5 units) |
+| `direction` | select (`both`, `up`, `down`) | No | `both` | Which direction of change to detect |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 작업이 성공했는지 여부 |
-| `changed` | boolean | 작업이 성공했는지 여부 |
-| `direction` | string | 작업이 성공했는지 여부 |
-| `change_percent` | number | 변화 방향:  |
-| `change_absolute` | number | 변화 비율 (양수 = 증가, 음수 = 감소) |
+| `ok` | boolean | Whether the operation succeeded |
+| `changed` | boolean | Whether value changed beyond threshold |
+| `direction` | string | Direction of change: "up", "down", or "none" |
+| `change_percent` | number | Percentage change (positive = up, negative = down) |
+| `change_absolute` | number | Absolute change (positive = up, negative = down) |
 | `current_value` | number | The current value |
 | `previous_value` | number | The previous value |
-| `summary` | string | 현재 값 |
+| `summary` | string | Human-readable summary (e.g., "+3.5%") |
 
 **Example:** Crypto price alert (5% change)
 

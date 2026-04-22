@@ -30,9 +30,9 @@ Perform logical AND operation
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Boolean values to AND together |
-| `true_count` | number | Result of AND operation |
-| `total_count` | number | Result of AND operation |
+| `result` | boolean | Result of AND operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |
 
 ### Logic Contains
 
@@ -45,16 +45,16 @@ Check if a value contains another value
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `haystack` | text | Yes | - | Value to search in (string, array, or object) |
-| `needle` | text | Yes | - | Value to search in (string, array, or object) |
-| `case_sensitive` | boolean | No | `True` | Value to search for |
+| `needle` | text | Yes | - | Value to search for |
+| `case_sensitive` | boolean | No | `True` | Case sensitive search for strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Case sensitive search for strings |
-| `position` | number | Whether haystack contains needle |
-| `count` | number | Whether haystack contains needle |
+| `result` | boolean | Whether haystack contains needle |
+| `position` | number | Position/index where found (-1 if not found) |
+| `count` | number | Number of occurrences |
 
 ### Logic Equals
 
@@ -67,17 +67,17 @@ Check if two values are equal
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `a` | text | Yes | - | First value to compare |
-| `b` | text | Yes | - | First value to compare |
-| `strict` | boolean | No | `False` | Second value to compare |
-| `case_sensitive` | boolean | No | `True` | Require same type (no type coercion) |
+| `b` | text | Yes | - | Second value to compare |
+| `strict` | boolean | No | `False` | Require same type (no type coercion) |
+| `case_sensitive` | boolean | No | `True` | Case sensitive string comparison |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Case sensitive string comparison |
-| `type_a` | string | Whether values are equal |
-| `type_b` | string | Whether values are equal |
+| `result` | boolean | Whether values are equal |
+| `type_a` | string | Type of first value |
+| `type_b` | string | Type of second value |
 
 ### Logic NOT
 
@@ -95,8 +95,8 @@ Perform logical NOT operation
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Boolean value to negate |
-| `original` | boolean | Negated result |
+| `result` | boolean | Negated result |
+| `original` | boolean | Original value |
 
 ### Logic OR
 
@@ -114,6 +114,6 @@ Perform logical OR operation
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Boolean values to OR together |
-| `true_count` | number | Result of OR operation |
-| `total_count` | number | Result of OR operation |
+| `result` | boolean | Result of OR operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |

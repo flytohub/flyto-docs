@@ -6,20 +6,20 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 
 | Module | Description |
 |--------|-------------|
-| [HTML 가독성](#html-가독성) | 콘텐츠 가독성 분석 |
-| [폼 추출](#폼-추출) | HTML에서 폼 데이터 추출 |
-| [메타데이터 추출](#메타데이터-추출) | HTML에서 메타데이터 추출 |
-| [테이블 추출](#테이블-추출) | HTML에서 테이블 데이터 추출 |
-| [패턴 찾기](#패턴-찾기) | HTML에서 반복되는 데이터 패턴 찾기 |
-| [HTML 구조](#html-구조) | HTML DOM 구조 분석 |
+| [HTML Readability](#html-readability) | Analyze content readability |
+| [Extract Forms](#extract-forms) | Extract form data from HTML |
+| [Extract Metadata](#extract-metadata) | Extract metadata from HTML |
+| [Extract Tables](#extract-tables) | Extract table data from HTML |
+| [Find Patterns](#find-patterns) | Find repeating data patterns in HTML |
+| [HTML Structure](#html-structure) | Analyze HTML DOM structure |
 
 ## Modules
 
-### HTML 가독성
+### HTML Readability
 
 `analysis.html.analyze_readability`
 
-콘텐츠 가독성 분석
+Analyze content readability
 
 **Parameters:**
 
@@ -34,11 +34,11 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 | `type` | any | object |
 | `properties` | any |  |
 
-### 폼 추출
+### Extract Forms
 
 `analysis.html.extract_forms`
 
-HTML에서 폼 데이터 추출
+Extract form data from HTML
 
 **Parameters:**
 
@@ -53,11 +53,11 @@ HTML에서 폼 데이터 추출
 | `type` | any | object |
 | `properties` | any |  |
 
-### 메타데이터 추출
+### Extract Metadata
 
 `analysis.html.extract_metadata`
 
-HTML에서 메타데이터 추출
+Extract metadata from HTML
 
 **Parameters:**
 
@@ -72,11 +72,11 @@ HTML에서 메타데이터 추출
 | `type` | any | object |
 | `properties` | any |  |
 
-### 테이블 추출
+### Extract Tables
 
 `analysis.html.extract_tables`
 
-HTML에서 테이블 데이터 추출
+Extract table data from HTML
 
 **Parameters:**
 
@@ -91,11 +91,11 @@ HTML에서 테이블 데이터 추출
 | `type` | any | object |
 | `properties` | any |  |
 
-### 패턴 찾기
+### Find Patterns
 
 `analysis.html.find_patterns`
 
-HTML에서 반복되는 데이터 패턴 찾기
+Find repeating data patterns in HTML
 
 **Parameters:**
 
@@ -110,11 +110,11 @@ HTML에서 반복되는 데이터 패턴 찾기
 | `type` | any | object |
 | `properties` | any |  |
 
-### HTML 구조
+### HTML Structure
 
 `analysis.html.structure`
 
-HTML DOM 구조 분석
+Analyze HTML DOM structure
 
 **Parameters:**
 

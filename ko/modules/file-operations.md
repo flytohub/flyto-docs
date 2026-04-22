@@ -6,17 +6,17 @@ Copy, move, and delete files.
 
 | Module | Description |
 |--------|-------------|
-| [파일 복사](#파일-복사) | 파일을 다른 위치로 복사 |
-| [파일 삭제](#파일-삭제) | 파일 시스템에서 파일 삭제 |
-| [파일 이동](#파일-이동) | 파일 이동 또는 이름 변경 |
+| [Copy File](#copy-file) | Copy a file to another location |
+| [Delete File](#delete-file) | Delete a file from the filesystem |
+| [Move File](#move-file) | Move or rename a file |
 
 ## Modules
 
-### 파일 복사
+### Copy File
 
 `file.copy`
 
-파일을 다른 위치로 복사
+Copy a file to another location
 
 **Parameters:**
 
@@ -30,10 +30,10 @@ Copy, move, and delete files.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `copied` | boolean | 복사됨 |
-| `source` | string | 복사됨 |
-| `destination` | string | 복사됨 |
-| `size` | number | 소스 |
+| `copied` | boolean | The copied |
+| `source` | string | The source |
+| `destination` | string | The destination |
+| `size` | number | Size in bytes |
 
 **Example:** Backup file
 
@@ -50,11 +50,11 @@ source: config.yaml
 destination: config.backup.yaml
 ```
 
-### 파일 삭제
+### Delete File
 
 `file.delete`
 
-파일 시스템에서 파일 삭제
+Delete a file from the filesystem
 
 **Parameters:**
 
@@ -67,8 +67,8 @@ destination: config.backup.yaml
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deleted` | boolean | 삭제됨 |
-| `file_path` | string | 삭제됨 |
+| `deleted` | boolean | The deleted |
+| `file_path` | string | The file path |
 
 **Example:** Delete temporary file
 
@@ -83,11 +83,11 @@ ignore_missing: true
 file_path: logs/app.log
 ```
 
-### 파일 이동
+### Move File
 
 `file.move`
 
-파일 이동 또는 이름 변경
+Move or rename a file
 
 **Parameters:**
 
@@ -100,9 +100,9 @@ file_path: logs/app.log
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `moved` | boolean | 이동됨 |
-| `source` | string | 이동됨 |
-| `destination` | string | 이동됨 |
+| `moved` | boolean | The moved |
+| `source` | string | The source |
+| `destination` | string | The destination |
 
 **Example:** Move file to archive
 

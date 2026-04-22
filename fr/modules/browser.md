@@ -6,68 +6,68 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [Résoudre le défi](#résoudre-le-défi) | Détecter et résoudre automatiquement les défis anti-bot (Cloudflare, CAPTCHA) |
-| [Cliquer sur l'element](#cliquer-sur-l'element) | Cliquer sur un element de la page |
-| [Fermer le navigateur](#fermer-le-navigateur) | Fermer l'instance du navigateur et liberer les ressources |
-| [Connexion distante](#connexion-distante) | Se connecter à un service de navigateur distant (Browserless, BrowserBase). Empreintes réelles, contourner Cloudflare. |
-| [Capturer la console](#capturer-la-console) | Capturer les journaux de la console du navigateur (erreurs, avertissements, infos) |
-| [Gerer les cookies](#gerer-les-cookies) | Obtenir, definir ou effacer les cookies du navigateur |
-| [Fichier de cookies](#fichier-de-cookies) | Importer ou exporter les cookies du navigateur depuis/vers un fichier JSON. |
+| [Handle Challenge](#handle-challenge) | Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop. |
+| [Click Element](#click-element) | Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Close Browser](#close-browser) | Close the browser instance and release resources |
+| [Connect Remote](#connect-remote) | Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs. |
+| [Capture Console](#capture-console) | Capture browser console logs (errors, warnings, info) |
+| [Manage Cookies](#manage-cookies) | Get, set, or clear browser cookies |
+| [Cookies File](#cookies-file) | Import or export browser cookies to/from a JSON file for session persistence. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [Détecter la liste](#détecter-la-liste) | Détecter automatiquement les éléments répétés sur une page (articles, produits, résultats de recherche) |
-| [Gerer le dialogue](#gerer-le-dialogue) | Gerer les dialogues alert, confirm et prompt |
-| [Telecharger le fichier](#telecharger-le-fichier) | Telecharger un fichier depuis le navigateur |
-| [Glisser-deposer](#glisser-deposer) | Glisser-deposer des elements |
-| [Émuler un appareil](#émuler-un-appareil) | Émuler un appareil ou définir une fenêtre personnalisée |
-| [Assurer le navigateur](#assurer-le-navigateur) | Assurez-vous qu'une session de navigateur existe (réutiliser ou lancer) |
-| [Executer JavaScript](#executer-javascript) | Executer du code JavaScript dans le contexte de la page |
-| [Extraire les donnees](#extraire-les-donnees) | Extraire des donnees structurees de la page |
-| [Extraire imbriqué](#extraire-imbriqué) | Extraire des données imbriquées (commentaires, fils, dossiers). |
-| [Trouver des elements](#trouver-des-elements) | Trouver des elements dans la page et retourner la liste des ID |
-| [Remplir le formulaire](#remplir-le-formulaire) | Remplissage intelligent de formulaires avec détection automatique des champs |
-| [Changer de frame](#changer-de-frame) | Basculer vers le contexte iframe ou frame |
-| [Simuler la geolocalisation](#simuler-la-geolocalisation) | Simuler la geolocalisation du navigateur |
-| [Aller a l'URL](#aller-a-l'url) | Naviguer vers une URL specifique |
-| [Survoler l'element](#survoler-l'element) | Survoler un element avec la souris |
-| [Interaction navigateur](#interaction-navigateur) | Pause pour permettre à l'utilisateur d'interagir avec la page du navigateur |
-| [Lancer le navigateur](#lancer-le-navigateur) | Lancer une nouvelle instance de navigateur avec Playwright |
-| [Connexion](#connexion) | Détecter et remplir automatiquement les formulaires de connexion avec vérification post-connexion. |
-| [Naviguer dans l'historique](#naviguer-dans-l'historique) | Naviguer dans l'historique du navigateur (retour, avant, recharger) |
-| [Moniteur reseau](#moniteur-reseau) | Surveiller et intercepter les requetes reseau |
-| [Lister les Pages](#lister-les-pages) | Lister toutes les pages/onglets ouverts du navigateur |
-| [Paginer & Extraire](#paginer--extraire) | Pagination automatique à travers les pages et extraction de données |
-| [Generer un PDF](#generer-un-pdf) | Generer un PDF de la page actuelle |
-| [Métriques de Performance](#métriques-de-performance) | Collecter les métriques de performance du navigateur |
-| [Pool de navigateurs](#pool-de-navigateurs) | Gérer plusieurs instances de navigateur nommées pour l'automatisation en parallèle. |
-| [Appuyer sur une touche](#appuyer-sur-une-touche) | Appuyer sur une touche du clavier |
-| [Rotation de proxy](#rotation-de-proxy) | Alterner entre une liste de proxies avec détection des proxies inactifs. |
-| [Extraire l'article](#extraire-l'article) | Extraction intelligente d'articles — extrait titre, auteur, date et contenu principal de toute page web |
-| [Enregistrer les actions](#enregistrer-les-actions) | Enregistrer les actions utilisateur comme workflow |
-| [Libérer le navigateur](#libérer-le-navigateur) | Libérer la session du navigateur (fermer uniquement si possédé) |
-| [Capturer la réponse](#capturer-la-réponse) | Capturer les corps de réponses API (XHR/fetch). Extraire le JSON des appels API de la page. |
-| [Vérifier robots.txt](#vérifier-robots.txt) | Vérifier la conformité robots.txt et découvrir les sitemaps. |
-| [Prendre une capture d'ecran](#prendre-une-capture-d'ecran) | Prendre une capture d'ecran de la page actuelle |
-| [Faire defiler la page](#faire-defiler-la-page) | Faire defiler la page vers un element, une position ou une direction |
-| [Selectionner une option](#selectionner-une-option) | Selectionner une option dans un element deroulant |
-| [Analyser le sitemap](#analyser-le-sitemap) | Analyser sitemap.xml et extraire les URLs avec métadonnées. |
-| [Instantané DOM](#instantané-dom) | Capturer un instantané DOM de la page actuelle |
-| [Stockage du navigateur](#stockage-du-navigateur) | Acceder au localStorage et sessionStorage |
-| [Gerer les onglets](#gerer-les-onglets) | Creer, basculer et fermer des onglets du navigateur |
-| [Extraire le tableau](#extraire-le-tableau) | Extraire les tableaux HTML en données structurées avec en-têtes détectés automatiquement. |
-| [Limitation](#limitation) | Limitation de débit par domaine. Attend entre les requêtes pour éviter les blocages. |
-| [Trace du Navigateur](#trace-du-navigateur) | Démarrer, arrêter ou enregistrer les traces de performance du navigateur |
-| [Saisir du texte](#saisir-du-texte) | Saisir du texte dans un champ de saisie |
-| [Telecharger un fichier](#telecharger-un-fichier) | Telecharger un fichier vers un element d'entree de fichier |
-| [Définir la fenêtre](#définir-la-fenêtre) | Obtenez ou définissez la taille de la fenêtre du navigateur |
-| [Attendre](#attendre) | Attendre une duree ou jusqu'a ce qu'un element apparaisse |
+| [Detect List](#detect-list) | Auto-detect repeating items on any page (articles, products, search results). No selectors needed. |
+| [Handle Dialog](#handle-dialog) | Handle alert, confirm, and prompt dialogs |
+| [Download File](#download-file) | Download file from browser |
+| [Drag and Drop](#drag-and-drop) | Drag and drop elements |
+| [Device Emulation](#device-emulation) | Emulate mobile devices, tablets, and custom viewports |
+| [Ensure Browser](#ensure-browser) | Ensure a browser session exists (reuse or launch) |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code in page context |
+| [Extract Data](#extract-data) | Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Extract Nested](#extract-nested) | Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children. |
+| [Find Elements](#find-elements) | Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Fill Form](#fill-form) | Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM. |
+| [Switch Frame](#switch-frame) | Switch to iframe or frame context |
+| [Mock Geolocation](#mock-geolocation) | Mock browser geolocation |
+| [Go to URL](#go-to-url) | Navigate to a specific URL |
+| [Hover Element](#hover-element) | Hover mouse over an element |
+| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
+| [Launch Browser](#launch-browser) | Launch a new browser instance with Playwright |
+| [Login](#login) | Auto-detect and fill login forms. Handles username + password + submit with post-login verification. |
+| [Page Navigation](#page-navigation) | Navigate back, forward, or reload the page |
+| [Network Monitor](#network-monitor) | Monitor and intercept network requests |
+| [List Pages](#list-pages) | List all open browser pages/tabs with details |
+| [Paginate & Extract](#paginate--extract) | Auto-paginate through pages and extract data. Supports retry and checkpoint resume. |
+| [Generate PDF](#generate-pdf) | Generate PDF from current page |
+| [Performance Metrics](#performance-metrics) | Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics |
+| [Browser Pool](#browser-pool) | Manage multiple named browser instances for parallel automation. |
+| [Press Key](#press-key) | Press a keyboard key |
+| [Rotate Proxy](#rotate-proxy) | Rotate through a list of proxies. Relaunches browser with the next proxy. |
+| [Extract Article](#extract-article) | Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode. |
+| [Record Actions](#record-actions) | Record user actions as workflow |
+| [Release Browser](#release-browser) | Release browser session (close only if owned) |
+| [Capture Response](#capture-response) | Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls. |
+| [Check Robots.txt](#check-robots.txt) | Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping. |
+| [Take Screenshot](#take-screenshot) | Take a screenshot of the current page |
+| [Scroll Page](#scroll-page) | Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Select Option](#select-option) | Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering. |
+| [DOM Snapshot](#dom-snapshot) | Capture DOM snapshot in HTML, MHTML, or text format |
+| [Browser Storage](#browser-storage) | Access localStorage and sessionStorage |
+| [Manage Tabs](#manage-tabs) | Create, switch, and close browser tabs |
+| [Extract Table](#extract-table) | Extract HTML tables as structured data. Auto-detects headers from thead/th. |
+| [Throttle](#throttle) | Per-domain rate limiting. Waits between requests to the same domain to avoid bans. |
+| [Performance Trace](#performance-trace) | Start/stop Chrome DevTools performance tracing (Chromium only) |
+| [Type Text](#type-text) | Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Upload File](#upload-file) | Upload file to file input element |
+| [Resize Viewport](#resize-viewport) | Resize browser viewport to specific dimensions |
+| [Wait](#wait) | Wait for a duration or until an element appears |
 
 ## Modules
 
-### Résoudre le défi
+### Handle Challenge
 
 `browser.challenge`
 
-Détecter et résoudre automatiquement les défis anti-bot (Cloudflare, CAPTCHA)
+Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop.
 
 **Parameters:**
 
@@ -107,11 +107,11 @@ auto_wait_seconds: 30
 human_fallback: false
 ```
 
-### Cliquer sur l'element
+### Click Element
 
 `browser.click`
 
-Cliquer sur un element de la page
+Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -131,8 +131,8 @@ Cliquer sur un element de la page
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `selector` | string | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | Selector that was used |
 | `method` | string | Click method used |
 
 **Example:** Example
@@ -156,11 +156,11 @@ click_method: selector
 selector: #submit-button
 ```
 
-### Fermer le navigateur
+### Close Browser
 
 `browser.close`
 
-Fermer l'instance du navigateur et liberer les ressources
+Close the browser instance and release resources
 
 **Parameters:**
 
@@ -172,19 +172,19 @@ Fermer l'instance du navigateur et liberer les ressources
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Fermer l'instance du navigateur |
-| `message` | string | Fermer l'instance du navigateur |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
 ```yaml
 ```
 
-### Connexion distante
+### Connect Remote
 
 `browser.connect`
 
-Se connecter à un service de navigateur distant (Browserless, BrowserBase). Empreintes réelles, contourner Cloudflare.
+Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs.
 
 **Parameters:**
 
@@ -222,11 +222,11 @@ ws_endpoint: wss://connect.browserbase.com?apiKey=KEY
 ws_endpoint: ws://localhost:3000
 ```
 
-### Capturer la console
+### Capture Console
 
 `browser.console`
 
-Capturer les journaux de la console du navigateur (erreurs, avertissements, infos)
+Capture browser console logs (errors, warnings, info)
 
 **Parameters:**
 
@@ -240,9 +240,9 @@ Capturer les journaux de la console du navigateur (erreurs, avertissements, info
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `messages` | array | Statut de l'operation (succes/erreur) |
-| `count` | number | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `messages` | array | The messages |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -257,11 +257,11 @@ level: error
 timeout: 5000
 ```
 
-### Gerer les cookies
+### Manage Cookies
 
 `browser.cookies`
 
-Obtenir, definir ou effacer les cookies du navigateur
+Get, set, or clear browser cookies
 
 **Parameters:**
 
@@ -280,9 +280,9 @@ Obtenir, definir ou effacer les cookies du navigateur
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `cookies` | array | Statut de l'operation (succes/erreur) |
-| `count` | number | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `cookies` | array | Browser cookies |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -312,11 +312,11 @@ domain: example.com
 action: clear
 ```
 
-### Fichier de cookies
+### Cookies File
 
 `browser.cookies_file`
 
-Importer ou exporter les cookies du navigateur depuis/vers un fichier JSON.
+Import or export browser cookies to/from a JSON file for session persistence.
 
 **Parameters:**
 
@@ -423,11 +423,11 @@ text: Login
 match_mode: best
 ```
 
-### Détecter la liste
+### Detect List
 
 `browser.detect_list`
 
-Détecter automatiquement les éléments répétés sur une page (articles, produits, résultats de recherche)
+Auto-detect repeating items on any page (articles, products, search results). No selectors needed.
 
 **Parameters:**
 
@@ -467,11 +467,11 @@ min_items: 5
 max_items: 50
 ```
 
-### Gerer le dialogue
+### Handle Dialog
 
 `browser.dialog`
 
-Gerer les dialogues alert, confirm et prompt
+Handle alert, confirm, and prompt dialogs
 
 **Parameters:**
 
@@ -485,10 +485,10 @@ Gerer les dialogues alert, confirm et prompt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `message` | string | Statut de l'operation (succes/erreur) |
-| `type` | string | Statut de l'operation (succes/erreur) |
-| `default_value` | string | Message de resultat decrivant l'issue |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `type` | string | The type |
+| `default_value` | string | The default value |
 
 **Example:** Example
 
@@ -516,11 +516,11 @@ action: listen
 timeout: 5000
 ```
 
-### Telecharger le fichier
+### Download File
 
 `browser.download`
 
-Telecharger un fichier depuis le navigateur
+Download file from browser
 
 **Parameters:**
 
@@ -534,10 +534,10 @@ Telecharger un fichier depuis le navigateur
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `path` | string | Statut de l'operation (succes/erreur) |
-| `filename` | string | Statut de l'operation (succes/erreur) |
-| `size` | number | Chemin du fichier ou de la ressource |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -554,11 +554,11 @@ save_path: /downloads/large-file.zip
 timeout_ms: 120000
 ```
 
-### Glisser-deposer
+### Drag and Drop
 
 `browser.drag`
 
-Glisser-deposer des elements
+Drag and drop elements
 
 **Parameters:**
 
@@ -574,9 +574,9 @@ Glisser-deposer des elements
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Position dans l'element cible {x, y} en pourcentages |
-| `source` | string | Position dans l'element cible {x, y} en pourcentages |
-| `target` | string | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `source` | string | The source |
+| `target` | string | The target |
 
 **Example:** Example
 
@@ -593,32 +593,32 @@ target: .container
 target_position: {"x": 0.5, "y": 0.5}
 ```
 
-### Émuler un appareil
+### Device Emulation
 
 `browser.emulate`
 
-Émuler un appareil ou définir une fenêtre personnalisée
+Emulate mobile devices, tablets, and custom viewports
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | Nom de l'appareil à émuler (par ex. iPhone 13) |
-| `width` | number | No | - | Largeur de la fenêtre en pixels |
-| `height` | number | No | - | Hauteur de la fenêtre en pixels |
-| `user_agent` | string | No | - | Chaîne d'agent utilisateur personnalisée |
-| `device_scale_factor` | number | No | - | Ratio de pixels de l'appareil |
-| `is_mobile` | boolean | No | - | Si l'on doit émuler un appareil mobile |
-| `has_touch` | boolean | No | - | Si l'appareil a un support tactile |
+| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | Device preset or "custom" for manual settings |
+| `width` | number | No | - | Custom viewport width (for custom device) |
+| `height` | number | No | - | Custom viewport height (for custom device) |
+| `user_agent` | string | No | - | Custom user agent string |
+| `device_scale_factor` | number | No | - | Device pixel ratio (1-3) |
+| `is_mobile` | boolean | No | - | Enable mobile browser behavior |
+| `has_touch` | boolean | No | - | Enable touch event support |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'opération (succès/erreur) |
-| `device` | string | Nom de l'appareil émulé |
-| `viewport` | object | Dimensions actuelles de la fenêtre |
-| `is_mobile` | boolean | Si l'émulation mobile est active |
+| `status` | string | Operation status |
+| `device` | string | Emulated device name |
+| `viewport` | object | Applied viewport dimensions |
+| `is_mobile` | boolean | Whether mobile mode is enabled |
 
 **Example:** Example
 
@@ -650,11 +650,11 @@ device: desktop_chrome
 user_agent: CustomBot/1.0
 ```
 
-### Assurer le navigateur
+### Ensure Browser
 
 `browser.ensure`
 
-Assurez-vous qu'une session de navigateur existe (réutiliser ou lancer)
+Ensure a browser session exists (reuse or launch)
 
 **Parameters:**
 
@@ -668,9 +668,9 @@ Assurez-vous qu'une session de navigateur existe (réutiliser ou lancer)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Si le navigateur a été lancé ou réutilisé |
-| `message` | string | Si le navigateur a été lancé ou réutilisé |
-| `is_owner` | boolean | Si le navigateur a été lancé ou réutilisé |
+| `status` | string | Whether browser was launched or reused |
+| `message` | string | Result message |
+| `is_owner` | boolean | Whether this step owns the browser (responsible for closing) |
 
 **Example:** Example
 
@@ -684,11 +684,11 @@ headless: false
 headless: true
 ```
 
-### Executer JavaScript
+### Execute JavaScript
 
 `browser.evaluate`
 
-Executer du code JavaScript dans le contexte de la page
+Execute JavaScript code in page context
 
 **Parameters:**
 
@@ -701,8 +701,8 @@ Executer du code JavaScript dans le contexte de la page
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `result` | any | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `result` | any | The operation result |
 
 **Example:** Example
 
@@ -729,11 +729,11 @@ args: ["#header"]
 script: document.body.style.backgroundColor = "red"; return "done"
 ```
 
-### Extraire les donnees
+### Extract Data
 
 `browser.extract`
 
-Extraire des donnees structurees de la page
+Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -747,9 +747,9 @@ Extraire des donnees structurees de la page
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `data` | array | Statut de l'operation (succes/erreur) |
-| `count` | number | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -759,11 +759,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### Extraire imbriqué
+### Extract Nested
 
 `browser.extract_nested`
 
-Extraire des données imbriquées (commentaires, fils, dossiers).
+Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children.
 
 **Parameters:**
 
@@ -797,11 +797,11 @@ fields: {"author": {"selector": ".author"}, "text": {"selector": ".body"}, "date
 root_selector: li.item
 ```
 
-### Trouver des elements
+### Find Elements
 
 `browser.find`
 
-Trouver des elements dans la page et retourner la liste des ID
+Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -814,9 +814,9 @@ Trouver des elements dans la page et retourner la liste des ID
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `count` | number | Statut de l'operation (succes/erreur) |
-| `element_ids` | array | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `count` | number | Number of items |
+| `element_ids` | array | The element ids |
 
 **Example:** Find search results
 
@@ -825,11 +825,11 @@ selector: div.tF2Cxc
 limit: 10
 ```
 
-### Remplir le formulaire
+### Fill Form
 
 `browser.form`
 
-Remplissage intelligent de formulaires avec détection automatique des champs
+Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM.
 
 **Parameters:**
 
@@ -847,9 +847,9 @@ Remplissage intelligent de formulaires avec détection automatique des champs
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filled_fields` | array | Délai entre le remplissage de chaque champ (pour un comportement plus humain) |
-| `failed_fields` | array | Liste des champs remplis |
-| `submitted` | boolean | Liste des champs remplis |
+| `filled_fields` | array | List of fields that were filled |
+| `failed_fields` | array | List of fields that failed to fill |
+| `submitted` | boolean | Whether form was submitted |
 
 **Example:** Example
 
@@ -865,11 +865,11 @@ data: {"username": "john_doe", "bio": "Hello world"}
 field_mapping: {"username": "#user-name-input", "bio": "textarea.bio-field"}
 ```
 
-### Changer de frame
+### Switch Frame
 
 `browser.frame`
 
-Basculer vers le contexte iframe ou frame
+Switch to iframe or frame context
 
 **Parameters:**
 
@@ -885,10 +885,10 @@ Basculer vers le contexte iframe ou frame
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Action sur la frame (enter pour basculer, list pour lister) |
-| `frame_url` | string | Action sur la frame (enter pour basculer, list pour lister) |
-| `frame_name` | string | Statut de l'operation (succes/erreur) |
-| `frames` | array | URL de la frame |
+| `status` | string | Operation status (success/error) |
+| `frame_url` | string | Frame URL |
+| `frame_name` | string | The frame name |
+| `frames` | array | List of frames |
 
 **Example:** Example
 
@@ -914,11 +914,11 @@ action: exit
 action: list
 ```
 
-### Simuler la geolocalisation
+### Mock Geolocation
 
 `browser.geolocation`
 
-Simuler la geolocalisation du navigateur
+Mock browser geolocation
 
 **Parameters:**
 
@@ -932,8 +932,8 @@ Simuler la geolocalisation du navigateur
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Precision de la position en metres |
-| `location` | object | Precision de la position en metres |
+| `status` | string | Operation status (success/error) |
+| `location` | object | The location |
 
 **Example:** Example
 
@@ -957,11 +957,11 @@ latitude: 35.6762
 longitude: 139.6503
 ```
 
-### Aller a l'URL
+### Go to URL
 
 `browser.goto`
 
-Naviguer vers une URL specifique
+Navigate to a specific URL
 
 **Parameters:**
 
@@ -976,8 +976,8 @@ Naviguer vers une URL specifique
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `url` | string | Naviguer vers une URL specifique |
+| `status` | string | Operation status (success/error) |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -986,11 +986,11 @@ url: https://www.google.com
 wait_until: domcontentloaded
 ```
 
-### Survoler l'element
+### Hover Element
 
 `browser.hover`
 
-Survoler un element avec la souris
+Hover mouse over an element
 
 **Parameters:**
 
@@ -1004,8 +1004,8 @@ Survoler un element avec la souris
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `selector` | string | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1020,11 +1020,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### Interaction navigateur
+### Browser Interact
 
 `browser.interact`
 
-Pause pour permettre à l'utilisateur d'interagir avec la page du navigateur
+Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
 
 **Parameters:**
 
@@ -1038,11 +1038,11 @@ Pause pour permettre à l'utilisateur d'interagir avec la page du navigateur
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'opération |
-| `action` | string | Action exécutée (clic/sélection/saisie/basculement) |
-| `selector` | string | Sélecteur CSS de l'élément interagi |
-| `value` | string | Valeur utilisée (pour les actions de sélection/saisie) |
-| `url` | string | URL de la page au moment de l'interaction |
+| `status` | string | Operation status |
+| `action` | string | Action executed (click/select/type/toggle) |
+| `selector` | string | CSS selector of the interacted element |
+| `value` | string | Value used (for select/type actions) |
+| `url` | string | Page URL at time of interaction |
 
 **Example:** Example
 
@@ -1051,11 +1051,11 @@ title: Choose a department
 description: Select the department you want to register for
 ```
 
-### Lancer le navigateur
+### Launch Browser
 
 `browser.launch`
 
-Lancer une nouvelle instance de navigateur avec Playwright
+Launch a new browser instance with Playwright
 
 **Parameters:**
 
@@ -1064,25 +1064,25 @@ Lancer une nouvelle instance de navigateur avec Playwright
 | `headless` | boolean | No | `False` | Run browser without visible window |
 | `width` | number | No | `1280` | Browser viewport width in pixels |
 | `height` | number | No | `720` | Browser viewport height in pixels |
-| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Moteur de navigateur à utiliser (chromium, firefox, webkit) |
+| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Browser engine to use |
 | `channel` | select (``, `chrome`, `msedge`) | No | - | Use system Chrome instead of bundled Chromium for better anti-detection bypass |
 | `behavior` | select (`fast`, `normal`, `careful`, `human_like`) | No | `fast` | How the browser interacts: fast (no delays), normal, careful (mouse movement), human_like (full simulation) |
 | `stealth` | boolean | No | `True` | Anti-detection patches: WebGL fingerprint, canvas noise, navigator fixes. Always recommended. |
-| `proxy` | string | No | - | URL du serveur proxy |
-| `user_agent` | string | No | - | Chaîne d'agent utilisateur personnalisée |
+| `proxy` | string | No | - | HTTP/SOCKS proxy server URL. For rotation use browser.proxy_rotate. |
+| `user_agent` | string | No | - | Custom user agent string |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |
-| `slow_mo` | number | No | `0` | Ralentir les opérations de la durée spécifiée en millisecondes |
+| `slow_mo` | number | No | `0` | Delay between Playwright actions in ms (low-level, prefer Behavior Profile) |
 | `record_video_dir` | string | No | - | Directory to save recorded videos (enables Playwright video recording) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `message` | string | Lancer une nouvelle instance de navigateur |
-| `browser_type` | string | Type de navigateur lancé |
-| `headless` | boolean | Si le navigateur fonctionne en mode sans tête |
-| `viewport` | object | Dimensions actuelles de la fenêtre |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `browser_type` | string | Browser engine used |
+| `headless` | boolean | Whether browser is in headless mode |
+| `viewport` | object | Browser viewport dimensions |
 | `behavior` | string | Active behavior profile |
 
 **Example:** Example
@@ -1105,11 +1105,11 @@ behavior: human_like
 stealth: true
 ```
 
-### Connexion
+### Login
 
 `browser.login`
 
-Détecter et remplir automatiquement les formulaires de connexion avec vérification post-connexion.
+Auto-detect and fill login forms. Handles username + password + submit with post-login verification.
 
 **Parameters:**
 
@@ -1149,11 +1149,11 @@ password_selector: #pass
 submit_selector: #login-btn
 ```
 
-### Naviguer dans l'historique
+### Page Navigation
 
 `browser.navigation`
 
-Naviguer dans l'historique du navigateur (retour, avant, recharger)
+Navigate back, forward, or reload the page
 
 **Parameters:**
 
@@ -1167,9 +1167,9 @@ Naviguer dans l'historique du navigateur (retour, avant, recharger)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'opération (succès/erreur) |
-| `action` | string | Action de navigation effectuée |
-| `url` | string | URL actuelle après navigation |
+| `status` | string | Operation status (success/error) |
+| `action` | string | Navigation action performed |
+| `url` | string | Current URL after navigation |
 
 **Example:** Example
 
@@ -1190,11 +1190,11 @@ action: reload
 wait_until: networkidle
 ```
 
-### Moniteur reseau
+### Network Monitor
 
 `browser.network`
 
-Surveiller et intercepter les requetes reseau
+Monitor and intercept network requests
 
 **Parameters:**
 
@@ -1210,9 +1210,9 @@ Surveiller et intercepter les requetes reseau
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Reponse a retourner pour les requetes interceptees |
-| `requests` | array | Reponse a retourner pour les requetes interceptees |
-| `blocked_count` | number | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `requests` | array | Captured network requests |
+| `blocked_count` | number | The blocked count |
 
 **Example:** Example
 
@@ -1237,27 +1237,27 @@ url_pattern: .*users.*
 mock_response: {"status": 200, "body": "{\"users\": []}"}
 ```
 
-### Lister les Pages
+### List Pages
 
 `browser.pages`
 
-Lister toutes les pages/onglets ouverts du navigateur
+List all open browser pages/tabs with details
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `include_details` | boolean | No | `True` | Inclure des informations détaillées pour chaque page |
-| `include_content_info` | boolean | No | `False` | Inclure les informations de type de contenu pour chaque page |
+| `include_details` | boolean | No | `True` | Include URL, title, and viewport info for each page |
+| `include_content_info` | boolean | No | `False` | Include page load state and frame count (slower) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'opération (succès/erreur) |
-| `pages` | array | Liste des pages ouvertes |
-| `count` | number | Nombre de pages ouvertes |
-| `current_index` | number | Index de la page active actuelle |
+| `status` | string | Operation status |
+| `pages` | array | List of page information |
+| `count` | number | Number of open pages |
+| `current_index` | number | Index of the current active page |
 
 **Example:** Example
 
@@ -1278,11 +1278,11 @@ include_details: true
 include_content_info: true
 ```
 
-### Paginer & Extraire
+### Paginate & Extract
 
 `browser.pagination`
 
-Pagination automatique à travers les pages et extraction de données
+Auto-paginate through pages and extract data. Supports retry and checkpoint resume.
 
 **Parameters:**
 
@@ -1307,10 +1307,10 @@ Pagination automatique à travers les pages et extraction de données
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `items` | array | Sélecteur qui apparaît quand il n'y a plus de pages (arrête la pagination) |
-| `total_items` | integer | Tous les éléments extraits de toutes les pages |
-| `pages_processed` | integer | Tous les éléments extraits de toutes les pages |
-| `stopped_reason` | string | Nombre de pages traitées |
+| `items` | array | All extracted items from all pages |
+| `total_items` | integer | Total number of items extracted |
+| `pages_processed` | integer | Number of pages processed |
+| `stopped_reason` | string | Why pagination stopped (max_pages, max_items, no_more, error) |
 | `retries_used` | integer | Total number of retries across all pages |
 | `resumed` | boolean | Whether execution resumed from a checkpoint |
 
@@ -1334,11 +1334,11 @@ no_more_indicator: .end-of-feed
 checkpoint_path: /tmp/feed_checkpoint.json
 ```
 
-### Generer un PDF
+### Generate PDF
 
 `browser.pdf`
 
-Generer un PDF de la page actuelle
+Generate PDF from current page
 
 **Parameters:**
 
@@ -1357,9 +1357,9 @@ Generer un PDF de la page actuelle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Echelle du rendu de la page web (0.1-2) |
-| `path` | string | Statut de l'operation (succes/erreur) |
-| `size` | number | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -1381,26 +1381,26 @@ path: /output/custom.pdf
 margin: {"top": "1cm", "bottom": "1cm", "left": "2cm", "right": "2cm"}
 ```
 
-### Métriques de Performance
+### Performance Metrics
 
 `browser.performance`
 
-Collecter les métriques de performance du navigateur
+Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | array | No | `['all']` | Métriques de performance à collecter |
-| `timeout_ms` | number | No | `3000` | Délai d'attente en millisecondes |
-| `setup_observers` | boolean | No | `True` | Configurer les observateurs de performance avant de collecter |
+| `metrics` | array | No | `['all']` | Which metrics to collect (default: all) |
+| `timeout_ms` | number | No | `3000` | Time to wait for metrics collection (for LCP, CLS) |
+| `setup_observers` | boolean | No | `True` | Install PerformanceObservers for better metric tracking |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'opération (succès/erreur) |
-| `metrics` | object | Métriques de performance collectées |
+| `status` | string | Operation status |
+| `metrics` | object | Collected performance metrics |
 
 **Example:** Example
 
@@ -1422,11 +1422,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### Pool de navigateurs
+### Browser Pool
 
 `browser.pool`
 
-Gérer plusieurs instances de navigateur nommées pour l'automatisation en parallèle.
+Manage multiple named browser instances for parallel automation.
 
 **Parameters:**
 
@@ -1466,11 +1466,11 @@ name: scraper1
 action: list
 ```
 
-### Appuyer sur une touche
+### Press Key
 
 `browser.press`
 
-Appuyer sur une touche du clavier
+Press a keyboard key
 
 **Parameters:**
 
@@ -1482,8 +1482,8 @@ Appuyer sur une touche du clavier
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `key` | string | Appuyer sur une touche du clavier |
+| `status` | string | Operation status (success/error) |
+| `key` | string | Key identifier |
 
 **Example:** Example
 
@@ -1497,11 +1497,11 @@ key: Enter
 key: Escape
 ```
 
-### Rotation de proxy
+### Rotate Proxy
 
 `browser.proxy_rotate`
 
-Alterner entre une liste de proxies avec détection des proxies inactifs.
+Rotate through a list of proxies. Relaunches browser with the next proxy.
 
 **Parameters:**
 
@@ -1538,11 +1538,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### Extraire l'article
+### Extract Article
 
 `browser.readability`
 
-Extraction intelligente d'articles — extrait titre, auteur, date et contenu principal de toute page web
+Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode.
 
 **Parameters:**
 
@@ -1551,7 +1551,7 @@ Extraction intelligente d'articles — extrait titre, auteur, date et contenu pr
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - | Sélecteur CSS pour la zone de contenu. Laisser vide pour la détection automatique. |
+| `selector` | string | No | - | CSS selector for the content area. Leave empty for auto-detection. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1603,11 +1603,11 @@ title_selector: .article-headline h1
 selector: .article-body
 ```
 
-### Enregistrer les actions
+### Record Actions
 
 `browser.record`
 
-Enregistrer les actions utilisateur comme workflow
+Record user actions as workflow
 
 **Parameters:**
 
@@ -1621,9 +1621,9 @@ Enregistrer les actions utilisateur comme workflow
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Format du workflow enregistre (yaml ou json) |
-| `recording` | array | Format du workflow enregistre (yaml ou json) |
-| `workflow` | string | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `recording` | array | Recording data or path |
+| `workflow` | string | The workflow |
 
 **Example:** Example
 
@@ -1644,25 +1644,25 @@ output_format: yaml
 action: get
 ```
 
-### Libérer le navigateur
+### Release Browser
 
 `browser.release`
 
-Libérer la session du navigateur (fermer uniquement si possédé)
+Release browser session (close only if owned)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `force` | boolean | No | `False` | Fermer le navigateur même s'il n'est pas possédé par ce modèle |
+| `force` | boolean | No | `False` | Close browser even if not owned by this template |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Fermer le navigateur même s'il n'est pas possédé par ce modèle |
-| `message` | string | Quelle action a été prise |
-| `was_owner` | boolean | Quelle action a été prise |
+| `status` | string | What action was taken |
+| `message` | string | Result message |
+| `was_owner` | boolean | Whether this template owned the browser |
 
 **Example:** Example
 
@@ -1675,11 +1675,11 @@ Libérer la session du navigateur (fermer uniquement si possédé)
 force: true
 ```
 
-### Capturer la réponse
+### Capture Response
 
 `browser.response`
 
-Capturer les corps de réponses API (XHR/fetch). Extraire le JSON des appels API de la page.
+Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls.
 
 **Parameters:**
 
@@ -1712,11 +1712,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### Vérifier robots.txt
+### Check Robots.txt
 
 `browser.robots`
 
-Vérifier la conformité robots.txt et découvrir les sitemaps.
+Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping.
 
 **Parameters:**
 
@@ -1747,11 +1747,11 @@ check_url: /api/data
 ```yaml
 ```
 
-### Prendre une capture d'ecran
+### Take Screenshot
 
 `browser.screenshot`
 
-Prendre une capture d'ecran de la page actuelle
+Take a screenshot of the current page
 
 **Parameters:**
 
@@ -1766,8 +1766,8 @@ Prendre une capture d'ecran de la page actuelle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `filepath` | string | Prendre une capture d'ecran de la page actuelle |
+| `status` | string | Operation status (success/error) |
+| `filepath` | string | Path to the file |
 
 **Example:** Example
 
@@ -1775,11 +1775,11 @@ Prendre une capture d'ecran de la page actuelle
 path: output/page.png
 ```
 
-### Faire defiler la page
+### Scroll Page
 
 `browser.scroll`
 
-Faire defiler la page vers un element, une position ou une direction
+Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1794,8 +1794,8 @@ Faire defiler la page vers un element, une position ou une direction
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `scrolled_to` | object | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `scrolled_to` | object | The scrolled to |
 
 **Example:** Example
 
@@ -1818,11 +1818,11 @@ amount: 10000
 behavior: smooth
 ```
 
-### Selectionner une option
+### Select Option
 
 `browser.select`
 
-Selectionner une option dans un element deroulant
+Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1838,9 +1838,9 @@ Selectionner une option dans un element deroulant
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `selected` | array | Statut de l'operation (succes/erreur) |
-| `selector` | string | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `selected` | array | The selected |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1866,11 +1866,11 @@ select_method: index
 index: 2
 ```
 
-### Analyser le sitemap
+### Parse Sitemap
 
 `browser.sitemap`
 
-Analyser sitemap.xml et extraire les URLs avec métadonnées.
+Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering.
 
 **Parameters:**
 
@@ -1902,29 +1902,29 @@ url_pattern: /blog/
 max_urls: 100
 ```
 
-### Instantané DOM
+### DOM Snapshot
 
 `browser.snapshot`
 
-Capturer un instantané DOM de la page actuelle
+Capture DOM snapshot in HTML, MHTML, or text format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`html`, `mhtml`, `text`) | No | `html` | Format de sortie (html ou texte) |
-| `selector` | string | No | - | Sélecteur CSS pour capturer un élément spécifique |
-| `path` | string | No | - | Chemin pour enregistrer l'instantané |
+| `format` | select (`html`, `mhtml`, `text`) | No | `html` | Snapshot format |
+| `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'opération (succès/erreur) |
-| `format` | string | Format de l'instantané |
-| `content` | string | Contenu de l'instantané |
-| `path` | string | Chemin où l'instantané a été enregistré |
-| `size_bytes` | number | Taille de l'instantané en octets |
+| `status` | string | Operation status |
+| `format` | string | Snapshot format used |
+| `content` | string | Snapshot content (if no path specified) |
+| `path` | string | Path to saved file |
+| `size_bytes` | number | Content size in bytes |
 
 **Example:** Example
 
@@ -1954,11 +1954,11 @@ selector: #main
 path: /tmp/section.html
 ```
 
-### Stockage du navigateur
+### Browser Storage
 
 `browser.storage`
 
-Acceder au localStorage et sessionStorage
+Access localStorage and sessionStorage
 
 **Parameters:**
 
@@ -1973,10 +1973,10 @@ Acceder au localStorage et sessionStorage
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `value` | any | Statut de l'operation (succes/erreur) |
-| `keys` | array | Statut de l'operation (succes/erreur) |
-| `length` | number | La valeur retournee |
+| `status` | string | Operation status (success/error) |
+| `value` | any | The returned value |
+| `keys` | array | List of keys |
+| `length` | number | Length of data |
 
 **Example:** Example
 
@@ -2009,11 +2009,11 @@ action: keys
 type: local
 ```
 
-### Gerer les onglets
+### Manage Tabs
 
 `browser.tab`
 
-Creer, basculer et fermer des onglets du navigateur
+Create, switch, and close browser tabs
 
 **Parameters:**
 
@@ -2028,10 +2028,10 @@ Creer, basculer et fermer des onglets du navigateur
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Index de l'onglet a basculer ou fermer (base 0) |
-| `tab_count` | number | Index de l'onglet a basculer ou fermer (base 0) |
-| `current_index` | number | Statut de l'operation (succes/erreur) |
-| `tabs` | array | Le nombre d'onglets |
+| `status` | string | Operation status (success/error) |
+| `tab_count` | number | The tab count |
+| `current_index` | number | The current index |
+| `tabs` | array | List of open tabs |
 
 **Example:** Example
 
@@ -2059,11 +2059,11 @@ action: close
 action: list
 ```
 
-### Extraire le tableau
+### Extract Table
 
 `browser.table`
 
-Extraire les tableaux HTML en données structurées avec en-têtes détectés automatiquement.
+Extract HTML tables as structured data. Auto-detects headers from thead/th.
 
 **Parameters:**
 
@@ -2095,11 +2095,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### Limitation
+### Throttle
 
 `browser.throttle`
 
-Limitation de débit par domaine. Attend entre les requêtes pour éviter les blocages.
+Per-domain rate limiting. Waits between requests to the same domain to avoid bans.
 
 **Parameters:**
 
@@ -2142,29 +2142,29 @@ min_interval_ms: 1500
 max_interval_ms: 8000
 ```
 
-### Trace du Navigateur
+### Performance Trace
 
 `browser.trace`
 
-Démarrer, arrêter ou enregistrer les traces de performance du navigateur
+Start/stop Chrome DevTools performance tracing (Chromium only)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | - | Action de traçage (démarrer, arrêter, enregistrer) |
-| `categories` | array | No | `['devtools.timeline']` | Catégories de traçage à capturer |
-| `screenshots` | boolean | No | `True` | Inclure des captures d'écran dans la trace |
-| `path` | string | No | - | Chemin pour enregistrer le fichier de trace |
+| `action` | string | Yes | - | Start or stop tracing |
+| `categories` | array | No | `['devtools.timeline']` | CDP trace categories (default: devtools.timeline) |
+| `screenshots` | boolean | No | `True` | Include screenshots in trace (increases file size) |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'opération (succès/erreur) |
-| `tracing` | boolean | Si la traçage est actuellement active |
-| `path` | string | Chemin où la trace a été enregistrée |
-| `size_bytes` | number | Taille du fichier de trace en octets |
+| `status` | string | Operation status (success/error) |
+| `tracing` | boolean | Whether tracing is active |
+| `path` | string | Path to trace file (when stopped) |
+| `size_bytes` | number | Trace file size in bytes |
 
 **Example:** Example
 
@@ -2188,11 +2188,11 @@ action: stop
 path: /tmp/performance-trace.json
 ```
 
-### Saisir du texte
+### Type Text
 
 `browser.type`
 
-Saisir du texte dans un champ de saisie
+Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -2213,8 +2213,8 @@ Saisir du texte dans un champ de saisie
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `selector` | string | Saisir du texte dans un champ de saisie |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 | `method` | string | Type method used |
 
 **Example:** Example
@@ -2250,11 +2250,11 @@ selector: #email
 text: user@example.com
 ```
 
-### Telecharger un fichier
+### Upload File
 
 `browser.upload`
 
-Telecharger un fichier vers un element d'entree de fichier
+Upload file to file input element
 
 **Parameters:**
 
@@ -2268,10 +2268,10 @@ Telecharger un fichier vers un element d'entree de fichier
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `filename` | string | Statut de l'operation (succes/erreur) |
-| `size` | number | Statut de l'operation (succes/erreur) |
-| `selector` | string | Nom du fichier |
+| `status` | string | Operation status (success/error) |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -2287,26 +2287,26 @@ selector: #file-upload
 file_path: /path/to/document.pdf
 ```
 
-### Définir la fenêtre
+### Resize Viewport
 
 `browser.viewport`
 
-Obtenez ou définissez la taille de la fenêtre du navigateur
+Resize browser viewport to specific dimensions
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `width` | number | Yes | `1280` | Largeur de la fenêtre en pixels |
-| `height` | number | Yes | `720` | Hauteur de la fenêtre en pixels |
+| `width` | number | Yes | `1280` | Viewport width in pixels |
+| `height` | number | Yes | `720` | Viewport height in pixels |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'opération (succès/erreur) |
-| `viewport` | object | Dimensions actuelles de la fenêtre |
-| `previous_viewport` | object | Dimensions précédentes de la fenêtre |
+| `status` | string | Operation status |
+| `viewport` | object | Applied viewport dimensions |
+| `previous_viewport` | object | Previous viewport dimensions |
 
 **Example:** Example
 
@@ -2336,11 +2336,11 @@ width: 1366
 height: 768
 ```
 
-### Attendre
+### Wait
 
 `browser.wait`
 
-Attendre une duree ou jusqu'a ce qu'un element apparaisse
+Wait for a duration or until an element appears
 
 **Parameters:**
 
@@ -2348,16 +2348,16 @@ Attendre une duree ou jusqu'a ce qu'un element apparaisse
 |------|------|----------|---------|-------------|
 | `duration_ms` | number | No | `1000` | Duration of the operation in milliseconds |
 | `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
-| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | État à attendre (visible, caché, attaché, détaché) |
+| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | Element state to wait for |
 | `timeout_ms` | number | No | `30000` | Maximum time to wait in milliseconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `selector` | string | Statut de l'operation (succes/erreur) |
-| `duration_ms` | number | Attendre une duree ou l'apparition d'un element |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was waited for |
+| `duration_ms` | number | Wait duration in milliseconds |
 
 **Example:** Example
 

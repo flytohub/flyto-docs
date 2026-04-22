@@ -6,15 +6,15 @@ Execute reusable templates as workflow steps.
 
 | Module | Description |
 |--------|-------------|
-| [テンプレートを呼び出す](#テンプレートを呼び出す) | ライブラリからテンプレートをワークフローステップとして実行する |
+| [Invoke Template](#invoke-template) | Execute a template from your library as a workflow step |
 
 ## Modules
 
-### テンプレートを呼び出す
+### Invoke Template
 
 `template.invoke`
 
-ライブラリからテンプレートをワークフローステップとして実行する
+Execute a template from your library as a workflow step
 
 **Parameters:**
 
@@ -29,10 +29,10 @@ Execute reusable templates as workflow steps.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ライブラリアイテムのID（購入/フォーク/所有） |
-| `result` | any | 最大実行時間（秒） |
-| `template_id` | string | ルーティング用イベント（成功/エラー） |
-| `execution_time_ms` | number | テンプレート実行結果 |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Template execution result |
+| `template_id` | string | Executed template ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 

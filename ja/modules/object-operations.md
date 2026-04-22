@@ -6,110 +6,110 @@ Deep merge, flatten, dot-path get/set, and unflatten.
 
 | Module | Description |
 |--------|-------------|
-| [ディープマージ](#ディープマージ) | 複数のオブジェクトをディープマージする |
-| [オブジェクトをフラット化](#オブジェクトをフラット化) | ネストされたオブジェクトを単一レベルにフラット化する |
-| [値を取得](#値を取得) | パスでオブジェクトから値を取得する |
-| [値を設定](#値を設定) | パスでオブジェクトに値を設定する |
-| [オブジェクトをアンフラット化](#オブジェクトをアンフラット化) | ドット表記のオブジェクトをネストに戻す |
+| [Deep Merge](#deep-merge) | Deep merge multiple objects |
+| [Flatten Object](#flatten-object) | Flatten nested object to single level |
+| [Get Value](#get-value) | Get value from object by path |
+| [Set Value](#set-value) | Set value in object by path |
+| [Unflatten Object](#unflatten-object) | Unflatten object with dot notation to nested |
 
 ## Modules
 
-### ディープマージ
+### Deep Merge
 
 `object.deep_merge`
 
-複数のオブジェクトをディープマージする
+Deep merge multiple objects
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `objects` | array | Yes | - | マージするオブジェクトの配列 |
-| `array_merge` | string | No | `replace` | マージするオブジェクトの配列 |
+| `objects` | array | Yes | - | Array of objects to merge |
+| `array_merge` | string | No | `replace` | How to merge arrays |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | マージされたオブジェクト |
+| `result` | object | Merged object |
 
-### オブジェクトをフラット化
+### Flatten Object
 
 `object.flatten`
 
-ネストされたオブジェクトを単一レベルにフラット化する
+Flatten nested object to single level
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | フラット化するネストされたオブジェクト |
-| `separator` | string | No | `.` | フラット化するネストされたオブジェクト |
-| `max_depth` | number | No | `0` | キーのセパレーター |
+| `object` | object | Yes | - | Nested object to flatten |
+| `separator` | string | No | `.` | Key separator |
+| `max_depth` | number | No | `0` | Maximum depth to flatten (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | フラット化する最大深度 (0 = 無制限) |
-| `keys` | array | フラット化されたオブジェクト |
+| `result` | object | Flattened object |
+| `keys` | array | Flattened keys |
 
-### 値を取得
+### Get Value
 
 `object.get`
 
-パスでオブジェクトから値を取得する
+Get value from object by path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | 値を取得するオブジェクト |
-| `path` | string | Yes | - | 値を取得するオブジェクト |
-| `default` | any | No | - | ドット表記のパス |
+| `object` | object | Yes | - | Object to get value from |
+| `path` | string | Yes | - | Dot notation path |
+| `default` | any | No | - | Default value if path not found |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | パスが見つからない場合のデフォルト値 |
-| `found` | boolean | 取得された値 |
+| `value` | any | Retrieved value |
+| `found` | boolean | Whether path was found |
 
-### 値を設定
+### Set Value
 
 `object.set`
 
-パスでオブジェクトに値を設定する
+Set value in object by path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | 変更するオブジェクト |
-| `path` | string | Yes | - | 変更するオブジェクト |
-| `value` | any | Yes | - | ドット表記のパス |
+| `object` | object | Yes | - | Object to modify |
+| `path` | string | Yes | - | Dot notation path |
+| `value` | any | Yes | - | Value to set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 設定する値 |
+| `result` | object | Modified object |
 
-### オブジェクトをアンフラット化
+### Unflatten Object
 
 `object.unflatten`
 
-ドット表記のオブジェクトをネストに戻す
+Unflatten object with dot notation to nested
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | アンフラット化するフラットなオブジェクト |
-| `separator` | string | No | `.` | アンフラット化するフラットなオブジェクト |
+| `object` | object | Yes | - | Flat object to unflatten |
+| `separator` | string | No | `.` | Key separator |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | キーのセパレーター |
+| `result` | object | Nested object |

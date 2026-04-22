@@ -26,15 +26,15 @@ Get file name from path
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `path` | string | Yes | - | File path |
-| `remove_extension` | boolean | No | `False` | File path |
+| `remove_extension` | boolean | No | `False` | Remove file extension from result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Remove file extension from result |
-| `original` | string | File name |
-| `extension` | string | File name |
+| `result` | string | File name |
+| `original` | string | Original path |
+| `extension` | string | File extension |
 
 ### Path Dirname
 
@@ -52,8 +52,8 @@ Get directory name from path
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | File path |
-| `original` | string | Directory name |
+| `result` | string | Directory name |
+| `original` | string | Original path |
 
 ### Path Extension
 
@@ -66,15 +66,15 @@ Get file extension from path
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `path` | string | Yes | - | File path |
-| `include_dot` | boolean | No | `True` | File path |
+| `include_dot` | boolean | No | `True` | Include the dot in extension |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Include the dot in extension |
-| `original` | string | File extension |
-| `has_extension` | boolean | File extension |
+| `result` | string | File extension |
+| `original` | string | Original path |
+| `has_extension` | boolean | Whether file has extension |
 
 ### Path Is Absolute
 
@@ -92,9 +92,9 @@ Check if path is absolute
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | File path to check |
-| `path` | string | Whether path is absolute |
-| `absolute` | string | Whether path is absolute |
+| `result` | boolean | Whether path is absolute |
+| `path` | string | The checked path |
+| `absolute` | string | Absolute version of the path |
 
 ### Path Join
 
@@ -112,8 +112,8 @@ Join path components
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Path components to join |
-| `parts` | array | Joined path |
+| `result` | string | Joined path |
+| `parts` | array | Original path parts |
 
 ### Path Normalize
 
@@ -126,12 +126,12 @@ Normalize a file path
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `path` | string | Yes | - | File path to normalize |
-| `resolve` | boolean | No | `False` | File path to normalize |
+| `resolve` | boolean | No | `False` | Resolve to absolute path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Resolve to absolute path |
-| `original` | string | Normalized path |
-| `is_absolute` | boolean | Normalized path |
+| `result` | string | Normalized path |
+| `original` | string | Original path |
+| `is_absolute` | boolean | Whether result is absolute |

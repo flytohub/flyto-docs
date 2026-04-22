@@ -6,100 +6,100 @@ In-memory key-value cache with TTL support.
 
 | Module | Description |
 |--------|-------------|
-| [Cache Pulisci](#cache-pulisci) | Cancella tutti gli elementi della cache o filtra per pattern |
-| [Cache Elimina](#cache-elimina) | Elimina un elemento della cache tramite chiave |
-| [Cache Ottieni](#cache-ottieni) | Ottieni un valore dalla cache tramite chiave |
-| [Cache Imposta](#cache-imposta) | Imposta un valore nella cache con TTL opzionale |
+| [Cache Clear](#cache-clear) | Clear all cache entries or filter by pattern |
+| [Cache Delete](#cache-delete) | Delete a cache entry by key |
+| [Cache Get](#cache-get) | Get a value from cache by key |
+| [Cache Set](#cache-set) | Set a value in cache with optional TTL |
 
 ## Modules
 
-### Cache Pulisci
+### Cache Clear
 
 `cache.clear`
 
-Cancella tutti gli elementi della cache o filtra per pattern
+Clear all cache entries or filter by pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `pattern` | string | No | `*` | Pattern glob per corrispondere alle chiavi (es. "user:*", predefinito "*" cancella tutto) |
-| `backend` | string | No | `memory` | Backend della cache da utilizzare |
-| `redis_url` | string | No | `redis://localhost:6379` | URL di connessione Redis |
+| `pattern` | string | No | `*` | Glob pattern to match keys (e.g. "user:*", default "*" clears all) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `cleared_count` | number | Numero di elementi della cache cancellati |
-| `backend` | string | Il backend utilizzato |
+| `cleared_count` | number | Number of cache entries cleared |
+| `backend` | string | The backend used |
 
-### Cache Elimina
+### Cache Delete
 
 `cache.delete`
 
-Elimina un elemento della cache tramite chiave
+Delete a cache entry by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | La chiave della cache da eliminare |
-| `backend` | string | No | `memory` | Backend della cache da utilizzare |
-| `redis_url` | string | No | `redis://localhost:6379` | URL di connessione Redis |
+| `key` | string | Yes | - | The cache key to delete |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | La chiave della cache |
-| `deleted` | boolean | Se la chiave è stata trovata ed eliminata |
-| `backend` | string | Il backend utilizzato |
+| `key` | string | The cache key |
+| `deleted` | boolean | Whether the key was found and deleted |
+| `backend` | string | The backend used |
 
-### Cache Ottieni
+### Cache Get
 
 `cache.get`
 
-Ottieni un valore dalla cache tramite chiave
+Get a value from cache by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | La chiave della cache da cercare |
-| `backend` | string | No | `memory` | Backend della cache da utilizzare |
-| `redis_url` | string | No | `redis://localhost:6379` | URL di connessione Redis |
+| `key` | string | Yes | - | The cache key to look up |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | La chiave della cache |
-| `value` | any | Il valore in cache (null se non trovato) |
-| `hit` | boolean | Se la chiave è stata trovata nella cache |
-| `backend` | string | Il backend utilizzato |
+| `key` | string | The cache key |
+| `value` | any | The cached value (null if not found) |
+| `hit` | boolean | Whether the key was found in cache |
+| `backend` | string | The backend used |
 
-### Cache Imposta
+### Cache Set
 
 `cache.set`
 
-Imposta un valore nella cache con TTL opzionale
+Set a value in cache with optional TTL
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | La chiave della cache sotto cui memorizzare il valore |
-| `value` | string | Yes | - | Il valore da memorizzare in cache (qualsiasi valore serializzabile in JSON) |
-| `ttl` | number | No | `0` | Tempo di vita in secondi (0 = nessuna scadenza) |
-| `backend` | string | No | `memory` | Backend della cache da utilizzare |
-| `redis_url` | string | No | `redis://localhost:6379` | URL di connessione Redis |
+| `key` | string | Yes | - | The cache key to store the value under |
+| `value` | string | Yes | - | The value to cache (any JSON-serializable value) |
+| `ttl` | number | No | `0` | Time-to-live in seconds (0 = no expiry) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | La chiave della cache |
-| `stored` | boolean | Se il valore è stato memorizzato con successo |
-| `ttl` | number | Il TTL in secondi (0 = nessuna scadenza) |
-| `backend` | string | Il backend utilizzato |
+| `key` | string | The cache key |
+| `stored` | boolean | Whether the value was stored successfully |
+| `ttl` | number | The TTL in seconds (0 = no expiry) |
+| `backend` | string | The backend used |

@@ -2,147 +2,205 @@
 
 Assertion utilities: equal, contains, length, true, not null, greater than.
 
-**6 modules**
+**8 modules**
 
 | Module | Description |
 |--------|-------------|
-| [含有アサート](#含有アサート) | コレクションに値が含まれているかをアサート |
-| [等価アサート](#等価アサート) | 2つの値が等しいかをアサート |
-| [大なりアサート](#大なりアサート) | 値が別の値より大きいかをアサート |
-| [長さアサート](#長さアサート) | コレクションが期待する長さを持つかをアサート |
-| [非nullアサート](#非nullアサート) | 値がnullまたはundefinedでないかをアサート |
-| [真アサート](#真アサート) | 条件がtrueかをアサート |
+| [Assert Contains](#assert-contains) | Assert that a collection contains a value |
+| [Assert Equal](#assert-equal) | Assert that two values are equal |
+| [Assert Greater Than](#assert-greater-than) | Assert that a value is greater than another |
+| [Assert Length](#assert-length) | Assert that a collection has expected length |
+| [Assert Not Null](#assert-not-null) | Assert that a value is not null or undefined |
+| [Assert Status](#assert-status) | Compare probe statuses to a baseline to derive exploitable/sanitized verdict |
+| [Assert Timing](#assert-timing) | Compare probe duration to a baseline to detect time-based oracles |
+| [Assert True](#assert-true) | Assert that a condition is true |
 
 ## Modules
 
-### 含有アサート
+### Assert Contains
 
 `test.assert_contains`
 
-コレクションに値が含まれているかをアサート
+Assert that a collection contains a value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `collection` | ['array', 'string'] | Yes | - | 検索するコレクション |
-| `value` | ['string', 'number', 'boolean'] | Yes | - | 検索するコレクション |
-| `message` | string | No | - | 検索する値 |
+| `collection` | ['array', 'string'] | Yes | - | Collection to search in |
+| `value` | ['string', 'number', 'boolean'] | Yes | - | Value to find |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | カスタムエラーメッセージ |
-| `collection` | ['array', 'string'] | アサートが合格したかどうか |
-| `value` | ['string', 'number', 'boolean'] | コレクションに値が含まれているかをアサート |
-| `message` | string | コレクションに値が含まれているかをアサート |
+| `passed` | boolean | Whether assertion passed |
+| `collection` | ['array', 'string'] | Collection searched |
+| `value` | ['string', 'number', 'boolean'] | Value searched for |
+| `message` | string | Result message |
 
-### 等価アサート
+### Assert Equal
 
 `test.assert_equal`
 
-2つの値が等しいかをアサート
+Assert that two values are equal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | 実際の値 |
-| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | 実際の値 |
-| `message` | string | No | - | 期待値 |
+| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Actual value |
+| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Expected value |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | カスタムエラーメッセージ |
-| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | アサートが合格したかどうか |
-| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | 2つの値が等しいかをアサート |
-| `message` | string | 2つの値が等しいかをアサート |
+| `passed` | boolean | Whether assertion passed |
+| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Actual value received |
+| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Expected value |
+| `message` | string | Result message |
 
-### 大なりアサート
+### Assert Greater Than
 
 `test.assert_greater_than`
 
-値が別の値より大きいかをアサート
+Assert that a value is greater than another
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | number | Yes | - | 実際の値 |
-| `threshold` | number | Yes | - | 実際の値 |
-| `message` | string | No | - | しきい値 |
+| `actual` | number | Yes | - | Actual value |
+| `threshold` | number | Yes | - | Threshold value |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | カスタムエラーメッセージ |
-| `actual` | number | アサートが合格したかどうか |
-| `threshold` | number | 値が別の値より大きいかをアサート |
-| `message` | string | 値が別の値より大きいかをアサート |
+| `passed` | boolean | Whether assertion passed |
+| `actual` | number | Actual value |
+| `threshold` | number | Threshold value |
+| `message` | string | Result message |
 
-### 長さアサート
+### Assert Length
 
 `test.assert_length`
 
-コレクションが期待する長さを持つかをアサート
+Assert that a collection has expected length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `collection` | ['array', 'string'] | Yes | - | チェックするコレクション |
-| `expected_length` | number | Yes | - | チェックするコレクション |
-| `message` | string | No | - | 期待する長さ |
+| `collection` | ['array', 'string'] | Yes | - | Collection to check |
+| `expected_length` | number | Yes | - | Expected length |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | カスタムエラーメッセージ |
-| `actual_length` | number | カスタムエラーメッセージ |
-| `expected_length` | number | コレクションが期待する長さを持つかをアサート |
-| `message` | string | コレクションが期待する長さを持つかをアサート |
+| `passed` | boolean | Whether assertion passed |
+| `actual_length` | number | Actual length |
+| `expected_length` | number | Expected length |
+| `message` | string | Result message |
 
-### 非nullアサート
+### Assert Not Null
 
 `test.assert_not_null`
 
-値がnullまたはundefinedでないかをアサート
+Assert that a value is not null or undefined
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | ['string', 'number', 'boolean', 'object', 'array', 'null'] | Yes | - | チェックする値 |
-| `message` | string | No | - | チェックする値 |
+| `value` | ['string', 'number', 'boolean', 'object', 'array', 'null'] | Yes | - | Value to check |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | 値がnullまたはundefinedでないかをアサート |
-| `message` | string | 値がnullまたはundefinedでないかをアサート |
+| `passed` | boolean | Whether assertion passed |
+| `message` | string | Result message |
 
-### 真アサート
+### Assert Status
+
+`test.assert_status`
+
+Compare probe statuses to a baseline to derive exploitable/sanitized verdict
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `source` | ['array', 'object'] | Yes | - | Batch result data (array of {status,...} from http.batch) |
+| `baseline_index` | number | No | `0` |  |
+| `probe_indices` | array | No | - | Indices to compare against the baseline |
+| `expected_blocked` | array | No | `[401, 403]` |  |
+| `on_bypass` | string | No | `exploitable` |  |
+| `on_blocked` | string | No | `sanitized` |  |
+| `on_error` | string | No | `unreachable` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `passed` | boolean | True when verdict != on_bypass |
+| `verdict` | string | One of on_bypass/on_blocked/on_error values |
+| `baseline` | object | Baseline probe summary |
+| `probes` | array | Per-probe decision detail |
+
+### Assert Timing
+
+`test.assert_timing`
+
+Compare probe duration to a baseline to detect time-based oracles
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `source` | ['array', 'object'] | Yes | - | Batch result data (array of {duration_ms,...} from http.batch) |
+| `baseline_index` | number | No | `0` |  |
+| `probe_index` | number | Yes | - |  |
+| `threshold_ms` | number | No | `3000` | Minimum probe-vs-baseline delta to flag as exploitable |
+| `on_slow` | string | No | `exploitable` |  |
+| `on_normal` | string | No | `inconclusive` |  |
+| `on_error` | string | No | `unreachable` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `passed` | boolean | True when verdict != on_slow |
+| `verdict` | string | on_slow/on_normal/on_error value |
+| `baseline_ms` | number | Baseline duration in ms |
+| `probe_ms` | number | Probe duration in ms |
+| `delta_ms` | number | probe_ms - baseline_ms |
+| `threshold_ms` | number | Threshold used |
+
+### Assert True
 
 `test.assert_true`
 
-条件がtrueかをアサート
+Assert that a condition is true
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `condition` | boolean | Yes | - | チェックする条件 |
-| `message` | string | No | - | チェックする条件 |
+| `condition` | boolean | Yes | - | Condition to check |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | 条件がtrueかをアサート |
-| `message` | string | 条件がtrueかをアサート |
+| `passed` | boolean | Whether assertion passed |
+| `message` | string | Result message |

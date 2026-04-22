@@ -2,147 +2,205 @@
 
 Assertion utilities: equal, contains, length, true, not null, greater than.
 
-**6 modules**
+**8 modules**
 
 | Module | Description |
 |--------|-------------|
-| [Pastikan Mengandung](#pastikan-mengandung) | Assert bahwa koleksi berisi nilai |
-| [Pastikan Sama](#pastikan-sama) | Assert bahwa dua nilai sama |
-| [Pastikan Lebih Besar Dari](#pastikan-lebih-besar-dari) | Assert bahwa nilai lebih besar dari yang lain |
-| [Pastikan Panjang](#pastikan-panjang) | Assert bahwa koleksi memiliki panjang yang diharapkan |
-| [Pastikan Tidak Null](#pastikan-tidak-null) | Assert bahwa nilai bukan null atau undefined |
-| [Pastikan Benar](#pastikan-benar) | Assert bahwa kondisi adalah true |
+| [Assert Contains](#assert-contains) | Assert that a collection contains a value |
+| [Assert Equal](#assert-equal) | Assert that two values are equal |
+| [Assert Greater Than](#assert-greater-than) | Assert that a value is greater than another |
+| [Assert Length](#assert-length) | Assert that a collection has expected length |
+| [Assert Not Null](#assert-not-null) | Assert that a value is not null or undefined |
+| [Assert Status](#assert-status) | Compare probe statuses to a baseline to derive exploitable/sanitized verdict |
+| [Assert Timing](#assert-timing) | Compare probe duration to a baseline to detect time-based oracles |
+| [Assert True](#assert-true) | Assert that a condition is true |
 
 ## Modules
 
-### Pastikan Mengandung
+### Assert Contains
 
 `test.assert_contains`
 
-Assert bahwa koleksi berisi nilai
+Assert that a collection contains a value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `collection` | ['array', 'string'] | Yes | - | Koleksi untuk dicari |
-| `value` | ['string', 'number', 'boolean'] | Yes | - | Koleksi untuk dicari |
-| `message` | string | No | - | Nilai untuk ditemukan |
+| `collection` | ['array', 'string'] | Yes | - | Collection to search in |
+| `value` | ['string', 'number', 'boolean'] | Yes | - | Value to find |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Pesan error kustom |
-| `collection` | ['array', 'string'] | Apakah asersi lolos |
-| `value` | ['string', 'number', 'boolean'] | Assert bahwa koleksi berisi nilai |
-| `message` | string | Assert bahwa koleksi berisi nilai |
+| `passed` | boolean | Whether assertion passed |
+| `collection` | ['array', 'string'] | Collection searched |
+| `value` | ['string', 'number', 'boolean'] | Value searched for |
+| `message` | string | Result message |
 
-### Pastikan Sama
+### Assert Equal
 
 `test.assert_equal`
 
-Assert bahwa dua nilai sama
+Assert that two values are equal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Nilai aktual |
-| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Nilai aktual |
-| `message` | string | No | - | Nilai yang diharapkan |
+| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Actual value |
+| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Expected value |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Pesan error kustom |
-| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Apakah asersi lolos |
-| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Assert bahwa dua nilai sama |
-| `message` | string | Assert bahwa dua nilai sama |
+| `passed` | boolean | Whether assertion passed |
+| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Actual value received |
+| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Expected value |
+| `message` | string | Result message |
 
-### Pastikan Lebih Besar Dari
+### Assert Greater Than
 
 `test.assert_greater_than`
 
-Assert bahwa nilai lebih besar dari yang lain
+Assert that a value is greater than another
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | number | Yes | - | Nilai aktual |
-| `threshold` | number | Yes | - | Nilai aktual |
-| `message` | string | No | - | Nilai threshold |
+| `actual` | number | Yes | - | Actual value |
+| `threshold` | number | Yes | - | Threshold value |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Pesan error kustom |
-| `actual` | number | Apakah asersi lolos |
-| `threshold` | number | Assert bahwa nilai lebih besar dari yang lain |
-| `message` | string | Assert bahwa nilai lebih besar dari yang lain |
+| `passed` | boolean | Whether assertion passed |
+| `actual` | number | Actual value |
+| `threshold` | number | Threshold value |
+| `message` | string | Result message |
 
-### Pastikan Panjang
+### Assert Length
 
 `test.assert_length`
 
-Assert bahwa koleksi memiliki panjang yang diharapkan
+Assert that a collection has expected length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `collection` | ['array', 'string'] | Yes | - | Koleksi untuk diperiksa |
-| `expected_length` | number | Yes | - | Koleksi untuk diperiksa |
-| `message` | string | No | - | Panjang yang diharapkan |
+| `collection` | ['array', 'string'] | Yes | - | Collection to check |
+| `expected_length` | number | Yes | - | Expected length |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Pesan error kustom |
-| `actual_length` | number | Pesan error kustom |
-| `expected_length` | number | Assert bahwa koleksi memiliki panjang yang diharapkan |
-| `message` | string | Assert bahwa koleksi memiliki panjang yang diharapkan |
+| `passed` | boolean | Whether assertion passed |
+| `actual_length` | number | Actual length |
+| `expected_length` | number | Expected length |
+| `message` | string | Result message |
 
-### Pastikan Tidak Null
+### Assert Not Null
 
 `test.assert_not_null`
 
-Assert bahwa nilai bukan null atau undefined
+Assert that a value is not null or undefined
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | ['string', 'number', 'boolean', 'object', 'array', 'null'] | Yes | - | Nilai untuk diperiksa |
-| `message` | string | No | - | Nilai untuk diperiksa |
+| `value` | ['string', 'number', 'boolean', 'object', 'array', 'null'] | Yes | - | Value to check |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Assert bahwa nilai bukan null atau undefined |
-| `message` | string | Assert bahwa nilai bukan null atau undefined |
+| `passed` | boolean | Whether assertion passed |
+| `message` | string | Result message |
 
-### Pastikan Benar
+### Assert Status
+
+`test.assert_status`
+
+Compare probe statuses to a baseline to derive exploitable/sanitized verdict
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `source` | ['array', 'object'] | Yes | - | Batch result data (array of {status,...} from http.batch) |
+| `baseline_index` | number | No | `0` |  |
+| `probe_indices` | array | No | - | Indices to compare against the baseline |
+| `expected_blocked` | array | No | `[401, 403]` |  |
+| `on_bypass` | string | No | `exploitable` |  |
+| `on_blocked` | string | No | `sanitized` |  |
+| `on_error` | string | No | `unreachable` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `passed` | boolean | True when verdict != on_bypass |
+| `verdict` | string | One of on_bypass/on_blocked/on_error values |
+| `baseline` | object | Baseline probe summary |
+| `probes` | array | Per-probe decision detail |
+
+### Assert Timing
+
+`test.assert_timing`
+
+Compare probe duration to a baseline to detect time-based oracles
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `source` | ['array', 'object'] | Yes | - | Batch result data (array of {duration_ms,...} from http.batch) |
+| `baseline_index` | number | No | `0` |  |
+| `probe_index` | number | Yes | - |  |
+| `threshold_ms` | number | No | `3000` | Minimum probe-vs-baseline delta to flag as exploitable |
+| `on_slow` | string | No | `exploitable` |  |
+| `on_normal` | string | No | `inconclusive` |  |
+| `on_error` | string | No | `unreachable` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `passed` | boolean | True when verdict != on_slow |
+| `verdict` | string | on_slow/on_normal/on_error value |
+| `baseline_ms` | number | Baseline duration in ms |
+| `probe_ms` | number | Probe duration in ms |
+| `delta_ms` | number | probe_ms - baseline_ms |
+| `threshold_ms` | number | Threshold used |
+
+### Assert True
 
 `test.assert_true`
 
-Assert bahwa kondisi adalah true
+Assert that a condition is true
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `condition` | boolean | Yes | - | Kondisi untuk diperiksa |
-| `message` | string | No | - | Kondisi untuk diperiksa |
+| `condition` | boolean | Yes | - | Condition to check |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Assert bahwa kondisi adalah true |
-| `message` | string | Assert bahwa kondisi adalah true |
+| `passed` | boolean | Whether assertion passed |
+| `message` | string | Result message |

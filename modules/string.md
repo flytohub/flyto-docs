@@ -37,8 +37,8 @@ Convert a string to lowercase
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | string | Lowercase converted string |
-| `original` | string | Lowercase converted string |
-| `status` | string | Lowercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
 ### Pad String
 
@@ -51,17 +51,17 @@ Pad a string to a specified length
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | string | Yes | - | Text to pad |
-| `length` | number | Yes | - | Text to pad |
-| `pad_char` | string | No | ` ` | Target length |
-| `position` | string | No | `end` | Character to pad with |
+| `length` | number | Yes | - | Target length |
+| `pad_char` | string | No | ` ` | Character to pad with |
+| `position` | string | No | `end` | Where to add padding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | string | Padded string |
-| `original` | string | Padded string |
-| `added` | number | Padded string |
+| `original` | string | Original string |
+| `added` | number | Characters added |
 
 ### String Replace
 
@@ -82,10 +82,10 @@ Replace occurrences of a substring in a string
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | string | String with replacements applied |
-| `original` | string | String with replacements applied |
-| `search` | string | String with replacements applied |
-| `replace` | string | Original input string |
-| `status` | string | Search string that was replaced |
+| `original` | string | Original input string |
+| `search` | string | Search string that was replaced |
+| `replace` | string | Replacement string used |
+| `status` | string | Operation status |
 
 ### String Reverse
 
@@ -104,8 +104,8 @@ Reverse the characters in a string
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | string | Reversed string |
-| `original` | string | Reversed string |
-| `length` | number | Reversed string |
+| `original` | string | Original input string |
+| `length` | number | String length |
 
 ### Slugify
 
@@ -118,16 +118,16 @@ Convert text to URL-friendly slug
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | string | Yes | - | Text to slugify |
-| `separator` | string | No | `-` | Text to slugify |
-| `lowercase` | boolean | No | `True` | Word separator |
-| `max_length` | number | No | `0` | Convert to lowercase |
+| `separator` | string | No | `-` | Word separator |
+| `lowercase` | boolean | No | `True` | Convert to lowercase |
+| `max_length` | number | No | `0` | Maximum slug length (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Maximum slug length (0 = unlimited) |
-| `original` | string | URL-friendly slug |
+| `result` | string | URL-friendly slug |
+| `original` | string | Original text |
 
 ### Split String
 
@@ -148,11 +148,11 @@ Split a string into an array using a delimiter
 | Field | Type | Description |
 |-------|------|-------------|
 | `parts` | array | Array of split string parts |
-| `result` | array | Array of split string parts |
-| `length` | number | Array of split string parts |
-| `original` | string | Alias for parts - array of split string parts |
-| `delimiter` | string | Number of parts after split |
-| `status` | string | Original input string |
+| `result` | array | Alias for parts - array of split string parts |
+| `length` | number | Number of parts after split |
+| `original` | string | Original input string |
+| `delimiter` | string | Delimiter used for splitting |
+| `status` | string | Operation status |
 
 ### Template
 
@@ -167,15 +167,15 @@ Render a template with variable substitution
 | `template` | string | Yes | - | Template string with {<!-- -->{variable}<!-- -->} placeholders |
 | `variables` | object | Yes | - | Variables to substitute |
 | `missing_value` | string | No | - | Value for undefined variables |
-| `preserve_missing` | boolean | No | `False` | Value for undefined variables |
+| `preserve_missing` | boolean | No | `False` | Keep placeholder if variable is missing |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Keep placeholder if variable is missing |
-| `replaced` | number | Rendered template |
-| `missing` | array | Rendered template |
+| `result` | string | Rendered template |
+| `replaced` | number | Number of replacements made |
+| `missing` | array | Missing variable names |
 
 ### Title Case String
 
@@ -224,8 +224,8 @@ Remove whitespace from both ends of a string
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | string | Trimmed string with whitespace removed |
-| `original` | string | Trimmed string with whitespace removed |
-| `status` | string | Trimmed string with whitespace removed |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
 ### Truncate String
 
@@ -238,18 +238,18 @@ Truncate a string to a maximum length
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | string | Yes | - | Text to truncate |
-| `length` | number | Yes | - | Text to truncate |
-| `suffix` | string | No | `...` | Maximum length |
-| `word_boundary` | boolean | No | `False` | Text to append if truncated |
+| `length` | number | Yes | - | Maximum length |
+| `suffix` | string | No | `...` | Text to append if truncated |
+| `word_boundary` | boolean | No | `False` | Break at word boundary |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Break at word boundary |
-| `original` | string | Truncated string |
-| `truncated` | boolean | Truncated string |
-| `removed` | number | Original string |
+| `result` | string | Truncated string |
+| `original` | string | Original string |
+| `truncated` | boolean | Whether string was truncated |
+| `removed` | number | Characters removed |
 
 ### String Uppercase
 
@@ -268,5 +268,5 @@ Convert a string to uppercase
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | string | Uppercase converted string |
-| `original` | string | Uppercase converted string |
-| `status` | string | Uppercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |

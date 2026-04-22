@@ -6,38 +6,38 @@ Build, run, inspect, and manage Docker containers.
 
 | Module | Description |
 |--------|-------------|
-| [建置 Docker 映像檔](#建置-docker-映像檔) | 從 Dockerfile 建置 Docker 映像檔 |
-| [檢查 Docker 容器](#檢查-docker-容器) | 獲取 Docker 容器的詳細資訊 |
-| [取得容器日誌](#取得容器日誌) | 從 Docker 容器取得日誌 |
-| [列出 Docker 容器](#列出-docker-容器) | 列出 Docker 容器 |
-| [執行 Docker 容器](#執行-docker-容器) | 從映像檔執行 Docker 容器 |
-| [停止 Docker 容器](#停止-docker-容器) | 停止正在執行的 Docker 容器 |
+| [Build Docker Image](#build-docker-image) | Build a Docker image from a Dockerfile |
+| [Inspect Docker Container](#inspect-docker-container) | Get detailed information about a Docker container |
+| [Get Container Logs](#get-container-logs) | Get logs from a Docker container |
+| [List Docker Containers](#list-docker-containers) | List Docker containers |
+| [Run Docker Container](#run-docker-container) | Run a Docker container from an image |
+| [Stop Docker Container](#stop-docker-container) | Stop a running Docker container |
 
 ## Modules
 
-### 建置 Docker 映像檔
+### Build Docker Image
 
 `docker.build`
 
-從 Dockerfile 建置 Docker 映像檔
+Build a Docker image from a Dockerfile
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 建置上下文目錄的路徑 |
-| `tag` | string | Yes | - | 命名並選擇性地標記映像檔（例如：myapp:latest） |
-| `dockerfile` | string | No | - | Dockerfile 的路徑（相對於建置上下文） |
-| `build_args` | object | No | - | 建置時的變數（例如：{"NODE_ENV": "production"}） |
-| `no_cache` | boolean | No | `False` | 建置映像檔時不使用快取 |
+| `path` | string | Yes | - | Path to the build context directory |
+| `tag` | string | Yes | - | Name and optionally tag the image (e.g. myapp:latest) |
+| `dockerfile` | string | No | - | Path to the Dockerfile (relative to build context) |
+| `build_args` | object | No | - | Build-time variables (e.g. {"NODE_ENV": "production"}) |
+| `no_cache` | boolean | No | `False` | Do not use cache when building the image |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `image_id` | string | 建置後的映像檔 ID |
-| `tag` | string | 應用於映像檔的標籤 |
-| `size` | string | 建置後的映像檔大小 |
+| `image_id` | string | ID of the built image |
+| `tag` | string | Tag applied to the image |
+| `size` | string | Size of the built image |
 
 **Example:** Build from current directory
 
@@ -56,29 +56,29 @@ build_args: {"NODE_ENV": "production"}
 no_cache: true
 ```
 
-### 檢查 Docker 容器
+### Inspect Docker Container
 
 `docker.inspect_container`
 
-獲取 Docker 容器的詳細資訊
+Get detailed information about a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | 要檢查的容器 ID 或名稱 |
+| `container` | string | Yes | - | Container ID or name to inspect |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | 簡短的容器 ID |
-| `name` | string | 容器名稱 |
-| `state` | object | 容器狀態（狀態、運行中、pid、退出碼等） |
-| `image` | string | 容器使用的映像 |
-| `network_settings` | object | 網路設定（IP、埠、網路） |
-| `mounts` | array | 卷和綁定掛載 |
-| `config` | object | 容器設定（環境變數、命令、標籤等） |
+| `id` | string | Short container ID |
+| `name` | string | Container name |
+| `state` | object | Container state (status, running, pid, exit_code, etc.) |
+| `image` | string | Image used by the container |
+| `network_settings` | object | Network configuration (IP, ports, networks) |
+| `mounts` | array | Volume and bind mounts |
+| `config` | object | Container configuration (env, cmd, labels, etc.) |
 
 **Example:** Inspect a container by name
 
@@ -92,27 +92,27 @@ container: my-nginx
 container: a1b2c3d4e5f6
 ```
 
-### 取得容器日誌
+### Get Container Logs
 
 `docker.logs`
 
-從 Docker 容器取得日誌
+Get logs from a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | 容器 ID 或名稱 |
-| `tail` | number | No | `100` | 從日誌結尾顯示的行數 |
-| `follow` | boolean | No | `False` | 跟隨日誌輸出（持續直到超時） |
-| `timestamps` | boolean | No | `False` | 在日誌輸出中顯示時間戳 |
+| `container` | string | Yes | - | Container ID or name |
+| `tail` | number | No | `100` | Number of lines to show from the end of the logs |
+| `follow` | boolean | No | `False` | Follow log output (streams until timeout) |
+| `timestamps` | boolean | No | `False` | Show timestamps in log output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `logs` | string | 容器日誌輸出 |
-| `lines` | number | 返回的日誌行數 |
+| `logs` | string | Container log output |
+| `lines` | number | Number of log lines returned |
 
 **Example:** Get last 50 lines
 
@@ -129,25 +129,25 @@ tail: 100
 timestamps: true
 ```
 
-### 列出 Docker 容器
+### List Docker Containers
 
 `docker.ps`
 
-列出 Docker 容器
+List Docker containers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `all` | boolean | No | `False` | 顯示所有容器（預設僅顯示運行中的） |
-| `filters` | object | No | - | 篩選容器（例如：{"name": "my-app", "status": "running"}） |
+| `all` | boolean | No | `False` | Show all containers (default shows just running) |
+| `filters` | object | No | - | Filter containers (e.g. {"name": "my-app", "status": "running"}) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `containers` | array | 包含 ID、名稱、映像、狀態、埠的容器列表 |
-| `count` | number | 找到的容器數量 |
+| `containers` | array | List of containers with id, name, image, status, ports |
+| `count` | number | Number of containers found |
 
 **Example:** List running containers
 
@@ -166,32 +166,32 @@ all: true
 filters: {"name": "nginx"}
 ```
 
-### 執行 Docker 容器
+### Run Docker Container
 
 `docker.run`
 
-從映像檔執行 Docker 容器
+Run a Docker container from an image
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image` | string | Yes | - | 要執行的 Docker 映像檔（例如：nginx:latest） |
-| `command` | string | No | - | 在容器內執行的指令 |
-| `name` | string | No | - | 為容器指定名稱 |
-| `ports` | object | No | - | 埠對應為主機:容器（例如：{"8080": "80"}） |
-| `volumes` | object | No | - | 卷對應為主機路徑:容器路徑 |
-| `env` | object | No | - | 在容器中設定的環境變數 |
-| `detach` | boolean | No | `True` | 在背景執行容器 |
-| `remove` | boolean | No | `False` | 容器退出時自動移除 |
-| `network` | string | No | - | 將容器連接到網路 |
+| `image` | string | Yes | - | Docker image to run (e.g. nginx:latest) |
+| `command` | string | No | - | Command to run inside the container |
+| `name` | string | No | - | Assign a name to the container |
+| `ports` | object | No | - | Port mappings as host:container (e.g. {"8080": "80"}) |
+| `volumes` | object | No | - | Volume mappings as host_path:container_path |
+| `env` | object | No | - | Environment variables to set in the container |
+| `detach` | boolean | No | `True` | Run container in background |
+| `remove` | boolean | No | `False` | Automatically remove the container when it exits |
+| `network` | string | No | - | Connect the container to a network |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | 建立的容器 ID |
-| `status` | string | 執行後的容器狀態 |
+| `container_id` | string | ID of the created container |
+| `status` | string | Container status after run |
 
 **Example:** Run Nginx web server
 
@@ -211,25 +211,25 @@ remove: true
 detach: false
 ```
 
-### 停止 Docker 容器
+### Stop Docker Container
 
 `docker.stop`
 
-停止正在執行的 Docker 容器
+Stop a running Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | 要停止的容器 ID 或名稱 |
-| `timeout` | number | No | `10` | 在殺死容器前等待的秒數 |
+| `container` | string | Yes | - | Container ID or name to stop |
+| `timeout` | number | No | `10` | Seconds to wait before killing the container |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | 已停止的容器 ID 或名稱 |
-| `stopped` | boolean | 容器是否成功停止 |
+| `container_id` | string | ID or name of the stopped container |
+| `stopped` | boolean | Whether the container was successfully stopped |
 
 **Example:** Stop a container by name
 

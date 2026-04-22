@@ -6,17 +6,17 @@ Copy, move, and delete files.
 
 | Module | Description |
 |--------|-------------|
-| [Datei kopieren](#datei-kopieren) | Datei an einen anderen Ort kopieren |
-| [Datei löschen](#datei-löschen) | Datei aus dem Dateisystem löschen |
-| [Datei verschieben](#datei-verschieben) | Datei verschieben oder umbenennen |
+| [Copy File](#copy-file) | Copy a file to another location |
+| [Delete File](#delete-file) | Delete a file from the filesystem |
+| [Move File](#move-file) | Move or rename a file |
 
 ## Modules
 
-### Datei kopieren
+### Copy File
 
 `file.copy`
 
-Datei an einen anderen Ort kopieren
+Copy a file to another location
 
 **Parameters:**
 
@@ -30,10 +30,10 @@ Datei an einen anderen Ort kopieren
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `copied` | boolean | Die kopierte |
-| `source` | string | Die kopierte |
-| `destination` | string | Die kopierte |
-| `size` | number | Die Quelle |
+| `copied` | boolean | The copied |
+| `source` | string | The source |
+| `destination` | string | The destination |
+| `size` | number | Size in bytes |
 
 **Example:** Backup file
 
@@ -50,11 +50,11 @@ source: config.yaml
 destination: config.backup.yaml
 ```
 
-### Datei löschen
+### Delete File
 
 `file.delete`
 
-Datei aus dem Dateisystem löschen
+Delete a file from the filesystem
 
 **Parameters:**
 
@@ -67,8 +67,8 @@ Datei aus dem Dateisystem löschen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deleted` | boolean | Die gelöschte |
-| `file_path` | string | Die gelöschte |
+| `deleted` | boolean | The deleted |
+| `file_path` | string | The file path |
 
 **Example:** Delete temporary file
 
@@ -83,11 +83,11 @@ ignore_missing: true
 file_path: logs/app.log
 ```
 
-### Datei verschieben
+### Move File
 
 `file.move`
 
-Datei verschieben oder umbenennen
+Move or rename a file
 
 **Parameters:**
 
@@ -100,9 +100,9 @@ Datei verschieben oder umbenennen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `moved` | boolean | Die verschobene |
-| `source` | string | Die verschobene |
-| `destination` | string | Die verschobene |
+| `moved` | boolean | The moved |
+| `source` | string | The source |
+| `destination` | string | The destination |
 
 **Example:** Move file to archive
 

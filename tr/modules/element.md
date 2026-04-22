@@ -6,31 +6,31 @@ DOM element query, attribute, and text extraction.
 
 | Module | Description |
 |--------|-------------|
-| [Öznitelik Al](#öznitelik-al) | Öğeyi al |
-| [Öğe Sorgula](#öğe-sorgula) | Öğe içinde alt öğeleri bul |
-| [Metin Al](#metin-al) | Öğeyi al |
+| [Get Attribute](#get-attribute) | Get element's attribute value |
+| [Query Element](#query-element) | Find child elements within element |
+| [Get Text](#get-text) | Get element's text content |
 
 ## Modules
 
-### Öznitelik Al
+### Get Attribute
 
 `element.attribute`
 
-Öğeyi al
+Get element's attribute value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | Öğe Kimliği (UUID) |
-| `name` | string | Yes | - | Öğe Kimliği (UUID) |
+| `element_id` | string | Yes | - | Element ID (UUID) |
+| `name` | string | Yes | - | Attribute name (e.g. href, src, class) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Öznitelik adı (örn: href, src, class) |
-| `value` | string | İşlem durumu (başarılı/hata) |
+| `status` | string | Operation status (success/error) |
+| `value` | string | The returned value |
 
 **Example:** Get href attribute
 
@@ -39,28 +39,28 @@ element_id: ${link_element}
 name: href
 ```
 
-### Öğe Sorgula
+### Query Element
 
 `element.query`
 
-Öğe içinde alt öğeleri bul
+Find child elements within element
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | Üst öğe kimliği (UUID) |
-| `selector` | string | Yes | - | Üst öğe kimliği (UUID) |
-| `all` | boolean | No | `False` | Alt öğeleri bulmak için CSS seçici |
+| `element_id` | string | Yes | - | Parent element ID (UUID) |
+| `selector` | string | Yes | - | CSS selector to find child elements |
+| `all` | boolean | No | `False` | Whether to find all matching elements (default: false, find first only) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Tüm eşleşen öğeleri bul (varsayılan: false, sadece ilki) |
-| `element_id` | string | İşlem durumu (başarılı/hata) |
-| `element_ids` | array | İşlem durumu (başarılı/hata) |
-| `count` | number | Bulunan öğe kimliği (tekil mod) |
+| `status` | string | Operation status (success/error) |
+| `element_id` | string | Found element ID (single mode) |
+| `element_ids` | array | List of found element IDs (all mode) |
+| `count` | number | Number of elements found |
 
 **Example:** Find child element
 
@@ -69,24 +69,24 @@ element_id: ${result_item}
 selector: h3
 ```
 
-### Metin Al
+### Get Text
 
 `element.text`
 
-Öğeyi al
+Get element's text content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | Öğe Kimliği (UUID) |
+| `element_id` | string | Yes | - | Element ID (UUID) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Öğe Kimliği (UUID) |
-| `text` | string | Öğe Kimliği (UUID) |
+| `status` | string | Operation status (success/error) |
+| `text` | string | Text content |
 
 **Example:** Get element text
 

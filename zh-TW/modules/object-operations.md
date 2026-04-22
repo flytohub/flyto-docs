@@ -6,110 +6,110 @@ Deep merge, flatten, dot-path get/set, and unflatten.
 
 | Module | Description |
 |--------|-------------|
-| [深度合併](#深度合併) | 深度合併多個物件 |
-| [扁平化物件](#扁平化物件) | 將巢狀物件扁平化為單層 |
-| [取得值](#取得值) | 根據路徑從物件中取得值 |
-| [設置值](#設置值) | 根據路徑在物件中設置值 |
-| [還原物件](#還原物件) | 將點表示法的物件還原為巢狀 |
+| [Deep Merge](#deep-merge) | Deep merge multiple objects |
+| [Flatten Object](#flatten-object) | Flatten nested object to single level |
+| [Get Value](#get-value) | Get value from object by path |
+| [Set Value](#set-value) | Set value in object by path |
+| [Unflatten Object](#unflatten-object) | Unflatten object with dot notation to nested |
 
 ## Modules
 
-### 深度合併
+### Deep Merge
 
 `object.deep_merge`
 
-深度合併多個物件
+Deep merge multiple objects
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `objects` | array | Yes | - | 要合併的物件陣列 |
-| `array_merge` | string | No | `replace` | 要合併的物件陣列 |
+| `objects` | array | Yes | - | Array of objects to merge |
+| `array_merge` | string | No | `replace` | How to merge arrays |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 合併後的物件 |
+| `result` | object | Merged object |
 
-### 扁平化物件
+### Flatten Object
 
 `object.flatten`
 
-將巢狀物件扁平化為單層
+Flatten nested object to single level
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | 要扁平化的巢狀物件 |
-| `separator` | string | No | `.` | 要扁平化的巢狀物件 |
-| `max_depth` | number | No | `0` | 鍵值分隔符 |
+| `object` | object | Yes | - | Nested object to flatten |
+| `separator` | string | No | `.` | Key separator |
+| `max_depth` | number | No | `0` | Maximum depth to flatten (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 扁平化的最大深度（0 = 無限制） |
-| `keys` | array | 扁平化後的物件 |
+| `result` | object | Flattened object |
+| `keys` | array | Flattened keys |
 
-### 取得值
+### Get Value
 
 `object.get`
 
-根據路徑從物件中取得值
+Get value from object by path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | 要從中取得值的物件 |
-| `path` | string | Yes | - | 要從中取得值的物件 |
-| `default` | any | No | - | 點表示法路徑 |
+| `object` | object | Yes | - | Object to get value from |
+| `path` | string | Yes | - | Dot notation path |
+| `default` | any | No | - | Default value if path not found |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | 路徑未找到時的預設值 |
-| `found` | boolean | 取得的值 |
+| `value` | any | Retrieved value |
+| `found` | boolean | Whether path was found |
 
-### 設置值
+### Set Value
 
 `object.set`
 
-根據路徑在物件中設置值
+Set value in object by path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | 要修改的物件 |
-| `path` | string | Yes | - | 要修改的物件 |
-| `value` | any | Yes | - | 點表示法路徑 |
+| `object` | object | Yes | - | Object to modify |
+| `path` | string | Yes | - | Dot notation path |
+| `value` | any | Yes | - | Value to set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 要設置的值 |
+| `result` | object | Modified object |
 
-### 還原物件
+### Unflatten Object
 
 `object.unflatten`
 
-將點表示法的物件還原為巢狀
+Unflatten object with dot notation to nested
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | 要還原的扁平化物件 |
-| `separator` | string | No | `.` | 要還原的扁平化物件 |
+| `object` | object | Yes | - | Flat object to unflatten |
+| `separator` | string | No | `.` | Key separator |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 鍵值分隔符 |
+| `result` | object | Nested object |

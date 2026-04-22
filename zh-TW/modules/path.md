@@ -6,132 +6,132 @@ File path utilities: join, normalize, basename, dirname, extension.
 
 | Module | Description |
 |--------|-------------|
-| [路徑檔名](#路徑檔名) | 從路徑取得檔案名稱 |
-| [路徑目錄名](#路徑目錄名) | 從路徑取得目錄名稱 |
-| [路徑副檔名](#路徑副檔名) | 從路徑取得檔案副檔名 |
-| [路徑是否為絕對路徑](#路徑是否為絕對路徑) | 檢查路徑是否為絕對路徑 |
-| [路徑合併](#路徑合併) | 合併路徑元件 |
-| [路徑標準化](#路徑標準化) | 標準化檔案路徑 |
+| [Path Basename](#path-basename) | Get file name from path |
+| [Path Dirname](#path-dirname) | Get directory name from path |
+| [Path Extension](#path-extension) | Get file extension from path |
+| [Path Is Absolute](#path-is-absolute) | Check if path is absolute |
+| [Path Join](#path-join) | Join path components |
+| [Path Normalize](#path-normalize) | Normalize a file path |
 
 ## Modules
 
-### 路徑檔名
+### Path Basename
 
 `path.basename`
 
-從路徑取得檔案名稱
+Get file name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 檔案路徑 |
-| `remove_extension` | boolean | No | `False` | 檔案路徑 |
+| `path` | string | Yes | - | File path |
+| `remove_extension` | boolean | No | `False` | Remove file extension from result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 從結果中移除檔案副檔名 |
-| `original` | string | 檔案名稱 |
-| `extension` | string | 檔案名稱 |
+| `result` | string | File name |
+| `original` | string | Original path |
+| `extension` | string | File extension |
 
-### 路徑目錄名
+### Path Dirname
 
 `path.dirname`
 
-從路徑取得目錄名稱
+Get directory name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 檔案路徑 |
+| `path` | string | Yes | - | File path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 檔案路徑 |
-| `original` | string | 目錄名稱 |
+| `result` | string | Directory name |
+| `original` | string | Original path |
 
-### 路徑副檔名
+### Path Extension
 
 `path.extension`
 
-從路徑取得檔案副檔名
+Get file extension from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 檔案路徑 |
-| `include_dot` | boolean | No | `True` | 檔案路徑 |
+| `path` | string | Yes | - | File path |
+| `include_dot` | boolean | No | `True` | Include the dot in extension |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 包含點在副檔名中 |
-| `original` | string | 檔案副檔名 |
-| `has_extension` | boolean | 檔案副檔名 |
+| `result` | string | File extension |
+| `original` | string | Original path |
+| `has_extension` | boolean | Whether file has extension |
 
-### 路徑是否為絕對路徑
+### Path Is Absolute
 
 `path.is_absolute`
 
-檢查路徑是否為絕對路徑
+Check if path is absolute
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 要檢查的檔案路徑 |
+| `path` | string | Yes | - | File path to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 要檢查的檔案路徑 |
-| `path` | string | 路徑是否為絕對路徑 |
-| `absolute` | string | 路徑是否為絕對路徑 |
+| `result` | boolean | Whether path is absolute |
+| `path` | string | The checked path |
+| `absolute` | string | Absolute version of the path |
 
-### 路徑合併
+### Path Join
 
 `path.join`
 
-合併路徑元件
+Join path components
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `parts` | array | Yes | - | 要合併的路徑元件 |
+| `parts` | array | Yes | - | Path components to join |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 要合併的路徑元件 |
-| `parts` | array | 合併後的路徑 |
+| `result` | string | Joined path |
+| `parts` | array | Original path parts |
 
-### 路徑標準化
+### Path Normalize
 
 `path.normalize`
 
-標準化檔案路徑
+Normalize a file path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 要標準化的檔案路徑 |
-| `resolve` | boolean | No | `False` | 要標準化的檔案路徑 |
+| `path` | string | Yes | - | File path to normalize |
+| `resolve` | boolean | No | `False` | Resolve to absolute path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 解析為絕對路徑 |
-| `original` | string | 標準化的路徑 |
-| `is_absolute` | boolean | 標準化的路徑 |
+| `result` | string | Normalized path |
+| `original` | string | Original path |
+| `is_absolute` | boolean | Whether result is absolute |

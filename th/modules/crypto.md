@@ -6,37 +6,37 @@ AES encryption/decryption, HMAC, JWT tokens, and secure random generation.
 
 | Module | Description |
 |--------|-------------|
-| [ถอดรหัส](#ถอดรหัส) | ถอดรหัสข้อมูลด้วยการเข้ารหัส AES |
-| [เข้ารหัส](#เข้ารหัส) | เข้ารหัสข้อมูลด้วยการเข้ารหัส AES |
-| [HMAC](#hmac) | สร้างลายเซ็น HMAC |
-| [สร้าง JWT](#สร้าง-jwt) | สร้างโทเค็น JWT ที่ลงนามแล้ว |
-| [ตรวจสอบ JWT](#ตรวจสอบ-jwt) | ตรวจสอบและถอดรหัสโทเค็น JWT |
-| [ไบต์สุ่ม](#ไบต์สุ่ม) | สร้างไบต์สุ่มที่ปลอดภัยทางการเข้ารหัส |
-| [สตริงสุ่ม](#สตริงสุ่ม) | สร้างสตริงสุ่มที่ปลอดภัยทางการเข้ารหัส |
+| [Decrypt](#decrypt) | AES symmetric decryption |
+| [Encrypt](#encrypt) | AES symmetric encryption |
+| [HMAC](#hmac) | Generate HMAC signature |
+| [Create JWT](#create-jwt) | Create JWT (JSON Web Token) tokens |
+| [Verify JWT](#verify-jwt) | Verify and decode JWT tokens |
+| [Random Bytes](#random-bytes) | Generate cryptographically secure random bytes |
+| [Random String](#random-string) | Generate cryptographically secure random string |
 
 ## Modules
 
-### ถอดรหัส
+### Decrypt
 
 `crypto.decrypt`
 
-ถอดรหัสข้อมูลด้วยการเข้ารหัส AES
+AES symmetric decryption
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `ciphertext` | string | Yes | - | ข้อมูลที่ถูกเข้ารหัสเพื่อถอดรหัส |
-| `key` | string | Yes | - | กุญแจการเข้ารหัส |
-| `mode` | select (`CBC`, `GCM`) | No | `GCM` | โหมดการเข้ารหัส AES (CBC, GCM, ฯลฯ) |
-| `input_format` | select (`base64`, `hex`) | No | `base64` | รูปแบบของข้อความเข้ารหัสที่นำเข้า (hex หรือ base64) |
+| `ciphertext` | string | Yes | - | Encrypted ciphertext to decrypt |
+| `key` | string | Yes | - | Decryption passphrase (must match encryption passphrase) |
+| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Decryption mode (must match encryption mode) |
+| `input_format` | select (`base64`, `hex`) | No | `base64` | Encoding format of the ciphertext input |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `plaintext` | string | ข้อความที่ถอดรหัสแล้ว |
-| `algorithm` | string | อัลกอริทึมที่ใช้ในการถอดรหัส |
+| `plaintext` | string | Decrypted plaintext |
+| `algorithm` | string | Decryption algorithm used |
 
 **Example:** Decrypt AES-GCM ciphertext
 
@@ -46,28 +46,28 @@ key: my-secret-passphrase
 mode: GCM
 ```
 
-### เข้ารหัส
+### Encrypt
 
 `crypto.encrypt`
 
-เข้ารหัสข้อมูลด้วยการเข้ารหัส AES
+AES symmetric encryption
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `plaintext` | string | Yes | - | ข้อมูลที่จะเข้ารหัส |
-| `key` | string | Yes | - | กุญแจการเข้ารหัส |
-| `mode` | select (`CBC`, `GCM`) | No | `GCM` | โหมดการเข้ารหัส AES (CBC, GCM, ฯลฯ) |
-| `output_format` | select (`base64`, `hex`) | No | `base64` | รูปแบบสำหรับข้อความเข้ารหัสที่ได้ (hex หรือ base64) |
+| `plaintext` | string | Yes | - | Text to encrypt |
+| `key` | string | Yes | - | Encryption passphrase (key is derived via PBKDF2) |
+| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Encryption mode |
+| `output_format` | select (`base64`, `hex`) | No | `base64` | Encoding format for the ciphertext output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ciphertext` | string | ข้อความเข้ารหัสที่ได้ |
-| `algorithm` | string | อัลกอริทึมที่ใช้ในการเข้ารหัส |
-| `mode` | string | โหมดการเข้ารหัสที่ใช้ |
+| `ciphertext` | string | Encrypted ciphertext |
+| `algorithm` | string | Encryption algorithm used |
+| `mode` | string | Encryption mode used |
 
 **Example:** Encrypt with AES-GCM
 
@@ -81,48 +81,48 @@ mode: GCM
 
 `crypto.hmac`
 
-สร้างลายเซ็น HMAC
+Generate HMAC signature
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `message` | string | Yes | - | ข้อความที่จะลงลายเซ็น |
-| `key` | string | Yes | - | ข้อความที่จะลงลายเซ็น |
-| `algorithm` | select (`sha256`, `sha512`, `sha1`, `md5`) | No | `sha256` | คีย์ลับสำหรับ HMAC |
-| `encoding` | select (`hex`, `base64`) | No | `hex` | รูปแบบการเข้ารหัสผลลัพธ์ |
+| `message` | string | Yes | - | Message to sign |
+| `key` | string | Yes | - | Secret key for HMAC |
+| `algorithm` | select (`sha256`, `sha512`, `sha1`, `md5`) | No | `sha256` | Hash algorithm |
+| `encoding` | select (`hex`, `base64`) | No | `hex` | Output encoding format |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `signature` | string | รูปแบบการเข้ารหัสผลลัพธ์ |
-| `algorithm` | string | ลายเซ็น HMAC |
+| `signature` | string | HMAC signature |
+| `algorithm` | string | Algorithm used |
 
-### สร้าง JWT
+### Create JWT
 
 `crypto.jwt_create`
 
-สร้างโทเค็น JWT ที่ลงนามแล้ว
+Create JWT (JSON Web Token) tokens
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `payload` | object | Yes | - | ข้อมูลเพย์โหลดของ JWT (วัตถุ) |
-| `secret` | string | Yes | - | กุญแจลับสำหรับลงนามโทเค็น |
-| `algorithm` | select (`HS256`, `HS384`, `HS512`, `RS256`) | No | `HS256` | อัลกอริทึมการลงนาม JWT (HS256, RS256, ฯลฯ) |
-| `expires_in` | number | No | - | เวลาในการหมดอายุของโทเค็นเป็นวินาที |
-| `issuer` | string | No | - | ข้อมูลผู้ออกโทเค็น |
-| `audience` | string | No | - | กลุ่มเป้าหมายที่ตั้งใจไว้สำหรับโทเค็น |
+| `payload` | object | Yes | - | JWT payload claims (JSON object) |
+| `secret` | string | Yes | - | Secret key for signing the token |
+| `algorithm` | select (`HS256`, `HS384`, `HS512`, `RS256`) | No | `HS256` | Signing algorithm |
+| `expires_in` | number | No | - | Token expiration time in seconds (optional) |
+| `issuer` | string | No | - | Token issuer (iss claim) |
+| `audience` | string | No | - | Token audience (aud claim) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `token` | string | โทเค็น JWT ที่สร้างขึ้น |
-| `algorithm` | string | อัลกอริทึมที่ใช้ในการลงนาม |
-| `expires_at` | string | เวลาหมดอายุของโทเค็น |
+| `token` | string | Signed JWT token |
+| `algorithm` | string | Algorithm used for signing |
+| `expires_at` | string | Token expiration timestamp (ISO 8601) or null |
 
 **Example:** Create a JWT with expiration
 
@@ -133,30 +133,30 @@ algorithm: HS256
 expires_in: 3600
 ```
 
-### ตรวจสอบ JWT
+### Verify JWT
 
 `crypto.jwt_verify`
 
-ตรวจสอบและถอดรหัสโทเค็น JWT
+Verify and decode JWT tokens
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `token` | string | Yes | - | โทเค็น JWT ที่ต้องการตรวจสอบ |
-| `secret` | string | Yes | - | คีย์ลับที่ใช้เซ็นชื่อโทเค็น |
-| `algorithms` | array | No | `['HS256']` | อัลกอริทึมการลงนามที่อนุญาต |
-| `verify_exp` | boolean | No | `True` | ตรวจสอบการหมดอายุหรือไม่ |
-| `audience` | string | No | - | ข้อมูลกลุ่มเป้าหมายที่คาดหวัง |
-| `issuer` | string | No | - | ผู้ออกที่คาดหวัง |
+| `token` | string | Yes | - | JWT token to verify and decode |
+| `secret` | string | Yes | - | Secret key for verifying the token signature |
+| `algorithms` | array | No | `['HS256']` | List of allowed signing algorithms |
+| `verify_exp` | boolean | No | `True` | Whether to verify the token expiration |
+| `audience` | string | No | - | Expected audience (aud claim) |
+| `issuer` | string | No | - | Expected issuer (iss claim) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | โทเค็นถูกต้องหรือไม่ |
-| `payload` | object | เพย์โหลด JWT ที่ถอดรหัสแล้ว |
-| `header` | object | ข้อมูลส่วนหัวของ JWT |
+| `valid` | boolean | Whether the token is valid |
+| `payload` | object | Decoded JWT payload |
+| `header` | object | Decoded JWT header |
 
 **Example:** Verify a JWT token
 
@@ -167,43 +167,43 @@ algorithms: ["HS256"]
 verify_exp: true
 ```
 
-### ไบต์สุ่ม
+### Random Bytes
 
 `crypto.random_bytes`
 
-สร้างไบต์สุ่มที่ปลอดภัยทางการเข้ารหัส
+Generate cryptographically secure random bytes
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | Yes | `32` | จำนวนไบต์ |
-| `encoding` | string | No | `hex` | การเข้ารหัสผลลัพธ์ |
+| `length` | number | Yes | `32` | Number of bytes |
+| `encoding` | string | No | `hex` | Output encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bytes` | string | ไบต์สุ่ม (เข้ารหัส) |
-| `length` | number | ไบต์สุ่ม (เข้ารหัส) |
+| `bytes` | string | Random bytes (encoded) |
+| `length` | number | Number of bytes generated |
 
-### สตริงสุ่ม
+### Random String
 
 `crypto.random_string`
 
-สร้างสตริงสุ่มที่ปลอดภัยทางการเข้ารหัส
+Generate cryptographically secure random string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | Yes | `16` | ความยาวของสตริง |
-| `charset` | string | No | `alphanumeric` | ตัวอักษรที่ใช้ |
-| `uppercase` | boolean | No | `False` | แปลงเป็นตัวพิมพ์ใหญ่ |
+| `length` | number | Yes | `16` | String length |
+| `charset` | string | No | `alphanumeric` | Characters to use |
+| `uppercase` | boolean | No | `False` | Convert to uppercase |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `string` | string | แปลงเป็นตัวพิมพ์ใหญ่ |
-| `length` | number | สตริงสุ่ม |
+| `string` | string | Random string |
+| `length` | number | String length |

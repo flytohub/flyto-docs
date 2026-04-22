@@ -6,110 +6,110 @@ Deep merge, flatten, dot-path get/set, and unflatten.
 
 | Module | Description |
 |--------|-------------|
-| [깊은 병합](#깊은-병합) | 여러 객체를 깊게 병합 |
-| [객체 평탄화](#객체-평탄화) | 중첩된 객체를 단일 레벨로 평탄화 |
-| [값 가져오기](#값-가져오기) | 경로를 통해 객체에서 값 가져오기 |
-| [값 설정](#값-설정) | 경로를 통해 객체에 값 설정 |
-| [객체 복원](#객체-복원) | 점 표기법으로 평탄화된 객체를 중첩으로 변환 |
+| [Deep Merge](#deep-merge) | Deep merge multiple objects |
+| [Flatten Object](#flatten-object) | Flatten nested object to single level |
+| [Get Value](#get-value) | Get value from object by path |
+| [Set Value](#set-value) | Set value in object by path |
+| [Unflatten Object](#unflatten-object) | Unflatten object with dot notation to nested |
 
 ## Modules
 
-### 깊은 병합
+### Deep Merge
 
 `object.deep_merge`
 
-여러 객체를 깊게 병합
+Deep merge multiple objects
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `objects` | array | Yes | - | 병합할 객체 배열 |
-| `array_merge` | string | No | `replace` | 병합할 객체 배열 |
+| `objects` | array | Yes | - | Array of objects to merge |
+| `array_merge` | string | No | `replace` | How to merge arrays |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 병합된 객체 |
+| `result` | object | Merged object |
 
-### 객체 평탄화
+### Flatten Object
 
 `object.flatten`
 
-중첩된 객체를 단일 레벨로 평탄화
+Flatten nested object to single level
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | 평탄화할 중첩 객체 |
-| `separator` | string | No | `.` | 평탄화할 중첩 객체 |
-| `max_depth` | number | No | `0` | 키 구분자 |
+| `object` | object | Yes | - | Nested object to flatten |
+| `separator` | string | No | `.` | Key separator |
+| `max_depth` | number | No | `0` | Maximum depth to flatten (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 평탄화할 최대 깊이 (0 = 무제한) |
-| `keys` | array | 평탄화된 객체 |
+| `result` | object | Flattened object |
+| `keys` | array | Flattened keys |
 
-### 값 가져오기
+### Get Value
 
 `object.get`
 
-경로를 통해 객체에서 값 가져오기
+Get value from object by path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | 값을 가져올 객체 |
-| `path` | string | Yes | - | 값을 가져올 객체 |
-| `default` | any | No | - | 점 표기법 경로 |
+| `object` | object | Yes | - | Object to get value from |
+| `path` | string | Yes | - | Dot notation path |
+| `default` | any | No | - | Default value if path not found |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | 경로를 찾지 못했을 때 기본값 |
-| `found` | boolean | 가져온 값 |
+| `value` | any | Retrieved value |
+| `found` | boolean | Whether path was found |
 
-### 값 설정
+### Set Value
 
 `object.set`
 
-경로를 통해 객체에 값 설정
+Set value in object by path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | 수정할 객체 |
-| `path` | string | Yes | - | 수정할 객체 |
-| `value` | any | Yes | - | 점 표기법 경로 |
+| `object` | object | Yes | - | Object to modify |
+| `path` | string | Yes | - | Dot notation path |
+| `value` | any | Yes | - | Value to set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 설정할 값 |
+| `result` | object | Modified object |
 
-### 객체 복원
+### Unflatten Object
 
 `object.unflatten`
 
-점 표기법으로 평탄화된 객체를 중첩으로 변환
+Unflatten object with dot notation to nested
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | 복원할 평탄화된 객체 |
-| `separator` | string | No | `.` | 복원할 평탄화된 객체 |
+| `object` | object | Yes | - | Flat object to unflatten |
+| `separator` | string | No | `.` | Key separator |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 키 구분자 |
+| `result` | object | Nested object |

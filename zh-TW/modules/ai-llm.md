@@ -6,53 +6,53 @@ AI model integration, text generation, embeddings, and autonomous agents.
 
 | Module | Description |
 |--------|-------------|
-| [自主代理](#自主代理) | 具備記憶和目標導向行為的自主 AI 代理 |
-| [鏈式代理](#鏈式代理) | 具有多步驟的循序 AI 處理鏈 |
-| [工具使用代理](#工具使用代理) | 可以調用工具/功能的 AI 代理 |
-| [文字嵌入](#文字嵌入) | 使用 AI 模型從文字生成向量嵌入 |
-| [AI 提取](#ai-提取) | 使用 AI 從文字提取結構化資料 |
-| [本機 Ollama 對話](#本機-ollama-對話) | 透過 Ollama 與本機 LLM 對話（完全離線） |
-| [AI 記憶](#ai-記憶) | AI Agent 的對話記憶 |
-| [實體記憶](#實體記憶) | 從對話中擷取並追蹤實體（人物、地點、概念） |
-| [Redis 記憶](#redis-記憶) | 使用 Redis 儲存的持久對話記憶 |
-| [向量記憶](#向量記憶) | 使用向量嵌入的語意記憶，用於擷取相關上下文 |
-| [AI 模型](#ai-模型) | AI Agent 的 LLM 模型配置 |
+| [Autonomous Agent](#autonomous-agent) | Self-directed AI agent with memory and goal-oriented behavior |
+| [Chain Agent](#chain-agent) | Sequential AI processing chain with multiple steps |
+| [Tool Use Agent](#tool-use-agent) | AI Agent that can call tools/functions |
+| [AI Embed](#ai-embed) | Generate embeddings from text |
+| [AI Extract](#ai-extract) | Extract structured data from text using LLM |
+| [Local Ollama Chat](#local-ollama-chat) | Chat with local LLM via Ollama (completely offline) |
+| [AI Memory](#ai-memory) | Conversation memory for AI Agent |
+| [Entity Memory](#entity-memory) | Extract and track entities (people, places, concepts) from conversations |
+| [Redis Memory](#redis-memory) | Persistent conversation memory using Redis storage |
+| [Vector Memory](#vector-memory) | Semantic memory using vector embeddings for relevant context retrieval |
+| [AI Model](#ai-model) | LLM model configuration for AI Agent |
 | [AI Tool](#ai-tool) | Expose a module as a tool for AI Agent |
-| [視覺分析](#視覺分析) | 使用 AI 視覺模型分析影像 |
-| [Claude 對話](#claude-對話) | 傳送聊天訊息給 Anthropic Claude AI 並取得回應 |
-| [Google Gemini 對話](#google-gemini-對話) | 傳送聊天訊息給 Google Gemini AI 並取得回應 |
-| [OpenAI 對話](#openai-對話) | 傳送聊天訊息給 OpenAI GPT 模型 |
-| [DALL-E 圖片產生](#dall-e-圖片產生) | 使用 DALL-E 產生圖片 |
-| [AI 代理](#ai-代理) | 自主 AI 代理，支援多埠連接（模型、記憶、工具） |
+| [Vision Analyze](#vision-analyze) | Analyze images using LLM vision capabilities |
+| [Claude Chat](#claude-chat) | Send a chat message to Anthropic Claude AI and get a response |
+| [Google Gemini Chat](#google-gemini-chat) | Send a chat message to Google Gemini AI and get a response |
+| [OpenAI Chat](#openai-chat) | Send a chat message to OpenAI GPT models |
+| [DALL-E Image Generation](#dall-e-image-generation) | Generate images using DALL-E |
+| [AI Agent](#ai-agent) | Autonomous AI agent with multi-port connections (model, memory, tools) |
 
 ## Modules
 
-### 自主代理
+### Autonomous Agent
 
 `agent.autonomous`
 
-具備記憶和目標導向行為的自主 AI 代理
+Self-directed AI agent with memory and goal-oriented behavior
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `goal` | string | Yes | - | 代理要達成的目標 |
-| `context` | string | No | - | 額外的上下文或限制條件 |
-| `max_iterations` | number | No | `5` | 最大推理步驟數 |
-| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | LLM 提供者（openai 或 ollama） |
-| `model` | string | No | `gpt-4o` | 模型名稱（例如 gpt-4、llama2、mistral） |
-| `ollama_url` | string | No | `http://localhost:11434` | Ollama 伺服器網址（僅限 ollama 提供者） |
-| `temperature` | number | No | `0.7` | 創造力等級（0-2） |
+| `goal` | string | Yes | - | The goal for the agent to achieve |
+| `context` | string | No | - | Additional context or constraints |
+| `max_iterations` | number | No | `5` | Maximum reasoning steps |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Choose LLM provider (cloud or local) |
+| `model` | string | No | `gpt-4o` | Model name (e.g., gpt-4, llama2, mistral) |
+| `ollama_url` | string | No | `http://localhost:11434` | Ollama server URL (only for ollama provider) |
+| `temperature` | number | No | `0.7` | Creativity level (0-2) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 操作結果 |
-| `thoughts` | array | 代理推理步驟 |
-| `iterations` | number | 執行的迭代次數 |
-| `goal_achieved` | boolean | 是否達成目標 |
+| `result` | string | The operation result |
+| `thoughts` | array | Agent reasoning steps |
+| `iterations` | number | The iterations |
+| `goal_achieved` | boolean | The goal achieved |
 
 **Example:** Research task
 
@@ -70,30 +70,30 @@ context: PostgreSQL database with 10M records
 max_iterations: 10
 ```
 
-### 鏈式代理
+### Chain Agent
 
 `agent.chain`
 
-具有多步驟的循序 AI 處理鏈
+Sequential AI processing chain with multiple steps
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input` | string | Yes | - | 鏈式處理的初始輸入 |
-| `chain_steps` | array | Yes | - | 處理步驟陣列（每個都是提示詞範本） |
-| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | LLM 提供者（openai 或 ollama） |
-| `model` | string | No | `gpt-4o` | 模型名稱（例如 gpt-4、llama2、mistral） |
-| `ollama_url` | string | No | `http://localhost:11434` | Ollama 伺服器網址（僅限 ollama 提供者） |
-| `temperature` | number | No | `0.7` | 創造力等級（0-2） |
+| `input` | string | Yes | - | Initial input for the chain |
+| `chain_steps` | array | Yes | - | Array of processing steps (each is a prompt template) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Choose LLM provider (cloud or local) |
+| `model` | string | No | `gpt-4o` | Model name (e.g., gpt-4, llama2, mistral) |
+| `ollama_url` | string | No | `http://localhost:11434` | Ollama server URL (only for ollama provider) |
+| `temperature` | number | No | `0.7` | Creativity level (0-2) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 最終結果 |
-| `intermediate_results` | array | 中間結果 |
-| `steps_completed` | number | 已完成的步驟數 |
+| `result` | string | The operation result |
+| `intermediate_results` | array | Results from each step in the chain |
+| `steps_completed` | number | The steps completed |
 
 **Example:** Content pipeline
 
@@ -110,32 +110,32 @@ input: User behavior data shows 60% bounce rate
 chain_steps: ["Analyze what might cause this issue: {input}", "Suggest 3 solutions based on: {previous}", "Create an action plan from: {previous}"]
 ```
 
-### 工具使用代理
+### Tool Use Agent
 
 `agent.tool_use`
 
-可以調用工具/功能的 AI 代理
+AI Agent that can call tools/functions
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | 代理的目標或任務 |
-| `tools` | array | Yes | - | 工具定義列表 [{name, description, parameters}] |
-| `provider` | select (`openai`, `anthropic`) | No | `openai` | 代理的 LLM 提供者 |
-| `model` | string | No | `gpt-4o` | 要使用的模型 |
-| `api_key` | string | No | - | API 金鑰（可回退到環境變數） |
-| `max_iterations` | number | No | `10` | 工具調用回合的最大次數 |
-| `system_prompt` | string | No | - | 可選的系統提示以引導代理 |
+| `prompt` | string | Yes | - | The goal or task for the agent |
+| `tools` | array | Yes | - | List of tool definitions [{name, description, parameters}] |
+| `provider` | select (`openai`, `anthropic`) | No | `openai` | LLM provider for the agent |
+| `model` | string | No | `gpt-4o` | Model to use |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `max_iterations` | number | No | `10` | Maximum number of tool call rounds |
+| `system_prompt` | string | No | - | Optional system prompt to guide the agent |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 代理的最終回應 |
-| `tool_calls` | array | 執行期間所有的工具調用 |
-| `iterations` | number | 已完成的回合數 |
-| `model` | string | 使用的模型 |
+| `result` | string | The agent final response |
+| `tool_calls` | array | All tool calls made during execution |
+| `iterations` | number | Number of iterations completed |
+| `model` | string | Model used |
 
 **Example:** File Processing Agent
 
@@ -147,30 +147,30 @@ model: gpt-4o
 max_iterations: 5
 ```
 
-### 文字嵌入
+### AI Embed
 
 `ai.embed`
 
-使用 AI 模型從文字生成向量嵌入
+Generate embeddings from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 要嵌入的文字 |
-| `provider` | select (`openai`, `local`) | No | `openai` | 嵌入的 AI 提供者 |
-| `model` | string | No | `text-embedding-3-small` | 要使用的嵌入模型 |
-| `api_key` | string | No | - | API 金鑰（可回退至環境變數） |
-| `dimensions` | number | No | - | 嵌入維度（適用於支援的模型） |
+| `text` | string | Yes | - | Single text or JSON array of texts to embed |
+| `provider` | select (`openai`, `local`) | No | `openai` | Embedding provider |
+| `model` | string | No | `text-embedding-3-small` | Embedding model to use |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `dimensions` | number | No | - | Output embedding dimensions (for supported models like text-embedding-3-*) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `embeddings` | array | 向量嵌入陣列 |
-| `model` | string | 用於嵌入的模型 |
-| `dimensions` | number | 嵌入向量的維度數 |
-| `token_count` | number | 處理的標記數量 |
+| `embeddings` | array | List of embedding vectors |
+| `model` | string | Model used for embedding |
+| `dimensions` | number | Dimensions of each embedding vector |
+| `token_count` | number | Total tokens consumed |
 
 **Example:** Single Text Embedding
 
@@ -189,31 +189,31 @@ model: text-embedding-3-small
 dimensions: 256
 ```
 
-### AI 提取
+### AI Extract
 
 `ai.extract`
 
-使用 AI 從文字提取結構化資料
+Extract structured data from text using LLM
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 從中提取資料的文字 |
-| `schema` | object | Yes | - | 定義要提取欄位的 JSON 架構 |
-| `instructions` | string | No | - | 額外的提取指示 |
-| `provider` | select (`openai`, `anthropic`) | No | `openai` | 要使用的 AI 提供者 |
-| `model` | string | No | `gpt-4o-mini` | 用於提取的模型 |
-| `api_key` | string | No | - | API 金鑰（可回退至環境變數） |
-| `temperature` | number | No | `0` | 取樣溫度（0-2） |
+| `text` | string | Yes | - | The text to extract structured data from |
+| `schema` | object | Yes | - | JSON schema describing the desired output structure |
+| `instructions` | string | No | - | Additional extraction instructions for the LLM |
+| `provider` | select (`openai`, `anthropic`) | No | `openai` | LLM provider |
+| `model` | string | No | `gpt-4o-mini` | Model to use for extraction |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `temperature` | number | No | `0` | LLM temperature (0 = deterministic) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted` | object | 提取的結構化資料 |
-| `model` | string | 用於提取的模型 |
-| `raw_response` | string | 模型的原始回應 |
+| `extracted` | object | The extracted structured data |
+| `model` | string | Model used for extraction |
+| `raw_response` | string | Raw LLM response text |
 
 **Example:** Extract Contact Info
 
@@ -232,34 +232,34 @@ schema: {"type": "object", "properties": {"invoice_number": {"type": "string"}, 
 instructions: Extract all invoice fields. Parse amounts as numbers.
 ```
 
-### 本機 Ollama 對話
+### Local Ollama Chat
 
 `ai.local_ollama.chat`
 
-透過 Ollama 與本機 LLM 對話（完全離線）
+Chat with local LLM via Ollama (completely offline)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | 傳送給本機 LLM 的訊息 |
-| `model` | select (`llama2`, `llama2:13b`, `llama2:70b`, `mistral`, `mixtral`, `codellama`, `codellama:13b`, `phi`, `neural-chat`, `starling-lm`) | No | `llama2` | 要使用的模型名稱 |
-| `temperature` | number | No | `0.7` | 取樣溫度（0-2） |
-| `system_message` | string | No | - | 系統角色訊息（選填） |
-| `ollama_url` | string | No | `http://localhost:11434` | Ollama 伺服器網址 |
-| `max_tokens` | number | No | - | 回應的最大 Token 數量 |
+| `prompt` | string | Yes | - | The message to send to the local LLM |
+| `model` | select (`llama2`, `llama2:13b`, `llama2:70b`, `mistral`, `mixtral`, `codellama`, `codellama:13b`, `phi`, `neural-chat`, `starling-lm`) | No | `llama2` | Ollama model to use |
+| `temperature` | number | No | `0.7` | Sampling temperature (0-2) |
+| `system_message` | string | No | - | System role message (optional) |
+| `ollama_url` | string | No | `http://localhost:11434` | Ollama server URL |
+| `max_tokens` | number | No | - | Maximum tokens in response (optional, depends on model) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `response` | string | 模型回應內容 |
-| `model` | string | 使用的模型 |
-| `context` | array | 對話上下文 |
-| `total_duration` | number | 總處理時間 |
-| `load_duration` | number | 模型載入時間 |
-| `prompt_eval_count` | number | 提示詞評估數量 |
-| `eval_count` | number | 評估 Token 數量 |
+| `response` | string | Response from the operation |
+| `model` | string | Model name or identifier |
+| `context` | array | Conversation context for follow-up requests |
+| `total_duration` | number | Total processing duration |
+| `load_duration` | number | Model loading duration |
+| `prompt_eval_count` | number | Number of prompt tokens evaluated |
+| `eval_count` | number | Number of tokens generated |
 
 **Example:** Simple local chat
 
@@ -285,29 +285,29 @@ model: mistral
 temperature: 0.7
 ```
 
-### AI 記憶
+### AI Memory
 
 `ai.memory`
 
-AI Agent 的對話記憶
+Conversation memory for AI Agent
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `memory_type` | select (`buffer`, `window`, `summary`) | Yes | `buffer` | 記憶儲存類型 |
-| `window_size` | number | No | `10` | 保留的最近訊息數量（用於視窗記憶） |
-| `session_id` | string | No | - | 此對話會話的唯一識別碼 |
-| `initial_messages` | array | No | `[]` | 預載的對話歷史 |
+| `memory_type` | select (`buffer`, `window`, `summary`) | Yes | `buffer` | Type of memory storage |
+| `window_size` | number | No | `10` | Number of recent messages to keep (for window memory) |
+| `session_id` | string | No | - | Unique identifier for this conversation session |
+| `initial_messages` | array | No | `[]` | Pre-loaded conversation history |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | 記憶類型 |
-| `session_id` | string | 會話識別碼 |
-| `messages` | array | 對話訊息 |
-| `config` | object | 記憶配置 |
+| `memory_type` | string | Type of memory |
+| `session_id` | string | Session identifier |
+| `messages` | array | Current message history |
+| `config` | object | Full memory configuration |
 
 **Example:** Simple Buffer Memory
 
@@ -322,11 +322,11 @@ memory_type: window
 window_size: 5
 ```
 
-### 實體記憶
+### Entity Memory
 
 `ai.memory.entity`
 
-從對話中擷取並追蹤實體（人物、地點、概念）
+Extract and track entities (people, places, concepts) from conversations
 
 **Parameters:**
 
@@ -342,11 +342,11 @@ window_size: 5
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | 記憶類型（entity） |
-| `session_id` | string | 會話識別碼 |
-| `entities` | object | 追蹤的實體 |
-| `relationships` | array | 實體關係 |
-| `config` | object | 記憶配置 |
+| `memory_type` | string | Type of memory (entity) |
+| `session_id` | string | Session identifier |
+| `entities` | object | Tracked entities by type |
+| `relationships` | array | Entity relationships |
+| `config` | object | Full memory configuration |
 
 **Example:** People & Organizations
 
@@ -363,11 +363,11 @@ track_relationships: true
 max_entities: 200
 ```
 
-### Redis 記憶
+### Redis Memory
 
 `ai.memory.redis`
 
-使用 Redis 儲存的持久對話記憶
+Persistent conversation memory using Redis storage
 
 **Parameters:**
 
@@ -384,11 +384,11 @@ max_entities: 200
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | 記憶類型（redis） |
-| `session_id` | string | 會話識別碼 |
-| `messages` | array | 載入的訊息歷史 |
-| `connected` | boolean | 連線狀態 |
-| `config` | object | 記憶配置 |
+| `memory_type` | string | Type of memory (redis) |
+| `session_id` | string | Session identifier |
+| `messages` | array | Loaded message history |
+| `connected` | boolean | Redis connection status |
+| `config` | object | Full memory configuration |
 
 **Example:** Local Redis
 
@@ -407,11 +407,11 @@ ttl_seconds: 86400
 max_messages: 500
 ```
 
-### 向量記憶
+### Vector Memory
 
 `ai.memory.vector`
 
-使用向量嵌入的語意記憶，用於擷取相關上下文
+Semantic memory using vector embeddings for relevant context retrieval
 
 **Parameters:**
 
@@ -427,10 +427,10 @@ max_messages: 500
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | 記憶類型（vector） |
-| `session_id` | string | 會話識別碼 |
-| `embedding_model` | string | 嵌入模型 |
-| `config` | object | 記憶配置 |
+| `memory_type` | string | Type of memory (vector) |
+| `session_id` | string | Session identifier |
+| `embedding_model` | string | Embedding model used |
+| `config` | object | Full memory configuration |
 
 **Example:** Default Vector Memory
 
@@ -447,11 +447,11 @@ top_k: 10
 similarity_threshold: 0.85
 ```
 
-### AI 模型
+### AI Model
 
 `ai.model`
 
-AI Agent 的 LLM 模型配置
+LLM model configuration for AI Agent
 
 **Parameters:**
 
@@ -462,15 +462,15 @@ AI Agent 的 LLM 模型配置
 | `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
 | `api_key` | string | No | - | API key (leave empty to use environment variable) |
 | `base_url` | string | No | - | Custom API endpoint URL |
-| `max_tokens` | number | No | `4096` | 回應的最大 Token 數量 |
+| `max_tokens` | number | No | `4096` | Maximum tokens in response |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `provider` | string | LLM 提供者 |
-| `model` | string | 模型名稱 |
-| `config` | object | 模型配置 |
+| `provider` | string | LLM provider name |
+| `model` | string | Model identifier |
+| `config` | object | Full model configuration |
 
 **Example:** OpenAI GPT-4
 
@@ -519,33 +519,33 @@ module_id: http.request
 module_id: data.json_parse
 ```
 
-### 視覺分析
+### Vision Analyze
 
 `ai.vision.analyze`
 
-使用 AI 視覺模型分析影像
+Analyze images using LLM vision capabilities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | No | - | 影像檔案的本地路徑 |
-| `image_url` | string | No | - | 要分析的影像 URL |
-| `prompt` | string | No | `Describe this image in detail` | 要分析或詢問圖片的內容 |
-| `provider` | select (`openai`, `anthropic`) | No | `openai` | 視覺分析的 AI 提供者 |
-| `model` | string | No | `gpt-4o` | 要使用的視覺模型 |
-| `api_key` | string | No | - | API 金鑰（可回退至環境變數） |
-| `max_tokens` | number | No | `1000` | 回應中的最大標記數量 |
-| `detail` | select (`low`, `high`, `auto`) | No | `auto` | 影像細節等級（低/高/自動） |
+| `image_path` | string | No | - | Path to the image file on disk |
+| `image_url` | string | No | - | URL of the image (alternative to image_path) |
+| `prompt` | string | No | `Describe this image in detail` | What to analyze in the image |
+| `provider` | select (`openai`, `anthropic`) | No | `openai` | LLM provider for vision analysis |
+| `model` | string | No | `gpt-4o` | Model to use for vision analysis |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `max_tokens` | number | No | `1000` | Maximum tokens in response |
+| `detail` | select (`low`, `high`, `auto`) | No | `auto` | Image detail level for analysis |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `analysis` | string | 影像的 AI 分析 |
-| `model` | string | 用於分析的模型 |
-| `provider` | string | 用於分析的提供者 |
-| `tokens_used` | number | 使用的標記數量 |
+| `analysis` | string | The vision analysis result |
+| `model` | string | Model used for analysis |
+| `provider` | string | Provider used |
+| `tokens_used` | number | Total tokens consumed |
 
 **Example:** Analyze Screenshot
 
@@ -565,31 +565,31 @@ provider: anthropic
 model: claude-sonnet-4-20250514
 ```
 
-### Claude 對話
+### Claude Chat
 
 `api.anthropic.chat`
 
-傳送聊天訊息給 Anthropic Claude AI 並取得回應
+Send a chat message to Anthropic Claude AI and get a response
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Anthropic API 金鑰（預設使用 env.ANTHROPIC_API_KEY） |
-| `model` | string | No | `claude-sonnet-4-6` | 要使用的 Claude 模型 |
-| `messages` | array | Yes | - | 包含角色和內容的訊息物件陣列 |
-| `max_tokens` | number | No | `1024` | 回應的最大 Token 數 |
-| `temperature` | number | No | `1.0` | 取樣溫度（0-1），較高值使輸出更隨機 |
-| `system` | string | No | - | 引導 Claude 行為的系統提示詞 |
+| `api_key` | string | No | - | Anthropic API key (defaults to env.ANTHROPIC_API_KEY) |
+| `model` | string | No | `claude-sonnet-4-6` | Claude model to use |
+| `messages` | array | Yes | - | Array of message objects with role and content |
+| `max_tokens` | number | No | `1024` | Maximum tokens in response |
+| `temperature` | number | No | `1.0` | Sampling temperature (0-1). Higher values make output more random |
+| `system` | string | No | - | System prompt to guide Claude behavior |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `content` | string | 回應內容 |
-| `model` | string | 使用的模型 |
-| `stop_reason` | string | 停止原因 |
-| `usage` | object | Token 使用統計 |
+| `content` | string | Claude response text |
+| `model` | string | Model used for response |
+| `stop_reason` | string | Why the model stopped generating (end_turn, max_tokens, etc) |
+| `usage` | object | Token usage statistics |
 
 **Example:** Simple question
 
@@ -606,21 +606,21 @@ messages: [{"role": "user", "content": "Summarize this article: ${article_text}"
 max_tokens: 500
 ```
 
-### Google Gemini 對話
+### Google Gemini Chat
 
 `api.google_gemini.chat`
 
-傳送聊天訊息給 Google Gemini AI 並取得回應
+Send a chat message to Google Gemini AI and get a response
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Google AI API 金鑰（預設使用 env.GOOGLE_AI_API_KEY） |
-| `model` | string | No | `gemini-2.5-pro` | 要使用的 Gemini 模型 |
-| `prompt` | string | Yes | - | 傳送給 Gemini 的文字提示詞 |
-| `temperature` | number | No | `1.0` | 控制隨機性（0-2），較高值使輸出更隨機 |
-| `max_output_tokens` | number | No | `2048` | 回應的最大 Token 數 |
+| `api_key` | string | No | - | Google AI API key (defaults to env.GOOGLE_AI_API_KEY) |
+| `model` | string | No | `gemini-2.5-pro` | Gemini model to use |
+| `prompt` | string | Yes | - | The text prompt to send to Gemini |
+| `temperature` | number | No | `1.0` | Controls randomness (0-2). Higher values make output more random |
+| `max_output_tokens` | number | No | `2048` | Maximum number of tokens in response |
 
 **Output:**
 
@@ -644,29 +644,29 @@ temperature: 0.7
 max_output_tokens: 500
 ```
 
-### OpenAI 對話
+### OpenAI Chat
 
 `api.openai.chat`
 
-傳送聊天訊息給 OpenAI GPT 模型
+Send a chat message to OpenAI GPT models
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | 傳送給 GPT 的訊息 |
-| `model` | select (`gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `o3`, `o3-mini`, `o4-mini`, `gpt-4-turbo-preview`) | No | `gpt-4o` | 要使用的 GPT 模型 |
-| `temperature` | number | No | `0.7` | 取樣溫度（0-2） |
-| `max_tokens` | number | No | `1000` | 回應的最大 Token 數 |
-| `system_message` | string | No | - | 系統角色訊息（選填） |
+| `prompt` | string | Yes | - | The message to send to GPT |
+| `model` | select (`gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `o3`, `o3-mini`, `o4-mini`, `gpt-4-turbo-preview`) | No | `gpt-4o` | OpenAI model to use |
+| `temperature` | number | No | `0.7` | Sampling temperature (0-2) |
+| `max_tokens` | number | No | `1000` | Maximum tokens in response |
+| `system_message` | string | No | - | System role message (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `response` | string | 回應文字 |
-| `model` | string | 使用的模型 |
-| `usage` | object | Token 使用統計 |
+| `response` | string | Response from the operation |
+| `model` | string | Model name or identifier |
+| `usage` | object | Token usage statistics |
 
 **Example:** Simple chat
 
@@ -684,21 +684,21 @@ temperature: 0.2
 system_message: You are a Python programming expert
 ```
 
-### DALL-E 圖片產生
+### DALL-E Image Generation
 
 `api.openai.image`
 
-使用 DALL-E 產生圖片
+Generate images using DALL-E
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | 要產生的圖片描述 |
-| `size` | select (`256x256`, `512x512`, `1024x1024`, `1792x1024`, `1024x1792`) | No | `1024x1024` | 圖片尺寸 |
-| `model` | select (`dall-e-3`, `dall-e-2`) | No | `dall-e-3` | DALL-E 模型版本 |
-| `quality` | select (`standard`, `hd`) | No | `standard` | 圖片品質（僅限 DALL-E 3） |
-| `n` | number | No | `1` | 要產生的圖片數量（1-10） |
+| `prompt` | string | Yes | - | Description of the image to generate |
+| `size` | select (`256x256`, `512x512`, `1024x1024`, `1792x1024`, `1024x1792`) | No | `1024x1024` | Image size |
+| `model` | select (`dall-e-3`, `dall-e-2`) | No | `dall-e-3` | DALL-E model version |
+| `quality` | select (`standard`, `hd`) | No | `standard` | Image quality (DALL-E 3 only) |
+| `n` | number | No | `1` | Number of images to generate (1-10) |
 
 **Output:**
 
@@ -725,32 +725,32 @@ model: dall-e-2
 n: 3
 ```
 
-### AI 代理
+### AI Agent
 
 `llm.agent`
 
-自主 AI 代理，支援多埠連接（模型、記憶、工具）
+Autonomous AI agent with multi-port connections (model, memory, tools)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt_source` | select (`manual`, `auto`) | No | `manual` | 取得任務提示詞的來源 |
-| `task` | string | No | - | 代理要完成的任務。使用 {<!-- -->{input}<!-- -->} 參考上游資料。 |
-| `prompt_path` | string | No | `{<!-- -->{input}<!-- -->}` | 從輸入擷取提示詞的路徑（例如 {<!-- -->{input.message}<!-- -->}） |
-| `join_strategy` | select (`first`, `newline`, `separator`, `json`) | No | `first` | 如何處理陣列輸入 |
+| `prompt_source` | select (`manual`, `auto`) | No | `manual` | Where to get the task prompt from |
+| `task` | string | No | - | The task for the agent to complete. Use {<!-- -->{input}<!-- -->} to reference upstream data. |
+| `prompt_path` | string | No | `{<!-- -->{input}<!-- -->}` | Path to extract prompt from input (e.g., {<!-- -->{input.message}<!-- -->}) |
+| `join_strategy` | select (`first`, `newline`, `separator`, `json`) | No | `first` | How to handle array inputs |
 | `join_separator` | string | No | `
 
 ---
 
-` | 合併陣列項目的分隔符 |
-| `max_input_size` | number | No | `10000` | 提示詞的最大字元數（防止溢位） |
+` | Separator for joining array items |
+| `max_input_size` | number | No | `10000` | Maximum characters for prompt (prevents overflow) |
 | `agent_type` | select (`tools`, `react`) | No | `tools` | Reasoning strategy for the agent |
-| `system_prompt` | string | No | `You are a helpful AI agent. Use the available tools to complete the task. Think step by step.` | 代理行為的指示說明 |
+| `system_prompt` | string | No | `You are a helpful AI agent. Use the available tools to complete the task. Think step by step.` | Instructions for the agent behavior |
 | `response_format` | select (`text`, `json`, `json_schema`) | No | `text` | Expected format of the final answer |
 | `output_schema` | object | No | `{}` | JSON Schema the final answer must match (for json_schema format) |
-| `context` | object | No | `{}` | 提供給代理的額外上下文資料 |
-| `max_iterations` | number | No | `10` | 代理執行的最大迭代次數 |
+| `context` | object | No | `{}` | Additional context data for the agent |
+| `max_iterations` | number | No | `10` | Maximum number of tool calls |
 | `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
 | `model` | string | No | `gpt-4o` | Specific model to use |
 | `api_key` | string | No | - | API key (leave empty to use environment variable) |
@@ -761,11 +761,11 @@ n: 3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 代理是否成功完成 |
-| `result` | string | 代理的最終結果 |
-| `steps` | array | 代理執行的步驟列表 |
-| `tool_calls` | number | 工具呼叫記錄 |
-| `tokens_used` | number | 使用的 Token 數量 |
+| `ok` | boolean | Whether the agent completed successfully |
+| `result` | string | The final result from the agent |
+| `steps` | array | List of steps the agent took |
+| `tool_calls` | number | Number of tools called |
+| `tokens_used` | number | Total tokens consumed |
 
 **Example:** Web Research Agent
 

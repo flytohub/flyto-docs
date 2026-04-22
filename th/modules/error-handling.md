@@ -6,9 +6,9 @@ Retry, fallback, and circuit breaker patterns.
 
 | Module | Description |
 |--------|-------------|
-| [Circuit Breaker](#circuit-breaker) | ป้องกันความล้มเหลวที่ต่อเนื่องด้วยรูปแบบ Circuit Breaker |
-| [การสำรอง](#การสำรอง) | ให้ค่าการสำรองเมื่อการดำเนินการล้มเหลว |
-| [ลองใหม่](#ลองใหม่) | ห่อหุ้มการดำเนินการด้วยตรรกะการลองใหม่ที่กำหนดค่าได้ |
+| [Circuit Breaker](#circuit-breaker) | Protect against cascading failures with circuit breaker pattern |
+| [Fallback](#fallback) | Provide fallback value when operation fails |
+| [Retry](#retry) | Wrap operations with configurable retry logic |
 
 ## Modules
 
@@ -16,32 +16,32 @@ Retry, fallback, and circuit breaker patterns.
 
 `error.circuit_breaker`
 
-ป้องกันความล้มเหลวที่ต่อเนื่องด้วยรูปแบบ Circuit Breaker
+Protect against cascading failures with circuit breaker pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | object | Yes | - | การกระทำที่ต้องป้องกันด้วย Circuit Breaker |
-| `circuit_id` | string | Yes | - | การกระทำที่ต้องป้องกันด้วย Circuit Breaker |
-| `failure_threshold` | number | No | `5` | รหัสเฉพาะสำหรับวงจรนี้ (สำหรับการติดตามสถานะ) |
-| `failure_window_ms` | number | No | `60000` | ช่วงเวลาสำหรับการนับความล้มเหลว |
-| `recovery_timeout_ms` | number | No | `30000` | เวลาที่จะลองกู้คืน (สถานะครึ่งเปิด) |
-| `success_threshold` | number | No | `3` | คำขอที่สำเร็จที่ต้องการในสถานะครึ่งเปิดเพื่อปิดวงจร |
-| `fallback` | object | No | - | การกระทำทางเลือกเมื่อวงจรเปิด |
-| `fallback_value` | any | No | - | การกระทำทางเลือกเมื่อวงจรเปิด |
-| `track_errors` | array | No | `[]` | ค่าคงที่ที่จะคืนเมื่อวงจรเปิด |
+| `action` | object | Yes | - | The action to protect with circuit breaker |
+| `circuit_id` | string | Yes | - | Unique identifier for this circuit (for state tracking) |
+| `failure_threshold` | number | No | `5` | Number of failures before opening circuit |
+| `failure_window_ms` | number | No | `60000` | Time window for counting failures |
+| `recovery_timeout_ms` | number | No | `30000` | Time before attempting recovery (half-open state) |
+| `success_threshold` | number | No | `3` | Successful requests needed in half-open to close circuit |
+| `fallback` | object | No | - | Alternative action when circuit is open |
+| `fallback_value` | any | No | - | Static value to return when circuit is open |
+| `track_errors` | array | No | `[]` | Only count these error codes toward threshold (empty = all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | นับเฉพาะรหัสข้อผิดพลาดเหล่านี้สำหรับเกณฑ์ (ว่าง = ทั้งหมด) |
-| `result` | any | เหตุการณ์สำหรับการกำหนดเส้นทาง (สำเร็จ/วงจรเปิด/สำรอง) |
-| `circuit_state` | string | ผลลัพธ์จากการกระทำหรือการสำรอง |
-| `failure_count` | number | สถานะปัจจุบันของวงจร (ปิด/เปิด/ครึ่งเปิด) |
-| `last_failure_time` | string | จำนวนความล้มเหลวปัจจุบันในช่วงเวลา |
-| `circuit_opened_at` | string | เวลาที่เกิดความล้มเหลวครั้งล่าสุด |
+| `__event__` | string | Event for routing (success/circuit_open/fallback) |
+| `result` | any | Result from action or fallback |
+| `circuit_state` | string | Current state of circuit (closed/open/half_open) |
+| `failure_count` | number | Current failure count in window |
+| `last_failure_time` | string | Timestamp of last failure |
+| `circuit_opened_at` | string | When circuit was opened |
 
 **Example:** Example
 
@@ -71,31 +71,31 @@ failure_threshold: 3
 fallback_value: {"users": [], "from_cache": false}
 ```
 
-### การสำรอง
+### Fallback
 
 `error.fallback`
 
-ให้ค่าการสำรองเมื่อการดำเนินการล้มเหลว
+Provide fallback value when operation fails
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `operation` | object | No | - | การดำเนินการหลักที่จะพยายาม |
-| `fallback_value` | any | No | - | การดำเนินการหลักที่จะพยายาม |
-| `fallback_operation` | object | No | - | ค่าคงที่ที่จะคืนเมื่อเกิดความล้มเหลว |
-| `fallback_on` | array | No | `[]` | การดำเนินการทางเลือกที่จะทำเมื่อเกิดความล้มเหลว |
-| `include_error_info` | boolean | No | `True` | รหัสข้อผิดพลาดที่ทำให้เกิดการสำรอง (ว่าง = ข้อผิดพลาดทั้งหมด) |
-| `log_fallback` | boolean | No | `True` | รวมข้อมูลข้อผิดพลาดเดิมในผลลัพธ์ |
+| `operation` | object | No | - | The primary operation to attempt |
+| `fallback_value` | any | No | - | Static value to return on failure |
+| `fallback_operation` | object | No | - | Alternative operation to execute on failure |
+| `fallback_on` | array | No | `[]` | Error codes that trigger fallback (empty = all errors) |
+| `include_error_info` | boolean | No | `True` | Include original error information in output |
+| `log_fallback` | boolean | No | `True` | Log when fallback is used |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | บันทึกเมื่อใช้การสำรอง |
-| `used_fallback` | boolean | ผลลัพธ์จากการดำเนินการหลักหรือการสำรอง |
-| `source` | string | ว่ามีการใช้การสำรองหรือไม่ |
-| `original_error` | object | แหล่งที่มาของผลลัพธ์ (หลัก/ค่าการสำรอง/การดำเนินการสำรอง) |
+| `result` | any | Result from primary operation or fallback |
+| `used_fallback` | boolean | Whether fallback was used |
+| `source` | string | Source of result (primary/fallback_value/fallback_operation) |
+| `original_error` | object | Original error if fallback was used |
 
 **Example:** Example
 
@@ -119,34 +119,34 @@ fallback_value: {"status": "unavailable"}
 fallback_on: ["NETWORK_ERROR", "TIMEOUT_ERROR"]
 ```
 
-### ลองใหม่
+### Retry
 
 `error.retry`
 
-ห่อหุ้มการดำเนินการด้วยตรรกะการลองใหม่ที่กำหนดค่าได้
+Wrap operations with configurable retry logic
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `operation` | object | Yes | - | การดำเนินการที่จะลองใหม่ (ID โมดูลและพารามิเตอร์) |
-| `max_retries` | number | No | `3` | การดำเนินการที่จะลองใหม่ (ID โมดูลและพารามิเตอร์) |
-| `initial_delay_ms` | number | No | `1000` | จำนวนครั้งสูงสุดที่ลองใหม่ |
-| `max_delay_ms` | number | No | `30000` | ความล่าช้าเริ่มต้นก่อนลองใหม่ครั้งแรก |
-| `backoff_multiplier` | number | No | `2.0` | ตัวคูณสำหรับการถอยแบบทวีคูณ (เช่น 2 จะเพิ่มความล่าช้าทุกครั้งที่ลองใหม่) |
-| `jitter` | boolean | No | `True` | เพิ่มการสั่นแบบสุ่มเพื่อป้องกันการโหลดซ้ำ |
-| `retry_on` | array | No | `[]` | เพิ่มการสั่นแบบสุ่มเพื่อป้องกันการโหลดซ้ำ |
-| `timeout_per_attempt_ms` | number | No | `0` | รายการรหัสข้อผิดพลาดที่จะลองใหม่ (ว่างเปล่า = ลองใหม่ทั้งหมด) |
+| `operation` | object | Yes | - | The operation to retry (module ID and params) |
+| `max_retries` | number | No | `3` | Maximum number of retry attempts |
+| `initial_delay_ms` | number | No | `1000` | Initial delay before first retry |
+| `max_delay_ms` | number | No | `30000` | Maximum delay between retries |
+| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g., 2 doubles delay each retry) |
+| `jitter` | boolean | No | `True` | Add random jitter to delay to prevent thundering herd |
+| `retry_on` | array | No | `[]` | List of error codes to retry on (empty = retry all) |
+| `timeout_per_attempt_ms` | number | No | `0` | Timeout for each attempt (0 for no timeout) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | หมดเวลาสำหรับแต่ละความพยายาม (0 สำหรับไม่หมดเวลา) |
-| `result` | any | เหตุการณ์สำหรับการกำหนดเส้นทาง (สำเร็จ/หมด) |
-| `attempts` | number | เหตุการณ์สำหรับการกำหนดเส้นทาง (สำเร็จ/หมด) |
-| `total_delay_ms` | number | ผลลัพธ์จากความพยายามที่สำเร็จ |
-| `errors` | array | จำนวนความพยายามที่ทำ |
+| `__event__` | string | Event for routing (success/exhausted) |
+| `result` | any | Result from successful attempt |
+| `attempts` | number | Number of attempts made |
+| `total_delay_ms` | number | Total time spent in delays |
+| `errors` | array | Errors from each failed attempt |
 
 **Example:** Example
 

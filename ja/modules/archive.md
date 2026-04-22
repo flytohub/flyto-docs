@@ -6,34 +6,34 @@ Create and extract ZIP, TAR, and gzip archives.
 
 | Module | Description |
 |--------|-------------|
-| [Gunzip 解凍](#gunzip-解凍) | gzip 圧縮ファイルを解凍 |
-| [Gzip 圧縮](#gzip-圧縮) | 単一ファイルを gzip で圧縮 |
-| [TAR アーカイブ作成](#tar-アーカイブ作成) | オプションで gzip/bz2/xz 圧縮を使用して TAR アーカイブを作成 |
-| [TARアーカイブを抽出](#tarアーカイブを抽出) | TARアーカイブからファイルを抽出（圧縮を自動検出） |
-| [ZIP アーカイブ作成](#zip-アーカイブ作成) | ファイルリストから ZIP アーカイブを作成 |
-| [ZIP アーカイブ抽出](#zip-アーカイブ抽出) | ZIP アーカイブからファイルを抽出 |
+| [Gunzip Decompress](#gunzip-decompress) | Decompress a gzip-compressed file |
+| [Gzip Compress](#gzip-compress) | Compress a single file using gzip |
+| [Create TAR Archive](#create-tar-archive) | Create a TAR archive with optional gzip/bz2/xz compression |
+| [Extract TAR Archive](#extract-tar-archive) | Extract files from a TAR archive (auto-detects compression) |
+| [Create ZIP Archive](#create-zip-archive) | Create a ZIP archive from a list of files |
+| [Extract ZIP Archive](#extract-zip-archive) | Extract files from a ZIP archive |
 
 ## Modules
 
-### Gunzip 解凍
+### Gunzip Decompress
 
 `archive.gunzip`
 
-gzip 圧縮ファイルを解凍
+Decompress a gzip-compressed file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | gzip 圧縮ファイルのパス |
-| `output_path` | string | No | - | 解凍ファイルのパス（デフォルトは .gz 拡張子なしの入力） |
+| `input_path` | string | Yes | - | Path to the gzip-compressed file |
+| `output_path` | string | No | - | Path for the decompressed file (defaults to input without .gz extension) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 解凍ファイルのパス |
-| `size` | number | 解凍ファイルサイズ（バイト） |
+| `path` | string | Path to the decompressed file |
+| `size` | number | Decompressed file size in bytes |
 
 **Example:** Decompress a gzip file
 
@@ -41,27 +41,27 @@ gzip 圧縮ファイルを解凍
 input_path: /tmp/data.txt.gz
 ```
 
-### Gzip 圧縮
+### Gzip Compress
 
 `archive.gzip`
 
-単一ファイルを gzip で圧縮
+Compress a single file using gzip
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | 圧縮するファイルのパス |
-| `output_path` | string | No | - | 圧縮ファイルのパス（デフォルトは入力パス + .gz） |
+| `input_path` | string | Yes | - | Path to the file to compress |
+| `output_path` | string | No | - | Path for the compressed file (defaults to input_path + .gz) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 圧縮ファイルのパス |
-| `original_size` | number | 元のファイルサイズ（バイト） |
-| `compressed_size` | number | 圧縮ファイルサイズ（バイト） |
-| `ratio` | number | 圧縮率（圧縮後 / 元のサイズ） |
+| `path` | string | Path to the compressed file |
+| `original_size` | number | Original file size in bytes |
+| `compressed_size` | number | Compressed file size in bytes |
+| `ratio` | number | Compression ratio (compressed / original) |
 
 **Example:** Compress a file with gzip
 
@@ -69,27 +69,27 @@ input_path: /tmp/data.txt.gz
 input_path: /tmp/data.txt
 ```
 
-### TAR アーカイブ作成
+### Create TAR Archive
 
 `archive.tar_create`
 
-オプションで gzip/bz2/xz 圧縮を使用して TAR アーカイブを作成
+Create a TAR archive with optional gzip/bz2/xz compression
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | Yes | - | 出力 TAR ファイルのパス |
-| `files` | array | Yes | - | アーカイブに含めるファイルパスのリスト |
-| `compression` | select (`none`, `gzip`, `bz2`, `xz`) | No | `gzip` | 圧縮方法 |
+| `output_path` | string | Yes | - | Path for the output TAR file |
+| `files` | array | Yes | - | List of file paths to include in the archive |
+| `compression` | select (`none`, `gzip`, `bz2`, `xz`) | No | `gzip` | Compression method |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 作成された TAR ファイルのパス |
-| `size` | number | アーカイブのサイズ（バイト） |
-| `file_count` | number | アーカイブ内のファイル数 |
+| `path` | string | Path to the created TAR file |
+| `size` | number | Archive size in bytes |
+| `file_count` | number | Number of files in the archive |
 
 **Example:** Create gzipped TAR archive
 
@@ -99,25 +99,25 @@ files: ["/tmp/file1.txt", "/tmp/file2.txt"]
 compression: gzip
 ```
 
-### TARアーカイブを抽出
+### Extract TAR Archive
 
 `archive.tar_extract`
 
-TARアーカイブからファイルを抽出（圧縮を自動検出）
+Extract files from a TAR archive (auto-detects compression)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `archive_path` | string | Yes | - | 抽出するTARアーカイブのパス |
-| `output_dir` | string | Yes | - | ファイルを抽出するディレクトリ |
+| `archive_path` | string | Yes | - | Path to the TAR archive to extract |
+| `output_dir` | string | Yes | - | Directory to extract files into |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted_files` | array | 抽出されたファイルパスのリスト |
-| `total_size` | number | 抽出されたファイルの合計サイズ（バイト） |
+| `extracted_files` | array | List of extracted file paths |
+| `total_size` | number | Total size of extracted files in bytes |
 
 **Example:** Extract TAR.GZ archive
 
@@ -126,28 +126,28 @@ archive_path: /tmp/archive.tar.gz
 output_dir: /tmp/extracted/
 ```
 
-### ZIP アーカイブ作成
+### Create ZIP Archive
 
 `archive.zip_create`
 
-ファイルリストから ZIP アーカイブを作成
+Create a ZIP archive from a list of files
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | Yes | - | 出力 ZIP ファイルのパス |
-| `files` | array | Yes | - | アーカイブに含めるファイルパスのリスト |
-| `compression` | select (`stored`, `deflated`, `bzip2`, `lzma`) | No | `deflated` | 圧縮方法 |
-| `password` | string | No | - | アーカイブを保護するためのオプションのパスワード（抽出のみ、サポートは限定的） |
+| `output_path` | string | Yes | - | Path for the output ZIP file |
+| `files` | array | Yes | - | List of file paths to include in the archive |
+| `compression` | select (`stored`, `deflated`, `bzip2`, `lzma`) | No | `deflated` | Compression method |
+| `password` | string | No | - | Optional password to protect the archive (extraction only, limited support) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 作成された ZIP ファイルのパス |
-| `size` | number | アーカイブサイズ（バイト） |
-| `file_count` | number | アーカイブ内のファイル数 |
+| `path` | string | Path to the created ZIP file |
+| `size` | number | Archive size in bytes |
+| `file_count` | number | Number of files in the archive |
 
 **Example:** Create ZIP from files
 
@@ -157,26 +157,26 @@ files: ["/tmp/file1.txt", "/tmp/file2.txt"]
 compression: deflated
 ```
 
-### ZIP アーカイブ抽出
+### Extract ZIP Archive
 
 `archive.zip_extract`
 
-ZIP アーカイブからファイルを抽出
+Extract files from a ZIP archive
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `archive_path` | string | Yes | - | 抽出する ZIP アーカイブのパス |
-| `output_dir` | string | Yes | - | ファイルを抽出するディレクトリ |
-| `password` | string | No | - | 暗号化アーカイブ用のパスワード |
+| `archive_path` | string | Yes | - | Path to the ZIP archive to extract |
+| `output_dir` | string | Yes | - | Directory to extract files into |
+| `password` | string | No | - | Password for encrypted archives |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted_files` | array | 抽出されたファイルパスのリスト |
-| `total_size` | number | 抽出されたファイルの合計サイズ（バイト） |
+| `extracted_files` | array | List of extracted file paths |
+| `total_size` | number | Total size of extracted files in bytes |
 
 **Example:** Extract ZIP archive
 

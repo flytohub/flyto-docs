@@ -6,89 +6,89 @@ Set operations: union, intersection, difference, unique.
 
 | Module | Description |
 |--------|-------------|
-| [Różnica zbiorów](#różnica-zbiorów) | Pobierz elementy z pierwszej tablicy, które nie występują w innych |
-| [Przecięcie zbiorów](#przecięcie-zbiorów) | Pobierz część wspólną dwóch lub więcej tablic |
-| [Suma zbiorów](#suma-zbiorów) | Pobierz sumę dwóch lub więcej tablic |
-| [Unikalne elementy zbioru](#unikalne-elementy-zbioru) | Usuń zduplikowane elementy z tablicy |
+| [Set Difference](#set-difference) | Get elements in first array but not in others |
+| [Set Intersection](#set-intersection) | Get intersection of two or more arrays |
+| [Set Union](#set-union) | Get union of two or more arrays |
+| [Set Unique](#set-unique) | Remove duplicate elements from array |
 
 ## Modules
 
-### Różnica zbiorów
+### Set Difference
 
 `set.difference`
 
-Pobierz elementy z pierwszej tablicy, które nie występują w innych
+Get elements in first array but not in others
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `source` | array | Yes | - | Tablica źródłowa |
-| `exclude` | array | Yes | - | Tablica źródłowa |
+| `source` | array | Yes | - | Source array |
+| `exclude` | array | Yes | - | Arrays of elements to exclude |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Tablice elementów do wykluczenia |
-| `count` | number | Elementy w źródle, ale nie w tablicach wykluczających |
-| `removed_count` | number | Elementy w źródle, ale nie w tablicach wykluczających |
+| `result` | array | Elements in source but not in exclude arrays |
+| `count` | number | Number of remaining elements |
+| `removed_count` | number | Number of elements removed |
 
-### Przecięcie zbiorów
+### Set Intersection
 
 `set.intersection`
 
-Pobierz część wspólną dwóch lub więcej tablic
+Get intersection of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | Tablice do przecięcia (tablica tablic) |
+| `arrays` | array | Yes | - | Arrays to intersect (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Tablice do przecięcia (tablica tablic) |
-| `count` | number | Przecięcie wszystkich tablic |
+| `result` | array | Intersection of all arrays |
+| `count` | number | Number of common elements |
 
-### Suma zbiorów
+### Set Union
 
 `set.union`
 
-Pobierz sumę dwóch lub więcej tablic
+Get union of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | Tablice do połączenia (tablica tablic) |
+| `arrays` | array | Yes | - | Arrays to combine (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Tablice do połączenia (tablica tablic) |
-| `count` | number | Suma wszystkich tablic |
+| `result` | array | Union of all arrays |
+| `count` | number | Number of unique elements |
 
-### Unikalne elementy zbioru
+### Set Unique
 
 `set.unique`
 
-Usuń zduplikowane elementy z tablicy
+Remove duplicate elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Tablica do deduplikacji |
-| `preserve_order` | boolean | No | `True` | Tablica do deduplikacji |
+| `array` | array | Yes | - | Array to deduplicate |
+| `preserve_order` | boolean | No | `True` | Keep first occurrence order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Zachowaj kolejność pierwszego wystąpienia |
-| `count` | number | Tablica z unikalnymi elementami |
-| `duplicates_removed` | number | Tablica z unikalnymi elementami |
+| `result` | array | Array with unique elements |
+| `count` | number | Number of unique elements |
+| `duplicates_removed` | number | Number of duplicates removed |

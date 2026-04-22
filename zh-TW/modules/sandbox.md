@@ -6,33 +6,33 @@ Execute JavaScript, Python, or shell commands in isolated environments.
 
 | Module | Description |
 |--------|-------------|
-| [執行 JavaScript](#執行-javascript) | 通過 Node.js 執行 JavaScript 程式碼，並設置超時 |
-| [執行 Python](#執行-python) | 在子程序中執行 Python 程式碼，並設置超時 |
-| [執行 Shell](#執行-shell) | 執行 Shell 命令，並設置超時和環境控制 |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code via Node.js with timeout |
+| [Execute Python](#execute-python) | Execute Python code in a subprocess with timeout |
+| [Execute Shell](#execute-shell) | Execute a shell command with timeout and environment control |
 
 ## Modules
 
-### 執行 JavaScript
+### Execute JavaScript
 
 `sandbox.execute_js`
 
-通過 Node.js 執行 JavaScript 程式碼，並設置超時
+Execute JavaScript code via Node.js with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | 要通過 Node.js 執行的 JavaScript 程式碼 |
-| `timeout` | number | No | `10` | 執行超時時間（秒） |
+| `code` | string | Yes | - | JavaScript code to execute via Node.js |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | 腳本的標準輸出 |
-| `stderr` | string | 腳本的標準錯誤輸出 |
-| `exit_code` | number | 程序退出代碼（0 = 成功） |
-| `execution_time_ms` | number | 執行時間（毫秒） |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple console.log
 
@@ -48,28 +48,28 @@ code: const data = { name: "test", value: 42 };
 console.log(JSON.stringify(data, null, 2));
 ```
 
-### 執行 Python
+### Execute Python
 
 `sandbox.execute_python`
 
-在子程序中執行 Python 程式碼，並設置超時
+Execute Python code in a subprocess with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | 要執行的 Python 程式碼 |
-| `timeout` | number | No | `10` | 執行超時時間（秒） |
-| `allowed_modules` | array | No | - | 可匯入模組的白名單（留空表示允許所有） |
+| `code` | string | Yes | - | Python code to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `allowed_modules` | array | No | - | Whitelist of importable modules (leave empty to allow all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | 腳本的標準輸出 |
-| `stderr` | string | 腳本的標準錯誤輸出 |
-| `exit_code` | number | 程序退出代碼（0 = 成功） |
-| `execution_time_ms` | number | 執行時間（毫秒） |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple print
 
@@ -86,29 +86,29 @@ print(math.pi)
 allowed_modules: ["math"]
 ```
 
-### 執行 Shell
+### Execute Shell
 
 `sandbox.execute_shell`
 
-執行 Shell 命令，並設置超時和環境控制
+Execute a shell command with timeout and environment control
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `command` | string | Yes | - | 要執行的 Shell 命令 |
-| `timeout` | number | No | `10` | 執行超時時間（秒） |
-| `working_dir` | string | No | - | 命令的工作目錄 |
-| `env` | object | No | - | 要設置的額外環境變數（與當前環境合併） |
+| `command` | string | Yes | - | Shell command to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `working_dir` | string | No | - | Working directory for the command |
+| `env` | object | No | - | Additional environment variables to set (merged with current env) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | 命令的標準輸出 |
-| `stderr` | string | 命令的標準錯誤輸出 |
-| `exit_code` | number | 程序退出代碼（0 = 成功） |
-| `execution_time_ms` | number | 執行時間（毫秒） |
+| `stdout` | string | Standard output from the command |
+| `stderr` | string | Standard error from the command |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple echo
 

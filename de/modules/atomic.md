@@ -2,62 +2,63 @@
 
 Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and testing.
 
-**44 modules**
+**45 modules**
 
 | Module | Description |
 |--------|-------------|
-| [Array filtern](#array-filtern) | Array-Elemente nach Bedingung filtern |
-| [Array sortieren](#array-sortieren) | Array-Elemente auf- oder absteigend sortieren |
-| [Array eindeutig](#array-eindeutig) | Doppelte Werte aus Array entfernen |
+| [Filter Array](#filter-array) | Filter array elements by condition |
+| [Sort Array](#sort-array) | Sort array elements in ascending or descending order |
+| [Array Unique](#array-unique) | Remove duplicate values from array |
 | [OAuth2 Token Exchange](#oauth2-token-exchange) | Exchange authorization code, refresh token, or client credentials for an access token |
-| [DNS-Abfrage](#dns-abfrage) | DNS-Abfrage für Domain-Einträge |
-| [Textunterschied](#textunterschied) | Erzeuge einen Unterschied zwischen zwei Textzeichenfolgen |
-| [Datei bearbeiten](#datei-bearbeiten) | Ersetze Text in einer Datei durch exakte Zeichenfolgensuche |
-| [Datei-Existenz prüfen](#datei-existenz-prüfen) | Prüfen, ob eine Datei oder ein Verzeichnis existiert |
-| [Datei lesen](#datei-lesen) | Inhalt aus einer Datei lesen |
-| [Datei schreiben](#datei-schreiben) | Inhalt in eine Datei schreiben |
-| [Git Klonen](#git-klonen) | Ein Git-Repository klonen |
-| [Git-Commit](#git-commit) | Einen Git-Commit erstellen |
-| [Git-Diff](#git-diff) | Git-Diff abrufen |
+| [DNS Lookup](#dns-lookup) | DNS lookup for domain records |
+| [Diff Content](#diff-content) | Generate unified diff between original and modified content |
+| [Edit File](#edit-file) | Replace a string in a file (targeted edit, not full overwrite) |
+| [Check File Exists](#check-file-exists) | Check if a file or directory exists |
+| [Read File](#read-file) | Read content from a file |
+| [Write File](#write-file) | Write content to a file |
+| [Git Clone](#git-clone) | Clone a git repository |
+| [Git Commit](#git-commit) | Create a git commit |
+| [Git Diff](#git-diff) | Get git diff |
+| [HTTP Batch](#http-batch) | Run a batch of HTTP probes sequentially and capture timing + body |
 | [HTTP Paginate](#http-paginate) | Automatically iterate through paginated API endpoints and collect all results |
-| [HTTP-Anfrage](#http-anfrage) | HTTP-Anfrage senden und Antwort empfangen |
-| [HTTP-Antwort bestätigen](#http-antwort-bestätigen) | HTTP-Antwort-Eigenschaften bestätigen und validieren |
+| [HTTP Request](#http-request) | Send HTTP request and receive response |
+| [Assert HTTP Response](#assert-http-response) | Assert and validate HTTP response properties |
 | [HTTP Session](#http-session) | Send a sequence of HTTP requests with persistent cookies (login → action → logout) |
 | [Webhook Wait](#webhook-wait) | Start a temporary server and wait for an incoming webhook callback |
-| [LLM-Chat](#llm-chat) | Mit LLM-APIs für intelligente Operationen interagieren |
-| [KI-Code-Korrektur](#ki-code-korrektur) | Automatisch Code-Korrekturen basierend auf Problemen generieren |
-| [Berechnen](#berechnen) | Grundlegende mathematische Operationen durchführen |
-| [HTTP-Gesundheitscheck](#http-gesundheitscheck) | HTTP-Gesundheitscheck / Verfügbarkeitsmonitor |
-| [Port prüfen](#port-prüfen) | Prüfen, ob Netzwerk-Port(s) offen oder geschlossen sind |
-| [Auf Port warten](#auf-port-warten) | Auf Verfügbarkeit eines Netzwerk-Ports warten |
-| [Prozesse auflisten](#prozesse-auflisten) | Alle laufenden Hintergrundprozesse auflisten |
-| [Hintergrundprozess starten](#hintergrundprozess-starten) | Hintergrundprozess starten (Server, Dienst usw.) |
-| [Prozess stoppen](#prozess-stoppen) | Laufenden Hintergrundprozess stoppen |
-| [Shell-Befehl ausführen](#shell-befehl-ausführen) | Shell-Befehl ausführen und Ausgabe erfassen |
-| [SSH Ausführen](#ssh-ausführen) | Befehl auf entferntem Server via SSH ausführen |
-| [SFTP Herunterladen](#sftp-herunterladen) | Datei von entferntem Server via SFTP herunterladen |
-| [SFTP Hochladen](#sftp-hochladen) | Datei auf entfernten Server via SFTP hochladen |
-| [E2E-Schritte ausführen](#e2e-schritte-ausführen) | End-to-End-Testschritte sequentiell ausführen |
-| [Qualitäts-Gate](#qualitäts-gate) | Qualitätsmetriken gegen definierte Schwellenwerte auswerten |
-| [HTTP-Tests ausführen](#http-tests-ausführen) | HTTP-API-Testsuite ausführen |
-| [Linter ausführen](#linter-ausführen) | Linting-Prüfungen auf Quellcode ausführen |
-| [Bericht generieren](#bericht-generieren) | Testausführungsbericht generieren |
-| [Szenario ausführen](#szenario-ausführen) | Szenariobasierten Test ausführen (BDD-Stil) |
-| [Sicherheitsscan](#sicherheitsscan) | Auf Sicherheitslücken scannen |
-| [Testsuite ausführen](#testsuite-ausführen) | Testsammlung ausführen |
-| [Unit-Tests ausführen](#unit-tests-ausführen) | Unit-Tests ausführen |
-| [Visueller Vergleich](#visueller-vergleich) | Visuelle Ausgaben auf Unterschiede vergleichen |
-| [UI-Qualität bewerten](#ui-qualität-bewerten) | Umfassende UI-Qualitätsbewertung mit mehrdimensionaler Punktevergabe |
-| [Bild mit KI analysieren](#bild-mit-ki-analysieren) | Bilder mit OpenAI Vision API (GPT-4V) analysieren |
-| [Bilder vergleichen](#bilder-vergleichen) | Zwei Bilder vergleichen und visuelle Unterschiede identifizieren |
+| [LLM Chat](#llm-chat) | Interact with LLM APIs for intelligent operations |
+| [AI Code Fix](#ai-code-fix) | Automatically generate code fixes based on issues |
+| [Calculate](#calculate) | Perform basic mathematical operations |
+| [HTTP Health Check](#http-health-check) | HTTP health check / uptime monitor |
+| [Check Port](#check-port) | Check if network port(s) are open or closed |
+| [Wait for Port](#wait-for-port) | Wait for a network port to become available |
+| [List Processes](#list-processes) | List all running background processes |
+| [Start Background Process](#start-background-process) | Start a background process (server, service, etc.) |
+| [Stop Process](#stop-process) | Stop a running background process |
+| [Execute Shell Command](#execute-shell-command) | Execute a shell command and capture output |
+| [SSH Execute](#ssh-execute) | Execute command on remote server via SSH |
+| [SFTP Download](#sftp-download) | Download file from remote server via SFTP |
+| [SFTP Upload](#sftp-upload) | Upload file to remote server via SFTP |
+| [Run E2E Steps](#run-e2e-steps) | Execute end-to-end test steps sequentially |
+| [Quality Gate](#quality-gate) | Evaluate quality metrics against defined thresholds |
+| [Run HTTP Tests](#run-http-tests) | Execute HTTP API test suite |
+| [Run Linter](#run-linter) | Run linting checks on source code |
+| [Generate Report](#generate-report) | Generate test execution report |
+| [Run Scenario](#run-scenario) | Execute scenario-based test (BDD style) |
+| [Security Scan](#security-scan) | Scan for security vulnerabilities |
+| [Run Test Suite](#run-test-suite) | Execute a collection of tests |
+| [Run Unit Tests](#run-unit-tests) | Execute unit tests |
+| [Visual Compare](#visual-compare) | Compare visual outputs for differences |
+| [Evaluate UI Quality](#evaluate-ui-quality) | Comprehensive UI quality evaluation with multi-dimensional scoring |
+| [Analyze Image with AI](#analyze-image-with-ai) | Analyze images using OpenAI Vision API (GPT-4V) |
+| [Compare Images](#compare-images) | Compare two images and identify visual differences |
 
 ## Modules
 
-### Array filtern
+### Filter Array
 
 `array.filter`
 
-Array-Elemente nach Bedingung filtern
+Filter array elements by condition
 
 **Parameters:**
 
@@ -71,8 +72,8 @@ Array-Elemente nach Bedingung filtern
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filtered` | array | Gefiltertes Array |
-| `count` | number | Gefiltertes Array |
+| `filtered` | array | Filtered array |
+| `count` | number | Number of items in filtered array |
 
 **Example:** Filter numbers greater than 5
 
@@ -82,11 +83,11 @@ condition: gt
 value: 5
 ```
 
-### Array sortieren
+### Sort Array
 
 `array.sort`
 
-Array-Elemente auf- oder absteigend sortieren
+Sort array elements in ascending or descending order
 
 **Parameters:**
 
@@ -99,8 +100,8 @@ Array-Elemente auf- oder absteigend sortieren
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sorted` | array | Sortiertes Array |
-| `count` | number | Sortiertes Array |
+| `sorted` | array | Sorted array |
+| `count` | number | Number of items |
 
 **Example:** Sort numbers ascending
 
@@ -109,11 +110,11 @@ array: [5, 2, 8, 1, 9]
 order: asc
 ```
 
-### Array eindeutig
+### Array Unique
 
 `array.unique`
 
-Doppelte Werte aus Array entfernen
+Remove duplicate values from array
 
 **Parameters:**
 
@@ -126,9 +127,9 @@ Doppelte Werte aus Array entfernen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `unique` | array | Array mit eindeutigen Werten |
-| `count` | number | Array mit eindeutigen Werten |
-| `duplicates_removed` | number | Array mit eindeutigen Werten |
+| `unique` | array | Array with unique values |
+| `count` | number | Number of unique items |
+| `duplicates_removed` | number | Number of duplicates removed |
 
 **Example:** Remove duplicates
 
@@ -214,19 +215,19 @@ client_secret: ${env.GITHUB_CLIENT_SECRET}
 code: abc123...
 ```
 
-### DNS-Abfrage
+### DNS Lookup
 
 `dns.lookup`
 
-DNS-Abfrage für Domain-Einträge
+DNS lookup for domain records
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `domain` | string | Yes | - | Domainname zur Abfrage |
-| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | DNS-Eintragstyp zur Abfrage |
-| `timeout` | number | No | `10` | Abfrage-Zeitlimit in Sekunden |
+| `domain` | string | Yes | - | Domain name to look up |
+| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | DNS record type to query |
+| `timeout` | number | No | `10` | Query timeout in seconds |
 
 **Output:**
 
@@ -249,29 +250,29 @@ domain: example.com
 record_type: MX
 ```
 
-### Textunterschied
+### Diff Content
 
 `file.diff`
 
-Erzeuge einen Unterschied zwischen zwei Textzeichenfolgen
+Generate unified diff between original and modified content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `original` | string | Yes | - | Originaltext |
-| `modified` | string | Yes | - | Geänderter Text |
-| `context_lines` | number | No | `3` | Anzahl der Kontextzeilen um Änderungen herum |
-| `filename` | string | No | `file` | Dateiname für den Diff-Kopf |
+| `original` | string | Yes | - | Original content for comparison |
+| `modified` | string | Yes | - | Modified content for comparison |
+| `context_lines` | number | No | `3` | Number of context lines around changes |
+| `filename` | string | No | `file` | Name of the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `diff` | string | Einheitliche Diff-Ausgabe |
-| `changed` | boolean | Ob Änderungen vorhanden sind |
-| `additions` | number | Anzahl der hinzugefügten Zeilen |
-| `deletions` | number | Anzahl der gelöschten Zeilen |
+| `diff` | string | Unified diff output |
+| `changed` | boolean | Whether content differs |
+| `additions` | number | Number of added lines |
+| `deletions` | number | Number of deleted lines |
 
 **Example:** Diff two strings
 
@@ -283,29 +284,29 @@ world!
 filename: test.txt
 ```
 
-### Datei bearbeiten
+### Edit File
 
 `file.edit`
 
-Ersetze Text in einer Datei durch exakte Zeichenfolgensuche
+Replace a string in a file (targeted edit, not full overwrite)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Pfad zur zu bearbeitenden Datei |
-| `old_string` | string | Yes | - | Text zum Finden und Ersetzen |
-| `new_string` | string | Yes | - | Ersetzungstext |
-| `replace_all` | boolean | No | `False` | Alle Vorkommen ersetzen, nicht nur das erste |
-| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | Dateicodierung |
+| `path` | string | Yes | - | Path to the file |
+| `old_string` | string | Yes | - | Text to find and replace |
+| `new_string` | string | Yes | - | Replacement text |
+| `replace_all` | boolean | No | `False` | Whether to replace all occurrences |
+| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | Character encoding for the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Pfad der bearbeiteten Datei |
-| `replacements` | number | Anzahl der vorgenommenen Ersetzungen |
-| `diff` | string | Diff, das zeigt, was sich geändert hat |
+| `path` | string | File path that was edited |
+| `replacements` | number | Number of replacements made |
+| `diff` | string | Unified diff of changes |
 
 **Example:** Replace string in file
 
@@ -315,11 +316,11 @@ old_string: def hello():
 new_string: def hello_world():
 ```
 
-### Datei-Existenz prüfen
+### Check File Exists
 
 `file.exists`
 
-Prüfen, ob eine Datei oder ein Verzeichnis existiert
+Check if a file or directory exists
 
 **Parameters:**
 
@@ -331,9 +332,9 @@ Prüfen, ob eine Datei oder ein Verzeichnis existiert
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `exists` | boolean | Ob der Pfad existiert |
-| `is_file` | boolean | Ob der Pfad existiert |
-| `is_directory` | boolean | Ob der Pfad existiert |
+| `exists` | boolean | Whether path exists |
+| `is_file` | boolean | Whether path is a file |
+| `is_directory` | boolean | Whether path is a directory |
 
 **Example:** Check file exists
 
@@ -341,11 +342,11 @@ Prüfen, ob eine Datei oder ein Verzeichnis existiert
 path: /tmp/data.txt
 ```
 
-### Datei lesen
+### Read File
 
 `file.read`
 
-Inhalt aus einer Datei lesen
+Read content from a file
 
 **Parameters:**
 
@@ -358,8 +359,8 @@ Inhalt aus einer Datei lesen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `content` | string | Dateiinhalt |
-| `size` | number | Dateiinhalt |
+| `content` | string | File content |
+| `size` | number | File size in bytes |
 
 **Example:** Read text file
 
@@ -368,11 +369,11 @@ path: /tmp/data.txt
 encoding: utf-8
 ```
 
-### Datei schreiben
+### Write File
 
 `file.write`
 
-Inhalt in eine Datei schreiben
+Write content to a file
 
 **Parameters:**
 
@@ -387,8 +388,8 @@ Inhalt in eine Datei schreiben
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Dateipfad |
-| `bytes_written` | number | Dateipfad |
+| `path` | string | File path |
+| `bytes_written` | number | Number of bytes written |
 
 **Example:** Write text file
 
@@ -398,21 +399,21 @@ content: Hello World
 mode: overwrite
 ```
 
-### Git Klonen
+### Git Clone
 
 `git.clone`
 
-Ein Git-Repository klonen
+Clone a git repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | Git-Repository-URL (HTTPS oder SSH) |
-| `destination` | string | Yes | - | Lokaler Pfad zum Klonen |
-| `branch` | string | No | - | Branch nach dem Klonen auschecken |
-| `depth` | number | No | - | Shallow-Klon-Tiefe (für vollständiges Klonen weglassen) |
-| `token` | string | No | - | Persönlicher Zugriffstoken für private Repos |
+| `url` | string | Yes | - | Git repository URL (HTTPS or SSH) |
+| `destination` | string | Yes | - | Local path to clone into |
+| `branch` | string | No | - | Branch to checkout after clone |
+| `depth` | number | No | - | Shallow clone depth (omit for full clone) |
+| `token` | string | No | - | Personal access token for private repos |
 
 **Output:**
 
@@ -437,22 +438,22 @@ branch: develop
 depth: 1
 ```
 
-### Git-Commit
+### Git Commit
 
 `git.commit`
 
-Einen Git-Commit erstellen
+Create a git commit
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | Pfad zum Git-Repository |
-| `message` | string | Yes | - | Commit-Nachricht |
-| `add_all` | boolean | No | `False` | Alle Änderungen vor dem Commit stagen (git add -A) |
-| `files` | array | No | - | Spezifische Dateien vor dem Commit stagen |
-| `author_name` | string | No | - | Commit-Autorenname überschreiben |
-| `author_email` | string | No | - | Commit-Autoren-E-Mail überschreiben |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `message` | string | Yes | - | Commit message |
+| `add_all` | boolean | No | `False` | Stage all changes before committing (git add -A) |
+| `files` | array | No | - | Specific files to stage before committing |
+| `author_name` | string | No | - | Override commit author name |
+| `author_email` | string | No | - | Override commit author email |
 
 **Output:**
 
@@ -477,21 +478,21 @@ message: fix: correct typo in readme
 files: ["README.md"]
 ```
 
-### Git-Diff
+### Git Diff
 
 `git.diff`
 
-Git-Diff abrufen
+Get git diff
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | Pfad zum Git-Repository |
-| `ref1` | string | No | `HEAD` | Erste Referenz (Commit, Branch, Tag) |
-| `ref2` | string | No | - | Zweite Referenz zum Vergleich |
-| `staged` | boolean | No | `False` | Nur gestagte Änderungen anzeigen (--cached) |
-| `stat_only` | boolean | No | `False` | Nur Dateistatistiken anzeigen (--stat) |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `ref1` | string | No | `HEAD` | First reference (commit, branch, tag) |
+| `ref2` | string | No | - | Second reference to compare against |
+| `staged` | boolean | No | `False` | Show only staged changes (--cached) |
+| `stat_only` | boolean | No | `False` | Show only file statistics (--stat) |
 
 **Output:**
 
@@ -521,6 +522,35 @@ repo_path: /home/user/project
 staged: true
 stat_only: true
 ```
+
+### HTTP Batch
+
+`http.batch`
+
+Run a batch of HTTP probes sequentially and capture timing + body
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `requests` | array | Yes | - | List of request dicts: {method, url, headers?, body?, label?} |
+| `description` | string | No | - | Informational description of the batch intent |
+| `measure_time` | boolean | No | `False` | Execute requests sequentially for reliable timing comparison |
+| `timeout` | number | No | `30` |  |
+| `verify_ssl` | boolean | No | `True` |  |
+| `ssrf_protection` | boolean | No | `True` |  |
+| `detect_patterns` | array | No | - | Optional list of substrings to report matches for across all bodies |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `ok` | boolean | Whether the batch completed (does not imply all requests succeeded) |
+| `data` | array | Per-request results: [{label, status, body, duration_ms, ok, ...}] |
+| `count` | number | Number of requests executed |
+| `failed_count` | number | Number of requests that errored or returned non-2xx |
+| `total_duration_ms` | number | Total elapsed ms across the batch |
+| `detected` | array | Pattern match summary when detect_patterns provided |
 
 ### HTTP Paginate
 
@@ -602,11 +632,11 @@ page_size: 100
 auth: {"type": "bearer", "token": "${env.GITHUB_TOKEN}"}
 ```
 
-### HTTP-Anfrage
+### HTTP Request
 
 `http.request`
 
-HTTP-Anfrage senden und Antwort empfangen
+Send HTTP request and receive response
 
 **Parameters:**
 
@@ -632,15 +662,15 @@ HTTP-Anfrage senden und Antwort empfangen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob die Anfrage erfolgreich war (2xx-Status) |
-| `status` | number | Ob die Anfrage erfolgreich war (2xx-Status) |
-| `status_text` | string | Ob die Anfrage erfolgreich war (2xx-Status) |
-| `headers` | object | HTTP-Statuscode |
-| `body` | any | HTTP-Statustext |
-| `url` | string | Antwortheader |
-| `duration_ms` | number | Antworttext (geparste JSON oder Text) |
-| `content_type` | string | Endgültige URL (nach Weiterleitungen) |
-| `content_length` | number | Antwort-Content-Type |
+| `ok` | boolean | Whether request was successful (2xx status) |
+| `status` | number | HTTP status code |
+| `status_text` | string | HTTP status text |
+| `headers` | object | Response headers |
+| `body` | any | Response body (parsed JSON or text) |
+| `url` | string | Final URL (after redirects) |
+| `duration_ms` | number | Request duration in milliseconds |
+| `content_type` | string | Response Content-Type |
+| `content_length` | number | Response body size in bytes |
 
 **Example:** Simple GET request
 
@@ -673,11 +703,11 @@ method: GET
 query: {"q": "flyto", "limit": 10}
 ```
 
-### HTTP-Antwort bestätigen
+### Assert HTTP Response
 
 `http.response_assert`
 
-HTTP-Antwort-Eigenschaften bestätigen und validieren
+Assert and validate HTTP response properties
 
 **Parameters:**
 
@@ -700,12 +730,12 @@ HTTP-Antwort-Eigenschaften bestätigen und validieren
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob alle Bestätigungen bestanden wurden |
-| `passed` | number | Ob alle Bestätigungen bestanden wurden |
-| `failed` | number | Ob alle Bestätigungen bestanden wurden |
-| `total` | number | Anzahl der bestandenen Bestätigungen |
-| `assertions` | array | Anzahl der fehlgeschlagenen Bestätigungen |
-| `errors` | array | Detaillierte Bestätigungsergebnisse |
+| `ok` | boolean | Whether all assertions passed |
+| `passed` | number | Number of passed assertions |
+| `failed` | number | Number of failed assertions |
+| `total` | number | Total number of assertions |
+| `assertions` | array | Detailed assertion results |
+| `errors` | array | List of error messages for failed assertions |
 
 **Example:** Assert status 200
 
@@ -821,11 +851,11 @@ use_ngrok: true
 ngrok_token: ${env.NGROK_AUTH_TOKEN}
 ```
 
-### LLM-Chat
+### LLM Chat
 
 `llm.chat`
 
-Mit LLM-APIs für intelligente Operationen interagieren
+Interact with LLM APIs for intelligent operations
 
 **Parameters:**
 
@@ -847,12 +877,12 @@ Mit LLM-APIs für intelligente Operationen interagieren
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob die Anfrage erfolgreich war |
-| `response` | string | Ob die Anfrage erfolgreich war |
-| `parsed` | any | Ob die Anfrage erfolgreich war |
-| `model` | string | Der LLM-Antworttext |
-| `tokens_used` | number | Geparste Antwort (wenn JSON-Format angefordert) |
-| `finish_reason` | string | Verwendetes Modell |
+| `ok` | boolean | Whether the request succeeded |
+| `response` | string | The LLM response text |
+| `parsed` | any | Parsed response (if JSON format requested) |
+| `model` | string | Model used |
+| `tokens_used` | number | Total tokens consumed |
+| `finish_reason` | string | Why the response ended |
 
 **Example:** Code Review
 
@@ -882,11 +912,11 @@ system_prompt: You are a DevOps engineer. Return JSON: {"decision": "yes/no", "r
 response_format: json
 ```
 
-### KI-Code-Korrektur
+### AI Code Fix
 
 `llm.code_fix`
 
-Automatisch Code-Korrekturen basierend auf Problemen generieren
+Automatically generate code fixes based on issues
 
 **Parameters:**
 
@@ -904,11 +934,11 @@ Automatisch Code-Korrekturen basierend auf Problemen generieren
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob die Operation erfolgreich war |
-| `fixes` | array | Ob die Operation erfolgreich war |
-| `applied` | array | Ob die Operation erfolgreich war |
-| `failed` | array | Liste der generierten Korrekturen |
-| `summary` | string | Liste der angewandten Korrekturen (wenn fix_mode apply ist) |
+| `ok` | boolean | Whether operation succeeded |
+| `fixes` | array | List of generated fixes |
+| `applied` | array | List of applied fixes (if fix_mode is apply) |
+| `failed` | array | Fixes that could not be applied |
+| `summary` | string | Summary of fixes |
 
 **Example:** Fix UI Issues
 
@@ -928,11 +958,11 @@ fix_mode: apply
 backup: true
 ```
 
-### Berechnen
+### Calculate
 
 `math.calculate`
 
-Grundlegende mathematische Operationen durchführen
+Perform basic mathematical operations
 
 **Parameters:**
 
@@ -947,9 +977,9 @@ Grundlegende mathematische Operationen durchführen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Berechnungsergebnis |
-| `operation` | string | Berechnungsergebnis |
-| `expression` | string | Berechnungsergebnis |
+| `result` | number | Calculation result |
+| `operation` | string | Operation performed |
+| `expression` | string | Human-readable expression |
 
 **Example:** Add two numbers
 
@@ -967,25 +997,25 @@ a: 2
 b: 8
 ```
 
-### HTTP-Gesundheitscheck
+### HTTP Health Check
 
 `monitor.http_check`
 
-HTTP-Gesundheitscheck / Verfügbarkeitsmonitor
+HTTP health check / uptime monitor
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | Zu überprüfende URL |
-| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | HTTP-Methode |
-| `expected_status` | number | No | `200` | Erwarteter HTTP-Statuscode |
-| `timeout_ms` | number | No | `10000` | Anfrage-Timeout in Millisekunden |
-| `headers` | object | No | - | Benutzerdefinierte Anfrage-Header |
-| `body` | string | No | - | Anfrage-Body (für POST) |
-| `check_ssl` | boolean | No | `True` | SSL-Zertifikatsgültigkeit und Ablauf prüfen |
-| `contains` | string | No | - | Antwort-Body muss diesen String enthalten |
-| `follow_redirects` | boolean | No | `True` | HTTP-Weiterleitungen folgen |
+| `url` | string | Yes | - | URL to check |
+| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | HTTP method |
+| `expected_status` | number | No | `200` | Expected HTTP status code |
+| `timeout_ms` | number | No | `10000` | Request timeout in milliseconds |
+| `headers` | object | No | - | Custom request headers |
+| `body` | string | No | - | Request body (for POST) |
+| `check_ssl` | boolean | No | `True` | Check SSL certificate validity and expiry |
+| `contains` | string | No | - | Response body must contain this string |
+| `follow_redirects` | boolean | No | `True` | Follow HTTP redirects |
 
 **Output:**
 
@@ -1009,30 +1039,30 @@ contains: "status":"ok"
 timeout_ms: 5000
 ```
 
-### Port prüfen
+### Check Port
 
 `port.check`
 
-Prüfen, ob Netzwerk-Port(s) offen oder geschlossen sind
+Check if network port(s) are open or closed
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | any | Yes | - | Portnummer oder Array von Ports zum Prüfen |
-| `host` | string | No | `localhost` | Portnummer oder Array von Ports zum Prüfen |
-| `connect_timeout` | number | No | `2` | Host zum Verbinden |
-| `expect_open` | boolean | No | - | Timeout für jeden Verbindungsversuch |
+| `port` | any | Yes | - | Port number or array of ports to check |
+| `host` | string | No | `localhost` | Host to connect to |
+| `connect_timeout` | number | No | `2` | Timeout for each connection attempt |
+| `expect_open` | boolean | No | - | Set to true to assert ports are open, false for closed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Auf true setzen, um offene Ports zu bestätigen, false für geschlossene |
-| `results` | array | Ob alle Prüfungen bestanden wurden (wenn expect_open gesetzt ist) |
-| `open_ports` | array | Ob alle Prüfungen bestanden wurden (wenn expect_open gesetzt ist) |
-| `closed_ports` | array | Array von Port-Prüfungsergebnissen |
-| `summary` | object | Liste der offenen Ports |
+| `ok` | boolean | Whether all checks passed (if expect_open is set) |
+| `results` | array | Array of port check results |
+| `open_ports` | array | List of open ports |
+| `closed_ports` | array | List of closed ports |
+| `summary` | object | Summary statistics |
 
 **Example:** Check single port
 
@@ -1055,32 +1085,32 @@ host: example.com
 expect_open: true
 ```
 
-### Auf Port warten
+### Wait for Port
 
 `port.wait`
 
-Auf Verfügbarkeit eines Netzwerk-Ports warten
+Wait for a network port to become available
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | number | Yes | - | Portnummer zum Warten |
-| `host` | string | No | `localhost` | Host zum Verbinden |
-| `timeout` | number | No | `60` | Host zum Verbinden |
-| `interval` | number | No | `500` | Maximale Wartezeit |
-| `expect_closed` | boolean | No | `False` | Zeit zwischen Verbindungsversuchen in Millisekunden |
+| `port` | number | Yes | - | Port number to wait for |
+| `host` | string | No | `localhost` | Host to connect to |
+| `timeout` | number | No | `60` | Maximum time to wait |
+| `interval` | number | No | `500` | Time between connection attempts in milliseconds |
+| `expect_closed` | boolean | No | `False` | Wait for port to become unavailable instead |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Stattdessen auf Nichtverfügbarkeit des Ports warten |
-| `available` | boolean | Ob Port im erwarteten Zustand ist |
-| `host` | string | Ob Port im erwarteten Zustand ist |
-| `port` | number | Ob Port aktuell verfügbar ist |
-| `wait_time_ms` | number | Host, der geprüft wurde |
-| `attempts` | number | Port, der geprüft wurde |
+| `ok` | boolean | Whether port is in expected state |
+| `available` | boolean | Whether port is currently available |
+| `host` | string | Host that was checked |
+| `port` | number | Port that was checked |
+| `wait_time_ms` | number | Time spent waiting in milliseconds |
+| `attempts` | number | Number of connection attempts |
 
 **Example:** Wait for dev server
 
@@ -1105,11 +1135,11 @@ expect_closed: true
 timeout: 10
 ```
 
-### Prozesse auflisten
+### List Processes
 
 `process.list`
 
-Alle laufenden Hintergrundprozesse auflisten
+List all running background processes
 
 **Parameters:**
 
@@ -1122,11 +1152,11 @@ Alle laufenden Hintergrundprozesse auflisten
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Operationserfolg |
-| `processes` | array | Operationserfolg |
-| `count` | number | Operationserfolg |
-| `running` | number | Liste von Prozessinformationen |
-| `stopped` | number | Gesamtanzahl der Prozesse |
+| `ok` | boolean | Operation success |
+| `processes` | array | List of process information |
+| `count` | number | Total number of processes |
+| `running` | number | Number of running processes |
+| `stopped` | number | Number of stopped processes |
 
 **Example:** List all processes
 
@@ -1139,11 +1169,11 @@ Alle laufenden Hintergrundprozesse auflisten
 filter_name: dev
 ```
 
-### Hintergrundprozess starten
+### Start Background Process
 
 `process.start`
 
-Hintergrundprozess starten (Server, Dienst usw.)
+Start a background process (server, service, etc.)
 
 **Parameters:**
 
@@ -1163,14 +1193,14 @@ Hintergrundprozess starten (Server, Dienst usw.)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob Prozess erfolgreich gestartet wurde |
-| `pid` | number | Ob Prozess erfolgreich gestartet wurde |
-| `process_id` | string | Ob Prozess erfolgreich gestartet wurde |
-| `name` | string | Prozess-ID |
-| `command` | string | Interne Prozesskennung für process.stop |
-| `cwd` | string | Prozessname |
-| `started_at` | string | Der ausgeführte Befehl |
-| `initial_output` | string | ISO-Zeitstempel wann Prozess gestartet wurde |
+| `ok` | boolean | Whether process started successfully |
+| `pid` | number | Process ID |
+| `process_id` | string | Internal process identifier for process.stop |
+| `name` | string | Process name |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory |
+| `started_at` | string | ISO timestamp when process started |
+| `initial_output` | string | Initial stdout output (if wait_for_output was used) |
 
 **Example:** Start dev server
 
@@ -1198,11 +1228,11 @@ name: api-server
 wait_for_output: listening
 ```
 
-### Prozess stoppen
+### Stop Process
 
 `process.stop`
 
-Laufenden Hintergrundprozess stoppen
+Stop a running background process
 
 **Parameters:**
 
@@ -1220,10 +1250,10 @@ Laufenden Hintergrundprozess stoppen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob alle Prozesse erfolgreich gestoppt wurden |
-| `stopped` | array | Ob alle Prozesse erfolgreich gestoppt wurden |
-| `failed` | array | Liste der gestoppten Prozessinfos |
-| `count` | number | Liste der gestoppten Prozessinfos |
+| `ok` | boolean | Whether all processes were stopped successfully |
+| `stopped` | array | List of stopped process info |
+| `failed` | array | List of processes that failed to stop |
+| `count` | number | Number of processes stopped |
 
 **Example:** Stop by process ID
 
@@ -1250,11 +1280,11 @@ force: true
 stop_all: true
 ```
 
-### Shell-Befehl ausführen
+### Execute Shell Command
 
 `shell.exec`
 
-Shell-Befehl ausführen und Ausgabe erfassen
+Execute a shell command and capture output
 
 **Parameters:**
 
@@ -1273,13 +1303,13 @@ Shell-Befehl ausführen und Ausgabe erfassen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob Befehl erfolgreich ausgeführt wurde (Exit-Code 0) |
-| `exit_code` | number | Ob Befehl erfolgreich ausgeführt wurde (Exit-Code 0) |
-| `stdout` | string | Ob Befehl erfolgreich ausgeführt wurde (Exit-Code 0) |
-| `stderr` | string | Befehls-Exit-Code |
-| `command` | string | Standardausgabe |
-| `cwd` | string | Standardfehlerausgabe |
-| `duration_ms` | number | Der ausgeführte Befehl |
+| `ok` | boolean | Whether command executed successfully (exit code 0) |
+| `exit_code` | number | Command exit code |
+| `stdout` | string | Standard output |
+| `stderr` | string | Standard error output |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory used |
+| `duration_ms` | number | Execution duration in milliseconds |
 
 **Example:** Run npm install
 
@@ -1309,23 +1339,23 @@ cwd: ./frontend
 env: {"NODE_ENV": "production"}
 ```
 
-### SSH Ausführen
+### SSH Execute
 
 `ssh.exec`
 
-Befehl auf entferntem Server via SSH ausführen
+Execute command on remote server via SSH
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | SSH-Server-Hostname oder IP |
-| `port` | number | No | `22` | SSH-Port |
-| `username` | string | Yes | - | SSH-Benutzername |
-| `password` | string | No | - | SSH-Passwort |
-| `private_key` | string | No | - | Privater Schlüssel im PEM-Format |
-| `command` | string | Yes | - | Befehl auf entferntem Server ausführen |
-| `timeout` | number | No | `30` | Befehlszeitüberschreitung in Sekunden |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `command` | string | Yes | - | Command to execute on remote server |
+| `timeout` | number | No | `30` | Command timeout in seconds |
 
 **Output:**
 
@@ -1350,23 +1380,23 @@ username: root
 command: systemctl restart nginx
 ```
 
-### SFTP Herunterladen
+### SFTP Download
 
 `ssh.sftp_download`
 
-Datei von entferntem Server via SFTP herunterladen
+Download file from remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | SSH-Server-Hostname oder IP |
-| `port` | number | No | `22` | SSH-Port |
-| `username` | string | Yes | - | SSH-Benutzername |
-| `password` | string | No | - | SSH-Passwort |
-| `private_key` | string | No | - | Privater Schlüssel im PEM-Format |
-| `remote_path` | string | Yes | - | Pfad zur Datei auf dem Remote-Server |
-| `local_path` | string | Yes | - | Zielpfad auf dem lokalen Rechner |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `remote_path` | string | Yes | - | Path to file on remote server |
+| `local_path` | string | Yes | - | Destination path on local machine |
 
 **Output:**
 
@@ -1384,24 +1414,24 @@ remote_path: /var/log/nginx/access.log
 local_path: /tmp/access.log
 ```
 
-### SFTP Hochladen
+### SFTP Upload
 
 `ssh.sftp_upload`
 
-Datei auf entfernten Server via SFTP hochladen
+Upload file to remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | SSH-Server-Hostname oder IP |
-| `port` | number | No | `22` | SSH-Port |
-| `username` | string | Yes | - | SSH-Benutzername |
-| `password` | string | No | - | SSH-Passwort |
-| `private_key` | string | No | - | Privater Schlüssel im PEM-Format |
-| `local_path` | string | Yes | - | Pfad zur lokalen Datei zum Hochladen |
-| `remote_path` | string | Yes | - | Zielpfad auf entferntem Server |
-| `overwrite` | boolean | No | `True` | Vorhandene entfernte Datei überschreiben |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `local_path` | string | Yes | - | Path to local file to upload |
+| `remote_path` | string | Yes | - | Destination path on remote server |
+| `overwrite` | boolean | No | `True` | Overwrite existing remote file |
 
 **Output:**
 
@@ -1419,17 +1449,17 @@ local_path: /tmp/app.tar.gz
 remote_path: /opt/releases/app.tar.gz
 ```
 
-### E2E-Schritte ausführen
+### Run E2E Steps
 
 `testing.e2e.run_steps`
 
-End-to-End-Testschritte sequentiell ausführen
+Execute end-to-end test steps sequentially
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `steps` | array | Yes | - | Array von Testschritt-Definitionen |
+| `steps` | array | Yes | - | Array of test step definitions |
 | `stop_on_failure` | boolean | No | `True` | Whether to stop on failure |
 | `timeout_per_step` | number | No | `30000` | Timeout Per Step value |
 
@@ -1437,45 +1467,45 @@ End-to-End-Testschritte sequentiell ausführen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob die Operation erfolgreich war |
-| `passed` | number | Ob die Operation erfolgreich war |
-| `failed` | number | Ob die Operation erfolgreich war |
-| `results` | array | Anzahl der bestandenen Tests |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### Qualitäts-Gate
+### Quality Gate
 
 `testing.gate.evaluate`
 
-Qualitätsmetriken gegen definierte Schwellenwerte auswerten
+Evaluate quality metrics against defined thresholds
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | object | Yes | - | Zu bewertende Metriken |
-| `thresholds` | object | Yes | - | Zu bewertende Metriken |
+| `metrics` | object | Yes | - | Metrics to evaluate |
+| `thresholds` | object | Yes | - | Threshold values for each metric |
 | `fail_on_breach` | boolean | No | `True` | Whether to fail on breach |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Schwellenwerte für jede Metrik |
-| `passed` | boolean | Ob die Operation erfolgreich war |
-| `results` | array | Ob die Operation erfolgreich war |
-| `summary` | string | Anzahl der bestandenen Tests |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `results` | array | List of results |
+| `summary` | string | The summary |
 
-### HTTP-Tests ausführen
+### Run HTTP Tests
 
 `testing.http.run_suite`
 
-HTTP-API-Testsuite ausführen
+Execute HTTP API test suite
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | Array von HTTP-Test-Definitionen |
+| `tests` | array | Yes | - | Array of HTTP test definitions |
 | `base_url` | string | No | - | Base URL for API requests |
 | `headers` | object | No | `{}` | HTTP request headers |
 
@@ -1483,22 +1513,22 @@ HTTP-API-Testsuite ausführen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob die Operation erfolgreich war |
-| `passed` | number | Ob die Operation erfolgreich war |
-| `failed` | number | Ob die Operation erfolgreich war |
-| `results` | array | Anzahl der bestandenen Tests |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### Linter ausführen
+### Run Linter
 
 `testing.lint.run`
 
-Linting-Prüfungen auf Quellcode ausführen
+Run linting checks on source code
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | Zu lintende Dateien oder Verzeichnisse |
+| `paths` | array | Yes | - | Files or directories to lint |
 | `linter` | string | No | `auto` | Linter |
 | `fix` | boolean | No | `False` | Whether to fix |
 
@@ -1506,16 +1536,16 @@ Linting-Prüfungen auf Quellcode ausführen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob die Operation erfolgreich war |
-| `errors` | number | Ob die Operation erfolgreich war |
-| `warnings` | number | Ob die Operation erfolgreich war |
-| `issues` | array | Anzahl der aufgetretenen Fehler |
+| `ok` | boolean | Whether the operation succeeded |
+| `errors` | number | Number of errors encountered |
+| `warnings` | number | The warnings |
+| `issues` | array | The issues |
 
-### Bericht generieren
+### Generate Report
 
 `testing.report.generate`
 
-Testausführungsbericht generieren
+Generate test execution report
 
 **Parameters:**
 
@@ -1529,43 +1559,43 @@ Testausführungsbericht generieren
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob die Operation erfolgreich war |
-| `report` | string | Ob die Operation erfolgreich war |
-| `format` | string | Ob die Operation erfolgreich war |
-| `summary` | object | Der Bericht |
+| `ok` | boolean | Whether the operation succeeded |
+| `report` | string | The report |
+| `format` | string | The format |
+| `summary` | object | The summary |
 
-### Szenario ausführen
+### Run Scenario
 
 `testing.scenario.run`
 
-Szenariobasierten Test ausführen (BDD-Stil)
+Execute scenario-based test (BDD style)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `scenario` | object | Yes | - | Szenario-Definition mit given/when/then |
+| `scenario` | object | Yes | - | Scenario definition with given/when/then |
 | `context` | object | No | `{}` | Additional context data |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Szenario-Definition mit given/when/then |
-| `passed` | boolean | Ob die Operation erfolgreich war |
-| `steps` | array | Ob die Operation erfolgreich war |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `steps` | array | The steps |
 
-### Sicherheitsscan
+### Security Scan
 
 `testing.security.scan`
 
-Auf Sicherheitslücken scannen
+Scan for security vulnerabilities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `targets` | array | Yes | - | Zu scannende Dateien, URLs oder Pfade |
+| `targets` | array | Yes | - | Files, URLs, or paths to scan |
 | `scan_type` | string | No | `all` | Scan Type |
 | `severity_threshold` | string | No | `medium` | Severity Threshold |
 
@@ -1573,45 +1603,45 @@ Auf Sicherheitslücken scannen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob die Operation erfolgreich war |
-| `vulnerabilities` | array | Ob die Operation erfolgreich war |
-| `summary` | object | Ob die Operation erfolgreich war |
+| `ok` | boolean | Whether the operation succeeded |
+| `vulnerabilities` | array | The vulnerabilities |
+| `summary` | object | The summary |
 
-### Testsuite ausführen
+### Run Test Suite
 
 `testing.suite.run`
 
-Testsammlung ausführen
+Execute a collection of tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | Array von Test-Definitionen |
+| `tests` | array | Yes | - | Array of test definitions |
 | `parallel` | boolean | No | `False` | Whether to parallel |
-| `max_failures` | number | No | `0` | Array von Test-Definitionen |
+| `max_failures` | number | No | `0` | 0 = no limit |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 0 = kein Limit |
-| `passed` | number | 0 = kein Limit |
-| `failed` | number | Ob die Operation erfolgreich war |
-| `skipped` | number | Anzahl der bestandenen Tests |
-| `results` | array | Anzahl der fehlgeschlagenen Tests |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `skipped` | number | Number of tests skipped |
+| `results` | array | List of results |
 
-### Unit-Tests ausführen
+### Run Unit Tests
 
 `testing.unit.run`
 
-Unit-Tests ausführen
+Execute unit tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | Pfade zu Testdateien oder Verzeichnissen |
+| `paths` | array | Yes | - | Paths to test files or directories |
 | `pattern` | string | No | `test_*.py` | Pattern |
 | `verbose` | boolean | No | `False` | Whether to verbose |
 
@@ -1619,67 +1649,67 @@ Unit-Tests ausführen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob die Operation erfolgreich war |
-| `passed` | number | Ob die Operation erfolgreich war |
-| `failed` | number | Ob die Operation erfolgreich war |
-| `errors` | number | Anzahl der bestandenen Tests |
-| `results` | array | Anzahl der fehlgeschlagenen Tests |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `errors` | number | Number of errors encountered |
+| `results` | array | List of results |
 
-### Visueller Vergleich
+### Visual Compare
 
 `testing.visual.compare`
 
-Visuelle Ausgaben auf Unterschiede vergleichen
+Compare visual outputs for differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | string | Yes | - | Pfad oder base64 des tatsächlichen Bildes |
-| `expected` | string | Yes | - | Pfad oder base64 des tatsächlichen Bildes |
-| `threshold` | number | No | `0.1` | Pfad oder base64 des erwarteten Bildes |
+| `actual` | string | Yes | - | Path or base64 of actual image |
+| `expected` | string | Yes | - | Path or base64 of expected image |
+| `threshold` | number | No | `0.1` | Max allowed difference (0-1) |
 | `output_diff` | boolean | No | `True` | Whether to output diff |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Maximal erlaubte Differenz (0-1) |
-| `match` | boolean | Ob die Operation erfolgreich war |
-| `difference` | number | Ob die Operation erfolgreich war |
-| `diff_image` | string | Die Übereinstimmung |
+| `ok` | boolean | Whether the operation succeeded |
+| `match` | boolean | The match |
+| `difference` | number | The difference |
+| `diff_image` | string | The diff image |
 
-### UI-Qualität bewerten
+### Evaluate UI Quality
 
 `ui.evaluate`
 
-Umfassende UI-Qualitätsbewertung mit mehrdimensionaler Punktevergabe
+Comprehensive UI quality evaluation with multi-dimensional scoring
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `screenshot` | string | Yes | - | Screenshot-Pfad oder URL zur Bewertung |
-| `app_type` | string | No | `web_app` | Screenshot-Pfad oder URL zur Bewertung |
-| `page_type` | string | No | - | Typ der zu bewertenden Seite |
-| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | Spezifische zu bewertende Kriterien (Standard: alle) |
-| `target_audience` | string | No | - | Beschreibung der Zielbenutzer |
-| `brand_guidelines` | string | No | - | Kurze Markenrichtlinien zum Prüfen |
-| `min_score` | number | No | `70` | Mindestpunktzahl zum Bestehen (0-100) |
-| `api_key` | string | No | - | OpenAI-API-Schlüssel (Standard: OPENAI_API_KEY env-Variable) |
+| `screenshot` | string | Yes | - | Screenshot path or URL to evaluate |
+| `app_type` | string | No | `web_app` | Type of application for context-aware evaluation |
+| `page_type` | string | No | - | Type of page being evaluated |
+| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | Specific criteria to evaluate (defaults to all) |
+| `target_audience` | string | No | - | Description of target users |
+| `brand_guidelines` | string | No | - | Brief brand guidelines to check against |
+| `min_score` | number | No | `70` | Minimum overall score to pass (0-100) |
+| `api_key` | string | No | - | OpenAI API key (defaults to OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | OpenAI-API-Schlüssel (Standard: OPENAI_API_KEY env-Variable) |
-| `passed` | boolean | Ob Bewertung erfolgreich war |
-| `overall_score` | number | Ob Bewertung erfolgreich war |
-| `scores` | object | Gesamte UI-Qualitätspunktzahl (0-100) |
-| `strengths` | array | Gesamte UI-Qualitätspunktzahl (0-100) |
-| `issues` | array | Punktzahlen nach Bewertungskriterien |
-| `recommendations` | array | Liste der UI-Stärken |
-| `summary` | string | Spezifische Verbesserungsempfehlungen |
+| `ok` | boolean | Whether evaluation succeeded |
+| `passed` | boolean | Whether UI meets minimum score threshold |
+| `overall_score` | number | Overall UI quality score (0-100) |
+| `scores` | object | Scores by evaluation criteria |
+| `strengths` | array | List of UI strengths |
+| `issues` | array | List of issues found with severity |
+| `recommendations` | array | Specific improvement recommendations |
+| `summary` | string | Executive summary of evaluation |
 
 **Example:** Evaluate Dashboard
 
@@ -1700,11 +1730,11 @@ page_type: product detail
 evaluation_criteria: ["usability", "cta_effectiveness", "visual_design"]
 ```
 
-### Bild mit KI analysieren
+### Analyze Image with AI
 
 `vision.analyze`
 
-Bilder mit OpenAI Vision API (GPT-4V) analysieren
+Analyze images using OpenAI Vision API (GPT-4V)
 
 **Parameters:**
 
@@ -1725,11 +1755,11 @@ Bilder mit OpenAI Vision API (GPT-4V) analysieren
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob Analyse erfolgreich war |
-| `analysis` | string | Ob Analyse erfolgreich war |
-| `structured` | object | Das KI-Analyseergebnis |
-| `model` | string | Strukturierte Analysedaten (wenn output_format structured/json ist) |
-| `tokens_used` | number | Für Analyse verwendetes Modell |
+| `ok` | boolean | Whether analysis succeeded |
+| `analysis` | string | The AI analysis result |
+| `structured` | object | Structured analysis data (if output_format is structured/json) |
+| `model` | string | Model used for analysis |
+| `tokens_used` | number | Total tokens used |
 
 **Example:** UI Review
 
@@ -1756,11 +1786,11 @@ prompt: Evaluate accessibility: color contrast, text readability, button sizes, 
 analysis_type: accessibility
 ```
 
-### Bilder vergleichen
+### Compare Images
 
 `vision.compare`
 
-Zwei Bilder vergleichen und visuelle Unterschiede identifizieren
+Compare two images and identify visual differences
 
 **Parameters:**
 
@@ -1780,12 +1810,12 @@ Zwei Bilder vergleichen und visuelle Unterschiede identifizieren
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob Vergleich erfolgreich war |
-| `has_differences` | boolean | Ob Vergleich erfolgreich war |
-| `similarity_score` | number | Ob signifikante Unterschiede gefunden wurden |
-| `differences` | array | Ähnlichkeitsprozentsatz (0-100) |
-| `summary` | string | Liste der identifizierten Unterschiede |
-| `recommendation` | string | Zusammenfassung der Vergleichsergebnisse |
+| `ok` | boolean | Whether comparison succeeded |
+| `has_differences` | boolean | Whether significant differences were found |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `differences` | array | List of identified differences |
+| `summary` | string | Summary of comparison results |
+| `recommendation` | string | Pass/Fail recommendation based on threshold |
 
 **Example:** Visual Regression Test
 

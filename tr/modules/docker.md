@@ -6,38 +6,38 @@ Build, run, inspect, and manage Docker containers.
 
 | Module | Description |
 |--------|-------------|
-| [Docker İmajı Oluştur](#docker-i̇majı-oluştur) | Bir Dockerfile'dan Docker imajı oluştur |
-| [Docker Konteynerını İncele](#docker-konteynerını-i̇ncele) | Bir Docker konteyneri hakkında detaylı bilgi al |
-| [Konteyner Loglarını Al](#konteyner-loglarını-al) | Docker konteynerinden logları al |
-| [Docker Konteynerlerini Listele](#docker-konteynerlerini-listele) | Docker konteynerlerini listele |
-| [Docker Konteynerı Çalıştır](#docker-konteynerı-çalıştır) | Bir imajdan Docker konteynerı çalıştır |
-| [Docker Konteynerı Durdur](#docker-konteynerı-durdur) | Çalışan bir Docker konteynerını durdur |
+| [Build Docker Image](#build-docker-image) | Build a Docker image from a Dockerfile |
+| [Inspect Docker Container](#inspect-docker-container) | Get detailed information about a Docker container |
+| [Get Container Logs](#get-container-logs) | Get logs from a Docker container |
+| [List Docker Containers](#list-docker-containers) | List Docker containers |
+| [Run Docker Container](#run-docker-container) | Run a Docker container from an image |
+| [Stop Docker Container](#stop-docker-container) | Stop a running Docker container |
 
 ## Modules
 
-### Docker İmajı Oluştur
+### Build Docker Image
 
 `docker.build`
 
-Bir Dockerfile'dan Docker imajı oluştur
+Build a Docker image from a Dockerfile
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Oluşturma bağlamı dizinine giden yol |
-| `tag` | string | Yes | - | İmajın adı ve isteğe bağlı olarak etiketi (ör. myapp:latest) |
-| `dockerfile` | string | No | - | Dockerfile'a giden yol (oluşturma bağlamına göre) |
-| `build_args` | object | No | - | Oluşturma zamanı değişkenleri (ör. {"NODE_ENV": "production"}) |
-| `no_cache` | boolean | No | `False` | İmajı oluştururken önbellek kullanma |
+| `path` | string | Yes | - | Path to the build context directory |
+| `tag` | string | Yes | - | Name and optionally tag the image (e.g. myapp:latest) |
+| `dockerfile` | string | No | - | Path to the Dockerfile (relative to build context) |
+| `build_args` | object | No | - | Build-time variables (e.g. {"NODE_ENV": "production"}) |
+| `no_cache` | boolean | No | `False` | Do not use cache when building the image |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `image_id` | string | Oluşturulan imajın ID'si |
-| `tag` | string | İmaja uygulanan etiket |
-| `size` | string | Oluşturulan imajın boyutu |
+| `image_id` | string | ID of the built image |
+| `tag` | string | Tag applied to the image |
+| `size` | string | Size of the built image |
 
 **Example:** Build from current directory
 
@@ -56,29 +56,29 @@ build_args: {"NODE_ENV": "production"}
 no_cache: true
 ```
 
-### Docker Konteynerını İncele
+### Inspect Docker Container
 
 `docker.inspect_container`
 
-Bir Docker konteyneri hakkında detaylı bilgi al
+Get detailed information about a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | İncelenecek konteyner ID'si veya adı |
+| `container` | string | Yes | - | Container ID or name to inspect |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | Kısa konteyner ID'si |
-| `name` | string | Konteyner adı |
-| `state` | object | Konteyner durumu (durum, çalışıyor, pid, çıkış kodu, vb.) |
-| `image` | string | Konteynerin kullandığı imaj |
-| `network_settings` | object | Ağ yapılandırması (IP, portlar, ağlar) |
-| `mounts` | array | Hacim ve bağlama noktaları |
-| `config` | object | Konteyner yapılandırması (env, cmd, etiketler, vb.) |
+| `id` | string | Short container ID |
+| `name` | string | Container name |
+| `state` | object | Container state (status, running, pid, exit_code, etc.) |
+| `image` | string | Image used by the container |
+| `network_settings` | object | Network configuration (IP, ports, networks) |
+| `mounts` | array | Volume and bind mounts |
+| `config` | object | Container configuration (env, cmd, labels, etc.) |
 
 **Example:** Inspect a container by name
 
@@ -92,27 +92,27 @@ container: my-nginx
 container: a1b2c3d4e5f6
 ```
 
-### Konteyner Loglarını Al
+### Get Container Logs
 
 `docker.logs`
 
-Docker konteynerinden logları al
+Get logs from a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | Konteyner ID veya adı |
-| `tail` | number | No | `100` | Logların sonundan gösterilecek satır sayısı |
-| `follow` | boolean | No | `False` | Log çıktısını takip et (zaman aşımına kadar akış) |
-| `timestamps` | boolean | No | `False` | Log çıktısında zaman damgalarını göster |
+| `container` | string | Yes | - | Container ID or name |
+| `tail` | number | No | `100` | Number of lines to show from the end of the logs |
+| `follow` | boolean | No | `False` | Follow log output (streams until timeout) |
+| `timestamps` | boolean | No | `False` | Show timestamps in log output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `logs` | string | Konteyner log çıktısı |
-| `lines` | number | Dönen log satır sayısı |
+| `logs` | string | Container log output |
+| `lines` | number | Number of log lines returned |
 
 **Example:** Get last 50 lines
 
@@ -129,25 +129,25 @@ tail: 100
 timestamps: true
 ```
 
-### Docker Konteynerlerini Listele
+### List Docker Containers
 
 `docker.ps`
 
-Docker konteynerlerini listele
+List Docker containers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `all` | boolean | No | `False` | Tüm konteynerleri göster (varsayılan sadece çalışanları gösterir) |
-| `filters` | object | No | - | Konteynerleri filtrele (örn. {"name": "my-app", "status": "running"}) |
+| `all` | boolean | No | `False` | Show all containers (default shows just running) |
+| `filters` | object | No | - | Filter containers (e.g. {"name": "my-app", "status": "running"}) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `containers` | array | ID, ad, imaj, durum, portlar ile konteyner listesi |
-| `count` | number | Bulunan konteyner sayısı |
+| `containers` | array | List of containers with id, name, image, status, ports |
+| `count` | number | Number of containers found |
 
 **Example:** List running containers
 
@@ -166,32 +166,32 @@ all: true
 filters: {"name": "nginx"}
 ```
 
-### Docker Konteynerı Çalıştır
+### Run Docker Container
 
 `docker.run`
 
-Bir imajdan Docker konteynerı çalıştır
+Run a Docker container from an image
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image` | string | Yes | - | Çalıştırılacak Docker imajı (ör. nginx:latest) |
-| `command` | string | No | - | Konteyner içinde çalıştırılacak komut |
-| `name` | string | No | - | Konteynere bir ad ver |
-| `ports` | object | No | - | Port eşlemeleri host:konteyner olarak (ör. {"8080": "80"}) |
-| `volumes` | object | No | - | Hacim eşlemeleri host_yolu:konteyner_yolu olarak |
-| `env` | object | No | - | Konteynerde ayarlanacak ortam değişkenleri |
-| `detach` | boolean | No | `True` | Konteyneri arka planda çalıştır |
-| `remove` | boolean | No | `False` | Konteyner çıktığında otomatik olarak sil |
-| `network` | string | No | - | Konteyneri bir ağa bağla |
+| `image` | string | Yes | - | Docker image to run (e.g. nginx:latest) |
+| `command` | string | No | - | Command to run inside the container |
+| `name` | string | No | - | Assign a name to the container |
+| `ports` | object | No | - | Port mappings as host:container (e.g. {"8080": "80"}) |
+| `volumes` | object | No | - | Volume mappings as host_path:container_path |
+| `env` | object | No | - | Environment variables to set in the container |
+| `detach` | boolean | No | `True` | Run container in background |
+| `remove` | boolean | No | `False` | Automatically remove the container when it exits |
+| `network` | string | No | - | Connect the container to a network |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | Oluşturulan konteynerin ID'si |
-| `status` | string | Çalıştırma sonrası konteyner durumu |
+| `container_id` | string | ID of the created container |
+| `status` | string | Container status after run |
 
 **Example:** Run Nginx web server
 
@@ -211,25 +211,25 @@ remove: true
 detach: false
 ```
 
-### Docker Konteynerı Durdur
+### Stop Docker Container
 
 `docker.stop`
 
-Çalışan bir Docker konteynerını durdur
+Stop a running Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | Durdurulacak konteyner ID'si veya adı |
-| `timeout` | number | No | `10` | Konteyneri öldürmeden önce bekleme süresi (saniye) |
+| `container` | string | Yes | - | Container ID or name to stop |
+| `timeout` | number | No | `10` | Seconds to wait before killing the container |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | Durdurulan konteynerin ID'si veya adı |
-| `stopped` | boolean | Konteynerin başarıyla durdurulup durdurulmadığı |
+| `container_id` | string | ID or name of the stopped container |
+| `stopped` | boolean | Whether the container was successfully stopped |
 
 **Example:** Stop a container by name
 

@@ -6,32 +6,32 @@ Environment variable management and .env file loading.
 
 | Module | Description |
 |--------|-------------|
-| [環境変数を取得](#環境変数を取得) | 環境変数の値を取得 |
-| [.envファイルを読み込む](#.envファイルを読み込む) | .envファイルから環境変数を読み込む |
-| [環境変数を設定](#環境変数を設定) | 現在のプロセスで環境変数を設定 |
+| [Get Environment Variable](#get-environment-variable) | Get the value of an environment variable |
+| [Load .env File](#load-.env-file) | Load environment variables from a .env file |
+| [Set Environment Variable](#set-environment-variable) | Set an environment variable in the current process |
 
 ## Modules
 
-### 環境変数を取得
+### Get Environment Variable
 
 `env.get`
 
-環境変数の値を取得
+Get the value of an environment variable
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | 環境変数の名前 |
-| `default` | string | No | - | 変数が設定されていない場合のデフォルト値 |
+| `name` | string | Yes | - | Name of the environment variable |
+| `default` | string | No | - | Default value if the variable is not set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | 変数名 |
-| `value` | string | 変数の値（未設定の場合はデフォルト） |
-| `exists` | boolean | 環境に変数が存在するかどうか |
+| `name` | string | Variable name |
+| `value` | string | Variable value (or default if not set) |
+| `exists` | boolean | Whether the variable exists in the environment |
 
 **Example:** Get HOME variable
 
@@ -46,25 +46,25 @@ name: MY_APP_PORT
 default: 8080
 ```
 
-### .envファイルを読み込む
+### Load .env File
 
 `env.load_dotenv`
 
-.envファイルから環境変数を読み込む
+Load environment variables from a .env file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | `.env` | .envファイルへのパス |
-| `override` | boolean | No | `False` | 既存の環境変数を上書きするかどうか |
+| `path` | string | Yes | `.env` | Path to the .env file |
+| `override` | boolean | No | `False` | Whether to override existing environment variables |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `loaded_count` | number | 読み込まれた変数の数 |
-| `variables` | array | 読み込まれた変数名のリスト |
+| `loaded_count` | number | Number of variables loaded |
+| `variables` | array | List of variable names that were loaded |
 
 **Example:** Load .env file
 
@@ -73,26 +73,26 @@ path: .env
 override: false
 ```
 
-### 環境変数を設定
+### Set Environment Variable
 
 `env.set`
 
-現在のプロセスで環境変数を設定
+Set an environment variable in the current process
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | 設定する環境変数の名前 |
-| `value` | string | Yes | - | 環境変数に割り当てる値 |
+| `name` | string | Yes | - | Name of the environment variable to set |
+| `value` | string | Yes | - | Value to assign to the environment variable |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | 変数名 |
-| `value` | string | 設定された新しい値 |
-| `previous_value` | string | 以前の値（以前に設定されていない場合はnull） |
+| `name` | string | Variable name |
+| `value` | string | New value that was set |
+| `previous_value` | string | Previous value (null if not previously set) |
 
 **Example:** Set an environment variable
 

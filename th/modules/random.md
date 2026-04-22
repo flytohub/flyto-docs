@@ -24,15 +24,15 @@ Select random element(s) from an array
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `array` | array | Yes | - | Array to pick from |
-| `count` | number | No | `1` | Array to pick from |
-| `unique` | boolean | No | `True` | Number of elements to pick |
+| `count` | number | No | `1` | Number of elements to pick |
+| `unique` | boolean | No | `True` | Pick unique elements (no duplicates) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `choice` | any | Pick unique elements (no duplicates) |
-| `count` | number | Selected element(s) |
+| `choice` | any | Selected element(s) |
+| `count` | number | Number of elements selected |
 
 ### Random Number
 
@@ -45,17 +45,17 @@ Generate random number within a range
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `min` | number | No | `0` | Minimum value (inclusive) |
-| `max` | number | No | `100` | Minimum value (inclusive) |
-| `integer` | boolean | No | `True` | Maximum value (inclusive) |
-| `precision` | number | No | `2` | Generate integers only |
+| `max` | number | No | `100` | Maximum value (inclusive) |
+| `integer` | boolean | No | `True` | Generate integers only |
+| `precision` | number | No | `2` | Decimal places for float |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `number` | number | Decimal places for float |
-| `min` | number | Generated random number |
-| `max` | number | Generated random number |
+| `number` | number | Generated random number |
+| `min` | number | Minimum bound used |
+| `max` | number | Maximum bound used |
 
 ### Shuffle Array
 
@@ -73,8 +73,8 @@ Randomly shuffle array elements
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Array to shuffle |
-| `length` | number | Shuffled array |
+| `result` | array | Shuffled array |
+| `length` | number | Array length |
 
 ### Generate UUID
 
@@ -87,11 +87,11 @@ Generate random UUID (v4)
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `uppercase` | boolean | No | `False` | Return uppercase UUID |
-| `remove_hyphens` | boolean | No | `False` | Return uppercase UUID |
+| `remove_hyphens` | boolean | No | `False` | Remove hyphens from UUID |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `uuid` | string | Remove hyphens from UUID |
-| `version` | number | Generated UUID |
+| `uuid` | string | Generated UUID |
+| `version` | number | UUID version |

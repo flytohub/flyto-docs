@@ -6,32 +6,32 @@ Environment variable management and .env file loading.
 
 | Module | Description |
 |--------|-------------|
-| [รับตัวแปรสภาพแวดล้อม](#รับตัวแปรสภาพแวดล้อม) | รับค่าของตัวแปรสภาพแวดล้อม |
-| [โหลดไฟล์ .env](#โหลดไฟล์-.env) | โหลดตัวแปรสภาพแวดล้อมจากไฟล์ .env |
-| [ตั้งค่าตัวแปรสภาพแวดล้อม](#ตั้งค่าตัวแปรสภาพแวดล้อม) | ตั้งค่าตัวแปรสภาพแวดล้อมในกระบวนการปัจจุบัน |
+| [Get Environment Variable](#get-environment-variable) | Get the value of an environment variable |
+| [Load .env File](#load-.env-file) | Load environment variables from a .env file |
+| [Set Environment Variable](#set-environment-variable) | Set an environment variable in the current process |
 
 ## Modules
 
-### รับตัวแปรสภาพแวดล้อม
+### Get Environment Variable
 
 `env.get`
 
-รับค่าของตัวแปรสภาพแวดล้อม
+Get the value of an environment variable
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | ชื่อตัวแปรสภาพแวดล้อม |
-| `default` | string | No | - | ค่าเริ่มต้นถ้าตัวแปรไม่ได้ถูกตั้งค่า |
+| `name` | string | Yes | - | Name of the environment variable |
+| `default` | string | No | - | Default value if the variable is not set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | ชื่อตัวแปร |
-| `value` | string | ค่าตัวแปร (หรือค่าเริ่มต้นถ้าไม่ได้ตั้งค่า) |
-| `exists` | boolean | ตัวแปรมีอยู่ในสภาพแวดล้อมหรือไม่ |
+| `name` | string | Variable name |
+| `value` | string | Variable value (or default if not set) |
+| `exists` | boolean | Whether the variable exists in the environment |
 
 **Example:** Get HOME variable
 
@@ -46,25 +46,25 @@ name: MY_APP_PORT
 default: 8080
 ```
 
-### โหลดไฟล์ .env
+### Load .env File
 
 `env.load_dotenv`
 
-โหลดตัวแปรสภาพแวดล้อมจากไฟล์ .env
+Load environment variables from a .env file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | `.env` | เส้นทางไปยังไฟล์ .env |
-| `override` | boolean | No | `False` | เขียนทับตัวแปรสภาพแวดล้อมที่มีอยู่หรือไม่ |
+| `path` | string | Yes | `.env` | Path to the .env file |
+| `override` | boolean | No | `False` | Whether to override existing environment variables |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `loaded_count` | number | จำนวนตัวแปรที่โหลด |
-| `variables` | array | รายการชื่อตัวแปรที่ถูกโหลด |
+| `loaded_count` | number | Number of variables loaded |
+| `variables` | array | List of variable names that were loaded |
 
 **Example:** Load .env file
 
@@ -73,26 +73,26 @@ path: .env
 override: false
 ```
 
-### ตั้งค่าตัวแปรสภาพแวดล้อม
+### Set Environment Variable
 
 `env.set`
 
-ตั้งค่าตัวแปรสภาพแวดล้อมในกระบวนการปัจจุบัน
+Set an environment variable in the current process
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | ชื่อตัวแปรสภาพแวดล้อมที่จะตั้งค่า |
-| `value` | string | Yes | - | ค่าที่จะกำหนดให้กับตัวแปรสภาพแวดล้อม |
+| `name` | string | Yes | - | Name of the environment variable to set |
+| `value` | string | Yes | - | Value to assign to the environment variable |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | ชื่อตัวแปร |
-| `value` | string | ค่าที่ตั้งค่าใหม่ |
-| `previous_value` | string | ค่าก่อนหน้า (null ถ้าไม่ได้ตั้งค่าก่อนหน้า) |
+| `name` | string | Variable name |
+| `value` | string | New value that was set |
+| `previous_value` | string | Previous value (null if not previously set) |
 
 **Example:** Set an environment variable
 

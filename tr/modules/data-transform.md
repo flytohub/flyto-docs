@@ -6,32 +6,32 @@ CSV, JSON, XML, YAML parsing, generation, and pipeline transformations.
 
 | Module | Description |
 |--------|-------------|
-| [CSV Dosyası Oku](#csv-dosyası-oku) | CSV dosyasını oku ve nesne dizisine ayrıştır |
-| [CSV Dosyası Yaz](#csv-dosyası-yaz) | Nesne dizisini CSV dosyasına yaz |
+| [Read CSV File](#read-csv-file) | Read and parse CSV file into array of objects |
+| [Write CSV File](#write-csv-file) | Write array of objects to CSV file |
 | [Deduplicate Records](#deduplicate-records) | Remove duplicate records from an array by key fields. Optionally persists seen hashes to disk or execution context for cross-run dedup. Use storage=context in cloud/stateless environments where disk is ephemeral. |
-| [JSON Ayrıştır](#json-ayrıştır) | JSON dizesini nesneye ayrıştır |
-| [JSON Dizeye Çevir](#json-dizeye-çevir) | Nesneyi JSON dizesine dönüştür |
-| [JSON'dan CSV'ye](#json'dan-csv'ye) | JSON verilerini veya dosyalarını CSV formatına dönüştür |
-| [Veri Hattı](#veri-hattı) | Bir adımda birden fazla veri dönüşümünü zincirleyin |
-| [Metin Şablonu](#metin-şablonu) | Metin şablonunu değişkenlerle doldur |
+| [Parse JSON](#parse-json) | Parse JSON string into object |
+| [JSON Stringify](#json-stringify) | Convert object to JSON string |
+| [JSON to CSV](#json-to-csv) | Convert JSON data or files to CSV format |
+| [Data Pipeline](#data-pipeline) | Chain multiple data transformations in a single step |
+| [Text Template](#text-template) | Fill text template with variables |
 | [Validate Records](#validate-records) | Validate extracted records against field rules. Splits output into valid and invalid arrays. |
-| [XML Oluştur](#xml-oluştur) | Nesne veya diziden XML dizesi oluştur |
-| [XML Ayrıştır](#xml-ayrıştır) | XML dizesini nesneye ayrıştır |
-| [YAML Oluştur](#yaml-oluştur) | Nesne veya diziden YAML dizesi oluştur |
-| [YAML Ayrıştır](#yaml-ayrıştır) | YAML dizesini nesneye ayrıştır |
-| [Nesne Anahtarları](#nesne-anahtarları) | Nesneden tüm anahtarları al |
-| [Nesne Birleştir](#nesne-birleştir) | Birden fazla nesneyi tek bir nesneye birleştir |
-| [Nesne Çıkar](#nesne-çıkar) | Nesneden belirli anahtarları çıkar |
-| [Nesne Seç](#nesne-seç) | Nesneden belirli anahtarları seç |
-| [Nesne Değerleri](#nesne-değerleri) | Nesneden tüm değerleri al |
+| [Generate XML](#generate-xml) | Generate XML string from Python dict |
+| [Parse XML](#parse-xml) | Parse XML string or file into Python dict |
+| [Generate YAML](#generate-yaml) | Generate YAML string from Python object |
+| [Parse YAML](#parse-yaml) | Parse YAML string or file into Python object |
+| [Object Keys](#object-keys) | Get all keys from an object |
+| [Object Merge](#object-merge) | Merge multiple objects into one |
+| [Object Omit](#object-omit) | Omit specific keys from an object |
+| [Object Pick](#object-pick) | Pick specific keys from an object |
+| [Object Values](#object-values) | Get all values from an object |
 
 ## Modules
 
-### CSV Dosyası Oku
+### Read CSV File
 
 `data.csv.read`
 
-CSV dosyasını oku ve nesne dizisine ayrıştır
+Read and parse CSV file into array of objects
 
 **Parameters:**
 
@@ -46,10 +46,10 @@ CSV dosyasını oku ve nesne dizisine ayrıştır
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu |
-| `data` | array | İşlem durumu |
-| `rows` | number | İşlem durumu |
-| `columns` | array | Satır nesneleri dizisi |
+| `status` | string | Operation status |
+| `data` | array | Array of row objects |
+| `rows` | number | Number of rows |
+| `columns` | array | Column names |
 
 **Example:** Example
 
@@ -59,11 +59,11 @@ delimiter: ,
 encoding: utf-8
 ```
 
-### CSV Dosyası Yaz
+### Write CSV File
 
 `data.csv.write`
 
-Nesne dizisini CSV dosyasına yaz
+Write array of objects to CSV file
 
 **Parameters:**
 
@@ -78,9 +78,9 @@ Nesne dizisini CSV dosyasına yaz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu |
-| `file_path` | string | İşlem durumu |
-| `rows_written` | number | İşlem durumu |
+| `status` | string | Operation status |
+| `file_path` | string | Path to written file |
+| `rows_written` | number | Number of rows written |
 
 **Example:** Example
 
@@ -130,11 +130,11 @@ keys: ["url"]
 hash_file: /tmp/seen.json
 ```
 
-### JSON Ayrıştır
+### Parse JSON
 
 `data.json.parse`
 
-JSON dizesini nesneye ayrıştır
+Parse JSON string into object
 
 **Parameters:**
 
@@ -146,8 +146,8 @@ JSON dizesini nesneye ayrıştır
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu |
-| `data` | object | İşlem durumu |
+| `status` | string | Operation status |
+| `data` | object | Parsed object |
 
 **Example:** Example
 
@@ -155,11 +155,11 @@ JSON dizesini nesneye ayrıştır
 json_string: {"name": "John", "age": 30}
 ```
 
-### JSON Dizeye Çevir
+### JSON Stringify
 
 `data.json.stringify`
 
-Nesneyi JSON dizesine dönüştür
+Convert object to JSON string
 
 **Parameters:**
 
@@ -173,8 +173,8 @@ Nesneyi JSON dizesine dönüştür
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu |
-| `json` | string | İşlem durumu |
+| `status` | string | Operation status |
+| `json` | string | JSON string |
 
 **Example:** Example
 
@@ -183,11 +183,11 @@ data: {"name": "John", "age": 30}
 pretty: true
 ```
 
-### JSON'dan CSV'ye
+### JSON to CSV
 
 `data.json_to_csv`
 
-JSON verilerini veya dosyalarını CSV formatına dönüştür
+Convert JSON data or files to CSV format
 
 **Parameters:**
 
@@ -204,10 +204,10 @@ JSON verilerini veya dosyalarını CSV formatına dönüştür
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Oluşturulan CSV dosyasının yolu |
-| `row_count` | number | Oluşturulan CSV dosyasının yolu |
-| `column_count` | number | Oluşturulan CSV dosyasının yolu |
-| `columns` | array | Yazılan satır sayısı |
+| `output_path` | string | Path to the generated CSV file |
+| `row_count` | number | Number of rows written |
+| `column_count` | number | Number of columns |
+| `columns` | array | List of column names |
 
 **Example:** Convert JSON array to CSV
 
@@ -223,27 +223,27 @@ input_data: /path/to/data.json
 output_path: /path/to/output.csv
 ```
 
-### Veri Hattı
+### Data Pipeline
 
 `data.pipeline`
 
-Bir adımda birden fazla veri dönüşümünü zincirleyin
+Chain multiple data transformations in a single step
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input` | any | Yes | - | Dönüştürülecek giriş verisi (dizi veya nesne) |
-| `steps` | array | Yes | - | Dönüştürülecek giriş verisi (dizi veya nesne) |
+| `input` | any | Yes | - | Input data to transform (array or object) |
+| `steps` | array | Yes | - | Array of transformation steps to apply in order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | Uygulanacak dönüşüm adımlarının dizisi |
-| `original_count` | integer | Dönüştürülmüş veri |
-| `result_count` | integer | Dönüştürülmüş veri |
-| `steps_applied` | integer | Dönüşüm sonrası öğe sayısı |
+| `result` | any | Transformed data |
+| `original_count` | integer | Count of items before transformation |
+| `result_count` | integer | Count of items after transformation |
+| `steps_applied` | integer | Number of transformation steps applied |
 
 **Example:** Example
 
@@ -266,11 +266,11 @@ input: ${input.data}
 steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}, {"pick": ["id", "name", "timestamp"]}, {"sort": {"field": "timestamp", "order": "desc"}}, {"skip": 5}, {"limit": 20}]
 ```
 
-### Metin Şablonu
+### Text Template
 
 `data.text.template`
 
-Metin şablonunu değişkenlerle doldur
+Fill text template with variables
 
 **Parameters:**
 
@@ -283,8 +283,8 @@ Metin şablonunu değişkenlerle doldur
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu |
-| `result` | string | İşlem durumu |
+| `status` | string | Operation status |
+| `result` | string | Filled template |
 
 **Example:** Example
 
@@ -334,27 +334,27 @@ mode: flag
 drop_fields: ["__index", "html"]
 ```
 
-### XML Oluştur
+### Generate XML
 
 `data.xml.generate`
 
-Nesne veya diziden XML dizesi oluştur
+Generate XML string from Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | object | Yes | - | XML'e dönüştürülecek veri |
-| `root_tag` | string | No | `root` | Kök eleman etiket adı |
-| `pretty` | boolean | No | `True` | XML çıktısını güzel yazdır |
-| `encoding` | string | No | `utf-8` | XML çıktısı için karakter kodlaması |
-| `declaration` | boolean | No | `True` | XML deklarasyon başlığını ekle |
+| `data` | object | Yes | - | Python dict or object to convert to XML |
+| `root_tag` | string | No | `root` | Tag name for the root XML element |
+| `pretty` | boolean | No | `True` | Format XML with indentation for readability |
+| `encoding` | string | No | `utf-8` | XML encoding declaration value |
+| `declaration` | boolean | No | `True` | Include <?xml version="1.0"?> declaration at top |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `xml` | string | Oluşturulan XML dizesi |
+| `xml` | string | Generated XML string |
 
 **Example:** Example
 
@@ -364,26 +364,26 @@ root_tag: users
 pretty: true
 ```
 
-### XML Ayrıştır
+### Parse XML
 
 `data.xml.parse`
 
-XML dizesini nesneye ayrıştır
+Parse XML string or file into Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | Ayrıştırılacak XML dizesi |
-| `file_path` | string | No | - | Ayrıştırılacak XML dosyasının yolu |
-| `preserve_attributes` | boolean | No | `True` | Ayrıştırılmış çıktıda XML özniteliklerini koru |
+| `content` | string | No | - | XML string to parse |
+| `file_path` | string | No | - | Path to XML file (used if content is empty) |
+| `preserve_attributes` | boolean | No | `True` | Include XML element attributes as @attributes in output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Nesne olarak ayrıştırılmış XML |
-| `root_tag` | string | Kök eleman etiket adı |
+| `result` | object | Parsed XML as nested dict |
+| `root_tag` | string | Root element tag name |
 
 **Example:** Example
 
@@ -392,27 +392,27 @@ content: <users><user id="1"><name>John</name></user></users>
 preserve_attributes: true
 ```
 
-### YAML Oluştur
+### Generate YAML
 
 `data.yaml.generate`
 
-Nesne veya diziden YAML dizesi oluştur
+Generate YAML string from Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | any | Yes | - | YAML'e dönüştürülecek veri |
-| `default_flow_style` | boolean | No | `False` | İç içe yapılar için akış stilini kullan |
-| `sort_keys` | boolean | No | `False` | Anahtarları alfabetik sırayla sırala |
-| `indent` | number | No | `2` | Girinti için boşluk sayısı |
-| `allow_unicode` | boolean | No | `True` | Çıktıda unicode karakterlere izin ver |
+| `data` | any | Yes | - | Python object, array, or value to convert to YAML |
+| `default_flow_style` | boolean | No | `False` | Use inline/flow style (JSON-like) instead of block style |
+| `sort_keys` | boolean | No | `False` | Sort dictionary keys alphabetically |
+| `indent` | number | No | `2` | Number of spaces for indentation |
+| `allow_unicode` | boolean | No | `True` | Allow unicode characters in output without escaping |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `yaml` | string | Oluşturulan YAML dizesi |
+| `yaml` | string | Generated YAML string |
 
 **Example:** Example
 
@@ -422,26 +422,26 @@ sort_keys: false
 indent: 2
 ```
 
-### YAML Ayrıştır
+### Parse YAML
 
 `data.yaml.parse`
 
-YAML dizesini nesneye ayrıştır
+Parse YAML string or file into Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | Ayrıştırılacak YAML dizesi |
-| `file_path` | string | No | - | Ayrıştırılacak YAML dosyasının yolu |
-| `multi_document` | boolean | No | `False` | Çok belgeli YAML'yi ayrıştır (--- ile ayrılmış) |
+| `content` | string | No | - | YAML string to parse |
+| `file_path` | string | No | - | Path to YAML file (used if content is empty) |
+| `multi_document` | boolean | No | `False` | Parse multiple YAML documents separated by --- (uses safe_load_all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | Nesne veya dizi olarak ayrıştırılmış YAML |
-| `type` | string | Ayrıştırılmış sonucun türü |
+| `result` | any | Parsed YAML data (object, array, or scalar) |
+| `type` | string | Type of parsed result: object, array, or scalar |
 
 **Example:** Example
 
@@ -464,11 +464,11 @@ name: Jane
 multi_document: true
 ```
 
-### Nesne Anahtarları
+### Object Keys
 
 `object.keys`
 
-Nesneden tüm anahtarları al
+Get all keys from an object
 
 **Parameters:**
 
@@ -480,8 +480,8 @@ Nesneden tüm anahtarları al
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `keys` | array | Nesne anahtarlarının listesi |
-| `count` | number | Nesne anahtarlarının listesi |
+| `keys` | array | List of object keys |
+| `count` | number | Number of keys |
 
 **Example:** Get object keys
 
@@ -489,11 +489,11 @@ Nesneden tüm anahtarları al
 object: {"name": "John", "age": 30, "city": "NYC"}
 ```
 
-### Nesne Birleştir
+### Object Merge
 
 `object.merge`
 
-Birden fazla nesneyi tek bir nesneye birleştir
+Merge multiple objects into one
 
 **Parameters:**
 
@@ -505,7 +505,7 @@ Birden fazla nesneyi tek bir nesneye birleştir
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Birleştirilmiş nesne |
+| `result` | object | Merged object |
 
 **Example:** Merge user data
 
@@ -513,11 +513,11 @@ Birden fazla nesneyi tek bir nesneye birleştir
 objects: [{"name": "John", "age": 30}, {"city": "NYC", "country": "USA"}, {"job": "Engineer"}]
 ```
 
-### Nesne Çıkar
+### Object Omit
 
 `object.omit`
 
-Nesneden belirli anahtarları çıkar
+Omit specific keys from an object
 
 **Parameters:**
 
@@ -530,7 +530,7 @@ Nesneden belirli anahtarları çıkar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Çıkarılmış anahtarlar olmadan nesne |
+| `result` | object | Object without omitted keys |
 
 **Example:** Omit sensitive fields
 
@@ -539,11 +539,11 @@ object: {"name": "John", "age": 30, "password": "secret", "ssn": "123-45-6789"}
 keys: ["password", "ssn"]
 ```
 
-### Nesne Seç
+### Object Pick
 
 `object.pick`
 
-Nesneden belirli anahtarları seç
+Pick specific keys from an object
 
 **Parameters:**
 
@@ -556,7 +556,7 @@ Nesneden belirli anahtarları seç
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Sadece seçilen anahtarları içeren nesne |
+| `result` | object | Object with only picked keys |
 
 **Example:** Pick user fields
 
@@ -565,11 +565,11 @@ object: {"name": "John", "age": 30, "email": "john@example.com", "password": "se
 keys: ["name", "email"]
 ```
 
-### Nesne Değerleri
+### Object Values
 
 `object.values`
 
-Nesneden tüm değerleri al
+Get all values from an object
 
 **Parameters:**
 
@@ -581,8 +581,8 @@ Nesneden tüm değerleri al
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `values` | array | Nesne değerlerinin listesi |
-| `count` | number | Nesne değerlerinin listesi |
+| `values` | array | List of object values |
+| `count` | number | Number of values |
 
 **Example:** Get object values
 

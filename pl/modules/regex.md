@@ -25,16 +25,16 @@ Extract named groups from text
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | string | Yes | - | Text to extract from |
-| `pattern` | string | Yes | - | Text to extract from |
+| `pattern` | string | Yes | - | Regex with named groups (?P<name>...) |
 | `ignore_case` | boolean | No | `False` | Case-insensitive matching |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted` | object | Case-insensitive matching |
-| `matched` | boolean | Extracted named groups |
-| `full_match` | string | Extracted named groups |
+| `extracted` | object | Extracted named groups |
+| `matched` | boolean | Whether pattern matched |
+| `full_match` | string | Full matched text |
 
 ### Regex Match
 
@@ -47,17 +47,17 @@ Find all matches of a pattern in text
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | string | Yes | - | Text to search |
-| `pattern` | string | Yes | - | Text to search |
-| `ignore_case` | boolean | No | `False` | Regular expression pattern |
-| `first_only` | boolean | No | `False` | Case-insensitive matching |
+| `pattern` | string | Yes | - | Regular expression pattern |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `first_only` | boolean | No | `False` | Return only the first match |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `matches` | array | Return only the first match |
-| `count` | number | List of matches |
-| `groups` | array | List of matches |
+| `matches` | array | List of matches |
+| `count` | number | Number of matches |
+| `groups` | array | Captured groups from each match |
 
 ### Regex Replace
 
@@ -70,18 +70,18 @@ Replace pattern matches in text
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | string | Yes | - | Text to process |
-| `pattern` | string | Yes | - | Text to process |
-| `replacement` | string | Yes | - | Regular expression pattern |
-| `ignore_case` | boolean | No | `False` | Replacement text (supports backreferences) |
-| `count` | number | No | `0` | Case-insensitive matching |
+| `pattern` | string | Yes | - | Regular expression pattern |
+| `replacement` | string | Yes | - | Replacement text (supports backreferences) |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `count` | number | No | `0` | Maximum replacements (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Maximum replacements (0 = unlimited) |
-| `replacements` | number | Text with replacements |
-| `original` | string | Text with replacements |
+| `result` | string | Text with replacements |
+| `replacements` | number | Number of replacements made |
+| `original` | string | Original text |
 
 ### Regex Split
 
@@ -94,17 +94,17 @@ Split text by a regex pattern
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | string | Yes | - | Text to split |
-| `pattern` | string | Yes | - | Text to split |
-| `ignore_case` | boolean | No | `False` | Regular expression pattern for delimiter |
-| `max_split` | number | No | `0` | Case-insensitive matching |
-| `remove_empty` | boolean | No | `False` | Maximum number of splits (0 = unlimited) |
+| `pattern` | string | Yes | - | Regular expression pattern for delimiter |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `max_split` | number | No | `0` | Maximum number of splits (0 = unlimited) |
+| `remove_empty` | boolean | No | `False` | Remove empty strings from result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Remove empty strings from result |
-| `count` | number | Split parts |
+| `result` | array | Split parts |
+| `count` | number | Number of parts |
 
 ### Regex Test
 
@@ -117,13 +117,13 @@ Test if string matches a regex pattern
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | string | Yes | - | Text to test |
-| `pattern` | string | Yes | - | Text to test |
-| `ignore_case` | boolean | No | `False` | Regular expression pattern |
-| `full_match` | boolean | No | `False` | Case-insensitive matching |
+| `pattern` | string | Yes | - | Regular expression pattern |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `full_match` | boolean | No | `False` | Require pattern to match entire string |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Require pattern to match entire string |
-| `pattern` | string | Whether pattern matches |
+| `result` | boolean | Whether pattern matches |
+| `pattern` | string | Pattern used |

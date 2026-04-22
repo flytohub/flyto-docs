@@ -6,89 +6,89 @@ Set operations: union, intersection, difference, unique.
 
 | Module | Description |
 |--------|-------------|
-| [Perbedaan Set](#perbedaan-set) | Dapatkan elemen di array pertama tapi tidak di lainnya |
-| [Irisan Set](#irisan-set) | Dapatkan irisan dari dua atau lebih array |
-| [Gabungan Set](#gabungan-set) | Dapatkan gabungan dari dua atau lebih array |
-| [Set Unik](#set-unik) | Hapus elemen duplikat dari array |
+| [Set Difference](#set-difference) | Get elements in first array but not in others |
+| [Set Intersection](#set-intersection) | Get intersection of two or more arrays |
+| [Set Union](#set-union) | Get union of two or more arrays |
+| [Set Unique](#set-unique) | Remove duplicate elements from array |
 
 ## Modules
 
-### Perbedaan Set
+### Set Difference
 
 `set.difference`
 
-Dapatkan elemen di array pertama tapi tidak di lainnya
+Get elements in first array but not in others
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `source` | array | Yes | - | Array sumber |
-| `exclude` | array | Yes | - | Array sumber |
+| `source` | array | Yes | - | Source array |
+| `exclude` | array | Yes | - | Arrays of elements to exclude |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Array elemen untuk dikecualikan |
-| `count` | number | Elemen di sumber tapi tidak di array yang dikecualikan |
-| `removed_count` | number | Elemen di sumber tapi tidak di array yang dikecualikan |
+| `result` | array | Elements in source but not in exclude arrays |
+| `count` | number | Number of remaining elements |
+| `removed_count` | number | Number of elements removed |
 
-### Irisan Set
+### Set Intersection
 
 `set.intersection`
 
-Dapatkan irisan dari dua atau lebih array
+Get intersection of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | Array untuk diiris (array dari array) |
+| `arrays` | array | Yes | - | Arrays to intersect (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Array untuk diiris (array dari array) |
-| `count` | number | Irisan dari semua array |
+| `result` | array | Intersection of all arrays |
+| `count` | number | Number of common elements |
 
-### Gabungan Set
+### Set Union
 
 `set.union`
 
-Dapatkan gabungan dari dua atau lebih array
+Get union of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | Array untuk digabungkan (array dari array) |
+| `arrays` | array | Yes | - | Arrays to combine (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Array untuk digabungkan (array dari array) |
-| `count` | number | Gabungan dari semua array |
+| `result` | array | Union of all arrays |
+| `count` | number | Number of unique elements |
 
-### Set Unik
+### Set Unique
 
 `set.unique`
 
-Hapus elemen duplikat dari array
+Remove duplicate elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Array untuk dihapus duplikatnya |
-| `preserve_order` | boolean | No | `True` | Array untuk dihapus duplikatnya |
+| `array` | array | Yes | - | Array to deduplicate |
+| `preserve_order` | boolean | No | `True` | Keep first occurrence order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Pertahankan urutan kemunculan pertama |
-| `count` | number | Array dengan elemen unik |
-| `duplicates_removed` | number | Array dengan elemen unik |
+| `result` | array | Array with unique elements |
+| `count` | number | Number of unique elements |
+| `duplicates_removed` | number | Number of duplicates removed |

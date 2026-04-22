@@ -6,19 +6,19 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Module | Description |
 |--------|-------------|
-| [Mutlak Değer](#mutlak-değer) | Sayının mutlak değerini al |
-| [Tavan Sayı](#tavan-sayı) | Sayıyı en yakın tam sayıya yukarı yuvarla |
-| [Taban Sayı](#taban-sayı) | Sayıyı en yakın tam sayıya aşağı yuvarla |
-| [Üs/Kuvvet](#üskuvvet) | Sayıyı bir üsse yükselt |
-| [Sayı Yuvarla](#sayı-yuvarla) | Sayıyı belirtilen ondalık basamağa yuvarla |
+| [Absolute Value](#absolute-value) | Get absolute value of a number |
+| [Ceiling Number](#ceiling-number) | Round number up to nearest integer |
+| [Floor Number](#floor-number) | Round number down to nearest integer |
+| [Power/Exponent](#powerexponent) | Raise number to a power |
+| [Round Number](#round-number) | Round number to specified decimal places |
 
 ## Modules
 
-### Mutlak Değer
+### Absolute Value
 
 `math.abs`
 
-Sayının mutlak değerini al
+Get absolute value of a number
 
 **Parameters:**
 
@@ -30,8 +30,8 @@ Sayının mutlak değerini al
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Mutlak değer |
-| `original` | number | Mutlak değer |
+| `result` | number | Absolute value |
+| `original` | number | Original number |
 
 **Example:** Absolute of negative number
 
@@ -45,11 +45,11 @@ number: -5
 number: 3.14
 ```
 
-### Tavan Sayı
+### Ceiling Number
 
 `math.ceil`
 
-Sayıyı en yakın tam sayıya yukarı yuvarla
+Round number up to nearest integer
 
 **Parameters:**
 
@@ -61,8 +61,8 @@ Sayıyı en yakın tam sayıya yukarı yuvarla
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Tavan değeri |
-| `original` | number | Tavan değeri |
+| `result` | number | Ceiling value |
+| `original` | number | Original number |
 
 **Example:** Ceiling positive number
 
@@ -76,11 +76,11 @@ number: 3.2
 number: -2.7
 ```
 
-### Taban Sayı
+### Floor Number
 
 `math.floor`
 
-Sayıyı en yakın tam sayıya aşağı yuvarla
+Round number down to nearest integer
 
 **Parameters:**
 
@@ -92,8 +92,8 @@ Sayıyı en yakın tam sayıya aşağı yuvarla
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Taban değeri |
-| `original` | number | Taban değeri |
+| `result` | number | Floored value |
+| `original` | number | Original number |
 
 **Example:** Floor positive number
 
@@ -107,11 +107,11 @@ number: 3.7
 number: -2.3
 ```
 
-### Üs/Kuvvet
+### Power/Exponent
 
 `math.power`
 
-Sayıyı bir üsse yükselt
+Raise number to a power
 
 **Parameters:**
 
@@ -124,9 +124,9 @@ Sayıyı bir üsse yükselt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Tabanın üsse yükseltilmiş sonucu |
-| `base` | number | Tabanın üsse yükseltilmiş sonucu |
-| `exponent` | number | Tabanın üsse yükseltilmiş sonucu |
+| `result` | number | Result of base raised to exponent |
+| `base` | number | Base number |
+| `exponent` | number | Exponent used |
 
 **Example:** Square a number
 
@@ -142,11 +142,11 @@ base: 27
 exponent: 0.333333
 ```
 
-### Sayı Yuvarla
+### Round Number
 
 `math.round`
 
-Sayıyı belirtilen ondalık basamağa yuvarla
+Round number to specified decimal places
 
 **Parameters:**
 
@@ -159,9 +159,9 @@ Sayıyı belirtilen ondalık basamağa yuvarla
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Yuvarlanmış değer |
-| `original` | number | Yuvarlanmış değer |
-| `decimals` | number | Yuvarlanmış değer |
+| `result` | number | Rounded value |
+| `original` | number | Original number |
+| `decimals` | number | Decimal places used |
 
 **Example:** Round to integer
 

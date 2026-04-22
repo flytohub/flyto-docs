@@ -6,148 +6,148 @@ Runtime type checking utilities.
 
 | Module | Description |
 |--------|-------------|
-| [Apakah Array](#apakah-array) | Periksa apakah nilai adalah array |
-| [Apakah Kosong](#apakah-kosong) | Periksa apakah nilai kosong |
-| [Apakah Null](#apakah-null) | Periksa apakah nilai adalah null/None |
-| [Apakah Angka](#apakah-angka) | Periksa apakah nilai adalah angka |
-| [Apakah Objek](#apakah-objek) | Periksa apakah nilai adalah objek |
-| [Apakah String](#apakah-string) | Periksa apakah nilai adalah string |
-| [Tipe Dari](#tipe-dari) | Dapatkan tipe dari nilai |
+| [Is Array](#is-array) | Check if a value is an array |
+| [Is Empty](#is-empty) | Check if a value is empty |
+| [Is Null](#is-null) | Check if a value is null/None |
+| [Is Number](#is-number) | Check if a value is a number |
+| [Is Object](#is-object) | Check if a value is an object |
+| [Is String](#is-string) | Check if a value is a string |
+| [Type Of](#type-of) | Get the type of a value |
 
 ## Modules
 
-### Apakah Array
+### Is Array
 
 `check.is_array`
 
-Periksa apakah nilai adalah array
+Check if a value is an array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Nilai untuk diperiksa |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_array` | boolean | Nilai untuk diperiksa |
-| `length` | number | Apakah nilai adalah array |
+| `is_array` | boolean | Whether value is an array |
+| `length` | number | Array length (if array) |
 
-### Apakah Kosong
+### Is Empty
 
 `check.is_empty`
 
-Periksa apakah nilai kosong
+Check if a value is empty
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Nilai untuk diperiksa |
-| `trim_strings` | boolean | No | `True` | Nilai untuk diperiksa |
+| `value` | any | Yes | - | Value to check |
+| `trim_strings` | boolean | No | `True` | Treat whitespace-only strings as empty |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_empty` | boolean | Anggap string hanya berisi spasi sebagai kosong |
-| `type` | string | Apakah nilai kosong |
+| `is_empty` | boolean | Whether value is empty |
+| `type` | string | Type of value |
 
-### Apakah Null
+### Is Null
 
 `check.is_null`
 
-Periksa apakah nilai adalah null/None
+Check if a value is null/None
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | No | - | Nilai untuk diperiksa |
+| `value` | any | No | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_null` | boolean | Nilai untuk diperiksa |
+| `is_null` | boolean | Whether value is null |
 
-### Apakah Angka
+### Is Number
 
 `check.is_number`
 
-Periksa apakah nilai adalah angka
+Check if a value is a number
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Nilai untuk diperiksa |
-| `parse_string` | boolean | No | `False` | Nilai untuk diperiksa |
-| `integer_only` | boolean | No | `False` | Anggap string numerik sebagai angka |
+| `value` | any | Yes | - | Value to check |
+| `parse_string` | boolean | No | `False` | Consider numeric strings as numbers |
+| `integer_only` | boolean | No | `False` | Only accept integers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_number` | boolean | Hanya terima bilangan bulat |
-| `is_integer` | boolean | Apakah nilai adalah angka |
-| `is_float` | boolean | Apakah nilai adalah angka |
+| `is_number` | boolean | Whether value is a number |
+| `is_integer` | boolean | Whether value is an integer |
+| `is_float` | boolean | Whether value is a float |
 
-### Apakah Objek
+### Is Object
 
 `check.is_object`
 
-Periksa apakah nilai adalah objek
+Check if a value is an object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Nilai untuk diperiksa |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_object` | boolean | Nilai untuk diperiksa |
-| `keys` | array | Apakah nilai adalah objek |
+| `is_object` | boolean | Whether value is an object |
+| `keys` | array | Object keys (if object) |
 
-### Apakah String
+### Is String
 
 `check.is_string`
 
-Periksa apakah nilai adalah string
+Check if a value is a string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Nilai untuk diperiksa |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_string` | boolean | Nilai untuk diperiksa |
-| `length` | number | Apakah nilai adalah string |
+| `is_string` | boolean | Whether value is a string |
+| `length` | number | String length (if string) |
 
-### Tipe Dari
+### Type Of
 
 `check.type_of`
 
-Dapatkan tipe dari nilai
+Get the type of a value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | No | - | Nilai untuk diperiksa |
+| `value` | any | No | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `type` | string | Nilai untuk diperiksa |
-| `is_primitive` | boolean | Nama tipe |
+| `type` | string | Type name |
+| `is_primitive` | boolean | Whether type is primitive |

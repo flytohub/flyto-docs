@@ -6,42 +6,42 @@ Retry, fallback, and circuit breaker patterns.
 
 | Module | Description |
 |--------|-------------|
-| [斷路器](#斷路器) | 使用斷路器模式防止連鎖故障 |
-| [後備](#後備) | 操作失敗時提供後備值 |
-| [重試](#重試) | 包裝操作並配置重試邏輯 |
+| [Circuit Breaker](#circuit-breaker) | Protect against cascading failures with circuit breaker pattern |
+| [Fallback](#fallback) | Provide fallback value when operation fails |
+| [Retry](#retry) | Wrap operations with configurable retry logic |
 
 ## Modules
 
-### 斷路器
+### Circuit Breaker
 
 `error.circuit_breaker`
 
-使用斷路器模式防止連鎖故障
+Protect against cascading failures with circuit breaker pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | object | Yes | - | 要用斷路器保護的動作 |
-| `circuit_id` | string | Yes | - | 要用斷路器保護的動作 |
-| `failure_threshold` | number | No | `5` | 此電路的唯一識別碼（用於狀態追蹤） |
-| `failure_window_ms` | number | No | `60000` | 計算故障的時間窗口 |
-| `recovery_timeout_ms` | number | No | `30000` | 在嘗試恢復前的時間（半開狀態） |
-| `success_threshold` | number | No | `3` | 在半開狀態下需要的成功請求數以關閉電路 |
-| `fallback` | object | No | - | 電路開啟時的替代動作 |
-| `fallback_value` | any | No | - | 電路開啟時的替代動作 |
-| `track_errors` | array | No | `[]` | 電路開啟時返回的靜態值 |
+| `action` | object | Yes | - | The action to protect with circuit breaker |
+| `circuit_id` | string | Yes | - | Unique identifier for this circuit (for state tracking) |
+| `failure_threshold` | number | No | `5` | Number of failures before opening circuit |
+| `failure_window_ms` | number | No | `60000` | Time window for counting failures |
+| `recovery_timeout_ms` | number | No | `30000` | Time before attempting recovery (half-open state) |
+| `success_threshold` | number | No | `3` | Successful requests needed in half-open to close circuit |
+| `fallback` | object | No | - | Alternative action when circuit is open |
+| `fallback_value` | any | No | - | Static value to return when circuit is open |
+| `track_errors` | array | No | `[]` | Only count these error codes toward threshold (empty = all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 僅計算這些錯誤代碼以達到閾值（空白 = 全部） |
-| `result` | any | 路由事件（成功/電路開啟/後備） |
-| `circuit_state` | string | 來自動作或後備的結果 |
-| `failure_count` | number | 電路的當前狀態（關閉/開啟/半開） |
-| `last_failure_time` | string | 窗口中的當前故障計數 |
-| `circuit_opened_at` | string | 最後一次故障的時間戳 |
+| `__event__` | string | Event for routing (success/circuit_open/fallback) |
+| `result` | any | Result from action or fallback |
+| `circuit_state` | string | Current state of circuit (closed/open/half_open) |
+| `failure_count` | number | Current failure count in window |
+| `last_failure_time` | string | Timestamp of last failure |
+| `circuit_opened_at` | string | When circuit was opened |
 
 **Example:** Example
 
@@ -71,31 +71,31 @@ failure_threshold: 3
 fallback_value: {"users": [], "from_cache": false}
 ```
 
-### 後備
+### Fallback
 
 `error.fallback`
 
-操作失敗時提供後備值
+Provide fallback value when operation fails
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `operation` | object | No | - | 要嘗試的主要操作 |
-| `fallback_value` | any | No | - | 要嘗試的主要操作 |
-| `fallback_operation` | object | No | - | 故障時返回的靜態值 |
-| `fallback_on` | array | No | `[]` | 故障時執行的替代操作 |
-| `include_error_info` | boolean | No | `True` | 觸發後備的錯誤代碼（空白 = 所有錯誤） |
-| `log_fallback` | boolean | No | `True` | 在輸出中包含原始錯誤資訊 |
+| `operation` | object | No | - | The primary operation to attempt |
+| `fallback_value` | any | No | - | Static value to return on failure |
+| `fallback_operation` | object | No | - | Alternative operation to execute on failure |
+| `fallback_on` | array | No | `[]` | Error codes that trigger fallback (empty = all errors) |
+| `include_error_info` | boolean | No | `True` | Include original error information in output |
+| `log_fallback` | boolean | No | `True` | Log when fallback is used |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | 使用後備時的日誌 |
-| `used_fallback` | boolean | 來自主要操作或後備的結果 |
-| `source` | string | 是否使用了後備 |
-| `original_error` | object | 結果來源（主要/後備值/後備操作） |
+| `result` | any | Result from primary operation or fallback |
+| `used_fallback` | boolean | Whether fallback was used |
+| `source` | string | Source of result (primary/fallback_value/fallback_operation) |
+| `original_error` | object | Original error if fallback was used |
 
 **Example:** Example
 
@@ -119,34 +119,34 @@ fallback_value: {"status": "unavailable"}
 fallback_on: ["NETWORK_ERROR", "TIMEOUT_ERROR"]
 ```
 
-### 重試
+### Retry
 
 `error.retry`
 
-包裝操作並配置重試邏輯
+Wrap operations with configurable retry logic
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `operation` | object | Yes | - | 要重試的操作（模組 ID 和參數） |
-| `max_retries` | number | No | `3` | 要重試的操作（模組 ID 和參數） |
-| `initial_delay_ms` | number | No | `1000` | 最大重試次數 |
-| `max_delay_ms` | number | No | `30000` | 第一次重試前的初始延遲 |
-| `backoff_multiplier` | number | No | `2.0` | 指數退避的倍數（例如，2 表示每次重試延遲加倍） |
-| `jitter` | boolean | No | `True` | 添加隨機抖動以防止過載 |
-| `retry_on` | array | No | `[]` | 添加隨機抖動以防止過載 |
-| `timeout_per_attempt_ms` | number | No | `0` | 要重試的錯誤代碼列表（空白表示重試所有） |
+| `operation` | object | Yes | - | The operation to retry (module ID and params) |
+| `max_retries` | number | No | `3` | Maximum number of retry attempts |
+| `initial_delay_ms` | number | No | `1000` | Initial delay before first retry |
+| `max_delay_ms` | number | No | `30000` | Maximum delay between retries |
+| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g., 2 doubles delay each retry) |
+| `jitter` | boolean | No | `True` | Add random jitter to delay to prevent thundering herd |
+| `retry_on` | array | No | `[]` | List of error codes to retry on (empty = retry all) |
+| `timeout_per_attempt_ms` | number | No | `0` | Timeout for each attempt (0 for no timeout) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 每次嘗試的超時時間（0 表示無超時） |
-| `result` | any | 路由事件（成功/耗盡） |
-| `attempts` | number | 路由事件（成功/耗盡） |
-| `total_delay_ms` | number | 成功嘗試的結果 |
-| `errors` | array | 已嘗試的次數 |
+| `__event__` | string | Event for routing (success/exhausted) |
+| `result` | any | Result from successful attempt |
+| `attempts` | number | Number of attempts made |
+| `total_delay_ms` | number | Total time spent in delays |
+| `errors` | array | Errors from each failed attempt |
 
 **Example:** Example
 

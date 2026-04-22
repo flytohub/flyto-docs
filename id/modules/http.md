@@ -6,7 +6,7 @@ HTTP request utilities.
 
 | Module | Description |
 |--------|-------------|
-| [HTTP GET](#http-get) | Kirim permintaan HTTP GET dan terima respons |
+| [HTTP GET](#http-get) | Send HTTP GET request to an API endpoint |
 
 ## Modules
 
@@ -14,16 +14,16 @@ HTTP request utilities.
 
 `http.get`
 
-Kirim permintaan HTTP GET dan terima respons
+Send HTTP GET request to an API endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL untuk mengirim permintaan GET |
-| `headers` | object | No | `{}` | Header permintaan sebagai objek key-value |
-| `query` | object | No | `{}` | Parameter query string sebagai objek key-value |
-| `timeout` | number | No | `30` | Batas waktu permintaan dalam milidetik |
+| `url` | string | Yes | - | Target URL |
+| `headers` | object | No | `{}` | HTTP request headers as key-value pairs |
+| `query` | object | No | `{}` | URL query string parameters as key-value pairs |
+| `timeout` | number | No | `30` | Maximum time to wait in seconds |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
 | `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
@@ -31,7 +31,7 @@ Kirim permintaan HTTP GET dan terima respons
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah permintaan berhasil (status 2xx) |
-| `status` | number | Kode status HTTP |
-| `body` | any | Isi respons (JSON atau teks yang diurai) |
-| `headers` | object | Header respons |
+| `ok` | boolean | Whether the operation succeeded |
+| `status` | number | HTTP status code |
+| `body` | any | Response body content |
+| `headers` | object | Response headers |

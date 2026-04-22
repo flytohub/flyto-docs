@@ -6,114 +6,114 @@ Boolean logic operations: AND, OR, NOT, equals, contains.
 
 | Module | Description |
 |--------|-------------|
-| [Logika AND](#logika-and) | Melakukan operasi logika AND |
-| [Logika Mengandung](#logika-mengandung) | Periksa apakah sebuah nilai mengandung nilai lain |
-| [Logika Sama](#logika-sama) | Periksa apakah dua nilai sama |
-| [Logika NOT](#logika-not) | Melakukan operasi logika NOT |
-| [Logika OR](#logika-or) | Melakukan operasi logika OR |
+| [Logic AND](#logic-and) | Perform logical AND operation |
+| [Logic Contains](#logic-contains) | Check if a value contains another value |
+| [Logic Equals](#logic-equals) | Check if two values are equal |
+| [Logic NOT](#logic-not) | Perform logical NOT operation |
+| [Logic OR](#logic-or) | Perform logical OR operation |
 
 ## Modules
 
-### Logika AND
+### Logic AND
 
 `logic.and`
 
-Melakukan operasi logika AND
+Perform logical AND operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | Nilai boolean untuk AND bersama |
+| `values` | array | Yes | - | Boolean values to AND together |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Nilai boolean untuk AND bersama |
-| `true_count` | number | Hasil operasi AND |
-| `total_count` | number | Hasil operasi AND |
+| `result` | boolean | Result of AND operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |
 
-### Logika Mengandung
+### Logic Contains
 
 `logic.contains`
 
-Periksa apakah sebuah nilai mengandung nilai lain
+Check if a value contains another value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `haystack` | text | Yes | - | Nilai untuk dicari di dalamnya (string, array, atau objek) |
-| `needle` | text | Yes | - | Nilai untuk dicari di dalamnya (string, array, atau objek) |
-| `case_sensitive` | boolean | No | `True` | Nilai untuk dicari |
+| `haystack` | text | Yes | - | Value to search in (string, array, or object) |
+| `needle` | text | Yes | - | Value to search for |
+| `case_sensitive` | boolean | No | `True` | Case sensitive search for strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Pencarian peka huruf besar/kecil untuk string |
-| `position` | number | Apakah haystack mengandung needle |
-| `count` | number | Apakah haystack mengandung needle |
+| `result` | boolean | Whether haystack contains needle |
+| `position` | number | Position/index where found (-1 if not found) |
+| `count` | number | Number of occurrences |
 
-### Logika Sama
+### Logic Equals
 
 `logic.equals`
 
-Periksa apakah dua nilai sama
+Check if two values are equal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `a` | text | Yes | - | Nilai pertama untuk dibandingkan |
-| `b` | text | Yes | - | Nilai pertama untuk dibandingkan |
-| `strict` | boolean | No | `False` | Nilai kedua untuk dibandingkan |
-| `case_sensitive` | boolean | No | `True` | Memerlukan tipe yang sama (tanpa koersi tipe) |
+| `a` | text | Yes | - | First value to compare |
+| `b` | text | Yes | - | Second value to compare |
+| `strict` | boolean | No | `False` | Require same type (no type coercion) |
+| `case_sensitive` | boolean | No | `True` | Case sensitive string comparison |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Perbandingan string peka huruf besar/kecil |
-| `type_a` | string | Apakah nilai-nilai sama |
-| `type_b` | string | Apakah nilai-nilai sama |
+| `result` | boolean | Whether values are equal |
+| `type_a` | string | Type of first value |
+| `type_b` | string | Type of second value |
 
-### Logika NOT
+### Logic NOT
 
 `logic.not`
 
-Melakukan operasi logika NOT
+Perform logical NOT operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | boolean | Yes | `False` | Nilai boolean untuk dinegasikan |
+| `value` | boolean | Yes | `False` | Boolean value to negate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Nilai boolean untuk dinegasikan |
-| `original` | boolean | Hasil yang dinegasikan |
+| `result` | boolean | Negated result |
+| `original` | boolean | Original value |
 
-### Logika OR
+### Logic OR
 
 `logic.or`
 
-Melakukan operasi logika OR
+Perform logical OR operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | Nilai boolean untuk OR bersama |
+| `values` | array | Yes | - | Boolean values to OR together |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Nilai boolean untuk OR bersama |
-| `true_count` | number | Hasil operasi OR |
-| `total_count` | number | Hasil operasi OR |
+| `result` | boolean | Result of OR operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |

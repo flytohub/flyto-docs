@@ -6,23 +6,23 @@ MongoDB, MySQL, PostgreSQL, and Redis database operations.
 
 | Module | Description |
 |--------|-------------|
-| [資料庫插入](#資料庫插入) | 將資料插入資料庫表格 |
-| [資料庫查詢](#資料庫查詢) | 在 PostgreSQL、MySQL 或 SQLite 資料庫執行 SQL 查詢 |
-| [資料庫更新](#資料庫更新) | 更新資料庫表格中的資料 |
-| [MongoDB 查詢](#mongodb-查詢) | 從 MongoDB 集合查詢文件 |
-| [MongoDB 插入](#mongodb-插入) | 將一個或多個文件插入 MongoDB 集合 |
-| [MySQL 查詢](#mysql-查詢) | 在 MySQL 資料庫執行 SQL 查詢並回傳結果 |
-| [PostgreSQL 查詢](#postgresql-查詢) | 在 PostgreSQL 資料庫執行 SQL 查詢並回傳結果 |
-| [Redis 取得](#redis-取得) | 從 Redis 快取取得值 |
-| [Redis 設定](#redis-設定) | 在 Redis 快取設定值 |
+| [Database Insert](#database-insert) | Insert data into database tables |
+| [Database Query](#database-query) | Execute SQL queries on PostgreSQL, MySQL, or SQLite databases |
+| [Database Update](#database-update) | Update data in database tables |
+| [MongoDB Find](#mongodb-find) | Query documents from MongoDB collection |
+| [MongoDB Insert](#mongodb-insert) | Insert one or more documents into MongoDB collection |
+| [MySQL Query](#mysql-query) | Execute a SQL query on MySQL database and return results |
+| [PostgreSQL Query](#postgresql-query) | Execute a SQL query on PostgreSQL database and return results |
+| [Redis Get](#redis-get) | Get a value from Redis cache |
+| [Redis Set](#redis-set) | Set a value in Redis cache |
 
 ## Modules
 
-### 資料庫插入
+### Database Insert
 
 `database.insert`
 
-將資料插入資料庫表格
+Insert data into database tables
 
 **Parameters:**
 
@@ -43,8 +43,8 @@ MongoDB, MySQL, PostgreSQL, and Redis database operations.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | 插入的列數 |
-| `returning_data` | array | 插入的列數 |
+| `inserted_count` | number | Number of rows inserted |
+| `returning_data` | array | Returned data from insert |
 
 **Example:** Insert single row
 
@@ -54,11 +54,11 @@ data: {"name": "John", "email": "john@example.com"}
 database_type: postgresql
 ```
 
-### 資料庫查詢
+### Database Query
 
 `database.query`
 
-在 PostgreSQL、MySQL 或 SQLite 資料庫執行 SQL 查詢
+Execute SQL queries on PostgreSQL, MySQL, or SQLite databases
 
 **Parameters:**
 
@@ -79,9 +79,9 @@ database_type: postgresql
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | 查詢結果列 |
-| `row_count` | number | 查詢結果列 |
-| `columns` | array | 查詢結果列 |
+| `rows` | array | Query result rows |
+| `row_count` | number | Number of rows returned/affected |
+| `columns` | array | Column names |
 
 **Example:** Select with parameters
 
@@ -91,11 +91,11 @@ params: ["active"]
 database_type: postgresql
 ```
 
-### 資料庫更新
+### Database Update
 
 `database.update`
 
-更新資料庫表格中的資料
+Update data in database tables
 
 **Parameters:**
 
@@ -116,7 +116,7 @@ database_type: postgresql
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `updated_count` | number | 更新的列數 |
+| `updated_count` | number | Number of rows updated |
 
 **Example:** Update user status
 
@@ -127,11 +127,11 @@ where: {"id": 123}
 database_type: postgresql
 ```
 
-### MongoDB 查詢
+### MongoDB Find
 
 `db.mongodb.find`
 
-從 MongoDB 集合查詢文件
+Query documents from MongoDB collection
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ database_type: postgresql
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `documents` | array | 符合條件的文件陣列 |
-| `count` | number | 符合條件的文件數量 |
+| `documents` | array | Array of matching documents |
+| `count` | number | Number of documents returned |
 
 **Example:** Find all active users
 
@@ -172,11 +172,11 @@ sort: {"created_at": -1}
 limit: 20
 ```
 
-### MongoDB 插入
+### MongoDB Insert
 
 `db.mongodb.insert`
 
-將一個或多個文件插入 MongoDB 集合
+Insert one or more documents into MongoDB collection
 
 **Parameters:**
 
@@ -192,8 +192,8 @@ limit: 20
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | 插入的文件數量 |
-| `inserted_ids` | array | 插入的文件 ID 列表 |
+| `inserted_count` | number | Number of documents inserted |
+| `inserted_ids` | array | Array of inserted document IDs |
 
 **Example:** Insert single document
 
@@ -211,11 +211,11 @@ collection: products
 documents: [{"name": "Product A", "price": 19.99}, {"name": "Product B", "price": 29.99}]
 ```
 
-### MySQL 查詢
+### MySQL Query
 
 `db.mysql.query`
 
-在 MySQL 資料庫執行 SQL 查詢並回傳結果
+Execute a SQL query on MySQL database and return results
 
 **Parameters:**
 
@@ -233,9 +233,9 @@ documents: [{"name": "Product A", "price": 19.99}, {"name": "Product B", "price"
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | 結果列物件陣列 |
-| `row_count` | number | 結果列數 |
-| `columns` | array | 欄位名稱列表 |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select products
 
@@ -250,11 +250,11 @@ query: SELECT * FROM orders WHERE customer_id = %s AND created_at > %s
 params: ["${customer_id}", "2024-01-01"]
 ```
 
-### PostgreSQL 查詢
+### PostgreSQL Query
 
 `db.postgresql.query`
 
-在 PostgreSQL 資料庫執行 SQL 查詢並回傳結果
+Execute a SQL query on PostgreSQL database and return results
 
 **Parameters:**
 
@@ -268,9 +268,9 @@ params: ["${customer_id}", "2024-01-01"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | 結果列物件陣列 |
-| `row_count` | number | 結果列數 |
-| `columns` | array | 欄位名稱列表 |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select users
 
@@ -285,11 +285,11 @@ query: SELECT * FROM orders WHERE user_id = $1 AND status = $2
 params: ["${user_id}", "completed"]
 ```
 
-### Redis 取得
+### Redis Get
 
 `db.redis.get`
 
-從 Redis 快取取得值
+Get a value from Redis cache
 
 **Parameters:**
 
@@ -304,9 +304,9 @@ params: ["${user_id}", "completed"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | 回傳的值 |
-| `exists` | boolean | 鍵是否存在 |
-| `key` | string | 查詢的鍵 |
+| `value` | any | The returned value |
+| `exists` | boolean | The exists |
+| `key` | string | Key identifier |
 
 **Example:** Get cached value
 
@@ -324,11 +324,11 @@ port: 6379
 db: 1
 ```
 
-### Redis 設定
+### Redis Set
 
 `db.redis.set`
 
-在 Redis 快取設定值
+Set a value in Redis cache
 
 **Parameters:**
 

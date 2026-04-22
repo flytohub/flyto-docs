@@ -6,20 +6,20 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 
 | Module | Description |
 |--------|-------------|
-| [Legibilidad HTML](#legibilidad-html) | Analizar legibilidad del contenido |
-| [Extraer formularios](#extraer-formularios) | Extraer datos de formularios de HTML |
-| [Extraer metadatos](#extraer-metadatos) | Extraer metadatos de HTML |
-| [Extraer tablas](#extraer-tablas) | Extraer datos de tablas de HTML |
-| [Encontrar patrones](#encontrar-patrones) | Encontrar patrones de datos repetitivos en HTML |
-| [Estructura HTML](#estructura-html) | Analizar estructura DOM de HTML |
+| [HTML Readability](#html-readability) | Analyze content readability |
+| [Extract Forms](#extract-forms) | Extract form data from HTML |
+| [Extract Metadata](#extract-metadata) | Extract metadata from HTML |
+| [Extract Tables](#extract-tables) | Extract table data from HTML |
+| [Find Patterns](#find-patterns) | Find repeating data patterns in HTML |
+| [HTML Structure](#html-structure) | Analyze HTML DOM structure |
 
 ## Modules
 
-### Legibilidad HTML
+### HTML Readability
 
 `analysis.html.analyze_readability`
 
-Analizar legibilidad del contenido
+Analyze content readability
 
 **Parameters:**
 
@@ -34,11 +34,11 @@ Analizar legibilidad del contenido
 | `type` | any | object |
 | `properties` | any |  |
 
-### Extraer formularios
+### Extract Forms
 
 `analysis.html.extract_forms`
 
-Extraer datos de formularios de HTML
+Extract form data from HTML
 
 **Parameters:**
 
@@ -53,11 +53,11 @@ Extraer datos de formularios de HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Extraer metadatos
+### Extract Metadata
 
 `analysis.html.extract_metadata`
 
-Extraer metadatos de HTML
+Extract metadata from HTML
 
 **Parameters:**
 
@@ -72,11 +72,11 @@ Extraer metadatos de HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Extraer tablas
+### Extract Tables
 
 `analysis.html.extract_tables`
 
-Extraer datos de tablas de HTML
+Extract table data from HTML
 
 **Parameters:**
 
@@ -91,11 +91,11 @@ Extraer datos de tablas de HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Encontrar patrones
+### Find Patterns
 
 `analysis.html.find_patterns`
 
-Encontrar patrones de datos repetitivos en HTML
+Find repeating data patterns in HTML
 
 **Parameters:**
 
@@ -110,11 +110,11 @@ Encontrar patrones de datos repetitivos en HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Estructura HTML
+### HTML Structure
 
 `analysis.html.structure`
 
-Analizar estructura DOM de HTML
+Analyze HTML DOM structure
 
 **Parameters:**
 

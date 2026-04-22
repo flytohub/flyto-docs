@@ -6,44 +6,44 @@ Visual verification, Figma comparison, style capture, and report generation.
 
 | Module | Description |
 |--------|-------------|
-| [ใส่คำอธิบายภาพหน้าจอ](#ใส่คำอธิบายภาพหน้าจอ) | วาดกล่องที่มีป้ายกำกับบนภาพหน้าจอเพื่อระบุความแตกต่าง |
-| [จับภาพสไตล์องค์ประกอบ](#จับภาพสไตล์องค์ประกอบ) | จับภาพสไตล์ที่คำนวณจากองค์ประกอบในเบราว์เซอร์ |
-| [เปรียบเทียบสไตล์](#เปรียบเทียบสไตล์) | เปรียบเทียบสไตล์ที่จับภาพกับค่าที่คาดหวัง |
-| [ดึงสไตล์จาก Figma](#ดึงสไตล์จาก-figma) | ดึงโทเค็นการออกแบบจาก Figma API (โทเค็นจะอยู่ในเครื่อง) |
-| [สร้างรายงาน](#สร้างรายงาน) | สร้างรายงานการตรวจสอบในรูปแบบ HTML/JSON/Markdown |
-| [โหลดชุดกฎ](#โหลดชุดกฎ) | โหลดกฎการตรวจสอบจากไฟล์ YAML |
-| [รันการตรวจสอบ](#รันการตรวจสอบ) | รันการตรวจสอบการออกแบบทั้งหมด: จับภาพ → เปรียบเทียบ → รายงาน |
-| [รันการตรวจสอบสเปค](#รันการตรวจสอบสเปค) | การตรวจสอบสเปคแบบไดนามิก - ประกอบโมดูลใดๆ ผ่าน YAML |
-| [เปรียบเทียบด้วยภาพ](#เปรียบเทียบด้วยภาพ) | เปรียบเทียบการออกแบบอ้างอิงกับไซต์ที่พัฒนาโดยการมองเห็น ใส่คำอธิบายความแตกต่าง |
+| [Annotate Screenshot](#annotate-screenshot) | Draw labeled bounding boxes on screenshots to mark differences |
+| [Capture Element Styles](#capture-element-styles) | Capture computed styles from browser element |
+| [Compare Styles](#compare-styles) | Compare captured styles with expected values |
+| [Fetch Figma Style](#fetch-figma-style) | Fetch design tokens from Figma API (token stays local) |
+| [Generate Report](#generate-report) | Generate verification report in HTML/JSON/Markdown |
+| [Load Ruleset](#load-ruleset) | Load verification rules from YAML file |
+| [Run Verification](#run-verification) | Run full design verification: capture → compare → report |
+| [Run Spec Verification](#run-spec-verification) | Dynamic spec verification - compose any modules via YAML |
+| [Visual Diff](#visual-diff) | Compare reference design with dev site visually, annotate differences |
 
 ## Modules
 
-### ใส่คำอธิบายภาพหน้าจอ
+### Annotate Screenshot
 
 `verify.annotate`
 
-วาดกล่องที่มีป้ายกำกับบนภาพหน้าจอเพื่อระบุความแตกต่าง
+Draw labeled bounding boxes on screenshots to mark differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | Yes | - | เส้นทางไปยังภาพหน้าจอ |
-| `annotations` | array | Yes | - | อาร์เรย์ของคำอธิบาย: [{label, x, y, width, height, color?, description?}] |
-| `output_path` | string | No | - | เส้นทางเอาต์พุตสำหรับภาพที่ใส่คำอธิบาย (ค่าเริ่มต้น: เพิ่มคำต่อท้าย _annotated) |
+| `image_path` | string | Yes | - | Path to the screenshot image |
+| `annotations` | array | Yes | - | Array of annotations: [{label, x, y, width, height, color?, description?}] |
+| `output_path` | string | No | - | Output path for annotated image (default: adds _annotated suffix) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | เส้นทางไปยังภาพที่ใส่คำอธิบาย |
-| `annotation_count` | integer | จำนวนคำอธิบายที่วาด |
+| `output_path` | string | Path to annotated image |
+| `annotation_count` | integer | Number of annotations drawn |
 
-### จับภาพสไตล์องค์ประกอบ
+### Capture Element Styles
 
 `verify.capture`
 
-จับภาพสไตล์ที่คำนวณจากองค์ประกอบในเบราว์เซอร์
+Capture computed styles from browser element
 
 **Parameters:**
 
@@ -62,11 +62,11 @@ Visual verification, Figma comparison, style capture, and report generation.
 | `element` | object | Captured element with styles |
 | `found` | boolean | Whether element was found |
 
-### เปรียบเทียบสไตล์
+### Compare Styles
 
 `verify.compare`
 
-เปรียบเทียบสไตล์ที่จับภาพกับค่าที่คาดหวัง
+Compare captured styles with expected values
 
 **Parameters:**
 
@@ -93,11 +93,11 @@ Visual verification, Figma comparison, style capture, and report generation.
 | `error_count` | number | Number of errors |
 | `warning_count` | number | Number of warnings |
 
-### ดึงสไตล์จาก Figma
+### Fetch Figma Style
 
 `verify.figma`
 
-ดึงโทเค็นการออกแบบจาก Figma API (โทเค็นจะอยู่ในเครื่อง)
+Fetch design tokens from Figma API (token stays local)
 
 **Parameters:**
 
@@ -115,11 +115,11 @@ Visual verification, Figma comparison, style capture, and report generation.
 | `node` | object | Figma node data |
 | `style` | object | Extracted style |
 
-### สร้างรายงาน
+### Generate Report
 
 `verify.report`
 
-สร้างรายงานการตรวจสอบในรูปแบบ HTML/JSON/Markdown
+Generate verification report in HTML/JSON/Markdown
 
 **Parameters:**
 
@@ -139,11 +139,11 @@ Visual verification, Figma comparison, style capture, and report generation.
 | `report_path` | string | Path to generated report |
 | `summary` | object | Summary statistics |
 
-### โหลดชุดกฎ
+### Load Ruleset
 
 `verify.ruleset`
 
-โหลดกฎการตรวจสอบจากไฟล์ YAML
+Load verification rules from YAML file
 
 **Parameters:**
 
@@ -158,11 +158,11 @@ Visual verification, Figma comparison, style capture, and report generation.
 | `ruleset` | object | Parsed ruleset |
 | `rules_count` | integer | Number of rules |
 
-### รันการตรวจสอบ
+### Run Verification
 
 `verify.run`
 
-รันการตรวจสอบการออกแบบทั้งหมด: จับภาพ → เปรียบเทียบ → รายงาน
+Run full design verification: capture → compare → report
 
 **Parameters:**
 
@@ -212,11 +212,11 @@ url: http://localhost:3000
 ruleset_path: ./design-rules.yaml
 ```
 
-### รันการตรวจสอบสเปค
+### Run Spec Verification
 
 `verify.spec`
 
-การตรวจสอบสเปคแบบไดนามิก - ประกอบโมดูลใดๆ ผ่าน YAML
+Dynamic spec verification - compose any modules via YAML
 
 **Parameters:**
 
@@ -233,31 +233,31 @@ ruleset_path: ./design-rules.yaml
 | `summary` | object |  |
 | `results` | array |  |
 
-### เปรียบเทียบด้วยภาพ
+### Visual Diff
 
 `verify.visual_diff`
 
-เปรียบเทียบการออกแบบอ้างอิงกับไซต์ที่พัฒนาโดยการมองเห็น ใส่คำอธิบายความแตกต่าง
+Compare reference design with dev site visually, annotate differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `reference_url` | string | Yes | - | URL หรือเส้นทางภาพในเครื่องของการออกแบบอ้างอิง |
-| `dev_url` | string | Yes | - | URL ของไซต์ที่พัฒนาเพื่อเปรียบเทียบ |
-| `output_dir` | string | No | `./verify-reports/visual-diff` | ไดเรกทอรีเอาต์พุตสำหรับรายงาน |
-| `focus_areas` | array | No | - | พื้นที่ที่ต้องการเน้น (เช่น ["header", "login form"]) |
-| `viewport_width` | number | No | `1280` | ความกว้างของวิวพอร์ตเบราว์เซอร์ |
-| `viewport_height` | number | No | `800` | ความสูงของวิวพอร์ตเบราว์เซอร์ |
-| `model` | string | No | `gpt-4o` | โมเดลการมองเห็นที่ใช้ |
-| `api_key` | string | No | - | คีย์ API ของ OpenAI (หรือใช้ตัวแปรแวดล้อม OPENAI_API_KEY) |
+| `reference_url` | string | Yes | - | URL or local image path of reference design |
+| `dev_url` | string | Yes | - | URL of development site to compare |
+| `output_dir` | string | No | `./verify-reports/visual-diff` | Output directory for reports |
+| `focus_areas` | array | No | - | Areas to focus on (e.g. ["header", "login form"]) |
+| `viewport_width` | number | No | `1280` | Browser viewport width |
+| `viewport_height` | number | No | `800` | Browser viewport height |
+| `model` | string | No | `gpt-4o` | Vision model to use |
+| `api_key` | string | No | - | OpenAI API key (or use OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `similarity_score` | number | เปอร์เซ็นต์ความคล้ายคลึง (0-100) |
-| `annotations` | array | รายการความแตกต่างที่ใส่คำอธิบาย |
-| `annotated_image` | string | เส้นทางไปยังภาพหน้าจอที่ใส่คำอธิบาย |
-| `report_path` | string | เส้นทางไปยังรายงาน HTML |
-| `summary` | string | สรุปความแตกต่าง |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `annotations` | array | List of annotated differences |
+| `annotated_image` | string | Path to annotated screenshot |
+| `report_path` | string | Path to HTML report |
+| `summary` | string | Summary of differences |

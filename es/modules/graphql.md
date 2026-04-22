@@ -6,34 +6,34 @@ Execute GraphQL queries and mutations.
 
 | Module | Description |
 |--------|-------------|
-| [Mutación GraphQL](#mutación-graphql) | Ejecuta una mutación GraphQL en un endpoint |
-| [Consulta GraphQL](#consulta-graphql) | Ejecuta una consulta GraphQL en un endpoint |
+| [GraphQL Mutation](#graphql-mutation) | Execute a GraphQL mutation against an endpoint |
+| [GraphQL Query](#graphql-query) | Execute a GraphQL query against an endpoint |
 
 ## Modules
 
-### Mutación GraphQL
+### GraphQL Mutation
 
 `graphql.mutation`
 
-Ejecuta una mutación GraphQL en un endpoint
+Execute a GraphQL mutation against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL del endpoint GraphQL |
-| `mutation` | string | Yes | - | Cadena de mutación GraphQL |
-| `variables` | object | No | - | Variables de mutación GraphQL como pares clave-valor |
-| `headers` | object | No | - | Encabezados HTTP adicionales para enviar con la solicitud |
-| `auth_token` | string | No | - | Token Bearer para autenticación (añadido como encabezado de Autorización) |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `mutation` | string | Yes | - | GraphQL mutation string |
+| `variables` | object | No | - | GraphQL mutation variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | Datos de respuesta de GraphQL |
-| `errors` | array | Errores de GraphQL (nulo si no hay errores) |
-| `status_code` | number | Código de estado HTTP |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Create user mutation
 
@@ -43,29 +43,29 @@ mutation: mutation CreateUser($input: UserInput!) { createUser(input: $input) { 
 variables: {"input": {"name": "John", "email": "john@example.com"}}
 ```
 
-### Consulta GraphQL
+### GraphQL Query
 
 `graphql.query`
 
-Ejecuta una consulta GraphQL en un endpoint
+Execute a GraphQL query against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL del endpoint GraphQL |
-| `query` | string | Yes | - | Cadena de consulta GraphQL |
-| `variables` | object | No | - | Variables de consulta GraphQL como pares clave-valor |
-| `headers` | object | No | - | Encabezados HTTP adicionales para enviar con la solicitud |
-| `auth_token` | string | No | - | Token Bearer para autenticación (añadido como encabezado de Autorización) |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `query` | string | Yes | - | GraphQL query string |
+| `variables` | object | No | - | GraphQL query variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | Datos de respuesta de GraphQL |
-| `errors` | array | Errores de GraphQL (nulo si no hay errores) |
-| `status_code` | number | Código de estado HTTP |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Simple query
 

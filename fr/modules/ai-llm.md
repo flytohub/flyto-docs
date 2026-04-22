@@ -6,53 +6,53 @@ AI model integration, text generation, embeddings, and autonomous agents.
 
 | Module | Description |
 |--------|-------------|
-| [Agent autonome](#agent-autonome) | Agent IA autodirige avec memoire et comportement oriente objectif |
-| [Agent en chaine](#agent-en-chaine) | Chaine de traitement IA sequentielle avec plusieurs etapes |
-| [Agent d'utilisation d'outils](#agent-d'utilisation-d'outils) | Agent AI qui peut appeler des outils/fonctions |
-| [Embeddings de Texte](#embeddings-de-texte) | Générer des embeddings vectoriels à partir de texte en utilisant des modèles AI |
-| [Extraction AI](#extraction-ai) | Extraire des données structurées à partir de texte en utilisant l'AI |
-| [Chat Ollama local](#chat-ollama-local) | Discuter avec un LLM local via Ollama (completement hors ligne) |
-| [Memoire IA](#memoire-ia) | Memoire de conversation pour l'agent IA |
-| [Memoire d'entites](#memoire-d'entites) | Extraire et suivre les entites (personnes, lieux, concepts) des conversations |
-| [Memoire Redis](#memoire-redis) | Memoire de conversation persistante utilisant le stockage Redis |
-| [Memoire vectorielle](#memoire-vectorielle) | Memoire semantique utilisant des embeddings vectoriels pour la recuperation de contexte pertinent |
-| [Modele IA](#modele-ia) | Configuration du modele LLM pour l'agent IA |
+| [Autonomous Agent](#autonomous-agent) | Self-directed AI agent with memory and goal-oriented behavior |
+| [Chain Agent](#chain-agent) | Sequential AI processing chain with multiple steps |
+| [Tool Use Agent](#tool-use-agent) | AI Agent that can call tools/functions |
+| [AI Embed](#ai-embed) | Generate embeddings from text |
+| [AI Extract](#ai-extract) | Extract structured data from text using LLM |
+| [Local Ollama Chat](#local-ollama-chat) | Chat with local LLM via Ollama (completely offline) |
+| [AI Memory](#ai-memory) | Conversation memory for AI Agent |
+| [Entity Memory](#entity-memory) | Extract and track entities (people, places, concepts) from conversations |
+| [Redis Memory](#redis-memory) | Persistent conversation memory using Redis storage |
+| [Vector Memory](#vector-memory) | Semantic memory using vector embeddings for relevant context retrieval |
+| [AI Model](#ai-model) | LLM model configuration for AI Agent |
 | [AI Tool](#ai-tool) | Expose a module as a tool for AI Agent |
-| [Analyse de Vision](#analyse-de-vision) | Analyser des images en utilisant des modèles de vision AI |
-| [Chat Claude](#chat-claude) | Envoyer un message de chat a Anthropic Claude AI et obtenir une reponse |
-| [Chat Google Gemini](#chat-google-gemini) | Envoyer un message de chat a Google Gemini AI et obtenir une reponse |
-| [Chat OpenAI](#chat-openai) | Envoyer un message de chat aux modeles OpenAI GPT |
-| [Generation d'images DALL-E](#generation-d'images-dall-e) | Generer des images avec DALL-E |
-| [Agent IA](#agent-ia) | Agent IA autonome avec connexions multi-ports (modele, memoire, outils) |
+| [Vision Analyze](#vision-analyze) | Analyze images using LLM vision capabilities |
+| [Claude Chat](#claude-chat) | Send a chat message to Anthropic Claude AI and get a response |
+| [Google Gemini Chat](#google-gemini-chat) | Send a chat message to Google Gemini AI and get a response |
+| [OpenAI Chat](#openai-chat) | Send a chat message to OpenAI GPT models |
+| [DALL-E Image Generation](#dall-e-image-generation) | Generate images using DALL-E |
+| [AI Agent](#ai-agent) | Autonomous AI agent with multi-port connections (model, memory, tools) |
 
 ## Modules
 
-### Agent autonome
+### Autonomous Agent
 
 `agent.autonomous`
 
-Agent IA autodirige avec memoire et comportement oriente objectif
+Self-directed AI agent with memory and goal-oriented behavior
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `goal` | string | Yes | - | L'objectif a atteindre par l'agent |
-| `context` | string | No | - | L'objectif a atteindre par l'agent |
-| `max_iterations` | number | No | `5` | Contexte ou contraintes supplementaires |
-| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Etapes de raisonnement maximum |
-| `model` | string | No | `gpt-4o` | Nom du modele (ex: gpt-4, llama2, mistral) |
-| `ollama_url` | string | No | `http://localhost:11434` | Nom du modele (ex: gpt-4, llama2, mistral) |
-| `temperature` | number | No | `0.7` | URL du serveur Ollama (uniquement pour le fournisseur ollama) |
+| `goal` | string | Yes | - | The goal for the agent to achieve |
+| `context` | string | No | - | Additional context or constraints |
+| `max_iterations` | number | No | `5` | Maximum reasoning steps |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Choose LLM provider (cloud or local) |
+| `model` | string | No | `gpt-4o` | Model name (e.g., gpt-4, llama2, mistral) |
+| `ollama_url` | string | No | `http://localhost:11434` | Ollama server URL (only for ollama provider) |
+| `temperature` | number | No | `0.7` | Creativity level (0-2) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Niveau de creativite (0-2) |
-| `thoughts` | array | Resultat de l'operation |
-| `iterations` | number | Resultat de l'operation |
-| `goal_achieved` | boolean | Etapes de raisonnement de l'agent |
+| `result` | string | The operation result |
+| `thoughts` | array | Agent reasoning steps |
+| `iterations` | number | The iterations |
+| `goal_achieved` | boolean | The goal achieved |
 
 **Example:** Research task
 
@@ -70,30 +70,30 @@ context: PostgreSQL database with 10M records
 max_iterations: 10
 ```
 
-### Agent en chaine
+### Chain Agent
 
 `agent.chain`
 
-Chaine de traitement IA sequentielle avec plusieurs etapes
+Sequential AI processing chain with multiple steps
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input` | string | Yes | - | Entree initiale pour la chaine |
-| `chain_steps` | array | Yes | - | Entree initiale pour la chaine |
-| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Tableau d'etapes de traitement (chacune est un modele de prompt) |
-| `model` | string | No | `gpt-4o` | Nom du modele (ex: gpt-4, llama2, mistral) |
-| `ollama_url` | string | No | `http://localhost:11434` | Nom du modele (ex: gpt-4, llama2, mistral) |
-| `temperature` | number | No | `0.7` | URL du serveur Ollama (uniquement pour le fournisseur ollama) |
+| `input` | string | Yes | - | Initial input for the chain |
+| `chain_steps` | array | Yes | - | Array of processing steps (each is a prompt template) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Choose LLM provider (cloud or local) |
+| `model` | string | No | `gpt-4o` | Model name (e.g., gpt-4, llama2, mistral) |
+| `ollama_url` | string | No | `http://localhost:11434` | Ollama server URL (only for ollama provider) |
+| `temperature` | number | No | `0.7` | Creativity level (0-2) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Niveau de creativite (0-2) |
-| `intermediate_results` | array | Resultat de l'operation |
-| `steps_completed` | number | Resultat de l'operation |
+| `result` | string | The operation result |
+| `intermediate_results` | array | Results from each step in the chain |
+| `steps_completed` | number | The steps completed |
 
 **Example:** Content pipeline
 
@@ -110,32 +110,32 @@ input: User behavior data shows 60% bounce rate
 chain_steps: ["Analyze what might cause this issue: {input}", "Suggest 3 solutions based on: {previous}", "Create an action plan from: {previous}"]
 ```
 
-### Agent d'utilisation d'outils
+### Tool Use Agent
 
 `agent.tool_use`
 
-Agent AI qui peut appeler des outils/fonctions
+AI Agent that can call tools/functions
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | L'objectif ou la tâche pour l'agent |
-| `tools` | array | Yes | - | Liste des définitions d'outils [{nom, description, paramètres}] |
-| `provider` | select (`openai`, `anthropic`) | No | `openai` | Fournisseur LLM pour l'agent |
-| `model` | string | No | `gpt-4o` | Modèle à utiliser |
-| `api_key` | string | No | - | Clé API (repli sur la variable d'environnement) |
-| `max_iterations` | number | No | `10` | Nombre maximum de tours d'appel d'outils |
-| `system_prompt` | string | No | - | Invite système optionnelle pour guider l'agent |
+| `prompt` | string | Yes | - | The goal or task for the agent |
+| `tools` | array | Yes | - | List of tool definitions [{name, description, parameters}] |
+| `provider` | select (`openai`, `anthropic`) | No | `openai` | LLM provider for the agent |
+| `model` | string | No | `gpt-4o` | Model to use |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `max_iterations` | number | No | `10` | Maximum number of tool call rounds |
+| `system_prompt` | string | No | - | Optional system prompt to guide the agent |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Réponse finale de l'agent |
-| `tool_calls` | array | Tous les appels d'outils effectués pendant l'exécution |
-| `iterations` | number | Nombre d'itérations complétées |
-| `model` | string | Modèle utilisé |
+| `result` | string | The agent final response |
+| `tool_calls` | array | All tool calls made during execution |
+| `iterations` | number | Number of iterations completed |
+| `model` | string | Model used |
 
 **Example:** File Processing Agent
 
@@ -147,30 +147,30 @@ model: gpt-4o
 max_iterations: 5
 ```
 
-### Embeddings de Texte
+### AI Embed
 
 `ai.embed`
 
-Générer des embeddings vectoriels à partir de texte en utilisant des modèles AI
+Generate embeddings from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Texte à embedder |
-| `provider` | select (`openai`, `local`) | No | `openai` | Fournisseur AI pour les embeddings |
-| `model` | string | No | `text-embedding-3-small` | Modèle d'embedding à utiliser |
-| `api_key` | string | No | - | Clé API (utilise la variable d'environnement par défaut) |
-| `dimensions` | number | No | - | Dimensions d'embedding (pour les modèles qui le supportent) |
+| `text` | string | Yes | - | Single text or JSON array of texts to embed |
+| `provider` | select (`openai`, `local`) | No | `openai` | Embedding provider |
+| `model` | string | No | `text-embedding-3-small` | Embedding model to use |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `dimensions` | number | No | - | Output embedding dimensions (for supported models like text-embedding-3-*) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `embeddings` | array | Tableau d'embeddings vectoriels |
-| `model` | string | Modèle utilisé pour l'embedding |
-| `dimensions` | number | Nombre de dimensions dans le vecteur d'embedding |
-| `token_count` | number | Nombre de tokens traités |
+| `embeddings` | array | List of embedding vectors |
+| `model` | string | Model used for embedding |
+| `dimensions` | number | Dimensions of each embedding vector |
+| `token_count` | number | Total tokens consumed |
 
 **Example:** Single Text Embedding
 
@@ -189,31 +189,31 @@ model: text-embedding-3-small
 dimensions: 256
 ```
 
-### Extraction AI
+### AI Extract
 
 `ai.extract`
 
-Extraire des données structurées à partir de texte en utilisant l'AI
+Extract structured data from text using LLM
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Texte à partir duquel extraire les données |
-| `schema` | object | Yes | - | Schéma JSON définissant les champs à extraire |
-| `instructions` | string | No | - | Instructions supplémentaires pour l'extraction |
-| `provider` | select (`openai`, `anthropic`) | No | `openai` | Fournisseur AI à utiliser |
-| `model` | string | No | `gpt-4o-mini` | Modèle à utiliser pour l'extraction |
-| `api_key` | string | No | - | Clé API (utilise la variable d'environnement par défaut) |
-| `temperature` | number | No | `0` | Température d'échantillonnage (0-2) |
+| `text` | string | Yes | - | The text to extract structured data from |
+| `schema` | object | Yes | - | JSON schema describing the desired output structure |
+| `instructions` | string | No | - | Additional extraction instructions for the LLM |
+| `provider` | select (`openai`, `anthropic`) | No | `openai` | LLM provider |
+| `model` | string | No | `gpt-4o-mini` | Model to use for extraction |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `temperature` | number | No | `0` | LLM temperature (0 = deterministic) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted` | object | Données structurées extraites |
-| `model` | string | Modèle utilisé pour l'extraction |
-| `raw_response` | string | Réponse brute du modèle |
+| `extracted` | object | The extracted structured data |
+| `model` | string | Model used for extraction |
+| `raw_response` | string | Raw LLM response text |
 
 **Example:** Extract Contact Info
 
@@ -232,34 +232,34 @@ schema: {"type": "object", "properties": {"invoice_number": {"type": "string"}, 
 instructions: Extract all invoice fields. Parse amounts as numbers.
 ```
 
-### Chat Ollama local
+### Local Ollama Chat
 
 `ai.local_ollama.chat`
 
-Discuter avec un LLM local via Ollama (completement hors ligne)
+Chat with local LLM via Ollama (completely offline)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | Le message a envoyer au LLM local |
-| `model` | select (`llama2`, `llama2:13b`, `llama2:70b`, `mistral`, `mixtral`, `codellama`, `codellama:13b`, `phi`, `neural-chat`, `starling-lm`) | No | `llama2` | Le message a envoyer au LLM local |
-| `temperature` | number | No | `0.7` | Temperature d'echantillonnage (0-2) |
-| `system_message` | string | No | - | Message de role systeme (optionnel) |
-| `ollama_url` | string | No | `http://localhost:11434` | Message de role systeme (optionnel) |
-| `max_tokens` | number | No | - | URL du serveur Ollama |
+| `prompt` | string | Yes | - | The message to send to the local LLM |
+| `model` | select (`llama2`, `llama2:13b`, `llama2:70b`, `mistral`, `mixtral`, `codellama`, `codellama:13b`, `phi`, `neural-chat`, `starling-lm`) | No | `llama2` | Ollama model to use |
+| `temperature` | number | No | `0.7` | Sampling temperature (0-2) |
+| `system_message` | string | No | - | System role message (optional) |
+| `ollama_url` | string | No | `http://localhost:11434` | Ollama server URL |
+| `max_tokens` | number | No | - | Maximum tokens in response (optional, depends on model) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `response` | string | Tokens maximum dans la reponse (optionnel, depend du modele) |
-| `model` | string | Reponse de l'operation |
-| `context` | array | Reponse de l'operation |
-| `total_duration` | number | Nom ou identifiant du modele |
-| `load_duration` | number | Contexte de conversation pour les requetes suivantes |
-| `prompt_eval_count` | number | Duree totale de traitement |
-| `eval_count` | number | Duree de chargement du modele |
+| `response` | string | Response from the operation |
+| `model` | string | Model name or identifier |
+| `context` | array | Conversation context for follow-up requests |
+| `total_duration` | number | Total processing duration |
+| `load_duration` | number | Model loading duration |
+| `prompt_eval_count` | number | Number of prompt tokens evaluated |
+| `eval_count` | number | Number of tokens generated |
 
 **Example:** Simple local chat
 
@@ -285,29 +285,29 @@ model: mistral
 temperature: 0.7
 ```
 
-### Memoire IA
+### AI Memory
 
 `ai.memory`
 
-Memoire de conversation pour l'agent IA
+Conversation memory for AI Agent
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `memory_type` | select (`buffer`, `window`, `summary`) | Yes | `buffer` | Type de stockage memoire |
-| `window_size` | number | No | `10` | Nombre de messages recents a conserver (pour la memoire fenetre) |
-| `session_id` | string | No | - | Identifiant unique pour cette session de conversation |
-| `initial_messages` | array | No | `[]` | Historique de conversation prechargee |
+| `memory_type` | select (`buffer`, `window`, `summary`) | Yes | `buffer` | Type of memory storage |
+| `window_size` | number | No | `10` | Number of recent messages to keep (for window memory) |
+| `session_id` | string | No | - | Unique identifier for this conversation session |
+| `initial_messages` | array | No | `[]` | Pre-loaded conversation history |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | Historique de conversation prechargee |
-| `session_id` | string | Historique de conversation prechargee |
-| `messages` | array | Type de memoire |
-| `config` | object | Identifiant de session |
+| `memory_type` | string | Type of memory |
+| `session_id` | string | Session identifier |
+| `messages` | array | Current message history |
+| `config` | object | Full memory configuration |
 
 **Example:** Simple Buffer Memory
 
@@ -322,11 +322,11 @@ memory_type: window
 window_size: 5
 ```
 
-### Memoire d'entites
+### Entity Memory
 
 `ai.memory.entity`
 
-Extraire et suivre les entites (personnes, lieux, concepts) des conversations
+Extract and track entities (people, places, concepts) from conversations
 
 **Parameters:**
 
@@ -342,11 +342,11 @@ Extraire et suivre les entites (personnes, lieux, concepts) des conversations
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | Nombre maximum d'entites a retenir |
-| `session_id` | string | Nombre maximum d'entites a retenir |
-| `entities` | object | Type de memoire (entite) |
-| `relationships` | array | Identifiant de session |
-| `config` | object | Entites suivies par type |
+| `memory_type` | string | Type of memory (entity) |
+| `session_id` | string | Session identifier |
+| `entities` | object | Tracked entities by type |
+| `relationships` | array | Entity relationships |
+| `config` | object | Full memory configuration |
 
 **Example:** People & Organizations
 
@@ -363,11 +363,11 @@ track_relationships: true
 max_entities: 200
 ```
 
-### Memoire Redis
+### Redis Memory
 
 `ai.memory.redis`
 
-Memoire de conversation persistante utilisant le stockage Redis
+Persistent conversation memory using Redis storage
 
 **Parameters:**
 
@@ -384,11 +384,11 @@ Memoire de conversation persistante utilisant le stockage Redis
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | Charger les messages existants de Redis a l'initialisation |
-| `session_id` | string | Charger les messages existants de Redis a l'initialisation |
-| `messages` | array | Type de memoire (redis) |
-| `connected` | boolean | Identifiant de session |
-| `config` | object | Historique des messages charges |
+| `memory_type` | string | Type of memory (redis) |
+| `session_id` | string | Session identifier |
+| `messages` | array | Loaded message history |
+| `connected` | boolean | Redis connection status |
+| `config` | object | Full memory configuration |
 
 **Example:** Local Redis
 
@@ -407,11 +407,11 @@ ttl_seconds: 86400
 max_messages: 500
 ```
 
-### Memoire vectorielle
+### Vector Memory
 
 `ai.memory.vector`
 
-Memoire semantique utilisant des embeddings vectoriels pour la recuperation de contexte pertinent
+Semantic memory using vector embeddings for relevant context retrieval
 
 **Parameters:**
 
@@ -427,10 +427,10 @@ Memoire semantique utilisant des embeddings vectoriels pour la recuperation de c
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | Inclure l'horodatage et autres metadonnees avec les memoires |
-| `session_id` | string | Inclure l'horodatage et autres metadonnees avec les memoires |
-| `embedding_model` | string | Type de memoire (vecteur) |
-| `config` | object | Identifiant de session |
+| `memory_type` | string | Type of memory (vector) |
+| `session_id` | string | Session identifier |
+| `embedding_model` | string | Embedding model used |
+| `config` | object | Full memory configuration |
 
 **Example:** Default Vector Memory
 
@@ -447,11 +447,11 @@ top_k: 10
 similarity_threshold: 0.85
 ```
 
-### Modele IA
+### AI Model
 
 `ai.model`
 
-Configuration du modele LLM pour l'agent IA
+LLM model configuration for AI Agent
 
 **Parameters:**
 
@@ -462,15 +462,15 @@ Configuration du modele LLM pour l'agent IA
 | `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
 | `api_key` | string | No | - | API key (leave empty to use environment variable) |
 | `base_url` | string | No | - | Custom API endpoint URL |
-| `max_tokens` | number | No | `4096` | Tokens maximum dans la reponse |
+| `max_tokens` | number | No | `4096` | Maximum tokens in response |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `provider` | string | Tokens maximum dans la reponse |
-| `model` | string | Nom du fournisseur LLM |
-| `config` | object | Nom du fournisseur LLM |
+| `provider` | string | LLM provider name |
+| `model` | string | Model identifier |
+| `config` | object | Full model configuration |
 
 **Example:** OpenAI GPT-4
 
@@ -519,33 +519,33 @@ module_id: http.request
 module_id: data.json_parse
 ```
 
-### Analyse de Vision
+### Vision Analyze
 
 `ai.vision.analyze`
 
-Analyser des images en utilisant des modèles de vision AI
+Analyze images using LLM vision capabilities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | No | - | Chemin local vers le fichier image |
-| `image_url` | string | No | - | URL de l'image à analyser |
-| `prompt` | string | No | `Describe this image in detail` | Que voulez-vous analyser ou demander sur l'image |
-| `provider` | select (`openai`, `anthropic`) | No | `openai` | Fournisseur d'IA pour l'analyse visuelle |
-| `model` | string | No | `gpt-4o` | Modèle de vision à utiliser |
-| `api_key` | string | No | - | Clé API (utilise la variable d'environnement par défaut) |
-| `max_tokens` | number | No | `1000` | Nombre maximum de tokens dans la réponse |
-| `detail` | select (`low`, `high`, `auto`) | No | `auto` | Niveau de détail de l'image (bas/élevé/auto) |
+| `image_path` | string | No | - | Path to the image file on disk |
+| `image_url` | string | No | - | URL of the image (alternative to image_path) |
+| `prompt` | string | No | `Describe this image in detail` | What to analyze in the image |
+| `provider` | select (`openai`, `anthropic`) | No | `openai` | LLM provider for vision analysis |
+| `model` | string | No | `gpt-4o` | Model to use for vision analysis |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `max_tokens` | number | No | `1000` | Maximum tokens in response |
+| `detail` | select (`low`, `high`, `auto`) | No | `auto` | Image detail level for analysis |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `analysis` | string | Analyse AI de l'image |
-| `model` | string | Modèle utilisé pour l'analyse |
-| `provider` | string | Fournisseur utilisé pour l'analyse |
-| `tokens_used` | number | Nombre de tokens utilisés |
+| `analysis` | string | The vision analysis result |
+| `model` | string | Model used for analysis |
+| `provider` | string | Provider used |
+| `tokens_used` | number | Total tokens consumed |
 
 **Example:** Analyze Screenshot
 
@@ -565,31 +565,31 @@ provider: anthropic
 model: claude-sonnet-4-20250514
 ```
 
-### Chat Claude
+### Claude Chat
 
 `api.anthropic.chat`
 
-Envoyer un message de chat a Anthropic Claude AI et obtenir une reponse
+Send a chat message to Anthropic Claude AI and get a response
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Cle API Anthropic (defaut: env.ANTHROPIC_API_KEY) |
-| `model` | string | No | `claude-sonnet-4-6` | Modele Claude a utiliser |
-| `messages` | array | Yes | - | Tableau d'objets message avec role et contenu |
-| `max_tokens` | number | No | `1024` | Contenu retourne par l'operation |
-| `temperature` | number | No | `1.0` | Temperature d'echantillonnage (0-1). Des valeurs plus elevees rendent la sortie plus aleatoire |
-| `system` | string | No | - | Prompt systeme pour guider le comportement de Claude |
+| `api_key` | string | No | - | Anthropic API key (defaults to env.ANTHROPIC_API_KEY) |
+| `model` | string | No | `claude-sonnet-4-6` | Claude model to use |
+| `messages` | array | Yes | - | Array of message objects with role and content |
+| `max_tokens` | number | No | `1024` | Maximum tokens in response |
+| `temperature` | number | No | `1.0` | Sampling temperature (0-1). Higher values make output more random |
+| `system` | string | No | - | System prompt to guide Claude behavior |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `content` | string | Prompt systeme pour guider le comportement de Claude |
-| `model` | string | Texte de reponse de Claude |
-| `stop_reason` | string | Modele utilise pour la reponse |
-| `usage` | object | Pourquoi le modele a arrete de generer (end_turn, max_tokens, etc) |
+| `content` | string | Claude response text |
+| `model` | string | Model used for response |
+| `stop_reason` | string | Why the model stopped generating (end_turn, max_tokens, etc) |
+| `usage` | object | Token usage statistics |
 
 **Example:** Simple question
 
@@ -606,21 +606,21 @@ messages: [{"role": "user", "content": "Summarize this article: ${article_text}"
 max_tokens: 500
 ```
 
-### Chat Google Gemini
+### Google Gemini Chat
 
 `api.google_gemini.chat`
 
-Envoyer un message de chat a Google Gemini AI et obtenir une reponse
+Send a chat message to Google Gemini AI and get a response
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Cle API Google AI (defaut: env.GOOGLE_AI_API_KEY) |
-| `model` | string | No | `gemini-2.5-pro` | Modele Gemini a utiliser |
-| `prompt` | string | Yes | - | Le prompt texte a envoyer a Gemini |
-| `temperature` | number | No | `1.0` | Controle l'aleatoire (0-2). Des valeurs plus elevees rendent la sortie plus aleatoire |
-| `max_output_tokens` | number | No | `2048` | Nombre maximum de tokens dans la reponse |
+| `api_key` | string | No | - | Google AI API key (defaults to env.GOOGLE_AI_API_KEY) |
+| `model` | string | No | `gemini-2.5-pro` | Gemini model to use |
+| `prompt` | string | Yes | - | The text prompt to send to Gemini |
+| `temperature` | number | No | `1.0` | Controls randomness (0-2). Higher values make output more random |
+| `max_output_tokens` | number | No | `2048` | Maximum number of tokens in response |
 
 **Output:**
 
@@ -644,29 +644,29 @@ temperature: 0.7
 max_output_tokens: 500
 ```
 
-### Chat OpenAI
+### OpenAI Chat
 
 `api.openai.chat`
 
-Envoyer un message de chat aux modeles OpenAI GPT
+Send a chat message to OpenAI GPT models
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | Le message a envoyer a GPT |
-| `model` | select (`gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `o3`, `o3-mini`, `o4-mini`, `gpt-4-turbo-preview`) | No | `gpt-4o` | Le message a envoyer a GPT |
-| `temperature` | number | No | `0.7` | Temperature d'echantillonnage (0-2) |
-| `max_tokens` | number | No | `1000` | Temperature d'echantillonnage (0-2) |
-| `system_message` | string | No | - | Tokens maximum dans la reponse |
+| `prompt` | string | Yes | - | The message to send to GPT |
+| `model` | select (`gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `o3`, `o3-mini`, `o4-mini`, `gpt-4-turbo-preview`) | No | `gpt-4o` | OpenAI model to use |
+| `temperature` | number | No | `0.7` | Sampling temperature (0-2) |
+| `max_tokens` | number | No | `1000` | Maximum tokens in response |
+| `system_message` | string | No | - | System role message (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `response` | string | Message de role systeme (optionnel) |
-| `model` | string | Reponse de l'operation |
-| `usage` | object | Reponse de l'operation |
+| `response` | string | Response from the operation |
+| `model` | string | Model name or identifier |
+| `usage` | object | Token usage statistics |
 
 **Example:** Simple chat
 
@@ -684,21 +684,21 @@ temperature: 0.2
 system_message: You are a Python programming expert
 ```
 
-### Generation d'images DALL-E
+### DALL-E Image Generation
 
 `api.openai.image`
 
-Generer des images avec DALL-E
+Generate images using DALL-E
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | Description de l'image a generer |
-| `size` | select (`256x256`, `512x512`, `1024x1024`, `1792x1024`, `1024x1792`) | No | `1024x1024` | Description de l'image a generer |
-| `model` | select (`dall-e-3`, `dall-e-2`) | No | `dall-e-3` | Version du modele DALL-E |
-| `quality` | select (`standard`, `hd`) | No | `standard` | Qualite de l'image (DALL-E 3 uniquement) |
-| `n` | number | No | `1` | Nombre d'images a generer (1-10) |
+| `prompt` | string | Yes | - | Description of the image to generate |
+| `size` | select (`256x256`, `512x512`, `1024x1024`, `1792x1024`, `1024x1792`) | No | `1024x1024` | Image size |
+| `model` | select (`dall-e-3`, `dall-e-2`) | No | `dall-e-3` | DALL-E model version |
+| `quality` | select (`standard`, `hd`) | No | `standard` | Image quality (DALL-E 3 only) |
+| `n` | number | No | `1` | Number of images to generate (1-10) |
 
 **Output:**
 
@@ -725,32 +725,32 @@ model: dall-e-2
 n: 3
 ```
 
-### Agent IA
+### AI Agent
 
 `llm.agent`
 
-Agent IA autonome avec connexions multi-ports (modele, memoire, outils)
+Autonomous AI agent with multi-port connections (model, memory, tools)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt_source` | select (`manual`, `auto`) | No | `manual` | D'ou obtenir le prompt de tache |
-| `task` | string | No | - | La tache pour l'agent a completer. Utilisez {<!-- -->{input}<!-- -->} pour referencer les donnees en amont. |
-| `prompt_path` | string | No | `{<!-- -->{input}<!-- -->}` | Chemin pour extraire le prompt de l'entree (ex: {<!-- -->{input.message}<!-- -->}) |
-| `join_strategy` | select (`first`, `newline`, `separator`, `json`) | No | `first` | Comment gerer les entrees de tableau |
+| `prompt_source` | select (`manual`, `auto`) | No | `manual` | Where to get the task prompt from |
+| `task` | string | No | - | The task for the agent to complete. Use {<!-- -->{input}<!-- -->} to reference upstream data. |
+| `prompt_path` | string | No | `{<!-- -->{input}<!-- -->}` | Path to extract prompt from input (e.g., {<!-- -->{input.message}<!-- -->}) |
+| `join_strategy` | select (`first`, `newline`, `separator`, `json`) | No | `first` | How to handle array inputs |
 | `join_separator` | string | No | `
 
 ---
 
-` | Separateur pour joindre les elements de tableau |
-| `max_input_size` | number | No | `10000` | Caracteres maximum pour le prompt (previent le debordement) |
+` | Separator for joining array items |
+| `max_input_size` | number | No | `10000` | Maximum characters for prompt (prevents overflow) |
 | `agent_type` | select (`tools`, `react`) | No | `tools` | Reasoning strategy for the agent |
-| `system_prompt` | string | No | `You are a helpful AI agent. Use the available tools to complete the task. Think step by step.` | Instructions pour le comportement de l'agent |
+| `system_prompt` | string | No | `You are a helpful AI agent. Use the available tools to complete the task. Think step by step.` | Instructions for the agent behavior |
 | `response_format` | select (`text`, `json`, `json_schema`) | No | `text` | Expected format of the final answer |
 | `output_schema` | object | No | `{}` | JSON Schema the final answer must match (for json_schema format) |
-| `context` | object | No | `{}` | Liste des IDs de modules (alternative a la connexion de noeuds d'outils) |
-| `max_iterations` | number | No | `10` | Donnees de contexte supplementaires pour l'agent |
+| `context` | object | No | `{}` | Additional context data for the agent |
+| `max_iterations` | number | No | `10` | Maximum number of tool calls |
 | `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
 | `model` | string | No | `gpt-4o` | Specific model to use |
 | `api_key` | string | No | - | API key (leave empty to use environment variable) |
@@ -761,11 +761,11 @@ Agent IA autonome avec connexions multi-ports (modele, memoire, outils)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Si l'agent a termine avec succes |
-| `result` | string | Si l'agent a termine avec succes |
-| `steps` | array | Si l'agent a termine avec succes |
-| `tool_calls` | number | Le resultat final de l'agent |
-| `tokens_used` | number | Liste des etapes prises par l'agent |
+| `ok` | boolean | Whether the agent completed successfully |
+| `result` | string | The final result from the agent |
+| `steps` | array | List of steps the agent took |
+| `tool_calls` | number | Number of tools called |
+| `tokens_used` | number | Total tokens consumed |
 
 **Example:** Web Research Agent
 

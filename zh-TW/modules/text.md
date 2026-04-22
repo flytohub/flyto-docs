@@ -6,143 +6,143 @@ Text analysis: word count, encoding detection, email/URL/number extraction.
 
 | Module | Description |
 |--------|-------------|
-| [字元計數](#字元計數) | 計算文字中的字元數 |
-| [偵測編碼](#偵測編碼) | 偵測文字編碼 |
-| [提取電子郵件](#提取電子郵件) | 從文字中提取所有電子郵件地址 |
-| [提取數字](#提取數字) | 從文字中提取所有數字 |
-| [提取 URL](#提取-url) | 從文字中提取所有 URL |
-| [字數統計](#字數統計) | 計算文字中的字數 |
+| [Character Count](#character-count) | Count characters in text |
+| [Detect Encoding](#detect-encoding) | Detect text encoding |
+| [Extract Emails](#extract-emails) | Extract all email addresses from text |
+| [Extract Numbers](#extract-numbers) | Extract all numbers from text |
+| [Extract URLs](#extract-urls) | Extract all URLs from text |
+| [Word Count](#word-count) | Count words in text |
 
 ## Modules
 
-### 字元計數
+### Character Count
 
 `text.char_count`
 
-計算文字中的字元數
+Count characters in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 要分析的文字 |
+| `text` | text | Yes | - | Text to analyze |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total` | number | 要分析的文字 |
-| `without_spaces` | number | 總字元數 |
-| `letters` | number | 總字元數 |
-| `digits` | number | 不含空格的計數 |
-| `spaces` | number | 字母計數 |
-| `lines` | number | 數字計數 |
+| `total` | number | Total character count |
+| `without_spaces` | number | Count without spaces |
+| `letters` | number | Letter count |
+| `digits` | number | Digit count |
+| `spaces` | number | Space count |
+| `lines` | number | Line count |
 
-### 偵測編碼
+### Detect Encoding
 
 `text.detect_encoding`
 
-偵測文字編碼
+Detect text encoding
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 要偵測編碼的文字或位元組 |
+| `text` | text | Yes | - | Text or bytes to detect encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `encoding` | string | 要偵測編碼的文字或位元組 |
-| `confidence` | number | 偵測到的編碼 |
-| `is_ascii` | boolean | 偵測到的編碼 |
-| `has_bom` | boolean | 信心水準（0-1） |
+| `encoding` | string | Detected encoding |
+| `confidence` | number | Confidence score (0-1) |
+| `is_ascii` | boolean | Whether text is pure ASCII |
+| `has_bom` | boolean | Whether BOM was detected |
 
-### 提取電子郵件
+### Extract Emails
 
 `text.extract_emails`
 
-從文字中提取所有電子郵件地址
+Extract all email addresses from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 要從中提取電子郵件的文字 |
-| `unique` | boolean | No | `True` | 要從中提取電子郵件的文字 |
-| `lowercase` | boolean | No | `True` | 僅返回唯一的電子郵件 |
+| `text` | text | Yes | - | Text to extract emails from |
+| `unique` | boolean | No | `True` | Return only unique emails |
+| `lowercase` | boolean | No | `True` | Convert emails to lowercase |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `emails` | array | 將電子郵件轉為小寫 |
-| `count` | number | 提取的電子郵件列表 |
-| `domains` | array | 提取的電子郵件列表 |
+| `emails` | array | List of extracted emails |
+| `count` | number | Number of emails found |
+| `domains` | array | Unique domains found |
 
-### 提取數字
+### Extract Numbers
 
 `text.extract_numbers`
 
-從文字中提取所有數字
+Extract all numbers from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 要從中提取數字的文字 |
-| `include_decimals` | boolean | No | `True` | 要從中提取數字的文字 |
-| `include_negative` | boolean | No | `True` | 包含小數 |
+| `text` | text | Yes | - | Text to extract numbers from |
+| `include_decimals` | boolean | No | `True` | Include decimal numbers |
+| `include_negative` | boolean | No | `True` | Include negative numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `numbers` | array | 包含負數 |
-| `count` | number | 提取的數字列表 |
-| `sum` | number | 提取的數字列表 |
-| `min` | number | 找到的數字數量 |
-| `max` | number | 所有數字的總和 |
+| `numbers` | array | List of extracted numbers |
+| `count` | number | Number of numbers found |
+| `sum` | number | Sum of all numbers |
+| `min` | number | Minimum value |
+| `max` | number | Maximum value |
 
-### 提取 URL
+### Extract URLs
 
 `text.extract_urls`
 
-從文字中提取所有 URL
+Extract all URLs from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 要從中提取 URL 的文字 |
-| `unique` | boolean | No | `True` | 要從中提取 URL 的文字 |
+| `text` | text | Yes | - | Text to extract URLs from |
+| `unique` | boolean | No | `True` | Return only unique URLs |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `urls` | array | 僅返回唯一的 URL |
-| `count` | number | 提取的 URL 列表 |
+| `urls` | array | List of extracted URLs |
+| `count` | number | Number of URLs found |
 
-### 字數統計
+### Word Count
 
 `text.word_count`
 
-計算文字中的字數
+Count words in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 要分析的文字 |
+| `text` | text | Yes | - | Text to analyze |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `word_count` | number | 要分析的文字 |
-| `unique_words` | number | 總字數 |
-| `sentence_count` | number | 總字數 |
-| `paragraph_count` | number | 獨特單字數量 |
-| `avg_word_length` | number | 大約的句子數 |
+| `word_count` | number | Total word count |
+| `unique_words` | number | Number of unique words |
+| `sentence_count` | number | Approximate sentence count |
+| `paragraph_count` | number | Paragraph count |
+| `avg_word_length` | number | Average word length |

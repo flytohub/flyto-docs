@@ -6,89 +6,89 @@ Set operations: union, intersection, difference, unique.
 
 | Module | Description |
 |--------|-------------|
-| [集合差](#集合差) | 最初の配列にあるが他にはない要素を取得 |
-| [集合積](#集合積) | 2つ以上の配列の共通部分を取得 |
-| [集合和](#集合和) | 2つ以上の配列の和集合を取得 |
-| [集合ユニーク](#集合ユニーク) | 配列から重複する要素を削除 |
+| [Set Difference](#set-difference) | Get elements in first array but not in others |
+| [Set Intersection](#set-intersection) | Get intersection of two or more arrays |
+| [Set Union](#set-union) | Get union of two or more arrays |
+| [Set Unique](#set-unique) | Remove duplicate elements from array |
 
 ## Modules
 
-### 集合差
+### Set Difference
 
 `set.difference`
 
-最初の配列にあるが他にはない要素を取得
+Get elements in first array but not in others
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `source` | array | Yes | - | ソース配列 |
-| `exclude` | array | Yes | - | ソース配列 |
+| `source` | array | Yes | - | Source array |
+| `exclude` | array | Yes | - | Arrays of elements to exclude |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 除外する要素の配列 |
-| `count` | number | ソースにあるが除外配列にはない要素 |
-| `removed_count` | number | ソースにあるが除外配列にはない要素 |
+| `result` | array | Elements in source but not in exclude arrays |
+| `count` | number | Number of remaining elements |
+| `removed_count` | number | Number of elements removed |
 
-### 集合積
+### Set Intersection
 
 `set.intersection`
 
-2つ以上の配列の共通部分を取得
+Get intersection of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | 交差する配列（配列の配列） |
+| `arrays` | array | Yes | - | Arrays to intersect (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 交差する配列（配列の配列） |
-| `count` | number | すべての配列の共通部分 |
+| `result` | array | Intersection of all arrays |
+| `count` | number | Number of common elements |
 
-### 集合和
+### Set Union
 
 `set.union`
 
-2つ以上の配列の和集合を取得
+Get union of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | 結合する配列（配列の配列） |
+| `arrays` | array | Yes | - | Arrays to combine (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 結合する配列（配列の配列） |
-| `count` | number | すべての配列の和集合 |
+| `result` | array | Union of all arrays |
+| `count` | number | Number of unique elements |
 
-### 集合ユニーク
+### Set Unique
 
 `set.unique`
 
-配列から重複する要素を削除
+Remove duplicate elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | 重複を除去する配列 |
-| `preserve_order` | boolean | No | `True` | 重複を除去する配列 |
+| `array` | array | Yes | - | Array to deduplicate |
+| `preserve_order` | boolean | No | `True` | Keep first occurrence order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 最初の出現順を保持 |
-| `count` | number | ユニークな要素を持つ配列 |
-| `duplicates_removed` | number | ユニークな要素を持つ配列 |
+| `result` | array | Array with unique elements |
+| `count` | number | Number of unique elements |
+| `duplicates_removed` | number | Number of duplicates removed |

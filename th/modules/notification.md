@@ -6,33 +6,33 @@ Send messages via Slack, Discord, Teams, Telegram, email, SMS, and WhatsApp.
 
 | Module | Description |
 |--------|-------------|
-| [Twilio โทรออก](#twilio-โทรออก) | โทรออกผ่าน Twilio |
-| [Twilio ส่ง SMS](#twilio-ส่ง-sms) | ส่งข้อความ SMS ผ่าน Twilio |
-| [ส่งข้อความ Discord](#ส่งข้อความ-discord) | ส่งข้อความไปยัง Discord ผ่าน webhook |
-| [ส่งอีเมล](#ส่งอีเมล) | ส่งอีเมลผ่าน SMTP |
-| [ส่งข้อความ Slack](#ส่งข้อความ-slack) | ส่งข้อความไปยัง Slack ผ่าน webhook |
-| [ส่งข้อความ Teams](#ส่งข้อความ-teams) | ส่งข้อความไปยัง Microsoft Teams ผ่าน incoming webhook |
-| [ส่งข้อความ Telegram](#ส่งข้อความ-telegram) | ส่งข้อความผ่าน Telegram Bot API |
-| [ส่งข้อความ WhatsApp](#ส่งข้อความ-whatsapp) | ส่งข้อความผ่าน WhatsApp Business API (Meta Cloud API) |
+| [Twilio Make Call](#twilio-make-call) | Make a voice call via Twilio |
+| [Twilio Send SMS](#twilio-send-sms) | Send SMS message via Twilio |
+| [Send Discord Message](#send-discord-message) | Send message to Discord via webhook |
+| [Send Email](#send-email) | Send email via SMTP |
+| [Send Slack Message](#send-slack-message) | Send message to Slack via webhook |
+| [Send Teams Message](#send-teams-message) | Send message to Microsoft Teams via incoming webhook |
+| [Send Telegram Message](#send-telegram-message) | Send message via Telegram Bot API |
+| [Send WhatsApp Message](#send-whatsapp-message) | Send message via WhatsApp Business API (Meta Cloud API) |
 | [Send Notification](#send-notification) | Send notification to Telegram, Discord, Slack, LINE, or any webhook URL |
 
 ## Modules
 
-### Twilio โทรออก
+### Twilio Make Call
 
 `communication.twilio.make_call`
 
-โทรออกผ่าน Twilio
+Make a voice call via Twilio
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `account_sid` | string | No | - | Twilio Account SID (หรือใช้ตัวแปรสภาพแวดล้อม TWILIO_ACCOUNT_SID) |
-| `auth_token` | string | No | - | Twilio Auth Token (หรือใช้ตัวแปรสภาพแวดล้อม TWILIO_AUTH_TOKEN) |
-| `from_number` | string | Yes | - | Twilio Auth Token (หรือใช้ตัวแปรสภาพแวดล้อม TWILIO_AUTH_TOKEN) |
-| `to_number` | string | Yes | - | หมายเลขโทรศัพท์ Twilio |
-| `twiml_url` | string | Yes | - | หมายเลขโทรศัพท์ผู้รับ |
+| `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
+| `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
+| `from_number` | string | Yes | - | Twilio phone number |
+| `to_number` | string | Yes | - | Recipient phone number |
+| `twiml_url` | string | Yes | - | URL to TwiML instructions |
 
 **Output:**
 
@@ -51,30 +51,30 @@ to_number: +0987654321
 twiml_url: https://example.com/voice.xml
 ```
 
-### Twilio ส่ง SMS
+### Twilio Send SMS
 
 `communication.twilio.send_sms`
 
-ส่งข้อความ SMS ผ่าน Twilio
+Send SMS message via Twilio
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `account_sid` | string | No | - | Twilio Account SID (หรือใช้ตัวแปรสภาพแวดล้อม TWILIO_ACCOUNT_SID) |
-| `auth_token` | string | No | - | Twilio Auth Token (หรือใช้ตัวแปรสภาพแวดล้อม TWILIO_AUTH_TOKEN) |
-| `from_number` | string | Yes | - | หมายเลขโทรศัพท์ Twilio (เช่น +1234567890) |
-| `to_number` | string | Yes | - | หมายเลขโทรศัพท์ Twilio (เช่น +1234567890) |
-| `message` | string | Yes | - | หมายเลขโทรศัพท์ผู้รับ (เช่น +1234567890) |
+| `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
+| `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
+| `from_number` | string | Yes | - | Twilio phone number (e.g. +1234567890) |
+| `to_number` | string | Yes | - | Recipient phone number (e.g. +1234567890) |
+| `message` | string | Yes | - | SMS message text |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sid` | string | ข้อความ SMS |
-| `status` | string | ข้อความ SMS |
-| `to` | string | SID |
-| `from` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
+| `sid` | string | The sid |
+| `status` | string | Operation status (success/error) |
+| `to` | string | The to |
+| `from` | string | The from |
 
 **Example:** Send notification SMS
 
@@ -92,28 +92,28 @@ to_number: +0987654321
 message: Your verification code is: 123456
 ```
 
-### ส่งข้อความ Discord
+### Send Discord Message
 
 `notification.discord.send_message`
 
-ส่งข้อความไปยัง Discord ผ่าน webhook
+Send message to Discord via webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | No | - | Discord webhook URL (จาก env.DISCORD_WEBHOOK_URL หรืออินพุตโดยตรง) |
-| `content` | string | Yes | - | Discord webhook URL (จาก env.DISCORD_WEBHOOK_URL หรืออินพุตโดยตรง) |
-| `username` | string | No | - | ข้อความที่จะส่ง |
-| `avatar_url` | string | No | - | แทนที่ชื่อผู้ใช้บอท (ไม่บังคับ) |
+| `webhook_url` | string | No | - | Discord webhook URL (from env.DISCORD_WEBHOOK_URL or direct input) |
+| `content` | string | Yes | - | The message to send |
+| `username` | string | No | - | Override bot username (optional) |
+| `avatar_url` | string | No | - | Bot avatar image URL (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | URL รูปภาพ avatar ของบอท (ไม่บังคับ) |
-| `sent` | boolean | สถานะการดำเนินการ (success/error) |
-| `message` | string | ส่งข้อความไปยังช่อง Discord ผ่าน webhook URL |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -121,33 +121,33 @@ message: Your verification code is: 123456
 content: Workflow completed successfully!
 ```
 
-### ส่งอีเมล
+### Send Email
 
 `notification.email.send`
 
-ส่งอีเมลผ่าน SMTP
+Send email via SMTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `smtp_server` | string | Yes | - | ชื่อโฮสต์เซิร์ฟเวอร์ SMTP (เช่น smtp.gmail.com) |
-| `smtp_port` | number | No | `587` | ชื่อโฮสต์เซิร์ฟเวอร์ SMTP (เช่น smtp.gmail.com) |
-| `username` | string | Yes | - | พอร์ต SMTP (587 สำหรับ TLS, 465 สำหรับ SSL) |
-| `password` | string | Yes | - | ชื่อผู้ใช้ SMTP |
-| `from_email` | string | Yes | - | รหัสผ่าน SMTP (ใช้ตัวแปร env!) |
-| `to_email` | string | Yes | - | ที่อยู่อีเมลผู้ส่ง |
-| `subject` | string | Yes | - | ที่อยู่อีเมลผู้รับ |
-| `body` | text | Yes | - | หัวข้ออีเมล |
-| `html` | boolean | No | `False` | เนื้อหาอีเมล (รองรับ HTML) |
+| `smtp_server` | string | Yes | - | SMTP server hostname (e.g., smtp.gmail.com) |
+| `smtp_port` | number | No | `587` | SMTP port (587 for TLS, 465 for SSL) |
+| `username` | string | Yes | - | SMTP username |
+| `password` | string | Yes | - | SMTP password (use env variable!) |
+| `from_email` | string | Yes | - | Sender email address |
+| `to_email` | string | Yes | - | Recipient email address |
+| `subject` | string | Yes | - | Email subject |
+| `body` | text | Yes | - | Email body (HTML supported) |
+| `html` | boolean | No | `False` | Send body as HTML |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ส่งเนื้อหาเป็น HTML |
-| `sent` | boolean | สถานะการดำเนินการ (success/error) |
-| `message` | string | สถานะการดำเนินการ (success/error) |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -160,29 +160,29 @@ subject: Workflow Complete
 body: Your automation workflow has finished successfully.
 ```
 
-### ส่งข้อความ Slack
+### Send Slack Message
 
 `notification.slack.send_message`
 
-ส่งข้อความไปยัง Slack ผ่าน webhook
+Send message to Slack via webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | No | - | Slack webhook URL (จาก env.SLACK_WEBHOOK_URL หรืออินพุตโดยตรง) |
-| `text` | string | Yes | - | Slack webhook URL (จาก env.SLACK_WEBHOOK_URL หรืออินพุตโดยตรง) |
-| `channel` | string | No | - | ข้อความที่จะส่ง |
-| `username` | string | No | - | แทนที่ช่องเริ่มต้น (ไม่บังคับ) |
-| `icon_emoji` | string | No | - | แทนที่ชื่อผู้ใช้บอท (ไม่บังคับ) |
+| `webhook_url` | string | No | - | Slack webhook URL (from env.SLACK_WEBHOOK_URL or direct input) |
+| `text` | string | Yes | - | The message to send |
+| `channel` | string | No | - | Override default channel (optional) |
+| `username` | string | No | - | Override bot username (optional) |
+| `icon_emoji` | string | No | - | Bot icon emoji (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | อิโมจิไอคอนบอท (ไม่บังคับ) |
-| `sent` | boolean | สถานะการดำเนินการ (success/error) |
-| `message` | string | สถานะการดำเนินการ (success/error) |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -199,28 +199,28 @@ username: Alert Bot
 icon_emoji: :warning:
 ```
 
-### ส่งข้อความ Teams
+### Send Teams Message
 
 `notification.teams.send_message`
 
-ส่งข้อความไปยัง Microsoft Teams ผ่าน incoming webhook
+Send message to Microsoft Teams via incoming webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | Yes | - | URL ของ Microsoft Teams incoming webhook |
-| `message` | text | Yes | - | ข้อความที่ต้องการส่ง |
-| `title` | string | No | - | ชื่อการ์ดข้อความ (ไม่บังคับ) |
-| `color` | string | No | - | รหัสสีธีมแบบ hex (ไม่บังคับ) |
-| `sections` | array | No | - | ส่วนเพิ่มเติมของ MessageCard (ไม่บังคับ) |
+| `webhook_url` | string | Yes | - | Microsoft Teams incoming webhook URL |
+| `message` | text | Yes | - | The message text to send |
+| `title` | string | No | - | Message card title (optional) |
+| `color` | string | No | - | Theme color hex code (optional) |
+| `sections` | array | No | - | Additional MessageCard sections (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | การดำเนินการสำเร็จหรือไม่ |
-| `data` | object | ข้อมูลตอบกลับพร้อมสถานะและ webhook_url |
+| `ok` | boolean | Whether the operation succeeded |
+| `data` | object | Response data with status and webhook_url |
 
 **Example:** Example
 
@@ -231,29 +231,29 @@ title: Deploy Status
 color: #00FF00
 ```
 
-### ส่งข้อความ Telegram
+### Send Telegram Message
 
 `notification.telegram.send_message`
 
-ส่งข้อความผ่าน Telegram Bot API
+Send message via Telegram Bot API
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bot_token` | string | No | - | Telegram bot token (จาก env.TELEGRAM_BOT_TOKEN หรืออินพุตโดยตรง) |
-| `chat_id` | string | Yes | - | Telegram bot token (จาก env.TELEGRAM_BOT_TOKEN หรืออินพุตโดยตรง) |
-| `text` | string | Yes | - | Telegram chat ID หรือชื่อผู้ใช้ช่อง |
-| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | ข้อความที่จะส่ง |
+| `bot_token` | string | No | - | Telegram bot token (from env.TELEGRAM_BOT_TOKEN or direct input) |
+| `chat_id` | string | Yes | - | Telegram chat ID or channel username |
+| `text` | string | Yes | - | The message to send |
+| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | Message formatting mode |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | โหมดจัดรูปแบบข้อความ |
-| `sent` | boolean | สถานะการดำเนินการ (success/error) |
-| `message_id` | number | สถานะการดำเนินการ (success/error) |
-| `message` | string | การแจ้งเตือนส่งสำเร็จหรือไม่ |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message_id` | number | Message identifier |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -270,30 +270,30 @@ text: *Bold* _italic_ `code`
 parse_mode: Markdown
 ```
 
-### ส่งข้อความ WhatsApp
+### Send WhatsApp Message
 
 `notification.whatsapp.send_message`
 
-ส่งข้อความผ่าน WhatsApp Business API (Meta Cloud API)
+Send message via WhatsApp Business API (Meta Cloud API)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `phone_number_id` | string | Yes | - | ID หมายเลขโทรศัพท์ผู้ส่งของ WhatsApp Business |
-| `to` | string | Yes | - | หมายเลขโทรศัพท์ผู้รับพร้อมรหัสประเทศ |
-| `message` | text | Yes | - | ข้อความที่ต้องการส่ง |
-| `access_token` | password | Yes | - | Meta access token สำหรับ WhatsApp Business API |
-| `message_type` | select (`text`, `template`) | No | `text` | ประเภทของข้อความที่ต้องการส่ง |
-| `template_name` | string | No | - | ชื่อเทมเพลตข้อความ WhatsApp (จำเป็นถ้าประเภทข้อความคือเทมเพลต) |
-| `template_language` | string | No | `en` | รหัสภาษาของเทมเพลต |
+| `phone_number_id` | string | Yes | - | WhatsApp Business sender phone number ID |
+| `to` | string | Yes | - | Recipient phone number with country code |
+| `message` | text | Yes | - | The message text to send |
+| `access_token` | password | Yes | - | Meta access token for WhatsApp Business API |
+| `message_type` | select (`text`, `template`) | No | `text` | Type of message to send |
+| `template_name` | string | No | - | WhatsApp message template name (required if message_type is "template") |
+| `template_language` | string | No | `en` | Template language code |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | การดำเนินการสำเร็จหรือไม่ |
-| `data` | object | ข้อมูลตอบกลับพร้อมสถานะ, message_id และ to |
+| `ok` | boolean | Whether the operation succeeded |
+| `data` | object | Response data with status, message_id, and to |
 
 **Example:** Example
 

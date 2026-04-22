@@ -39,7 +39,7 @@ Read emails from IMAP server
 | Field | Type | Description |
 |-------|------|-------------|
 | `emails` | array | List of email objects |
-| `count` | number | List of email objects |
+| `count` | number | Number of emails fetched |
 
 **Example:** Read recent unread emails
 
@@ -78,8 +78,8 @@ Send email via SMTP server
 | Field | Type | Description |
 |-------|------|-------------|
 | `sent` | boolean | Whether email was sent successfully |
-| `message_id` | string | Whether email was sent successfully |
-| `recipients` | array | Whether email was sent successfully |
+| `message_id` | string | Email message ID |
+| `recipients` | array | List of recipients |
 
 **Example:** Send simple email
 
@@ -150,8 +150,8 @@ Send HTTP POST request to a webhook URL
 | Field | Type | Description |
 |-------|------|-------------|
 | `status_code` | number | HTTP response status code |
-| `response` | object | HTTP response status code |
-| `headers` | object | HTTP response status code |
+| `response` | object | Response body (if JSON) |
+| `headers` | object | Response headers |
 
 **Example:** Simple POST webhook
 

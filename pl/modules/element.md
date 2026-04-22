@@ -6,31 +6,31 @@ DOM element query, attribute, and text extraction.
 
 | Module | Description |
 |--------|-------------|
-| [Pobierz atrybut](#pobierz-atrybut) | Pobierz element |
-| [Zapytaj element](#zapytaj-element) | Znajdz elementy potomne wewnatrz elementu |
-| [Pobierz tekst](#pobierz-tekst) | Pobierz element |
+| [Get Attribute](#get-attribute) | Get element's attribute value |
+| [Query Element](#query-element) | Find child elements within element |
+| [Get Text](#get-text) | Get element's text content |
 
 ## Modules
 
-### Pobierz atrybut
+### Get Attribute
 
 `element.attribute`
 
-Pobierz element
+Get element's attribute value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | ID elementu (UUID) |
-| `name` | string | Yes | - | ID elementu (UUID) |
+| `element_id` | string | Yes | - | Element ID (UUID) |
+| `name` | string | Yes | - | Attribute name (e.g. href, src, class) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Nazwa atrybutu (np. href, src, class) |
-| `value` | string | Status operacji (sukces/blad) |
+| `status` | string | Operation status (success/error) |
+| `value` | string | The returned value |
 
 **Example:** Get href attribute
 
@@ -39,28 +39,28 @@ element_id: ${link_element}
 name: href
 ```
 
-### Zapytaj element
+### Query Element
 
 `element.query`
 
-Znajdz elementy potomne wewnatrz elementu
+Find child elements within element
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | ID elementu rodzica (UUID) |
-| `selector` | string | Yes | - | ID elementu rodzica (UUID) |
-| `all` | boolean | No | `False` | Selektor CSS do znajdowania elementow potomnych |
+| `element_id` | string | Yes | - | Parent element ID (UUID) |
+| `selector` | string | Yes | - | CSS selector to find child elements |
+| `all` | boolean | No | `False` | Whether to find all matching elements (default: false, find first only) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Czy znalezc wszystkie pasujace elementy (domyslnie: false, znajdz tylko pierwszy) |
-| `element_id` | string | Status operacji (sukces/blad) |
-| `element_ids` | array | Status operacji (sukces/blad) |
-| `count` | number | Znaleziony ID elementu (tryb pojedynczy) |
+| `status` | string | Operation status (success/error) |
+| `element_id` | string | Found element ID (single mode) |
+| `element_ids` | array | List of found element IDs (all mode) |
+| `count` | number | Number of elements found |
 
 **Example:** Find child element
 
@@ -69,24 +69,24 @@ element_id: ${result_item}
 selector: h3
 ```
 
-### Pobierz tekst
+### Get Text
 
 `element.text`
 
-Pobierz element
+Get element's text content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | ID elementu (UUID) |
+| `element_id` | string | Yes | - | Element ID (UUID) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ID elementu (UUID) |
-| `text` | string | ID elementu (UUID) |
+| `status` | string | Operation status (success/error) |
+| `text` | string | Text content |
 
 **Example:** Get element text
 

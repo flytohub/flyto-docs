@@ -6,123 +6,123 @@ Number, currency, duration, filesize, and percentage formatting.
 
 | Module | Description |
 |--------|-------------|
-| [Formatta Valuta](#formatta-valuta) | Formatta i numeri come valuta |
-| [Formatta Durata](#formatta-durata) | Formatta i secondi come durata leggibile |
-| [Formatta Dimensione File](#formatta-dimensione-file) | Formatta i byte come dimensione file leggibile |
-| [Formatta Numero](#formatta-numero) | Formatta i numeri con separatori e decimali |
-| [Formatta Percentuale](#formatta-percentuale) | Formatta i numeri come percentuali |
+| [Format Currency](#format-currency) | Format numbers as currency |
+| [Format Duration](#format-duration) | Format seconds as human-readable duration |
+| [Format Filesize](#format-filesize) | Format bytes as human-readable file size |
+| [Format Number](#format-number) | Format numbers with separators and decimals |
+| [Format Percentage](#format-percentage) | Format numbers as percentages |
 
 ## Modules
 
-### Formatta Valuta
+### Format Currency
 
 `format.currency`
 
-Formatta i numeri come valuta
+Format numbers as currency
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `amount` | number | Yes | - | Importo da formattare |
-| `currency` | string | No | `USD` | Importo da formattare |
-| `decimal_places` | number | No | `2` | Numero di cifre decimali |
-| `symbol_position` | string | No | `before` | Numero di cifre decimali |
+| `amount` | number | Yes | - | Amount to format |
+| `currency` | string | No | `USD` | Currency code (USD, EUR, GBP, etc) |
+| `decimal_places` | number | No | `2` | Number of decimal places |
+| `symbol_position` | string | No | `before` | Position of currency symbol |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Stringa di valuta formattata |
-| `original` | number | Stringa di valuta formattata |
-| `symbol` | string | Stringa di valuta formattata |
+| `result` | string | Formatted currency string |
+| `original` | number | Original amount |
+| `symbol` | string | Currency symbol used |
 
-### Formatta Durata
+### Format Duration
 
 `format.duration`
 
-Formatta i secondi come durata leggibile
+Format seconds as human-readable duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | Yes | - | Durata in secondi |
-| `format` | string | No | `short` | Durata in secondi |
-| `show_zero` | boolean | No | `False` | Mostra le unità che sono zero |
+| `seconds` | number | Yes | - | Duration in seconds |
+| `format` | string | No | `short` | Output format style |
+| `show_zero` | boolean | No | `False` | Show units that are zero |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Mostra le unità che sono zero |
-| `original` | number | Stringa di durata formattata |
-| `parts` | object | Stringa di durata formattata |
+| `result` | string | Formatted duration string |
+| `original` | number | Original seconds |
+| `parts` | object | Duration parts (days, hours, minutes, seconds) |
 
-### Formatta Dimensione File
+### Format Filesize
 
 `format.filesize`
 
-Formatta i byte come dimensione file leggibile
+Format bytes as human-readable file size
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bytes` | number | Yes | - | Dimensione in byte |
-| `binary` | boolean | No | `False` | Dimensione in byte |
-| `decimal_places` | number | No | `2` | Usa unità binarie (KiB, MiB) invece di decimali (KB, MB) |
+| `bytes` | number | Yes | - | Size in bytes |
+| `binary` | boolean | No | `False` | Use binary units (KiB, MiB) instead of decimal (KB, MB) |
+| `decimal_places` | number | No | `2` | Number of decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Numero di cifre decimali |
-| `original` | number | Stringa di dimensione file formattata |
-| `unit` | string | Stringa di dimensione file formattata |
-| `value` | number | Byte originali |
+| `result` | string | Formatted file size string |
+| `original` | number | Original bytes |
+| `unit` | string | Unit used |
+| `value` | number | Numeric value in unit |
 
-### Formatta Numero
+### Format Number
 
 `format.number`
 
-Formatta i numeri con separatori e decimali
+Format numbers with separators and decimals
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `number` | number | Yes | - | Numero da formattare |
-| `decimal_places` | number | No | `2` | Numero da formattare |
-| `thousand_separator` | string | No | `,` | Numero di cifre decimali |
-| `decimal_separator` | string | No | `.` | Separatore per migliaia |
+| `number` | number | Yes | - | Number to format |
+| `decimal_places` | number | No | `2` | Number of decimal places |
+| `thousand_separator` | string | No | `,` | Separator for thousands |
+| `decimal_separator` | string | No | `.` | Separator for decimals |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Separatore per decimali |
-| `original` | number | Stringa di numero formattata |
+| `result` | string | Formatted number string |
+| `original` | number | Original number |
 
-### Formatta Percentuale
+### Format Percentage
 
 `format.percentage`
 
-Formatta i numeri come percentuali
+Format numbers as percentages
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | number | Yes | - | Valore da formattare come percentuale |
-| `is_ratio` | boolean | No | `True` | Valore da formattare come percentuale |
-| `decimal_places` | number | No | `1` | L'input è un rapporto (0-1) che deve essere moltiplicato per 100 |
-| `include_sign` | boolean | No | `False` | Numero di cifre decimali |
+| `value` | number | Yes | - | Value to format as percentage |
+| `is_ratio` | boolean | No | `True` | Input is a ratio (0-1) that needs to be multiplied by 100 |
+| `decimal_places` | number | No | `1` | Number of decimal places |
+| `include_sign` | boolean | No | `False` | Include + sign for positive values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Includi il segno + per i valori positivi |
-| `original` | number | Stringa percentuale formattata |
-| `numeric` | number | Stringa percentuale formattata |
+| `result` | string | Formatted percentage string |
+| `original` | number | Original value |
+| `numeric` | number | Numeric percentage value |

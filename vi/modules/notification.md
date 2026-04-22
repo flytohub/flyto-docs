@@ -6,33 +6,33 @@ Send messages via Slack, Discord, Teams, Telegram, email, SMS, and WhatsApp.
 
 | Module | Description |
 |--------|-------------|
-| [Gọi điện Twilio](#gọi-điện-twilio) | Thực hiện cuộc gọi thoại qua Twilio |
-| [Gửi SMS Twilio](#gửi-sms-twilio) | Gửi tin nhắn SMS qua Twilio |
-| [Gửi tin nhắn Discord](#gửi-tin-nhắn-discord) | Gửi tin nhắn đến Discord qua webhook |
-| [Gửi Email](#gửi-email) | Gửi email qua SMTP |
-| [Gửi tin nhắn Slack](#gửi-tin-nhắn-slack) | Gửi tin nhắn đến Slack qua webhook |
-| [Gửi Tin Nhắn Teams](#gửi-tin-nhắn-teams) | Gửi tin nhắn đến Microsoft Teams qua webhook đầu vào |
-| [Gửi tin nhắn Telegram](#gửi-tin-nhắn-telegram) | Gửi tin nhắn qua API Bot Telegram |
-| [Gửi Tin Nhắn WhatsApp](#gửi-tin-nhắn-whatsapp) | Gửi tin nhắn qua WhatsApp Business API (Meta Cloud API) |
+| [Twilio Make Call](#twilio-make-call) | Make a voice call via Twilio |
+| [Twilio Send SMS](#twilio-send-sms) | Send SMS message via Twilio |
+| [Send Discord Message](#send-discord-message) | Send message to Discord via webhook |
+| [Send Email](#send-email) | Send email via SMTP |
+| [Send Slack Message](#send-slack-message) | Send message to Slack via webhook |
+| [Send Teams Message](#send-teams-message) | Send message to Microsoft Teams via incoming webhook |
+| [Send Telegram Message](#send-telegram-message) | Send message via Telegram Bot API |
+| [Send WhatsApp Message](#send-whatsapp-message) | Send message via WhatsApp Business API (Meta Cloud API) |
 | [Send Notification](#send-notification) | Send notification to Telegram, Discord, Slack, LINE, or any webhook URL |
 
 ## Modules
 
-### Gọi điện Twilio
+### Twilio Make Call
 
 `communication.twilio.make_call`
 
-Thực hiện cuộc gọi thoại qua Twilio
+Make a voice call via Twilio
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `account_sid` | string | No | - | Account SID Twilio (hoặc sử dụng biến env TWILIO_ACCOUNT_SID) |
-| `auth_token` | string | No | - | Auth Token Twilio (hoặc sử dụng biến env TWILIO_AUTH_TOKEN) |
-| `from_number` | string | Yes | - | Auth Token Twilio (hoặc sử dụng biến env TWILIO_AUTH_TOKEN) |
-| `to_number` | string | Yes | - | Số điện thoại Twilio |
-| `twiml_url` | string | Yes | - | Số điện thoại người nhận |
+| `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
+| `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
+| `from_number` | string | Yes | - | Twilio phone number |
+| `to_number` | string | Yes | - | Recipient phone number |
+| `twiml_url` | string | Yes | - | URL to TwiML instructions |
 
 **Output:**
 
@@ -51,30 +51,30 @@ to_number: +0987654321
 twiml_url: https://example.com/voice.xml
 ```
 
-### Gửi SMS Twilio
+### Twilio Send SMS
 
 `communication.twilio.send_sms`
 
-Gửi tin nhắn SMS qua Twilio
+Send SMS message via Twilio
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `account_sid` | string | No | - | Account SID Twilio (hoặc sử dụng biến env TWILIO_ACCOUNT_SID) |
-| `auth_token` | string | No | - | Auth Token Twilio (hoặc sử dụng biến env TWILIO_AUTH_TOKEN) |
-| `from_number` | string | Yes | - | Số điện thoại Twilio (ví dụ: +1234567890) |
-| `to_number` | string | Yes | - | Số điện thoại Twilio (ví dụ: +1234567890) |
-| `message` | string | Yes | - | Số điện thoại người nhận (ví dụ: +1234567890) |
+| `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
+| `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
+| `from_number` | string | Yes | - | Twilio phone number (e.g. +1234567890) |
+| `to_number` | string | Yes | - | Recipient phone number (e.g. +1234567890) |
+| `message` | string | Yes | - | SMS message text |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sid` | string | Nội dung tin nhắn SMS |
-| `status` | string | Nội dung tin nhắn SMS |
-| `to` | string | SID |
-| `from` | string | Trạng thái thao tác (success/error) |
+| `sid` | string | The sid |
+| `status` | string | Operation status (success/error) |
+| `to` | string | The to |
+| `from` | string | The from |
 
 **Example:** Send notification SMS
 
@@ -92,28 +92,28 @@ to_number: +0987654321
 message: Your verification code is: 123456
 ```
 
-### Gửi tin nhắn Discord
+### Send Discord Message
 
 `notification.discord.send_message`
 
-Gửi tin nhắn đến Discord qua webhook
+Send message to Discord via webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | No | - | URL webhook Discord (từ env.DISCORD_WEBHOOK_URL hoặc nhập trực tiếp) |
-| `content` | string | Yes | - | URL webhook Discord (từ env.DISCORD_WEBHOOK_URL hoặc nhập trực tiếp) |
-| `username` | string | No | - | Tin nhắn cần gửi |
-| `avatar_url` | string | No | - | Ghi đè tên bot (tùy chọn) |
+| `webhook_url` | string | No | - | Discord webhook URL (from env.DISCORD_WEBHOOK_URL or direct input) |
+| `content` | string | Yes | - | The message to send |
+| `username` | string | No | - | Override bot username (optional) |
+| `avatar_url` | string | No | - | Bot avatar image URL (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | URL hình ảnh avatar bot (tùy chọn) |
-| `sent` | boolean | Trạng thái thao tác (success/error) |
-| `message` | string | Gửi tin nhắn đến kênh Discord qua URL webhook |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -121,33 +121,33 @@ Gửi tin nhắn đến Discord qua webhook
 content: Workflow completed successfully!
 ```
 
-### Gửi Email
+### Send Email
 
 `notification.email.send`
 
-Gửi email qua SMTP
+Send email via SMTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `smtp_server` | string | Yes | - | Tên máy chủ SMTP (ví dụ: smtp.gmail.com) |
-| `smtp_port` | number | No | `587` | Tên máy chủ SMTP (ví dụ: smtp.gmail.com) |
-| `username` | string | Yes | - | Cổng SMTP (587 cho TLS, 465 cho SSL) |
-| `password` | string | Yes | - | Tên đăng nhập SMTP |
-| `from_email` | string | Yes | - | Mật khẩu SMTP (sử dụng biến env!) |
-| `to_email` | string | Yes | - | Địa chỉ email người gửi |
-| `subject` | string | Yes | - | Địa chỉ email người nhận |
-| `body` | text | Yes | - | Chủ đề email |
-| `html` | boolean | No | `False` | Nội dung email (hỗ trợ HTML) |
+| `smtp_server` | string | Yes | - | SMTP server hostname (e.g., smtp.gmail.com) |
+| `smtp_port` | number | No | `587` | SMTP port (587 for TLS, 465 for SSL) |
+| `username` | string | Yes | - | SMTP username |
+| `password` | string | Yes | - | SMTP password (use env variable!) |
+| `from_email` | string | Yes | - | Sender email address |
+| `to_email` | string | Yes | - | Recipient email address |
+| `subject` | string | Yes | - | Email subject |
+| `body` | text | Yes | - | Email body (HTML supported) |
+| `html` | boolean | No | `False` | Send body as HTML |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Gửi nội dung dưới dạng HTML |
-| `sent` | boolean | Trạng thái thao tác (success/error) |
-| `message` | string | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -160,29 +160,29 @@ subject: Workflow Complete
 body: Your automation workflow has finished successfully.
 ```
 
-### Gửi tin nhắn Slack
+### Send Slack Message
 
 `notification.slack.send_message`
 
-Gửi tin nhắn đến Slack qua webhook
+Send message to Slack via webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | No | - | URL webhook Slack (từ env.SLACK_WEBHOOK_URL hoặc nhập trực tiếp) |
-| `text` | string | Yes | - | URL webhook Slack (từ env.SLACK_WEBHOOK_URL hoặc nhập trực tiếp) |
-| `channel` | string | No | - | Tin nhắn cần gửi |
-| `username` | string | No | - | Ghi đè kênh mặc định (tùy chọn) |
-| `icon_emoji` | string | No | - | Ghi đè tên bot (tùy chọn) |
+| `webhook_url` | string | No | - | Slack webhook URL (from env.SLACK_WEBHOOK_URL or direct input) |
+| `text` | string | Yes | - | The message to send |
+| `channel` | string | No | - | Override default channel (optional) |
+| `username` | string | No | - | Override bot username (optional) |
+| `icon_emoji` | string | No | - | Bot icon emoji (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Emoji icon bot (tùy chọn) |
-| `sent` | boolean | Trạng thái thao tác (success/error) |
-| `message` | string | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -199,28 +199,28 @@ username: Alert Bot
 icon_emoji: :warning:
 ```
 
-### Gửi Tin Nhắn Teams
+### Send Teams Message
 
 `notification.teams.send_message`
 
-Gửi tin nhắn đến Microsoft Teams qua webhook đầu vào
+Send message to Microsoft Teams via incoming webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | Yes | - | URL webhook đầu vào của Microsoft Teams |
-| `message` | text | Yes | - | Nội dung tin nhắn để gửi |
-| `title` | string | No | - | Tiêu đề thẻ tin nhắn (tùy chọn) |
-| `color` | string | No | - | Mã màu chủ đề hex (tùy chọn) |
-| `sections` | array | No | - | Các phần MessageCard bổ sung (tùy chọn) |
+| `webhook_url` | string | Yes | - | Microsoft Teams incoming webhook URL |
+| `message` | text | Yes | - | The message text to send |
+| `title` | string | No | - | Message card title (optional) |
+| `color` | string | No | - | Theme color hex code (optional) |
+| `sections` | array | No | - | Additional MessageCard sections (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Hoạt động có thành công hay không |
-| `data` | object | Dữ liệu phản hồi với trạng thái và webhook_url |
+| `ok` | boolean | Whether the operation succeeded |
+| `data` | object | Response data with status and webhook_url |
 
 **Example:** Example
 
@@ -231,29 +231,29 @@ title: Deploy Status
 color: #00FF00
 ```
 
-### Gửi tin nhắn Telegram
+### Send Telegram Message
 
 `notification.telegram.send_message`
 
-Gửi tin nhắn qua API Bot Telegram
+Send message via Telegram Bot API
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bot_token` | string | No | - | Token bot Telegram (từ env.TELEGRAM_BOT_TOKEN hoặc nhập trực tiếp) |
-| `chat_id` | string | Yes | - | Token bot Telegram (từ env.TELEGRAM_BOT_TOKEN hoặc nhập trực tiếp) |
-| `text` | string | Yes | - | ID chat Telegram hoặc tên kênh |
-| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | Tin nhắn cần gửi |
+| `bot_token` | string | No | - | Telegram bot token (from env.TELEGRAM_BOT_TOKEN or direct input) |
+| `chat_id` | string | Yes | - | Telegram chat ID or channel username |
+| `text` | string | Yes | - | The message to send |
+| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | Message formatting mode |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Chế độ định dạng tin nhắn |
-| `sent` | boolean | Trạng thái thao tác (success/error) |
-| `message_id` | number | Trạng thái thao tác (success/error) |
-| `message` | string | Thông báo đã được gửi chưa |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message_id` | number | Message identifier |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -270,30 +270,30 @@ text: *Bold* _italic_ `code`
 parse_mode: Markdown
 ```
 
-### Gửi Tin Nhắn WhatsApp
+### Send WhatsApp Message
 
 `notification.whatsapp.send_message`
 
-Gửi tin nhắn qua WhatsApp Business API (Meta Cloud API)
+Send message via WhatsApp Business API (Meta Cloud API)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `phone_number_id` | string | Yes | - | ID số điện thoại người gửi WhatsApp Business |
-| `to` | string | Yes | - | Số điện thoại người nhận với mã quốc gia |
-| `message` | text | Yes | - | Nội dung tin nhắn để gửi |
-| `access_token` | password | Yes | - | Meta access token cho WhatsApp Business API |
-| `message_type` | select (`text`, `template`) | No | `text` | Loại tin nhắn để gửi |
-| `template_name` | string | No | - | Tên mẫu tin nhắn WhatsApp (bắt buộc nếu message_type là template) |
-| `template_language` | string | No | `en` | Mã ngôn ngữ mẫu |
+| `phone_number_id` | string | Yes | - | WhatsApp Business sender phone number ID |
+| `to` | string | Yes | - | Recipient phone number with country code |
+| `message` | text | Yes | - | The message text to send |
+| `access_token` | password | Yes | - | Meta access token for WhatsApp Business API |
+| `message_type` | select (`text`, `template`) | No | `text` | Type of message to send |
+| `template_name` | string | No | - | WhatsApp message template name (required if message_type is "template") |
+| `template_language` | string | No | `en` | Template language code |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Hoạt động có thành công hay không |
-| `data` | object | Dữ liệu phản hồi với trạng thái, message_id, và người nhận |
+| `ok` | boolean | Whether the operation succeeded |
+| `data` | object | Response data with status, message_id, and to |
 
 **Example:** Example
 

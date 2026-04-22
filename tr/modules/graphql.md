@@ -6,34 +6,34 @@ Execute GraphQL queries and mutations.
 
 | Module | Description |
 |--------|-------------|
-| [GraphQL Mutasyonu](#graphql-mutasyonu) | Bir uç noktaya karşı GraphQL mutasyonu çalıştır |
-| [GraphQL Sorgusu](#graphql-sorgusu) | Bir uç noktaya karşı GraphQL sorgusu çalıştır |
+| [GraphQL Mutation](#graphql-mutation) | Execute a GraphQL mutation against an endpoint |
+| [GraphQL Query](#graphql-query) | Execute a GraphQL query against an endpoint |
 
 ## Modules
 
-### GraphQL Mutasyonu
+### GraphQL Mutation
 
 `graphql.mutation`
 
-Bir uç noktaya karşı GraphQL mutasyonu çalıştır
+Execute a GraphQL mutation against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | GraphQL uç nokta URL'si |
-| `mutation` | string | Yes | - | GraphQL mutasyon metni |
-| `variables` | object | No | - | Anahtar-değer çiftleri olarak GraphQL mutasyon değişkenleri |
-| `headers` | object | No | - | İstekle birlikte gönderilecek ek HTTP başlıkları |
-| `auth_token` | string | No | - | Kimlik doğrulama için Bearer belirteci (Authorization başlığı olarak eklenir) |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `mutation` | string | Yes | - | GraphQL mutation string |
+| `variables` | object | No | - | GraphQL mutation variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | GraphQL yanıt verileri |
-| `errors` | array | GraphQL hataları (hata yoksa null) |
-| `status_code` | number | HTTP durum kodu |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Create user mutation
 
@@ -43,29 +43,29 @@ mutation: mutation CreateUser($input: UserInput!) { createUser(input: $input) { 
 variables: {"input": {"name": "John", "email": "john@example.com"}}
 ```
 
-### GraphQL Sorgusu
+### GraphQL Query
 
 `graphql.query`
 
-Bir uç noktaya karşı GraphQL sorgusu çalıştır
+Execute a GraphQL query against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | GraphQL uç nokta URL'si |
-| `query` | string | Yes | - | GraphQL sorgu metni |
-| `variables` | object | No | - | Anahtar-değer çiftleri olarak GraphQL sorgu değişkenleri |
-| `headers` | object | No | - | İstekle birlikte gönderilecek ek HTTP başlıkları |
-| `auth_token` | string | No | - | Kimlik doğrulama için Bearer belirteci (Authorization başlığı olarak eklenir) |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `query` | string | Yes | - | GraphQL query string |
+| `variables` | object | No | - | GraphQL query variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | GraphQL yanıt verileri |
-| `errors` | array | GraphQL hataları (hata yoksa null) |
-| `status_code` | number | HTTP durum kodu |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Simple query
 

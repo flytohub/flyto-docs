@@ -6,114 +6,114 @@ Boolean logic operations: AND, OR, NOT, equals, contains.
 
 | Module | Description |
 |--------|-------------|
-| [論理 AND](#論理-and) | 論理 AND 演算を実行する |
-| [論理 Contains](#論理-contains) | 値が他の値を含むか確認する |
-| [論理 Equals](#論理-equals) | 2つの値が等しいか確認する |
-| [論理 NOT](#論理-not) | 論理 NOT 演算を実行する |
-| [論理 OR](#論理-or) | 論理 OR 演算を実行する |
+| [Logic AND](#logic-and) | Perform logical AND operation |
+| [Logic Contains](#logic-contains) | Check if a value contains another value |
+| [Logic Equals](#logic-equals) | Check if two values are equal |
+| [Logic NOT](#logic-not) | Perform logical NOT operation |
+| [Logic OR](#logic-or) | Perform logical OR operation |
 
 ## Modules
 
-### 論理 AND
+### Logic AND
 
 `logic.and`
 
-論理 AND 演算を実行する
+Perform logical AND operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | AND するブール値 |
+| `values` | array | Yes | - | Boolean values to AND together |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | AND するブール値 |
-| `true_count` | number | AND 演算の結果 |
-| `total_count` | number | AND 演算の結果 |
+| `result` | boolean | Result of AND operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |
 
-### 論理 Contains
+### Logic Contains
 
 `logic.contains`
 
-値が他の値を含むか確認する
+Check if a value contains another value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `haystack` | text | Yes | - | 検索する値（文字列、配列、またはオブジェクト） |
-| `needle` | text | Yes | - | 検索する値（文字列、配列、またはオブジェクト） |
-| `case_sensitive` | boolean | No | `True` | 検索する値 |
+| `haystack` | text | Yes | - | Value to search in (string, array, or object) |
+| `needle` | text | Yes | - | Value to search for |
+| `case_sensitive` | boolean | No | `True` | Case sensitive search for strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 文字列の大文字小文字を区別して検索 |
-| `position` | number | 干し草の中に針が含まれているか |
-| `count` | number | 干し草の中に針が含まれているか |
+| `result` | boolean | Whether haystack contains needle |
+| `position` | number | Position/index where found (-1 if not found) |
+| `count` | number | Number of occurrences |
 
-### 論理 Equals
+### Logic Equals
 
 `logic.equals`
 
-2つの値が等しいか確認する
+Check if two values are equal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `a` | text | Yes | - | 比較する最初の値 |
-| `b` | text | Yes | - | 比較する最初の値 |
-| `strict` | boolean | No | `False` | 比較する2番目の値 |
-| `case_sensitive` | boolean | No | `True` | 同じ型を要求する（型の強制なし） |
+| `a` | text | Yes | - | First value to compare |
+| `b` | text | Yes | - | Second value to compare |
+| `strict` | boolean | No | `False` | Require same type (no type coercion) |
+| `case_sensitive` | boolean | No | `True` | Case sensitive string comparison |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 文字列の大文字小文字を区別して比較 |
-| `type_a` | string | 値が等しいかどうか |
-| `type_b` | string | 値が等しいかどうか |
+| `result` | boolean | Whether values are equal |
+| `type_a` | string | Type of first value |
+| `type_b` | string | Type of second value |
 
-### 論理 NOT
+### Logic NOT
 
 `logic.not`
 
-論理 NOT 演算を実行する
+Perform logical NOT operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | boolean | Yes | `False` | 否定するブール値 |
+| `value` | boolean | Yes | `False` | Boolean value to negate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 否定するブール値 |
-| `original` | boolean | 否定された結果 |
+| `result` | boolean | Negated result |
+| `original` | boolean | Original value |
 
-### 論理 OR
+### Logic OR
 
 `logic.or`
 
-論理 OR 演算を実行する
+Perform logical OR operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | OR するブール値 |
+| `values` | array | Yes | - | Boolean values to OR together |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | OR するブール値 |
-| `true_count` | number | OR 演算の結果 |
-| `total_count` | number | OR 演算の結果 |
+| `result` | boolean | Result of OR operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |

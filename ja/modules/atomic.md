@@ -2,62 +2,63 @@
 
 Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and testing.
 
-**44 modules**
+**45 modules**
 
 | Module | Description |
 |--------|-------------|
-| [配列フィルター](#配列フィルター) | 条件によって配列要素をフィルタリングする |
-| [配列ソート](#配列ソート) | 配列要素を昇順または降順でソートする |
-| [配列ユニーク](#配列ユニーク) | 配列から重複値を除去する |
+| [Filter Array](#filter-array) | Filter array elements by condition |
+| [Sort Array](#sort-array) | Sort array elements in ascending or descending order |
+| [Array Unique](#array-unique) | Remove duplicate values from array |
 | [OAuth2 Token Exchange](#oauth2-token-exchange) | Exchange authorization code, refresh token, or client credentials for an access token |
-| [DNSルックアップ](#dnsルックアップ) | ドメインレコードのDNSルックアップ |
-| [テキスト差分](#テキスト差分) | 2つのテキスト文字列の差分を生成 |
-| [ファイル編集](#ファイル編集) | 正確な文字列マッチングを使用してファイル内のテキストを置換 |
-| [ファイル存在確認](#ファイル存在確認) | ファイルまたはディレクトリが存在するか確認する |
-| [ファイル読み込み](#ファイル読み込み) | ファイルからコンテンツを読み込む |
-| [ファイル書き込み](#ファイル書き込み) | ファイルにコンテンツを書き込む |
-| [Git クローン](#git-クローン) | Git リポジトリをクローンする |
-| [Git コミット](#git-コミット) | Git コミットを作成する |
-| [Git 差分](#git-差分) | Git 差分を取得する |
+| [DNS Lookup](#dns-lookup) | DNS lookup for domain records |
+| [Diff Content](#diff-content) | Generate unified diff between original and modified content |
+| [Edit File](#edit-file) | Replace a string in a file (targeted edit, not full overwrite) |
+| [Check File Exists](#check-file-exists) | Check if a file or directory exists |
+| [Read File](#read-file) | Read content from a file |
+| [Write File](#write-file) | Write content to a file |
+| [Git Clone](#git-clone) | Clone a git repository |
+| [Git Commit](#git-commit) | Create a git commit |
+| [Git Diff](#git-diff) | Get git diff |
+| [HTTP Batch](#http-batch) | Run a batch of HTTP probes sequentially and capture timing + body |
 | [HTTP Paginate](#http-paginate) | Automatically iterate through paginated API endpoints and collect all results |
-| [HTTPリクエスト](#httpリクエスト) | HTTPリクエストを送信してレスポンスを受け取る |
-| [HTTPレスポンス検証](#httpレスポンス検証) | HTTPレスポンスのプロパティを検証する |
+| [HTTP Request](#http-request) | Send HTTP request and receive response |
+| [Assert HTTP Response](#assert-http-response) | Assert and validate HTTP response properties |
 | [HTTP Session](#http-session) | Send a sequence of HTTP requests with persistent cookies (login → action → logout) |
 | [Webhook Wait](#webhook-wait) | Start a temporary server and wait for an incoming webhook callback |
-| [LLMチャット](#llmチャット) | インテリジェントな操作のためにLLM APIと対話 |
-| [AIコード修正](#aiコード修正) | 問題に基づいてコード修正を自動生成 |
-| [計算](#計算) | 基本的な数学演算を実行 |
-| [HTTPヘルスチェック](#httpヘルスチェック) | HTTPヘルスチェック / アップタイムモニター |
-| [ポートチェック](#ポートチェック) | ネットワークポートが開いているか閉じているかをチェック |
-| [ポート待機](#ポート待機) | ネットワークポートが利用可能になるまで待機 |
-| [プロセス一覧](#プロセス一覧) | 実行中のすべてのバックグラウンドプロセスを一覧表示 |
-| [バックグラウンドプロセス開始](#バックグラウンドプロセス開始) | バックグラウンドプロセス（サーバー、サービスなど）を開始 |
-| [プロセス停止](#プロセス停止) | 実行中のバックグラウンドプロセスを停止 |
-| [シェルコマンド実行](#シェルコマンド実行) | シェルコマンドを実行して出力をキャプチャ |
-| [SSH 実行](#ssh-実行) | SSH を使ってリモートサーバーでコマンドを実行 |
-| [SFTP ダウンロード](#sftp-ダウンロード) | SFTP を使ってリモートサーバーからファイルをダウンロード |
-| [SFTP アップロード](#sftp-アップロード) | SFTP を使ってリモートサーバーにファイルをアップロード |
-| [E2Eステップ実行](#e2eステップ実行) | エンドツーエンドテストステップを順次実行 |
-| [品質ゲート](#品質ゲート) | 定義されたしきい値に対して品質メトリクスを評価 |
-| [HTTPテスト実行](#httpテスト実行) | HTTP APIテストスイートを実行 |
-| [リンター実行](#リンター実行) | ソースコードでリンティングチェックを実行 |
-| [レポート生成](#レポート生成) | テスト実行レポートを生成 |
-| [シナリオ実行](#シナリオ実行) | シナリオベースのテスト（BDDスタイル）を実行 |
-| [セキュリティスキャン](#セキュリティスキャン) | セキュリティ脆弱性をスキャン |
-| [テストスイート実行](#テストスイート実行) | テストのコレクションを実行 |
-| [ユニットテスト実行](#ユニットテスト実行) | ユニットテストを実行 |
-| [ビジュアル比較](#ビジュアル比較) | ビジュアル出力の違いを比較 |
-| [UI品質評価](#ui品質評価) | 多次元スコアリングによる包括的なUI品質評価 |
-| [AIで画像を分析](#aiで画像を分析) | OpenAI Vision API（GPT-4V）を使用して画像を分析 |
-| [画像比較](#画像比較) | 2つの画像を比較して視覚的な違いを特定 |
+| [LLM Chat](#llm-chat) | Interact with LLM APIs for intelligent operations |
+| [AI Code Fix](#ai-code-fix) | Automatically generate code fixes based on issues |
+| [Calculate](#calculate) | Perform basic mathematical operations |
+| [HTTP Health Check](#http-health-check) | HTTP health check / uptime monitor |
+| [Check Port](#check-port) | Check if network port(s) are open or closed |
+| [Wait for Port](#wait-for-port) | Wait for a network port to become available |
+| [List Processes](#list-processes) | List all running background processes |
+| [Start Background Process](#start-background-process) | Start a background process (server, service, etc.) |
+| [Stop Process](#stop-process) | Stop a running background process |
+| [Execute Shell Command](#execute-shell-command) | Execute a shell command and capture output |
+| [SSH Execute](#ssh-execute) | Execute command on remote server via SSH |
+| [SFTP Download](#sftp-download) | Download file from remote server via SFTP |
+| [SFTP Upload](#sftp-upload) | Upload file to remote server via SFTP |
+| [Run E2E Steps](#run-e2e-steps) | Execute end-to-end test steps sequentially |
+| [Quality Gate](#quality-gate) | Evaluate quality metrics against defined thresholds |
+| [Run HTTP Tests](#run-http-tests) | Execute HTTP API test suite |
+| [Run Linter](#run-linter) | Run linting checks on source code |
+| [Generate Report](#generate-report) | Generate test execution report |
+| [Run Scenario](#run-scenario) | Execute scenario-based test (BDD style) |
+| [Security Scan](#security-scan) | Scan for security vulnerabilities |
+| [Run Test Suite](#run-test-suite) | Execute a collection of tests |
+| [Run Unit Tests](#run-unit-tests) | Execute unit tests |
+| [Visual Compare](#visual-compare) | Compare visual outputs for differences |
+| [Evaluate UI Quality](#evaluate-ui-quality) | Comprehensive UI quality evaluation with multi-dimensional scoring |
+| [Analyze Image with AI](#analyze-image-with-ai) | Analyze images using OpenAI Vision API (GPT-4V) |
+| [Compare Images](#compare-images) | Compare two images and identify visual differences |
 
 ## Modules
 
-### 配列フィルター
+### Filter Array
 
 `array.filter`
 
-条件によって配列要素をフィルタリングする
+Filter array elements by condition
 
 **Parameters:**
 
@@ -71,8 +72,8 @@ Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and t
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filtered` | array | フィルタリングされた配列 |
-| `count` | number | フィルタリングされた要素数 |
+| `filtered` | array | Filtered array |
+| `count` | number | Number of items in filtered array |
 
 **Example:** Filter numbers greater than 5
 
@@ -82,11 +83,11 @@ condition: gt
 value: 5
 ```
 
-### 配列ソート
+### Sort Array
 
 `array.sort`
 
-配列要素を昇順または降順でソートする
+Sort array elements in ascending or descending order
 
 **Parameters:**
 
@@ -99,8 +100,8 @@ value: 5
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sorted` | array | ソートされた配列 |
-| `count` | number | ソートされた要素数 |
+| `sorted` | array | Sorted array |
+| `count` | number | Number of items |
 
 **Example:** Sort numbers ascending
 
@@ -109,11 +110,11 @@ array: [5, 2, 8, 1, 9]
 order: asc
 ```
 
-### 配列ユニーク
+### Array Unique
 
 `array.unique`
 
-配列から重複値を除去する
+Remove duplicate values from array
 
 **Parameters:**
 
@@ -126,9 +127,9 @@ order: asc
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `unique` | array | ユニークな値を持つ配列 |
-| `count` | number | ユニークな要素数 |
-| `duplicates_removed` | number | 除去された重複の数 |
+| `unique` | array | Array with unique values |
+| `count` | number | Number of unique items |
+| `duplicates_removed` | number | Number of duplicates removed |
 
 **Example:** Remove duplicates
 
@@ -214,19 +215,19 @@ client_secret: ${env.GITHUB_CLIENT_SECRET}
 code: abc123...
 ```
 
-### DNSルックアップ
+### DNS Lookup
 
 `dns.lookup`
 
-ドメインレコードのDNSルックアップ
+DNS lookup for domain records
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `domain` | string | Yes | - | ルックアップするドメイン名 |
-| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | クエリするDNSレコードタイプ |
-| `timeout` | number | No | `10` | クエリのタイムアウト（秒） |
+| `domain` | string | Yes | - | Domain name to look up |
+| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | DNS record type to query |
+| `timeout` | number | No | `10` | Query timeout in seconds |
 
 **Output:**
 
@@ -249,29 +250,29 @@ domain: example.com
 record_type: MX
 ```
 
-### テキスト差分
+### Diff Content
 
 `file.diff`
 
-2つのテキスト文字列の差分を生成
+Generate unified diff between original and modified content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `original` | string | Yes | - | 元のテキスト |
-| `modified` | string | Yes | - | 変更後のテキスト |
-| `context_lines` | number | No | `3` | 変更周辺のコンテキスト行数 |
-| `filename` | string | No | `file` | 差分ヘッダーで使用するファイル名 |
+| `original` | string | Yes | - | Original content for comparison |
+| `modified` | string | Yes | - | Modified content for comparison |
+| `context_lines` | number | No | `3` | Number of context lines around changes |
+| `filename` | string | No | `file` | Name of the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `diff` | string | 統一された差分出力 |
-| `changed` | boolean | 変更があるかどうか |
-| `additions` | number | 追加された行数 |
-| `deletions` | number | 削除された行数 |
+| `diff` | string | Unified diff output |
+| `changed` | boolean | Whether content differs |
+| `additions` | number | Number of added lines |
+| `deletions` | number | Number of deleted lines |
 
 **Example:** Diff two strings
 
@@ -283,29 +284,29 @@ world!
 filename: test.txt
 ```
 
-### ファイル編集
+### Edit File
 
 `file.edit`
 
-正確な文字列マッチングを使用してファイル内のテキストを置換
+Replace a string in a file (targeted edit, not full overwrite)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 編集するファイルのパス |
-| `old_string` | string | Yes | - | 検索して置換するテキスト |
-| `new_string` | string | Yes | - | 置換後のテキスト |
-| `replace_all` | boolean | No | `False` | 最初だけでなくすべての出現を置換 |
-| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | ファイルのエンコーディング |
+| `path` | string | Yes | - | Path to the file |
+| `old_string` | string | Yes | - | Text to find and replace |
+| `new_string` | string | Yes | - | Replacement text |
+| `replace_all` | boolean | No | `False` | Whether to replace all occurrences |
+| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | Character encoding for the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 編集されたファイルのパス |
-| `replacements` | number | 置換された回数 |
-| `diff` | string | 変更内容を示す差分 |
+| `path` | string | File path that was edited |
+| `replacements` | number | Number of replacements made |
+| `diff` | string | Unified diff of changes |
 
 **Example:** Replace string in file
 
@@ -315,11 +316,11 @@ old_string: def hello():
 new_string: def hello_world():
 ```
 
-### ファイル存在確認
+### Check File Exists
 
 `file.exists`
 
-ファイルまたはディレクトリが存在するか確認する
+Check if a file or directory exists
 
 **Parameters:**
 
@@ -331,9 +332,9 @@ new_string: def hello_world():
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `exists` | boolean | パスが存在するかどうか |
-| `is_file` | boolean | ファイルかどうか |
-| `is_directory` | boolean | ディレクトリかどうか |
+| `exists` | boolean | Whether path exists |
+| `is_file` | boolean | Whether path is a file |
+| `is_directory` | boolean | Whether path is a directory |
 
 **Example:** Check file exists
 
@@ -341,11 +342,11 @@ new_string: def hello_world():
 path: /tmp/data.txt
 ```
 
-### ファイル読み込み
+### Read File
 
 `file.read`
 
-ファイルからコンテンツを読み込む
+Read content from a file
 
 **Parameters:**
 
@@ -358,8 +359,8 @@ path: /tmp/data.txt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `content` | string | ファイルコンテンツ |
-| `size` | number | ファイルサイズ |
+| `content` | string | File content |
+| `size` | number | File size in bytes |
 
 **Example:** Read text file
 
@@ -368,11 +369,11 @@ path: /tmp/data.txt
 encoding: utf-8
 ```
 
-### ファイル書き込み
+### Write File
 
 `file.write`
 
-ファイルにコンテンツを書き込む
+Write content to a file
 
 **Parameters:**
 
@@ -387,8 +388,8 @@ encoding: utf-8
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | ファイルパス |
-| `bytes_written` | number | 書き込まれたバイト数 |
+| `path` | string | File path |
+| `bytes_written` | number | Number of bytes written |
 
 **Example:** Write text file
 
@@ -398,21 +399,21 @@ content: Hello World
 mode: overwrite
 ```
 
-### Git クローン
+### Git Clone
 
 `git.clone`
 
-Git リポジトリをクローンする
+Clone a git repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | Git リポジトリの URL (HTTPS または SSH) |
-| `destination` | string | Yes | - | クローン先のローカルパス |
-| `branch` | string | No | - | クローン後にチェックアウトするブランチ |
-| `depth` | number | No | - | 浅いクローンの深さ（フルクローンの場合は省略） |
-| `token` | string | No | - | プライベートリポジトリ用の個人アクセス トークン |
+| `url` | string | Yes | - | Git repository URL (HTTPS or SSH) |
+| `destination` | string | Yes | - | Local path to clone into |
+| `branch` | string | No | - | Branch to checkout after clone |
+| `depth` | number | No | - | Shallow clone depth (omit for full clone) |
+| `token` | string | No | - | Personal access token for private repos |
 
 **Output:**
 
@@ -437,22 +438,22 @@ branch: develop
 depth: 1
 ```
 
-### Git コミット
+### Git Commit
 
 `git.commit`
 
-Git コミットを作成する
+Create a git commit
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | Git リポジトリのパス |
-| `message` | string | Yes | - | コミットメッセージ |
-| `add_all` | boolean | No | `False` | コミット前にすべての変更をステージする (git add -A) |
-| `files` | array | No | - | コミット前にステージする特定のファイル |
-| `author_name` | string | No | - | コミットの著者名を上書きする |
-| `author_email` | string | No | - | コミットの著者メールを上書きする |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `message` | string | Yes | - | Commit message |
+| `add_all` | boolean | No | `False` | Stage all changes before committing (git add -A) |
+| `files` | array | No | - | Specific files to stage before committing |
+| `author_name` | string | No | - | Override commit author name |
+| `author_email` | string | No | - | Override commit author email |
 
 **Output:**
 
@@ -477,21 +478,21 @@ message: fix: correct typo in readme
 files: ["README.md"]
 ```
 
-### Git 差分
+### Git Diff
 
 `git.diff`
 
-Git 差分を取得する
+Get git diff
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | Git リポジトリのパス |
-| `ref1` | string | No | `HEAD` | 最初の参照（コミット、ブランチ、タグ） |
-| `ref2` | string | No | - | 比較対象の2番目の参照 |
-| `staged` | boolean | No | `False` | ステージされた変更のみを表示する (--cached) |
-| `stat_only` | boolean | No | `False` | ファイル統計のみを表示する (--stat) |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `ref1` | string | No | `HEAD` | First reference (commit, branch, tag) |
+| `ref2` | string | No | - | Second reference to compare against |
+| `staged` | boolean | No | `False` | Show only staged changes (--cached) |
+| `stat_only` | boolean | No | `False` | Show only file statistics (--stat) |
 
 **Output:**
 
@@ -521,6 +522,35 @@ repo_path: /home/user/project
 staged: true
 stat_only: true
 ```
+
+### HTTP Batch
+
+`http.batch`
+
+Run a batch of HTTP probes sequentially and capture timing + body
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `requests` | array | Yes | - | List of request dicts: {method, url, headers?, body?, label?} |
+| `description` | string | No | - | Informational description of the batch intent |
+| `measure_time` | boolean | No | `False` | Execute requests sequentially for reliable timing comparison |
+| `timeout` | number | No | `30` |  |
+| `verify_ssl` | boolean | No | `True` |  |
+| `ssrf_protection` | boolean | No | `True` |  |
+| `detect_patterns` | array | No | - | Optional list of substrings to report matches for across all bodies |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `ok` | boolean | Whether the batch completed (does not imply all requests succeeded) |
+| `data` | array | Per-request results: [{label, status, body, duration_ms, ok, ...}] |
+| `count` | number | Number of requests executed |
+| `failed_count` | number | Number of requests that errored or returned non-2xx |
+| `total_duration_ms` | number | Total elapsed ms across the batch |
+| `detected` | array | Pattern match summary when detect_patterns provided |
 
 ### HTTP Paginate
 
@@ -602,11 +632,11 @@ page_size: 100
 auth: {"type": "bearer", "token": "${env.GITHUB_TOKEN}"}
 ```
 
-### HTTPリクエスト
+### HTTP Request
 
 `http.request`
 
-HTTPリクエストを送信してレスポンスを受け取る
+Send HTTP request and receive response
 
 **Parameters:**
 
@@ -632,15 +662,15 @@ HTTPリクエストを送信してレスポンスを受け取る
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | リクエストが成功したかどうか（2xxステータス） |
-| `status` | number | HTTPステータスコード |
-| `status_text` | string | HTTPステータステキスト |
-| `headers` | object | レスポンスヘッダー |
-| `body` | any | レスポンスボディ（パースされたJSONまたはテキスト） |
-| `url` | string | 最終URL（リダイレクト後） |
-| `duration_ms` | number | リクエスト処理時間（ミリ秒） |
-| `content_type` | string | レスポンスのContent-Type |
-| `content_length` | number | コンテンツ長 |
+| `ok` | boolean | Whether request was successful (2xx status) |
+| `status` | number | HTTP status code |
+| `status_text` | string | HTTP status text |
+| `headers` | object | Response headers |
+| `body` | any | Response body (parsed JSON or text) |
+| `url` | string | Final URL (after redirects) |
+| `duration_ms` | number | Request duration in milliseconds |
+| `content_type` | string | Response Content-Type |
+| `content_length` | number | Response body size in bytes |
 
 **Example:** Simple GET request
 
@@ -673,11 +703,11 @@ method: GET
 query: {"q": "flyto", "limit": 10}
 ```
 
-### HTTPレスポンス検証
+### Assert HTTP Response
 
 `http.response_assert`
 
-HTTPレスポンスのプロパティを検証する
+Assert and validate HTTP response properties
 
 **Parameters:**
 
@@ -700,12 +730,12 @@ HTTPレスポンスのプロパティを検証する
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | すべてのアサーションが通過したかどうか |
-| `passed` | number | 通過したアサーション数 |
-| `failed` | number | 失敗したアサーション数 |
-| `total` | number | アサーション総数 |
-| `assertions` | array | 詳細なアサーション結果 |
-| `errors` | array | エラーメッセージ |
+| `ok` | boolean | Whether all assertions passed |
+| `passed` | number | Number of passed assertions |
+| `failed` | number | Number of failed assertions |
+| `total` | number | Total number of assertions |
+| `assertions` | array | Detailed assertion results |
+| `errors` | array | List of error messages for failed assertions |
 
 **Example:** Assert status 200
 
@@ -821,11 +851,11 @@ use_ngrok: true
 ngrok_token: ${env.NGROK_AUTH_TOKEN}
 ```
 
-### LLMチャット
+### LLM Chat
 
 `llm.chat`
 
-インテリジェントな操作のためにLLM APIと対話
+Interact with LLM APIs for intelligent operations
 
 **Parameters:**
 
@@ -847,12 +877,12 @@ ngrok_token: ${env.NGROK_AUTH_TOKEN}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | リクエストが成功したかどうか |
-| `response` | string | リクエストが成功したかどうか |
-| `parsed` | any | リクエストが成功したかどうか |
-| `model` | string | LLMレスポンステキスト |
-| `tokens_used` | number | パースされたレスポンス（JSON形式が要求された場合） |
-| `finish_reason` | string | 使用されたモデル |
+| `ok` | boolean | Whether the request succeeded |
+| `response` | string | The LLM response text |
+| `parsed` | any | Parsed response (if JSON format requested) |
+| `model` | string | Model used |
+| `tokens_used` | number | Total tokens consumed |
+| `finish_reason` | string | Why the response ended |
 
 **Example:** Code Review
 
@@ -882,11 +912,11 @@ system_prompt: You are a DevOps engineer. Return JSON: {"decision": "yes/no", "r
 response_format: json
 ```
 
-### AIコード修正
+### AI Code Fix
 
 `llm.code_fix`
 
-問題に基づいてコード修正を自動生成
+Automatically generate code fixes based on issues
 
 **Parameters:**
 
@@ -904,11 +934,11 @@ response_format: json
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作が成功したかどうか |
-| `fixes` | array | 操作が成功したかどうか |
-| `applied` | array | 操作が成功したかどうか |
-| `failed` | array | 生成された修正のリスト |
-| `summary` | string | 適用された修正のリスト（fix_modeがapplyの場合） |
+| `ok` | boolean | Whether operation succeeded |
+| `fixes` | array | List of generated fixes |
+| `applied` | array | List of applied fixes (if fix_mode is apply) |
+| `failed` | array | Fixes that could not be applied |
+| `summary` | string | Summary of fixes |
 
 **Example:** Fix UI Issues
 
@@ -928,11 +958,11 @@ fix_mode: apply
 backup: true
 ```
 
-### 計算
+### Calculate
 
 `math.calculate`
 
-基本的な数学演算を実行
+Perform basic mathematical operations
 
 **Parameters:**
 
@@ -947,9 +977,9 @@ backup: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 計算結果 |
-| `operation` | string | 計算結果 |
-| `expression` | string | 計算結果 |
+| `result` | number | Calculation result |
+| `operation` | string | Operation performed |
+| `expression` | string | Human-readable expression |
 
 **Example:** Add two numbers
 
@@ -967,25 +997,25 @@ a: 2
 b: 8
 ```
 
-### HTTPヘルスチェック
+### HTTP Health Check
 
 `monitor.http_check`
 
-HTTPヘルスチェック / アップタイムモニター
+HTTP health check / uptime monitor
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | チェックするURL |
-| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | HTTPメソッド |
-| `expected_status` | number | No | `200` | 期待されるHTTPステータスコード |
-| `timeout_ms` | number | No | `10000` | リクエストタイムアウト（ミリ秒） |
-| `headers` | object | No | - | カスタムリクエストヘッダー |
-| `body` | string | No | - | リクエストボディ（POST用） |
-| `check_ssl` | boolean | No | `True` | SSL証明書の有効性と期限をチェック |
-| `contains` | string | No | - | レスポンスボディに含まれるべき文字列 |
-| `follow_redirects` | boolean | No | `True` | HTTPリダイレクトを追跡 |
+| `url` | string | Yes | - | URL to check |
+| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | HTTP method |
+| `expected_status` | number | No | `200` | Expected HTTP status code |
+| `timeout_ms` | number | No | `10000` | Request timeout in milliseconds |
+| `headers` | object | No | - | Custom request headers |
+| `body` | string | No | - | Request body (for POST) |
+| `check_ssl` | boolean | No | `True` | Check SSL certificate validity and expiry |
+| `contains` | string | No | - | Response body must contain this string |
+| `follow_redirects` | boolean | No | `True` | Follow HTTP redirects |
 
 **Output:**
 
@@ -1009,30 +1039,30 @@ contains: "status":"ok"
 timeout_ms: 5000
 ```
 
-### ポートチェック
+### Check Port
 
 `port.check`
 
-ネットワークポートが開いているか閉じているかをチェック
+Check if network port(s) are open or closed
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | any | Yes | - | チェックするポート番号またはポートの配列 |
-| `host` | string | No | `localhost` | チェックするポート番号またはポートの配列 |
-| `connect_timeout` | number | No | `2` | 接続先ホスト |
-| `expect_open` | boolean | No | - | 各接続試行のタイムアウト |
+| `port` | any | Yes | - | Port number or array of ports to check |
+| `host` | string | No | `localhost` | Host to connect to |
+| `connect_timeout` | number | No | `2` | Timeout for each connection attempt |
+| `expect_open` | boolean | No | - | Set to true to assert ports are open, false for closed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | ポートが開いていることを確認する場合はtrue、閉じている場合はfalseに設定 |
-| `results` | array | すべてのチェックが合格したかどうか（expect_openが設定されている場合） |
-| `open_ports` | array | すべてのチェックが合格したかどうか（expect_openが設定されている場合） |
-| `closed_ports` | array | ポートチェック結果の配列 |
-| `summary` | object | 開いているポートのリスト |
+| `ok` | boolean | Whether all checks passed (if expect_open is set) |
+| `results` | array | Array of port check results |
+| `open_ports` | array | List of open ports |
+| `closed_ports` | array | List of closed ports |
+| `summary` | object | Summary statistics |
 
 **Example:** Check single port
 
@@ -1055,32 +1085,32 @@ host: example.com
 expect_open: true
 ```
 
-### ポート待機
+### Wait for Port
 
 `port.wait`
 
-ネットワークポートが利用可能になるまで待機
+Wait for a network port to become available
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | number | Yes | - | 待機するポート番号 |
-| `host` | string | No | `localhost` | 接続先ホスト |
-| `timeout` | number | No | `60` | 接続先ホスト |
-| `interval` | number | No | `500` | 最大待機時間 |
-| `expect_closed` | boolean | No | `False` | 接続試行間の間隔（ミリ秒） |
+| `port` | number | Yes | - | Port number to wait for |
+| `host` | string | No | `localhost` | Host to connect to |
+| `timeout` | number | No | `60` | Maximum time to wait |
+| `interval` | number | No | `500` | Time between connection attempts in milliseconds |
+| `expect_closed` | boolean | No | `False` | Wait for port to become unavailable instead |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 代わりにポートが利用不可になるまで待機 |
-| `available` | boolean | ポートが期待される状態かどうか |
-| `host` | string | ポートが期待される状態かどうか |
-| `port` | number | ポートが現在利用可能かどうか |
-| `wait_time_ms` | number | チェックされたホスト |
-| `attempts` | number | チェックされたポート |
+| `ok` | boolean | Whether port is in expected state |
+| `available` | boolean | Whether port is currently available |
+| `host` | string | Host that was checked |
+| `port` | number | Port that was checked |
+| `wait_time_ms` | number | Time spent waiting in milliseconds |
+| `attempts` | number | Number of connection attempts |
 
 **Example:** Wait for dev server
 
@@ -1105,11 +1135,11 @@ expect_closed: true
 timeout: 10
 ```
 
-### プロセス一覧
+### List Processes
 
 `process.list`
 
-実行中のすべてのバックグラウンドプロセスを一覧表示
+List all running background processes
 
 **Parameters:**
 
@@ -1122,11 +1152,11 @@ timeout: 10
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作成功 |
-| `processes` | array | 操作成功 |
-| `count` | number | 操作成功 |
-| `running` | number | プロセス情報のリスト |
-| `stopped` | number | プロセスの総数 |
+| `ok` | boolean | Operation success |
+| `processes` | array | List of process information |
+| `count` | number | Total number of processes |
+| `running` | number | Number of running processes |
+| `stopped` | number | Number of stopped processes |
 
 **Example:** List all processes
 
@@ -1139,11 +1169,11 @@ timeout: 10
 filter_name: dev
 ```
 
-### バックグラウンドプロセス開始
+### Start Background Process
 
 `process.start`
 
-バックグラウンドプロセス（サーバー、サービスなど）を開始
+Start a background process (server, service, etc.)
 
 **Parameters:**
 
@@ -1163,14 +1193,14 @@ filter_name: dev
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | プロセスが正常に開始したかどうか |
-| `pid` | number | プロセスが正常に開始したかどうか |
-| `process_id` | string | プロセスが正常に開始したかどうか |
-| `name` | string | プロセスID |
-| `command` | string | process.stop用の内部プロセス識別子 |
-| `cwd` | string | プロセス名 |
-| `started_at` | string | 実行されたコマンド |
-| `initial_output` | string | プロセス開始のISOタイムスタンプ |
+| `ok` | boolean | Whether process started successfully |
+| `pid` | number | Process ID |
+| `process_id` | string | Internal process identifier for process.stop |
+| `name` | string | Process name |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory |
+| `started_at` | string | ISO timestamp when process started |
+| `initial_output` | string | Initial stdout output (if wait_for_output was used) |
 
 **Example:** Start dev server
 
@@ -1198,11 +1228,11 @@ name: api-server
 wait_for_output: listening
 ```
 
-### プロセス停止
+### Stop Process
 
 `process.stop`
 
-実行中のバックグラウンドプロセスを停止
+Stop a running background process
 
 **Parameters:**
 
@@ -1220,10 +1250,10 @@ wait_for_output: listening
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | すべてのプロセスが正常に停止したかどうか |
-| `stopped` | array | すべてのプロセスが正常に停止したかどうか |
-| `failed` | array | 停止したプロセス情報のリスト |
-| `count` | number | 停止したプロセス情報のリスト |
+| `ok` | boolean | Whether all processes were stopped successfully |
+| `stopped` | array | List of stopped process info |
+| `failed` | array | List of processes that failed to stop |
+| `count` | number | Number of processes stopped |
 
 **Example:** Stop by process ID
 
@@ -1250,11 +1280,11 @@ force: true
 stop_all: true
 ```
 
-### シェルコマンド実行
+### Execute Shell Command
 
 `shell.exec`
 
-シェルコマンドを実行して出力をキャプチャ
+Execute a shell command and capture output
 
 **Parameters:**
 
@@ -1273,13 +1303,13 @@ stop_all: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | コマンドが正常に実行されたかどうか（終了コード0） |
-| `exit_code` | number | コマンドが正常に実行されたかどうか（終了コード0） |
-| `stdout` | string | コマンドが正常に実行されたかどうか（終了コード0） |
-| `stderr` | string | コマンド終了コード |
-| `command` | string | 標準出力 |
-| `cwd` | string | 標準エラー出力 |
-| `duration_ms` | number | 実行されたコマンド |
+| `ok` | boolean | Whether command executed successfully (exit code 0) |
+| `exit_code` | number | Command exit code |
+| `stdout` | string | Standard output |
+| `stderr` | string | Standard error output |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory used |
+| `duration_ms` | number | Execution duration in milliseconds |
 
 **Example:** Run npm install
 
@@ -1309,23 +1339,23 @@ cwd: ./frontend
 env: {"NODE_ENV": "production"}
 ```
 
-### SSH 実行
+### SSH Execute
 
 `ssh.exec`
 
-SSH を使ってリモートサーバーでコマンドを実行
+Execute command on remote server via SSH
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | SSH サーバーのホスト名または IP |
-| `port` | number | No | `22` | SSH ポート |
-| `username` | string | Yes | - | SSH ユーザー名 |
-| `password` | string | No | - | SSH パスワード |
-| `private_key` | string | No | - | PEM 形式の秘密鍵 |
-| `command` | string | Yes | - | リモートサーバーで実行するコマンド |
-| `timeout` | number | No | `30` | コマンドのタイムアウト（秒） |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `command` | string | Yes | - | Command to execute on remote server |
+| `timeout` | number | No | `30` | Command timeout in seconds |
 
 **Output:**
 
@@ -1350,23 +1380,23 @@ username: root
 command: systemctl restart nginx
 ```
 
-### SFTP ダウンロード
+### SFTP Download
 
 `ssh.sftp_download`
 
-SFTP を使ってリモートサーバーからファイルをダウンロード
+Download file from remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | SSH サーバーのホスト名または IP |
-| `port` | number | No | `22` | SSH ポート |
-| `username` | string | Yes | - | SSH ユーザー名 |
-| `password` | string | No | - | SSHパスワード |
-| `private_key` | string | No | - | PEM形式の秘密鍵 |
-| `remote_path` | string | Yes | - | リモートサーバー上のファイルパス |
-| `local_path` | string | Yes | - | ローカルマシンの保存先パス |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `remote_path` | string | Yes | - | Path to file on remote server |
+| `local_path` | string | Yes | - | Destination path on local machine |
 
 **Output:**
 
@@ -1384,24 +1414,24 @@ remote_path: /var/log/nginx/access.log
 local_path: /tmp/access.log
 ```
 
-### SFTP アップロード
+### SFTP Upload
 
 `ssh.sftp_upload`
 
-SFTP を使ってリモートサーバーにファイルをアップロード
+Upload file to remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | SSH サーバーのホスト名または IP |
-| `port` | number | No | `22` | SSH ポート |
-| `username` | string | Yes | - | SSH ユーザー名 |
-| `password` | string | No | - | SSH パスワード |
-| `private_key` | string | No | - | PEM 形式の秘密鍵 |
-| `local_path` | string | Yes | - | アップロードするローカルファイルのパス |
-| `remote_path` | string | Yes | - | リモートサーバーの保存先パス |
-| `overwrite` | boolean | No | `True` | 既存のリモートファイルを上書き |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `local_path` | string | Yes | - | Path to local file to upload |
+| `remote_path` | string | Yes | - | Destination path on remote server |
+| `overwrite` | boolean | No | `True` | Overwrite existing remote file |
 
 **Output:**
 
@@ -1419,17 +1449,17 @@ local_path: /tmp/app.tar.gz
 remote_path: /opt/releases/app.tar.gz
 ```
 
-### E2Eステップ実行
+### Run E2E Steps
 
 `testing.e2e.run_steps`
 
-エンドツーエンドテストステップを順次実行
+Execute end-to-end test steps sequentially
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `steps` | array | Yes | - | テストステップ定義の配列 |
+| `steps` | array | Yes | - | Array of test step definitions |
 | `stop_on_failure` | boolean | No | `True` | Whether to stop on failure |
 | `timeout_per_step` | number | No | `30000` | Timeout Per Step value |
 
@@ -1437,45 +1467,45 @@ remote_path: /opt/releases/app.tar.gz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作が成功したかどうか |
-| `passed` | number | 操作が成功したかどうか |
-| `failed` | number | 操作が成功したかどうか |
-| `results` | array | 合格したテストの数 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### 品質ゲート
+### Quality Gate
 
 `testing.gate.evaluate`
 
-定義されたしきい値に対して品質メトリクスを評価
+Evaluate quality metrics against defined thresholds
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | object | Yes | - | 評価するメトリクス |
-| `thresholds` | object | Yes | - | 評価するメトリクス |
+| `metrics` | object | Yes | - | Metrics to evaluate |
+| `thresholds` | object | Yes | - | Threshold values for each metric |
 | `fail_on_breach` | boolean | No | `True` | Whether to fail on breach |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 各メトリクスのしきい値 |
-| `passed` | boolean | 操作が成功したかどうか |
-| `results` | array | 操作が成功したかどうか |
-| `summary` | string | 合格したテストの数 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `results` | array | List of results |
+| `summary` | string | The summary |
 
-### HTTPテスト実行
+### Run HTTP Tests
 
 `testing.http.run_suite`
 
-HTTP APIテストスイートを実行
+Execute HTTP API test suite
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | HTTPテスト定義の配列 |
+| `tests` | array | Yes | - | Array of HTTP test definitions |
 | `base_url` | string | No | - | Base URL for API requests |
 | `headers` | object | No | `{}` | HTTP request headers |
 
@@ -1483,22 +1513,22 @@ HTTP APIテストスイートを実行
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作が成功したかどうか |
-| `passed` | number | 操作が成功したかどうか |
-| `failed` | number | 操作が成功したかどうか |
-| `results` | array | 合格したテストの数 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### リンター実行
+### Run Linter
 
 `testing.lint.run`
 
-ソースコードでリンティングチェックを実行
+Run linting checks on source code
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | リントするファイルまたはディレクトリ |
+| `paths` | array | Yes | - | Files or directories to lint |
 | `linter` | string | No | `auto` | Linter |
 | `fix` | boolean | No | `False` | Whether to fix |
 
@@ -1506,16 +1536,16 @@ HTTP APIテストスイートを実行
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作が成功したかどうか |
-| `errors` | number | 操作が成功したかどうか |
-| `warnings` | number | 操作が成功したかどうか |
-| `issues` | array | 発生したエラーの数 |
+| `ok` | boolean | Whether the operation succeeded |
+| `errors` | number | Number of errors encountered |
+| `warnings` | number | The warnings |
+| `issues` | array | The issues |
 
-### レポート生成
+### Generate Report
 
 `testing.report.generate`
 
-テスト実行レポートを生成
+Generate test execution report
 
 **Parameters:**
 
@@ -1529,43 +1559,43 @@ HTTP APIテストスイートを実行
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作が成功したかどうか |
-| `report` | string | 操作が成功したかどうか |
-| `format` | string | 操作が成功したかどうか |
-| `summary` | object | レポート |
+| `ok` | boolean | Whether the operation succeeded |
+| `report` | string | The report |
+| `format` | string | The format |
+| `summary` | object | The summary |
 
-### シナリオ実行
+### Run Scenario
 
 `testing.scenario.run`
 
-シナリオベースのテスト（BDDスタイル）を実行
+Execute scenario-based test (BDD style)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `scenario` | object | Yes | - | given/when/thenを含むシナリオ定義 |
+| `scenario` | object | Yes | - | Scenario definition with given/when/then |
 | `context` | object | No | `{}` | Additional context data |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | given/when/thenを含むシナリオ定義 |
-| `passed` | boolean | 操作が成功したかどうか |
-| `steps` | array | 操作が成功したかどうか |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `steps` | array | The steps |
 
-### セキュリティスキャン
+### Security Scan
 
 `testing.security.scan`
 
-セキュリティ脆弱性をスキャン
+Scan for security vulnerabilities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `targets` | array | Yes | - | スキャンするファイル、URL、またはパス |
+| `targets` | array | Yes | - | Files, URLs, or paths to scan |
 | `scan_type` | string | No | `all` | Scan Type |
 | `severity_threshold` | string | No | `medium` | Severity Threshold |
 
@@ -1573,45 +1603,45 @@ HTTP APIテストスイートを実行
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作が成功したかどうか |
-| `vulnerabilities` | array | 操作が成功したかどうか |
-| `summary` | object | 操作が成功したかどうか |
+| `ok` | boolean | Whether the operation succeeded |
+| `vulnerabilities` | array | The vulnerabilities |
+| `summary` | object | The summary |
 
-### テストスイート実行
+### Run Test Suite
 
 `testing.suite.run`
 
-テストのコレクションを実行
+Execute a collection of tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | テスト定義の配列 |
+| `tests` | array | Yes | - | Array of test definitions |
 | `parallel` | boolean | No | `False` | Whether to parallel |
-| `max_failures` | number | No | `0` | テスト定義の配列 |
+| `max_failures` | number | No | `0` | 0 = no limit |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 0 = 制限なし |
-| `passed` | number | 0 = 制限なし |
-| `failed` | number | 操作が成功したかどうか |
-| `skipped` | number | 合格したテストの数 |
-| `results` | array | 失敗したテストの数 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `skipped` | number | Number of tests skipped |
+| `results` | array | List of results |
 
-### ユニットテスト実行
+### Run Unit Tests
 
 `testing.unit.run`
 
-ユニットテストを実行
+Execute unit tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | テストファイルまたはディレクトリへのパス |
+| `paths` | array | Yes | - | Paths to test files or directories |
 | `pattern` | string | No | `test_*.py` | Pattern |
 | `verbose` | boolean | No | `False` | Whether to verbose |
 
@@ -1619,67 +1649,67 @@ HTTP APIテストスイートを実行
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作が成功したかどうか |
-| `passed` | number | 操作が成功したかどうか |
-| `failed` | number | 操作が成功したかどうか |
-| `errors` | number | 合格したテストの数 |
-| `results` | array | 失敗したテストの数 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `errors` | number | Number of errors encountered |
+| `results` | array | List of results |
 
-### ビジュアル比較
+### Visual Compare
 
 `testing.visual.compare`
 
-ビジュアル出力の違いを比較
+Compare visual outputs for differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | string | Yes | - | 実際の画像のパスまたはBase64 |
-| `expected` | string | Yes | - | 実際の画像のパスまたはBase64 |
-| `threshold` | number | No | `0.1` | 期待される画像のパスまたはBase64 |
+| `actual` | string | Yes | - | Path or base64 of actual image |
+| `expected` | string | Yes | - | Path or base64 of expected image |
+| `threshold` | number | No | `0.1` | Max allowed difference (0-1) |
 | `output_diff` | boolean | No | `True` | Whether to output diff |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 許容される最大差分（0-1） |
-| `match` | boolean | 操作が成功したかどうか |
-| `difference` | number | 操作が成功したかどうか |
-| `diff_image` | string | 一致 |
+| `ok` | boolean | Whether the operation succeeded |
+| `match` | boolean | The match |
+| `difference` | number | The difference |
+| `diff_image` | string | The diff image |
 
-### UI品質評価
+### Evaluate UI Quality
 
 `ui.evaluate`
 
-多次元スコアリングによる包括的なUI品質評価
+Comprehensive UI quality evaluation with multi-dimensional scoring
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `screenshot` | string | Yes | - | 評価するスクリーンショットのパスまたはURL |
-| `app_type` | string | No | `web_app` | 評価するスクリーンショットのパスまたはURL |
-| `page_type` | string | No | - | 評価されるページのタイプ |
-| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | 評価する特定の基準（デフォルト: すべて） |
-| `target_audience` | string | No | - | ターゲットユーザーの説明 |
-| `brand_guidelines` | string | No | - | チェックする簡単なブランドガイドライン |
-| `min_score` | number | No | `70` | 合格するための最小総合スコア（0-100） |
-| `api_key` | string | No | - | OpenAI APIキー（デフォルト: 環境変数 OPENAI_API_KEY） |
+| `screenshot` | string | Yes | - | Screenshot path or URL to evaluate |
+| `app_type` | string | No | `web_app` | Type of application for context-aware evaluation |
+| `page_type` | string | No | - | Type of page being evaluated |
+| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | Specific criteria to evaluate (defaults to all) |
+| `target_audience` | string | No | - | Description of target users |
+| `brand_guidelines` | string | No | - | Brief brand guidelines to check against |
+| `min_score` | number | No | `70` | Minimum overall score to pass (0-100) |
+| `api_key` | string | No | - | OpenAI API key (defaults to OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | OpenAI APIキー（デフォルト: 環境変数 OPENAI_API_KEY） |
-| `passed` | boolean | 評価が成功したかどうか |
-| `overall_score` | number | 評価が成功したかどうか |
-| `scores` | object | UI品質の総合スコア（0-100） |
-| `strengths` | array | UI品質の総合スコア（0-100） |
-| `issues` | array | 評価基準別のスコア |
-| `recommendations` | array | UIの強みのリスト |
-| `summary` | string | 具体的な改善提案 |
+| `ok` | boolean | Whether evaluation succeeded |
+| `passed` | boolean | Whether UI meets minimum score threshold |
+| `overall_score` | number | Overall UI quality score (0-100) |
+| `scores` | object | Scores by evaluation criteria |
+| `strengths` | array | List of UI strengths |
+| `issues` | array | List of issues found with severity |
+| `recommendations` | array | Specific improvement recommendations |
+| `summary` | string | Executive summary of evaluation |
 
 **Example:** Evaluate Dashboard
 
@@ -1700,11 +1730,11 @@ page_type: product detail
 evaluation_criteria: ["usability", "cta_effectiveness", "visual_design"]
 ```
 
-### AIで画像を分析
+### Analyze Image with AI
 
 `vision.analyze`
 
-OpenAI Vision API（GPT-4V）を使用して画像を分析
+Analyze images using OpenAI Vision API (GPT-4V)
 
 **Parameters:**
 
@@ -1725,11 +1755,11 @@ OpenAI Vision API（GPT-4V）を使用して画像を分析
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 分析が成功したかどうか |
-| `analysis` | string | 分析が成功したかどうか |
-| `structured` | object | AI分析結果 |
-| `model` | string | 構造化された分析データ（output_formatがstructured/jsonの場合） |
-| `tokens_used` | number | 分析に使用されたモデル |
+| `ok` | boolean | Whether analysis succeeded |
+| `analysis` | string | The AI analysis result |
+| `structured` | object | Structured analysis data (if output_format is structured/json) |
+| `model` | string | Model used for analysis |
+| `tokens_used` | number | Total tokens used |
 
 **Example:** UI Review
 
@@ -1756,11 +1786,11 @@ prompt: Evaluate accessibility: color contrast, text readability, button sizes, 
 analysis_type: accessibility
 ```
 
-### 画像比較
+### Compare Images
 
 `vision.compare`
 
-2つの画像を比較して視覚的な違いを特定
+Compare two images and identify visual differences
 
 **Parameters:**
 
@@ -1780,12 +1810,12 @@ analysis_type: accessibility
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 比較が成功したかどうか |
-| `has_differences` | boolean | 比較が成功したかどうか |
-| `similarity_score` | number | 重要な違いが見つかったかどうか |
-| `differences` | array | 類似度パーセンテージ（0-100） |
-| `summary` | string | 特定された違いのリスト |
-| `recommendation` | string | 比較結果のサマリー |
+| `ok` | boolean | Whether comparison succeeded |
+| `has_differences` | boolean | Whether significant differences were found |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `differences` | array | List of identified differences |
+| `summary` | string | Summary of comparison results |
+| `recommendation` | string | Pass/Fail recommendation based on threshold |
 
 **Example:** Visual Regression Test
 

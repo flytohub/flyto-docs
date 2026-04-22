@@ -6,68 +6,68 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [Güvenlik Çöz](#güvenlik-çöz) | Anti-bot güvenlik önlemlerini otomatik algıla ve çöz (Cloudflare, CAPTCHA) |
-| [Öğeye Tıkla](#öğeye-tıkla) | Sayfadaki bir öğeye tıkla |
-| [Tarayıcıyı Kapat](#tarayıcıyı-kapat) | Tarayıcı örneğini kapat ve kaynakları serbest bırak |
-| [Uzak Bağlantı](#uzak-bağlantı) | Uzak tarayıcı hizmetine bağlan (Browserless, BrowserBase). Gerçek parmak izleri, Cloudflare bypass. |
-| [Konsolu Yakala](#konsolu-yakala) | Tarayıcı konsol günlüklerini yakala (hatalar, uyarılar, bilgi) |
-| [Çerezleri Yönet](#çerezleri-yönet) | Tarayıcı çerezlerini al, ayarla veya temizle |
-| [Çerez Dosyası](#çerez-dosyası) | Tarayıcı çerezlerini JSON dosyasına/dosyasından içe/dışa aktarın. |
+| [Handle Challenge](#handle-challenge) | Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop. |
+| [Click Element](#click-element) | Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Close Browser](#close-browser) | Close the browser instance and release resources |
+| [Connect Remote](#connect-remote) | Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs. |
+| [Capture Console](#capture-console) | Capture browser console logs (errors, warnings, info) |
+| [Manage Cookies](#manage-cookies) | Get, set, or clear browser cookies |
+| [Cookies File](#cookies-file) | Import or export browser cookies to/from a JSON file for session persistence. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [Liste Algıla](#liste-algıla) | Herhangi bir sayfadaki tekrarlanan öğeleri otomatik algıla (makaleler, ürünler, arama sonuçları) |
-| [Diyaloğu İşle](#diyaloğu-i̇şle) | Uyarı, onay ve istem diyaloglarını işle |
-| [Dosya İndir](#dosya-i̇ndir) | Tarayıcıdan dosya indir |
-| [Sürükle ve Bırak](#sürükle-ve-bırak) | Öğeleri sürükle ve bırak |
-| [Cihazı Taklit Et](#cihazı-taklit-et) | Bir cihazı taklit et veya özel görünüm ayarla |
-| [Tarayıcıyı Sağla](#tarayıcıyı-sağla) | Bir tarayıcı oturumu olduğundan emin olun (yeniden kullan veya başlat) |
-| [JavaScript Çalıştır](#javascript-çalıştır) | Sayfa bağlamında JavaScript kodu çalıştır |
-| [Veri Çıkar](#veri-çıkar) | Sayfadan yapılandırılmış veri çıkar |
-| [İç İçe Çıkar](#i̇ç-i̇çe-çıkar) | Ağaç/iç içe verileri çıkar (yorumlar, konular, klasörler). |
-| [Öğeleri Bul](#öğeleri-bul) | Sayfada öğeleri bul ve öğe kimliği listesi döndür |
-| [Formu Doldur](#formu-doldur) | Otomatik alan algılama ile akıllı form doldurma |
-| [Çerçeve Değiştir](#çerçeve-değiştir) | iframe veya çerçeve bağlamına geç |
-| [Konum Taklit Et](#konum-taklit-et) | Tarayıcı coğrafi konumunu taklit et |
-| [URL'ye Git](#url'ye-git) | Belirli bir URL'ye git |
-| [Öğe Üzerinde Bekle](#öğe-üzerinde-bekle) | Fareyi bir öğenin üzerine getir |
-| [Tarayıcı Etkileşimi](#tarayıcı-etkileşimi) | Kullanıcının tarayıcı sayfasıyla etkileşime girmesi için duraklat |
-| [Tarayıcı Başlat](#tarayıcı-başlat) | Playwright ile yeni tarayıcı örneği başlat |
-| [Giriş](#giriş) | Giriş formlarını otomatik algıla ve doldur, giriş sonrası doğrulamayla. |
-| [Geçmişte Gez](#geçmişte-gez) | Tarayıcı geçmişinde gezin (geri, ileri, yeniden yükle) |
-| [Ağ İzleyici](#ağ-i̇zleyici) | Ağ isteklerini izle ve engelle |
-| [Sayfaları Listele](#sayfaları-listele) | Açık tarayıcı sayfalarını/sekmesini listele |
-| [Sayfalandır & Çıkar](#sayfalandır--çıkar) | Sayfaları otomatik olarak gez ve verileri çıkar |
-| [PDF Oluştur](#pdf-oluştur) | Mevcut sayfadan PDF oluştur |
-| [Performans Metrikleri](#performans-metrikleri) | Tarayıcı performans metriklerini topla |
-| [Tarayıcı Havuzu](#tarayıcı-havuzu) | Paralel otomasyon için birden fazla adlandırılmış tarayıcı örneğini yönetin. |
-| [Tuşa Bas](#tuşa-bas) | Klavye tuşuna bas |
-| [Proxy Döndür](#proxy-döndür) | Etkin olmayan proxy algılamasıyla proxy listesi arasında geçiş yapın. |
-| [Makale Çıkar](#makale-çıkar) | Akıllı makale çıkarma — herhangi bir sayfadan başlık, yazar, tarih ve ana içeriği çıkarır |
-| [Eylemleri Kaydet](#eylemleri-kaydet) | Kullanıcı eylemlerini iş akışı olarak kaydet |
-| [Tarayıcıyı Serbest Bırak](#tarayıcıyı-serbest-bırak) | Tarayıcı oturumunu serbest bırak (sadece sahip olunursa kapat) |
-| [Yanıt Yakala](#yanıt-yakala) | API yanıt gövdelerini yakala (XHR/fetch). Sayfa API çağrılarından JSON çıkar. |
-| [Robots.txt Kontrol](#robots.txt-kontrol) | robots.txt uyumluluğunu kontrol et ve site haritalarını keşfet. |
-| [Ekran Görüntüsü Al](#ekran-görüntüsü-al) | Mevcut sayfanın ekran görüntüsünü al |
-| [Sayfayı Kaydır](#sayfayı-kaydır) | Sayfayı öğeye, konuma veya yöne kaydır |
-| [Seçenek Seç](#seçenek-seç) | Açılır öğeden seçenek seç |
-| [Site Haritası Ayrıştır](#site-haritası-ayrıştır) | sitemap.xml dosyasını ayrıştır ve meta verilerle URL'leri çıkar. |
-| [DOM Anlık Görüntüsü](#dom-anlık-görüntüsü) | Geçerli sayfanın DOM anlık görüntüsünü al |
-| [Tarayıcı Depolama](#tarayıcı-depolama) | localStorage ve sessionStorage'a eriş |
-| [Sekmeleri Yönet](#sekmeleri-yönet) | Tarayıcı sekmelerini oluştur, değiştir ve kapat |
-| [Tablo Çıkar](#tablo-çıkar) | HTML tablolarını otomatik algılanan başlıklarla yapılandırılmış veri olarak çıkar. |
-| [Hız Sınırlama](#hız-sınırlama) | Alan adına göre hız sınırlama. Engellenmeyi önlemek için istekler arasında bekler. |
-| [Tarayıcı İzi](#tarayıcı-i̇zi) | Tarayıcı performans izlerini başlat, durdur veya kaydet |
-| [Metin Yaz](#metin-yaz) | Giriş alanına metin yaz |
-| [Dosya Yükle](#dosya-yükle) | Dosya giriş öğesine dosya yükle |
-| [Görünüm Alanını Ayarla](#görünüm-alanını-ayarla) | Tarayıcı görünüm alanı boyutunu al veya ayarla |
-| [Bekle](#bekle) | Bir süre veya öğe görünene kadar bekle |
+| [Detect List](#detect-list) | Auto-detect repeating items on any page (articles, products, search results). No selectors needed. |
+| [Handle Dialog](#handle-dialog) | Handle alert, confirm, and prompt dialogs |
+| [Download File](#download-file) | Download file from browser |
+| [Drag and Drop](#drag-and-drop) | Drag and drop elements |
+| [Device Emulation](#device-emulation) | Emulate mobile devices, tablets, and custom viewports |
+| [Ensure Browser](#ensure-browser) | Ensure a browser session exists (reuse or launch) |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code in page context |
+| [Extract Data](#extract-data) | Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Extract Nested](#extract-nested) | Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children. |
+| [Find Elements](#find-elements) | Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Fill Form](#fill-form) | Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM. |
+| [Switch Frame](#switch-frame) | Switch to iframe or frame context |
+| [Mock Geolocation](#mock-geolocation) | Mock browser geolocation |
+| [Go to URL](#go-to-url) | Navigate to a specific URL |
+| [Hover Element](#hover-element) | Hover mouse over an element |
+| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
+| [Launch Browser](#launch-browser) | Launch a new browser instance with Playwright |
+| [Login](#login) | Auto-detect and fill login forms. Handles username + password + submit with post-login verification. |
+| [Page Navigation](#page-navigation) | Navigate back, forward, or reload the page |
+| [Network Monitor](#network-monitor) | Monitor and intercept network requests |
+| [List Pages](#list-pages) | List all open browser pages/tabs with details |
+| [Paginate & Extract](#paginate--extract) | Auto-paginate through pages and extract data. Supports retry and checkpoint resume. |
+| [Generate PDF](#generate-pdf) | Generate PDF from current page |
+| [Performance Metrics](#performance-metrics) | Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics |
+| [Browser Pool](#browser-pool) | Manage multiple named browser instances for parallel automation. |
+| [Press Key](#press-key) | Press a keyboard key |
+| [Rotate Proxy](#rotate-proxy) | Rotate through a list of proxies. Relaunches browser with the next proxy. |
+| [Extract Article](#extract-article) | Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode. |
+| [Record Actions](#record-actions) | Record user actions as workflow |
+| [Release Browser](#release-browser) | Release browser session (close only if owned) |
+| [Capture Response](#capture-response) | Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls. |
+| [Check Robots.txt](#check-robots.txt) | Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping. |
+| [Take Screenshot](#take-screenshot) | Take a screenshot of the current page |
+| [Scroll Page](#scroll-page) | Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Select Option](#select-option) | Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering. |
+| [DOM Snapshot](#dom-snapshot) | Capture DOM snapshot in HTML, MHTML, or text format |
+| [Browser Storage](#browser-storage) | Access localStorage and sessionStorage |
+| [Manage Tabs](#manage-tabs) | Create, switch, and close browser tabs |
+| [Extract Table](#extract-table) | Extract HTML tables as structured data. Auto-detects headers from thead/th. |
+| [Throttle](#throttle) | Per-domain rate limiting. Waits between requests to the same domain to avoid bans. |
+| [Performance Trace](#performance-trace) | Start/stop Chrome DevTools performance tracing (Chromium only) |
+| [Type Text](#type-text) | Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Upload File](#upload-file) | Upload file to file input element |
+| [Resize Viewport](#resize-viewport) | Resize browser viewport to specific dimensions |
+| [Wait](#wait) | Wait for a duration or until an element appears |
 
 ## Modules
 
-### Güvenlik Çöz
+### Handle Challenge
 
 `browser.challenge`
 
-Anti-bot güvenlik önlemlerini otomatik algıla ve çöz (Cloudflare, CAPTCHA)
+Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop.
 
 **Parameters:**
 
@@ -107,11 +107,11 @@ auto_wait_seconds: 30
 human_fallback: false
 ```
 
-### Öğeye Tıkla
+### Click Element
 
 `browser.click`
 
-Sayfadaki bir öğeye tıkla
+Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -131,8 +131,8 @@ Sayfadaki bir öğeye tıkla
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `selector` | string | İşlem durumu (başarılı/hata) |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | Selector that was used |
 | `method` | string | Click method used |
 
 **Example:** Example
@@ -156,11 +156,11 @@ click_method: selector
 selector: #submit-button
 ```
 
-### Tarayıcıyı Kapat
+### Close Browser
 
 `browser.close`
 
-Tarayıcı örneğini kapat ve kaynakları serbest bırak
+Close the browser instance and release resources
 
 **Parameters:**
 
@@ -172,19 +172,19 @@ Tarayıcı örneğini kapat ve kaynakları serbest bırak
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Tarayıcı örneğini kapat |
-| `message` | string | Tarayıcı örneğini kapat |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
 ```yaml
 ```
 
-### Uzak Bağlantı
+### Connect Remote
 
 `browser.connect`
 
-Uzak tarayıcı hizmetine bağlan (Browserless, BrowserBase). Gerçek parmak izleri, Cloudflare bypass.
+Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs.
 
 **Parameters:**
 
@@ -222,11 +222,11 @@ ws_endpoint: wss://connect.browserbase.com?apiKey=KEY
 ws_endpoint: ws://localhost:3000
 ```
 
-### Konsolu Yakala
+### Capture Console
 
 `browser.console`
 
-Tarayıcı konsol günlüklerini yakala (hatalar, uyarılar, bilgi)
+Capture browser console logs (errors, warnings, info)
 
 **Parameters:**
 
@@ -240,9 +240,9 @@ Tarayıcı konsol günlüklerini yakala (hatalar, uyarılar, bilgi)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `messages` | array | İşlem durumu (başarılı/hata) |
-| `count` | number | İşlem durumu (başarılı/hata) |
+| `status` | string | Operation status (success/error) |
+| `messages` | array | The messages |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -257,11 +257,11 @@ level: error
 timeout: 5000
 ```
 
-### Çerezleri Yönet
+### Manage Cookies
 
 `browser.cookies`
 
-Tarayıcı çerezlerini al, ayarla veya temizle
+Get, set, or clear browser cookies
 
 **Parameters:**
 
@@ -280,9 +280,9 @@ Tarayıcı çerezlerini al, ayarla veya temizle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `cookies` | array | İşlem durumu (başarılı/hata) |
-| `count` | number | İşlem durumu (başarılı/hata) |
+| `status` | string | Operation status (success/error) |
+| `cookies` | array | Browser cookies |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -312,11 +312,11 @@ domain: example.com
 action: clear
 ```
 
-### Çerez Dosyası
+### Cookies File
 
 `browser.cookies_file`
 
-Tarayıcı çerezlerini JSON dosyasına/dosyasından içe/dışa aktarın.
+Import or export browser cookies to/from a JSON file for session persistence.
 
 **Parameters:**
 
@@ -423,11 +423,11 @@ text: Login
 match_mode: best
 ```
 
-### Liste Algıla
+### Detect List
 
 `browser.detect_list`
 
-Herhangi bir sayfadaki tekrarlanan öğeleri otomatik algıla (makaleler, ürünler, arama sonuçları)
+Auto-detect repeating items on any page (articles, products, search results). No selectors needed.
 
 **Parameters:**
 
@@ -467,11 +467,11 @@ min_items: 5
 max_items: 50
 ```
 
-### Diyaloğu İşle
+### Handle Dialog
 
 `browser.dialog`
 
-Uyarı, onay ve istem diyaloglarını işle
+Handle alert, confirm, and prompt dialogs
 
 **Parameters:**
 
@@ -485,10 +485,10 @@ Uyarı, onay ve istem diyaloglarını işle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `message` | string | İşlem durumu (başarılı/hata) |
-| `type` | string | İşlem durumu (başarılı/hata) |
-| `default_value` | string | Sonucu açıklayan sonuç mesajı |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `type` | string | The type |
+| `default_value` | string | The default value |
 
 **Example:** Example
 
@@ -516,11 +516,11 @@ action: listen
 timeout: 5000
 ```
 
-### Dosya İndir
+### Download File
 
 `browser.download`
 
-Tarayıcıdan dosya indir
+Download file from browser
 
 **Parameters:**
 
@@ -534,10 +534,10 @@ Tarayıcıdan dosya indir
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `path` | string | İşlem durumu (başarılı/hata) |
-| `filename` | string | İşlem durumu (başarılı/hata) |
-| `size` | number | Dosya veya kaynak yolu |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -554,11 +554,11 @@ save_path: /downloads/large-file.zip
 timeout_ms: 120000
 ```
 
-### Sürükle ve Bırak
+### Drag and Drop
 
 `browser.drag`
 
-Öğeleri sürükle ve bırak
+Drag and drop elements
 
 **Parameters:**
 
@@ -574,9 +574,9 @@ timeout_ms: 120000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Hedef öğe içindeki konum {x, y} yüzdeler olarak |
-| `source` | string | Hedef öğe içindeki konum {x, y} yüzdeler olarak |
-| `target` | string | İşlem durumu (başarılı/hata) |
+| `status` | string | Operation status (success/error) |
+| `source` | string | The source |
+| `target` | string | The target |
 
 **Example:** Example
 
@@ -593,32 +593,32 @@ target: .container
 target_position: {"x": 0.5, "y": 0.5}
 ```
 
-### Cihazı Taklit Et
+### Device Emulation
 
 `browser.emulate`
 
-Bir cihazı taklit et veya özel görünüm ayarla
+Emulate mobile devices, tablets, and custom viewports
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | Taklit edilecek cihaz adı (ör. iPhone 13) |
-| `width` | number | No | - | Görünüm genişliği piksel cinsinden |
-| `height` | number | No | - | Görünüm yüksekliği piksel cinsinden |
-| `user_agent` | string | No | - | Özel kullanıcı ajanı dizesi |
-| `device_scale_factor` | number | No | - | Cihaz piksel oranı |
-| `is_mobile` | boolean | No | - | Mobil cihazı taklit et |
-| `has_touch` | boolean | No | - | Cihazın dokunmatik desteği olup olmadığı |
+| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | Device preset or "custom" for manual settings |
+| `width` | number | No | - | Custom viewport width (for custom device) |
+| `height` | number | No | - | Custom viewport height (for custom device) |
+| `user_agent` | string | No | - | Custom user agent string |
+| `device_scale_factor` | number | No | - | Device pixel ratio (1-3) |
+| `is_mobile` | boolean | No | - | Enable mobile browser behavior |
+| `has_touch` | boolean | No | - | Enable touch event support |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `device` | string | Taklit edilen cihaz adı |
-| `viewport` | object | Mevcut görünüm boyutları |
-| `is_mobile` | boolean | Mobil taklit aktif mi |
+| `status` | string | Operation status |
+| `device` | string | Emulated device name |
+| `viewport` | object | Applied viewport dimensions |
+| `is_mobile` | boolean | Whether mobile mode is enabled |
 
 **Example:** Example
 
@@ -650,11 +650,11 @@ device: desktop_chrome
 user_agent: CustomBot/1.0
 ```
 
-### Tarayıcıyı Sağla
+### Ensure Browser
 
 `browser.ensure`
 
-Bir tarayıcı oturumu olduğundan emin olun (yeniden kullan veya başlat)
+Ensure a browser session exists (reuse or launch)
 
 **Parameters:**
 
@@ -668,9 +668,9 @@ Bir tarayıcı oturumu olduğundan emin olun (yeniden kullan veya başlat)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Tarayıcının başlatılıp başlatılmadığı veya yeniden kullanılıp kullanılmadığı |
-| `message` | string | Tarayıcının başlatılıp başlatılmadığı veya yeniden kullanılıp kullanılmadığı |
-| `is_owner` | boolean | Tarayıcının başlatılıp başlatılmadığı veya yeniden kullanılıp kullanılmadığı |
+| `status` | string | Whether browser was launched or reused |
+| `message` | string | Result message |
+| `is_owner` | boolean | Whether this step owns the browser (responsible for closing) |
 
 **Example:** Example
 
@@ -684,11 +684,11 @@ headless: false
 headless: true
 ```
 
-### JavaScript Çalıştır
+### Execute JavaScript
 
 `browser.evaluate`
 
-Sayfa bağlamında JavaScript kodu çalıştır
+Execute JavaScript code in page context
 
 **Parameters:**
 
@@ -701,8 +701,8 @@ Sayfa bağlamında JavaScript kodu çalıştır
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `result` | any | İşlem durumu (başarılı/hata) |
+| `status` | string | Operation status (success/error) |
+| `result` | any | The operation result |
 
 **Example:** Example
 
@@ -729,11 +729,11 @@ args: ["#header"]
 script: document.body.style.backgroundColor = "red"; return "done"
 ```
 
-### Veri Çıkar
+### Extract Data
 
 `browser.extract`
 
-Sayfadan yapılandırılmış veri çıkar
+Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -747,9 +747,9 @@ Sayfadan yapılandırılmış veri çıkar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `data` | array | İşlem durumu (başarılı/hata) |
-| `count` | number | İşlem durumu (başarılı/hata) |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -759,11 +759,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### İç İçe Çıkar
+### Extract Nested
 
 `browser.extract_nested`
 
-Ağaç/iç içe verileri çıkar (yorumlar, konular, klasörler).
+Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children.
 
 **Parameters:**
 
@@ -797,11 +797,11 @@ fields: {"author": {"selector": ".author"}, "text": {"selector": ".body"}, "date
 root_selector: li.item
 ```
 
-### Öğeleri Bul
+### Find Elements
 
 `browser.find`
 
-Sayfada öğeleri bul ve öğe kimliği listesi döndür
+Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -814,9 +814,9 @@ Sayfada öğeleri bul ve öğe kimliği listesi döndür
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `count` | number | İşlem durumu (başarılı/hata) |
-| `element_ids` | array | İşlem durumu (başarılı/hata) |
+| `status` | string | Operation status (success/error) |
+| `count` | number | Number of items |
+| `element_ids` | array | The element ids |
 
 **Example:** Find search results
 
@@ -825,11 +825,11 @@ selector: div.tF2Cxc
 limit: 10
 ```
 
-### Formu Doldur
+### Fill Form
 
 `browser.form`
 
-Otomatik alan algılama ile akıllı form doldurma
+Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM.
 
 **Parameters:**
 
@@ -847,9 +847,9 @@ Otomatik alan algılama ile akıllı form doldurma
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filled_fields` | array | Her alanı doldurma arasındaki gecikme (daha insansı davranış için) |
-| `failed_fields` | array | Doldurulan alanların listesi |
-| `submitted` | boolean | Doldurulan alanların listesi |
+| `filled_fields` | array | List of fields that were filled |
+| `failed_fields` | array | List of fields that failed to fill |
+| `submitted` | boolean | Whether form was submitted |
 
 **Example:** Example
 
@@ -865,11 +865,11 @@ data: {"username": "john_doe", "bio": "Hello world"}
 field_mapping: {"username": "#user-name-input", "bio": "textarea.bio-field"}
 ```
 
-### Çerçeve Değiştir
+### Switch Frame
 
 `browser.frame`
 
-iframe veya çerçeve bağlamına geç
+Switch to iframe or frame context
 
 **Parameters:**
 
@@ -885,10 +885,10 @@ iframe veya çerçeve bağlamına geç
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Çerçeve eylemi (çerçeveye geçmek için enter, tüm çerçeveleri listelemek için list) |
-| `frame_url` | string | Çerçeve eylemi (çerçeveye geçmek için enter, tüm çerçeveleri listelemek için list) |
-| `frame_name` | string | İşlem durumu (başarılı/hata) |
-| `frames` | array | Çerçeve URL'si |
+| `status` | string | Operation status (success/error) |
+| `frame_url` | string | Frame URL |
+| `frame_name` | string | The frame name |
+| `frames` | array | List of frames |
 
 **Example:** Example
 
@@ -914,11 +914,11 @@ action: exit
 action: list
 ```
 
-### Konum Taklit Et
+### Mock Geolocation
 
 `browser.geolocation`
 
-Tarayıcı coğrafi konumunu taklit et
+Mock browser geolocation
 
 **Parameters:**
 
@@ -932,8 +932,8 @@ Tarayıcı coğrafi konumunu taklit et
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Metre cinsinden konum doğruluğu |
-| `location` | object | Metre cinsinden konum doğruluğu |
+| `status` | string | Operation status (success/error) |
+| `location` | object | The location |
 
 **Example:** Example
 
@@ -957,11 +957,11 @@ latitude: 35.6762
 longitude: 139.6503
 ```
 
-### URL'ye Git
+### Go to URL
 
 `browser.goto`
 
-Belirli bir URL'ye git
+Navigate to a specific URL
 
 **Parameters:**
 
@@ -976,8 +976,8 @@ Belirli bir URL'ye git
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `url` | string | Belirli bir URL'ye git |
+| `status` | string | Operation status (success/error) |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -986,11 +986,11 @@ url: https://www.google.com
 wait_until: domcontentloaded
 ```
 
-### Öğe Üzerinde Bekle
+### Hover Element
 
 `browser.hover`
 
-Fareyi bir öğenin üzerine getir
+Hover mouse over an element
 
 **Parameters:**
 
@@ -1004,8 +1004,8 @@ Fareyi bir öğenin üzerine getir
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `selector` | string | İşlem durumu (başarılı/hata) |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1020,11 +1020,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### Tarayıcı Etkileşimi
+### Browser Interact
 
 `browser.interact`
 
-Kullanıcının tarayıcı sayfasıyla etkileşime girmesi için duraklat
+Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
 
 **Parameters:**
 
@@ -1038,11 +1038,11 @@ Kullanıcının tarayıcı sayfasıyla etkileşime girmesi için duraklat
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu |
-| `action` | string | Gerçekleştirilen eylem (tıklama/seçme/yazma/değiştirme) |
-| `selector` | string | Etkileşim yapılan öğenin CSS seçicisi |
-| `value` | string | Kullanılan değer (seçme/yazma eylemleri için) |
-| `url` | string | Etkileşim anındaki sayfa URL'si |
+| `status` | string | Operation status |
+| `action` | string | Action executed (click/select/type/toggle) |
+| `selector` | string | CSS selector of the interacted element |
+| `value` | string | Value used (for select/type actions) |
+| `url` | string | Page URL at time of interaction |
 
 **Example:** Example
 
@@ -1051,11 +1051,11 @@ title: Choose a department
 description: Select the department you want to register for
 ```
 
-### Tarayıcı Başlat
+### Launch Browser
 
 `browser.launch`
 
-Playwright ile yeni tarayıcı örneği başlat
+Launch a new browser instance with Playwright
 
 **Parameters:**
 
@@ -1064,25 +1064,25 @@ Playwright ile yeni tarayıcı örneği başlat
 | `headless` | boolean | No | `False` | Run browser without visible window |
 | `width` | number | No | `1280` | Browser viewport width in pixels |
 | `height` | number | No | `720` | Browser viewport height in pixels |
-| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Kullanılacak tarayıcı motoru (chromium, firefox, webkit) |
+| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Browser engine to use |
 | `channel` | select (``, `chrome`, `msedge`) | No | - | Use system Chrome instead of bundled Chromium for better anti-detection bypass |
 | `behavior` | select (`fast`, `normal`, `careful`, `human_like`) | No | `fast` | How the browser interacts: fast (no delays), normal, careful (mouse movement), human_like (full simulation) |
 | `stealth` | boolean | No | `True` | Anti-detection patches: WebGL fingerprint, canvas noise, navigator fixes. Always recommended. |
-| `proxy` | string | No | - | Proxy sunucu URL'si |
-| `user_agent` | string | No | - | Özel kullanıcı ajanı dizesi |
+| `proxy` | string | No | - | HTTP/SOCKS proxy server URL. For rotation use browser.proxy_rotate. |
+| `user_agent` | string | No | - | Custom user agent string |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |
-| `slow_mo` | number | No | `0` | İşlemleri belirtilen milisaniye kadar yavaşlat |
+| `slow_mo` | number | No | `0` | Delay between Playwright actions in ms (low-level, prefer Behavior Profile) |
 | `record_video_dir` | string | No | - | Directory to save recorded videos (enables Playwright video recording) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `message` | string | Yeni tarayıcı örneği başlat |
-| `browser_type` | string | Başlatılan tarayıcı türü |
-| `headless` | boolean | Tarayıcı başsız mı çalışıyor |
-| `viewport` | object | Mevcut görünüm boyutları |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `browser_type` | string | Browser engine used |
+| `headless` | boolean | Whether browser is in headless mode |
+| `viewport` | object | Browser viewport dimensions |
 | `behavior` | string | Active behavior profile |
 
 **Example:** Example
@@ -1105,11 +1105,11 @@ behavior: human_like
 stealth: true
 ```
 
-### Giriş
+### Login
 
 `browser.login`
 
-Giriş formlarını otomatik algıla ve doldur, giriş sonrası doğrulamayla.
+Auto-detect and fill login forms. Handles username + password + submit with post-login verification.
 
 **Parameters:**
 
@@ -1149,11 +1149,11 @@ password_selector: #pass
 submit_selector: #login-btn
 ```
 
-### Geçmişte Gez
+### Page Navigation
 
 `browser.navigation`
 
-Tarayıcı geçmişinde gezin (geri, ileri, yeniden yükle)
+Navigate back, forward, or reload the page
 
 **Parameters:**
 
@@ -1167,9 +1167,9 @@ Tarayıcı geçmişinde gezin (geri, ileri, yeniden yükle)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `action` | string | Gerçekleştirilen gezinme eylemi |
-| `url` | string | Geçişten sonraki mevcut URL |
+| `status` | string | Operation status (success/error) |
+| `action` | string | Navigation action performed |
+| `url` | string | Current URL after navigation |
 
 **Example:** Example
 
@@ -1190,11 +1190,11 @@ action: reload
 wait_until: networkidle
 ```
 
-### Ağ İzleyici
+### Network Monitor
 
 `browser.network`
 
-Ağ isteklerini izle ve engelle
+Monitor and intercept network requests
 
 **Parameters:**
 
@@ -1210,9 +1210,9 @@ Ağ isteklerini izle ve engelle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Engellenen istekler için döndürülecek yanıt |
-| `requests` | array | Engellenen istekler için döndürülecek yanıt |
-| `blocked_count` | number | İşlem durumu (başarılı/hata) |
+| `status` | string | Operation status (success/error) |
+| `requests` | array | Captured network requests |
+| `blocked_count` | number | The blocked count |
 
 **Example:** Example
 
@@ -1237,27 +1237,27 @@ url_pattern: .*users.*
 mock_response: {"status": 200, "body": "{\"users\": []}"}
 ```
 
-### Sayfaları Listele
+### List Pages
 
 `browser.pages`
 
-Açık tarayıcı sayfalarını/sekmesini listele
+List all open browser pages/tabs with details
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `include_details` | boolean | No | `True` | Her sayfa için detaylı bilgi dahil et |
-| `include_content_info` | boolean | No | `False` | Her sayfa için içerik türü bilgisini dahil et |
+| `include_details` | boolean | No | `True` | Include URL, title, and viewport info for each page |
+| `include_content_info` | boolean | No | `False` | Include page load state and frame count (slower) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `pages` | array | Açık sayfaların listesi |
-| `count` | number | Açık sayfa sayısı |
-| `current_index` | number | Mevcut aktif sayfanın indeksi |
+| `status` | string | Operation status |
+| `pages` | array | List of page information |
+| `count` | number | Number of open pages |
+| `current_index` | number | Index of the current active page |
 
 **Example:** Example
 
@@ -1278,11 +1278,11 @@ include_details: true
 include_content_info: true
 ```
 
-### Sayfalandır & Çıkar
+### Paginate & Extract
 
 `browser.pagination`
 
-Sayfaları otomatik olarak gez ve verileri çıkar
+Auto-paginate through pages and extract data. Supports retry and checkpoint resume.
 
 **Parameters:**
 
@@ -1307,10 +1307,10 @@ Sayfaları otomatik olarak gez ve verileri çıkar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `items` | array | Daha fazla sayfa olmadığında görünen seçici (sayfalandırmayı durdurur) |
-| `total_items` | integer | Tüm sayfalardan çıkarılan tüm öğeler |
-| `pages_processed` | integer | Tüm sayfalardan çıkarılan tüm öğeler |
-| `stopped_reason` | string | İşlenen sayfa sayısı |
+| `items` | array | All extracted items from all pages |
+| `total_items` | integer | Total number of items extracted |
+| `pages_processed` | integer | Number of pages processed |
+| `stopped_reason` | string | Why pagination stopped (max_pages, max_items, no_more, error) |
 | `retries_used` | integer | Total number of retries across all pages |
 | `resumed` | boolean | Whether execution resumed from a checkpoint |
 
@@ -1334,11 +1334,11 @@ no_more_indicator: .end-of-feed
 checkpoint_path: /tmp/feed_checkpoint.json
 ```
 
-### PDF Oluştur
+### Generate PDF
 
 `browser.pdf`
 
-Mevcut sayfadan PDF oluştur
+Generate PDF from current page
 
 **Parameters:**
 
@@ -1357,9 +1357,9 @@ Mevcut sayfadan PDF oluştur
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Web sayfası işleme ölçeği (0.1-2) |
-| `path` | string | İşlem durumu (başarılı/hata) |
-| `size` | number | İşlem durumu (başarılı/hata) |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -1381,26 +1381,26 @@ path: /output/custom.pdf
 margin: {"top": "1cm", "bottom": "1cm", "left": "2cm", "right": "2cm"}
 ```
 
-### Performans Metrikleri
+### Performance Metrics
 
 `browser.performance`
 
-Tarayıcı performans metriklerini topla
+Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | array | No | `['all']` | Toplanacak performans metrikleri |
-| `timeout_ms` | number | No | `3000` | Milisaniye cinsinden zaman aşımı |
-| `setup_observers` | boolean | No | `True` | Toplamadan önce performans gözlemcilerini ayarla |
+| `metrics` | array | No | `['all']` | Which metrics to collect (default: all) |
+| `timeout_ms` | number | No | `3000` | Time to wait for metrics collection (for LCP, CLS) |
+| `setup_observers` | boolean | No | `True` | Install PerformanceObservers for better metric tracking |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `metrics` | object | Toplanan performans metrikleri |
+| `status` | string | Operation status |
+| `metrics` | object | Collected performance metrics |
 
 **Example:** Example
 
@@ -1422,11 +1422,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### Tarayıcı Havuzu
+### Browser Pool
 
 `browser.pool`
 
-Paralel otomasyon için birden fazla adlandırılmış tarayıcı örneğini yönetin.
+Manage multiple named browser instances for parallel automation.
 
 **Parameters:**
 
@@ -1466,11 +1466,11 @@ name: scraper1
 action: list
 ```
 
-### Tuşa Bas
+### Press Key
 
 `browser.press`
 
-Klavye tuşuna bas
+Press a keyboard key
 
 **Parameters:**
 
@@ -1482,8 +1482,8 @@ Klavye tuşuna bas
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `key` | string | Klavye tuşuna bas |
+| `status` | string | Operation status (success/error) |
+| `key` | string | Key identifier |
 
 **Example:** Example
 
@@ -1497,11 +1497,11 @@ key: Enter
 key: Escape
 ```
 
-### Proxy Döndür
+### Rotate Proxy
 
 `browser.proxy_rotate`
 
-Etkin olmayan proxy algılamasıyla proxy listesi arasında geçiş yapın.
+Rotate through a list of proxies. Relaunches browser with the next proxy.
 
 **Parameters:**
 
@@ -1538,11 +1538,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### Makale Çıkar
+### Extract Article
 
 `browser.readability`
 
-Akıllı makale çıkarma — herhangi bir sayfadan başlık, yazar, tarih ve ana içeriği çıkarır
+Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode.
 
 **Parameters:**
 
@@ -1551,7 +1551,7 @@ Akıllı makale çıkarma — herhangi bir sayfadan başlık, yazar, tarih ve an
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - | İçerik alanı için CSS seçici. Otomatik algılama için boş bırakın. |
+| `selector` | string | No | - | CSS selector for the content area. Leave empty for auto-detection. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1603,11 +1603,11 @@ title_selector: .article-headline h1
 selector: .article-body
 ```
 
-### Eylemleri Kaydet
+### Record Actions
 
 `browser.record`
 
-Kullanıcı eylemlerini iş akışı olarak kaydet
+Record user actions as workflow
 
 **Parameters:**
 
@@ -1621,9 +1621,9 @@ Kullanıcı eylemlerini iş akışı olarak kaydet
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Kaydedilen iş akışı için format (yaml veya json) |
-| `recording` | array | Kaydedilen iş akışı için format (yaml veya json) |
-| `workflow` | string | İşlem durumu (başarılı/hata) |
+| `status` | string | Operation status (success/error) |
+| `recording` | array | Recording data or path |
+| `workflow` | string | The workflow |
 
 **Example:** Example
 
@@ -1644,25 +1644,25 @@ output_format: yaml
 action: get
 ```
 
-### Tarayıcıyı Serbest Bırak
+### Release Browser
 
 `browser.release`
 
-Tarayıcı oturumunu serbest bırak (sadece sahip olunursa kapat)
+Release browser session (close only if owned)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `force` | boolean | No | `False` | Bu şablon tarafından sahip olunmasa bile tarayıcıyı kapat |
+| `force` | boolean | No | `False` | Close browser even if not owned by this template |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Bu şablon tarafından sahip olunmasa bile tarayıcıyı kapat |
-| `message` | string | Hangi işlem yapıldı |
-| `was_owner` | boolean | Hangi işlem yapıldı |
+| `status` | string | What action was taken |
+| `message` | string | Result message |
+| `was_owner` | boolean | Whether this template owned the browser |
 
 **Example:** Example
 
@@ -1675,11 +1675,11 @@ Tarayıcı oturumunu serbest bırak (sadece sahip olunursa kapat)
 force: true
 ```
 
-### Yanıt Yakala
+### Capture Response
 
 `browser.response`
 
-API yanıt gövdelerini yakala (XHR/fetch). Sayfa API çağrılarından JSON çıkar.
+Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls.
 
 **Parameters:**
 
@@ -1712,11 +1712,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### Robots.txt Kontrol
+### Check Robots.txt
 
 `browser.robots`
 
-robots.txt uyumluluğunu kontrol et ve site haritalarını keşfet.
+Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping.
 
 **Parameters:**
 
@@ -1747,11 +1747,11 @@ check_url: /api/data
 ```yaml
 ```
 
-### Ekran Görüntüsü Al
+### Take Screenshot
 
 `browser.screenshot`
 
-Mevcut sayfanın ekran görüntüsünü al
+Take a screenshot of the current page
 
 **Parameters:**
 
@@ -1766,8 +1766,8 @@ Mevcut sayfanın ekran görüntüsünü al
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `filepath` | string | Mevcut sayfanın ekran görüntüsünü al |
+| `status` | string | Operation status (success/error) |
+| `filepath` | string | Path to the file |
 
 **Example:** Example
 
@@ -1775,11 +1775,11 @@ Mevcut sayfanın ekran görüntüsünü al
 path: output/page.png
 ```
 
-### Sayfayı Kaydır
+### Scroll Page
 
 `browser.scroll`
 
-Sayfayı öğeye, konuma veya yöne kaydır
+Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1794,8 +1794,8 @@ Sayfayı öğeye, konuma veya yöne kaydır
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `scrolled_to` | object | İşlem durumu (başarılı/hata) |
+| `status` | string | Operation status (success/error) |
+| `scrolled_to` | object | The scrolled to |
 
 **Example:** Example
 
@@ -1818,11 +1818,11 @@ amount: 10000
 behavior: smooth
 ```
 
-### Seçenek Seç
+### Select Option
 
 `browser.select`
 
-Açılır öğeden seçenek seç
+Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1838,9 +1838,9 @@ Açılır öğeden seçenek seç
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `selected` | array | İşlem durumu (başarılı/hata) |
-| `selector` | string | İşlem durumu (başarılı/hata) |
+| `status` | string | Operation status (success/error) |
+| `selected` | array | The selected |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1866,11 +1866,11 @@ select_method: index
 index: 2
 ```
 
-### Site Haritası Ayrıştır
+### Parse Sitemap
 
 `browser.sitemap`
 
-sitemap.xml dosyasını ayrıştır ve meta verilerle URL'leri çıkar.
+Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering.
 
 **Parameters:**
 
@@ -1902,29 +1902,29 @@ url_pattern: /blog/
 max_urls: 100
 ```
 
-### DOM Anlık Görüntüsü
+### DOM Snapshot
 
 `browser.snapshot`
 
-Geçerli sayfanın DOM anlık görüntüsünü al
+Capture DOM snapshot in HTML, MHTML, or text format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`html`, `mhtml`, `text`) | No | `html` | Çıktı formatı (html veya metin) |
-| `selector` | string | No | - | Belirli bir elementi anlık görüntülemek için CSS seçici |
-| `path` | string | No | - | Anlık görüntüyü kaydetme yolu |
+| `format` | select (`html`, `mhtml`, `text`) | No | `html` | Snapshot format |
+| `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `format` | string | Anlık görüntü formatı |
-| `content` | string | Anlık görüntü içeriği |
-| `path` | string | Anlık görüntünün kaydedildiği yol |
-| `size_bytes` | number | Anlık görüntünün boyutu (bayt cinsinden) |
+| `status` | string | Operation status |
+| `format` | string | Snapshot format used |
+| `content` | string | Snapshot content (if no path specified) |
+| `path` | string | Path to saved file |
+| `size_bytes` | number | Content size in bytes |
 
 **Example:** Example
 
@@ -1954,11 +1954,11 @@ selector: #main
 path: /tmp/section.html
 ```
 
-### Tarayıcı Depolama
+### Browser Storage
 
 `browser.storage`
 
-localStorage ve sessionStorage'a eriş
+Access localStorage and sessionStorage
 
 **Parameters:**
 
@@ -1973,10 +1973,10 @@ localStorage ve sessionStorage'a eriş
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `value` | any | İşlem durumu (başarılı/hata) |
-| `keys` | array | İşlem durumu (başarılı/hata) |
-| `length` | number | Döndürülen değer |
+| `status` | string | Operation status (success/error) |
+| `value` | any | The returned value |
+| `keys` | array | List of keys |
+| `length` | number | Length of data |
 
 **Example:** Example
 
@@ -2009,11 +2009,11 @@ action: keys
 type: local
 ```
 
-### Sekmeleri Yönet
+### Manage Tabs
 
 `browser.tab`
 
-Tarayıcı sekmelerini oluştur, değiştir ve kapat
+Create, switch, and close browser tabs
 
 **Parameters:**
 
@@ -2028,10 +2028,10 @@ Tarayıcı sekmelerini oluştur, değiştir ve kapat
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Geçilecek veya kapatılacak sekme indeksi (0 tabanlı) |
-| `tab_count` | number | Geçilecek veya kapatılacak sekme indeksi (0 tabanlı) |
-| `current_index` | number | İşlem durumu (başarılı/hata) |
-| `tabs` | array | Sekme sayısı |
+| `status` | string | Operation status (success/error) |
+| `tab_count` | number | The tab count |
+| `current_index` | number | The current index |
+| `tabs` | array | List of open tabs |
 
 **Example:** Example
 
@@ -2059,11 +2059,11 @@ action: close
 action: list
 ```
 
-### Tablo Çıkar
+### Extract Table
 
 `browser.table`
 
-HTML tablolarını otomatik algılanan başlıklarla yapılandırılmış veri olarak çıkar.
+Extract HTML tables as structured data. Auto-detects headers from thead/th.
 
 **Parameters:**
 
@@ -2095,11 +2095,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### Hız Sınırlama
+### Throttle
 
 `browser.throttle`
 
-Alan adına göre hız sınırlama. Engellenmeyi önlemek için istekler arasında bekler.
+Per-domain rate limiting. Waits between requests to the same domain to avoid bans.
 
 **Parameters:**
 
@@ -2142,29 +2142,29 @@ min_interval_ms: 1500
 max_interval_ms: 8000
 ```
 
-### Tarayıcı İzi
+### Performance Trace
 
 `browser.trace`
 
-Tarayıcı performans izlerini başlat, durdur veya kaydet
+Start/stop Chrome DevTools performance tracing (Chromium only)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | - | İzleme eylemi (başlat, durdur, kaydet) |
-| `categories` | array | No | `['devtools.timeline']` | Yakalanacak izleme kategorileri |
-| `screenshots` | boolean | No | `True` | İzlemeye ekran görüntüleri dahil et |
-| `path` | string | No | - | İz dosyasını kaydetme yolu |
+| `action` | string | Yes | - | Start or stop tracing |
+| `categories` | array | No | `['devtools.timeline']` | CDP trace categories (default: devtools.timeline) |
+| `screenshots` | boolean | No | `True` | Include screenshots in trace (increases file size) |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `tracing` | boolean | İzleme şu anda aktif mi |
-| `path` | string | İzin kaydedildiği yol |
-| `size_bytes` | number | İz dosyasının boyutu (bayt cinsinden) |
+| `status` | string | Operation status (success/error) |
+| `tracing` | boolean | Whether tracing is active |
+| `path` | string | Path to trace file (when stopped) |
+| `size_bytes` | number | Trace file size in bytes |
 
 **Example:** Example
 
@@ -2188,11 +2188,11 @@ action: stop
 path: /tmp/performance-trace.json
 ```
 
-### Metin Yaz
+### Type Text
 
 `browser.type`
 
-Giriş alanına metin yaz
+Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -2213,8 +2213,8 @@ Giriş alanına metin yaz
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `selector` | string | Giriş alanına metin yaz |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 | `method` | string | Type method used |
 
 **Example:** Example
@@ -2250,11 +2250,11 @@ selector: #email
 text: user@example.com
 ```
 
-### Dosya Yükle
+### Upload File
 
 `browser.upload`
 
-Dosya giriş öğesine dosya yükle
+Upload file to file input element
 
 **Parameters:**
 
@@ -2268,10 +2268,10 @@ Dosya giriş öğesine dosya yükle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `filename` | string | İşlem durumu (başarılı/hata) |
-| `size` | number | İşlem durumu (başarılı/hata) |
-| `selector` | string | Dosya adı |
+| `status` | string | Operation status (success/error) |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -2287,26 +2287,26 @@ selector: #file-upload
 file_path: /path/to/document.pdf
 ```
 
-### Görünüm Alanını Ayarla
+### Resize Viewport
 
 `browser.viewport`
 
-Tarayıcı görünüm alanı boyutunu al veya ayarla
+Resize browser viewport to specific dimensions
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `width` | number | Yes | `1280` | Görünüm alanı genişliği (piksel) |
-| `height` | number | Yes | `720` | Görünüm alanı yüksekliği (piksel) |
+| `width` | number | Yes | `1280` | Viewport width in pixels |
+| `height` | number | Yes | `720` | Viewport height in pixels |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `viewport` | object | Mevcut görünüm alanı boyutları |
-| `previous_viewport` | object | Önceki görünüm alanı boyutları |
+| `status` | string | Operation status |
+| `viewport` | object | Applied viewport dimensions |
+| `previous_viewport` | object | Previous viewport dimensions |
 
 **Example:** Example
 
@@ -2336,11 +2336,11 @@ width: 1366
 height: 768
 ```
 
-### Bekle
+### Wait
 
 `browser.wait`
 
-Bir süre veya öğe görünene kadar bekle
+Wait for a duration or until an element appears
 
 **Parameters:**
 
@@ -2348,16 +2348,16 @@ Bir süre veya öğe görünene kadar bekle
 |------|------|----------|---------|-------------|
 | `duration_ms` | number | No | `1000` | Duration of the operation in milliseconds |
 | `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
-| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | Beklenecek durum (görünür, gizli, bağlı, ayrılmış) |
+| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | Element state to wait for |
 | `timeout_ms` | number | No | `30000` | Maximum time to wait in milliseconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (başarılı/hata) |
-| `selector` | string | İşlem durumu (başarılı/hata) |
-| `duration_ms` | number | Bir süre veya öğe görünümünü bekle |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was waited for |
+| `duration_ms` | number | Wait duration in milliseconds |
 
 **Example:** Example
 

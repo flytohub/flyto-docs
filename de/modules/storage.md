@@ -6,32 +6,32 @@ Persistent key-value storage.
 
 | Module | Description |
 |--------|-------------|
-| [Gespeicherten Wert löschen](#gespeicherten-wert-löschen) | Einen Wert aus dem persistenten Schlüssel-Wert-Speicher löschen |
-| [Gespeicherten Wert abrufen](#gespeicherten-wert-abrufen) | Einen Wert aus dem persistenten Schlüssel-Wert-Speicher abrufen |
-| [Wert speichern](#wert-speichern) | Einen Wert im persistenten Schlüssel-Wert-Speicher speichern |
+| [Delete Stored Value](#delete-stored-value) | Delete a value from persistent key-value storage |
+| [Get Stored Value](#get-stored-value) | Retrieve a value from persistent key-value storage |
+| [Store Value](#store-value) | Store a value in persistent key-value storage |
 
 ## Modules
 
-### Gespeicherten Wert löschen
+### Delete Stored Value
 
 `storage.delete`
 
-Einen Wert aus dem persistenten Schlüssel-Wert-Speicher löschen
+Delete a value from persistent key-value storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `namespace` | string | Yes | `default` | Speichernamespace |
-| `key` | string | Yes | - | Speichernamespace |
+| `namespace` | string | Yes | `default` | Storage namespace |
+| `key` | string | Yes | - | Key to delete |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Zu löschender Schlüssel |
-| `deleted` | boolean | Ob die Operation erfolgreich war |
-| `key` | string | Ob die Operation erfolgreich war |
+| `ok` | boolean | Whether the operation succeeded |
+| `deleted` | boolean | Whether the key existed and was deleted |
+| `key` | string | The key that was deleted |
 
 **Example:** Delete cached value
 
@@ -40,28 +40,28 @@ namespace: cache
 key: api_response
 ```
 
-### Gespeicherten Wert abrufen
+### Get Stored Value
 
 `storage.get`
 
-Einen Wert aus dem persistenten Schlüssel-Wert-Speicher abrufen
+Retrieve a value from persistent key-value storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `namespace` | string | Yes | `default` | Speichernamespace (z.B. Workflow-Name oder Projekt) |
-| `key` | string | Yes | - | Speichernamespace (z.B. Workflow-Name oder Projekt) |
-| `default` | any | No | - | Schlüssel zum Abrufen |
+| `namespace` | string | Yes | `default` | Storage namespace (e.g., workflow name or project) |
+| `key` | string | Yes | - | Key to retrieve |
+| `default` | any | No | - | Value to return if key does not exist |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Wert, der zurückgegeben wird, wenn der Schlüssel nicht existiert |
-| `found` | boolean | Ob die Operation erfolgreich war |
-| `value` | any | Ob die Operation erfolgreich war |
-| `key` | string | Ob der Schlüssel gefunden wurde (nicht abgelaufen) |
+| `ok` | boolean | Whether the operation succeeded |
+| `found` | boolean | Whether the key was found (not expired) |
+| `value` | any | The stored value or default |
+| `key` | string | The key that was queried |
 
 **Example:** Get last BTC price
 
@@ -78,29 +78,29 @@ namespace: my-workflow
 key: last_run_status
 ```
 
-### Wert speichern
+### Store Value
 
 `storage.set`
 
-Einen Wert im persistenten Schlüssel-Wert-Speicher speichern
+Store a value in persistent key-value storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `namespace` | string | Yes | `default` | Speichernamespace (z.B. Workflow-Name oder Projekt) |
-| `key` | string | Yes | - | Speichernamespace (z.B. Workflow-Name oder Projekt) |
-| `value` | any | Yes | - | Schlüssel, unter dem der Wert gespeichert werden soll |
+| `namespace` | string | Yes | `default` | Storage namespace (e.g., workflow name or project) |
+| `key` | string | Yes | - | Key to store value under |
+| `value` | any | Yes | - | Value to store (string, number, or object) |
 | `ttl_seconds` | number | No | `0` | Time to live in seconds (optional, 0 = no expiration) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Lebensdauer in Sekunden (optional, 0 = keine Ablaufzeit) |
-| `key` | string | Ob die Operation erfolgreich war |
-| `stored_at` | number | Ob die Operation erfolgreich war |
-| `expires_at` | number | Der gespeicherte Schlüssel |
+| `ok` | boolean | Whether the operation succeeded |
+| `key` | string | The key that was stored |
+| `stored_at` | number | Unix timestamp when value was stored |
+| `expires_at` | number | Unix timestamp when value expires (if TTL set) |
 
 **Example:** Store BTC price
 

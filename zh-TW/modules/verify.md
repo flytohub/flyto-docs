@@ -6,44 +6,44 @@ Visual verification, Figma comparison, style capture, and report generation.
 
 | Module | Description |
 |--------|-------------|
-| [標註截圖](#標註截圖) | 在截圖上畫出標記框以標示差異 |
-| [擷取元素樣式](#擷取元素樣式) | 從瀏覽器元素擷取計算樣式 |
-| [比較樣式](#比較樣式) | 將擷取的樣式與預期值進行比較 |
-| [獲取 Figma 樣式](#獲取-figma-樣式) | 從 Figma API 獲取設計標記（標記保留在本地） |
-| [生成報告](#生成報告) | 生成 HTML/JSON/Markdown 格式的驗證報告 |
-| [載入規則集](#載入規則集) | 從 YAML 檔案載入驗證規則 |
-| [執行驗證](#執行驗證) | 執行完整設計驗證：擷取 → 比較 → 報告 |
-| [執行規格驗證](#執行規格驗證) | 動態規格驗證 - 通過 YAML 組合任何模組 |
-| [視覺差異](#視覺差異) | 視覺上比較參考設計與開發網站，標註差異 |
+| [Annotate Screenshot](#annotate-screenshot) | Draw labeled bounding boxes on screenshots to mark differences |
+| [Capture Element Styles](#capture-element-styles) | Capture computed styles from browser element |
+| [Compare Styles](#compare-styles) | Compare captured styles with expected values |
+| [Fetch Figma Style](#fetch-figma-style) | Fetch design tokens from Figma API (token stays local) |
+| [Generate Report](#generate-report) | Generate verification report in HTML/JSON/Markdown |
+| [Load Ruleset](#load-ruleset) | Load verification rules from YAML file |
+| [Run Verification](#run-verification) | Run full design verification: capture → compare → report |
+| [Run Spec Verification](#run-spec-verification) | Dynamic spec verification - compose any modules via YAML |
+| [Visual Diff](#visual-diff) | Compare reference design with dev site visually, annotate differences |
 
 ## Modules
 
-### 標註截圖
+### Annotate Screenshot
 
 `verify.annotate`
 
-在截圖上畫出標記框以標示差異
+Draw labeled bounding boxes on screenshots to mark differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | Yes | - | 截圖圖片的路徑 |
-| `annotations` | array | Yes | - | 標註陣列: [{label, x, y, width, height, color?, description?}] |
-| `output_path` | string | No | - | 標註後圖片的輸出路徑（預設：加上 _annotated 後綴） |
+| `image_path` | string | Yes | - | Path to the screenshot image |
+| `annotations` | array | Yes | - | Array of annotations: [{label, x, y, width, height, color?, description?}] |
+| `output_path` | string | No | - | Output path for annotated image (default: adds _annotated suffix) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 標註後圖片的路徑 |
-| `annotation_count` | integer | 已畫出的標註數量 |
+| `output_path` | string | Path to annotated image |
+| `annotation_count` | integer | Number of annotations drawn |
 
-### 擷取元素樣式
+### Capture Element Styles
 
 `verify.capture`
 
-從瀏覽器元素擷取計算樣式
+Capture computed styles from browser element
 
 **Parameters:**
 
@@ -62,11 +62,11 @@ Visual verification, Figma comparison, style capture, and report generation.
 | `element` | object | Captured element with styles |
 | `found` | boolean | Whether element was found |
 
-### 比較樣式
+### Compare Styles
 
 `verify.compare`
 
-將擷取的樣式與預期值進行比較
+Compare captured styles with expected values
 
 **Parameters:**
 
@@ -93,11 +93,11 @@ Visual verification, Figma comparison, style capture, and report generation.
 | `error_count` | number | Number of errors |
 | `warning_count` | number | Number of warnings |
 
-### 獲取 Figma 樣式
+### Fetch Figma Style
 
 `verify.figma`
 
-從 Figma API 獲取設計標記（標記保留在本地）
+Fetch design tokens from Figma API (token stays local)
 
 **Parameters:**
 
@@ -115,11 +115,11 @@ Visual verification, Figma comparison, style capture, and report generation.
 | `node` | object | Figma node data |
 | `style` | object | Extracted style |
 
-### 生成報告
+### Generate Report
 
 `verify.report`
 
-生成 HTML/JSON/Markdown 格式的驗證報告
+Generate verification report in HTML/JSON/Markdown
 
 **Parameters:**
 
@@ -139,11 +139,11 @@ Visual verification, Figma comparison, style capture, and report generation.
 | `report_path` | string | Path to generated report |
 | `summary` | object | Summary statistics |
 
-### 載入規則集
+### Load Ruleset
 
 `verify.ruleset`
 
-從 YAML 檔案載入驗證規則
+Load verification rules from YAML file
 
 **Parameters:**
 
@@ -158,11 +158,11 @@ Visual verification, Figma comparison, style capture, and report generation.
 | `ruleset` | object | Parsed ruleset |
 | `rules_count` | integer | Number of rules |
 
-### 執行驗證
+### Run Verification
 
 `verify.run`
 
-執行完整設計驗證：擷取 → 比較 → 報告
+Run full design verification: capture → compare → report
 
 **Parameters:**
 
@@ -212,11 +212,11 @@ url: http://localhost:3000
 ruleset_path: ./design-rules.yaml
 ```
 
-### 執行規格驗證
+### Run Spec Verification
 
 `verify.spec`
 
-動態規格驗證 - 通過 YAML 組合任何模組
+Dynamic spec verification - compose any modules via YAML
 
 **Parameters:**
 
@@ -233,31 +233,31 @@ ruleset_path: ./design-rules.yaml
 | `summary` | object |  |
 | `results` | array |  |
 
-### 視覺差異
+### Visual Diff
 
 `verify.visual_diff`
 
-視覺上比較參考設計與開發網站，標註差異
+Compare reference design with dev site visually, annotate differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `reference_url` | string | Yes | - | 參考設計的 URL 或本地圖片路徑 |
-| `dev_url` | string | Yes | - | 要比較的開發網站 URL |
-| `output_dir` | string | No | `./verify-reports/visual-diff` | 報告的輸出目錄 |
-| `focus_areas` | array | No | - | 需要關注的區域（例如：["header", "login form"]） |
-| `viewport_width` | number | No | `1280` | 瀏覽器視窗寬度 |
-| `viewport_height` | number | No | `800` | 瀏覽器視窗高度 |
-| `model` | string | No | `gpt-4o` | 使用的視覺模型 |
-| `api_key` | string | No | - | OpenAI API 金鑰（或使用 OPENAI_API_KEY 環境變數） |
+| `reference_url` | string | Yes | - | URL or local image path of reference design |
+| `dev_url` | string | Yes | - | URL of development site to compare |
+| `output_dir` | string | No | `./verify-reports/visual-diff` | Output directory for reports |
+| `focus_areas` | array | No | - | Areas to focus on (e.g. ["header", "login form"]) |
+| `viewport_width` | number | No | `1280` | Browser viewport width |
+| `viewport_height` | number | No | `800` | Browser viewport height |
+| `model` | string | No | `gpt-4o` | Vision model to use |
+| `api_key` | string | No | - | OpenAI API key (or use OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `similarity_score` | number | 相似度百分比 (0-100) |
-| `annotations` | array | 標註差異的列表 |
-| `annotated_image` | string | 標註後截圖的路徑 |
-| `report_path` | string | HTML 報告的路徑 |
-| `summary` | string | 差異摘要 |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `annotations` | array | List of annotated differences |
+| `annotated_image` | string | Path to annotated screenshot |
+| `report_path` | string | Path to HTML report |
+| `summary` | string | Summary of differences |

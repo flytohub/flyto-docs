@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [Analiza cwiczeniowa](#analiza-cwiczeniowa) | Analizuj strukture strony internetowej do cwiczenia |
-| [Wykonaj cwiczenie](#wykonaj-cwiczenie) | Wykonaj sesje cwiczeniowa |
-| [Wnioskuj schemat cwiczeniowy](#wnioskuj-schemat-cwiczeniowy) | Wnioskuj schemat danych ze strony internetowej |
-| [Statystyki cwiczen](#statystyki-cwiczen) | Pobierz statystyki cwiczen |
+| [Practice Analyze](#practice-analyze) | Analyze website structure for practice |
+| [Practice Execute](#practice-execute) | Execute practice session |
+| [Practice Infer Schema](#practice-infer-schema) | Infer data schema from website |
+| [Practice Stats](#practice-stats) | Get practice statistics |
 
 ## Modules
 
-### Analiza cwiczeniowa
+### Practice Analyze
 
 `training.practice.analyze`
 
-Analizuj strukture strony internetowej do cwiczenia
+Analyze website structure for practice
 
 **Parameters:**
 
@@ -29,14 +29,14 @@ Analizuj strukture strony internetowej do cwiczenia
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Analizuj strukture strony internetowej |
-| `structure` | object | Analizuj strukture strony internetowej |
+| `status` | string | Operation status (success/error) |
+| `structure` | object | The structure |
 
-### Wykonaj cwiczenie
+### Practice Execute
 
 `training.practice.execute`
 
-Wykonaj sesje cwiczeniowa
+Execute practice session
 
 **Parameters:**
 
@@ -49,14 +49,14 @@ Wykonaj sesje cwiczeniowa
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Wykonaj sesje cwiczeniowa |
-| `items_processed` | number | Wykonaj sesje cwiczeniowa |
+| `status` | string | Operation status (success/error) |
+| `items_processed` | number | The items processed |
 
-### Wnioskuj schemat cwiczeniowy
+### Practice Infer Schema
 
 `training.practice.infer_schema`
 
-Wnioskuj schemat danych ze strony internetowej
+Infer data schema from website
 
 **Parameters:**
 
@@ -69,20 +69,20 @@ Wnioskuj schemat danych ze strony internetowej
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Wnioskuj schemat danych |
-| `schema` | object | Wnioskuj schemat danych |
+| `status` | string | Operation status (success/error) |
+| `schema` | object | The schema |
 
-### Statystyki cwiczen
+### Practice Stats
 
 `training.practice.stats`
 
-Pobierz statystyki cwiczen
+Get practice statistics
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total_sessions` | number | Calkowita liczba sesji |
-| `successful_sessions` | number | Calkowita liczba sesji |
-| `success_rate` | number | Pobierz statystyki cwiczen |
-| `history` | array | Pobierz statystyki cwiczen |
+| `total_sessions` | number | The total sessions |
+| `successful_sessions` | number | The successful sessions |
+| `success_rate` | number | The success rate |
+| `history` | array | The history |

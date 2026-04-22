@@ -38,9 +38,9 @@ Read data from Excel files (xlsx, xls)
 | Field | Type | Description |
 |-------|------|-------------|
 | `data` | array | Extracted data rows |
-| `headers` | array | Extracted data rows |
-| `row_count` | number | Extracted data rows |
-| `sheet_names` | array | Column headers |
+| `headers` | array | Column headers |
+| `row_count` | number | Number of data rows |
+| `sheet_names` | array | All sheet names in the workbook |
 
 **Example:** Read entire sheet
 
@@ -70,8 +70,8 @@ Write data to Excel files (xlsx)
 | Field | Type | Description |
 |-------|------|-------------|
 | `path` | string | Path to the created Excel file |
-| `row_count` | number | Path to the created Excel file |
-| `size` | number | Path to the created Excel file |
+| `row_count` | number | Number of data rows written |
+| `size` | number | File size in bytes |
 
 **Example:** Write data to Excel
 
@@ -101,9 +101,9 @@ Fill PDF form fields with data and optionally insert images
 | Field | Type | Description |
 |-------|------|-------------|
 | `output_path` | string | Path to the filled PDF |
-| `fields_filled` | number | Path to the filled PDF |
-| `images_inserted` | number | Path to the filled PDF |
-| `file_size_bytes` | number | Number of images inserted |
+| `fields_filled` | number | Number of fields filled |
+| `images_inserted` | number | Number of images inserted |
+| `file_size_bytes` | number | Size of the output PDF in bytes |
 
 **Example:** Fill form with text fields
 
@@ -147,8 +147,8 @@ Generate PDF files from HTML content or text
 | Field | Type | Description |
 |-------|------|-------------|
 | `output_path` | string | Path to the generated PDF |
-| `page_count` | number | Path to the generated PDF |
-| `file_size_bytes` | number | Number of pages in the PDF |
+| `page_count` | number | Number of pages in the PDF |
+| `file_size_bytes` | number | Size of the generated PDF in bytes |
 
 **Example:** Generate from HTML
 
@@ -178,9 +178,9 @@ Extract text and metadata from PDF files
 | Field | Type | Description |
 |-------|------|-------------|
 | `text` | string | Extracted text content |
-| `pages` | array | Extracted text content |
-| `metadata` | object | Extracted text content |
-| `page_count` | number | Text content per page |
+| `pages` | array | Text content per page |
+| `metadata` | object | PDF metadata (title, author, etc.) |
+| `page_count` | number | Total number of pages |
 
 **Example:** Extract all text from PDF
 
@@ -209,8 +209,8 @@ Convert PDF files to Word documents (.docx)
 | Field | Type | Description |
 |-------|------|-------------|
 | `output_path` | string | Path to the generated Word document |
-| `page_count` | number | Path to the generated Word document |
-| `file_size` | number | Number of pages converted |
+| `page_count` | number | Number of pages converted |
+| `file_size` | number | Size of the output file in bytes |
 
 **Example:** Convert entire PDF to Word
 
@@ -247,10 +247,10 @@ Extract text and content from Word documents (.docx)
 | Field | Type | Description |
 |-------|------|-------------|
 | `text` | string | Full text content of the document |
-| `paragraphs` | array | Full text content of the document |
-| `tables` | array | Full text content of the document |
-| `images` | array | List of paragraphs |
-| `metadata` | object | Extracted tables as arrays |
+| `paragraphs` | array | List of paragraphs |
+| `tables` | array | Extracted tables as arrays |
+| `images` | array | Paths to extracted images |
+| `metadata` | object | Document metadata |
 
 **Example:** Extract text from Word
 
@@ -286,8 +286,8 @@ Convert Word documents (.docx) to PDF files
 | Field | Type | Description |
 |-------|------|-------------|
 | `output_path` | string | Path to the generated PDF file |
-| `file_size` | number | Path to the generated PDF file |
-| `method_used` | string | Size of the output file in bytes |
+| `file_size` | number | Size of the output file in bytes |
+| `method_used` | string | Conversion method that was used |
 
 **Example:** Convert Word to PDF
 

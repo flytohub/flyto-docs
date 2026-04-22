@@ -6,167 +6,167 @@ Validate email, URL, phone, IP, UUID, credit card, and JSON Schema.
 
 | Module | Description |
 |--------|-------------|
-| [クレジットカードを検証](#クレジットカードを検証) | Luhnアルゴリズムでクレジットカード番号を検証 |
-| [メールを検証](#メールを検証) | メールアドレスの形式を検証 |
-| [IPを検証](#ipを検証) | IPv4またはIPv6アドレスの形式を検証 |
-| [JSONスキーマを検証](#jsonスキーマを検証) | JSONデータをJSONスキーマに対して検証 |
-| [電話を検証](#電話を検証) | 電話番号の形式を検証 |
-| [URLを検証](#urlを検証) | URLの形式と構造を検証 |
-| [UUID を検証](#uuid-を検証) | UUID の形式とバージョンを検証 |
+| [Validate Credit Card](#validate-credit-card) | Validate credit card number using Luhn algorithm |
+| [Validate Email](#validate-email) | Validate email address format |
+| [Validate IP](#validate-ip) | Validate IPv4 or IPv6 address format |
+| [Validate JSON Schema](#validate-json-schema) | Validate JSON data against a JSON Schema |
+| [Validate Phone](#validate-phone) | Validate phone number format |
+| [Validate URL](#validate-url) | Validate URL format and structure |
+| [Validate UUID](#validate-uuid) | Validate UUID format and version |
 
 ## Modules
 
-### クレジットカードを検証
+### Validate Credit Card
 
 `validate.credit_card`
 
-Luhnアルゴリズムでクレジットカード番号を検証
+Validate credit card number using Luhn algorithm
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `card_number` | string | Yes | - | 検証するクレジットカード番号 |
+| `card_number` | string | Yes | - | Credit card number to validate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 検証するクレジットカード番号 |
-| `card_type` | string | カード番号が有効かどうか |
-| `masked` | string | カード番号が有効かどうか |
-| `luhn_valid` | boolean | マスクされたカード番号 (****1234) |
+| `valid` | boolean | Whether the card number is valid |
+| `card_type` | string | Detected card type (visa, mastercard, etc) |
+| `masked` | string | Masked card number (****1234) |
+| `luhn_valid` | boolean | Whether the Luhn checksum is valid |
 
-### メールを検証
+### Validate Email
 
 `validate.email`
 
-メールアドレスの形式を検証
+Validate email address format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `email` | string | Yes | - | 検証するメールアドレス |
+| `email` | string | Yes | - | Email address to validate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 検証するメールアドレス |
-| `email` | string | メールが有効かどうか |
-| `local_part` | string | メールが有効かどうか |
-| `domain` | string | 検証されたメール |
+| `valid` | boolean | Whether the email is valid |
+| `email` | string | The validated email |
+| `local_part` | string | The local part (before @) |
+| `domain` | string | The domain part (after @) |
 
-### IPを検証
+### Validate IP
 
 `validate.ip`
 
-IPv4またはIPv6アドレスの形式を検証
+Validate IPv4 or IPv6 address format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `ip` | string | Yes | - | 検証するIPアドレス |
-| `version` | string | No | `any` | 検証するIPアドレス |
+| `ip` | string | Yes | - | IP address to validate |
+| `version` | string | No | `any` | Expected IP version (any, v4, v6) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | IPアドレスが有効かどうか |
-| `ip` | string | IPアドレスが有効かどうか |
-| `version` | string | IPアドレスが有効かどうか |
-| `is_private` | boolean | 検証されたIPアドレス |
-| `is_loopback` | boolean | 検出されたIPバージョン (v4またはv6) |
+| `valid` | boolean | Whether the IP address is valid |
+| `ip` | string | The validated IP address |
+| `version` | string | Detected IP version (v4 or v6) |
+| `is_private` | boolean | Whether the IP is in a private range |
+| `is_loopback` | boolean | Whether the IP is a loopback address |
 
-### JSONスキーマを検証
+### Validate JSON Schema
 
 `validate.json_schema`
 
-JSONデータをJSONスキーマに対して検証
+Validate JSON data against a JSON Schema
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | text | Yes | - | 検証するJSONデータ（文字列またはオブジェクト） |
-| `schema` | text | Yes | - | 検証するJSONデータ（文字列またはオブジェクト） |
+| `data` | text | Yes | - | JSON data to validate (string or object) |
+| `schema` | text | Yes | - | JSON Schema to validate against |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 検証するJSONスキーマ |
-| `errors` | array | データが有効かどうか |
-| `error_count` | number | データが有効かどうか |
+| `valid` | boolean | Whether the data is valid |
+| `errors` | array | List of validation errors |
+| `error_count` | number | Number of validation errors |
 
-### 電話を検証
+### Validate Phone
 
 `validate.phone`
 
-電話番号の形式を検証
+Validate phone number format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `phone` | string | Yes | - | 検証する電話番号 |
-| `region` | string | No | `international` | 検証する電話番号 |
+| `phone` | string | Yes | - | Phone number to validate |
+| `region` | string | No | `international` | Region code for validation (international, us, tw, cn, jp) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 電話番号が有効かどうか |
-| `phone` | string | 電話番号が有効かどうか |
-| `normalized` | string | 電話番号が有効かどうか |
-| `region` | string | 検証された電話番号 |
+| `valid` | boolean | Whether the phone number is valid |
+| `phone` | string | The validated phone number |
+| `normalized` | string | Normalized phone number (digits only) |
+| `region` | string | Region used for validation |
 
-### URLを検証
+### Validate URL
 
 `validate.url`
 
-URLの形式と構造を検証
+Validate URL format and structure
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | 検証する URL |
-| `require_https` | boolean | No | `False` | 検証する URL |
+| `url` | string | Yes | - | URL to validate |
+| `require_https` | boolean | No | `False` | Only accept HTTPS URLs |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | HTTPS URL のみ受け付ける |
-| `url` | string | URL が有効かどうか |
-| `scheme` | string | URL が有効かどうか |
-| `host` | string | 検証されたURL |
-| `port` | number | URL スキーム (http, https など) |
-| `path` | string | ホスト/ドメイン名 |
-| `query` | string | 指定された場合のポート番号 |
+| `valid` | boolean | Whether the URL is valid |
+| `url` | string | The validated URL |
+| `scheme` | string | URL scheme (http, https, etc) |
+| `host` | string | Host/domain name |
+| `port` | number | Port number if specified |
+| `path` | string | URL path |
+| `query` | string | Query string |
 
-### UUID を検証
+### Validate UUID
 
 `validate.uuid`
 
-UUID の形式とバージョンを検証
+Validate UUID format and version
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `uuid` | string | Yes | - | 検証する UUID |
-| `version` | number | No | `0` | 検証する UUID |
+| `uuid` | string | Yes | - | UUID to validate |
+| `version` | number | No | `0` | Expected UUID version (1-5, or 0 for any) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 期待される UUID バージョン (1-5、または 0 は任意) |
-| `uuid` | string | UUID が有効かどうか |
-| `version` | number | UUID が有効かどうか |
-| `variant` | string | 検証された UUID |
+| `valid` | boolean | Whether the UUID is valid |
+| `uuid` | string | The validated UUID |
+| `version` | number | Detected UUID version |
+| `variant` | string | UUID variant |

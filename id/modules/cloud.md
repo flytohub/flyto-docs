@@ -6,28 +6,28 @@ AWS S3, Azure Blob, Google Cloud Storage, and Google Workspace integrations.
 
 | Module | Description |
 |--------|-------------|
-| [Hapus Objek S3](#hapus-objek-s3) | Hapus objek dari bucket AWS S3 |
-| [Unduh S3](#unduh-s3) | Unduh file dari bucket AWS S3 ke jalur lokal |
-| [Daftar Objek S3](#daftar-objek-s3) | Daftar objek dalam bucket AWS S3 dengan filter awalan opsional |
-| [Unggah S3](#unggah-s3) | Unggah file lokal ke bucket AWS S3 |
-| [Unduh AWS S3](#unduh-aws-s3) | Unduh file dari bucket AWS S3 |
-| [Unggah AWS S3](#unggah-aws-s3) | Unggah file atau data ke bucket AWS S3 |
-| [Unduh Azure](#unduh-azure) | Unduh file dari Azure Blob Storage |
-| [Unggah Azure](#unggah-azure) | Unggah file ke Azure Blob Storage |
-| [Unduh GCS](#unduh-gcs) | Unduh file dari Google Cloud Storage |
-| [Unggah GCS](#unggah-gcs) | Unggah file ke Google Cloud Storage |
-| [Buat Acara Kalender](#buat-acara-kalender) | Buat acara baru di Google Calendar |
-| [Daftar Acara Kalender](#daftar-acara-kalender) | Daftar acara mendatang dari Google Calendar |
-| [Cari Gmail](#cari-gmail) | Cari pesan Gmail menggunakan sintaks kueri pencarian Gmail |
-| [Kirim Gmail](#kirim-gmail) | Kirim email melalui Gmail API |
+| [S3 Delete Object](#s3-delete-object) | Delete an object from an AWS S3 bucket |
+| [S3 Download](#s3-download) | Download a file from an AWS S3 bucket to a local path |
+| [S3 List Objects](#s3-list-objects) | List objects in an AWS S3 bucket with optional prefix filter |
+| [S3 Upload](#s3-upload) | Upload a local file to an AWS S3 bucket |
+| [AWS S3 Download](#aws-s3-download) | Download a file from AWS S3 bucket |
+| [AWS S3 Upload](#aws-s3-upload) | Upload a file or data to AWS S3 bucket |
+| [Azure Download](#azure-download) | Download file from Azure Blob Storage |
+| [Azure Upload](#azure-upload) | Upload file to Azure Blob Storage |
+| [GCS Download](#gcs-download) | Download file from Google Cloud Storage |
+| [GCS Upload](#gcs-upload) | Upload file to Google Cloud Storage |
+| [Calendar Create Event](#calendar-create-event) | Create a new event in Google Calendar |
+| [Calendar List Events](#calendar-list-events) | List upcoming events from Google Calendar |
+| [Gmail Search](#gmail-search) | Search Gmail messages using Gmail search query syntax |
+| [Gmail Send](#gmail-send) | Send an email via the Gmail API |
 
 ## Modules
 
-### Hapus Objek S3
+### S3 Delete Object
 
 `aws.s3.delete`
 
-Hapus objek dari bucket AWS S3
+Delete an object from an AWS S3 bucket
 
 **Parameters:**
 
@@ -43,9 +43,9 @@ Hapus objek dari bucket AWS S3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bucket` | string | Nama bucket S3 |
-| `key` | string | Kunci objek yang dihapus |
-| `deleted` | boolean | Apakah objek berhasil dihapus |
+| `bucket` | string | S3 bucket name |
+| `key` | string | Deleted object key |
+| `deleted` | boolean | Whether the object was deleted successfully |
 
 **Example:** Delete an object
 
@@ -54,11 +54,11 @@ bucket: my-bucket
 key: uploads/old-file.txt
 ```
 
-### Unduh S3
+### S3 Download
 
 `aws.s3.download`
 
-Unduh file dari bucket AWS S3 ke jalur lokal
+Download a file from an AWS S3 bucket to a local path
 
 **Parameters:**
 
@@ -75,9 +75,9 @@ Unduh file dari bucket AWS S3 ke jalur lokal
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Jalur file lokal tempat file disimpan |
-| `size` | number | Ukuran file dalam byte |
-| `content_type` | string | Jenis MIME dari file yang diunduh |
+| `path` | string | Local file path where the file was saved |
+| `size` | number | File size in bytes |
+| `content_type` | string | MIME type of the downloaded file |
 
 **Example:** Download a file from S3
 
@@ -87,11 +87,11 @@ key: data/report.csv
 output_path: /tmp/report.csv
 ```
 
-### Daftar Objek S3
+### S3 List Objects
 
 `aws.s3.list`
 
-Daftar objek dalam bucket AWS S3 dengan filter awalan opsional
+List objects in an AWS S3 bucket with optional prefix filter
 
 **Parameters:**
 
@@ -108,9 +108,9 @@ Daftar objek dalam bucket AWS S3 dengan filter awalan opsional
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `objects` | array | Daftar objek S3 |
-| `count` | number | Jumlah objek yang dikembalikan |
-| `truncated` | boolean | Apakah hasilnya terpotong |
+| `objects` | array | List of S3 objects |
+| `count` | number | Number of objects returned |
+| `truncated` | boolean | Whether the results are truncated |
 
 **Example:** List objects with prefix
 
@@ -120,11 +120,11 @@ prefix: uploads/
 max_keys: 50
 ```
 
-### Unggah S3
+### S3 Upload
 
 `aws.s3.upload`
 
-Unggah file lokal ke bucket AWS S3
+Upload a local file to an AWS S3 bucket
 
 **Parameters:**
 
@@ -142,10 +142,10 @@ Unggah file lokal ke bucket AWS S3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bucket` | string | Nama bucket S3 |
-| `key` | string | Kunci objek S3 |
-| `url` | string | URL publik dari objek yang diunggah |
-| `size` | number | Ukuran file dalam byte |
+| `bucket` | string | S3 bucket name |
+| `key` | string | S3 object key |
+| `url` | string | Public URL of the uploaded object |
+| `size` | number | File size in bytes |
 
 **Example:** Upload a local file
 
@@ -155,22 +155,22 @@ key: data/report.csv
 file_path: /tmp/report.csv
 ```
 
-### Unduh AWS S3
+### AWS S3 Download
 
 `cloud.aws_s3.download`
 
-Unduh file dari bucket AWS S3
+Download a file from AWS S3 bucket
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `aws_access_key_id` | string | No | - | AWS access key ID (default ke env.AWS_ACCESS_KEY_ID) |
-| `aws_secret_access_key` | string | No | - | AWS secret access key (default ke env.AWS_SECRET_ACCESS_KEY) |
-| `region` | string | No | `us-east-1` | Region AWS (default ke env.AWS_REGION atau us-east-1) |
-| `bucket` | string | Yes | - | Nama bucket S3 |
-| `key` | string | Yes | - | Nama bucket S3 |
-| `file_path` | string | No | - | S3 object key (path file di bucket) |
+| `aws_access_key_id` | string | No | - | AWS access key ID (defaults to env.AWS_ACCESS_KEY_ID) |
+| `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
+| `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
+| `bucket` | string | Yes | - | S3 bucket name |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to save downloaded content |
 
 **Output:**
 
@@ -196,34 +196,34 @@ key: backups/database.sql
 file_path: /tmp/downloaded.sql
 ```
 
-### Unggah AWS S3
+### AWS S3 Upload
 
 `cloud.aws_s3.upload`
 
-Unggah file atau data ke bucket AWS S3
+Upload a file or data to AWS S3 bucket
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `aws_access_key_id` | string | No | - | AWS access key ID (default ke env.AWS_ACCESS_KEY_ID) |
-| `aws_secret_access_key` | string | No | - | AWS secret access key (default ke env.AWS_SECRET_ACCESS_KEY) |
-| `region` | string | No | `us-east-1` | Region AWS (default ke env.AWS_REGION atau us-east-1) |
-| `bucket` | string | Yes | - | Nama bucket S3 |
-| `key` | string | Yes | - | Nama bucket S3 |
-| `file_path` | string | No | - | S3 object key (path file di bucket) |
-| `content` | string | No | - | Path file lokal untuk diunggah |
-| `content_type` | string | No | - | Tipe MIME file |
-| `acl` | string | No | `private` | Tipe MIME file |
+| `aws_access_key_id` | string | No | - | AWS access key ID (defaults to env.AWS_ACCESS_KEY_ID) |
+| `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
+| `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
+| `bucket` | string | Yes | - | S3 bucket name |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to upload |
+| `content` | string | No | - | File content to upload (as string or base64) |
+| `content_type` | string | No | - | MIME type of the file |
+| `acl` | string | No | `private` | Access control list for the object |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | URL S3 objek yang diunggah |
-| `bucket` | string | URL S3 objek yang diunggah |
-| `key` | string | URL S3 objek yang diunggah |
-| `etag` | string | Nama bucket |
+| `url` | string | S3 URL of uploaded object |
+| `bucket` | string | Bucket name |
+| `key` | string | Object key |
+| `etag` | string | ETag of uploaded object |
 
 **Example:** Upload text content
 
@@ -243,20 +243,20 @@ file_path: /tmp/backup.sql
 acl: private
 ```
 
-### Unduh Azure
+### Azure Download
 
 `cloud.azure.download`
 
-Unduh file dari Azure Blob Storage
+Download file from Azure Blob Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `connection_string` | string | No | - | String koneksi Azure Storage (gunakan env var AZURE_STORAGE_CONNECTION_STRING) |
-| `container` | string | Yes | - | String koneksi Azure Storage (gunakan env var AZURE_STORAGE_CONNECTION_STRING) |
-| `blob_name` | string | Yes | - | Nama container Azure |
-| `destination_path` | string | Yes | - | Blob untuk diunduh |
+| `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | Yes | - | Blob to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -283,30 +283,30 @@ blob_name: photos/vacation.jpg
 destination_path: /tmp/photo.jpg
 ```
 
-### Unggah Azure
+### Azure Upload
 
 `cloud.azure.upload`
 
-Unggah file ke Azure Blob Storage
+Upload file to Azure Blob Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `file_path` | string | Yes | - | Path file lokal untuk diunggah |
-| `connection_string` | string | No | - | Path file lokal untuk diunggah |
-| `container` | string | Yes | - | String koneksi Azure Storage (gunakan env var AZURE_STORAGE_CONNECTION_STRING) |
-| `blob_name` | string | No | - | Nama container Azure |
-| `content_type` | string | No | - | Nama untuk blob yang diunggah (default: nama file) |
+| `file_path` | string | Yes | - | Local file path to upload |
+| `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | No | - | Name for the uploaded blob (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | Tipe MIME (opsional) |
-| `container` | string | Tipe MIME (opsional) |
-| `blob_name` | string | Alamat URL |
-| `size` | number | Container |
+| `url` | string | URL address |
+| `container` | string | The container |
+| `blob_name` | string | The blob name |
+| `size` | number | Size in bytes |
 
 **Example:** Upload image
 
@@ -325,19 +325,19 @@ container: documents
 blob_name: reports/monthly.pdf
 ```
 
-### Unduh GCS
+### GCS Download
 
 `cloud.gcs.download`
 
-Unduh file dari Google Cloud Storage
+Download file from Google Cloud Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bucket` | string | Yes | - | Nama bucket GCS |
-| `object_name` | string | Yes | - | Nama bucket GCS |
-| `destination_path` | string | Yes | - | Objek untuk diunduh |
+| `bucket` | string | Yes | - | GCS bucket name |
+| `object_name` | string | Yes | - | Object to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -364,31 +364,31 @@ object_name: photos/vacation.jpg
 destination_path: /tmp/photo.jpg
 ```
 
-### Unggah GCS
+### GCS Upload
 
 `cloud.gcs.upload`
 
-Unggah file ke Google Cloud Storage
+Upload file to Google Cloud Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `file_path` | string | Yes | - | Path file lokal untuk diunggah |
-| `bucket` | string | Yes | - | Path file lokal untuk diunggah |
-| `object_name` | string | No | - | Nama bucket GCS |
-| `content_type` | string | No | - | Nama untuk objek yang diunggah (default: nama file) |
-| `public` | boolean | No | `False` | Tipe MIME (opsional) |
+| `file_path` | string | Yes | - | Local file path to upload |
+| `bucket` | string | Yes | - | GCS bucket name |
+| `object_name` | string | No | - | Name for the uploaded object (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
+| `public` | boolean | No | `False` | Make file publicly accessible |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | Buat file dapat diakses publik |
-| `bucket` | string | Buat file dapat diakses publik |
-| `object_name` | string | Alamat URL |
-| `size` | number | Nama bucket storage |
-| `public_url` | string | Nama objek di storage |
+| `url` | string | URL address |
+| `bucket` | string | Storage bucket name |
+| `object_name` | string | Object name in storage |
+| `size` | number | Size in bytes |
+| `public_url` | string | Public accessible URL |
 
 **Example:** Upload image
 
@@ -408,11 +408,11 @@ bucket: data-backup
 object_name: reports/daily.csv
 ```
 
-### Buat Acara Kalender
+### Calendar Create Event
 
 `google.calendar.create_event`
 
-Buat acara baru di Google Calendar
+Create a new event in Google Calendar
 
 **Parameters:**
 
@@ -431,11 +431,11 @@ Buat acara baru di Google Calendar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `event_id` | string | ID acara yang dibuat |
-| `summary` | string | Judul acara |
-| `start` | string | Waktu mulai acara |
-| `end` | string | Waktu berakhir acara |
-| `html_link` | string | Tautan untuk melihat acara di Google Calendar |
+| `event_id` | string | Created event ID |
+| `summary` | string | Event title |
+| `start` | string | Event start time |
+| `end` | string | Event end time |
+| `html_link` | string | Link to view the event in Google Calendar |
 
 **Example:** Create a meeting event
 
@@ -448,11 +448,11 @@ attendees: alice@example.com, bob@example.com
 timezone: America/New_York
 ```
 
-### Daftar Acara Kalender
+### Calendar List Events
 
 `google.calendar.list_events`
 
-Daftar acara mendatang dari Google Calendar
+List upcoming events from Google Calendar
 
 **Parameters:**
 
@@ -467,8 +467,8 @@ Daftar acara mendatang dari Google Calendar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `events` | array | Daftar acara kalender |
-| `count` | number | Jumlah acara yang dikembalikan |
+| `events` | array | List of calendar events |
+| `count` | number | Number of events returned |
 
 **Example:** List next 5 events
 
@@ -477,11 +477,11 @@ access_token: <oauth2-token>
 max_results: 5
 ```
 
-### Cari Gmail
+### Gmail Search
 
 `google.gmail.search`
 
-Cari pesan Gmail menggunakan sintaks kueri pencarian Gmail
+Search Gmail messages using Gmail search query syntax
 
 **Parameters:**
 
@@ -495,8 +495,8 @@ Cari pesan Gmail menggunakan sintaks kueri pencarian Gmail
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `messages` | array | Daftar pesan yang cocok |
-| `total` | number | Jumlah total pesan yang dikembalikan |
+| `messages` | array | List of matching messages |
+| `total` | number | Total number of messages returned |
 
 **Example:** Search for emails from a specific sender
 
@@ -506,11 +506,11 @@ query: from:boss@company.com is:unread
 max_results: 5
 ```
 
-### Kirim Gmail
+### Gmail Send
 
 `google.gmail.send`
 
-Kirim email melalui Gmail API
+Send an email via the Gmail API
 
 **Parameters:**
 
@@ -528,9 +528,9 @@ Kirim email melalui Gmail API
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `message_id` | string | ID pesan Gmail |
-| `thread_id` | string | ID thread Gmail |
-| `to` | string | Alamat email penerima |
+| `message_id` | string | Gmail message ID |
+| `thread_id` | string | Gmail thread ID |
+| `to` | string | Recipient email address |
 
 **Example:** Send a plain text email
 

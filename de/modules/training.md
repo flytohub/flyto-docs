@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [Übung analysieren](#übung-analysieren) | Website-Struktur für Übung analysieren |
-| [Übung ausführen](#übung-ausführen) | Übungssitzung ausführen |
-| [Übung Schema ableiten](#übung-schema-ableiten) | Datenschema von Website ableiten |
-| [Übungsstatistiken](#übungsstatistiken) | Übungsstatistiken abrufen |
+| [Practice Analyze](#practice-analyze) | Analyze website structure for practice |
+| [Practice Execute](#practice-execute) | Execute practice session |
+| [Practice Infer Schema](#practice-infer-schema) | Infer data schema from website |
+| [Practice Stats](#practice-stats) | Get practice statistics |
 
 ## Modules
 
-### Übung analysieren
+### Practice Analyze
 
 `training.practice.analyze`
 
-Website-Struktur für Übung analysieren
+Analyze website structure for practice
 
 **Parameters:**
 
@@ -29,14 +29,14 @@ Website-Struktur für Übung analysieren
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Website-Struktur analysieren |
-| `structure` | object | Website-Struktur analysieren |
+| `status` | string | Operation status (success/error) |
+| `structure` | object | The structure |
 
-### Übung ausführen
+### Practice Execute
 
 `training.practice.execute`
 
-Übungssitzung ausführen
+Execute practice session
 
 **Parameters:**
 
@@ -49,14 +49,14 @@ Website-Struktur für Übung analysieren
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Übungssitzung ausführen |
-| `items_processed` | number | Übungssitzung ausführen |
+| `status` | string | Operation status (success/error) |
+| `items_processed` | number | The items processed |
 
-### Übung Schema ableiten
+### Practice Infer Schema
 
 `training.practice.infer_schema`
 
-Datenschema von Website ableiten
+Infer data schema from website
 
 **Parameters:**
 
@@ -69,20 +69,20 @@ Datenschema von Website ableiten
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Datenschema ableiten |
-| `schema` | object | Datenschema ableiten |
+| `status` | string | Operation status (success/error) |
+| `schema` | object | The schema |
 
-### Übungsstatistiken
+### Practice Stats
 
 `training.practice.stats`
 
-Übungsstatistiken abrufen
+Get practice statistics
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total_sessions` | number | Die Gesamtsitzungen |
-| `successful_sessions` | number | Die Gesamtsitzungen |
-| `success_rate` | number | Übungsstatistiken abrufen |
-| `history` | array | Übungsstatistiken abrufen |
+| `total_sessions` | number | The total sessions |
+| `successful_sessions` | number | The successful sessions |
+| `success_rate` | number | The success rate |
+| `history` | array | The history |

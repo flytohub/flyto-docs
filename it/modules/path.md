@@ -6,132 +6,132 @@ File path utilities: join, normalize, basename, dirname, extension.
 
 | Module | Description |
 |--------|-------------|
-| [Nome Base Percorso](#nome-base-percorso) | Ottieni il nome del file dal percorso |
-| [Nome Dir Percorso](#nome-dir-percorso) | Ottieni il nome della directory dal percorso |
-| [Estensione Percorso](#estensione-percorso) | Ottieni l'estensione del file dal percorso |
-| [Percorso Assoluto](#percorso-assoluto) | Verifica se il percorso è assoluto |
-| [Unisci Percorso](#unisci-percorso) | Unisci i componenti del percorso |
-| [Normalizza Percorso](#normalizza-percorso) | Normalizza un percorso di file |
+| [Path Basename](#path-basename) | Get file name from path |
+| [Path Dirname](#path-dirname) | Get directory name from path |
+| [Path Extension](#path-extension) | Get file extension from path |
+| [Path Is Absolute](#path-is-absolute) | Check if path is absolute |
+| [Path Join](#path-join) | Join path components |
+| [Path Normalize](#path-normalize) | Normalize a file path |
 
 ## Modules
 
-### Nome Base Percorso
+### Path Basename
 
 `path.basename`
 
-Ottieni il nome del file dal percorso
+Get file name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Percorso del file |
-| `remove_extension` | boolean | No | `False` | Percorso del file |
+| `path` | string | Yes | - | File path |
+| `remove_extension` | boolean | No | `False` | Remove file extension from result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Rimuovi l'estensione del file dal risultato |
-| `original` | string | Nome del file |
-| `extension` | string | Nome del file |
+| `result` | string | File name |
+| `original` | string | Original path |
+| `extension` | string | File extension |
 
-### Nome Dir Percorso
+### Path Dirname
 
 `path.dirname`
 
-Ottieni il nome della directory dal percorso
+Get directory name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Percorso del file |
+| `path` | string | Yes | - | File path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Percorso del file |
-| `original` | string | Nome della directory |
+| `result` | string | Directory name |
+| `original` | string | Original path |
 
-### Estensione Percorso
+### Path Extension
 
 `path.extension`
 
-Ottieni l'estensione del file dal percorso
+Get file extension from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Percorso del file |
-| `include_dot` | boolean | No | `True` | Percorso del file |
+| `path` | string | Yes | - | File path |
+| `include_dot` | boolean | No | `True` | Include the dot in extension |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Includi il punto nell'estensione |
-| `original` | string | Estensione del file |
-| `has_extension` | boolean | Estensione del file |
+| `result` | string | File extension |
+| `original` | string | Original path |
+| `has_extension` | boolean | Whether file has extension |
 
-### Percorso Assoluto
+### Path Is Absolute
 
 `path.is_absolute`
 
-Verifica se il percorso è assoluto
+Check if path is absolute
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Percorso del file da verificare |
+| `path` | string | Yes | - | File path to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Percorso del file da verificare |
-| `path` | string | Se il percorso è assoluto |
-| `absolute` | string | Se il percorso è assoluto |
+| `result` | boolean | Whether path is absolute |
+| `path` | string | The checked path |
+| `absolute` | string | Absolute version of the path |
 
-### Unisci Percorso
+### Path Join
 
 `path.join`
 
-Unisci i componenti del percorso
+Join path components
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `parts` | array | Yes | - | Componenti del percorso da unire |
+| `parts` | array | Yes | - | Path components to join |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Componenti del percorso da unire |
-| `parts` | array | Percorso unito |
+| `result` | string | Joined path |
+| `parts` | array | Original path parts |
 
-### Normalizza Percorso
+### Path Normalize
 
 `path.normalize`
 
-Normalizza un percorso di file
+Normalize a file path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Percorso del file da normalizzare |
-| `resolve` | boolean | No | `False` | Percorso del file da normalizzare |
+| `path` | string | Yes | - | File path to normalize |
+| `resolve` | boolean | No | `False` | Resolve to absolute path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Risolvi a percorso assoluto |
-| `original` | string | Percorso normalizzato |
-| `is_absolute` | boolean | Percorso normalizzato |
+| `result` | string | Normalized path |
+| `original` | string | Original path |
+| `is_absolute` | boolean | Whether result is absolute |

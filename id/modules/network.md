@@ -6,10 +6,10 @@ Ping, port scan, traceroute, and WHOIS lookup.
 
 | Module | Description |
 |--------|-------------|
-| [Ping](#ping) | Ping host untuk memeriksa konektivitas dan mengukur latensi |
-| [Pindai Port](#pindai-port) | Pindai port pada host untuk memeriksa mana yang terbuka |
-| [Traceroute](#traceroute) | Lacak rute paket untuk mencapai host tujuan |
-| [Pencarian WHOIS](#pencarian-whois) | Lakukan pencarian WHOIS untuk domain untuk mendapatkan informasi pendaftaran |
+| [Ping](#ping) | Ping a host to check connectivity and measure latency |
+| [Port Scan](#port-scan) | Scan ports on a host to check which are open |
+| [Traceroute](#traceroute) | Trace the route packets take to reach a destination host |
+| [WHOIS Lookup](#whois-lookup) | Perform WHOIS lookup for a domain to retrieve registration information |
 
 ## Modules
 
@@ -17,26 +17,26 @@ Ping, port scan, traceroute, and WHOIS lookup.
 
 `network.ping`
 
-Ping host untuk memeriksa konektivitas dan mengukur latensi
+Ping a host to check connectivity and measure latency
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | Nama host atau alamat IP untuk diping |
-| `count` | number | No | `4` | Jumlah paket ping untuk dikirim |
-| `timeout` | number | No | `5` | Waktu habis dalam detik untuk setiap paket |
+| `host` | string | Yes | - | Hostname or IP address to ping |
+| `count` | number | No | `4` | Number of ping packets to send |
+| `timeout` | number | No | `5` | Timeout in seconds for each packet |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `host` | string | Host yang diping |
-| `alive` | boolean | Apakah host merespons |
-| `packets_sent` | number | Jumlah paket yang dikirim |
-| `packets_received` | number | Jumlah paket yang diterima |
-| `packet_loss_pct` | number | Persentase kehilangan paket |
-| `latency_ms` | object | Statistik latensi dalam milidetik (min, rata-rata, maks) |
+| `host` | string | The pinged host |
+| `alive` | boolean | Whether the host responded |
+| `packets_sent` | number | Number of packets sent |
+| `packets_received` | number | Number of packets received |
+| `packet_loss_pct` | number | Packet loss percentage |
+| `latency_ms` | object | Latency statistics in milliseconds (min, avg, max) |
 
 **Example:** Ping a host
 
@@ -46,28 +46,28 @@ count: 4
 timeout: 5
 ```
 
-### Pindai Port
+### Port Scan
 
 `network.port_scan`
 
-Pindai port pada host untuk memeriksa mana yang terbuka
+Scan ports on a host to check which are open
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | Nama host atau alamat IP untuk dipindai |
-| `ports` | string | No | - | Port untuk dipindai: pisahkan dengan koma (80,443), rentang (80-443), atau kosongkan untuk port umum |
-| `timeout` | number | No | `1.0` | Waktu habis koneksi dalam detik per port |
+| `host` | string | Yes | - | Hostname or IP address to scan |
+| `ports` | string | No | - | Ports to scan: comma-separated (80,443), range (80-443), or leave empty for common ports |
+| `timeout` | number | No | `1.0` | Connection timeout in seconds per port |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `host` | string | Host yang dipindai |
-| `open_ports` | array | Daftar nomor port yang terbuka |
-| `closed_ports` | array | Daftar nomor port yang tertutup |
-| `scan_time_ms` | number | Total waktu pemindaian dalam milidetik |
+| `host` | string | The scanned host |
+| `open_ports` | array | List of open port numbers |
+| `closed_ports` | array | List of closed port numbers |
+| `scan_time_ms` | number | Total scan time in milliseconds |
 
 **Example:** Scan common ports
 
@@ -87,23 +87,23 @@ timeout: 2.0
 
 `network.traceroute`
 
-Lacak rute paket untuk mencapai host tujuan
+Trace the route packets take to reach a destination host
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | Nama host atau alamat IP untuk dilacak rutenya |
-| `max_hops` | number | No | `30` | Jumlah maksimum lompatan untuk dilacak |
-| `timeout` | number | No | `5` | Waktu habis dalam detik untuk setiap uji coba |
+| `host` | string | Yes | - | Hostname or IP address to trace route to |
+| `max_hops` | number | No | `30` | Maximum number of hops to trace |
+| `timeout` | number | No | `5` | Timeout in seconds for each probe |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `host` | string | Host tujuan |
-| `hops` | array | Daftar lompatan sepanjang rute |
-| `total_hops` | number | Jumlah total lompatan untuk mencapai tujuan |
+| `host` | string | The target host |
+| `hops` | array | List of hops along the route |
+| `total_hops` | number | Total number of hops to reach destination |
 
 **Example:** Trace route to host
 
@@ -112,28 +112,28 @@ host: google.com
 max_hops: 30
 ```
 
-### Pencarian WHOIS
+### WHOIS Lookup
 
 `network.whois`
 
-Lakukan pencarian WHOIS untuk domain untuk mendapatkan informasi pendaftaran
+Perform WHOIS lookup for a domain to retrieve registration information
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `domain` | string | Yes | - | Nama domain untuk dicari |
+| `domain` | string | Yes | - | Domain name to look up |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `domain` | string | Domain yang dicari |
-| `registrar` | string | Pendaftar domain |
-| `creation_date` | string | Tanggal pembuatan domain |
-| `expiration_date` | string | Tanggal kedaluwarsa domain |
-| `name_servers` | array | Daftar server nama |
-| `raw` | string | Output WHOIS mentah lengkap |
+| `domain` | string | The queried domain |
+| `registrar` | string | Domain registrar |
+| `creation_date` | string | Domain creation date |
+| `expiration_date` | string | Domain expiration date |
+| `name_servers` | array | List of name servers |
+| `raw` | string | Full raw WHOIS output |
 
 **Example:** WHOIS lookup
 

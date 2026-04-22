@@ -6,76 +6,76 @@ In-memory and Redis message queue operations.
 
 | Module | Description |
 |--------|-------------|
-| [Usuń z kolejki](#usuń-z-kolejki) | Usuń i zwróć element z kolejki |
-| [Dodaj do kolejki](#dodaj-do-kolejki) | Dodaj element do kolejki w pamięci lub Redis |
-| [Rozmiar kolejki](#rozmiar-kolejki) | Pobierz aktualny rozmiar kolejki |
+| [Dequeue Item](#dequeue-item) | Remove and return an item from a queue |
+| [Enqueue Item](#enqueue-item) | Add an item to an in-memory or Redis queue |
+| [Queue Size](#queue-size) | Get the current size of a queue |
 
 ## Modules
 
-### Usuń z kolejki
+### Dequeue Item
 
 `queue.dequeue`
 
-Usuń i zwróć element z kolejki
+Remove and return an item from a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nazwa kolejki, z której usunąć element |
-| `backend` | string | No | `memory` | Backend kolejki do użycia |
-| `redis_url` | string | No | `redis://localhost:6379` | URL połączenia Redis |
-| `timeout` | number | No | `0` | Limit czasu w sekundach (0 = nieblokujący) |
+| `queue_name` | string | Yes | - | Name of the queue to dequeue from |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
+| `timeout` | number | No | `0` | Timeout in seconds (0 = non-blocking) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | any | Usunięty element (null, jeśli kolejka jest pusta) |
-| `queue_name` | string | Nazwa kolejki |
-| `remaining` | number | Pozostałe elementy w kolejce |
-| `empty` | boolean | Czy kolejka była pusta |
+| `data` | any | The dequeued item (null if queue is empty) |
+| `queue_name` | string | Name of the queue |
+| `remaining` | number | Remaining items in the queue |
+| `empty` | boolean | Whether the queue was empty |
 
-### Dodaj do kolejki
+### Enqueue Item
 
 `queue.enqueue`
 
-Dodaj element do kolejki w pamięci lub Redis
+Add an item to an in-memory or Redis queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nazwa kolejki, do której dodać element |
-| `data` | string | Yes | - | Dane do dodania do kolejki (dowolna wartość serializowalna JSON) |
-| `backend` | string | No | `memory` | Backend kolejki do użycia |
-| `redis_url` | string | No | `redis://localhost:6379` | URL połączenia Redis |
+| `queue_name` | string | Yes | - | Name of the queue to add the item to |
+| `data` | string | Yes | - | Data to enqueue (any JSON-serializable value) |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Nazwa kolejki |
-| `position` | number | Pozycja elementu w kolejce |
-| `queue_size` | number | Aktualny rozmiar kolejki po dodaniu |
+| `queue_name` | string | Name of the queue |
+| `position` | number | Position of the item in the queue |
+| `queue_size` | number | Current size of the queue after enqueue |
 
-### Rozmiar kolejki
+### Queue Size
 
 `queue.size`
 
-Pobierz aktualny rozmiar kolejki
+Get the current size of a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nazwa kolejki do sprawdzenia |
-| `backend` | string | No | `memory` | Backend kolejki do użycia |
-| `redis_url` | string | No | `redis://localhost:6379` | URL połączenia Redis |
+| `queue_name` | string | Yes | - | Name of the queue to check |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Nazwa kolejki |
-| `size` | number | Aktualna liczba elementów w kolejce |
+| `queue_name` | string | Name of the queue |
+| `size` | number | Current number of items in the queue |

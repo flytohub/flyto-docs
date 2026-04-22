@@ -6,143 +6,143 @@ Text analysis: word count, encoding detection, email/URL/number extraction.
 
 | Module | Description |
 |--------|-------------|
-| [文字数](#文字数) | テキストの文字数を数える |
-| [エンコーディング検出](#エンコーディング検出) | テキストのエンコーディングを検出する |
-| [メール抽出](#メール抽出) | テキストからすべてのメールアドレスを抽出する |
-| [数字抽出](#数字抽出) | テキストからすべての数字を抽出する |
-| [URL抽出](#url抽出) | テキストからすべてのURLを抽出する |
-| [単語数](#単語数) | テキストの単語数を数える |
+| [Character Count](#character-count) | Count characters in text |
+| [Detect Encoding](#detect-encoding) | Detect text encoding |
+| [Extract Emails](#extract-emails) | Extract all email addresses from text |
+| [Extract Numbers](#extract-numbers) | Extract all numbers from text |
+| [Extract URLs](#extract-urls) | Extract all URLs from text |
+| [Word Count](#word-count) | Count words in text |
 
 ## Modules
 
-### 文字数
+### Character Count
 
 `text.char_count`
 
-テキストの文字数を数える
+Count characters in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 解析するテキスト |
+| `text` | text | Yes | - | Text to analyze |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total` | number | 解析するテキスト |
-| `without_spaces` | number | 総文字数 |
-| `letters` | number | 総文字数 |
-| `digits` | number | スペースなしでカウント |
-| `spaces` | number | 文字の数 |
-| `lines` | number | 数字の数 |
+| `total` | number | Total character count |
+| `without_spaces` | number | Count without spaces |
+| `letters` | number | Letter count |
+| `digits` | number | Digit count |
+| `spaces` | number | Space count |
+| `lines` | number | Line count |
 
-### エンコーディング検出
+### Detect Encoding
 
 `text.detect_encoding`
 
-テキストのエンコーディングを検出する
+Detect text encoding
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | エンコーディングを検出するテキストまたはバイト |
+| `text` | text | Yes | - | Text or bytes to detect encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `encoding` | string | エンコーディングを検出するテキストまたはバイト |
-| `confidence` | number | 検出されたエンコーディング |
-| `is_ascii` | boolean | 検出されたエンコーディング |
-| `has_bom` | boolean | 信頼度スコア (0-1) |
+| `encoding` | string | Detected encoding |
+| `confidence` | number | Confidence score (0-1) |
+| `is_ascii` | boolean | Whether text is pure ASCII |
+| `has_bom` | boolean | Whether BOM was detected |
 
-### メール抽出
+### Extract Emails
 
 `text.extract_emails`
 
-テキストからすべてのメールアドレスを抽出する
+Extract all email addresses from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | メールを抽出するテキスト |
-| `unique` | boolean | No | `True` | メールを抽出するテキスト |
-| `lowercase` | boolean | No | `True` | ユニークなメールのみを返す |
+| `text` | text | Yes | - | Text to extract emails from |
+| `unique` | boolean | No | `True` | Return only unique emails |
+| `lowercase` | boolean | No | `True` | Convert emails to lowercase |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `emails` | array | メールを小文字に変換 |
-| `count` | number | 抽出されたメールのリスト |
-| `domains` | array | 抽出されたメールのリスト |
+| `emails` | array | List of extracted emails |
+| `count` | number | Number of emails found |
+| `domains` | array | Unique domains found |
 
-### 数字抽出
+### Extract Numbers
 
 `text.extract_numbers`
 
-テキストからすべての数字を抽出する
+Extract all numbers from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 数字を抽出するテキスト |
-| `include_decimals` | boolean | No | `True` | 数字を抽出するテキスト |
-| `include_negative` | boolean | No | `True` | 小数を含める |
+| `text` | text | Yes | - | Text to extract numbers from |
+| `include_decimals` | boolean | No | `True` | Include decimal numbers |
+| `include_negative` | boolean | No | `True` | Include negative numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `numbers` | array | 負の数を含める |
-| `count` | number | 抽出された数字のリスト |
-| `sum` | number | 抽出された数字のリスト |
-| `min` | number | 見つかった数字の数 |
-| `max` | number | すべての数字の合計 |
+| `numbers` | array | List of extracted numbers |
+| `count` | number | Number of numbers found |
+| `sum` | number | Sum of all numbers |
+| `min` | number | Minimum value |
+| `max` | number | Maximum value |
 
-### URL抽出
+### Extract URLs
 
 `text.extract_urls`
 
-テキストからすべてのURLを抽出する
+Extract all URLs from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | URLを抽出するテキスト |
-| `unique` | boolean | No | `True` | URLを抽出するテキスト |
+| `text` | text | Yes | - | Text to extract URLs from |
+| `unique` | boolean | No | `True` | Return only unique URLs |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `urls` | array | ユニークなURLのみを返す |
-| `count` | number | 抽出されたURLのリスト |
+| `urls` | array | List of extracted URLs |
+| `count` | number | Number of URLs found |
 
-### 単語数
+### Word Count
 
 `text.word_count`
 
-テキストの単語数を数える
+Count words in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 分析するテキスト |
+| `text` | text | Yes | - | Text to analyze |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `word_count` | number | 分析するテキスト |
-| `unique_words` | number | 総単語数 |
-| `sentence_count` | number | 総単語数 |
-| `paragraph_count` | number | ユニークな単語の数 |
-| `avg_word_length` | number | おおよその文数 |
+| `word_count` | number | Total word count |
+| `unique_words` | number | Number of unique words |
+| `sentence_count` | number | Approximate sentence count |
+| `paragraph_count` | number | Paragraph count |
+| `avg_word_length` | number | Average word length |

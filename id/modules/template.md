@@ -6,15 +6,15 @@ Execute reusable templates as workflow steps.
 
 | Module | Description |
 |--------|-------------|
-| [Jalankan Template](#jalankan-template) | Jalankan template dari perpustakaan Anda sebagai langkah alur kerja |
+| [Invoke Template](#invoke-template) | Execute a template from your library as a workflow step |
 
 ## Modules
 
-### Jalankan Template
+### Invoke Template
 
 `template.invoke`
 
-Jalankan template dari perpustakaan Anda sebagai langkah alur kerja
+Execute a template from your library as a workflow step
 
 **Parameters:**
 
@@ -29,10 +29,10 @@ Jalankan template dari perpustakaan Anda sebagai langkah alur kerja
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ID item perpustakaan (pembelian/fork/milik) |
-| `result` | any | Waktu eksekusi maksimum dalam detik |
-| `template_id` | string | Event untuk routing (berhasil/gagal) |
-| `execution_time_ms` | number | Hasil eksekusi template |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Template execution result |
+| `template_id` | string | Executed template ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 

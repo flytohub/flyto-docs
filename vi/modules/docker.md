@@ -6,38 +6,38 @@ Build, run, inspect, and manage Docker containers.
 
 | Module | Description |
 |--------|-------------|
-| [Tạo Docker Image](#tạo-docker-image) | Tạo một Docker image từ Dockerfile |
-| [Kiểm tra Docker Container](#kiểm-tra-docker-container) | Lấy thông tin chi tiết về Docker container |
-| [Lấy nhật ký container](#lấy-nhật-ký-container) | Lấy nhật ký từ container Docker |
-| [Liệt kê container Docker](#liệt-kê-container-docker) | Liệt kê container Docker |
-| [Chạy Docker Container](#chạy-docker-container) | Chạy một Docker container từ image |
-| [Dừng Docker Container](#dừng-docker-container) | Dừng một Docker container đang chạy |
+| [Build Docker Image](#build-docker-image) | Build a Docker image from a Dockerfile |
+| [Inspect Docker Container](#inspect-docker-container) | Get detailed information about a Docker container |
+| [Get Container Logs](#get-container-logs) | Get logs from a Docker container |
+| [List Docker Containers](#list-docker-containers) | List Docker containers |
+| [Run Docker Container](#run-docker-container) | Run a Docker container from an image |
+| [Stop Docker Container](#stop-docker-container) | Stop a running Docker container |
 
 ## Modules
 
-### Tạo Docker Image
+### Build Docker Image
 
 `docker.build`
 
-Tạo một Docker image từ Dockerfile
+Build a Docker image from a Dockerfile
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Đường dẫn đến thư mục ngữ cảnh build |
-| `tag` | string | Yes | - | Tên và tùy chọn tag cho image (ví dụ: myapp:latest) |
-| `dockerfile` | string | No | - | Đường dẫn đến Dockerfile (tương đối với ngữ cảnh build) |
-| `build_args` | object | No | - | Biến trong thời gian build (ví dụ: {"NODE_ENV": "production"}) |
-| `no_cache` | boolean | No | `False` | Không sử dụng cache khi tạo image |
+| `path` | string | Yes | - | Path to the build context directory |
+| `tag` | string | Yes | - | Name and optionally tag the image (e.g. myapp:latest) |
+| `dockerfile` | string | No | - | Path to the Dockerfile (relative to build context) |
+| `build_args` | object | No | - | Build-time variables (e.g. {"NODE_ENV": "production"}) |
+| `no_cache` | boolean | No | `False` | Do not use cache when building the image |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `image_id` | string | ID của image đã tạo |
-| `tag` | string | Tag được áp dụng cho image |
-| `size` | string | Kích thước của image đã tạo |
+| `image_id` | string | ID of the built image |
+| `tag` | string | Tag applied to the image |
+| `size` | string | Size of the built image |
 
 **Example:** Build from current directory
 
@@ -56,29 +56,29 @@ build_args: {"NODE_ENV": "production"}
 no_cache: true
 ```
 
-### Kiểm tra Docker Container
+### Inspect Docker Container
 
 `docker.inspect_container`
 
-Lấy thông tin chi tiết về Docker container
+Get detailed information about a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | ID hoặc tên container để kiểm tra |
+| `container` | string | Yes | - | Container ID or name to inspect |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | ID ngắn của container |
-| `name` | string | Tên container |
-| `state` | object | Trạng thái container (trạng thái, đang chạy, pid, mã thoát, v.v.) |
-| `image` | string | Hình ảnh được container sử dụng |
-| `network_settings` | object | Cấu hình mạng (IP, cổng, mạng) |
-| `mounts` | array | Volume và bind mounts |
-| `config` | object | Cấu hình container (env, cmd, nhãn, v.v.) |
+| `id` | string | Short container ID |
+| `name` | string | Container name |
+| `state` | object | Container state (status, running, pid, exit_code, etc.) |
+| `image` | string | Image used by the container |
+| `network_settings` | object | Network configuration (IP, ports, networks) |
+| `mounts` | array | Volume and bind mounts |
+| `config` | object | Container configuration (env, cmd, labels, etc.) |
 
 **Example:** Inspect a container by name
 
@@ -92,27 +92,27 @@ container: my-nginx
 container: a1b2c3d4e5f6
 ```
 
-### Lấy nhật ký container
+### Get Container Logs
 
 `docker.logs`
 
-Lấy nhật ký từ container Docker
+Get logs from a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | ID hoặc tên container |
-| `tail` | number | No | `100` | Số dòng hiển thị từ cuối nhật ký |
-| `follow` | boolean | No | `False` | Theo dõi đầu ra nhật ký (truyền đến khi hết thời gian chờ) |
-| `timestamps` | boolean | No | `False` | Hiển thị dấu thời gian trong đầu ra nhật ký |
+| `container` | string | Yes | - | Container ID or name |
+| `tail` | number | No | `100` | Number of lines to show from the end of the logs |
+| `follow` | boolean | No | `False` | Follow log output (streams until timeout) |
+| `timestamps` | boolean | No | `False` | Show timestamps in log output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `logs` | string | Đầu ra nhật ký container |
-| `lines` | number | Số dòng nhật ký được trả về |
+| `logs` | string | Container log output |
+| `lines` | number | Number of log lines returned |
 
 **Example:** Get last 50 lines
 
@@ -129,25 +129,25 @@ tail: 100
 timestamps: true
 ```
 
-### Liệt kê container Docker
+### List Docker Containers
 
 `docker.ps`
 
-Liệt kê container Docker
+List Docker containers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `all` | boolean | No | `False` | Hiển thị tất cả container (mặc định chỉ hiển thị đang chạy) |
-| `filters` | object | No | - | Lọc container (ví dụ: {"name": "my-app", "status": "running"}) |
+| `all` | boolean | No | `False` | Show all containers (default shows just running) |
+| `filters` | object | No | - | Filter containers (e.g. {"name": "my-app", "status": "running"}) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `containers` | array | Danh sách container với id, tên, hình ảnh, trạng thái, cổng |
-| `count` | number | Số lượng container tìm thấy |
+| `containers` | array | List of containers with id, name, image, status, ports |
+| `count` | number | Number of containers found |
 
 **Example:** List running containers
 
@@ -166,32 +166,32 @@ all: true
 filters: {"name": "nginx"}
 ```
 
-### Chạy Docker Container
+### Run Docker Container
 
 `docker.run`
 
-Chạy một Docker container từ image
+Run a Docker container from an image
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image` | string | Yes | - | Docker image để chạy (ví dụ: nginx:latest) |
-| `command` | string | No | - | Lệnh để chạy trong container |
-| `name` | string | No | - | Gán tên cho container |
-| `ports` | object | No | - | Ánh xạ cổng dạng host:container (ví dụ: {"8080": "80"}) |
-| `volumes` | object | No | - | Ánh xạ ổ đĩa dạng host_path:container_path |
-| `env` | object | No | - | Biến môi trường để thiết lập trong container |
-| `detach` | boolean | No | `True` | Chạy container ở chế độ nền |
-| `remove` | boolean | No | `False` | Tự động xóa container khi thoát |
-| `network` | string | No | - | Kết nối container với một mạng |
+| `image` | string | Yes | - | Docker image to run (e.g. nginx:latest) |
+| `command` | string | No | - | Command to run inside the container |
+| `name` | string | No | - | Assign a name to the container |
+| `ports` | object | No | - | Port mappings as host:container (e.g. {"8080": "80"}) |
+| `volumes` | object | No | - | Volume mappings as host_path:container_path |
+| `env` | object | No | - | Environment variables to set in the container |
+| `detach` | boolean | No | `True` | Run container in background |
+| `remove` | boolean | No | `False` | Automatically remove the container when it exits |
+| `network` | string | No | - | Connect the container to a network |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | ID của container đã tạo |
-| `status` | string | Trạng thái container sau khi chạy |
+| `container_id` | string | ID of the created container |
+| `status` | string | Container status after run |
 
 **Example:** Run Nginx web server
 
@@ -211,25 +211,25 @@ remove: true
 detach: false
 ```
 
-### Dừng Docker Container
+### Stop Docker Container
 
 `docker.stop`
 
-Dừng một Docker container đang chạy
+Stop a running Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | ID hoặc tên container để dừng |
-| `timeout` | number | No | `10` | Số giây chờ trước khi dừng container |
+| `container` | string | Yes | - | Container ID or name to stop |
+| `timeout` | number | No | `10` | Seconds to wait before killing the container |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | ID hoặc tên của container đã dừng |
-| `stopped` | boolean | Container có được dừng thành công không |
+| `container_id` | string | ID or name of the stopped container |
+| `stopped` | boolean | Whether the container was successfully stopped |
 
 **Example:** Stop a container by name
 

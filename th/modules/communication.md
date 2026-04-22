@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [อ่านอีเมล](#อ่านอีเมล) | อ่านอีเมลจากเซิร์ฟเวอร์ IMAP |
-| [ส่งอีเมล](#ส่งอีเมล) | ส่งอีเมลผ่านเซิร์ฟเวอร์ SMTP |
-| [ส่งข้อความ Slack](#ส่งข้อความ-slack) | ส่งข้อความไปยังช่อง Slack ผ่าน incoming webhook |
-| [ทริกเกอร์ Webhook](#ทริกเกอร์-webhook) | ส่งคำขอ HTTP POST ไปยัง webhook URL |
+| [Read Email](#read-email) | Read emails from IMAP server |
+| [Send Email](#send-email) | Send email via SMTP server |
+| [Send Slack Message](#send-slack-message) | Send messages to Slack channels via incoming webhook |
+| [Trigger Webhook](#trigger-webhook) | Send HTTP POST request to a webhook URL |
 
 ## Modules
 
-### อ่านอีเมล
+### Read Email
 
 `email.read`
 
-อ่านอีเมลจากเซิร์ฟเวอร์ IMAP
+Read emails from IMAP server
 
 **Parameters:**
 
@@ -38,8 +38,8 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `emails` | array | รายการออบเจกต์อีเมล |
-| `count` | number | รายการออบเจกต์อีเมล |
+| `emails` | array | List of email objects |
+| `count` | number | Number of emails fetched |
 
 **Example:** Read recent unread emails
 
@@ -49,11 +49,11 @@ unread_only: true
 limit: 5
 ```
 
-### ส่งอีเมล
+### Send Email
 
 `email.send`
 
-ส่งอีเมลผ่านเซิร์ฟเวอร์ SMTP
+Send email via SMTP server
 
 **Parameters:**
 
@@ -77,9 +77,9 @@ limit: 5
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sent` | boolean | อีเมลส่งสำเร็จหรือไม่ |
-| `message_id` | string | อีเมลส่งสำเร็จหรือไม่ |
-| `recipients` | array | อีเมลส่งสำเร็จหรือไม่ |
+| `sent` | boolean | Whether email was sent successfully |
+| `message_id` | string | Email message ID |
+| `recipients` | array | List of recipients |
 
 **Example:** Send simple email
 
@@ -89,11 +89,11 @@ subject: Hello
 body: This is a test email.
 ```
 
-### ส่งข้อความ Slack
+### Send Slack Message
 
 `slack.send`
 
-ส่งข้อความไปยังช่อง Slack ผ่าน incoming webhook
+Send messages to Slack channels via incoming webhook
 
 **Parameters:**
 
@@ -111,7 +111,7 @@ body: This is a test email.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sent` | boolean | ข้อความส่งสำเร็จหรือไม่ |
+| `sent` | boolean | Whether message was sent successfully |
 
 **Example:** Send simple message
 
@@ -127,11 +127,11 @@ username: Flyto Bot
 icon_emoji: :white_check_mark:
 ```
 
-### ทริกเกอร์ Webhook
+### Trigger Webhook
 
 `webhook.trigger`
 
-ส่งคำขอ HTTP POST ไปยัง webhook URL
+Send HTTP POST request to a webhook URL
 
 **Parameters:**
 
@@ -149,9 +149,9 @@ icon_emoji: :white_check_mark:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | รหัสสถานะการตอบกลับ HTTP |
-| `response` | object | รหัสสถานะการตอบกลับ HTTP |
-| `headers` | object | รหัสสถานะการตอบกลับ HTTP |
+| `status_code` | number | HTTP response status code |
+| `response` | object | Response body (if JSON) |
+| `headers` | object | Response headers |
 
 **Example:** Simple POST webhook
 

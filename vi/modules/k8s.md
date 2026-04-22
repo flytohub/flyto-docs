@@ -6,19 +6,19 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Module | Description |
 |--------|-------------|
-| [Áp dụng Manifest](#áp-dụng-manifest) | Áp dụng một manifest Kubernetes qua kubectl apply |
-| [Mô tả Tài nguyên](#mô-tả-tài-nguyên) | Mô tả chi tiết một tài nguyên Kubernetes |
-| [Lấy Pods](#lấy-pods) | Liệt kê các pod Kubernetes trong một không gian tên |
-| [Lấy Nhật ký Pod](#lấy-nhật-ký-pod) | Lấy nhật ký từ một pod Kubernetes |
-| [Thay đổi quy mô Triển khai](#thay-đổi-quy-mô-triển-khai) | Thay đổi quy mô triển khai Kubernetes đến số lượng bản sao chỉ định |
+| [Apply Manifest](#apply-manifest) | Apply a Kubernetes manifest via kubectl apply |
+| [Describe Resource](#describe-resource) | Describe a Kubernetes resource in detail |
+| [Get Pods](#get-pods) | List Kubernetes pods in a namespace |
+| [Get Pod Logs](#get-pod-logs) | Retrieve logs from a Kubernetes pod |
+| [Scale Deployment](#scale-deployment) | Scale a Kubernetes deployment to a specified replica count |
 
 ## Modules
 
-### Áp dụng Manifest
+### Apply Manifest
 
 `k8s.apply`
 
-Áp dụng một manifest Kubernetes qua kubectl apply
+Apply a Kubernetes manifest via kubectl apply
 
 **Parameters:**
 
@@ -32,16 +32,16 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `kind` | string | Loại tài nguyên (ví dụ: Triển khai, Dịch vụ) |
-| `name` | string | Tên tài nguyên |
-| `namespace` | string | Không gian tên tài nguyên |
-| `action` | string | Hành động thực hiện (đã tạo, đã cấu hình, không thay đổi) |
+| `kind` | string | Resource kind (e.g. Deployment, Service) |
+| `name` | string | Resource name |
+| `namespace` | string | Resource namespace |
+| `action` | string | Action taken (created, configured, unchanged) |
 
-### Mô tả Tài nguyên
+### Describe Resource
 
 `k8s.describe`
 
-Mô tả chi tiết một tài nguyên Kubernetes
+Describe a Kubernetes resource in detail
 
 **Parameters:**
 
@@ -56,16 +56,16 @@ Mô tả chi tiết một tài nguyên Kubernetes
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `resource_type` | string | Loại tài nguyên đã được mô tả |
-| `name` | string | Tên tài nguyên |
-| `namespace` | string | Không gian tên Kubernetes |
-| `description` | string | Văn bản đầu ra đầy đủ của kubectl describe |
+| `resource_type` | string | Resource type that was described |
+| `name` | string | Resource name |
+| `namespace` | string | Kubernetes namespace |
+| `description` | string | Full kubectl describe output text |
 
-### Lấy Pods
+### Get Pods
 
 `k8s.get_pods`
 
-Liệt kê các pod Kubernetes trong một không gian tên
+List Kubernetes pods in a namespace
 
 **Parameters:**
 
@@ -79,14 +79,14 @@ Liệt kê các pod Kubernetes trong một không gian tên
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pods` | array | Danh sách các pod với thông tin trạng thái |
-| `count` | number | Tổng số pod được tìm thấy |
+| `pods` | array | List of pods with status information |
+| `count` | number | Total number of pods found |
 
-### Lấy Nhật ký Pod
+### Get Pod Logs
 
 `k8s.logs`
 
-Lấy nhật ký từ một pod Kubernetes
+Retrieve logs from a Kubernetes pod
 
 **Parameters:**
 
@@ -103,15 +103,15 @@ Lấy nhật ký từ một pod Kubernetes
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pod` | string | Tên pod |
-| `logs` | string | Văn bản đầu ra nhật ký |
-| `lines` | number | Số dòng nhật ký được trả về |
+| `pod` | string | Pod name |
+| `logs` | string | Log output text |
+| `lines` | number | Number of log lines returned |
 
-### Thay đổi quy mô Triển khai
+### Scale Deployment
 
 `k8s.scale`
 
-Thay đổi quy mô triển khai Kubernetes đến số lượng bản sao chỉ định
+Scale a Kubernetes deployment to a specified replica count
 
 **Parameters:**
 
@@ -126,7 +126,7 @@ Thay đổi quy mô triển khai Kubernetes đến số lượng bản sao chỉ
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deployment` | string | Tên triển khai |
-| `replicas` | number | Số lượng bản sao yêu cầu |
-| `namespace` | string | Không gian tên Kubernetes |
-| `scaled` | boolean | Thao tác thay đổi quy mô có thành công hay không |
+| `deployment` | string | Deployment name |
+| `replicas` | number | Requested replica count |
+| `namespace` | string | Kubernetes namespace |
+| `scaled` | boolean | Whether the scale operation succeeded |

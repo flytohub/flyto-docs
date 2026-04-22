@@ -6,23 +6,23 @@ MongoDB, MySQL, PostgreSQL, and Redis database operations.
 
 | Module | Description |
 |--------|-------------|
-| [Datenbank-Einfügen](#datenbank-einfügen) | Daten in Datenbanktabellen einfügen |
-| [Datenbank-Abfrage](#datenbank-abfrage) | SQL-Abfragen auf PostgreSQL-, MySQL- oder SQLite-Datenbanken ausführen |
-| [Datenbank-Update](#datenbank-update) | Daten in Datenbanktabellen aktualisieren |
-| [MongoDB-Suche](#mongodb-suche) | Dokumente aus MongoDB-Sammlung abfragen |
-| [MongoDB-Einfügen](#mongodb-einfügen) | Ein oder mehrere Dokumente in MongoDB-Sammlung einfügen |
-| [MySQL-Abfrage](#mysql-abfrage) | SQL-Abfrage auf MySQL-Datenbank ausführen und Ergebnisse zurückgeben |
-| [PostgreSQL-Abfrage](#postgresql-abfrage) | SQL-Abfrage auf PostgreSQL-Datenbank ausführen und Ergebnisse zurückgeben |
-| [Redis abrufen](#redis-abrufen) | Wert aus Redis-Cache abrufen |
-| [Redis setzen](#redis-setzen) | Wert in Redis-Cache setzen |
+| [Database Insert](#database-insert) | Insert data into database tables |
+| [Database Query](#database-query) | Execute SQL queries on PostgreSQL, MySQL, or SQLite databases |
+| [Database Update](#database-update) | Update data in database tables |
+| [MongoDB Find](#mongodb-find) | Query documents from MongoDB collection |
+| [MongoDB Insert](#mongodb-insert) | Insert one or more documents into MongoDB collection |
+| [MySQL Query](#mysql-query) | Execute a SQL query on MySQL database and return results |
+| [PostgreSQL Query](#postgresql-query) | Execute a SQL query on PostgreSQL database and return results |
+| [Redis Get](#redis-get) | Get a value from Redis cache |
+| [Redis Set](#redis-set) | Set a value in Redis cache |
 
 ## Modules
 
-### Datenbank-Einfügen
+### Database Insert
 
 `database.insert`
 
-Daten in Datenbanktabellen einfügen
+Insert data into database tables
 
 **Parameters:**
 
@@ -43,8 +43,8 @@ Daten in Datenbanktabellen einfügen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | Anzahl der eingefügten Zeilen |
-| `returning_data` | array | Anzahl der eingefügten Zeilen |
+| `inserted_count` | number | Number of rows inserted |
+| `returning_data` | array | Returned data from insert |
 
 **Example:** Insert single row
 
@@ -54,11 +54,11 @@ data: {"name": "John", "email": "john@example.com"}
 database_type: postgresql
 ```
 
-### Datenbank-Abfrage
+### Database Query
 
 `database.query`
 
-SQL-Abfragen auf PostgreSQL-, MySQL- oder SQLite-Datenbanken ausführen
+Execute SQL queries on PostgreSQL, MySQL, or SQLite databases
 
 **Parameters:**
 
@@ -79,9 +79,9 @@ SQL-Abfragen auf PostgreSQL-, MySQL- oder SQLite-Datenbanken ausführen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | Abfrageergebniszeilen |
-| `row_count` | number | Abfrageergebniszeilen |
-| `columns` | array | Abfrageergebniszeilen |
+| `rows` | array | Query result rows |
+| `row_count` | number | Number of rows returned/affected |
+| `columns` | array | Column names |
 
 **Example:** Select with parameters
 
@@ -91,11 +91,11 @@ params: ["active"]
 database_type: postgresql
 ```
 
-### Datenbank-Update
+### Database Update
 
 `database.update`
 
-Daten in Datenbanktabellen aktualisieren
+Update data in database tables
 
 **Parameters:**
 
@@ -116,7 +116,7 @@ Daten in Datenbanktabellen aktualisieren
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `updated_count` | number | Anzahl der aktualisierten Zeilen |
+| `updated_count` | number | Number of rows updated |
 
 **Example:** Update user status
 
@@ -127,11 +127,11 @@ where: {"id": 123}
 database_type: postgresql
 ```
 
-### MongoDB-Suche
+### MongoDB Find
 
 `db.mongodb.find`
 
-Dokumente aus MongoDB-Sammlung abfragen
+Query documents from MongoDB collection
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ Dokumente aus MongoDB-Sammlung abfragen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `documents` | array | Array von übereinstimmenden Dokumenten |
-| `count` | number | Array von übereinstimmenden Dokumenten |
+| `documents` | array | Array of matching documents |
+| `count` | number | Number of documents returned |
 
 **Example:** Find all active users
 
@@ -172,11 +172,11 @@ sort: {"created_at": -1}
 limit: 20
 ```
 
-### MongoDB-Einfügen
+### MongoDB Insert
 
 `db.mongodb.insert`
 
-Ein oder mehrere Dokumente in MongoDB-Sammlung einfügen
+Insert one or more documents into MongoDB collection
 
 **Parameters:**
 
@@ -192,8 +192,8 @@ Ein oder mehrere Dokumente in MongoDB-Sammlung einfügen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | Anzahl der eingefügten Dokumente |
-| `inserted_ids` | array | Anzahl der eingefügten Dokumente |
+| `inserted_count` | number | Number of documents inserted |
+| `inserted_ids` | array | Array of inserted document IDs |
 
 **Example:** Insert single document
 
@@ -211,11 +211,11 @@ collection: products
 documents: [{"name": "Product A", "price": 19.99}, {"name": "Product B", "price": 29.99}]
 ```
 
-### MySQL-Abfrage
+### MySQL Query
 
 `db.mysql.query`
 
-SQL-Abfrage auf MySQL-Datenbank ausführen und Ergebnisse zurückgeben
+Execute a SQL query on MySQL database and return results
 
 **Parameters:**
 
@@ -233,9 +233,9 @@ SQL-Abfrage auf MySQL-Datenbank ausführen und Ergebnisse zurückgeben
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | Array von Ergebniszeilen als Objekte |
-| `row_count` | number | Array von Ergebniszeilen als Objekte |
-| `columns` | array | Array von Ergebniszeilen als Objekte |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select products
 
@@ -250,11 +250,11 @@ query: SELECT * FROM orders WHERE customer_id = %s AND created_at > %s
 params: ["${customer_id}", "2024-01-01"]
 ```
 
-### PostgreSQL-Abfrage
+### PostgreSQL Query
 
 `db.postgresql.query`
 
-SQL-Abfrage auf PostgreSQL-Datenbank ausführen und Ergebnisse zurückgeben
+Execute a SQL query on PostgreSQL database and return results
 
 **Parameters:**
 
@@ -268,9 +268,9 @@ SQL-Abfrage auf PostgreSQL-Datenbank ausführen und Ergebnisse zurückgeben
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | Array von Ergebniszeilen als Objekte |
-| `row_count` | number | Array von Ergebniszeilen als Objekte |
-| `columns` | array | Array von Ergebniszeilen als Objekte |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select users
 
@@ -285,11 +285,11 @@ query: SELECT * FROM orders WHERE user_id = $1 AND status = $2
 params: ["${user_id}", "completed"]
 ```
 
-### Redis abrufen
+### Redis Get
 
 `db.redis.get`
 
-Wert aus Redis-Cache abrufen
+Get a value from Redis cache
 
 **Parameters:**
 
@@ -304,9 +304,9 @@ Wert aus Redis-Cache abrufen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | Der zurückgegebene Wert |
-| `exists` | boolean | Der zurückgegebene Wert |
-| `key` | string | Der zurückgegebene Wert |
+| `value` | any | The returned value |
+| `exists` | boolean | The exists |
+| `key` | string | Key identifier |
 
 **Example:** Get cached value
 
@@ -324,11 +324,11 @@ port: 6379
 db: 1
 ```
 
-### Redis setzen
+### Redis Set
 
 `db.redis.set`
 
-Wert in Redis-Cache setzen
+Set a value in Redis cache
 
 **Parameters:**
 

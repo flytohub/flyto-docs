@@ -6,15 +6,15 @@ Execute reusable templates as workflow steps.
 
 | Module | Description |
 |--------|-------------|
-| [टेम्पलेट को आमंत्रित करें](#टेम्पलेट-को-आमंत्रित-करें) | अपने पुस्तकालय से एक टेम्पलेट को वर्कफ़्लो चरण के रूप में निष्पादित करें |
+| [Invoke Template](#invoke-template) | Execute a template from your library as a workflow step |
 
 ## Modules
 
-### टेम्पलेट को आमंत्रित करें
+### Invoke Template
 
 `template.invoke`
 
-अपने पुस्तकालय से एक टेम्पलेट को वर्कफ़्लो चरण के रूप में निष्पादित करें
+Execute a template from your library as a workflow step
 
 **Parameters:**
 
@@ -29,10 +29,10 @@ Execute reusable templates as workflow steps.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | पुस्तकालय आइटम का ID (खरीद/फोर्क/स्वामित्व) |
-| `result` | any | अधिकतम निष्पादन समय सेकंड में |
-| `template_id` | string | रूटिंग के लिए घटना (सफलता/त्रुटि) |
-| `execution_time_ms` | number | टेम्पलेट निष्पादन परिणाम |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Template execution result |
+| `template_id` | string | Executed template ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 

@@ -6,68 +6,68 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [チャレンジ対応](#チャレンジ対応) | アンチボットチャレンジ (Cloudflare, CAPTCHA) を自動検出して対処 |
-| [クリック](#クリック) | ページ上の要素をクリック |
-| [ブラウザを閉じる](#ブラウザを閉じる) | ブラウザを閉じてリソースを解放 |
-| [リモート接続](#リモート接続) | リモートブラウザサービス (Browserless, BrowserBase) に接続。実フィンガープリントで Cloudflare をバイパス。 |
-| [コンソール取得](#コンソール取得) | ブラウザコンソールログを取得 |
-| [Cookie 管理](#cookie-管理) | Cookie の取得・設定・削除 |
-| [Cookie ファイル](#cookie-ファイル) | ブラウザの Cookie を JSON ファイルにインポート/エクスポート。 |
+| [Handle Challenge](#handle-challenge) | Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop. |
+| [Click Element](#click-element) | Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Close Browser](#close-browser) | Close the browser instance and release resources |
+| [Connect Remote](#connect-remote) | Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs. |
+| [Capture Console](#capture-console) | Capture browser console logs (errors, warnings, info) |
+| [Manage Cookies](#manage-cookies) | Get, set, or clear browser cookies |
+| [Cookies File](#cookies-file) | Import or export browser cookies to/from a JSON file for session persistence. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [リスト検出](#リスト検出) | ページ上の繰り返し項目 (記事、商品、検索結果) を自動検出 |
-| [ダイアログ処理](#ダイアログ処理) | alert・confirm・prompt ダイアログの処理 |
-| [ダウンロード](#ダウンロード) | ブラウザからファイルをダウンロード |
-| [ドラッグ＆ドロップ](#ドラッグ＆ドロップ) | 要素をドラッグ＆ドロップ |
-| [デバイスエミュレート](#デバイスエミュレート) | デバイスをエミュレートまたはカスタムビューポートを設定 |
-| [ブラウザ確認](#ブラウザ確認) | ブラウザセッションが存在することを確認（再利用または起動） |
-| [JavaScript 実行](#javascript-実行) | ページ上でJavaScriptコードを実行 |
-| [データ抽出](#データ抽出) | ページから構造化データを抽出 |
-| [ネスト抽出](#ネスト抽出) | ツリー/ネスト構造のデータ (コメント、スレッド、フォルダ) を抽出。 |
-| [要素検索](#要素検索) | ページ内の要素を検索し要素ID一覧を返す |
-| [フォーム入力](#フォーム入力) | 自動フィールド検出によるスマートフォーム入力 |
-| [フレーム切替](#フレーム切替) | iframe またはフレームに切り替え |
-| [位置情報シミュレート](#位置情報シミュレート) | ブラウザの位置情報をシミュレート |
-| [URLに移動](#urlに移動) | 指定URLに移動 |
-| [ホバー](#ホバー) | 要素にマウスオーバー |
-| [ブラウザ操作](#ブラウザ操作) | ユーザーがブラウザページを操作するまで一時停止 |
-| [ブラウザ起動](#ブラウザ起動) | Playwright で新しいブラウザを起動 |
-| [ログイン](#ログイン) | ログインフォームを自動検出して入力し、ログイン後の検証を行う。 |
-| [履歴ナビゲート](#履歴ナビゲート) | ブラウザ履歴をナビゲート（戻る、進む、リロード） |
-| [ネットワーク監視](#ネットワーク監視) | ネットワークリクエストの監視・傍受 |
-| [ページ一覧](#ページ一覧) | 開いているすべてのブラウザページ/タブを一覧表示 |
-| [ページネート＆抽出](#ページネート＆抽出) | ページを自動でページネートし、データを抽出 |
-| [PDF生成](#pdf生成) | 現在のページからPDFを生成 |
-| [パフォーマンス指標](#パフォーマンス指標) | ブラウザのパフォーマンス指標を収集 |
-| [ブラウザプール](#ブラウザプール) | 並列自動化のための複数の名前付きブラウザインスタンスを管理。 |
-| [キー入力](#キー入力) | キーボードキーを押す |
-| [プロキシローテーション](#プロキシローテーション) | プロキシリストをローテーションし、無効なプロキシを検出。 |
-| [記事抽出](#記事抽出) | スマート記事抽出 — 任意のウェブページからタイトル、著者、日付、本文を抽出 |
-| [操作記録](#操作記録) | ユーザー操作をワークフローとして記録 |
-| [ブラウザを解放](#ブラウザを解放) | ブラウザセッションを解放（所有している場合のみ閉じる） |
-| [レスポンスキャプチャ](#レスポンスキャプチャ) | API レスポンスボディ (XHR/fetch) をキャプチャ。ページの API コールから JSON を抽出。 |
-| [Robots.txt チェック](#robots.txt-チェック) | robots.txt の準拠を確認し、サイトマップを検出。 |
-| [スクリーンショット](#スクリーンショット) | 現在のページのスクリーンショットを撮影 |
-| [スクロール](#スクロール) | 要素・位置・方向にスクロール |
-| [選択](#選択) | ドロップダウンから選択 |
-| [サイトマップ解析](#サイトマップ解析) | sitemap.xml を解析し、メタデータ付きの URL を抽出。 |
-| [DOMスナップショット](#domスナップショット) | 現在のページのDOMスナップショットをキャプチャ |
-| [ストレージ](#ストレージ) | localStorage・sessionStorage にアクセス |
-| [タブ管理](#タブ管理) | タブの作成・切替・閉じる |
-| [テーブル抽出](#テーブル抽出) | HTML テーブルをヘッダー自動検出で構造化データとして抽出。 |
-| [スロットル](#スロットル) | ドメインごとのレート制限。アクセス制限を避けるためリクエスト間で待機。 |
-| [ブラウザトレース](#ブラウザトレース) | ブラウザのパフォーマンストレースを開始、停止、または保存 |
-| [テキスト入力](#テキスト入力) | 入力フィールドにテキストを入力 |
-| [ファイルアップロード](#ファイルアップロード) | ファイル入力要素にファイルをアップロード |
-| [ビューポート設定](#ビューポート設定) | ブラウザのビューポートサイズを取得または設定 |
-| [待機](#待機) | 一定時間または要素が表示されるまで待機 |
+| [Detect List](#detect-list) | Auto-detect repeating items on any page (articles, products, search results). No selectors needed. |
+| [Handle Dialog](#handle-dialog) | Handle alert, confirm, and prompt dialogs |
+| [Download File](#download-file) | Download file from browser |
+| [Drag and Drop](#drag-and-drop) | Drag and drop elements |
+| [Device Emulation](#device-emulation) | Emulate mobile devices, tablets, and custom viewports |
+| [Ensure Browser](#ensure-browser) | Ensure a browser session exists (reuse or launch) |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code in page context |
+| [Extract Data](#extract-data) | Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Extract Nested](#extract-nested) | Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children. |
+| [Find Elements](#find-elements) | Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Fill Form](#fill-form) | Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM. |
+| [Switch Frame](#switch-frame) | Switch to iframe or frame context |
+| [Mock Geolocation](#mock-geolocation) | Mock browser geolocation |
+| [Go to URL](#go-to-url) | Navigate to a specific URL |
+| [Hover Element](#hover-element) | Hover mouse over an element |
+| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
+| [Launch Browser](#launch-browser) | Launch a new browser instance with Playwright |
+| [Login](#login) | Auto-detect and fill login forms. Handles username + password + submit with post-login verification. |
+| [Page Navigation](#page-navigation) | Navigate back, forward, or reload the page |
+| [Network Monitor](#network-monitor) | Monitor and intercept network requests |
+| [List Pages](#list-pages) | List all open browser pages/tabs with details |
+| [Paginate & Extract](#paginate--extract) | Auto-paginate through pages and extract data. Supports retry and checkpoint resume. |
+| [Generate PDF](#generate-pdf) | Generate PDF from current page |
+| [Performance Metrics](#performance-metrics) | Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics |
+| [Browser Pool](#browser-pool) | Manage multiple named browser instances for parallel automation. |
+| [Press Key](#press-key) | Press a keyboard key |
+| [Rotate Proxy](#rotate-proxy) | Rotate through a list of proxies. Relaunches browser with the next proxy. |
+| [Extract Article](#extract-article) | Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode. |
+| [Record Actions](#record-actions) | Record user actions as workflow |
+| [Release Browser](#release-browser) | Release browser session (close only if owned) |
+| [Capture Response](#capture-response) | Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls. |
+| [Check Robots.txt](#check-robots.txt) | Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping. |
+| [Take Screenshot](#take-screenshot) | Take a screenshot of the current page |
+| [Scroll Page](#scroll-page) | Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Select Option](#select-option) | Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering. |
+| [DOM Snapshot](#dom-snapshot) | Capture DOM snapshot in HTML, MHTML, or text format |
+| [Browser Storage](#browser-storage) | Access localStorage and sessionStorage |
+| [Manage Tabs](#manage-tabs) | Create, switch, and close browser tabs |
+| [Extract Table](#extract-table) | Extract HTML tables as structured data. Auto-detects headers from thead/th. |
+| [Throttle](#throttle) | Per-domain rate limiting. Waits between requests to the same domain to avoid bans. |
+| [Performance Trace](#performance-trace) | Start/stop Chrome DevTools performance tracing (Chromium only) |
+| [Type Text](#type-text) | Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Upload File](#upload-file) | Upload file to file input element |
+| [Resize Viewport](#resize-viewport) | Resize browser viewport to specific dimensions |
+| [Wait](#wait) | Wait for a duration or until an element appears |
 
 ## Modules
 
-### チャレンジ対応
+### Handle Challenge
 
 `browser.challenge`
 
-アンチボットチャレンジ (Cloudflare, CAPTCHA) を自動検出して対処
+Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop.
 
 **Parameters:**
 
@@ -107,11 +107,11 @@ auto_wait_seconds: 30
 human_fallback: false
 ```
 
-### クリック
+### Click Element
 
 `browser.click`
 
-ページ上の要素をクリック
+Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -131,8 +131,8 @@ human_fallback: false
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | 操作ステータス |
-| `selector` | string | クリックされたセレクター |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | Selector that was used |
 | `method` | string | Click method used |
 
 **Example:** Example
@@ -156,11 +156,11 @@ click_method: selector
 selector: #submit-button
 ```
 
-### ブラウザを閉じる
+### Close Browser
 
 `browser.close`
 
-ブラウザを閉じてリソースを解放
+Close the browser instance and release resources
 
 **Parameters:**
 
@@ -172,19 +172,19 @@ selector: #submit-button
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `message` | string | 終了結果メッセージ |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
 ```yaml
 ```
 
-### リモート接続
+### Connect Remote
 
 `browser.connect`
 
-リモートブラウザサービス (Browserless, BrowserBase) に接続。実フィンガープリントで Cloudflare をバイパス。
+Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs.
 
 **Parameters:**
 
@@ -222,11 +222,11 @@ ws_endpoint: wss://connect.browserbase.com?apiKey=KEY
 ws_endpoint: ws://localhost:3000
 ```
 
-### コンソール取得
+### Capture Console
 
 `browser.console`
 
-ブラウザコンソールログを取得
+Capture browser console logs (errors, warnings, info)
 
 **Parameters:**
 
@@ -240,9 +240,9 @@ ws_endpoint: ws://localhost:3000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `messages` | array | コンソールメッセージ一覧 |
-| `count` | number | ログ件数 |
+| `status` | string | Operation status (success/error) |
+| `messages` | array | The messages |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -257,11 +257,11 @@ level: error
 timeout: 5000
 ```
 
-### Cookie 管理
+### Manage Cookies
 
 `browser.cookies`
 
-Cookie の取得・設定・削除
+Get, set, or clear browser cookies
 
 **Parameters:**
 
@@ -280,9 +280,9 @@ Cookie の取得・設定・削除
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `cookies` | array | Cookie 一覧 |
-| `count` | number | Cookie 件数 |
+| `status` | string | Operation status (success/error) |
+| `cookies` | array | Browser cookies |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -312,11 +312,11 @@ domain: example.com
 action: clear
 ```
 
-### Cookie ファイル
+### Cookies File
 
 `browser.cookies_file`
 
-ブラウザの Cookie を JSON ファイルにインポート/エクスポート。
+Import or export browser cookies to/from a JSON file for session persistence.
 
 **Parameters:**
 
@@ -423,11 +423,11 @@ text: Login
 match_mode: best
 ```
 
-### リスト検出
+### Detect List
 
 `browser.detect_list`
 
-ページ上の繰り返し項目 (記事、商品、検索結果) を自動検出
+Auto-detect repeating items on any page (articles, products, search results). No selectors needed.
 
 **Parameters:**
 
@@ -467,11 +467,11 @@ min_items: 5
 max_items: 50
 ```
 
-### ダイアログ処理
+### Handle Dialog
 
 `browser.dialog`
 
-alert・confirm・prompt ダイアログの処理
+Handle alert, confirm, and prompt dialogs
 
 **Parameters:**
 
@@ -485,10 +485,10 @@ alert・confirm・prompt ダイアログの処理
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `message` | string | ダイアログメッセージ |
-| `type` | string | ダイアログタイプ |
-| `default_value` | string | ダイアログのデフォルト値 |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `type` | string | The type |
+| `default_value` | string | The default value |
 
 **Example:** Example
 
@@ -516,11 +516,11 @@ action: listen
 timeout: 5000
 ```
 
-### ダウンロード
+### Download File
 
 `browser.download`
 
-ブラウザからファイルをダウンロード
+Download file from browser
 
 **Parameters:**
 
@@ -534,10 +534,10 @@ timeout: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `path` | string | ファイルパス |
-| `filename` | string | ファイル名 |
-| `size` | number | ファイルサイズ |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -554,11 +554,11 @@ save_path: /downloads/large-file.zip
 timeout_ms: 120000
 ```
 
-### ドラッグ＆ドロップ
+### Drag and Drop
 
 `browser.drag`
 
-要素をドラッグ＆ドロップ
+Drag and drop elements
 
 **Parameters:**
 
@@ -574,9 +574,9 @@ timeout_ms: 120000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `source` | string | ソース要素位置 |
-| `target` | string | ターゲット要素位置 |
+| `status` | string | Operation status (success/error) |
+| `source` | string | The source |
+| `target` | string | The target |
 
 **Example:** Example
 
@@ -593,32 +593,32 @@ target: .container
 target_position: {"x": 0.5, "y": 0.5}
 ```
 
-### デバイスエミュレート
+### Device Emulation
 
 `browser.emulate`
 
-デバイスをエミュレートまたはカスタムビューポートを設定
+Emulate mobile devices, tablets, and custom viewports
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | エミュレートするデバイス名（例：iPhone 13） |
-| `width` | number | No | - | ビューポートの幅（ピクセル） |
-| `height` | number | No | - | ビューポートの高さ（ピクセル） |
-| `user_agent` | string | No | - | カスタムユーザーエージェント文字列 |
-| `device_scale_factor` | number | No | - | デバイスピクセル比 |
-| `is_mobile` | boolean | No | - | モバイルデバイスをエミュレートするかどうか |
-| `has_touch` | boolean | No | - | デバイスにタッチサポートがあるかどうか |
+| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | Device preset or "custom" for manual settings |
+| `width` | number | No | - | Custom viewport width (for custom device) |
+| `height` | number | No | - | Custom viewport height (for custom device) |
+| `user_agent` | string | No | - | Custom user agent string |
+| `device_scale_factor` | number | No | - | Device pixel ratio (1-3) |
+| `is_mobile` | boolean | No | - | Enable mobile browser behavior |
+| `has_touch` | boolean | No | - | Enable touch event support |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス（成功/エラー） |
-| `device` | string | エミュレートされたデバイス名 |
-| `viewport` | object | 現在のビューポート寸法 |
-| `is_mobile` | boolean | モバイルエミュレーションが有効かどうか |
+| `status` | string | Operation status |
+| `device` | string | Emulated device name |
+| `viewport` | object | Applied viewport dimensions |
+| `is_mobile` | boolean | Whether mobile mode is enabled |
 
 **Example:** Example
 
@@ -650,11 +650,11 @@ device: desktop_chrome
 user_agent: CustomBot/1.0
 ```
 
-### ブラウザ確認
+### Ensure Browser
 
 `browser.ensure`
 
-ブラウザセッションが存在することを確認（再利用または起動）
+Ensure a browser session exists (reuse or launch)
 
 **Parameters:**
 
@@ -668,9 +668,9 @@ user_agent: CustomBot/1.0
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ブラウザが起動または再利用されたかどうか |
-| `message` | string | ブラウザが起動または再利用されたかどうか |
-| `is_owner` | boolean | ブラウザが起動または再利用されたかどうか |
+| `status` | string | Whether browser was launched or reused |
+| `message` | string | Result message |
+| `is_owner` | boolean | Whether this step owns the browser (responsible for closing) |
 
 **Example:** Example
 
@@ -684,11 +684,11 @@ headless: false
 headless: true
 ```
 
-### JavaScript 実行
+### Execute JavaScript
 
 `browser.evaluate`
 
-ページ上でJavaScriptコードを実行
+Execute JavaScript code in page context
 
 **Parameters:**
 
@@ -701,8 +701,8 @@ headless: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `result` | any | 実行結果 |
+| `status` | string | Operation status (success/error) |
+| `result` | any | The operation result |
 
 **Example:** Example
 
@@ -729,11 +729,11 @@ args: ["#header"]
 script: document.body.style.backgroundColor = "red"; return "done"
 ```
 
-### データ抽出
+### Extract Data
 
 `browser.extract`
 
-ページから構造化データを抽出
+Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -747,9 +747,9 @@ script: document.body.style.backgroundColor = "red"; return "done"
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `data` | array | 抽出データ |
-| `count` | number | 抽出件数 |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -759,11 +759,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### ネスト抽出
+### Extract Nested
 
 `browser.extract_nested`
 
-ツリー/ネスト構造のデータ (コメント、スレッド、フォルダ) を抽出。
+Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children.
 
 **Parameters:**
 
@@ -797,11 +797,11 @@ fields: {"author": {"selector": ".author"}, "text": {"selector": ".body"}, "date
 root_selector: li.item
 ```
 
-### 要素検索
+### Find Elements
 
 `browser.find`
 
-ページ内の要素を検索し要素ID一覧を返す
+Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -814,9 +814,9 @@ root_selector: li.item
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `count` | number | 見つかった要素数 |
-| `element_ids` | array | 要素ID一覧 |
+| `status` | string | Operation status (success/error) |
+| `count` | number | Number of items |
+| `element_ids` | array | The element ids |
 
 **Example:** Find search results
 
@@ -825,11 +825,11 @@ selector: div.tF2Cxc
 limit: 10
 ```
 
-### フォーム入力
+### Fill Form
 
 `browser.form`
 
-自動フィールド検出によるスマートフォーム入力
+Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM.
 
 **Parameters:**
 
@@ -847,9 +847,9 @@ limit: 10
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filled_fields` | array | 各フィールド入力間の遅延（より人間らしい動作のため） |
-| `failed_fields` | array | 入力されたフィールドのリスト |
-| `submitted` | boolean | 入力されたフィールドのリスト |
+| `filled_fields` | array | List of fields that were filled |
+| `failed_fields` | array | List of fields that failed to fill |
+| `submitted` | boolean | Whether form was submitted |
 
 **Example:** Example
 
@@ -865,11 +865,11 @@ data: {"username": "john_doe", "bio": "Hello world"}
 field_mapping: {"username": "#user-name-input", "bio": "textarea.bio-field"}
 ```
 
-### フレーム切替
+### Switch Frame
 
 `browser.frame`
 
-iframe またはフレームに切り替え
+Switch to iframe or frame context
 
 **Parameters:**
 
@@ -885,10 +885,10 @@ iframe またはフレームに切り替え
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `frame_url` | string | フレームURL |
-| `frame_name` | string | フレーム名 |
-| `frames` | array | フレーム一覧 |
+| `status` | string | Operation status (success/error) |
+| `frame_url` | string | Frame URL |
+| `frame_name` | string | The frame name |
+| `frames` | array | List of frames |
 
 **Example:** Example
 
@@ -914,11 +914,11 @@ action: exit
 action: list
 ```
 
-### 位置情報シミュレート
+### Mock Geolocation
 
 `browser.geolocation`
 
-ブラウザの位置情報をシミュレート
+Mock browser geolocation
 
 **Parameters:**
 
@@ -932,8 +932,8 @@ action: list
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `location` | object | 位置情報 |
+| `status` | string | Operation status (success/error) |
+| `location` | object | The location |
 
 **Example:** Example
 
@@ -957,11 +957,11 @@ latitude: 35.6762
 longitude: 139.6503
 ```
 
-### URLに移動
+### Go to URL
 
 `browser.goto`
 
-指定URLに移動
+Navigate to a specific URL
 
 **Parameters:**
 
@@ -976,8 +976,8 @@ longitude: 139.6503
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `url` | string | 実際に開いたURL |
+| `status` | string | Operation status (success/error) |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -986,11 +986,11 @@ url: https://www.google.com
 wait_until: domcontentloaded
 ```
 
-### ホバー
+### Hover Element
 
 `browser.hover`
 
-要素にマウスオーバー
+Hover mouse over an element
 
 **Parameters:**
 
@@ -1004,8 +1004,8 @@ wait_until: domcontentloaded
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `selector` | string | ホバーしたセレクター |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1020,11 +1020,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### ブラウザ操作
+### Browser Interact
 
 `browser.interact`
 
-ユーザーがブラウザページを操作するまで一時停止
+Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
 
 **Parameters:**
 
@@ -1038,11 +1038,11 @@ timeout_ms: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `action` | string | 実行されたアクション (click/select/type/toggle) |
-| `selector` | string | 操作された要素の CSS セレクタ |
-| `value` | string | 使用された値 (select/type アクション用) |
-| `url` | string | 操作時のページ URL |
+| `status` | string | Operation status |
+| `action` | string | Action executed (click/select/type/toggle) |
+| `selector` | string | CSS selector of the interacted element |
+| `value` | string | Value used (for select/type actions) |
+| `url` | string | Page URL at time of interaction |
 
 **Example:** Example
 
@@ -1051,11 +1051,11 @@ title: Choose a department
 description: Select the department you want to register for
 ```
 
-### ブラウザ起動
+### Launch Browser
 
 `browser.launch`
 
-Playwright で新しいブラウザを起動
+Launch a new browser instance with Playwright
 
 **Parameters:**
 
@@ -1064,25 +1064,25 @@ Playwright で新しいブラウザを起動
 | `headless` | boolean | No | `False` | Run browser without visible window |
 | `width` | number | No | `1280` | Browser viewport width in pixels |
 | `height` | number | No | `720` | Browser viewport height in pixels |
-| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | 使用するブラウザエンジン（chromium、firefox、webkit） |
+| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Browser engine to use |
 | `channel` | select (``, `chrome`, `msedge`) | No | - | Use system Chrome instead of bundled Chromium for better anti-detection bypass |
 | `behavior` | select (`fast`, `normal`, `careful`, `human_like`) | No | `fast` | How the browser interacts: fast (no delays), normal, careful (mouse movement), human_like (full simulation) |
 | `stealth` | boolean | No | `True` | Anti-detection patches: WebGL fingerprint, canvas noise, navigator fixes. Always recommended. |
-| `proxy` | string | No | - | プロキシサーバーのURL |
-| `user_agent` | string | No | - | カスタムユーザーエージェント文字列 |
+| `proxy` | string | No | - | HTTP/SOCKS proxy server URL. For rotation use browser.proxy_rotate. |
+| `user_agent` | string | No | - | Custom user agent string |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |
-| `slow_mo` | number | No | `0` | 指定されたミリ秒で操作を遅くする |
+| `slow_mo` | number | No | `0` | Delay between Playwright actions in ms (low-level, prefer Behavior Profile) |
 | `record_video_dir` | string | No | - | Directory to save recorded videos (enables Playwright video recording) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `message` | string | 起動結果メッセージ |
-| `browser_type` | string | 起動したブラウザのタイプ |
-| `headless` | boolean | ブラウザがヘッドレスで実行されているかどうか |
-| `viewport` | object | 現在のビューポート寸法 |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `browser_type` | string | Browser engine used |
+| `headless` | boolean | Whether browser is in headless mode |
+| `viewport` | object | Browser viewport dimensions |
 | `behavior` | string | Active behavior profile |
 
 **Example:** Example
@@ -1105,11 +1105,11 @@ behavior: human_like
 stealth: true
 ```
 
-### ログイン
+### Login
 
 `browser.login`
 
-ログインフォームを自動検出して入力し、ログイン後の検証を行う。
+Auto-detect and fill login forms. Handles username + password + submit with post-login verification.
 
 **Parameters:**
 
@@ -1149,11 +1149,11 @@ password_selector: #pass
 submit_selector: #login-btn
 ```
 
-### 履歴ナビゲート
+### Page Navigation
 
 `browser.navigation`
 
-ブラウザ履歴をナビゲート（戻る、進む、リロード）
+Navigate back, forward, or reload the page
 
 **Parameters:**
 
@@ -1167,9 +1167,9 @@ submit_selector: #login-btn
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス（成功/エラー） |
-| `action` | string | 実行されたナビゲーションアクション |
-| `url` | string | ナビゲーション後の現在のURL |
+| `status` | string | Operation status (success/error) |
+| `action` | string | Navigation action performed |
+| `url` | string | Current URL after navigation |
 
 **Example:** Example
 
@@ -1190,11 +1190,11 @@ action: reload
 wait_until: networkidle
 ```
 
-### ネットワーク監視
+### Network Monitor
 
 `browser.network`
 
-ネットワークリクエストの監視・傍受
+Monitor and intercept network requests
 
 **Parameters:**
 
@@ -1210,9 +1210,9 @@ wait_until: networkidle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `requests` | array | リクエスト一覧 |
-| `blocked_count` | number | ブロック件数 |
+| `status` | string | Operation status (success/error) |
+| `requests` | array | Captured network requests |
+| `blocked_count` | number | The blocked count |
 
 **Example:** Example
 
@@ -1237,27 +1237,27 @@ url_pattern: .*users.*
 mock_response: {"status": 200, "body": "{\"users\": []}"}
 ```
 
-### ページ一覧
+### List Pages
 
 `browser.pages`
 
-開いているすべてのブラウザページ/タブを一覧表示
+List all open browser pages/tabs with details
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `include_details` | boolean | No | `True` | 各ページの詳細情報を含める |
-| `include_content_info` | boolean | No | `False` | 各ページのコンテンツタイプ情報を含める |
+| `include_details` | boolean | No | `True` | Include URL, title, and viewport info for each page |
+| `include_content_info` | boolean | No | `False` | Include page load state and frame count (slower) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス（成功/エラー） |
-| `pages` | array | 開いているページの一覧 |
-| `count` | number | 開いているページの数 |
-| `current_index` | number | 現在アクティブなページのインデックス |
+| `status` | string | Operation status |
+| `pages` | array | List of page information |
+| `count` | number | Number of open pages |
+| `current_index` | number | Index of the current active page |
 
 **Example:** Example
 
@@ -1278,11 +1278,11 @@ include_details: true
 include_content_info: true
 ```
 
-### ページネート＆抽出
+### Paginate & Extract
 
 `browser.pagination`
 
-ページを自動でページネートし、データを抽出
+Auto-paginate through pages and extract data. Supports retry and checkpoint resume.
 
 **Parameters:**
 
@@ -1307,10 +1307,10 @@ include_content_info: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `items` | array | ページがなくなったときに表示されるセレクタ（ページネーション停止） |
-| `total_items` | integer | すべてのページから抽出されたアイテム |
-| `pages_processed` | integer | すべてのページから抽出されたアイテム |
-| `stopped_reason` | string | 処理されたページ数 |
+| `items` | array | All extracted items from all pages |
+| `total_items` | integer | Total number of items extracted |
+| `pages_processed` | integer | Number of pages processed |
+| `stopped_reason` | string | Why pagination stopped (max_pages, max_items, no_more, error) |
 | `retries_used` | integer | Total number of retries across all pages |
 | `resumed` | boolean | Whether execution resumed from a checkpoint |
 
@@ -1334,11 +1334,11 @@ no_more_indicator: .end-of-feed
 checkpoint_path: /tmp/feed_checkpoint.json
 ```
 
-### PDF生成
+### Generate PDF
 
 `browser.pdf`
 
-現在のページからPDFを生成
+Generate PDF from current page
 
 **Parameters:**
 
@@ -1357,9 +1357,9 @@ checkpoint_path: /tmp/feed_checkpoint.json
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `path` | string | PDFファイルパス |
-| `size` | number | PDFファイルサイズ |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -1381,26 +1381,26 @@ path: /output/custom.pdf
 margin: {"top": "1cm", "bottom": "1cm", "left": "2cm", "right": "2cm"}
 ```
 
-### パフォーマンス指標
+### Performance Metrics
 
 `browser.performance`
 
-ブラウザのパフォーマンス指標を収集
+Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | array | No | `['all']` | 収集するパフォーマンス指標 |
-| `timeout_ms` | number | No | `3000` | タイムアウト（ミリ秒） |
-| `setup_observers` | boolean | No | `True` | 収集前にパフォーマンスオブザーバーを設定 |
+| `metrics` | array | No | `['all']` | Which metrics to collect (default: all) |
+| `timeout_ms` | number | No | `3000` | Time to wait for metrics collection (for LCP, CLS) |
+| `setup_observers` | boolean | No | `True` | Install PerformanceObservers for better metric tracking |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス（成功/エラー） |
-| `metrics` | object | 収集されたパフォーマンス指標 |
+| `status` | string | Operation status |
+| `metrics` | object | Collected performance metrics |
 
 **Example:** Example
 
@@ -1422,11 +1422,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### ブラウザプール
+### Browser Pool
 
 `browser.pool`
 
-並列自動化のための複数の名前付きブラウザインスタンスを管理。
+Manage multiple named browser instances for parallel automation.
 
 **Parameters:**
 
@@ -1466,11 +1466,11 @@ name: scraper1
 action: list
 ```
 
-### キー入力
+### Press Key
 
 `browser.press`
 
-キーボードキーを押す
+Press a keyboard key
 
 **Parameters:**
 
@@ -1482,8 +1482,8 @@ action: list
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `key` | string | 押されたキー |
+| `status` | string | Operation status (success/error) |
+| `key` | string | Key identifier |
 
 **Example:** Example
 
@@ -1497,11 +1497,11 @@ key: Enter
 key: Escape
 ```
 
-### プロキシローテーション
+### Rotate Proxy
 
 `browser.proxy_rotate`
 
-プロキシリストをローテーションし、無効なプロキシを検出。
+Rotate through a list of proxies. Relaunches browser with the next proxy.
 
 **Parameters:**
 
@@ -1538,11 +1538,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### 記事抽出
+### Extract Article
 
 `browser.readability`
 
-スマート記事抽出 — 任意のウェブページからタイトル、著者、日付、本文を抽出
+Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode.
 
 **Parameters:**
 
@@ -1551,7 +1551,7 @@ action: rotate
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - | コンテンツ領域の CSS セレクタ。空にすると自動検出。 |
+| `selector` | string | No | - | CSS selector for the content area. Leave empty for auto-detection. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1603,11 +1603,11 @@ title_selector: .article-headline h1
 selector: .article-body
 ```
 
-### 操作記録
+### Record Actions
 
 `browser.record`
 
-ユーザー操作をワークフローとして記録
+Record user actions as workflow
 
 **Parameters:**
 
@@ -1621,9 +1621,9 @@ selector: .article-body
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `recording` | array | 記録状態 |
-| `workflow` | string | 記録されたワークフロー |
+| `status` | string | Operation status (success/error) |
+| `recording` | array | Recording data or path |
+| `workflow` | string | The workflow |
 
 **Example:** Example
 
@@ -1644,25 +1644,25 @@ output_format: yaml
 action: get
 ```
 
-### ブラウザを解放
+### Release Browser
 
 `browser.release`
 
-ブラウザセッションを解放（所有している場合のみ閉じる）
+Release browser session (close only if owned)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `force` | boolean | No | `False` | このテンプレートが所有していなくてもブラウザを閉じる |
+| `force` | boolean | No | `False` | Close browser even if not owned by this template |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | このテンプレートが所有していなくてもブラウザを閉じる |
-| `message` | string | 実行されたアクション |
-| `was_owner` | boolean | 実行されたアクション |
+| `status` | string | What action was taken |
+| `message` | string | Result message |
+| `was_owner` | boolean | Whether this template owned the browser |
 
 **Example:** Example
 
@@ -1675,11 +1675,11 @@ action: get
 force: true
 ```
 
-### レスポンスキャプチャ
+### Capture Response
 
 `browser.response`
 
-API レスポンスボディ (XHR/fetch) をキャプチャ。ページの API コールから JSON を抽出。
+Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls.
 
 **Parameters:**
 
@@ -1712,11 +1712,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### Robots.txt チェック
+### Check Robots.txt
 
 `browser.robots`
 
-robots.txt の準拠を確認し、サイトマップを検出。
+Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping.
 
 **Parameters:**
 
@@ -1747,11 +1747,11 @@ check_url: /api/data
 ```yaml
 ```
 
-### スクリーンショット
+### Take Screenshot
 
 `browser.screenshot`
 
-現在のページのスクリーンショットを撮影
+Take a screenshot of the current page
 
 **Parameters:**
 
@@ -1766,8 +1766,8 @@ check_url: /api/data
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `filepath` | string | ファイルパス |
+| `status` | string | Operation status (success/error) |
+| `filepath` | string | Path to the file |
 
 **Example:** Example
 
@@ -1775,11 +1775,11 @@ check_url: /api/data
 path: output/page.png
 ```
 
-### スクロール
+### Scroll Page
 
 `browser.scroll`
 
-要素・位置・方向にスクロール
+Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1794,8 +1794,8 @@ path: output/page.png
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `scrolled_to` | object | スクロール位置 |
+| `status` | string | Operation status (success/error) |
+| `scrolled_to` | object | The scrolled to |
 
 **Example:** Example
 
@@ -1818,11 +1818,11 @@ amount: 10000
 behavior: smooth
 ```
 
-### 選択
+### Select Option
 
 `browser.select`
 
-ドロップダウンから選択
+Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1838,9 +1838,9 @@ behavior: smooth
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `selected` | array | 選択された値 |
-| `selector` | string | セレクター |
+| `status` | string | Operation status (success/error) |
+| `selected` | array | The selected |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1866,11 +1866,11 @@ select_method: index
 index: 2
 ```
 
-### サイトマップ解析
+### Parse Sitemap
 
 `browser.sitemap`
 
-sitemap.xml を解析し、メタデータ付きの URL を抽出。
+Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering.
 
 **Parameters:**
 
@@ -1902,29 +1902,29 @@ url_pattern: /blog/
 max_urls: 100
 ```
 
-### DOMスナップショット
+### DOM Snapshot
 
 `browser.snapshot`
 
-現在のページのDOMスナップショットをキャプチャ
+Capture DOM snapshot in HTML, MHTML, or text format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`html`, `mhtml`, `text`) | No | `html` | 出力形式（htmlまたはtext） |
-| `selector` | string | No | - | 特定の要素をスナップショットするためのCSSセレクタ |
-| `path` | string | No | - | スナップショットを保存するパス |
+| `format` | select (`html`, `mhtml`, `text`) | No | `html` | Snapshot format |
+| `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス（成功/エラー） |
-| `format` | string | スナップショットの形式 |
-| `content` | string | スナップショットの内容 |
-| `path` | string | スナップショットが保存されたパス |
-| `size_bytes` | number | スナップショットのサイズ（バイト） |
+| `status` | string | Operation status |
+| `format` | string | Snapshot format used |
+| `content` | string | Snapshot content (if no path specified) |
+| `path` | string | Path to saved file |
+| `size_bytes` | number | Content size in bytes |
 
 **Example:** Example
 
@@ -1954,11 +1954,11 @@ selector: #main
 path: /tmp/section.html
 ```
 
-### ストレージ
+### Browser Storage
 
 `browser.storage`
 
-localStorage・sessionStorage にアクセス
+Access localStorage and sessionStorage
 
 **Parameters:**
 
@@ -1973,10 +1973,10 @@ localStorage・sessionStorage にアクセス
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `value` | any | 取得した値 |
-| `keys` | array | キー一覧 |
-| `length` | number | 項目数 |
+| `status` | string | Operation status (success/error) |
+| `value` | any | The returned value |
+| `keys` | array | List of keys |
+| `length` | number | Length of data |
 
 **Example:** Example
 
@@ -2009,11 +2009,11 @@ action: keys
 type: local
 ```
 
-### タブ管理
+### Manage Tabs
 
 `browser.tab`
 
-タブの作成・切替・閉じる
+Create, switch, and close browser tabs
 
 **Parameters:**
 
@@ -2028,10 +2028,10 @@ type: local
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `tab_count` | number | タブ総数 |
-| `current_index` | number | 現在のタブインデックス |
-| `tabs` | array | タブ一覧 |
+| `status` | string | Operation status (success/error) |
+| `tab_count` | number | The tab count |
+| `current_index` | number | The current index |
+| `tabs` | array | List of open tabs |
 
 **Example:** Example
 
@@ -2059,11 +2059,11 @@ action: close
 action: list
 ```
 
-### テーブル抽出
+### Extract Table
 
 `browser.table`
 
-HTML テーブルをヘッダー自動検出で構造化データとして抽出。
+Extract HTML tables as structured data. Auto-detects headers from thead/th.
 
 **Parameters:**
 
@@ -2095,11 +2095,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### スロットル
+### Throttle
 
 `browser.throttle`
 
-ドメインごとのレート制限。アクセス制限を避けるためリクエスト間で待機。
+Per-domain rate limiting. Waits between requests to the same domain to avoid bans.
 
 **Parameters:**
 
@@ -2142,29 +2142,29 @@ min_interval_ms: 1500
 max_interval_ms: 8000
 ```
 
-### ブラウザトレース
+### Performance Trace
 
 `browser.trace`
 
-ブラウザのパフォーマンストレースを開始、停止、または保存
+Start/stop Chrome DevTools performance tracing (Chromium only)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | - | トレースアクション（開始、停止、保存） |
-| `categories` | array | No | `['devtools.timeline']` | キャプチャするトレースカテゴリ |
-| `screenshots` | boolean | No | `True` | トレースにスクリーンショットを含める |
-| `path` | string | No | - | トレースファイルを保存するパス |
+| `action` | string | Yes | - | Start or stop tracing |
+| `categories` | array | No | `['devtools.timeline']` | CDP trace categories (default: devtools.timeline) |
+| `screenshots` | boolean | No | `True` | Include screenshots in trace (increases file size) |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス（成功/エラー） |
-| `tracing` | boolean | トレースが現在アクティブかどうか |
-| `path` | string | トレースが保存されたパス |
-| `size_bytes` | number | トレースファイルのサイズ（バイト） |
+| `status` | string | Operation status (success/error) |
+| `tracing` | boolean | Whether tracing is active |
+| `path` | string | Path to trace file (when stopped) |
+| `size_bytes` | number | Trace file size in bytes |
 
 **Example:** Example
 
@@ -2188,11 +2188,11 @@ action: stop
 path: /tmp/performance-trace.json
 ```
 
-### テキスト入力
+### Type Text
 
 `browser.type`
 
-入力フィールドにテキストを入力
+Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -2213,8 +2213,8 @@ path: /tmp/performance-trace.json
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | 操作ステータス |
-| `selector` | string | 入力セレクター |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 | `method` | string | Type method used |
 
 **Example:** Example
@@ -2250,11 +2250,11 @@ selector: #email
 text: user@example.com
 ```
 
-### ファイルアップロード
+### Upload File
 
 `browser.upload`
 
-ファイル入力要素にファイルをアップロード
+Upload file to file input element
 
 **Parameters:**
 
@@ -2268,10 +2268,10 @@ text: user@example.com
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `filename` | string | ファイル名 |
-| `size` | number | ファイルサイズ |
-| `selector` | string | セレクター |
+| `status` | string | Operation status (success/error) |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -2287,26 +2287,26 @@ selector: #file-upload
 file_path: /path/to/document.pdf
 ```
 
-### ビューポート設定
+### Resize Viewport
 
 `browser.viewport`
 
-ブラウザのビューポートサイズを取得または設定
+Resize browser viewport to specific dimensions
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `width` | number | Yes | `1280` | ビューポートの幅（ピクセル） |
-| `height` | number | Yes | `720` | ビューポートの高さ（ピクセル） |
+| `width` | number | Yes | `1280` | Viewport width in pixels |
+| `height` | number | Yes | `720` | Viewport height in pixels |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス（成功/エラー） |
-| `viewport` | object | 現在のビューポート寸法 |
-| `previous_viewport` | object | 以前のビューポート寸法 |
+| `status` | string | Operation status |
+| `viewport` | object | Applied viewport dimensions |
+| `previous_viewport` | object | Previous viewport dimensions |
 
 **Example:** Example
 
@@ -2336,11 +2336,11 @@ width: 1366
 height: 768
 ```
 
-### 待機
+### Wait
 
 `browser.wait`
 
-一定時間または要素が表示されるまで待機
+Wait for a duration or until an element appears
 
 **Parameters:**
 
@@ -2348,16 +2348,16 @@ height: 768
 |------|------|----------|---------|-------------|
 | `duration_ms` | number | No | `1000` | Duration of the operation in milliseconds |
 | `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
-| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | 待機する状態（表示、非表示、付加、分離） |
+| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | Element state to wait for |
 | `timeout_ms` | number | No | `30000` | Maximum time to wait in milliseconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `selector` | string | 待機セレクター |
-| `duration_ms` | number | 待機時間（ミリ秒） |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was waited for |
+| `duration_ms` | number | Wait duration in milliseconds |
 
 **Example:** Example
 

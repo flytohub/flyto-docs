@@ -6,23 +6,23 @@ Resize, crop, compress, convert, OCR, QR codes, and watermarks.
 
 | Module | Description |
 |--------|-------------|
-| [Bild komprimieren](#bild-komprimieren) | Bilder komprimieren, um Dateigröße zu reduzieren und Qualität zu erhalten |
-| [Bild konvertieren](#bild-konvertieren) | Bild in anderes Format konvertieren (PNG, JPEG, WEBP usw.) |
-| [Bild zuschneiden](#bild-zuschneiden) | Bild auf angegebene Koordinaten zuschneiden |
-| [Bild herunterladen](#bild-herunterladen) | Bild von URL in lokale Datei herunterladen |
-| [OCR-Text extrahieren](#ocr-text-extrahieren) | Text aus Bildern mit OCR extrahieren |
-| [QR-Code generieren](#qr-code-generieren) | QR-Codes aus Text, URLs oder Daten generieren |
-| [Bildgröße ändern](#bildgröße-ändern) | Bilder auf angegebene Abmessungen mit verschiedenen Algorithmen skalieren |
-| [Bild drehen](#bild-drehen) | Bild um angegebene Gradzahl drehen |
-| [Wasserzeichen hinzufügen](#wasserzeichen-hinzufügen) | Text- oder Bildwasserzeichen zu einem Bild hinzufügen |
+| [Compress Image](#compress-image) | Compress images to reduce file size while maintaining quality |
+| [Convert Image](#convert-image) | Convert image to different format (PNG, JPEG, WEBP, etc.) |
+| [Crop Image](#crop-image) | Crop image to specified region |
+| [Download Image](#download-image) | Download image from URL to local file |
+| [OCR - Extract Text](#ocr---extract-text) | Extract text from images using Tesseract OCR |
+| [Generate QR Code](#generate-qr-code) | Generate QR codes from text, URLs, or data |
+| [Resize Image](#resize-image) | Resize images to specified dimensions with various algorithms |
+| [Rotate Image](#rotate-image) | Rotate image by specified angle |
+| [Add Watermark](#add-watermark) | Add text or image watermark to images |
 
 ## Modules
 
-### Bild komprimieren
+### Compress Image
 
 `image.compress`
 
-Bilder komprimieren, um Dateigröße zu reduzieren und Qualität zu erhalten
+Compress images to reduce file size while maintaining quality
 
 **Parameters:**
 
@@ -39,10 +39,10 @@ Bilder komprimieren, um Dateigröße zu reduzieren und Qualität zu erhalten
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Pfad zum komprimierten Bild |
-| `original_size_bytes` | number | Pfad zum komprimierten Bild |
-| `compressed_size_bytes` | number | Originaldateigröße in Bytes |
-| `compression_ratio` | number | Komprimierte Dateigröße in Bytes |
+| `output_path` | string | Path to the compressed image |
+| `original_size_bytes` | number | Original file size in bytes |
+| `compressed_size_bytes` | number | Compressed file size in bytes |
+| `compression_ratio` | number | Compression ratio (original/compressed) |
 
 **Example:** Compress with quality setting
 
@@ -58,11 +58,11 @@ input_path: /path/to/image.png
 max_size_kb: 500
 ```
 
-### Bild konvertieren
+### Convert Image
 
 `image.convert`
 
-Bild in anderes Format konvertieren (PNG, JPEG, WEBP usw.)
+Convert image to different format (PNG, JPEG, WEBP, etc.)
 
 **Parameters:**
 
@@ -78,10 +78,10 @@ Bild in anderes Format konvertieren (PNG, JPEG, WEBP usw.)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Pfad zum konvertierten Bild |
-| `size` | number | Pfad zum konvertierten Bild |
-| `format` | string | Pfad zum konvertierten Bild |
-| `dimensions` | object | Dateigröße in Bytes |
+| `path` | string | Path to the converted image |
+| `size` | number | File size in bytes |
+| `format` | string | Output format |
+| `dimensions` | object | Image dimensions {width, height} |
 
 **Example:** Convert PNG to JPEG
 
@@ -91,32 +91,32 @@ format: jpeg
 quality: 90
 ```
 
-### Bild zuschneiden
+### Crop Image
 
 `image.crop`
 
-Bild auf angegebene Koordinaten zuschneiden
+Crop image to specified region
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | Pfad zum Eingabebild |
-| `output_path` | string | Yes | - | Pfad für das Ausgabebild |
-| `left` | number | Yes | - | Linke Koordinate des Zuschneidebereichs |
-| `top` | number | Yes | - | Obere Koordinate des Zuschneidebereichs |
-| `right` | number | Yes | - | Rechte Koordinate des Zuschneidebereichs |
-| `bottom` | number | Yes | - | Untere Koordinate des Zuschneidebereichs |
+| `input_path` | string | Yes | - | Path to the source image |
+| `output_path` | string | Yes | - | Path to save the cropped image |
+| `left` | number | Yes | - | Left coordinate of crop region (pixels) |
+| `top` | number | Yes | - | Top coordinate of crop region (pixels) |
+| `right` | number | Yes | - | Right coordinate of crop region (pixels) |
+| `bottom` | number | Yes | - | Bottom coordinate of crop region (pixels) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Pfad zum zugeschnittenen Bild |
-| `width` | integer | Breite des zugeschnittenen Bildes |
-| `height` | integer | Höhe des zugeschnittenen Bildes |
-| `original_width` | integer | Originalbildbreite |
-| `original_height` | integer | Originalbildhöhe |
+| `output_path` | string | Path to the cropped image |
+| `width` | integer | Width of the cropped image |
+| `height` | integer | Height of the cropped image |
+| `original_width` | integer | Original image width |
+| `original_height` | integer | Original image height |
 
 **Example:** Crop center region
 
@@ -129,11 +129,11 @@ right: 500
 bottom: 400
 ```
 
-### Bild herunterladen
+### Download Image
 
 `image.download`
 
-Bild von URL in lokale Datei herunterladen
+Download image from URL to local file
 
 **Parameters:**
 
@@ -149,10 +149,10 @@ Bild von URL in lokale Datei herunterladen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Lokaler Dateipfad des heruntergeladenen Bildes |
-| `size` | number | Lokaler Dateipfad des heruntergeladenen Bildes |
-| `content_type` | string | Lokaler Dateipfad des heruntergeladenen Bildes |
-| `filename` | string | Dateigröße in Bytes |
+| `path` | string | Local file path of downloaded image |
+| `size` | number | File size in bytes |
+| `content_type` | string | Content type of the image |
+| `filename` | string | Filename of the downloaded image |
 
 **Example:** Download image from URL
 
@@ -161,28 +161,28 @@ url: https://example.com/photo.jpg
 output_dir: /tmp/images
 ```
 
-### OCR-Text extrahieren
+### OCR - Extract Text
 
 `image.ocr`
 
-Text aus Bildern mit OCR extrahieren
+Extract text from images using Tesseract OCR
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | Yes | - | Pfad zur Bilddatei |
-| `language` | string | No | `eng` | Sprachcode für OCR (z.B. eng, chi_sim) |
-| `psm` | number | No | `3` | Tesseract-Seitensegmentierungsmodus |
-| `output_type` | select (`text`, `data`, `boxes`) | No | `text` | Art der OCR-Ausgabe (Text oder Daten) |
+| `image_path` | string | Yes | - | Path to the image file |
+| `language` | string | No | `eng` | OCR language code (e.g. eng, chi_tra, jpn) |
+| `psm` | number | No | `3` | Tesseract page segmentation mode (0-13) |
+| `output_type` | select (`text`, `data`, `boxes`) | No | `text` | Type of OCR output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | Aus dem Bild extrahierter Text |
-| `confidence` | number | OCR-Vertrauensbewertung |
-| `language` | string | Für OCR verwendete Sprache |
+| `text` | string | Extracted text from the image |
+| `confidence` | number | Average OCR confidence score (0-100) |
+| `language` | string | Language used for OCR |
 
 **Example:** Extract text from image
 
@@ -191,11 +191,11 @@ image_path: /path/to/document.png
 language: eng
 ```
 
-### QR-Code generieren
+### Generate QR Code
 
 `image.qrcode_generate`
 
-QR-Codes aus Text, URLs oder Daten generieren
+Generate QR codes from text, URLs, or data
 
 **Parameters:**
 
@@ -216,9 +216,9 @@ QR-Codes aus Text, URLs oder Daten generieren
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Pfad zum generierten QR-Code-Bild |
-| `file_size` | number | Pfad zum generierten QR-Code-Bild |
-| `dimensions` | object | Größe der Ausgabedatei in Bytes |
+| `output_path` | string | Path to the generated QR code image |
+| `file_size` | number | Size of the output file in bytes |
+| `dimensions` | object | Image dimensions {width, height} |
 
 **Example:** Generate URL QR code
 
@@ -244,11 +244,11 @@ format: svg
 border: 2
 ```
 
-### Bildgröße ändern
+### Resize Image
 
 `image.resize`
 
-Bilder auf angegebene Abmessungen mit verschiedenen Algorithmen skalieren
+Resize images to specified dimensions with various algorithms
 
 **Parameters:**
 
@@ -266,9 +266,9 @@ Bilder auf angegebene Abmessungen mit verschiedenen Algorithmen skalieren
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Pfad zum skalierten Bild |
-| `original_size` | object | Pfad zum skalierten Bild |
-| `new_size` | object | Pfad zum skalierten Bild |
+| `output_path` | string | Path to the resized image |
+| `original_size` | object | Original image dimensions |
+| `new_size` | object | New image dimensions |
 
 **Example:** Resize to specific dimensions
 
@@ -285,30 +285,30 @@ input_path: /path/to/image.png
 scale: 0.5
 ```
 
-### Bild drehen
+### Rotate Image
 
 `image.rotate`
 
-Bild um angegebene Gradzahl drehen
+Rotate image by specified angle
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | Pfad zum Eingabebild |
-| `output_path` | string | Yes | - | Pfad für das Ausgabebild |
-| `angle` | number | Yes | - | Drehwinkel in Grad |
-| `expand` | boolean | No | `True` | Ausgabe erweitern, um das gesamte gedrehte Bild aufzunehmen |
-| `fill_color` | string | No | `#000000` | Farbe zum Füllen leerer Bereiche nach der Drehung |
+| `input_path` | string | Yes | - | Path to the source image |
+| `output_path` | string | Yes | - | Path to save the rotated image |
+| `angle` | number | Yes | - | Rotation angle in degrees (counter-clockwise) |
+| `expand` | boolean | No | `True` | Expand output canvas to fit the entire rotated image |
+| `fill_color` | string | No | `#000000` | Background fill color for empty areas (hex) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Pfad zum gedrehten Bild |
-| `width` | integer | Breite des gedrehten Bildes |
-| `height` | integer | Höhe des gedrehten Bildes |
-| `angle` | number | Winkel, um den das Bild gedreht wurde |
+| `output_path` | string | Path to the rotated image |
+| `width` | integer | Width of the rotated image |
+| `height` | integer | Height of the rotated image |
+| `angle` | number | Rotation angle applied |
 
 **Example:** Rotate 90 degrees
 
@@ -318,30 +318,30 @@ output_path: /path/to/rotated.png
 angle: 90
 ```
 
-### Wasserzeichen hinzufügen
+### Add Watermark
 
 `image.watermark`
 
-Text- oder Bildwasserzeichen zu einem Bild hinzufügen
+Add text or image watermark to images
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | Pfad zum Eingabebild |
-| `output_path` | string | Yes | - | Pfad für das Ausgabebild |
-| `text` | string | No | - | Text, der als Wasserzeichen verwendet wird |
-| `watermark_image` | string | No | - | Pfad zur Bilddatei, die als Wasserzeichen verwendet wird |
-| `position` | select (`center`, `top-left`, `top-right`, `bottom-left`, `bottom-right`) | No | `bottom-right` | Position des Wasserzeichens auf dem Bild |
-| `opacity` | number | No | `0.5` | Deckkraft des Wasserzeichens (0,0 bis 1,0) |
-| `font_size` | number | No | `36` | Schriftgröße für Text-Wasserzeichen |
+| `input_path` | string | Yes | - | Path to the source image |
+| `output_path` | string | Yes | - | Path to save the watermarked image |
+| `text` | string | No | - | Text to use as watermark (optional if watermark_image is set) |
+| `watermark_image` | string | No | - | Path to watermark image (optional if text is set) |
+| `position` | select (`center`, `top-left`, `top-right`, `bottom-left`, `bottom-right`) | No | `bottom-right` | Watermark position on the image |
+| `opacity` | number | No | `0.5` | Watermark opacity (0.0 = transparent, 1.0 = opaque) |
+| `font_size` | number | No | `36` | Font size for text watermark |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Pfad zum Bild mit Wasserzeichen |
-| `watermark_type` | string | Art des angewendeten Wasserzeichens (Text oder Bild) |
+| `output_path` | string | Path to the watermarked image |
+| `watermark_type` | string | Type of watermark applied (text or image) |
 
 **Example:** Add text watermark
 

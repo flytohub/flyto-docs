@@ -6,33 +6,33 @@ Send messages via Slack, Discord, Teams, Telegram, email, SMS, and WhatsApp.
 
 | Module | Description |
 |--------|-------------|
-| [Twilio 撥打電話](#twilio-撥打電話) | 透過 Twilio 撥打語音電話 |
-| [Twilio 發送簡訊](#twilio-發送簡訊) | 透過 Twilio 發送簡訊 |
-| [傳送 Discord 訊息](#傳送-discord-訊息) | 透過 webhook 傳送訊息到 Discord |
-| [傳送電子郵件](#傳送電子郵件) | 透過 SMTP 傳送電子郵件 |
-| [傳送 Slack 訊息](#傳送-slack-訊息) | 透過 webhook 傳送訊息到 Slack |
-| [發送 Teams 訊息](#發送-teams-訊息) | 透過傳入的 webhook 發送訊息到 Microsoft Teams |
-| [傳送 Telegram 訊息](#傳送-telegram-訊息) | 透過 Telegram Bot API 傳送訊息 |
-| [發送 WhatsApp 訊息](#發送-whatsapp-訊息) | 透過 WhatsApp Business API（Meta Cloud API）發送訊息 |
-| [發送通知](#發送通知) | 發送通知到 Telegram、Discord、Slack、LINE 或任何 webhook URL |
+| [Twilio Make Call](#twilio-make-call) | Make a voice call via Twilio |
+| [Twilio Send SMS](#twilio-send-sms) | Send SMS message via Twilio |
+| [Send Discord Message](#send-discord-message) | Send message to Discord via webhook |
+| [Send Email](#send-email) | Send email via SMTP |
+| [Send Slack Message](#send-slack-message) | Send message to Slack via webhook |
+| [Send Teams Message](#send-teams-message) | Send message to Microsoft Teams via incoming webhook |
+| [Send Telegram Message](#send-telegram-message) | Send message via Telegram Bot API |
+| [Send WhatsApp Message](#send-whatsapp-message) | Send message via WhatsApp Business API (Meta Cloud API) |
+| [Send Notification](#send-notification) | Send notification to Telegram, Discord, Slack, LINE, or any webhook URL |
 
 ## Modules
 
-### Twilio 撥打電話
+### Twilio Make Call
 
 `communication.twilio.make_call`
 
-透過 Twilio 撥打語音電話
+Make a voice call via Twilio
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `account_sid` | string | No | - | Twilio 帳戶 SID（或使用 TWILIO_ACCOUNT_SID 環境變數） |
-| `auth_token` | string | No | - | Twilio 認證權杖（或使用 TWILIO_AUTH_TOKEN 環境變數） |
-| `from_number` | string | Yes | - | Twilio 認證權杖（或使用 TWILIO_AUTH_TOKEN 環境變數） |
-| `to_number` | string | Yes | - | Twilio 電話號碼 |
-| `twiml_url` | string | Yes | - | 收話方電話號碼 |
+| `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
+| `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
+| `from_number` | string | Yes | - | Twilio phone number |
+| `to_number` | string | Yes | - | Recipient phone number |
+| `twiml_url` | string | Yes | - | URL to TwiML instructions |
 
 **Output:**
 
@@ -51,30 +51,30 @@ to_number: +0987654321
 twiml_url: https://example.com/voice.xml
 ```
 
-### Twilio 發送簡訊
+### Twilio Send SMS
 
 `communication.twilio.send_sms`
 
-透過 Twilio 發送簡訊
+Send SMS message via Twilio
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `account_sid` | string | No | - | Twilio 帳戶 SID（或使用 TWILIO_ACCOUNT_SID 環境變數） |
-| `auth_token` | string | No | - | Twilio 認證權杖（或使用 TWILIO_AUTH_TOKEN 環境變數） |
-| `from_number` | string | Yes | - | Twilio 電話號碼（例如 +1234567890） |
-| `to_number` | string | Yes | - | Twilio 電話號碼（例如 +1234567890） |
-| `message` | string | Yes | - | 收話方電話號碼（例如 +1234567890） |
+| `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
+| `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
+| `from_number` | string | Yes | - | Twilio phone number (e.g. +1234567890) |
+| `to_number` | string | Yes | - | Recipient phone number (e.g. +1234567890) |
+| `message` | string | Yes | - | SMS message text |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sid` | string | 簡訊內容 |
-| `status` | string | 簡訊內容 |
-| `to` | string | SID |
-| `from` | string | 操作狀態（成功/錯誤） |
+| `sid` | string | The sid |
+| `status` | string | Operation status (success/error) |
+| `to` | string | The to |
+| `from` | string | The from |
 
 **Example:** Send notification SMS
 
@@ -92,28 +92,28 @@ to_number: +0987654321
 message: Your verification code is: 123456
 ```
 
-### 傳送 Discord 訊息
+### Send Discord Message
 
 `notification.discord.send_message`
 
-透過 webhook 傳送訊息到 Discord
+Send message to Discord via webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | No | - | Discord webhook 網址（來自 env.DISCORD_WEBHOOK_URL 或直接輸入） |
-| `content` | string | Yes | - | 要傳送的訊息 |
-| `username` | string | No | - | 覆蓋機器人使用者名稱（選填） |
-| `avatar_url` | string | No | - | 機器人頭像圖片網址（選填） |
+| `webhook_url` | string | No | - | Discord webhook URL (from env.DISCORD_WEBHOOK_URL or direct input) |
+| `content` | string | Yes | - | The message to send |
+| `username` | string | No | - | Override bot username (optional) |
+| `avatar_url` | string | No | - | Bot avatar image URL (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `sent` | boolean | 是否成功傳送 |
-| `message` | string | 傳送的訊息 |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -121,33 +121,33 @@ message: Your verification code is: 123456
 content: Workflow completed successfully!
 ```
 
-### 傳送電子郵件
+### Send Email
 
 `notification.email.send`
 
-透過 SMTP 傳送電子郵件
+Send email via SMTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `smtp_server` | string | Yes | - | SMTP 伺服器主機名稱（例如 smtp.gmail.com） |
-| `smtp_port` | number | No | `587` | SMTP 連接埠（TLS 為 587，SSL 為 465） |
-| `username` | string | Yes | - | SMTP 使用者名稱 |
-| `password` | string | Yes | - | SMTP 密碼（請使用環境變數！） |
-| `from_email` | string | Yes | - | 寄件者電子郵件地址 |
-| `to_email` | string | Yes | - | 收件者電子郵件地址 |
-| `subject` | string | Yes | - | 郵件主旨 |
-| `body` | text | Yes | - | 郵件內容（支援 HTML） |
-| `html` | boolean | No | `False` | 以 HTML 格式傳送內容 |
+| `smtp_server` | string | Yes | - | SMTP server hostname (e.g., smtp.gmail.com) |
+| `smtp_port` | number | No | `587` | SMTP port (587 for TLS, 465 for SSL) |
+| `username` | string | Yes | - | SMTP username |
+| `password` | string | Yes | - | SMTP password (use env variable!) |
+| `from_email` | string | Yes | - | Sender email address |
+| `to_email` | string | Yes | - | Recipient email address |
+| `subject` | string | Yes | - | Email subject |
+| `body` | text | Yes | - | Email body (HTML supported) |
+| `html` | boolean | No | `False` | Send body as HTML |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `sent` | boolean | 是否成功傳送 |
-| `message` | string | 結果訊息 |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -160,29 +160,29 @@ subject: Workflow Complete
 body: Your automation workflow has finished successfully.
 ```
 
-### 傳送 Slack 訊息
+### Send Slack Message
 
 `notification.slack.send_message`
 
-透過 webhook 傳送訊息到 Slack
+Send message to Slack via webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | No | - | Slack webhook 網址（來自 env.SLACK_WEBHOOK_URL 或直接輸入） |
-| `text` | string | Yes | - | 要傳送的訊息 |
-| `channel` | string | No | - | 覆蓋預設頻道（選填） |
-| `username` | string | No | - | 覆蓋機器人使用者名稱（選填） |
-| `icon_emoji` | string | No | - | 機器人圖示 emoji（選填） |
+| `webhook_url` | string | No | - | Slack webhook URL (from env.SLACK_WEBHOOK_URL or direct input) |
+| `text` | string | Yes | - | The message to send |
+| `channel` | string | No | - | Override default channel (optional) |
+| `username` | string | No | - | Override bot username (optional) |
+| `icon_emoji` | string | No | - | Bot icon emoji (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `sent` | boolean | 是否成功傳送 |
-| `message` | string | 傳送的訊息 |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -199,28 +199,28 @@ username: Alert Bot
 icon_emoji: :warning:
 ```
 
-### 發送 Teams 訊息
+### Send Teams Message
 
 `notification.teams.send_message`
 
-透過傳入的 webhook 發送訊息到 Microsoft Teams
+Send message to Microsoft Teams via incoming webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | Yes | - | Microsoft Teams 傳入 webhook URL |
-| `message` | text | Yes | - | 要發送的訊息文字 |
-| `title` | string | No | - | 訊息卡片標題（選填） |
-| `color` | string | No | - | 主題顏色的十六進位碼（選填） |
-| `sections` | array | No | - | 額外的 MessageCard 區段（選填） |
+| `webhook_url` | string | Yes | - | Microsoft Teams incoming webhook URL |
+| `message` | text | Yes | - | The message text to send |
+| `title` | string | No | - | Message card title (optional) |
+| `color` | string | No | - | Theme color hex code (optional) |
+| `sections` | array | No | - | Additional MessageCard sections (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作是否成功 |
-| `data` | object | 包含狀態和 webhook_url 的回應資料 |
+| `ok` | boolean | Whether the operation succeeded |
+| `data` | object | Response data with status and webhook_url |
 
 **Example:** Example
 
@@ -231,29 +231,29 @@ title: Deploy Status
 color: #00FF00
 ```
 
-### 傳送 Telegram 訊息
+### Send Telegram Message
 
 `notification.telegram.send_message`
 
-透過 Telegram Bot API 傳送訊息
+Send message via Telegram Bot API
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bot_token` | string | No | - | Telegram 機器人 Token（來自 env.TELEGRAM_BOT_TOKEN 或直接輸入） |
-| `chat_id` | string | Yes | - | Telegram 聊天室 ID 或頻道使用者名稱 |
-| `text` | string | Yes | - | 要傳送的訊息 |
-| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | 訊息格式模式 |
+| `bot_token` | string | No | - | Telegram bot token (from env.TELEGRAM_BOT_TOKEN or direct input) |
+| `chat_id` | string | Yes | - | Telegram chat ID or channel username |
+| `text` | string | Yes | - | The message to send |
+| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | Message formatting mode |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `sent` | boolean | 是否成功傳送 |
-| `message_id` | number | 訊息 ID |
-| `message` | string | 傳送的訊息 |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message_id` | number | Message identifier |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -270,30 +270,30 @@ text: *Bold* _italic_ `code`
 parse_mode: Markdown
 ```
 
-### 發送 WhatsApp 訊息
+### Send WhatsApp Message
 
 `notification.whatsapp.send_message`
 
-透過 WhatsApp Business API（Meta Cloud API）發送訊息
+Send message via WhatsApp Business API (Meta Cloud API)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `phone_number_id` | string | Yes | - | WhatsApp Business 發送者的電話號碼 ID |
-| `to` | string | Yes | - | 包含國碼的收件人電話號碼 |
-| `message` | text | Yes | - | 要發送的訊息文字 |
-| `access_token` | password | Yes | - | WhatsApp Business API 的 Meta 存取權杖 |
-| `message_type` | select (`text`, `template`) | No | `text` | 要發送的訊息類型 |
-| `template_name` | string | No | - | WhatsApp 訊息範本名稱（若 message_type 是範本則必填） |
-| `template_language` | string | No | `en` | 範本語言代碼 |
+| `phone_number_id` | string | Yes | - | WhatsApp Business sender phone number ID |
+| `to` | string | Yes | - | Recipient phone number with country code |
+| `message` | text | Yes | - | The message text to send |
+| `access_token` | password | Yes | - | Meta access token for WhatsApp Business API |
+| `message_type` | select (`text`, `template`) | No | `text` | Type of message to send |
+| `template_name` | string | No | - | WhatsApp message template name (required if message_type is "template") |
+| `template_language` | string | No | `en` | Template language code |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作是否成功 |
-| `data` | object | 包含狀態、message_id 和 to 的回應資料 |
+| `ok` | boolean | Whether the operation succeeded |
+| `data` | object | Response data with status, message_id, and to |
 
 **Example:** Example
 
@@ -316,29 +316,29 @@ template_name: hello_world
 template_language: en
 ```
 
-### 發送通知
+### Send Notification
 
 `notify.send`
 
-發送通知到 Telegram、Discord、Slack、LINE 或任何 webhook URL
+Send notification to Telegram, Discord, Slack, LINE, or any webhook URL
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | Webhook URL（Telegram、Discord、Slack 或自訂） |
-| `message` | string | Yes | - | 通知訊息內容 |
-| `title` | string | No | - | 選填標題（適用於 Discord、Slack、Teams） |
-| `chat_id` | string | No | - | Telegram 聊天 ID（Telegram 必需） |
+| `url` | string | Yes | - | Webhook URL (Telegram, Discord, Slack, or custom) |
+| `message` | string | Yes | - | Notification message content |
+| `title` | string | No | - | Optional title (for Discord, Slack, Teams) |
+| `chat_id` | string | No | - | Telegram chat ID (required for Telegram) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 通知是否成功發送 |
-| `platform` | string | 偵測到的平台（telegram、discord、slack 等） |
-| `status_code` | number | HTTP 回應狀態碼 |
-| `response` | object | Webhook 的回應內容 |
+| `ok` | boolean | Whether notification was sent successfully |
+| `platform` | string | Detected platform (telegram, discord, slack, etc.) |
+| `status_code` | number | HTTP response status code |
+| `response` | object | Response from the webhook |
 
 **Example:** Send Telegram notification
 

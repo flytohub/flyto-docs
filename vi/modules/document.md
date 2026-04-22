@@ -6,22 +6,22 @@ Excel, PDF, and Word document read/write/convert.
 
 | Module | Description |
 |--------|-------------|
-| [Đọc Excel](#đọc-excel) | Đọc dữ liệu từ tệp Excel (xlsx, xls) |
-| [Ghi Excel](#ghi-excel) | Ghi dữ liệu vào tệp Excel (xlsx) |
-| [Điền form PDF](#điền-form-pdf) | Điền các trường form PDF với dữ liệu và tùy chọn chèn hình ảnh |
-| [Tạo PDF](#tạo-pdf) | Tạo tệp PDF từ nội dung HTML hoặc văn bản |
-| [Phân tích PDF](#phân-tích-pdf) | Trích xuất văn bản và metadata từ tệp PDF |
-| [PDF sang Word](#pdf-sang-word) | Chuyển đổi tệp PDF sang tài liệu Word (.docx) |
-| [Phân tích tài liệu Word](#phân-tích-tài-liệu-word) | Trích xuất văn bản và nội dung từ tài liệu Word (.docx) |
-| [Word sang PDF](#word-sang-pdf) | Chuyển đổi tài liệu Word (.docx) thành tệp PDF |
+| [Read Excel](#read-excel) | Read data from Excel files (xlsx, xls) |
+| [Write Excel](#write-excel) | Write data to Excel files (xlsx) |
+| [Fill PDF Form](#fill-pdf-form) | Fill PDF form fields with data and optionally insert images |
+| [Generate PDF](#generate-pdf) | Generate PDF files from HTML content or text |
+| [Parse PDF](#parse-pdf) | Extract text and metadata from PDF files |
+| [PDF to Word](#pdf-to-word) | Convert PDF files to Word documents (.docx) |
+| [Parse Word Document](#parse-word-document) | Extract text and content from Word documents (.docx) |
+| [Word to PDF](#word-to-pdf) | Convert Word documents (.docx) to PDF files |
 
 ## Modules
 
-### Đọc Excel
+### Read Excel
 
 `excel.read`
 
-Đọc dữ liệu từ tệp Excel (xlsx, xls)
+Read data from Excel files (xlsx, xls)
 
 **Parameters:**
 
@@ -37,10 +37,10 @@ Excel, PDF, and Word document read/write/convert.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | array | Các hàng dữ liệu trích xuất |
-| `headers` | array | Các hàng dữ liệu trích xuất |
-| `row_count` | number | Các hàng dữ liệu trích xuất |
-| `sheet_names` | array | Tiêu đề cột |
+| `data` | array | Extracted data rows |
+| `headers` | array | Column headers |
+| `row_count` | number | Number of data rows |
+| `sheet_names` | array | All sheet names in the workbook |
 
 **Example:** Read entire sheet
 
@@ -49,11 +49,11 @@ path: /tmp/data.xlsx
 as_dict: true
 ```
 
-### Ghi Excel
+### Write Excel
 
 `excel.write`
 
-Ghi dữ liệu vào tệp Excel (xlsx)
+Write data to Excel files (xlsx)
 
 **Parameters:**
 
@@ -69,9 +69,9 @@ Ghi dữ liệu vào tệp Excel (xlsx)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Đường dẫn đến tệp Excel đã tạo |
-| `row_count` | number | Đường dẫn đến tệp Excel đã tạo |
-| `size` | number | Đường dẫn đến tệp Excel đã tạo |
+| `path` | string | Path to the created Excel file |
+| `row_count` | number | Number of data rows written |
+| `size` | number | File size in bytes |
 
 **Example:** Write data to Excel
 
@@ -80,11 +80,11 @@ path: /tmp/output.xlsx
 data: [{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]
 ```
 
-### Điền form PDF
+### Fill PDF Form
 
 `pdf.fill_form`
 
-Điền các trường form PDF với dữ liệu và tùy chọn chèn hình ảnh
+Fill PDF form fields with data and optionally insert images
 
 **Parameters:**
 
@@ -100,10 +100,10 @@ data: [{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Đường dẫn đến PDF đã điền |
-| `fields_filled` | number | Đường dẫn đến PDF đã điền |
-| `images_inserted` | number | Đường dẫn đến PDF đã điền |
-| `file_size_bytes` | number | Số hình ảnh đã chèn |
+| `output_path` | string | Path to the filled PDF |
+| `fields_filled` | number | Number of fields filled |
+| `images_inserted` | number | Number of images inserted |
+| `file_size_bytes` | number | Size of the output PDF in bytes |
 
 **Example:** Fill form with text fields
 
@@ -122,11 +122,11 @@ fields: {"name": "Jane Doe"}
 images: [{"file": "/photos/jane.jpg", "page": 1, "x": 50, "y": 650, "width": 100, "height": 120}]
 ```
 
-### Tạo PDF
+### Generate PDF
 
 `pdf.generate`
 
-Tạo tệp PDF từ nội dung HTML hoặc văn bản
+Generate PDF files from HTML content or text
 
 **Parameters:**
 
@@ -146,9 +146,9 @@ Tạo tệp PDF từ nội dung HTML hoặc văn bản
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Đường dẫn đến PDF đã tạo |
-| `page_count` | number | Đường dẫn đến PDF đã tạo |
-| `file_size_bytes` | number | Số trang trong PDF |
+| `output_path` | string | Path to the generated PDF |
+| `page_count` | number | Number of pages in the PDF |
+| `file_size_bytes` | number | Size of the generated PDF in bytes |
 
 **Example:** Generate from HTML
 
@@ -158,11 +158,11 @@ output_path: /path/to/report.pdf
 title: Monthly Report
 ```
 
-### Phân tích PDF
+### Parse PDF
 
 `pdf.parse`
 
-Trích xuất văn bản và metadata từ tệp PDF
+Extract text and metadata from PDF files
 
 **Parameters:**
 
@@ -177,10 +177,10 @@ Trích xuất văn bản và metadata từ tệp PDF
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | Nội dung văn bản đã trích xuất |
-| `pages` | array | Nội dung văn bản đã trích xuất |
-| `metadata` | object | Nội dung văn bản đã trích xuất |
-| `page_count` | number | Nội dung văn bản theo trang |
+| `text` | string | Extracted text content |
+| `pages` | array | Text content per page |
+| `metadata` | object | PDF metadata (title, author, etc.) |
+| `page_count` | number | Total number of pages |
 
 **Example:** Extract all text from PDF
 
@@ -189,11 +189,11 @@ path: /tmp/document.pdf
 pages: all
 ```
 
-### PDF sang Word
+### PDF to Word
 
 `pdf.to_word`
 
-Chuyển đổi tệp PDF sang tài liệu Word (.docx)
+Convert PDF files to Word documents (.docx)
 
 **Parameters:**
 
@@ -208,9 +208,9 @@ Chuyển đổi tệp PDF sang tài liệu Word (.docx)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Đường dẫn đến tài liệu Word đã tạo |
-| `page_count` | number | Đường dẫn đến tài liệu Word đã tạo |
-| `file_size` | number | Số trang đã chuyển đổi |
+| `output_path` | string | Path to the generated Word document |
+| `page_count` | number | Number of pages converted |
+| `file_size` | number | Size of the output file in bytes |
 
 **Example:** Convert entire PDF to Word
 
@@ -226,11 +226,11 @@ output_path: /tmp/output.docx
 pages: 1-5
 ```
 
-### Phân tích tài liệu Word
+### Parse Word Document
 
 `word.parse`
 
-Trích xuất văn bản và nội dung từ tài liệu Word (.docx)
+Extract text and content from Word documents (.docx)
 
 **Parameters:**
 
@@ -246,11 +246,11 @@ Trích xuất văn bản và nội dung từ tài liệu Word (.docx)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | Toàn bộ nội dung văn bản của tài liệu |
-| `paragraphs` | array | Toàn bộ nội dung văn bản của tài liệu |
-| `tables` | array | Toàn bộ nội dung văn bản của tài liệu |
-| `images` | array | Danh sách các đoạn văn |
-| `metadata` | object | Các bảng được trích xuất dưới dạng mảng |
+| `text` | string | Full text content of the document |
+| `paragraphs` | array | List of paragraphs |
+| `tables` | array | Extracted tables as arrays |
+| `images` | array | Paths to extracted images |
+| `metadata` | object | Document metadata |
 
 **Example:** Extract text from Word
 
@@ -267,11 +267,11 @@ extract_images: true
 images_output_dir: /path/to/images/
 ```
 
-### Word sang PDF
+### Word to PDF
 
 `word.to_pdf`
 
-Chuyển đổi tài liệu Word (.docx) thành tệp PDF
+Convert Word documents (.docx) to PDF files
 
 **Parameters:**
 
@@ -285,9 +285,9 @@ Chuyển đổi tài liệu Word (.docx) thành tệp PDF
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Đường dẫn đến tệp PDF đã tạo |
-| `file_size` | number | Đường dẫn đến tệp PDF đã tạo |
-| `method_used` | string | Kích thước tệp đầu ra tính bằng byte |
+| `output_path` | string | Path to the generated PDF file |
+| `file_size` | number | Size of the output file in bytes |
+| `method_used` | string | Conversion method that was used |
 
 **Example:** Convert Word to PDF
 

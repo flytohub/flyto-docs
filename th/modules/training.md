@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [ฝึกวิเคราะห์](#ฝึกวิเคราะห์) | วิเคราะห์โครงสร้างเว็บไซต์สำหรับการฝึก |
-| [ฝึกดำเนินการ](#ฝึกดำเนินการ) | ดำเนินการเซสชันฝึก |
-| [ฝึกอนุมานสคีมา](#ฝึกอนุมานสคีมา) | อนุมานสคีมาข้อมูลจากเว็บไซต์ |
-| [สถิติการฝึก](#สถิติการฝึก) | รับสถิติการฝึก |
+| [Practice Analyze](#practice-analyze) | Analyze website structure for practice |
+| [Practice Execute](#practice-execute) | Execute practice session |
+| [Practice Infer Schema](#practice-infer-schema) | Infer data schema from website |
+| [Practice Stats](#practice-stats) | Get practice statistics |
 
 ## Modules
 
-### ฝึกวิเคราะห์
+### Practice Analyze
 
 `training.practice.analyze`
 
-วิเคราะห์โครงสร้างเว็บไซต์สำหรับการฝึก
+Analyze website structure for practice
 
 **Parameters:**
 
@@ -29,14 +29,14 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | วิเคราะห์โครงสร้างเว็บไซต์ |
-| `structure` | object | วิเคราะห์โครงสร้างเว็บไซต์ |
+| `status` | string | Operation status (success/error) |
+| `structure` | object | The structure |
 
-### ฝึกดำเนินการ
+### Practice Execute
 
 `training.practice.execute`
 
-ดำเนินการเซสชันฝึก
+Execute practice session
 
 **Parameters:**
 
@@ -49,14 +49,14 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ดำเนินการเซสชันฝึก |
-| `items_processed` | number | ดำเนินการเซสชันฝึก |
+| `status` | string | Operation status (success/error) |
+| `items_processed` | number | The items processed |
 
-### ฝึกอนุมานสคีมา
+### Practice Infer Schema
 
 `training.practice.infer_schema`
 
-อนุมานสคีมาข้อมูลจากเว็บไซต์
+Infer data schema from website
 
 **Parameters:**
 
@@ -69,20 +69,20 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | อนุมานสคีมาข้อมูล |
-| `schema` | object | อนุมานสคีมาข้อมูล |
+| `status` | string | Operation status (success/error) |
+| `schema` | object | The schema |
 
-### สถิติการฝึก
+### Practice Stats
 
 `training.practice.stats`
 
-รับสถิติการฝึก
+Get practice statistics
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total_sessions` | number | เซสชันทั้งหมด |
-| `successful_sessions` | number | เซสชันทั้งหมด |
-| `success_rate` | number | รับสถิติการฝึก |
-| `history` | array | รับสถิติการฝึก |
+| `total_sessions` | number | The total sessions |
+| `successful_sessions` | number | The successful sessions |
+| `success_rate` | number | The success rate |
+| `history` | array | The history |

@@ -6,124 +6,124 @@ Pattern matching: match, extract, replace, split, and test.
 
 | Module | Description |
 |--------|-------------|
-| [正規表現抽出](#正規表現抽出) | テキストから名前付きグループを抽出する |
-| [正規表現マッチ](#正規表現マッチ) | テキスト内のパターンのすべての一致を見つける |
-| [正規表現置換](#正規表現置換) | テキスト内のパターン一致を置換する |
-| [正規表現分割](#正規表現分割) | 正規表現パターンでテキストを分割する |
-| [正規表現テスト](#正規表現テスト) | 文字列が正規表現パターンに一致するかテスト |
+| [Regex Extract](#regex-extract) | Extract named groups from text |
+| [Regex Match](#regex-match) | Find all matches of a pattern in text |
+| [Regex Replace](#regex-replace) | Replace pattern matches in text |
+| [Regex Split](#regex-split) | Split text by a regex pattern |
+| [Regex Test](#regex-test) | Test if string matches a regex pattern |
 
 ## Modules
 
-### 正規表現抽出
+### Regex Extract
 
 `regex.extract`
 
-テキストから名前付きグループを抽出する
+Extract named groups from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 抽出するテキスト |
-| `pattern` | string | Yes | - | 抽出するテキスト |
-| `ignore_case` | boolean | No | `False` | 大文字小文字を区別しないマッチング |
+| `text` | string | Yes | - | Text to extract from |
+| `pattern` | string | Yes | - | Regex with named groups (?P<name>...) |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted` | object | 大文字小文字を区別しないマッチング |
-| `matched` | boolean | 抽出された名前付きグループ |
-| `full_match` | string | 抽出された名前付きグループ |
+| `extracted` | object | Extracted named groups |
+| `matched` | boolean | Whether pattern matched |
+| `full_match` | string | Full matched text |
 
-### 正規表現マッチ
+### Regex Match
 
 `regex.match`
 
-テキスト内のパターンのすべての一致を見つける
+Find all matches of a pattern in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 検索するテキスト |
-| `pattern` | string | Yes | - | 検索するテキスト |
-| `ignore_case` | boolean | No | `False` | 正規表現パターン |
-| `first_only` | boolean | No | `False` | 大文字小文字を区別しないマッチング |
+| `text` | string | Yes | - | Text to search |
+| `pattern` | string | Yes | - | Regular expression pattern |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `first_only` | boolean | No | `False` | Return only the first match |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `matches` | array | 最初の一致のみを返す |
-| `count` | number | 一致のリスト |
-| `groups` | array | 一致のリスト |
+| `matches` | array | List of matches |
+| `count` | number | Number of matches |
+| `groups` | array | Captured groups from each match |
 
-### 正規表現置換
+### Regex Replace
 
 `regex.replace`
 
-テキスト内のパターン一致を置換する
+Replace pattern matches in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 処理するテキスト |
-| `pattern` | string | Yes | - | 処理するテキスト |
-| `replacement` | string | Yes | - | 正規表現パターン |
-| `ignore_case` | boolean | No | `False` | 置換テキスト（後方参照をサポート） |
-| `count` | number | No | `0` | 大文字小文字を区別しないマッチング |
+| `text` | string | Yes | - | Text to process |
+| `pattern` | string | Yes | - | Regular expression pattern |
+| `replacement` | string | Yes | - | Replacement text (supports backreferences) |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `count` | number | No | `0` | Maximum replacements (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 最大置換数（0 = 無制限） |
-| `replacements` | number | 置換後のテキスト |
-| `original` | string | 置換後のテキスト |
+| `result` | string | Text with replacements |
+| `replacements` | number | Number of replacements made |
+| `original` | string | Original text |
 
-### 正規表現分割
+### Regex Split
 
 `regex.split`
 
-正規表現パターンでテキストを分割する
+Split text by a regex pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 分割するテキスト |
-| `pattern` | string | Yes | - | 分割するテキスト |
-| `ignore_case` | boolean | No | `False` | 区切り用の正規表現パターン |
-| `max_split` | number | No | `0` | 大文字小文字を区別しないマッチング |
-| `remove_empty` | boolean | No | `False` | 最大分割数（0 = 無制限） |
+| `text` | string | Yes | - | Text to split |
+| `pattern` | string | Yes | - | Regular expression pattern for delimiter |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `max_split` | number | No | `0` | Maximum number of splits (0 = unlimited) |
+| `remove_empty` | boolean | No | `False` | Remove empty strings from result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 結果から空の文字列を削除する |
-| `count` | number | 分割された部分 |
+| `result` | array | Split parts |
+| `count` | number | Number of parts |
 
-### 正規表現テスト
+### Regex Test
 
 `regex.test`
 
-文字列が正規表現パターンに一致するかテスト
+Test if string matches a regex pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | テストするテキスト |
-| `pattern` | string | Yes | - | テストするテキスト |
-| `ignore_case` | boolean | No | `False` | 正規表現パターン |
-| `full_match` | boolean | No | `False` | 大文字小文字を区別しない一致 |
+| `text` | string | Yes | - | Text to test |
+| `pattern` | string | Yes | - | Regular expression pattern |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `full_match` | boolean | No | `False` | Require pattern to match entire string |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | パターンが文字列全体に一致する必要がある |
-| `pattern` | string | パターンが一致するかどうか |
+| `result` | boolean | Whether pattern matches |
+| `pattern` | string | Pattern used |

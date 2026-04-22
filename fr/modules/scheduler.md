@@ -6,74 +6,74 @@ Cron parsing, delay, and interval calculations.
 
 | Module | Description |
 |--------|-------------|
-| [Analyser l'expression Cron](#analyser-l'expression-cron) | Analyser l'expression cron et calculer les N prochaines exécutions |
-| [Délai / Pause](#délai--pause) | Mettre en pause l'exécution pour une durée spécifiée |
-| [Calculer l'intervalle](#calculer-l'intervalle) | Calculer le temps d'intervalle et les prochaines occurrences |
+| [Parse Cron Expression](#parse-cron-expression) | Parse cron expression and calculate next N run times |
+| [Delay / Sleep](#delay--sleep) | Pause execution for a specified duration |
+| [Calculate Interval](#calculate-interval) | Calculate interval timing and next occurrences |
 
 ## Modules
 
-### Analyser l'expression Cron
+### Parse Cron Expression
 
 `scheduler.cron_parse`
 
-Analyser l'expression cron et calculer les N prochaines exécutions
+Parse cron expression and calculate next N run times
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `expression` | string | Yes | - | Expression cron standard à 5 champs (par ex. "0 9 * * MON-FRI") |
-| `count` | number | No | `5` | Nombre de prochaines exécutions à calculer |
-| `timezone` | string | No | `0` | Fuseau horaire pour le calcul (décalage UTC comme "+8" ou "-5", par défaut "0" pour UTC) |
+| `expression` | string | Yes | - | Standard 5-field cron expression (e.g. "0 9 * * MON-FRI") |
+| `count` | number | No | `5` | Number of next run times to calculate |
+| `timezone` | string | No | `0` | Timezone for calculation (UTC offset like "+8" or "-5", default "0" for UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `expression` | string | L'expression cron analysée |
-| `description` | string | Description du calendrier en langage naturel |
-| `next_runs` | array | Liste des prochaines exécutions sous forme de chaînes datetime ISO |
-| `is_valid` | boolean | Si l'expression est valide |
+| `expression` | string | The parsed cron expression |
+| `description` | string | Human-readable description of the schedule |
+| `next_runs` | array | List of next run times as ISO datetime strings |
+| `is_valid` | boolean | Whether the expression is valid |
 
-### Délai / Pause
+### Delay / Sleep
 
 `scheduler.delay`
 
-Mettre en pause l'exécution pour une durée spécifiée
+Pause execution for a specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | Yes | - | Nombre de secondes de délai |
-| `message` | string | No | - | Message optionnel à inclure dans le résultat |
+| `seconds` | number | Yes | - | Number of seconds to delay |
+| `message` | string | No | - | Optional message to include in the result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `delayed_seconds` | number | Nombre réel de secondes de délai |
-| `message` | string | Le message fourni ou par défaut |
+| `delayed_seconds` | number | Actual number of seconds delayed |
+| `message` | string | The provided message or default |
 
-### Calculer l'intervalle
+### Calculate Interval
 
 `scheduler.interval`
 
-Calculer le temps d'intervalle et les prochaines occurrences
+Calculate interval timing and next occurrences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | No | `0` | Composant en secondes de l'intervalle |
-| `minutes` | number | No | `0` | Composant en minutes de l'intervalle |
-| `hours` | number | No | `0` | Composant en heures de l'intervalle |
-| `start_time` | string | No | - | Heure de début au format ISO 8601 (par défaut : maintenant) |
+| `seconds` | number | No | `0` | Interval seconds component |
+| `minutes` | number | No | `0` | Interval minutes component |
+| `hours` | number | No | `0` | Interval hours component |
+| `start_time` | string | No | - | Start time in ISO 8601 format (default: now) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `interval_seconds` | number | Intervalle total en secondes |
-| `next_runs` | array | Liste des 5 prochaines exécutions sous forme de chaînes datetime ISO |
-| `human_readable` | string | Description de l'intervalle en langage naturel |
+| `interval_seconds` | number | Total interval in seconds |
+| `next_runs` | array | List of next 5 run times as ISO datetime strings |
+| `human_readable` | string | Human-readable interval description |

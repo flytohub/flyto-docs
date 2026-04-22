@@ -6,123 +6,123 @@ Number, currency, duration, filesize, and percentage formatting.
 
 | Module | Description |
 |--------|-------------|
-| [通貨フォーマット](#通貨フォーマット) | 数値を通貨としてフォーマット |
-| [期間フォーマット](#期間フォーマット) | 秒数を人間が読める期間にフォーマット |
-| [ファイルサイズフォーマット](#ファイルサイズフォーマット) | バイト数を人間が読めるファイルサイズにフォーマット |
-| [数値フォーマット](#数値フォーマット) | 数値を区切り文字と小数でフォーマット |
-| [パーセンテージフォーマット](#パーセンテージフォーマット) | 数値をパーセンテージとしてフォーマット |
+| [Format Currency](#format-currency) | Format numbers as currency |
+| [Format Duration](#format-duration) | Format seconds as human-readable duration |
+| [Format Filesize](#format-filesize) | Format bytes as human-readable file size |
+| [Format Number](#format-number) | Format numbers with separators and decimals |
+| [Format Percentage](#format-percentage) | Format numbers as percentages |
 
 ## Modules
 
-### 通貨フォーマット
+### Format Currency
 
 `format.currency`
 
-数値を通貨としてフォーマット
+Format numbers as currency
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `amount` | number | Yes | - | フォーマットする金額 |
-| `currency` | string | No | `USD` | フォーマットする金額 |
-| `decimal_places` | number | No | `2` | 小数点以下の桁数 |
-| `symbol_position` | string | No | `before` | 小数点以下の桁数 |
+| `amount` | number | Yes | - | Amount to format |
+| `currency` | string | No | `USD` | Currency code (USD, EUR, GBP, etc) |
+| `decimal_places` | number | No | `2` | Number of decimal places |
+| `symbol_position` | string | No | `before` | Position of currency symbol |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | フォーマットされた通貨文字列 |
-| `original` | number | フォーマットされた通貨文字列 |
-| `symbol` | string | フォーマットされた通貨文字列 |
+| `result` | string | Formatted currency string |
+| `original` | number | Original amount |
+| `symbol` | string | Currency symbol used |
 
-### 期間フォーマット
+### Format Duration
 
 `format.duration`
 
-秒数を人間が読める期間にフォーマット
+Format seconds as human-readable duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | Yes | - | 秒単位の期間 |
-| `format` | string | No | `short` | 秒単位の期間 |
-| `show_zero` | boolean | No | `False` | ゼロの単位を表示 |
+| `seconds` | number | Yes | - | Duration in seconds |
+| `format` | string | No | `short` | Output format style |
+| `show_zero` | boolean | No | `False` | Show units that are zero |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | ゼロの単位を表示 |
-| `original` | number | フォーマットされた期間文字列 |
-| `parts` | object | フォーマットされた期間文字列 |
+| `result` | string | Formatted duration string |
+| `original` | number | Original seconds |
+| `parts` | object | Duration parts (days, hours, minutes, seconds) |
 
-### ファイルサイズフォーマット
+### Format Filesize
 
 `format.filesize`
 
-バイト数を人間が読めるファイルサイズにフォーマット
+Format bytes as human-readable file size
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bytes` | number | Yes | - | バイト単位のサイズ |
-| `binary` | boolean | No | `False` | バイト単位のサイズ |
-| `decimal_places` | number | No | `2` | 10進（KB, MB）ではなく2進単位（KiB, MiB）を使用 |
+| `bytes` | number | Yes | - | Size in bytes |
+| `binary` | boolean | No | `False` | Use binary units (KiB, MiB) instead of decimal (KB, MB) |
+| `decimal_places` | number | No | `2` | Number of decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 小数点以下の桁数 |
-| `original` | number | フォーマットされたファイルサイズ文字列 |
-| `unit` | string | フォーマットされたファイルサイズ文字列 |
-| `value` | number | 元のバイト数 |
+| `result` | string | Formatted file size string |
+| `original` | number | Original bytes |
+| `unit` | string | Unit used |
+| `value` | number | Numeric value in unit |
 
-### 数値フォーマット
+### Format Number
 
 `format.number`
 
-数値を区切り文字と小数でフォーマット
+Format numbers with separators and decimals
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `number` | number | Yes | - | フォーマットする数値 |
-| `decimal_places` | number | No | `2` | フォーマットする数値 |
-| `thousand_separator` | string | No | `,` | 小数点以下の桁数 |
-| `decimal_separator` | string | No | `.` | 千単位の区切り文字 |
+| `number` | number | Yes | - | Number to format |
+| `decimal_places` | number | No | `2` | Number of decimal places |
+| `thousand_separator` | string | No | `,` | Separator for thousands |
+| `decimal_separator` | string | No | `.` | Separator for decimals |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 小数点の区切り文字 |
-| `original` | number | フォーマットされた数値文字列 |
+| `result` | string | Formatted number string |
+| `original` | number | Original number |
 
-### パーセンテージフォーマット
+### Format Percentage
 
 `format.percentage`
 
-数値をパーセンテージとしてフォーマット
+Format numbers as percentages
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | number | Yes | - | パーセンテージとしてフォーマットする値 |
-| `is_ratio` | boolean | No | `True` | パーセンテージとしてフォーマットする値 |
-| `decimal_places` | number | No | `1` | 入力は0から1の比率で、100倍する必要がある |
-| `include_sign` | boolean | No | `False` | 小数点以下の桁数 |
+| `value` | number | Yes | - | Value to format as percentage |
+| `is_ratio` | boolean | No | `True` | Input is a ratio (0-1) that needs to be multiplied by 100 |
+| `decimal_places` | number | No | `1` | Number of decimal places |
+| `include_sign` | boolean | No | `False` | Include + sign for positive values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 正の値には+記号を含める |
-| `original` | number | フォーマットされたパーセンテージ文字列 |
-| `numeric` | number | フォーマットされたパーセンテージ文字列 |
+| `result` | string | Formatted percentage string |
+| `original` | number | Original value |
+| `numeric` | number | Numeric percentage value |

@@ -6,23 +6,23 @@ MongoDB, MySQL, PostgreSQL, and Redis database operations.
 
 | Module | Description |
 |--------|-------------|
-| [データベース挿入](#データベース挿入) | データベーステーブルにデータを挿入 |
-| [データベースクエリ](#データベースクエリ) | PostgreSQL、MySQL、またはSQLiteデータベースでSQLクエリを実行 |
-| [データベース更新](#データベース更新) | データベーステーブルのデータを更新 |
-| [MongoDB 検索](#mongodb-検索) | MongoDBコレクションからドキュメントをクエリ |
-| [MongoDB 挿入](#mongodb-挿入) | MongoDBコレクションに1つ以上のドキュメントを挿入 |
-| [MySQL クエリ](#mysql-クエリ) | MySQLデータベースでSQLクエリを実行して結果を返す |
-| [PostgreSQL クエリ](#postgresql-クエリ) | PostgreSQLデータベースでSQLクエリを実行して結果を返す |
-| [Redis 取得](#redis-取得) | Redisキャッシュから値を取得 |
-| [Redis 設定](#redis-設定) | Redisキャッシュに値を設定 |
+| [Database Insert](#database-insert) | Insert data into database tables |
+| [Database Query](#database-query) | Execute SQL queries on PostgreSQL, MySQL, or SQLite databases |
+| [Database Update](#database-update) | Update data in database tables |
+| [MongoDB Find](#mongodb-find) | Query documents from MongoDB collection |
+| [MongoDB Insert](#mongodb-insert) | Insert one or more documents into MongoDB collection |
+| [MySQL Query](#mysql-query) | Execute a SQL query on MySQL database and return results |
+| [PostgreSQL Query](#postgresql-query) | Execute a SQL query on PostgreSQL database and return results |
+| [Redis Get](#redis-get) | Get a value from Redis cache |
+| [Redis Set](#redis-set) | Set a value in Redis cache |
 
 ## Modules
 
-### データベース挿入
+### Database Insert
 
 `database.insert`
 
-データベーステーブルにデータを挿入
+Insert data into database tables
 
 **Parameters:**
 
@@ -43,8 +43,8 @@ MongoDB, MySQL, PostgreSQL, and Redis database operations.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | 挿入された行数 |
-| `returning_data` | array | 挿入された行数 |
+| `inserted_count` | number | Number of rows inserted |
+| `returning_data` | array | Returned data from insert |
 
 **Example:** Insert single row
 
@@ -54,11 +54,11 @@ data: {"name": "John", "email": "john@example.com"}
 database_type: postgresql
 ```
 
-### データベースクエリ
+### Database Query
 
 `database.query`
 
-PostgreSQL、MySQL、またはSQLiteデータベースでSQLクエリを実行
+Execute SQL queries on PostgreSQL, MySQL, or SQLite databases
 
 **Parameters:**
 
@@ -79,9 +79,9 @@ PostgreSQL、MySQL、またはSQLiteデータベースでSQLクエリを実行
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | クエリ結果の行 |
-| `row_count` | number | クエリ結果の行 |
-| `columns` | array | クエリ結果の行 |
+| `rows` | array | Query result rows |
+| `row_count` | number | Number of rows returned/affected |
+| `columns` | array | Column names |
 
 **Example:** Select with parameters
 
@@ -91,11 +91,11 @@ params: ["active"]
 database_type: postgresql
 ```
 
-### データベース更新
+### Database Update
 
 `database.update`
 
-データベーステーブルのデータを更新
+Update data in database tables
 
 **Parameters:**
 
@@ -116,7 +116,7 @@ database_type: postgresql
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `updated_count` | number | 更新された行数 |
+| `updated_count` | number | Number of rows updated |
 
 **Example:** Update user status
 
@@ -127,11 +127,11 @@ where: {"id": 123}
 database_type: postgresql
 ```
 
-### MongoDB 検索
+### MongoDB Find
 
 `db.mongodb.find`
 
-MongoDBコレクションからドキュメントをクエリ
+Query documents from MongoDB collection
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ MongoDBコレクションからドキュメントをクエリ
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `documents` | array | 一致するドキュメントの配列 |
-| `count` | number | 一致するドキュメントの配列 |
+| `documents` | array | Array of matching documents |
+| `count` | number | Number of documents returned |
 
 **Example:** Find all active users
 
@@ -172,11 +172,11 @@ sort: {"created_at": -1}
 limit: 20
 ```
 
-### MongoDB 挿入
+### MongoDB Insert
 
 `db.mongodb.insert`
 
-MongoDBコレクションに1つ以上のドキュメントを挿入
+Insert one or more documents into MongoDB collection
 
 **Parameters:**
 
@@ -192,8 +192,8 @@ MongoDBコレクションに1つ以上のドキュメントを挿入
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | 挿入されたドキュメント数 |
-| `inserted_ids` | array | 挿入されたドキュメント数 |
+| `inserted_count` | number | Number of documents inserted |
+| `inserted_ids` | array | Array of inserted document IDs |
 
 **Example:** Insert single document
 
@@ -211,11 +211,11 @@ collection: products
 documents: [{"name": "Product A", "price": 19.99}, {"name": "Product B", "price": 29.99}]
 ```
 
-### MySQL クエリ
+### MySQL Query
 
 `db.mysql.query`
 
-MySQLデータベースでSQLクエリを実行して結果を返す
+Execute a SQL query on MySQL database and return results
 
 **Parameters:**
 
@@ -233,9 +233,9 @@ MySQLデータベースでSQLクエリを実行して結果を返す
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | オブジェクトとしての結果行の配列 |
-| `row_count` | number | オブジェクトとしての結果行の配列 |
-| `columns` | array | オブジェクトとしての結果行の配列 |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select products
 
@@ -250,11 +250,11 @@ query: SELECT * FROM orders WHERE customer_id = %s AND created_at > %s
 params: ["${customer_id}", "2024-01-01"]
 ```
 
-### PostgreSQL クエリ
+### PostgreSQL Query
 
 `db.postgresql.query`
 
-PostgreSQLデータベースでSQLクエリを実行して結果を返す
+Execute a SQL query on PostgreSQL database and return results
 
 **Parameters:**
 
@@ -268,9 +268,9 @@ PostgreSQLデータベースでSQLクエリを実行して結果を返す
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | オブジェクトとしての結果行の配列 |
-| `row_count` | number | オブジェクトとしての結果行の配列 |
-| `columns` | array | オブジェクトとしての結果行の配列 |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select users
 
@@ -285,11 +285,11 @@ query: SELECT * FROM orders WHERE user_id = $1 AND status = $2
 params: ["${user_id}", "completed"]
 ```
 
-### Redis 取得
+### Redis Get
 
 `db.redis.get`
 
-Redisキャッシュから値を取得
+Get a value from Redis cache
 
 **Parameters:**
 
@@ -304,9 +304,9 @@ Redisキャッシュから値を取得
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | 返された値 |
-| `exists` | boolean | 返された値 |
-| `key` | string | 返された値 |
+| `value` | any | The returned value |
+| `exists` | boolean | The exists |
+| `key` | string | Key identifier |
 
 **Example:** Get cached value
 
@@ -324,11 +324,11 @@ port: 6379
 db: 1
 ```
 
-### Redis 設定
+### Redis Set
 
 `db.redis.set`
 
-Redisキャッシュに値を設定
+Set a value in Redis cache
 
 **Parameters:**
 

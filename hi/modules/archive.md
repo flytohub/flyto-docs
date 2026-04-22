@@ -6,34 +6,34 @@ Create and extract ZIP, TAR, and gzip archives.
 
 | Module | Description |
 |--------|-------------|
-| [Gunzip डीकंप्रेस](#gunzip-डीकंप्रेस) | gzip-संपीड़ित फ़ाइल को डीकंप्रेस करें |
-| [Gzip संपीड़न](#gzip-संपीड़न) | एकल फ़ाइल को gzip से संपीड़ित करें |
-| [TAR संग्रह बनाएं](#tar-संग्रह-बनाएं) | वैकल्पिक gzip/bz2/xz संपीड़न के साथ TAR संग्रह बनाएं |
-| [TAR आर्काइव निकालें](#tar-आर्काइव-निकालें) | TAR आर्काइव से फाइलें निकालें (स्वतः संपीड़न पहचानता है) |
-| [ZIP संग्रह बनाएं](#zip-संग्रह-बनाएं) | फ़ाइलों की सूची से ZIP संग्रह बनाएं |
-| [ZIP संग्रह निकालें](#zip-संग्रह-निकालें) | ZIP संग्रह से फ़ाइलें निकालें |
+| [Gunzip Decompress](#gunzip-decompress) | Decompress a gzip-compressed file |
+| [Gzip Compress](#gzip-compress) | Compress a single file using gzip |
+| [Create TAR Archive](#create-tar-archive) | Create a TAR archive with optional gzip/bz2/xz compression |
+| [Extract TAR Archive](#extract-tar-archive) | Extract files from a TAR archive (auto-detects compression) |
+| [Create ZIP Archive](#create-zip-archive) | Create a ZIP archive from a list of files |
+| [Extract ZIP Archive](#extract-zip-archive) | Extract files from a ZIP archive |
 
 ## Modules
 
-### Gunzip डीकंप्रेस
+### Gunzip Decompress
 
 `archive.gunzip`
 
-gzip-संपीड़ित फ़ाइल को डीकंप्रेस करें
+Decompress a gzip-compressed file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | gzip-संपीड़ित फ़ाइल का पथ |
-| `output_path` | string | No | - | डीकंप्रेस्ड फ़ाइल के लिए पथ (डिफ़ॉल्ट इनपुट बिना .gz एक्सटेंशन के) |
+| `input_path` | string | Yes | - | Path to the gzip-compressed file |
+| `output_path` | string | No | - | Path for the decompressed file (defaults to input without .gz extension) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | डीकंप्रेस्ड फ़ाइल का पथ |
-| `size` | number | डीकंप्रेस्ड फ़ाइल का आकार बाइट्स में |
+| `path` | string | Path to the decompressed file |
+| `size` | number | Decompressed file size in bytes |
 
 **Example:** Decompress a gzip file
 
@@ -41,27 +41,27 @@ gzip-संपीड़ित फ़ाइल को डीकंप्रेस
 input_path: /tmp/data.txt.gz
 ```
 
-### Gzip संपीड़न
+### Gzip Compress
 
 `archive.gzip`
 
-एकल फ़ाइल को gzip से संपीड़ित करें
+Compress a single file using gzip
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | संपीड़ित करने के लिए फ़ाइल का पथ |
-| `output_path` | string | No | - | संपीड़ित फ़ाइल के लिए पथ (डिफ़ॉल्ट इनपुट पथ + .gz) |
+| `input_path` | string | Yes | - | Path to the file to compress |
+| `output_path` | string | No | - | Path for the compressed file (defaults to input_path + .gz) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | संपीड़ित फ़ाइल का पथ |
-| `original_size` | number | मूल फ़ाइल का आकार बाइट्स में |
-| `compressed_size` | number | संपीड़ित फ़ाइल का आकार बाइट्स में |
-| `ratio` | number | संपीड़न अनुपात (संपीड़ित / मूल) |
+| `path` | string | Path to the compressed file |
+| `original_size` | number | Original file size in bytes |
+| `compressed_size` | number | Compressed file size in bytes |
+| `ratio` | number | Compression ratio (compressed / original) |
 
 **Example:** Compress a file with gzip
 
@@ -69,27 +69,27 @@ input_path: /tmp/data.txt.gz
 input_path: /tmp/data.txt
 ```
 
-### TAR संग्रह बनाएं
+### Create TAR Archive
 
 `archive.tar_create`
 
-वैकल्पिक gzip/bz2/xz संपीड़न के साथ TAR संग्रह बनाएं
+Create a TAR archive with optional gzip/bz2/xz compression
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | Yes | - | आउटपुट TAR फ़ाइल के लिए पथ |
-| `files` | array | Yes | - | संग्रह में शामिल करने के लिए फ़ाइल पथों की सूची |
-| `compression` | select (`none`, `gzip`, `bz2`, `xz`) | No | `gzip` | संपीड़न विधि |
+| `output_path` | string | Yes | - | Path for the output TAR file |
+| `files` | array | Yes | - | List of file paths to include in the archive |
+| `compression` | select (`none`, `gzip`, `bz2`, `xz`) | No | `gzip` | Compression method |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | बनी हुई TAR फ़ाइल का पथ |
-| `size` | number | आर्काइव का आकार बाइट्स में |
-| `file_count` | number | आर्काइव में फाइलों की संख्या |
+| `path` | string | Path to the created TAR file |
+| `size` | number | Archive size in bytes |
+| `file_count` | number | Number of files in the archive |
 
 **Example:** Create gzipped TAR archive
 
@@ -99,25 +99,25 @@ files: ["/tmp/file1.txt", "/tmp/file2.txt"]
 compression: gzip
 ```
 
-### TAR आर्काइव निकालें
+### Extract TAR Archive
 
 `archive.tar_extract`
 
-TAR आर्काइव से फाइलें निकालें (स्वतः संपीड़न पहचानता है)
+Extract files from a TAR archive (auto-detects compression)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `archive_path` | string | Yes | - | निकालने के लिए TAR आर्काइव का पथ |
-| `output_dir` | string | Yes | - | फाइलें निकालने के लिए डायरेक्टरी |
+| `archive_path` | string | Yes | - | Path to the TAR archive to extract |
+| `output_dir` | string | Yes | - | Directory to extract files into |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted_files` | array | निकाली गई फाइल पथों की सूची |
-| `total_size` | number | निकाली गई फाइलों का कुल आकार बाइट्स में |
+| `extracted_files` | array | List of extracted file paths |
+| `total_size` | number | Total size of extracted files in bytes |
 
 **Example:** Extract TAR.GZ archive
 
@@ -126,28 +126,28 @@ archive_path: /tmp/archive.tar.gz
 output_dir: /tmp/extracted/
 ```
 
-### ZIP संग्रह बनाएं
+### Create ZIP Archive
 
 `archive.zip_create`
 
-फ़ाइलों की सूची से ZIP संग्रह बनाएं
+Create a ZIP archive from a list of files
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | Yes | - | आउटपुट ZIP फ़ाइल के लिए पथ |
-| `files` | array | Yes | - | संग्रह में शामिल करने के लिए फ़ाइल पथों की सूची |
-| `compression` | select (`stored`, `deflated`, `bzip2`, `lzma`) | No | `deflated` | संपीड़न विधि |
-| `password` | string | No | - | संग्रह को सुरक्षित करने के लिए वैकल्पिक पासवर्ड (केवल निष्कर्षण, सीमित समर्थन) |
+| `output_path` | string | Yes | - | Path for the output ZIP file |
+| `files` | array | Yes | - | List of file paths to include in the archive |
+| `compression` | select (`stored`, `deflated`, `bzip2`, `lzma`) | No | `deflated` | Compression method |
+| `password` | string | No | - | Optional password to protect the archive (extraction only, limited support) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | बनी हुई ZIP फ़ाइल का पथ |
-| `size` | number | संग्रह का आकार बाइट्स में |
-| `file_count` | number | संग्रह में फ़ाइलों की संख्या |
+| `path` | string | Path to the created ZIP file |
+| `size` | number | Archive size in bytes |
+| `file_count` | number | Number of files in the archive |
 
 **Example:** Create ZIP from files
 
@@ -157,26 +157,26 @@ files: ["/tmp/file1.txt", "/tmp/file2.txt"]
 compression: deflated
 ```
 
-### ZIP संग्रह निकालें
+### Extract ZIP Archive
 
 `archive.zip_extract`
 
-ZIP संग्रह से फ़ाइलें निकालें
+Extract files from a ZIP archive
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `archive_path` | string | Yes | - | निकालने के लिए ZIP संग्रह का पथ |
-| `output_dir` | string | Yes | - | फ़ाइलों को निकालने के लिए निर्देशिका |
-| `password` | string | No | - | एन्क्रिप्टेड संग्रहों के लिए पासवर्ड |
+| `archive_path` | string | Yes | - | Path to the ZIP archive to extract |
+| `output_dir` | string | Yes | - | Directory to extract files into |
+| `password` | string | No | - | Password for encrypted archives |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted_files` | array | निकाली गई फ़ाइल पथों की सूची |
-| `total_size` | number | निकाली गई फ़ाइलों का कुल आकार बाइट्स में |
+| `extracted_files` | array | List of extracted file paths |
+| `total_size` | number | Total size of extracted files in bytes |
 
 **Example:** Extract ZIP archive
 

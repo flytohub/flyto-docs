@@ -6,161 +6,161 @@ Base64, hex, URL, and HTML encoding and decoding.
 
 | Module | Description |
 |--------|-------------|
-| [Base64 디코드](#base64-디코드) | Base64로 인코딩된 텍스트를 디코드합니다 |
-| [16진수 디코드](#16진수-디코드) | 16진수를 텍스트로 디코드합니다 |
-| [URL 디코드](#url-디코드) | URL 인코딩된 텍스트를 디코드합니다 |
-| [Base64 인코딩](#base64-인코딩) | 텍스트를 Base64로 인코딩 |
-| [16진수 인코딩](#16진수-인코딩) | 텍스트를 16진수로 인코딩 |
-| [HTML 인코딩](#html-인코딩) | 텍스트를 HTML 엔티티로 인코딩 |
-| [URL 인코딩](#url-인코딩) | URL 인코딩 (퍼센트 인코딩) |
+| [Base64 Decode](#base64-decode) | Decode Base64 encoded text |
+| [Hex Decode](#hex-decode) | Decode hexadecimal to text |
+| [URL Decode](#url-decode) | Decode URL encoded text |
+| [Base64 Encode](#base64-encode) | Encode text to Base64 |
+| [Hex Encode](#hex-encode) | Encode text to hexadecimal |
+| [HTML Encode](#html-encode) | Encode text to HTML entities |
+| [URL Encode](#url-encode) | URL encode text (percent encoding) |
 
 ## Modules
 
-### Base64 디코드
+### Base64 Decode
 
 `decode.base64`
 
-Base64로 인코딩된 텍스트를 디코드합니다
+Decode Base64 encoded text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 디코드할 Base64 인코딩된 텍스트 |
-| `encoding` | string | No | `utf-8` | 디코드할 Base64 인코딩된 텍스트 |
-| `url_safe` | boolean | No | `False` | 출력의 문자 인코딩 |
+| `text` | text | Yes | - | Base64 encoded text to decode |
+| `encoding` | string | No | `utf-8` | Character encoding for output |
+| `url_safe` | boolean | No | `False` | Input is URL-safe Base64 |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 입력은 URL-안전 Base64입니다 |
-| `original` | string | 디코드된 문자열 |
-| `valid` | boolean | 디코드된 문자열 |
+| `result` | string | Decoded string |
+| `original` | string | Original Base64 input |
+| `valid` | boolean | Whether decoding was successful |
 
-### 16진수 디코드
+### Hex Decode
 
 `decode.hex`
 
-16진수를 텍스트로 디코드합니다
+Decode hexadecimal to text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 디코드할 16진수 텍스트 |
-| `encoding` | string | No | `utf-8` | 디코드할 16진수 텍스트 |
+| `text` | text | Yes | - | Hexadecimal text to decode |
+| `encoding` | string | No | `utf-8` | Character encoding for output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 출력의 문자 인코딩 |
-| `original` | string | 디코드된 문자열 |
-| `valid` | boolean | 디코드된 문자열 |
+| `result` | string | Decoded string |
+| `original` | string | Original hex input |
+| `valid` | boolean | Whether decoding was successful |
 
-### URL 디코드
+### URL Decode
 
 `decode.url`
 
-URL 인코딩된 텍스트를 디코드합니다
+Decode URL encoded text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 디코드할 URL 인코딩된 텍스트 |
-| `plus_spaces` | boolean | No | `False` | 디코드할 URL 인코딩된 텍스트 |
+| `text` | text | Yes | - | URL encoded text to decode |
+| `plus_spaces` | boolean | No | `False` | Treat + as space (form decoding) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | +를 공백으로 처리 (폼 디코딩) |
-| `original` | string | 디코드된 문자열 |
+| `result` | string | Decoded string |
+| `original` | string | Original URL encoded input |
 
-### Base64 인코딩
+### Base64 Encode
 
 `encode.base64`
 
-텍스트를 Base64로 인코딩
+Encode text to Base64
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 인코딩할 텍스트 |
-| `encoding` | string | No | `utf-8` | 인코딩할 텍스트 |
-| `url_safe` | boolean | No | `False` | 문자 인코딩 |
+| `text` | text | Yes | - | Text to encode |
+| `encoding` | string | No | `utf-8` | Character encoding |
+| `url_safe` | boolean | No | `False` | Use URL-safe Base64 encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | URL-안전 Base64 인코딩 사용 |
-| `original` | string | Base64 인코딩된 문자열 |
-| `length` | number | Base64 인코딩된 문자열 |
+| `result` | string | Base64 encoded string |
+| `original` | string | Original input |
+| `length` | number | Length of encoded string |
 
-### 16진수 인코딩
+### Hex Encode
 
 `encode.hex`
 
-텍스트를 16진수로 인코딩
+Encode text to hexadecimal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 16진수로 인코딩할 텍스트 |
-| `encoding` | string | No | `utf-8` | 16진수로 인코딩할 텍스트 |
-| `uppercase` | boolean | No | `False` | 문자 인코딩 |
-| `separator` | string | No | - | 대문자 16진수 문자 사용 |
+| `text` | text | Yes | - | Text to encode to hex |
+| `encoding` | string | No | `utf-8` | Character encoding |
+| `uppercase` | boolean | No | `False` | Use uppercase hex letters |
+| `separator` | string | No | - | Separator between hex bytes |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 16진수 바이트 사이의 구분자 |
-| `original` | string | 16진수 인코딩된 문자열 |
-| `byte_count` | number | 16진수 인코딩된 문자열 |
+| `result` | string | Hex encoded string |
+| `original` | string | Original input |
+| `byte_count` | number | Number of bytes encoded |
 
-### HTML 인코딩
+### HTML Encode
 
 `encode.html`
 
-텍스트를 HTML 엔티티로 인코딩
+Encode text to HTML entities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | HTML 엔티티로 인코딩할 텍스트 |
-| `quote` | boolean | No | `True` | HTML 엔티티로 인코딩할 텍스트 |
+| `text` | text | Yes | - | Text to encode as HTML entities |
+| `quote` | boolean | No | `True` | Also encode quote characters |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 따옴표 문자도 인코딩 |
-| `original` | string | HTML 인코딩된 문자열 |
+| `result` | string | HTML encoded string |
+| `original` | string | Original input |
 
-### URL 인코딩
+### URL Encode
 
 `encode.url`
 
-URL 인코딩 (퍼센트 인코딩)
+URL encode text (percent encoding)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | URL 인코딩할 텍스트 |
-| `plus_spaces` | boolean | No | `False` | URL 인코딩할 텍스트 |
-| `safe` | string | No | - | 공백에 %20 대신 + 사용 (폼 인코딩) |
+| `text` | text | Yes | - | Text to URL encode |
+| `plus_spaces` | boolean | No | `False` | Use + instead of %20 for spaces (form encoding) |
+| `safe` | string | No | - | Characters that should not be encoded |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 인코딩하지 않을 문자 |
-| `original` | string | URL 인코딩된 문자열 |
+| `result` | string | URL encoded string |
+| `original` | string | Original input |

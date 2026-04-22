@@ -6,32 +6,32 @@ Persistent key-value storage.
 
 | Module | Description |
 |--------|-------------|
-| [保存された値を削除](#保存された値を削除) | 永続的なキー-バリュー ストレージから値を削除する |
-| [保存された値を取得](#保存された値を取得) | 永続的なキー-バリュー ストレージから値を取得する |
-| [値を保存](#値を保存) | 永続的なキー-バリュー ストレージに値を保存する |
+| [Delete Stored Value](#delete-stored-value) | Delete a value from persistent key-value storage |
+| [Get Stored Value](#get-stored-value) | Retrieve a value from persistent key-value storage |
+| [Store Value](#store-value) | Store a value in persistent key-value storage |
 
 ## Modules
 
-### 保存された値を削除
+### Delete Stored Value
 
 `storage.delete`
 
-永続的なキー-バリュー ストレージから値を削除する
+Delete a value from persistent key-value storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `namespace` | string | Yes | `default` | ストレージネームスペース |
-| `key` | string | Yes | - | ストレージネームスペース |
+| `namespace` | string | Yes | `default` | Storage namespace |
+| `key` | string | Yes | - | Key to delete |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 削除するキー |
-| `deleted` | boolean | 操作が成功したかどうか |
-| `key` | string | 操作が成功したかどうか |
+| `ok` | boolean | Whether the operation succeeded |
+| `deleted` | boolean | Whether the key existed and was deleted |
+| `key` | string | The key that was deleted |
 
 **Example:** Delete cached value
 
@@ -40,28 +40,28 @@ namespace: cache
 key: api_response
 ```
 
-### 保存された値を取得
+### Get Stored Value
 
 `storage.get`
 
-永続的なキー-バリュー ストレージから値を取得する
+Retrieve a value from persistent key-value storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `namespace` | string | Yes | `default` | ストレージネームスペース（例: ワークフロー名やプロジェクト） |
-| `key` | string | Yes | - | ストレージネームスペース（例: ワークフロー名やプロジェクト） |
-| `default` | any | No | - | 取得するキー |
+| `namespace` | string | Yes | `default` | Storage namespace (e.g., workflow name or project) |
+| `key` | string | Yes | - | Key to retrieve |
+| `default` | any | No | - | Value to return if key does not exist |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | キーが存在しない場合に返す値 |
-| `found` | boolean | 操作が成功したかどうか |
-| `value` | any | 操作が成功したかどうか |
-| `key` | string | キーが見つかったかどうか（期限切れでない） |
+| `ok` | boolean | Whether the operation succeeded |
+| `found` | boolean | Whether the key was found (not expired) |
+| `value` | any | The stored value or default |
+| `key` | string | The key that was queried |
 
 **Example:** Get last BTC price
 
@@ -78,29 +78,29 @@ namespace: my-workflow
 key: last_run_status
 ```
 
-### 値を保存
+### Store Value
 
 `storage.set`
 
-永続的なキー-バリュー ストレージに値を保存する
+Store a value in persistent key-value storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `namespace` | string | Yes | `default` | ストレージネームスペース（例: ワークフロー名やプロジェクト） |
-| `key` | string | Yes | - | ストレージネームスペース（例: ワークフロー名やプロジェクト） |
-| `value` | any | Yes | - | 値を保存するキー |
+| `namespace` | string | Yes | `default` | Storage namespace (e.g., workflow name or project) |
+| `key` | string | Yes | - | Key to store value under |
+| `value` | any | Yes | - | Value to store (string, number, or object) |
 | `ttl_seconds` | number | No | `0` | Time to live in seconds (optional, 0 = no expiration) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 有効期限（秒単位、オプション、0 = 無期限） |
-| `key` | string | 操作が成功したかどうか |
-| `stored_at` | number | 操作が成功したかどうか |
-| `expires_at` | number | 保存されたキー |
+| `ok` | boolean | Whether the operation succeeded |
+| `key` | string | The key that was stored |
+| `stored_at` | number | Unix timestamp when value was stored |
+| `expires_at` | number | Unix timestamp when value expires (if TTL set) |
 
 **Example:** Store BTC price
 

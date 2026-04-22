@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [Latihan Analisis](#latihan-analisis) | Analisis struktur website untuk latihan |
-| [Latihan Eksekusi](#latihan-eksekusi) | Eksekusi sesi latihan |
-| [Latihan Inferensi Skema](#latihan-inferensi-skema) | Inferensi skema data dari website |
-| [Statistik Latihan](#statistik-latihan) | Dapatkan statistik latihan |
+| [Practice Analyze](#practice-analyze) | Analyze website structure for practice |
+| [Practice Execute](#practice-execute) | Execute practice session |
+| [Practice Infer Schema](#practice-infer-schema) | Infer data schema from website |
+| [Practice Stats](#practice-stats) | Get practice statistics |
 
 ## Modules
 
-### Latihan Analisis
+### Practice Analyze
 
 `training.practice.analyze`
 
-Analisis struktur website untuk latihan
+Analyze website structure for practice
 
 **Parameters:**
 
@@ -29,14 +29,14 @@ Analisis struktur website untuk latihan
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Analisis struktur website |
-| `structure` | object | Analisis struktur website |
+| `status` | string | Operation status (success/error) |
+| `structure` | object | The structure |
 
-### Latihan Eksekusi
+### Practice Execute
 
 `training.practice.execute`
 
-Eksekusi sesi latihan
+Execute practice session
 
 **Parameters:**
 
@@ -49,14 +49,14 @@ Eksekusi sesi latihan
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Eksekusi sesi latihan |
-| `items_processed` | number | Eksekusi sesi latihan |
+| `status` | string | Operation status (success/error) |
+| `items_processed` | number | The items processed |
 
-### Latihan Inferensi Skema
+### Practice Infer Schema
 
 `training.practice.infer_schema`
 
-Inferensi skema data dari website
+Infer data schema from website
 
 **Parameters:**
 
@@ -69,20 +69,20 @@ Inferensi skema data dari website
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Inferensi skema data |
-| `schema` | object | Inferensi skema data |
+| `status` | string | Operation status (success/error) |
+| `schema` | object | The schema |
 
-### Statistik Latihan
+### Practice Stats
 
 `training.practice.stats`
 
-Dapatkan statistik latihan
+Get practice statistics
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total_sessions` | number | Total sesi |
-| `successful_sessions` | number | Total sesi |
-| `success_rate` | number | Dapatkan statistik latihan |
-| `history` | array | Dapatkan statistik latihan |
+| `total_sessions` | number | The total sessions |
+| `successful_sessions` | number | The successful sessions |
+| `success_rate` | number | The success rate |
+| `history` | array | The history |

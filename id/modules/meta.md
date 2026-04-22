@@ -6,34 +6,34 @@ Module generation, listing, testing, and documentation.
 
 | Module | Description |
 |--------|-------------|
-| [Daftar Modul yang Tersedia](#daftar-modul-yang-tersedia) | Daftar semua modul yang tersedia di registry |
-| [Perbarui Dokumentasi Modul](#perbarui-dokumentasi-modul) | Hasilkan atau perbarui dokumentasi MODULES.md dari registry |
+| [List Available Modules](#list-available-modules) | List all available modules in the registry |
+| [Update Module Documentation](#update-module-documentation) | Generate or update MODULES.md documentation from registry |
 
 ## Modules
 
-### Daftar Modul yang Tersedia
+### List Available Modules
 
 `meta.modules.list`
 
-Daftar semua modul yang tersedia di registry
+List all available modules in the registry
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `category` | string | No | - | Filter modul berdasarkan kategori (mis., browser, data, ai) |
-| `tags` | array | No | - | Filter modul berdasarkan kategori (mis., browser, data, ai) |
-| `include_params` | boolean | No | `True` | Filter modul berdasarkan tag |
-| `include_output` | boolean | No | `True` | Sertakan skema parameter dalam output |
-| `format` | select (`json`, `markdown`, `compact`) | No | `json` | Sertakan skema output dalam respons |
+| `category` | string | No | - | Filter modules by category (e.g., browser, data, ai) |
+| `tags` | array | No | - | Filter modules by tags |
+| `include_params` | boolean | No | `True` | Include parameter schema in output |
+| `include_output` | boolean | No | `True` | Include output schema in response |
+| `format` | select (`json`, `markdown`, `compact`) | No | `json` | Format for module list output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `modules` | array | Daftar modul terdaftar |
-| `count` | number | Skema params |
-| `formatted` | string | Skema output |
+| `modules` | array | List of registered modules |
+| `count` | number | Number of items |
+| `formatted` | string | The formatted |
 
 **Example:** List all modules
 
@@ -60,26 +60,26 @@ format: markdown
 format: compact
 ```
 
-### Perbarui Dokumentasi Modul
+### Update Module Documentation
 
 `meta.modules.update_docs`
 
-Hasilkan atau perbarui dokumentasi MODULES.md dari registry
+Generate or update MODULES.md documentation from registry
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | No | `docs/MODULES.md` | Path untuk menulis file MODULES.md |
-| `include_examples` | boolean | No | `True` | Sertakan contoh penggunaan dalam dokumentasi |
+| `output_path` | string | No | `docs/MODULES.md` | Path to write MODULES.md file |
+| `include_examples` | boolean | No | `True` | Include usage examples in documentation |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `file_path` | string | Sertakan contoh penggunaan dalam dokumentasi |
-| `modules_count` | number | Path file |
-| `categories` | array | Path file |
+| `file_path` | string | The file path |
+| `modules_count` | number | The modules count |
+| `categories` | array | The categories |
 
 **Example:** Update module documentation
 

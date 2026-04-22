@@ -6,22 +6,22 @@ Excel, PDF, and Word document read/write/convert.
 
 | Module | Description |
 |--------|-------------|
-| [Baca Excel](#baca-excel) | Baca data dari file Excel (xlsx, xls) |
-| [Tulis Excel](#tulis-excel) | Tulis data ke file Excel (xlsx) |
-| [Isi Form PDF](#isi-form-pdf) | Isi field form PDF dengan data dan opsional sisipkan gambar |
-| [Hasilkan PDF](#hasilkan-pdf) | Hasilkan file PDF dari konten HTML atau teks |
-| [Memproses PDF](#memproses-pdf) | Ekstrak teks dan metadata dari file PDF |
-| [PDF ke Word](#pdf-ke-word) | Konversi file PDF ke dokumen Word (.docx) |
-| [Parse Dokumen Word](#parse-dokumen-word) | Ekstrak teks dan konten dari dokumen Word (.docx) |
-| [Word ke PDF](#word-ke-pdf) | Konversi dokumen Word (.docx) ke file PDF |
+| [Read Excel](#read-excel) | Read data from Excel files (xlsx, xls) |
+| [Write Excel](#write-excel) | Write data to Excel files (xlsx) |
+| [Fill PDF Form](#fill-pdf-form) | Fill PDF form fields with data and optionally insert images |
+| [Generate PDF](#generate-pdf) | Generate PDF files from HTML content or text |
+| [Parse PDF](#parse-pdf) | Extract text and metadata from PDF files |
+| [PDF to Word](#pdf-to-word) | Convert PDF files to Word documents (.docx) |
+| [Parse Word Document](#parse-word-document) | Extract text and content from Word documents (.docx) |
+| [Word to PDF](#word-to-pdf) | Convert Word documents (.docx) to PDF files |
 
 ## Modules
 
-### Baca Excel
+### Read Excel
 
 `excel.read`
 
-Baca data dari file Excel (xlsx, xls)
+Read data from Excel files (xlsx, xls)
 
 **Parameters:**
 
@@ -37,10 +37,10 @@ Baca data dari file Excel (xlsx, xls)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | array | Baris data yang diekstrak |
-| `headers` | array | Baris data yang diekstrak |
-| `row_count` | number | Baris data yang diekstrak |
-| `sheet_names` | array | Header kolom |
+| `data` | array | Extracted data rows |
+| `headers` | array | Column headers |
+| `row_count` | number | Number of data rows |
+| `sheet_names` | array | All sheet names in the workbook |
 
 **Example:** Read entire sheet
 
@@ -49,11 +49,11 @@ path: /tmp/data.xlsx
 as_dict: true
 ```
 
-### Tulis Excel
+### Write Excel
 
 `excel.write`
 
-Tulis data ke file Excel (xlsx)
+Write data to Excel files (xlsx)
 
 **Parameters:**
 
@@ -69,9 +69,9 @@ Tulis data ke file Excel (xlsx)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Path ke file Excel yang dibuat |
-| `row_count` | number | Path ke file Excel yang dibuat |
-| `size` | number | Path ke file Excel yang dibuat |
+| `path` | string | Path to the created Excel file |
+| `row_count` | number | Number of data rows written |
+| `size` | number | File size in bytes |
 
 **Example:** Write data to Excel
 
@@ -80,11 +80,11 @@ path: /tmp/output.xlsx
 data: [{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]
 ```
 
-### Isi Form PDF
+### Fill PDF Form
 
 `pdf.fill_form`
 
-Isi field form PDF dengan data dan opsional sisipkan gambar
+Fill PDF form fields with data and optionally insert images
 
 **Parameters:**
 
@@ -100,10 +100,10 @@ Isi field form PDF dengan data dan opsional sisipkan gambar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Path ke PDF yang diisi |
-| `fields_filled` | number | Path ke PDF yang diisi |
-| `images_inserted` | number | Path ke PDF yang diisi |
-| `file_size_bytes` | number | Jumlah gambar yang disisipkan |
+| `output_path` | string | Path to the filled PDF |
+| `fields_filled` | number | Number of fields filled |
+| `images_inserted` | number | Number of images inserted |
+| `file_size_bytes` | number | Size of the output PDF in bytes |
 
 **Example:** Fill form with text fields
 
@@ -122,11 +122,11 @@ fields: {"name": "Jane Doe"}
 images: [{"file": "/photos/jane.jpg", "page": 1, "x": 50, "y": 650, "width": 100, "height": 120}]
 ```
 
-### Hasilkan PDF
+### Generate PDF
 
 `pdf.generate`
 
-Hasilkan file PDF dari konten HTML atau teks
+Generate PDF files from HTML content or text
 
 **Parameters:**
 
@@ -146,9 +146,9 @@ Hasilkan file PDF dari konten HTML atau teks
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Path ke PDF yang dihasilkan |
-| `page_count` | number | Path ke PDF yang dihasilkan |
-| `file_size_bytes` | number | Jumlah halaman dalam PDF |
+| `output_path` | string | Path to the generated PDF |
+| `page_count` | number | Number of pages in the PDF |
+| `file_size_bytes` | number | Size of the generated PDF in bytes |
 
 **Example:** Generate from HTML
 
@@ -158,11 +158,11 @@ output_path: /path/to/report.pdf
 title: Monthly Report
 ```
 
-### Memproses PDF
+### Parse PDF
 
 `pdf.parse`
 
-Ekstrak teks dan metadata dari file PDF
+Extract text and metadata from PDF files
 
 **Parameters:**
 
@@ -177,10 +177,10 @@ Ekstrak teks dan metadata dari file PDF
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | Konten teks yang diekstrak |
-| `pages` | array | Konten teks yang diekstrak |
-| `metadata` | object | Konten teks yang diekstrak |
-| `page_count` | number | Konten teks per halaman |
+| `text` | string | Extracted text content |
+| `pages` | array | Text content per page |
+| `metadata` | object | PDF metadata (title, author, etc.) |
+| `page_count` | number | Total number of pages |
 
 **Example:** Extract all text from PDF
 
@@ -189,11 +189,11 @@ path: /tmp/document.pdf
 pages: all
 ```
 
-### PDF ke Word
+### PDF to Word
 
 `pdf.to_word`
 
-Konversi file PDF ke dokumen Word (.docx)
+Convert PDF files to Word documents (.docx)
 
 **Parameters:**
 
@@ -208,9 +208,9 @@ Konversi file PDF ke dokumen Word (.docx)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Path ke dokumen Word yang dihasilkan |
-| `page_count` | number | Path ke dokumen Word yang dihasilkan |
-| `file_size` | number | Jumlah halaman yang dikonversi |
+| `output_path` | string | Path to the generated Word document |
+| `page_count` | number | Number of pages converted |
+| `file_size` | number | Size of the output file in bytes |
 
 **Example:** Convert entire PDF to Word
 
@@ -226,11 +226,11 @@ output_path: /tmp/output.docx
 pages: 1-5
 ```
 
-### Parse Dokumen Word
+### Parse Word Document
 
 `word.parse`
 
-Ekstrak teks dan konten dari dokumen Word (.docx)
+Extract text and content from Word documents (.docx)
 
 **Parameters:**
 
@@ -246,11 +246,11 @@ Ekstrak teks dan konten dari dokumen Word (.docx)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | Konten teks lengkap dokumen |
-| `paragraphs` | array | Konten teks lengkap dokumen |
-| `tables` | array | Konten teks lengkap dokumen |
-| `images` | array | Daftar paragraf |
-| `metadata` | object | Tabel yang diekstrak sebagai array |
+| `text` | string | Full text content of the document |
+| `paragraphs` | array | List of paragraphs |
+| `tables` | array | Extracted tables as arrays |
+| `images` | array | Paths to extracted images |
+| `metadata` | object | Document metadata |
 
 **Example:** Extract text from Word
 
@@ -267,11 +267,11 @@ extract_images: true
 images_output_dir: /path/to/images/
 ```
 
-### Word ke PDF
+### Word to PDF
 
 `word.to_pdf`
 
-Konversi dokumen Word (.docx) ke file PDF
+Convert Word documents (.docx) to PDF files
 
 **Parameters:**
 
@@ -285,9 +285,9 @@ Konversi dokumen Word (.docx) ke file PDF
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Path ke file PDF yang dihasilkan |
-| `file_size` | number | Path ke file PDF yang dihasilkan |
-| `method_used` | string | Ukuran file output dalam bytes |
+| `output_path` | string | Path to the generated PDF file |
+| `file_size` | number | Size of the output file in bytes |
+| `method_used` | string | Conversion method that was used |
 
 **Example:** Convert Word to PDF
 

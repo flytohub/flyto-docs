@@ -6,148 +6,148 @@ Runtime type checking utilities.
 
 | Module | Description |
 |--------|-------------|
-| [配列かどうか](#配列かどうか) | 値が配列かどうかを確認する |
-| [空かどうか](#空かどうか) | 値が空かどうかを確認する |
-| [Nullかどうか](#nullかどうか) | 値がnull/Noneかどうかを確認する |
-| [数値かどうか](#数値かどうか) | 値が数値かどうかを確認する |
-| [オブジェクトかどうか](#オブジェクトかどうか) | 値がオブジェクトかどうかを確認する |
-| [文字列かどうか](#文字列かどうか) | 値が文字列かどうかを確認する |
-| [型を取得](#型を取得) | 値の型を取得する |
+| [Is Array](#is-array) | Check if a value is an array |
+| [Is Empty](#is-empty) | Check if a value is empty |
+| [Is Null](#is-null) | Check if a value is null/None |
+| [Is Number](#is-number) | Check if a value is a number |
+| [Is Object](#is-object) | Check if a value is an object |
+| [Is String](#is-string) | Check if a value is a string |
+| [Type Of](#type-of) | Get the type of a value |
 
 ## Modules
 
-### 配列かどうか
+### Is Array
 
 `check.is_array`
 
-値が配列かどうかを確認する
+Check if a value is an array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 確認する値 |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_array` | boolean | 確認する値 |
-| `length` | number | 値が配列かどうか |
+| `is_array` | boolean | Whether value is an array |
+| `length` | number | Array length (if array) |
 
-### 空かどうか
+### Is Empty
 
 `check.is_empty`
 
-値が空かどうかを確認する
+Check if a value is empty
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 確認する値 |
-| `trim_strings` | boolean | No | `True` | 確認する値 |
+| `value` | any | Yes | - | Value to check |
+| `trim_strings` | boolean | No | `True` | Treat whitespace-only strings as empty |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_empty` | boolean | 空白のみの文字列を空として扱う |
-| `type` | string | 値が空かどうか |
+| `is_empty` | boolean | Whether value is empty |
+| `type` | string | Type of value |
 
-### Nullかどうか
+### Is Null
 
 `check.is_null`
 
-値がnull/Noneかどうかを確認する
+Check if a value is null/None
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | No | - | 確認する値 |
+| `value` | any | No | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_null` | boolean | 確認する値 |
+| `is_null` | boolean | Whether value is null |
 
-### 数値かどうか
+### Is Number
 
 `check.is_number`
 
-値が数値かどうかを確認する
+Check if a value is a number
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 確認する値 |
-| `parse_string` | boolean | No | `False` | 確認する値 |
-| `integer_only` | boolean | No | `False` | 数値の文字列を数値として考慮する |
+| `value` | any | Yes | - | Value to check |
+| `parse_string` | boolean | No | `False` | Consider numeric strings as numbers |
+| `integer_only` | boolean | No | `False` | Only accept integers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_number` | boolean | 整数のみ受け付ける |
-| `is_integer` | boolean | 値が数値かどうか |
-| `is_float` | boolean | 値が数値かどうか |
+| `is_number` | boolean | Whether value is a number |
+| `is_integer` | boolean | Whether value is an integer |
+| `is_float` | boolean | Whether value is a float |
 
-### オブジェクトかどうか
+### Is Object
 
 `check.is_object`
 
-値がオブジェクトかどうかを確認する
+Check if a value is an object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 確認する値 |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_object` | boolean | 確認する値 |
-| `keys` | array | 値がオブジェクトかどうか |
+| `is_object` | boolean | Whether value is an object |
+| `keys` | array | Object keys (if object) |
 
-### 文字列かどうか
+### Is String
 
 `check.is_string`
 
-値が文字列かどうかを確認する
+Check if a value is a string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 確認する値 |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_string` | boolean | 確認する値 |
-| `length` | number | 値が文字列かどうか |
+| `is_string` | boolean | Whether value is a string |
+| `length` | number | String length (if string) |
 
-### 型を取得
+### Type Of
 
 `check.type_of`
 
-値の型を取得する
+Get the type of a value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | No | - | 確認する値 |
+| `value` | any | No | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `type` | string | 確認する値 |
-| `is_primitive` | boolean | 型名 |
+| `type` | string | Type name |
+| `is_primitive` | boolean | Whether type is primitive |

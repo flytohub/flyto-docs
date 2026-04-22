@@ -6,42 +6,42 @@ Retry, fallback, and circuit breaker patterns.
 
 | Module | Description |
 |--------|-------------|
-| [회로 차단기](#회로-차단기) | 회로 차단기 패턴으로 연쇄 실패를 방지합니다 |
-| [대체](#대체) | 작업 실패 시 대체 값을 제공합니다 |
-| [재시도](#재시도) | 구성 가능한 재시도 로직으로 작업 감싸기 |
+| [Circuit Breaker](#circuit-breaker) | Protect against cascading failures with circuit breaker pattern |
+| [Fallback](#fallback) | Provide fallback value when operation fails |
+| [Retry](#retry) | Wrap operations with configurable retry logic |
 
 ## Modules
 
-### 회로 차단기
+### Circuit Breaker
 
 `error.circuit_breaker`
 
-회로 차단기 패턴으로 연쇄 실패를 방지합니다
+Protect against cascading failures with circuit breaker pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | object | Yes | - | 회로 차단기로 보호할 작업 |
-| `circuit_id` | string | Yes | - | 회로 차단기로 보호할 작업 |
-| `failure_threshold` | number | No | `5` | 이 회로의 고유 식별자 (상태 추적용) |
-| `failure_window_ms` | number | No | `60000` | 실패를 계산할 시간 창 |
-| `recovery_timeout_ms` | number | No | `30000` | 복구 시도 전의 시간 (반열림 상태) |
-| `success_threshold` | number | No | `3` | 회로를 닫기 위해 반열림 상태에서 필요한 성공 요청 수 |
-| `fallback` | object | No | - | 회로가 열렸을 때의 대체 작업 |
-| `fallback_value` | any | No | - | 회로가 열렸을 때의 대체 작업 |
-| `track_errors` | array | No | `[]` | 회로가 열렸을 때 반환할 고정 값 |
+| `action` | object | Yes | - | The action to protect with circuit breaker |
+| `circuit_id` | string | Yes | - | Unique identifier for this circuit (for state tracking) |
+| `failure_threshold` | number | No | `5` | Number of failures before opening circuit |
+| `failure_window_ms` | number | No | `60000` | Time window for counting failures |
+| `recovery_timeout_ms` | number | No | `30000` | Time before attempting recovery (half-open state) |
+| `success_threshold` | number | No | `3` | Successful requests needed in half-open to close circuit |
+| `fallback` | object | No | - | Alternative action when circuit is open |
+| `fallback_value` | any | No | - | Static value to return when circuit is open |
+| `track_errors` | array | No | `[]` | Only count these error codes toward threshold (empty = all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 이 오류 코드만 임계값에 포함 (비어 있으면 모두 포함) |
-| `result` | any | 라우팅 이벤트 (성공/회로 열림/대체 작업) |
-| `circuit_state` | string | 작업 결과 또는 대체 작업 |
-| `failure_count` | number | 회로의 현재 상태 (닫힘/열림/반열림) |
-| `last_failure_time` | string | 현재 창에서의 실패 횟수 |
-| `circuit_opened_at` | string | 마지막 실패의 타임스탬프 |
+| `__event__` | string | Event for routing (success/circuit_open/fallback) |
+| `result` | any | Result from action or fallback |
+| `circuit_state` | string | Current state of circuit (closed/open/half_open) |
+| `failure_count` | number | Current failure count in window |
+| `last_failure_time` | string | Timestamp of last failure |
+| `circuit_opened_at` | string | When circuit was opened |
 
 **Example:** Example
 
@@ -71,31 +71,31 @@ failure_threshold: 3
 fallback_value: {"users": [], "from_cache": false}
 ```
 
-### 대체
+### Fallback
 
 `error.fallback`
 
-작업 실패 시 대체 값을 제공합니다
+Provide fallback value when operation fails
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `operation` | object | No | - | 시도할 기본 작업 |
-| `fallback_value` | any | No | - | 시도할 기본 작업 |
-| `fallback_operation` | object | No | - | 실패 시 반환할 고정 값 |
-| `fallback_on` | array | No | `[]` | 실패 시 실행할 대체 작업 |
-| `include_error_info` | boolean | No | `True` | 대체 작업을 트리거하는 오류 코드 (비어 있으면 모든 오류) |
-| `log_fallback` | boolean | No | `True` | 출력에 원래 오류 정보를 포함 |
+| `operation` | object | No | - | The primary operation to attempt |
+| `fallback_value` | any | No | - | Static value to return on failure |
+| `fallback_operation` | object | No | - | Alternative operation to execute on failure |
+| `fallback_on` | array | No | `[]` | Error codes that trigger fallback (empty = all errors) |
+| `include_error_info` | boolean | No | `True` | Include original error information in output |
+| `log_fallback` | boolean | No | `True` | Log when fallback is used |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | 대체 작업이 사용될 때 기록 |
-| `used_fallback` | boolean | 기본 작업 또는 대체 작업의 결과 |
-| `source` | string | 대체 작업이 사용되었는지 여부 |
-| `original_error` | object | 결과의 출처 (기본/대체 값/대체 작업) |
+| `result` | any | Result from primary operation or fallback |
+| `used_fallback` | boolean | Whether fallback was used |
+| `source` | string | Source of result (primary/fallback_value/fallback_operation) |
+| `original_error` | object | Original error if fallback was used |
 
 **Example:** Example
 
@@ -119,34 +119,34 @@ fallback_value: {"status": "unavailable"}
 fallback_on: ["NETWORK_ERROR", "TIMEOUT_ERROR"]
 ```
 
-### 재시도
+### Retry
 
 `error.retry`
 
-구성 가능한 재시도 로직으로 작업 감싸기
+Wrap operations with configurable retry logic
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `operation` | object | Yes | - | 재시도할 작업 (모듈 ID 및 매개변수) |
-| `max_retries` | number | No | `3` | 재시도할 작업 (모듈 ID 및 매개변수) |
-| `initial_delay_ms` | number | No | `1000` | 최대 재시도 횟수 |
-| `max_delay_ms` | number | No | `30000` | 첫 번째 재시도 전 초기 지연 |
-| `backoff_multiplier` | number | No | `2.0` | 지수 백오프에 대한 배수 (예: 2는 각 재시도마다 지연을 두 배로) |
-| `jitter` | boolean | No | `True` | 우르르 몰림을 방지하기 위해 지연에 랜덤 지터 추가 |
-| `retry_on` | array | No | `[]` | 우르르 몰림을 방지하기 위해 지연에 랜덤 지터 추가 |
-| `timeout_per_attempt_ms` | number | No | `0` | 재시도할 오류 코드 목록 (비어 있으면 모두 재시도) |
+| `operation` | object | Yes | - | The operation to retry (module ID and params) |
+| `max_retries` | number | No | `3` | Maximum number of retry attempts |
+| `initial_delay_ms` | number | No | `1000` | Initial delay before first retry |
+| `max_delay_ms` | number | No | `30000` | Maximum delay between retries |
+| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g., 2 doubles delay each retry) |
+| `jitter` | boolean | No | `True` | Add random jitter to delay to prevent thundering herd |
+| `retry_on` | array | No | `[]` | List of error codes to retry on (empty = retry all) |
+| `timeout_per_attempt_ms` | number | No | `0` | Timeout for each attempt (0 for no timeout) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 각 시도의 타임아웃 (0은 타임아웃 없음) |
-| `result` | any | 라우팅 이벤트 (성공/소진됨) |
-| `attempts` | number | 라우팅 이벤트 (성공/소진됨) |
-| `total_delay_ms` | number | 성공적인 시도의 결과 |
-| `errors` | array | 시도 횟수 |
+| `__event__` | string | Event for routing (success/exhausted) |
+| `result` | any | Result from successful attempt |
+| `attempts` | number | Number of attempts made |
+| `total_delay_ms` | number | Total time spent in delays |
+| `errors` | array | Errors from each failed attempt |
 
 **Example:** Example
 

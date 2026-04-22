@@ -6,124 +6,124 @@ Pattern matching: match, extract, replace, split, and test.
 
 | Module | Description |
 |--------|-------------|
-| [Extraction Regex](#extraction-regex) | Extraire des groupes nommés du texte |
-| [Correspondance Regex](#correspondance-regex) | Trouver toutes les correspondances d'un motif dans le texte |
-| [Remplacement Regex](#remplacement-regex) | Remplacer les correspondances de motifs dans le texte |
-| [Division Regex](#division-regex) | Diviser le texte par un motif regex |
-| [Test Regex](#test-regex) | Tester si la chaîne correspond à un motif regex |
+| [Regex Extract](#regex-extract) | Extract named groups from text |
+| [Regex Match](#regex-match) | Find all matches of a pattern in text |
+| [Regex Replace](#regex-replace) | Replace pattern matches in text |
+| [Regex Split](#regex-split) | Split text by a regex pattern |
+| [Regex Test](#regex-test) | Test if string matches a regex pattern |
 
 ## Modules
 
-### Extraction Regex
+### Regex Extract
 
 `regex.extract`
 
-Extraire des groupes nommés du texte
+Extract named groups from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Texte à extraire |
-| `pattern` | string | Yes | - | Texte à extraire |
-| `ignore_case` | boolean | No | `False` | Correspondance insensible à la casse |
+| `text` | string | Yes | - | Text to extract from |
+| `pattern` | string | Yes | - | Regex with named groups (?P<name>...) |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted` | object | Correspondance insensible à la casse |
-| `matched` | boolean | Groupes nommés extraits |
-| `full_match` | string | Groupes nommés extraits |
+| `extracted` | object | Extracted named groups |
+| `matched` | boolean | Whether pattern matched |
+| `full_match` | string | Full matched text |
 
-### Correspondance Regex
+### Regex Match
 
 `regex.match`
 
-Trouver toutes les correspondances d'un motif dans le texte
+Find all matches of a pattern in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Texte à rechercher |
-| `pattern` | string | Yes | - | Texte à rechercher |
-| `ignore_case` | boolean | No | `False` | Motif d'expression régulière |
-| `first_only` | boolean | No | `False` | Correspondance insensible à la casse |
+| `text` | string | Yes | - | Text to search |
+| `pattern` | string | Yes | - | Regular expression pattern |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `first_only` | boolean | No | `False` | Return only the first match |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `matches` | array | Retourne seulement la première correspondance |
-| `count` | number | Liste des correspondances |
-| `groups` | array | Liste des correspondances |
+| `matches` | array | List of matches |
+| `count` | number | Number of matches |
+| `groups` | array | Captured groups from each match |
 
-### Remplacement Regex
+### Regex Replace
 
 `regex.replace`
 
-Remplacer les correspondances de motifs dans le texte
+Replace pattern matches in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Texte à traiter |
-| `pattern` | string | Yes | - | Texte à traiter |
-| `replacement` | string | Yes | - | Motif d'expression régulière |
-| `ignore_case` | boolean | No | `False` | Texte de remplacement (supporte les rétro-références) |
-| `count` | number | No | `0` | Correspondance insensible à la casse |
+| `text` | string | Yes | - | Text to process |
+| `pattern` | string | Yes | - | Regular expression pattern |
+| `replacement` | string | Yes | - | Replacement text (supports backreferences) |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `count` | number | No | `0` | Maximum replacements (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Remplacements maximum (0 = illimité) |
-| `replacements` | number | Texte avec remplacements |
-| `original` | string | Texte avec remplacements |
+| `result` | string | Text with replacements |
+| `replacements` | number | Number of replacements made |
+| `original` | string | Original text |
 
-### Division Regex
+### Regex Split
 
 `regex.split`
 
-Diviser le texte par un motif regex
+Split text by a regex pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Texte à diviser |
-| `pattern` | string | Yes | - | Texte à diviser |
-| `ignore_case` | boolean | No | `False` | Motif d'expression régulière pour le délimiteur |
-| `max_split` | number | No | `0` | Correspondance insensible à la casse |
-| `remove_empty` | boolean | No | `False` | Nombre maximum de divisions (0 = illimité) |
+| `text` | string | Yes | - | Text to split |
+| `pattern` | string | Yes | - | Regular expression pattern for delimiter |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `max_split` | number | No | `0` | Maximum number of splits (0 = unlimited) |
+| `remove_empty` | boolean | No | `False` | Remove empty strings from result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Supprimer les chaînes vides du résultat |
-| `count` | number | Parties divisées |
+| `result` | array | Split parts |
+| `count` | number | Number of parts |
 
-### Test Regex
+### Regex Test
 
 `regex.test`
 
-Tester si la chaîne correspond à un motif regex
+Test if string matches a regex pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Texte à tester |
-| `pattern` | string | Yes | - | Texte à tester |
-| `ignore_case` | boolean | No | `False` | Motif d'expression régulière |
-| `full_match` | boolean | No | `False` | Correspondance insensible à la casse |
+| `text` | string | Yes | - | Text to test |
+| `pattern` | string | Yes | - | Regular expression pattern |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `full_match` | boolean | No | `False` | Require pattern to match entire string |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Exiger que le motif corresponde à toute la chaîne |
-| `pattern` | string | Si le motif correspond |
+| `result` | boolean | Whether pattern matches |
+| `pattern` | string | Pattern used |

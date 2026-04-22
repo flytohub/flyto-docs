@@ -6,41 +6,41 @@ Google Sheets, Notion, Airtable, and Stripe integrations.
 
 | Module | Description |
 |--------|-------------|
-| [Google Sheets पढ़ें](#google-sheets-पढ़ें) | Google Sheets स्प्रेडशीट से डेटा पढ़ें |
-| [Google Sheets लिखें](#google-sheets-लिखें) | Google Sheets स्प्रेडशीट में डेटा लिखें |
-| [Notion पेज बनाएं](#notion-पेज-बनाएं) | Notion डेटाबेस में नया पेज बनाएं |
-| [Notion डेटाबेस क्वेरी](#notion-डेटाबेस-क्वेरी) | फ़िल्टर और सॉर्टिंग के साथ Notion डेटाबेस से पेज क्वेरी करें |
-| [Stripe पेमेंट बनाएं](#stripe-पेमेंट-बनाएं) | Stripe के साथ पेमेंट इंटेंट बनाएं |
-| [Stripe ग्राहक प्राप्त करें](#stripe-ग्राहक-प्राप्त-करें) | Stripe से ग्राहक जानकारी प्राप्त करें |
-| [Stripe चार्ज सूचीबद्ध करें](#stripe-चार्ज-सूचीबद्ध-करें) | Stripe से हाल के चार्ज सूचीबद्ध करें |
-| [Airtable रिकॉर्ड बनाएं](#airtable-रिकॉर्ड-बनाएं) | Airtable टेबल में नया रिकॉर्ड बनाएं |
-| [Airtable रिकॉर्ड पढ़ें](#airtable-रिकॉर्ड-पढ़ें) | Airtable टेबल से रिकॉर्ड पढ़ें |
-| [Airtable रिकॉर्ड अपडेट करें](#airtable-रिकॉर्ड-अपडेट-करें) | Airtable टेबल में मौजूदा रिकॉर्ड अपडेट करें |
+| [Google Sheets Read](#google-sheets-read) | Read data from Google Sheets spreadsheet |
+| [Google Sheets Write](#google-sheets-write) | Write data to Google Sheets spreadsheet |
+| [Notion Create Page](#notion-create-page) | Create a new page in Notion database |
+| [Notion Query Database](#notion-query-database) | Query pages from Notion database with filters and sorting |
+| [Stripe Create Payment](#stripe-create-payment) | Create a payment intent with Stripe |
+| [Stripe Get Customer](#stripe-get-customer) | Retrieve customer information from Stripe |
+| [Stripe List Charges](#stripe-list-charges) | List recent charges from Stripe |
+| [Airtable Create Record](#airtable-create-record) | Create a new record in Airtable table |
+| [Airtable Read Records](#airtable-read-records) | Read records from Airtable table |
+| [Airtable Update Record](#airtable-update-record) | Update an existing record in Airtable table |
 
 ## Modules
 
-### Google Sheets पढ़ें
+### Google Sheets Read
 
 `api.google_sheets.read`
 
-Google Sheets स्प्रेडशीट से डेटा पढ़ें
+Read data from Google Sheets spreadsheet
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `credentials` | object | No | - | Google सेवा खाता JSON क्रेडेंशियल्स (डिफ़ॉल्ट env.GOOGLE_CREDENTIALS_JSON) |
-| `spreadsheet_id` | string | Yes | - | Google Sheets स्प्रेडशीट ID (URL से) |
-| `range` | string | Yes | - | पढ़ने के लिए A1 नोटेशन रेंज |
-| `include_header` | boolean | No | `True` | पहली पंक्ति को कॉलम हेडर के रूप में पार्स करें |
+| `credentials` | object | No | - | Google service account JSON credentials (defaults to env.GOOGLE_CREDENTIALS_JSON) |
+| `spreadsheet_id` | string | Yes | - | Google Sheets spreadsheet ID (from URL) |
+| `range` | string | Yes | - | A1 notation range to read |
+| `include_header` | boolean | No | `True` | Parse first row as column headers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `values` | array | पहली पंक्ति को कॉलम हेडर के रूप में पार्स करें |
-| `data` | array | पंक्तियों की सरणी (प्रत्येक पंक्ति मानों की सरणी है) |
-| `row_count` | number | पंक्तियों की सरणी (प्रत्येक पंक्ति मानों की सरणी है) |
+| `values` | array | Array of rows (each row is array of values) |
+| `data` | array | Array of row objects (if include_header=true) |
+| `row_count` | number | Number of rows read |
 
 **Example:** Read with headers
 
@@ -50,30 +50,30 @@ range: Sheet1!A1:D100
 include_header: true
 ```
 
-### Google Sheets लिखें
+### Google Sheets Write
 
 `api.google_sheets.write`
 
-Google Sheets स्प्रेडशीट में डेटा लिखें
+Write data to Google Sheets spreadsheet
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `credentials` | object | No | - | Google सेवा खाता JSON क्रेडेंशियल्स (डिफ़ॉल्ट env.GOOGLE_CREDENTIALS_JSON) |
-| `spreadsheet_id` | string | Yes | - | Google Sheets स्प्रेडशीट ID (URL से) |
-| `range` | string | Yes | - | Google Sheets स्प्रेडशीट ID (URL से) |
-| `values` | array | Yes | - | लिखने के लिए A1 नोटेशन रेंज |
-| `value_input_option` | string | No | `USER_ENTERED` | इनपुट मानों की व्याख्या कैसे करें |
+| `credentials` | object | No | - | Google service account JSON credentials (defaults to env.GOOGLE_CREDENTIALS_JSON) |
+| `spreadsheet_id` | string | Yes | - | Google Sheets spreadsheet ID (from URL) |
+| `range` | string | Yes | - | A1 notation range to write |
+| `values` | array | Yes | - | Array of rows to write (each row is array of values) |
+| `value_input_option` | string | No | `USER_ENTERED` | How to interpret input values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `updated_range` | string | अपडेट की गई रेंज |
-| `updated_rows` | number | अपडेट की गई रेंज |
-| `updated_columns` | number | अपडेट की गई रेंज |
-| `updated_cells` | number | अपडेट की गई पंक्तियों की संख्या |
+| `updated_range` | string | Range that was updated |
+| `updated_rows` | number | Number of rows updated |
+| `updated_columns` | number | Number of columns updated |
+| `updated_cells` | number | Number of cells updated |
 
 **Example:** Write data with headers
 
@@ -83,28 +83,28 @@ range: Sheet1!A1
 values: [["Name", "Email", "Status"], ["John Doe", "john@example.com", "Active"], ["Jane Smith", "jane@example.com", "Active"]]
 ```
 
-### Notion पेज बनाएं
+### Notion Create Page
 
 `api.notion.create_page`
 
-Notion डेटाबेस में नया पेज बनाएं
+Create a new page in Notion database
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Notion इंटीग्रेशन टोकन (डिफ़ॉल्ट env.NOTION_API_KEY) |
-| `database_id` | string | Yes | - | Notion डेटाबेस ID (32-अक्षर हेक्स स्ट्रिंग) |
-| `properties` | object | Yes | - | पेज प्रॉपर्टीज़ (शीर्षक, टेक्स्ट, सेलेक्ट, आदि) |
-| `content` | array | No | - | पेज प्रॉपर्टीज़ (शीर्षक, टेक्स्ट, सेलेक्ट, आदि) |
+| `api_key` | string | No | - | Notion integration token (defaults to env.NOTION_API_KEY) |
+| `database_id` | string | Yes | - | Notion database ID (32-char hex string) |
+| `properties` | object | Yes | - | Page properties (title, text, select, etc.) |
+| `content` | array | No | - | Page content as Notion blocks |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `page_id` | string | Notion ब्लॉक के रूप में पेज सामग्री |
-| `url` | string | Notion ब्लॉक के रूप में पेज सामग्री |
-| `created_time` | string | बनाया गया पेज ID |
+| `page_id` | string | Created page ID |
+| `url` | string | URL to the created page |
+| `created_time` | string | Page creation timestamp |
 
 **Example:** Create task page
 
@@ -113,29 +113,29 @@ database_id: your_database_id
 properties: {"Name": {"title": [{"text": {"content": "New Task"}}]}, "Status": {"select": {"name": "In Progress"}}, "Priority": {"select": {"name": "High"}}}
 ```
 
-### Notion डेटाबेस क्वेरी
+### Notion Query Database
 
 `api.notion.query_database`
 
-फ़िल्टर और सॉर्टिंग के साथ Notion डेटाबेस से पेज क्वेरी करें
+Query pages from Notion database with filters and sorting
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Notion इंटीग्रेशन टोकन (डिफ़ॉल्ट env.NOTION_API_KEY) |
-| `database_id` | string | Yes | - | Notion डेटाबेस ID |
-| `filter` | object | No | - | Notion डेटाबेस ID |
-| `sorts` | array | No | - | क्वेरी के लिए फ़िल्टर शर्तें |
-| `page_size` | number | No | `100` | परिणामों के लिए सॉर्ट क्रम |
+| `api_key` | string | No | - | Notion integration token (defaults to env.NOTION_API_KEY) |
+| `database_id` | string | Yes | - | Notion database ID |
+| `filter` | object | No | - | Filter conditions for query |
+| `sorts` | array | No | - | Sort order for results |
+| `page_size` | number | No | `100` | Number of results to return |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `results` | array | लौटाने के लिए परिणामों की संख्या |
-| `count` | number | पेज ऑब्जेक्ट की सरणी |
-| `has_more` | boolean | पेज ऑब्जेक्ट की सरणी |
+| `results` | array | Array of page objects |
+| `count` | number | Number of results returned |
+| `has_more` | boolean | Whether there are more results |
 
 **Example:** Query all pages
 
@@ -151,31 +151,31 @@ filter: {"property": "Status", "select": {"equals": "In Progress"}}
 sorts: [{"property": "Created", "direction": "descending"}]
 ```
 
-### Stripe पेमेंट बनाएं
+### Stripe Create Payment
 
 `payment.stripe.create_payment`
 
-Stripe के साथ पेमेंट इंटेंट बनाएं
+Create a payment intent with Stripe
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Stripe सीक्रेट कुंजी (या STRIPE_API_KEY env उपयोग करें) |
-| `amount` | number | Yes | - | Stripe सीक्रेट कुंजी (या STRIPE_API_KEY env उपयोग करें) |
-| `currency` | string | No | `usd` | सेंट में राशि (जैसे $10.00 के लिए 1000) |
-| `description` | string | No | - | तीन-अक्षर मुद्रा कोड (जैसे usd, eur) |
-| `customer` | string | No | - | भुगतान विवरण |
+| `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `amount` | number | Yes | - | Amount in cents (e.g. 1000 for $10.00) |
+| `currency` | string | No | `usd` | Three-letter currency code (e.g. usd, eur) |
+| `description` | string | No | - | Payment description |
+| `customer` | string | No | - | Stripe customer ID (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | Stripe ग्राहक ID (वैकल्पिक) |
-| `amount` | number | Stripe ग्राहक ID (वैकल्पिक) |
-| `currency` | string | अद्वितीय पहचानकर्ता |
-| `status` | string | भुगतान राशि |
-| `client_secret` | string | मुद्रा कोड |
+| `id` | string | Unique identifier |
+| `amount` | number | Payment amount |
+| `currency` | string | Currency code |
+| `status` | string | Operation status (success/error) |
+| `client_secret` | string | Client secret for payment |
 
 **Example:** Create $50 payment
 
@@ -194,18 +194,18 @@ customer: cus_XXXXXXXXXXXXXXX
 description: Subscription payment
 ```
 
-### Stripe ग्राहक प्राप्त करें
+### Stripe Get Customer
 
 `payment.stripe.get_customer`
 
-Stripe से ग्राहक जानकारी प्राप्त करें
+Retrieve customer information from Stripe
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Stripe सीक्रेट कुंजी (या STRIPE_API_KEY env उपयोग करें) |
-| `customer_id` | string | Yes | - | Stripe सीक्रेट कुंजी (या STRIPE_API_KEY env उपयोग करें) |
+| `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `customer_id` | string | Yes | - | Stripe customer ID |
 
 **Output:**
 
@@ -223,19 +223,19 @@ Stripe से ग्राहक जानकारी प्राप्त क
 customer_id: cus_XXXXXXXXXXXXXXX
 ```
 
-### Stripe चार्ज सूचीबद्ध करें
+### Stripe List Charges
 
 `payment.stripe.list_charges`
 
-Stripe से हाल के चार्ज सूचीबद्ध करें
+List recent charges from Stripe
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Stripe सीक्रेट कुंजी (या STRIPE_API_KEY env उपयोग करें) |
-| `limit` | number | No | `10` | Stripe सीक्रेट कुंजी (या STRIPE_API_KEY env उपयोग करें) |
-| `customer` | string | No | - | ग्राहक ID द्वारा फ़िल्टर करें (वैकल्पिक) |
+| `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `limit` | number | No | `10` | Number of charges to return (1-100) |
+| `customer` | string | No | - | Filter by customer ID (optional) |
 
 **Output:**
 
@@ -258,20 +258,20 @@ customer: cus_XXXXXXXXXXXXXXX
 limit: 50
 ```
 
-### Airtable रिकॉर्ड बनाएं
+### Airtable Create Record
 
 `productivity.airtable.create`
 
-Airtable टेबल में नया रिकॉर्ड बनाएं
+Create a new record in Airtable table
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Airtable API कुंजी (या AIRTABLE_API_KEY env उपयोग करें) |
-| `base_id` | string | Yes | - | Airtable API कुंजी (या AIRTABLE_API_KEY env उपयोग करें) |
-| `table_name` | string | Yes | - | Airtable बेस ID |
-| `fields` | json | Yes | - | टेबल का नाम |
+| `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `fields` | json | Yes | - | Record fields as JSON object |
 
 **Output:**
 
@@ -297,28 +297,28 @@ table_name: Tasks
 fields: {"Title": "Review PR", "Assignee": "Alice", "Priority": "High"}
 ```
 
-### Airtable रिकॉर्ड पढ़ें
+### Airtable Read Records
 
 `productivity.airtable.read`
 
-Airtable टेबल से रिकॉर्ड पढ़ें
+Read records from Airtable table
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Airtable API कुंजी (या AIRTABLE_API_KEY env उपयोग करें) |
-| `base_id` | string | Yes | - | Airtable API कुंजी (या AIRTABLE_API_KEY env उपयोग करें) |
-| `table_name` | string | Yes | - | Airtable बेस ID |
-| `view` | string | No | - | टेबल का नाम |
-| `max_records` | number | No | `100` | उपयोग करने के लिए व्यू नाम (वैकल्पिक) |
+| `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `view` | string | No | - | View name to use (optional) |
+| `max_records` | number | No | `100` | Maximum number of records to return |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `records` | array | लौटाने के लिए अधिकतम रिकॉर्ड संख्या |
-| `count` | number | रिकॉर्ड्स |
+| `records` | array | The records |
+| `count` | number | Number of items |
 
 **Example:** Read all customers
 
@@ -337,21 +337,21 @@ view: Active Tasks
 max_records: 50
 ```
 
-### Airtable रिकॉर्ड अपडेट करें
+### Airtable Update Record
 
 `productivity.airtable.update`
 
-Airtable टेबल में मौजूदा रिकॉर्ड अपडेट करें
+Update an existing record in Airtable table
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Airtable API कुंजी (या AIRTABLE_API_KEY env उपयोग करें) |
-| `base_id` | string | Yes | - | Airtable API कुंजी (या AIRTABLE_API_KEY env उपयोग करें) |
-| `table_name` | string | Yes | - | Airtable बेस ID |
-| `record_id` | string | Yes | - | टेबल का नाम |
-| `fields` | json | Yes | - | अपडेट करने के लिए रिकॉर्ड की ID |
+| `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `record_id` | string | Yes | - | ID of the record to update |
+| `fields` | json | Yes | - | Fields to update as JSON object |
 
 **Output:**
 

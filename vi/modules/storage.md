@@ -23,15 +23,15 @@ Delete a value from persistent key-value storage
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `namespace` | string | Yes | `default` | Storage namespace |
-| `key` | string | Yes | - | Storage namespace |
+| `key` | string | Yes | - | Key to delete |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Key to delete |
-| `deleted` | boolean | Whether the operation succeeded |
-| `key` | string | Whether the operation succeeded |
+| `ok` | boolean | Whether the operation succeeded |
+| `deleted` | boolean | Whether the key existed and was deleted |
+| `key` | string | The key that was deleted |
 
 **Example:** Delete cached value
 
@@ -51,17 +51,17 @@ Retrieve a value from persistent key-value storage
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `namespace` | string | Yes | `default` | Storage namespace (e.g., workflow name or project) |
-| `key` | string | Yes | - | Storage namespace (e.g., workflow name or project) |
-| `default` | any | No | - | Key to retrieve |
+| `key` | string | Yes | - | Key to retrieve |
+| `default` | any | No | - | Value to return if key does not exist |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Value to return if key does not exist |
-| `found` | boolean | Whether the operation succeeded |
-| `value` | any | Whether the operation succeeded |
-| `key` | string | Whether the key was found (not expired) |
+| `ok` | boolean | Whether the operation succeeded |
+| `found` | boolean | Whether the key was found (not expired) |
+| `value` | any | The stored value or default |
+| `key` | string | The key that was queried |
 
 **Example:** Get last BTC price
 
@@ -89,18 +89,18 @@ Store a value in persistent key-value storage
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `namespace` | string | Yes | `default` | Storage namespace (e.g., workflow name or project) |
-| `key` | string | Yes | - | Storage namespace (e.g., workflow name or project) |
-| `value` | any | Yes | - | Key to store value under |
+| `key` | string | Yes | - | Key to store value under |
+| `value` | any | Yes | - | Value to store (string, number, or object) |
 | `ttl_seconds` | number | No | `0` | Time to live in seconds (optional, 0 = no expiration) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Time to live in seconds (optional, 0 = no expiration) |
-| `key` | string | Whether the operation succeeded |
-| `stored_at` | number | Whether the operation succeeded |
-| `expires_at` | number | The key that was stored |
+| `ok` | boolean | Whether the operation succeeded |
+| `key` | string | The key that was stored |
+| `stored_at` | number | Unix timestamp when value was stored |
+| `expires_at` | number | Unix timestamp when value expires (if TTL set) |
 
 **Example:** Store BTC price
 

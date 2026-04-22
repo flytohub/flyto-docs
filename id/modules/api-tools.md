@@ -6,10 +6,10 @@ GitHub API, HTTP requests, and search engine integrations.
 
 | Module | Description |
 |--------|-------------|
-| [Buat Issue GitHub](#buat-issue-github) | Buat issue baru di repositori GitHub |
+| [Create GitHub Issue](#create-github-issue) | Create a new issue in a GitHub repository |
 | [Create GitHub Pull Request](#create-github-pull-request) | Create a new pull request in a GitHub repository |
-| [Dapatkan Repositori GitHub](#dapatkan-repositori-github) | Dapatkan informasi tentang repositori GitHub |
-| [Daftar Issue GitHub](#daftar-issue-github) | Daftar issue dari repositori GitHub |
+| [Get GitHub Repository](#get-github-repository) | Get information about a GitHub repository |
+| [List GitHub Issues](#list-github-issues) | List issues from a GitHub repository |
 | [List GitHub Repositories](#list-github-repositories) | List repositories for a GitHub user or the authenticated user |
 | [Google Search (API)](#google-search-api) | Use Google Custom Search API to search keywords |
 | [HTTP GET Request](#http-get-request) | Send HTTP GET request to any URL |
@@ -18,11 +18,11 @@ GitHub API, HTTP requests, and search engine integrations.
 
 ## Modules
 
-### Buat Issue GitHub
+### Create GitHub Issue
 
 `api.github.create_issue`
 
-Buat issue baru di repositori GitHub
+Create a new issue in a GitHub repository
 
 **Parameters:**
 
@@ -94,32 +94,32 @@ head: feature/auth
 base: main
 ```
 
-### Dapatkan Repositori GitHub
+### Get GitHub Repository
 
 `api.github.get_repo`
 
-Dapatkan informasi tentang repositori GitHub
+Get information about a GitHub repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `owner` | string | Yes | - | Pemilik repositori (username atau organisasi) |
-| `repo` | string | Yes | - | Pemilik repositori (username atau organisasi) |
-| `token` | string | No | - | Nama repositori |
+| `owner` | string | Yes | - | Repository owner (username or organization) |
+| `repo` | string | Yes | - | Repository name |
+| `token` | string | No | - | GitHub Personal Access Token (optional but recommended) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | GitHub Personal Access Token (opsional tapi disarankan) |
-| `repo` | object | Status operasi (success/error) |
-| `name` | string | Status operasi (success/error) |
-| `full_name` | string | Informasi repositori |
-| `description` | string | Nama item |
-| `stars` | number | Nama repositori lengkap |
-| `forks` | number | Deskripsi item |
-| `url` | string | Ambil informasi tentang repositori GitHub |
+| `status` | string | Operation status (success/error) |
+| `repo` | object | Repository information |
+| `name` | string | Name of the item |
+| `full_name` | string | Full repository name |
+| `description` | string | Item description |
+| `stars` | number | Number of stars |
+| `forks` | number | Number of forks |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -128,11 +128,11 @@ owner: octocat
 repo: Hello-World
 ```
 
-### Daftar Issue GitHub
+### List GitHub Issues
 
 `api.github.list_issues`
 
-Daftar issue dari repositori GitHub
+List issues from a GitHub repository
 
 **Parameters:**
 
@@ -219,10 +219,10 @@ Use Google Custom Search API to search keywords
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi |
-| `data` | array | Data hasil pencarian |
-| `count` | number | Jumlah hasil pencarian |
-| `total_results` | number | Total jumlah hasil |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
+| `total_results` | number | Total number of search results available |
 
 **Example:** Search Python tutorials
 
@@ -251,10 +251,10 @@ Send HTTP GET request to any URL
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | Kode status HTTP |
-| `headers` | object | Header respons |
-| `body` | string | Body respons |
-| `json` | object | Respons JSON (jika berlaku) |
+| `status_code` | number | HTTP status code |
+| `headers` | object | HTTP headers |
+| `body` | string | Response body content |
+| `json` | object | Parsed JSON response data |
 
 **Example:** Fetch API data
 

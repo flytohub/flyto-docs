@@ -6,143 +6,143 @@ Text analysis: word count, encoding detection, email/URL/number extraction.
 
 | Module | Description |
 |--------|-------------|
-| [Zeichenzähler](#zeichenzähler) | Zeichen im Text zählen |
-| [Kodierung erkennen](#kodierung-erkennen) | Textkodierung erkennen |
-| [E-Mails extrahieren](#e-mails-extrahieren) | Alle E-Mail-Adressen aus dem Text extrahieren |
-| [Zahlen extrahieren](#zahlen-extrahieren) | Alle Zahlen aus dem Text extrahieren |
-| [URLs extrahieren](#urls-extrahieren) | Alle URLs aus dem Text extrahieren |
-| [Wortanzahl](#wortanzahl) | Wörter im Text zählen |
+| [Character Count](#character-count) | Count characters in text |
+| [Detect Encoding](#detect-encoding) | Detect text encoding |
+| [Extract Emails](#extract-emails) | Extract all email addresses from text |
+| [Extract Numbers](#extract-numbers) | Extract all numbers from text |
+| [Extract URLs](#extract-urls) | Extract all URLs from text |
+| [Word Count](#word-count) | Count words in text |
 
 ## Modules
 
-### Zeichenzähler
+### Character Count
 
 `text.char_count`
 
-Zeichen im Text zählen
+Count characters in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Zu analysierender Text |
+| `text` | text | Yes | - | Text to analyze |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total` | number | Zu analysierender Text |
-| `without_spaces` | number | Gesamtanzahl der Zeichen |
-| `letters` | number | Gesamtanzahl der Zeichen |
-| `digits` | number | Zählen ohne Leerzeichen |
-| `spaces` | number | Buchstabenanzahl |
-| `lines` | number | Ziffernanzahl |
+| `total` | number | Total character count |
+| `without_spaces` | number | Count without spaces |
+| `letters` | number | Letter count |
+| `digits` | number | Digit count |
+| `spaces` | number | Space count |
+| `lines` | number | Line count |
 
-### Kodierung erkennen
+### Detect Encoding
 
 `text.detect_encoding`
 
-Textkodierung erkennen
+Detect text encoding
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Text oder Bytes zur Kodierungserkennung |
+| `text` | text | Yes | - | Text or bytes to detect encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `encoding` | string | Text oder Bytes zur Kodierungserkennung |
-| `confidence` | number | Erkannte Kodierung |
-| `is_ascii` | boolean | Erkannte Kodierung |
-| `has_bom` | boolean | Vertrauenswürdigkeit (0-1) |
+| `encoding` | string | Detected encoding |
+| `confidence` | number | Confidence score (0-1) |
+| `is_ascii` | boolean | Whether text is pure ASCII |
+| `has_bom` | boolean | Whether BOM was detected |
 
-### E-Mails extrahieren
+### Extract Emails
 
 `text.extract_emails`
 
-Alle E-Mail-Adressen aus dem Text extrahieren
+Extract all email addresses from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Text, aus dem E-Mails extrahiert werden sollen |
-| `unique` | boolean | No | `True` | Text, aus dem E-Mails extrahiert werden sollen |
-| `lowercase` | boolean | No | `True` | Nur eindeutige E-Mails zurückgeben |
+| `text` | text | Yes | - | Text to extract emails from |
+| `unique` | boolean | No | `True` | Return only unique emails |
+| `lowercase` | boolean | No | `True` | Convert emails to lowercase |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `emails` | array | E-Mails in Kleinbuchstaben umwandeln |
-| `count` | number | Liste der extrahierten E-Mails |
-| `domains` | array | Liste der extrahierten E-Mails |
+| `emails` | array | List of extracted emails |
+| `count` | number | Number of emails found |
+| `domains` | array | Unique domains found |
 
-### Zahlen extrahieren
+### Extract Numbers
 
 `text.extract_numbers`
 
-Alle Zahlen aus dem Text extrahieren
+Extract all numbers from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Text, aus dem Zahlen extrahiert werden sollen |
-| `include_decimals` | boolean | No | `True` | Text, aus dem Zahlen extrahiert werden sollen |
-| `include_negative` | boolean | No | `True` | Dezimalzahlen einbeziehen |
+| `text` | text | Yes | - | Text to extract numbers from |
+| `include_decimals` | boolean | No | `True` | Include decimal numbers |
+| `include_negative` | boolean | No | `True` | Include negative numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `numbers` | array | Negative Zahlen einbeziehen |
-| `count` | number | Liste der extrahierten Zahlen |
-| `sum` | number | Liste der extrahierten Zahlen |
-| `min` | number | Anzahl der gefundenen Zahlen |
-| `max` | number | Summe aller Zahlen |
+| `numbers` | array | List of extracted numbers |
+| `count` | number | Number of numbers found |
+| `sum` | number | Sum of all numbers |
+| `min` | number | Minimum value |
+| `max` | number | Maximum value |
 
-### URLs extrahieren
+### Extract URLs
 
 `text.extract_urls`
 
-Alle URLs aus dem Text extrahieren
+Extract all URLs from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Text, aus dem URLs extrahiert werden sollen |
-| `unique` | boolean | No | `True` | Text, aus dem URLs extrahiert werden sollen |
+| `text` | text | Yes | - | Text to extract URLs from |
+| `unique` | boolean | No | `True` | Return only unique URLs |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `urls` | array | Nur eindeutige URLs zurückgeben |
-| `count` | number | Liste der extrahierten URLs |
+| `urls` | array | List of extracted URLs |
+| `count` | number | Number of URLs found |
 
-### Wortanzahl
+### Word Count
 
 `text.word_count`
 
-Wörter im Text zählen
+Count words in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Zu analysierender Text |
+| `text` | text | Yes | - | Text to analyze |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `word_count` | number | Zu analysierender Text |
-| `unique_words` | number | Gesamtanzahl der Wörter |
-| `sentence_count` | number | Gesamtanzahl der Wörter |
-| `paragraph_count` | number | Anzahl der einzigartigen Wörter |
-| `avg_word_length` | number | Ungefähre Satzanzahl |
+| `word_count` | number | Total word count |
+| `unique_words` | number | Number of unique words |
+| `sentence_count` | number | Approximate sentence count |
+| `paragraph_count` | number | Paragraph count |
+| `avg_word_length` | number | Average word length |

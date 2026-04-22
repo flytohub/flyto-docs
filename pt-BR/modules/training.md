@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [Pratica Analisar](#pratica-analisar) | Analisar estrutura de website para pratica |
-| [Pratica Executar](#pratica-executar) | Executar sessao de pratica |
-| [Pratica Inferir Schema](#pratica-inferir-schema) | Inferir schema de dados do website |
-| [Estatisticas de Pratica](#estatisticas-de-pratica) | Obter estatisticas de pratica |
+| [Practice Analyze](#practice-analyze) | Analyze website structure for practice |
+| [Practice Execute](#practice-execute) | Execute practice session |
+| [Practice Infer Schema](#practice-infer-schema) | Infer data schema from website |
+| [Practice Stats](#practice-stats) | Get practice statistics |
 
 ## Modules
 
-### Pratica Analisar
+### Practice Analyze
 
 `training.practice.analyze`
 
-Analisar estrutura de website para pratica
+Analyze website structure for practice
 
 **Parameters:**
 
@@ -29,14 +29,14 @@ Analisar estrutura de website para pratica
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Analisar estrutura do website |
-| `structure` | object | Analisar estrutura do website |
+| `status` | string | Operation status (success/error) |
+| `structure` | object | The structure |
 
-### Pratica Executar
+### Practice Execute
 
 `training.practice.execute`
 
-Executar sessao de pratica
+Execute practice session
 
 **Parameters:**
 
@@ -49,14 +49,14 @@ Executar sessao de pratica
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Executar sessao de pratica |
-| `items_processed` | number | Executar sessao de pratica |
+| `status` | string | Operation status (success/error) |
+| `items_processed` | number | The items processed |
 
-### Pratica Inferir Schema
+### Practice Infer Schema
 
 `training.practice.infer_schema`
 
-Inferir schema de dados do website
+Infer data schema from website
 
 **Parameters:**
 
@@ -69,20 +69,20 @@ Inferir schema de dados do website
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Inferir schema de dados |
-| `schema` | object | Inferir schema de dados |
+| `status` | string | Operation status (success/error) |
+| `schema` | object | The schema |
 
-### Estatisticas de Pratica
+### Practice Stats
 
 `training.practice.stats`
 
-Obter estatisticas de pratica
+Get practice statistics
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total_sessions` | number | O total de sessoes |
-| `successful_sessions` | number | O total de sessoes |
-| `success_rate` | number | Obter estatisticas de pratica |
-| `history` | array | Obter estatisticas de pratica |
+| `total_sessions` | number | The total sessions |
+| `successful_sessions` | number | The successful sessions |
+| `success_rate` | number | The success rate |
+| `history` | array | The history |

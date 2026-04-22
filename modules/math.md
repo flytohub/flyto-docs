@@ -31,7 +31,7 @@ Get absolute value of a number
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | number | Absolute value |
-| `original` | number | Absolute value |
+| `original` | number | Original number |
 
 **Example:** Absolute of negative number
 
@@ -62,7 +62,7 @@ Round number up to nearest integer
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | number | Ceiling value |
-| `original` | number | Ceiling value |
+| `original` | number | Original number |
 
 **Example:** Ceiling positive number
 
@@ -93,7 +93,7 @@ Round number down to nearest integer
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | number | Floored value |
-| `original` | number | Floored value |
+| `original` | number | Original number |
 
 **Example:** Floor positive number
 
@@ -125,8 +125,8 @@ Raise number to a power
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | number | Result of base raised to exponent |
-| `base` | number | Result of base raised to exponent |
-| `exponent` | number | Result of base raised to exponent |
+| `base` | number | Base number |
+| `exponent` | number | Exponent used |
 
 **Example:** Square a number
 
@@ -160,8 +160,8 @@ Round number to specified decimal places
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | number | Rounded value |
-| `original` | number | Rounded value |
-| `decimals` | number | Rounded value |
+| `original` | number | Original number |
+| `decimals` | number | Decimal places used |
 
 **Example:** Round to integer
 

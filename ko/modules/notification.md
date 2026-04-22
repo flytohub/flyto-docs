@@ -6,33 +6,33 @@ Send messages via Slack, Discord, Teams, Telegram, email, SMS, and WhatsApp.
 
 | Module | Description |
 |--------|-------------|
-| [Twilio 통화 걸기](#twilio-통화-걸기) | Twilio를 통해 음성 통화 걸기 |
-| [Twilio SMS 전송](#twilio-sms-전송) | Twilio를 통해 SMS 메시지 전송 |
-| [Discord 메시지 전송](#discord-메시지-전송) | 웹훅을 통해 Discord에 메시지 전송 |
-| [이메일 전송](#이메일-전송) | SMTP를 통해 이메일 전송 |
-| [Slack 메시지 전송](#slack-메시지-전송) | 웹훅을 통해 Slack에 메시지 전송 |
-| [Teams 메시지 보내기](#teams-메시지-보내기) | Microsoft Teams로 수신 웹훅을 통해 메시지 보내기 |
-| [Telegram 메시지 전송](#telegram-메시지-전송) | Telegram Bot API를 통해 메시지 전송 |
-| [WhatsApp 메시지 보내기](#whatsapp-메시지-보내기) | WhatsApp Business API (Meta Cloud API)를 통해 메시지 보내기 |
-| [알림 보내기](#알림-보내기) | Telegram, Discord, Slack, LINE 또는 웹훅 URL로 알림 보내기 |
+| [Twilio Make Call](#twilio-make-call) | Make a voice call via Twilio |
+| [Twilio Send SMS](#twilio-send-sms) | Send SMS message via Twilio |
+| [Send Discord Message](#send-discord-message) | Send message to Discord via webhook |
+| [Send Email](#send-email) | Send email via SMTP |
+| [Send Slack Message](#send-slack-message) | Send message to Slack via webhook |
+| [Send Teams Message](#send-teams-message) | Send message to Microsoft Teams via incoming webhook |
+| [Send Telegram Message](#send-telegram-message) | Send message via Telegram Bot API |
+| [Send WhatsApp Message](#send-whatsapp-message) | Send message via WhatsApp Business API (Meta Cloud API) |
+| [Send Notification](#send-notification) | Send notification to Telegram, Discord, Slack, LINE, or any webhook URL |
 
 ## Modules
 
-### Twilio 통화 걸기
+### Twilio Make Call
 
 `communication.twilio.make_call`
 
-Twilio를 통해 음성 통화 걸기
+Make a voice call via Twilio
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `account_sid` | string | No | - | Twilio 계정 SID (또는 TWILIO_ACCOUNT_SID env 사용) |
-| `auth_token` | string | No | - | Twilio 인증 토큰 (또는 TWILIO_AUTH_TOKEN env 사용) |
-| `from_number` | string | Yes | - | Twilio 인증 토큰 (또는 TWILIO_AUTH_TOKEN env 사용) |
-| `to_number` | string | Yes | - | Twilio 전화번호 |
-| `twiml_url` | string | Yes | - | 수신자 전화번호 |
+| `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
+| `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
+| `from_number` | string | Yes | - | Twilio phone number |
+| `to_number` | string | Yes | - | Recipient phone number |
+| `twiml_url` | string | Yes | - | URL to TwiML instructions |
 
 **Output:**
 
@@ -51,30 +51,30 @@ to_number: +0987654321
 twiml_url: https://example.com/voice.xml
 ```
 
-### Twilio SMS 전송
+### Twilio Send SMS
 
 `communication.twilio.send_sms`
 
-Twilio를 통해 SMS 메시지 전송
+Send SMS message via Twilio
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `account_sid` | string | No | - | Twilio 계정 SID (또는 TWILIO_ACCOUNT_SID env 사용) |
-| `auth_token` | string | No | - | Twilio 인증 토큰 (또는 TWILIO_AUTH_TOKEN env 사용) |
-| `from_number` | string | Yes | - | Twilio 전화번호 (예: +1234567890) |
-| `to_number` | string | Yes | - | Twilio 전화번호 (예: +1234567890) |
-| `message` | string | Yes | - | 수신자 전화번호 (예: +1234567890) |
+| `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
+| `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
+| `from_number` | string | Yes | - | Twilio phone number (e.g. +1234567890) |
+| `to_number` | string | Yes | - | Recipient phone number (e.g. +1234567890) |
+| `message` | string | Yes | - | SMS message text |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sid` | string | SMS 메시지 텍스트 |
-| `status` | string | SMS 메시지 텍스트 |
-| `to` | string | SID |
-| `from` | string | 작업 상태 (성공/오류) |
+| `sid` | string | The sid |
+| `status` | string | Operation status (success/error) |
+| `to` | string | The to |
+| `from` | string | The from |
 
 **Example:** Send notification SMS
 
@@ -92,28 +92,28 @@ to_number: +0987654321
 message: Your verification code is: 123456
 ```
 
-### Discord 메시지 전송
+### Send Discord Message
 
 `notification.discord.send_message`
 
-웹훅을 통해 Discord에 메시지 전송
+Send message to Discord via webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | No | - | Discord 웹훅 URL (env.DISCORD_WEBHOOK_URL 또는 직접 입력) |
-| `content` | string | Yes | - | Discord 웹훅 URL (env.DISCORD_WEBHOOK_URL 또는 직접 입력) |
-| `username` | string | No | - | 전송할 메시지 |
-| `avatar_url` | string | No | - | 봇 사용자 이름 재정의 (선택사항) |
+| `webhook_url` | string | No | - | Discord webhook URL (from env.DISCORD_WEBHOOK_URL or direct input) |
+| `content` | string | Yes | - | The message to send |
+| `username` | string | No | - | Override bot username (optional) |
+| `avatar_url` | string | No | - | Bot avatar image URL (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 봇 아바타 이미지 URL (선택사항) |
-| `sent` | boolean | 작업 상태 (성공/오류) |
-| `message` | string | 웹훅 URL을 통해 Discord 채널에 메시지 전송 |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -121,33 +121,33 @@ message: Your verification code is: 123456
 content: Workflow completed successfully!
 ```
 
-### 이메일 전송
+### Send Email
 
 `notification.email.send`
 
-SMTP를 통해 이메일 전송
+Send email via SMTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `smtp_server` | string | Yes | - | SMTP 서버 호스트명 (예: smtp.gmail.com) |
-| `smtp_port` | number | No | `587` | SMTP 서버 호스트명 (예: smtp.gmail.com) |
-| `username` | string | Yes | - | SMTP 포트 (TLS: 587, SSL: 465) |
-| `password` | string | Yes | - | SMTP 사용자 이름 |
-| `from_email` | string | Yes | - | SMTP 비밀번호 (환경 변수 사용!) |
-| `to_email` | string | Yes | - | 발신자 이메일 주소 |
-| `subject` | string | Yes | - | 수신자 이메일 주소 |
-| `body` | text | Yes | - | 이메일 제목 |
-| `html` | boolean | No | `False` | 이메일 본문 (HTML 지원) |
+| `smtp_server` | string | Yes | - | SMTP server hostname (e.g., smtp.gmail.com) |
+| `smtp_port` | number | No | `587` | SMTP port (587 for TLS, 465 for SSL) |
+| `username` | string | Yes | - | SMTP username |
+| `password` | string | Yes | - | SMTP password (use env variable!) |
+| `from_email` | string | Yes | - | Sender email address |
+| `to_email` | string | Yes | - | Recipient email address |
+| `subject` | string | Yes | - | Email subject |
+| `body` | text | Yes | - | Email body (HTML supported) |
+| `html` | boolean | No | `False` | Send body as HTML |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 본문을 HTML로 전송 |
-| `sent` | boolean | 작업 상태 (성공/오류) |
-| `message` | string | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -160,29 +160,29 @@ subject: Workflow Complete
 body: Your automation workflow has finished successfully.
 ```
 
-### Slack 메시지 전송
+### Send Slack Message
 
 `notification.slack.send_message`
 
-웹훅을 통해 Slack에 메시지 전송
+Send message to Slack via webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | No | - | Slack 웹훅 URL (env.SLACK_WEBHOOK_URL 또는 직접 입력) |
-| `text` | string | Yes | - | Slack 웹훅 URL (env.SLACK_WEBHOOK_URL 또는 직접 입력) |
-| `channel` | string | No | - | 전송할 메시지 |
-| `username` | string | No | - | 기본 채널 재정의 (선택사항) |
-| `icon_emoji` | string | No | - | 봇 사용자 이름 재정의 (선택사항) |
+| `webhook_url` | string | No | - | Slack webhook URL (from env.SLACK_WEBHOOK_URL or direct input) |
+| `text` | string | Yes | - | The message to send |
+| `channel` | string | No | - | Override default channel (optional) |
+| `username` | string | No | - | Override bot username (optional) |
+| `icon_emoji` | string | No | - | Bot icon emoji (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 봇 아이콘 이모지 (선택사항) |
-| `sent` | boolean | 작업 상태 (성공/오류) |
-| `message` | string | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -199,28 +199,28 @@ username: Alert Bot
 icon_emoji: :warning:
 ```
 
-### Teams 메시지 보내기
+### Send Teams Message
 
 `notification.teams.send_message`
 
-Microsoft Teams로 수신 웹훅을 통해 메시지 보내기
+Send message to Microsoft Teams via incoming webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | Yes | - | Microsoft Teams 수신 웹훅 URL |
-| `message` | text | Yes | - | 보낼 메시지 텍스트 |
-| `title` | string | No | - | 메시지 카드 제목 (선택 사항) |
-| `color` | string | No | - | 테마 색상 16진수 코드 (선택 사항) |
-| `sections` | array | No | - | 추가 MessageCard 섹션 (선택 사항) |
+| `webhook_url` | string | Yes | - | Microsoft Teams incoming webhook URL |
+| `message` | text | Yes | - | The message text to send |
+| `title` | string | No | - | Message card title (optional) |
+| `color` | string | No | - | Theme color hex code (optional) |
+| `sections` | array | No | - | Additional MessageCard sections (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 작업이 성공했는지 여부 |
-| `data` | object | 상태와 webhook_url이 포함된 응답 데이터 |
+| `ok` | boolean | Whether the operation succeeded |
+| `data` | object | Response data with status and webhook_url |
 
 **Example:** Example
 
@@ -231,29 +231,29 @@ title: Deploy Status
 color: #00FF00
 ```
 
-### Telegram 메시지 전송
+### Send Telegram Message
 
 `notification.telegram.send_message`
 
-Telegram Bot API를 통해 메시지 전송
+Send message via Telegram Bot API
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bot_token` | string | No | - | Telegram 봇 토큰 (env.TELEGRAM_BOT_TOKEN 또는 직접 입력) |
-| `chat_id` | string | Yes | - | Telegram 봇 토큰 (env.TELEGRAM_BOT_TOKEN 또는 직접 입력) |
-| `text` | string | Yes | - | Telegram 채팅 ID 또는 채널 사용자명 |
-| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | 전송할 메시지 |
+| `bot_token` | string | No | - | Telegram bot token (from env.TELEGRAM_BOT_TOKEN or direct input) |
+| `chat_id` | string | Yes | - | Telegram chat ID or channel username |
+| `text` | string | Yes | - | The message to send |
+| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | Message formatting mode |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 메시지 포맷 모드 |
-| `sent` | boolean | 작업 상태 (성공/오류) |
-| `message_id` | number | 작업 상태 (성공/오류) |
-| `message` | string | 알림 전송 여부 |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message_id` | number | Message identifier |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -270,30 +270,30 @@ text: *Bold* _italic_ `code`
 parse_mode: Markdown
 ```
 
-### WhatsApp 메시지 보내기
+### Send WhatsApp Message
 
 `notification.whatsapp.send_message`
 
-WhatsApp Business API (Meta Cloud API)를 통해 메시지 보내기
+Send message via WhatsApp Business API (Meta Cloud API)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `phone_number_id` | string | Yes | - | WhatsApp Business 발신자 전화번호 ID |
-| `to` | string | Yes | - | 국가 코드가 포함된 수신자 전화번호 |
-| `message` | text | Yes | - | 보낼 메시지 텍스트 |
-| `access_token` | password | Yes | - | WhatsApp Business API를 위한 Meta 액세스 토큰 |
-| `message_type` | select (`text`, `template`) | No | `text` | 보낼 메시지 유형 |
-| `template_name` | string | No | - | WhatsApp 메시지 템플릿 이름 (message_type이 템플릿일 경우 필수) |
-| `template_language` | string | No | `en` | 템플릿 언어 코드 |
+| `phone_number_id` | string | Yes | - | WhatsApp Business sender phone number ID |
+| `to` | string | Yes | - | Recipient phone number with country code |
+| `message` | text | Yes | - | The message text to send |
+| `access_token` | password | Yes | - | Meta access token for WhatsApp Business API |
+| `message_type` | select (`text`, `template`) | No | `text` | Type of message to send |
+| `template_name` | string | No | - | WhatsApp message template name (required if message_type is "template") |
+| `template_language` | string | No | `en` | Template language code |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 작업이 성공했는지 여부 |
-| `data` | object | 상태, message_id 및 수신자가 포함된 응답 데이터 |
+| `ok` | boolean | Whether the operation succeeded |
+| `data` | object | Response data with status, message_id, and to |
 
 **Example:** Example
 
@@ -316,29 +316,29 @@ template_name: hello_world
 template_language: en
 ```
 
-### 알림 보내기
+### Send Notification
 
 `notify.send`
 
-Telegram, Discord, Slack, LINE 또는 웹훅 URL로 알림 보내기
+Send notification to Telegram, Discord, Slack, LINE, or any webhook URL
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | 웹훅 URL (Telegram, Discord, Slack 또는 사용자 정의) |
-| `message` | string | Yes | - | 알림 메시지 내용 |
-| `title` | string | No | - | 선택적 제목 (Discord, Slack, Teams용) |
-| `chat_id` | string | No | - | Telegram 채팅 ID (Telegram에 필요) |
+| `url` | string | Yes | - | Webhook URL (Telegram, Discord, Slack, or custom) |
+| `message` | string | Yes | - | Notification message content |
+| `title` | string | No | - | Optional title (for Discord, Slack, Teams) |
+| `chat_id` | string | No | - | Telegram chat ID (required for Telegram) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 알림이 성공적으로 전송되었는지 여부 |
-| `platform` | string | 감지된 플랫폼 (telegram, discord, slack 등) |
-| `status_code` | number | HTTP 응답 상태 코드 |
-| `response` | object | 웹훅의 응답 |
+| `ok` | boolean | Whether notification was sent successfully |
+| `platform` | string | Detected platform (telegram, discord, slack, etc.) |
+| `status_code` | number | HTTP response status code |
+| `response` | object | Response from the webhook |
 
 **Example:** Send Telegram notification
 

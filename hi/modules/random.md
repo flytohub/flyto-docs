@@ -6,92 +6,92 @@ Random number, UUID, choice, and shuffle.
 
 | Module | Description |
 |--------|-------------|
-| [यादृच्छिक चयन](#यादृच्छिक-चयन) | एक array से यादृच्छिक तत्व चुनें |
-| [यादृच्छिक संख्या](#यादृच्छिक-संख्या) | एक सीमा के भीतर यादृच्छिक संख्या उत्पन्न करें |
-| [Array फेरबदल](#array-फेरबदल) | Array तत्वों को यादृच्छिक रूप से फेरबदल करें |
-| [UUID उत्पन्न करें](#uuid-उत्पन्न-करें) | यादृच्छिक UUID (v4) उत्पन्न करें |
+| [Random Choice](#random-choice) | Select random element(s) from an array |
+| [Random Number](#random-number) | Generate random number within a range |
+| [Shuffle Array](#shuffle-array) | Randomly shuffle array elements |
+| [Generate UUID](#generate-uuid) | Generate random UUID (v4) |
 
 ## Modules
 
-### यादृच्छिक चयन
+### Random Choice
 
 `random.choice`
 
-एक array से यादृच्छिक तत्व चुनें
+Select random element(s) from an array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | जिस array से चुनना है |
-| `count` | number | No | `1` | जिस array से चुनना है |
-| `unique` | boolean | No | `True` | चुनने के लिए तत्वों की संख्या |
+| `array` | array | Yes | - | Array to pick from |
+| `count` | number | No | `1` | Number of elements to pick |
+| `unique` | boolean | No | `True` | Pick unique elements (no duplicates) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `choice` | any | अद्वितीय तत्व चुनें (कोई डुप्लिकेट नहीं) |
-| `count` | number | चुने गए तत्व |
+| `choice` | any | Selected element(s) |
+| `count` | number | Number of elements selected |
 
-### यादृच्छिक संख्या
+### Random Number
 
 `random.number`
 
-एक सीमा के भीतर यादृच्छिक संख्या उत्पन्न करें
+Generate random number within a range
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `min` | number | No | `0` | न्यूनतम मान (समावेशी) |
-| `max` | number | No | `100` | न्यूनतम मान (समावेशी) |
-| `integer` | boolean | No | `True` | अधिकतम मान (समावेशी) |
-| `precision` | number | No | `2` | केवल पूर्णांक उत्पन्न करें |
+| `min` | number | No | `0` | Minimum value (inclusive) |
+| `max` | number | No | `100` | Maximum value (inclusive) |
+| `integer` | boolean | No | `True` | Generate integers only |
+| `precision` | number | No | `2` | Decimal places for float |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `number` | number | दशमलव स्थानों की संख्या |
-| `min` | number | उत्पन्न यादृच्छिक संख्या |
-| `max` | number | उत्पन्न यादृच्छिक संख्या |
+| `number` | number | Generated random number |
+| `min` | number | Minimum bound used |
+| `max` | number | Maximum bound used |
 
-### Array फेरबदल
+### Shuffle Array
 
 `random.shuffle`
 
-Array तत्वों को यादृच्छिक रूप से फेरबदल करें
+Randomly shuffle array elements
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | फेरबदल करने के लिए array |
+| `array` | array | Yes | - | Array to shuffle |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | फेरबदल करने के लिए array |
-| `length` | number | फेरबदल किया गया array |
+| `result` | array | Shuffled array |
+| `length` | number | Array length |
 
-### UUID उत्पन्न करें
+### Generate UUID
 
 `random.uuid`
 
-यादृच्छिक UUID (v4) उत्पन्न करें
+Generate random UUID (v4)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `uppercase` | boolean | No | `False` | बड़े अक्षरों में UUID लौटाएं |
-| `remove_hyphens` | boolean | No | `False` | बड़े अक्षरों में UUID लौटाएं |
+| `uppercase` | boolean | No | `False` | Return uppercase UUID |
+| `remove_hyphens` | boolean | No | `False` | Remove hyphens from UUID |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `uuid` | string | UUID से हाइफ़न हटाएं |
-| `version` | number | उत्पन्न UUID |
+| `uuid` | string | Generated UUID |
+| `version` | number | UUID version |

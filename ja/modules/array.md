@@ -6,26 +6,26 @@ List manipulation — chunk, flatten, group, map, reduce, zip, and more.
 
 | Module | Description |
 |--------|-------------|
-| [配列チャンク](#配列チャンク) | 配列を指定サイズのチャンクに分割する |
-| [コンパクト](#コンパクト) | 配列からnull/空の値を削除 |
-| [配列差分](#配列差分) | 最初の配列にあって他の配列にない要素を取得する |
-| [削除](#削除) | 配列から最初のN要素を削除 |
-| [配列平坦化](#配列平坦化) | ネストされた配列を単一の配列に平坦化する |
-| [グループ化](#グループ化) | キーで配列要素をグループ化 |
-| [配列交差](#配列交差) | 配列間の共通要素を取得する |
-| [配列結合](#配列結合) | 配列要素を文字列に結合する |
-| [配列マップ](#配列マップ) | 配列の各要素を変換する |
-| [配列集約](#配列集約) | 配列を単一の値に集約する |
-| [取得](#取得) | 配列から最初のN要素を取得 |
-| [配列をジップ](#配列をジップ) | 複数の配列を要素ごとに結合 |
+| [Array Chunk](#array-chunk) | Split array into chunks of specified size |
+| [Compact](#compact) | Remove null/empty values from array |
+| [Array Difference](#array-difference) | Find elements in first array not in others |
+| [Drop](#drop) | Drop first N elements from array |
+| [Array Flatten](#array-flatten) | Flatten nested arrays into single array |
+| [Group By](#group-by) | Group array elements by a key |
+| [Array Intersection](#array-intersection) | Find common elements between arrays |
+| [Array Join](#array-join) | Join array elements into string |
+| [Array Map](#array-map) | Transform each element in an array |
+| [Array Reduce](#array-reduce) | Reduce array to single value |
+| [Take](#take) | Take first N elements from array |
+| [Zip Arrays](#zip-arrays) | Combine multiple arrays element-wise |
 
 ## Modules
 
-### 配列チャンク
+### Array Chunk
 
 `array.chunk`
 
-配列を指定サイズのチャンクに分割する
+Split array into chunks of specified size
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ List manipulation — chunk, flatten, group, map, reduce, zip, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | チャンクの配列 |
-| `chunks` | number | チャンクの配列 |
+| `result` | array | Array of chunks |
+| `chunks` | number | Number of chunks |
 
 **Example:** Chunk into groups of 3
 
@@ -55,33 +55,33 @@ array: ["a", "b", "c", "d", "e"]
 size: 2
 ```
 
-### コンパクト
+### Compact
 
 `array.compact`
 
-配列からnull/空の値を削除
+Remove null/empty values from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | コンパクト化する配列 |
-| `remove_empty_strings` | boolean | No | `True` | 空の文字列を削除 |
-| `remove_zero` | boolean | No | `False` | 空の文字列を削除 |
-| `remove_false` | boolean | No | `False` | ゼロ値を削除 |
+| `array` | array | Yes | - | Array to compact |
+| `remove_empty_strings` | boolean | No | `True` | Remove empty strings |
+| `remove_zero` | boolean | No | `False` | Remove zero values |
+| `remove_false` | boolean | No | `False` | Remove false values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | false値を削除 |
-| `removed` | number | コンパクト化された配列 |
+| `result` | array | Compacted array |
+| `removed` | number | Number of items removed |
 
-### 配列差分
+### Array Difference
 
 `array.difference`
 
-最初の配列にあって他の配列にない要素を取得する
+Find elements in first array not in others
 
 **Parameters:**
 
@@ -94,8 +94,8 @@ size: 2
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 最初の配列に固有の要素 |
-| `length` | number | 差分要素の数 |
+| `result` | array | Elements unique to first array |
+| `length` | number | Number of unique elements |
 
 **Example:** Find unique elements
 
@@ -104,31 +104,31 @@ array: [1, 2, 3, 4, 5]
 subtract: [[2, 4], [5]]
 ```
 
-### 削除
+### Drop
 
 `array.drop`
 
-配列から最初のN要素を削除
+Drop first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | 元の配列 |
-| `count` | number | Yes | `1` | 元の配列 |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to drop |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 削除する要素の数 |
-| `dropped` | number | 残りの要素 |
+| `result` | array | Remaining elements |
+| `dropped` | number | Number of elements dropped |
 
-### 配列平坦化
+### Array Flatten
 
 `array.flatten`
 
-ネストされた配列を単一の配列に平坦化する
+Flatten nested arrays into single array
 
 **Parameters:**
 
@@ -141,8 +141,8 @@ subtract: [[2, 4], [5]]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 平坦化された配列 |
-| `length` | number | 平坦化された配列の長さ |
+| `result` | array | Flattened array |
+| `length` | number | Length of flattened array |
 
 **Example:** Flatten one level
 
@@ -158,32 +158,32 @@ array: [[1, [2, [3, [4]]]]]
 depth: -1
 ```
 
-### グループ化
+### Group By
 
 `array.group_by`
 
-キーで配列要素をグループ化
+Group array elements by a key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | グループ化するオブジェクトの配列 |
-| `key` | string | Yes | - | グループ化するオブジェクトの配列 |
+| `array` | array | Yes | - | Array of objects to group |
+| `key` | string | Yes | - | Property name to group by |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `groups` | object | グループ化するプロパティ名 |
-| `keys` | array | グループ化された結果 |
-| `count` | number | グループ化された結果 |
+| `groups` | object | Grouped results |
+| `keys` | array | Group keys |
+| `count` | number | Number of groups |
 
-### 配列交差
+### Array Intersection
 
 `array.intersection`
 
-配列間の共通要素を取得する
+Find common elements between arrays
 
 **Parameters:**
 
@@ -195,8 +195,8 @@ depth: -1
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 共通要素 |
-| `length` | number | 共通要素の数 |
+| `result` | array | Common elements |
+| `length` | number | Number of common elements |
 
 **Example:** Find common elements
 
@@ -204,11 +204,11 @@ depth: -1
 arrays: [[1, 2, 3, 4], [2, 3, 5], [2, 3, 6]]
 ```
 
-### 配列結合
+### Array Join
 
 `array.join`
 
-配列要素を文字列に結合する
+Join array elements into string
 
 **Parameters:**
 
@@ -222,7 +222,7 @@ arrays: [[1, 2, 3, 4], [2, 3, 5], [2, 3, 6]]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 結合された文字列 |
+| `result` | string | Joined string |
 
 **Example:** Join with comma
 
@@ -239,11 +239,11 @@ separator:
 
 ```
 
-### 配列マップ
+### Array Map
 
 `array.map`
 
-配列の各要素を変換する
+Transform each element in an array
 
 **Parameters:**
 
@@ -257,8 +257,8 @@ separator:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 変換された配列 |
-| `length` | number | 変換された配列の長さ |
+| `result` | array | Transformed array |
+| `length` | number | Length of result array |
 
 **Example:** Multiply numbers
 
@@ -276,11 +276,11 @@ operation: extract
 value: name
 ```
 
-### 配列集約
+### Array Reduce
 
 `array.reduce`
 
-配列を単一の値に集約する
+Reduce array to single value
 
 **Parameters:**
 
@@ -295,8 +295,8 @@ value: name
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | 集約された値 |
-| `operation` | string | 実行された操作 |
+| `result` | any | Reduced value |
+| `operation` | string | Operation that was applied |
 
 **Example:** Sum numbers
 
@@ -313,42 +313,42 @@ operation: join
 separator:  
 ```
 
-### 取得
+### Take
 
 `array.take`
 
-配列から最初のN要素を取得
+Take first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | 元の配列 |
-| `count` | number | Yes | `1` | 元の配列 |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to take |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 取得する要素の数 |
-| `length` | number | 取得した要素 |
+| `result` | array | Taken elements |
+| `length` | number | Number of elements taken |
 
-### 配列をジップ
+### Zip Arrays
 
 `array.zip`
 
-複数の配列を要素ごとに結合
+Combine multiple arrays element-wise
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | ジップする配列の配列 |
-| `fill_value` | any | No | - | ジップする配列の配列 |
+| `arrays` | array | Yes | - | Array of arrays to zip |
+| `fill_value` | any | No | - | Value for missing elements |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 欠損要素の値 |
-| `length` | number | ジップされた配列 |
+| `result` | array | Zipped array |
+| `length` | number | Result length |

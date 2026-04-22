@@ -2,62 +2,63 @@
 
 Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and testing.
 
-**44 modules**
+**45 modules**
 
 | Module | Description |
 |--------|-------------|
-| [篩選陣列](#篩選陣列) | 依條件篩選陣列元素 |
-| [排序陣列](#排序陣列) | 以升序或降序排序陣列元素 |
-| [陣列去重](#陣列去重) | 從陣列中移除重複的值 |
+| [Filter Array](#filter-array) | Filter array elements by condition |
+| [Sort Array](#sort-array) | Sort array elements in ascending or descending order |
+| [Array Unique](#array-unique) | Remove duplicate values from array |
 | [OAuth2 Token Exchange](#oauth2-token-exchange) | Exchange authorization code, refresh token, or client credentials for an access token |
-| [DNS 查詢](#dns-查詢) | 查詢網域記錄的 DNS |
-| [文字差異](#文字差異) | 生成兩個文字字串之間的差異 |
-| [編輯檔案](#編輯檔案) | 使用精確字串匹配替換檔案中的文字 |
-| [檢查檔案存在](#檢查檔案存在) | 檢查檔案或目錄是否存在 |
-| [讀取檔案](#讀取檔案) | 從檔案讀取內容 |
-| [寫入檔案](#寫入檔案) | 寫入內容到檔案 |
-| [Git 複製](#git-複製) | 複製一個 git 儲存庫 |
-| [Git 提交](#git-提交) | 建立一個 git 提交 |
-| [Git 差異](#git-差異) | 取得 git 差異 |
+| [DNS Lookup](#dns-lookup) | DNS lookup for domain records |
+| [Diff Content](#diff-content) | Generate unified diff between original and modified content |
+| [Edit File](#edit-file) | Replace a string in a file (targeted edit, not full overwrite) |
+| [Check File Exists](#check-file-exists) | Check if a file or directory exists |
+| [Read File](#read-file) | Read content from a file |
+| [Write File](#write-file) | Write content to a file |
+| [Git Clone](#git-clone) | Clone a git repository |
+| [Git Commit](#git-commit) | Create a git commit |
+| [Git Diff](#git-diff) | Get git diff |
+| [HTTP Batch](#http-batch) | Run a batch of HTTP probes sequentially and capture timing + body |
 | [HTTP Paginate](#http-paginate) | Automatically iterate through paginated API endpoints and collect all results |
-| [HTTP 請求](#http-請求) | 傳送 HTTP 請求並接收回應 |
-| [驗證 HTTP 回應](#驗證-http-回應) | 驗證 HTTP 回應屬性 |
+| [HTTP Request](#http-request) | Send HTTP request and receive response |
+| [Assert HTTP Response](#assert-http-response) | Assert and validate HTTP response properties |
 | [HTTP Session](#http-session) | Send a sequence of HTTP requests with persistent cookies (login → action → logout) |
 | [Webhook Wait](#webhook-wait) | Start a temporary server and wait for an incoming webhook callback |
-| [LLM 對話](#llm-對話) | 與 LLM API 互動進行智慧操作 |
-| [AI 程式碼修復](#ai-程式碼修復) | 根據問題自動產生程式碼修復 |
-| [計算](#計算) | 執行基本數學運算 |
-| [HTTP 健康檢查](#http-健康檢查) | HTTP 健康檢查 / 上線監控 |
-| [檢查埠](#檢查埠) | 檢查網路埠是否開啟或關閉 |
-| [等待埠](#等待埠) | 等待網路埠變為可用 |
-| [列出程序](#列出程序) | 列出所有執行中的背景程序 |
-| [啟動背景程序](#啟動背景程序) | 啟動背景程序（伺服器、服務等） |
-| [停止程序](#停止程序) | 停止執行中的背景程序 |
-| [執行 Shell 命令](#執行-shell-命令) | 執行 shell 命令並擷取輸出 |
-| [SSH 執行](#ssh-執行) | 透過 SSH 在遠端伺服器執行命令 |
-| [SFTP 下載](#sftp-下載) | 透過 SFTP 從遠端伺服器下載檔案 |
-| [SFTP 上傳](#sftp-上傳) | 透過 SFTP 上傳檔案到遠端伺服器 |
-| [執行 E2E 步驟](#執行-e2e-步驟) | 依序執行端對端測試步驟 |
-| [品質閘道](#品質閘道) | 根據定義的門檻評估品質指標 |
-| [執行 HTTP 測試](#執行-http-測試) | 執行 HTTP API 測試套件 |
-| [執行 Linter](#執行-linter) | 對原始碼執行程式碼檢查 |
-| [產生報告](#產生報告) | 產生測試執行報告 |
-| [執行情境](#執行情境) | 執行情境式測試（BDD 風格） |
-| [安全掃描](#安全掃描) | 掃描安全漏洞 |
-| [執行測試套件](#執行測試套件) | 執行測試集合 |
-| [執行單元測試](#執行單元測試) | 執行單元測試 |
-| [視覺比較](#視覺比較) | 比較視覺輸出差異 |
-| [評估 UI 品質](#評估-ui-品質) | 全面的 UI 品質評估，具備多維度評分 |
-| [AI 圖片分析](#ai-圖片分析) | 使用 OpenAI Vision API（GPT-4V）分析圖片 |
-| [比較圖片](#比較圖片) | 比較兩張圖片並識別視覺差異 |
+| [LLM Chat](#llm-chat) | Interact with LLM APIs for intelligent operations |
+| [AI Code Fix](#ai-code-fix) | Automatically generate code fixes based on issues |
+| [Calculate](#calculate) | Perform basic mathematical operations |
+| [HTTP Health Check](#http-health-check) | HTTP health check / uptime monitor |
+| [Check Port](#check-port) | Check if network port(s) are open or closed |
+| [Wait for Port](#wait-for-port) | Wait for a network port to become available |
+| [List Processes](#list-processes) | List all running background processes |
+| [Start Background Process](#start-background-process) | Start a background process (server, service, etc.) |
+| [Stop Process](#stop-process) | Stop a running background process |
+| [Execute Shell Command](#execute-shell-command) | Execute a shell command and capture output |
+| [SSH Execute](#ssh-execute) | Execute command on remote server via SSH |
+| [SFTP Download](#sftp-download) | Download file from remote server via SFTP |
+| [SFTP Upload](#sftp-upload) | Upload file to remote server via SFTP |
+| [Run E2E Steps](#run-e2e-steps) | Execute end-to-end test steps sequentially |
+| [Quality Gate](#quality-gate) | Evaluate quality metrics against defined thresholds |
+| [Run HTTP Tests](#run-http-tests) | Execute HTTP API test suite |
+| [Run Linter](#run-linter) | Run linting checks on source code |
+| [Generate Report](#generate-report) | Generate test execution report |
+| [Run Scenario](#run-scenario) | Execute scenario-based test (BDD style) |
+| [Security Scan](#security-scan) | Scan for security vulnerabilities |
+| [Run Test Suite](#run-test-suite) | Execute a collection of tests |
+| [Run Unit Tests](#run-unit-tests) | Execute unit tests |
+| [Visual Compare](#visual-compare) | Compare visual outputs for differences |
+| [Evaluate UI Quality](#evaluate-ui-quality) | Comprehensive UI quality evaluation with multi-dimensional scoring |
+| [Analyze Image with AI](#analyze-image-with-ai) | Analyze images using OpenAI Vision API (GPT-4V) |
+| [Compare Images](#compare-images) | Compare two images and identify visual differences |
 
 ## Modules
 
-### 篩選陣列
+### Filter Array
 
 `array.filter`
 
-依條件篩選陣列元素
+Filter array elements by condition
 
 **Parameters:**
 
@@ -71,8 +72,8 @@ Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and t
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filtered` | array | 篩選後的陣列 |
-| `count` | number | 篩選後的數量 |
+| `filtered` | array | Filtered array |
+| `count` | number | Number of items in filtered array |
 
 **Example:** Filter numbers greater than 5
 
@@ -82,11 +83,11 @@ condition: gt
 value: 5
 ```
 
-### 排序陣列
+### Sort Array
 
 `array.sort`
 
-以升序或降序排序陣列元素
+Sort array elements in ascending or descending order
 
 **Parameters:**
 
@@ -99,8 +100,8 @@ value: 5
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sorted` | array | 排序後的陣列 |
-| `count` | number | 排序後的數量 |
+| `sorted` | array | Sorted array |
+| `count` | number | Number of items |
 
 **Example:** Sort numbers ascending
 
@@ -109,11 +110,11 @@ array: [5, 2, 8, 1, 9]
 order: asc
 ```
 
-### 陣列去重
+### Array Unique
 
 `array.unique`
 
-從陣列中移除重複的值
+Remove duplicate values from array
 
 **Parameters:**
 
@@ -126,9 +127,9 @@ order: asc
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `unique` | array | 不重複的陣列 |
-| `count` | number | 去重後的數量 |
-| `duplicates_removed` | number | 移除的重複數量 |
+| `unique` | array | Array with unique values |
+| `count` | number | Number of unique items |
+| `duplicates_removed` | number | Number of duplicates removed |
 
 **Example:** Remove duplicates
 
@@ -214,19 +215,19 @@ client_secret: ${env.GITHUB_CLIENT_SECRET}
 code: abc123...
 ```
 
-### DNS 查詢
+### DNS Lookup
 
 `dns.lookup`
 
-查詢網域記錄的 DNS
+DNS lookup for domain records
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `domain` | string | Yes | - | 要查詢的網域名稱 |
-| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | 要查詢的 DNS 記錄類型 |
-| `timeout` | number | No | `10` | 查詢逾時秒數 |
+| `domain` | string | Yes | - | Domain name to look up |
+| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | DNS record type to query |
+| `timeout` | number | No | `10` | Query timeout in seconds |
 
 **Output:**
 
@@ -249,29 +250,29 @@ domain: example.com
 record_type: MX
 ```
 
-### 文字差異
+### Diff Content
 
 `file.diff`
 
-生成兩個文字字串之間的差異
+Generate unified diff between original and modified content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `original` | string | Yes | - | 原始文字 |
-| `modified` | string | Yes | - | 已修改的文字 |
-| `context_lines` | number | No | `3` | 變更周圍的上下文行數 |
-| `filename` | string | No | `file` | 在差異標題中使用的檔名 |
+| `original` | string | Yes | - | Original content for comparison |
+| `modified` | string | Yes | - | Modified content for comparison |
+| `context_lines` | number | No | `3` | Number of context lines around changes |
+| `filename` | string | No | `file` | Name of the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `diff` | string | 統一的差異輸出 |
-| `changed` | boolean | 是否有任何變更 |
-| `additions` | number | 新增行數 |
-| `deletions` | number | 刪除行數 |
+| `diff` | string | Unified diff output |
+| `changed` | boolean | Whether content differs |
+| `additions` | number | Number of added lines |
+| `deletions` | number | Number of deleted lines |
 
 **Example:** Diff two strings
 
@@ -283,29 +284,29 @@ world!
 filename: test.txt
 ```
 
-### 編輯檔案
+### Edit File
 
 `file.edit`
 
-使用精確字串匹配替換檔案中的文字
+Replace a string in a file (targeted edit, not full overwrite)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 要編輯的檔案路徑 |
-| `old_string` | string | Yes | - | 要查找和替換的文字 |
-| `new_string` | string | Yes | - | 替換文字 |
-| `replace_all` | boolean | No | `False` | 替換所有出現的地方，而不只是第一次 |
-| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | 檔案編碼 |
+| `path` | string | Yes | - | Path to the file |
+| `old_string` | string | Yes | - | Text to find and replace |
+| `new_string` | string | Yes | - | Replacement text |
+| `replace_all` | boolean | No | `False` | Whether to replace all occurrences |
+| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | Character encoding for the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 已編輯檔案的路徑 |
-| `replacements` | number | 替換次數 |
-| `diff` | string | 顯示變更的差異 |
+| `path` | string | File path that was edited |
+| `replacements` | number | Number of replacements made |
+| `diff` | string | Unified diff of changes |
 
 **Example:** Replace string in file
 
@@ -315,11 +316,11 @@ old_string: def hello():
 new_string: def hello_world():
 ```
 
-### 檢查檔案存在
+### Check File Exists
 
 `file.exists`
 
-檢查檔案或目錄是否存在
+Check if a file or directory exists
 
 **Parameters:**
 
@@ -331,9 +332,9 @@ new_string: def hello_world():
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `exists` | boolean | 路徑是否存在 |
-| `is_file` | boolean | 是否為檔案 |
-| `is_directory` | boolean | 是否為目錄 |
+| `exists` | boolean | Whether path exists |
+| `is_file` | boolean | Whether path is a file |
+| `is_directory` | boolean | Whether path is a directory |
 
 **Example:** Check file exists
 
@@ -341,11 +342,11 @@ new_string: def hello_world():
 path: /tmp/data.txt
 ```
 
-### 讀取檔案
+### Read File
 
 `file.read`
 
-從檔案讀取內容
+Read content from a file
 
 **Parameters:**
 
@@ -358,8 +359,8 @@ path: /tmp/data.txt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `content` | string | 檔案內容 |
-| `size` | number | 檔案大小 |
+| `content` | string | File content |
+| `size` | number | File size in bytes |
 
 **Example:** Read text file
 
@@ -368,11 +369,11 @@ path: /tmp/data.txt
 encoding: utf-8
 ```
 
-### 寫入檔案
+### Write File
 
 `file.write`
 
-寫入內容到檔案
+Write content to a file
 
 **Parameters:**
 
@@ -387,8 +388,8 @@ encoding: utf-8
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 檔案路徑 |
-| `bytes_written` | number | 寫入的位元組數 |
+| `path` | string | File path |
+| `bytes_written` | number | Number of bytes written |
 
 **Example:** Write text file
 
@@ -398,21 +399,21 @@ content: Hello World
 mode: overwrite
 ```
 
-### Git 複製
+### Git Clone
 
 `git.clone`
 
-複製一個 git 儲存庫
+Clone a git repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | Git 儲存庫 URL (HTTPS 或 SSH) |
-| `destination` | string | Yes | - | 要複製到的本地路徑 |
-| `branch` | string | No | - | 複製後要檢出的分支 |
-| `depth` | number | No | - | 淺層複製深度（完整複製則省略） |
-| `token` | string | No | - | 私人儲存庫的個人存取權杖 |
+| `url` | string | Yes | - | Git repository URL (HTTPS or SSH) |
+| `destination` | string | Yes | - | Local path to clone into |
+| `branch` | string | No | - | Branch to checkout after clone |
+| `depth` | number | No | - | Shallow clone depth (omit for full clone) |
+| `token` | string | No | - | Personal access token for private repos |
 
 **Output:**
 
@@ -437,22 +438,22 @@ branch: develop
 depth: 1
 ```
 
-### Git 提交
+### Git Commit
 
 `git.commit`
 
-建立一個 git 提交
+Create a git commit
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | Git 儲存庫的路徑 |
-| `message` | string | Yes | - | 提交訊息 |
-| `add_all` | boolean | No | `False` | 提交前階段所有變更 (git add -A) |
-| `files` | array | No | - | 提交前要階段的特定檔案 |
-| `author_name` | string | No | - | 覆寫提交作者名稱 |
-| `author_email` | string | No | - | 覆寫提交作者電子郵件 |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `message` | string | Yes | - | Commit message |
+| `add_all` | boolean | No | `False` | Stage all changes before committing (git add -A) |
+| `files` | array | No | - | Specific files to stage before committing |
+| `author_name` | string | No | - | Override commit author name |
+| `author_email` | string | No | - | Override commit author email |
 
 **Output:**
 
@@ -477,21 +478,21 @@ message: fix: correct typo in readme
 files: ["README.md"]
 ```
 
-### Git 差異
+### Git Diff
 
 `git.diff`
 
-取得 git 差異
+Get git diff
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | Git 儲存庫的路徑 |
-| `ref1` | string | No | `HEAD` | 第一個參考（提交、分支、標籤） |
-| `ref2` | string | No | - | 要比較的第二個參考 |
-| `staged` | boolean | No | `False` | 僅顯示已階段的變更 (--cached) |
-| `stat_only` | boolean | No | `False` | 僅顯示檔案統計 (--stat) |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `ref1` | string | No | `HEAD` | First reference (commit, branch, tag) |
+| `ref2` | string | No | - | Second reference to compare against |
+| `staged` | boolean | No | `False` | Show only staged changes (--cached) |
+| `stat_only` | boolean | No | `False` | Show only file statistics (--stat) |
 
 **Output:**
 
@@ -521,6 +522,35 @@ repo_path: /home/user/project
 staged: true
 stat_only: true
 ```
+
+### HTTP Batch
+
+`http.batch`
+
+Run a batch of HTTP probes sequentially and capture timing + body
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `requests` | array | Yes | - | List of request dicts: {method, url, headers?, body?, label?} |
+| `description` | string | No | - | Informational description of the batch intent |
+| `measure_time` | boolean | No | `False` | Execute requests sequentially for reliable timing comparison |
+| `timeout` | number | No | `30` |  |
+| `verify_ssl` | boolean | No | `True` |  |
+| `ssrf_protection` | boolean | No | `True` |  |
+| `detect_patterns` | array | No | - | Optional list of substrings to report matches for across all bodies |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `ok` | boolean | Whether the batch completed (does not imply all requests succeeded) |
+| `data` | array | Per-request results: [{label, status, body, duration_ms, ok, ...}] |
+| `count` | number | Number of requests executed |
+| `failed_count` | number | Number of requests that errored or returned non-2xx |
+| `total_duration_ms` | number | Total elapsed ms across the batch |
+| `detected` | array | Pattern match summary when detect_patterns provided |
 
 ### HTTP Paginate
 
@@ -602,11 +632,11 @@ page_size: 100
 auth: {"type": "bearer", "token": "${env.GITHUB_TOKEN}"}
 ```
 
-### HTTP 請求
+### HTTP Request
 
 `http.request`
 
-傳送 HTTP 請求並接收回應
+Send HTTP request and receive response
 
 **Parameters:**
 
@@ -632,15 +662,15 @@ auth: {"type": "bearer", "token": "${env.GITHUB_TOKEN}"}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 請求是否成功（2xx 狀態） |
-| `status` | number | HTTP 狀態碼 |
-| `status_text` | string | HTTP 狀態文字 |
-| `headers` | object | 回應標頭 |
-| `body` | any | 回應內容（解析後的 JSON 或文字） |
-| `url` | string | 最終網址（重新導向後） |
-| `duration_ms` | number | 請求時間（毫秒） |
-| `content_type` | string | 內容類型 |
-| `content_length` | number | 內容長度 |
+| `ok` | boolean | Whether request was successful (2xx status) |
+| `status` | number | HTTP status code |
+| `status_text` | string | HTTP status text |
+| `headers` | object | Response headers |
+| `body` | any | Response body (parsed JSON or text) |
+| `url` | string | Final URL (after redirects) |
+| `duration_ms` | number | Request duration in milliseconds |
+| `content_type` | string | Response Content-Type |
+| `content_length` | number | Response body size in bytes |
 
 **Example:** Simple GET request
 
@@ -673,11 +703,11 @@ method: GET
 query: {"q": "flyto", "limit": 10}
 ```
 
-### 驗證 HTTP 回應
+### Assert HTTP Response
 
 `http.response_assert`
 
-驗證 HTTP 回應屬性
+Assert and validate HTTP response properties
 
 **Parameters:**
 
@@ -700,12 +730,12 @@ query: {"q": "flyto", "limit": 10}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 所有驗證是否通過 |
-| `passed` | number | 通過的驗證數量 |
-| `failed` | number | 失敗的驗證數量 |
-| `total` | number | 總驗證數量 |
-| `assertions` | array | 詳細的驗證結果 |
-| `errors` | array | 錯誤訊息 |
+| `ok` | boolean | Whether all assertions passed |
+| `passed` | number | Number of passed assertions |
+| `failed` | number | Number of failed assertions |
+| `total` | number | Total number of assertions |
+| `assertions` | array | Detailed assertion results |
+| `errors` | array | List of error messages for failed assertions |
 
 **Example:** Assert status 200
 
@@ -821,11 +851,11 @@ use_ngrok: true
 ngrok_token: ${env.NGROK_AUTH_TOKEN}
 ```
 
-### LLM 對話
+### LLM Chat
 
 `llm.chat`
 
-與 LLM API 互動進行智慧操作
+Interact with LLM APIs for intelligent operations
 
 **Parameters:**
 
@@ -847,12 +877,12 @@ ngrok_token: ${env.NGROK_AUTH_TOKEN}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 請求是否成功 |
-| `response` | string | LLM 回應文字 |
-| `parsed` | any | 解析的回應（如果請求 JSON 格式） |
-| `model` | string | 使用的模型 |
-| `tokens_used` | number | 使用的 Token 數量 |
-| `finish_reason` | string | 完成原因 |
+| `ok` | boolean | Whether the request succeeded |
+| `response` | string | The LLM response text |
+| `parsed` | any | Parsed response (if JSON format requested) |
+| `model` | string | Model used |
+| `tokens_used` | number | Total tokens consumed |
+| `finish_reason` | string | Why the response ended |
 
 **Example:** Code Review
 
@@ -882,11 +912,11 @@ system_prompt: You are a DevOps engineer. Return JSON: {"decision": "yes/no", "r
 response_format: json
 ```
 
-### AI 程式碼修復
+### AI Code Fix
 
 `llm.code_fix`
 
-根據問題自動產生程式碼修復
+Automatically generate code fixes based on issues
 
 **Parameters:**
 
@@ -904,11 +934,11 @@ response_format: json
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作是否成功 |
-| `fixes` | array | 產生的修復列表 |
-| `applied` | array | 已套用的修復列表 |
-| `failed` | array | 失敗的修復列表 |
-| `summary` | string | 修復摘要 |
+| `ok` | boolean | Whether operation succeeded |
+| `fixes` | array | List of generated fixes |
+| `applied` | array | List of applied fixes (if fix_mode is apply) |
+| `failed` | array | Fixes that could not be applied |
+| `summary` | string | Summary of fixes |
 
 **Example:** Fix UI Issues
 
@@ -928,11 +958,11 @@ fix_mode: apply
 backup: true
 ```
 
-### 計算
+### Calculate
 
 `math.calculate`
 
-執行基本數學運算
+Perform basic mathematical operations
 
 **Parameters:**
 
@@ -947,9 +977,9 @@ backup: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 計算結果 |
-| `operation` | string | 執行的操作 |
-| `expression` | string | 計算式 |
+| `result` | number | Calculation result |
+| `operation` | string | Operation performed |
+| `expression` | string | Human-readable expression |
 
 **Example:** Add two numbers
 
@@ -967,25 +997,25 @@ a: 2
 b: 8
 ```
 
-### HTTP 健康檢查
+### HTTP Health Check
 
 `monitor.http_check`
 
-HTTP 健康檢查 / 上線監控
+HTTP health check / uptime monitor
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | 要檢查的 URL |
-| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | HTTP 方法 |
-| `expected_status` | number | No | `200` | 預期的 HTTP 狀態碼 |
-| `timeout_ms` | number | No | `10000` | 請求超時時間（毫秒） |
-| `headers` | object | No | - | 自訂請求標頭 |
-| `body` | string | No | - | 請求內容（用於 POST） |
-| `check_ssl` | boolean | No | `True` | 檢查 SSL 憑證的有效性和到期日 |
-| `contains` | string | No | - | 回應內容必須包含此字串 |
-| `follow_redirects` | boolean | No | `True` | 跟隨 HTTP 重定向 |
+| `url` | string | Yes | - | URL to check |
+| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | HTTP method |
+| `expected_status` | number | No | `200` | Expected HTTP status code |
+| `timeout_ms` | number | No | `10000` | Request timeout in milliseconds |
+| `headers` | object | No | - | Custom request headers |
+| `body` | string | No | - | Request body (for POST) |
+| `check_ssl` | boolean | No | `True` | Check SSL certificate validity and expiry |
+| `contains` | string | No | - | Response body must contain this string |
+| `follow_redirects` | boolean | No | `True` | Follow HTTP redirects |
 
 **Output:**
 
@@ -1009,30 +1039,30 @@ contains: "status":"ok"
 timeout_ms: 5000
 ```
 
-### 檢查埠
+### Check Port
 
 `port.check`
 
-檢查網路埠是否開啟或關閉
+Check if network port(s) are open or closed
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | any | Yes | - | 要檢查的埠號或埠號陣列 |
-| `host` | string | No | `localhost` | 要檢查的埠號或埠號陣列 |
-| `connect_timeout` | number | No | `2` | 要連線的主機 |
-| `expect_open` | boolean | No | - | 每次連線嘗試的逾時時間 |
+| `port` | any | Yes | - | Port number or array of ports to check |
+| `host` | string | No | `localhost` | Host to connect to |
+| `connect_timeout` | number | No | `2` | Timeout for each connection attempt |
+| `expect_open` | boolean | No | - | Set to true to assert ports are open, false for closed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 設為 true 預期埠開啟，false 預期關閉 |
-| `results` | array | 所有檢查是否通過（如果有設定 expect_open） |
-| `open_ports` | array | 所有檢查是否通過（如果有設定 expect_open） |
-| `closed_ports` | array | 埠檢查結果陣列 |
-| `summary` | object | 開啟的埠列表 |
+| `ok` | boolean | Whether all checks passed (if expect_open is set) |
+| `results` | array | Array of port check results |
+| `open_ports` | array | List of open ports |
+| `closed_ports` | array | List of closed ports |
+| `summary` | object | Summary statistics |
 
 **Example:** Check single port
 
@@ -1055,32 +1085,32 @@ host: example.com
 expect_open: true
 ```
 
-### 等待埠
+### Wait for Port
 
 `port.wait`
 
-等待網路埠變為可用
+Wait for a network port to become available
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | number | Yes | - | 要等待的埠號 |
-| `host` | string | No | `localhost` | 要連線的主機 |
-| `timeout` | number | No | `60` | 要連線的主機 |
-| `interval` | number | No | `500` | 最大等待時間 |
-| `expect_closed` | boolean | No | `False` | 連線嘗試之間的間隔（毫秒） |
+| `port` | number | Yes | - | Port number to wait for |
+| `host` | string | No | `localhost` | Host to connect to |
+| `timeout` | number | No | `60` | Maximum time to wait |
+| `interval` | number | No | `500` | Time between connection attempts in milliseconds |
+| `expect_closed` | boolean | No | `False` | Wait for port to become unavailable instead |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 改為等待埠變為不可用 |
-| `available` | boolean | 埠是否在預期狀態 |
-| `host` | string | 埠是否在預期狀態 |
-| `port` | number | 埠目前是否可用 |
-| `wait_time_ms` | number | 檢查的主機 |
-| `attempts` | number | 檢查的埠 |
+| `ok` | boolean | Whether port is in expected state |
+| `available` | boolean | Whether port is currently available |
+| `host` | string | Host that was checked |
+| `port` | number | Port that was checked |
+| `wait_time_ms` | number | Time spent waiting in milliseconds |
+| `attempts` | number | Number of connection attempts |
 
 **Example:** Wait for dev server
 
@@ -1105,11 +1135,11 @@ expect_closed: true
 timeout: 10
 ```
 
-### 列出程序
+### List Processes
 
 `process.list`
 
-列出所有執行中的背景程序
+List all running background processes
 
 **Parameters:**
 
@@ -1122,11 +1152,11 @@ timeout: 10
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作成功 |
-| `processes` | array | 操作成功 |
-| `count` | number | 操作成功 |
-| `running` | number | 程序資訊列表 |
-| `stopped` | number | 程序總數 |
+| `ok` | boolean | Operation success |
+| `processes` | array | List of process information |
+| `count` | number | Total number of processes |
+| `running` | number | Number of running processes |
+| `stopped` | number | Number of stopped processes |
 
 **Example:** List all processes
 
@@ -1139,11 +1169,11 @@ timeout: 10
 filter_name: dev
 ```
 
-### 啟動背景程序
+### Start Background Process
 
 `process.start`
 
-啟動背景程序（伺服器、服務等）
+Start a background process (server, service, etc.)
 
 **Parameters:**
 
@@ -1163,14 +1193,14 @@ filter_name: dev
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 程序是否成功啟動 |
-| `pid` | number | 程序是否成功啟動 |
-| `process_id` | string | 程序是否成功啟動 |
-| `name` | string | 程序 ID |
-| `command` | string | 供 process.stop 使用的內部程序識別碼 |
-| `cwd` | string | 程序名稱 |
-| `started_at` | string | 執行的命令 |
-| `initial_output` | string | 程序啟動的 ISO 時間戳記 |
+| `ok` | boolean | Whether process started successfully |
+| `pid` | number | Process ID |
+| `process_id` | string | Internal process identifier for process.stop |
+| `name` | string | Process name |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory |
+| `started_at` | string | ISO timestamp when process started |
+| `initial_output` | string | Initial stdout output (if wait_for_output was used) |
 
 **Example:** Start dev server
 
@@ -1198,11 +1228,11 @@ name: api-server
 wait_for_output: listening
 ```
 
-### 停止程序
+### Stop Process
 
 `process.stop`
 
-停止執行中的背景程序
+Stop a running background process
 
 **Parameters:**
 
@@ -1220,10 +1250,10 @@ wait_for_output: listening
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 所有程序是否成功停止 |
-| `stopped` | array | 所有程序是否成功停止 |
-| `failed` | array | 已停止的程序資訊列表 |
-| `count` | number | 已停止的程序資訊列表 |
+| `ok` | boolean | Whether all processes were stopped successfully |
+| `stopped` | array | List of stopped process info |
+| `failed` | array | List of processes that failed to stop |
+| `count` | number | Number of processes stopped |
 
 **Example:** Stop by process ID
 
@@ -1250,11 +1280,11 @@ force: true
 stop_all: true
 ```
 
-### 執行 Shell 命令
+### Execute Shell Command
 
 `shell.exec`
 
-執行 shell 命令並擷取輸出
+Execute a shell command and capture output
 
 **Parameters:**
 
@@ -1273,13 +1303,13 @@ stop_all: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 命令是否成功執行（結束代碼 0） |
-| `exit_code` | number | 命令是否成功執行（結束代碼 0） |
-| `stdout` | string | 命令是否成功執行（結束代碼 0） |
-| `stderr` | string | 命令結束代碼 |
-| `command` | string | 標準輸出 |
-| `cwd` | string | 標準錯誤輸出 |
-| `duration_ms` | number | 執行的命令 |
+| `ok` | boolean | Whether command executed successfully (exit code 0) |
+| `exit_code` | number | Command exit code |
+| `stdout` | string | Standard output |
+| `stderr` | string | Standard error output |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory used |
+| `duration_ms` | number | Execution duration in milliseconds |
 
 **Example:** Run npm install
 
@@ -1309,23 +1339,23 @@ cwd: ./frontend
 env: {"NODE_ENV": "production"}
 ```
 
-### SSH 執行
+### SSH Execute
 
 `ssh.exec`
 
-透過 SSH 在遠端伺服器執行命令
+Execute command on remote server via SSH
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | SSH 伺服器的主機名稱或 IP |
-| `port` | number | No | `22` | SSH 埠 |
-| `username` | string | Yes | - | SSH 使用者名稱 |
-| `password` | string | No | - | SSH 密碼 |
-| `private_key` | string | No | - | PEM 格式的私鑰 |
-| `command` | string | Yes | - | 在遠端伺服器上執行的命令 |
-| `timeout` | number | No | `30` | 命令的逾時秒數 |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `command` | string | Yes | - | Command to execute on remote server |
+| `timeout` | number | No | `30` | Command timeout in seconds |
 
 **Output:**
 
@@ -1350,23 +1380,23 @@ username: root
 command: systemctl restart nginx
 ```
 
-### SFTP 下載
+### SFTP Download
 
 `ssh.sftp_download`
 
-透過 SFTP 從遠端伺服器下載檔案
+Download file from remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | SSH 伺服器的主機名稱或 IP |
-| `port` | number | No | `22` | SSH 埠 |
-| `username` | string | Yes | - | SSH 使用者名稱 |
-| `password` | string | No | - | SSH 密碼 |
-| `private_key` | string | No | - | PEM 格式的私密金鑰 |
-| `remote_path` | string | Yes | - | 遠端伺服器上的檔案路徑 |
-| `local_path` | string | Yes | - | 本地機器上的目的地路徑 |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `remote_path` | string | Yes | - | Path to file on remote server |
+| `local_path` | string | Yes | - | Destination path on local machine |
 
 **Output:**
 
@@ -1384,24 +1414,24 @@ remote_path: /var/log/nginx/access.log
 local_path: /tmp/access.log
 ```
 
-### SFTP 上傳
+### SFTP Upload
 
 `ssh.sftp_upload`
 
-透過 SFTP 上傳檔案到遠端伺服器
+Upload file to remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | SSH 伺服器的主機名稱或 IP |
-| `port` | number | No | `22` | SSH 埠 |
-| `username` | string | Yes | - | SSH 使用者名稱 |
-| `password` | string | No | - | SSH 密碼 |
-| `private_key` | string | No | - | PEM 格式的私鑰 |
-| `local_path` | string | Yes | - | 要上傳的本地檔案路徑 |
-| `remote_path` | string | Yes | - | 遠端伺服器上的目標路徑 |
-| `overwrite` | boolean | No | `True` | 覆蓋現有的遠端檔案 |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `local_path` | string | Yes | - | Path to local file to upload |
+| `remote_path` | string | Yes | - | Destination path on remote server |
+| `overwrite` | boolean | No | `True` | Overwrite existing remote file |
 
 **Output:**
 
@@ -1419,17 +1449,17 @@ local_path: /tmp/app.tar.gz
 remote_path: /opt/releases/app.tar.gz
 ```
 
-### 執行 E2E 步驟
+### Run E2E Steps
 
 `testing.e2e.run_steps`
 
-依序執行端對端測試步驟
+Execute end-to-end test steps sequentially
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `steps` | array | Yes | - | 測試步驟定義陣列 |
+| `steps` | array | Yes | - | Array of test step definitions |
 | `stop_on_failure` | boolean | No | `True` | Whether to stop on failure |
 | `timeout_per_step` | number | No | `30000` | Timeout Per Step value |
 
@@ -1437,45 +1467,45 @@ remote_path: /opt/releases/app.tar.gz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作是否成功 |
-| `passed` | number | 操作是否成功 |
-| `failed` | number | 操作是否成功 |
-| `results` | array | 通過的測試數量 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### 品質閘道
+### Quality Gate
 
 `testing.gate.evaluate`
 
-根據定義的門檻評估品質指標
+Evaluate quality metrics against defined thresholds
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | object | Yes | - | 要評估的指標 |
-| `thresholds` | object | Yes | - | 要評估的指標 |
+| `metrics` | object | Yes | - | Metrics to evaluate |
+| `thresholds` | object | Yes | - | Threshold values for each metric |
 | `fail_on_breach` | boolean | No | `True` | Whether to fail on breach |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 各指標的門檻值 |
-| `passed` | boolean | 操作是否成功 |
-| `results` | array | 操作是否成功 |
-| `summary` | string | 通過的測試數量 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `results` | array | List of results |
+| `summary` | string | The summary |
 
-### 執行 HTTP 測試
+### Run HTTP Tests
 
 `testing.http.run_suite`
 
-執行 HTTP API 測試套件
+Execute HTTP API test suite
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | HTTP 測試定義陣列 |
+| `tests` | array | Yes | - | Array of HTTP test definitions |
 | `base_url` | string | No | - | Base URL for API requests |
 | `headers` | object | No | `{}` | HTTP request headers |
 
@@ -1483,22 +1513,22 @@ remote_path: /opt/releases/app.tar.gz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作是否成功 |
-| `passed` | number | 操作是否成功 |
-| `failed` | number | 操作是否成功 |
-| `results` | array | 通過的測試數量 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### 執行 Linter
+### Run Linter
 
 `testing.lint.run`
 
-對原始碼執行程式碼檢查
+Run linting checks on source code
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | 要檢查的檔案或目錄 |
+| `paths` | array | Yes | - | Files or directories to lint |
 | `linter` | string | No | `auto` | Linter |
 | `fix` | boolean | No | `False` | Whether to fix |
 
@@ -1506,16 +1536,16 @@ remote_path: /opt/releases/app.tar.gz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作是否成功 |
-| `errors` | number | 操作是否成功 |
-| `warnings` | number | 操作是否成功 |
-| `issues` | array | 發現的錯誤數量 |
+| `ok` | boolean | Whether the operation succeeded |
+| `errors` | number | Number of errors encountered |
+| `warnings` | number | The warnings |
+| `issues` | array | The issues |
 
-### 產生報告
+### Generate Report
 
 `testing.report.generate`
 
-產生測試執行報告
+Generate test execution report
 
 **Parameters:**
 
@@ -1529,43 +1559,43 @@ remote_path: /opt/releases/app.tar.gz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作是否成功 |
-| `report` | string | 操作是否成功 |
-| `format` | string | 操作是否成功 |
-| `summary` | object | 報告內容 |
+| `ok` | boolean | Whether the operation succeeded |
+| `report` | string | The report |
+| `format` | string | The format |
+| `summary` | object | The summary |
 
-### 執行情境
+### Run Scenario
 
 `testing.scenario.run`
 
-執行情境式測試（BDD 風格）
+Execute scenario-based test (BDD style)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `scenario` | object | Yes | - | 包含 given/when/then 的情境定義 |
+| `scenario` | object | Yes | - | Scenario definition with given/when/then |
 | `context` | object | No | `{}` | Additional context data |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 包含 given/when/then 的情境定義 |
-| `passed` | boolean | 操作是否成功 |
-| `steps` | array | 操作是否成功 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `steps` | array | The steps |
 
-### 安全掃描
+### Security Scan
 
 `testing.security.scan`
 
-掃描安全漏洞
+Scan for security vulnerabilities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `targets` | array | Yes | - | 要掃描的檔案、URL 或路徑 |
+| `targets` | array | Yes | - | Files, URLs, or paths to scan |
 | `scan_type` | string | No | `all` | Scan Type |
 | `severity_threshold` | string | No | `medium` | Severity Threshold |
 
@@ -1573,45 +1603,45 @@ remote_path: /opt/releases/app.tar.gz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作是否成功 |
-| `vulnerabilities` | array | 操作是否成功 |
-| `summary` | object | 操作是否成功 |
+| `ok` | boolean | Whether the operation succeeded |
+| `vulnerabilities` | array | The vulnerabilities |
+| `summary` | object | The summary |
 
-### 執行測試套件
+### Run Test Suite
 
 `testing.suite.run`
 
-執行測試集合
+Execute a collection of tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | 測試定義陣列 |
+| `tests` | array | Yes | - | Array of test definitions |
 | `parallel` | boolean | No | `False` | Whether to parallel |
-| `max_failures` | number | No | `0` | 測試定義陣列 |
+| `max_failures` | number | No | `0` | 0 = no limit |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 0 = 無限制 |
-| `passed` | number | 0 = 無限制 |
-| `failed` | number | 操作是否成功 |
-| `skipped` | number | 通過的測試數量 |
-| `results` | array | 失敗的測試數量 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `skipped` | number | Number of tests skipped |
+| `results` | array | List of results |
 
-### 執行單元測試
+### Run Unit Tests
 
 `testing.unit.run`
 
-執行單元測試
+Execute unit tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | 測試檔案或目錄的路徑 |
+| `paths` | array | Yes | - | Paths to test files or directories |
 | `pattern` | string | No | `test_*.py` | Pattern |
 | `verbose` | boolean | No | `False` | Whether to verbose |
 
@@ -1619,67 +1649,67 @@ remote_path: /opt/releases/app.tar.gz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作是否成功 |
-| `passed` | number | 操作是否成功 |
-| `failed` | number | 操作是否成功 |
-| `errors` | number | 通過的測試數量 |
-| `results` | array | 失敗的測試數量 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `errors` | number | Number of errors encountered |
+| `results` | array | List of results |
 
-### 視覺比較
+### Visual Compare
 
 `testing.visual.compare`
 
-比較視覺輸出差異
+Compare visual outputs for differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | string | Yes | - | 實際圖片的路徑或 base64 |
-| `expected` | string | Yes | - | 實際圖片的路徑或 base64 |
-| `threshold` | number | No | `0.1` | 預期圖片的路徑或 base64 |
+| `actual` | string | Yes | - | Path or base64 of actual image |
+| `expected` | string | Yes | - | Path or base64 of expected image |
+| `threshold` | number | No | `0.1` | Max allowed difference (0-1) |
 | `output_diff` | boolean | No | `True` | Whether to output diff |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 允許的最大差異（0-1） |
-| `match` | boolean | 操作是否成功 |
-| `difference` | number | 操作是否成功 |
-| `diff_image` | string | 比對結果 |
+| `ok` | boolean | Whether the operation succeeded |
+| `match` | boolean | The match |
+| `difference` | number | The difference |
+| `diff_image` | string | The diff image |
 
-### 評估 UI 品質
+### Evaluate UI Quality
 
 `ui.evaluate`
 
-全面的 UI 品質評估，具備多維度評分
+Comprehensive UI quality evaluation with multi-dimensional scoring
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `screenshot` | string | Yes | - | 要評估的截圖路徑或網址 |
-| `app_type` | string | No | `web_app` | 應用程式類型 |
-| `page_type` | string | No | - | 正在評估的頁面類型 |
-| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | 要評估的特定標準（預設為全部） |
-| `target_audience` | string | No | - | 目標使用者說明 |
-| `brand_guidelines` | string | No | - | 簡要的品牌指南以供檢查 |
-| `min_score` | number | No | `70` | 通過的最低整體分數（0-100） |
-| `api_key` | string | No | - | OpenAI API 金鑰（預設使用 OPENAI_API_KEY 環境變數） |
+| `screenshot` | string | Yes | - | Screenshot path or URL to evaluate |
+| `app_type` | string | No | `web_app` | Type of application for context-aware evaluation |
+| `page_type` | string | No | - | Type of page being evaluated |
+| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | Specific criteria to evaluate (defaults to all) |
+| `target_audience` | string | No | - | Description of target users |
+| `brand_guidelines` | string | No | - | Brief brand guidelines to check against |
+| `min_score` | number | No | `70` | Minimum overall score to pass (0-100) |
+| `api_key` | string | No | - | OpenAI API key (defaults to OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 評估是否成功 |
-| `passed` | boolean | 是否通過 |
-| `overall_score` | number | 整體 UI 品質分數（0-100） |
-| `scores` | object | 各評估標準的分數 |
-| `strengths` | array | UI 優點列表 |
-| `issues` | array | 發現的問題 |
-| `recommendations` | array | 改善建議 |
-| `summary` | string | 評估摘要 |
+| `ok` | boolean | Whether evaluation succeeded |
+| `passed` | boolean | Whether UI meets minimum score threshold |
+| `overall_score` | number | Overall UI quality score (0-100) |
+| `scores` | object | Scores by evaluation criteria |
+| `strengths` | array | List of UI strengths |
+| `issues` | array | List of issues found with severity |
+| `recommendations` | array | Specific improvement recommendations |
+| `summary` | string | Executive summary of evaluation |
 
 **Example:** Evaluate Dashboard
 
@@ -1700,11 +1730,11 @@ page_type: product detail
 evaluation_criteria: ["usability", "cta_effectiveness", "visual_design"]
 ```
 
-### AI 圖片分析
+### Analyze Image with AI
 
 `vision.analyze`
 
-使用 OpenAI Vision API（GPT-4V）分析圖片
+Analyze images using OpenAI Vision API (GPT-4V)
 
 **Parameters:**
 
@@ -1725,11 +1755,11 @@ evaluation_criteria: ["usability", "cta_effectiveness", "visual_design"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 分析是否成功 |
-| `analysis` | string | 分析是否成功 |
-| `structured` | object | AI 分析結果 |
-| `model` | string | 結構化分析資料（如果 output_format 是 structured/json） |
-| `tokens_used` | number | 用於分析的模型 |
+| `ok` | boolean | Whether analysis succeeded |
+| `analysis` | string | The AI analysis result |
+| `structured` | object | Structured analysis data (if output_format is structured/json) |
+| `model` | string | Model used for analysis |
+| `tokens_used` | number | Total tokens used |
 
 **Example:** UI Review
 
@@ -1756,11 +1786,11 @@ prompt: Evaluate accessibility: color contrast, text readability, button sizes, 
 analysis_type: accessibility
 ```
 
-### 比較圖片
+### Compare Images
 
 `vision.compare`
 
-比較兩張圖片並識別視覺差異
+Compare two images and identify visual differences
 
 **Parameters:**
 
@@ -1780,12 +1810,12 @@ analysis_type: accessibility
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 比較是否成功 |
-| `has_differences` | boolean | 比較是否成功 |
-| `similarity_score` | number | 是否發現顯著差異 |
-| `differences` | array | 相似度百分比（0-100） |
-| `summary` | string | 識別到的差異列表 |
-| `recommendation` | string | 比較結果摘要 |
+| `ok` | boolean | Whether comparison succeeded |
+| `has_differences` | boolean | Whether significant differences were found |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `differences` | array | List of identified differences |
+| `summary` | string | Summary of comparison results |
+| `recommendation` | string | Pass/Fail recommendation based on threshold |
 
 **Example:** Visual Regression Test
 

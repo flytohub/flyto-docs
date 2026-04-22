@@ -6,20 +6,20 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 
 | Module | Description |
 |--------|-------------|
-| [Khả năng đọc HTML](#khả-năng-đọc-html) | Phân tích khả năng đọc nội dung |
-| [Trích xuất Forms](#trích-xuất-forms) | Trích xuất dữ liệu form từ HTML |
-| [Trích xuất Metadata](#trích-xuất-metadata) | Trích xuất metadata từ HTML |
-| [Trích xuất bảng](#trích-xuất-bảng) | Trích xuất dữ liệu bảng từ HTML |
-| [Tìm mẫu](#tìm-mẫu) | Tìm các mẫu dữ liệu lặp lại trong HTML |
-| [Cấu trúc HTML](#cấu-trúc-html) | Phân tích cấu trúc DOM HTML |
+| [HTML Readability](#html-readability) | Analyze content readability |
+| [Extract Forms](#extract-forms) | Extract form data from HTML |
+| [Extract Metadata](#extract-metadata) | Extract metadata from HTML |
+| [Extract Tables](#extract-tables) | Extract table data from HTML |
+| [Find Patterns](#find-patterns) | Find repeating data patterns in HTML |
+| [HTML Structure](#html-structure) | Analyze HTML DOM structure |
 
 ## Modules
 
-### Khả năng đọc HTML
+### HTML Readability
 
 `analysis.html.analyze_readability`
 
-Phân tích khả năng đọc nội dung
+Analyze content readability
 
 **Parameters:**
 
@@ -34,11 +34,11 @@ Phân tích khả năng đọc nội dung
 | `type` | any | object |
 | `properties` | any |  |
 
-### Trích xuất Forms
+### Extract Forms
 
 `analysis.html.extract_forms`
 
-Trích xuất dữ liệu form từ HTML
+Extract form data from HTML
 
 **Parameters:**
 
@@ -53,11 +53,11 @@ Trích xuất dữ liệu form từ HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Trích xuất Metadata
+### Extract Metadata
 
 `analysis.html.extract_metadata`
 
-Trích xuất metadata từ HTML
+Extract metadata from HTML
 
 **Parameters:**
 
@@ -72,11 +72,11 @@ Trích xuất metadata từ HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Trích xuất bảng
+### Extract Tables
 
 `analysis.html.extract_tables`
 
-Trích xuất dữ liệu bảng từ HTML
+Extract table data from HTML
 
 **Parameters:**
 
@@ -91,11 +91,11 @@ Trích xuất dữ liệu bảng từ HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Tìm mẫu
+### Find Patterns
 
 `analysis.html.find_patterns`
 
-Tìm các mẫu dữ liệu lặp lại trong HTML
+Find repeating data patterns in HTML
 
 **Parameters:**
 
@@ -110,11 +110,11 @@ Tìm các mẫu dữ liệu lặp lại trong HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Cấu trúc HTML
+### HTML Structure
 
 `analysis.html.structure`
 
-Phân tích cấu trúc DOM HTML
+Analyze HTML DOM structure
 
 **Parameters:**
 

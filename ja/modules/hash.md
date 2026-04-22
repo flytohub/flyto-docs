@@ -6,47 +6,47 @@ SHA-256 and SHA-512 cryptographic hashing.
 
 | Module | Description |
 |--------|-------------|
-| [SHA-256ハッシュ](#sha-256ハッシュ) | テキストのSHA-256暗号ハッシュを計算 |
-| [SHA-512ハッシュ](#sha-512ハッシュ) | テキストのSHA-512暗号ハッシュを計算 |
+| [SHA-256 Hash](#sha-256-hash) | Calculate SHA-256 cryptographic hash of text |
+| [SHA-512 Hash](#sha-512-hash) | Calculate SHA-512 cryptographic hash of text |
 
 ## Modules
 
-### SHA-256ハッシュ
+### SHA-256 Hash
 
 `hash.sha256`
 
-テキストのSHA-256暗号ハッシュを計算
+Calculate SHA-256 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | ハッシュするテキスト |
-| `encoding` | string | No | `utf-8` | ハッシュするテキスト |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | テキストエンコーディング |
-| `algorithm` | string | SHA-256ハッシュ（64桁の16進数） |
+| `hash` | string | SHA-256 hash (64 hex characters) |
+| `algorithm` | string | Hash algorithm used |
 
-### SHA-512ハッシュ
+### SHA-512 Hash
 
 `hash.sha512`
 
-テキストのSHA-512暗号ハッシュを計算
+Calculate SHA-512 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | ハッシュするテキスト |
-| `encoding` | string | No | `utf-8` | ハッシュするテキスト |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | テキストエンコーディング |
-| `algorithm` | string | SHA-512ハッシュ（128桁の16進数） |
+| `hash` | string | SHA-512 hash (128 hex characters) |
+| `algorithm` | string | Hash algorithm used |

@@ -6,25 +6,25 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Module | Description |
 |--------|-------------|
-| [Chaine en minuscules](#chaine-en-minuscules) | Convertir une chaine en minuscules |
-| [Remplir Chaîne](#remplir-chaîne) | Remplir une chaîne à une longueur spécifiée |
-| [Remplacer dans la chaine](#remplacer-dans-la-chaine) | Remplacer les occurrences d'une sous-chaine dans une chaine |
-| [Inverser la chaine](#inverser-la-chaine) | Inverser les caracteres dans une chaine |
-| [Slugifier](#slugifier) | Convertir le texte en slug compatible URL |
-| [Diviser la chaine](#diviser-la-chaine) | Diviser une chaine en tableau en utilisant un delimiteur |
-| [Modèle](#modèle) | Rendre un modèle avec substitution de variables |
-| [Chaine en casse de titre](#chaine-en-casse-de-titre) | Convertir une chaine en casse de titre |
-| [Rogner la chaine](#rogner-la-chaine) | Supprimer les espaces des deux extremites d'une chaine |
-| [Tronquer Chaîne](#tronquer-chaîne) | Tronquer une chaîne à une longueur maximale |
-| [Chaine en majuscules](#chaine-en-majuscules) | Convertir une chaine en majuscules |
+| [String Lowercase](#string-lowercase) | Convert a string to lowercase |
+| [Pad String](#pad-string) | Pad a string to a specified length |
+| [String Replace](#string-replace) | Replace occurrences of a substring in a string |
+| [String Reverse](#string-reverse) | Reverse the characters in a string |
+| [Slugify](#slugify) | Convert text to URL-friendly slug |
+| [Split String](#split-string) | Split a string into an array using a delimiter |
+| [Template](#template) | Render a template with variable substitution |
+| [Title Case String](#title-case-string) | Convert string to title case |
+| [String Trim](#string-trim) | Remove whitespace from both ends of a string |
+| [Truncate String](#truncate-string) | Truncate a string to a maximum length |
+| [String Uppercase](#string-uppercase) | Convert a string to uppercase |
 
 ## Modules
 
-### Chaine en minuscules
+### String Lowercase
 
 `string.lowercase`
 
-Convertir une chaine en minuscules
+Convert a string to lowercase
 
 **Parameters:**
 
@@ -36,38 +36,38 @@ Convertir une chaine en minuscules
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Chaine convertie en minuscules |
-| `original` | string | Chaine convertie en minuscules |
-| `status` | string | Chaine convertie en minuscules |
+| `result` | string | Lowercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### Remplir Chaîne
+### Pad String
 
 `string.pad`
 
-Remplir une chaîne à une longueur spécifiée
+Pad a string to a specified length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Texte à remplir |
-| `length` | number | Yes | - | Texte à remplir |
-| `pad_char` | string | No | ` ` | Longueur cible |
-| `position` | string | No | `end` | Caractère de remplissage |
+| `text` | string | Yes | - | Text to pad |
+| `length` | number | Yes | - | Target length |
+| `pad_char` | string | No | ` ` | Character to pad with |
+| `position` | string | No | `end` | Where to add padding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Chaîne remplie |
-| `original` | string | Chaîne remplie |
-| `added` | number | Chaîne remplie |
+| `result` | string | Padded string |
+| `original` | string | Original string |
+| `added` | number | Characters added |
 
-### Remplacer dans la chaine
+### String Replace
 
 `string.replace`
 
-Remplacer les occurrences d'une sous-chaine dans une chaine
+Replace occurrences of a substring in a string
 
 **Parameters:**
 
@@ -81,17 +81,17 @@ Remplacer les occurrences d'une sous-chaine dans une chaine
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Chaine avec les remplacements appliques |
-| `original` | string | Chaine avec les remplacements appliques |
-| `search` | string | Chaine avec les remplacements appliques |
-| `replace` | string | Chaine d'entree originale |
-| `status` | string | Chaine de recherche qui a ete remplacee |
+| `result` | string | String with replacements applied |
+| `original` | string | Original input string |
+| `search` | string | Search string that was replaced |
+| `replace` | string | Replacement string used |
+| `status` | string | Operation status |
 
-### Inverser la chaine
+### String Reverse
 
 `string.reverse`
 
-Inverser les caracteres dans une chaine
+Reverse the characters in a string
 
 **Parameters:**
 
@@ -103,37 +103,37 @@ Inverser les caracteres dans une chaine
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Chaine inversee |
-| `original` | string | Chaine inversee |
-| `length` | number | Chaine inversee |
+| `result` | string | Reversed string |
+| `original` | string | Original input string |
+| `length` | number | String length |
 
-### Slugifier
+### Slugify
 
 `string.slugify`
 
-Convertir le texte en slug compatible URL
+Convert text to URL-friendly slug
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Texte à slugifier |
-| `separator` | string | No | `-` | Texte à slugifier |
-| `lowercase` | boolean | No | `True` | Séparateur de mots |
-| `max_length` | number | No | `0` | Convertir en minuscules |
+| `text` | string | Yes | - | Text to slugify |
+| `separator` | string | No | `-` | Word separator |
+| `lowercase` | boolean | No | `True` | Convert to lowercase |
+| `max_length` | number | No | `0` | Maximum slug length (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Longueur maximale du slug (0 = illimitée) |
-| `original` | string | Slug compatible URL |
+| `result` | string | URL-friendly slug |
+| `original` | string | Original text |
 
-### Diviser la chaine
+### Split String
 
 `string.split`
 
-Diviser une chaine en tableau en utilisant un delimiteur
+Split a string into an array using a delimiter
 
 **Parameters:**
 
@@ -147,41 +147,41 @@ Diviser une chaine en tableau en utilisant un delimiteur
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `parts` | array | Tableau des parties de chaine divisees |
-| `result` | array | Tableau des parties de chaine divisees |
-| `length` | number | Tableau des parties de chaine divisees |
-| `original` | string | Alias pour parts - tableau des parties de chaine divisees |
-| `delimiter` | string | Nombre de parties apres la division |
-| `status` | string | Chaine d'entree originale |
+| `parts` | array | Array of split string parts |
+| `result` | array | Alias for parts - array of split string parts |
+| `length` | number | Number of parts after split |
+| `original` | string | Original input string |
+| `delimiter` | string | Delimiter used for splitting |
+| `status` | string | Operation status |
 
-### Modèle
+### Template
 
 `string.template`
 
-Rendre un modèle avec substitution de variables
+Render a template with variable substitution
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `template` | string | Yes | - | Chaîne de modèle avec des placeholders {<!-- -->{variable}<!-- -->} |
-| `variables` | object | Yes | - | Variables à substituer |
-| `missing_value` | string | No | - | Valeur pour les variables non définies |
-| `preserve_missing` | boolean | No | `False` | Valeur pour les variables non définies |
+| `template` | string | Yes | - | Template string with {<!-- -->{variable}<!-- -->} placeholders |
+| `variables` | object | Yes | - | Variables to substitute |
+| `missing_value` | string | No | - | Value for undefined variables |
+| `preserve_missing` | boolean | No | `False` | Keep placeholder if variable is missing |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Conserver le placeholder si la variable est manquante |
-| `replaced` | number | Modèle rendu |
-| `missing` | array | Modèle rendu |
+| `result` | string | Rendered template |
+| `replaced` | number | Number of replacements made |
+| `missing` | array | Missing variable names |
 
-### Chaine en casse de titre
+### Title Case String
 
 `string.titlecase`
 
-Convertir une chaine en casse de titre
+Convert string to title case
 
 **Parameters:**
 
@@ -193,7 +193,7 @@ Convertir une chaine en casse de titre
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Chaine convertie en casse de titre |
+| `result` | string | Title case converted string |
 
 **Example:** Convert to title case
 
@@ -207,11 +207,11 @@ text: hello world from flyto
 text: john doe
 ```
 
-### Rogner la chaine
+### String Trim
 
 `string.trim`
 
-Supprimer les espaces des deux extremites d'une chaine
+Remove whitespace from both ends of a string
 
 **Parameters:**
 
@@ -223,39 +223,39 @@ Supprimer les espaces des deux extremites d'une chaine
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Chaine rognee avec espaces supprimes |
-| `original` | string | Chaine rognee avec espaces supprimes |
-| `status` | string | Chaine rognee avec espaces supprimes |
+| `result` | string | Trimmed string with whitespace removed |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### Tronquer Chaîne
+### Truncate String
 
 `string.truncate`
 
-Tronquer une chaîne à une longueur maximale
+Truncate a string to a maximum length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Texte à tronquer |
-| `length` | number | Yes | - | Texte à tronquer |
-| `suffix` | string | No | `...` | Longueur maximale |
-| `word_boundary` | boolean | No | `False` | Texte à ajouter si tronqué |
+| `text` | string | Yes | - | Text to truncate |
+| `length` | number | Yes | - | Maximum length |
+| `suffix` | string | No | `...` | Text to append if truncated |
+| `word_boundary` | boolean | No | `False` | Break at word boundary |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Couper à la limite du mot |
-| `original` | string | Chaîne tronquée |
-| `truncated` | boolean | Chaîne tronquée |
-| `removed` | number | Chaîne originale |
+| `result` | string | Truncated string |
+| `original` | string | Original string |
+| `truncated` | boolean | Whether string was truncated |
+| `removed` | number | Characters removed |
 
-### Chaine en majuscules
+### String Uppercase
 
 `string.uppercase`
 
-Convertir une chaine en majuscules
+Convert a string to uppercase
 
 **Parameters:**
 
@@ -267,6 +267,6 @@ Convertir une chaine en majuscules
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Chaine convertie en majuscules |
-| `original` | string | Chaine convertie en majuscules |
-| `status` | string | Chaine convertie en majuscules |
+| `result` | string | Uppercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |

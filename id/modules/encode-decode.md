@@ -6,161 +6,161 @@ Base64, hex, URL, and HTML encoding and decoding.
 
 | Module | Description |
 |--------|-------------|
-| [Dekode Base64](#dekode-base64) | Dekode teks yang dikodekan Base64 |
-| [Dekode Hex](#dekode-hex) | Dekode heksadesimal ke teks |
-| [Dekode URL](#dekode-url) | Dekode teks yang dikodekan URL |
-| [Encode Base64](#encode-base64) | Encode teks ke Base64 |
-| [Encode Hex](#encode-hex) | Encode teks ke heksadesimal |
-| [Encode HTML](#encode-html) | Encode teks ke entitas HTML |
-| [Encode URL](#encode-url) | Encode URL teks (percent encoding) |
+| [Base64 Decode](#base64-decode) | Decode Base64 encoded text |
+| [Hex Decode](#hex-decode) | Decode hexadecimal to text |
+| [URL Decode](#url-decode) | Decode URL encoded text |
+| [Base64 Encode](#base64-encode) | Encode text to Base64 |
+| [Hex Encode](#hex-encode) | Encode text to hexadecimal |
+| [HTML Encode](#html-encode) | Encode text to HTML entities |
+| [URL Encode](#url-encode) | URL encode text (percent encoding) |
 
 ## Modules
 
-### Dekode Base64
+### Base64 Decode
 
 `decode.base64`
 
-Dekode teks yang dikodekan Base64
+Decode Base64 encoded text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Teks yang dikodekan Base64 untuk didekode |
-| `encoding` | string | No | `utf-8` | Teks yang dikodekan Base64 untuk didekode |
-| `url_safe` | boolean | No | `False` | Pengkodean karakter untuk keluaran |
+| `text` | text | Yes | - | Base64 encoded text to decode |
+| `encoding` | string | No | `utf-8` | Character encoding for output |
+| `url_safe` | boolean | No | `False` | Input is URL-safe Base64 |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Input adalah Base64 aman-URL |
-| `original` | string | String yang didekode |
-| `valid` | boolean | String yang didekode |
+| `result` | string | Decoded string |
+| `original` | string | Original Base64 input |
+| `valid` | boolean | Whether decoding was successful |
 
-### Dekode Hex
+### Hex Decode
 
 `decode.hex`
 
-Dekode heksadesimal ke teks
+Decode hexadecimal to text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Teks heksadesimal untuk didekode |
-| `encoding` | string | No | `utf-8` | Teks heksadesimal untuk didekode |
+| `text` | text | Yes | - | Hexadecimal text to decode |
+| `encoding` | string | No | `utf-8` | Character encoding for output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Pengkodean karakter untuk keluaran |
-| `original` | string | String yang didekode |
-| `valid` | boolean | String yang didekode |
+| `result` | string | Decoded string |
+| `original` | string | Original hex input |
+| `valid` | boolean | Whether decoding was successful |
 
-### Dekode URL
+### URL Decode
 
 `decode.url`
 
-Dekode teks yang dikodekan URL
+Decode URL encoded text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Teks yang dikodekan URL untuk didekode |
-| `plus_spaces` | boolean | No | `False` | Teks yang dikodekan URL untuk didekode |
+| `text` | text | Yes | - | URL encoded text to decode |
+| `plus_spaces` | boolean | No | `False` | Treat + as space (form decoding) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Perlakukan + sebagai spasi (dekode formulir) |
-| `original` | string | String yang didekode |
+| `result` | string | Decoded string |
+| `original` | string | Original URL encoded input |
 
-### Encode Base64
+### Base64 Encode
 
 `encode.base64`
 
-Encode teks ke Base64
+Encode text to Base64
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Teks untuk diencode |
-| `encoding` | string | No | `utf-8` | Teks untuk diencode |
-| `url_safe` | boolean | No | `False` | Encoding karakter |
+| `text` | text | Yes | - | Text to encode |
+| `encoding` | string | No | `utf-8` | Character encoding |
+| `url_safe` | boolean | No | `False` | Use URL-safe Base64 encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Gunakan encoding Base64 yang aman untuk URL |
-| `original` | string | String yang diencode Base64 |
-| `length` | number | String yang diencode Base64 |
+| `result` | string | Base64 encoded string |
+| `original` | string | Original input |
+| `length` | number | Length of encoded string |
 
-### Encode Hex
+### Hex Encode
 
 `encode.hex`
 
-Encode teks ke heksadesimal
+Encode text to hexadecimal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Teks untuk diencode ke hex |
-| `encoding` | string | No | `utf-8` | Teks untuk diencode ke hex |
-| `uppercase` | boolean | No | `False` | Encoding karakter |
-| `separator` | string | No | - | Gunakan huruf hex kapital |
+| `text` | text | Yes | - | Text to encode to hex |
+| `encoding` | string | No | `utf-8` | Character encoding |
+| `uppercase` | boolean | No | `False` | Use uppercase hex letters |
+| `separator` | string | No | - | Separator between hex bytes |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Pemisah antara byte hex |
-| `original` | string | String yang diencode Hex |
-| `byte_count` | number | String yang diencode Hex |
+| `result` | string | Hex encoded string |
+| `original` | string | Original input |
+| `byte_count` | number | Number of bytes encoded |
 
-### Encode HTML
+### HTML Encode
 
 `encode.html`
 
-Encode teks ke entitas HTML
+Encode text to HTML entities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Teks untuk diencode sebagai entitas HTML |
-| `quote` | boolean | No | `True` | Teks untuk diencode sebagai entitas HTML |
+| `text` | text | Yes | - | Text to encode as HTML entities |
+| `quote` | boolean | No | `True` | Also encode quote characters |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Juga encode karakter kutip |
-| `original` | string | String yang diencode HTML |
+| `result` | string | HTML encoded string |
+| `original` | string | Original input |
 
-### Encode URL
+### URL Encode
 
 `encode.url`
 
-Encode URL teks (percent encoding)
+URL encode text (percent encoding)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Teks untuk diencode URL |
-| `plus_spaces` | boolean | No | `False` | Teks untuk diencode URL |
-| `safe` | string | No | - | Gunakan + sebagai pengganti %20 untuk spasi (form encoding) |
+| `text` | text | Yes | - | Text to URL encode |
+| `plus_spaces` | boolean | No | `False` | Use + instead of %20 for spaces (form encoding) |
+| `safe` | string | No | - | Characters that should not be encoded |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Karakter yang tidak boleh diencode |
-| `original` | string | String yang diencode URL |
+| `result` | string | URL encoded string |
+| `original` | string | Original input |

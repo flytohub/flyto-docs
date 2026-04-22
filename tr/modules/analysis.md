@@ -6,20 +6,20 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 
 | Module | Description |
 |--------|-------------|
-| [HTML Okunabilirlik](#html-okunabilirlik) | İçerik okunabilirliğini analiz et |
-| [Formları Çıkar](#formları-çıkar) | HTML'den form verilerini çıkar |
-| [Meta Verileri Çıkar](#meta-verileri-çıkar) | HTML'den meta verileri çıkar |
-| [Tabloları Çıkar](#tabloları-çıkar) | HTML'den tablo verilerini çıkar |
-| [Kalıpları Bul](#kalıpları-bul) | HTML'de tekrarlanan veri kalıplarını bul |
-| [HTML Yapısı](#html-yapısı) | HTML DOM yapısını analiz et |
+| [HTML Readability](#html-readability) | Analyze content readability |
+| [Extract Forms](#extract-forms) | Extract form data from HTML |
+| [Extract Metadata](#extract-metadata) | Extract metadata from HTML |
+| [Extract Tables](#extract-tables) | Extract table data from HTML |
+| [Find Patterns](#find-patterns) | Find repeating data patterns in HTML |
+| [HTML Structure](#html-structure) | Analyze HTML DOM structure |
 
 ## Modules
 
-### HTML Okunabilirlik
+### HTML Readability
 
 `analysis.html.analyze_readability`
 
-İçerik okunabilirliğini analiz et
+Analyze content readability
 
 **Parameters:**
 
@@ -34,11 +34,11 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 | `type` | any | object |
 | `properties` | any |  |
 
-### Formları Çıkar
+### Extract Forms
 
 `analysis.html.extract_forms`
 
-HTML'den form verilerini çıkar
+Extract form data from HTML
 
 **Parameters:**
 
@@ -53,11 +53,11 @@ HTML'den form verilerini çıkar
 | `type` | any | object |
 | `properties` | any |  |
 
-### Meta Verileri Çıkar
+### Extract Metadata
 
 `analysis.html.extract_metadata`
 
-HTML'den meta verileri çıkar
+Extract metadata from HTML
 
 **Parameters:**
 
@@ -72,11 +72,11 @@ HTML'den meta verileri çıkar
 | `type` | any | object |
 | `properties` | any |  |
 
-### Tabloları Çıkar
+### Extract Tables
 
 `analysis.html.extract_tables`
 
-HTML'den tablo verilerini çıkar
+Extract table data from HTML
 
 **Parameters:**
 
@@ -91,11 +91,11 @@ HTML'den tablo verilerini çıkar
 | `type` | any | object |
 | `properties` | any |  |
 
-### Kalıpları Bul
+### Find Patterns
 
 `analysis.html.find_patterns`
 
-HTML'de tekrarlanan veri kalıplarını bul
+Find repeating data patterns in HTML
 
 **Parameters:**
 
@@ -110,11 +110,11 @@ HTML'de tekrarlanan veri kalıplarını bul
 | `type` | any | object |
 | `properties` | any |  |
 
-### HTML Yapısı
+### HTML Structure
 
 `analysis.html.structure`
 
-HTML DOM yapısını analiz et
+Analyze HTML DOM structure
 
 **Parameters:**
 

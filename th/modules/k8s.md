@@ -6,19 +6,19 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Module | Description |
 |--------|-------------|
-| [ใช้ Manifest](#ใช้-manifest) | ใช้ Kubernetes manifest ผ่าน kubectl apply |
-| [อธิบายทรัพยากร](#อธิบายทรัพยากร) | อธิบายทรัพยากร Kubernetes อย่างละเอียด |
-| [รับ Pods](#รับ-pods) | แสดงรายการ Kubernetes pods ใน namespace |
-| [รับบันทึก Pod](#รับบันทึก-pod) | ดึงบันทึกจาก Kubernetes pod |
-| [ปรับขนาด Deployment](#ปรับขนาด-deployment) | ปรับขนาด Kubernetes deployment ไปยังจำนวน replicas ที่ระบุ |
+| [Apply Manifest](#apply-manifest) | Apply a Kubernetes manifest via kubectl apply |
+| [Describe Resource](#describe-resource) | Describe a Kubernetes resource in detail |
+| [Get Pods](#get-pods) | List Kubernetes pods in a namespace |
+| [Get Pod Logs](#get-pod-logs) | Retrieve logs from a Kubernetes pod |
+| [Scale Deployment](#scale-deployment) | Scale a Kubernetes deployment to a specified replica count |
 
 ## Modules
 
-### ใช้ Manifest
+### Apply Manifest
 
 `k8s.apply`
 
-ใช้ Kubernetes manifest ผ่าน kubectl apply
+Apply a Kubernetes manifest via kubectl apply
 
 **Parameters:**
 
@@ -32,16 +32,16 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `kind` | string | ประเภททรัพยากร (เช่น Deployment, Service) |
-| `name` | string | ชื่อทรัพยากร |
-| `namespace` | string | Namespace ของทรัพยากร |
-| `action` | string | การกระทำที่ดำเนินการ (สร้าง, ตั้งค่า, ไม่เปลี่ยนแปลง) |
+| `kind` | string | Resource kind (e.g. Deployment, Service) |
+| `name` | string | Resource name |
+| `namespace` | string | Resource namespace |
+| `action` | string | Action taken (created, configured, unchanged) |
 
-### อธิบายทรัพยากร
+### Describe Resource
 
 `k8s.describe`
 
-อธิบายทรัพยากร Kubernetes อย่างละเอียด
+Describe a Kubernetes resource in detail
 
 **Parameters:**
 
@@ -56,16 +56,16 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `resource_type` | string | ประเภททรัพยากรที่อธิบาย |
-| `name` | string | ชื่อทรัพยากร |
-| `namespace` | string | Namespace ของ Kubernetes |
-| `description` | string | ข้อความผลลัพธ์เต็มของ kubectl describe |
+| `resource_type` | string | Resource type that was described |
+| `name` | string | Resource name |
+| `namespace` | string | Kubernetes namespace |
+| `description` | string | Full kubectl describe output text |
 
-### รับ Pods
+### Get Pods
 
 `k8s.get_pods`
 
-แสดงรายการ Kubernetes pods ใน namespace
+List Kubernetes pods in a namespace
 
 **Parameters:**
 
@@ -79,14 +79,14 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pods` | array | รายการ pods พร้อมข้อมูลสถานะ |
-| `count` | number | จำนวนรวมของ pods ที่พบ |
+| `pods` | array | List of pods with status information |
+| `count` | number | Total number of pods found |
 
-### รับบันทึก Pod
+### Get Pod Logs
 
 `k8s.logs`
 
-ดึงบันทึกจาก Kubernetes pod
+Retrieve logs from a Kubernetes pod
 
 **Parameters:**
 
@@ -103,15 +103,15 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pod` | string | ชื่อ Pod |
-| `logs` | string | ข้อความผลลัพธ์บันทึก |
-| `lines` | number | จำนวนบรรทัดบันทึกที่คืนค่า |
+| `pod` | string | Pod name |
+| `logs` | string | Log output text |
+| `lines` | number | Number of log lines returned |
 
-### ปรับขนาด Deployment
+### Scale Deployment
 
 `k8s.scale`
 
-ปรับขนาด Kubernetes deployment ไปยังจำนวน replicas ที่ระบุ
+Scale a Kubernetes deployment to a specified replica count
 
 **Parameters:**
 
@@ -126,7 +126,7 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deployment` | string | ชื่อ Deployment |
-| `replicas` | number | จำนวน replicas ที่ร้องขอ |
-| `namespace` | string | Namespace ของ Kubernetes |
-| `scaled` | boolean | การดำเนินการปรับขนาดสำเร็จหรือไม่ |
+| `deployment` | string | Deployment name |
+| `replicas` | number | Requested replica count |
+| `namespace` | string | Kubernetes namespace |
+| `scaled` | boolean | Whether the scale operation succeeded |

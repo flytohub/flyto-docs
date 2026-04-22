@@ -6,33 +6,33 @@ Execute JavaScript, Python, or shell commands in isolated environments.
 
 | Module | Description |
 |--------|-------------|
-| [JavaScript 実行](#javascript-実行) | Node.jsでタイムアウト付きのJavaScriptコードを実行 |
-| [Python 実行](#python-実行) | サブプロセスでタイムアウト付きのPythonコードを実行 |
-| [シェル実行](#シェル実行) | タイムアウトと環境制御付きでシェルコマンドを実行 |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code via Node.js with timeout |
+| [Execute Python](#execute-python) | Execute Python code in a subprocess with timeout |
+| [Execute Shell](#execute-shell) | Execute a shell command with timeout and environment control |
 
 ## Modules
 
-### JavaScript 実行
+### Execute JavaScript
 
 `sandbox.execute_js`
 
-Node.jsでタイムアウト付きのJavaScriptコードを実行
+Execute JavaScript code via Node.js with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | Node.jsで実行するJavaScriptコード |
-| `timeout` | number | No | `10` | 実行タイムアウト（秒） |
+| `code` | string | Yes | - | JavaScript code to execute via Node.js |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | スクリプトの標準出力 |
-| `stderr` | string | スクリプトの標準エラー |
-| `exit_code` | number | プロセスの終了コード（0 = 成功） |
-| `execution_time_ms` | number | 実行時間（ミリ秒） |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple console.log
 
@@ -48,28 +48,28 @@ code: const data = { name: "test", value: 42 };
 console.log(JSON.stringify(data, null, 2));
 ```
 
-### Python 実行
+### Execute Python
 
 `sandbox.execute_python`
 
-サブプロセスでタイムアウト付きのPythonコードを実行
+Execute Python code in a subprocess with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | 実行するPythonコード |
-| `timeout` | number | No | `10` | 実行タイムアウト（秒） |
-| `allowed_modules` | array | No | - | インポート可能なモジュールのホワイトリスト（すべて許可する場合は空のまま） |
+| `code` | string | Yes | - | Python code to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `allowed_modules` | array | No | - | Whitelist of importable modules (leave empty to allow all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | スクリプトの標準出力 |
-| `stderr` | string | スクリプトの標準エラー |
-| `exit_code` | number | プロセスの終了コード（0 = 成功） |
-| `execution_time_ms` | number | 実行時間（ミリ秒） |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple print
 
@@ -86,29 +86,29 @@ print(math.pi)
 allowed_modules: ["math"]
 ```
 
-### シェル実行
+### Execute Shell
 
 `sandbox.execute_shell`
 
-タイムアウトと環境制御付きでシェルコマンドを実行
+Execute a shell command with timeout and environment control
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `command` | string | Yes | - | 実行するシェルコマンド |
-| `timeout` | number | No | `10` | 実行タイムアウト（秒） |
-| `working_dir` | string | No | - | コマンドの作業ディレクトリ |
-| `env` | object | No | - | 設定する追加の環境変数（現在の環境とマージ） |
+| `command` | string | Yes | - | Shell command to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `working_dir` | string | No | - | Working directory for the command |
+| `env` | object | No | - | Additional environment variables to set (merged with current env) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | コマンドの標準出力 |
-| `stderr` | string | コマンドの標準エラー |
-| `exit_code` | number | プロセスの終了コード（0 = 成功） |
-| `execution_time_ms` | number | 実行時間（ミリ秒） |
+| `stdout` | string | Standard output from the command |
+| `stderr` | string | Standard error from the command |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple echo
 

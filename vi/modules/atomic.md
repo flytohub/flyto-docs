@@ -2,62 +2,63 @@
 
 Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and testing.
 
-**44 modules**
+**45 modules**
 
 | Module | Description |
 |--------|-------------|
-| [Lọc mảng](#lọc-mảng) | Lọc các phần tử mảng theo điều kiện |
-| [Sắp xếp mảng](#sắp-xếp-mảng) | Sắp xếp các phần tử mảng theo thứ tự tăng hoặc giảm dần |
-| [Mảng duy nhất](#mảng-duy-nhất) | Loại bỏ các giá trị trùng lặp khỏi mảng |
+| [Filter Array](#filter-array) | Filter array elements by condition |
+| [Sort Array](#sort-array) | Sort array elements in ascending or descending order |
+| [Array Unique](#array-unique) | Remove duplicate values from array |
 | [OAuth2 Token Exchange](#oauth2-token-exchange) | Exchange authorization code, refresh token, or client credentials for an access token |
-| [Tra cứu DNS](#tra-cứu-dns) | Tra cứu DNS cho bản ghi tên miền |
-| [So sánh Văn bản](#so-sánh-văn-bản) | Tạo sự khác biệt giữa hai chuỗi văn bản |
-| [Chỉnh sửa Tệp](#chỉnh-sửa-tệp) | Thay thế văn bản trong tệp bằng cách khớp chuỗi chính xác |
-| [Kiểm tra tệp tồn tại](#kiểm-tra-tệp-tồn-tại) | Kiểm tra xem tệp hoặc thư mục có tồn tại không |
-| [Đọc tệp](#đọc-tệp) | Đọc nội dung từ tệp |
-| [Ghi tệp](#ghi-tệp) | Ghi nội dung vào tệp |
-| [Git Clone](#git-clone) | Clone một kho lưu trữ git |
-| [Git Commit](#git-commit) | Tạo một commit git |
-| [Git Diff](#git-diff) | Lấy git diff |
+| [DNS Lookup](#dns-lookup) | DNS lookup for domain records |
+| [Diff Content](#diff-content) | Generate unified diff between original and modified content |
+| [Edit File](#edit-file) | Replace a string in a file (targeted edit, not full overwrite) |
+| [Check File Exists](#check-file-exists) | Check if a file or directory exists |
+| [Read File](#read-file) | Read content from a file |
+| [Write File](#write-file) | Write content to a file |
+| [Git Clone](#git-clone) | Clone a git repository |
+| [Git Commit](#git-commit) | Create a git commit |
+| [Git Diff](#git-diff) | Get git diff |
+| [HTTP Batch](#http-batch) | Run a batch of HTTP probes sequentially and capture timing + body |
 | [HTTP Paginate](#http-paginate) | Automatically iterate through paginated API endpoints and collect all results |
-| [Yêu cầu HTTP](#yêu-cầu-http) | Gửi yêu cầu HTTP và nhận phản hồi |
-| [Xác nhận phản hồi HTTP](#xác-nhận-phản-hồi-http) | Xác nhận và xác thực các thuộc tính phản hồi HTTP |
+| [HTTP Request](#http-request) | Send HTTP request and receive response |
+| [Assert HTTP Response](#assert-http-response) | Assert and validate HTTP response properties |
 | [HTTP Session](#http-session) | Send a sequence of HTTP requests with persistent cookies (login → action → logout) |
 | [Webhook Wait](#webhook-wait) | Start a temporary server and wait for an incoming webhook callback |
-| [LLM Chat](#llm-chat) | Tương tác với API LLM cho các thao tác thông minh |
-| [Sửa lỗi code AI](#sửa-lỗi-code-ai) | Tự động tạo sửa lỗi code dựa trên các vấn đề |
-| [Tính toán](#tính-toán) | Thực hiện các phép toán cơ bản |
-| [Kiểm tra sức khỏe HTTP](#kiểm-tra-sức-khỏe-http) | Kiểm tra sức khỏe HTTP / giám sát thời gian hoạt động |
-| [Kiểm tra cổng](#kiểm-tra-cổng) | Kiểm tra xem cổng mạng có mở hay đóng |
-| [Chờ cổng](#chờ-cổng) | Chờ cổng mạng có sẵn |
-| [Liệt kê tiến trình](#liệt-kê-tiến-trình) | Liệt kê tất cả các tiến trình nền đang chạy |
-| [Khởi động tiến trình nền](#khởi-động-tiến-trình-nền) | Khởi động tiến trình nền (server, dịch vụ, v.v.) |
-| [Dừng tiến trình](#dừng-tiến-trình) | Dừng tiến trình nền đang chạy |
-| [Thực thi lệnh Shell](#thực-thi-lệnh-shell) | Thực thi lệnh shell và bắt đầu ra |
-| [Thực thi SSH](#thực-thi-ssh) | Thực thi lệnh trên máy chủ từ xa qua SSH |
-| [Tải xuống SFTP](#tải-xuống-sftp) | Tải tệp từ máy chủ từ xa qua SFTP |
-| [Tải lên SFTP](#tải-lên-sftp) | Tải tệp lên máy chủ từ xa qua SFTP |
-| [Chạy các bước E2E](#chạy-các-bước-e2e) | Thực thi các bước kiểm thử end-to-end tuần tự |
-| [Cổng chất lượng](#cổng-chất-lượng) | Đánh giá các chỉ số chất lượng so với ngưỡng định nghĩa |
-| [Chạy kiểm thử HTTP](#chạy-kiểm-thử-http) | Thực thi bộ kiểm thử API HTTP |
-| [Chạy Linter](#chạy-linter) | Chạy kiểm tra lint trên mã nguồn |
-| [Tạo báo cáo](#tạo-báo-cáo) | Tạo báo cáo thực thi kiểm thử |
-| [Chạy kịch bản](#chạy-kịch-bản) | Thực thi kiểm thử dựa trên kịch bản (kiểu BDD) |
-| [Quét bảo mật](#quét-bảo-mật) | Quét lỗ hổng bảo mật |
-| [Chạy bộ kiểm thử](#chạy-bộ-kiểm-thử) | Thực thi một bộ kiểm thử |
-| [Chạy kiểm thử đơn vị](#chạy-kiểm-thử-đơn-vị) | Thực thi kiểm thử đơn vị |
-| [So sánh hình ảnh](#so-sánh-hình-ảnh) | So sánh đầu ra hình ảnh để tìm sự khác biệt |
-| [Đánh giá chất lượng UI](#đánh-giá-chất-lượng-ui) | Đánh giá chất lượng UI toàn diện với điểm số đa chiều |
-| [Phân tích hình ảnh với AI](#phân-tích-hình-ảnh-với-ai) | Phân tích hình ảnh sử dụng OpenAI Vision API (GPT-4V) |
-| [So sánh hình ảnh](#so-sánh-hình-ảnh) | So sánh hai hình ảnh và xác định sự khác biệt hình ảnh |
+| [LLM Chat](#llm-chat) | Interact with LLM APIs for intelligent operations |
+| [AI Code Fix](#ai-code-fix) | Automatically generate code fixes based on issues |
+| [Calculate](#calculate) | Perform basic mathematical operations |
+| [HTTP Health Check](#http-health-check) | HTTP health check / uptime monitor |
+| [Check Port](#check-port) | Check if network port(s) are open or closed |
+| [Wait for Port](#wait-for-port) | Wait for a network port to become available |
+| [List Processes](#list-processes) | List all running background processes |
+| [Start Background Process](#start-background-process) | Start a background process (server, service, etc.) |
+| [Stop Process](#stop-process) | Stop a running background process |
+| [Execute Shell Command](#execute-shell-command) | Execute a shell command and capture output |
+| [SSH Execute](#ssh-execute) | Execute command on remote server via SSH |
+| [SFTP Download](#sftp-download) | Download file from remote server via SFTP |
+| [SFTP Upload](#sftp-upload) | Upload file to remote server via SFTP |
+| [Run E2E Steps](#run-e2e-steps) | Execute end-to-end test steps sequentially |
+| [Quality Gate](#quality-gate) | Evaluate quality metrics against defined thresholds |
+| [Run HTTP Tests](#run-http-tests) | Execute HTTP API test suite |
+| [Run Linter](#run-linter) | Run linting checks on source code |
+| [Generate Report](#generate-report) | Generate test execution report |
+| [Run Scenario](#run-scenario) | Execute scenario-based test (BDD style) |
+| [Security Scan](#security-scan) | Scan for security vulnerabilities |
+| [Run Test Suite](#run-test-suite) | Execute a collection of tests |
+| [Run Unit Tests](#run-unit-tests) | Execute unit tests |
+| [Visual Compare](#visual-compare) | Compare visual outputs for differences |
+| [Evaluate UI Quality](#evaluate-ui-quality) | Comprehensive UI quality evaluation with multi-dimensional scoring |
+| [Analyze Image with AI](#analyze-image-with-ai) | Analyze images using OpenAI Vision API (GPT-4V) |
+| [Compare Images](#compare-images) | Compare two images and identify visual differences |
 
 ## Modules
 
-### Lọc mảng
+### Filter Array
 
 `array.filter`
 
-Lọc các phần tử mảng theo điều kiện
+Filter array elements by condition
 
 **Parameters:**
 
@@ -71,8 +72,8 @@ Lọc các phần tử mảng theo điều kiện
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filtered` | array | Mảng đã lọc |
-| `count` | number | Mảng đã lọc |
+| `filtered` | array | Filtered array |
+| `count` | number | Number of items in filtered array |
 
 **Example:** Filter numbers greater than 5
 
@@ -82,11 +83,11 @@ condition: gt
 value: 5
 ```
 
-### Sắp xếp mảng
+### Sort Array
 
 `array.sort`
 
-Sắp xếp các phần tử mảng theo thứ tự tăng hoặc giảm dần
+Sort array elements in ascending or descending order
 
 **Parameters:**
 
@@ -99,8 +100,8 @@ Sắp xếp các phần tử mảng theo thứ tự tăng hoặc giảm dần
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sorted` | array | Mảng đã sắp xếp |
-| `count` | number | Mảng đã sắp xếp |
+| `sorted` | array | Sorted array |
+| `count` | number | Number of items |
 
 **Example:** Sort numbers ascending
 
@@ -109,11 +110,11 @@ array: [5, 2, 8, 1, 9]
 order: asc
 ```
 
-### Mảng duy nhất
+### Array Unique
 
 `array.unique`
 
-Loại bỏ các giá trị trùng lặp khỏi mảng
+Remove duplicate values from array
 
 **Parameters:**
 
@@ -126,9 +127,9 @@ Loại bỏ các giá trị trùng lặp khỏi mảng
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `unique` | array | Mảng với các giá trị duy nhất |
-| `count` | number | Mảng với các giá trị duy nhất |
-| `duplicates_removed` | number | Mảng với các giá trị duy nhất |
+| `unique` | array | Array with unique values |
+| `count` | number | Number of unique items |
+| `duplicates_removed` | number | Number of duplicates removed |
 
 **Example:** Remove duplicates
 
@@ -214,19 +215,19 @@ client_secret: ${env.GITHUB_CLIENT_SECRET}
 code: abc123...
 ```
 
-### Tra cứu DNS
+### DNS Lookup
 
 `dns.lookup`
 
-Tra cứu DNS cho bản ghi tên miền
+DNS lookup for domain records
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `domain` | string | Yes | - | Tên miền cần tra cứu |
-| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | Loại bản ghi DNS cần truy vấn |
-| `timeout` | number | No | `10` | Thời gian chờ truy vấn tính bằng giây |
+| `domain` | string | Yes | - | Domain name to look up |
+| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | DNS record type to query |
+| `timeout` | number | No | `10` | Query timeout in seconds |
 
 **Output:**
 
@@ -249,29 +250,29 @@ domain: example.com
 record_type: MX
 ```
 
-### So sánh Văn bản
+### Diff Content
 
 `file.diff`
 
-Tạo sự khác biệt giữa hai chuỗi văn bản
+Generate unified diff between original and modified content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `original` | string | Yes | - | Văn bản gốc |
-| `modified` | string | Yes | - | Văn bản đã chỉnh sửa |
-| `context_lines` | number | No | `3` | Số dòng ngữ cảnh xung quanh thay đổi |
-| `filename` | string | No | `file` | Tên tệp sử dụng trong tiêu đề so sánh |
+| `original` | string | Yes | - | Original content for comparison |
+| `modified` | string | Yes | - | Modified content for comparison |
+| `context_lines` | number | No | `3` | Number of context lines around changes |
+| `filename` | string | No | `file` | Name of the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `diff` | string | Đầu ra so sánh hợp nhất |
-| `changed` | boolean | Có thay đổi nào không |
-| `additions` | number | Số dòng được thêm |
-| `deletions` | number | Số dòng bị xóa |
+| `diff` | string | Unified diff output |
+| `changed` | boolean | Whether content differs |
+| `additions` | number | Number of added lines |
+| `deletions` | number | Number of deleted lines |
 
 **Example:** Diff two strings
 
@@ -283,29 +284,29 @@ world!
 filename: test.txt
 ```
 
-### Chỉnh sửa Tệp
+### Edit File
 
 `file.edit`
 
-Thay thế văn bản trong tệp bằng cách khớp chuỗi chính xác
+Replace a string in a file (targeted edit, not full overwrite)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Đường dẫn đến tệp cần chỉnh sửa |
-| `old_string` | string | Yes | - | Văn bản cần tìm và thay thế |
-| `new_string` | string | Yes | - | Văn bản thay thế |
-| `replace_all` | boolean | No | `False` | Thay thế tất cả các lần xuất hiện thay vì chỉ lần đầu tiên |
-| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | Mã hóa tệp |
+| `path` | string | Yes | - | Path to the file |
+| `old_string` | string | Yes | - | Text to find and replace |
+| `new_string` | string | Yes | - | Replacement text |
+| `replace_all` | boolean | No | `False` | Whether to replace all occurrences |
+| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | Character encoding for the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Đường dẫn của tệp đã chỉnh sửa |
-| `replacements` | number | Số lần thay thế đã thực hiện |
-| `diff` | string | So sánh hiển thị những gì đã thay đổi |
+| `path` | string | File path that was edited |
+| `replacements` | number | Number of replacements made |
+| `diff` | string | Unified diff of changes |
 
 **Example:** Replace string in file
 
@@ -315,11 +316,11 @@ old_string: def hello():
 new_string: def hello_world():
 ```
 
-### Kiểm tra tệp tồn tại
+### Check File Exists
 
 `file.exists`
 
-Kiểm tra xem tệp hoặc thư mục có tồn tại không
+Check if a file or directory exists
 
 **Parameters:**
 
@@ -331,9 +332,9 @@ Kiểm tra xem tệp hoặc thư mục có tồn tại không
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `exists` | boolean | Đường dẫn có tồn tại không |
-| `is_file` | boolean | Đường dẫn có tồn tại không |
-| `is_directory` | boolean | Đường dẫn có tồn tại không |
+| `exists` | boolean | Whether path exists |
+| `is_file` | boolean | Whether path is a file |
+| `is_directory` | boolean | Whether path is a directory |
 
 **Example:** Check file exists
 
@@ -341,11 +342,11 @@ Kiểm tra xem tệp hoặc thư mục có tồn tại không
 path: /tmp/data.txt
 ```
 
-### Đọc tệp
+### Read File
 
 `file.read`
 
-Đọc nội dung từ tệp
+Read content from a file
 
 **Parameters:**
 
@@ -358,8 +359,8 @@ path: /tmp/data.txt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `content` | string | Nội dung tệp |
-| `size` | number | Nội dung tệp |
+| `content` | string | File content |
+| `size` | number | File size in bytes |
 
 **Example:** Read text file
 
@@ -368,11 +369,11 @@ path: /tmp/data.txt
 encoding: utf-8
 ```
 
-### Ghi tệp
+### Write File
 
 `file.write`
 
-Ghi nội dung vào tệp
+Write content to a file
 
 **Parameters:**
 
@@ -387,8 +388,8 @@ Ghi nội dung vào tệp
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Đường dẫn tệp |
-| `bytes_written` | number | Đường dẫn tệp |
+| `path` | string | File path |
+| `bytes_written` | number | Number of bytes written |
 
 **Example:** Write text file
 
@@ -402,17 +403,17 @@ mode: overwrite
 
 `git.clone`
 
-Clone một kho lưu trữ git
+Clone a git repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL kho lưu trữ Git (HTTPS hoặc SSH) |
-| `destination` | string | Yes | - | Đường dẫn cục bộ để clone vào |
-| `branch` | string | No | - | Nhánh để checkout sau khi clone |
-| `depth` | number | No | - | Độ sâu clone nông (bỏ qua để clone đầy đủ) |
-| `token` | string | No | - | Mã truy cập cá nhân cho kho lưu trữ riêng tư |
+| `url` | string | Yes | - | Git repository URL (HTTPS or SSH) |
+| `destination` | string | Yes | - | Local path to clone into |
+| `branch` | string | No | - | Branch to checkout after clone |
+| `depth` | number | No | - | Shallow clone depth (omit for full clone) |
+| `token` | string | No | - | Personal access token for private repos |
 
 **Output:**
 
@@ -441,18 +442,18 @@ depth: 1
 
 `git.commit`
 
-Tạo một commit git
+Create a git commit
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | Đường dẫn đến kho lưu trữ git |
-| `message` | string | Yes | - | Thông điệp commit |
-| `add_all` | boolean | No | `False` | Stage tất cả các thay đổi trước khi commit (git add -A) |
-| `files` | array | No | - | Các tệp cụ thể để stage trước khi commit |
-| `author_name` | string | No | - | Ghi đè tên tác giả commit |
-| `author_email` | string | No | - | Ghi đè email tác giả commit |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `message` | string | Yes | - | Commit message |
+| `add_all` | boolean | No | `False` | Stage all changes before committing (git add -A) |
+| `files` | array | No | - | Specific files to stage before committing |
+| `author_name` | string | No | - | Override commit author name |
+| `author_email` | string | No | - | Override commit author email |
 
 **Output:**
 
@@ -481,17 +482,17 @@ files: ["README.md"]
 
 `git.diff`
 
-Lấy git diff
+Get git diff
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | Đường dẫn đến kho lưu trữ git |
-| `ref1` | string | No | `HEAD` | Tham chiếu đầu tiên (commit, nhánh, thẻ) |
-| `ref2` | string | No | - | Tham chiếu thứ hai để so sánh |
-| `staged` | boolean | No | `False` | Chỉ hiển thị các thay đổi đã stage (--cached) |
-| `stat_only` | boolean | No | `False` | Chỉ hiển thị thống kê tệp (--stat) |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `ref1` | string | No | `HEAD` | First reference (commit, branch, tag) |
+| `ref2` | string | No | - | Second reference to compare against |
+| `staged` | boolean | No | `False` | Show only staged changes (--cached) |
+| `stat_only` | boolean | No | `False` | Show only file statistics (--stat) |
 
 **Output:**
 
@@ -521,6 +522,35 @@ repo_path: /home/user/project
 staged: true
 stat_only: true
 ```
+
+### HTTP Batch
+
+`http.batch`
+
+Run a batch of HTTP probes sequentially and capture timing + body
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `requests` | array | Yes | - | List of request dicts: {method, url, headers?, body?, label?} |
+| `description` | string | No | - | Informational description of the batch intent |
+| `measure_time` | boolean | No | `False` | Execute requests sequentially for reliable timing comparison |
+| `timeout` | number | No | `30` |  |
+| `verify_ssl` | boolean | No | `True` |  |
+| `ssrf_protection` | boolean | No | `True` |  |
+| `detect_patterns` | array | No | - | Optional list of substrings to report matches for across all bodies |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `ok` | boolean | Whether the batch completed (does not imply all requests succeeded) |
+| `data` | array | Per-request results: [{label, status, body, duration_ms, ok, ...}] |
+| `count` | number | Number of requests executed |
+| `failed_count` | number | Number of requests that errored or returned non-2xx |
+| `total_duration_ms` | number | Total elapsed ms across the batch |
+| `detected` | array | Pattern match summary when detect_patterns provided |
 
 ### HTTP Paginate
 
@@ -602,11 +632,11 @@ page_size: 100
 auth: {"type": "bearer", "token": "${env.GITHUB_TOKEN}"}
 ```
 
-### Yêu cầu HTTP
+### HTTP Request
 
 `http.request`
 
-Gửi yêu cầu HTTP và nhận phản hồi
+Send HTTP request and receive response
 
 **Parameters:**
 
@@ -632,15 +662,15 @@ Gửi yêu cầu HTTP và nhận phản hồi
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Yêu cầu có thành công không (trạng thái 2xx) |
-| `status` | number | Yêu cầu có thành công không (trạng thái 2xx) |
-| `status_text` | string | Yêu cầu có thành công không (trạng thái 2xx) |
-| `headers` | object | Mã trạng thái HTTP |
-| `body` | any | Văn bản trạng thái HTTP |
-| `url` | string | Headers phản hồi |
-| `duration_ms` | number | Nội dung phản hồi (JSON đã phân tích hoặc văn bản) |
-| `content_type` | string | URL cuối cùng (sau chuyển hướng) |
-| `content_length` | number | Content-Type phản hồi |
+| `ok` | boolean | Whether request was successful (2xx status) |
+| `status` | number | HTTP status code |
+| `status_text` | string | HTTP status text |
+| `headers` | object | Response headers |
+| `body` | any | Response body (parsed JSON or text) |
+| `url` | string | Final URL (after redirects) |
+| `duration_ms` | number | Request duration in milliseconds |
+| `content_type` | string | Response Content-Type |
+| `content_length` | number | Response body size in bytes |
 
 **Example:** Simple GET request
 
@@ -673,11 +703,11 @@ method: GET
 query: {"q": "flyto", "limit": 10}
 ```
 
-### Xác nhận phản hồi HTTP
+### Assert HTTP Response
 
 `http.response_assert`
 
-Xác nhận và xác thực các thuộc tính phản hồi HTTP
+Assert and validate HTTP response properties
 
 **Parameters:**
 
@@ -700,12 +730,12 @@ Xác nhận và xác thực các thuộc tính phản hồi HTTP
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Tất cả xác nhận có đạt không |
-| `passed` | number | Tất cả xác nhận có đạt không |
-| `failed` | number | Tất cả xác nhận có đạt không |
-| `total` | number | Số xác nhận đạt |
-| `assertions` | array | Số xác nhận thất bại |
-| `errors` | array | Kết quả xác nhận chi tiết |
+| `ok` | boolean | Whether all assertions passed |
+| `passed` | number | Number of passed assertions |
+| `failed` | number | Number of failed assertions |
+| `total` | number | Total number of assertions |
+| `assertions` | array | Detailed assertion results |
+| `errors` | array | List of error messages for failed assertions |
 
 **Example:** Assert status 200
 
@@ -825,7 +855,7 @@ ngrok_token: ${env.NGROK_AUTH_TOKEN}
 
 `llm.chat`
 
-Tương tác với API LLM cho các thao tác thông minh
+Interact with LLM APIs for intelligent operations
 
 **Parameters:**
 
@@ -847,12 +877,12 @@ Tương tác với API LLM cho các thao tác thông minh
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Yêu cầu có thành công không |
-| `response` | string | Yêu cầu có thành công không |
-| `parsed` | any | Yêu cầu có thành công không |
-| `model` | string | Văn bản phản hồi LLM |
-| `tokens_used` | number | Phản hồi đã phân tích (nếu yêu cầu định dạng JSON) |
-| `finish_reason` | string | Model đã sử dụng |
+| `ok` | boolean | Whether the request succeeded |
+| `response` | string | The LLM response text |
+| `parsed` | any | Parsed response (if JSON format requested) |
+| `model` | string | Model used |
+| `tokens_used` | number | Total tokens consumed |
+| `finish_reason` | string | Why the response ended |
 
 **Example:** Code Review
 
@@ -882,11 +912,11 @@ system_prompt: You are a DevOps engineer. Return JSON: {"decision": "yes/no", "r
 response_format: json
 ```
 
-### Sửa lỗi code AI
+### AI Code Fix
 
 `llm.code_fix`
 
-Tự động tạo sửa lỗi code dựa trên các vấn đề
+Automatically generate code fixes based on issues
 
 **Parameters:**
 
@@ -904,11 +934,11 @@ Tự động tạo sửa lỗi code dựa trên các vấn đề
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Thao tác có thành công không |
-| `fixes` | array | Thao tác có thành công không |
-| `applied` | array | Thao tác có thành công không |
-| `failed` | array | Danh sách các sửa lỗi đã tạo |
-| `summary` | string | Danh sách các sửa lỗi đã áp dụng (nếu fix_mode là apply) |
+| `ok` | boolean | Whether operation succeeded |
+| `fixes` | array | List of generated fixes |
+| `applied` | array | List of applied fixes (if fix_mode is apply) |
+| `failed` | array | Fixes that could not be applied |
+| `summary` | string | Summary of fixes |
 
 **Example:** Fix UI Issues
 
@@ -928,11 +958,11 @@ fix_mode: apply
 backup: true
 ```
 
-### Tính toán
+### Calculate
 
 `math.calculate`
 
-Thực hiện các phép toán cơ bản
+Perform basic mathematical operations
 
 **Parameters:**
 
@@ -947,9 +977,9 @@ Thực hiện các phép toán cơ bản
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Kết quả tính toán |
-| `operation` | string | Kết quả tính toán |
-| `expression` | string | Kết quả tính toán |
+| `result` | number | Calculation result |
+| `operation` | string | Operation performed |
+| `expression` | string | Human-readable expression |
 
 **Example:** Add two numbers
 
@@ -967,25 +997,25 @@ a: 2
 b: 8
 ```
 
-### Kiểm tra sức khỏe HTTP
+### HTTP Health Check
 
 `monitor.http_check`
 
-Kiểm tra sức khỏe HTTP / giám sát thời gian hoạt động
+HTTP health check / uptime monitor
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL cần kiểm tra |
-| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | Phương thức HTTP |
-| `expected_status` | number | No | `200` | Mã trạng thái HTTP mong đợi |
-| `timeout_ms` | number | No | `10000` | Thời gian chờ yêu cầu tính bằng mili giây |
-| `headers` | object | No | - | Tiêu đề yêu cầu tùy chỉnh |
-| `body` | string | No | - | Nội dung yêu cầu (cho POST) |
-| `check_ssl` | boolean | No | `True` | Kiểm tra tính hợp lệ và ngày hết hạn của chứng chỉ SSL |
-| `contains` | string | No | - | Nội dung phản hồi phải chứa chuỗi này |
-| `follow_redirects` | boolean | No | `True` | Theo dõi chuyển hướng HTTP |
+| `url` | string | Yes | - | URL to check |
+| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | HTTP method |
+| `expected_status` | number | No | `200` | Expected HTTP status code |
+| `timeout_ms` | number | No | `10000` | Request timeout in milliseconds |
+| `headers` | object | No | - | Custom request headers |
+| `body` | string | No | - | Request body (for POST) |
+| `check_ssl` | boolean | No | `True` | Check SSL certificate validity and expiry |
+| `contains` | string | No | - | Response body must contain this string |
+| `follow_redirects` | boolean | No | `True` | Follow HTTP redirects |
 
 **Output:**
 
@@ -1009,30 +1039,30 @@ contains: "status":"ok"
 timeout_ms: 5000
 ```
 
-### Kiểm tra cổng
+### Check Port
 
 `port.check`
 
-Kiểm tra xem cổng mạng có mở hay đóng
+Check if network port(s) are open or closed
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | any | Yes | - | Số cổng hoặc mảng các cổng cần kiểm tra |
-| `host` | string | No | `localhost` | Số cổng hoặc mảng các cổng cần kiểm tra |
-| `connect_timeout` | number | No | `2` | Host để kết nối |
-| `expect_open` | boolean | No | - | Thời gian chờ cho mỗi lần thử kết nối |
+| `port` | any | Yes | - | Port number or array of ports to check |
+| `host` | string | No | `localhost` | Host to connect to |
+| `connect_timeout` | number | No | `2` | Timeout for each connection attempt |
+| `expect_open` | boolean | No | - | Set to true to assert ports are open, false for closed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Đặt true để xác nhận cổng mở, false cho đóng |
-| `results` | array | Tất cả kiểm tra có đạt không (nếu expect_open được đặt) |
-| `open_ports` | array | Tất cả kiểm tra có đạt không (nếu expect_open được đặt) |
-| `closed_ports` | array | Mảng kết quả kiểm tra cổng |
-| `summary` | object | Danh sách các cổng mở |
+| `ok` | boolean | Whether all checks passed (if expect_open is set) |
+| `results` | array | Array of port check results |
+| `open_ports` | array | List of open ports |
+| `closed_ports` | array | List of closed ports |
+| `summary` | object | Summary statistics |
 
 **Example:** Check single port
 
@@ -1055,32 +1085,32 @@ host: example.com
 expect_open: true
 ```
 
-### Chờ cổng
+### Wait for Port
 
 `port.wait`
 
-Chờ cổng mạng có sẵn
+Wait for a network port to become available
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | number | Yes | - | Số cổng cần chờ |
-| `host` | string | No | `localhost` | Host để kết nối |
-| `timeout` | number | No | `60` | Host để kết nối |
-| `interval` | number | No | `500` | Thời gian chờ tối đa |
-| `expect_closed` | boolean | No | `False` | Thời gian giữa các lần thử kết nối tính bằng mili giây |
+| `port` | number | Yes | - | Port number to wait for |
+| `host` | string | No | `localhost` | Host to connect to |
+| `timeout` | number | No | `60` | Maximum time to wait |
+| `interval` | number | No | `500` | Time between connection attempts in milliseconds |
+| `expect_closed` | boolean | No | `False` | Wait for port to become unavailable instead |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Chờ cổng không khả dụng thay vì |
-| `available` | boolean | Cổng có ở trạng thái mong đợi không |
-| `host` | string | Cổng có ở trạng thái mong đợi không |
-| `port` | number | Cổng hiện có sẵn không |
-| `wait_time_ms` | number | Host đã được kiểm tra |
-| `attempts` | number | Cổng đã được kiểm tra |
+| `ok` | boolean | Whether port is in expected state |
+| `available` | boolean | Whether port is currently available |
+| `host` | string | Host that was checked |
+| `port` | number | Port that was checked |
+| `wait_time_ms` | number | Time spent waiting in milliseconds |
+| `attempts` | number | Number of connection attempts |
 
 **Example:** Wait for dev server
 
@@ -1105,11 +1135,11 @@ expect_closed: true
 timeout: 10
 ```
 
-### Liệt kê tiến trình
+### List Processes
 
 `process.list`
 
-Liệt kê tất cả các tiến trình nền đang chạy
+List all running background processes
 
 **Parameters:**
 
@@ -1122,11 +1152,11 @@ Liệt kê tất cả các tiến trình nền đang chạy
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Thao tác thành công |
-| `processes` | array | Thao tác thành công |
-| `count` | number | Thao tác thành công |
-| `running` | number | Danh sách thông tin tiến trình |
-| `stopped` | number | Tổng số tiến trình |
+| `ok` | boolean | Operation success |
+| `processes` | array | List of process information |
+| `count` | number | Total number of processes |
+| `running` | number | Number of running processes |
+| `stopped` | number | Number of stopped processes |
 
 **Example:** List all processes
 
@@ -1139,11 +1169,11 @@ Liệt kê tất cả các tiến trình nền đang chạy
 filter_name: dev
 ```
 
-### Khởi động tiến trình nền
+### Start Background Process
 
 `process.start`
 
-Khởi động tiến trình nền (server, dịch vụ, v.v.)
+Start a background process (server, service, etc.)
 
 **Parameters:**
 
@@ -1163,14 +1193,14 @@ Khởi động tiến trình nền (server, dịch vụ, v.v.)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Tiến trình có khởi động thành công không |
-| `pid` | number | Tiến trình có khởi động thành công không |
-| `process_id` | string | Tiến trình có khởi động thành công không |
-| `name` | string | ID Tiến trình |
-| `command` | string | Định danh tiến trình nội bộ cho process.stop |
-| `cwd` | string | Tên tiến trình |
-| `started_at` | string | Lệnh đã thực thi |
-| `initial_output` | string | Dấu thời gian ISO khi tiến trình bắt đầu |
+| `ok` | boolean | Whether process started successfully |
+| `pid` | number | Process ID |
+| `process_id` | string | Internal process identifier for process.stop |
+| `name` | string | Process name |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory |
+| `started_at` | string | ISO timestamp when process started |
+| `initial_output` | string | Initial stdout output (if wait_for_output was used) |
 
 **Example:** Start dev server
 
@@ -1198,11 +1228,11 @@ name: api-server
 wait_for_output: listening
 ```
 
-### Dừng tiến trình
+### Stop Process
 
 `process.stop`
 
-Dừng tiến trình nền đang chạy
+Stop a running background process
 
 **Parameters:**
 
@@ -1220,10 +1250,10 @@ Dừng tiến trình nền đang chạy
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Tất cả tiến trình có được dừng thành công không |
-| `stopped` | array | Tất cả tiến trình có được dừng thành công không |
-| `failed` | array | Danh sách thông tin tiến trình đã dừng |
-| `count` | number | Danh sách thông tin tiến trình đã dừng |
+| `ok` | boolean | Whether all processes were stopped successfully |
+| `stopped` | array | List of stopped process info |
+| `failed` | array | List of processes that failed to stop |
+| `count` | number | Number of processes stopped |
 
 **Example:** Stop by process ID
 
@@ -1250,11 +1280,11 @@ force: true
 stop_all: true
 ```
 
-### Thực thi lệnh Shell
+### Execute Shell Command
 
 `shell.exec`
 
-Thực thi lệnh shell và bắt đầu ra
+Execute a shell command and capture output
 
 **Parameters:**
 
@@ -1273,13 +1303,13 @@ Thực thi lệnh shell và bắt đầu ra
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Lệnh có thực thi thành công không (mã thoát 0) |
-| `exit_code` | number | Lệnh có thực thi thành công không (mã thoát 0) |
-| `stdout` | string | Lệnh có thực thi thành công không (mã thoát 0) |
-| `stderr` | string | Mã thoát lệnh |
-| `command` | string | Đầu ra tiêu chuẩn |
-| `cwd` | string | Đầu ra lỗi tiêu chuẩn |
-| `duration_ms` | number | Lệnh đã thực thi |
+| `ok` | boolean | Whether command executed successfully (exit code 0) |
+| `exit_code` | number | Command exit code |
+| `stdout` | string | Standard output |
+| `stderr` | string | Standard error output |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory used |
+| `duration_ms` | number | Execution duration in milliseconds |
 
 **Example:** Run npm install
 
@@ -1309,23 +1339,23 @@ cwd: ./frontend
 env: {"NODE_ENV": "production"}
 ```
 
-### Thực thi SSH
+### SSH Execute
 
 `ssh.exec`
 
-Thực thi lệnh trên máy chủ từ xa qua SSH
+Execute command on remote server via SSH
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | Tên máy chủ hoặc IP của máy chủ SSH |
-| `port` | number | No | `22` | Cổng SSH |
-| `username` | string | Yes | - | Tên người dùng SSH |
-| `password` | string | No | - | Mật khẩu SSH |
-| `private_key` | string | No | - | Khóa riêng định dạng PEM |
-| `command` | string | Yes | - | Lệnh thực thi trên máy chủ từ xa |
-| `timeout` | number | No | `30` | Thời gian chờ lệnh tính bằng giây |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `command` | string | Yes | - | Command to execute on remote server |
+| `timeout` | number | No | `30` | Command timeout in seconds |
 
 **Output:**
 
@@ -1350,23 +1380,23 @@ username: root
 command: systemctl restart nginx
 ```
 
-### Tải xuống SFTP
+### SFTP Download
 
 `ssh.sftp_download`
 
-Tải tệp từ máy chủ từ xa qua SFTP
+Download file from remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | Tên máy chủ hoặc IP của máy chủ SSH |
-| `port` | number | No | `22` | Cổng SSH |
-| `username` | string | Yes | - | Tên người dùng SSH |
-| `password` | string | No | - | Mật khẩu SSH |
-| `private_key` | string | No | - | Khóa riêng định dạng PEM |
-| `remote_path` | string | Yes | - | Đường dẫn đến tệp trên máy chủ từ xa |
-| `local_path` | string | Yes | - | Đường dẫn đích trên máy cục bộ |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `remote_path` | string | Yes | - | Path to file on remote server |
+| `local_path` | string | Yes | - | Destination path on local machine |
 
 **Output:**
 
@@ -1384,24 +1414,24 @@ remote_path: /var/log/nginx/access.log
 local_path: /tmp/access.log
 ```
 
-### Tải lên SFTP
+### SFTP Upload
 
 `ssh.sftp_upload`
 
-Tải tệp lên máy chủ từ xa qua SFTP
+Upload file to remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | Tên máy chủ hoặc IP của máy chủ SSH |
-| `port` | number | No | `22` | Cổng SSH |
-| `username` | string | Yes | - | Tên người dùng SSH |
-| `password` | string | No | - | Mật khẩu SSH |
-| `private_key` | string | No | - | Khóa riêng định dạng PEM |
-| `local_path` | string | Yes | - | Đường dẫn đến tệp cục bộ để tải lên |
-| `remote_path` | string | Yes | - | Đường dẫn đích trên máy chủ từ xa |
-| `overwrite` | boolean | No | `True` | Ghi đè tệp từ xa hiện có |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `local_path` | string | Yes | - | Path to local file to upload |
+| `remote_path` | string | Yes | - | Destination path on remote server |
+| `overwrite` | boolean | No | `True` | Overwrite existing remote file |
 
 **Output:**
 
@@ -1419,17 +1449,17 @@ local_path: /tmp/app.tar.gz
 remote_path: /opt/releases/app.tar.gz
 ```
 
-### Chạy các bước E2E
+### Run E2E Steps
 
 `testing.e2e.run_steps`
 
-Thực thi các bước kiểm thử end-to-end tuần tự
+Execute end-to-end test steps sequentially
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `steps` | array | Yes | - | Mảng định nghĩa bước kiểm thử |
+| `steps` | array | Yes | - | Array of test step definitions |
 | `stop_on_failure` | boolean | No | `True` | Whether to stop on failure |
 | `timeout_per_step` | number | No | `30000` | Timeout Per Step value |
 
@@ -1437,45 +1467,45 @@ Thực thi các bước kiểm thử end-to-end tuần tự
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Thao tác có thành công không |
-| `passed` | number | Thao tác có thành công không |
-| `failed` | number | Thao tác có thành công không |
-| `results` | array | Số kiểm thử đạt |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### Cổng chất lượng
+### Quality Gate
 
 `testing.gate.evaluate`
 
-Đánh giá các chỉ số chất lượng so với ngưỡng định nghĩa
+Evaluate quality metrics against defined thresholds
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | object | Yes | - | Các chỉ số cần đánh giá |
-| `thresholds` | object | Yes | - | Các chỉ số cần đánh giá |
+| `metrics` | object | Yes | - | Metrics to evaluate |
+| `thresholds` | object | Yes | - | Threshold values for each metric |
 | `fail_on_breach` | boolean | No | `True` | Whether to fail on breach |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Giá trị ngưỡng cho mỗi chỉ số |
-| `passed` | boolean | Thao tác có thành công không |
-| `results` | array | Thao tác có thành công không |
-| `summary` | string | Số kiểm thử đạt |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `results` | array | List of results |
+| `summary` | string | The summary |
 
-### Chạy kiểm thử HTTP
+### Run HTTP Tests
 
 `testing.http.run_suite`
 
-Thực thi bộ kiểm thử API HTTP
+Execute HTTP API test suite
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | Mảng định nghĩa kiểm thử HTTP |
+| `tests` | array | Yes | - | Array of HTTP test definitions |
 | `base_url` | string | No | - | Base URL for API requests |
 | `headers` | object | No | `{}` | HTTP request headers |
 
@@ -1483,22 +1513,22 @@ Thực thi bộ kiểm thử API HTTP
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Thao tác có thành công không |
-| `passed` | number | Thao tác có thành công không |
-| `failed` | number | Thao tác có thành công không |
-| `results` | array | Số kiểm thử đạt |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### Chạy Linter
+### Run Linter
 
 `testing.lint.run`
 
-Chạy kiểm tra lint trên mã nguồn
+Run linting checks on source code
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | Tệp hoặc thư mục cần lint |
+| `paths` | array | Yes | - | Files or directories to lint |
 | `linter` | string | No | `auto` | Linter |
 | `fix` | boolean | No | `False` | Whether to fix |
 
@@ -1506,16 +1536,16 @@ Chạy kiểm tra lint trên mã nguồn
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Thao tác có thành công không |
-| `errors` | number | Thao tác có thành công không |
-| `warnings` | number | Thao tác có thành công không |
-| `issues` | array | Số lỗi gặp phải |
+| `ok` | boolean | Whether the operation succeeded |
+| `errors` | number | Number of errors encountered |
+| `warnings` | number | The warnings |
+| `issues` | array | The issues |
 
-### Tạo báo cáo
+### Generate Report
 
 `testing.report.generate`
 
-Tạo báo cáo thực thi kiểm thử
+Generate test execution report
 
 **Parameters:**
 
@@ -1529,43 +1559,43 @@ Tạo báo cáo thực thi kiểm thử
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Thao tác có thành công không |
-| `report` | string | Thao tác có thành công không |
-| `format` | string | Thao tác có thành công không |
-| `summary` | object | Báo cáo |
+| `ok` | boolean | Whether the operation succeeded |
+| `report` | string | The report |
+| `format` | string | The format |
+| `summary` | object | The summary |
 
-### Chạy kịch bản
+### Run Scenario
 
 `testing.scenario.run`
 
-Thực thi kiểm thử dựa trên kịch bản (kiểu BDD)
+Execute scenario-based test (BDD style)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `scenario` | object | Yes | - | Định nghĩa kịch bản với given/when/then |
+| `scenario` | object | Yes | - | Scenario definition with given/when/then |
 | `context` | object | No | `{}` | Additional context data |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Định nghĩa kịch bản với given/when/then |
-| `passed` | boolean | Thao tác có thành công không |
-| `steps` | array | Thao tác có thành công không |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `steps` | array | The steps |
 
-### Quét bảo mật
+### Security Scan
 
 `testing.security.scan`
 
-Quét lỗ hổng bảo mật
+Scan for security vulnerabilities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `targets` | array | Yes | - | Tệp, URL hoặc đường dẫn cần quét |
+| `targets` | array | Yes | - | Files, URLs, or paths to scan |
 | `scan_type` | string | No | `all` | Scan Type |
 | `severity_threshold` | string | No | `medium` | Severity Threshold |
 
@@ -1573,45 +1603,45 @@ Quét lỗ hổng bảo mật
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Thao tác có thành công không |
-| `vulnerabilities` | array | Thao tác có thành công không |
-| `summary` | object | Thao tác có thành công không |
+| `ok` | boolean | Whether the operation succeeded |
+| `vulnerabilities` | array | The vulnerabilities |
+| `summary` | object | The summary |
 
-### Chạy bộ kiểm thử
+### Run Test Suite
 
 `testing.suite.run`
 
-Thực thi một bộ kiểm thử
+Execute a collection of tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | Mảng định nghĩa kiểm thử |
+| `tests` | array | Yes | - | Array of test definitions |
 | `parallel` | boolean | No | `False` | Whether to parallel |
-| `max_failures` | number | No | `0` | Mảng định nghĩa kiểm thử |
+| `max_failures` | number | No | `0` | 0 = no limit |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 0 = không giới hạn |
-| `passed` | number | 0 = không giới hạn |
-| `failed` | number | Thao tác có thành công không |
-| `skipped` | number | Số kiểm thử đạt |
-| `results` | array | Số kiểm thử không đạt |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `skipped` | number | Number of tests skipped |
+| `results` | array | List of results |
 
-### Chạy kiểm thử đơn vị
+### Run Unit Tests
 
 `testing.unit.run`
 
-Thực thi kiểm thử đơn vị
+Execute unit tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | Đường dẫn đến tệp hoặc thư mục kiểm thử |
+| `paths` | array | Yes | - | Paths to test files or directories |
 | `pattern` | string | No | `test_*.py` | Pattern |
 | `verbose` | boolean | No | `False` | Whether to verbose |
 
@@ -1619,67 +1649,67 @@ Thực thi kiểm thử đơn vị
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Thao tác có thành công không |
-| `passed` | number | Thao tác có thành công không |
-| `failed` | number | Thao tác có thành công không |
-| `errors` | number | Số kiểm thử đạt |
-| `results` | array | Số kiểm thử không đạt |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `errors` | number | Number of errors encountered |
+| `results` | array | List of results |
 
-### So sánh hình ảnh
+### Visual Compare
 
 `testing.visual.compare`
 
-So sánh đầu ra hình ảnh để tìm sự khác biệt
+Compare visual outputs for differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | string | Yes | - | Đường dẫn hoặc base64 của hình ảnh thực tế |
-| `expected` | string | Yes | - | Đường dẫn hoặc base64 của hình ảnh thực tế |
-| `threshold` | number | No | `0.1` | Đường dẫn hoặc base64 của hình ảnh mong đợi |
+| `actual` | string | Yes | - | Path or base64 of actual image |
+| `expected` | string | Yes | - | Path or base64 of expected image |
+| `threshold` | number | No | `0.1` | Max allowed difference (0-1) |
 | `output_diff` | boolean | No | `True` | Whether to output diff |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Sự khác biệt tối đa cho phép (0-1) |
-| `match` | boolean | Thao tác có thành công không |
-| `difference` | number | Thao tác có thành công không |
-| `diff_image` | string | Sự khớp |
+| `ok` | boolean | Whether the operation succeeded |
+| `match` | boolean | The match |
+| `difference` | number | The difference |
+| `diff_image` | string | The diff image |
 
-### Đánh giá chất lượng UI
+### Evaluate UI Quality
 
 `ui.evaluate`
 
-Đánh giá chất lượng UI toàn diện với điểm số đa chiều
+Comprehensive UI quality evaluation with multi-dimensional scoring
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `screenshot` | string | Yes | - | Đường dẫn ảnh chụp màn hình hoặc URL để đánh giá |
-| `app_type` | string | No | `web_app` | Đường dẫn ảnh chụp màn hình hoặc URL để đánh giá |
-| `page_type` | string | No | - | Loại trang đang được đánh giá |
-| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | Tiêu chí cụ thể để đánh giá (mặc định là tất cả) |
-| `target_audience` | string | No | - | Mô tả người dùng mục tiêu |
-| `brand_guidelines` | string | No | - | Hướng dẫn thương hiệu ngắn gọn để kiểm tra |
-| `min_score` | number | No | `70` | Điểm tối thiểu để đạt (0-100) |
-| `api_key` | string | No | - | Khóa API OpenAI (mặc định là biến env OPENAI_API_KEY) |
+| `screenshot` | string | Yes | - | Screenshot path or URL to evaluate |
+| `app_type` | string | No | `web_app` | Type of application for context-aware evaluation |
+| `page_type` | string | No | - | Type of page being evaluated |
+| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | Specific criteria to evaluate (defaults to all) |
+| `target_audience` | string | No | - | Description of target users |
+| `brand_guidelines` | string | No | - | Brief brand guidelines to check against |
+| `min_score` | number | No | `70` | Minimum overall score to pass (0-100) |
+| `api_key` | string | No | - | OpenAI API key (defaults to OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Khóa API OpenAI (mặc định là biến env OPENAI_API_KEY) |
-| `passed` | boolean | Đánh giá có thành công không |
-| `overall_score` | number | Đánh giá có thành công không |
-| `scores` | object | Điểm chất lượng UI tổng thể (0-100) |
-| `strengths` | array | Điểm chất lượng UI tổng thể (0-100) |
-| `issues` | array | Điểm theo tiêu chí đánh giá |
-| `recommendations` | array | Danh sách điểm mạnh của UI |
-| `summary` | string | Khuyến nghị cải thiện cụ thể |
+| `ok` | boolean | Whether evaluation succeeded |
+| `passed` | boolean | Whether UI meets minimum score threshold |
+| `overall_score` | number | Overall UI quality score (0-100) |
+| `scores` | object | Scores by evaluation criteria |
+| `strengths` | array | List of UI strengths |
+| `issues` | array | List of issues found with severity |
+| `recommendations` | array | Specific improvement recommendations |
+| `summary` | string | Executive summary of evaluation |
 
 **Example:** Evaluate Dashboard
 
@@ -1700,11 +1730,11 @@ page_type: product detail
 evaluation_criteria: ["usability", "cta_effectiveness", "visual_design"]
 ```
 
-### Phân tích hình ảnh với AI
+### Analyze Image with AI
 
 `vision.analyze`
 
-Phân tích hình ảnh sử dụng OpenAI Vision API (GPT-4V)
+Analyze images using OpenAI Vision API (GPT-4V)
 
 **Parameters:**
 
@@ -1725,11 +1755,11 @@ Phân tích hình ảnh sử dụng OpenAI Vision API (GPT-4V)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Phân tích có thành công không |
-| `analysis` | string | Phân tích có thành công không |
-| `structured` | object | Kết quả phân tích AI |
-| `model` | string | Dữ liệu phân tích có cấu trúc (nếu output_format là structured/json) |
-| `tokens_used` | number | Model được sử dụng để phân tích |
+| `ok` | boolean | Whether analysis succeeded |
+| `analysis` | string | The AI analysis result |
+| `structured` | object | Structured analysis data (if output_format is structured/json) |
+| `model` | string | Model used for analysis |
+| `tokens_used` | number | Total tokens used |
 
 **Example:** UI Review
 
@@ -1756,11 +1786,11 @@ prompt: Evaluate accessibility: color contrast, text readability, button sizes, 
 analysis_type: accessibility
 ```
 
-### So sánh hình ảnh
+### Compare Images
 
 `vision.compare`
 
-So sánh hai hình ảnh và xác định sự khác biệt hình ảnh
+Compare two images and identify visual differences
 
 **Parameters:**
 
@@ -1780,12 +1810,12 @@ So sánh hai hình ảnh và xác định sự khác biệt hình ảnh
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | So sánh có thành công không |
-| `has_differences` | boolean | So sánh có thành công không |
-| `similarity_score` | number | Có tìm thấy sự khác biệt đáng kể không |
-| `differences` | array | Phần trăm tương đồng (0-100) |
-| `summary` | string | Danh sách các sự khác biệt được xác định |
-| `recommendation` | string | Tóm tắt kết quả so sánh |
+| `ok` | boolean | Whether comparison succeeded |
+| `has_differences` | boolean | Whether significant differences were found |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `differences` | array | List of identified differences |
+| `summary` | string | Summary of comparison results |
+| `recommendation` | string | Pass/Fail recommendation based on threshold |
 
 **Example:** Visual Regression Test
 

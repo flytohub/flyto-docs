@@ -6,30 +6,30 @@ Parse frontmatter, convert to HTML, and generate table of contents.
 
 | Module | Description |
 |--------|-------------|
-| [แยกวิเคราะห์ Frontmatter](#แยกวิเคราะห์-frontmatter) | ดึง YAML frontmatter จากเนื้อหา Markdown |
-| [Markdown เป็น HTML](#markdown-เป็น-html) | แปลงข้อความ Markdown เป็น HTML |
-| [สร้างสารบัญ](#สร้างสารบัญ) | สร้างสารบัญจากหัวข้อใน Markdown |
+| [Parse Frontmatter](#parse-frontmatter) | Extract YAML frontmatter from Markdown content |
+| [Markdown to HTML](#markdown-to-html) | Convert Markdown text to HTML |
+| [Generate Table of Contents](#generate-table-of-contents) | Generate a table of contents from Markdown headings |
 
 ## Modules
 
-### แยกวิเคราะห์ Frontmatter
+### Parse Frontmatter
 
 `markdown.parse_frontmatter`
 
-ดึง YAML frontmatter จากเนื้อหา Markdown
+Extract YAML frontmatter from Markdown content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | เนื้อหา Markdown ที่มี frontmatter |
+| `text` | string | Yes | - | Markdown content with frontmatter |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `frontmatter` | object | frontmatter ที่แยกวิเคราะห์แล้วในรูปแบบพจนานุกรม |
-| `content` | string | เนื้อหา Markdown ที่ไม่มี frontmatter |
+| `frontmatter` | object | Parsed frontmatter as a dictionary |
+| `content` | string | Markdown content without frontmatter |
 
 **Example:** Parse YAML frontmatter
 
@@ -47,25 +47,25 @@ tags:
 Content here.
 ```
 
-### Markdown เป็น HTML
+### Markdown to HTML
 
 `markdown.to_html`
 
-แปลงข้อความ Markdown เป็น HTML
+Convert Markdown text to HTML
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | เนื้อหา Markdown ที่จะแปลง |
-| `extensions` | array | No | - | ส่วนขยาย Markdown ที่จะเปิดใช้งาน (ใช้กับไลบรารี markdown เท่านั้น) |
+| `text` | string | Yes | - | Markdown content to convert |
+| `extensions` | array | No | - | Markdown extensions to enable (only used with the markdown library) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `html` | string | เนื้อหา HTML ที่แปลงแล้ว |
-| `word_count` | number | จำนวนคำของข้อความที่ป้อน |
+| `html` | string | Converted HTML content |
+| `word_count` | number | Word count of the input text |
 
 **Example:** Convert markdown to HTML
 
@@ -75,25 +75,25 @@ text: # Hello
 This is **bold** and *italic*.
 ```
 
-### สร้างสารบัญ
+### Generate Table of Contents
 
 `markdown.toc`
 
-สร้างสารบัญจากหัวข้อใน Markdown
+Generate a table of contents from Markdown headings
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | เนื้อหา Markdown ที่จะดึงหัวข้อออกมา |
-| `max_depth` | number | No | `3` | ความลึกของหัวข้อสูงสุดที่รวม (1-6) |
+| `text` | string | Yes | - | Markdown content to extract headings from |
+| `max_depth` | number | No | `3` | Maximum heading depth to include (1-6) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `toc` | array | รายการหัวข้อพร้อมระดับ ชื่อ และ slug |
-| `toc_markdown` | string | สารบัญในรูปแบบ Markdown |
+| `toc` | array | List of headings with level, title, and slug |
+| `toc_markdown` | string | Formatted Markdown table of contents |
 
 **Example:** Generate TOC from markdown
 

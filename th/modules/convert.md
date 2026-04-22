@@ -6,115 +6,115 @@ Type casting between data types.
 
 | Module | Description |
 |--------|-------------|
-| [เป็นอาเรย์](#เป็นอาเรย์) | แปลงค่าเป็นอาเรย์ |
-| [เป็นบูลีน](#เป็นบูลีน) | แปลงค่าเป็นบูลีน |
-| [เป็นตัวเลข](#เป็นตัวเลข) | แปลงค่าเป็นตัวเลข |
-| [เป็นออบเจ็กต์](#เป็นออบเจ็กต์) | แปลงค่าเป็นออบเจ็กต์ |
-| [เป็นสตริง](#เป็นสตริง) | แปลงค่าใดๆ เป็นสตริง |
+| [To Array](#to-array) | Convert value to array |
+| [To Boolean](#to-boolean) | Convert value to boolean |
+| [To Number](#to-number) | Convert value to number |
+| [To Object](#to-object) | Convert value to object |
+| [To String](#to-string) | Convert any value to string |
 
 ## Modules
 
-### เป็นอาเรย์
+### To Array
 
 `convert.to_array`
 
-แปลงค่าเป็นอาเรย์
+Convert value to array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | ค่าที่ต้องการแปลง |
-| `split_string` | boolean | No | `False` | ค่าที่ต้องการแปลง |
-| `delimiter` | string | No | - | แยกสตริงเป็นตัวอักษร |
+| `value` | any | Yes | - | Value to convert |
+| `split_string` | boolean | No | `False` | Split string into characters |
+| `delimiter` | string | No | - | Delimiter for string splitting |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | ตัวคั่นสำหรับการแยกสตริง |
-| `length` | number | อาเรย์ที่แปลงแล้ว |
-| `original_type` | string | อาเรย์ที่แปลงแล้ว |
+| `result` | array | Converted array |
+| `length` | number | Array length |
+| `original_type` | string | Original value type |
 
-### เป็นบูลีน
+### To Boolean
 
 `convert.to_boolean`
 
-แปลงค่าเป็นบูลีน
+Convert value to boolean
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | ค่าที่ต้องการแปลง |
-| `strict` | boolean | No | `False` | ค่าที่ต้องการแปลง |
+| `value` | any | Yes | - | Value to convert |
+| `strict` | boolean | No | `False` | Only accept true/false strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | รับเฉพาะสตริง true/false |
-| `original_type` | string | บูลีนที่แปลงแล้ว |
+| `result` | boolean | Converted boolean |
+| `original_type` | string | Original value type |
 
-### เป็นตัวเลข
+### To Number
 
 `convert.to_number`
 
-แปลงค่าเป็นตัวเลข
+Convert value to number
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | ค่าที่ต้องการแปลง |
-| `default` | number | No | `0` | ค่าที่ต้องการแปลง |
-| `integer` | boolean | No | `False` | ค่าเริ่มต้นหากการแปลงล้มเหลว |
+| `value` | any | Yes | - | Value to convert |
+| `default` | number | No | `0` | Default value if conversion fails |
+| `integer` | boolean | No | `False` | Convert to integer |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | แปลงเป็นจำนวนเต็ม |
-| `success` | boolean | ตัวเลขที่แปลงแล้ว |
-| `original_type` | string | ตัวเลขที่แปลงแล้ว |
+| `result` | number | Converted number |
+| `success` | boolean | Whether conversion succeeded |
+| `original_type` | string | Original value type |
 
-### เป็นออบเจ็กต์
+### To Object
 
 `convert.to_object`
 
-แปลงค่าเป็นออบเจ็กต์
+Convert value to object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | ค่าที่ต้องการแปลง |
-| `key_name` | string | No | `value` | ค่าที่ต้องการแปลง |
+| `value` | any | Yes | - | Value to convert |
+| `key_name` | string | No | `value` | Key name for wrapping non-objects |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | ชื่อคีย์สำหรับห่อหุ้มที่ไม่ใช่ออบเจ็กต์ |
-| `keys` | array | ออบเจ็กต์ที่แปลงแล้ว |
-| `original_type` | string | ออบเจ็กต์ที่แปลงแล้ว |
+| `result` | object | Converted object |
+| `keys` | array | Object keys |
+| `original_type` | string | Original value type |
 
-### เป็นสตริง
+### To String
 
 `convert.to_string`
 
-แปลงค่าใดๆ เป็นสตริง
+Convert any value to string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | ค่าที่ต้องการแปลง |
-| `pretty` | boolean | No | `False` | ค่าที่ต้องการแปลง |
+| `value` | any | Yes | - | Value to convert |
+| `pretty` | boolean | No | `False` | Format objects/arrays with indentation |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | จัดรูปแบบออบเจ็กต์/อาเรย์ด้วยการเยื้อง |
-| `original_type` | string | การแสดงผลในรูปแบบสตริง |
+| `result` | string | String representation |
+| `original_type` | string | Original value type |

@@ -6,60 +6,60 @@ Branching, loops, parallelism, subflows, triggers, and error handling.
 
 | Module | Description |
 |--------|-------------|
-| [Grup İşlemi](#grup-i̇şlemi) | Öğeleri yapılandırılabilir boyutta gruplar halinde işleyin |
-| [Dal](#dal) | İfade değerlendirmesine dayalı koşullu dallanma |
-| [Kesme Noktası](#kesme-noktası) | İnsan onayı veya girişi için iş akışı yürütmesini duraklat |
-| [Devre Kesici](#devre-kesici) | Kademeli hataları önlemek için devre kesici deseni |
-| [Kapsayıcı](#kapsayıcı) | Karmaşık iş akışlarını düzenlemek için gömülü alt akış kapsayıcısı |
-| [Gecikme](#gecikme) | Hızlı tekrarlanan çağrıları önlemek için yürütmeyi geciktir |
-| [Bitiş](#bitiş) | Açık iş akışı bitiş düğümü |
-| [Hata İşleyici](#hata-i̇şleyici) | Yukarı akış düğümlerinden gelen hataları yakalar ve işler |
-| [Hata İş Akışı Tetikleyicisi](#hata-i̇ş-akışı-tetikleyicisi) | Hata iş akışları için giriş noktası - başka bir iş akışı başarısız olduğunda tetiklenir |
-| [Her Biri İçin](#her-biri-i̇çin) | Bir liste üzerinde yinele ve her öğe için adımları yürüt |
-| [Çatalla](#çatalla) | Yürütmeyi paralel dallara böl |
-| [Git](#git) | Başka bir adıma koşulsuz atlama |
+| [Batch Process](#batch-process) | Process items in batches with configurable size |
+| [Branch](#branch) | Conditional branching based on expression evaluation |
+| [Breakpoint](#breakpoint) | Pause workflow execution for human approval or input |
+| [Circuit Breaker](#circuit-breaker) | Circuit breaker pattern for fault tolerance |
+| [Container](#container) | Embedded subflow container for organizing complex workflows |
+| [Debounce](#debounce) | Debounce execution to prevent rapid repeated calls |
+| [End](#end) | Explicit workflow end node |
+| [Error Handler](#error-handler) | Catches and handles errors from upstream nodes |
+| [Error Workflow Trigger](#error-workflow-trigger) | Entry point for error workflows - triggered when another workflow fails |
+| [For Each](#for-each) | Iterate over a list and execute steps for each item |
+| [Fork](#fork) | Split execution into parallel branches |
+| [Goto](#goto) | Unconditional jump to another step |
 | [Invoke Workflow](#invoke-workflow) | Execute an external workflow file |
-| [Birleştir](#birleştir) | Paralel dalların tamamlanmasını bekle |
-| [Döngü](#döngü) | Çıktı port yönlendirmesi kullanarak adımları N kez tekrarla |
-| [Birleştir](#birleştir) | Birden fazla girdiyi tek bir çıktıya birleştir |
-| [Paralel](#paralel) | Farklı stratejilerle birden fazla görevi paralel olarak yürütün |
-| [Hız Sınırı](#hız-sınırı) | Token bucket veya kayar pencere kullanarak yürütmeyi sınırla |
-| [Yeniden Dene](#yeniden-dene) | Başarısız işlemleri yapılandırılabilir geri çekilme ile yeniden dene |
-| [Başlangıç](#başlangıç) | Açık iş akışı başlangıç düğümü |
-| [Alt Akış](#alt-akış) | Harici bir iş akışına başvur ve yürüt |
-| [Anahtar](#anahtar) | Değer eşleşmesine dayalı çok yollu dallanma |
-| [Sınırlama](#sınırlama) | Minimum aralıkla yürütme hızını sınırlayın |
-| [Tetikleyici](#tetikleyici) | İş akışı giriş noktası - manuel, webhook, zamanlama veya olay |
+| [Join](#join) | Wait for parallel branches to complete |
+| [Loop](#loop) | Repeat steps N times using output port routing |
+| [Merge](#merge) | Merge multiple inputs into a single output |
+| [Parallel](#parallel) | Execute multiple tasks in parallel with different strategies |
+| [Rate Limit](#rate-limit) | Rate limiter with token bucket strategy |
+| [Retry](#retry) | Retry with exponential backoff |
+| [Start](#start) | Explicit workflow start node |
+| [Subflow](#subflow) | Reference and execute an external workflow |
+| [Switch](#switch) | Multi-way branching based on value matching |
+| [Throttle](#throttle) | Throttle execution rate with minimum interval |
+| [Trigger](#trigger) | Workflow entry point - manual, webhook, schedule, event, mcp, or polling |
 
 ## Modules
 
-### Grup İşlemi
+### Batch Process
 
 `flow.batch`
 
-Öğeleri yapılandırılabilir boyutta gruplar halinde işleyin
+Process items in batches with configurable size
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `items` | array | Yes | - | Array of items to process. Can be numbers, strings, or objects. |
-| `batch_size` | number | Yes | `10` | Grup başına öğe sayısı |
-| `delay_ms` | number | No | `0` | Gruplar arasında bekleme süresi (hız sınırlaması için) |
-| `continue_on_error` | boolean | No | `False` | Bir hata oluşursa kalan grupları işlemeye devam et |
-| `parallel_batches` | number | No | `1` | Bir hata oluşursa kalan grupları işlemeye devam et |
+| `batch_size` | number | Yes | `10` | Number of items per batch |
+| `delay_ms` | number | No | `0` | Milliseconds to wait between batches (for rate limiting) |
+| `continue_on_error` | boolean | No | `False` | Continue processing remaining batches if one fails |
+| `parallel_batches` | number | No | `1` | Number of batches to process in parallel (1 for sequential) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Paralel işlenecek grup sayısı (ardışık için 1) |
-| `batch` | array | Yönlendirme için olay (grup/tamamlandı/hata) |
-| `batch_index` | number | Yönlendirme için olay (grup/tamamlandı/hata) |
-| `total_batches` | number | Mevcut grup öğeleri |
-| `total_items` | number | Mevcut grup indeksi (0 tabanlı) |
-| `is_last_batch` | boolean | Toplam grup sayısı |
-| `progress` | object | Toplam öğe sayısı |
+| `__event__` | string | Event for routing (batch/completed/error) |
+| `batch` | array | Current batch items |
+| `batch_index` | number | Current batch index (0-based) |
+| `total_batches` | number | Total number of batches |
+| `total_items` | number | Total number of items |
+| `is_last_batch` | boolean | Whether this is the last batch |
+| `progress` | object | Progress information |
 
 **Example:** Example
 
@@ -85,11 +85,11 @@ parallel_batches: 3
 continue_on_error: true
 ```
 
-### Dal
+### Branch
 
 `flow.branch`
 
-İfade değerlendirmesine dayalı koşullu dallanma
+Conditional branching based on expression evaluation
 
 **Parameters:**
 
@@ -101,11 +101,11 @@ continue_on_error: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme olayı (true/false/error) |
-| `outputs` | object | Port bazında çıktı değerleri |
-| `result` | boolean | Dal sonucu |
-| `condition` | string | Koşul değeri |
-| `resolved_condition` | string | Koşul değerlendirme sonucu |
+| `__event__` | string | Event for routing (true/false/error) |
+| `outputs` | object | Output values by port |
+| `result` | boolean | Condition evaluation result |
+| `condition` | string | Original condition expression |
+| `resolved_condition` | string | Condition after variable resolution |
 
 **Example:** Example
 
@@ -119,11 +119,11 @@ condition: ${search_step.count} > 0
 condition: ${api_call.status} == success
 ```
 
-### Kesme Noktası
+### Breakpoint
 
 `flow.breakpoint`
 
-İnsan onayı veya girişi için iş akışı yürütmesini duraklat
+Pause workflow execution for human approval or input
 
 **Parameters:**
 
@@ -142,15 +142,15 @@ condition: ${api_call.status} == success
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme olayı (approved/rejected/timeout) |
-| `breakpoint_id` | string | Kesme noktası kimliği |
-| `status` | string | Durum |
-| `approved_by` | array | Onaylayan |
-| `rejected_by` | array | Reddeden |
-| `custom_inputs` | object | Özel girdi değerleri |
-| `comments` | array | İnceleme yorumları |
-| `resolved_at` | string | Çözüm zamanı |
-| `wait_duration_ms` | integer | Bekleme süresi (ms) |
+| `__event__` | string | Event for routing (approved/rejected/timeout) |
+| `breakpoint_id` | string | Unique breakpoint identifier |
+| `status` | string | Final status (approved/rejected/timeout/cancelled) |
+| `approved_by` | array | List of users who approved |
+| `rejected_by` | array | List of users who rejected |
+| `custom_inputs` | object | Values collected from custom fields |
+| `comments` | array | Comments from approvers |
+| `resolved_at` | string | ISO timestamp of resolution |
+| `wait_duration_ms` | integer | Time spent waiting for approval |
 
 **Example:** Example
 
@@ -175,29 +175,29 @@ title: Adjustment Required
 custom_fields: [{"name": "reason", "label": "Reason", "type": "text", "required": true}, {"name": "amount", "label": "Amount", "type": "number", "required": true}]
 ```
 
-### Devre Kesici
+### Circuit Breaker
 
 `flow.circuit_breaker`
 
-Kademeli hataları önlemek için devre kesici deseni
+Circuit breaker pattern for fault tolerance
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `failure_threshold` | number | Yes | `5` | Devrenin açılmasından önceki hata sayısı |
-| `reset_timeout_ms` | number | No | `60000` | Devrenin yarı açık duruma geçmesinden önceki süre (milisaniye) |
-| `half_open_max` | number | No | `1` | Yarı açık durumda izin verilen maksimum istek |
+| `failure_threshold` | number | Yes | `5` | Number of failures before opening the circuit |
+| `reset_timeout_ms` | number | No | `60000` | Time to wait before transitioning from open to half-open |
+| `half_open_max` | number | No | `1` | Maximum test requests allowed in half-open state |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme için etkinlik (izin verildi/reddedildi/yarı açık) |
-| `state` | string | Devre durumu (kapalı/açık/yarı açık) |
-| `failure_count` | number | Ardışık hata sayısı |
-| `last_failure_time_ms` | number | Son hatanın zaman damgası (milisaniye) |
-| `time_until_half_open_ms` | number | Devrenin yarı açık duruma geçmesine kadar geçen milisaniye |
+| `__event__` | string | Event for routing (closed/open/half_open) |
+| `state` | string | Current circuit breaker state |
+| `failure_count` | number | Current number of consecutive failures |
+| `last_failure_time_ms` | number | Timestamp of last failure |
+| `time_until_half_open_ms` | number | Milliseconds until circuit transitions to half-open |
 
 **Example:** Example
 
@@ -222,11 +222,11 @@ reset_timeout_ms: 120000
 half_open_max: 3
 ```
 
-### Kapsayıcı
+### Container
 
 `flow.container`
 
-Karmaşık iş akışlarını düzenlemek için gömülü alt akış kapsayıcısı
+Embedded subflow container for organizing complex workflows
 
 **Parameters:**
 
@@ -241,12 +241,12 @@ Karmaşık iş akışlarını düzenlemek için gömülü alt akış kapsayıcı
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme olayı (success/error) |
-| `outputs` | object | Port bazında çıktı değerleri |
-| `subflow_result` | object | Alt akış sonucu |
-| `exported_variables` | object | Dışa aktarılan değişkenler |
-| `node_count` | integer | Düğüm sayısı |
-| `execution_time_ms` | number | Yürütme süresi (ms) |
+| `__event__` | string | Event for routing (success/error) |
+| `outputs` | object | Output values by port |
+| `subflow_result` | object | Result from subflow execution |
+| `exported_variables` | object | Variables exported from subflow |
+| `node_count` | integer | Number of nodes in subflow |
+| `execution_time_ms` | number | Total subflow execution time in milliseconds |
 
 **Example:** Example
 
@@ -262,29 +262,29 @@ subflow: {"nodes": [], "edges": []}
 inherit_context: false
 ```
 
-### Gecikme
+### Debounce
 
 `flow.debounce`
 
-Hızlı tekrarlanan çağrıları önlemek için yürütmeyi geciktir
+Debounce execution to prevent rapid repeated calls
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `delay_ms` | number | Yes | - | Son çağrıdan sonra yürütme için bekleme süresi |
-| `leading` | boolean | No | `False` | Öncü kenarda yürüt (ilk çağrı hemen tetikler) |
-| `trailing` | boolean | No | `True` | Ardıl kenarda yürüt (gecikme süresi dolduktan sonra) |
+| `delay_ms` | number | Yes | - | Wait time in milliseconds before allowing execution |
+| `leading` | boolean | No | `False` | Execute on the leading edge (first call immediately) |
+| `trailing` | boolean | No | `True` | Execute on the trailing edge (after delay of inactivity) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme için etkinlik (yürütüldü/geciktirildi) |
-| `last_call_ms` | number | Son çağrının zaman damgası (milisaniye) |
-| `calls_debounced` | number | Son yürütmeden bu yana geciktirilen çağrı sayısı |
-| `time_since_last_ms` | number | Son çağrıdan bu yana geçen süre (milisaniye) |
-| `edge` | string | Hangi kenarın yürütmeyi tetiklediği (öncü/ardıl) |
+| `__event__` | string | Event for routing (executed/skipped) |
+| `last_call_ms` | number | Timestamp of the last call |
+| `calls_debounced` | number | Number of calls that were debounced (skipped) |
+| `time_since_last_ms` | number | Time since last call in milliseconds |
+| `edge` | string | Which edge triggered execution (leading/trailing) |
 
 **Example:** Example
 
@@ -308,11 +308,11 @@ leading: true
 trailing: true
 ```
 
-### Bitiş
+### End
 
 `flow.end`
 
-Açık iş akışı bitiş düğümü
+Explicit workflow end node
 
 **Parameters:**
 
@@ -325,9 +325,9 @@ Açık iş akışı bitiş düğümü
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme olayı (__end__) |
-| `ended_at` | string | Bitiş zamanı |
-| `workflow_result` | object | İş akışı sonucu |
+| `__event__` | string | Event for routing (__end__) |
+| `ended_at` | string | ISO timestamp of end |
+| `workflow_result` | object | Mapped workflow output |
 
 **Example:** Example
 
@@ -340,29 +340,29 @@ Açık iş akışı bitiş düğümü
 output_mapping: {"result": "${process.output}", "status": "success"}
 ```
 
-### Hata İşleyici
+### Error Handler
 
 `flow.error_handle`
 
-Yukarı akış düğümlerinden gelen hataları yakalar ve işler
+Catches and handles errors from upstream nodes
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | `log_and_continue` | Hata ile ne yapılacağı |
-| `include_traceback` | boolean | No | `True` | Çıkışa tam yığın izini dahil et |
-| `error_code_mapping` | object | No | `{}` | Çıkışa tam yığın izini dahil et |
-| `fallback_value` | any | No | - | Hata kodlarını özel eylemlerle eşle |
+| `action` | string | Yes | `log_and_continue` | What to do with the error |
+| `include_traceback` | boolean | No | `True` | Include full stack trace in output |
+| `error_code_mapping` | object | No | `{}` | Map error codes to custom actions |
+| `fallback_value` | any | No | - | Value to use when error is suppressed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Hata bastırıldığında kullanılacak değer |
-| `outputs` | object | Yönlendirme için olay (işlendi/yükselt) |
-| `error_info` | object | Yönlendirme için olay (işlendi/yükselt) |
-| `action_taken` | string | Alınan eylem |
+| `__event__` | string | Event for routing (handled/escalate) |
+| `outputs` | object | Output values by port |
+| `error_info` | object | Extracted error information |
+| `action_taken` | string | What action was taken |
 
 **Example:** Example
 
@@ -385,11 +385,11 @@ action: transform
 error_code_mapping: {"TIMEOUT": {"retry": true, "delay": 5000}, "NOT_FOUND": {"skip": true}}
 ```
 
-### Hata İş Akışı Tetikleyicisi
+### Error Workflow Trigger
 
 `flow.error_workflow_trigger`
 
-Hata iş akışları için giriş noktası - başka bir iş akışı başarısız olduğunda tetiklenir
+Entry point for error workflows - triggered when another workflow fails
 
 **Parameters:**
 
@@ -401,9 +401,9 @@ Hata iş akışları için giriş noktası - başka bir iş akışı başarısı
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Bu hata iş akışının açıklaması |
-| `error_context` | object | Yönlendirme için olay (tetiklendi) |
-| `triggered_at` | string | Hata iş akışının tetiklendiği ISO zaman damgası |
+| `__event__` | string | Event for routing (triggered) |
+| `error_context` | object | Complete error context from failed workflow |
+| `triggered_at` | string | ISO timestamp when error workflow was triggered |
 
 **Example:** Example
 
@@ -417,33 +417,33 @@ description: Send Slack notification on workflow failure
 description: Log all workflow errors to monitoring system
 ```
 
-### Her Biri İçin
+### For Each
 
 `flow.foreach`
 
-Bir liste üzerinde yinele ve her öğe için adımları yürüt
+Iterate over a list and execute steps for each item
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `items` | string | Yes | - | Üzerinde yinelenecek öğeler listesi (${variable} referansı destekler) |
-| `steps` | array | No | - | Her öğe için yürütülecek adımlar |
-| `item_var` | string | No | `item` | Geçerli öğe için değişken adı |
-| `index_var` | string | No | `index` | Geçerli indeks için değişken adı |
-| `output_mode` | string | No | `collect` | Sonuç toplama modu |
+| `items` | string | Yes | - | Array to iterate over — use gear icon to reference a previous step output |
+| `steps` | array | No | - | Steps to execute for each item (nested mode only) |
+| `item_var` | string | No | `item` | Variable name for current item |
+| `index_var` | string | No | `index` | Variable name for current index |
+| `output_mode` | string | No | `collect` | How to collect results: collect (array), last (single), none |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme olayı (iterate/done) |
-| `__set_context` | object | Bağlam ayarla |
-| `outputs` | object | Port bazında çıktı değerleri |
-| `iteration` | number | Geçerli yineleme indeksi |
-| `status` | string | İşlem durumu |
-| `results` | array | Toplanan sonuçlar |
-| `count` | number | Toplam öğe sayısı |
+| `__event__` | string | Event for routing (iterate/done) |
+| `__set_context` | object | Scope variables set on each iteration |
+| `outputs` | object | Output values by port |
+| `iteration` | number | Current iteration index |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of items processed |
 
 **Example:** Example
 
@@ -459,11 +459,11 @@ item_var: element
 steps: [{"module": "element.text", "params": {"element_id": "${element}"}, "output": "text"}]
 ```
 
-### Çatalla
+### Fork
 
 `flow.fork`
 
-Yürütmeyi paralel dallara böl
+Split execution into parallel branches
 
 **Parameters:**
 
@@ -475,9 +475,9 @@ Yürütmeyi paralel dallara böl
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme olayı (fork/error) |
-| `input_data` | any | Girdi verileri |
-| `branch_count` | integer | Dal sayısı |
+| `__event__` | string | Event for routing (fork/error) |
+| `input_data` | any | Input data passed to all branches |
+| `branch_count` | integer | Number of branches created |
 
 **Example:** Example
 
@@ -491,11 +491,11 @@ branch_count: 2
 branch_count: 3
 ```
 
-### Git
+### Goto
 
 `flow.goto`
 
-Başka bir adıma koşulsuz atlama
+Unconditional jump to another step
 
 **Parameters:**
 
@@ -508,9 +508,9 @@ Başka bir adıma koşulsuz atlama
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme olayı (goto) |
-| `target` | string | Hedef adım |
-| `iteration` | number | Yineleme sayısı |
+| `__event__` | string | Event for routing (goto) |
+| `target` | string | ID of the target step |
+| `iteration` | number | Current iteration count for this goto |
 
 **Example:** Example
 
@@ -544,10 +544,10 @@ Execute an external workflow file
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Parameters to pass to the invoked workflow |
-| `result` | any | Maximum execution time in seconds |
-| `workflow_id` | string | Event for routing (success/error) |
-| `execution_time_ms` | number | Workflow execution result |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Workflow execution result |
+| `workflow_id` | string | Invoked workflow ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 
@@ -565,11 +565,11 @@ workflow_params: {"data": "${input.data}"}
 output_mapping: {"processed": "result.data"}
 ```
 
-### Birleştir
+### Join
 
 `flow.join`
 
-Paralel dalların tamamlanmasını bekle
+Wait for parallel branches to complete
 
 **Parameters:**
 
@@ -584,10 +584,10 @@ Paralel dalların tamamlanmasını bekle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme olayı (joined/timeout/error) |
-| `joined_data` | array | Birleştirilmiş veriler |
-| `completed_count` | integer | Tamamlanan dal sayısı |
-| `strategy` | string | Birleştirme stratejisi |
+| `__event__` | string | Event for routing (joined/timeout/error) |
+| `joined_data` | array | Data from all completed inputs |
+| `completed_count` | integer | Number of inputs completed |
+| `strategy` | string | Strategy used for joining |
 
 **Example:** Example
 
@@ -605,31 +605,31 @@ input_count: 3
 cancel_pending: true
 ```
 
-### Döngü
+### Loop
 
 `flow.loop`
 
-Çıktı port yönlendirmesi kullanarak adımları N kez tekrarla
+Repeat steps N times using output port routing
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `times` | number | Yes | `1` | Tekrar sayısı |
-| `target` | string | No | - | Hedef adım (kullanımdan kaldırıldı) |
-| `steps` | array | No | - | Her yineleme için yürütülecek adımlar |
-| `index_var` | string | No | `index` | Geçerli indeks için değişken adı |
+| `times` | number | Yes | `1` | Number of times to repeat |
+| `target` | string | No | - | DEPRECATED: Use output ports and edges instead |
+| `steps` | array | No | - | Steps to execute for each iteration (nested mode) |
+| `index_var` | string | No | `index` | Variable name for current index |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme olayı (iterate/done) |
-| `outputs` | object | Port bazında çıktı değerleri |
-| `iteration` | number | Geçerli yineleme |
-| `status` | string | İşlem durumu |
-| `results` | array | Toplanan sonuçlar |
-| `count` | number | Toplam yineleme |
+| `__event__` | string | Event for routing (iterate/done/error) |
+| `outputs` | object | Output values by port |
+| `iteration` | number | Current iteration count |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of iterations completed |
 
 **Example:** Example
 
@@ -644,11 +644,11 @@ times: 5
 steps: [{"module": "browser.click", "params": {"selector": ".next"}}]
 ```
 
-### Birleştir
+### Merge
 
 `flow.merge`
 
-Birden fazla girdiyi tek bir çıktıya birleştir
+Merge multiple inputs into a single output
 
 **Parameters:**
 
@@ -661,10 +661,10 @@ Birden fazla girdiyi tek bir çıktıya birleştir
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme olayı (merged/error) |
-| `merged_data` | any | Birleştirilmiş veriler |
-| `input_count` | integer | Girdi sayısı |
-| `strategy` | string | Birleştirme stratejisi |
+| `__event__` | string | Event for routing (merged/error) |
+| `merged_data` | any | Merged data based on strategy |
+| `input_count` | integer | Number of inputs received |
+| `strategy` | string | Strategy used for merging |
 
 **Example:** Example
 
@@ -680,33 +680,33 @@ strategy: first
 input_count: 2
 ```
 
-### Paralel
+### Parallel
 
 `flow.parallel`
 
-Farklı stratejilerle birden fazla görevi paralel olarak yürütün
+Execute multiple tasks in parallel with different strategies
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tasks` | array | Yes | - | Paralel olarak yürütülecek görev tanımlarının dizisi |
-| `mode` | string | No | `all` | Paralel olarak yürütülecek görev tanımlarının dizisi |
+| `tasks` | array | Yes | - | Array of task definitions to execute in parallel |
+| `mode` | string | No | `all` | Parallel execution mode |
 | `timeout_ms` | number | No | `60000` | Maximum wait time in milliseconds |
-| `fail_fast` | boolean | No | `True` | İlk hatada tüm görevleri durdur (sadece mode=all için) |
-| `concurrency_limit` | number | No | `0` | İlk hatada tüm görevleri durdur (sadece mode=all için) |
+| `fail_fast` | boolean | No | `True` | Stop all tasks on first failure (only for mode=all) |
+| `concurrency_limit` | number | No | `0` | Maximum number of concurrent tasks (0 for unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Maksimum eşzamanlı görev sayısı (sınırsız için 0) |
-| `results` | array | Yönlendirme için olay (tamamlandı/kısmi/hata) |
-| `completed_count` | number | Yönlendirme için olay (tamamlandı/kısmi/hata) |
-| `failed_count` | number | Tüm görevlerin sonuçları |
-| `total_count` | number | Başarıyla tamamlanan görev sayısı |
-| `mode` | string | Başarısız görev sayısı |
-| `duration_ms` | number | Toplam görev sayısı |
+| `__event__` | string | Event for routing (completed/partial/error) |
+| `results` | array | Results from all tasks |
+| `completed_count` | number | Number of successfully completed tasks |
+| `failed_count` | number | Number of failed tasks |
+| `total_count` | number | Total number of tasks |
+| `mode` | string | Execution mode used |
+| `duration_ms` | number | Total execution time in milliseconds |
 
 **Example:** Example
 
@@ -730,30 +730,30 @@ tasks: [{"module": "http.get", "params": {"url": "https://api1.example.com"}}, {
 mode: settle
 ```
 
-### Hız Sınırı
+### Rate Limit
 
 `flow.rate_limit`
 
-Token bucket veya kayar pencere kullanarak yürütmeyi sınırla
+Rate limiter with token bucket strategy
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `max_requests` | number | Yes | - | Pencere başına izin verilen maksimum istek sayısı |
-| `window_ms` | number | No | `60000` | Zaman penceresi (milisaniye) |
-| `strategy` | string | No | `token_bucket` | Hız sınırlama stratejisi (token_bucket veya kayar_pencere) |
-| `queue_overflow` | string | No | `wait` | Kuyruk dolduğunda davranış (bırak veya hata) |
+| `max_requests` | number | Yes | - | Maximum number of requests allowed per window |
+| `window_ms` | number | No | `60000` | Time window in milliseconds |
+| `strategy` | string | No | `token_bucket` | Rate limiting strategy |
+| `queue_overflow` | string | No | `wait` | Behavior when rate limit is exceeded |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme için etkinlik (izin verildi/sınırlı) |
-| `tokens_remaining` | number | Kovadaki kalan jetonlar |
-| `window_reset_ms` | number | Pencerenin sıfırlanmasına kadar geçen milisaniye |
-| `requests_in_window` | number | Mevcut penceredeki istek sayısı |
-| `wait_ms` | number | Bir sonraki izin verilen istek için bekleme süresi (milisaniye) |
+| `__event__` | string | Event for routing (allowed/throttled/error) |
+| `tokens_remaining` | number | Number of tokens remaining in the bucket |
+| `window_reset_ms` | number | Milliseconds until the window resets |
+| `requests_in_window` | number | Number of requests made in current window |
+| `wait_ms` | number | Milliseconds to wait before retry (if throttled) |
 
 **Example:** Example
 
@@ -781,32 +781,32 @@ strategy: sliding_window
 queue_overflow: wait
 ```
 
-### Yeniden Dene
+### Retry
 
 `flow.retry`
 
-Başarısız işlemleri yapılandırılabilir geri çekilme ile yeniden dene
+Retry with exponential backoff
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `max_retries` | number | Yes | `3` | Maksimum yeniden deneme deneme sayısı |
-| `initial_delay_ms` | number | No | `1000` | İlk yeniden deneme öncesi başlangıç gecikmesi (milisaniye) |
-| `backoff_multiplier` | number | No | `2.0` | Üstel geri çekilme için çarpan |
-| `max_delay_ms` | number | No | `30000` | Yeniden denemeler arasındaki maksimum gecikme (milisaniye) |
-| `retry_on_errors` | array | No | `[]` | Yeniden denenecek hata türleri (boşsa hepsi yeniden denenir) |
+| `max_retries` | number | Yes | `3` | Maximum number of retry attempts |
+| `initial_delay_ms` | number | No | `1000` | Initial delay before first retry in milliseconds |
+| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g. 2.0 doubles delay each retry) |
+| `max_delay_ms` | number | No | `30000` | Maximum delay cap in milliseconds |
+| `retry_on_errors` | array | No | `[]` | Optional list of error codes to retry on (empty = retry on all errors) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme için olay (yeniden dene/başarılı/başarısız) |
-| `attempt` | number | Mevcut deneme numarası |
-| `max_retries` | number | Yapılandırılmış maksimum yeniden deneme sayısı |
-| `delay_ms` | number | Sonraki yeniden deneme öncesi gecikme (milisaniye) |
-| `total_elapsed_ms` | number | Toplam geçen süre (milisaniye) |
-| `last_error` | object | Son hata mesajı |
+| `__event__` | string | Event for routing (success/retry/exhausted) |
+| `attempt` | number | Current attempt number (1-based) |
+| `max_retries` | number | Maximum retry attempts configured |
+| `delay_ms` | number | Delay before this attempt in milliseconds |
+| `total_elapsed_ms` | number | Total time elapsed across all attempts |
+| `last_error` | object | Last error that triggered a retry |
 
 **Example:** Example
 
@@ -831,30 +831,30 @@ initial_delay_ms: 2000
 retry_on_errors: ["TIMEOUT", "RATE_LIMIT", "429", "503"]
 ```
 
-### Başlangıç
+### Start
 
 `flow.start`
 
-Açık iş akışı başlangıç düğümü
+Explicit workflow start node
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme olayı (start) |
-| `started_at` | string | Başlangıç zamanı |
-| `workflow_id` | string | İş akışı kimliği |
+| `__event__` | string | Event for routing (start) |
+| `started_at` | string | ISO timestamp of start |
+| `workflow_id` | string | Workflow ID if available |
 
 **Example:** Example
 
 ```yaml
 ```
 
-### Alt Akış
+### Subflow
 
 `flow.subflow`
 
-Harici bir iş akışına başvur ve yürüt
+Reference and execute an external workflow
 
 **Parameters:**
 
@@ -870,10 +870,10 @@ Harici bir iş akışına başvur ve yürüt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme olayı (success/error) |
-| `result` | any | Yürütme sonucu |
-| `execution_id` | string | Yürütme kimliği |
-| `workflow_ref` | string | İş akışı referansı |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Subflow execution result |
+| `execution_id` | string | Subflow execution ID (for spawn/async) |
+| `workflow_ref` | string | Referenced workflow |
 
 **Example:** Example
 
@@ -891,11 +891,11 @@ workflow_ref: workflows/send_notifications
 execution_mode: spawn
 ```
 
-### Anahtar
+### Switch
 
 `flow.switch`
 
-Değer eşleşmesine dayalı çok yollu dallanma
+Multi-way branching based on value matching
 
 **Parameters:**
 
@@ -908,10 +908,10 @@ Değer eşleşmesine dayalı çok yollu dallanma
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme olayı (case:value veya default) |
-| `outputs` | object | Port bazında çıktı değerleri |
-| `matched_case` | string | Eşleşen durum |
-| `value` | any | Eşleşen değer |
+| `__event__` | string | Event for routing (case:value or default) |
+| `outputs` | object | Output values by port |
+| `matched_case` | string | The case that matched |
+| `value` | any | The resolved value that was matched |
 
 **Example:** Example
 
@@ -927,28 +927,28 @@ expression: ${input.type}
 cases: [{"id": "img", "value": "image", "label": "Image"}, {"id": "vid", "value": "video", "label": "Video"}, {"id": "txt", "value": "text", "label": "Text"}]
 ```
 
-### Sınırlama
+### Throttle
 
 `flow.throttle`
 
-Minimum aralıkla yürütme hızını sınırlayın
+Throttle execution rate with minimum interval
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `interval_ms` | number | Yes | - | Yürütmeler arasındaki minimum süre (milisaniye) |
-| `leading` | boolean | No | `True` | Öncü kenarda yürüt (ilk çağrı hemen geçer) |
+| `interval_ms` | number | Yes | - | Minimum time between executions in milliseconds |
+| `leading` | boolean | No | `True` | Execute on the leading edge (first call passes immediately) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme için olay (yürütüldü/sınırlı) |
-| `last_execution_ms` | number | Son izin verilen yürütmenin zaman damgası |
-| `calls_throttled` | number | Son yürütmeden bu yana sınırlanan çağrı sayısı |
-| `time_since_last_ms` | number | Son yürütmeden bu yana geçen süre (milisaniye) |
-| `remaining_ms` | number | Bir sonraki yürütmeye izin verilene kadar kalan milisaniye |
+| `__event__` | string | Event for routing (executed/throttled) |
+| `last_execution_ms` | number | Timestamp of last allowed execution |
+| `calls_throttled` | number | Number of calls throttled since last execution |
+| `time_since_last_ms` | number | Time elapsed since last execution in milliseconds |
+| `remaining_ms` | number | Milliseconds remaining until next execution is allowed |
 
 **Example:** Example
 
@@ -970,11 +970,11 @@ interval_ms: 5000
 leading: false
 ```
 
-### Tetikleyici
+### Trigger
 
 `flow.trigger`
 
-İş akışı giriş noktası - manuel, webhook, zamanlama veya olay
+Workflow entry point - manual, webhook, schedule, event, mcp, or polling
 
 **Parameters:**
 
@@ -999,10 +999,10 @@ leading: false
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yönlendirme olayı (triggered/error) |
-| `trigger_data` | object | Tetikleyici verileri |
-| `trigger_type` | string | Tetikleyici türü |
-| `triggered_at` | string | Tetiklenme zamanı |
+| `__event__` | string | Event for routing (triggered/error) |
+| `trigger_data` | object | Data from trigger source |
+| `trigger_type` | string | Type of trigger |
+| `triggered_at` | string | ISO timestamp |
 
 **Example:** Example
 

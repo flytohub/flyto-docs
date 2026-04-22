@@ -2,54 +2,55 @@
 
 Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and testing.
 
-**44 modules**
+**45 modules**
 
 | Module | Description |
 |--------|-------------|
-| [Filter Array](#filter-array) | Filter elemen array berdasarkan kondisi |
-| [Urutkan Array](#urutkan-array) | Urutkan elemen array secara ascending atau descending |
-| [Array Unik](#array-unik) | Hapus nilai duplikat dari array |
+| [Filter Array](#filter-array) | Filter array elements by condition |
+| [Sort Array](#sort-array) | Sort array elements in ascending or descending order |
+| [Array Unique](#array-unique) | Remove duplicate values from array |
 | [OAuth2 Token Exchange](#oauth2-token-exchange) | Exchange authorization code, refresh token, or client credentials for an access token |
-| [Pencarian DNS](#pencarian-dns) | Pencarian DNS untuk catatan domain |
-| [Perbedaan Teks](#perbedaan-teks) | Hasilkan perbedaan antara dua string teks |
-| [Edit File](#edit-file) | Ganti teks dalam file menggunakan pencocokan string yang tepat |
-| [Periksa File Ada](#periksa-file-ada) | Periksa apakah file atau direktori ada |
-| [Baca File](#baca-file) | Baca konten dari file |
-| [Tulis File](#tulis-file) | Tulis konten ke file |
-| [Git Clone](#git-clone) | Clone repositori git |
-| [Git Commit](#git-commit) | Buat commit git |
-| [Git Diff](#git-diff) | Dapatkan git diff |
+| [DNS Lookup](#dns-lookup) | DNS lookup for domain records |
+| [Diff Content](#diff-content) | Generate unified diff between original and modified content |
+| [Edit File](#edit-file) | Replace a string in a file (targeted edit, not full overwrite) |
+| [Check File Exists](#check-file-exists) | Check if a file or directory exists |
+| [Read File](#read-file) | Read content from a file |
+| [Write File](#write-file) | Write content to a file |
+| [Git Clone](#git-clone) | Clone a git repository |
+| [Git Commit](#git-commit) | Create a git commit |
+| [Git Diff](#git-diff) | Get git diff |
+| [HTTP Batch](#http-batch) | Run a batch of HTTP probes sequentially and capture timing + body |
 | [HTTP Paginate](#http-paginate) | Automatically iterate through paginated API endpoints and collect all results |
-| [Permintaan HTTP](#permintaan-http) | Kirim permintaan HTTP dan terima respons |
-| [Assert Respons HTTP](#assert-respons-http) | Assert dan validasi properti respons HTTP |
+| [HTTP Request](#http-request) | Send HTTP request and receive response |
+| [Assert HTTP Response](#assert-http-response) | Assert and validate HTTP response properties |
 | [HTTP Session](#http-session) | Send a sequence of HTTP requests with persistent cookies (login → action → logout) |
 | [Webhook Wait](#webhook-wait) | Start a temporary server and wait for an incoming webhook callback |
-| [LLM Chat](#llm-chat) | Berinteraksi dengan API LLM untuk operasi cerdas |
-| [Perbaikan Kode AI](#perbaikan-kode-ai) | Otomatis hasilkan perbaikan kode berdasarkan masalah |
-| [Hitung](#hitung) | Lakukan operasi matematika dasar |
-| [Pemeriksaan Kesehatan HTTP](#pemeriksaan-kesehatan-http) | Pemeriksaan kesehatan HTTP / pemantauan uptime |
-| [Periksa Port](#periksa-port) | Periksa apakah port jaringan terbuka atau tertutup |
-| [Tunggu Port](#tunggu-port) | Tunggu port jaringan tersedia |
-| [Daftar Proses](#daftar-proses) | Daftar semua proses background yang berjalan |
-| [Mulai Proses Background](#mulai-proses-background) | Mulai proses background (server, layanan, dll.) |
-| [Hentikan Proses](#hentikan-proses) | Hentikan proses background yang berjalan |
-| [Eksekusi Perintah Shell](#eksekusi-perintah-shell) | Eksekusi perintah shell dan tangkap output |
-| [Eksekusi SSH](#eksekusi-ssh) | Eksekusi perintah di server jarak jauh via SSH |
-| [Unduh SFTP](#unduh-sftp) | Unduh file dari server jarak jauh via SFTP |
-| [Unggah SFTP](#unggah-sftp) | Unggah file ke server jarak jauh via SFTP |
-| [Jalankan Langkah E2E](#jalankan-langkah-e2e) | Eksekusi langkah tes end-to-end secara sekuensial |
-| [Gerbang Kualitas](#gerbang-kualitas) | Evaluasi metrik kualitas terhadap threshold yang ditentukan |
-| [Jalankan Tes HTTP](#jalankan-tes-http) | Eksekusi suite tes HTTP API |
-| [Jalankan Linter](#jalankan-linter) | Jalankan pemeriksaan linting pada source code |
-| [Hasilkan Laporan](#hasilkan-laporan) | Hasilkan laporan eksekusi tes |
-| [Jalankan Skenario](#jalankan-skenario) | Eksekusi tes berbasis skenario (gaya BDD) |
-| [Pindai Keamanan](#pindai-keamanan) | Pindai kerentanan keamanan |
-| [Jalankan Test Suite](#jalankan-test-suite) | Eksekusi koleksi tes |
-| [Jalankan Unit Test](#jalankan-unit-test) | Eksekusi unit test |
-| [Perbandingan Visual](#perbandingan-visual) | Bandingkan output visual untuk perbedaan |
-| [Evaluasi Kualitas UI](#evaluasi-kualitas-ui) | Evaluasi kualitas UI komprehensif dengan penilaian multi-dimensi |
-| [Analisis Gambar dengan AI](#analisis-gambar-dengan-ai) | Analisis gambar menggunakan OpenAI Vision API (GPT-4V) |
-| [Bandingkan Gambar](#bandingkan-gambar) | Bandingkan dua gambar dan identifikasi perbedaan visual |
+| [LLM Chat](#llm-chat) | Interact with LLM APIs for intelligent operations |
+| [AI Code Fix](#ai-code-fix) | Automatically generate code fixes based on issues |
+| [Calculate](#calculate) | Perform basic mathematical operations |
+| [HTTP Health Check](#http-health-check) | HTTP health check / uptime monitor |
+| [Check Port](#check-port) | Check if network port(s) are open or closed |
+| [Wait for Port](#wait-for-port) | Wait for a network port to become available |
+| [List Processes](#list-processes) | List all running background processes |
+| [Start Background Process](#start-background-process) | Start a background process (server, service, etc.) |
+| [Stop Process](#stop-process) | Stop a running background process |
+| [Execute Shell Command](#execute-shell-command) | Execute a shell command and capture output |
+| [SSH Execute](#ssh-execute) | Execute command on remote server via SSH |
+| [SFTP Download](#sftp-download) | Download file from remote server via SFTP |
+| [SFTP Upload](#sftp-upload) | Upload file to remote server via SFTP |
+| [Run E2E Steps](#run-e2e-steps) | Execute end-to-end test steps sequentially |
+| [Quality Gate](#quality-gate) | Evaluate quality metrics against defined thresholds |
+| [Run HTTP Tests](#run-http-tests) | Execute HTTP API test suite |
+| [Run Linter](#run-linter) | Run linting checks on source code |
+| [Generate Report](#generate-report) | Generate test execution report |
+| [Run Scenario](#run-scenario) | Execute scenario-based test (BDD style) |
+| [Security Scan](#security-scan) | Scan for security vulnerabilities |
+| [Run Test Suite](#run-test-suite) | Execute a collection of tests |
+| [Run Unit Tests](#run-unit-tests) | Execute unit tests |
+| [Visual Compare](#visual-compare) | Compare visual outputs for differences |
+| [Evaluate UI Quality](#evaluate-ui-quality) | Comprehensive UI quality evaluation with multi-dimensional scoring |
+| [Analyze Image with AI](#analyze-image-with-ai) | Analyze images using OpenAI Vision API (GPT-4V) |
+| [Compare Images](#compare-images) | Compare two images and identify visual differences |
 
 ## Modules
 
@@ -57,7 +58,7 @@ Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and t
 
 `array.filter`
 
-Filter elemen array berdasarkan kondisi
+Filter array elements by condition
 
 **Parameters:**
 
@@ -71,8 +72,8 @@ Filter elemen array berdasarkan kondisi
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filtered` | array | Array yang difilter |
-| `count` | number | Array yang difilter |
+| `filtered` | array | Filtered array |
+| `count` | number | Number of items in filtered array |
 
 **Example:** Filter numbers greater than 5
 
@@ -82,11 +83,11 @@ condition: gt
 value: 5
 ```
 
-### Urutkan Array
+### Sort Array
 
 `array.sort`
 
-Urutkan elemen array secara ascending atau descending
+Sort array elements in ascending or descending order
 
 **Parameters:**
 
@@ -99,8 +100,8 @@ Urutkan elemen array secara ascending atau descending
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sorted` | array | Array yang diurutkan |
-| `count` | number | Array yang diurutkan |
+| `sorted` | array | Sorted array |
+| `count` | number | Number of items |
 
 **Example:** Sort numbers ascending
 
@@ -109,11 +110,11 @@ array: [5, 2, 8, 1, 9]
 order: asc
 ```
 
-### Array Unik
+### Array Unique
 
 `array.unique`
 
-Hapus nilai duplikat dari array
+Remove duplicate values from array
 
 **Parameters:**
 
@@ -126,9 +127,9 @@ Hapus nilai duplikat dari array
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `unique` | array | Array dengan nilai unik |
-| `count` | number | Array dengan nilai unik |
-| `duplicates_removed` | number | Array dengan nilai unik |
+| `unique` | array | Array with unique values |
+| `count` | number | Number of unique items |
+| `duplicates_removed` | number | Number of duplicates removed |
 
 **Example:** Remove duplicates
 
@@ -214,19 +215,19 @@ client_secret: ${env.GITHUB_CLIENT_SECRET}
 code: abc123...
 ```
 
-### Pencarian DNS
+### DNS Lookup
 
 `dns.lookup`
 
-Pencarian DNS untuk catatan domain
+DNS lookup for domain records
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `domain` | string | Yes | - | Nama domain untuk dicari |
-| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | Jenis catatan DNS untuk ditanyakan |
-| `timeout` | number | No | `10` | Batas waktu pencarian dalam detik |
+| `domain` | string | Yes | - | Domain name to look up |
+| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | DNS record type to query |
+| `timeout` | number | No | `10` | Query timeout in seconds |
 
 **Output:**
 
@@ -249,29 +250,29 @@ domain: example.com
 record_type: MX
 ```
 
-### Perbedaan Teks
+### Diff Content
 
 `file.diff`
 
-Hasilkan perbedaan antara dua string teks
+Generate unified diff between original and modified content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `original` | string | Yes | - | Teks asli |
-| `modified` | string | Yes | - | Teks yang dimodifikasi |
-| `context_lines` | number | No | `3` | Jumlah baris konteks di sekitar perubahan |
-| `filename` | string | No | `file` | Nama file yang digunakan di header perbedaan |
+| `original` | string | Yes | - | Original content for comparison |
+| `modified` | string | Yes | - | Modified content for comparison |
+| `context_lines` | number | No | `3` | Number of context lines around changes |
+| `filename` | string | No | `file` | Name of the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `diff` | string | Output perbedaan yang seragam |
-| `changed` | boolean | Apakah ada perubahan |
-| `additions` | number | Jumlah baris yang ditambahkan |
-| `deletions` | number | Jumlah baris yang dihapus |
+| `diff` | string | Unified diff output |
+| `changed` | boolean | Whether content differs |
+| `additions` | number | Number of added lines |
+| `deletions` | number | Number of deleted lines |
 
 **Example:** Diff two strings
 
@@ -287,25 +288,25 @@ filename: test.txt
 
 `file.edit`
 
-Ganti teks dalam file menggunakan pencocokan string yang tepat
+Replace a string in a file (targeted edit, not full overwrite)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Jalur ke file yang akan diedit |
-| `old_string` | string | Yes | - | Teks untuk ditemukan dan diganti |
-| `new_string` | string | Yes | - | Teks pengganti |
-| `replace_all` | boolean | No | `False` | Ganti semua kejadian, bukan hanya yang pertama |
-| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | Pengkodean file |
+| `path` | string | Yes | - | Path to the file |
+| `old_string` | string | Yes | - | Text to find and replace |
+| `new_string` | string | Yes | - | Replacement text |
+| `replace_all` | boolean | No | `False` | Whether to replace all occurrences |
+| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | Character encoding for the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Jalur file yang diedit |
-| `replacements` | number | Jumlah penggantian yang dilakukan |
-| `diff` | string | Perbedaan yang menunjukkan apa yang berubah |
+| `path` | string | File path that was edited |
+| `replacements` | number | Number of replacements made |
+| `diff` | string | Unified diff of changes |
 
 **Example:** Replace string in file
 
@@ -315,11 +316,11 @@ old_string: def hello():
 new_string: def hello_world():
 ```
 
-### Periksa File Ada
+### Check File Exists
 
 `file.exists`
 
-Periksa apakah file atau direktori ada
+Check if a file or directory exists
 
 **Parameters:**
 
@@ -331,9 +332,9 @@ Periksa apakah file atau direktori ada
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `exists` | boolean | Apakah path ada |
-| `is_file` | boolean | Apakah path ada |
-| `is_directory` | boolean | Apakah path ada |
+| `exists` | boolean | Whether path exists |
+| `is_file` | boolean | Whether path is a file |
+| `is_directory` | boolean | Whether path is a directory |
 
 **Example:** Check file exists
 
@@ -341,11 +342,11 @@ Periksa apakah file atau direktori ada
 path: /tmp/data.txt
 ```
 
-### Baca File
+### Read File
 
 `file.read`
 
-Baca konten dari file
+Read content from a file
 
 **Parameters:**
 
@@ -358,8 +359,8 @@ Baca konten dari file
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `content` | string | Konten file |
-| `size` | number | Konten file |
+| `content` | string | File content |
+| `size` | number | File size in bytes |
 
 **Example:** Read text file
 
@@ -368,11 +369,11 @@ path: /tmp/data.txt
 encoding: utf-8
 ```
 
-### Tulis File
+### Write File
 
 `file.write`
 
-Tulis konten ke file
+Write content to a file
 
 **Parameters:**
 
@@ -387,8 +388,8 @@ Tulis konten ke file
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Path file |
-| `bytes_written` | number | Path file |
+| `path` | string | File path |
+| `bytes_written` | number | Number of bytes written |
 
 **Example:** Write text file
 
@@ -402,17 +403,17 @@ mode: overwrite
 
 `git.clone`
 
-Clone repositori git
+Clone a git repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL repositori Git (HTTPS atau SSH) |
-| `destination` | string | Yes | - | Jalur lokal untuk clone |
-| `branch` | string | No | - | Cabang untuk checkout setelah clone |
-| `depth` | number | No | - | Kedalaman clone dangkal (kosongkan untuk clone penuh) |
-| `token` | string | No | - | Token akses pribadi untuk repositori privat |
+| `url` | string | Yes | - | Git repository URL (HTTPS or SSH) |
+| `destination` | string | Yes | - | Local path to clone into |
+| `branch` | string | No | - | Branch to checkout after clone |
+| `depth` | number | No | - | Shallow clone depth (omit for full clone) |
+| `token` | string | No | - | Personal access token for private repos |
 
 **Output:**
 
@@ -441,18 +442,18 @@ depth: 1
 
 `git.commit`
 
-Buat commit git
+Create a git commit
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | Jalur ke repositori git |
-| `message` | string | Yes | - | Pesan commit |
-| `add_all` | boolean | No | `False` | Stage semua perubahan sebelum commit (git add -A) |
-| `files` | array | No | - | File spesifik untuk stage sebelum commit |
-| `author_name` | string | No | - | Ganti nama penulis commit |
-| `author_email` | string | No | - | Ganti email penulis commit |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `message` | string | Yes | - | Commit message |
+| `add_all` | boolean | No | `False` | Stage all changes before committing (git add -A) |
+| `files` | array | No | - | Specific files to stage before committing |
+| `author_name` | string | No | - | Override commit author name |
+| `author_email` | string | No | - | Override commit author email |
 
 **Output:**
 
@@ -481,17 +482,17 @@ files: ["README.md"]
 
 `git.diff`
 
-Dapatkan git diff
+Get git diff
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | Jalur ke repositori git |
-| `ref1` | string | No | `HEAD` | Referensi pertama (commit, cabang, tag) |
-| `ref2` | string | No | - | Referensi kedua untuk dibandingkan |
-| `staged` | boolean | No | `False` | Tampilkan hanya perubahan yang di-stage (--cached) |
-| `stat_only` | boolean | No | `False` | Tampilkan hanya statistik file (--stat) |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `ref1` | string | No | `HEAD` | First reference (commit, branch, tag) |
+| `ref2` | string | No | - | Second reference to compare against |
+| `staged` | boolean | No | `False` | Show only staged changes (--cached) |
+| `stat_only` | boolean | No | `False` | Show only file statistics (--stat) |
 
 **Output:**
 
@@ -521,6 +522,35 @@ repo_path: /home/user/project
 staged: true
 stat_only: true
 ```
+
+### HTTP Batch
+
+`http.batch`
+
+Run a batch of HTTP probes sequentially and capture timing + body
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `requests` | array | Yes | - | List of request dicts: {method, url, headers?, body?, label?} |
+| `description` | string | No | - | Informational description of the batch intent |
+| `measure_time` | boolean | No | `False` | Execute requests sequentially for reliable timing comparison |
+| `timeout` | number | No | `30` |  |
+| `verify_ssl` | boolean | No | `True` |  |
+| `ssrf_protection` | boolean | No | `True` |  |
+| `detect_patterns` | array | No | - | Optional list of substrings to report matches for across all bodies |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `ok` | boolean | Whether the batch completed (does not imply all requests succeeded) |
+| `data` | array | Per-request results: [{label, status, body, duration_ms, ok, ...}] |
+| `count` | number | Number of requests executed |
+| `failed_count` | number | Number of requests that errored or returned non-2xx |
+| `total_duration_ms` | number | Total elapsed ms across the batch |
+| `detected` | array | Pattern match summary when detect_patterns provided |
 
 ### HTTP Paginate
 
@@ -602,11 +632,11 @@ page_size: 100
 auth: {"type": "bearer", "token": "${env.GITHUB_TOKEN}"}
 ```
 
-### Permintaan HTTP
+### HTTP Request
 
 `http.request`
 
-Kirim permintaan HTTP dan terima respons
+Send HTTP request and receive response
 
 **Parameters:**
 
@@ -632,15 +662,15 @@ Kirim permintaan HTTP dan terima respons
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah permintaan berhasil (status 2xx) |
-| `status` | number | Apakah permintaan berhasil (status 2xx) |
-| `status_text` | string | Apakah permintaan berhasil (status 2xx) |
-| `headers` | object | Kode status HTTP |
-| `body` | any | Teks status HTTP |
-| `url` | string | Header respons |
-| `duration_ms` | number | Body respons (JSON yang di-parse atau teks) |
-| `content_type` | string | URL akhir (setelah redirect) |
-| `content_length` | number | Content-Type respons |
+| `ok` | boolean | Whether request was successful (2xx status) |
+| `status` | number | HTTP status code |
+| `status_text` | string | HTTP status text |
+| `headers` | object | Response headers |
+| `body` | any | Response body (parsed JSON or text) |
+| `url` | string | Final URL (after redirects) |
+| `duration_ms` | number | Request duration in milliseconds |
+| `content_type` | string | Response Content-Type |
+| `content_length` | number | Response body size in bytes |
 
 **Example:** Simple GET request
 
@@ -673,11 +703,11 @@ method: GET
 query: {"q": "flyto", "limit": 10}
 ```
 
-### Assert Respons HTTP
+### Assert HTTP Response
 
 `http.response_assert`
 
-Assert dan validasi properti respons HTTP
+Assert and validate HTTP response properties
 
 **Parameters:**
 
@@ -700,12 +730,12 @@ Assert dan validasi properti respons HTTP
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah semua asersi lolos |
-| `passed` | number | Apakah semua asersi lolos |
-| `failed` | number | Apakah semua asersi lolos |
-| `total` | number | Jumlah asersi yang lolos |
-| `assertions` | array | Jumlah asersi yang gagal |
-| `errors` | array | Hasil asersi detail |
+| `ok` | boolean | Whether all assertions passed |
+| `passed` | number | Number of passed assertions |
+| `failed` | number | Number of failed assertions |
+| `total` | number | Total number of assertions |
+| `assertions` | array | Detailed assertion results |
+| `errors` | array | List of error messages for failed assertions |
 
 **Example:** Assert status 200
 
@@ -825,7 +855,7 @@ ngrok_token: ${env.NGROK_AUTH_TOKEN}
 
 `llm.chat`
 
-Berinteraksi dengan API LLM untuk operasi cerdas
+Interact with LLM APIs for intelligent operations
 
 **Parameters:**
 
@@ -847,12 +877,12 @@ Berinteraksi dengan API LLM untuk operasi cerdas
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah permintaan berhasil |
-| `response` | string | Apakah permintaan berhasil |
-| `parsed` | any | Apakah permintaan berhasil |
-| `model` | string | Teks respons LLM |
-| `tokens_used` | number | Respons yang di-parse (jika format JSON diminta) |
-| `finish_reason` | string | Model yang digunakan |
+| `ok` | boolean | Whether the request succeeded |
+| `response` | string | The LLM response text |
+| `parsed` | any | Parsed response (if JSON format requested) |
+| `model` | string | Model used |
+| `tokens_used` | number | Total tokens consumed |
+| `finish_reason` | string | Why the response ended |
 
 **Example:** Code Review
 
@@ -882,11 +912,11 @@ system_prompt: You are a DevOps engineer. Return JSON: {"decision": "yes/no", "r
 response_format: json
 ```
 
-### Perbaikan Kode AI
+### AI Code Fix
 
 `llm.code_fix`
 
-Otomatis hasilkan perbaikan kode berdasarkan masalah
+Automatically generate code fixes based on issues
 
 **Parameters:**
 
@@ -904,11 +934,11 @@ Otomatis hasilkan perbaikan kode berdasarkan masalah
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah operasi berhasil |
-| `fixes` | array | Apakah operasi berhasil |
-| `applied` | array | Apakah operasi berhasil |
-| `failed` | array | Daftar perbaikan yang dihasilkan |
-| `summary` | string | Daftar perbaikan yang diterapkan (jika fix_mode adalah apply) |
+| `ok` | boolean | Whether operation succeeded |
+| `fixes` | array | List of generated fixes |
+| `applied` | array | List of applied fixes (if fix_mode is apply) |
+| `failed` | array | Fixes that could not be applied |
+| `summary` | string | Summary of fixes |
 
 **Example:** Fix UI Issues
 
@@ -928,11 +958,11 @@ fix_mode: apply
 backup: true
 ```
 
-### Hitung
+### Calculate
 
 `math.calculate`
 
-Lakukan operasi matematika dasar
+Perform basic mathematical operations
 
 **Parameters:**
 
@@ -947,9 +977,9 @@ Lakukan operasi matematika dasar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Hasil perhitungan |
-| `operation` | string | Hasil perhitungan |
-| `expression` | string | Hasil perhitungan |
+| `result` | number | Calculation result |
+| `operation` | string | Operation performed |
+| `expression` | string | Human-readable expression |
 
 **Example:** Add two numbers
 
@@ -967,25 +997,25 @@ a: 2
 b: 8
 ```
 
-### Pemeriksaan Kesehatan HTTP
+### HTTP Health Check
 
 `monitor.http_check`
 
-Pemeriksaan kesehatan HTTP / pemantauan uptime
+HTTP health check / uptime monitor
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL yang akan diperiksa |
-| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | Metode HTTP |
-| `expected_status` | number | No | `200` | Kode status HTTP yang diharapkan |
-| `timeout_ms` | number | No | `10000` | Batas waktu permintaan dalam milidetik |
-| `headers` | object | No | - | Header permintaan khusus |
-| `body` | string | No | - | Badan permintaan (untuk POST) |
-| `check_ssl` | boolean | No | `True` | Periksa keabsahan dan kedaluwarsa sertifikat SSL |
-| `contains` | string | No | - | Badan respons harus mengandung string ini |
-| `follow_redirects` | boolean | No | `True` | Ikuti pengalihan HTTP |
+| `url` | string | Yes | - | URL to check |
+| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | HTTP method |
+| `expected_status` | number | No | `200` | Expected HTTP status code |
+| `timeout_ms` | number | No | `10000` | Request timeout in milliseconds |
+| `headers` | object | No | - | Custom request headers |
+| `body` | string | No | - | Request body (for POST) |
+| `check_ssl` | boolean | No | `True` | Check SSL certificate validity and expiry |
+| `contains` | string | No | - | Response body must contain this string |
+| `follow_redirects` | boolean | No | `True` | Follow HTTP redirects |
 
 **Output:**
 
@@ -1009,30 +1039,30 @@ contains: "status":"ok"
 timeout_ms: 5000
 ```
 
-### Periksa Port
+### Check Port
 
 `port.check`
 
-Periksa apakah port jaringan terbuka atau tertutup
+Check if network port(s) are open or closed
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | any | Yes | - | Nomor port atau array port untuk diperiksa |
-| `host` | string | No | `localhost` | Nomor port atau array port untuk diperiksa |
-| `connect_timeout` | number | No | `2` | Host untuk terhubung |
-| `expect_open` | boolean | No | - | Timeout untuk setiap percobaan koneksi |
+| `port` | any | Yes | - | Port number or array of ports to check |
+| `host` | string | No | `localhost` | Host to connect to |
+| `connect_timeout` | number | No | `2` | Timeout for each connection attempt |
+| `expect_open` | boolean | No | - | Set to true to assert ports are open, false for closed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Atur ke true untuk assert port terbuka, false untuk tertutup |
-| `results` | array | Apakah semua pemeriksaan lolos (jika expect_open diatur) |
-| `open_ports` | array | Apakah semua pemeriksaan lolos (jika expect_open diatur) |
-| `closed_ports` | array | Array hasil pemeriksaan port |
-| `summary` | object | Daftar port terbuka |
+| `ok` | boolean | Whether all checks passed (if expect_open is set) |
+| `results` | array | Array of port check results |
+| `open_ports` | array | List of open ports |
+| `closed_ports` | array | List of closed ports |
+| `summary` | object | Summary statistics |
 
 **Example:** Check single port
 
@@ -1055,32 +1085,32 @@ host: example.com
 expect_open: true
 ```
 
-### Tunggu Port
+### Wait for Port
 
 `port.wait`
 
-Tunggu port jaringan tersedia
+Wait for a network port to become available
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | number | Yes | - | Nomor port untuk ditunggu |
-| `host` | string | No | `localhost` | Host untuk terhubung |
-| `timeout` | number | No | `60` | Host untuk terhubung |
-| `interval` | number | No | `500` | Waktu maksimum untuk menunggu |
-| `expect_closed` | boolean | No | `False` | Waktu antara percobaan koneksi dalam milidetik |
+| `port` | number | Yes | - | Port number to wait for |
+| `host` | string | No | `localhost` | Host to connect to |
+| `timeout` | number | No | `60` | Maximum time to wait |
+| `interval` | number | No | `500` | Time between connection attempts in milliseconds |
+| `expect_closed` | boolean | No | `False` | Wait for port to become unavailable instead |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Tunggu port menjadi tidak tersedia |
-| `available` | boolean | Apakah port dalam kondisi yang diharapkan |
-| `host` | string | Apakah port dalam kondisi yang diharapkan |
-| `port` | number | Apakah port saat ini tersedia |
-| `wait_time_ms` | number | Host yang diperiksa |
-| `attempts` | number | Port yang diperiksa |
+| `ok` | boolean | Whether port is in expected state |
+| `available` | boolean | Whether port is currently available |
+| `host` | string | Host that was checked |
+| `port` | number | Port that was checked |
+| `wait_time_ms` | number | Time spent waiting in milliseconds |
+| `attempts` | number | Number of connection attempts |
 
 **Example:** Wait for dev server
 
@@ -1105,11 +1135,11 @@ expect_closed: true
 timeout: 10
 ```
 
-### Daftar Proses
+### List Processes
 
 `process.list`
 
-Daftar semua proses background yang berjalan
+List all running background processes
 
 **Parameters:**
 
@@ -1122,11 +1152,11 @@ Daftar semua proses background yang berjalan
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Operasi berhasil |
-| `processes` | array | Operasi berhasil |
-| `count` | number | Operasi berhasil |
-| `running` | number | Daftar informasi proses |
-| `stopped` | number | Total jumlah proses |
+| `ok` | boolean | Operation success |
+| `processes` | array | List of process information |
+| `count` | number | Total number of processes |
+| `running` | number | Number of running processes |
+| `stopped` | number | Number of stopped processes |
 
 **Example:** List all processes
 
@@ -1139,11 +1169,11 @@ Daftar semua proses background yang berjalan
 filter_name: dev
 ```
 
-### Mulai Proses Background
+### Start Background Process
 
 `process.start`
 
-Mulai proses background (server, layanan, dll.)
+Start a background process (server, service, etc.)
 
 **Parameters:**
 
@@ -1163,14 +1193,14 @@ Mulai proses background (server, layanan, dll.)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah proses berhasil dimulai |
-| `pid` | number | Apakah proses berhasil dimulai |
-| `process_id` | string | Apakah proses berhasil dimulai |
-| `name` | string | ID Proses |
-| `command` | string | Identifier proses internal untuk process.stop |
-| `cwd` | string | Nama proses |
-| `started_at` | string | Perintah yang dieksekusi |
-| `initial_output` | string | Timestamp ISO saat proses dimulai |
+| `ok` | boolean | Whether process started successfully |
+| `pid` | number | Process ID |
+| `process_id` | string | Internal process identifier for process.stop |
+| `name` | string | Process name |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory |
+| `started_at` | string | ISO timestamp when process started |
+| `initial_output` | string | Initial stdout output (if wait_for_output was used) |
 
 **Example:** Start dev server
 
@@ -1198,11 +1228,11 @@ name: api-server
 wait_for_output: listening
 ```
 
-### Hentikan Proses
+### Stop Process
 
 `process.stop`
 
-Hentikan proses background yang berjalan
+Stop a running background process
 
 **Parameters:**
 
@@ -1220,10 +1250,10 @@ Hentikan proses background yang berjalan
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah semua proses berhasil dihentikan |
-| `stopped` | array | Apakah semua proses berhasil dihentikan |
-| `failed` | array | Daftar info proses yang dihentikan |
-| `count` | number | Daftar info proses yang dihentikan |
+| `ok` | boolean | Whether all processes were stopped successfully |
+| `stopped` | array | List of stopped process info |
+| `failed` | array | List of processes that failed to stop |
+| `count` | number | Number of processes stopped |
 
 **Example:** Stop by process ID
 
@@ -1250,11 +1280,11 @@ force: true
 stop_all: true
 ```
 
-### Eksekusi Perintah Shell
+### Execute Shell Command
 
 `shell.exec`
 
-Eksekusi perintah shell dan tangkap output
+Execute a shell command and capture output
 
 **Parameters:**
 
@@ -1273,13 +1303,13 @@ Eksekusi perintah shell dan tangkap output
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah perintah berhasil dieksekusi (exit code 0) |
-| `exit_code` | number | Apakah perintah berhasil dieksekusi (exit code 0) |
-| `stdout` | string | Apakah perintah berhasil dieksekusi (exit code 0) |
-| `stderr` | string | Exit code perintah |
-| `command` | string | Output standar |
-| `cwd` | string | Output error standar |
-| `duration_ms` | number | Perintah yang dieksekusi |
+| `ok` | boolean | Whether command executed successfully (exit code 0) |
+| `exit_code` | number | Command exit code |
+| `stdout` | string | Standard output |
+| `stderr` | string | Standard error output |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory used |
+| `duration_ms` | number | Execution duration in milliseconds |
 
 **Example:** Run npm install
 
@@ -1309,23 +1339,23 @@ cwd: ./frontend
 env: {"NODE_ENV": "production"}
 ```
 
-### Eksekusi SSH
+### SSH Execute
 
 `ssh.exec`
 
-Eksekusi perintah di server jarak jauh via SSH
+Execute command on remote server via SSH
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | Nama host atau IP server SSH |
-| `port` | number | No | `22` | Port SSH |
-| `username` | string | Yes | - | Nama pengguna SSH |
-| `password` | string | No | - | Kata sandi SSH |
-| `private_key` | string | No | - | Kunci pribadi format PEM |
-| `command` | string | Yes | - | Perintah untuk dieksekusi di server jarak jauh |
-| `timeout` | number | No | `30` | Batas waktu perintah dalam detik |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `command` | string | Yes | - | Command to execute on remote server |
+| `timeout` | number | No | `30` | Command timeout in seconds |
 
 **Output:**
 
@@ -1350,23 +1380,23 @@ username: root
 command: systemctl restart nginx
 ```
 
-### Unduh SFTP
+### SFTP Download
 
 `ssh.sftp_download`
 
-Unduh file dari server jarak jauh via SFTP
+Download file from remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | Nama host atau IP server SSH |
-| `port` | number | No | `22` | Port SSH |
-| `username` | string | Yes | - | Nama pengguna SSH |
-| `password` | string | No | - | Kata sandi SSH |
-| `private_key` | string | No | - | Kunci pribadi format PEM |
-| `remote_path` | string | Yes | - | Jalur ke file di server jauh |
-| `local_path` | string | Yes | - | Jalur tujuan di mesin lokal |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `remote_path` | string | Yes | - | Path to file on remote server |
+| `local_path` | string | Yes | - | Destination path on local machine |
 
 **Output:**
 
@@ -1384,24 +1414,24 @@ remote_path: /var/log/nginx/access.log
 local_path: /tmp/access.log
 ```
 
-### Unggah SFTP
+### SFTP Upload
 
 `ssh.sftp_upload`
 
-Unggah file ke server jarak jauh via SFTP
+Upload file to remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | Nama host atau IP server SSH |
-| `port` | number | No | `22` | Port SSH |
-| `username` | string | Yes | - | Nama pengguna SSH |
-| `password` | string | No | - | Kata sandi SSH |
-| `private_key` | string | No | - | Kunci pribadi format PEM |
-| `local_path` | string | Yes | - | Jalur ke file lokal untuk diunggah |
-| `remote_path` | string | Yes | - | Jalur tujuan di server jarak jauh |
-| `overwrite` | boolean | No | `True` | Timpa file jarak jauh yang ada |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `local_path` | string | Yes | - | Path to local file to upload |
+| `remote_path` | string | Yes | - | Destination path on remote server |
+| `overwrite` | boolean | No | `True` | Overwrite existing remote file |
 
 **Output:**
 
@@ -1419,17 +1449,17 @@ local_path: /tmp/app.tar.gz
 remote_path: /opt/releases/app.tar.gz
 ```
 
-### Jalankan Langkah E2E
+### Run E2E Steps
 
 `testing.e2e.run_steps`
 
-Eksekusi langkah tes end-to-end secara sekuensial
+Execute end-to-end test steps sequentially
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `steps` | array | Yes | - | Array definisi langkah tes |
+| `steps` | array | Yes | - | Array of test step definitions |
 | `stop_on_failure` | boolean | No | `True` | Whether to stop on failure |
 | `timeout_per_step` | number | No | `30000` | Timeout Per Step value |
 
@@ -1437,45 +1467,45 @@ Eksekusi langkah tes end-to-end secara sekuensial
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah operasi berhasil |
-| `passed` | number | Apakah operasi berhasil |
-| `failed` | number | Apakah operasi berhasil |
-| `results` | array | Jumlah tes yang lolos |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### Gerbang Kualitas
+### Quality Gate
 
 `testing.gate.evaluate`
 
-Evaluasi metrik kualitas terhadap threshold yang ditentukan
+Evaluate quality metrics against defined thresholds
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | object | Yes | - | Metrik untuk dievaluasi |
-| `thresholds` | object | Yes | - | Metrik untuk dievaluasi |
+| `metrics` | object | Yes | - | Metrics to evaluate |
+| `thresholds` | object | Yes | - | Threshold values for each metric |
 | `fail_on_breach` | boolean | No | `True` | Whether to fail on breach |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Nilai threshold untuk setiap metrik |
-| `passed` | boolean | Apakah operasi berhasil |
-| `results` | array | Apakah operasi berhasil |
-| `summary` | string | Jumlah tes yang lolos |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `results` | array | List of results |
+| `summary` | string | The summary |
 
-### Jalankan Tes HTTP
+### Run HTTP Tests
 
 `testing.http.run_suite`
 
-Eksekusi suite tes HTTP API
+Execute HTTP API test suite
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | Array definisi tes HTTP |
+| `tests` | array | Yes | - | Array of HTTP test definitions |
 | `base_url` | string | No | - | Base URL for API requests |
 | `headers` | object | No | `{}` | HTTP request headers |
 
@@ -1483,22 +1513,22 @@ Eksekusi suite tes HTTP API
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah operasi berhasil |
-| `passed` | number | Apakah operasi berhasil |
-| `failed` | number | Apakah operasi berhasil |
-| `results` | array | Jumlah tes yang lolos |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### Jalankan Linter
+### Run Linter
 
 `testing.lint.run`
 
-Jalankan pemeriksaan linting pada source code
+Run linting checks on source code
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | File atau direktori untuk di-lint |
+| `paths` | array | Yes | - | Files or directories to lint |
 | `linter` | string | No | `auto` | Linter |
 | `fix` | boolean | No | `False` | Whether to fix |
 
@@ -1506,16 +1536,16 @@ Jalankan pemeriksaan linting pada source code
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah operasi berhasil |
-| `errors` | number | Apakah operasi berhasil |
-| `warnings` | number | Apakah operasi berhasil |
-| `issues` | array | Jumlah error yang ditemukan |
+| `ok` | boolean | Whether the operation succeeded |
+| `errors` | number | Number of errors encountered |
+| `warnings` | number | The warnings |
+| `issues` | array | The issues |
 
-### Hasilkan Laporan
+### Generate Report
 
 `testing.report.generate`
 
-Hasilkan laporan eksekusi tes
+Generate test execution report
 
 **Parameters:**
 
@@ -1529,43 +1559,43 @@ Hasilkan laporan eksekusi tes
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah operasi berhasil |
-| `report` | string | Apakah operasi berhasil |
-| `format` | string | Apakah operasi berhasil |
-| `summary` | object | Laporan |
+| `ok` | boolean | Whether the operation succeeded |
+| `report` | string | The report |
+| `format` | string | The format |
+| `summary` | object | The summary |
 
-### Jalankan Skenario
+### Run Scenario
 
 `testing.scenario.run`
 
-Eksekusi tes berbasis skenario (gaya BDD)
+Execute scenario-based test (BDD style)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `scenario` | object | Yes | - | Definisi skenario dengan given/when/then |
+| `scenario` | object | Yes | - | Scenario definition with given/when/then |
 | `context` | object | No | `{}` | Additional context data |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Definisi skenario dengan given/when/then |
-| `passed` | boolean | Apakah operasi berhasil |
-| `steps` | array | Apakah operasi berhasil |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `steps` | array | The steps |
 
-### Pindai Keamanan
+### Security Scan
 
 `testing.security.scan`
 
-Pindai kerentanan keamanan
+Scan for security vulnerabilities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `targets` | array | Yes | - | File, URL, atau path untuk dipindai |
+| `targets` | array | Yes | - | Files, URLs, or paths to scan |
 | `scan_type` | string | No | `all` | Scan Type |
 | `severity_threshold` | string | No | `medium` | Severity Threshold |
 
@@ -1573,45 +1603,45 @@ Pindai kerentanan keamanan
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah operasi berhasil |
-| `vulnerabilities` | array | Apakah operasi berhasil |
-| `summary` | object | Apakah operasi berhasil |
+| `ok` | boolean | Whether the operation succeeded |
+| `vulnerabilities` | array | The vulnerabilities |
+| `summary` | object | The summary |
 
-### Jalankan Test Suite
+### Run Test Suite
 
 `testing.suite.run`
 
-Eksekusi koleksi tes
+Execute a collection of tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | Array definisi tes |
+| `tests` | array | Yes | - | Array of test definitions |
 | `parallel` | boolean | No | `False` | Whether to parallel |
-| `max_failures` | number | No | `0` | Array definisi tes |
+| `max_failures` | number | No | `0` | 0 = no limit |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 0 = tanpa batas |
-| `passed` | number | 0 = tanpa batas |
-| `failed` | number | Apakah operasi berhasil |
-| `skipped` | number | Jumlah tes yang lolos |
-| `results` | array | Jumlah tes yang gagal |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `skipped` | number | Number of tests skipped |
+| `results` | array | List of results |
 
-### Jalankan Unit Test
+### Run Unit Tests
 
 `testing.unit.run`
 
-Eksekusi unit test
+Execute unit tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | Path ke file tes atau direktori |
+| `paths` | array | Yes | - | Paths to test files or directories |
 | `pattern` | string | No | `test_*.py` | Pattern |
 | `verbose` | boolean | No | `False` | Whether to verbose |
 
@@ -1619,67 +1649,67 @@ Eksekusi unit test
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah operasi berhasil |
-| `passed` | number | Apakah operasi berhasil |
-| `failed` | number | Apakah operasi berhasil |
-| `errors` | number | Jumlah tes yang lolos |
-| `results` | array | Jumlah tes yang gagal |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `errors` | number | Number of errors encountered |
+| `results` | array | List of results |
 
-### Perbandingan Visual
+### Visual Compare
 
 `testing.visual.compare`
 
-Bandingkan output visual untuk perbedaan
+Compare visual outputs for differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | string | Yes | - | Path atau base64 gambar aktual |
-| `expected` | string | Yes | - | Path atau base64 gambar aktual |
-| `threshold` | number | No | `0.1` | Path atau base64 gambar yang diharapkan |
+| `actual` | string | Yes | - | Path or base64 of actual image |
+| `expected` | string | Yes | - | Path or base64 of expected image |
+| `threshold` | number | No | `0.1` | Max allowed difference (0-1) |
 | `output_diff` | boolean | No | `True` | Whether to output diff |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Perbedaan maksimum yang diizinkan (0-1) |
-| `match` | boolean | Apakah operasi berhasil |
-| `difference` | number | Apakah operasi berhasil |
-| `diff_image` | string | Kecocokan |
+| `ok` | boolean | Whether the operation succeeded |
+| `match` | boolean | The match |
+| `difference` | number | The difference |
+| `diff_image` | string | The diff image |
 
-### Evaluasi Kualitas UI
+### Evaluate UI Quality
 
 `ui.evaluate`
 
-Evaluasi kualitas UI komprehensif dengan penilaian multi-dimensi
+Comprehensive UI quality evaluation with multi-dimensional scoring
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `screenshot` | string | Yes | - | Path screenshot atau URL untuk dievaluasi |
-| `app_type` | string | No | `web_app` | Path screenshot atau URL untuk dievaluasi |
-| `page_type` | string | No | - | Jenis halaman yang dievaluasi |
-| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | Kriteria spesifik untuk dievaluasi (default ke semua) |
-| `target_audience` | string | No | - | Deskripsi pengguna target |
-| `brand_guidelines` | string | No | - | Panduan merek singkat untuk diperiksa |
-| `min_score` | number | No | `70` | Skor minimum keseluruhan untuk lolos (0-100) |
-| `api_key` | string | No | - | API key OpenAI (default ke var env OPENAI_API_KEY) |
+| `screenshot` | string | Yes | - | Screenshot path or URL to evaluate |
+| `app_type` | string | No | `web_app` | Type of application for context-aware evaluation |
+| `page_type` | string | No | - | Type of page being evaluated |
+| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | Specific criteria to evaluate (defaults to all) |
+| `target_audience` | string | No | - | Description of target users |
+| `brand_guidelines` | string | No | - | Brief brand guidelines to check against |
+| `min_score` | number | No | `70` | Minimum overall score to pass (0-100) |
+| `api_key` | string | No | - | OpenAI API key (defaults to OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | API key OpenAI (default ke var env OPENAI_API_KEY) |
-| `passed` | boolean | Apakah evaluasi berhasil |
-| `overall_score` | number | Apakah evaluasi berhasil |
-| `scores` | object | Skor kualitas UI keseluruhan (0-100) |
-| `strengths` | array | Skor kualitas UI keseluruhan (0-100) |
-| `issues` | array | Skor berdasarkan kriteria evaluasi |
-| `recommendations` | array | Daftar kekuatan UI |
-| `summary` | string | Rekomendasi perbaikan spesifik |
+| `ok` | boolean | Whether evaluation succeeded |
+| `passed` | boolean | Whether UI meets minimum score threshold |
+| `overall_score` | number | Overall UI quality score (0-100) |
+| `scores` | object | Scores by evaluation criteria |
+| `strengths` | array | List of UI strengths |
+| `issues` | array | List of issues found with severity |
+| `recommendations` | array | Specific improvement recommendations |
+| `summary` | string | Executive summary of evaluation |
 
 **Example:** Evaluate Dashboard
 
@@ -1700,11 +1730,11 @@ page_type: product detail
 evaluation_criteria: ["usability", "cta_effectiveness", "visual_design"]
 ```
 
-### Analisis Gambar dengan AI
+### Analyze Image with AI
 
 `vision.analyze`
 
-Analisis gambar menggunakan OpenAI Vision API (GPT-4V)
+Analyze images using OpenAI Vision API (GPT-4V)
 
 **Parameters:**
 
@@ -1725,11 +1755,11 @@ Analisis gambar menggunakan OpenAI Vision API (GPT-4V)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah analisis berhasil |
-| `analysis` | string | Apakah analisis berhasil |
-| `structured` | object | Hasil analisis AI |
-| `model` | string | Data analisis terstruktur (jika output_format adalah structured/json) |
-| `tokens_used` | number | Model yang digunakan untuk analisis |
+| `ok` | boolean | Whether analysis succeeded |
+| `analysis` | string | The AI analysis result |
+| `structured` | object | Structured analysis data (if output_format is structured/json) |
+| `model` | string | Model used for analysis |
+| `tokens_used` | number | Total tokens used |
 
 **Example:** UI Review
 
@@ -1756,11 +1786,11 @@ prompt: Evaluate accessibility: color contrast, text readability, button sizes, 
 analysis_type: accessibility
 ```
 
-### Bandingkan Gambar
+### Compare Images
 
 `vision.compare`
 
-Bandingkan dua gambar dan identifikasi perbedaan visual
+Compare two images and identify visual differences
 
 **Parameters:**
 
@@ -1780,12 +1810,12 @@ Bandingkan dua gambar dan identifikasi perbedaan visual
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah perbandingan berhasil |
-| `has_differences` | boolean | Apakah perbandingan berhasil |
-| `similarity_score` | number | Apakah perbedaan signifikan ditemukan |
-| `differences` | array | Persentase kesamaan (0-100) |
-| `summary` | string | Daftar perbedaan yang teridentifikasi |
-| `recommendation` | string | Ringkasan hasil perbandingan |
+| `ok` | boolean | Whether comparison succeeded |
+| `has_differences` | boolean | Whether significant differences were found |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `differences` | array | List of identified differences |
+| `summary` | string | Summary of comparison results |
+| `recommendation` | string | Pass/Fail recommendation based on threshold |
 
 **Example:** Visual Regression Test
 

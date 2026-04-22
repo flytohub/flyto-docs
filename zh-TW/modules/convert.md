@@ -6,115 +6,115 @@ Type casting between data types.
 
 | Module | Description |
 |--------|-------------|
-| [轉換為陣列](#轉換為陣列) | 將值轉換為陣列 |
-| [轉換為布林值](#轉換為布林值) | 將值轉換為布林值 |
-| [轉換為數字](#轉換為數字) | 將值轉換為數字 |
-| [轉換為物件](#轉換為物件) | 將值轉換為物件 |
-| [轉換為字串](#轉換為字串) | 將任何值轉換為字串 |
+| [To Array](#to-array) | Convert value to array |
+| [To Boolean](#to-boolean) | Convert value to boolean |
+| [To Number](#to-number) | Convert value to number |
+| [To Object](#to-object) | Convert value to object |
+| [To String](#to-string) | Convert any value to string |
 
 ## Modules
 
-### 轉換為陣列
+### To Array
 
 `convert.to_array`
 
-將值轉換為陣列
+Convert value to array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 要轉換的值 |
-| `split_string` | boolean | No | `False` | 要轉換的值 |
-| `delimiter` | string | No | - | 將字串分割為字符 |
+| `value` | any | Yes | - | Value to convert |
+| `split_string` | boolean | No | `False` | Split string into characters |
+| `delimiter` | string | No | - | Delimiter for string splitting |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 用於字串分割的分隔符 |
-| `length` | number | 已轉換的陣列 |
-| `original_type` | string | 已轉換的陣列 |
+| `result` | array | Converted array |
+| `length` | number | Array length |
+| `original_type` | string | Original value type |
 
-### 轉換為布林值
+### To Boolean
 
 `convert.to_boolean`
 
-將值轉換為布林值
+Convert value to boolean
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 要轉換的值 |
-| `strict` | boolean | No | `False` | 要轉換的值 |
+| `value` | any | Yes | - | Value to convert |
+| `strict` | boolean | No | `False` | Only accept true/false strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 只接受 true/false 字串 |
-| `original_type` | string | 已轉換的布林值 |
+| `result` | boolean | Converted boolean |
+| `original_type` | string | Original value type |
 
-### 轉換為數字
+### To Number
 
 `convert.to_number`
 
-將值轉換為數字
+Convert value to number
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 要轉換的值 |
-| `default` | number | No | `0` | 要轉換的值 |
-| `integer` | boolean | No | `False` | 轉換失敗時的預設值 |
+| `value` | any | Yes | - | Value to convert |
+| `default` | number | No | `0` | Default value if conversion fails |
+| `integer` | boolean | No | `False` | Convert to integer |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 轉換為整數 |
-| `success` | boolean | 已轉換的數字 |
-| `original_type` | string | 已轉換的數字 |
+| `result` | number | Converted number |
+| `success` | boolean | Whether conversion succeeded |
+| `original_type` | string | Original value type |
 
-### 轉換為物件
+### To Object
 
 `convert.to_object`
 
-將值轉換為物件
+Convert value to object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 要轉換的值 |
-| `key_name` | string | No | `value` | 要轉換的值 |
+| `value` | any | Yes | - | Value to convert |
+| `key_name` | string | No | `value` | Key name for wrapping non-objects |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 用於包裝非物件的鍵名 |
-| `keys` | array | 已轉換的物件 |
-| `original_type` | string | 已轉換的物件 |
+| `result` | object | Converted object |
+| `keys` | array | Object keys |
+| `original_type` | string | Original value type |
 
-### 轉換為字串
+### To String
 
 `convert.to_string`
 
-將任何值轉換為字串
+Convert any value to string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 要轉換的值 |
-| `pretty` | boolean | No | `False` | 要轉換的值 |
+| `value` | any | Yes | - | Value to convert |
+| `pretty` | boolean | No | `False` | Format objects/arrays with indentation |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 格式化物件/陣列並縮排 |
-| `original_type` | string | 字串表示 |
+| `result` | string | String representation |
+| `original_type` | string | Original value type |

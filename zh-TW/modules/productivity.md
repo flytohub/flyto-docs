@@ -6,41 +6,41 @@ Google Sheets, Notion, Airtable, and Stripe integrations.
 
 | Module | Description |
 |--------|-------------|
-| [Google 試算表讀取](#google-試算表讀取) | 從 Google 試算表讀取資料 |
-| [Google 試算表寫入](#google-試算表寫入) | 寫入資料到 Google 試算表 |
-| [Notion 建立頁面](#notion-建立頁面) | 在 Notion 資料庫建立新頁面 |
-| [Notion 查詢資料庫](#notion-查詢資料庫) | 使用篩選和排序查詢 Notion 資料庫的頁面 |
-| [Stripe 建立付款](#stripe-建立付款) | 使用 Stripe 建立付款意圖 |
-| [Stripe 取得客戶](#stripe-取得客戶) | 從 Stripe 取得客戶資訊 |
-| [Stripe 列出收費](#stripe-列出收費) | 列出 Stripe 的最近收費紀錄 |
-| [Airtable 建立記錄](#airtable-建立記錄) | 在 Airtable 表格中建立新記錄 |
-| [Airtable 讀取記錄](#airtable-讀取記錄) | 從 Airtable 表格讀取記錄 |
-| [Airtable 更新記錄](#airtable-更新記錄) | 更新 Airtable 表格中的現有記錄 |
+| [Google Sheets Read](#google-sheets-read) | Read data from Google Sheets spreadsheet |
+| [Google Sheets Write](#google-sheets-write) | Write data to Google Sheets spreadsheet |
+| [Notion Create Page](#notion-create-page) | Create a new page in Notion database |
+| [Notion Query Database](#notion-query-database) | Query pages from Notion database with filters and sorting |
+| [Stripe Create Payment](#stripe-create-payment) | Create a payment intent with Stripe |
+| [Stripe Get Customer](#stripe-get-customer) | Retrieve customer information from Stripe |
+| [Stripe List Charges](#stripe-list-charges) | List recent charges from Stripe |
+| [Airtable Create Record](#airtable-create-record) | Create a new record in Airtable table |
+| [Airtable Read Records](#airtable-read-records) | Read records from Airtable table |
+| [Airtable Update Record](#airtable-update-record) | Update an existing record in Airtable table |
 
 ## Modules
 
-### Google 試算表讀取
+### Google Sheets Read
 
 `api.google_sheets.read`
 
-從 Google 試算表讀取資料
+Read data from Google Sheets spreadsheet
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `credentials` | object | No | - | Google 服務帳戶 JSON 憑證（預設使用 env.GOOGLE_CREDENTIALS_JSON） |
-| `spreadsheet_id` | string | Yes | - | Google 試算表 ID（來自網址） |
-| `range` | string | Yes | - | A1 標記法的範圍 |
-| `include_header` | boolean | No | `True` | 將第一列解析為欄位標題 |
+| `credentials` | object | No | - | Google service account JSON credentials (defaults to env.GOOGLE_CREDENTIALS_JSON) |
+| `spreadsheet_id` | string | Yes | - | Google Sheets spreadsheet ID (from URL) |
+| `range` | string | Yes | - | A1 notation range to read |
+| `include_header` | boolean | No | `True` | Parse first row as column headers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `values` | array | 儲存格值 |
-| `data` | array | 資料陣列 |
-| `row_count` | number | 列數 |
+| `values` | array | Array of rows (each row is array of values) |
+| `data` | array | Array of row objects (if include_header=true) |
+| `row_count` | number | Number of rows read |
 
 **Example:** Read with headers
 
@@ -50,30 +50,30 @@ range: Sheet1!A1:D100
 include_header: true
 ```
 
-### Google 試算表寫入
+### Google Sheets Write
 
 `api.google_sheets.write`
 
-寫入資料到 Google 試算表
+Write data to Google Sheets spreadsheet
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `credentials` | object | No | - | Google 服務帳戶 JSON 憑證（預設使用 env.GOOGLE_CREDENTIALS_JSON） |
-| `spreadsheet_id` | string | Yes | - | Google 試算表 ID（來自網址） |
-| `range` | string | Yes | - | A1 標記法的範圍 |
-| `values` | array | Yes | - | 要寫入的值陣列 |
-| `value_input_option` | string | No | `USER_ENTERED` | 如何解譯輸入值 |
+| `credentials` | object | No | - | Google service account JSON credentials (defaults to env.GOOGLE_CREDENTIALS_JSON) |
+| `spreadsheet_id` | string | Yes | - | Google Sheets spreadsheet ID (from URL) |
+| `range` | string | Yes | - | A1 notation range to write |
+| `values` | array | Yes | - | Array of rows to write (each row is array of values) |
+| `value_input_option` | string | No | `USER_ENTERED` | How to interpret input values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `updated_range` | string | 更新的範圍 |
-| `updated_rows` | number | 更新的列數 |
-| `updated_columns` | number | 更新的欄數 |
-| `updated_cells` | number | 更新的儲存格數 |
+| `updated_range` | string | Range that was updated |
+| `updated_rows` | number | Number of rows updated |
+| `updated_columns` | number | Number of columns updated |
+| `updated_cells` | number | Number of cells updated |
 
 **Example:** Write data with headers
 
@@ -83,28 +83,28 @@ range: Sheet1!A1
 values: [["Name", "Email", "Status"], ["John Doe", "john@example.com", "Active"], ["Jane Smith", "jane@example.com", "Active"]]
 ```
 
-### Notion 建立頁面
+### Notion Create Page
 
 `api.notion.create_page`
 
-在 Notion 資料庫建立新頁面
+Create a new page in Notion database
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Notion 整合權杖（預設使用 env.NOTION_API_KEY） |
-| `database_id` | string | Yes | - | Notion 資料庫 ID（32 字元十六進位字串） |
-| `properties` | object | Yes | - | 頁面屬性（標題、文字、選項等） |
-| `content` | array | No | - | 頁面內容（Notion 區塊） |
+| `api_key` | string | No | - | Notion integration token (defaults to env.NOTION_API_KEY) |
+| `database_id` | string | Yes | - | Notion database ID (32-char hex string) |
+| `properties` | object | Yes | - | Page properties (title, text, select, etc.) |
+| `content` | array | No | - | Page content as Notion blocks |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `page_id` | string | 頁面 ID |
-| `url` | string | 頁面網址 |
-| `created_time` | string | 建立時間 |
+| `page_id` | string | Created page ID |
+| `url` | string | URL to the created page |
+| `created_time` | string | Page creation timestamp |
 
 **Example:** Create task page
 
@@ -113,29 +113,29 @@ database_id: your_database_id
 properties: {"Name": {"title": [{"text": {"content": "New Task"}}]}, "Status": {"select": {"name": "In Progress"}}, "Priority": {"select": {"name": "High"}}}
 ```
 
-### Notion 查詢資料庫
+### Notion Query Database
 
 `api.notion.query_database`
 
-使用篩選和排序查詢 Notion 資料庫的頁面
+Query pages from Notion database with filters and sorting
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Notion 整合權杖（預設使用 env.NOTION_API_KEY） |
-| `database_id` | string | Yes | - | Notion 資料庫 ID |
-| `filter` | object | No | - | 查詢的篩選條件 |
-| `sorts` | array | No | - | 結果的排序方式 |
-| `page_size` | number | No | `100` | 回傳的結果數量 |
+| `api_key` | string | No | - | Notion integration token (defaults to env.NOTION_API_KEY) |
+| `database_id` | string | Yes | - | Notion database ID |
+| `filter` | object | No | - | Filter conditions for query |
+| `sorts` | array | No | - | Sort order for results |
+| `page_size` | number | No | `100` | Number of results to return |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `results` | array | 頁面物件陣列 |
-| `count` | number | 結果數量 |
-| `has_more` | boolean | 是否有更多結果 |
+| `results` | array | Array of page objects |
+| `count` | number | Number of results returned |
+| `has_more` | boolean | Whether there are more results |
 
 **Example:** Query all pages
 
@@ -151,31 +151,31 @@ filter: {"property": "Status", "select": {"equals": "In Progress"}}
 sorts: [{"property": "Created", "direction": "descending"}]
 ```
 
-### Stripe 建立付款
+### Stripe Create Payment
 
 `payment.stripe.create_payment`
 
-使用 Stripe 建立付款意圖
+Create a payment intent with Stripe
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Stripe 秘密金鑰（或使用 STRIPE_API_KEY 環境變數） |
-| `amount` | number | Yes | - | Stripe 秘密金鑰（或使用 STRIPE_API_KEY 環境變數） |
-| `currency` | string | No | `usd` | 金額（分為單位，例如 1000 代表 $10.00） |
-| `description` | string | No | - | 三碼幣別代碼（例如 usd、eur） |
-| `customer` | string | No | - | 付款說明 |
+| `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `amount` | number | Yes | - | Amount in cents (e.g. 1000 for $10.00) |
+| `currency` | string | No | `usd` | Three-letter currency code (e.g. usd, eur) |
+| `description` | string | No | - | Payment description |
+| `customer` | string | No | - | Stripe customer ID (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | Stripe 客戶 ID（選填） |
-| `amount` | number | Stripe 客戶 ID（選填） |
-| `currency` | string | 唯一識別碼 |
-| `status` | string | 付款金額 |
-| `client_secret` | string | 幣別代碼 |
+| `id` | string | Unique identifier |
+| `amount` | number | Payment amount |
+| `currency` | string | Currency code |
+| `status` | string | Operation status (success/error) |
+| `client_secret` | string | Client secret for payment |
 
 **Example:** Create $50 payment
 
@@ -194,18 +194,18 @@ customer: cus_XXXXXXXXXXXXXXX
 description: Subscription payment
 ```
 
-### Stripe 取得客戶
+### Stripe Get Customer
 
 `payment.stripe.get_customer`
 
-從 Stripe 取得客戶資訊
+Retrieve customer information from Stripe
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Stripe 秘密金鑰（或使用 STRIPE_API_KEY 環境變數） |
-| `customer_id` | string | Yes | - | Stripe 秘密金鑰（或使用 STRIPE_API_KEY 環境變數） |
+| `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `customer_id` | string | Yes | - | Stripe customer ID |
 
 **Output:**
 
@@ -223,19 +223,19 @@ description: Subscription payment
 customer_id: cus_XXXXXXXXXXXXXXX
 ```
 
-### Stripe 列出收費
+### Stripe List Charges
 
 `payment.stripe.list_charges`
 
-列出 Stripe 的最近收費紀錄
+List recent charges from Stripe
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Stripe 秘密金鑰（或使用 STRIPE_API_KEY 環境變數） |
-| `limit` | number | No | `10` | Stripe 秘密金鑰（或使用 STRIPE_API_KEY 環境變數） |
-| `customer` | string | No | - | 依客戶 ID 篩選（選填） |
+| `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `limit` | number | No | `10` | Number of charges to return (1-100) |
+| `customer` | string | No | - | Filter by customer ID (optional) |
 
 **Output:**
 
@@ -258,20 +258,20 @@ customer: cus_XXXXXXXXXXXXXXX
 limit: 50
 ```
 
-### Airtable 建立記錄
+### Airtable Create Record
 
 `productivity.airtable.create`
 
-在 Airtable 表格中建立新記錄
+Create a new record in Airtable table
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Airtable API 金鑰（或使用 AIRTABLE_API_KEY 環境變數） |
-| `base_id` | string | Yes | - | Airtable API 金鑰（或使用 AIRTABLE_API_KEY 環境變數） |
-| `table_name` | string | Yes | - | Airtable 基底 ID |
-| `fields` | json | Yes | - | 表格名稱 |
+| `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `fields` | json | Yes | - | Record fields as JSON object |
 
 **Output:**
 
@@ -297,28 +297,28 @@ table_name: Tasks
 fields: {"Title": "Review PR", "Assignee": "Alice", "Priority": "High"}
 ```
 
-### Airtable 讀取記錄
+### Airtable Read Records
 
 `productivity.airtable.read`
 
-從 Airtable 表格讀取記錄
+Read records from Airtable table
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Airtable API 金鑰（或使用 AIRTABLE_API_KEY 環境變數） |
-| `base_id` | string | Yes | - | Airtable API 金鑰（或使用 AIRTABLE_API_KEY 環境變數） |
-| `table_name` | string | Yes | - | Airtable 基底 ID |
-| `view` | string | No | - | 表格名稱 |
-| `max_records` | number | No | `100` | 要使用的檢視名稱（選填） |
+| `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `view` | string | No | - | View name to use (optional) |
+| `max_records` | number | No | `100` | Maximum number of records to return |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `records` | array | 回傳記錄的最大數量 |
-| `count` | number | 記錄列表 |
+| `records` | array | The records |
+| `count` | number | Number of items |
 
 **Example:** Read all customers
 
@@ -337,21 +337,21 @@ view: Active Tasks
 max_records: 50
 ```
 
-### Airtable 更新記錄
+### Airtable Update Record
 
 `productivity.airtable.update`
 
-更新 Airtable 表格中的現有記錄
+Update an existing record in Airtable table
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Airtable API 金鑰（或使用 AIRTABLE_API_KEY 環境變數） |
-| `base_id` | string | Yes | - | Airtable API 金鑰（或使用 AIRTABLE_API_KEY 環境變數） |
-| `table_name` | string | Yes | - | Airtable 基底 ID |
-| `record_id` | string | Yes | - | 表格名稱 |
-| `fields` | json | Yes | - | 要更新的記錄 ID |
+| `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `record_id` | string | Yes | - | ID of the record to update |
+| `fields` | json | Yes | - | Fields to update as JSON object |
 
 **Output:**
 

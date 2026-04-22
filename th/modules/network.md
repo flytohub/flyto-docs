@@ -6,37 +6,37 @@ Ping, port scan, traceroute, and WHOIS lookup.
 
 | Module | Description |
 |--------|-------------|
-| [พิง](#พิง) | พิงโฮสต์เพื่อตรวจสอบการเชื่อมต่อและวัดความหน่วง |
-| [สแกนพอร์ต](#สแกนพอร์ต) | สแกนพอร์ตบนโฮสต์เพื่อตรวจสอบว่าพอร์ตใดเปิดอยู่ |
-| [เส้นทาง](#เส้นทาง) | ติดตามเส้นทางที่แพ็กเก็ตใช้เพื่อไปยังโฮสต์ปลายทาง |
-| [ค้นหา WHOIS](#ค้นหา-whois) | ดำเนินการค้นหา WHOIS สำหรับโดเมนเพื่อดึงข้อมูลการลงทะเบียน |
+| [Ping](#ping) | Ping a host to check connectivity and measure latency |
+| [Port Scan](#port-scan) | Scan ports on a host to check which are open |
+| [Traceroute](#traceroute) | Trace the route packets take to reach a destination host |
+| [WHOIS Lookup](#whois-lookup) | Perform WHOIS lookup for a domain to retrieve registration information |
 
 ## Modules
 
-### พิง
+### Ping
 
 `network.ping`
 
-พิงโฮสต์เพื่อตรวจสอบการเชื่อมต่อและวัดความหน่วง
+Ping a host to check connectivity and measure latency
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | ชื่อโฮสต์หรือที่อยู่ IP ที่จะพิง |
-| `count` | number | No | `4` | จำนวนแพ็กเก็ตพิงที่จะส่ง |
-| `timeout` | number | No | `5` | เวลาหมดในวินาทีสำหรับแต่ละแพ็กเก็ต |
+| `host` | string | Yes | - | Hostname or IP address to ping |
+| `count` | number | No | `4` | Number of ping packets to send |
+| `timeout` | number | No | `5` | Timeout in seconds for each packet |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `host` | string | โฮสต์ที่ถูกพิง |
-| `alive` | boolean | โฮสต์ตอบสนองหรือไม่ |
-| `packets_sent` | number | จำนวนแพ็กเก็ตที่ส่ง |
-| `packets_received` | number | จำนวนแพ็กเก็ตที่ได้รับ |
-| `packet_loss_pct` | number | เปอร์เซ็นต์การสูญเสียแพ็กเก็ต |
-| `latency_ms` | object | สถิติความหน่วงเป็นมิลลิวินาที (ต่ำสุด, เฉลี่ย, สูงสุด) |
+| `host` | string | The pinged host |
+| `alive` | boolean | Whether the host responded |
+| `packets_sent` | number | Number of packets sent |
+| `packets_received` | number | Number of packets received |
+| `packet_loss_pct` | number | Packet loss percentage |
+| `latency_ms` | object | Latency statistics in milliseconds (min, avg, max) |
 
 **Example:** Ping a host
 
@@ -46,28 +46,28 @@ count: 4
 timeout: 5
 ```
 
-### สแกนพอร์ต
+### Port Scan
 
 `network.port_scan`
 
-สแกนพอร์ตบนโฮสต์เพื่อตรวจสอบว่าพอร์ตใดเปิดอยู่
+Scan ports on a host to check which are open
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | ชื่อโฮสต์หรือที่อยู่ IP ที่จะสแกน |
-| `ports` | string | No | - | พอร์ตที่จะสแกน: คั่นด้วยเครื่องหมายจุลภาค (80,443), ช่วง (80-443), หรือเว้นว่างไว้สำหรับพอร์ตทั่วไป |
-| `timeout` | number | No | `1.0` | เวลาหมดการเชื่อมต่อเป็นวินาทีต่อพอร์ต |
+| `host` | string | Yes | - | Hostname or IP address to scan |
+| `ports` | string | No | - | Ports to scan: comma-separated (80,443), range (80-443), or leave empty for common ports |
+| `timeout` | number | No | `1.0` | Connection timeout in seconds per port |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `host` | string | โฮสต์ที่ถูกสแกน |
-| `open_ports` | array | รายการหมายเลขพอร์ตที่เปิด |
-| `closed_ports` | array | รายการหมายเลขพอร์ตที่ปิด |
-| `scan_time_ms` | number | เวลาสแกนทั้งหมดเป็นมิลลิวินาที |
+| `host` | string | The scanned host |
+| `open_ports` | array | List of open port numbers |
+| `closed_ports` | array | List of closed port numbers |
+| `scan_time_ms` | number | Total scan time in milliseconds |
 
 **Example:** Scan common ports
 
@@ -83,27 +83,27 @@ ports: 80-443
 timeout: 2.0
 ```
 
-### เส้นทาง
+### Traceroute
 
 `network.traceroute`
 
-ติดตามเส้นทางที่แพ็กเก็ตใช้เพื่อไปยังโฮสต์ปลายทาง
+Trace the route packets take to reach a destination host
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | ชื่อโฮสต์หรือที่อยู่ IP ที่จะติดตามเส้นทางไป |
-| `max_hops` | number | No | `30` | จำนวนฮอปสูงสุดที่จะติดตาม |
-| `timeout` | number | No | `5` | เวลาหมดในวินาทีสำหรับแต่ละโพรบ |
+| `host` | string | Yes | - | Hostname or IP address to trace route to |
+| `max_hops` | number | No | `30` | Maximum number of hops to trace |
+| `timeout` | number | No | `5` | Timeout in seconds for each probe |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `host` | string | โฮสต์เป้าหมาย |
-| `hops` | array | รายการฮอปตามเส้นทาง |
-| `total_hops` | number | จำนวนฮอปทั้งหมดเพื่อไปยังปลายทาง |
+| `host` | string | The target host |
+| `hops` | array | List of hops along the route |
+| `total_hops` | number | Total number of hops to reach destination |
 
 **Example:** Trace route to host
 
@@ -112,28 +112,28 @@ host: google.com
 max_hops: 30
 ```
 
-### ค้นหา WHOIS
+### WHOIS Lookup
 
 `network.whois`
 
-ดำเนินการค้นหา WHOIS สำหรับโดเมนเพื่อดึงข้อมูลการลงทะเบียน
+Perform WHOIS lookup for a domain to retrieve registration information
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `domain` | string | Yes | - | ชื่อโดเมนที่จะค้นหา |
+| `domain` | string | Yes | - | Domain name to look up |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `domain` | string | โดเมนที่ถูกค้นหา |
-| `registrar` | string | ผู้รับจดทะเบียนโดเมน |
-| `creation_date` | string | วันที่สร้างโดเมน |
-| `expiration_date` | string | วันที่หมดอายุของโดเมน |
-| `name_servers` | array | รายการเซิร์ฟเวอร์ชื่อ |
-| `raw` | string | ผลลัพธ์ WHOIS แบบดิบทั้งหมด |
+| `domain` | string | The queried domain |
+| `registrar` | string | Domain registrar |
+| `creation_date` | string | Domain creation date |
+| `expiration_date` | string | Domain expiration date |
+| `name_servers` | array | List of name servers |
+| `raw` | string | Full raw WHOIS output |
 
 **Example:** WHOIS lookup
 

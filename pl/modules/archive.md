@@ -6,34 +6,34 @@ Create and extract ZIP, TAR, and gzip archives.
 
 | Module | Description |
 |--------|-------------|
-| [Dekompresja Gunzip](#dekompresja-gunzip) | Dekompresuj plik skompresowany gzip |
-| [Kompresja Gzip](#kompresja-gzip) | Kompresuj pojedynczy plik za pomocą gzip |
-| [Utwórz archiwum TAR](#utwórz-archiwum-tar) | Utwórz archiwum TAR z opcjonalną kompresją gzip/bz2/xz |
-| [Rozpakuj archiwum TAR](#rozpakuj-archiwum-tar) | Rozpakuj pliki z archiwum TAR (automatyczne wykrywanie kompresji) |
-| [Utwórz archiwum ZIP](#utwórz-archiwum-zip) | Utwórz archiwum ZIP z listy plików |
-| [Wyodrębnij archiwum ZIP](#wyodrębnij-archiwum-zip) | Wyodrębnij pliki z archiwum ZIP |
+| [Gunzip Decompress](#gunzip-decompress) | Decompress a gzip-compressed file |
+| [Gzip Compress](#gzip-compress) | Compress a single file using gzip |
+| [Create TAR Archive](#create-tar-archive) | Create a TAR archive with optional gzip/bz2/xz compression |
+| [Extract TAR Archive](#extract-tar-archive) | Extract files from a TAR archive (auto-detects compression) |
+| [Create ZIP Archive](#create-zip-archive) | Create a ZIP archive from a list of files |
+| [Extract ZIP Archive](#extract-zip-archive) | Extract files from a ZIP archive |
 
 ## Modules
 
-### Dekompresja Gunzip
+### Gunzip Decompress
 
 `archive.gunzip`
 
-Dekompresuj plik skompresowany gzip
+Decompress a gzip-compressed file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | Ścieżka do pliku skompresowanego gzip |
-| `output_path` | string | No | - | Ścieżka dla zdekompresowanego pliku (domyślnie input bez rozszerzenia .gz) |
+| `input_path` | string | Yes | - | Path to the gzip-compressed file |
+| `output_path` | string | No | - | Path for the decompressed file (defaults to input without .gz extension) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Ścieżka do zdekompresowanego pliku |
-| `size` | number | Rozmiar zdekompresowanego pliku w bajtach |
+| `path` | string | Path to the decompressed file |
+| `size` | number | Decompressed file size in bytes |
 
 **Example:** Decompress a gzip file
 
@@ -41,27 +41,27 @@ Dekompresuj plik skompresowany gzip
 input_path: /tmp/data.txt.gz
 ```
 
-### Kompresja Gzip
+### Gzip Compress
 
 `archive.gzip`
 
-Kompresuj pojedynczy plik za pomocą gzip
+Compress a single file using gzip
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | Ścieżka do pliku do kompresji |
-| `output_path` | string | No | - | Ścieżka dla skompresowanego pliku (domyślnie input_path + .gz) |
+| `input_path` | string | Yes | - | Path to the file to compress |
+| `output_path` | string | No | - | Path for the compressed file (defaults to input_path + .gz) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Ścieżka do skompresowanego pliku |
-| `original_size` | number | Oryginalny rozmiar pliku w bajtach |
-| `compressed_size` | number | Rozmiar skompresowanego pliku w bajtach |
-| `ratio` | number | Współczynnik kompresji (skompresowany / oryginalny) |
+| `path` | string | Path to the compressed file |
+| `original_size` | number | Original file size in bytes |
+| `compressed_size` | number | Compressed file size in bytes |
+| `ratio` | number | Compression ratio (compressed / original) |
 
 **Example:** Compress a file with gzip
 
@@ -69,27 +69,27 @@ Kompresuj pojedynczy plik za pomocą gzip
 input_path: /tmp/data.txt
 ```
 
-### Utwórz archiwum TAR
+### Create TAR Archive
 
 `archive.tar_create`
 
-Utwórz archiwum TAR z opcjonalną kompresją gzip/bz2/xz
+Create a TAR archive with optional gzip/bz2/xz compression
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | Yes | - | Ścieżka dla pliku wyjściowego TAR |
-| `files` | array | Yes | - | Lista ścieżek plików do dodania do archiwum |
-| `compression` | select (`none`, `gzip`, `bz2`, `xz`) | No | `gzip` | Metoda kompresji |
+| `output_path` | string | Yes | - | Path for the output TAR file |
+| `files` | array | Yes | - | List of file paths to include in the archive |
+| `compression` | select (`none`, `gzip`, `bz2`, `xz`) | No | `gzip` | Compression method |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Ścieżka do utworzonego pliku TAR |
-| `size` | number | Rozmiar archiwum w bajtach |
-| `file_count` | number | Liczba plików w archiwum |
+| `path` | string | Path to the created TAR file |
+| `size` | number | Archive size in bytes |
+| `file_count` | number | Number of files in the archive |
 
 **Example:** Create gzipped TAR archive
 
@@ -99,25 +99,25 @@ files: ["/tmp/file1.txt", "/tmp/file2.txt"]
 compression: gzip
 ```
 
-### Rozpakuj archiwum TAR
+### Extract TAR Archive
 
 `archive.tar_extract`
 
-Rozpakuj pliki z archiwum TAR (automatyczne wykrywanie kompresji)
+Extract files from a TAR archive (auto-detects compression)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `archive_path` | string | Yes | - | Ścieżka do archiwum TAR do rozpakowania |
-| `output_dir` | string | Yes | - | Katalog do którego zostaną rozpakowane pliki |
+| `archive_path` | string | Yes | - | Path to the TAR archive to extract |
+| `output_dir` | string | Yes | - | Directory to extract files into |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted_files` | array | Lista ścieżek do rozpakowanych plików |
-| `total_size` | number | Całkowity rozmiar rozpakowanych plików w bajtach |
+| `extracted_files` | array | List of extracted file paths |
+| `total_size` | number | Total size of extracted files in bytes |
 
 **Example:** Extract TAR.GZ archive
 
@@ -126,28 +126,28 @@ archive_path: /tmp/archive.tar.gz
 output_dir: /tmp/extracted/
 ```
 
-### Utwórz archiwum ZIP
+### Create ZIP Archive
 
 `archive.zip_create`
 
-Utwórz archiwum ZIP z listy plików
+Create a ZIP archive from a list of files
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | Yes | - | Ścieżka dla pliku wyjściowego ZIP |
-| `files` | array | Yes | - | Lista ścieżek plików do dodania do archiwum |
-| `compression` | select (`stored`, `deflated`, `bzip2`, `lzma`) | No | `deflated` | Metoda kompresji |
-| `password` | string | No | - | Opcjonalne hasło do ochrony archiwum (tylko ekstrakcja, ograniczone wsparcie) |
+| `output_path` | string | Yes | - | Path for the output ZIP file |
+| `files` | array | Yes | - | List of file paths to include in the archive |
+| `compression` | select (`stored`, `deflated`, `bzip2`, `lzma`) | No | `deflated` | Compression method |
+| `password` | string | No | - | Optional password to protect the archive (extraction only, limited support) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Ścieżka do utworzonego pliku ZIP |
-| `size` | number | Rozmiar archiwum w bajtach |
-| `file_count` | number | Liczba plików w archiwum |
+| `path` | string | Path to the created ZIP file |
+| `size` | number | Archive size in bytes |
+| `file_count` | number | Number of files in the archive |
 
 **Example:** Create ZIP from files
 
@@ -157,26 +157,26 @@ files: ["/tmp/file1.txt", "/tmp/file2.txt"]
 compression: deflated
 ```
 
-### Wyodrębnij archiwum ZIP
+### Extract ZIP Archive
 
 `archive.zip_extract`
 
-Wyodrębnij pliki z archiwum ZIP
+Extract files from a ZIP archive
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `archive_path` | string | Yes | - | Ścieżka do archiwum ZIP do wyodrębnienia |
-| `output_dir` | string | Yes | - | Katalog do wyodrębnienia plików |
-| `password` | string | No | - | Hasło do zaszyfrowanych archiwów |
+| `archive_path` | string | Yes | - | Path to the ZIP archive to extract |
+| `output_dir` | string | Yes | - | Directory to extract files into |
+| `password` | string | No | - | Password for encrypted archives |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted_files` | array | Lista ścieżek wyodrębnionych plików |
-| `total_size` | number | Całkowity rozmiar wyodrębnionych plików w bajtach |
+| `extracted_files` | array | List of extracted file paths |
+| `total_size` | number | Total size of extracted files in bytes |
 
 **Example:** Extract ZIP archive
 

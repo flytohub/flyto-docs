@@ -6,34 +6,34 @@ Module generation, listing, testing, and documentation.
 
 | Module | Description |
 |--------|-------------|
-| [Liệt kê các Module có sẵn](#liệt-kê-các-module-có-sẵn) | Liệt kê tất cả các module có sẵn trong registry |
-| [Cập nhật tài liệu Module](#cập-nhật-tài-liệu-module) | Tạo hoặc cập nhật tài liệu MODULES.md từ registry |
+| [List Available Modules](#list-available-modules) | List all available modules in the registry |
+| [Update Module Documentation](#update-module-documentation) | Generate or update MODULES.md documentation from registry |
 
 ## Modules
 
-### Liệt kê các Module có sẵn
+### List Available Modules
 
 `meta.modules.list`
 
-Liệt kê tất cả các module có sẵn trong registry
+List all available modules in the registry
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `category` | string | No | - | Lọc module theo danh mục (ví dụ: browser, data, ai) |
-| `tags` | array | No | - | Lọc module theo danh mục (ví dụ: browser, data, ai) |
-| `include_params` | boolean | No | `True` | Lọc module theo thẻ |
-| `include_output` | boolean | No | `True` | Bao gồm schema tham số trong đầu ra |
-| `format` | select (`json`, `markdown`, `compact`) | No | `json` | Bao gồm schema đầu ra trong phản hồi |
+| `category` | string | No | - | Filter modules by category (e.g., browser, data, ai) |
+| `tags` | array | No | - | Filter modules by tags |
+| `include_params` | boolean | No | `True` | Include parameter schema in output |
+| `include_output` | boolean | No | `True` | Include output schema in response |
+| `format` | select (`json`, `markdown`, `compact`) | No | `json` | Format for module list output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `modules` | array | Danh sách các module đã đăng ký |
-| `count` | number | Schema tham số |
-| `formatted` | string | Schema đầu ra |
+| `modules` | array | List of registered modules |
+| `count` | number | Number of items |
+| `formatted` | string | The formatted |
 
 **Example:** List all modules
 
@@ -60,26 +60,26 @@ format: markdown
 format: compact
 ```
 
-### Cập nhật tài liệu Module
+### Update Module Documentation
 
 `meta.modules.update_docs`
 
-Tạo hoặc cập nhật tài liệu MODULES.md từ registry
+Generate or update MODULES.md documentation from registry
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | No | `docs/MODULES.md` | Đường dẫn ghi tệp MODULES.md |
-| `include_examples` | boolean | No | `True` | Bao gồm ví dụ sử dụng trong tài liệu |
+| `output_path` | string | No | `docs/MODULES.md` | Path to write MODULES.md file |
+| `include_examples` | boolean | No | `True` | Include usage examples in documentation |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `file_path` | string | Bao gồm ví dụ sử dụng trong tài liệu |
-| `modules_count` | number | Đường dẫn tệp |
-| `categories` | array | Đường dẫn tệp |
+| `file_path` | string | The file path |
+| `modules_count` | number | The modules count |
+| `categories` | array | The categories |
 
 **Example:** Update module documentation
 

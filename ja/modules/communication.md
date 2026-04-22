@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [メール読み取り](#メール読み取り) | IMAPサーバーからメールを読み取り |
-| [メール送信](#メール送信) | SMTPサーバー経由でメールを送信 |
-| [Slackメッセージ送信](#slackメッセージ送信) | Incoming Webhook経由でSlackチャンネルにメッセージを送信 |
-| [Webhookトリガー](#webhookトリガー) | Webhook URLにHTTP POSTリクエストを送信 |
+| [Read Email](#read-email) | Read emails from IMAP server |
+| [Send Email](#send-email) | Send email via SMTP server |
+| [Send Slack Message](#send-slack-message) | Send messages to Slack channels via incoming webhook |
+| [Trigger Webhook](#trigger-webhook) | Send HTTP POST request to a webhook URL |
 
 ## Modules
 
-### メール読み取り
+### Read Email
 
 `email.read`
 
-IMAPサーバーからメールを読み取り
+Read emails from IMAP server
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ IMAPサーバーからメールを読み取り
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `emails` | array | メールオブジェクトのリスト |
-| `count` | number | メールオブジェクトのリスト |
+| `emails` | array | List of email objects |
+| `count` | number | Number of emails fetched |
 
 **Example:** Read recent unread emails
 
@@ -49,11 +49,11 @@ unread_only: true
 limit: 5
 ```
 
-### メール送信
+### Send Email
 
 `email.send`
 
-SMTPサーバー経由でメールを送信
+Send email via SMTP server
 
 **Parameters:**
 
@@ -77,9 +77,9 @@ SMTPサーバー経由でメールを送信
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sent` | boolean | メールが正常に送信されたかどうか |
-| `message_id` | string | メールが正常に送信されたかどうか |
-| `recipients` | array | メールが正常に送信されたかどうか |
+| `sent` | boolean | Whether email was sent successfully |
+| `message_id` | string | Email message ID |
+| `recipients` | array | List of recipients |
 
 **Example:** Send simple email
 
@@ -89,11 +89,11 @@ subject: Hello
 body: This is a test email.
 ```
 
-### Slackメッセージ送信
+### Send Slack Message
 
 `slack.send`
 
-Incoming Webhook経由でSlackチャンネルにメッセージを送信
+Send messages to Slack channels via incoming webhook
 
 **Parameters:**
 
@@ -111,7 +111,7 @@ Incoming Webhook経由でSlackチャンネルにメッセージを送信
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sent` | boolean | メッセージが正常に送信されたかどうか |
+| `sent` | boolean | Whether message was sent successfully |
 
 **Example:** Send simple message
 
@@ -127,11 +127,11 @@ username: Flyto Bot
 icon_emoji: :white_check_mark:
 ```
 
-### Webhookトリガー
+### Trigger Webhook
 
 `webhook.trigger`
 
-Webhook URLにHTTP POSTリクエストを送信
+Send HTTP POST request to a webhook URL
 
 **Parameters:**
 
@@ -149,9 +149,9 @@ Webhook URLにHTTP POSTリクエストを送信
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | HTTPレスポンスステータスコード |
-| `response` | object | HTTPレスポンスステータスコード |
-| `headers` | object | HTTPレスポンスステータスコード |
+| `status_code` | number | HTTP response status code |
+| `response` | object | Response body (if JSON) |
+| `headers` | object | Response headers |
 
 **Example:** Simple POST webhook
 

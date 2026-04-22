@@ -6,167 +6,167 @@ Validate email, URL, phone, IP, UUID, credit card, and JSON Schema.
 
 | Module | Description |
 |--------|-------------|
-| [क्रेडिट कार्ड की जाँच करें](#क्रेडिट-कार्ड-की-जाँच-करें) | लुहन एल्गोरिदम का उपयोग करके क्रेडिट कार्ड नंबर की जाँच करें |
-| [ईमेल की जाँच करें](#ईमेल-की-जाँच-करें) | ईमेल पते के प्रारूप की जाँच करें |
-| [IP की जाँच करें](#ip-की-जाँच-करें) | IPv4 या IPv6 पते के प्रारूप की जाँच करें |
-| [JSON स्कीमा की जाँच करें](#json-स्कीमा-की-जाँच-करें) | JSON स्कीमा के खिलाफ JSON डेटा की जाँच करें |
-| [फोन की जाँच करें](#फोन-की-जाँच-करें) | फोन नंबर के प्रारूप की जाँच करें |
-| [URL की जाँच करें](#url-की-जाँच-करें) | URL के प्रारूप और संरचना की जाँच करें |
-| [UUID जाँचें](#uuid-जाँचें) | UUID प्रारूप और संस्करण की जाँच करें |
+| [Validate Credit Card](#validate-credit-card) | Validate credit card number using Luhn algorithm |
+| [Validate Email](#validate-email) | Validate email address format |
+| [Validate IP](#validate-ip) | Validate IPv4 or IPv6 address format |
+| [Validate JSON Schema](#validate-json-schema) | Validate JSON data against a JSON Schema |
+| [Validate Phone](#validate-phone) | Validate phone number format |
+| [Validate URL](#validate-url) | Validate URL format and structure |
+| [Validate UUID](#validate-uuid) | Validate UUID format and version |
 
 ## Modules
 
-### क्रेडिट कार्ड की जाँच करें
+### Validate Credit Card
 
 `validate.credit_card`
 
-लुहन एल्गोरिदम का उपयोग करके क्रेडिट कार्ड नंबर की जाँच करें
+Validate credit card number using Luhn algorithm
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `card_number` | string | Yes | - | जाँच के लिए क्रेडिट कार्ड नंबर |
+| `card_number` | string | Yes | - | Credit card number to validate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | जाँच के लिए क्रेडिट कार्ड नंबर |
-| `card_type` | string | क्या कार्ड नंबर मान्य है |
-| `masked` | string | क्या कार्ड नंबर मान्य है |
-| `luhn_valid` | boolean | मास्क किया गया कार्ड नंबर (****1234) |
+| `valid` | boolean | Whether the card number is valid |
+| `card_type` | string | Detected card type (visa, mastercard, etc) |
+| `masked` | string | Masked card number (****1234) |
+| `luhn_valid` | boolean | Whether the Luhn checksum is valid |
 
-### ईमेल की जाँच करें
+### Validate Email
 
 `validate.email`
 
-ईमेल पते के प्रारूप की जाँच करें
+Validate email address format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `email` | string | Yes | - | जाँच के लिए ईमेल पता |
+| `email` | string | Yes | - | Email address to validate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | जाँच के लिए ईमेल पता |
-| `email` | string | क्या ईमेल मान्य है |
-| `local_part` | string | क्या ईमेल मान्य है |
-| `domain` | string | जाँचा गया ईमेल |
+| `valid` | boolean | Whether the email is valid |
+| `email` | string | The validated email |
+| `local_part` | string | The local part (before @) |
+| `domain` | string | The domain part (after @) |
 
-### IP की जाँच करें
+### Validate IP
 
 `validate.ip`
 
-IPv4 या IPv6 पते के प्रारूप की जाँच करें
+Validate IPv4 or IPv6 address format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `ip` | string | Yes | - | जाँच के लिए IP पता |
-| `version` | string | No | `any` | जाँच के लिए IP पता |
+| `ip` | string | Yes | - | IP address to validate |
+| `version` | string | No | `any` | Expected IP version (any, v4, v6) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | क्या IP पता मान्य है |
-| `ip` | string | क्या IP पता मान्य है |
-| `version` | string | क्या IP पता मान्य है |
-| `is_private` | boolean | जाँचा गया IP पता |
-| `is_loopback` | boolean | पता चला IP संस्करण (v4 या v6) |
+| `valid` | boolean | Whether the IP address is valid |
+| `ip` | string | The validated IP address |
+| `version` | string | Detected IP version (v4 or v6) |
+| `is_private` | boolean | Whether the IP is in a private range |
+| `is_loopback` | boolean | Whether the IP is a loopback address |
 
-### JSON स्कीमा की जाँच करें
+### Validate JSON Schema
 
 `validate.json_schema`
 
-JSON स्कीमा के खिलाफ JSON डेटा की जाँच करें
+Validate JSON data against a JSON Schema
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | text | Yes | - | जाँच के लिए JSON डेटा (स्ट्रिंग या ऑब्जेक्ट) |
-| `schema` | text | Yes | - | जाँच के लिए JSON डेटा (स्ट्रिंग या ऑब्जेक्ट) |
+| `data` | text | Yes | - | JSON data to validate (string or object) |
+| `schema` | text | Yes | - | JSON Schema to validate against |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | जाँच के लिए JSON स्कीमा |
-| `errors` | array | क्या डेटा मान्य है |
-| `error_count` | number | क्या डेटा मान्य है |
+| `valid` | boolean | Whether the data is valid |
+| `errors` | array | List of validation errors |
+| `error_count` | number | Number of validation errors |
 
-### फोन की जाँच करें
+### Validate Phone
 
 `validate.phone`
 
-फोन नंबर के प्रारूप की जाँच करें
+Validate phone number format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `phone` | string | Yes | - | जाँच के लिए फोन नंबर |
-| `region` | string | No | `international` | जाँच के लिए फोन नंबर |
+| `phone` | string | Yes | - | Phone number to validate |
+| `region` | string | No | `international` | Region code for validation (international, us, tw, cn, jp) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | क्या फोन नंबर मान्य है |
-| `phone` | string | क्या फोन नंबर मान्य है |
-| `normalized` | string | क्या फोन नंबर मान्य है |
-| `region` | string | जाँचा गया फोन नंबर |
+| `valid` | boolean | Whether the phone number is valid |
+| `phone` | string | The validated phone number |
+| `normalized` | string | Normalized phone number (digits only) |
+| `region` | string | Region used for validation |
 
-### URL की जाँच करें
+### Validate URL
 
 `validate.url`
 
-URL के प्रारूप और संरचना की जाँच करें
+Validate URL format and structure
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | मान्य करने के लिए URL |
-| `require_https` | boolean | No | `False` | मान्य करने के लिए URL |
+| `url` | string | Yes | - | URL to validate |
+| `require_https` | boolean | No | `False` | Only accept HTTPS URLs |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | केवल HTTPS URL स्वीकार करें |
-| `url` | string | क्या URL मान्य है |
-| `scheme` | string | क्या URL मान्य है |
-| `host` | string | जाँचा गया URL |
-| `port` | number | URL स्कीम (http, https, आदि) |
-| `path` | string | होस्ट/डोमेन नाम |
-| `query` | string | यदि निर्दिष्ट है तो पोर्ट नंबर |
+| `valid` | boolean | Whether the URL is valid |
+| `url` | string | The validated URL |
+| `scheme` | string | URL scheme (http, https, etc) |
+| `host` | string | Host/domain name |
+| `port` | number | Port number if specified |
+| `path` | string | URL path |
+| `query` | string | Query string |
 
-### UUID जाँचें
+### Validate UUID
 
 `validate.uuid`
 
-UUID प्रारूप और संस्करण की जाँच करें
+Validate UUID format and version
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `uuid` | string | Yes | - | मान्य करने के लिए UUID |
-| `version` | number | No | `0` | मान्य करने के लिए UUID |
+| `uuid` | string | Yes | - | UUID to validate |
+| `version` | number | No | `0` | Expected UUID version (1-5, or 0 for any) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | अपेक्षित UUID संस्करण (1-5, या कोई भी के लिए 0) |
-| `uuid` | string | क्या UUID मान्य है |
-| `version` | number | क्या UUID मान्य है |
-| `variant` | string | जाँचा गया UUID |
+| `valid` | boolean | Whether the UUID is valid |
+| `uuid` | string | The validated UUID |
+| `version` | number | Detected UUID version |
+| `variant` | string | UUID variant |

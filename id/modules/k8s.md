@@ -6,19 +6,19 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Module | Description |
 |--------|-------------|
-| [Terapkan Manifest](#terapkan-manifest) | Terapkan manifest Kubernetes melalui kubectl apply |
-| [Deskripsikan Sumber Daya](#deskripsikan-sumber-daya) | Deskripsikan sumber daya Kubernetes secara detail |
-| [Dapatkan Pod](#dapatkan-pod) | Daftar pod Kubernetes dalam sebuah namespace |
-| [Dapatkan Log Pod](#dapatkan-log-pod) | Ambil log dari pod Kubernetes |
-| [Skala Deployment](#skala-deployment) | Skala deployment Kubernetes ke jumlah replika yang ditentukan |
+| [Apply Manifest](#apply-manifest) | Apply a Kubernetes manifest via kubectl apply |
+| [Describe Resource](#describe-resource) | Describe a Kubernetes resource in detail |
+| [Get Pods](#get-pods) | List Kubernetes pods in a namespace |
+| [Get Pod Logs](#get-pod-logs) | Retrieve logs from a Kubernetes pod |
+| [Scale Deployment](#scale-deployment) | Scale a Kubernetes deployment to a specified replica count |
 
 ## Modules
 
-### Terapkan Manifest
+### Apply Manifest
 
 `k8s.apply`
 
-Terapkan manifest Kubernetes melalui kubectl apply
+Apply a Kubernetes manifest via kubectl apply
 
 **Parameters:**
 
@@ -32,16 +32,16 @@ Terapkan manifest Kubernetes melalui kubectl apply
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `kind` | string | Jenis sumber daya (mis. Deployment, Service) |
-| `name` | string | Nama sumber daya |
-| `namespace` | string | Namespace sumber daya |
-| `action` | string | Tindakan yang diambil (dibuat, dikonfigurasi, tidak berubah) |
+| `kind` | string | Resource kind (e.g. Deployment, Service) |
+| `name` | string | Resource name |
+| `namespace` | string | Resource namespace |
+| `action` | string | Action taken (created, configured, unchanged) |
 
-### Deskripsikan Sumber Daya
+### Describe Resource
 
 `k8s.describe`
 
-Deskripsikan sumber daya Kubernetes secara detail
+Describe a Kubernetes resource in detail
 
 **Parameters:**
 
@@ -56,16 +56,16 @@ Deskripsikan sumber daya Kubernetes secara detail
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `resource_type` | string | Jenis sumber daya yang dideskripsikan |
-| `name` | string | Nama sumber daya |
-| `namespace` | string | Namespace Kubernetes |
-| `description` | string | Teks keluaran lengkap kubectl describe |
+| `resource_type` | string | Resource type that was described |
+| `name` | string | Resource name |
+| `namespace` | string | Kubernetes namespace |
+| `description` | string | Full kubectl describe output text |
 
-### Dapatkan Pod
+### Get Pods
 
 `k8s.get_pods`
 
-Daftar pod Kubernetes dalam sebuah namespace
+List Kubernetes pods in a namespace
 
 **Parameters:**
 
@@ -79,14 +79,14 @@ Daftar pod Kubernetes dalam sebuah namespace
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pods` | array | Daftar pod dengan informasi status |
-| `count` | number | Jumlah total pod yang ditemukan |
+| `pods` | array | List of pods with status information |
+| `count` | number | Total number of pods found |
 
-### Dapatkan Log Pod
+### Get Pod Logs
 
 `k8s.logs`
 
-Ambil log dari pod Kubernetes
+Retrieve logs from a Kubernetes pod
 
 **Parameters:**
 
@@ -103,15 +103,15 @@ Ambil log dari pod Kubernetes
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pod` | string | Nama pod |
-| `logs` | string | Teks keluaran log |
-| `lines` | number | Jumlah baris log yang dikembalikan |
+| `pod` | string | Pod name |
+| `logs` | string | Log output text |
+| `lines` | number | Number of log lines returned |
 
-### Skala Deployment
+### Scale Deployment
 
 `k8s.scale`
 
-Skala deployment Kubernetes ke jumlah replika yang ditentukan
+Scale a Kubernetes deployment to a specified replica count
 
 **Parameters:**
 
@@ -126,7 +126,7 @@ Skala deployment Kubernetes ke jumlah replika yang ditentukan
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deployment` | string | Nama deployment |
-| `replicas` | number | Jumlah replika yang diminta |
-| `namespace` | string | Namespace Kubernetes |
-| `scaled` | boolean | Apakah operasi skala berhasil |
+| `deployment` | string | Deployment name |
+| `replicas` | number | Requested replica count |
+| `namespace` | string | Kubernetes namespace |
+| `scaled` | boolean | Whether the scale operation succeeded |

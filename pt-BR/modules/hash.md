@@ -22,14 +22,14 @@ Calculate SHA-256 cryptographic hash of text
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | string | Yes | - | Text to hash |
-| `encoding` | string | No | `utf-8` | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | Text encoding |
-| `algorithm` | string | SHA-256 hash (64 hex characters) |
+| `hash` | string | SHA-256 hash (64 hex characters) |
+| `algorithm` | string | Hash algorithm used |
 
 ### SHA-512 Hash
 
@@ -42,11 +42,11 @@ Calculate SHA-512 cryptographic hash of text
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | string | Yes | - | Text to hash |
-| `encoding` | string | No | `utf-8` | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | Text encoding |
-| `algorithm` | string | SHA-512 hash (128 hex characters) |
+| `hash` | string | SHA-512 hash (128 hex characters) |
+| `algorithm` | string | Hash algorithm used |

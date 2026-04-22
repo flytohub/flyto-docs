@@ -6,74 +6,74 @@ Cron parsing, delay, and interval calculations.
 
 | Module | Description |
 |--------|-------------|
-| [Cron-Ausdruck analysieren](#cron-ausdruck-analysieren) | Cron-Ausdruck analysieren und nächste N Ausführungszeiten berechnen |
-| [Verzögerung / Schlaf](#verzögerung--schlaf) | Ausführung für eine bestimmte Dauer pausieren |
-| [Intervall berechnen](#intervall-berechnen) | Intervallzeit und nächste Vorkommen berechnen |
+| [Parse Cron Expression](#parse-cron-expression) | Parse cron expression and calculate next N run times |
+| [Delay / Sleep](#delay--sleep) | Pause execution for a specified duration |
+| [Calculate Interval](#calculate-interval) | Calculate interval timing and next occurrences |
 
 ## Modules
 
-### Cron-Ausdruck analysieren
+### Parse Cron Expression
 
 `scheduler.cron_parse`
 
-Cron-Ausdruck analysieren und nächste N Ausführungszeiten berechnen
+Parse cron expression and calculate next N run times
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `expression` | string | Yes | - | Standard 5-Feld-Cron-Ausdruck (z.B. "0 9 * * MON-FRI") |
-| `count` | number | No | `5` | Anzahl der nächsten Ausführungszeiten, die berechnet werden sollen |
-| `timezone` | string | No | `0` | Zeitzone für die Berechnung (UTC-Offset wie "+8" oder "-5", Standard "0" für UTC) |
+| `expression` | string | Yes | - | Standard 5-field cron expression (e.g. "0 9 * * MON-FRI") |
+| `count` | number | No | `5` | Number of next run times to calculate |
+| `timezone` | string | No | `0` | Timezone for calculation (UTC offset like "+8" or "-5", default "0" for UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `expression` | string | Der analysierte Cron-Ausdruck |
-| `description` | string | Lesbare Beschreibung des Zeitplans |
-| `next_runs` | array | Liste der nächsten Ausführungszeiten als ISO-Datetime-Strings |
-| `is_valid` | boolean | Ob der Ausdruck gültig ist |
+| `expression` | string | The parsed cron expression |
+| `description` | string | Human-readable description of the schedule |
+| `next_runs` | array | List of next run times as ISO datetime strings |
+| `is_valid` | boolean | Whether the expression is valid |
 
-### Verzögerung / Schlaf
+### Delay / Sleep
 
 `scheduler.delay`
 
-Ausführung für eine bestimmte Dauer pausieren
+Pause execution for a specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | Yes | - | Anzahl der Sekunden, die verzögert werden sollen |
-| `message` | string | No | - | Optionale Nachricht, die im Ergebnis enthalten sein soll |
+| `seconds` | number | Yes | - | Number of seconds to delay |
+| `message` | string | No | - | Optional message to include in the result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `delayed_seconds` | number | Tatsächliche Anzahl der verzögerten Sekunden |
-| `message` | string | Die angegebene Nachricht oder Standard |
+| `delayed_seconds` | number | Actual number of seconds delayed |
+| `message` | string | The provided message or default |
 
-### Intervall berechnen
+### Calculate Interval
 
 `scheduler.interval`
 
-Intervallzeit und nächste Vorkommen berechnen
+Calculate interval timing and next occurrences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | No | `0` | Intervall-Sekunden-Komponente |
-| `minutes` | number | No | `0` | Intervall-Minuten-Komponente |
-| `hours` | number | No | `0` | Intervall-Stunden-Komponente |
-| `start_time` | string | No | - | Startzeit im ISO 8601 Format (Standard: jetzt) |
+| `seconds` | number | No | `0` | Interval seconds component |
+| `minutes` | number | No | `0` | Interval minutes component |
+| `hours` | number | No | `0` | Interval hours component |
+| `start_time` | string | No | - | Start time in ISO 8601 format (default: now) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `interval_seconds` | number | Gesamtintervall in Sekunden |
-| `next_runs` | array | Liste der nächsten 5 Ausführungszeiten als ISO-Datetime-Strings |
-| `human_readable` | string | Lesbare Intervallbeschreibung |
+| `interval_seconds` | number | Total interval in seconds |
+| `next_runs` | array | List of next 5 run times as ISO datetime strings |
+| `human_readable` | string | Human-readable interval description |

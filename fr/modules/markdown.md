@@ -6,30 +6,30 @@ Parse frontmatter, convert to HTML, and generate table of contents.
 
 | Module | Description |
 |--------|-------------|
-| [Analyser le Frontmatter](#analyser-le-frontmatter) | Extraire le frontmatter YAML du contenu Markdown |
-| [Markdown en HTML](#markdown-en-html) | Convertir le texte Markdown en HTML |
-| [Générer la table des matières](#générer-la-table-des-matières) | Générer une table des matières à partir des titres Markdown |
+| [Parse Frontmatter](#parse-frontmatter) | Extract YAML frontmatter from Markdown content |
+| [Markdown to HTML](#markdown-to-html) | Convert Markdown text to HTML |
+| [Generate Table of Contents](#generate-table-of-contents) | Generate a table of contents from Markdown headings |
 
 ## Modules
 
-### Analyser le Frontmatter
+### Parse Frontmatter
 
 `markdown.parse_frontmatter`
 
-Extraire le frontmatter YAML du contenu Markdown
+Extract YAML frontmatter from Markdown content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Contenu Markdown avec frontmatter |
+| `text` | string | Yes | - | Markdown content with frontmatter |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `frontmatter` | object | Frontmatter analysé sous forme de dictionnaire |
-| `content` | string | Contenu Markdown sans frontmatter |
+| `frontmatter` | object | Parsed frontmatter as a dictionary |
+| `content` | string | Markdown content without frontmatter |
 
 **Example:** Parse YAML frontmatter
 
@@ -47,25 +47,25 @@ tags:
 Content here.
 ```
 
-### Markdown en HTML
+### Markdown to HTML
 
 `markdown.to_html`
 
-Convertir le texte Markdown en HTML
+Convert Markdown text to HTML
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Contenu Markdown à convertir |
-| `extensions` | array | No | - | Extensions Markdown à activer (utilisées uniquement avec la bibliothèque markdown) |
+| `text` | string | Yes | - | Markdown content to convert |
+| `extensions` | array | No | - | Markdown extensions to enable (only used with the markdown library) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `html` | string | Contenu HTML converti |
-| `word_count` | number | Nombre de mots du texte d'entrée |
+| `html` | string | Converted HTML content |
+| `word_count` | number | Word count of the input text |
 
 **Example:** Convert markdown to HTML
 
@@ -75,25 +75,25 @@ text: # Hello
 This is **bold** and *italic*.
 ```
 
-### Générer la table des matières
+### Generate Table of Contents
 
 `markdown.toc`
 
-Générer une table des matières à partir des titres Markdown
+Generate a table of contents from Markdown headings
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Contenu Markdown pour extraire les titres |
-| `max_depth` | number | No | `3` | Profondeur maximale des titres à inclure (1-6) |
+| `text` | string | Yes | - | Markdown content to extract headings from |
+| `max_depth` | number | No | `3` | Maximum heading depth to include (1-6) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `toc` | array | Liste des titres avec niveau, titre et identifiant |
-| `toc_markdown` | string | Table des matières formatée en Markdown |
+| `toc` | array | List of headings with level, title, and slug |
+| `toc_markdown` | string | Formatted Markdown table of contents |
 
 **Example:** Generate TOC from markdown
 

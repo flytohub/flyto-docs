@@ -6,8 +6,8 @@ SHA-256 and SHA-512 cryptographic hashing.
 
 | Module | Description |
 |--------|-------------|
-| [SHA-256 Hash](#sha-256-hash) | SHA-256 kryptografischen Hash eines Textes berechnen |
-| [SHA-512 Hash](#sha-512-hash) | SHA-512 kryptografischen Hash eines Textes berechnen |
+| [SHA-256 Hash](#sha-256-hash) | Calculate SHA-256 cryptographic hash of text |
+| [SHA-512 Hash](#sha-512-hash) | Calculate SHA-512 cryptographic hash of text |
 
 ## Modules
 
@@ -15,38 +15,38 @@ SHA-256 and SHA-512 cryptographic hashing.
 
 `hash.sha256`
 
-SHA-256 kryptografischen Hash eines Textes berechnen
+Calculate SHA-256 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Text zum Hashen |
-| `encoding` | string | No | `utf-8` | Text zum Hashen |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | Textkodierung |
-| `algorithm` | string | SHA-256 Hash (64 hexadezimale Zeichen) |
+| `hash` | string | SHA-256 hash (64 hex characters) |
+| `algorithm` | string | Hash algorithm used |
 
 ### SHA-512 Hash
 
 `hash.sha512`
 
-SHA-512 kryptografischen Hash eines Textes berechnen
+Calculate SHA-512 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Text zum Hashen |
-| `encoding` | string | No | `utf-8` | Text zum Hashen |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | Textkodierung |
-| `algorithm` | string | SHA-512 Hash (128 hexadezimale Zeichen) |
+| `hash` | string | SHA-512 hash (128 hex characters) |
+| `algorithm` | string | Hash algorithm used |

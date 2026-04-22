@@ -6,20 +6,20 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 
 | Module | Description |
 |--------|-------------|
-| [ความสามารถอ่าน HTML](#ความสามารถอ่าน-html) | วิเคราะห์ความสามารถในการอ่านเนื้อหา |
-| [ดึงฟอร์ม](#ดึงฟอร์ม) | ดึงข้อมูลฟอร์มจาก HTML |
-| [ดึง Metadata](#ดึง-metadata) | ดึง metadata จาก HTML |
-| [ดึงตาราง](#ดึงตาราง) | ดึงข้อมูลตารางจาก HTML |
-| [ค้นหารูปแบบ](#ค้นหารูปแบบ) | ค้นหารูปแบบข้อมูลที่ซ้ำใน HTML |
-| [โครงสร้าง HTML](#โครงสร้าง-html) | วิเคราะห์โครงสร้าง DOM ของ HTML |
+| [HTML Readability](#html-readability) | Analyze content readability |
+| [Extract Forms](#extract-forms) | Extract form data from HTML |
+| [Extract Metadata](#extract-metadata) | Extract metadata from HTML |
+| [Extract Tables](#extract-tables) | Extract table data from HTML |
+| [Find Patterns](#find-patterns) | Find repeating data patterns in HTML |
+| [HTML Structure](#html-structure) | Analyze HTML DOM structure |
 
 ## Modules
 
-### ความสามารถอ่าน HTML
+### HTML Readability
 
 `analysis.html.analyze_readability`
 
-วิเคราะห์ความสามารถในการอ่านเนื้อหา
+Analyze content readability
 
 **Parameters:**
 
@@ -34,11 +34,11 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 | `type` | any | object |
 | `properties` | any |  |
 
-### ดึงฟอร์ม
+### Extract Forms
 
 `analysis.html.extract_forms`
 
-ดึงข้อมูลฟอร์มจาก HTML
+Extract form data from HTML
 
 **Parameters:**
 
@@ -53,11 +53,11 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 | `type` | any | object |
 | `properties` | any |  |
 
-### ดึง Metadata
+### Extract Metadata
 
 `analysis.html.extract_metadata`
 
-ดึง metadata จาก HTML
+Extract metadata from HTML
 
 **Parameters:**
 
@@ -72,11 +72,11 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 | `type` | any | object |
 | `properties` | any |  |
 
-### ดึงตาราง
+### Extract Tables
 
 `analysis.html.extract_tables`
 
-ดึงข้อมูลตารางจาก HTML
+Extract table data from HTML
 
 **Parameters:**
 
@@ -91,11 +91,11 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 | `type` | any | object |
 | `properties` | any |  |
 
-### ค้นหารูปแบบ
+### Find Patterns
 
 `analysis.html.find_patterns`
 
-ค้นหารูปแบบข้อมูลที่ซ้ำใน HTML
+Find repeating data patterns in HTML
 
 **Parameters:**
 
@@ -110,11 +110,11 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 | `type` | any | object |
 | `properties` | any |  |
 
-### โครงสร้าง HTML
+### HTML Structure
 
 `analysis.html.structure`
 
-วิเคราะห์โครงสร้าง DOM ของ HTML
+Analyze HTML DOM structure
 
 **Parameters:**
 

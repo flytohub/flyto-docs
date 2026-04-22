@@ -6,26 +6,26 @@ List manipulation — chunk, flatten, group, map, reduce, zip, and more.
 
 | Module | Description |
 |--------|-------------|
-| [सरणी खंड](#सरणी-खंड) | सरणी को निर्दिष्ट आकार के खंडों में विभाजित करें |
-| [संक्षिप्त करें](#संक्षिप्त-करें) | ऐरे से null/खाली मान हटाएं |
-| [सरणी अंतर](#सरणी-अंतर) | पहली सरणी में ऐसे तत्व खोजें जो अन्य में नहीं हैं |
-| [हटाएं](#हटाएं) | ऐरे से पहले N तत्व हटाएं |
-| [सरणी समतल](#सरणी-समतल) | नेस्टेड सरणियों को एकल सरणी में समतल करें |
-| [समूहित करें](#समूहित-करें) | ऐरे तत्वों को एक कुंजी द्वारा समूहित करें |
-| [सरणी प्रतिच्छेदन](#सरणी-प्रतिच्छेदन) | सरणियों के बीच समान तत्व खोजें |
-| [सरणी जोड़ें](#सरणी-जोड़ें) | सरणी तत्वों को स्ट्रिंग में जोड़ें |
-| [सरणी मैप](#सरणी-मैप) | सरणी में प्रत्येक तत्व को रूपांतरित करें |
-| [सरणी रिड्यूस](#सरणी-रिड्यूस) | सरणी को एकल मान में घटाएं |
-| [लें](#लें) | ऐरे से पहले N तत्व लें |
-| [ऐरे संयोजित करें](#ऐरे-संयोजित-करें) | कई ऐरे को तत्व-वार संयोजित करें |
+| [Array Chunk](#array-chunk) | Split array into chunks of specified size |
+| [Compact](#compact) | Remove null/empty values from array |
+| [Array Difference](#array-difference) | Find elements in first array not in others |
+| [Drop](#drop) | Drop first N elements from array |
+| [Array Flatten](#array-flatten) | Flatten nested arrays into single array |
+| [Group By](#group-by) | Group array elements by a key |
+| [Array Intersection](#array-intersection) | Find common elements between arrays |
+| [Array Join](#array-join) | Join array elements into string |
+| [Array Map](#array-map) | Transform each element in an array |
+| [Array Reduce](#array-reduce) | Reduce array to single value |
+| [Take](#take) | Take first N elements from array |
+| [Zip Arrays](#zip-arrays) | Combine multiple arrays element-wise |
 
 ## Modules
 
-### सरणी खंड
+### Array Chunk
 
 `array.chunk`
 
-सरणी को निर्दिष्ट आकार के खंडों में विभाजित करें
+Split array into chunks of specified size
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ List manipulation — chunk, flatten, group, map, reduce, zip, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | खंडों की सरणी |
-| `chunks` | number | खंडों की सरणी |
+| `result` | array | Array of chunks |
+| `chunks` | number | Number of chunks |
 
 **Example:** Chunk into groups of 3
 
@@ -55,33 +55,33 @@ array: ["a", "b", "c", "d", "e"]
 size: 2
 ```
 
-### संक्षिप्त करें
+### Compact
 
 `array.compact`
 
-ऐरे से null/खाली मान हटाएं
+Remove null/empty values from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | संक्षिप्त करने के लिए ऐरे |
-| `remove_empty_strings` | boolean | No | `True` | खाली स्ट्रिंग्स हटाएं |
-| `remove_zero` | boolean | No | `False` | खाली स्ट्रिंग्स हटाएं |
-| `remove_false` | boolean | No | `False` | शून्य मान हटाएं |
+| `array` | array | Yes | - | Array to compact |
+| `remove_empty_strings` | boolean | No | `True` | Remove empty strings |
+| `remove_zero` | boolean | No | `False` | Remove zero values |
+| `remove_false` | boolean | No | `False` | Remove false values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | गलत मान हटाएं |
-| `removed` | number | संक्षिप्त किया गया ऐरे |
+| `result` | array | Compacted array |
+| `removed` | number | Number of items removed |
 
-### सरणी अंतर
+### Array Difference
 
 `array.difference`
 
-पहली सरणी में ऐसे तत्व खोजें जो अन्य में नहीं हैं
+Find elements in first array not in others
 
 **Parameters:**
 
@@ -94,8 +94,8 @@ size: 2
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | पहली सरणी के अद्वितीय तत्व |
-| `length` | number | पहली सरणी के अद्वितीय तत्व |
+| `result` | array | Elements unique to first array |
+| `length` | number | Number of unique elements |
 
 **Example:** Find unique elements
 
@@ -104,31 +104,31 @@ array: [1, 2, 3, 4, 5]
 subtract: [[2, 4], [5]]
 ```
 
-### हटाएं
+### Drop
 
 `array.drop`
 
-ऐरे से पहले N तत्व हटाएं
+Drop first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | स्रोत ऐरे |
-| `count` | number | Yes | `1` | स्रोत ऐरे |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to drop |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | हटाने के लिए तत्वों की संख्या |
-| `dropped` | number | शेष तत्व |
+| `result` | array | Remaining elements |
+| `dropped` | number | Number of elements dropped |
 
-### सरणी समतल
+### Array Flatten
 
 `array.flatten`
 
-नेस्टेड सरणियों को एकल सरणी में समतल करें
+Flatten nested arrays into single array
 
 **Parameters:**
 
@@ -141,8 +141,8 @@ subtract: [[2, 4], [5]]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | समतल सरणी |
-| `length` | number | समतल सरणी |
+| `result` | array | Flattened array |
+| `length` | number | Length of flattened array |
 
 **Example:** Flatten one level
 
@@ -158,32 +158,32 @@ array: [[1, [2, [3, [4]]]]]
 depth: -1
 ```
 
-### समूहित करें
+### Group By
 
 `array.group_by`
 
-ऐरे तत्वों को एक कुंजी द्वारा समूहित करें
+Group array elements by a key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | समूहित करने के लिए वस्तुओं का ऐरे |
-| `key` | string | Yes | - | समूहित करने के लिए वस्तुओं का ऐरे |
+| `array` | array | Yes | - | Array of objects to group |
+| `key` | string | Yes | - | Property name to group by |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `groups` | object | समूहित करने के लिए गुण का नाम |
-| `keys` | array | समूहित परिणाम |
-| `count` | number | समूहित परिणाम |
+| `groups` | object | Grouped results |
+| `keys` | array | Group keys |
+| `count` | number | Number of groups |
 
-### सरणी प्रतिच्छेदन
+### Array Intersection
 
 `array.intersection`
 
-सरणियों के बीच समान तत्व खोजें
+Find common elements between arrays
 
 **Parameters:**
 
@@ -195,8 +195,8 @@ depth: -1
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | समान तत्व |
-| `length` | number | समान तत्व |
+| `result` | array | Common elements |
+| `length` | number | Number of common elements |
 
 **Example:** Find common elements
 
@@ -204,11 +204,11 @@ depth: -1
 arrays: [[1, 2, 3, 4], [2, 3, 5], [2, 3, 6]]
 ```
 
-### सरणी जोड़ें
+### Array Join
 
 `array.join`
 
-सरणी तत्वों को स्ट्रिंग में जोड़ें
+Join array elements into string
 
 **Parameters:**
 
@@ -222,7 +222,7 @@ arrays: [[1, 2, 3, 4], [2, 3, 5], [2, 3, 6]]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | जोड़ी गई स्ट्रिंग |
+| `result` | string | Joined string |
 
 **Example:** Join with comma
 
@@ -239,11 +239,11 @@ separator:
 
 ```
 
-### सरणी मैप
+### Array Map
 
 `array.map`
 
-सरणी में प्रत्येक तत्व को रूपांतरित करें
+Transform each element in an array
 
 **Parameters:**
 
@@ -257,8 +257,8 @@ separator:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | रूपांतरित सरणी |
-| `length` | number | रूपांतरित सरणी |
+| `result` | array | Transformed array |
+| `length` | number | Length of result array |
 
 **Example:** Multiply numbers
 
@@ -276,11 +276,11 @@ operation: extract
 value: name
 ```
 
-### सरणी रिड्यूस
+### Array Reduce
 
 `array.reduce`
 
-सरणी को एकल मान में घटाएं
+Reduce array to single value
 
 **Parameters:**
 
@@ -295,8 +295,8 @@ value: name
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | घटाया गया मान |
-| `operation` | string | घटाया गया मान |
+| `result` | any | Reduced value |
+| `operation` | string | Operation that was applied |
 
 **Example:** Sum numbers
 
@@ -313,42 +313,42 @@ operation: join
 separator:  
 ```
 
-### लें
+### Take
 
 `array.take`
 
-ऐरे से पहले N तत्व लें
+Take first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | स्रोत ऐरे |
-| `count` | number | Yes | `1` | स्रोत ऐरे |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to take |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | लेने के लिए तत्वों की संख्या |
-| `length` | number | लिये गए तत्व |
+| `result` | array | Taken elements |
+| `length` | number | Number of elements taken |
 
-### ऐरे संयोजित करें
+### Zip Arrays
 
 `array.zip`
 
-कई ऐरे को तत्व-वार संयोजित करें
+Combine multiple arrays element-wise
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | संयोजित करने के लिए ऐरे का ऐरे |
-| `fill_value` | any | No | - | संयोजित करने के लिए ऐरे का ऐरे |
+| `arrays` | array | Yes | - | Array of arrays to zip |
+| `fill_value` | any | No | - | Value for missing elements |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | लापता तत्वों के लिए मान |
-| `length` | number | संयोजित ऐरे |
+| `result` | array | Zipped array |
+| `length` | number | Result length |

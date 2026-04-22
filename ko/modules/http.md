@@ -6,7 +6,7 @@ HTTP request utilities.
 
 | Module | Description |
 |--------|-------------|
-| [HTTP GET](#http-get) | HTTP GET 요청을 보내고 응답 받기 |
+| [HTTP GET](#http-get) | Send HTTP GET request to an API endpoint |
 
 ## Modules
 
@@ -14,16 +14,16 @@ HTTP request utilities.
 
 `http.get`
 
-HTTP GET 요청을 보내고 응답 받기
+Send HTTP GET request to an API endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | GET 요청을 보낼 URL |
-| `headers` | object | No | `{}` | 키-값 객체로 된 요청 헤더 |
-| `query` | object | No | `{}` | 키-값 객체로 된 쿼리 문자열 매개변수 |
-| `timeout` | number | No | `30` | 밀리초 단위의 요청 시간 초과 |
+| `url` | string | Yes | - | Target URL |
+| `headers` | object | No | `{}` | HTTP request headers as key-value pairs |
+| `query` | object | No | `{}` | URL query string parameters as key-value pairs |
+| `timeout` | number | No | `30` | Maximum time to wait in seconds |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
 | `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
@@ -31,7 +31,7 @@ HTTP GET 요청을 보내고 응답 받기
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 요청이 성공했는지 여부 (2xx 상태) |
-| `status` | number | HTTP 상태 코드 |
-| `body` | any | 응답 본문 (파싱된 JSON 또는 텍스트) |
-| `headers` | object | 응답 헤더 |
+| `ok` | boolean | Whether the operation succeeded |
+| `status` | number | HTTP status code |
+| `body` | any | Response body content |
+| `headers` | object | Response headers |

@@ -6,38 +6,38 @@ Build, run, inspect, and manage Docker containers.
 
 | Module | Description |
 |--------|-------------|
-| [Docker 이미지 빌드](#docker-이미지-빌드) | Dockerfile에서 Docker 이미지를 빌드합니다 |
-| [Docker 컨테이너 검사](#docker-컨테이너-검사) | Docker 컨테이너에 대한 자세한 정보를 가져옵니다 |
-| [컨테이너 로그 가져오기](#컨테이너-로그-가져오기) | Docker 컨테이너에서 로그 가져오기 |
-| [Docker 컨테이너 목록](#docker-컨테이너-목록) | Docker 컨테이너 목록 |
-| [Docker 컨테이너 실행](#docker-컨테이너-실행) | 이미지에서 Docker 컨테이너를 실행합니다 |
-| [Docker 컨테이너 중지](#docker-컨테이너-중지) | 실행 중인 Docker 컨테이너를 중지합니다 |
+| [Build Docker Image](#build-docker-image) | Build a Docker image from a Dockerfile |
+| [Inspect Docker Container](#inspect-docker-container) | Get detailed information about a Docker container |
+| [Get Container Logs](#get-container-logs) | Get logs from a Docker container |
+| [List Docker Containers](#list-docker-containers) | List Docker containers |
+| [Run Docker Container](#run-docker-container) | Run a Docker container from an image |
+| [Stop Docker Container](#stop-docker-container) | Stop a running Docker container |
 
 ## Modules
 
-### Docker 이미지 빌드
+### Build Docker Image
 
 `docker.build`
 
-Dockerfile에서 Docker 이미지를 빌드합니다
+Build a Docker image from a Dockerfile
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 빌드 컨텍스트 디렉토리 경로 |
-| `tag` | string | Yes | - | 이미지 이름과 선택적 태그 (예: myapp:latest) |
-| `dockerfile` | string | No | - | Dockerfile 경로 (빌드 컨텍스트 기준) |
-| `build_args` | object | No | - | 빌드 시 변수 (예: {"NODE_ENV": "production"}) |
-| `no_cache` | boolean | No | `False` | 이미지 빌드 시 캐시를 사용하지 않습니다 |
+| `path` | string | Yes | - | Path to the build context directory |
+| `tag` | string | Yes | - | Name and optionally tag the image (e.g. myapp:latest) |
+| `dockerfile` | string | No | - | Path to the Dockerfile (relative to build context) |
+| `build_args` | object | No | - | Build-time variables (e.g. {"NODE_ENV": "production"}) |
+| `no_cache` | boolean | No | `False` | Do not use cache when building the image |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `image_id` | string | 빌드된 이미지 ID |
-| `tag` | string | 이미지에 적용된 태그 |
-| `size` | string | 빌드된 이미지 크기 |
+| `image_id` | string | ID of the built image |
+| `tag` | string | Tag applied to the image |
+| `size` | string | Size of the built image |
 
 **Example:** Build from current directory
 
@@ -56,29 +56,29 @@ build_args: {"NODE_ENV": "production"}
 no_cache: true
 ```
 
-### Docker 컨테이너 검사
+### Inspect Docker Container
 
 `docker.inspect_container`
 
-Docker 컨테이너에 대한 자세한 정보를 가져옵니다
+Get detailed information about a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | 검사할 컨테이너 ID 또는 이름 |
+| `container` | string | Yes | - | Container ID or name to inspect |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | 짧은 컨테이너 ID |
-| `name` | string | 컨테이너 이름 |
-| `state` | object | 컨테이너 상태 (상태, 실행 중, pid, 종료 코드 등) |
-| `image` | string | 컨테이너에서 사용하는 이미지 |
-| `network_settings` | object | 네트워크 설정 (IP, 포트, 네트워크) |
-| `mounts` | array | 볼륨 및 바인드 마운트 |
-| `config` | object | 컨테이너 설정 (환경 변수, 명령어, 레이블 등) |
+| `id` | string | Short container ID |
+| `name` | string | Container name |
+| `state` | object | Container state (status, running, pid, exit_code, etc.) |
+| `image` | string | Image used by the container |
+| `network_settings` | object | Network configuration (IP, ports, networks) |
+| `mounts` | array | Volume and bind mounts |
+| `config` | object | Container configuration (env, cmd, labels, etc.) |
 
 **Example:** Inspect a container by name
 
@@ -92,27 +92,27 @@ container: my-nginx
 container: a1b2c3d4e5f6
 ```
 
-### 컨테이너 로그 가져오기
+### Get Container Logs
 
 `docker.logs`
 
-Docker 컨테이너에서 로그 가져오기
+Get logs from a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | 컨테이너 ID 또는 이름 |
-| `tail` | number | No | `100` | 로그의 끝에서 보여줄 줄 수 |
-| `follow` | boolean | No | `False` | 로그 출력 따라가기 (타임아웃까지 스트리밍) |
-| `timestamps` | boolean | No | `False` | 로그 출력에 타임스탬프 표시 |
+| `container` | string | Yes | - | Container ID or name |
+| `tail` | number | No | `100` | Number of lines to show from the end of the logs |
+| `follow` | boolean | No | `False` | Follow log output (streams until timeout) |
+| `timestamps` | boolean | No | `False` | Show timestamps in log output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `logs` | string | 컨테이너 로그 출력 |
-| `lines` | number | 반환된 로그 줄 수 |
+| `logs` | string | Container log output |
+| `lines` | number | Number of log lines returned |
 
 **Example:** Get last 50 lines
 
@@ -129,25 +129,25 @@ tail: 100
 timestamps: true
 ```
 
-### Docker 컨테이너 목록
+### List Docker Containers
 
 `docker.ps`
 
-Docker 컨테이너 목록
+List Docker containers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `all` | boolean | No | `False` | 모든 컨테이너 보기 (기본값은 실행 중인 것만 표시) |
-| `filters` | object | No | - | 컨테이너 필터링 (예: {"name": "my-app", "status": "running"}) |
+| `all` | boolean | No | `False` | Show all containers (default shows just running) |
+| `filters` | object | No | - | Filter containers (e.g. {"name": "my-app", "status": "running"}) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `containers` | array | ID, 이름, 이미지, 상태, 포트가 포함된 컨테이너 목록 |
-| `count` | number | 찾은 컨테이너 수 |
+| `containers` | array | List of containers with id, name, image, status, ports |
+| `count` | number | Number of containers found |
 
 **Example:** List running containers
 
@@ -166,32 +166,32 @@ all: true
 filters: {"name": "nginx"}
 ```
 
-### Docker 컨테이너 실행
+### Run Docker Container
 
 `docker.run`
 
-이미지에서 Docker 컨테이너를 실행합니다
+Run a Docker container from an image
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image` | string | Yes | - | 실행할 Docker 이미지 (예: nginx:latest) |
-| `command` | string | No | - | 컨테이너 내에서 실행할 명령어 |
-| `name` | string | No | - | 컨테이너에 이름을 지정합니다 |
-| `ports` | object | No | - | 호스트:컨테이너 형식의 포트 매핑 (예: {"8080": "80"}) |
-| `volumes` | object | No | - | 호스트 경로:컨테이너 경로 형식의 볼륨 매핑 |
-| `env` | object | No | - | 컨테이너에 설정할 환경 변수 |
-| `detach` | boolean | No | `True` | 컨테이너를 백그라운드에서 실행합니다 |
-| `remove` | boolean | No | `False` | 컨테이너 종료 시 자동으로 제거합니다 |
-| `network` | string | No | - | 컨테이너를 네트워크에 연결합니다 |
+| `image` | string | Yes | - | Docker image to run (e.g. nginx:latest) |
+| `command` | string | No | - | Command to run inside the container |
+| `name` | string | No | - | Assign a name to the container |
+| `ports` | object | No | - | Port mappings as host:container (e.g. {"8080": "80"}) |
+| `volumes` | object | No | - | Volume mappings as host_path:container_path |
+| `env` | object | No | - | Environment variables to set in the container |
+| `detach` | boolean | No | `True` | Run container in background |
+| `remove` | boolean | No | `False` | Automatically remove the container when it exits |
+| `network` | string | No | - | Connect the container to a network |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | 생성된 컨테이너 ID |
-| `status` | string | 실행 후 컨테이너 상태 |
+| `container_id` | string | ID of the created container |
+| `status` | string | Container status after run |
 
 **Example:** Run Nginx web server
 
@@ -211,25 +211,25 @@ remove: true
 detach: false
 ```
 
-### Docker 컨테이너 중지
+### Stop Docker Container
 
 `docker.stop`
 
-실행 중인 Docker 컨테이너를 중지합니다
+Stop a running Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | 중지할 컨테이너 ID 또는 이름 |
-| `timeout` | number | No | `10` | 컨테이너를 강제 종료하기 전 대기 시간 (초) |
+| `container` | string | Yes | - | Container ID or name to stop |
+| `timeout` | number | No | `10` | Seconds to wait before killing the container |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | 중지된 컨테이너 ID 또는 이름 |
-| `stopped` | boolean | 컨테이너가 성공적으로 중지되었는지 여부 |
+| `container_id` | string | ID or name of the stopped container |
+| `stopped` | boolean | Whether the container was successfully stopped |
 
 **Example:** Stop a container by name
 

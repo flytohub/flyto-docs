@@ -6,115 +6,115 @@ Type casting between data types.
 
 | Module | Description |
 |--------|-------------|
-| [배열로](#배열로) | 값을 배열로 변환 |
-| [불리언으로](#불리언으로) | 값을 불리언으로 변환 |
-| [숫자로](#숫자로) | 값을 숫자로 변환 |
-| [객체로](#객체로) | 값을 객체로 변환 |
-| [문자열로](#문자열로) | 어떤 값을 문자열로 변환 |
+| [To Array](#to-array) | Convert value to array |
+| [To Boolean](#to-boolean) | Convert value to boolean |
+| [To Number](#to-number) | Convert value to number |
+| [To Object](#to-object) | Convert value to object |
+| [To String](#to-string) | Convert any value to string |
 
 ## Modules
 
-### 배열로
+### To Array
 
 `convert.to_array`
 
-값을 배열로 변환
+Convert value to array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 변환할 값 |
-| `split_string` | boolean | No | `False` | 변환할 값 |
-| `delimiter` | string | No | - | 문자열을 문자로 분할 |
+| `value` | any | Yes | - | Value to convert |
+| `split_string` | boolean | No | `False` | Split string into characters |
+| `delimiter` | string | No | - | Delimiter for string splitting |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 문자열 분할 구분자 |
-| `length` | number | 변환된 배열 |
-| `original_type` | string | 변환된 배열 |
+| `result` | array | Converted array |
+| `length` | number | Array length |
+| `original_type` | string | Original value type |
 
-### 불리언으로
+### To Boolean
 
 `convert.to_boolean`
 
-값을 불리언으로 변환
+Convert value to boolean
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 변환할 값 |
-| `strict` | boolean | No | `False` | 변환할 값 |
+| `value` | any | Yes | - | Value to convert |
+| `strict` | boolean | No | `False` | Only accept true/false strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | true/false 문자열만 허용 |
-| `original_type` | string | 변환된 불리언 |
+| `result` | boolean | Converted boolean |
+| `original_type` | string | Original value type |
 
-### 숫자로
+### To Number
 
 `convert.to_number`
 
-값을 숫자로 변환
+Convert value to number
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 변환할 값 |
-| `default` | number | No | `0` | 변환할 값 |
-| `integer` | boolean | No | `False` | 변환 실패 시 기본값 |
+| `value` | any | Yes | - | Value to convert |
+| `default` | number | No | `0` | Default value if conversion fails |
+| `integer` | boolean | No | `False` | Convert to integer |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 정수로 변환 |
-| `success` | boolean | 변환된 숫자 |
-| `original_type` | string | 변환된 숫자 |
+| `result` | number | Converted number |
+| `success` | boolean | Whether conversion succeeded |
+| `original_type` | string | Original value type |
 
-### 객체로
+### To Object
 
 `convert.to_object`
 
-값을 객체로 변환
+Convert value to object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 변환할 값 |
-| `key_name` | string | No | `value` | 변환할 값 |
+| `value` | any | Yes | - | Value to convert |
+| `key_name` | string | No | `value` | Key name for wrapping non-objects |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 비객체를 감싸는 키 이름 |
-| `keys` | array | 변환된 객체 |
-| `original_type` | string | 변환된 객체 |
+| `result` | object | Converted object |
+| `keys` | array | Object keys |
+| `original_type` | string | Original value type |
 
-### 문자열로
+### To String
 
 `convert.to_string`
 
-어떤 값을 문자열로 변환
+Convert any value to string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 변환할 값 |
-| `pretty` | boolean | No | `False` | 변환할 값 |
+| `value` | any | Yes | - | Value to convert |
+| `pretty` | boolean | No | `False` | Format objects/arrays with indentation |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 객체/배열을 들여쓰기로 포맷 |
-| `original_type` | string | 문자열 표현 |
+| `result` | string | String representation |
+| `original_type` | string | Original value type |

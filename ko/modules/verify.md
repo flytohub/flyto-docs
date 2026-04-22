@@ -6,44 +6,44 @@ Visual verification, Figma comparison, style capture, and report generation.
 
 | Module | Description |
 |--------|-------------|
-| [스크린샷 주석 달기](#스크린샷-주석-달기) | 스크린샷에 라벨이 있는 경계 상자를 그려 차이점을 표시합니다 |
-| [요소 스타일 캡처](#요소-스타일-캡처) | 브라우저 요소에서 계산된 스타일 캡처 |
-| [스타일 비교](#스타일-비교) | 캡처한 스타일과 예상 값 비교 |
-| [Figma 스타일 가져오기](#figma-스타일-가져오기) | Figma API에서 디자인 토큰 가져오기 (토큰은 로컬에 유지) |
-| [보고서 생성](#보고서-생성) | HTML/JSON/Markdown 형식으로 검증 보고서 생성 |
-| [규칙셋 불러오기](#규칙셋-불러오기) | YAML 파일에서 검증 규칙 불러오기 |
-| [검증 실행](#검증-실행) | 전체 디자인 검증 실행: 캡처 → 비교 → 보고서 |
-| [사양 검증 실행](#사양-검증-실행) | 동적 사양 검증 - YAML을 통해 모듈 구성 |
-| [시각적 차이](#시각적-차이) | 참조 디자인과 개발 사이트를 시각적으로 비교하고 차이점을 주석으로 표시합니다 |
+| [Annotate Screenshot](#annotate-screenshot) | Draw labeled bounding boxes on screenshots to mark differences |
+| [Capture Element Styles](#capture-element-styles) | Capture computed styles from browser element |
+| [Compare Styles](#compare-styles) | Compare captured styles with expected values |
+| [Fetch Figma Style](#fetch-figma-style) | Fetch design tokens from Figma API (token stays local) |
+| [Generate Report](#generate-report) | Generate verification report in HTML/JSON/Markdown |
+| [Load Ruleset](#load-ruleset) | Load verification rules from YAML file |
+| [Run Verification](#run-verification) | Run full design verification: capture → compare → report |
+| [Run Spec Verification](#run-spec-verification) | Dynamic spec verification - compose any modules via YAML |
+| [Visual Diff](#visual-diff) | Compare reference design with dev site visually, annotate differences |
 
 ## Modules
 
-### 스크린샷 주석 달기
+### Annotate Screenshot
 
 `verify.annotate`
 
-스크린샷에 라벨이 있는 경계 상자를 그려 차이점을 표시합니다
+Draw labeled bounding boxes on screenshots to mark differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | Yes | - | 스크린샷 이미지 경로 |
-| `annotations` | array | Yes | - | 주석 배열: [{label, x, y, width, height, color?, description?}] |
-| `output_path` | string | No | - | 주석이 달린 이미지의 출력 경로 (기본값: _annotated 접미사 추가) |
+| `image_path` | string | Yes | - | Path to the screenshot image |
+| `annotations` | array | Yes | - | Array of annotations: [{label, x, y, width, height, color?, description?}] |
+| `output_path` | string | No | - | Output path for annotated image (default: adds _annotated suffix) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 주석이 달린 이미지 경로 |
-| `annotation_count` | integer | 그려진 주석의 수 |
+| `output_path` | string | Path to annotated image |
+| `annotation_count` | integer | Number of annotations drawn |
 
-### 요소 스타일 캡처
+### Capture Element Styles
 
 `verify.capture`
 
-브라우저 요소에서 계산된 스타일 캡처
+Capture computed styles from browser element
 
 **Parameters:**
 
@@ -62,11 +62,11 @@ Visual verification, Figma comparison, style capture, and report generation.
 | `element` | object | Captured element with styles |
 | `found` | boolean | Whether element was found |
 
-### 스타일 비교
+### Compare Styles
 
 `verify.compare`
 
-캡처한 스타일과 예상 값 비교
+Compare captured styles with expected values
 
 **Parameters:**
 
@@ -93,11 +93,11 @@ Visual verification, Figma comparison, style capture, and report generation.
 | `error_count` | number | Number of errors |
 | `warning_count` | number | Number of warnings |
 
-### Figma 스타일 가져오기
+### Fetch Figma Style
 
 `verify.figma`
 
-Figma API에서 디자인 토큰 가져오기 (토큰은 로컬에 유지)
+Fetch design tokens from Figma API (token stays local)
 
 **Parameters:**
 
@@ -115,11 +115,11 @@ Figma API에서 디자인 토큰 가져오기 (토큰은 로컬에 유지)
 | `node` | object | Figma node data |
 | `style` | object | Extracted style |
 
-### 보고서 생성
+### Generate Report
 
 `verify.report`
 
-HTML/JSON/Markdown 형식으로 검증 보고서 생성
+Generate verification report in HTML/JSON/Markdown
 
 **Parameters:**
 
@@ -139,11 +139,11 @@ HTML/JSON/Markdown 형식으로 검증 보고서 생성
 | `report_path` | string | Path to generated report |
 | `summary` | object | Summary statistics |
 
-### 규칙셋 불러오기
+### Load Ruleset
 
 `verify.ruleset`
 
-YAML 파일에서 검증 규칙 불러오기
+Load verification rules from YAML file
 
 **Parameters:**
 
@@ -158,11 +158,11 @@ YAML 파일에서 검증 규칙 불러오기
 | `ruleset` | object | Parsed ruleset |
 | `rules_count` | integer | Number of rules |
 
-### 검증 실행
+### Run Verification
 
 `verify.run`
 
-전체 디자인 검증 실행: 캡처 → 비교 → 보고서
+Run full design verification: capture → compare → report
 
 **Parameters:**
 
@@ -212,11 +212,11 @@ url: http://localhost:3000
 ruleset_path: ./design-rules.yaml
 ```
 
-### 사양 검증 실행
+### Run Spec Verification
 
 `verify.spec`
 
-동적 사양 검증 - YAML을 통해 모듈 구성
+Dynamic spec verification - compose any modules via YAML
 
 **Parameters:**
 
@@ -233,31 +233,31 @@ ruleset_path: ./design-rules.yaml
 | `summary` | object |  |
 | `results` | array |  |
 
-### 시각적 차이
+### Visual Diff
 
 `verify.visual_diff`
 
-참조 디자인과 개발 사이트를 시각적으로 비교하고 차이점을 주석으로 표시합니다
+Compare reference design with dev site visually, annotate differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `reference_url` | string | Yes | - | 참조 디자인의 URL 또는 로컬 이미지 경로 |
-| `dev_url` | string | Yes | - | 비교할 개발 사이트의 URL |
-| `output_dir` | string | No | `./verify-reports/visual-diff` | 보고서의 출력 디렉토리 |
-| `focus_areas` | array | No | - | 집중할 영역 (예: ["헤더", "로그인 폼"]) |
-| `viewport_width` | number | No | `1280` | 브라우저 뷰포트 너비 |
-| `viewport_height` | number | No | `800` | 브라우저 뷰포트 높이 |
-| `model` | string | No | `gpt-4o` | 사용할 비전 모델 |
-| `api_key` | string | No | - | OpenAI API 키 (또는 OPENAI_API_KEY 환경 변수 사용) |
+| `reference_url` | string | Yes | - | URL or local image path of reference design |
+| `dev_url` | string | Yes | - | URL of development site to compare |
+| `output_dir` | string | No | `./verify-reports/visual-diff` | Output directory for reports |
+| `focus_areas` | array | No | - | Areas to focus on (e.g. ["header", "login form"]) |
+| `viewport_width` | number | No | `1280` | Browser viewport width |
+| `viewport_height` | number | No | `800` | Browser viewport height |
+| `model` | string | No | `gpt-4o` | Vision model to use |
+| `api_key` | string | No | - | OpenAI API key (or use OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `similarity_score` | number | 유사도 백분율 (0-100) |
-| `annotations` | array | 주석이 달린 차이점 목록 |
-| `annotated_image` | string | 주석이 달린 스크린샷 경로 |
-| `report_path` | string | HTML 보고서 경로 |
-| `summary` | string | 차이점 요약 |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `annotations` | array | List of annotated differences |
+| `annotated_image` | string | Path to annotated screenshot |
+| `report_path` | string | Path to HTML report |
+| `summary` | string | Summary of differences |

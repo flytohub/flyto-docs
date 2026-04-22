@@ -6,7 +6,7 @@ HTTP request utilities.
 
 | Module | Description |
 |--------|-------------|
-| [HTTP GET](#http-get) | HTTP GET isteği gönder ve yanıt al |
+| [HTTP GET](#http-get) | Send HTTP GET request to an API endpoint |
 
 ## Modules
 
@@ -14,16 +14,16 @@ HTTP request utilities.
 
 `http.get`
 
-HTTP GET isteği gönder ve yanıt al
+Send HTTP GET request to an API endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | GET isteğinin gönderileceği URL |
-| `headers` | object | No | `{}` | Anahtar-değer nesnesi olarak istek başlıkları |
-| `query` | object | No | `{}` | Anahtar-değer nesnesi olarak sorgu dizesi parametreleri |
-| `timeout` | number | No | `30` | İstek zaman aşımı süresi (milisaniye cinsinden) |
+| `url` | string | Yes | - | Target URL |
+| `headers` | object | No | `{}` | HTTP request headers as key-value pairs |
+| `query` | object | No | `{}` | URL query string parameters as key-value pairs |
+| `timeout` | number | No | `30` | Maximum time to wait in seconds |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
 | `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
@@ -31,7 +31,7 @@ HTTP GET isteği gönder ve yanıt al
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | İsteğin başarılı olup olmadığı (2xx durumu) |
-| `status` | number | HTTP durum kodu |
-| `body` | any | Yanıt gövdesi (işlenmiş JSON veya metin) |
-| `headers` | object | Yanıt başlıkları |
+| `ok` | boolean | Whether the operation succeeded |
+| `status` | number | HTTP status code |
+| `body` | any | Response body content |
+| `headers` | object | Response headers |

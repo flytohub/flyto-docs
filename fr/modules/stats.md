@@ -6,178 +6,178 @@ Statistical functions: mean, median, mode, std dev, percentile, and more.
 
 | Module | Description |
 |--------|-------------|
-| [Moyenne](#moyenne) | Calculer la moyenne arithmétique des nombres |
-| [Médiane](#médiane) | Calculer la médiane (valeur centrale) des nombres |
-| [Min/Max](#minmax) | Trouver les valeurs minimales et maximales |
-| [Mode](#mode) | Calculer le mode (valeur la plus fréquente) |
-| [Percentile](#percentile) | Calculer le percentile des nombres |
-| [Écart Type](#écart-type) | Calculer l'écart type des nombres |
-| [Sum](#sum) | Calculer la somme des nombres |
-| [Variance](#variance) | Calculer la variance des nombres |
+| [Mean (Average)](#mean-average) | Calculate arithmetic mean of numbers |
+| [Median](#median) | Calculate median (middle value) of numbers |
+| [Min/Max](#minmax) | Find minimum and maximum values |
+| [Mode](#mode) | Calculate mode (most frequent value) |
+| [Percentile](#percentile) | Calculate percentile of numbers |
+| [Standard Deviation](#standard-deviation) | Calculate standard deviation of numbers |
+| [Sum](#sum) | Calculate sum of numbers |
+| [Variance](#variance) | Calculate variance of numbers |
 
 ## Modules
 
-### Moyenne
+### Mean (Average)
 
 `stats.mean`
 
-Calculer la moyenne arithmétique des nombres
+Calculate arithmetic mean of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | Tableau de nombres |
-| `precision` | number | No | `2` | Tableau de nombres |
+| `numbers` | array | Yes | - | Array of numbers |
+| `precision` | number | No | `2` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `mean` | number | Décimales |
-| `count` | number | Moyenne arithmétique |
-| `sum` | number | Moyenne arithmétique |
+| `mean` | number | Arithmetic mean |
+| `count` | number | Number of values |
+| `sum` | number | Sum of values |
 
-### Médiane
+### Median
 
 `stats.median`
 
-Calculer la médiane (valeur centrale) des nombres
+Calculate median (middle value) of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | Tableau de nombres |
+| `numbers` | array | Yes | - | Array of numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `median` | number | Tableau de nombres |
-| `count` | number | Valeur médiane |
+| `median` | number | Median value |
+| `count` | number | Number of values |
 
 ### Min/Max
 
 `stats.min_max`
 
-Trouver les valeurs minimales et maximales
+Find minimum and maximum values
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | Tableau de nombres |
+| `numbers` | array | Yes | - | Array of numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `min` | number | Tableau de nombres |
-| `max` | number | Valeur minimale |
-| `range` | number | Valeur minimale |
-| `min_index` | number | Valeur maximale |
-| `max_index` | number | Plage (max - min) |
+| `min` | number | Minimum value |
+| `max` | number | Maximum value |
+| `range` | number | Range (max - min) |
+| `min_index` | number | Index of minimum |
+| `max_index` | number | Index of maximum |
 
 ### Mode
 
 `stats.mode`
 
-Calculer le mode (valeur la plus fréquente)
+Calculate mode (most frequent value)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | Tableau de valeurs |
-| `all_modes` | boolean | No | `False` | Tableau de valeurs |
+| `values` | array | Yes | - | Array of values |
+| `all_modes` | boolean | No | `False` | Return all modes if multiple exist |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `mode` | any | Retourner tous les modes s'il en existe plusieurs |
-| `frequency` | number | Valeur(s) la plus fréquente(s) |
-| `count` | number | Valeur(s) la plus fréquente(s) |
+| `mode` | any | Most frequent value(s) |
+| `frequency` | number | Frequency of mode |
+| `count` | number | Number of values |
 
 ### Percentile
 
 `stats.percentile`
 
-Calculer le percentile des nombres
+Calculate percentile of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | Tableau de nombres |
-| `percentile` | number | Yes | `50` | Tableau de nombres |
+| `numbers` | array | Yes | - | Array of numbers |
+| `percentile` | number | Yes | `50` | Percentile to calculate (0-100) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | number | Percentile à calculer (0-100) |
-| `percentile` | number | Valeur du percentile |
+| `value` | number | Percentile value |
+| `percentile` | number | Percentile requested |
 
-### Écart Type
+### Standard Deviation
 
 `stats.std_dev`
 
-Calculer l'écart type des nombres
+Calculate standard deviation of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | Tableau de nombres |
-| `population` | boolean | No | `False` | Utiliser la formule de population (diviser par N au lieu de N-1) |
-| `precision` | number | No | `4` | Utiliser la formule de population (diviser par N au lieu de N-1) |
+| `numbers` | array | Yes | - | Array of numbers |
+| `population` | boolean | No | `False` | Use population formula (divide by N instead of N-1) |
+| `precision` | number | No | `4` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `std_dev` | number | Décimales |
-| `variance` | number | Écart type |
-| `mean` | number | Écart type |
+| `std_dev` | number | Standard deviation |
+| `variance` | number | Variance |
+| `mean` | number | Mean value |
 
 ### Sum
 
 `stats.sum`
 
-Calculer la somme des nombres
+Calculate sum of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | Tableau de nombres |
+| `numbers` | array | Yes | - | Array of numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sum` | number | Tableau de nombres |
-| `count` | number | Somme des nombres |
+| `sum` | number | Sum of numbers |
+| `count` | number | Number of values |
 
 ### Variance
 
 `stats.variance`
 
-Calculer la variance des nombres
+Calculate variance of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | Tableau de nombres |
-| `population` | boolean | No | `False` | Tableau de nombres |
-| `precision` | number | No | `4` | Utiliser la formule de population |
+| `numbers` | array | Yes | - | Array of numbers |
+| `population` | boolean | No | `False` | Use population formula |
+| `precision` | number | No | `4` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `variance` | number | Décimales |
-| `mean` | number | Valeur de la variance |
+| `variance` | number | Variance value |
+| `mean` | number | Mean value |

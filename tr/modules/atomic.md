@@ -2,62 +2,63 @@
 
 Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and testing.
 
-**44 modules**
+**45 modules**
 
 | Module | Description |
 |--------|-------------|
-| [Dizi Filtrele](#dizi-filtrele) | Dizi öğelerini koşula göre filtrele |
-| [Dizi Sırala](#dizi-sırala) | Dizi öğelerini artan veya azalan sırada sırala |
-| [Dizi Benzersiz](#dizi-benzersiz) | Diziden yinelenen değerleri kaldır |
+| [Filter Array](#filter-array) | Filter array elements by condition |
+| [Sort Array](#sort-array) | Sort array elements in ascending or descending order |
+| [Array Unique](#array-unique) | Remove duplicate values from array |
 | [OAuth2 Token Exchange](#oauth2-token-exchange) | Exchange authorization code, refresh token, or client credentials for an access token |
-| [DNS Sorgulama](#dns-sorgulama) | Alan adı kayıtları için DNS sorgulama |
-| [Metin Farkı](#metin-farkı) | İki metin dizesi arasında fark oluştur |
-| [Dosyayı Düzenle](#dosyayı-düzenle) | Tam dize eşleştirmesi kullanarak bir dosyada metni değiştir |
-| [Dosya Var mı Kontrol Et](#dosya-var-mı-kontrol-et) | Dosya veya dizinin var olup olmadığını kontrol et |
-| [Dosya Oku](#dosya-oku) | Dosyadan içerik oku |
-| [Dosya Yaz](#dosya-yaz) | Dosyaya içerik yaz |
-| [Git Klonla](#git-klonla) | Bir git deposunu klonla |
-| [Git Commit](#git-commit) | Bir git commit oluştur |
-| [Git Diff](#git-diff) | Git diff al |
+| [DNS Lookup](#dns-lookup) | DNS lookup for domain records |
+| [Diff Content](#diff-content) | Generate unified diff between original and modified content |
+| [Edit File](#edit-file) | Replace a string in a file (targeted edit, not full overwrite) |
+| [Check File Exists](#check-file-exists) | Check if a file or directory exists |
+| [Read File](#read-file) | Read content from a file |
+| [Write File](#write-file) | Write content to a file |
+| [Git Clone](#git-clone) | Clone a git repository |
+| [Git Commit](#git-commit) | Create a git commit |
+| [Git Diff](#git-diff) | Get git diff |
+| [HTTP Batch](#http-batch) | Run a batch of HTTP probes sequentially and capture timing + body |
 | [HTTP Paginate](#http-paginate) | Automatically iterate through paginated API endpoints and collect all results |
-| [HTTP İsteği](#http-i̇steği) | HTTP isteği gönder ve yanıt al |
-| [HTTP Yanıtı Doğrula](#http-yanıtı-doğrula) | HTTP yanıt özelliklerini doğrula ve onaylama yap |
+| [HTTP Request](#http-request) | Send HTTP request and receive response |
+| [Assert HTTP Response](#assert-http-response) | Assert and validate HTTP response properties |
 | [HTTP Session](#http-session) | Send a sequence of HTTP requests with persistent cookies (login → action → logout) |
 | [Webhook Wait](#webhook-wait) | Start a temporary server and wait for an incoming webhook callback |
-| [LLM Sohbet](#llm-sohbet) | Akıllı işlemler için LLM API'leriyle etkileşim |
-| [AI Kod Düzeltme](#ai-kod-düzeltme) | Sorunlara dayalı otomatik kod düzeltmeleri oluştur |
-| [Hesapla](#hesapla) | Temel matematiksel işlemler gerçekleştir |
-| [HTTP Sağlık Kontrolü](#http-sağlık-kontrolü) | HTTP sağlık kontrolü / çalışma süresi izleyici |
-| [Port Kontrol Et](#port-kontrol-et) | Ağ portlarının açık veya kapalı olup olmadığını kontrol et |
-| [Port Bekle](#port-bekle) | Ağ portunun kullanılabilir hale gelmesini bekle |
-| [İşlemleri Listele](#i̇şlemleri-listele) | Çalışan tüm arka plan işlemlerini listele |
-| [Arka Plan İşlemi Başlat](#arka-plan-i̇şlemi-başlat) | Arka plan işlemi başlat (sunucu, servis vb.) |
-| [İşlemi Durdur](#i̇şlemi-durdur) | Çalışan arka plan işlemini durdur |
-| [Kabuk Komutu Çalıştır](#kabuk-komutu-çalıştır) | Kabuk komutu çalıştır ve çıktıyı yakala |
-| [SSH Çalıştır](#ssh-çalıştır) | SSH ile uzak sunucuda komut çalıştır |
-| [SFTP İndirme](#sftp-i̇ndirme) | SFTP ile uzak sunucudan dosya indir |
-| [SFTP Yükleme](#sftp-yükleme) | SFTP ile uzak sunucuya dosya yükle |
-| [E2E Adımlarını Çalıştır](#e2e-adımlarını-çalıştır) | Uçtan uca test adımlarını sıralı olarak çalıştır |
-| [Kalite Kapısı](#kalite-kapısı) | Kalite metriklerini tanımlı eşiklere göre değerlendir |
-| [HTTP Testlerini Çalıştır](#http-testlerini-çalıştır) | HTTP API test paketini çalıştır |
-| [Linter Çalıştır](#linter-çalıştır) | Kaynak kodu üzerinde lint kontrolleri çalıştır |
-| [Rapor Oluştur](#rapor-oluştur) | Test yürütme raporu oluştur |
-| [Senaryo Çalıştır](#senaryo-çalıştır) | Senaryo tabanlı test çalıştır (BDD tarzı) |
-| [Güvenlik Taraması](#güvenlik-taraması) | Güvenlik açıklarını tara |
-| [Test Paketini Çalıştır](#test-paketini-çalıştır) | Test koleksiyonunu çalıştır |
-| [Birim Testlerini Çalıştır](#birim-testlerini-çalıştır) | Birim testlerini çalıştır |
-| [Görsel Karşılaştır](#görsel-karşılaştır) | Görsel çıktıları farklılıklar için karşılaştır |
-| [UI Kalitesini Değerlendir](#ui-kalitesini-değerlendir) | Çok boyutlu puanlama ile kapsamlı UI kalite değerlendirmesi |
-| [Görüntüyü AI ile Analiz Et](#görüntüyü-ai-ile-analiz-et) | OpenAI Vision API (GPT-4V) kullanarak görüntüleri analiz et |
-| [Görüntüleri Karşılaştır](#görüntüleri-karşılaştır) | İki görüntüyü karşılaştır ve görsel farklılıkları belirle |
+| [LLM Chat](#llm-chat) | Interact with LLM APIs for intelligent operations |
+| [AI Code Fix](#ai-code-fix) | Automatically generate code fixes based on issues |
+| [Calculate](#calculate) | Perform basic mathematical operations |
+| [HTTP Health Check](#http-health-check) | HTTP health check / uptime monitor |
+| [Check Port](#check-port) | Check if network port(s) are open or closed |
+| [Wait for Port](#wait-for-port) | Wait for a network port to become available |
+| [List Processes](#list-processes) | List all running background processes |
+| [Start Background Process](#start-background-process) | Start a background process (server, service, etc.) |
+| [Stop Process](#stop-process) | Stop a running background process |
+| [Execute Shell Command](#execute-shell-command) | Execute a shell command and capture output |
+| [SSH Execute](#ssh-execute) | Execute command on remote server via SSH |
+| [SFTP Download](#sftp-download) | Download file from remote server via SFTP |
+| [SFTP Upload](#sftp-upload) | Upload file to remote server via SFTP |
+| [Run E2E Steps](#run-e2e-steps) | Execute end-to-end test steps sequentially |
+| [Quality Gate](#quality-gate) | Evaluate quality metrics against defined thresholds |
+| [Run HTTP Tests](#run-http-tests) | Execute HTTP API test suite |
+| [Run Linter](#run-linter) | Run linting checks on source code |
+| [Generate Report](#generate-report) | Generate test execution report |
+| [Run Scenario](#run-scenario) | Execute scenario-based test (BDD style) |
+| [Security Scan](#security-scan) | Scan for security vulnerabilities |
+| [Run Test Suite](#run-test-suite) | Execute a collection of tests |
+| [Run Unit Tests](#run-unit-tests) | Execute unit tests |
+| [Visual Compare](#visual-compare) | Compare visual outputs for differences |
+| [Evaluate UI Quality](#evaluate-ui-quality) | Comprehensive UI quality evaluation with multi-dimensional scoring |
+| [Analyze Image with AI](#analyze-image-with-ai) | Analyze images using OpenAI Vision API (GPT-4V) |
+| [Compare Images](#compare-images) | Compare two images and identify visual differences |
 
 ## Modules
 
-### Dizi Filtrele
+### Filter Array
 
 `array.filter`
 
-Dizi öğelerini koşula göre filtrele
+Filter array elements by condition
 
 **Parameters:**
 
@@ -71,8 +72,8 @@ Dizi öğelerini koşula göre filtrele
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filtered` | array | Filtrelenmiş dizi |
-| `count` | number | Filtrelenmiş dizi |
+| `filtered` | array | Filtered array |
+| `count` | number | Number of items in filtered array |
 
 **Example:** Filter numbers greater than 5
 
@@ -82,11 +83,11 @@ condition: gt
 value: 5
 ```
 
-### Dizi Sırala
+### Sort Array
 
 `array.sort`
 
-Dizi öğelerini artan veya azalan sırada sırala
+Sort array elements in ascending or descending order
 
 **Parameters:**
 
@@ -99,8 +100,8 @@ Dizi öğelerini artan veya azalan sırada sırala
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sorted` | array | Sıralanmış dizi |
-| `count` | number | Sıralanmış dizi |
+| `sorted` | array | Sorted array |
+| `count` | number | Number of items |
 
 **Example:** Sort numbers ascending
 
@@ -109,11 +110,11 @@ array: [5, 2, 8, 1, 9]
 order: asc
 ```
 
-### Dizi Benzersiz
+### Array Unique
 
 `array.unique`
 
-Diziden yinelenen değerleri kaldır
+Remove duplicate values from array
 
 **Parameters:**
 
@@ -126,9 +127,9 @@ Diziden yinelenen değerleri kaldır
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `unique` | array | Benzersiz değerler içeren dizi |
-| `count` | number | Benzersiz değerler içeren dizi |
-| `duplicates_removed` | number | Benzersiz değerler içeren dizi |
+| `unique` | array | Array with unique values |
+| `count` | number | Number of unique items |
+| `duplicates_removed` | number | Number of duplicates removed |
 
 **Example:** Remove duplicates
 
@@ -214,19 +215,19 @@ client_secret: ${env.GITHUB_CLIENT_SECRET}
 code: abc123...
 ```
 
-### DNS Sorgulama
+### DNS Lookup
 
 `dns.lookup`
 
-Alan adı kayıtları için DNS sorgulama
+DNS lookup for domain records
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `domain` | string | Yes | - | Sorgulanacak alan adı |
-| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | Sorgulanacak DNS kayıt türü |
-| `timeout` | number | No | `10` | Saniye cinsinden sorgu zaman aşımı |
+| `domain` | string | Yes | - | Domain name to look up |
+| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | DNS record type to query |
+| `timeout` | number | No | `10` | Query timeout in seconds |
 
 **Output:**
 
@@ -249,29 +250,29 @@ domain: example.com
 record_type: MX
 ```
 
-### Metin Farkı
+### Diff Content
 
 `file.diff`
 
-İki metin dizesi arasında fark oluştur
+Generate unified diff between original and modified content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `original` | string | Yes | - | Orijinal metin |
-| `modified` | string | Yes | - | Değiştirilmiş metin |
-| `context_lines` | number | No | `3` | Değişikliklerin etrafındaki bağlam satır sayısı |
-| `filename` | string | No | `file` | Fark başlığında kullanılacak dosya adı |
+| `original` | string | Yes | - | Original content for comparison |
+| `modified` | string | Yes | - | Modified content for comparison |
+| `context_lines` | number | No | `3` | Number of context lines around changes |
+| `filename` | string | No | `file` | Name of the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `diff` | string | Birleştirilmiş fark çıktısı |
-| `changed` | boolean | Herhangi bir değişiklik var mı |
-| `additions` | number | Eklenen satır sayısı |
-| `deletions` | number | Silinen satır sayısı |
+| `diff` | string | Unified diff output |
+| `changed` | boolean | Whether content differs |
+| `additions` | number | Number of added lines |
+| `deletions` | number | Number of deleted lines |
 
 **Example:** Diff two strings
 
@@ -283,29 +284,29 @@ world!
 filename: test.txt
 ```
 
-### Dosyayı Düzenle
+### Edit File
 
 `file.edit`
 
-Tam dize eşleştirmesi kullanarak bir dosyada metni değiştir
+Replace a string in a file (targeted edit, not full overwrite)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Düzenlenecek dosyanın yolu |
-| `old_string` | string | Yes | - | Bulunacak ve değiştirilecek metin |
-| `new_string` | string | Yes | - | Değiştirme metni |
-| `replace_all` | boolean | No | `False` | Sadece ilkini değil, tümünü değiştir |
-| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | Dosya kodlaması |
+| `path` | string | Yes | - | Path to the file |
+| `old_string` | string | Yes | - | Text to find and replace |
+| `new_string` | string | Yes | - | Replacement text |
+| `replace_all` | boolean | No | `False` | Whether to replace all occurrences |
+| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | Character encoding for the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Düzenlenen dosyanın yolu |
-| `replacements` | number | Yapılan değişiklik sayısı |
-| `diff` | string | Nelerin değiştiğini gösteren fark |
+| `path` | string | File path that was edited |
+| `replacements` | number | Number of replacements made |
+| `diff` | string | Unified diff of changes |
 
 **Example:** Replace string in file
 
@@ -315,11 +316,11 @@ old_string: def hello():
 new_string: def hello_world():
 ```
 
-### Dosya Var mı Kontrol Et
+### Check File Exists
 
 `file.exists`
 
-Dosya veya dizinin var olup olmadığını kontrol et
+Check if a file or directory exists
 
 **Parameters:**
 
@@ -331,9 +332,9 @@ Dosya veya dizinin var olup olmadığını kontrol et
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `exists` | boolean | Yol var mı |
-| `is_file` | boolean | Yol var mı |
-| `is_directory` | boolean | Yol var mı |
+| `exists` | boolean | Whether path exists |
+| `is_file` | boolean | Whether path is a file |
+| `is_directory` | boolean | Whether path is a directory |
 
 **Example:** Check file exists
 
@@ -341,11 +342,11 @@ Dosya veya dizinin var olup olmadığını kontrol et
 path: /tmp/data.txt
 ```
 
-### Dosya Oku
+### Read File
 
 `file.read`
 
-Dosyadan içerik oku
+Read content from a file
 
 **Parameters:**
 
@@ -358,8 +359,8 @@ Dosyadan içerik oku
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `content` | string | Dosya içeriği |
-| `size` | number | Dosya içeriği |
+| `content` | string | File content |
+| `size` | number | File size in bytes |
 
 **Example:** Read text file
 
@@ -368,11 +369,11 @@ path: /tmp/data.txt
 encoding: utf-8
 ```
 
-### Dosya Yaz
+### Write File
 
 `file.write`
 
-Dosyaya içerik yaz
+Write content to a file
 
 **Parameters:**
 
@@ -387,8 +388,8 @@ Dosyaya içerik yaz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Dosya yolu |
-| `bytes_written` | number | Dosya yolu |
+| `path` | string | File path |
+| `bytes_written` | number | Number of bytes written |
 
 **Example:** Write text file
 
@@ -398,21 +399,21 @@ content: Hello World
 mode: overwrite
 ```
 
-### Git Klonla
+### Git Clone
 
 `git.clone`
 
-Bir git deposunu klonla
+Clone a git repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | Git deposu URL'si (HTTPS veya SSH) |
-| `destination` | string | Yes | - | Klonlanacak yerel yol |
-| `branch` | string | No | - | Klonlamadan sonra kontrol edilecek dal |
-| `depth` | number | No | - | Yüzeysel klon derinliği (tam klon için boş bırakın) |
-| `token` | string | No | - | Özel depolar için kişisel erişim token'ı |
+| `url` | string | Yes | - | Git repository URL (HTTPS or SSH) |
+| `destination` | string | Yes | - | Local path to clone into |
+| `branch` | string | No | - | Branch to checkout after clone |
+| `depth` | number | No | - | Shallow clone depth (omit for full clone) |
+| `token` | string | No | - | Personal access token for private repos |
 
 **Output:**
 
@@ -441,18 +442,18 @@ depth: 1
 
 `git.commit`
 
-Bir git commit oluştur
+Create a git commit
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | Git deposunun yolu |
-| `message` | string | Yes | - | Commit mesajı |
-| `add_all` | boolean | No | `False` | Commit öncesi tüm değişiklikleri aşamalandır (git add -A) |
-| `files` | array | No | - | Commit öncesi aşamalandırılacak belirli dosyalar |
-| `author_name` | string | No | - | Commit yazar adını geçersiz kıl |
-| `author_email` | string | No | - | Commit yazar e-postasını geçersiz kıl |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `message` | string | Yes | - | Commit message |
+| `add_all` | boolean | No | `False` | Stage all changes before committing (git add -A) |
+| `files` | array | No | - | Specific files to stage before committing |
+| `author_name` | string | No | - | Override commit author name |
+| `author_email` | string | No | - | Override commit author email |
 
 **Output:**
 
@@ -481,17 +482,17 @@ files: ["README.md"]
 
 `git.diff`
 
-Git diff al
+Get git diff
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | Git deposunun yolu |
-| `ref1` | string | No | `HEAD` | İlk referans (commit, dal, etiket) |
-| `ref2` | string | No | - | Karşılaştırılacak ikinci referans |
-| `staged` | boolean | No | `False` | Sadece aşamalandırılan değişiklikleri göster (--cached) |
-| `stat_only` | boolean | No | `False` | Sadece dosya istatistiklerini göster (--stat) |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `ref1` | string | No | `HEAD` | First reference (commit, branch, tag) |
+| `ref2` | string | No | - | Second reference to compare against |
+| `staged` | boolean | No | `False` | Show only staged changes (--cached) |
+| `stat_only` | boolean | No | `False` | Show only file statistics (--stat) |
 
 **Output:**
 
@@ -521,6 +522,35 @@ repo_path: /home/user/project
 staged: true
 stat_only: true
 ```
+
+### HTTP Batch
+
+`http.batch`
+
+Run a batch of HTTP probes sequentially and capture timing + body
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `requests` | array | Yes | - | List of request dicts: {method, url, headers?, body?, label?} |
+| `description` | string | No | - | Informational description of the batch intent |
+| `measure_time` | boolean | No | `False` | Execute requests sequentially for reliable timing comparison |
+| `timeout` | number | No | `30` |  |
+| `verify_ssl` | boolean | No | `True` |  |
+| `ssrf_protection` | boolean | No | `True` |  |
+| `detect_patterns` | array | No | - | Optional list of substrings to report matches for across all bodies |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `ok` | boolean | Whether the batch completed (does not imply all requests succeeded) |
+| `data` | array | Per-request results: [{label, status, body, duration_ms, ok, ...}] |
+| `count` | number | Number of requests executed |
+| `failed_count` | number | Number of requests that errored or returned non-2xx |
+| `total_duration_ms` | number | Total elapsed ms across the batch |
+| `detected` | array | Pattern match summary when detect_patterns provided |
 
 ### HTTP Paginate
 
@@ -602,11 +632,11 @@ page_size: 100
 auth: {"type": "bearer", "token": "${env.GITHUB_TOKEN}"}
 ```
 
-### HTTP İsteği
+### HTTP Request
 
 `http.request`
 
-HTTP isteği gönder ve yanıt al
+Send HTTP request and receive response
 
 **Parameters:**
 
@@ -632,15 +662,15 @@ HTTP isteği gönder ve yanıt al
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | İstek başarılı mı (2xx durum) |
-| `status` | number | İstek başarılı mı (2xx durum) |
-| `status_text` | string | İstek başarılı mı (2xx durum) |
-| `headers` | object | HTTP durum kodu |
-| `body` | any | HTTP durum metni |
-| `url` | string | Yanıt başlıkları |
-| `duration_ms` | number | Yanıt gövdesi (ayrıştırılmış JSON veya metin) |
-| `content_type` | string | Son URL (yönlendirmelerden sonra) |
-| `content_length` | number | Yanıt Content-Type |
+| `ok` | boolean | Whether request was successful (2xx status) |
+| `status` | number | HTTP status code |
+| `status_text` | string | HTTP status text |
+| `headers` | object | Response headers |
+| `body` | any | Response body (parsed JSON or text) |
+| `url` | string | Final URL (after redirects) |
+| `duration_ms` | number | Request duration in milliseconds |
+| `content_type` | string | Response Content-Type |
+| `content_length` | number | Response body size in bytes |
 
 **Example:** Simple GET request
 
@@ -673,11 +703,11 @@ method: GET
 query: {"q": "flyto", "limit": 10}
 ```
 
-### HTTP Yanıtı Doğrula
+### Assert HTTP Response
 
 `http.response_assert`
 
-HTTP yanıt özelliklerini doğrula ve onaylama yap
+Assert and validate HTTP response properties
 
 **Parameters:**
 
@@ -700,12 +730,12 @@ HTTP yanıt özelliklerini doğrula ve onaylama yap
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Tüm doğrulamalar geçti mi |
-| `passed` | number | Tüm doğrulamalar geçti mi |
-| `failed` | number | Tüm doğrulamalar geçti mi |
-| `total` | number | Başarılı doğrulama sayısı |
-| `assertions` | array | Başarısız doğrulama sayısı |
-| `errors` | array | Ayrıntılı doğrulama sonuçları |
+| `ok` | boolean | Whether all assertions passed |
+| `passed` | number | Number of passed assertions |
+| `failed` | number | Number of failed assertions |
+| `total` | number | Total number of assertions |
+| `assertions` | array | Detailed assertion results |
+| `errors` | array | List of error messages for failed assertions |
 
 **Example:** Assert status 200
 
@@ -821,11 +851,11 @@ use_ngrok: true
 ngrok_token: ${env.NGROK_AUTH_TOKEN}
 ```
 
-### LLM Sohbet
+### LLM Chat
 
 `llm.chat`
 
-Akıllı işlemler için LLM API'leriyle etkileşim
+Interact with LLM APIs for intelligent operations
 
 **Parameters:**
 
@@ -847,12 +877,12 @@ Akıllı işlemler için LLM API'leriyle etkileşim
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | İstek başarılı mı |
-| `response` | string | İstek başarılı mı |
-| `parsed` | any | İstek başarılı mı |
-| `model` | string | LLM yanıt metni |
-| `tokens_used` | number | Ayrıştırılmış yanıt (JSON format istendiyse) |
-| `finish_reason` | string | Kullanılan model |
+| `ok` | boolean | Whether the request succeeded |
+| `response` | string | The LLM response text |
+| `parsed` | any | Parsed response (if JSON format requested) |
+| `model` | string | Model used |
+| `tokens_used` | number | Total tokens consumed |
+| `finish_reason` | string | Why the response ended |
 
 **Example:** Code Review
 
@@ -882,11 +912,11 @@ system_prompt: You are a DevOps engineer. Return JSON: {"decision": "yes/no", "r
 response_format: json
 ```
 
-### AI Kod Düzeltme
+### AI Code Fix
 
 `llm.code_fix`
 
-Sorunlara dayalı otomatik kod düzeltmeleri oluştur
+Automatically generate code fixes based on issues
 
 **Parameters:**
 
@@ -904,11 +934,11 @@ Sorunlara dayalı otomatik kod düzeltmeleri oluştur
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | İşlem başarılı mı |
-| `fixes` | array | İşlem başarılı mı |
-| `applied` | array | İşlem başarılı mı |
-| `failed` | array | Oluşturulan düzeltmeler listesi |
-| `summary` | string | Uygulanan düzeltmeler listesi (fix_mode apply ise) |
+| `ok` | boolean | Whether operation succeeded |
+| `fixes` | array | List of generated fixes |
+| `applied` | array | List of applied fixes (if fix_mode is apply) |
+| `failed` | array | Fixes that could not be applied |
+| `summary` | string | Summary of fixes |
 
 **Example:** Fix UI Issues
 
@@ -928,11 +958,11 @@ fix_mode: apply
 backup: true
 ```
 
-### Hesapla
+### Calculate
 
 `math.calculate`
 
-Temel matematiksel işlemler gerçekleştir
+Perform basic mathematical operations
 
 **Parameters:**
 
@@ -947,9 +977,9 @@ Temel matematiksel işlemler gerçekleştir
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Hesaplama sonucu |
-| `operation` | string | Hesaplama sonucu |
-| `expression` | string | Hesaplama sonucu |
+| `result` | number | Calculation result |
+| `operation` | string | Operation performed |
+| `expression` | string | Human-readable expression |
 
 **Example:** Add two numbers
 
@@ -967,25 +997,25 @@ a: 2
 b: 8
 ```
 
-### HTTP Sağlık Kontrolü
+### HTTP Health Check
 
 `monitor.http_check`
 
-HTTP sağlık kontrolü / çalışma süresi izleyici
+HTTP health check / uptime monitor
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | Kontrol edilecek URL |
-| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | HTTP yöntemi |
-| `expected_status` | number | No | `200` | Beklenen HTTP durum kodu |
-| `timeout_ms` | number | No | `10000` | İstek zaman aşımı (milisaniye) |
-| `headers` | object | No | - | Özel istek başlıkları |
-| `body` | string | No | - | İstek gövdesi (POST için) |
-| `check_ssl` | boolean | No | `True` | SSL sertifikası geçerliliği ve son kullanma tarihini kontrol et |
-| `contains` | string | No | - | Yanıt gövdesi bu dizeyi içermelidir |
-| `follow_redirects` | boolean | No | `True` | HTTP yönlendirmelerini takip et |
+| `url` | string | Yes | - | URL to check |
+| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | HTTP method |
+| `expected_status` | number | No | `200` | Expected HTTP status code |
+| `timeout_ms` | number | No | `10000` | Request timeout in milliseconds |
+| `headers` | object | No | - | Custom request headers |
+| `body` | string | No | - | Request body (for POST) |
+| `check_ssl` | boolean | No | `True` | Check SSL certificate validity and expiry |
+| `contains` | string | No | - | Response body must contain this string |
+| `follow_redirects` | boolean | No | `True` | Follow HTTP redirects |
 
 **Output:**
 
@@ -1009,30 +1039,30 @@ contains: "status":"ok"
 timeout_ms: 5000
 ```
 
-### Port Kontrol Et
+### Check Port
 
 `port.check`
 
-Ağ portlarının açık veya kapalı olup olmadığını kontrol et
+Check if network port(s) are open or closed
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | any | Yes | - | Kontrol edilecek port numarası veya port dizisi |
-| `host` | string | No | `localhost` | Kontrol edilecek port numarası veya port dizisi |
-| `connect_timeout` | number | No | `2` | Bağlanılacak ana bilgisayar |
-| `expect_open` | boolean | No | - | Her bağlantı denemesi için zaman aşımı |
+| `port` | any | Yes | - | Port number or array of ports to check |
+| `host` | string | No | `localhost` | Host to connect to |
+| `connect_timeout` | number | No | `2` | Timeout for each connection attempt |
+| `expect_open` | boolean | No | - | Set to true to assert ports are open, false for closed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Portların açık olduğunu doğrulamak için true, kapalı için false ayarla |
-| `results` | array | Tüm kontroller geçti mi (expect_open ayarlıysa) |
-| `open_ports` | array | Tüm kontroller geçti mi (expect_open ayarlıysa) |
-| `closed_ports` | array | Port kontrol sonuçları dizisi |
-| `summary` | object | Açık portların listesi |
+| `ok` | boolean | Whether all checks passed (if expect_open is set) |
+| `results` | array | Array of port check results |
+| `open_ports` | array | List of open ports |
+| `closed_ports` | array | List of closed ports |
+| `summary` | object | Summary statistics |
 
 **Example:** Check single port
 
@@ -1055,32 +1085,32 @@ host: example.com
 expect_open: true
 ```
 
-### Port Bekle
+### Wait for Port
 
 `port.wait`
 
-Ağ portunun kullanılabilir hale gelmesini bekle
+Wait for a network port to become available
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | number | Yes | - | Beklenecek port numarası |
-| `host` | string | No | `localhost` | Bağlanılacak ana bilgisayar |
-| `timeout` | number | No | `60` | Bağlanılacak ana bilgisayar |
-| `interval` | number | No | `500` | Maksimum bekleme süresi |
-| `expect_closed` | boolean | No | `False` | Bağlantı denemeleri arasındaki süre (milisaniye) |
+| `port` | number | Yes | - | Port number to wait for |
+| `host` | string | No | `localhost` | Host to connect to |
+| `timeout` | number | No | `60` | Maximum time to wait |
+| `interval` | number | No | `500` | Time between connection attempts in milliseconds |
+| `expect_closed` | boolean | No | `False` | Wait for port to become unavailable instead |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Portun kullanılamaz hale gelmesini bekle |
-| `available` | boolean | Port beklenen durumda mı |
-| `host` | string | Port beklenen durumda mı |
-| `port` | number | Port şu anda kullanılabilir mi |
-| `wait_time_ms` | number | Kontrol edilen ana bilgisayar |
-| `attempts` | number | Kontrol edilen port |
+| `ok` | boolean | Whether port is in expected state |
+| `available` | boolean | Whether port is currently available |
+| `host` | string | Host that was checked |
+| `port` | number | Port that was checked |
+| `wait_time_ms` | number | Time spent waiting in milliseconds |
+| `attempts` | number | Number of connection attempts |
 
 **Example:** Wait for dev server
 
@@ -1105,11 +1135,11 @@ expect_closed: true
 timeout: 10
 ```
 
-### İşlemleri Listele
+### List Processes
 
 `process.list`
 
-Çalışan tüm arka plan işlemlerini listele
+List all running background processes
 
 **Parameters:**
 
@@ -1122,11 +1152,11 @@ timeout: 10
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | İşlem başarılı |
-| `processes` | array | İşlem başarılı |
-| `count` | number | İşlem başarılı |
-| `running` | number | İşlem bilgileri listesi |
-| `stopped` | number | Toplam işlem sayısı |
+| `ok` | boolean | Operation success |
+| `processes` | array | List of process information |
+| `count` | number | Total number of processes |
+| `running` | number | Number of running processes |
+| `stopped` | number | Number of stopped processes |
 
 **Example:** List all processes
 
@@ -1139,11 +1169,11 @@ timeout: 10
 filter_name: dev
 ```
 
-### Arka Plan İşlemi Başlat
+### Start Background Process
 
 `process.start`
 
-Arka plan işlemi başlat (sunucu, servis vb.)
+Start a background process (server, service, etc.)
 
 **Parameters:**
 
@@ -1163,14 +1193,14 @@ Arka plan işlemi başlat (sunucu, servis vb.)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | İşlem başarıyla başladı mı |
-| `pid` | number | İşlem başarıyla başladı mı |
-| `process_id` | string | İşlem başarıyla başladı mı |
-| `name` | string | İşlem Kimliği |
-| `command` | string | process.stop için dahili işlem tanımlayıcı |
-| `cwd` | string | İşlem adı |
-| `started_at` | string | Çalıştırılan komut |
-| `initial_output` | string | İşlemin başladığı ISO zaman damgası |
+| `ok` | boolean | Whether process started successfully |
+| `pid` | number | Process ID |
+| `process_id` | string | Internal process identifier for process.stop |
+| `name` | string | Process name |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory |
+| `started_at` | string | ISO timestamp when process started |
+| `initial_output` | string | Initial stdout output (if wait_for_output was used) |
 
 **Example:** Start dev server
 
@@ -1198,11 +1228,11 @@ name: api-server
 wait_for_output: listening
 ```
 
-### İşlemi Durdur
+### Stop Process
 
 `process.stop`
 
-Çalışan arka plan işlemini durdur
+Stop a running background process
 
 **Parameters:**
 
@@ -1220,10 +1250,10 @@ wait_for_output: listening
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Tüm işlemler başarıyla durduruldu mu |
-| `stopped` | array | Tüm işlemler başarıyla durduruldu mu |
-| `failed` | array | Durdurulan işlem bilgileri listesi |
-| `count` | number | Durdurulan işlem bilgileri listesi |
+| `ok` | boolean | Whether all processes were stopped successfully |
+| `stopped` | array | List of stopped process info |
+| `failed` | array | List of processes that failed to stop |
+| `count` | number | Number of processes stopped |
 
 **Example:** Stop by process ID
 
@@ -1250,11 +1280,11 @@ force: true
 stop_all: true
 ```
 
-### Kabuk Komutu Çalıştır
+### Execute Shell Command
 
 `shell.exec`
 
-Kabuk komutu çalıştır ve çıktıyı yakala
+Execute a shell command and capture output
 
 **Parameters:**
 
@@ -1273,13 +1303,13 @@ Kabuk komutu çalıştır ve çıktıyı yakala
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Komut başarıyla çalıştı mı (çıkış kodu 0) |
-| `exit_code` | number | Komut başarıyla çalıştı mı (çıkış kodu 0) |
-| `stdout` | string | Komut başarıyla çalıştı mı (çıkış kodu 0) |
-| `stderr` | string | Komut çıkış kodu |
-| `command` | string | Standart çıktı |
-| `cwd` | string | Standart hata çıktısı |
-| `duration_ms` | number | Çalıştırılan komut |
+| `ok` | boolean | Whether command executed successfully (exit code 0) |
+| `exit_code` | number | Command exit code |
+| `stdout` | string | Standard output |
+| `stderr` | string | Standard error output |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory used |
+| `duration_ms` | number | Execution duration in milliseconds |
 
 **Example:** Run npm install
 
@@ -1309,23 +1339,23 @@ cwd: ./frontend
 env: {"NODE_ENV": "production"}
 ```
 
-### SSH Çalıştır
+### SSH Execute
 
 `ssh.exec`
 
-SSH ile uzak sunucuda komut çalıştır
+Execute command on remote server via SSH
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | SSH sunucu hostname veya IP |
-| `port` | number | No | `22` | SSH portu |
-| `username` | string | Yes | - | SSH kullanıcı adı |
-| `password` | string | No | - | SSH şifresi |
-| `private_key` | string | No | - | PEM formatında özel anahtar |
-| `command` | string | Yes | - | Uzak sunucuda çalıştırılacak komut |
-| `timeout` | number | No | `30` | Komut zaman aşımı (saniye cinsinden) |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `command` | string | Yes | - | Command to execute on remote server |
+| `timeout` | number | No | `30` | Command timeout in seconds |
 
 **Output:**
 
@@ -1350,23 +1380,23 @@ username: root
 command: systemctl restart nginx
 ```
 
-### SFTP İndirme
+### SFTP Download
 
 `ssh.sftp_download`
 
-SFTP ile uzak sunucudan dosya indir
+Download file from remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | SSH sunucu hostname veya IP |
-| `port` | number | No | `22` | SSH portu |
-| `username` | string | Yes | - | SSH kullanıcı adı |
-| `password` | string | No | - | SSH şifresi |
-| `private_key` | string | No | - | PEM formatında özel anahtar |
-| `remote_path` | string | Yes | - | Uzak sunucudaki dosya yolu |
-| `local_path` | string | Yes | - | Yerel makinedeki hedef yol |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `remote_path` | string | Yes | - | Path to file on remote server |
+| `local_path` | string | Yes | - | Destination path on local machine |
 
 **Output:**
 
@@ -1384,24 +1414,24 @@ remote_path: /var/log/nginx/access.log
 local_path: /tmp/access.log
 ```
 
-### SFTP Yükleme
+### SFTP Upload
 
 `ssh.sftp_upload`
 
-SFTP ile uzak sunucuya dosya yükle
+Upload file to remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | SSH sunucu hostname veya IP |
-| `port` | number | No | `22` | SSH portu |
-| `username` | string | Yes | - | SSH kullanıcı adı |
-| `password` | string | No | - | SSH şifresi |
-| `private_key` | string | No | - | PEM formatında özel anahtar |
-| `local_path` | string | Yes | - | Yüklenecek yerel dosya yolu |
-| `remote_path` | string | Yes | - | Uzak sunucudaki hedef yol |
-| `overwrite` | boolean | No | `True` | Mevcut uzak dosyanın üzerine yaz |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `local_path` | string | Yes | - | Path to local file to upload |
+| `remote_path` | string | Yes | - | Destination path on remote server |
+| `overwrite` | boolean | No | `True` | Overwrite existing remote file |
 
 **Output:**
 
@@ -1419,17 +1449,17 @@ local_path: /tmp/app.tar.gz
 remote_path: /opt/releases/app.tar.gz
 ```
 
-### E2E Adımlarını Çalıştır
+### Run E2E Steps
 
 `testing.e2e.run_steps`
 
-Uçtan uca test adımlarını sıralı olarak çalıştır
+Execute end-to-end test steps sequentially
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `steps` | array | Yes | - | Test adımı tanımları dizisi |
+| `steps` | array | Yes | - | Array of test step definitions |
 | `stop_on_failure` | boolean | No | `True` | Whether to stop on failure |
 | `timeout_per_step` | number | No | `30000` | Timeout Per Step value |
 
@@ -1437,45 +1467,45 @@ Uçtan uca test adımlarını sıralı olarak çalıştır
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | İşlem başarılı mı |
-| `passed` | number | İşlem başarılı mı |
-| `failed` | number | İşlem başarılı mı |
-| `results` | array | Geçen test sayısı |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### Kalite Kapısı
+### Quality Gate
 
 `testing.gate.evaluate`
 
-Kalite metriklerini tanımlı eşiklere göre değerlendir
+Evaluate quality metrics against defined thresholds
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | object | Yes | - | Değerlendirilecek metrikler |
-| `thresholds` | object | Yes | - | Değerlendirilecek metrikler |
+| `metrics` | object | Yes | - | Metrics to evaluate |
+| `thresholds` | object | Yes | - | Threshold values for each metric |
 | `fail_on_breach` | boolean | No | `True` | Whether to fail on breach |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Her metrik için eşik değerleri |
-| `passed` | boolean | İşlem başarılı mı |
-| `results` | array | İşlem başarılı mı |
-| `summary` | string | Geçen test sayısı |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `results` | array | List of results |
+| `summary` | string | The summary |
 
-### HTTP Testlerini Çalıştır
+### Run HTTP Tests
 
 `testing.http.run_suite`
 
-HTTP API test paketini çalıştır
+Execute HTTP API test suite
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | HTTP test tanımları dizisi |
+| `tests` | array | Yes | - | Array of HTTP test definitions |
 | `base_url` | string | No | - | Base URL for API requests |
 | `headers` | object | No | `{}` | HTTP request headers |
 
@@ -1483,22 +1513,22 @@ HTTP API test paketini çalıştır
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | İşlem başarılı mı |
-| `passed` | number | İşlem başarılı mı |
-| `failed` | number | İşlem başarılı mı |
-| `results` | array | Geçen test sayısı |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### Linter Çalıştır
+### Run Linter
 
 `testing.lint.run`
 
-Kaynak kodu üzerinde lint kontrolleri çalıştır
+Run linting checks on source code
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | Lint yapılacak dosyalar veya dizinler |
+| `paths` | array | Yes | - | Files or directories to lint |
 | `linter` | string | No | `auto` | Linter |
 | `fix` | boolean | No | `False` | Whether to fix |
 
@@ -1506,16 +1536,16 @@ Kaynak kodu üzerinde lint kontrolleri çalıştır
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | İşlem başarılı mı |
-| `errors` | number | İşlem başarılı mı |
-| `warnings` | number | İşlem başarılı mı |
-| `issues` | array | Karşılaşılan hata sayısı |
+| `ok` | boolean | Whether the operation succeeded |
+| `errors` | number | Number of errors encountered |
+| `warnings` | number | The warnings |
+| `issues` | array | The issues |
 
-### Rapor Oluştur
+### Generate Report
 
 `testing.report.generate`
 
-Test yürütme raporu oluştur
+Generate test execution report
 
 **Parameters:**
 
@@ -1529,43 +1559,43 @@ Test yürütme raporu oluştur
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | İşlem başarılı mı |
-| `report` | string | İşlem başarılı mı |
-| `format` | string | İşlem başarılı mı |
-| `summary` | object | Rapor |
+| `ok` | boolean | Whether the operation succeeded |
+| `report` | string | The report |
+| `format` | string | The format |
+| `summary` | object | The summary |
 
-### Senaryo Çalıştır
+### Run Scenario
 
 `testing.scenario.run`
 
-Senaryo tabanlı test çalıştır (BDD tarzı)
+Execute scenario-based test (BDD style)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `scenario` | object | Yes | - | given/when/then ile senaryo tanımı |
+| `scenario` | object | Yes | - | Scenario definition with given/when/then |
 | `context` | object | No | `{}` | Additional context data |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | given/when/then ile senaryo tanımı |
-| `passed` | boolean | İşlem başarılı mı |
-| `steps` | array | İşlem başarılı mı |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `steps` | array | The steps |
 
-### Güvenlik Taraması
+### Security Scan
 
 `testing.security.scan`
 
-Güvenlik açıklarını tara
+Scan for security vulnerabilities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `targets` | array | Yes | - | Taranacak dosyalar, URL'ler veya yollar |
+| `targets` | array | Yes | - | Files, URLs, or paths to scan |
 | `scan_type` | string | No | `all` | Scan Type |
 | `severity_threshold` | string | No | `medium` | Severity Threshold |
 
@@ -1573,45 +1603,45 @@ Güvenlik açıklarını tara
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | İşlem başarılı mı |
-| `vulnerabilities` | array | İşlem başarılı mı |
-| `summary` | object | İşlem başarılı mı |
+| `ok` | boolean | Whether the operation succeeded |
+| `vulnerabilities` | array | The vulnerabilities |
+| `summary` | object | The summary |
 
-### Test Paketini Çalıştır
+### Run Test Suite
 
 `testing.suite.run`
 
-Test koleksiyonunu çalıştır
+Execute a collection of tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | Test tanımları dizisi |
+| `tests` | array | Yes | - | Array of test definitions |
 | `parallel` | boolean | No | `False` | Whether to parallel |
-| `max_failures` | number | No | `0` | Test tanımları dizisi |
+| `max_failures` | number | No | `0` | 0 = no limit |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 0 = limit yok |
-| `passed` | number | 0 = limit yok |
-| `failed` | number | İşlem başarılı mı |
-| `skipped` | number | Geçen test sayısı |
-| `results` | array | Başarısız test sayısı |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `skipped` | number | Number of tests skipped |
+| `results` | array | List of results |
 
-### Birim Testlerini Çalıştır
+### Run Unit Tests
 
 `testing.unit.run`
 
-Birim testlerini çalıştır
+Execute unit tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | Test dosyaları veya dizin yolları |
+| `paths` | array | Yes | - | Paths to test files or directories |
 | `pattern` | string | No | `test_*.py` | Pattern |
 | `verbose` | boolean | No | `False` | Whether to verbose |
 
@@ -1619,67 +1649,67 @@ Birim testlerini çalıştır
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | İşlem başarılı mı |
-| `passed` | number | İşlem başarılı mı |
-| `failed` | number | İşlem başarılı mı |
-| `errors` | number | Geçen test sayısı |
-| `results` | array | Başarısız test sayısı |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `errors` | number | Number of errors encountered |
+| `results` | array | List of results |
 
-### Görsel Karşılaştır
+### Visual Compare
 
 `testing.visual.compare`
 
-Görsel çıktıları farklılıklar için karşılaştır
+Compare visual outputs for differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | string | Yes | - | Gerçek görüntünün yolu veya base64'ü |
-| `expected` | string | Yes | - | Gerçek görüntünün yolu veya base64'ü |
-| `threshold` | number | No | `0.1` | Beklenen görüntünün yolu veya base64'ü |
+| `actual` | string | Yes | - | Path or base64 of actual image |
+| `expected` | string | Yes | - | Path or base64 of expected image |
+| `threshold` | number | No | `0.1` | Max allowed difference (0-1) |
 | `output_diff` | boolean | No | `True` | Whether to output diff |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | İzin verilen maksimum fark (0-1) |
-| `match` | boolean | İşlem başarılı mı |
-| `difference` | number | İşlem başarılı mı |
-| `diff_image` | string | Eşleşme |
+| `ok` | boolean | Whether the operation succeeded |
+| `match` | boolean | The match |
+| `difference` | number | The difference |
+| `diff_image` | string | The diff image |
 
-### UI Kalitesini Değerlendir
+### Evaluate UI Quality
 
 `ui.evaluate`
 
-Çok boyutlu puanlama ile kapsamlı UI kalite değerlendirmesi
+Comprehensive UI quality evaluation with multi-dimensional scoring
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `screenshot` | string | Yes | - | Değerlendirilecek ekran görüntüsü yolu veya URL |
-| `app_type` | string | No | `web_app` | Değerlendirilecek ekran görüntüsü yolu veya URL |
-| `page_type` | string | No | - | Değerlendirilen sayfa türü |
-| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | Değerlendirilecek belirli kriterler (varsayılan tümü) |
-| `target_audience` | string | No | - | Hedef kullanıcıların açıklaması |
-| `brand_guidelines` | string | No | - | Karşılaştırılacak kısa marka yönergeleri |
-| `min_score` | number | No | `70` | Geçmek için minimum genel puan (0-100) |
-| `api_key` | string | No | - | OpenAI API anahtarı (varsayılan OPENAI_API_KEY ortam değişkeni) |
+| `screenshot` | string | Yes | - | Screenshot path or URL to evaluate |
+| `app_type` | string | No | `web_app` | Type of application for context-aware evaluation |
+| `page_type` | string | No | - | Type of page being evaluated |
+| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | Specific criteria to evaluate (defaults to all) |
+| `target_audience` | string | No | - | Description of target users |
+| `brand_guidelines` | string | No | - | Brief brand guidelines to check against |
+| `min_score` | number | No | `70` | Minimum overall score to pass (0-100) |
+| `api_key` | string | No | - | OpenAI API key (defaults to OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | OpenAI API anahtarı (varsayılan OPENAI_API_KEY ortam değişkeni) |
-| `passed` | boolean | Değerlendirmenin başarılı olup olmadığı |
-| `overall_score` | number | Değerlendirmenin başarılı olup olmadığı |
-| `scores` | object | Genel UI kalite puanı (0-100) |
-| `strengths` | array | Genel UI kalite puanı (0-100) |
-| `issues` | array | Değerlendirme kriterlerine göre puanlar |
-| `recommendations` | array | UI güçlü yönlerinin listesi |
-| `summary` | string | Belirli iyileştirme önerileri |
+| `ok` | boolean | Whether evaluation succeeded |
+| `passed` | boolean | Whether UI meets minimum score threshold |
+| `overall_score` | number | Overall UI quality score (0-100) |
+| `scores` | object | Scores by evaluation criteria |
+| `strengths` | array | List of UI strengths |
+| `issues` | array | List of issues found with severity |
+| `recommendations` | array | Specific improvement recommendations |
+| `summary` | string | Executive summary of evaluation |
 
 **Example:** Evaluate Dashboard
 
@@ -1700,11 +1730,11 @@ page_type: product detail
 evaluation_criteria: ["usability", "cta_effectiveness", "visual_design"]
 ```
 
-### Görüntüyü AI ile Analiz Et
+### Analyze Image with AI
 
 `vision.analyze`
 
-OpenAI Vision API (GPT-4V) kullanarak görüntüleri analiz et
+Analyze images using OpenAI Vision API (GPT-4V)
 
 **Parameters:**
 
@@ -1725,11 +1755,11 @@ OpenAI Vision API (GPT-4V) kullanarak görüntüleri analiz et
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Analizin başarılı olup olmadığı |
-| `analysis` | string | Analizin başarılı olup olmadığı |
-| `structured` | object | AI analiz sonucu |
-| `model` | string | Yapılandırılmış analiz verileri (output_format structured/json ise) |
-| `tokens_used` | number | Analiz için kullanılan model |
+| `ok` | boolean | Whether analysis succeeded |
+| `analysis` | string | The AI analysis result |
+| `structured` | object | Structured analysis data (if output_format is structured/json) |
+| `model` | string | Model used for analysis |
+| `tokens_used` | number | Total tokens used |
 
 **Example:** UI Review
 
@@ -1756,11 +1786,11 @@ prompt: Evaluate accessibility: color contrast, text readability, button sizes, 
 analysis_type: accessibility
 ```
 
-### Görüntüleri Karşılaştır
+### Compare Images
 
 `vision.compare`
 
-İki görüntüyü karşılaştır ve görsel farklılıkları belirle
+Compare two images and identify visual differences
 
 **Parameters:**
 
@@ -1780,12 +1810,12 @@ analysis_type: accessibility
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Karşılaştırmanın başarılı olup olmadığı |
-| `has_differences` | boolean | Karşılaştırmanın başarılı olup olmadığı |
-| `similarity_score` | number | Önemli farklılıkların bulunup bulunmadığı |
-| `differences` | array | Benzerlik yüzdesi (0-100) |
-| `summary` | string | Belirlenen farklılıkların listesi |
-| `recommendation` | string | Karşılaştırma sonuçlarının özeti |
+| `ok` | boolean | Whether comparison succeeded |
+| `has_differences` | boolean | Whether significant differences were found |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `differences` | array | List of identified differences |
+| `summary` | string | Summary of comparison results |
+| `recommendation` | string | Pass/Fail recommendation based on threshold |
 
 **Example:** Visual Regression Test
 

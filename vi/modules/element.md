@@ -6,31 +6,31 @@ DOM element query, attribute, and text extraction.
 
 | Module | Description |
 |--------|-------------|
-| [Lấy thuộc tính](#lấy-thuộc-tính) | Lấy phần tử |
-| [Truy vấn phần tử](#truy-vấn-phần-tử) | Tìm phần tử con trong phần tử |
-| [Lấy văn bản](#lấy-văn-bản) | Lấy phần tử |
+| [Get Attribute](#get-attribute) | Get element's attribute value |
+| [Query Element](#query-element) | Find child elements within element |
+| [Get Text](#get-text) | Get element's text content |
 
 ## Modules
 
-### Lấy thuộc tính
+### Get Attribute
 
 `element.attribute`
 
-Lấy phần tử
+Get element's attribute value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | ID phần tử (UUID) |
-| `name` | string | Yes | - | ID phần tử (UUID) |
+| `element_id` | string | Yes | - | Element ID (UUID) |
+| `name` | string | Yes | - | Attribute name (e.g. href, src, class) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Tên thuộc tính (ví dụ: href, src, class) |
-| `value` | string | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `value` | string | The returned value |
 
 **Example:** Get href attribute
 
@@ -39,28 +39,28 @@ element_id: ${link_element}
 name: href
 ```
 
-### Truy vấn phần tử
+### Query Element
 
 `element.query`
 
-Tìm phần tử con trong phần tử
+Find child elements within element
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | ID phần tử cha (UUID) |
-| `selector` | string | Yes | - | ID phần tử cha (UUID) |
-| `all` | boolean | No | `False` | CSS selector để tìm phần tử con |
+| `element_id` | string | Yes | - | Parent element ID (UUID) |
+| `selector` | string | Yes | - | CSS selector to find child elements |
+| `all` | boolean | No | `False` | Whether to find all matching elements (default: false, find first only) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Có tìm tất cả phần tử khớp không (mặc định: false, chỉ tìm phần tử đầu tiên) |
-| `element_id` | string | Trạng thái thao tác (success/error) |
-| `element_ids` | array | Trạng thái thao tác (success/error) |
-| `count` | number | ID phần tử tìm thấy (chế độ đơn) |
+| `status` | string | Operation status (success/error) |
+| `element_id` | string | Found element ID (single mode) |
+| `element_ids` | array | List of found element IDs (all mode) |
+| `count` | number | Number of elements found |
 
 **Example:** Find child element
 
@@ -69,24 +69,24 @@ element_id: ${result_item}
 selector: h3
 ```
 
-### Lấy văn bản
+### Get Text
 
 `element.text`
 
-Lấy phần tử
+Get element's text content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | ID phần tử (UUID) |
+| `element_id` | string | Yes | - | Element ID (UUID) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ID phần tử (UUID) |
-| `text` | string | ID phần tử (UUID) |
+| `status` | string | Operation status (success/error) |
+| `text` | string | Text content |
 
 **Example:** Get element text
 

@@ -6,15 +6,15 @@ Threshold-based change detection.
 
 | Module | Description |
 |--------|-------------|
-| [परिवर्तन का पता लगाएं](#परिवर्तन-का-पता-लगाएं) | जांचें कि क्या कोई मान सीमा से अधिक बदल गया है (मात्रा या प्रतिशत द्वारा) |
+| [Detect Change](#detect-change) | Detect if a value has changed beyond threshold (by amount or percentage) |
 
 ## Modules
 
-### परिवर्तन का पता लगाएं
+### Detect Change
 
 `compare.change`
 
-जांचें कि क्या कोई मान सीमा से अधिक बदल गया है (मात्रा या प्रतिशत द्वारा)
+Detect if a value has changed beyond threshold (by amount or percentage)
 
 **Parameters:**
 
@@ -22,22 +22,22 @@ Threshold-based change detection.
 |------|------|----------|---------|-------------|
 | `current_value` | number | Yes | - | The current/new value to compare |
 | `previous_value` | number | Yes | - | The previous/old value to compare against |
-| `mode` | select (`percent`, `absolute`, `any`) | No | `percent` | तुलना के लिए पिछला/पुराना मान |
-| `threshold` | number | No | `5` | ट्रिगर करने के लिए न्यूनतम परिवर्तन (5 = 5% या 5 इकाइयाँ) |
-| `direction` | select (`both`, `up`, `down`) | No | `both` | किस दिशा में परिवर्तन का पता लगाएं |
+| `mode` | select (`percent`, `absolute`, `any`) | No | `percent` | How to measure change |
+| `threshold` | number | No | `5` | Minimum change to trigger (5 = 5% or 5 units) |
+| `direction` | select (`both`, `up`, `down`) | No | `both` | Which direction of change to detect |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | क्या ऑपरेशन सफल हुआ |
-| `changed` | boolean | क्या ऑपरेशन सफल हुआ |
-| `direction` | string | क्या ऑपरेशन सफल हुआ |
-| `change_percent` | number | परिवर्तन की दिशा:  |
-| `change_absolute` | number | प्रतिशत परिवर्तन (सकारात्मक = ऊपर, नकारात्मक = नीचे) |
+| `ok` | boolean | Whether the operation succeeded |
+| `changed` | boolean | Whether value changed beyond threshold |
+| `direction` | string | Direction of change: "up", "down", or "none" |
+| `change_percent` | number | Percentage change (positive = up, negative = down) |
+| `change_absolute` | number | Absolute change (positive = up, negative = down) |
 | `current_value` | number | The current value |
 | `previous_value` | number | The previous value |
-| `summary` | string | वर्तमान मान |
+| `summary` | string | Human-readable summary (e.g., "+3.5%") |
 
 **Example:** Crypto price alert (5% change)
 

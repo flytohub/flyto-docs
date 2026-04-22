@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [E-Mail lesen](#e-mail-lesen) | E-Mails von IMAP-Server lesen |
-| [E-Mail senden](#e-mail-senden) | E-Mail über SMTP-Server senden |
-| [Slack-Nachricht senden](#slack-nachricht-senden) | Nachrichten über Incoming-Webhook an Slack-Kanäle senden |
-| [Webhook auslösen](#webhook-auslösen) | HTTP-POST-Anfrage an eine Webhook-URL senden |
+| [Read Email](#read-email) | Read emails from IMAP server |
+| [Send Email](#send-email) | Send email via SMTP server |
+| [Send Slack Message](#send-slack-message) | Send messages to Slack channels via incoming webhook |
+| [Trigger Webhook](#trigger-webhook) | Send HTTP POST request to a webhook URL |
 
 ## Modules
 
-### E-Mail lesen
+### Read Email
 
 `email.read`
 
-E-Mails von IMAP-Server lesen
+Read emails from IMAP server
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ E-Mails von IMAP-Server lesen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `emails` | array | Liste von E-Mail-Objekten |
-| `count` | number | Liste von E-Mail-Objekten |
+| `emails` | array | List of email objects |
+| `count` | number | Number of emails fetched |
 
 **Example:** Read recent unread emails
 
@@ -49,11 +49,11 @@ unread_only: true
 limit: 5
 ```
 
-### E-Mail senden
+### Send Email
 
 `email.send`
 
-E-Mail über SMTP-Server senden
+Send email via SMTP server
 
 **Parameters:**
 
@@ -77,9 +77,9 @@ E-Mail über SMTP-Server senden
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sent` | boolean | Ob die E-Mail erfolgreich gesendet wurde |
-| `message_id` | string | Ob die E-Mail erfolgreich gesendet wurde |
-| `recipients` | array | Ob die E-Mail erfolgreich gesendet wurde |
+| `sent` | boolean | Whether email was sent successfully |
+| `message_id` | string | Email message ID |
+| `recipients` | array | List of recipients |
 
 **Example:** Send simple email
 
@@ -89,11 +89,11 @@ subject: Hello
 body: This is a test email.
 ```
 
-### Slack-Nachricht senden
+### Send Slack Message
 
 `slack.send`
 
-Nachrichten über Incoming-Webhook an Slack-Kanäle senden
+Send messages to Slack channels via incoming webhook
 
 **Parameters:**
 
@@ -111,7 +111,7 @@ Nachrichten über Incoming-Webhook an Slack-Kanäle senden
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sent` | boolean | Ob Nachricht erfolgreich gesendet wurde |
+| `sent` | boolean | Whether message was sent successfully |
 
 **Example:** Send simple message
 
@@ -127,11 +127,11 @@ username: Flyto Bot
 icon_emoji: :white_check_mark:
 ```
 
-### Webhook auslösen
+### Trigger Webhook
 
 `webhook.trigger`
 
-HTTP-POST-Anfrage an eine Webhook-URL senden
+Send HTTP POST request to a webhook URL
 
 **Parameters:**
 
@@ -149,9 +149,9 @@ HTTP-POST-Anfrage an eine Webhook-URL senden
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | HTTP-Antwort-Statuscode |
-| `response` | object | HTTP-Antwort-Statuscode |
-| `headers` | object | HTTP-Antwort-Statuscode |
+| `status_code` | number | HTTP response status code |
+| `response` | object | Response body (if JSON) |
+| `headers` | object | Response headers |
 
 **Example:** Simple POST webhook
 

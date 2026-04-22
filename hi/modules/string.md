@@ -6,25 +6,25 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Module | Description |
 |--------|-------------|
-| [स्ट्रिंग लोअरकेस](#स्ट्रिंग-लोअरकेस) | स्ट्रिंग को लोअरकेस में बदलें |
-| [स्ट्रिंग पैड करें](#स्ट्रिंग-पैड-करें) | एक स्ट्रिंग को निर्दिष्ट लंबाई तक पैड करें |
-| [स्ट्रिंग रिप्लेस](#स्ट्रिंग-रिप्लेस) | स्ट्रिंग में सबस्ट्रिंग की घटनाओं को बदलें |
-| [स्ट्रिंग रिवर्स](#स्ट्रिंग-रिवर्स) | स्ट्रिंग में अक्षरों को उलटें |
-| [स्लगिफाई](#स्लगिफाई) | टेक्स्ट को URL-अनुकूल स्लग में बदलें |
-| [स्ट्रिंग स्प्लिट](#स्ट्रिंग-स्प्लिट) | डेलिमिटर का उपयोग करके स्ट्रिंग को सरणी में विभाजित करें |
-| [टेम्पलेट](#टेम्पलेट) | वेरिएबल प्रतिस्थापन के साथ एक टेम्पलेट रेंडर करें |
-| [टाइटल केस स्ट्रिंग](#टाइटल-केस-स्ट्रिंग) | स्ट्रिंग को टाइटल केस में बदलें |
-| [स्ट्रिंग ट्रिम](#स्ट्रिंग-ट्रिम) | स्ट्रिंग के दोनों सिरों से व्हाइटस्पेस हटाएं |
-| [स्ट्रिंग ट्रंकेट करें](#स्ट्रिंग-ट्रंकेट-करें) | एक स्ट्रिंग को अधिकतम लंबाई तक ट्रंकेट करें |
-| [स्ट्रिंग अपरकेस](#स्ट्रिंग-अपरकेस) | स्ट्रिंग को अपरकेस में बदलें |
+| [String Lowercase](#string-lowercase) | Convert a string to lowercase |
+| [Pad String](#pad-string) | Pad a string to a specified length |
+| [String Replace](#string-replace) | Replace occurrences of a substring in a string |
+| [String Reverse](#string-reverse) | Reverse the characters in a string |
+| [Slugify](#slugify) | Convert text to URL-friendly slug |
+| [Split String](#split-string) | Split a string into an array using a delimiter |
+| [Template](#template) | Render a template with variable substitution |
+| [Title Case String](#title-case-string) | Convert string to title case |
+| [String Trim](#string-trim) | Remove whitespace from both ends of a string |
+| [Truncate String](#truncate-string) | Truncate a string to a maximum length |
+| [String Uppercase](#string-uppercase) | Convert a string to uppercase |
 
 ## Modules
 
-### स्ट्रिंग लोअरकेस
+### String Lowercase
 
 `string.lowercase`
 
-स्ट्रिंग को लोअरकेस में बदलें
+Convert a string to lowercase
 
 **Parameters:**
 
@@ -36,38 +36,38 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | लोअरकेस में कन्वर्ट की गई स्ट्रिंग |
-| `original` | string | लोअरकेस में कन्वर्ट की गई स्ट्रिंग |
-| `status` | string | लोअरकेस में कन्वर्ट की गई स्ट्रिंग |
+| `result` | string | Lowercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### स्ट्रिंग पैड करें
+### Pad String
 
 `string.pad`
 
-एक स्ट्रिंग को निर्दिष्ट लंबाई तक पैड करें
+Pad a string to a specified length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | पैड करने के लिए टेक्स्ट |
-| `length` | number | Yes | - | पैड करने के लिए टेक्स्ट |
-| `pad_char` | string | No | ` ` | लक्ष्य लंबाई |
-| `position` | string | No | `end` | पैड करने के लिए चरित्र |
+| `text` | string | Yes | - | Text to pad |
+| `length` | number | Yes | - | Target length |
+| `pad_char` | string | No | ` ` | Character to pad with |
+| `position` | string | No | `end` | Where to add padding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | पैड की गई स्ट्रिंग |
-| `original` | string | पैड की गई स्ट्रिंग |
-| `added` | number | पैड की गई स्ट्रिंग |
+| `result` | string | Padded string |
+| `original` | string | Original string |
+| `added` | number | Characters added |
 
-### स्ट्रिंग रिप्लेस
+### String Replace
 
 `string.replace`
 
-स्ट्रिंग में सबस्ट्रिंग की घटनाओं को बदलें
+Replace occurrences of a substring in a string
 
 **Parameters:**
 
@@ -81,17 +81,17 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | प्रतिस्थापन लागू की गई स्ट्रिंग |
-| `original` | string | प्रतिस्थापन लागू की गई स्ट्रिंग |
-| `search` | string | प्रतिस्थापन लागू की गई स्ट्रिंग |
-| `replace` | string | मूल इनपुट स्ट्रिंग |
-| `status` | string | खोज स्ट्रिंग जो बदली गई |
+| `result` | string | String with replacements applied |
+| `original` | string | Original input string |
+| `search` | string | Search string that was replaced |
+| `replace` | string | Replacement string used |
+| `status` | string | Operation status |
 
-### स्ट्रिंग रिवर्स
+### String Reverse
 
 `string.reverse`
 
-स्ट्रिंग में अक्षरों को उलटें
+Reverse the characters in a string
 
 **Parameters:**
 
@@ -103,37 +103,37 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | उलटी स्ट्रिंग |
-| `original` | string | उलटी स्ट्रिंग |
-| `length` | number | उलटी स्ट्रिंग |
+| `result` | string | Reversed string |
+| `original` | string | Original input string |
+| `length` | number | String length |
 
-### स्लगिफाई
+### Slugify
 
 `string.slugify`
 
-टेक्स्ट को URL-अनुकूल स्लग में बदलें
+Convert text to URL-friendly slug
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | स्लगिफाई करने के लिए टेक्स्ट |
-| `separator` | string | No | `-` | स्लगिफाई करने के लिए टेक्स्ट |
-| `lowercase` | boolean | No | `True` | शब्द विभाजक |
-| `max_length` | number | No | `0` | छोटे अक्षरों में बदलें |
+| `text` | string | Yes | - | Text to slugify |
+| `separator` | string | No | `-` | Word separator |
+| `lowercase` | boolean | No | `True` | Convert to lowercase |
+| `max_length` | number | No | `0` | Maximum slug length (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | अधिकतम स्लग लंबाई (0 = असीमित) |
-| `original` | string | URL-अनुकूल स्लग |
+| `result` | string | URL-friendly slug |
+| `original` | string | Original text |
 
-### स्ट्रिंग स्प्लिट
+### Split String
 
 `string.split`
 
-डेलिमिटर का उपयोग करके स्ट्रिंग को सरणी में विभाजित करें
+Split a string into an array using a delimiter
 
 **Parameters:**
 
@@ -147,41 +147,41 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `parts` | array | विभाजित स्ट्रिंग भागों की सरणी |
-| `result` | array | विभाजित स्ट्रिंग भागों की सरणी |
-| `length` | number | विभाजित स्ट्रिंग भागों की सरणी |
-| `original` | string | parts के लिए उपनाम - विभाजित स्ट्रिंग भागों की सरणी |
-| `delimiter` | string | विभाजन के बाद भागों की संख्या |
-| `status` | string | मूल इनपुट स्ट्रिंग |
+| `parts` | array | Array of split string parts |
+| `result` | array | Alias for parts - array of split string parts |
+| `length` | number | Number of parts after split |
+| `original` | string | Original input string |
+| `delimiter` | string | Delimiter used for splitting |
+| `status` | string | Operation status |
 
-### टेम्पलेट
+### Template
 
 `string.template`
 
-वेरिएबल प्रतिस्थापन के साथ एक टेम्पलेट रेंडर करें
+Render a template with variable substitution
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `template` | string | Yes | - | {<!-- -->{variable}<!-- -->} प्लेसहोल्डर के साथ टेम्पलेट स्ट्रिंग |
-| `variables` | object | Yes | - | प्रतिस्थापित करने के लिए वेरिएबल्स |
-| `missing_value` | string | No | - | अपरिभाषित वेरिएबल के लिए मान |
-| `preserve_missing` | boolean | No | `False` | अपरिभाषित वेरिएबल के लिए मान |
+| `template` | string | Yes | - | Template string with {<!-- -->{variable}<!-- -->} placeholders |
+| `variables` | object | Yes | - | Variables to substitute |
+| `missing_value` | string | No | - | Value for undefined variables |
+| `preserve_missing` | boolean | No | `False` | Keep placeholder if variable is missing |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | यदि वेरिएबल गायब है तो प्लेसहोल्डर रखें |
-| `replaced` | number | रेंडर किया गया टेम्पलेट |
-| `missing` | array | रेंडर किया गया टेम्पलेट |
+| `result` | string | Rendered template |
+| `replaced` | number | Number of replacements made |
+| `missing` | array | Missing variable names |
 
-### टाइटल केस स्ट्रिंग
+### Title Case String
 
 `string.titlecase`
 
-स्ट्रिंग को टाइटल केस में बदलें
+Convert string to title case
 
 **Parameters:**
 
@@ -193,7 +193,7 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | टाइटल केस में कन्वर्ट की गई स्ट्रिंग |
+| `result` | string | Title case converted string |
 
 **Example:** Convert to title case
 
@@ -207,11 +207,11 @@ text: hello world from flyto
 text: john doe
 ```
 
-### स्ट्रिंग ट्रिम
+### String Trim
 
 `string.trim`
 
-स्ट्रिंग के दोनों सिरों से व्हाइटस्पेस हटाएं
+Remove whitespace from both ends of a string
 
 **Parameters:**
 
@@ -223,39 +223,39 @@ text: john doe
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | व्हाइटस्पेस हटाई गई ट्रिम की गई स्ट्रिंग |
-| `original` | string | व्हाइटस्पेस हटाई गई ट्रिम की गई स्ट्रिंग |
-| `status` | string | व्हाइटस्पेस हटाई गई ट्रिम की गई स्ट्रिंग |
+| `result` | string | Trimmed string with whitespace removed |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### स्ट्रिंग ट्रंकेट करें
+### Truncate String
 
 `string.truncate`
 
-एक स्ट्रिंग को अधिकतम लंबाई तक ट्रंकेट करें
+Truncate a string to a maximum length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | ट्रंकेट करने के लिए टेक्स्ट |
-| `length` | number | Yes | - | ट्रंकेट करने के लिए टेक्स्ट |
-| `suffix` | string | No | `...` | अधिकतम लंबाई |
-| `word_boundary` | boolean | No | `False` | कट जाने पर जोड़ने के लिए पाठ |
+| `text` | string | Yes | - | Text to truncate |
+| `length` | number | Yes | - | Maximum length |
+| `suffix` | string | No | `...` | Text to append if truncated |
+| `word_boundary` | boolean | No | `False` | Break at word boundary |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | शब्द सीमा पर ब्रेक करें |
-| `original` | string | ट्रंकेट की गई स्ट्रिंग |
-| `truncated` | boolean | ट्रंकेट की गई स्ट्रिंग |
-| `removed` | number | मूल स्ट्रिंग |
+| `result` | string | Truncated string |
+| `original` | string | Original string |
+| `truncated` | boolean | Whether string was truncated |
+| `removed` | number | Characters removed |
 
-### स्ट्रिंग अपरकेस
+### String Uppercase
 
 `string.uppercase`
 
-स्ट्रिंग को अपरकेस में बदलें
+Convert a string to uppercase
 
 **Parameters:**
 
@@ -267,6 +267,6 @@ text: john doe
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | अपरकेस में कन्वर्ट की गई स्ट्रिंग |
-| `original` | string | अपरकेस में कन्वर्ट की गई स्ट्रिंग |
-| `status` | string | अपरकेस में कन्वर्ट की गई स्ट्रिंग |
+| `result` | string | Uppercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |

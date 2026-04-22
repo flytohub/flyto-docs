@@ -6,10 +6,10 @@ GitHub API, HTTP requests, and search engine integrations.
 
 | Module | Description |
 |--------|-------------|
-| [GitHub Issue Oluştur](#github-issue-oluştur) | GitHub deposunda yeni issue oluştur |
+| [Create GitHub Issue](#create-github-issue) | Create a new issue in a GitHub repository |
 | [Create GitHub Pull Request](#create-github-pull-request) | Create a new pull request in a GitHub repository |
-| [GitHub Deposu Al](#github-deposu-al) | GitHub deposu hakkında bilgi al |
-| [GitHub Issue'larını Listele](#github-issue'larını-listele) | GitHub deposundan issue'ları listele |
+| [Get GitHub Repository](#get-github-repository) | Get information about a GitHub repository |
+| [List GitHub Issues](#list-github-issues) | List issues from a GitHub repository |
 | [List GitHub Repositories](#list-github-repositories) | List repositories for a GitHub user or the authenticated user |
 | [Google Search (API)](#google-search-api) | Use Google Custom Search API to search keywords |
 | [HTTP GET Request](#http-get-request) | Send HTTP GET request to any URL |
@@ -18,11 +18,11 @@ GitHub API, HTTP requests, and search engine integrations.
 
 ## Modules
 
-### GitHub Issue Oluştur
+### Create GitHub Issue
 
 `api.github.create_issue`
 
-GitHub deposunda yeni issue oluştur
+Create a new issue in a GitHub repository
 
 **Parameters:**
 
@@ -94,32 +94,32 @@ head: feature/auth
 base: main
 ```
 
-### GitHub Deposu Al
+### Get GitHub Repository
 
 `api.github.get_repo`
 
-GitHub deposu hakkında bilgi al
+Get information about a GitHub repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `owner` | string | Yes | - | Depo sahibi (kullanıcı adı veya organizasyon) |
-| `repo` | string | Yes | - | Depo sahibi (kullanıcı adı veya organizasyon) |
-| `token` | string | No | - | Depo adı |
+| `owner` | string | Yes | - | Repository owner (username or organization) |
+| `repo` | string | Yes | - | Repository name |
+| `token` | string | No | - | GitHub Personal Access Token (optional but recommended) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | GitHub Kişisel Erişim Tokeni (isteğe bağlı ama önerilen) |
-| `repo` | object | İşlem durumu (başarılı/hata) |
-| `name` | string | İşlem durumu (başarılı/hata) |
-| `full_name` | string | Depo bilgileri |
-| `description` | string | Öğe adı |
-| `stars` | number | Tam depo adı |
-| `forks` | number | Öğe açıklaması |
-| `url` | string | GitHub deposu hakkında bilgi al |
+| `status` | string | Operation status (success/error) |
+| `repo` | object | Repository information |
+| `name` | string | Name of the item |
+| `full_name` | string | Full repository name |
+| `description` | string | Item description |
+| `stars` | number | Number of stars |
+| `forks` | number | Number of forks |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -128,11 +128,11 @@ owner: octocat
 repo: Hello-World
 ```
 
-### GitHub Issue'larını Listele
+### List GitHub Issues
 
 `api.github.list_issues`
 
-GitHub deposundan issue'ları listele
+List issues from a GitHub repository
 
 **Parameters:**
 
@@ -219,10 +219,10 @@ Use Google Custom Search API to search keywords
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu |
-| `data` | array | Arama sonuç verileri |
-| `count` | number | Arama sonuçlarının sayısı |
-| `total_results` | number | Toplam sonuç sayısı |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
+| `total_results` | number | Total number of search results available |
 
 **Example:** Search Python tutorials
 
@@ -251,10 +251,10 @@ Send HTTP GET request to any URL
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | HTTP durum kodu |
-| `headers` | object | Yanıt başlıkları |
-| `body` | string | Yanıt gövdesi |
-| `json` | object | JSON yanıtı (varsa) |
+| `status_code` | number | HTTP status code |
+| `headers` | object | HTTP headers |
+| `body` | string | Response body content |
+| `json` | object | Parsed JSON response data |
 
 **Example:** Fetch API data
 

@@ -6,23 +6,23 @@ MongoDB, MySQL, PostgreSQL, and Redis database operations.
 
 | Module | Description |
 |--------|-------------|
-| [Veritabanı Ekle](#veritabanı-ekle) | Veritabanı tablolarına veri ekle |
-| [Veritabanı Sorgusu](#veritabanı-sorgusu) | PostgreSQL, MySQL veya SQLite veritabanlarında SQL sorguları çalıştır |
-| [Veritabanı Güncelle](#veritabanı-güncelle) | Veritabanı tablolarındaki verileri güncelle |
-| [MongoDB Bul](#mongodb-bul) | MongoDB koleksiyonundan belgeleri sorgula |
-| [MongoDB Ekle](#mongodb-ekle) | MongoDB koleksiyonuna bir veya daha fazla belge ekle |
-| [MySQL Sorgusu](#mysql-sorgusu) | MySQL veritabanında SQL sorgusu çalıştır ve sonuçları döndür |
-| [PostgreSQL Sorgusu](#postgresql-sorgusu) | PostgreSQL veritabanında SQL sorgusu çalıştır ve sonuçları döndür |
-| [Redis Al](#redis-al) | Redis önbelleğinden değer al |
-| [Redis Ayarla](#redis-ayarla) | Redis önbelleğinde değer ayarla |
+| [Database Insert](#database-insert) | Insert data into database tables |
+| [Database Query](#database-query) | Execute SQL queries on PostgreSQL, MySQL, or SQLite databases |
+| [Database Update](#database-update) | Update data in database tables |
+| [MongoDB Find](#mongodb-find) | Query documents from MongoDB collection |
+| [MongoDB Insert](#mongodb-insert) | Insert one or more documents into MongoDB collection |
+| [MySQL Query](#mysql-query) | Execute a SQL query on MySQL database and return results |
+| [PostgreSQL Query](#postgresql-query) | Execute a SQL query on PostgreSQL database and return results |
+| [Redis Get](#redis-get) | Get a value from Redis cache |
+| [Redis Set](#redis-set) | Set a value in Redis cache |
 
 ## Modules
 
-### Veritabanı Ekle
+### Database Insert
 
 `database.insert`
 
-Veritabanı tablolarına veri ekle
+Insert data into database tables
 
 **Parameters:**
 
@@ -43,8 +43,8 @@ Veritabanı tablolarına veri ekle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | Eklenen satır sayısı |
-| `returning_data` | array | Eklenen satır sayısı |
+| `inserted_count` | number | Number of rows inserted |
+| `returning_data` | array | Returned data from insert |
 
 **Example:** Insert single row
 
@@ -54,11 +54,11 @@ data: {"name": "John", "email": "john@example.com"}
 database_type: postgresql
 ```
 
-### Veritabanı Sorgusu
+### Database Query
 
 `database.query`
 
-PostgreSQL, MySQL veya SQLite veritabanlarında SQL sorguları çalıştır
+Execute SQL queries on PostgreSQL, MySQL, or SQLite databases
 
 **Parameters:**
 
@@ -79,9 +79,9 @@ PostgreSQL, MySQL veya SQLite veritabanlarında SQL sorguları çalıştır
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | Sorgu sonuç satırları |
-| `row_count` | number | Sorgu sonuç satırları |
-| `columns` | array | Sorgu sonuç satırları |
+| `rows` | array | Query result rows |
+| `row_count` | number | Number of rows returned/affected |
+| `columns` | array | Column names |
 
 **Example:** Select with parameters
 
@@ -91,11 +91,11 @@ params: ["active"]
 database_type: postgresql
 ```
 
-### Veritabanı Güncelle
+### Database Update
 
 `database.update`
 
-Veritabanı tablolarındaki verileri güncelle
+Update data in database tables
 
 **Parameters:**
 
@@ -116,7 +116,7 @@ Veritabanı tablolarındaki verileri güncelle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `updated_count` | number | Güncellenen satır sayısı |
+| `updated_count` | number | Number of rows updated |
 
 **Example:** Update user status
 
@@ -127,11 +127,11 @@ where: {"id": 123}
 database_type: postgresql
 ```
 
-### MongoDB Bul
+### MongoDB Find
 
 `db.mongodb.find`
 
-MongoDB koleksiyonundan belgeleri sorgula
+Query documents from MongoDB collection
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ MongoDB koleksiyonundan belgeleri sorgula
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `documents` | array | Eşleşen belge dizisi |
-| `count` | number | Eşleşen belge dizisi |
+| `documents` | array | Array of matching documents |
+| `count` | number | Number of documents returned |
 
 **Example:** Find all active users
 
@@ -172,11 +172,11 @@ sort: {"created_at": -1}
 limit: 20
 ```
 
-### MongoDB Ekle
+### MongoDB Insert
 
 `db.mongodb.insert`
 
-MongoDB koleksiyonuna bir veya daha fazla belge ekle
+Insert one or more documents into MongoDB collection
 
 **Parameters:**
 
@@ -192,8 +192,8 @@ MongoDB koleksiyonuna bir veya daha fazla belge ekle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | Eklenen belge sayısı |
-| `inserted_ids` | array | Eklenen belge sayısı |
+| `inserted_count` | number | Number of documents inserted |
+| `inserted_ids` | array | Array of inserted document IDs |
 
 **Example:** Insert single document
 
@@ -211,11 +211,11 @@ collection: products
 documents: [{"name": "Product A", "price": 19.99}, {"name": "Product B", "price": 29.99}]
 ```
 
-### MySQL Sorgusu
+### MySQL Query
 
 `db.mysql.query`
 
-MySQL veritabanında SQL sorgusu çalıştır ve sonuçları döndür
+Execute a SQL query on MySQL database and return results
 
 **Parameters:**
 
@@ -233,9 +233,9 @@ MySQL veritabanında SQL sorgusu çalıştır ve sonuçları döndür
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | Nesne olarak sonuç satırları dizisi |
-| `row_count` | number | Nesne olarak sonuç satırları dizisi |
-| `columns` | array | Nesne olarak sonuç satırları dizisi |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select products
 
@@ -250,11 +250,11 @@ query: SELECT * FROM orders WHERE customer_id = %s AND created_at > %s
 params: ["${customer_id}", "2024-01-01"]
 ```
 
-### PostgreSQL Sorgusu
+### PostgreSQL Query
 
 `db.postgresql.query`
 
-PostgreSQL veritabanında SQL sorgusu çalıştır ve sonuçları döndür
+Execute a SQL query on PostgreSQL database and return results
 
 **Parameters:**
 
@@ -268,9 +268,9 @@ PostgreSQL veritabanında SQL sorgusu çalıştır ve sonuçları döndür
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | Nesne olarak sonuç satırları dizisi |
-| `row_count` | number | Nesne olarak sonuç satırları dizisi |
-| `columns` | array | Nesne olarak sonuç satırları dizisi |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select users
 
@@ -285,11 +285,11 @@ query: SELECT * FROM orders WHERE user_id = $1 AND status = $2
 params: ["${user_id}", "completed"]
 ```
 
-### Redis Al
+### Redis Get
 
 `db.redis.get`
 
-Redis önbelleğinden değer al
+Get a value from Redis cache
 
 **Parameters:**
 
@@ -304,9 +304,9 @@ Redis önbelleğinden değer al
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | Döndürülen değer |
-| `exists` | boolean | Döndürülen değer |
-| `key` | string | Döndürülen değer |
+| `value` | any | The returned value |
+| `exists` | boolean | The exists |
+| `key` | string | Key identifier |
 
 **Example:** Get cached value
 
@@ -324,11 +324,11 @@ port: 6379
 db: 1
 ```
 
-### Redis Ayarla
+### Redis Set
 
 `db.redis.set`
 
-Redis önbelleğinde değer ayarla
+Set a value in Redis cache
 
 **Parameters:**
 

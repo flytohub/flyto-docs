@@ -6,32 +6,32 @@ CSV, JSON, XML, YAML parsing, generation, and pipeline transformations.
 
 | Module | Description |
 |--------|-------------|
-| [Leer archivo CSV](#leer-archivo-csv) | Leer y parsear archivo CSV en array de objetos |
-| [Escribir archivo CSV](#escribir-archivo-csv) | Escribir array de objetos a archivo CSV |
+| [Read CSV File](#read-csv-file) | Read and parse CSV file into array of objects |
+| [Write CSV File](#write-csv-file) | Write array of objects to CSV file |
 | [Deduplicate Records](#deduplicate-records) | Remove duplicate records from an array by key fields. Optionally persists seen hashes to disk or execution context for cross-run dedup. Use storage=context in cloud/stateless environments where disk is ephemeral. |
-| [Parsear JSON](#parsear-json) | Parsear cadena JSON a objeto |
-| [Convertir a JSON](#convertir-a-json) | Convertir objeto a cadena JSON |
-| [JSON a CSV](#json-a-csv) | Convertir datos JSON o archivos a formato CSV |
-| [Tubería de Datos](#tubería-de-datos) | Encadena múltiples transformaciones de datos en un solo paso |
-| [Plantilla de texto](#plantilla-de-texto) | Llenar plantilla de texto con variables |
+| [Parse JSON](#parse-json) | Parse JSON string into object |
+| [JSON Stringify](#json-stringify) | Convert object to JSON string |
+| [JSON to CSV](#json-to-csv) | Convert JSON data or files to CSV format |
+| [Data Pipeline](#data-pipeline) | Chain multiple data transformations in a single step |
+| [Text Template](#text-template) | Fill text template with variables |
 | [Validate Records](#validate-records) | Validate extracted records against field rules. Splits output into valid and invalid arrays. |
-| [Generar XML](#generar-xml) | Generar cadena XML desde objeto o arreglo |
-| [Analizar XML](#analizar-xml) | Analizar cadena XML en objeto |
-| [Generar YAML](#generar-yaml) | Generar cadena YAML desde objeto o arreglo |
-| [Analizar YAML](#analizar-yaml) | Analizar cadena YAML en objeto |
-| [Claves de objeto](#claves-de-objeto) | Obtener todas las claves de un objeto |
-| [Combinar objetos](#combinar-objetos) | Combinar multiples objetos en uno |
-| [Omitir de objeto](#omitir-de-objeto) | Omitir claves especificas de un objeto |
-| [Seleccionar de objeto](#seleccionar-de-objeto) | Seleccionar claves especificas de un objeto |
-| [Valores de objeto](#valores-de-objeto) | Obtener todos los valores de un objeto |
+| [Generate XML](#generate-xml) | Generate XML string from Python dict |
+| [Parse XML](#parse-xml) | Parse XML string or file into Python dict |
+| [Generate YAML](#generate-yaml) | Generate YAML string from Python object |
+| [Parse YAML](#parse-yaml) | Parse YAML string or file into Python object |
+| [Object Keys](#object-keys) | Get all keys from an object |
+| [Object Merge](#object-merge) | Merge multiple objects into one |
+| [Object Omit](#object-omit) | Omit specific keys from an object |
+| [Object Pick](#object-pick) | Pick specific keys from an object |
+| [Object Values](#object-values) | Get all values from an object |
 
 ## Modules
 
-### Leer archivo CSV
+### Read CSV File
 
 `data.csv.read`
 
-Leer y parsear archivo CSV en array de objetos
+Read and parse CSV file into array of objects
 
 **Parameters:**
 
@@ -46,10 +46,10 @@ Leer y parsear archivo CSV en array de objetos
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Estado de la operacion |
-| `data` | array | Estado de la operacion |
-| `rows` | number | Estado de la operacion |
-| `columns` | array | Array de objetos de fila |
+| `status` | string | Operation status |
+| `data` | array | Array of row objects |
+| `rows` | number | Number of rows |
+| `columns` | array | Column names |
 
 **Example:** Example
 
@@ -59,11 +59,11 @@ delimiter: ,
 encoding: utf-8
 ```
 
-### Escribir archivo CSV
+### Write CSV File
 
 `data.csv.write`
 
-Escribir array de objetos a archivo CSV
+Write array of objects to CSV file
 
 **Parameters:**
 
@@ -78,9 +78,9 @@ Escribir array de objetos a archivo CSV
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Estado de la operacion |
-| `file_path` | string | Estado de la operacion |
-| `rows_written` | number | Estado de la operacion |
+| `status` | string | Operation status |
+| `file_path` | string | Path to written file |
+| `rows_written` | number | Number of rows written |
 
 **Example:** Example
 
@@ -130,11 +130,11 @@ keys: ["url"]
 hash_file: /tmp/seen.json
 ```
 
-### Parsear JSON
+### Parse JSON
 
 `data.json.parse`
 
-Parsear cadena JSON a objeto
+Parse JSON string into object
 
 **Parameters:**
 
@@ -146,8 +146,8 @@ Parsear cadena JSON a objeto
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Estado de la operacion |
-| `data` | object | Estado de la operacion |
+| `status` | string | Operation status |
+| `data` | object | Parsed object |
 
 **Example:** Example
 
@@ -155,11 +155,11 @@ Parsear cadena JSON a objeto
 json_string: {"name": "John", "age": 30}
 ```
 
-### Convertir a JSON
+### JSON Stringify
 
 `data.json.stringify`
 
-Convertir objeto a cadena JSON
+Convert object to JSON string
 
 **Parameters:**
 
@@ -173,8 +173,8 @@ Convertir objeto a cadena JSON
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Estado de la operacion |
-| `json` | string | Estado de la operacion |
+| `status` | string | Operation status |
+| `json` | string | JSON string |
 
 **Example:** Example
 
@@ -183,11 +183,11 @@ data: {"name": "John", "age": 30}
 pretty: true
 ```
 
-### JSON a CSV
+### JSON to CSV
 
 `data.json_to_csv`
 
-Convertir datos JSON o archivos a formato CSV
+Convert JSON data or files to CSV format
 
 **Parameters:**
 
@@ -204,10 +204,10 @@ Convertir datos JSON o archivos a formato CSV
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Ruta al archivo CSV generado |
-| `row_count` | number | Ruta al archivo CSV generado |
-| `column_count` | number | Ruta al archivo CSV generado |
-| `columns` | array | Numero de filas escritas |
+| `output_path` | string | Path to the generated CSV file |
+| `row_count` | number | Number of rows written |
+| `column_count` | number | Number of columns |
+| `columns` | array | List of column names |
 
 **Example:** Convert JSON array to CSV
 
@@ -223,27 +223,27 @@ input_data: /path/to/data.json
 output_path: /path/to/output.csv
 ```
 
-### Tubería de Datos
+### Data Pipeline
 
 `data.pipeline`
 
-Encadena múltiples transformaciones de datos en un solo paso
+Chain multiple data transformations in a single step
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input` | any | Yes | - | Datos de entrada para transformar (arreglo u objeto) |
-| `steps` | array | Yes | - | Datos de entrada para transformar (arreglo u objeto) |
+| `input` | any | Yes | - | Input data to transform (array or object) |
+| `steps` | array | Yes | - | Array of transformation steps to apply in order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | Arreglo de pasos de transformación a aplicar en orden |
-| `original_count` | integer | Datos transformados |
-| `result_count` | integer | Datos transformados |
-| `steps_applied` | integer | Cantidad de elementos después de la transformación |
+| `result` | any | Transformed data |
+| `original_count` | integer | Count of items before transformation |
+| `result_count` | integer | Count of items after transformation |
+| `steps_applied` | integer | Number of transformation steps applied |
 
 **Example:** Example
 
@@ -266,11 +266,11 @@ input: ${input.data}
 steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}, {"pick": ["id", "name", "timestamp"]}, {"sort": {"field": "timestamp", "order": "desc"}}, {"skip": 5}, {"limit": 20}]
 ```
 
-### Plantilla de texto
+### Text Template
 
 `data.text.template`
 
-Llenar plantilla de texto con variables
+Fill text template with variables
 
 **Parameters:**
 
@@ -283,8 +283,8 @@ Llenar plantilla de texto con variables
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Estado de la operacion |
-| `result` | string | Estado de la operacion |
+| `status` | string | Operation status |
+| `result` | string | Filled template |
 
 **Example:** Example
 
@@ -334,27 +334,27 @@ mode: flag
 drop_fields: ["__index", "html"]
 ```
 
-### Generar XML
+### Generate XML
 
 `data.xml.generate`
 
-Generar cadena XML desde objeto o arreglo
+Generate XML string from Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | object | Yes | - | Datos a convertir a XML |
-| `root_tag` | string | No | `root` | Nombre de la etiqueta del elemento raíz |
-| `pretty` | boolean | No | `True` | Formato bonito para la salida XML |
-| `encoding` | string | No | `utf-8` | Codificación de caracteres para la salida XML |
-| `declaration` | boolean | No | `True` | Incluir encabezado de declaración XML |
+| `data` | object | Yes | - | Python dict or object to convert to XML |
+| `root_tag` | string | No | `root` | Tag name for the root XML element |
+| `pretty` | boolean | No | `True` | Format XML with indentation for readability |
+| `encoding` | string | No | `utf-8` | XML encoding declaration value |
+| `declaration` | boolean | No | `True` | Include <?xml version="1.0"?> declaration at top |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `xml` | string | Cadena XML generada |
+| `xml` | string | Generated XML string |
 
 **Example:** Example
 
@@ -364,26 +364,26 @@ root_tag: users
 pretty: true
 ```
 
-### Analizar XML
+### Parse XML
 
 `data.xml.parse`
 
-Analizar cadena XML en objeto
+Parse XML string or file into Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | Cadena XML a analizar |
-| `file_path` | string | No | - | Ruta al archivo XML a analizar |
-| `preserve_attributes` | boolean | No | `True` | Preservar atributos XML en la salida analizada |
+| `content` | string | No | - | XML string to parse |
+| `file_path` | string | No | - | Path to XML file (used if content is empty) |
+| `preserve_attributes` | boolean | No | `True` | Include XML element attributes as @attributes in output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | XML analizado como objeto |
-| `root_tag` | string | Nombre de la etiqueta del elemento raíz |
+| `result` | object | Parsed XML as nested dict |
+| `root_tag` | string | Root element tag name |
 
 **Example:** Example
 
@@ -392,27 +392,27 @@ content: <users><user id="1"><name>John</name></user></users>
 preserve_attributes: true
 ```
 
-### Generar YAML
+### Generate YAML
 
 `data.yaml.generate`
 
-Generar cadena YAML desde objeto o arreglo
+Generate YAML string from Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | any | Yes | - | Datos a convertir a YAML |
-| `default_flow_style` | boolean | No | `False` | Usar estilo de flujo para estructuras anidadas |
-| `sort_keys` | boolean | No | `False` | Ordenar claves alfabéticamente |
-| `indent` | number | No | `2` | Número de espacios para la indentación |
-| `allow_unicode` | boolean | No | `True` | Permitir caracteres unicode en la salida |
+| `data` | any | Yes | - | Python object, array, or value to convert to YAML |
+| `default_flow_style` | boolean | No | `False` | Use inline/flow style (JSON-like) instead of block style |
+| `sort_keys` | boolean | No | `False` | Sort dictionary keys alphabetically |
+| `indent` | number | No | `2` | Number of spaces for indentation |
+| `allow_unicode` | boolean | No | `True` | Allow unicode characters in output without escaping |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `yaml` | string | Cadena YAML generada |
+| `yaml` | string | Generated YAML string |
 
 **Example:** Example
 
@@ -422,26 +422,26 @@ sort_keys: false
 indent: 2
 ```
 
-### Analizar YAML
+### Parse YAML
 
 `data.yaml.parse`
 
-Analizar cadena YAML en objeto
+Parse YAML string or file into Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | Cadena YAML a analizar |
-| `file_path` | string | No | - | Ruta al archivo YAML a analizar |
-| `multi_document` | boolean | No | `False` | Analizar YAML de múltiples documentos (separados por ---) |
+| `content` | string | No | - | YAML string to parse |
+| `file_path` | string | No | - | Path to YAML file (used if content is empty) |
+| `multi_document` | boolean | No | `False` | Parse multiple YAML documents separated by --- (uses safe_load_all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | YAML analizado como objeto o arreglo |
-| `type` | string | Tipo del resultado analizado |
+| `result` | any | Parsed YAML data (object, array, or scalar) |
+| `type` | string | Type of parsed result: object, array, or scalar |
 
 **Example:** Example
 
@@ -464,11 +464,11 @@ name: Jane
 multi_document: true
 ```
 
-### Claves de objeto
+### Object Keys
 
 `object.keys`
 
-Obtener todas las claves de un objeto
+Get all keys from an object
 
 **Parameters:**
 
@@ -480,8 +480,8 @@ Obtener todas las claves de un objeto
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `keys` | array | Lista de claves del objeto |
-| `count` | number | Lista de claves del objeto |
+| `keys` | array | List of object keys |
+| `count` | number | Number of keys |
 
 **Example:** Get object keys
 
@@ -489,11 +489,11 @@ Obtener todas las claves de un objeto
 object: {"name": "John", "age": 30, "city": "NYC"}
 ```
 
-### Combinar objetos
+### Object Merge
 
 `object.merge`
 
-Combinar multiples objetos en uno
+Merge multiple objects into one
 
 **Parameters:**
 
@@ -505,7 +505,7 @@ Combinar multiples objetos en uno
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Objeto combinado |
+| `result` | object | Merged object |
 
 **Example:** Merge user data
 
@@ -513,11 +513,11 @@ Combinar multiples objetos en uno
 objects: [{"name": "John", "age": 30}, {"city": "NYC", "country": "USA"}, {"job": "Engineer"}]
 ```
 
-### Omitir de objeto
+### Object Omit
 
 `object.omit`
 
-Omitir claves especificas de un objeto
+Omit specific keys from an object
 
 **Parameters:**
 
@@ -530,7 +530,7 @@ Omitir claves especificas de un objeto
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Objeto sin claves omitidas |
+| `result` | object | Object without omitted keys |
 
 **Example:** Omit sensitive fields
 
@@ -539,11 +539,11 @@ object: {"name": "John", "age": 30, "password": "secret", "ssn": "123-45-6789"}
 keys: ["password", "ssn"]
 ```
 
-### Seleccionar de objeto
+### Object Pick
 
 `object.pick`
 
-Seleccionar claves especificas de un objeto
+Pick specific keys from an object
 
 **Parameters:**
 
@@ -556,7 +556,7 @@ Seleccionar claves especificas de un objeto
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Objeto con solo claves seleccionadas |
+| `result` | object | Object with only picked keys |
 
 **Example:** Pick user fields
 
@@ -565,11 +565,11 @@ object: {"name": "John", "age": 30, "email": "john@example.com", "password": "se
 keys: ["name", "email"]
 ```
 
-### Valores de objeto
+### Object Values
 
 `object.values`
 
-Obtener todos los valores de un objeto
+Get all values from an object
 
 **Parameters:**
 
@@ -581,8 +581,8 @@ Obtener todos los valores de un objeto
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `values` | array | Lista de valores del objeto |
-| `count` | number | Lista de valores del objeto |
+| `values` | array | List of object values |
+| `count` | number | Number of values |
 
 **Example:** Get object values
 

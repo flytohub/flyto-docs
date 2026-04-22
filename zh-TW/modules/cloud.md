@@ -6,28 +6,28 @@ AWS S3, Azure Blob, Google Cloud Storage, and Google Workspace integrations.
 
 | Module | Description |
 |--------|-------------|
-| [S3 刪除物件](#s3-刪除物件) | 從 AWS S3 儲存桶刪除物件 |
-| [S3 下載](#s3-下載) | 從 AWS S3 儲存桶下載檔案到本地路徑 |
-| [S3 列出物件](#s3-列出物件) | 列出 AWS S3 儲存桶中的物件，可選擇性使用前綴過濾 |
-| [S3 上傳](#s3-上傳) | 上傳本地檔案到 AWS S3 儲存桶 |
-| [AWS S3 下載](#aws-s3-下載) | 從 AWS S3 儲存桶下載檔案 |
-| [AWS S3 上傳](#aws-s3-上傳) | 上傳檔案或資料到 AWS S3 儲存桶 |
-| [Azure 下載](#azure-下載) | 從 Azure Blob 儲存體下載檔案 |
-| [Azure 上傳](#azure-上傳) | 上傳檔案到 Azure Blob 儲存體 |
-| [GCS 下載](#gcs-下載) | 從 Google Cloud Storage 下載檔案 |
-| [GCS 上傳](#gcs-上傳) | 上傳檔案到 Google Cloud Storage |
-| [行事曆建立事件](#行事曆建立事件) | 在 Google 行事曆中建立新事件 |
-| [行事曆列出事件](#行事曆列出事件) | 列出 Google 行事曆中的即將舉行的事件 |
-| [Gmail 搜尋](#gmail-搜尋) | 使用 Gmail 搜尋語法搜尋 Gmail 訊息 |
-| [Gmail 發送](#gmail-發送) | 透過 Gmail API 發送電子郵件 |
+| [S3 Delete Object](#s3-delete-object) | Delete an object from an AWS S3 bucket |
+| [S3 Download](#s3-download) | Download a file from an AWS S3 bucket to a local path |
+| [S3 List Objects](#s3-list-objects) | List objects in an AWS S3 bucket with optional prefix filter |
+| [S3 Upload](#s3-upload) | Upload a local file to an AWS S3 bucket |
+| [AWS S3 Download](#aws-s3-download) | Download a file from AWS S3 bucket |
+| [AWS S3 Upload](#aws-s3-upload) | Upload a file or data to AWS S3 bucket |
+| [Azure Download](#azure-download) | Download file from Azure Blob Storage |
+| [Azure Upload](#azure-upload) | Upload file to Azure Blob Storage |
+| [GCS Download](#gcs-download) | Download file from Google Cloud Storage |
+| [GCS Upload](#gcs-upload) | Upload file to Google Cloud Storage |
+| [Calendar Create Event](#calendar-create-event) | Create a new event in Google Calendar |
+| [Calendar List Events](#calendar-list-events) | List upcoming events from Google Calendar |
+| [Gmail Search](#gmail-search) | Search Gmail messages using Gmail search query syntax |
+| [Gmail Send](#gmail-send) | Send an email via the Gmail API |
 
 ## Modules
 
-### S3 刪除物件
+### S3 Delete Object
 
 `aws.s3.delete`
 
-從 AWS S3 儲存桶刪除物件
+Delete an object from an AWS S3 bucket
 
 **Parameters:**
 
@@ -43,9 +43,9 @@ AWS S3, Azure Blob, Google Cloud Storage, and Google Workspace integrations.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bucket` | string | S3 儲存桶名稱 |
-| `key` | string | 已刪除物件的鍵值 |
-| `deleted` | boolean | 物件是否成功刪除 |
+| `bucket` | string | S3 bucket name |
+| `key` | string | Deleted object key |
+| `deleted` | boolean | Whether the object was deleted successfully |
 
 **Example:** Delete an object
 
@@ -54,11 +54,11 @@ bucket: my-bucket
 key: uploads/old-file.txt
 ```
 
-### S3 下載
+### S3 Download
 
 `aws.s3.download`
 
-從 AWS S3 儲存桶下載檔案到本地路徑
+Download a file from an AWS S3 bucket to a local path
 
 **Parameters:**
 
@@ -75,9 +75,9 @@ key: uploads/old-file.txt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 檔案儲存的本地路徑 |
-| `size` | number | 檔案大小（位元組） |
-| `content_type` | string | 下載檔案的 MIME 類型 |
+| `path` | string | Local file path where the file was saved |
+| `size` | number | File size in bytes |
+| `content_type` | string | MIME type of the downloaded file |
 
 **Example:** Download a file from S3
 
@@ -87,11 +87,11 @@ key: data/report.csv
 output_path: /tmp/report.csv
 ```
 
-### S3 列出物件
+### S3 List Objects
 
 `aws.s3.list`
 
-列出 AWS S3 儲存桶中的物件，可選擇性使用前綴過濾
+List objects in an AWS S3 bucket with optional prefix filter
 
 **Parameters:**
 
@@ -108,9 +108,9 @@ output_path: /tmp/report.csv
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `objects` | array | S3 物件列表 |
-| `count` | number | 返回的物件數量 |
-| `truncated` | boolean | 結果是否被截斷 |
+| `objects` | array | List of S3 objects |
+| `count` | number | Number of objects returned |
+| `truncated` | boolean | Whether the results are truncated |
 
 **Example:** List objects with prefix
 
@@ -120,11 +120,11 @@ prefix: uploads/
 max_keys: 50
 ```
 
-### S3 上傳
+### S3 Upload
 
 `aws.s3.upload`
 
-上傳本地檔案到 AWS S3 儲存桶
+Upload a local file to an AWS S3 bucket
 
 **Parameters:**
 
@@ -142,10 +142,10 @@ max_keys: 50
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bucket` | string | S3 儲存桶名稱 |
-| `key` | string | S3 物件鍵值 |
-| `url` | string | 已上傳物件的公開 URL |
-| `size` | number | 檔案大小（位元組） |
+| `bucket` | string | S3 bucket name |
+| `key` | string | S3 object key |
+| `url` | string | Public URL of the uploaded object |
+| `size` | number | File size in bytes |
 
 **Example:** Upload a local file
 
@@ -155,22 +155,22 @@ key: data/report.csv
 file_path: /tmp/report.csv
 ```
 
-### AWS S3 下載
+### AWS S3 Download
 
 `cloud.aws_s3.download`
 
-從 AWS S3 儲存桶下載檔案
+Download a file from AWS S3 bucket
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `aws_access_key_id` | string | No | - | AWS 存取金鑰 ID（預設使用 env.AWS_ACCESS_KEY_ID） |
-| `aws_secret_access_key` | string | No | - | AWS 秘密存取金鑰（預設使用 env.AWS_SECRET_ACCESS_KEY） |
-| `region` | string | No | `us-east-1` | AWS 區域（預設使用 env.AWS_REGION 或 us-east-1） |
-| `bucket` | string | Yes | - | S3 儲存桶名稱 |
-| `key` | string | Yes | - | S3 儲存桶名稱 |
-| `file_path` | string | No | - | S3 物件金鑰（儲存桶中的檔案路徑） |
+| `aws_access_key_id` | string | No | - | AWS access key ID (defaults to env.AWS_ACCESS_KEY_ID) |
+| `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
+| `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
+| `bucket` | string | Yes | - | S3 bucket name |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to save downloaded content |
 
 **Output:**
 
@@ -196,34 +196,34 @@ key: backups/database.sql
 file_path: /tmp/downloaded.sql
 ```
 
-### AWS S3 上傳
+### AWS S3 Upload
 
 `cloud.aws_s3.upload`
 
-上傳檔案或資料到 AWS S3 儲存桶
+Upload a file or data to AWS S3 bucket
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `aws_access_key_id` | string | No | - | AWS 存取金鑰 ID（預設使用 env.AWS_ACCESS_KEY_ID） |
-| `aws_secret_access_key` | string | No | - | AWS 秘密存取金鑰（預設使用 env.AWS_SECRET_ACCESS_KEY） |
-| `region` | string | No | `us-east-1` | AWS 區域（預設使用 env.AWS_REGION 或 us-east-1） |
-| `bucket` | string | Yes | - | S3 儲存桶名稱 |
-| `key` | string | Yes | - | S3 儲存桶名稱 |
-| `file_path` | string | No | - | S3 物件金鑰（儲存桶中的檔案路徑） |
-| `content` | string | No | - | 要上傳的本機檔案路徑 |
-| `content_type` | string | No | - | 檔案的 MIME 類型 |
-| `acl` | string | No | `private` | 檔案的 MIME 類型 |
+| `aws_access_key_id` | string | No | - | AWS access key ID (defaults to env.AWS_ACCESS_KEY_ID) |
+| `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
+| `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
+| `bucket` | string | Yes | - | S3 bucket name |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to upload |
+| `content` | string | No | - | File content to upload (as string or base64) |
+| `content_type` | string | No | - | MIME type of the file |
+| `acl` | string | No | `private` | Access control list for the object |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | 已上傳物件的 S3 URL |
-| `bucket` | string | 已上傳物件的 S3 URL |
-| `key` | string | 已上傳物件的 S3 URL |
-| `etag` | string | 儲存桶名稱 |
+| `url` | string | S3 URL of uploaded object |
+| `bucket` | string | Bucket name |
+| `key` | string | Object key |
+| `etag` | string | ETag of uploaded object |
 
 **Example:** Upload text content
 
@@ -243,20 +243,20 @@ file_path: /tmp/backup.sql
 acl: private
 ```
 
-### Azure 下載
+### Azure Download
 
 `cloud.azure.download`
 
-從 Azure Blob 儲存體下載檔案
+Download file from Azure Blob Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `connection_string` | string | No | - | Azure 儲存體連線字串（使用環境變數 AZURE_STORAGE_CONNECTION_STRING） |
-| `container` | string | Yes | - | Azure 儲存體連線字串（使用環境變數 AZURE_STORAGE_CONNECTION_STRING） |
-| `blob_name` | string | Yes | - | Azure 容器名稱 |
-| `destination_path` | string | Yes | - | 要下載的 Blob |
+| `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | Yes | - | Blob to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -283,30 +283,30 @@ blob_name: photos/vacation.jpg
 destination_path: /tmp/photo.jpg
 ```
 
-### Azure 上傳
+### Azure Upload
 
 `cloud.azure.upload`
 
-上傳檔案到 Azure Blob 儲存體
+Upload file to Azure Blob Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `file_path` | string | Yes | - | 要上傳的本機檔案路徑 |
-| `connection_string` | string | No | - | 要上傳的本機檔案路徑 |
-| `container` | string | Yes | - | Azure 儲存體連線字串（使用環境變數 AZURE_STORAGE_CONNECTION_STRING） |
-| `blob_name` | string | No | - | Azure 容器名稱 |
-| `content_type` | string | No | - | 上傳 Blob 的名稱（預設：檔案名稱） |
+| `file_path` | string | Yes | - | Local file path to upload |
+| `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | No | - | Name for the uploaded blob (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | MIME 類型（選填） |
-| `container` | string | MIME 類型（選填） |
-| `blob_name` | string | URL 位址 |
-| `size` | number | 容器 |
+| `url` | string | URL address |
+| `container` | string | The container |
+| `blob_name` | string | The blob name |
+| `size` | number | Size in bytes |
 
 **Example:** Upload image
 
@@ -325,19 +325,19 @@ container: documents
 blob_name: reports/monthly.pdf
 ```
 
-### GCS 下載
+### GCS Download
 
 `cloud.gcs.download`
 
-從 Google Cloud Storage 下載檔案
+Download file from Google Cloud Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bucket` | string | Yes | - | GCS 儲存桶名稱 |
-| `object_name` | string | Yes | - | GCS 儲存桶名稱 |
-| `destination_path` | string | Yes | - | 要下載的物件 |
+| `bucket` | string | Yes | - | GCS bucket name |
+| `object_name` | string | Yes | - | Object to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -364,31 +364,31 @@ object_name: photos/vacation.jpg
 destination_path: /tmp/photo.jpg
 ```
 
-### GCS 上傳
+### GCS Upload
 
 `cloud.gcs.upload`
 
-上傳檔案到 Google Cloud Storage
+Upload file to Google Cloud Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `file_path` | string | Yes | - | 要上傳的本機檔案路徑 |
-| `bucket` | string | Yes | - | 要上傳的本機檔案路徑 |
-| `object_name` | string | No | - | GCS 儲存桶名稱 |
-| `content_type` | string | No | - | 上傳物件的名稱（預設：檔案名稱） |
-| `public` | boolean | No | `False` | MIME 類型（選填） |
+| `file_path` | string | Yes | - | Local file path to upload |
+| `bucket` | string | Yes | - | GCS bucket name |
+| `object_name` | string | No | - | Name for the uploaded object (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
+| `public` | boolean | No | `False` | Make file publicly accessible |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | 是否公開存取 |
-| `bucket` | string | 是否公開存取 |
-| `object_name` | string | URL 位址 |
-| `size` | number | 儲存桶名稱 |
-| `public_url` | string | 儲存體中的物件名稱 |
+| `url` | string | URL address |
+| `bucket` | string | Storage bucket name |
+| `object_name` | string | Object name in storage |
+| `size` | number | Size in bytes |
+| `public_url` | string | Public accessible URL |
 
 **Example:** Upload image
 
@@ -408,11 +408,11 @@ bucket: data-backup
 object_name: reports/daily.csv
 ```
 
-### 行事曆建立事件
+### Calendar Create Event
 
 `google.calendar.create_event`
 
-在 Google 行事曆中建立新事件
+Create a new event in Google Calendar
 
 **Parameters:**
 
@@ -431,11 +431,11 @@ object_name: reports/daily.csv
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `event_id` | string | 已建立的事件 ID |
-| `summary` | string | 事件標題 |
-| `start` | string | 事件開始時間 |
-| `end` | string | 事件結束時間 |
-| `html_link` | string | 查看事件的 Google 行事曆連結 |
+| `event_id` | string | Created event ID |
+| `summary` | string | Event title |
+| `start` | string | Event start time |
+| `end` | string | Event end time |
+| `html_link` | string | Link to view the event in Google Calendar |
 
 **Example:** Create a meeting event
 
@@ -448,11 +448,11 @@ attendees: alice@example.com, bob@example.com
 timezone: America/New_York
 ```
 
-### 行事曆列出事件
+### Calendar List Events
 
 `google.calendar.list_events`
 
-列出 Google 行事曆中的即將舉行的事件
+List upcoming events from Google Calendar
 
 **Parameters:**
 
@@ -467,8 +467,8 @@ timezone: America/New_York
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `events` | array | 行事曆事件列表 |
-| `count` | number | 返回的事件數量 |
+| `events` | array | List of calendar events |
+| `count` | number | Number of events returned |
 
 **Example:** List next 5 events
 
@@ -477,11 +477,11 @@ access_token: <oauth2-token>
 max_results: 5
 ```
 
-### Gmail 搜尋
+### Gmail Search
 
 `google.gmail.search`
 
-使用 Gmail 搜尋語法搜尋 Gmail 訊息
+Search Gmail messages using Gmail search query syntax
 
 **Parameters:**
 
@@ -495,8 +495,8 @@ max_results: 5
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `messages` | array | 符合的訊息列表 |
-| `total` | number | 返回的訊息總數 |
+| `messages` | array | List of matching messages |
+| `total` | number | Total number of messages returned |
 
 **Example:** Search for emails from a specific sender
 
@@ -506,11 +506,11 @@ query: from:boss@company.com is:unread
 max_results: 5
 ```
 
-### Gmail 發送
+### Gmail Send
 
 `google.gmail.send`
 
-透過 Gmail API 發送電子郵件
+Send an email via the Gmail API
 
 **Parameters:**
 
@@ -528,9 +528,9 @@ max_results: 5
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `message_id` | string | Gmail 訊息 ID |
-| `thread_id` | string | Gmail 討論串 ID |
-| `to` | string | 收件者電子郵件地址 |
+| `message_id` | string | Gmail message ID |
+| `thread_id` | string | Gmail thread ID |
+| `to` | string | Recipient email address |
 
 **Example:** Send a plain text email
 

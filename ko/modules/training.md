@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [연습 분석](#연습-분석) | 연습용 웹사이트 구조 분석 |
-| [연습 실행](#연습-실행) | 연습 세션 실행 |
-| [연습 스키마 추론](#연습-스키마-추론) | 웹사이트에서 데이터 스키마 추론 |
-| [연습 통계](#연습-통계) | 연습 통계 가져오기 |
+| [Practice Analyze](#practice-analyze) | Analyze website structure for practice |
+| [Practice Execute](#practice-execute) | Execute practice session |
+| [Practice Infer Schema](#practice-infer-schema) | Infer data schema from website |
+| [Practice Stats](#practice-stats) | Get practice statistics |
 
 ## Modules
 
-### 연습 분석
+### Practice Analyze
 
 `training.practice.analyze`
 
-연습용 웹사이트 구조 분석
+Analyze website structure for practice
 
 **Parameters:**
 
@@ -29,14 +29,14 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 웹사이트 구조 분석 |
-| `structure` | object | 웹사이트 구조 분석 |
+| `status` | string | Operation status (success/error) |
+| `structure` | object | The structure |
 
-### 연습 실행
+### Practice Execute
 
 `training.practice.execute`
 
-연습 세션 실행
+Execute practice session
 
 **Parameters:**
 
@@ -49,14 +49,14 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 연습 세션 실행 |
-| `items_processed` | number | 연습 세션 실행 |
+| `status` | string | Operation status (success/error) |
+| `items_processed` | number | The items processed |
 
-### 연습 스키마 추론
+### Practice Infer Schema
 
 `training.practice.infer_schema`
 
-웹사이트에서 데이터 스키마 추론
+Infer data schema from website
 
 **Parameters:**
 
@@ -69,20 +69,20 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 데이터 스키마 추론 |
-| `schema` | object | 데이터 스키마 추론 |
+| `status` | string | Operation status (success/error) |
+| `schema` | object | The schema |
 
-### 연습 통계
+### Practice Stats
 
 `training.practice.stats`
 
-연습 통계 가져오기
+Get practice statistics
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total_sessions` | number | 총 세션 수 |
-| `successful_sessions` | number | 총 세션 수 |
-| `success_rate` | number | 연습 통계 가져오기 |
-| `history` | array | 연습 통계 가져오기 |
+| `total_sessions` | number | The total sessions |
+| `successful_sessions` | number | The successful sessions |
+| `success_rate` | number | The success rate |
+| `history` | array | The history |

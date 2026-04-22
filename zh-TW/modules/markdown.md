@@ -6,30 +6,30 @@ Parse frontmatter, convert to HTML, and generate table of contents.
 
 | Module | Description |
 |--------|-------------|
-| [解析 Frontmatter](#解析-frontmatter) | 從 Markdown 內容中提取 YAML frontmatter |
-| [Markdown 轉 HTML](#markdown-轉-html) | 將 Markdown 文字轉換為 HTML |
-| [生成目錄](#生成目錄) | 從 Markdown 標題生成目錄 |
+| [Parse Frontmatter](#parse-frontmatter) | Extract YAML frontmatter from Markdown content |
+| [Markdown to HTML](#markdown-to-html) | Convert Markdown text to HTML |
+| [Generate Table of Contents](#generate-table-of-contents) | Generate a table of contents from Markdown headings |
 
 ## Modules
 
-### 解析 Frontmatter
+### Parse Frontmatter
 
 `markdown.parse_frontmatter`
 
-從 Markdown 內容中提取 YAML frontmatter
+Extract YAML frontmatter from Markdown content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 包含 frontmatter 的 Markdown 內容 |
+| `text` | string | Yes | - | Markdown content with frontmatter |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `frontmatter` | object | 解析後的 frontmatter 字典 |
-| `content` | string | 不含 frontmatter 的 Markdown 內容 |
+| `frontmatter` | object | Parsed frontmatter as a dictionary |
+| `content` | string | Markdown content without frontmatter |
 
 **Example:** Parse YAML frontmatter
 
@@ -47,25 +47,25 @@ tags:
 Content here.
 ```
 
-### Markdown 轉 HTML
+### Markdown to HTML
 
 `markdown.to_html`
 
-將 Markdown 文字轉換為 HTML
+Convert Markdown text to HTML
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 要轉換的 Markdown 內容 |
-| `extensions` | array | No | - | 要啟用的 Markdown 擴充功能（僅用於 markdown 函式庫） |
+| `text` | string | Yes | - | Markdown content to convert |
+| `extensions` | array | No | - | Markdown extensions to enable (only used with the markdown library) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `html` | string | 轉換後的 HTML 內容 |
-| `word_count` | number | 輸入文字的字數 |
+| `html` | string | Converted HTML content |
+| `word_count` | number | Word count of the input text |
 
 **Example:** Convert markdown to HTML
 
@@ -75,25 +75,25 @@ text: # Hello
 This is **bold** and *italic*.
 ```
 
-### 生成目錄
+### Generate Table of Contents
 
 `markdown.toc`
 
-從 Markdown 標題生成目錄
+Generate a table of contents from Markdown headings
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 要提取標題的 Markdown 內容 |
-| `max_depth` | number | No | `3` | 要包含的最大標題深度 (1-6) |
+| `text` | string | Yes | - | Markdown content to extract headings from |
+| `max_depth` | number | No | `3` | Maximum heading depth to include (1-6) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `toc` | array | 包含層級、標題和 slug 的標題列表 |
-| `toc_markdown` | string | 格式化的 Markdown 目錄 |
+| `toc` | array | List of headings with level, title, and slug |
+| `toc_markdown` | string | Formatted Markdown table of contents |
 
 **Example:** Generate TOC from markdown
 

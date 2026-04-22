@@ -6,34 +6,34 @@ Create and extract ZIP, TAR, and gzip archives.
 
 | Module | Description |
 |--------|-------------|
-| [คลายบีบอัด Gunzip](#คลายบีบอัด-gunzip) | คลายบีบอัดไฟล์ที่บีบอัดด้วย gzip |
-| [บีบอัด Gzip](#บีบอัด-gzip) | บีบอัดไฟล์เดี่ยวด้วย gzip |
-| [สร้างไฟล์ TAR](#สร้างไฟล์-tar) | สร้างไฟล์ TAR พร้อมการบีบอัด gzip/bz2/xz |
-| [แยกไฟล์ TAR](#แยกไฟล์-tar) | แยกไฟล์จากไฟล์ TAR (ตรวจจับการบีบอัดอัตโนมัติ) |
-| [สร้างไฟล์ ZIP](#สร้างไฟล์-zip) | สร้างไฟล์ ZIP จากรายการไฟล์ |
-| [แยกไฟล์ ZIP](#แยกไฟล์-zip) | แยกไฟล์จากไฟล์ ZIP |
+| [Gunzip Decompress](#gunzip-decompress) | Decompress a gzip-compressed file |
+| [Gzip Compress](#gzip-compress) | Compress a single file using gzip |
+| [Create TAR Archive](#create-tar-archive) | Create a TAR archive with optional gzip/bz2/xz compression |
+| [Extract TAR Archive](#extract-tar-archive) | Extract files from a TAR archive (auto-detects compression) |
+| [Create ZIP Archive](#create-zip-archive) | Create a ZIP archive from a list of files |
+| [Extract ZIP Archive](#extract-zip-archive) | Extract files from a ZIP archive |
 
 ## Modules
 
-### คลายบีบอัด Gunzip
+### Gunzip Decompress
 
 `archive.gunzip`
 
-คลายบีบอัดไฟล์ที่บีบอัดด้วย gzip
+Decompress a gzip-compressed file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | เส้นทางไปยังไฟล์ที่บีบอัดด้วย gzip |
-| `output_path` | string | No | - | เส้นทางสำหรับไฟล์ที่คลายบีบอัดแล้ว (ค่าเริ่มต้นคือ input โดยไม่มีนามสกุล .gz) |
+| `input_path` | string | Yes | - | Path to the gzip-compressed file |
+| `output_path` | string | No | - | Path for the decompressed file (defaults to input without .gz extension) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | เส้นทางไปยังไฟล์ที่คลายบีบอัดแล้ว |
-| `size` | number | ขนาดไฟล์ที่คลายบีบอัดแล้วเป็นไบต์ |
+| `path` | string | Path to the decompressed file |
+| `size` | number | Decompressed file size in bytes |
 
 **Example:** Decompress a gzip file
 
@@ -41,27 +41,27 @@ Create and extract ZIP, TAR, and gzip archives.
 input_path: /tmp/data.txt.gz
 ```
 
-### บีบอัด Gzip
+### Gzip Compress
 
 `archive.gzip`
 
-บีบอัดไฟล์เดี่ยวด้วย gzip
+Compress a single file using gzip
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | เส้นทางไปยังไฟล์ที่ต้องการบีบอัด |
-| `output_path` | string | No | - | เส้นทางสำหรับไฟล์ที่บีบอัดแล้ว (ค่าเริ่มต้นคือ input_path + .gz) |
+| `input_path` | string | Yes | - | Path to the file to compress |
+| `output_path` | string | No | - | Path for the compressed file (defaults to input_path + .gz) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | เส้นทางไปยังไฟล์ที่บีบอัดแล้ว |
-| `original_size` | number | ขนาดไฟล์ต้นฉบับเป็นไบต์ |
-| `compressed_size` | number | ขนาดไฟล์ที่บีบอัดแล้วเป็นไบต์ |
-| `ratio` | number | อัตราการบีบอัด (บีบอัด / ต้นฉบับ) |
+| `path` | string | Path to the compressed file |
+| `original_size` | number | Original file size in bytes |
+| `compressed_size` | number | Compressed file size in bytes |
+| `ratio` | number | Compression ratio (compressed / original) |
 
 **Example:** Compress a file with gzip
 
@@ -69,27 +69,27 @@ input_path: /tmp/data.txt.gz
 input_path: /tmp/data.txt
 ```
 
-### สร้างไฟล์ TAR
+### Create TAR Archive
 
 `archive.tar_create`
 
-สร้างไฟล์ TAR พร้อมการบีบอัด gzip/bz2/xz
+Create a TAR archive with optional gzip/bz2/xz compression
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | Yes | - | เส้นทางสำหรับไฟล์ TAR ที่สร้าง |
-| `files` | array | Yes | - | รายการเส้นทางไฟล์ที่จะรวมในไฟล์ TAR |
-| `compression` | select (`none`, `gzip`, `bz2`, `xz`) | No | `gzip` | วิธีการบีบอัด |
+| `output_path` | string | Yes | - | Path for the output TAR file |
+| `files` | array | Yes | - | List of file paths to include in the archive |
+| `compression` | select (`none`, `gzip`, `bz2`, `xz`) | No | `gzip` | Compression method |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | เส้นทางไปยังไฟล์ TAR ที่สร้าง |
-| `size` | number | ขนาดไฟล์บีบอัดเป็นไบต์ |
-| `file_count` | number | จำนวนไฟล์ในไฟล์บีบอัด |
+| `path` | string | Path to the created TAR file |
+| `size` | number | Archive size in bytes |
+| `file_count` | number | Number of files in the archive |
 
 **Example:** Create gzipped TAR archive
 
@@ -99,25 +99,25 @@ files: ["/tmp/file1.txt", "/tmp/file2.txt"]
 compression: gzip
 ```
 
-### แยกไฟล์ TAR
+### Extract TAR Archive
 
 `archive.tar_extract`
 
-แยกไฟล์จากไฟล์ TAR (ตรวจจับการบีบอัดอัตโนมัติ)
+Extract files from a TAR archive (auto-detects compression)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `archive_path` | string | Yes | - | เส้นทางไปยังไฟล์ TAR ที่จะแยก |
-| `output_dir` | string | Yes | - | ไดเรกทอรีที่จะแยกไฟล์เข้าไป |
+| `archive_path` | string | Yes | - | Path to the TAR archive to extract |
+| `output_dir` | string | Yes | - | Directory to extract files into |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted_files` | array | รายการเส้นทางไฟล์ที่แยกออกมา |
-| `total_size` | number | ขนาดรวมของไฟล์ที่แยกออกมาเป็นไบต์ |
+| `extracted_files` | array | List of extracted file paths |
+| `total_size` | number | Total size of extracted files in bytes |
 
 **Example:** Extract TAR.GZ archive
 
@@ -126,28 +126,28 @@ archive_path: /tmp/archive.tar.gz
 output_dir: /tmp/extracted/
 ```
 
-### สร้างไฟล์ ZIP
+### Create ZIP Archive
 
 `archive.zip_create`
 
-สร้างไฟล์ ZIP จากรายการไฟล์
+Create a ZIP archive from a list of files
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | Yes | - | เส้นทางสำหรับไฟล์ ZIP ที่สร้าง |
-| `files` | array | Yes | - | รายการเส้นทางไฟล์ที่จะรวมในไฟล์ ZIP |
-| `compression` | select (`stored`, `deflated`, `bzip2`, `lzma`) | No | `deflated` | วิธีการบีบอัด |
-| `password` | string | No | - | รหัสผ่านเพื่อป้องกันไฟล์ ZIP (เฉพาะการคลายบีบอัด, รองรับจำกัด) |
+| `output_path` | string | Yes | - | Path for the output ZIP file |
+| `files` | array | Yes | - | List of file paths to include in the archive |
+| `compression` | select (`stored`, `deflated`, `bzip2`, `lzma`) | No | `deflated` | Compression method |
+| `password` | string | No | - | Optional password to protect the archive (extraction only, limited support) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | เส้นทางไปยังไฟล์ ZIP ที่สร้าง |
-| `size` | number | ขนาดไฟล์ ZIP เป็นไบต์ |
-| `file_count` | number | จำนวนไฟล์ในไฟล์ ZIP |
+| `path` | string | Path to the created ZIP file |
+| `size` | number | Archive size in bytes |
+| `file_count` | number | Number of files in the archive |
 
 **Example:** Create ZIP from files
 
@@ -157,26 +157,26 @@ files: ["/tmp/file1.txt", "/tmp/file2.txt"]
 compression: deflated
 ```
 
-### แยกไฟล์ ZIP
+### Extract ZIP Archive
 
 `archive.zip_extract`
 
-แยกไฟล์จากไฟล์ ZIP
+Extract files from a ZIP archive
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `archive_path` | string | Yes | - | เส้นทางไปยังไฟล์ ZIP ที่ต้องการแยก |
-| `output_dir` | string | Yes | - | ไดเรกทอรีสำหรับแยกไฟล์เข้าไป |
-| `password` | string | No | - | รหัสผ่านสำหรับไฟล์ ZIP ที่เข้ารหัส |
+| `archive_path` | string | Yes | - | Path to the ZIP archive to extract |
+| `output_dir` | string | Yes | - | Directory to extract files into |
+| `password` | string | No | - | Password for encrypted archives |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted_files` | array | รายการเส้นทางไฟล์ที่แยกออกมา |
-| `total_size` | number | ขนาดรวมของไฟล์ที่แยกออกมาเป็นไบต์ |
+| `extracted_files` | array | List of extracted file paths |
+| `total_size` | number | Total size of extracted files in bytes |
 
 **Example:** Extract ZIP archive
 

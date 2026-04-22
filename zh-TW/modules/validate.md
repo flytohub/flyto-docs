@@ -6,167 +6,167 @@ Validate email, URL, phone, IP, UUID, credit card, and JSON Schema.
 
 | Module | Description |
 |--------|-------------|
-| [驗證信用卡](#驗證信用卡) | 使用 Luhn 演算法驗證信用卡號 |
-| [驗證電子郵件](#驗證電子郵件) | 驗證電子郵件地址格式 |
-| [驗證 IP](#驗證-ip) | 驗證 IPv4 或 IPv6 地址格式 |
-| [驗證 JSON 架構](#驗證-json-架構) | 根據 JSON 架構驗證 JSON 資料 |
-| [驗證電話](#驗證電話) | 驗證電話號碼格式 |
-| [驗證 URL](#驗證-url) | 驗證 URL 格式和結構 |
-| [驗證 UUID](#驗證-uuid) | 驗證 UUID 格式和版本 |
+| [Validate Credit Card](#validate-credit-card) | Validate credit card number using Luhn algorithm |
+| [Validate Email](#validate-email) | Validate email address format |
+| [Validate IP](#validate-ip) | Validate IPv4 or IPv6 address format |
+| [Validate JSON Schema](#validate-json-schema) | Validate JSON data against a JSON Schema |
+| [Validate Phone](#validate-phone) | Validate phone number format |
+| [Validate URL](#validate-url) | Validate URL format and structure |
+| [Validate UUID](#validate-uuid) | Validate UUID format and version |
 
 ## Modules
 
-### 驗證信用卡
+### Validate Credit Card
 
 `validate.credit_card`
 
-使用 Luhn 演算法驗證信用卡號
+Validate credit card number using Luhn algorithm
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `card_number` | string | Yes | - | 要驗證的信用卡號 |
+| `card_number` | string | Yes | - | Credit card number to validate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 要驗證的信用卡號 |
-| `card_type` | string | 卡號是否有效 |
-| `masked` | string | 卡號是否有效 |
-| `luhn_valid` | boolean | 遮蔽的卡號 (****1234) |
+| `valid` | boolean | Whether the card number is valid |
+| `card_type` | string | Detected card type (visa, mastercard, etc) |
+| `masked` | string | Masked card number (****1234) |
+| `luhn_valid` | boolean | Whether the Luhn checksum is valid |
 
-### 驗證電子郵件
+### Validate Email
 
 `validate.email`
 
-驗證電子郵件地址格式
+Validate email address format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `email` | string | Yes | - | 要驗證的電子郵件地址 |
+| `email` | string | Yes | - | Email address to validate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 要驗證的電子郵件地址 |
-| `email` | string | 電子郵件是否有效 |
-| `local_part` | string | 電子郵件是否有效 |
-| `domain` | string | 已驗證的電子郵件 |
+| `valid` | boolean | Whether the email is valid |
+| `email` | string | The validated email |
+| `local_part` | string | The local part (before @) |
+| `domain` | string | The domain part (after @) |
 
-### 驗證 IP
+### Validate IP
 
 `validate.ip`
 
-驗證 IPv4 或 IPv6 地址格式
+Validate IPv4 or IPv6 address format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `ip` | string | Yes | - | 要驗證的 IP 地址 |
-| `version` | string | No | `any` | 要驗證的 IP 地址 |
+| `ip` | string | Yes | - | IP address to validate |
+| `version` | string | No | `any` | Expected IP version (any, v4, v6) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | IP 地址是否有效 |
-| `ip` | string | IP 地址是否有效 |
-| `version` | string | IP 地址是否有效 |
-| `is_private` | boolean | 已驗證的 IP 地址 |
-| `is_loopback` | boolean | 檢測到的 IP 版本 (v4 或 v6) |
+| `valid` | boolean | Whether the IP address is valid |
+| `ip` | string | The validated IP address |
+| `version` | string | Detected IP version (v4 or v6) |
+| `is_private` | boolean | Whether the IP is in a private range |
+| `is_loopback` | boolean | Whether the IP is a loopback address |
 
-### 驗證 JSON 架構
+### Validate JSON Schema
 
 `validate.json_schema`
 
-根據 JSON 架構驗證 JSON 資料
+Validate JSON data against a JSON Schema
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | text | Yes | - | 要驗證的 JSON 資料（字串或物件） |
-| `schema` | text | Yes | - | 要驗證的 JSON 資料（字串或物件） |
+| `data` | text | Yes | - | JSON data to validate (string or object) |
+| `schema` | text | Yes | - | JSON Schema to validate against |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 要驗證的 JSON 架構 |
-| `errors` | array | 資料是否有效 |
-| `error_count` | number | 資料是否有效 |
+| `valid` | boolean | Whether the data is valid |
+| `errors` | array | List of validation errors |
+| `error_count` | number | Number of validation errors |
 
-### 驗證電話
+### Validate Phone
 
 `validate.phone`
 
-驗證電話號碼格式
+Validate phone number format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `phone` | string | Yes | - | 要驗證的電話號碼 |
-| `region` | string | No | `international` | 要驗證的電話號碼 |
+| `phone` | string | Yes | - | Phone number to validate |
+| `region` | string | No | `international` | Region code for validation (international, us, tw, cn, jp) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 電話號碼是否有效 |
-| `phone` | string | 電話號碼是否有效 |
-| `normalized` | string | 電話號碼是否有效 |
-| `region` | string | 已驗證的電話號碼 |
+| `valid` | boolean | Whether the phone number is valid |
+| `phone` | string | The validated phone number |
+| `normalized` | string | Normalized phone number (digits only) |
+| `region` | string | Region used for validation |
 
-### 驗證 URL
+### Validate URL
 
 `validate.url`
 
-驗證 URL 格式和結構
+Validate URL format and structure
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | 要驗證的 URL |
-| `require_https` | boolean | No | `False` | 要驗證的 URL |
+| `url` | string | Yes | - | URL to validate |
+| `require_https` | boolean | No | `False` | Only accept HTTPS URLs |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 僅接受 HTTPS URL |
-| `url` | string | URL 是否有效 |
-| `scheme` | string | URL 是否有效 |
-| `host` | string | 已驗證的 URL |
-| `port` | number | URL 協定（http, https 等） |
-| `path` | string | 主機/網域名稱 |
-| `query` | string | 若有指定則為埠號 |
+| `valid` | boolean | Whether the URL is valid |
+| `url` | string | The validated URL |
+| `scheme` | string | URL scheme (http, https, etc) |
+| `host` | string | Host/domain name |
+| `port` | number | Port number if specified |
+| `path` | string | URL path |
+| `query` | string | Query string |
 
-### 驗證 UUID
+### Validate UUID
 
 `validate.uuid`
 
-驗證 UUID 格式和版本
+Validate UUID format and version
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `uuid` | string | Yes | - | 要驗證的 UUID |
-| `version` | number | No | `0` | 要驗證的 UUID |
+| `uuid` | string | Yes | - | UUID to validate |
+| `version` | number | No | `0` | Expected UUID version (1-5, or 0 for any) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 預期的 UUID 版本（1-5，或 0 表示任意） |
-| `uuid` | string | UUID 是否有效 |
-| `version` | number | UUID 是否有效 |
-| `variant` | string | 已驗證的 UUID |
+| `valid` | boolean | Whether the UUID is valid |
+| `uuid` | string | The validated UUID |
+| `version` | number | Detected UUID version |
+| `variant` | string | UUID variant |

@@ -6,32 +6,32 @@ Environment variable management and .env file loading.
 
 | Module | Description |
 |--------|-------------|
-| [取得環境變數](#取得環境變數) | 取得環境變數的值 |
-| [載入 .env 檔案](#載入-.env-檔案) | 從 .env 檔案載入環境變數 |
-| [設定環境變數](#設定環境變數) | 在目前的程序中設定環境變數 |
+| [Get Environment Variable](#get-environment-variable) | Get the value of an environment variable |
+| [Load .env File](#load-.env-file) | Load environment variables from a .env file |
+| [Set Environment Variable](#set-environment-variable) | Set an environment variable in the current process |
 
 ## Modules
 
-### 取得環境變數
+### Get Environment Variable
 
 `env.get`
 
-取得環境變數的值
+Get the value of an environment variable
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | 環境變數的名稱 |
-| `default` | string | No | - | 如果變數未設定，則使用預設值 |
+| `name` | string | Yes | - | Name of the environment variable |
+| `default` | string | No | - | Default value if the variable is not set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | 變數名稱 |
-| `value` | string | 變數值（或未設定時的預設值） |
-| `exists` | boolean | 變數是否存在於環境中 |
+| `name` | string | Variable name |
+| `value` | string | Variable value (or default if not set) |
+| `exists` | boolean | Whether the variable exists in the environment |
 
 **Example:** Get HOME variable
 
@@ -46,25 +46,25 @@ name: MY_APP_PORT
 default: 8080
 ```
 
-### 載入 .env 檔案
+### Load .env File
 
 `env.load_dotenv`
 
-從 .env 檔案載入環境變數
+Load environment variables from a .env file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | `.env` | .env 檔案的路徑 |
-| `override` | boolean | No | `False` | 是否覆蓋現有的環境變數 |
+| `path` | string | Yes | `.env` | Path to the .env file |
+| `override` | boolean | No | `False` | Whether to override existing environment variables |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `loaded_count` | number | 載入的變數數量 |
-| `variables` | array | 已載入的變數名稱列表 |
+| `loaded_count` | number | Number of variables loaded |
+| `variables` | array | List of variable names that were loaded |
 
 **Example:** Load .env file
 
@@ -73,26 +73,26 @@ path: .env
 override: false
 ```
 
-### 設定環境變數
+### Set Environment Variable
 
 `env.set`
 
-在目前的程序中設定環境變數
+Set an environment variable in the current process
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | 要設定的環境變數名稱 |
-| `value` | string | Yes | - | 要指派給環境變數的值 |
+| `name` | string | Yes | - | Name of the environment variable to set |
+| `value` | string | Yes | - | Value to assign to the environment variable |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | 變數名稱 |
-| `value` | string | 已設定的新值 |
-| `previous_value` | string | 先前的值（如果未先前設定則為 null） |
+| `name` | string | Variable name |
+| `value` | string | New value that was set |
+| `previous_value` | string | Previous value (null if not previously set) |
 
 **Example:** Set an environment variable
 

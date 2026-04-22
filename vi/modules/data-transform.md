@@ -6,32 +6,32 @@ CSV, JSON, XML, YAML parsing, generation, and pipeline transformations.
 
 | Module | Description |
 |--------|-------------|
-| [Đọc tệp CSV](#đọc-tệp-csv) | Đọc và phân tích tệp CSV thành mảng các đối tượng |
-| [Ghi tệp CSV](#ghi-tệp-csv) | Ghi mảng các đối tượng vào tệp CSV |
+| [Read CSV File](#read-csv-file) | Read and parse CSV file into array of objects |
+| [Write CSV File](#write-csv-file) | Write array of objects to CSV file |
 | [Deduplicate Records](#deduplicate-records) | Remove duplicate records from an array by key fields. Optionally persists seen hashes to disk or execution context for cross-run dedup. Use storage=context in cloud/stateless environments where disk is ephemeral. |
-| [Phân tích JSON](#phân-tích-json) | Phân tích chuỗi JSON thành đối tượng |
-| [JSON Stringify](#json-stringify) | Chuyển đổi đối tượng thành chuỗi JSON |
-| [JSON sang CSV](#json-sang-csv) | Chuyển đổi dữ liệu hoặc tệp JSON sang định dạng CSV |
-| [Dòng dữ liệu](#dòng-dữ-liệu) | Kết hợp nhiều biến đổi dữ liệu trong một bước |
-| [Template văn bản](#template-văn-bản) | Điền các biến vào template văn bản |
+| [Parse JSON](#parse-json) | Parse JSON string into object |
+| [JSON Stringify](#json-stringify) | Convert object to JSON string |
+| [JSON to CSV](#json-to-csv) | Convert JSON data or files to CSV format |
+| [Data Pipeline](#data-pipeline) | Chain multiple data transformations in a single step |
+| [Text Template](#text-template) | Fill text template with variables |
 | [Validate Records](#validate-records) | Validate extracted records against field rules. Splits output into valid and invalid arrays. |
-| [Tạo XML](#tạo-xml) | Tạo chuỗi XML từ đối tượng hoặc mảng |
-| [Phân tích XML](#phân-tích-xml) | Phân tích chuỗi XML thành đối tượng |
-| [Tạo YAML](#tạo-yaml) | Tạo chuỗi YAML từ đối tượng hoặc mảng |
-| [Phân tích YAML](#phân-tích-yaml) | Phân tích chuỗi YAML thành đối tượng |
-| [Khóa đối tượng](#khóa-đối-tượng) | Lấy tất cả các khóa từ một đối tượng |
-| [Gộp đối tượng](#gộp-đối-tượng) | Gộp nhiều đối tượng thành một |
-| [Bỏ qua đối tượng](#bỏ-qua-đối-tượng) | Bỏ qua các khóa cụ thể từ một đối tượng |
-| [Chọn đối tượng](#chọn-đối-tượng) | Chọn các khóa cụ thể từ một đối tượng |
-| [Giá trị đối tượng](#giá-trị-đối-tượng) | Lấy tất cả các giá trị từ một đối tượng |
+| [Generate XML](#generate-xml) | Generate XML string from Python dict |
+| [Parse XML](#parse-xml) | Parse XML string or file into Python dict |
+| [Generate YAML](#generate-yaml) | Generate YAML string from Python object |
+| [Parse YAML](#parse-yaml) | Parse YAML string or file into Python object |
+| [Object Keys](#object-keys) | Get all keys from an object |
+| [Object Merge](#object-merge) | Merge multiple objects into one |
+| [Object Omit](#object-omit) | Omit specific keys from an object |
+| [Object Pick](#object-pick) | Pick specific keys from an object |
+| [Object Values](#object-values) | Get all values from an object |
 
 ## Modules
 
-### Đọc tệp CSV
+### Read CSV File
 
 `data.csv.read`
 
-Đọc và phân tích tệp CSV thành mảng các đối tượng
+Read and parse CSV file into array of objects
 
 **Parameters:**
 
@@ -46,10 +46,10 @@ CSV, JSON, XML, YAML parsing, generation, and pipeline transformations.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác |
-| `data` | array | Trạng thái thao tác |
-| `rows` | number | Trạng thái thao tác |
-| `columns` | array | Mảng các đối tượng hàng |
+| `status` | string | Operation status |
+| `data` | array | Array of row objects |
+| `rows` | number | Number of rows |
+| `columns` | array | Column names |
 
 **Example:** Example
 
@@ -59,11 +59,11 @@ delimiter: ,
 encoding: utf-8
 ```
 
-### Ghi tệp CSV
+### Write CSV File
 
 `data.csv.write`
 
-Ghi mảng các đối tượng vào tệp CSV
+Write array of objects to CSV file
 
 **Parameters:**
 
@@ -78,9 +78,9 @@ Ghi mảng các đối tượng vào tệp CSV
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác |
-| `file_path` | string | Trạng thái thao tác |
-| `rows_written` | number | Trạng thái thao tác |
+| `status` | string | Operation status |
+| `file_path` | string | Path to written file |
+| `rows_written` | number | Number of rows written |
 
 **Example:** Example
 
@@ -130,11 +130,11 @@ keys: ["url"]
 hash_file: /tmp/seen.json
 ```
 
-### Phân tích JSON
+### Parse JSON
 
 `data.json.parse`
 
-Phân tích chuỗi JSON thành đối tượng
+Parse JSON string into object
 
 **Parameters:**
 
@@ -146,8 +146,8 @@ Phân tích chuỗi JSON thành đối tượng
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác |
-| `data` | object | Trạng thái thao tác |
+| `status` | string | Operation status |
+| `data` | object | Parsed object |
 
 **Example:** Example
 
@@ -159,7 +159,7 @@ json_string: {"name": "John", "age": 30}
 
 `data.json.stringify`
 
-Chuyển đổi đối tượng thành chuỗi JSON
+Convert object to JSON string
 
 **Parameters:**
 
@@ -173,8 +173,8 @@ Chuyển đổi đối tượng thành chuỗi JSON
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác |
-| `json` | string | Trạng thái thao tác |
+| `status` | string | Operation status |
+| `json` | string | JSON string |
 
 **Example:** Example
 
@@ -183,11 +183,11 @@ data: {"name": "John", "age": 30}
 pretty: true
 ```
 
-### JSON sang CSV
+### JSON to CSV
 
 `data.json_to_csv`
 
-Chuyển đổi dữ liệu hoặc tệp JSON sang định dạng CSV
+Convert JSON data or files to CSV format
 
 **Parameters:**
 
@@ -204,10 +204,10 @@ Chuyển đổi dữ liệu hoặc tệp JSON sang định dạng CSV
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Đường dẫn đến tệp CSV đã tạo |
-| `row_count` | number | Đường dẫn đến tệp CSV đã tạo |
-| `column_count` | number | Đường dẫn đến tệp CSV đã tạo |
-| `columns` | array | Số hàng đã ghi |
+| `output_path` | string | Path to the generated CSV file |
+| `row_count` | number | Number of rows written |
+| `column_count` | number | Number of columns |
+| `columns` | array | List of column names |
 
 **Example:** Convert JSON array to CSV
 
@@ -223,27 +223,27 @@ input_data: /path/to/data.json
 output_path: /path/to/output.csv
 ```
 
-### Dòng dữ liệu
+### Data Pipeline
 
 `data.pipeline`
 
-Kết hợp nhiều biến đổi dữ liệu trong một bước
+Chain multiple data transformations in a single step
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input` | any | Yes | - | Dữ liệu đầu vào để biến đổi (mảng hoặc đối tượng) |
-| `steps` | array | Yes | - | Dữ liệu đầu vào để biến đổi (mảng hoặc đối tượng) |
+| `input` | any | Yes | - | Input data to transform (array or object) |
+| `steps` | array | Yes | - | Array of transformation steps to apply in order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | Mảng các bước biến đổi cần áp dụng theo thứ tự |
-| `original_count` | integer | Dữ liệu đã biến đổi |
-| `result_count` | integer | Dữ liệu đã biến đổi |
-| `steps_applied` | integer | Số lượng mục sau khi biến đổi |
+| `result` | any | Transformed data |
+| `original_count` | integer | Count of items before transformation |
+| `result_count` | integer | Count of items after transformation |
+| `steps_applied` | integer | Number of transformation steps applied |
 
 **Example:** Example
 
@@ -266,11 +266,11 @@ input: ${input.data}
 steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}, {"pick": ["id", "name", "timestamp"]}, {"sort": {"field": "timestamp", "order": "desc"}}, {"skip": 5}, {"limit": 20}]
 ```
 
-### Template văn bản
+### Text Template
 
 `data.text.template`
 
-Điền các biến vào template văn bản
+Fill text template with variables
 
 **Parameters:**
 
@@ -283,8 +283,8 @@ steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác |
-| `result` | string | Trạng thái thao tác |
+| `status` | string | Operation status |
+| `result` | string | Filled template |
 
 **Example:** Example
 
@@ -334,27 +334,27 @@ mode: flag
 drop_fields: ["__index", "html"]
 ```
 
-### Tạo XML
+### Generate XML
 
 `data.xml.generate`
 
-Tạo chuỗi XML từ đối tượng hoặc mảng
+Generate XML string from Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | object | Yes | - | Dữ liệu để chuyển đổi thành XML |
-| `root_tag` | string | No | `root` | Tên thẻ phần tử gốc |
-| `pretty` | boolean | No | `True` | In đẹp đầu ra XML |
-| `encoding` | string | No | `utf-8` | Mã hóa ký tự cho đầu ra XML |
-| `declaration` | boolean | No | `True` | Bao gồm tiêu đề khai báo XML |
+| `data` | object | Yes | - | Python dict or object to convert to XML |
+| `root_tag` | string | No | `root` | Tag name for the root XML element |
+| `pretty` | boolean | No | `True` | Format XML with indentation for readability |
+| `encoding` | string | No | `utf-8` | XML encoding declaration value |
+| `declaration` | boolean | No | `True` | Include <?xml version="1.0"?> declaration at top |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `xml` | string | Chuỗi XML đã tạo |
+| `xml` | string | Generated XML string |
 
 **Example:** Example
 
@@ -364,26 +364,26 @@ root_tag: users
 pretty: true
 ```
 
-### Phân tích XML
+### Parse XML
 
 `data.xml.parse`
 
-Phân tích chuỗi XML thành đối tượng
+Parse XML string or file into Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | Chuỗi XML để phân tích |
-| `file_path` | string | No | - | Đường dẫn đến tệp XML để phân tích |
-| `preserve_attributes` | boolean | No | `True` | Giữ lại thuộc tính XML trong đầu ra đã phân tích |
+| `content` | string | No | - | XML string to parse |
+| `file_path` | string | No | - | Path to XML file (used if content is empty) |
+| `preserve_attributes` | boolean | No | `True` | Include XML element attributes as @attributes in output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | XML đã phân tích dưới dạng đối tượng |
-| `root_tag` | string | Tên thẻ phần tử gốc |
+| `result` | object | Parsed XML as nested dict |
+| `root_tag` | string | Root element tag name |
 
 **Example:** Example
 
@@ -392,27 +392,27 @@ content: <users><user id="1"><name>John</name></user></users>
 preserve_attributes: true
 ```
 
-### Tạo YAML
+### Generate YAML
 
 `data.yaml.generate`
 
-Tạo chuỗi YAML từ đối tượng hoặc mảng
+Generate YAML string from Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | any | Yes | - | Dữ liệu để chuyển đổi thành YAML |
-| `default_flow_style` | boolean | No | `False` | Sử dụng kiểu dòng cho cấu trúc lồng nhau |
-| `sort_keys` | boolean | No | `False` | Sắp xếp khóa theo thứ tự chữ cái |
-| `indent` | number | No | `2` | Số khoảng trắng để thụt lề |
-| `allow_unicode` | boolean | No | `True` | Cho phép ký tự unicode trong đầu ra |
+| `data` | any | Yes | - | Python object, array, or value to convert to YAML |
+| `default_flow_style` | boolean | No | `False` | Use inline/flow style (JSON-like) instead of block style |
+| `sort_keys` | boolean | No | `False` | Sort dictionary keys alphabetically |
+| `indent` | number | No | `2` | Number of spaces for indentation |
+| `allow_unicode` | boolean | No | `True` | Allow unicode characters in output without escaping |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `yaml` | string | Chuỗi YAML đã tạo |
+| `yaml` | string | Generated YAML string |
 
 **Example:** Example
 
@@ -422,26 +422,26 @@ sort_keys: false
 indent: 2
 ```
 
-### Phân tích YAML
+### Parse YAML
 
 `data.yaml.parse`
 
-Phân tích chuỗi YAML thành đối tượng
+Parse YAML string or file into Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | Chuỗi YAML để phân tích |
-| `file_path` | string | No | - | Đường dẫn đến tệp YAML để phân tích |
-| `multi_document` | boolean | No | `False` | Phân tích YAML nhiều tài liệu (ngăn cách bằng ---) |
+| `content` | string | No | - | YAML string to parse |
+| `file_path` | string | No | - | Path to YAML file (used if content is empty) |
+| `multi_document` | boolean | No | `False` | Parse multiple YAML documents separated by --- (uses safe_load_all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | YAML đã phân tích dưới dạng đối tượng hoặc mảng |
-| `type` | string | Loại của kết quả đã phân tích |
+| `result` | any | Parsed YAML data (object, array, or scalar) |
+| `type` | string | Type of parsed result: object, array, or scalar |
 
 **Example:** Example
 
@@ -464,11 +464,11 @@ name: Jane
 multi_document: true
 ```
 
-### Khóa đối tượng
+### Object Keys
 
 `object.keys`
 
-Lấy tất cả các khóa từ một đối tượng
+Get all keys from an object
 
 **Parameters:**
 
@@ -480,8 +480,8 @@ Lấy tất cả các khóa từ một đối tượng
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `keys` | array | Danh sách các khóa đối tượng |
-| `count` | number | Danh sách các khóa đối tượng |
+| `keys` | array | List of object keys |
+| `count` | number | Number of keys |
 
 **Example:** Get object keys
 
@@ -489,11 +489,11 @@ Lấy tất cả các khóa từ một đối tượng
 object: {"name": "John", "age": 30, "city": "NYC"}
 ```
 
-### Gộp đối tượng
+### Object Merge
 
 `object.merge`
 
-Gộp nhiều đối tượng thành một
+Merge multiple objects into one
 
 **Parameters:**
 
@@ -505,7 +505,7 @@ Gộp nhiều đối tượng thành một
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Đối tượng đã gộp |
+| `result` | object | Merged object |
 
 **Example:** Merge user data
 
@@ -513,11 +513,11 @@ Gộp nhiều đối tượng thành một
 objects: [{"name": "John", "age": 30}, {"city": "NYC", "country": "USA"}, {"job": "Engineer"}]
 ```
 
-### Bỏ qua đối tượng
+### Object Omit
 
 `object.omit`
 
-Bỏ qua các khóa cụ thể từ một đối tượng
+Omit specific keys from an object
 
 **Parameters:**
 
@@ -530,7 +530,7 @@ Bỏ qua các khóa cụ thể từ một đối tượng
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Đối tượng không có các khóa đã bỏ qua |
+| `result` | object | Object without omitted keys |
 
 **Example:** Omit sensitive fields
 
@@ -539,11 +539,11 @@ object: {"name": "John", "age": 30, "password": "secret", "ssn": "123-45-6789"}
 keys: ["password", "ssn"]
 ```
 
-### Chọn đối tượng
+### Object Pick
 
 `object.pick`
 
-Chọn các khóa cụ thể từ một đối tượng
+Pick specific keys from an object
 
 **Parameters:**
 
@@ -556,7 +556,7 @@ Chọn các khóa cụ thể từ một đối tượng
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Đối tượng chỉ có các khóa đã chọn |
+| `result` | object | Object with only picked keys |
 
 **Example:** Pick user fields
 
@@ -565,11 +565,11 @@ object: {"name": "John", "age": 30, "email": "john@example.com", "password": "se
 keys: ["name", "email"]
 ```
 
-### Giá trị đối tượng
+### Object Values
 
 `object.values`
 
-Lấy tất cả các giá trị từ một đối tượng
+Get all values from an object
 
 **Parameters:**
 
@@ -581,8 +581,8 @@ Lấy tất cả các giá trị từ một đối tượng
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `values` | array | Danh sách các giá trị đối tượng |
-| `count` | number | Danh sách các giá trị đối tượng |
+| `values` | array | List of object values |
+| `count` | number | Number of values |
 
 **Example:** Get object values
 

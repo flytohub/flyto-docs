@@ -6,74 +6,74 @@ Cron parsing, delay, and interval calculations.
 
 | Module | Description |
 |--------|-------------|
-| [แยกวิเคราะห์ Cron Expression](#แยกวิเคราะห์-cron-expression) | แยกวิเคราะห์ cron expression และคำนวณเวลาเริ่มต้น N ครั้งถัดไป |
-| [หน่วงเวลา / หยุดชั่วคราว](#หน่วงเวลา--หยุดชั่วคราว) | หยุดการทำงานชั่วคราวตามระยะเวลาที่กำหนด |
-| [คำนวณช่วงเวลา](#คำนวณช่วงเวลา) | คำนวณเวลาช่วงและการเกิดขึ้นครั้งถัดไป |
+| [Parse Cron Expression](#parse-cron-expression) | Parse cron expression and calculate next N run times |
+| [Delay / Sleep](#delay--sleep) | Pause execution for a specified duration |
+| [Calculate Interval](#calculate-interval) | Calculate interval timing and next occurrences |
 
 ## Modules
 
-### แยกวิเคราะห์ Cron Expression
+### Parse Cron Expression
 
 `scheduler.cron_parse`
 
-แยกวิเคราะห์ cron expression และคำนวณเวลาเริ่มต้น N ครั้งถัดไป
+Parse cron expression and calculate next N run times
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `expression` | string | Yes | - | Cron expression แบบ 5 ฟิลด์มาตรฐาน (เช่น "0 9 * * MON-FRI") |
-| `count` | number | No | `5` | จำนวนเวลาเริ่มต้นครั้งถัดไปที่ต้องคำนวณ |
-| `timezone` | string | No | `0` | เขตเวลาสำหรับการคำนวณ (UTC offset เช่น "+8" หรือ "-5", ค่าเริ่มต้น "0" สำหรับ UTC) |
+| `expression` | string | Yes | - | Standard 5-field cron expression (e.g. "0 9 * * MON-FRI") |
+| `count` | number | No | `5` | Number of next run times to calculate |
+| `timezone` | string | No | `0` | Timezone for calculation (UTC offset like "+8" or "-5", default "0" for UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `expression` | string | Cron expression ที่แยกวิเคราะห์แล้ว |
-| `description` | string | คำอธิบายตารางเวลาในรูปแบบที่อ่านง่าย |
-| `next_runs` | array | รายการเวลาเริ่มต้นครั้งถัดไปในรูปแบบวันที่และเวลา ISO |
-| `is_valid` | boolean | Expression นี้ถูกต้องหรือไม่ |
+| `expression` | string | The parsed cron expression |
+| `description` | string | Human-readable description of the schedule |
+| `next_runs` | array | List of next run times as ISO datetime strings |
+| `is_valid` | boolean | Whether the expression is valid |
 
-### หน่วงเวลา / หยุดชั่วคราว
+### Delay / Sleep
 
 `scheduler.delay`
 
-หยุดการทำงานชั่วคราวตามระยะเวลาที่กำหนด
+Pause execution for a specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | Yes | - | จำนวนวินาทีที่ต้องหน่วงเวลา |
-| `message` | string | No | - | ข้อความเพิ่มเติมที่ต้องการใส่ในผลลัพธ์ |
+| `seconds` | number | Yes | - | Number of seconds to delay |
+| `message` | string | No | - | Optional message to include in the result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `delayed_seconds` | number | จำนวนวินาทีที่หน่วงเวลาจริง |
-| `message` | string | ข้อความที่ให้ไว้หรือค่าเริ่มต้น |
+| `delayed_seconds` | number | Actual number of seconds delayed |
+| `message` | string | The provided message or default |
 
-### คำนวณช่วงเวลา
+### Calculate Interval
 
 `scheduler.interval`
 
-คำนวณเวลาช่วงและการเกิดขึ้นครั้งถัดไป
+Calculate interval timing and next occurrences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | No | `0` | ส่วนประกอบวินาทีของช่วงเวลา |
-| `minutes` | number | No | `0` | ส่วนประกอบนาทีของช่วงเวลา |
-| `hours` | number | No | `0` | ส่วนประกอบชั่วโมงของช่วงเวลา |
-| `start_time` | string | No | - | เวลาเริ่มต้นในรูปแบบ ISO 8601 (ค่าเริ่มต้น: ตอนนี้) |
+| `seconds` | number | No | `0` | Interval seconds component |
+| `minutes` | number | No | `0` | Interval minutes component |
+| `hours` | number | No | `0` | Interval hours component |
+| `start_time` | string | No | - | Start time in ISO 8601 format (default: now) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `interval_seconds` | number | ช่วงเวลารวมในวินาที |
-| `next_runs` | array | รายการเวลาเริ่มต้น 5 ครั้งถัดไปในรูปแบบวันที่และเวลา ISO |
-| `human_readable` | string | คำอธิบายช่วงเวลาในรูปแบบที่อ่านง่าย |
+| `interval_seconds` | number | Total interval in seconds |
+| `next_runs` | array | List of next 5 run times as ISO datetime strings |
+| `human_readable` | string | Human-readable interval description |

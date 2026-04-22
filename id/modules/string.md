@@ -6,25 +6,25 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Module | Description |
 |--------|-------------|
-| [String Huruf Kecil](#string-huruf-kecil) | Konversi string ke huruf kecil |
-| [Pad Teks](#pad-teks) | Tambahkan padding pada teks hingga panjang tertentu |
-| [Ganti String](#ganti-string) | Ganti kemunculan substring dalam string |
-| [Balik String](#balik-string) | Balikkan karakter dalam string |
-| [Slugify](#slugify) | Ubah teks menjadi slug yang ramah URL |
-| [Pisahkan String](#pisahkan-string) | Pisahkan string ke array menggunakan delimiter |
-| [Template](#template) | Render template dengan substitusi variabel |
-| [String Title Case](#string-title-case) | Konversi string ke title case |
-| [Trim String](#trim-string) | Hapus whitespace dari kedua ujung string |
-| [Potong Teks](#potong-teks) | Potong teks hingga panjang maksimum |
-| [String Huruf Besar](#string-huruf-besar) | Konversi string ke huruf besar |
+| [String Lowercase](#string-lowercase) | Convert a string to lowercase |
+| [Pad String](#pad-string) | Pad a string to a specified length |
+| [String Replace](#string-replace) | Replace occurrences of a substring in a string |
+| [String Reverse](#string-reverse) | Reverse the characters in a string |
+| [Slugify](#slugify) | Convert text to URL-friendly slug |
+| [Split String](#split-string) | Split a string into an array using a delimiter |
+| [Template](#template) | Render a template with variable substitution |
+| [Title Case String](#title-case-string) | Convert string to title case |
+| [String Trim](#string-trim) | Remove whitespace from both ends of a string |
+| [Truncate String](#truncate-string) | Truncate a string to a maximum length |
+| [String Uppercase](#string-uppercase) | Convert a string to uppercase |
 
 ## Modules
 
-### String Huruf Kecil
+### String Lowercase
 
 `string.lowercase`
 
-Konversi string ke huruf kecil
+Convert a string to lowercase
 
 **Parameters:**
 
@@ -36,38 +36,38 @@ Konversi string ke huruf kecil
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | String yang dikonversi ke huruf kecil |
-| `original` | string | String yang dikonversi ke huruf kecil |
-| `status` | string | String yang dikonversi ke huruf kecil |
+| `result` | string | Lowercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### Pad Teks
+### Pad String
 
 `string.pad`
 
-Tambahkan padding pada teks hingga panjang tertentu
+Pad a string to a specified length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Teks untuk ditambahkan padding |
-| `length` | number | Yes | - | Teks untuk ditambahkan padding |
-| `pad_char` | string | No | ` ` | Panjang yang ditargetkan |
-| `position` | string | No | `end` | Karakter untuk padding |
+| `text` | string | Yes | - | Text to pad |
+| `length` | number | Yes | - | Target length |
+| `pad_char` | string | No | ` ` | Character to pad with |
+| `position` | string | No | `end` | Where to add padding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Teks dengan padding |
-| `original` | string | Teks dengan padding |
-| `added` | number | Teks dengan padding |
+| `result` | string | Padded string |
+| `original` | string | Original string |
+| `added` | number | Characters added |
 
-### Ganti String
+### String Replace
 
 `string.replace`
 
-Ganti kemunculan substring dalam string
+Replace occurrences of a substring in a string
 
 **Parameters:**
 
@@ -81,17 +81,17 @@ Ganti kemunculan substring dalam string
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | String dengan penggantian diterapkan |
-| `original` | string | String dengan penggantian diterapkan |
-| `search` | string | String dengan penggantian diterapkan |
-| `replace` | string | String input asli |
-| `status` | string | String pencarian yang diganti |
+| `result` | string | String with replacements applied |
+| `original` | string | Original input string |
+| `search` | string | Search string that was replaced |
+| `replace` | string | Replacement string used |
+| `status` | string | Operation status |
 
-### Balik String
+### String Reverse
 
 `string.reverse`
 
-Balikkan karakter dalam string
+Reverse the characters in a string
 
 **Parameters:**
 
@@ -103,37 +103,37 @@ Balikkan karakter dalam string
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | String yang dibalik |
-| `original` | string | String yang dibalik |
-| `length` | number | String yang dibalik |
+| `result` | string | Reversed string |
+| `original` | string | Original input string |
+| `length` | number | String length |
 
 ### Slugify
 
 `string.slugify`
 
-Ubah teks menjadi slug yang ramah URL
+Convert text to URL-friendly slug
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Teks untuk diubah menjadi slug |
-| `separator` | string | No | `-` | Teks untuk diubah menjadi slug |
-| `lowercase` | boolean | No | `True` | Pemisah kata |
-| `max_length` | number | No | `0` | Ubah menjadi huruf kecil |
+| `text` | string | Yes | - | Text to slugify |
+| `separator` | string | No | `-` | Word separator |
+| `lowercase` | boolean | No | `True` | Convert to lowercase |
+| `max_length` | number | No | `0` | Maximum slug length (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Panjang maksimum slug (0 = tidak terbatas) |
-| `original` | string | Slug yang ramah URL |
+| `result` | string | URL-friendly slug |
+| `original` | string | Original text |
 
-### Pisahkan String
+### Split String
 
 `string.split`
 
-Pisahkan string ke array menggunakan delimiter
+Split a string into an array using a delimiter
 
 **Parameters:**
 
@@ -147,41 +147,41 @@ Pisahkan string ke array menggunakan delimiter
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `parts` | array | Array bagian string yang dipisahkan |
-| `result` | array | Array bagian string yang dipisahkan |
-| `length` | number | Array bagian string yang dipisahkan |
-| `original` | string | Alias untuk parts - array bagian string yang dipisahkan |
-| `delimiter` | string | Jumlah bagian setelah dipisahkan |
-| `status` | string | String input asli |
+| `parts` | array | Array of split string parts |
+| `result` | array | Alias for parts - array of split string parts |
+| `length` | number | Number of parts after split |
+| `original` | string | Original input string |
+| `delimiter` | string | Delimiter used for splitting |
+| `status` | string | Operation status |
 
 ### Template
 
 `string.template`
 
-Render template dengan substitusi variabel
+Render a template with variable substitution
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `template` | string | Yes | - | String template dengan placeholder {<!-- -->{variable}<!-- -->} |
-| `variables` | object | Yes | - | Variabel untuk substitusi |
-| `missing_value` | string | No | - | Nilai untuk variabel yang tidak terdefinisi |
-| `preserve_missing` | boolean | No | `False` | Nilai untuk variabel yang tidak terdefinisi |
+| `template` | string | Yes | - | Template string with {<!-- -->{variable}<!-- -->} placeholders |
+| `variables` | object | Yes | - | Variables to substitute |
+| `missing_value` | string | No | - | Value for undefined variables |
+| `preserve_missing` | boolean | No | `False` | Keep placeholder if variable is missing |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Simpan placeholder jika variabel tidak ada |
-| `replaced` | number | Template yang telah dirender |
-| `missing` | array | Template yang telah dirender |
+| `result` | string | Rendered template |
+| `replaced` | number | Number of replacements made |
+| `missing` | array | Missing variable names |
 
-### String Title Case
+### Title Case String
 
 `string.titlecase`
 
-Konversi string ke title case
+Convert string to title case
 
 **Parameters:**
 
@@ -193,7 +193,7 @@ Konversi string ke title case
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | String yang dikonversi ke title case |
+| `result` | string | Title case converted string |
 
 **Example:** Convert to title case
 
@@ -207,11 +207,11 @@ text: hello world from flyto
 text: john doe
 ```
 
-### Trim String
+### String Trim
 
 `string.trim`
 
-Hapus whitespace dari kedua ujung string
+Remove whitespace from both ends of a string
 
 **Parameters:**
 
@@ -223,39 +223,39 @@ Hapus whitespace dari kedua ujung string
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | String yang di-trim dengan whitespace dihapus |
-| `original` | string | String yang di-trim dengan whitespace dihapus |
-| `status` | string | String yang di-trim dengan whitespace dihapus |
+| `result` | string | Trimmed string with whitespace removed |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### Potong Teks
+### Truncate String
 
 `string.truncate`
 
-Potong teks hingga panjang maksimum
+Truncate a string to a maximum length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Teks untuk dipotong |
-| `length` | number | Yes | - | Teks untuk dipotong |
-| `suffix` | string | No | `...` | Panjang maksimum |
-| `word_boundary` | boolean | No | `False` | Teks yang ditambahkan jika terpotong |
+| `text` | string | Yes | - | Text to truncate |
+| `length` | number | Yes | - | Maximum length |
+| `suffix` | string | No | `...` | Text to append if truncated |
+| `word_boundary` | boolean | No | `False` | Break at word boundary |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Potong di batas kata |
-| `original` | string | Teks yang dipotong |
-| `truncated` | boolean | Teks yang dipotong |
-| `removed` | number | Teks asli |
+| `result` | string | Truncated string |
+| `original` | string | Original string |
+| `truncated` | boolean | Whether string was truncated |
+| `removed` | number | Characters removed |
 
-### String Huruf Besar
+### String Uppercase
 
 `string.uppercase`
 
-Konversi string ke huruf besar
+Convert a string to uppercase
 
 **Parameters:**
 
@@ -267,6 +267,6 @@ Konversi string ke huruf besar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | String yang dikonversi ke huruf besar |
-| `original` | string | String yang dikonversi ke huruf besar |
-| `status` | string | String yang dikonversi ke huruf besar |
+| `result` | string | Uppercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |

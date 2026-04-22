@@ -6,30 +6,30 @@ Parse frontmatter, convert to HTML, and generate table of contents.
 
 | Module | Description |
 |--------|-------------|
-| [Phân tích Frontmatter](#phân-tích-frontmatter) | Trích xuất YAML frontmatter từ nội dung Markdown |
-| [Markdown sang HTML](#markdown-sang-html) | Chuyển đổi văn bản Markdown sang HTML |
-| [Tạo Mục lục](#tạo-mục-lục) | Tạo mục lục từ các tiêu đề trong Markdown |
+| [Parse Frontmatter](#parse-frontmatter) | Extract YAML frontmatter from Markdown content |
+| [Markdown to HTML](#markdown-to-html) | Convert Markdown text to HTML |
+| [Generate Table of Contents](#generate-table-of-contents) | Generate a table of contents from Markdown headings |
 
 ## Modules
 
-### Phân tích Frontmatter
+### Parse Frontmatter
 
 `markdown.parse_frontmatter`
 
-Trích xuất YAML frontmatter từ nội dung Markdown
+Extract YAML frontmatter from Markdown content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Nội dung Markdown có frontmatter |
+| `text` | string | Yes | - | Markdown content with frontmatter |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `frontmatter` | object | Frontmatter đã phân tích dưới dạng từ điển |
-| `content` | string | Nội dung Markdown không có frontmatter |
+| `frontmatter` | object | Parsed frontmatter as a dictionary |
+| `content` | string | Markdown content without frontmatter |
 
 **Example:** Parse YAML frontmatter
 
@@ -47,25 +47,25 @@ tags:
 Content here.
 ```
 
-### Markdown sang HTML
+### Markdown to HTML
 
 `markdown.to_html`
 
-Chuyển đổi văn bản Markdown sang HTML
+Convert Markdown text to HTML
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Nội dung Markdown để chuyển đổi |
-| `extensions` | array | No | - | Tiện ích mở rộng Markdown để kích hoạt (chỉ dùng với thư viện markdown) |
+| `text` | string | Yes | - | Markdown content to convert |
+| `extensions` | array | No | - | Markdown extensions to enable (only used with the markdown library) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `html` | string | Nội dung HTML đã chuyển đổi |
-| `word_count` | number | Số từ của văn bản đầu vào |
+| `html` | string | Converted HTML content |
+| `word_count` | number | Word count of the input text |
 
 **Example:** Convert markdown to HTML
 
@@ -75,25 +75,25 @@ text: # Hello
 This is **bold** and *italic*.
 ```
 
-### Tạo Mục lục
+### Generate Table of Contents
 
 `markdown.toc`
 
-Tạo mục lục từ các tiêu đề trong Markdown
+Generate a table of contents from Markdown headings
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Nội dung Markdown để trích xuất tiêu đề |
-| `max_depth` | number | No | `3` | Độ sâu tiêu đề tối đa để bao gồm (1-6) |
+| `text` | string | Yes | - | Markdown content to extract headings from |
+| `max_depth` | number | No | `3` | Maximum heading depth to include (1-6) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `toc` | array | Danh sách tiêu đề với cấp độ, tiêu đề và slug |
-| `toc_markdown` | string | Mục lục Markdown đã định dạng |
+| `toc` | array | List of headings with level, title, and slug |
+| `toc_markdown` | string | Formatted Markdown table of contents |
 
 **Example:** Generate TOC from markdown
 

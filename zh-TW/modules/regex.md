@@ -6,124 +6,124 @@ Pattern matching: match, extract, replace, split, and test.
 
 | Module | Description |
 |--------|-------------|
-| [正則表達式提取](#正則表達式提取) | 從文字中提取命名群組 |
-| [正則表達式匹配](#正則表達式匹配) | 在文字中尋找模式的所有匹配項 |
-| [正則表達式替換](#正則表達式替換) | 在文字中替換模式匹配項 |
-| [正則表達式分割](#正則表達式分割) | 用正則表達式模式分割文字 |
-| [正則測試](#正則測試) | 測試字串是否符合正則表達式模式 |
+| [Regex Extract](#regex-extract) | Extract named groups from text |
+| [Regex Match](#regex-match) | Find all matches of a pattern in text |
+| [Regex Replace](#regex-replace) | Replace pattern matches in text |
+| [Regex Split](#regex-split) | Split text by a regex pattern |
+| [Regex Test](#regex-test) | Test if string matches a regex pattern |
 
 ## Modules
 
-### 正則表達式提取
+### Regex Extract
 
 `regex.extract`
 
-從文字中提取命名群組
+Extract named groups from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 要提取的文字 |
-| `pattern` | string | Yes | - | 要提取的文字 |
-| `ignore_case` | boolean | No | `False` | 不區分大小寫匹配 |
+| `text` | string | Yes | - | Text to extract from |
+| `pattern` | string | Yes | - | Regex with named groups (?P<name>...) |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted` | object | 不區分大小寫匹配 |
-| `matched` | boolean | 提取的命名群組 |
-| `full_match` | string | 提取的命名群組 |
+| `extracted` | object | Extracted named groups |
+| `matched` | boolean | Whether pattern matched |
+| `full_match` | string | Full matched text |
 
-### 正則表達式匹配
+### Regex Match
 
 `regex.match`
 
-在文字中尋找模式的所有匹配項
+Find all matches of a pattern in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 要搜尋的文字 |
-| `pattern` | string | Yes | - | 要搜尋的文字 |
-| `ignore_case` | boolean | No | `False` | 正則表達式模式 |
-| `first_only` | boolean | No | `False` | 不區分大小寫匹配 |
+| `text` | string | Yes | - | Text to search |
+| `pattern` | string | Yes | - | Regular expression pattern |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `first_only` | boolean | No | `False` | Return only the first match |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `matches` | array | 僅返回第一個匹配項 |
-| `count` | number | 匹配項列表 |
-| `groups` | array | 匹配項列表 |
+| `matches` | array | List of matches |
+| `count` | number | Number of matches |
+| `groups` | array | Captured groups from each match |
 
-### 正則表達式替換
+### Regex Replace
 
 `regex.replace`
 
-在文字中替換模式匹配項
+Replace pattern matches in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 要處理的文字 |
-| `pattern` | string | Yes | - | 要處理的文字 |
-| `replacement` | string | Yes | - | 正則表達式模式 |
-| `ignore_case` | boolean | No | `False` | 替換文字（支援反向引用） |
-| `count` | number | No | `0` | 不區分大小寫匹配 |
+| `text` | string | Yes | - | Text to process |
+| `pattern` | string | Yes | - | Regular expression pattern |
+| `replacement` | string | Yes | - | Replacement text (supports backreferences) |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `count` | number | No | `0` | Maximum replacements (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 最大替換次數（0 = 無限制） |
-| `replacements` | number | 包含替換的文字 |
-| `original` | string | 包含替換的文字 |
+| `result` | string | Text with replacements |
+| `replacements` | number | Number of replacements made |
+| `original` | string | Original text |
 
-### 正則表達式分割
+### Regex Split
 
 `regex.split`
 
-用正則表達式模式分割文字
+Split text by a regex pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 要分割的文字 |
-| `pattern` | string | Yes | - | 要分割的文字 |
-| `ignore_case` | boolean | No | `False` | 作為分隔符的正則表達式模式 |
-| `max_split` | number | No | `0` | 不區分大小寫匹配 |
-| `remove_empty` | boolean | No | `False` | 最大分割次數（0 = 無限制） |
+| `text` | string | Yes | - | Text to split |
+| `pattern` | string | Yes | - | Regular expression pattern for delimiter |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `max_split` | number | No | `0` | Maximum number of splits (0 = unlimited) |
+| `remove_empty` | boolean | No | `False` | Remove empty strings from result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 從結果中移除空字串 |
-| `count` | number | 分割部分 |
+| `result` | array | Split parts |
+| `count` | number | Number of parts |
 
-### 正則測試
+### Regex Test
 
 `regex.test`
 
-測試字串是否符合正則表達式模式
+Test if string matches a regex pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 要測試的文字 |
-| `pattern` | string | Yes | - | 要測試的文字 |
-| `ignore_case` | boolean | No | `False` | 正則表達式模式 |
-| `full_match` | boolean | No | `False` | 不區分大小寫匹配 |
+| `text` | string | Yes | - | Text to test |
+| `pattern` | string | Yes | - | Regular expression pattern |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `full_match` | boolean | No | `False` | Require pattern to match entire string |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 要求模式匹配整個字串 |
-| `pattern` | string | 模式是否匹配 |
+| `result` | boolean | Whether pattern matches |
+| `pattern` | string | Pattern used |

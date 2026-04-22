@@ -6,178 +6,178 @@ Statistical functions: mean, median, mode, std dev, percentile, and more.
 
 | Module | Description |
 |--------|-------------|
-| [平均](#平均) | 数値の算術平均を計算 |
-| [中央値](#中央値) | 数値の中央値を計算 |
-| [最小/最大](#最小最大) | 最小値と最大値を見つける |
-| [最頻値](#最頻値) | 最頻値を計算 |
-| [パーセンタイル](#パーセンタイル) | 数値のパーセンタイルを計算 |
-| [標準偏差](#標準偏差) | 数値の標準偏差を計算 |
-| [Sum](#sum) | 数値の合計を計算する |
-| [分散](#分散) | 数値の分散を計算する |
+| [Mean (Average)](#mean-average) | Calculate arithmetic mean of numbers |
+| [Median](#median) | Calculate median (middle value) of numbers |
+| [Min/Max](#minmax) | Find minimum and maximum values |
+| [Mode](#mode) | Calculate mode (most frequent value) |
+| [Percentile](#percentile) | Calculate percentile of numbers |
+| [Standard Deviation](#standard-deviation) | Calculate standard deviation of numbers |
+| [Sum](#sum) | Calculate sum of numbers |
+| [Variance](#variance) | Calculate variance of numbers |
 
 ## Modules
 
-### 平均
+### Mean (Average)
 
 `stats.mean`
 
-数値の算術平均を計算
+Calculate arithmetic mean of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | 数値の配列 |
-| `precision` | number | No | `2` | 数値の配列 |
+| `numbers` | array | Yes | - | Array of numbers |
+| `precision` | number | No | `2` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `mean` | number | 小数点以下の桁数 |
-| `count` | number | 算術平均 |
-| `sum` | number | 算術平均 |
+| `mean` | number | Arithmetic mean |
+| `count` | number | Number of values |
+| `sum` | number | Sum of values |
 
-### 中央値
+### Median
 
 `stats.median`
 
-数値の中央値を計算
+Calculate median (middle value) of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | 数値の配列 |
+| `numbers` | array | Yes | - | Array of numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `median` | number | 数値の配列 |
-| `count` | number | 中央値 |
+| `median` | number | Median value |
+| `count` | number | Number of values |
 
-### 最小/最大
+### Min/Max
 
 `stats.min_max`
 
-最小値と最大値を見つける
+Find minimum and maximum values
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | 数値の配列 |
+| `numbers` | array | Yes | - | Array of numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `min` | number | 数値の配列 |
-| `max` | number | 最小値 |
-| `range` | number | 最小値 |
-| `min_index` | number | 最大値 |
-| `max_index` | number | 範囲（最大 - 最小） |
+| `min` | number | Minimum value |
+| `max` | number | Maximum value |
+| `range` | number | Range (max - min) |
+| `min_index` | number | Index of minimum |
+| `max_index` | number | Index of maximum |
 
-### 最頻値
+### Mode
 
 `stats.mode`
 
-最頻値を計算
+Calculate mode (most frequent value)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | 値の配列 |
-| `all_modes` | boolean | No | `False` | 値の配列 |
+| `values` | array | Yes | - | Array of values |
+| `all_modes` | boolean | No | `False` | Return all modes if multiple exist |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `mode` | any | 複数存在する場合はすべてのモードを返す |
-| `frequency` | number | 最頻値 |
-| `count` | number | 最頻値 |
+| `mode` | any | Most frequent value(s) |
+| `frequency` | number | Frequency of mode |
+| `count` | number | Number of values |
 
-### パーセンタイル
+### Percentile
 
 `stats.percentile`
 
-数値のパーセンタイルを計算
+Calculate percentile of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | 数値の配列 |
-| `percentile` | number | Yes | `50` | 数値の配列 |
+| `numbers` | array | Yes | - | Array of numbers |
+| `percentile` | number | Yes | `50` | Percentile to calculate (0-100) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | number | 計算するパーセンタイル（0-100） |
-| `percentile` | number | パーセンタイル値 |
+| `value` | number | Percentile value |
+| `percentile` | number | Percentile requested |
 
-### 標準偏差
+### Standard Deviation
 
 `stats.std_dev`
 
-数値の標準偏差を計算
+Calculate standard deviation of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | 数値の配列 |
-| `population` | boolean | No | `False` | 母集団の公式を使用（N-1ではなくNで割る） |
-| `precision` | number | No | `4` | 母集団の公式を使用する（N-1ではなくNで割る） |
+| `numbers` | array | Yes | - | Array of numbers |
+| `population` | boolean | No | `False` | Use population formula (divide by N instead of N-1) |
+| `precision` | number | No | `4` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `std_dev` | number | 小数点以下の桁数 |
-| `variance` | number | 標準偏差 |
-| `mean` | number | 標準偏差 |
+| `std_dev` | number | Standard deviation |
+| `variance` | number | Variance |
+| `mean` | number | Mean value |
 
 ### Sum
 
 `stats.sum`
 
-数値の合計を計算する
+Calculate sum of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | 数値の配列 |
+| `numbers` | array | Yes | - | Array of numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sum` | number | 数値の配列 |
-| `count` | number | 数値の合計 |
+| `sum` | number | Sum of numbers |
+| `count` | number | Number of values |
 
-### 分散
+### Variance
 
 `stats.variance`
 
-数値の分散を計算する
+Calculate variance of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | 数値の配列 |
-| `population` | boolean | No | `False` | 数値の配列 |
-| `precision` | number | No | `4` | 母集団の公式を使用する |
+| `numbers` | array | Yes | - | Array of numbers |
+| `population` | boolean | No | `False` | Use population formula |
+| `precision` | number | No | `4` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `variance` | number | 小数点以下の桁数 |
-| `mean` | number | 分散の値 |
+| `variance` | number | Variance value |
+| `mean` | number | Mean value |

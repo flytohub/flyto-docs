@@ -6,53 +6,53 @@ AI model integration, text generation, embeddings, and autonomous agents.
 
 | Module | Description |
 |--------|-------------|
-| [자율 에이전트](#자율-에이전트) | 메모리와 목표 지향 행동을 갖춘 자율 AI 에이전트 |
-| [체인 에이전트](#체인-에이전트) | 여러 단계를 가진 순차적 AI 처리 체인 |
-| [도구 사용 에이전트](#도구-사용-에이전트) | 도구/기능을 호출할 수 있는 AI 에이전트 |
-| [텍스트 임베딩](#텍스트-임베딩) | AI 모델을 사용하여 텍스트에서 벡터 임베딩 생성 |
-| [AI 추출](#ai-추출) | AI를 사용하여 텍스트에서 구조화된 데이터 추출 |
-| [로컬 Ollama 채팅](#로컬-ollama-채팅) | Ollama를 통해 로컬 LLM과 채팅 (완전 오프라인) |
-| [AI 메모리](#ai-메모리) | AI 에이전트용 대화 메모리 |
-| [엔티티 메모리](#엔티티-메모리) | 대화에서 엔티티(사람, 장소, 개념) 추출 및 추적 |
-| [Redis 메모리](#redis-메모리) | Redis 저장소를 사용한 영구 대화 메모리 |
-| [벡터 메모리](#벡터-메모리) | 관련 컨텍스트 검색을 위한 벡터 임베딩을 사용한 의미 메모리 |
-| [AI 모델](#ai-모델) | AI 에이전트용 LLM 모델 구성 |
+| [Autonomous Agent](#autonomous-agent) | Self-directed AI agent with memory and goal-oriented behavior |
+| [Chain Agent](#chain-agent) | Sequential AI processing chain with multiple steps |
+| [Tool Use Agent](#tool-use-agent) | AI Agent that can call tools/functions |
+| [AI Embed](#ai-embed) | Generate embeddings from text |
+| [AI Extract](#ai-extract) | Extract structured data from text using LLM |
+| [Local Ollama Chat](#local-ollama-chat) | Chat with local LLM via Ollama (completely offline) |
+| [AI Memory](#ai-memory) | Conversation memory for AI Agent |
+| [Entity Memory](#entity-memory) | Extract and track entities (people, places, concepts) from conversations |
+| [Redis Memory](#redis-memory) | Persistent conversation memory using Redis storage |
+| [Vector Memory](#vector-memory) | Semantic memory using vector embeddings for relevant context retrieval |
+| [AI Model](#ai-model) | LLM model configuration for AI Agent |
 | [AI Tool](#ai-tool) | Expose a module as a tool for AI Agent |
-| [비전 분석](#비전-분석) | AI 비전 모델을 사용하여 이미지 분석 |
-| [Claude 채팅](#claude-채팅) | Anthropic Claude AI에 채팅 메시지를 보내고 응답 받기 |
-| [Google Gemini 채팅](#google-gemini-채팅) | Google Gemini AI에 채팅 메시지를 보내고 응답 받기 |
-| [OpenAI 채팅](#openai-채팅) | OpenAI GPT 모델에 채팅 메시지 전송 |
-| [DALL-E 이미지 생성](#dall-e-이미지-생성) | DALL-E를 사용하여 이미지 생성 |
-| [AI 에이전트](#ai-에이전트) | 다중 포트 연결(모델, 메모리, 도구)이 있는 자율 AI 에이전트 |
+| [Vision Analyze](#vision-analyze) | Analyze images using LLM vision capabilities |
+| [Claude Chat](#claude-chat) | Send a chat message to Anthropic Claude AI and get a response |
+| [Google Gemini Chat](#google-gemini-chat) | Send a chat message to Google Gemini AI and get a response |
+| [OpenAI Chat](#openai-chat) | Send a chat message to OpenAI GPT models |
+| [DALL-E Image Generation](#dall-e-image-generation) | Generate images using DALL-E |
+| [AI Agent](#ai-agent) | Autonomous AI agent with multi-port connections (model, memory, tools) |
 
 ## Modules
 
-### 자율 에이전트
+### Autonomous Agent
 
 `agent.autonomous`
 
-메모리와 목표 지향 행동을 갖춘 자율 AI 에이전트
+Self-directed AI agent with memory and goal-oriented behavior
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `goal` | string | Yes | - | 에이전트가 달성할 목표 |
-| `context` | string | No | - | 에이전트가 달성할 목표 |
-| `max_iterations` | number | No | `5` | 추가 컨텍스트 또는 제약 조건 |
-| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | 최대 추론 단계 |
-| `model` | string | No | `gpt-4o` | 모델 이름 (예: gpt-4, llama2, mistral) |
-| `ollama_url` | string | No | `http://localhost:11434` | 모델 이름 (예: gpt-4, llama2, mistral) |
-| `temperature` | number | No | `0.7` | Ollama 서버 URL (ollama 제공자 전용) |
+| `goal` | string | Yes | - | The goal for the agent to achieve |
+| `context` | string | No | - | Additional context or constraints |
+| `max_iterations` | number | No | `5` | Maximum reasoning steps |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Choose LLM provider (cloud or local) |
+| `model` | string | No | `gpt-4o` | Model name (e.g., gpt-4, llama2, mistral) |
+| `ollama_url` | string | No | `http://localhost:11434` | Ollama server URL (only for ollama provider) |
+| `temperature` | number | No | `0.7` | Creativity level (0-2) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 창의성 수준 (0-2) |
-| `thoughts` | array | 작업 결과 |
-| `iterations` | number | 작업 결과 |
-| `goal_achieved` | boolean | 에이전트 추론 단계 |
+| `result` | string | The operation result |
+| `thoughts` | array | Agent reasoning steps |
+| `iterations` | number | The iterations |
+| `goal_achieved` | boolean | The goal achieved |
 
 **Example:** Research task
 
@@ -70,30 +70,30 @@ context: PostgreSQL database with 10M records
 max_iterations: 10
 ```
 
-### 체인 에이전트
+### Chain Agent
 
 `agent.chain`
 
-여러 단계를 가진 순차적 AI 처리 체인
+Sequential AI processing chain with multiple steps
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input` | string | Yes | - | 체인의 초기 입력 |
-| `chain_steps` | array | Yes | - | 체인의 초기 입력 |
-| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | 처리 단계 배열 (각각 프롬프트 템플릿) |
-| `model` | string | No | `gpt-4o` | 모델 이름 (예: gpt-4, llama2, mistral) |
-| `ollama_url` | string | No | `http://localhost:11434` | 모델 이름 (예: gpt-4, llama2, mistral) |
-| `temperature` | number | No | `0.7` | Ollama 서버 URL (ollama 제공자 전용) |
+| `input` | string | Yes | - | Initial input for the chain |
+| `chain_steps` | array | Yes | - | Array of processing steps (each is a prompt template) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Choose LLM provider (cloud or local) |
+| `model` | string | No | `gpt-4o` | Model name (e.g., gpt-4, llama2, mistral) |
+| `ollama_url` | string | No | `http://localhost:11434` | Ollama server URL (only for ollama provider) |
+| `temperature` | number | No | `0.7` | Creativity level (0-2) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 창의성 수준 (0-2) |
-| `intermediate_results` | array | 작업 결과 |
-| `steps_completed` | number | 작업 결과 |
+| `result` | string | The operation result |
+| `intermediate_results` | array | Results from each step in the chain |
+| `steps_completed` | number | The steps completed |
 
 **Example:** Content pipeline
 
@@ -110,32 +110,32 @@ input: User behavior data shows 60% bounce rate
 chain_steps: ["Analyze what might cause this issue: {input}", "Suggest 3 solutions based on: {previous}", "Create an action plan from: {previous}"]
 ```
 
-### 도구 사용 에이전트
+### Tool Use Agent
 
 `agent.tool_use`
 
-도구/기능을 호출할 수 있는 AI 에이전트
+AI Agent that can call tools/functions
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | 에이전트의 목표 또는 작업 |
-| `tools` | array | Yes | - | 도구 정의 목록 [{name, description, parameters}] |
-| `provider` | select (`openai`, `anthropic`) | No | `openai` | 에이전트의 LLM 제공자 |
-| `model` | string | No | `gpt-4o` | 사용할 모델 |
-| `api_key` | string | No | - | API 키 (환경 변수로 대체 가능) |
-| `max_iterations` | number | No | `10` | 최대 도구 호출 라운드 수 |
-| `system_prompt` | string | No | - | 에이전트를 안내하기 위한 선택적 시스템 프롬프트 |
+| `prompt` | string | Yes | - | The goal or task for the agent |
+| `tools` | array | Yes | - | List of tool definitions [{name, description, parameters}] |
+| `provider` | select (`openai`, `anthropic`) | No | `openai` | LLM provider for the agent |
+| `model` | string | No | `gpt-4o` | Model to use |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `max_iterations` | number | No | `10` | Maximum number of tool call rounds |
+| `system_prompt` | string | No | - | Optional system prompt to guide the agent |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 에이전트의 최종 응답 |
-| `tool_calls` | array | 실행 중에 수행된 모든 도구 호출 |
-| `iterations` | number | 완료된 반복 횟수 |
-| `model` | string | 사용된 모델 |
+| `result` | string | The agent final response |
+| `tool_calls` | array | All tool calls made during execution |
+| `iterations` | number | Number of iterations completed |
+| `model` | string | Model used |
 
 **Example:** File Processing Agent
 
@@ -147,30 +147,30 @@ model: gpt-4o
 max_iterations: 5
 ```
 
-### 텍스트 임베딩
+### AI Embed
 
 `ai.embed`
 
-AI 모델을 사용하여 텍스트에서 벡터 임베딩 생성
+Generate embeddings from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 임베딩할 텍스트 |
-| `provider` | select (`openai`, `local`) | No | `openai` | 임베딩을 위한 AI 제공자 |
-| `model` | string | No | `text-embedding-3-small` | 사용할 임베딩 모델 |
-| `api_key` | string | No | - | API 키 (환경 변수로 대체 가능) |
-| `dimensions` | number | No | - | 임베딩 차원 (지원하는 모델에 한함) |
+| `text` | string | Yes | - | Single text or JSON array of texts to embed |
+| `provider` | select (`openai`, `local`) | No | `openai` | Embedding provider |
+| `model` | string | No | `text-embedding-3-small` | Embedding model to use |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `dimensions` | number | No | - | Output embedding dimensions (for supported models like text-embedding-3-*) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `embeddings` | array | 벡터 임베딩 배열 |
-| `model` | string | 임베딩에 사용된 모델 |
-| `dimensions` | number | 임베딩 벡터의 차원 수 |
-| `token_count` | number | 처리된 토큰 수 |
+| `embeddings` | array | List of embedding vectors |
+| `model` | string | Model used for embedding |
+| `dimensions` | number | Dimensions of each embedding vector |
+| `token_count` | number | Total tokens consumed |
 
 **Example:** Single Text Embedding
 
@@ -189,31 +189,31 @@ model: text-embedding-3-small
 dimensions: 256
 ```
 
-### AI 추출
+### AI Extract
 
 `ai.extract`
 
-AI를 사용하여 텍스트에서 구조화된 데이터 추출
+Extract structured data from text using LLM
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 데이터를 추출할 텍스트 |
-| `schema` | object | Yes | - | 추출할 필드를 정의하는 JSON 스키마 |
-| `instructions` | string | No | - | 추가 추출 지침 |
-| `provider` | select (`openai`, `anthropic`) | No | `openai` | 사용할 AI 제공자 |
-| `model` | string | No | `gpt-4o-mini` | 추출에 사용할 모델 |
-| `api_key` | string | No | - | API 키 (환경 변수로 대체 가능) |
-| `temperature` | number | No | `0` | 샘플링 온도 (0-2) |
+| `text` | string | Yes | - | The text to extract structured data from |
+| `schema` | object | Yes | - | JSON schema describing the desired output structure |
+| `instructions` | string | No | - | Additional extraction instructions for the LLM |
+| `provider` | select (`openai`, `anthropic`) | No | `openai` | LLM provider |
+| `model` | string | No | `gpt-4o-mini` | Model to use for extraction |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `temperature` | number | No | `0` | LLM temperature (0 = deterministic) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted` | object | 추출된 구조화된 데이터 |
-| `model` | string | 추출에 사용된 모델 |
-| `raw_response` | string | 원본 모델 응답 |
+| `extracted` | object | The extracted structured data |
+| `model` | string | Model used for extraction |
+| `raw_response` | string | Raw LLM response text |
 
 **Example:** Extract Contact Info
 
@@ -232,34 +232,34 @@ schema: {"type": "object", "properties": {"invoice_number": {"type": "string"}, 
 instructions: Extract all invoice fields. Parse amounts as numbers.
 ```
 
-### 로컬 Ollama 채팅
+### Local Ollama Chat
 
 `ai.local_ollama.chat`
 
-Ollama를 통해 로컬 LLM과 채팅 (완전 오프라인)
+Chat with local LLM via Ollama (completely offline)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | 로컬 LLM에 보낼 메시지 |
-| `model` | select (`llama2`, `llama2:13b`, `llama2:70b`, `mistral`, `mixtral`, `codellama`, `codellama:13b`, `phi`, `neural-chat`, `starling-lm`) | No | `llama2` | 로컬 LLM에 보낼 메시지 |
-| `temperature` | number | No | `0.7` | 샘플링 온도 (0-2) |
-| `system_message` | string | No | - | 시스템 역할 메시지 (선택사항) |
-| `ollama_url` | string | No | `http://localhost:11434` | 시스템 역할 메시지 (선택사항) |
-| `max_tokens` | number | No | - | Ollama 서버 URL |
+| `prompt` | string | Yes | - | The message to send to the local LLM |
+| `model` | select (`llama2`, `llama2:13b`, `llama2:70b`, `mistral`, `mixtral`, `codellama`, `codellama:13b`, `phi`, `neural-chat`, `starling-lm`) | No | `llama2` | Ollama model to use |
+| `temperature` | number | No | `0.7` | Sampling temperature (0-2) |
+| `system_message` | string | No | - | System role message (optional) |
+| `ollama_url` | string | No | `http://localhost:11434` | Ollama server URL |
+| `max_tokens` | number | No | - | Maximum tokens in response (optional, depends on model) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `response` | string | 응답의 최대 토큰 (선택사항, 모델에 따라 다름) |
-| `model` | string | 작업의 응답 |
-| `context` | array | 작업의 응답 |
-| `total_duration` | number | 모델 이름 또는 식별자 |
-| `load_duration` | number | 후속 요청을 위한 대화 컨텍스트 |
-| `prompt_eval_count` | number | 총 처리 시간 |
-| `eval_count` | number | 모델 로딩 시간 |
+| `response` | string | Response from the operation |
+| `model` | string | Model name or identifier |
+| `context` | array | Conversation context for follow-up requests |
+| `total_duration` | number | Total processing duration |
+| `load_duration` | number | Model loading duration |
+| `prompt_eval_count` | number | Number of prompt tokens evaluated |
+| `eval_count` | number | Number of tokens generated |
 
 **Example:** Simple local chat
 
@@ -285,29 +285,29 @@ model: mistral
 temperature: 0.7
 ```
 
-### AI 메모리
+### AI Memory
 
 `ai.memory`
 
-AI 에이전트용 대화 메모리
+Conversation memory for AI Agent
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `memory_type` | select (`buffer`, `window`, `summary`) | Yes | `buffer` | 메모리 저장 유형 |
-| `window_size` | number | No | `10` | 유지할 최근 메시지 수 (윈도우 메모리용) |
-| `session_id` | string | No | - | 이 대화 세션의 고유 식별자 |
-| `initial_messages` | array | No | `[]` | 사전 로드된 대화 기록 |
+| `memory_type` | select (`buffer`, `window`, `summary`) | Yes | `buffer` | Type of memory storage |
+| `window_size` | number | No | `10` | Number of recent messages to keep (for window memory) |
+| `session_id` | string | No | - | Unique identifier for this conversation session |
+| `initial_messages` | array | No | `[]` | Pre-loaded conversation history |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | 사전 로드된 대화 기록 |
-| `session_id` | string | 사전 로드된 대화 기록 |
-| `messages` | array | 메모리 유형 |
-| `config` | object | 세션 식별자 |
+| `memory_type` | string | Type of memory |
+| `session_id` | string | Session identifier |
+| `messages` | array | Current message history |
+| `config` | object | Full memory configuration |
 
 **Example:** Simple Buffer Memory
 
@@ -322,11 +322,11 @@ memory_type: window
 window_size: 5
 ```
 
-### 엔티티 메모리
+### Entity Memory
 
 `ai.memory.entity`
 
-대화에서 엔티티(사람, 장소, 개념) 추출 및 추적
+Extract and track entities (people, places, concepts) from conversations
 
 **Parameters:**
 
@@ -342,11 +342,11 @@ window_size: 5
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | 기억할 최대 엔티티 수 |
-| `session_id` | string | 기억할 최대 엔티티 수 |
-| `entities` | object | 메모리 유형 (엔티티) |
-| `relationships` | array | 세션 식별자 |
-| `config` | object | 유형별 추적된 엔티티 |
+| `memory_type` | string | Type of memory (entity) |
+| `session_id` | string | Session identifier |
+| `entities` | object | Tracked entities by type |
+| `relationships` | array | Entity relationships |
+| `config` | object | Full memory configuration |
 
 **Example:** People & Organizations
 
@@ -363,11 +363,11 @@ track_relationships: true
 max_entities: 200
 ```
 
-### Redis 메모리
+### Redis Memory
 
 `ai.memory.redis`
 
-Redis 저장소를 사용한 영구 대화 메모리
+Persistent conversation memory using Redis storage
 
 **Parameters:**
 
@@ -384,11 +384,11 @@ Redis 저장소를 사용한 영구 대화 메모리
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | 초기화 시 Redis에서 기존 메시지 로드 |
-| `session_id` | string | 초기화 시 Redis에서 기존 메시지 로드 |
-| `messages` | array | 메모리 유형 (redis) |
-| `connected` | boolean | 세션 식별자 |
-| `config` | object | 로드된 메시지 기록 |
+| `memory_type` | string | Type of memory (redis) |
+| `session_id` | string | Session identifier |
+| `messages` | array | Loaded message history |
+| `connected` | boolean | Redis connection status |
+| `config` | object | Full memory configuration |
 
 **Example:** Local Redis
 
@@ -407,11 +407,11 @@ ttl_seconds: 86400
 max_messages: 500
 ```
 
-### 벡터 메모리
+### Vector Memory
 
 `ai.memory.vector`
 
-관련 컨텍스트 검색을 위한 벡터 임베딩을 사용한 의미 메모리
+Semantic memory using vector embeddings for relevant context retrieval
 
 **Parameters:**
 
@@ -427,10 +427,10 @@ max_messages: 500
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | 메모리에 타임스탬프 및 기타 메타데이터 포함 |
-| `session_id` | string | 메모리에 타임스탬프 및 기타 메타데이터 포함 |
-| `embedding_model` | string | 메모리 유형 (벡터) |
-| `config` | object | 세션 식별자 |
+| `memory_type` | string | Type of memory (vector) |
+| `session_id` | string | Session identifier |
+| `embedding_model` | string | Embedding model used |
+| `config` | object | Full memory configuration |
 
 **Example:** Default Vector Memory
 
@@ -447,11 +447,11 @@ top_k: 10
 similarity_threshold: 0.85
 ```
 
-### AI 모델
+### AI Model
 
 `ai.model`
 
-AI 에이전트용 LLM 모델 구성
+LLM model configuration for AI Agent
 
 **Parameters:**
 
@@ -462,15 +462,15 @@ AI 에이전트용 LLM 모델 구성
 | `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
 | `api_key` | string | No | - | API key (leave empty to use environment variable) |
 | `base_url` | string | No | - | Custom API endpoint URL |
-| `max_tokens` | number | No | `4096` | 응답의 최대 토큰 |
+| `max_tokens` | number | No | `4096` | Maximum tokens in response |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `provider` | string | 응답의 최대 토큰 |
-| `model` | string | LLM 제공자 이름 |
-| `config` | object | LLM 제공자 이름 |
+| `provider` | string | LLM provider name |
+| `model` | string | Model identifier |
+| `config` | object | Full model configuration |
 
 **Example:** OpenAI GPT-4
 
@@ -519,33 +519,33 @@ module_id: http.request
 module_id: data.json_parse
 ```
 
-### 비전 분석
+### Vision Analyze
 
 `ai.vision.analyze`
 
-AI 비전 모델을 사용하여 이미지 분석
+Analyze images using LLM vision capabilities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | No | - | 이미지 파일의 로컬 경로 |
-| `image_url` | string | No | - | 분석할 이미지의 URL |
-| `prompt` | string | No | `Describe this image in detail` | 이미지에 대해 분석하거나 질문할 내용 |
-| `provider` | select (`openai`, `anthropic`) | No | `openai` | 비전 분석을 위한 AI 제공자 |
-| `model` | string | No | `gpt-4o` | 사용할 비전 모델 |
-| `api_key` | string | No | - | API 키 (환경 변수로 대체 가능) |
-| `max_tokens` | number | No | `1000` | 응답의 최대 토큰 수 |
-| `detail` | select (`low`, `high`, `auto`) | No | `auto` | 이미지 세부 수준 (낮음/높음/자동) |
+| `image_path` | string | No | - | Path to the image file on disk |
+| `image_url` | string | No | - | URL of the image (alternative to image_path) |
+| `prompt` | string | No | `Describe this image in detail` | What to analyze in the image |
+| `provider` | select (`openai`, `anthropic`) | No | `openai` | LLM provider for vision analysis |
+| `model` | string | No | `gpt-4o` | Model to use for vision analysis |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `max_tokens` | number | No | `1000` | Maximum tokens in response |
+| `detail` | select (`low`, `high`, `auto`) | No | `auto` | Image detail level for analysis |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `analysis` | string | 이미지에 대한 AI 분석 |
-| `model` | string | 분석에 사용된 모델 |
-| `provider` | string | 분석에 사용된 제공자 |
-| `tokens_used` | number | 사용된 토큰 수 |
+| `analysis` | string | The vision analysis result |
+| `model` | string | Model used for analysis |
+| `provider` | string | Provider used |
+| `tokens_used` | number | Total tokens consumed |
 
 **Example:** Analyze Screenshot
 
@@ -565,31 +565,31 @@ provider: anthropic
 model: claude-sonnet-4-20250514
 ```
 
-### Claude 채팅
+### Claude Chat
 
 `api.anthropic.chat`
 
-Anthropic Claude AI에 채팅 메시지를 보내고 응답 받기
+Send a chat message to Anthropic Claude AI and get a response
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Anthropic API 키 (기본값: env.ANTHROPIC_API_KEY) |
-| `model` | string | No | `claude-sonnet-4-6` | 사용할 Claude 모델 |
-| `messages` | array | Yes | - | role과 content가 포함된 메시지 객체 배열 |
-| `max_tokens` | number | No | `1024` | 작업에서 반환된 콘텐츠 |
-| `temperature` | number | No | `1.0` | 샘플링 온도 (0-1). 높을수록 출력이 더 무작위 |
-| `system` | string | No | - | Claude 동작을 안내하는 시스템 프롬프트 |
+| `api_key` | string | No | - | Anthropic API key (defaults to env.ANTHROPIC_API_KEY) |
+| `model` | string | No | `claude-sonnet-4-6` | Claude model to use |
+| `messages` | array | Yes | - | Array of message objects with role and content |
+| `max_tokens` | number | No | `1024` | Maximum tokens in response |
+| `temperature` | number | No | `1.0` | Sampling temperature (0-1). Higher values make output more random |
+| `system` | string | No | - | System prompt to guide Claude behavior |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `content` | string | Claude 동작을 안내하는 시스템 프롬프트 |
-| `model` | string | Claude 응답 텍스트 |
-| `stop_reason` | string | 응답에 사용된 모델 |
-| `usage` | object | 모델이 생성을 중단한 이유 (end_turn, max_tokens 등) |
+| `content` | string | Claude response text |
+| `model` | string | Model used for response |
+| `stop_reason` | string | Why the model stopped generating (end_turn, max_tokens, etc) |
+| `usage` | object | Token usage statistics |
 
 **Example:** Simple question
 
@@ -606,21 +606,21 @@ messages: [{"role": "user", "content": "Summarize this article: ${article_text}"
 max_tokens: 500
 ```
 
-### Google Gemini 채팅
+### Google Gemini Chat
 
 `api.google_gemini.chat`
 
-Google Gemini AI에 채팅 메시지를 보내고 응답 받기
+Send a chat message to Google Gemini AI and get a response
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Google AI API 키 (기본값: env.GOOGLE_AI_API_KEY) |
-| `model` | string | No | `gemini-2.5-pro` | 사용할 Gemini 모델 |
-| `prompt` | string | Yes | - | Gemini에 보낼 텍스트 프롬프트 |
-| `temperature` | number | No | `1.0` | 무작위성 제어 (0-2). 높을수록 출력이 더 무작위 |
-| `max_output_tokens` | number | No | `2048` | 응답의 최대 토큰 수 |
+| `api_key` | string | No | - | Google AI API key (defaults to env.GOOGLE_AI_API_KEY) |
+| `model` | string | No | `gemini-2.5-pro` | Gemini model to use |
+| `prompt` | string | Yes | - | The text prompt to send to Gemini |
+| `temperature` | number | No | `1.0` | Controls randomness (0-2). Higher values make output more random |
+| `max_output_tokens` | number | No | `2048` | Maximum number of tokens in response |
 
 **Output:**
 
@@ -644,29 +644,29 @@ temperature: 0.7
 max_output_tokens: 500
 ```
 
-### OpenAI 채팅
+### OpenAI Chat
 
 `api.openai.chat`
 
-OpenAI GPT 모델에 채팅 메시지 전송
+Send a chat message to OpenAI GPT models
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | GPT에 보낼 메시지 |
-| `model` | select (`gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `o3`, `o3-mini`, `o4-mini`, `gpt-4-turbo-preview`) | No | `gpt-4o` | GPT에 보낼 메시지 |
-| `temperature` | number | No | `0.7` | 샘플링 온도 (0-2) |
-| `max_tokens` | number | No | `1000` | 샘플링 온도 (0-2) |
-| `system_message` | string | No | - | 응답의 최대 토큰 |
+| `prompt` | string | Yes | - | The message to send to GPT |
+| `model` | select (`gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `o3`, `o3-mini`, `o4-mini`, `gpt-4-turbo-preview`) | No | `gpt-4o` | OpenAI model to use |
+| `temperature` | number | No | `0.7` | Sampling temperature (0-2) |
+| `max_tokens` | number | No | `1000` | Maximum tokens in response |
+| `system_message` | string | No | - | System role message (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `response` | string | 시스템 역할 메시지 (선택사항) |
-| `model` | string | 작업의 응답 |
-| `usage` | object | 작업의 응답 |
+| `response` | string | Response from the operation |
+| `model` | string | Model name or identifier |
+| `usage` | object | Token usage statistics |
 
 **Example:** Simple chat
 
@@ -684,21 +684,21 @@ temperature: 0.2
 system_message: You are a Python programming expert
 ```
 
-### DALL-E 이미지 생성
+### DALL-E Image Generation
 
 `api.openai.image`
 
-DALL-E를 사용하여 이미지 생성
+Generate images using DALL-E
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | 생성할 이미지 설명 |
-| `size` | select (`256x256`, `512x512`, `1024x1024`, `1792x1024`, `1024x1792`) | No | `1024x1024` | 생성할 이미지 설명 |
-| `model` | select (`dall-e-3`, `dall-e-2`) | No | `dall-e-3` | DALL-E 모델 버전 |
-| `quality` | select (`standard`, `hd`) | No | `standard` | 이미지 품질 (DALL-E 3 전용) |
-| `n` | number | No | `1` | 생성할 이미지 수 (1-10) |
+| `prompt` | string | Yes | - | Description of the image to generate |
+| `size` | select (`256x256`, `512x512`, `1024x1024`, `1792x1024`, `1024x1792`) | No | `1024x1024` | Image size |
+| `model` | select (`dall-e-3`, `dall-e-2`) | No | `dall-e-3` | DALL-E model version |
+| `quality` | select (`standard`, `hd`) | No | `standard` | Image quality (DALL-E 3 only) |
+| `n` | number | No | `1` | Number of images to generate (1-10) |
 
 **Output:**
 
@@ -725,32 +725,32 @@ model: dall-e-2
 n: 3
 ```
 
-### AI 에이전트
+### AI Agent
 
 `llm.agent`
 
-다중 포트 연결(모델, 메모리, 도구)이 있는 자율 AI 에이전트
+Autonomous AI agent with multi-port connections (model, memory, tools)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt_source` | select (`manual`, `auto`) | No | `manual` | 작업 프롬프트를 가져올 위치 |
-| `task` | string | No | - | 에이전트가 완료할 작업. 업스트림 데이터를 참조하려면 {<!-- -->{input}<!-- -->}을 사용하세요. |
-| `prompt_path` | string | No | `{<!-- -->{input}<!-- -->}` | 입력에서 프롬프트를 추출할 경로 (예: {<!-- -->{input.message}<!-- -->}) |
-| `join_strategy` | select (`first`, `newline`, `separator`, `json`) | No | `first` | 배열 입력 처리 방법 |
+| `prompt_source` | select (`manual`, `auto`) | No | `manual` | Where to get the task prompt from |
+| `task` | string | No | - | The task for the agent to complete. Use {<!-- -->{input}<!-- -->} to reference upstream data. |
+| `prompt_path` | string | No | `{<!-- -->{input}<!-- -->}` | Path to extract prompt from input (e.g., {<!-- -->{input.message}<!-- -->}) |
+| `join_strategy` | select (`first`, `newline`, `separator`, `json`) | No | `first` | How to handle array inputs |
 | `join_separator` | string | No | `
 
 ---
 
-` | 배열 항목 결합을 위한 구분자 |
-| `max_input_size` | number | No | `10000` | 프롬프트의 최대 문자 수 (오버플로 방지) |
+` | Separator for joining array items |
+| `max_input_size` | number | No | `10000` | Maximum characters for prompt (prevents overflow) |
 | `agent_type` | select (`tools`, `react`) | No | `tools` | Reasoning strategy for the agent |
-| `system_prompt` | string | No | `You are a helpful AI agent. Use the available tools to complete the task. Think step by step.` | 에이전트 동작을 위한 지침 |
+| `system_prompt` | string | No | `You are a helpful AI agent. Use the available tools to complete the task. Think step by step.` | Instructions for the agent behavior |
 | `response_format` | select (`text`, `json`, `json_schema`) | No | `text` | Expected format of the final answer |
 | `output_schema` | object | No | `{}` | JSON Schema the final answer must match (for json_schema format) |
-| `context` | object | No | `{}` | 모듈 ID 목록 (도구 노드 연결 대안) |
-| `max_iterations` | number | No | `10` | 에이전트를 위한 추가 컨텍스트 데이터 |
+| `context` | object | No | `{}` | Additional context data for the agent |
+| `max_iterations` | number | No | `10` | Maximum number of tool calls |
 | `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
 | `model` | string | No | `gpt-4o` | Specific model to use |
 | `api_key` | string | No | - | API key (leave empty to use environment variable) |
@@ -761,11 +761,11 @@ n: 3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 에이전트가 성공적으로 완료되었는지 여부 |
-| `result` | string | 에이전트가 성공적으로 완료되었는지 여부 |
-| `steps` | array | 에이전트가 성공적으로 완료되었는지 여부 |
-| `tool_calls` | number | 에이전트의 최종 결과 |
-| `tokens_used` | number | 에이전트가 수행한 단계 목록 |
+| `ok` | boolean | Whether the agent completed successfully |
+| `result` | string | The final result from the agent |
+| `steps` | array | List of steps the agent took |
+| `tool_calls` | number | Number of tools called |
+| `tokens_used` | number | Total tokens consumed |
 
 **Example:** Web Research Agent
 

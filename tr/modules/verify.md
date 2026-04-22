@@ -6,44 +6,44 @@ Visual verification, Figma comparison, style capture, and report generation.
 
 | Module | Description |
 |--------|-------------|
-| [Ekran Görüntüsünü Açıklayın](#ekran-görüntüsünü-açıklayın) | Ekran görüntülerinde farklılıkları işaretlemek için etiketli sınırlayıcı kutular çizin |
-| [Eleman Stillerini Yakala](#eleman-stillerini-yakala) | Tarayıcı elemanından hesaplanan stilleri yakala |
-| [Stilleri Karşılaştır](#stilleri-karşılaştır) | Yakalanan stilleri beklenen değerlerle karşılaştır |
-| [Figma Stili Al](#figma-stili-al) | Figma API'den tasarım tokenlarını al (token yerel kalır) |
-| [Rapor Oluştur](#rapor-oluştur) | HTML/JSON/Markdown formatında doğrulama raporu oluştur |
-| [Kural Setini Yükle](#kural-setini-yükle) | YAML dosyasından doğrulama kurallarını yükle |
-| [Doğrulamayı Çalıştır](#doğrulamayı-çalıştır) | Tam tasarım doğrulaması çalıştır: yakala → karşılaştır → raporla |
-| [Spesifikasyon Doğrulamasını Çalıştır](#spesifikasyon-doğrulamasını-çalıştır) | Dinamik spesifikasyon doğrulaması - herhangi bir modülü YAML ile birleştir |
-| [Görsel Fark](#görsel-fark) | Referans tasarımı ile geliştirici sitesini görsel olarak karşılaştırın, farklılıkları açıklayın |
+| [Annotate Screenshot](#annotate-screenshot) | Draw labeled bounding boxes on screenshots to mark differences |
+| [Capture Element Styles](#capture-element-styles) | Capture computed styles from browser element |
+| [Compare Styles](#compare-styles) | Compare captured styles with expected values |
+| [Fetch Figma Style](#fetch-figma-style) | Fetch design tokens from Figma API (token stays local) |
+| [Generate Report](#generate-report) | Generate verification report in HTML/JSON/Markdown |
+| [Load Ruleset](#load-ruleset) | Load verification rules from YAML file |
+| [Run Verification](#run-verification) | Run full design verification: capture → compare → report |
+| [Run Spec Verification](#run-spec-verification) | Dynamic spec verification - compose any modules via YAML |
+| [Visual Diff](#visual-diff) | Compare reference design with dev site visually, annotate differences |
 
 ## Modules
 
-### Ekran Görüntüsünü Açıklayın
+### Annotate Screenshot
 
 `verify.annotate`
 
-Ekran görüntülerinde farklılıkları işaretlemek için etiketli sınırlayıcı kutular çizin
+Draw labeled bounding boxes on screenshots to mark differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | Yes | - | Ekran görüntüsü resminin yolu |
-| `annotations` | array | Yes | - | Açıklama dizisi: [{label, x, y, genişlik, yükseklik, renk?, açıklama?}] |
-| `output_path` | string | No | - | Açıklamalı görüntü için çıkış yolu (varsayılan: _annotated eki ekler) |
+| `image_path` | string | Yes | - | Path to the screenshot image |
+| `annotations` | array | Yes | - | Array of annotations: [{label, x, y, width, height, color?, description?}] |
+| `output_path` | string | No | - | Output path for annotated image (default: adds _annotated suffix) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Açıklamalı görüntünün yolu |
-| `annotation_count` | integer | Çizilen açıklama sayısı |
+| `output_path` | string | Path to annotated image |
+| `annotation_count` | integer | Number of annotations drawn |
 
-### Eleman Stillerini Yakala
+### Capture Element Styles
 
 `verify.capture`
 
-Tarayıcı elemanından hesaplanan stilleri yakala
+Capture computed styles from browser element
 
 **Parameters:**
 
@@ -62,11 +62,11 @@ Tarayıcı elemanından hesaplanan stilleri yakala
 | `element` | object | Captured element with styles |
 | `found` | boolean | Whether element was found |
 
-### Stilleri Karşılaştır
+### Compare Styles
 
 `verify.compare`
 
-Yakalanan stilleri beklenen değerlerle karşılaştır
+Compare captured styles with expected values
 
 **Parameters:**
 
@@ -93,11 +93,11 @@ Yakalanan stilleri beklenen değerlerle karşılaştır
 | `error_count` | number | Number of errors |
 | `warning_count` | number | Number of warnings |
 
-### Figma Stili Al
+### Fetch Figma Style
 
 `verify.figma`
 
-Figma API'den tasarım tokenlarını al (token yerel kalır)
+Fetch design tokens from Figma API (token stays local)
 
 **Parameters:**
 
@@ -115,11 +115,11 @@ Figma API'den tasarım tokenlarını al (token yerel kalır)
 | `node` | object | Figma node data |
 | `style` | object | Extracted style |
 
-### Rapor Oluştur
+### Generate Report
 
 `verify.report`
 
-HTML/JSON/Markdown formatında doğrulama raporu oluştur
+Generate verification report in HTML/JSON/Markdown
 
 **Parameters:**
 
@@ -139,11 +139,11 @@ HTML/JSON/Markdown formatında doğrulama raporu oluştur
 | `report_path` | string | Path to generated report |
 | `summary` | object | Summary statistics |
 
-### Kural Setini Yükle
+### Load Ruleset
 
 `verify.ruleset`
 
-YAML dosyasından doğrulama kurallarını yükle
+Load verification rules from YAML file
 
 **Parameters:**
 
@@ -158,11 +158,11 @@ YAML dosyasından doğrulama kurallarını yükle
 | `ruleset` | object | Parsed ruleset |
 | `rules_count` | integer | Number of rules |
 
-### Doğrulamayı Çalıştır
+### Run Verification
 
 `verify.run`
 
-Tam tasarım doğrulaması çalıştır: yakala → karşılaştır → raporla
+Run full design verification: capture → compare → report
 
 **Parameters:**
 
@@ -212,11 +212,11 @@ url: http://localhost:3000
 ruleset_path: ./design-rules.yaml
 ```
 
-### Spesifikasyon Doğrulamasını Çalıştır
+### Run Spec Verification
 
 `verify.spec`
 
-Dinamik spesifikasyon doğrulaması - herhangi bir modülü YAML ile birleştir
+Dynamic spec verification - compose any modules via YAML
 
 **Parameters:**
 
@@ -233,31 +233,31 @@ Dinamik spesifikasyon doğrulaması - herhangi bir modülü YAML ile birleştir
 | `summary` | object |  |
 | `results` | array |  |
 
-### Görsel Fark
+### Visual Diff
 
 `verify.visual_diff`
 
-Referans tasarımı ile geliştirici sitesini görsel olarak karşılaştırın, farklılıkları açıklayın
+Compare reference design with dev site visually, annotate differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `reference_url` | string | Yes | - | Referans tasarımının URL'si veya yerel resim yolu |
-| `dev_url` | string | Yes | - | Karşılaştırılacak geliştirme sitesinin URL'si |
-| `output_dir` | string | No | `./verify-reports/visual-diff` | Raporlar için çıkış dizini |
-| `focus_areas` | array | No | - | Odaklanılacak alanlar (örneğin ["başlık", "giriş formu"]) |
-| `viewport_width` | number | No | `1280` | Tarayıcı görünüm alanı genişliği |
-| `viewport_height` | number | No | `800` | Tarayıcı görünüm alanı yüksekliği |
-| `model` | string | No | `gpt-4o` | Kullanılacak görsel model |
-| `api_key` | string | No | - | OpenAI API anahtarı (veya OPENAI_API_KEY ortam değişkenini kullanın) |
+| `reference_url` | string | Yes | - | URL or local image path of reference design |
+| `dev_url` | string | Yes | - | URL of development site to compare |
+| `output_dir` | string | No | `./verify-reports/visual-diff` | Output directory for reports |
+| `focus_areas` | array | No | - | Areas to focus on (e.g. ["header", "login form"]) |
+| `viewport_width` | number | No | `1280` | Browser viewport width |
+| `viewport_height` | number | No | `800` | Browser viewport height |
+| `model` | string | No | `gpt-4o` | Vision model to use |
+| `api_key` | string | No | - | OpenAI API key (or use OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `similarity_score` | number | Benzerlik yüzdesi (0-100) |
-| `annotations` | array | Açıklamalı farklılıkların listesi |
-| `annotated_image` | string | Açıklamalı ekran görüntüsünün yolu |
-| `report_path` | string | HTML raporunun yolu |
-| `summary` | string | Farklılıkların özeti |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `annotations` | array | List of annotated differences |
+| `annotated_image` | string | Path to annotated screenshot |
+| `report_path` | string | Path to HTML report |
+| `summary` | string | Summary of differences |

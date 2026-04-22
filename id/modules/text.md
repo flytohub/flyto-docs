@@ -6,143 +6,143 @@ Text analysis: word count, encoding detection, email/URL/number extraction.
 
 | Module | Description |
 |--------|-------------|
-| [Jumlah Karakter](#jumlah-karakter) | Hitung karakter dalam teks |
-| [Deteksi Pengkodean](#deteksi-pengkodean) | Deteksi pengkodean teks |
-| [Ekstrak Email](#ekstrak-email) | Ekstrak semua alamat email dari teks |
-| [Ekstrak Angka](#ekstrak-angka) | Ekstrak semua angka dari teks |
-| [Ekstrak URL](#ekstrak-url) | Ekstrak semua URL dari teks |
-| [Jumlah Kata](#jumlah-kata) | Hitung kata dalam teks |
+| [Character Count](#character-count) | Count characters in text |
+| [Detect Encoding](#detect-encoding) | Detect text encoding |
+| [Extract Emails](#extract-emails) | Extract all email addresses from text |
+| [Extract Numbers](#extract-numbers) | Extract all numbers from text |
+| [Extract URLs](#extract-urls) | Extract all URLs from text |
+| [Word Count](#word-count) | Count words in text |
 
 ## Modules
 
-### Jumlah Karakter
+### Character Count
 
 `text.char_count`
 
-Hitung karakter dalam teks
+Count characters in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Teks untuk dianalisis |
+| `text` | text | Yes | - | Text to analyze |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total` | number | Teks untuk dianalisis |
-| `without_spaces` | number | Jumlah total karakter |
-| `letters` | number | Jumlah total karakter |
-| `digits` | number | Hitung tanpa spasi |
-| `spaces` | number | Jumlah huruf |
-| `lines` | number | Jumlah digit |
+| `total` | number | Total character count |
+| `without_spaces` | number | Count without spaces |
+| `letters` | number | Letter count |
+| `digits` | number | Digit count |
+| `spaces` | number | Space count |
+| `lines` | number | Line count |
 
-### Deteksi Pengkodean
+### Detect Encoding
 
 `text.detect_encoding`
 
-Deteksi pengkodean teks
+Detect text encoding
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Teks atau byte untuk mendeteksi pengkodean |
+| `text` | text | Yes | - | Text or bytes to detect encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `encoding` | string | Teks atau byte untuk mendeteksi pengkodean |
-| `confidence` | number | Pengkodean terdeteksi |
-| `is_ascii` | boolean | Pengkodean terdeteksi |
-| `has_bom` | boolean | Skor kepercayaan (0-1) |
+| `encoding` | string | Detected encoding |
+| `confidence` | number | Confidence score (0-1) |
+| `is_ascii` | boolean | Whether text is pure ASCII |
+| `has_bom` | boolean | Whether BOM was detected |
 
-### Ekstrak Email
+### Extract Emails
 
 `text.extract_emails`
 
-Ekstrak semua alamat email dari teks
+Extract all email addresses from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Teks untuk mengekstrak email |
-| `unique` | boolean | No | `True` | Teks untuk mengekstrak email |
-| `lowercase` | boolean | No | `True` | Kembalikan hanya email unik |
+| `text` | text | Yes | - | Text to extract emails from |
+| `unique` | boolean | No | `True` | Return only unique emails |
+| `lowercase` | boolean | No | `True` | Convert emails to lowercase |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `emails` | array | Ubah email menjadi huruf kecil |
-| `count` | number | Daftar email yang diekstrak |
-| `domains` | array | Daftar email yang diekstrak |
+| `emails` | array | List of extracted emails |
+| `count` | number | Number of emails found |
+| `domains` | array | Unique domains found |
 
-### Ekstrak Angka
+### Extract Numbers
 
 `text.extract_numbers`
 
-Ekstrak semua angka dari teks
+Extract all numbers from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Teks untuk mengekstrak angka |
-| `include_decimals` | boolean | No | `True` | Teks untuk mengekstrak angka |
-| `include_negative` | boolean | No | `True` | Sertakan angka desimal |
+| `text` | text | Yes | - | Text to extract numbers from |
+| `include_decimals` | boolean | No | `True` | Include decimal numbers |
+| `include_negative` | boolean | No | `True` | Include negative numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `numbers` | array | Sertakan angka negatif |
-| `count` | number | Daftar angka yang diekstrak |
-| `sum` | number | Daftar angka yang diekstrak |
-| `min` | number | Jumlah angka yang ditemukan |
-| `max` | number | Jumlah semua angka |
+| `numbers` | array | List of extracted numbers |
+| `count` | number | Number of numbers found |
+| `sum` | number | Sum of all numbers |
+| `min` | number | Minimum value |
+| `max` | number | Maximum value |
 
-### Ekstrak URL
+### Extract URLs
 
 `text.extract_urls`
 
-Ekstrak semua URL dari teks
+Extract all URLs from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Teks untuk mengekstrak URL |
-| `unique` | boolean | No | `True` | Teks untuk mengekstrak URL |
+| `text` | text | Yes | - | Text to extract URLs from |
+| `unique` | boolean | No | `True` | Return only unique URLs |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `urls` | array | Kembalikan hanya URL unik |
-| `count` | number | Daftar URL yang diekstrak |
+| `urls` | array | List of extracted URLs |
+| `count` | number | Number of URLs found |
 
-### Jumlah Kata
+### Word Count
 
 `text.word_count`
 
-Hitung kata dalam teks
+Count words in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Teks untuk dianalisis |
+| `text` | text | Yes | - | Text to analyze |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `word_count` | number | Teks untuk dianalisis |
-| `unique_words` | number | Total jumlah kata |
-| `sentence_count` | number | Total jumlah kata |
-| `paragraph_count` | number | Jumlah kata unik |
-| `avg_word_length` | number | Perkiraan jumlah kalimat |
+| `word_count` | number | Total word count |
+| `unique_words` | number | Number of unique words |
+| `sentence_count` | number | Approximate sentence count |
+| `paragraph_count` | number | Paragraph count |
+| `avg_word_length` | number | Average word length |

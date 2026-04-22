@@ -6,143 +6,143 @@ Text analysis: word count, encoding detection, email/URL/number extraction.
 
 | Module | Description |
 |--------|-------------|
-| [वर्ण गिनती](#वर्ण-गिनती) | पाठ में वर्णों की गिनती करें |
-| [एन्कोडिंग का पता लगाएं](#एन्कोडिंग-का-पता-लगाएं) | पाठ एन्कोडिंग का पता लगाएं |
-| [ईमेल निकालें](#ईमेल-निकालें) | पाठ से सभी ईमेल पते निकालें |
-| [संख्याएँ निकालें](#संख्याएँ-निकालें) | पाठ से सभी संख्याएँ निकालें |
-| [URL निकालें](#url-निकालें) | पाठ से सभी URL निकालें |
-| [शब्द गणना](#शब्द-गणना) | पाठ में शब्दों की गिनती करें |
+| [Character Count](#character-count) | Count characters in text |
+| [Detect Encoding](#detect-encoding) | Detect text encoding |
+| [Extract Emails](#extract-emails) | Extract all email addresses from text |
+| [Extract Numbers](#extract-numbers) | Extract all numbers from text |
+| [Extract URLs](#extract-urls) | Extract all URLs from text |
+| [Word Count](#word-count) | Count words in text |
 
 ## Modules
 
-### वर्ण गिनती
+### Character Count
 
 `text.char_count`
 
-पाठ में वर्णों की गिनती करें
+Count characters in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | विश्लेषण करने के लिए पाठ |
+| `text` | text | Yes | - | Text to analyze |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total` | number | विश्लेषण करने के लिए पाठ |
-| `without_spaces` | number | कुल वर्ण गिनती |
-| `letters` | number | कुल वर्ण गिनती |
-| `digits` | number | खाली स्थानों के बिना गिनती |
-| `spaces` | number | अक्षर गिनती |
-| `lines` | number | अंक गिनती |
+| `total` | number | Total character count |
+| `without_spaces` | number | Count without spaces |
+| `letters` | number | Letter count |
+| `digits` | number | Digit count |
+| `spaces` | number | Space count |
+| `lines` | number | Line count |
 
-### एन्कोडिंग का पता लगाएं
+### Detect Encoding
 
 `text.detect_encoding`
 
-पाठ एन्कोडिंग का पता लगाएं
+Detect text encoding
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | एन्कोडिंग का पता लगाने के लिए पाठ या बाइट्स |
+| `text` | text | Yes | - | Text or bytes to detect encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `encoding` | string | एन्कोडिंग का पता लगाने के लिए पाठ या बाइट्स |
-| `confidence` | number | पता लगाया गया एन्कोडिंग |
-| `is_ascii` | boolean | पता लगाया गया एन्कोडिंग |
-| `has_bom` | boolean | विश्वास स्कोर (0-1) |
+| `encoding` | string | Detected encoding |
+| `confidence` | number | Confidence score (0-1) |
+| `is_ascii` | boolean | Whether text is pure ASCII |
+| `has_bom` | boolean | Whether BOM was detected |
 
-### ईमेल निकालें
+### Extract Emails
 
 `text.extract_emails`
 
-पाठ से सभी ईमेल पते निकालें
+Extract all email addresses from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | जिस पाठ से ईमेल निकालें |
-| `unique` | boolean | No | `True` | जिस पाठ से ईमेल निकालें |
-| `lowercase` | boolean | No | `True` | केवल अद्वितीय ईमेल लौटाएं |
+| `text` | text | Yes | - | Text to extract emails from |
+| `unique` | boolean | No | `True` | Return only unique emails |
+| `lowercase` | boolean | No | `True` | Convert emails to lowercase |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `emails` | array | ईमेल को लोअरकेस में बदलें |
-| `count` | number | निकाले गए ईमेल की सूची |
-| `domains` | array | निकाले गए ईमेल की सूची |
+| `emails` | array | List of extracted emails |
+| `count` | number | Number of emails found |
+| `domains` | array | Unique domains found |
 
-### संख्याएँ निकालें
+### Extract Numbers
 
 `text.extract_numbers`
 
-पाठ से सभी संख्याएँ निकालें
+Extract all numbers from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | जिस पाठ से संख्याएँ निकालें |
-| `include_decimals` | boolean | No | `True` | जिस पाठ से संख्याएँ निकालें |
-| `include_negative` | boolean | No | `True` | दशमलव संख्याएँ शामिल करें |
+| `text` | text | Yes | - | Text to extract numbers from |
+| `include_decimals` | boolean | No | `True` | Include decimal numbers |
+| `include_negative` | boolean | No | `True` | Include negative numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `numbers` | array | ऋणात्मक संख्याएँ शामिल करें |
-| `count` | number | निकाली गई संख्याओं की सूची |
-| `sum` | number | निकाली गई संख्याओं की सूची |
-| `min` | number | मिली हुई संख्याओं की संख्या |
-| `max` | number | सभी संख्याओं का योग |
+| `numbers` | array | List of extracted numbers |
+| `count` | number | Number of numbers found |
+| `sum` | number | Sum of all numbers |
+| `min` | number | Minimum value |
+| `max` | number | Maximum value |
 
-### URL निकालें
+### Extract URLs
 
 `text.extract_urls`
 
-पाठ से सभी URL निकालें
+Extract all URLs from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | जिस पाठ से URL निकालें |
-| `unique` | boolean | No | `True` | जिस पाठ से URL निकालें |
+| `text` | text | Yes | - | Text to extract URLs from |
+| `unique` | boolean | No | `True` | Return only unique URLs |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `urls` | array | केवल अद्वितीय URL लौटाएं |
-| `count` | number | निकाले गए URL की सूची |
+| `urls` | array | List of extracted URLs |
+| `count` | number | Number of URLs found |
 
-### शब्द गणना
+### Word Count
 
 `text.word_count`
 
-पाठ में शब्दों की गिनती करें
+Count words in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | विश्लेषण के लिए पाठ |
+| `text` | text | Yes | - | Text to analyze |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `word_count` | number | विश्लेषण के लिए पाठ |
-| `unique_words` | number | कुल शब्द गिनती |
-| `sentence_count` | number | कुल शब्द गिनती |
-| `paragraph_count` | number | अद्वितीय शब्दों की संख्या |
-| `avg_word_length` | number | अनुमानित वाक्य गिनती |
+| `word_count` | number | Total word count |
+| `unique_words` | number | Number of unique words |
+| `sentence_count` | number | Approximate sentence count |
+| `paragraph_count` | number | Paragraph count |
+| `avg_word_length` | number | Average word length |

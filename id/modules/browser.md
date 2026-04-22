@@ -6,68 +6,68 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [Tangani Tantangan](#tangani-tantangan) | Deteksi otomatis dan tangani tantangan anti-bot (Cloudflare, CAPTCHA) |
-| [Klik Elemen](#klik-elemen) | Klik elemen di halaman |
-| [Tutup Browser](#tutup-browser) | Tutup instance browser dan lepaskan sumber daya |
-| [Hubungkan Jarak Jauh](#hubungkan-jarak-jauh) | Hubungkan ke layanan browser jarak jauh (Browserless, BrowserBase). Fingerprint asli, lewati Cloudflare. |
-| [Tangkap Konsol](#tangkap-konsol) | Tangkap log konsol browser (error, warning, info) |
-| [Kelola Cookie](#kelola-cookie) | Dapatkan, atur, atau hapus cookie browser |
-| [File Cookie](#file-cookie) | Impor atau ekspor cookie browser ke/dari file JSON. |
+| [Handle Challenge](#handle-challenge) | Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop. |
+| [Click Element](#click-element) | Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Close Browser](#close-browser) | Close the browser instance and release resources |
+| [Connect Remote](#connect-remote) | Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs. |
+| [Capture Console](#capture-console) | Capture browser console logs (errors, warnings, info) |
+| [Manage Cookies](#manage-cookies) | Get, set, or clear browser cookies |
+| [Cookies File](#cookies-file) | Import or export browser cookies to/from a JSON file for session persistence. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [Deteksi Daftar](#deteksi-daftar) | Deteksi otomatis item berulang pada halaman (artikel, produk, hasil pencarian) |
-| [Tangani Dialog](#tangani-dialog) | Tangani dialog alert, confirm, dan prompt |
-| [Unduh File](#unduh-file) | Unduh file dari browser |
-| [Seret dan Lepas](#seret-dan-lepas) | Seret dan lepas elemen |
-| [Simulasi Perangkat](#simulasi-perangkat) | Mensimulasikan perangkat atau mengatur viewport kustom |
-| [Pastikan Browser](#pastikan-browser) | Pastikan sesi browser ada (gunakan kembali atau luncurkan) |
-| [Jalankan JavaScript](#jalankan-javascript) | Jalankan kode JavaScript di konteks halaman |
-| [Ekstrak Data](#ekstrak-data) | Ekstrak data terstruktur dari halaman |
-| [Ekstrak Bersarang](#ekstrak-bersarang) | Ekstrak data bersarang/hierarki (komentar, thread, folder). |
-| [Temukan Elemen](#temukan-elemen) | Temukan elemen di halaman dan kembalikan daftar ID elemen |
-| [Isi Formulir](#isi-formulir) | Pengisian formulir pintar dengan deteksi bidang otomatis |
-| [Ganti Frame](#ganti-frame) | Beralih ke konteks iframe atau frame |
-| [Mock Geolokasi](#mock-geolokasi) | Mock geolokasi browser |
-| [Pergi ke URL](#pergi-ke-url) | Navigasi ke URL tertentu |
-| [Hover Elemen](#hover-elemen) | Arahkan mouse ke atas elemen |
-| [Interaksi Browser](#interaksi-browser) | Jeda agar pengguna dapat berinteraksi dengan halaman browser |
-| [Luncurkan Browser](#luncurkan-browser) | Luncurkan instance browser baru dengan Playwright |
-| [Login](#login) | Deteksi otomatis dan isi form login dengan verifikasi pasca-login. |
-| [Navigasi Riwayat](#navigasi-riwayat) | Menavigasi riwayat browser (mundur, maju, muat ulang) |
-| [Monitor Jaringan](#monitor-jaringan) | Pantau dan cegat permintaan jaringan |
-| [Daftar Halaman](#daftar-halaman) | Daftar semua halaman/tab browser yang terbuka |
-| [Paginasi & Ekstrak](#paginasi--ekstrak) | Auto-paginasi melalui halaman dan ekstrak data |
-| [Hasilkan PDF](#hasilkan-pdf) | Hasilkan PDF dari halaman saat ini |
-| [Metrik Kinerja](#metrik-kinerja) | Kumpulkan metrik kinerja browser |
-| [Pool Browser](#pool-browser) | Kelola beberapa instance browser untuk otomasi paralel. |
-| [Tekan Tombol](#tekan-tombol) | Tekan tombol keyboard |
-| [Rotasi Proxy](#rotasi-proxy) | Rotasi daftar proxy dengan deteksi proxy mati. |
-| [Ekstrak Artikel](#ekstrak-artikel) | Ekstraksi artikel cerdas — ambil judul, penulis, tanggal, dan konten utama dari halaman web apa pun |
-| [Rekam Aksi](#rekam-aksi) | Rekam aksi pengguna sebagai workflow |
-| [Lepaskan Browser](#lepaskan-browser) | Lepaskan sesi browser (tutup hanya jika dimiliki) |
-| [Tangkap Respons](#tangkap-respons) | Tangkap isi respons API (XHR/fetch). Ekstrak JSON dari panggilan API pada halaman. |
-| [Periksa Robots.txt](#periksa-robots.txt) | Periksa kepatuhan robots.txt dan temukan sitemap. |
-| [Ambil Tangkapan Layar](#ambil-tangkapan-layar) | Ambil tangkapan layar halaman saat ini |
-| [Gulir Halaman](#gulir-halaman) | Gulir halaman ke elemen, posisi, atau arah |
-| [Pilih Opsi](#pilih-opsi) | Pilih opsi dari elemen dropdown |
-| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml dan ekstrak URL beserta metadata. |
-| [Snapshot DOM](#snapshot-dom) | Tangkap snapshot DOM dari halaman saat ini |
-| [Penyimpanan Browser](#penyimpanan-browser) | Akses localStorage dan sessionStorage |
-| [Kelola Tab](#kelola-tab) | Buat, ganti, dan tutup tab browser |
-| [Ekstrak Tabel](#ekstrak-tabel) | Ekstrak tabel HTML menjadi data terstruktur dengan header yang terdeteksi otomatis. |
-| [Pembatas Kecepatan](#pembatas-kecepatan) | Pembatasan kecepatan per domain. Menunggu antar permintaan untuk menghindari pemblokiran. |
-| [Jejak Browser](#jejak-browser) | Mulai, hentikan, atau simpan jejak kinerja browser |
-| [Ketik Teks](#ketik-teks) | Ketik teks ke dalam field input |
-| [Unggah File](#unggah-file) | Unggah file ke elemen input file |
-| [Atur Viewport](#atur-viewport) | Dapatkan atau atur ukuran viewport browser |
-| [Tunggu](#tunggu) | Tunggu durasi atau sampai elemen muncul |
+| [Detect List](#detect-list) | Auto-detect repeating items on any page (articles, products, search results). No selectors needed. |
+| [Handle Dialog](#handle-dialog) | Handle alert, confirm, and prompt dialogs |
+| [Download File](#download-file) | Download file from browser |
+| [Drag and Drop](#drag-and-drop) | Drag and drop elements |
+| [Device Emulation](#device-emulation) | Emulate mobile devices, tablets, and custom viewports |
+| [Ensure Browser](#ensure-browser) | Ensure a browser session exists (reuse or launch) |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code in page context |
+| [Extract Data](#extract-data) | Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Extract Nested](#extract-nested) | Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children. |
+| [Find Elements](#find-elements) | Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Fill Form](#fill-form) | Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM. |
+| [Switch Frame](#switch-frame) | Switch to iframe or frame context |
+| [Mock Geolocation](#mock-geolocation) | Mock browser geolocation |
+| [Go to URL](#go-to-url) | Navigate to a specific URL |
+| [Hover Element](#hover-element) | Hover mouse over an element |
+| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
+| [Launch Browser](#launch-browser) | Launch a new browser instance with Playwright |
+| [Login](#login) | Auto-detect and fill login forms. Handles username + password + submit with post-login verification. |
+| [Page Navigation](#page-navigation) | Navigate back, forward, or reload the page |
+| [Network Monitor](#network-monitor) | Monitor and intercept network requests |
+| [List Pages](#list-pages) | List all open browser pages/tabs with details |
+| [Paginate & Extract](#paginate--extract) | Auto-paginate through pages and extract data. Supports retry and checkpoint resume. |
+| [Generate PDF](#generate-pdf) | Generate PDF from current page |
+| [Performance Metrics](#performance-metrics) | Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics |
+| [Browser Pool](#browser-pool) | Manage multiple named browser instances for parallel automation. |
+| [Press Key](#press-key) | Press a keyboard key |
+| [Rotate Proxy](#rotate-proxy) | Rotate through a list of proxies. Relaunches browser with the next proxy. |
+| [Extract Article](#extract-article) | Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode. |
+| [Record Actions](#record-actions) | Record user actions as workflow |
+| [Release Browser](#release-browser) | Release browser session (close only if owned) |
+| [Capture Response](#capture-response) | Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls. |
+| [Check Robots.txt](#check-robots.txt) | Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping. |
+| [Take Screenshot](#take-screenshot) | Take a screenshot of the current page |
+| [Scroll Page](#scroll-page) | Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Select Option](#select-option) | Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering. |
+| [DOM Snapshot](#dom-snapshot) | Capture DOM snapshot in HTML, MHTML, or text format |
+| [Browser Storage](#browser-storage) | Access localStorage and sessionStorage |
+| [Manage Tabs](#manage-tabs) | Create, switch, and close browser tabs |
+| [Extract Table](#extract-table) | Extract HTML tables as structured data. Auto-detects headers from thead/th. |
+| [Throttle](#throttle) | Per-domain rate limiting. Waits between requests to the same domain to avoid bans. |
+| [Performance Trace](#performance-trace) | Start/stop Chrome DevTools performance tracing (Chromium only) |
+| [Type Text](#type-text) | Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Upload File](#upload-file) | Upload file to file input element |
+| [Resize Viewport](#resize-viewport) | Resize browser viewport to specific dimensions |
+| [Wait](#wait) | Wait for a duration or until an element appears |
 
 ## Modules
 
-### Tangani Tantangan
+### Handle Challenge
 
 `browser.challenge`
 
-Deteksi otomatis dan tangani tantangan anti-bot (Cloudflare, CAPTCHA)
+Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop.
 
 **Parameters:**
 
@@ -107,11 +107,11 @@ auto_wait_seconds: 30
 human_fallback: false
 ```
 
-### Klik Elemen
+### Click Element
 
 `browser.click`
 
-Klik elemen di halaman
+Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -131,8 +131,8 @@ Klik elemen di halaman
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | Status operasi (success/error) |
-| `selector` | string | Status operasi (success/error) |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | Selector that was used |
 | `method` | string | Click method used |
 
 **Example:** Example
@@ -156,11 +156,11 @@ click_method: selector
 selector: #submit-button
 ```
 
-### Tutup Browser
+### Close Browser
 
 `browser.close`
 
-Tutup instance browser dan lepaskan sumber daya
+Close the browser instance and release resources
 
 **Parameters:**
 
@@ -172,19 +172,19 @@ Tutup instance browser dan lepaskan sumber daya
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Tutup instance browser |
-| `message` | string | Tutup instance browser |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
 ```yaml
 ```
 
-### Hubungkan Jarak Jauh
+### Connect Remote
 
 `browser.connect`
 
-Hubungkan ke layanan browser jarak jauh (Browserless, BrowserBase). Fingerprint asli, lewati Cloudflare.
+Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs.
 
 **Parameters:**
 
@@ -222,11 +222,11 @@ ws_endpoint: wss://connect.browserbase.com?apiKey=KEY
 ws_endpoint: ws://localhost:3000
 ```
 
-### Tangkap Konsol
+### Capture Console
 
 `browser.console`
 
-Tangkap log konsol browser (error, warning, info)
+Capture browser console logs (errors, warnings, info)
 
 **Parameters:**
 
@@ -240,9 +240,9 @@ Tangkap log konsol browser (error, warning, info)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `messages` | array | Status operasi (success/error) |
-| `count` | number | Status operasi (success/error) |
+| `status` | string | Operation status (success/error) |
+| `messages` | array | The messages |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -257,11 +257,11 @@ level: error
 timeout: 5000
 ```
 
-### Kelola Cookie
+### Manage Cookies
 
 `browser.cookies`
 
-Dapatkan, atur, atau hapus cookie browser
+Get, set, or clear browser cookies
 
 **Parameters:**
 
@@ -280,9 +280,9 @@ Dapatkan, atur, atau hapus cookie browser
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `cookies` | array | Status operasi (success/error) |
-| `count` | number | Status operasi (success/error) |
+| `status` | string | Operation status (success/error) |
+| `cookies` | array | Browser cookies |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -312,11 +312,11 @@ domain: example.com
 action: clear
 ```
 
-### File Cookie
+### Cookies File
 
 `browser.cookies_file`
 
-Impor atau ekspor cookie browser ke/dari file JSON.
+Import or export browser cookies to/from a JSON file for session persistence.
 
 **Parameters:**
 
@@ -423,11 +423,11 @@ text: Login
 match_mode: best
 ```
 
-### Deteksi Daftar
+### Detect List
 
 `browser.detect_list`
 
-Deteksi otomatis item berulang pada halaman (artikel, produk, hasil pencarian)
+Auto-detect repeating items on any page (articles, products, search results). No selectors needed.
 
 **Parameters:**
 
@@ -467,11 +467,11 @@ min_items: 5
 max_items: 50
 ```
 
-### Tangani Dialog
+### Handle Dialog
 
 `browser.dialog`
 
-Tangani dialog alert, confirm, dan prompt
+Handle alert, confirm, and prompt dialogs
 
 **Parameters:**
 
@@ -485,10 +485,10 @@ Tangani dialog alert, confirm, dan prompt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `message` | string | Status operasi (success/error) |
-| `type` | string | Status operasi (success/error) |
-| `default_value` | string | Pesan hasil yang menjelaskan outcome |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `type` | string | The type |
+| `default_value` | string | The default value |
 
 **Example:** Example
 
@@ -516,11 +516,11 @@ action: listen
 timeout: 5000
 ```
 
-### Unduh File
+### Download File
 
 `browser.download`
 
-Unduh file dari browser
+Download file from browser
 
 **Parameters:**
 
@@ -534,10 +534,10 @@ Unduh file dari browser
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `path` | string | Status operasi (success/error) |
-| `filename` | string | Status operasi (success/error) |
-| `size` | number | Path file atau sumber daya |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -554,11 +554,11 @@ save_path: /downloads/large-file.zip
 timeout_ms: 120000
 ```
 
-### Seret dan Lepas
+### Drag and Drop
 
 `browser.drag`
 
-Seret dan lepas elemen
+Drag and drop elements
 
 **Parameters:**
 
@@ -574,9 +574,9 @@ Seret dan lepas elemen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Posisi dalam elemen target {x, y} sebagai persentase |
-| `source` | string | Posisi dalam elemen target {x, y} sebagai persentase |
-| `target` | string | Status operasi (success/error) |
+| `status` | string | Operation status (success/error) |
+| `source` | string | The source |
+| `target` | string | The target |
 
 **Example:** Example
 
@@ -593,32 +593,32 @@ target: .container
 target_position: {"x": 0.5, "y": 0.5}
 ```
 
-### Simulasi Perangkat
+### Device Emulation
 
 `browser.emulate`
 
-Mensimulasikan perangkat atau mengatur viewport kustom
+Emulate mobile devices, tablets, and custom viewports
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | Nama perangkat yang akan disimulasikan (misalnya iPhone 13) |
-| `width` | number | No | - | Lebar viewport dalam piksel |
-| `height` | number | No | - | Tinggi viewport dalam piksel |
-| `user_agent` | string | No | - | String user agent kustom |
-| `device_scale_factor` | number | No | - | Rasio piksel perangkat |
-| `is_mobile` | boolean | No | - | Apakah akan mensimulasikan perangkat mobile |
-| `has_touch` | boolean | No | - | Apakah perangkat mendukung sentuhan |
+| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | Device preset or "custom" for manual settings |
+| `width` | number | No | - | Custom viewport width (for custom device) |
+| `height` | number | No | - | Custom viewport height (for custom device) |
+| `user_agent` | string | No | - | Custom user agent string |
+| `device_scale_factor` | number | No | - | Device pixel ratio (1-3) |
+| `is_mobile` | boolean | No | - | Enable mobile browser behavior |
+| `has_touch` | boolean | No | - | Enable touch event support |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (sukses/gagal) |
-| `device` | string | Nama perangkat yang disimulasikan |
-| `viewport` | object | Dimensi viewport saat ini |
-| `is_mobile` | boolean | Apakah simulasi perangkat mobile aktif |
+| `status` | string | Operation status |
+| `device` | string | Emulated device name |
+| `viewport` | object | Applied viewport dimensions |
+| `is_mobile` | boolean | Whether mobile mode is enabled |
 
 **Example:** Example
 
@@ -650,11 +650,11 @@ device: desktop_chrome
 user_agent: CustomBot/1.0
 ```
 
-### Pastikan Browser
+### Ensure Browser
 
 `browser.ensure`
 
-Pastikan sesi browser ada (gunakan kembali atau luncurkan)
+Ensure a browser session exists (reuse or launch)
 
 **Parameters:**
 
@@ -668,9 +668,9 @@ Pastikan sesi browser ada (gunakan kembali atau luncurkan)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Apakah browser diluncurkan atau digunakan kembali |
-| `message` | string | Apakah browser diluncurkan atau digunakan kembali |
-| `is_owner` | boolean | Apakah browser diluncurkan atau digunakan kembali |
+| `status` | string | Whether browser was launched or reused |
+| `message` | string | Result message |
+| `is_owner` | boolean | Whether this step owns the browser (responsible for closing) |
 
 **Example:** Example
 
@@ -684,11 +684,11 @@ headless: false
 headless: true
 ```
 
-### Jalankan JavaScript
+### Execute JavaScript
 
 `browser.evaluate`
 
-Jalankan kode JavaScript di konteks halaman
+Execute JavaScript code in page context
 
 **Parameters:**
 
@@ -701,8 +701,8 @@ Jalankan kode JavaScript di konteks halaman
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `result` | any | Status operasi (success/error) |
+| `status` | string | Operation status (success/error) |
+| `result` | any | The operation result |
 
 **Example:** Example
 
@@ -729,11 +729,11 @@ args: ["#header"]
 script: document.body.style.backgroundColor = "red"; return "done"
 ```
 
-### Ekstrak Data
+### Extract Data
 
 `browser.extract`
 
-Ekstrak data terstruktur dari halaman
+Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -747,9 +747,9 @@ Ekstrak data terstruktur dari halaman
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `data` | array | Status operasi (success/error) |
-| `count` | number | Status operasi (success/error) |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -759,11 +759,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### Ekstrak Bersarang
+### Extract Nested
 
 `browser.extract_nested`
 
-Ekstrak data bersarang/hierarki (komentar, thread, folder).
+Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children.
 
 **Parameters:**
 
@@ -797,11 +797,11 @@ fields: {"author": {"selector": ".author"}, "text": {"selector": ".body"}, "date
 root_selector: li.item
 ```
 
-### Temukan Elemen
+### Find Elements
 
 `browser.find`
 
-Temukan elemen di halaman dan kembalikan daftar ID elemen
+Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -814,9 +814,9 @@ Temukan elemen di halaman dan kembalikan daftar ID elemen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `count` | number | Status operasi (success/error) |
-| `element_ids` | array | Status operasi (success/error) |
+| `status` | string | Operation status (success/error) |
+| `count` | number | Number of items |
+| `element_ids` | array | The element ids |
 
 **Example:** Find search results
 
@@ -825,11 +825,11 @@ selector: div.tF2Cxc
 limit: 10
 ```
 
-### Isi Formulir
+### Fill Form
 
 `browser.form`
 
-Pengisian formulir pintar dengan deteksi bidang otomatis
+Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM.
 
 **Parameters:**
 
@@ -847,9 +847,9 @@ Pengisian formulir pintar dengan deteksi bidang otomatis
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filled_fields` | array | Penundaan antara pengisian setiap bidang (untuk perilaku lebih manusiawi) |
-| `failed_fields` | array | Daftar bidang yang diisi |
-| `submitted` | boolean | Daftar bidang yang diisi |
+| `filled_fields` | array | List of fields that were filled |
+| `failed_fields` | array | List of fields that failed to fill |
+| `submitted` | boolean | Whether form was submitted |
 
 **Example:** Example
 
@@ -865,11 +865,11 @@ data: {"username": "john_doe", "bio": "Hello world"}
 field_mapping: {"username": "#user-name-input", "bio": "textarea.bio-field"}
 ```
 
-### Ganti Frame
+### Switch Frame
 
 `browser.frame`
 
-Beralih ke konteks iframe atau frame
+Switch to iframe or frame context
 
 **Parameters:**
 
@@ -885,10 +885,10 @@ Beralih ke konteks iframe atau frame
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Aksi frame (enter untuk beralih ke frame, list untuk daftar semua frame) |
-| `frame_url` | string | Aksi frame (enter untuk beralih ke frame, list untuk daftar semua frame) |
-| `frame_name` | string | Status operasi (success/error) |
-| `frames` | array | URL Frame |
+| `status` | string | Operation status (success/error) |
+| `frame_url` | string | Frame URL |
+| `frame_name` | string | The frame name |
+| `frames` | array | List of frames |
 
 **Example:** Example
 
@@ -914,11 +914,11 @@ action: exit
 action: list
 ```
 
-### Mock Geolokasi
+### Mock Geolocation
 
 `browser.geolocation`
 
-Mock geolokasi browser
+Mock browser geolocation
 
 **Parameters:**
 
@@ -932,8 +932,8 @@ Mock geolokasi browser
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Akurasi posisi dalam meter |
-| `location` | object | Akurasi posisi dalam meter |
+| `status` | string | Operation status (success/error) |
+| `location` | object | The location |
 
 **Example:** Example
 
@@ -957,11 +957,11 @@ latitude: 35.6762
 longitude: 139.6503
 ```
 
-### Pergi ke URL
+### Go to URL
 
 `browser.goto`
 
-Navigasi ke URL tertentu
+Navigate to a specific URL
 
 **Parameters:**
 
@@ -976,8 +976,8 @@ Navigasi ke URL tertentu
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `url` | string | Navigasi ke URL tertentu |
+| `status` | string | Operation status (success/error) |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -986,11 +986,11 @@ url: https://www.google.com
 wait_until: domcontentloaded
 ```
 
-### Hover Elemen
+### Hover Element
 
 `browser.hover`
 
-Arahkan mouse ke atas elemen
+Hover mouse over an element
 
 **Parameters:**
 
@@ -1004,8 +1004,8 @@ Arahkan mouse ke atas elemen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `selector` | string | Status operasi (success/error) |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1020,11 +1020,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### Interaksi Browser
+### Browser Interact
 
 `browser.interact`
 
-Jeda agar pengguna dapat berinteraksi dengan halaman browser
+Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
 
 **Parameters:**
 
@@ -1038,11 +1038,11 @@ Jeda agar pengguna dapat berinteraksi dengan halaman browser
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi |
-| `action` | string | Aksi yang dijalankan (click/select/type/toggle) |
-| `selector` | string | CSS selector dari elemen yang diinteraksi |
-| `value` | string | Nilai yang digunakan (untuk aksi select/type) |
-| `url` | string | URL halaman saat interaksi |
+| `status` | string | Operation status |
+| `action` | string | Action executed (click/select/type/toggle) |
+| `selector` | string | CSS selector of the interacted element |
+| `value` | string | Value used (for select/type actions) |
+| `url` | string | Page URL at time of interaction |
 
 **Example:** Example
 
@@ -1051,11 +1051,11 @@ title: Choose a department
 description: Select the department you want to register for
 ```
 
-### Luncurkan Browser
+### Launch Browser
 
 `browser.launch`
 
-Luncurkan instance browser baru dengan Playwright
+Launch a new browser instance with Playwright
 
 **Parameters:**
 
@@ -1064,25 +1064,25 @@ Luncurkan instance browser baru dengan Playwright
 | `headless` | boolean | No | `False` | Run browser without visible window |
 | `width` | number | No | `1280` | Browser viewport width in pixels |
 | `height` | number | No | `720` | Browser viewport height in pixels |
-| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Mesin browser yang digunakan (chromium, firefox, webkit) |
+| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Browser engine to use |
 | `channel` | select (``, `chrome`, `msedge`) | No | - | Use system Chrome instead of bundled Chromium for better anti-detection bypass |
 | `behavior` | select (`fast`, `normal`, `careful`, `human_like`) | No | `fast` | How the browser interacts: fast (no delays), normal, careful (mouse movement), human_like (full simulation) |
 | `stealth` | boolean | No | `True` | Anti-detection patches: WebGL fingerprint, canvas noise, navigator fixes. Always recommended. |
-| `proxy` | string | No | - | URL server proxy |
-| `user_agent` | string | No | - | String user agent kustom |
+| `proxy` | string | No | - | HTTP/SOCKS proxy server URL. For rotation use browser.proxy_rotate. |
+| `user_agent` | string | No | - | Custom user agent string |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |
-| `slow_mo` | number | No | `0` | Memperlambat operasi dengan milidetik yang ditentukan |
+| `slow_mo` | number | No | `0` | Delay between Playwright actions in ms (low-level, prefer Behavior Profile) |
 | `record_video_dir` | string | No | - | Directory to save recorded videos (enables Playwright video recording) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `message` | string | Luncurkan instance browser baru |
-| `browser_type` | string | Jenis browser yang diluncurkan |
-| `headless` | boolean | Apakah browser berjalan tanpa antarmuka |
-| `viewport` | object | Dimensi viewport saat ini |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `browser_type` | string | Browser engine used |
+| `headless` | boolean | Whether browser is in headless mode |
+| `viewport` | object | Browser viewport dimensions |
 | `behavior` | string | Active behavior profile |
 
 **Example:** Example
@@ -1109,7 +1109,7 @@ stealth: true
 
 `browser.login`
 
-Deteksi otomatis dan isi form login dengan verifikasi pasca-login.
+Auto-detect and fill login forms. Handles username + password + submit with post-login verification.
 
 **Parameters:**
 
@@ -1149,11 +1149,11 @@ password_selector: #pass
 submit_selector: #login-btn
 ```
 
-### Navigasi Riwayat
+### Page Navigation
 
 `browser.navigation`
 
-Menavigasi riwayat browser (mundur, maju, muat ulang)
+Navigate back, forward, or reload the page
 
 **Parameters:**
 
@@ -1167,9 +1167,9 @@ Menavigasi riwayat browser (mundur, maju, muat ulang)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (sukses/gagal) |
-| `action` | string | Aksi navigasi yang dilakukan |
-| `url` | string | URL saat ini setelah navigasi |
+| `status` | string | Operation status (success/error) |
+| `action` | string | Navigation action performed |
+| `url` | string | Current URL after navigation |
 
 **Example:** Example
 
@@ -1190,11 +1190,11 @@ action: reload
 wait_until: networkidle
 ```
 
-### Monitor Jaringan
+### Network Monitor
 
 `browser.network`
 
-Pantau dan cegat permintaan jaringan
+Monitor and intercept network requests
 
 **Parameters:**
 
@@ -1210,9 +1210,9 @@ Pantau dan cegat permintaan jaringan
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Respons untuk dikembalikan untuk permintaan yang dicegat |
-| `requests` | array | Respons untuk dikembalikan untuk permintaan yang dicegat |
-| `blocked_count` | number | Status operasi (success/error) |
+| `status` | string | Operation status (success/error) |
+| `requests` | array | Captured network requests |
+| `blocked_count` | number | The blocked count |
 
 **Example:** Example
 
@@ -1237,27 +1237,27 @@ url_pattern: .*users.*
 mock_response: {"status": 200, "body": "{\"users\": []}"}
 ```
 
-### Daftar Halaman
+### List Pages
 
 `browser.pages`
 
-Daftar semua halaman/tab browser yang terbuka
+List all open browser pages/tabs with details
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `include_details` | boolean | No | `True` | Sertakan informasi detail untuk setiap halaman |
-| `include_content_info` | boolean | No | `False` | Sertakan informasi tipe konten untuk setiap halaman |
+| `include_details` | boolean | No | `True` | Include URL, title, and viewport info for each page |
+| `include_content_info` | boolean | No | `False` | Include page load state and frame count (slower) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (berhasil/gagal) |
-| `pages` | array | Daftar halaman yang terbuka |
-| `count` | number | Jumlah halaman yang terbuka |
-| `current_index` | number | Indeks halaman aktif saat ini |
+| `status` | string | Operation status |
+| `pages` | array | List of page information |
+| `count` | number | Number of open pages |
+| `current_index` | number | Index of the current active page |
 
 **Example:** Example
 
@@ -1278,11 +1278,11 @@ include_details: true
 include_content_info: true
 ```
 
-### Paginasi & Ekstrak
+### Paginate & Extract
 
 `browser.pagination`
 
-Auto-paginasi melalui halaman dan ekstrak data
+Auto-paginate through pages and extract data. Supports retry and checkpoint resume.
 
 **Parameters:**
 
@@ -1307,10 +1307,10 @@ Auto-paginasi melalui halaman dan ekstrak data
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `items` | array | Pemilih yang muncul saat tidak ada halaman lagi (menghentikan paginasi) |
-| `total_items` | integer | Semua item yang diekstrak dari semua halaman |
-| `pages_processed` | integer | Semua item yang diekstrak dari semua halaman |
-| `stopped_reason` | string | Jumlah halaman yang diproses |
+| `items` | array | All extracted items from all pages |
+| `total_items` | integer | Total number of items extracted |
+| `pages_processed` | integer | Number of pages processed |
+| `stopped_reason` | string | Why pagination stopped (max_pages, max_items, no_more, error) |
 | `retries_used` | integer | Total number of retries across all pages |
 | `resumed` | boolean | Whether execution resumed from a checkpoint |
 
@@ -1334,11 +1334,11 @@ no_more_indicator: .end-of-feed
 checkpoint_path: /tmp/feed_checkpoint.json
 ```
 
-### Hasilkan PDF
+### Generate PDF
 
 `browser.pdf`
 
-Hasilkan PDF dari halaman saat ini
+Generate PDF from current page
 
 **Parameters:**
 
@@ -1357,9 +1357,9 @@ Hasilkan PDF dari halaman saat ini
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Skala rendering halaman web (0.1-2) |
-| `path` | string | Status operasi (success/error) |
-| `size` | number | Status operasi (success/error) |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -1381,26 +1381,26 @@ path: /output/custom.pdf
 margin: {"top": "1cm", "bottom": "1cm", "left": "2cm", "right": "2cm"}
 ```
 
-### Metrik Kinerja
+### Performance Metrics
 
 `browser.performance`
 
-Kumpulkan metrik kinerja browser
+Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | array | No | `['all']` | Metrik kinerja yang akan dikumpulkan |
-| `timeout_ms` | number | No | `3000` | Batas waktu dalam milidetik |
-| `setup_observers` | boolean | No | `True` | Siapkan pengamat kinerja sebelum mengumpulkan |
+| `metrics` | array | No | `['all']` | Which metrics to collect (default: all) |
+| `timeout_ms` | number | No | `3000` | Time to wait for metrics collection (for LCP, CLS) |
+| `setup_observers` | boolean | No | `True` | Install PerformanceObservers for better metric tracking |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (berhasil/gagal) |
-| `metrics` | object | Metrik kinerja yang dikumpulkan |
+| `status` | string | Operation status |
+| `metrics` | object | Collected performance metrics |
 
 **Example:** Example
 
@@ -1422,11 +1422,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### Pool Browser
+### Browser Pool
 
 `browser.pool`
 
-Kelola beberapa instance browser untuk otomasi paralel.
+Manage multiple named browser instances for parallel automation.
 
 **Parameters:**
 
@@ -1466,11 +1466,11 @@ name: scraper1
 action: list
 ```
 
-### Tekan Tombol
+### Press Key
 
 `browser.press`
 
-Tekan tombol keyboard
+Press a keyboard key
 
 **Parameters:**
 
@@ -1482,8 +1482,8 @@ Tekan tombol keyboard
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `key` | string | Tekan tombol keyboard |
+| `status` | string | Operation status (success/error) |
+| `key` | string | Key identifier |
 
 **Example:** Example
 
@@ -1497,11 +1497,11 @@ key: Enter
 key: Escape
 ```
 
-### Rotasi Proxy
+### Rotate Proxy
 
 `browser.proxy_rotate`
 
-Rotasi daftar proxy dengan deteksi proxy mati.
+Rotate through a list of proxies. Relaunches browser with the next proxy.
 
 **Parameters:**
 
@@ -1538,11 +1538,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### Ekstrak Artikel
+### Extract Article
 
 `browser.readability`
 
-Ekstraksi artikel cerdas — ambil judul, penulis, tanggal, dan konten utama dari halaman web apa pun
+Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode.
 
 **Parameters:**
 
@@ -1551,7 +1551,7 @@ Ekstraksi artikel cerdas — ambil judul, penulis, tanggal, dan konten utama dar
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - | CSS selector untuk area konten. Kosongkan untuk deteksi otomatis. |
+| `selector` | string | No | - | CSS selector for the content area. Leave empty for auto-detection. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1603,11 +1603,11 @@ title_selector: .article-headline h1
 selector: .article-body
 ```
 
-### Rekam Aksi
+### Record Actions
 
 `browser.record`
 
-Rekam aksi pengguna sebagai workflow
+Record user actions as workflow
 
 **Parameters:**
 
@@ -1621,9 +1621,9 @@ Rekam aksi pengguna sebagai workflow
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Format untuk workflow yang direkam (yaml atau json) |
-| `recording` | array | Format untuk workflow yang direkam (yaml atau json) |
-| `workflow` | string | Status operasi (success/error) |
+| `status` | string | Operation status (success/error) |
+| `recording` | array | Recording data or path |
+| `workflow` | string | The workflow |
 
 **Example:** Example
 
@@ -1644,25 +1644,25 @@ output_format: yaml
 action: get
 ```
 
-### Lepaskan Browser
+### Release Browser
 
 `browser.release`
 
-Lepaskan sesi browser (tutup hanya jika dimiliki)
+Release browser session (close only if owned)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `force` | boolean | No | `False` | Tutup browser meskipun tidak dimiliki oleh template ini |
+| `force` | boolean | No | `False` | Close browser even if not owned by this template |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Tutup browser meskipun tidak dimiliki oleh template ini |
-| `message` | string | Tindakan apa yang diambil |
-| `was_owner` | boolean | Tindakan apa yang diambil |
+| `status` | string | What action was taken |
+| `message` | string | Result message |
+| `was_owner` | boolean | Whether this template owned the browser |
 
 **Example:** Example
 
@@ -1675,11 +1675,11 @@ Lepaskan sesi browser (tutup hanya jika dimiliki)
 force: true
 ```
 
-### Tangkap Respons
+### Capture Response
 
 `browser.response`
 
-Tangkap isi respons API (XHR/fetch). Ekstrak JSON dari panggilan API pada halaman.
+Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls.
 
 **Parameters:**
 
@@ -1712,11 +1712,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### Periksa Robots.txt
+### Check Robots.txt
 
 `browser.robots`
 
-Periksa kepatuhan robots.txt dan temukan sitemap.
+Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping.
 
 **Parameters:**
 
@@ -1747,11 +1747,11 @@ check_url: /api/data
 ```yaml
 ```
 
-### Ambil Tangkapan Layar
+### Take Screenshot
 
 `browser.screenshot`
 
-Ambil tangkapan layar halaman saat ini
+Take a screenshot of the current page
 
 **Parameters:**
 
@@ -1766,8 +1766,8 @@ Ambil tangkapan layar halaman saat ini
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `filepath` | string | Ambil tangkapan layar halaman saat ini |
+| `status` | string | Operation status (success/error) |
+| `filepath` | string | Path to the file |
 
 **Example:** Example
 
@@ -1775,11 +1775,11 @@ Ambil tangkapan layar halaman saat ini
 path: output/page.png
 ```
 
-### Gulir Halaman
+### Scroll Page
 
 `browser.scroll`
 
-Gulir halaman ke elemen, posisi, atau arah
+Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1794,8 +1794,8 @@ Gulir halaman ke elemen, posisi, atau arah
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `scrolled_to` | object | Status operasi (success/error) |
+| `status` | string | Operation status (success/error) |
+| `scrolled_to` | object | The scrolled to |
 
 **Example:** Example
 
@@ -1818,11 +1818,11 @@ amount: 10000
 behavior: smooth
 ```
 
-### Pilih Opsi
+### Select Option
 
 `browser.select`
 
-Pilih opsi dari elemen dropdown
+Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1838,9 +1838,9 @@ Pilih opsi dari elemen dropdown
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `selected` | array | Status operasi (success/error) |
-| `selector` | string | Status operasi (success/error) |
+| `status` | string | Operation status (success/error) |
+| `selected` | array | The selected |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1870,7 +1870,7 @@ index: 2
 
 `browser.sitemap`
 
-Parse sitemap.xml dan ekstrak URL beserta metadata.
+Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering.
 
 **Parameters:**
 
@@ -1902,29 +1902,29 @@ url_pattern: /blog/
 max_urls: 100
 ```
 
-### Snapshot DOM
+### DOM Snapshot
 
 `browser.snapshot`
 
-Tangkap snapshot DOM dari halaman saat ini
+Capture DOM snapshot in HTML, MHTML, or text format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`html`, `mhtml`, `text`) | No | `html` | Format keluaran (html atau teks) |
-| `selector` | string | No | - | Pemilih CSS untuk menangkap elemen tertentu |
-| `path` | string | No | - | Jalur untuk menyimpan snapshot |
+| `format` | select (`html`, `mhtml`, `text`) | No | `html` | Snapshot format |
+| `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (berhasil/gagal) |
-| `format` | string | Format snapshot |
-| `content` | string | Konten snapshot |
-| `path` | string | Jalur tempat snapshot disimpan |
-| `size_bytes` | number | Ukuran snapshot dalam byte |
+| `status` | string | Operation status |
+| `format` | string | Snapshot format used |
+| `content` | string | Snapshot content (if no path specified) |
+| `path` | string | Path to saved file |
+| `size_bytes` | number | Content size in bytes |
 
 **Example:** Example
 
@@ -1954,11 +1954,11 @@ selector: #main
 path: /tmp/section.html
 ```
 
-### Penyimpanan Browser
+### Browser Storage
 
 `browser.storage`
 
-Akses localStorage dan sessionStorage
+Access localStorage and sessionStorage
 
 **Parameters:**
 
@@ -1973,10 +1973,10 @@ Akses localStorage dan sessionStorage
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `value` | any | Status operasi (success/error) |
-| `keys` | array | Status operasi (success/error) |
-| `length` | number | Nilai yang dikembalikan |
+| `status` | string | Operation status (success/error) |
+| `value` | any | The returned value |
+| `keys` | array | List of keys |
+| `length` | number | Length of data |
 
 **Example:** Example
 
@@ -2009,11 +2009,11 @@ action: keys
 type: local
 ```
 
-### Kelola Tab
+### Manage Tabs
 
 `browser.tab`
 
-Buat, ganti, dan tutup tab browser
+Create, switch, and close browser tabs
 
 **Parameters:**
 
@@ -2028,10 +2028,10 @@ Buat, ganti, dan tutup tab browser
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Indeks tab untuk diganti atau ditutup (berbasis 0) |
-| `tab_count` | number | Indeks tab untuk diganti atau ditutup (berbasis 0) |
-| `current_index` | number | Status operasi (success/error) |
-| `tabs` | array | Jumlah tab |
+| `status` | string | Operation status (success/error) |
+| `tab_count` | number | The tab count |
+| `current_index` | number | The current index |
+| `tabs` | array | List of open tabs |
 
 **Example:** Example
 
@@ -2059,11 +2059,11 @@ action: close
 action: list
 ```
 
-### Ekstrak Tabel
+### Extract Table
 
 `browser.table`
 
-Ekstrak tabel HTML menjadi data terstruktur dengan header yang terdeteksi otomatis.
+Extract HTML tables as structured data. Auto-detects headers from thead/th.
 
 **Parameters:**
 
@@ -2095,11 +2095,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### Pembatas Kecepatan
+### Throttle
 
 `browser.throttle`
 
-Pembatasan kecepatan per domain. Menunggu antar permintaan untuk menghindari pemblokiran.
+Per-domain rate limiting. Waits between requests to the same domain to avoid bans.
 
 **Parameters:**
 
@@ -2142,29 +2142,29 @@ min_interval_ms: 1500
 max_interval_ms: 8000
 ```
 
-### Jejak Browser
+### Performance Trace
 
 `browser.trace`
 
-Mulai, hentikan, atau simpan jejak kinerja browser
+Start/stop Chrome DevTools performance tracing (Chromium only)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | - | Tindakan jejak (mulai, hentikan, simpan) |
-| `categories` | array | No | `['devtools.timeline']` | Kategori jejak yang akan ditangkap |
-| `screenshots` | boolean | No | `True` | Sertakan tangkapan layar dalam jejak |
-| `path` | string | No | - | Jalur untuk menyimpan file jejak |
+| `action` | string | Yes | - | Start or stop tracing |
+| `categories` | array | No | `['devtools.timeline']` | CDP trace categories (default: devtools.timeline) |
+| `screenshots` | boolean | No | `True` | Include screenshots in trace (increases file size) |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (berhasil/gagal) |
-| `tracing` | boolean | Apakah penelusuran sedang aktif |
-| `path` | string | Jalur tempat jejak disimpan |
-| `size_bytes` | number | Ukuran file jejak dalam byte |
+| `status` | string | Operation status (success/error) |
+| `tracing` | boolean | Whether tracing is active |
+| `path` | string | Path to trace file (when stopped) |
+| `size_bytes` | number | Trace file size in bytes |
 
 **Example:** Example
 
@@ -2188,11 +2188,11 @@ action: stop
 path: /tmp/performance-trace.json
 ```
 
-### Ketik Teks
+### Type Text
 
 `browser.type`
 
-Ketik teks ke dalam field input
+Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -2213,8 +2213,8 @@ Ketik teks ke dalam field input
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | Status operasi (success/error) |
-| `selector` | string | Ketik teks ke dalam field input |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 | `method` | string | Type method used |
 
 **Example:** Example
@@ -2250,11 +2250,11 @@ selector: #email
 text: user@example.com
 ```
 
-### Unggah File
+### Upload File
 
 `browser.upload`
 
-Unggah file ke elemen input file
+Upload file to file input element
 
 **Parameters:**
 
@@ -2268,10 +2268,10 @@ Unggah file ke elemen input file
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `filename` | string | Status operasi (success/error) |
-| `size` | number | Status operasi (success/error) |
-| `selector` | string | Nama file |
+| `status` | string | Operation status (success/error) |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -2287,26 +2287,26 @@ selector: #file-upload
 file_path: /path/to/document.pdf
 ```
 
-### Atur Viewport
+### Resize Viewport
 
 `browser.viewport`
 
-Dapatkan atau atur ukuran viewport browser
+Resize browser viewport to specific dimensions
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `width` | number | Yes | `1280` | Lebar viewport dalam piksel |
-| `height` | number | Yes | `720` | Tinggi viewport dalam piksel |
+| `width` | number | Yes | `1280` | Viewport width in pixels |
+| `height` | number | Yes | `720` | Viewport height in pixels |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (berhasil/gagal) |
-| `viewport` | object | Dimensi viewport saat ini |
-| `previous_viewport` | object | Dimensi viewport sebelumnya |
+| `status` | string | Operation status |
+| `viewport` | object | Applied viewport dimensions |
+| `previous_viewport` | object | Previous viewport dimensions |
 
 **Example:** Example
 
@@ -2336,11 +2336,11 @@ width: 1366
 height: 768
 ```
 
-### Tunggu
+### Wait
 
 `browser.wait`
 
-Tunggu durasi atau sampai elemen muncul
+Wait for a duration or until an element appears
 
 **Parameters:**
 
@@ -2348,16 +2348,16 @@ Tunggu durasi atau sampai elemen muncul
 |------|------|----------|---------|-------------|
 | `duration_ms` | number | No | `1000` | Duration of the operation in milliseconds |
 | `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
-| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | Status untuk ditunggu (terlihat, tersembunyi, terlampir, terlepas) |
+| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | Element state to wait for |
 | `timeout_ms` | number | No | `30000` | Maximum time to wait in milliseconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (success/error) |
-| `selector` | string | Status operasi (success/error) |
-| `duration_ms` | number | Tunggu durasi atau elemen muncul |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was waited for |
+| `duration_ms` | number | Wait duration in milliseconds |
 
 **Example:** Example
 

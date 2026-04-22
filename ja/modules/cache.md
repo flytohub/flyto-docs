@@ -6,100 +6,100 @@ In-memory key-value cache with TTL support.
 
 | Module | Description |
 |--------|-------------|
-| [キャッシュクリア](#キャッシュクリア) | すべてのキャッシュエントリをクリアまたはパターンでフィルタ |
-| [キャッシュ削除](#キャッシュ削除) | キーでキャッシュエントリを削除 |
-| [キャッシュ取得](#キャッシュ取得) | キーでキャッシュから値を取得 |
-| [キャッシュ設定](#キャッシュ設定) | オプションのTTLでキャッシュに値を設定 |
+| [Cache Clear](#cache-clear) | Clear all cache entries or filter by pattern |
+| [Cache Delete](#cache-delete) | Delete a cache entry by key |
+| [Cache Get](#cache-get) | Get a value from cache by key |
+| [Cache Set](#cache-set) | Set a value in cache with optional TTL |
 
 ## Modules
 
-### キャッシュクリア
+### Cache Clear
 
 `cache.clear`
 
-すべてのキャッシュエントリをクリアまたはパターンでフィルタ
+Clear all cache entries or filter by pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `pattern` | string | No | `*` | キーに一致するグロブパターン（例："user:*"、デフォルト"*"はすべてクリア） |
-| `backend` | string | No | `memory` | 使用するキャッシュバックエンド |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis接続URL |
+| `pattern` | string | No | `*` | Glob pattern to match keys (e.g. "user:*", default "*" clears all) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `cleared_count` | number | クリアされたキャッシュエントリの数 |
-| `backend` | string | 使用されたバックエンド |
+| `cleared_count` | number | Number of cache entries cleared |
+| `backend` | string | The backend used |
 
-### キャッシュ削除
+### Cache Delete
 
 `cache.delete`
 
-キーでキャッシュエントリを削除
+Delete a cache entry by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | 削除するキャッシュキー |
-| `backend` | string | No | `memory` | 使用するキャッシュバックエンド |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis接続URL |
+| `key` | string | Yes | - | The cache key to delete |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | キャッシュキー |
-| `deleted` | boolean | キーが見つかり削除されたかどうか |
-| `backend` | string | 使用されたバックエンド |
+| `key` | string | The cache key |
+| `deleted` | boolean | Whether the key was found and deleted |
+| `backend` | string | The backend used |
 
-### キャッシュ取得
+### Cache Get
 
 `cache.get`
 
-キーでキャッシュから値を取得
+Get a value from cache by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | 検索するキャッシュキー |
-| `backend` | string | No | `memory` | 使用するキャッシュバックエンド |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis接続URL |
+| `key` | string | Yes | - | The cache key to look up |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | キャッシュキー |
-| `value` | any | キャッシュされた値（見つからない場合はnull） |
-| `hit` | boolean | キーがキャッシュに見つかったかどうか |
-| `backend` | string | 使用されたバックエンド |
+| `key` | string | The cache key |
+| `value` | any | The cached value (null if not found) |
+| `hit` | boolean | Whether the key was found in cache |
+| `backend` | string | The backend used |
 
-### キャッシュ設定
+### Cache Set
 
 `cache.set`
 
-オプションのTTLでキャッシュに値を設定
+Set a value in cache with optional TTL
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | 値を保存するキャッシュキー |
-| `value` | string | Yes | - | キャッシュする値（JSONシリアライズ可能な値） |
-| `ttl` | number | No | `0` | 有効期限（秒、0は無期限） |
-| `backend` | string | No | `memory` | 使用するキャッシュバックエンド |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis接続URL |
+| `key` | string | Yes | - | The cache key to store the value under |
+| `value` | string | Yes | - | The value to cache (any JSON-serializable value) |
+| `ttl` | number | No | `0` | Time-to-live in seconds (0 = no expiry) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | キャッシュキー |
-| `stored` | boolean | 値が正常に保存されたかどうか |
-| `ttl` | number | TTL（秒、0は無期限） |
-| `backend` | string | 使用されたバックエンド |
+| `key` | string | The cache key |
+| `stored` | boolean | Whether the value was stored successfully |
+| `ttl` | number | The TTL in seconds (0 = no expiry) |
+| `backend` | string | The backend used |

@@ -6,25 +6,25 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Module | Description |
 |--------|-------------|
-| [Dize Küçük Harf](#dize-küçük-harf) | Dizeyi küçük harfe dönüştür |
+| [String Lowercase](#string-lowercase) | Convert a string to lowercase |
 | [Pad String](#pad-string) | Pad a string to a specified length |
-| [Dize Değiştir](#dize-değiştir) | Dizede alt dize geçişlerini değiştir |
-| [Dize Ters Çevir](#dize-ters-çevir) | Dizideki karakterleri ters çevir |
+| [String Replace](#string-replace) | Replace occurrences of a substring in a string |
+| [String Reverse](#string-reverse) | Reverse the characters in a string |
 | [Slugify](#slugify) | Convert text to URL-friendly slug |
-| [Dize Böl](#dize-böl) | Ayırıcı kullanarak dizeyi diziye böl |
+| [Split String](#split-string) | Split a string into an array using a delimiter |
 | [Template](#template) | Render a template with variable substitution |
-| [Başlık Harfli Dize](#başlık-harfli-dize) | Dizeyi başlık harfine dönüştür |
-| [Dize Kırp](#dize-kırp) | Dizenin her iki ucundan boşlukları kaldır |
+| [Title Case String](#title-case-string) | Convert string to title case |
+| [String Trim](#string-trim) | Remove whitespace from both ends of a string |
 | [Truncate String](#truncate-string) | Truncate a string to a maximum length |
-| [Dize Büyük Harf](#dize-büyük-harf) | Dizeyi büyük harfe dönüştür |
+| [String Uppercase](#string-uppercase) | Convert a string to uppercase |
 
 ## Modules
 
-### Dize Küçük Harf
+### String Lowercase
 
 `string.lowercase`
 
-Dizeyi küçük harfe dönüştür
+Convert a string to lowercase
 
 **Parameters:**
 
@@ -36,9 +36,9 @@ Dizeyi küçük harfe dönüştür
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Küçük harfe dönüştürülmüş dize |
-| `original` | string | Küçük harfe dönüştürülmüş dize |
-| `status` | string | Küçük harfe dönüştürülmüş dize |
+| `result` | string | Lowercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
 ### Pad String
 
@@ -51,23 +51,23 @@ Pad a string to a specified length
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | string | Yes | - | Text to pad |
-| `length` | number | Yes | - | Text to pad |
-| `pad_char` | string | No | ` ` | Target length |
-| `position` | string | No | `end` | Character to pad with |
+| `length` | number | Yes | - | Target length |
+| `pad_char` | string | No | ` ` | Character to pad with |
+| `position` | string | No | `end` | Where to add padding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | string | Padded string |
-| `original` | string | Padded string |
-| `added` | number | Padded string |
+| `original` | string | Original string |
+| `added` | number | Characters added |
 
-### Dize Değiştir
+### String Replace
 
 `string.replace`
 
-Dizede alt dize geçişlerini değiştir
+Replace occurrences of a substring in a string
 
 **Parameters:**
 
@@ -81,17 +81,17 @@ Dizede alt dize geçişlerini değiştir
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Değişiklikler uygulanmış dize |
-| `original` | string | Değişiklikler uygulanmış dize |
-| `search` | string | Değişiklikler uygulanmış dize |
-| `replace` | string | Orijinal giriş dizesi |
-| `status` | string | Değiştirilen arama dizesi |
+| `result` | string | String with replacements applied |
+| `original` | string | Original input string |
+| `search` | string | Search string that was replaced |
+| `replace` | string | Replacement string used |
+| `status` | string | Operation status |
 
-### Dize Ters Çevir
+### String Reverse
 
 `string.reverse`
 
-Dizideki karakterleri ters çevir
+Reverse the characters in a string
 
 **Parameters:**
 
@@ -103,9 +103,9 @@ Dizideki karakterleri ters çevir
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Ters çevrilmiş dize |
-| `original` | string | Ters çevrilmiş dize |
-| `length` | number | Ters çevrilmiş dize |
+| `result` | string | Reversed string |
+| `original` | string | Original input string |
+| `length` | number | String length |
 
 ### Slugify
 
@@ -118,22 +118,22 @@ Convert text to URL-friendly slug
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | string | Yes | - | Text to slugify |
-| `separator` | string | No | `-` | Text to slugify |
-| `lowercase` | boolean | No | `True` | Word separator |
-| `max_length` | number | No | `0` | Convert to lowercase |
+| `separator` | string | No | `-` | Word separator |
+| `lowercase` | boolean | No | `True` | Convert to lowercase |
+| `max_length` | number | No | `0` | Maximum slug length (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Maximum slug length (0 = unlimited) |
-| `original` | string | URL-friendly slug |
+| `result` | string | URL-friendly slug |
+| `original` | string | Original text |
 
-### Dize Böl
+### Split String
 
 `string.split`
 
-Ayırıcı kullanarak dizeyi diziye böl
+Split a string into an array using a delimiter
 
 **Parameters:**
 
@@ -147,12 +147,12 @@ Ayırıcı kullanarak dizeyi diziye böl
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `parts` | array | Bölünmüş dize parçaları dizisi |
-| `result` | array | Bölünmüş dize parçaları dizisi |
-| `length` | number | Bölünmüş dize parçaları dizisi |
-| `original` | string | Parçalar için takma ad - bölünmüş dize parçaları dizisi |
-| `delimiter` | string | Bölünmeden sonra parça sayısı |
-| `status` | string | Orijinal giriş dizesi |
+| `parts` | array | Array of split string parts |
+| `result` | array | Alias for parts - array of split string parts |
+| `length` | number | Number of parts after split |
+| `original` | string | Original input string |
+| `delimiter` | string | Delimiter used for splitting |
+| `status` | string | Operation status |
 
 ### Template
 
@@ -167,21 +167,21 @@ Render a template with variable substitution
 | `template` | string | Yes | - | Template string with {<!-- -->{variable}<!-- -->} placeholders |
 | `variables` | object | Yes | - | Variables to substitute |
 | `missing_value` | string | No | - | Value for undefined variables |
-| `preserve_missing` | boolean | No | `False` | Value for undefined variables |
+| `preserve_missing` | boolean | No | `False` | Keep placeholder if variable is missing |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Keep placeholder if variable is missing |
-| `replaced` | number | Rendered template |
-| `missing` | array | Rendered template |
+| `result` | string | Rendered template |
+| `replaced` | number | Number of replacements made |
+| `missing` | array | Missing variable names |
 
-### Başlık Harfli Dize
+### Title Case String
 
 `string.titlecase`
 
-Dizeyi başlık harfine dönüştür
+Convert string to title case
 
 **Parameters:**
 
@@ -193,7 +193,7 @@ Dizeyi başlık harfine dönüştür
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Başlık harfine dönüştürülmüş dize |
+| `result` | string | Title case converted string |
 
 **Example:** Convert to title case
 
@@ -207,11 +207,11 @@ text: hello world from flyto
 text: john doe
 ```
 
-### Dize Kırp
+### String Trim
 
 `string.trim`
 
-Dizenin her iki ucundan boşlukları kaldır
+Remove whitespace from both ends of a string
 
 **Parameters:**
 
@@ -223,9 +223,9 @@ Dizenin her iki ucundan boşlukları kaldır
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Boşlukları kaldırılmış kırpılmış dize |
-| `original` | string | Boşlukları kaldırılmış kırpılmış dize |
-| `status` | string | Boşlukları kaldırılmış kırpılmış dize |
+| `result` | string | Trimmed string with whitespace removed |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
 ### Truncate String
 
@@ -238,24 +238,24 @@ Truncate a string to a maximum length
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | string | Yes | - | Text to truncate |
-| `length` | number | Yes | - | Text to truncate |
-| `suffix` | string | No | `...` | Maximum length |
-| `word_boundary` | boolean | No | `False` | Text to append if truncated |
+| `length` | number | Yes | - | Maximum length |
+| `suffix` | string | No | `...` | Text to append if truncated |
+| `word_boundary` | boolean | No | `False` | Break at word boundary |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Break at word boundary |
-| `original` | string | Truncated string |
-| `truncated` | boolean | Truncated string |
-| `removed` | number | Original string |
+| `result` | string | Truncated string |
+| `original` | string | Original string |
+| `truncated` | boolean | Whether string was truncated |
+| `removed` | number | Characters removed |
 
-### Dize Büyük Harf
+### String Uppercase
 
 `string.uppercase`
 
-Dizeyi büyük harfe dönüştür
+Convert a string to uppercase
 
 **Parameters:**
 
@@ -267,6 +267,6 @@ Dizeyi büyük harfe dönüştür
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Büyük harfe dönüştürülmüş dize |
-| `original` | string | Büyük harfe dönüştürülmüş dize |
-| `status` | string | Büyük harfe dönüştürülmüş dize |
+| `result` | string | Uppercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |

@@ -6,143 +6,143 @@ Text analysis: word count, encoding detection, email/URL/number extraction.
 
 | Module | Description |
 |--------|-------------|
-| [문자 수](#문자-수) | 텍스트의 문자 수 세기 |
-| [인코딩 감지](#인코딩-감지) | 텍스트 인코딩 감지 |
-| [이메일 추출](#이메일-추출) | 텍스트에서 모든 이메일 주소 추출 |
-| [숫자 추출](#숫자-추출) | 텍스트에서 모든 숫자 추출 |
-| [URL 추출](#url-추출) | 텍스트에서 모든 URL 추출 |
-| [단어 수](#단어-수) | 텍스트의 단어 수 세기 |
+| [Character Count](#character-count) | Count characters in text |
+| [Detect Encoding](#detect-encoding) | Detect text encoding |
+| [Extract Emails](#extract-emails) | Extract all email addresses from text |
+| [Extract Numbers](#extract-numbers) | Extract all numbers from text |
+| [Extract URLs](#extract-urls) | Extract all URLs from text |
+| [Word Count](#word-count) | Count words in text |
 
 ## Modules
 
-### 문자 수
+### Character Count
 
 `text.char_count`
 
-텍스트의 문자 수 세기
+Count characters in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 분석할 텍스트 |
+| `text` | text | Yes | - | Text to analyze |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total` | number | 분석할 텍스트 |
-| `without_spaces` | number | 총 문자 수 |
-| `letters` | number | 총 문자 수 |
-| `digits` | number | 공백 제외한 문자 수 |
-| `spaces` | number | 문자 수 |
-| `lines` | number | 숫자 수 |
+| `total` | number | Total character count |
+| `without_spaces` | number | Count without spaces |
+| `letters` | number | Letter count |
+| `digits` | number | Digit count |
+| `spaces` | number | Space count |
+| `lines` | number | Line count |
 
-### 인코딩 감지
+### Detect Encoding
 
 `text.detect_encoding`
 
-텍스트 인코딩 감지
+Detect text encoding
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 인코딩을 감지할 텍스트 또는 바이트 |
+| `text` | text | Yes | - | Text or bytes to detect encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `encoding` | string | 인코딩을 감지할 텍스트 또는 바이트 |
-| `confidence` | number | 감지된 인코딩 |
-| `is_ascii` | boolean | 감지된 인코딩 |
-| `has_bom` | boolean | 신뢰도 점수 (0-1) |
+| `encoding` | string | Detected encoding |
+| `confidence` | number | Confidence score (0-1) |
+| `is_ascii` | boolean | Whether text is pure ASCII |
+| `has_bom` | boolean | Whether BOM was detected |
 
-### 이메일 추출
+### Extract Emails
 
 `text.extract_emails`
 
-텍스트에서 모든 이메일 주소 추출
+Extract all email addresses from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 이메일을 추출할 텍스트 |
-| `unique` | boolean | No | `True` | 이메일을 추출할 텍스트 |
-| `lowercase` | boolean | No | `True` | 고유한 이메일만 반환 |
+| `text` | text | Yes | - | Text to extract emails from |
+| `unique` | boolean | No | `True` | Return only unique emails |
+| `lowercase` | boolean | No | `True` | Convert emails to lowercase |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `emails` | array | 이메일을 소문자로 변환 |
-| `count` | number | 추출된 이메일 목록 |
-| `domains` | array | 추출된 이메일 목록 |
+| `emails` | array | List of extracted emails |
+| `count` | number | Number of emails found |
+| `domains` | array | Unique domains found |
 
-### 숫자 추출
+### Extract Numbers
 
 `text.extract_numbers`
 
-텍스트에서 모든 숫자 추출
+Extract all numbers from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 숫자를 추출할 텍스트 |
-| `include_decimals` | boolean | No | `True` | 숫자를 추출할 텍스트 |
-| `include_negative` | boolean | No | `True` | 소수 포함 |
+| `text` | text | Yes | - | Text to extract numbers from |
+| `include_decimals` | boolean | No | `True` | Include decimal numbers |
+| `include_negative` | boolean | No | `True` | Include negative numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `numbers` | array | 음수 포함 |
-| `count` | number | 추출된 숫자 목록 |
-| `sum` | number | 추출된 숫자 목록 |
-| `min` | number | 발견된 숫자 수 |
-| `max` | number | 모든 숫자의 합 |
+| `numbers` | array | List of extracted numbers |
+| `count` | number | Number of numbers found |
+| `sum` | number | Sum of all numbers |
+| `min` | number | Minimum value |
+| `max` | number | Maximum value |
 
-### URL 추출
+### Extract URLs
 
 `text.extract_urls`
 
-텍스트에서 모든 URL 추출
+Extract all URLs from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | URL을 추출할 텍스트 |
-| `unique` | boolean | No | `True` | URL을 추출할 텍스트 |
+| `text` | text | Yes | - | Text to extract URLs from |
+| `unique` | boolean | No | `True` | Return only unique URLs |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `urls` | array | 고유한 URL만 반환 |
-| `count` | number | 추출된 URL 목록 |
+| `urls` | array | List of extracted URLs |
+| `count` | number | Number of URLs found |
 
-### 단어 수
+### Word Count
 
 `text.word_count`
 
-텍스트의 단어 수 세기
+Count words in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 분석할 텍스트 |
+| `text` | text | Yes | - | Text to analyze |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `word_count` | number | 분석할 텍스트 |
-| `unique_words` | number | 총 단어 수 |
-| `sentence_count` | number | 총 단어 수 |
-| `paragraph_count` | number | 고유 단어 수 |
-| `avg_word_length` | number | 문장 수 추정 |
+| `word_count` | number | Total word count |
+| `unique_words` | number | Number of unique words |
+| `sentence_count` | number | Approximate sentence count |
+| `paragraph_count` | number | Paragraph count |
+| `avg_word_length` | number | Average word length |

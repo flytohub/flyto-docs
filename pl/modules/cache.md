@@ -6,100 +6,100 @@ In-memory key-value cache with TTL support.
 
 | Module | Description |
 |--------|-------------|
-| [Wyczyść pamięć podręczną](#wyczyść-pamięć-podręczną) | Wyczyść wszystkie wpisy z pamięci podręcznej lub filtruj według wzorca |
-| [Usuń z pamięci podręcznej](#usuń-z-pamięci-podręcznej) | Usuń wpis z pamięci podręcznej za pomocą klucza |
-| [Pobierz z pamięci podręcznej](#pobierz-z-pamięci-podręcznej) | Pobierz wartość z pamięci podręcznej za pomocą klucza |
-| [Ustaw w pamięci podręcznej](#ustaw-w-pamięci-podręcznej) | Ustaw wartość w pamięci podręcznej z opcjonalnym TTL |
+| [Cache Clear](#cache-clear) | Clear all cache entries or filter by pattern |
+| [Cache Delete](#cache-delete) | Delete a cache entry by key |
+| [Cache Get](#cache-get) | Get a value from cache by key |
+| [Cache Set](#cache-set) | Set a value in cache with optional TTL |
 
 ## Modules
 
-### Wyczyść pamięć podręczną
+### Cache Clear
 
 `cache.clear`
 
-Wyczyść wszystkie wpisy z pamięci podręcznej lub filtruj według wzorca
+Clear all cache entries or filter by pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `pattern` | string | No | `*` | Wzorzec glob do dopasowania kluczy (np. "user:*", domyślnie "*" usuwa wszystko) |
-| `backend` | string | No | `memory` | Backend pamięci podręcznej do użycia |
-| `redis_url` | string | No | `redis://localhost:6379` | URL połączenia Redis |
+| `pattern` | string | No | `*` | Glob pattern to match keys (e.g. "user:*", default "*" clears all) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `cleared_count` | number | Liczba usuniętych wpisów z pamięci podręcznej |
-| `backend` | string | Używany backend |
+| `cleared_count` | number | Number of cache entries cleared |
+| `backend` | string | The backend used |
 
-### Usuń z pamięci podręcznej
+### Cache Delete
 
 `cache.delete`
 
-Usuń wpis z pamięci podręcznej za pomocą klucza
+Delete a cache entry by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | Klucz pamięci podręcznej do usunięcia |
-| `backend` | string | No | `memory` | Backend pamięci podręcznej do użycia |
-| `redis_url` | string | No | `redis://localhost:6379` | URL połączenia Redis |
+| `key` | string | Yes | - | The cache key to delete |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | Klucz pamięci podręcznej |
-| `deleted` | boolean | Czy klucz został znaleziony i usunięty |
-| `backend` | string | Używany backend |
+| `key` | string | The cache key |
+| `deleted` | boolean | Whether the key was found and deleted |
+| `backend` | string | The backend used |
 
-### Pobierz z pamięci podręcznej
+### Cache Get
 
 `cache.get`
 
-Pobierz wartość z pamięci podręcznej za pomocą klucza
+Get a value from cache by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | Klucz pamięci podręcznej do wyszukania |
-| `backend` | string | No | `memory` | Backend pamięci podręcznej do użycia |
-| `redis_url` | string | No | `redis://localhost:6379` | URL połączenia Redis |
+| `key` | string | Yes | - | The cache key to look up |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | Klucz pamięci podręcznej |
-| `value` | any | Wartość z pamięci podręcznej (null jeśli nie znaleziono) |
-| `hit` | boolean | Czy klucz został znaleziony w pamięci podręcznej |
-| `backend` | string | Używany backend |
+| `key` | string | The cache key |
+| `value` | any | The cached value (null if not found) |
+| `hit` | boolean | Whether the key was found in cache |
+| `backend` | string | The backend used |
 
-### Ustaw w pamięci podręcznej
+### Cache Set
 
 `cache.set`
 
-Ustaw wartość w pamięci podręcznej z opcjonalnym TTL
+Set a value in cache with optional TTL
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | Klucz pamięci podręcznej do przechowywania wartości |
-| `value` | string | Yes | - | Wartość do zapisania w pamięci podręcznej (dowolna wartość serializowalna do JSON) |
-| `ttl` | number | No | `0` | Czas życia w sekundach (0 = bez wygaśnięcia) |
-| `backend` | string | No | `memory` | Backend pamięci podręcznej do użycia |
-| `redis_url` | string | No | `redis://localhost:6379` | URL połączenia Redis |
+| `key` | string | Yes | - | The cache key to store the value under |
+| `value` | string | Yes | - | The value to cache (any JSON-serializable value) |
+| `ttl` | number | No | `0` | Time-to-live in seconds (0 = no expiry) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | Klucz pamięci podręcznej |
-| `stored` | boolean | Czy wartość została pomyślnie zapisana |
-| `ttl` | number | TTL w sekundach (0 = bez wygaśnięcia) |
-| `backend` | string | Używany backend |
+| `key` | string | The cache key |
+| `stored` | boolean | Whether the value was stored successfully |
+| `ttl` | number | The TTL in seconds (0 = no expiry) |
+| `backend` | string | The backend used |

@@ -6,44 +6,44 @@ Visual verification, Figma comparison, style capture, and report generation.
 
 | Module | Description |
 |--------|-------------|
-| [Chú thích Ảnh chụp màn hình](#chú-thích-ảnh-chụp-màn-hình) | Vẽ các hộp có nhãn trên ảnh chụp màn hình để đánh dấu sự khác biệt |
-| [Chụp Kiểu Phần Tử](#chụp-kiểu-phần-tử) | Chụp các kiểu đã tính toán từ phần tử trình duyệt |
-| [So Sánh Kiểu](#so-sánh-kiểu) | So sánh các kiểu đã chụp với giá trị mong đợi |
-| [Lấy Kiểu Figma](#lấy-kiểu-figma) | Lấy token thiết kế từ Figma API (token giữ cục bộ) |
-| [Tạo Báo Cáo](#tạo-báo-cáo) | Tạo báo cáo xác minh dưới dạng HTML/JSON/Markdown |
-| [Tải Bộ Quy Tắc](#tải-bộ-quy-tắc) | Tải quy tắc xác minh từ tệp YAML |
-| [Chạy Xác Minh](#chạy-xác-minh) | Chạy xác minh thiết kế đầy đủ: chụp → so sánh → báo cáo |
-| [Chạy Xác Minh Đặc Tả](#chạy-xác-minh-đặc-tả) | Xác minh đặc tả động - kết hợp bất kỳ mô-đun nào qua YAML |
-| [So sánh Hình ảnh](#so-sánh-hình-ảnh) | So sánh thiết kế tham chiếu với trang phát triển trực quan, chú thích sự khác biệt |
+| [Annotate Screenshot](#annotate-screenshot) | Draw labeled bounding boxes on screenshots to mark differences |
+| [Capture Element Styles](#capture-element-styles) | Capture computed styles from browser element |
+| [Compare Styles](#compare-styles) | Compare captured styles with expected values |
+| [Fetch Figma Style](#fetch-figma-style) | Fetch design tokens from Figma API (token stays local) |
+| [Generate Report](#generate-report) | Generate verification report in HTML/JSON/Markdown |
+| [Load Ruleset](#load-ruleset) | Load verification rules from YAML file |
+| [Run Verification](#run-verification) | Run full design verification: capture → compare → report |
+| [Run Spec Verification](#run-spec-verification) | Dynamic spec verification - compose any modules via YAML |
+| [Visual Diff](#visual-diff) | Compare reference design with dev site visually, annotate differences |
 
 ## Modules
 
-### Chú thích Ảnh chụp màn hình
+### Annotate Screenshot
 
 `verify.annotate`
 
-Vẽ các hộp có nhãn trên ảnh chụp màn hình để đánh dấu sự khác biệt
+Draw labeled bounding boxes on screenshots to mark differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | Yes | - | Đường dẫn đến hình ảnh chụp màn hình |
-| `annotations` | array | Yes | - | Mảng chú thích: [{label, x, y, width, height, color?, description?}] |
-| `output_path` | string | No | - | Đường dẫn đầu ra cho hình ảnh đã chú thích (mặc định: thêm hậu tố _annotated) |
+| `image_path` | string | Yes | - | Path to the screenshot image |
+| `annotations` | array | Yes | - | Array of annotations: [{label, x, y, width, height, color?, description?}] |
+| `output_path` | string | No | - | Output path for annotated image (default: adds _annotated suffix) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Đường dẫn đến hình ảnh đã chú thích |
-| `annotation_count` | integer | Số lượng chú thích đã vẽ |
+| `output_path` | string | Path to annotated image |
+| `annotation_count` | integer | Number of annotations drawn |
 
-### Chụp Kiểu Phần Tử
+### Capture Element Styles
 
 `verify.capture`
 
-Chụp các kiểu đã tính toán từ phần tử trình duyệt
+Capture computed styles from browser element
 
 **Parameters:**
 
@@ -62,11 +62,11 @@ Chụp các kiểu đã tính toán từ phần tử trình duyệt
 | `element` | object | Captured element with styles |
 | `found` | boolean | Whether element was found |
 
-### So Sánh Kiểu
+### Compare Styles
 
 `verify.compare`
 
-So sánh các kiểu đã chụp với giá trị mong đợi
+Compare captured styles with expected values
 
 **Parameters:**
 
@@ -93,11 +93,11 @@ So sánh các kiểu đã chụp với giá trị mong đợi
 | `error_count` | number | Number of errors |
 | `warning_count` | number | Number of warnings |
 
-### Lấy Kiểu Figma
+### Fetch Figma Style
 
 `verify.figma`
 
-Lấy token thiết kế từ Figma API (token giữ cục bộ)
+Fetch design tokens from Figma API (token stays local)
 
 **Parameters:**
 
@@ -115,11 +115,11 @@ Lấy token thiết kế từ Figma API (token giữ cục bộ)
 | `node` | object | Figma node data |
 | `style` | object | Extracted style |
 
-### Tạo Báo Cáo
+### Generate Report
 
 `verify.report`
 
-Tạo báo cáo xác minh dưới dạng HTML/JSON/Markdown
+Generate verification report in HTML/JSON/Markdown
 
 **Parameters:**
 
@@ -139,11 +139,11 @@ Tạo báo cáo xác minh dưới dạng HTML/JSON/Markdown
 | `report_path` | string | Path to generated report |
 | `summary` | object | Summary statistics |
 
-### Tải Bộ Quy Tắc
+### Load Ruleset
 
 `verify.ruleset`
 
-Tải quy tắc xác minh từ tệp YAML
+Load verification rules from YAML file
 
 **Parameters:**
 
@@ -158,11 +158,11 @@ Tải quy tắc xác minh từ tệp YAML
 | `ruleset` | object | Parsed ruleset |
 | `rules_count` | integer | Number of rules |
 
-### Chạy Xác Minh
+### Run Verification
 
 `verify.run`
 
-Chạy xác minh thiết kế đầy đủ: chụp → so sánh → báo cáo
+Run full design verification: capture → compare → report
 
 **Parameters:**
 
@@ -212,11 +212,11 @@ url: http://localhost:3000
 ruleset_path: ./design-rules.yaml
 ```
 
-### Chạy Xác Minh Đặc Tả
+### Run Spec Verification
 
 `verify.spec`
 
-Xác minh đặc tả động - kết hợp bất kỳ mô-đun nào qua YAML
+Dynamic spec verification - compose any modules via YAML
 
 **Parameters:**
 
@@ -233,31 +233,31 @@ Xác minh đặc tả động - kết hợp bất kỳ mô-đun nào qua YAML
 | `summary` | object |  |
 | `results` | array |  |
 
-### So sánh Hình ảnh
+### Visual Diff
 
 `verify.visual_diff`
 
-So sánh thiết kế tham chiếu với trang phát triển trực quan, chú thích sự khác biệt
+Compare reference design with dev site visually, annotate differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `reference_url` | string | Yes | - | URL hoặc đường dẫn hình ảnh cục bộ của thiết kế tham chiếu |
-| `dev_url` | string | Yes | - | URL của trang phát triển để so sánh |
-| `output_dir` | string | No | `./verify-reports/visual-diff` | Thư mục đầu ra cho các báo cáo |
-| `focus_areas` | array | No | - | Khu vực cần tập trung (ví dụ: ["header", "login form"]) |
-| `viewport_width` | number | No | `1280` | Chiều rộng khung nhìn trình duyệt |
-| `viewport_height` | number | No | `800` | Chiều cao khung nhìn trình duyệt |
-| `model` | string | No | `gpt-4o` | Mô hình thị giác để sử dụng |
-| `api_key` | string | No | - | Khóa API OpenAI (hoặc sử dụng biến môi trường OPENAI_API_KEY) |
+| `reference_url` | string | Yes | - | URL or local image path of reference design |
+| `dev_url` | string | Yes | - | URL of development site to compare |
+| `output_dir` | string | No | `./verify-reports/visual-diff` | Output directory for reports |
+| `focus_areas` | array | No | - | Areas to focus on (e.g. ["header", "login form"]) |
+| `viewport_width` | number | No | `1280` | Browser viewport width |
+| `viewport_height` | number | No | `800` | Browser viewport height |
+| `model` | string | No | `gpt-4o` | Vision model to use |
+| `api_key` | string | No | - | OpenAI API key (or use OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `similarity_score` | number | Tỷ lệ tương đồng (0-100) |
-| `annotations` | array | Danh sách các sự khác biệt đã chú thích |
-| `annotated_image` | string | Đường dẫn đến ảnh chụp màn hình đã chú thích |
-| `report_path` | string | Đường dẫn đến báo cáo HTML |
-| `summary` | string | Tóm tắt các sự khác biệt |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `annotations` | array | List of annotated differences |
+| `annotated_image` | string | Path to annotated screenshot |
+| `report_path` | string | Path to HTML report |
+| `summary` | string | Summary of differences |

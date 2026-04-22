@@ -6,42 +6,42 @@ Retry, fallback, and circuit breaker patterns.
 
 | Module | Description |
 |--------|-------------|
-| [サーキットブレーカー](#サーキットブレーカー) | サーキットブレーカーパターンで連鎖的な失敗を防ぐ |
-| [フォールバック](#フォールバック) | 操作が失敗したときにフォールバック値を提供 |
-| [リトライ](#リトライ) | 設定可能なリトライロジックで操作をラップする |
+| [Circuit Breaker](#circuit-breaker) | Protect against cascading failures with circuit breaker pattern |
+| [Fallback](#fallback) | Provide fallback value when operation fails |
+| [Retry](#retry) | Wrap operations with configurable retry logic |
 
 ## Modules
 
-### サーキットブレーカー
+### Circuit Breaker
 
 `error.circuit_breaker`
 
-サーキットブレーカーパターンで連鎖的な失敗を防ぐ
+Protect against cascading failures with circuit breaker pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | object | Yes | - | サーキットブレーカーで保護するアクション |
-| `circuit_id` | string | Yes | - | サーキットブレーカーで保護するアクション |
-| `failure_threshold` | number | No | `5` | このサーキットのユニークID（状態追跡用） |
-| `failure_window_ms` | number | No | `60000` | 失敗をカウントする時間枠 |
-| `recovery_timeout_ms` | number | No | `30000` | 回復を試みる前の時間（半開状態） |
-| `success_threshold` | number | No | `3` | サーキットを閉じるために半開状態で必要な成功リクエスト数 |
-| `fallback` | object | No | - | サーキットが開いているときの代替アクション |
-| `fallback_value` | any | No | - | サーキットが開いているときの代替アクション |
-| `track_errors` | array | No | `[]` | サーキットが開いているときに返す静的な値 |
+| `action` | object | Yes | - | The action to protect with circuit breaker |
+| `circuit_id` | string | Yes | - | Unique identifier for this circuit (for state tracking) |
+| `failure_threshold` | number | No | `5` | Number of failures before opening circuit |
+| `failure_window_ms` | number | No | `60000` | Time window for counting failures |
+| `recovery_timeout_ms` | number | No | `30000` | Time before attempting recovery (half-open state) |
+| `success_threshold` | number | No | `3` | Successful requests needed in half-open to close circuit |
+| `fallback` | object | No | - | Alternative action when circuit is open |
+| `fallback_value` | any | No | - | Static value to return when circuit is open |
+| `track_errors` | array | No | `[]` | Only count these error codes toward threshold (empty = all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | これらのエラーコードのみを閾値にカウント（空 = 全て） |
-| `result` | any | ルーティング用イベント（成功/サーキット開/フォールバック） |
-| `circuit_state` | string | アクションまたはフォールバックの結果 |
-| `failure_count` | number | サーキットの現在の状態（閉/開/半開） |
-| `last_failure_time` | string | ウィンドウ内の現在の失敗回数 |
-| `circuit_opened_at` | string | 最後の失敗のタイムスタンプ |
+| `__event__` | string | Event for routing (success/circuit_open/fallback) |
+| `result` | any | Result from action or fallback |
+| `circuit_state` | string | Current state of circuit (closed/open/half_open) |
+| `failure_count` | number | Current failure count in window |
+| `last_failure_time` | string | Timestamp of last failure |
+| `circuit_opened_at` | string | When circuit was opened |
 
 **Example:** Example
 
@@ -71,31 +71,31 @@ failure_threshold: 3
 fallback_value: {"users": [], "from_cache": false}
 ```
 
-### フォールバック
+### Fallback
 
 `error.fallback`
 
-操作が失敗したときにフォールバック値を提供
+Provide fallback value when operation fails
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `operation` | object | No | - | 試みるプライマリ操作 |
-| `fallback_value` | any | No | - | 試みるプライマリ操作 |
-| `fallback_operation` | object | No | - | 失敗時に返す静的な値 |
-| `fallback_on` | array | No | `[]` | 失敗時に実行する代替操作 |
-| `include_error_info` | boolean | No | `True` | フォールバックをトリガーするエラーコード（空 = 全てのエラー） |
-| `log_fallback` | boolean | No | `True` | 出力に元のエラー情報を含める |
+| `operation` | object | No | - | The primary operation to attempt |
+| `fallback_value` | any | No | - | Static value to return on failure |
+| `fallback_operation` | object | No | - | Alternative operation to execute on failure |
+| `fallback_on` | array | No | `[]` | Error codes that trigger fallback (empty = all errors) |
+| `include_error_info` | boolean | No | `True` | Include original error information in output |
+| `log_fallback` | boolean | No | `True` | Log when fallback is used |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | フォールバックが使用されたときにログ |
-| `used_fallback` | boolean | プライマリ操作またはフォールバックの結果 |
-| `source` | string | フォールバックが使用されたかどうか |
-| `original_error` | object | 結果のソース（プライマリ/フォールバック値/フォールバック操作） |
+| `result` | any | Result from primary operation or fallback |
+| `used_fallback` | boolean | Whether fallback was used |
+| `source` | string | Source of result (primary/fallback_value/fallback_operation) |
+| `original_error` | object | Original error if fallback was used |
 
 **Example:** Example
 
@@ -119,34 +119,34 @@ fallback_value: {"status": "unavailable"}
 fallback_on: ["NETWORK_ERROR", "TIMEOUT_ERROR"]
 ```
 
-### リトライ
+### Retry
 
 `error.retry`
 
-設定可能なリトライロジックで操作をラップする
+Wrap operations with configurable retry logic
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `operation` | object | Yes | - | リトライする操作（モジュールIDとパラメータ） |
-| `max_retries` | number | No | `3` | リトライする操作（モジュールIDとパラメータ） |
-| `initial_delay_ms` | number | No | `1000` | 最大リトライ試行回数 |
-| `max_delay_ms` | number | No | `30000` | 最初のリトライ前の初期遅延 |
-| `backoff_multiplier` | number | No | `2.0` | 指数バックオフの乗数（例：2は各リトライの遅延を2倍に） |
-| `jitter` | boolean | No | `True` | 雷鳴の群れを防ぐために遅延にランダムジッターを追加 |
-| `retry_on` | array | No | `[]` | 雷鳴の群れを防ぐために遅延にランダムジッターを追加 |
-| `timeout_per_attempt_ms` | number | No | `0` | リトライするエラーコードのリスト（空の場合はすべてリトライ） |
+| `operation` | object | Yes | - | The operation to retry (module ID and params) |
+| `max_retries` | number | No | `3` | Maximum number of retry attempts |
+| `initial_delay_ms` | number | No | `1000` | Initial delay before first retry |
+| `max_delay_ms` | number | No | `30000` | Maximum delay between retries |
+| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g., 2 doubles delay each retry) |
+| `jitter` | boolean | No | `True` | Add random jitter to delay to prevent thundering herd |
+| `retry_on` | array | No | `[]` | List of error codes to retry on (empty = retry all) |
+| `timeout_per_attempt_ms` | number | No | `0` | Timeout for each attempt (0 for no timeout) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 各試行のタイムアウト（0はタイムアウトなし） |
-| `result` | any | ルーティング用イベント（成功/終了） |
-| `attempts` | number | ルーティング用イベント（成功/終了） |
-| `total_delay_ms` | number | 成功した試行の結果 |
-| `errors` | array | 試行回数 |
+| `__event__` | string | Event for routing (success/exhausted) |
+| `result` | any | Result from successful attempt |
+| `attempts` | number | Number of attempts made |
+| `total_delay_ms` | number | Total time spent in delays |
+| `errors` | array | Errors from each failed attempt |
 
 **Example:** Example
 

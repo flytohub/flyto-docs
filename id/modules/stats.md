@@ -6,178 +6,178 @@ Statistical functions: mean, median, mode, std dev, percentile, and more.
 
 | Module | Description |
 |--------|-------------|
-| [Rata-rata](#rata-rata) | Hitung rata-rata aritmatika dari angka |
-| [Median](#median) | Hitung median (nilai tengah) dari angka |
-| [Min/Maks](#minmaks) | Cari nilai minimum dan maksimum |
-| [Modus](#modus) | Hitung modus (nilai yang paling sering muncul) |
-| [Persentil](#persentil) | Hitung persentil dari angka |
-| [Deviasi Standar](#deviasi-standar) | Hitung deviasi standar dari angka |
-| [Sum](#sum) | Hitung jumlah angka |
-| [Varians](#varians) | Hitung varians angka |
+| [Mean (Average)](#mean-average) | Calculate arithmetic mean of numbers |
+| [Median](#median) | Calculate median (middle value) of numbers |
+| [Min/Max](#minmax) | Find minimum and maximum values |
+| [Mode](#mode) | Calculate mode (most frequent value) |
+| [Percentile](#percentile) | Calculate percentile of numbers |
+| [Standard Deviation](#standard-deviation) | Calculate standard deviation of numbers |
+| [Sum](#sum) | Calculate sum of numbers |
+| [Variance](#variance) | Calculate variance of numbers |
 
 ## Modules
 
-### Rata-rata
+### Mean (Average)
 
 `stats.mean`
 
-Hitung rata-rata aritmatika dari angka
+Calculate arithmetic mean of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | Array angka |
-| `precision` | number | No | `2` | Array angka |
+| `numbers` | array | Yes | - | Array of numbers |
+| `precision` | number | No | `2` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `mean` | number | Tempat desimal |
-| `count` | number | Rata-rata aritmatika |
-| `sum` | number | Rata-rata aritmatika |
+| `mean` | number | Arithmetic mean |
+| `count` | number | Number of values |
+| `sum` | number | Sum of values |
 
 ### Median
 
 `stats.median`
 
-Hitung median (nilai tengah) dari angka
+Calculate median (middle value) of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | Array angka |
+| `numbers` | array | Yes | - | Array of numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `median` | number | Array angka |
-| `count` | number | Nilai median |
+| `median` | number | Median value |
+| `count` | number | Number of values |
 
-### Min/Maks
+### Min/Max
 
 `stats.min_max`
 
-Cari nilai minimum dan maksimum
+Find minimum and maximum values
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | Array angka |
+| `numbers` | array | Yes | - | Array of numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `min` | number | Array angka |
-| `max` | number | Nilai minimum |
-| `range` | number | Nilai minimum |
-| `min_index` | number | Nilai maksimum |
-| `max_index` | number | Rentang (maks - min) |
+| `min` | number | Minimum value |
+| `max` | number | Maximum value |
+| `range` | number | Range (max - min) |
+| `min_index` | number | Index of minimum |
+| `max_index` | number | Index of maximum |
 
-### Modus
+### Mode
 
 `stats.mode`
 
-Hitung modus (nilai yang paling sering muncul)
+Calculate mode (most frequent value)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | Array nilai |
-| `all_modes` | boolean | No | `False` | Array nilai |
+| `values` | array | Yes | - | Array of values |
+| `all_modes` | boolean | No | `False` | Return all modes if multiple exist |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `mode` | any | Kembalikan semua modus jika ada beberapa |
-| `frequency` | number | Nilai yang paling sering muncul |
-| `count` | number | Nilai yang paling sering muncul |
+| `mode` | any | Most frequent value(s) |
+| `frequency` | number | Frequency of mode |
+| `count` | number | Number of values |
 
-### Persentil
+### Percentile
 
 `stats.percentile`
 
-Hitung persentil dari angka
+Calculate percentile of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | Array angka |
-| `percentile` | number | Yes | `50` | Array angka |
+| `numbers` | array | Yes | - | Array of numbers |
+| `percentile` | number | Yes | `50` | Percentile to calculate (0-100) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | number | Persentil untuk dihitung (0-100) |
-| `percentile` | number | Nilai persentil |
+| `value` | number | Percentile value |
+| `percentile` | number | Percentile requested |
 
-### Deviasi Standar
+### Standard Deviation
 
 `stats.std_dev`
 
-Hitung deviasi standar dari angka
+Calculate standard deviation of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | Array angka |
-| `population` | boolean | No | `False` | Gunakan rumus populasi (bagi dengan N bukan N-1) |
-| `precision` | number | No | `4` | Gunakan rumus populasi (bagi dengan N bukan N-1) |
+| `numbers` | array | Yes | - | Array of numbers |
+| `population` | boolean | No | `False` | Use population formula (divide by N instead of N-1) |
+| `precision` | number | No | `4` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `std_dev` | number | Tempat desimal |
-| `variance` | number | Deviasi standar |
-| `mean` | number | Deviasi standar |
+| `std_dev` | number | Standard deviation |
+| `variance` | number | Variance |
+| `mean` | number | Mean value |
 
 ### Sum
 
 `stats.sum`
 
-Hitung jumlah angka
+Calculate sum of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | Array angka |
+| `numbers` | array | Yes | - | Array of numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sum` | number | Array angka |
-| `count` | number | Jumlah angka |
+| `sum` | number | Sum of numbers |
+| `count` | number | Number of values |
 
-### Varians
+### Variance
 
 `stats.variance`
 
-Hitung varians angka
+Calculate variance of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | Array angka |
-| `population` | boolean | No | `False` | Array angka |
-| `precision` | number | No | `4` | Gunakan rumus populasi |
+| `numbers` | array | Yes | - | Array of numbers |
+| `population` | boolean | No | `False` | Use population formula |
+| `precision` | number | No | `4` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `variance` | number | Tempat desimal |
-| `mean` | number | Nilai varians |
+| `variance` | number | Variance value |
+| `mean` | number | Mean value |

@@ -6,17 +6,17 @@ Copy, move, and delete files.
 
 | Module | Description |
 |--------|-------------|
-| [複製檔案](#複製檔案) | 複製檔案到另一個位置 |
-| [刪除檔案](#刪除檔案) | 從檔案系統刪除檔案 |
-| [移動檔案](#移動檔案) | 移動或重新命名檔案 |
+| [Copy File](#copy-file) | Copy a file to another location |
+| [Delete File](#delete-file) | Delete a file from the filesystem |
+| [Move File](#move-file) | Move or rename a file |
 
 ## Modules
 
-### 複製檔案
+### Copy File
 
 `file.copy`
 
-複製檔案到另一個位置
+Copy a file to another location
 
 **Parameters:**
 
@@ -30,10 +30,10 @@ Copy, move, and delete files.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `copied` | boolean | 是否成功複製 |
-| `source` | string | 來源路徑 |
-| `destination` | string | 目的地路徑 |
-| `size` | number | 檔案大小 |
+| `copied` | boolean | The copied |
+| `source` | string | The source |
+| `destination` | string | The destination |
+| `size` | number | Size in bytes |
 
 **Example:** Backup file
 
@@ -50,11 +50,11 @@ source: config.yaml
 destination: config.backup.yaml
 ```
 
-### 刪除檔案
+### Delete File
 
 `file.delete`
 
-從檔案系統刪除檔案
+Delete a file from the filesystem
 
 **Parameters:**
 
@@ -67,8 +67,8 @@ destination: config.backup.yaml
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deleted` | boolean | 是否成功刪除 |
-| `file_path` | string | 已刪除的檔案路徑 |
+| `deleted` | boolean | The deleted |
+| `file_path` | string | The file path |
 
 **Example:** Delete temporary file
 
@@ -83,11 +83,11 @@ ignore_missing: true
 file_path: logs/app.log
 ```
 
-### 移動檔案
+### Move File
 
 `file.move`
 
-移動或重新命名檔案
+Move or rename a file
 
 **Parameters:**
 
@@ -100,9 +100,9 @@ file_path: logs/app.log
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `moved` | boolean | 是否成功移動 |
-| `source` | string | 來源路徑 |
-| `destination` | string | 目的地路徑 |
+| `moved` | boolean | The moved |
+| `source` | string | The source |
+| `destination` | string | The destination |
 
 **Example:** Move file to archive
 

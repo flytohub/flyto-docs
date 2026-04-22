@@ -6,68 +6,68 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [จัดการการท้าทาย](#จัดการการท้าทาย) | ตรวจจับและจัดการกับการท้าทายของระบบป้องกันบอทอัตโนมัติ (Cloudflare, CAPTCHA) |
-| [คลิกองค์ประกอบ](#คลิกองค์ประกอบ) | คลิกองค์ประกอบบนหน้า |
-| [ปิดเบราว์เซอร์](#ปิดเบราว์เซอร์) | ปิดอินสแตนซ์เบราว์เซอร์และปล่อยทรัพยากร |
-| [เชื่อมต่อระยะไกล](#เชื่อมต่อระยะไกล) | เชื่อมต่อบริการเบราว์เซอร์ระยะไกล (Browserless, BrowserBase) Fingerprint จริง, ผ่าน Cloudflare |
-| [จับคอนโซล](#จับคอนโซล) | จับบันทึกคอนโซลเบราว์เซอร์ (ข้อผิดพลาด คำเตือน ข้อมูล) |
-| [จัดการคุกกี้](#จัดการคุกกี้) | รับ ตั้งค่า หรือล้างคุกกี้เบราว์เซอร์ |
-| [ไฟล์คุกกี้](#ไฟล์คุกกี้) | นำเข้าหรือส่งออกคุกกี้เบราว์เซอร์จาก/ไปยังไฟล์ JSON |
+| [Handle Challenge](#handle-challenge) | Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop. |
+| [Click Element](#click-element) | Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Close Browser](#close-browser) | Close the browser instance and release resources |
+| [Connect Remote](#connect-remote) | Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs. |
+| [Capture Console](#capture-console) | Capture browser console logs (errors, warnings, info) |
+| [Manage Cookies](#manage-cookies) | Get, set, or clear browser cookies |
+| [Cookies File](#cookies-file) | Import or export browser cookies to/from a JSON file for session persistence. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [ตรวจจับรายการ](#ตรวจจับรายการ) | ตรวจจับรายการซ้ำบนหน้าเว็บอัตโนมัติ (บทความ, สินค้า, ผลการค้นหา) |
-| [จัดการ Dialog](#จัดการ-dialog) | จัดการกล่องโต้ตอบ alert, confirm และ prompt |
-| [ดาวน์โหลดไฟล์](#ดาวน์โหลดไฟล์) | ดาวน์โหลดไฟล์จากเบราว์เซอร์ |
-| [ลากและวาง](#ลากและวาง) | ลากและวางองค์ประกอบ |
-| [จำลองอุปกรณ์](#จำลองอุปกรณ์) | จำลองอุปกรณ์หรือกำหนดขนาดหน้าต่างเอง |
-| [ตรวจสอบเบราว์เซอร์](#ตรวจสอบเบราว์เซอร์) | ตรวจสอบให้แน่ใจว่ามีเซสชันเบราว์เซอร์อยู่ (ใช้ซ้ำหรือเปิดใหม่) |
-| [รัน JavaScript](#รัน-javascript) | รันโค้ด JavaScript ในบริบทหน้า |
-| [ดึงข้อมูล](#ดึงข้อมูล) | ดึงข้อมูลที่มีโครงสร้างจากหน้า |
-| [ดึงข้อมูลซ้อน](#ดึงข้อมูลซ้อน) | ดึงข้อมูลแบบซ้อน/โครงสร้างต้นไม้ (ความคิดเห็น, เธรด, โฟลเดอร์) |
-| [ค้นหาองค์ประกอบ](#ค้นหาองค์ประกอบ) | ค้นหาองค์ประกอบในหน้าและส่งคืนรายการ ID องค์ประกอบ |
-| [กรอกฟอร์ม](#กรอกฟอร์ม) | กรอกฟอร์มอัตโนมัติด้วยการตรวจจับช่องกรอก |
-| [สลับ Frame](#สลับ-frame) | สลับไปยังบริบท iframe หรือ frame |
-| [จำลอง Geolocation](#จำลอง-geolocation) | จำลองตำแหน่งทางภูมิศาสตร์ของเบราว์เซอร์ |
-| [ไปยัง URL](#ไปยัง-url) | นำทางไปยัง URL ที่ระบุ |
-| [วางเมาส์เหนือองค์ประกอบ](#วางเมาส์เหนือองค์ประกอบ) | วางเมาส์เหนือองค์ประกอบ |
-| [โต้ตอบเบราว์เซอร์](#โต้ตอบเบราว์เซอร์) | หยุดชั่วคราวเพื่อให้ผู้ใช้โต้ตอบกับหน้าเบราว์เซอร์ |
-| [เปิดเบราว์เซอร์](#เปิดเบราว์เซอร์) | เปิดอินสแตนซ์เบราว์เซอร์ใหม่ด้วย Playwright |
-| [เข้าสู่ระบบ](#เข้าสู่ระบบ) | ตรวจจับและกรอกฟอร์มเข้าสู่ระบบอัตโนมัติพร้อมการยืนยันหลังเข้าสู่ระบบ |
-| [นำทางประวัติ](#นำทางประวัติ) | นำทางประวัติเบราว์เซอร์ (ย้อนกลับ, ไปข้างหน้า, โหลดซ้ำ) |
-| [ตรวจสอบเครือข่าย](#ตรวจสอบเครือข่าย) | ติดตามและดักจับคำขอเครือข่าย |
-| [รายการหน้า](#รายการหน้า) | แสดงรายการหน้า/แท็บเบราว์เซอร์ที่เปิดอยู่ทั้งหมด |
-| [แบ่งหน้า & ดึงข้อมูล](#แบ่งหน้า--ดึงข้อมูล) | แบ่งหน้าอัตโนมัติและดึงข้อมูล |
-| [สร้าง PDF](#สร้าง-pdf) | สร้าง PDF จากหน้าปัจจุบัน |
-| [ข้อมูลประสิทธิภาพ](#ข้อมูลประสิทธิภาพ) | รวบรวมข้อมูลประสิทธิภาพของเบราว์เซอร์ |
-| [กลุ่มเบราว์เซอร์](#กลุ่มเบราว์เซอร์) | จัดการเบราว์เซอร์หลายอินสแตนซ์สำหรับการทำงานอัตโนมัติแบบขนาน |
-| [กดปุ่ม](#กดปุ่ม) | กดปุ่มแป้นพิมพ์ |
-| [หมุนเวียนพร็อกซี](#หมุนเวียนพร็อกซี) | สลับรายการพร็อกซีพร้อมตรวจจับพร็อกซีที่ใช้ไม่ได้ |
-| [ดึงบทความ](#ดึงบทความ) | ดึงบทความอัจฉริยะ — ดึงหัวข้อ, ผู้เขียน, วันที่ และเนื้อหาหลักจากทุกหน้าเว็บ |
-| [บันทึกการกระทำ](#บันทึกการกระทำ) | บันทึกการกระทำของผู้ใช้เป็น workflow |
-| [ปล่อยเบราว์เซอร์](#ปล่อยเบราว์เซอร์) | ปล่อยเซสชันเบราว์เซอร์ (ปิดเฉพาะถ้าเป็นเจ้าของ) |
-| [จับการตอบกลับ](#จับการตอบกลับ) | จับเนื้อหาการตอบกลับ API (XHR/fetch) ดึง JSON จาก API บนหน้าเว็บ |
-| [ตรวจสอบ Robots.txt](#ตรวจสอบ-robots.txt) | ตรวจสอบการปฏิบัติตาม robots.txt และค้นหา sitemap |
-| [ถ่ายภาพหน้าจอ](#ถ่ายภาพหน้าจอ) | ถ่ายภาพหน้าจอของหน้าปัจจุบัน |
-| [เลื่อนหน้า](#เลื่อนหน้า) | เลื่อนหน้าไปยังองค์ประกอบ ตำแหน่ง หรือทิศทาง |
-| [เลือกตัวเลือก](#เลือกตัวเลือก) | เลือกตัวเลือกจากองค์ประกอบ dropdown |
-| [แยกวิเคราะห์ Sitemap](#แยกวิเคราะห์-sitemap) | แยกวิเคราะห์ sitemap.xml และดึง URL พร้อม metadata |
-| [ภาพ DOM](#ภาพ-dom) | จับภาพ DOM ของหน้าปัจจุบัน |
-| [พื้นที่เก็บข้อมูลของเบราว์เซอร์](#พื้นที่เก็บข้อมูลของเบราว์เซอร์) | เข้าถึง localStorage และ sessionStorage |
-| [จัดการแท็บ](#จัดการแท็บ) | สร้าง สลับ และปิดแท็บเบราว์เซอร์ |
-| [ดึงตาราง](#ดึงตาราง) | ดึงตาราง HTML เป็นข้อมูลมีโครงสร้างพร้อมหัวตารางที่ตรวจจับอัตโนมัติ |
-| [จำกัดความเร็ว](#จำกัดความเร็ว) | จำกัดอัตราตามโดเมน รอระหว่างคำขอเพื่อป้องกันการถูกบล็อก |
-| [การติดตามเบราว์เซอร์](#การติดตามเบราว์เซอร์) | เริ่ม หยุด หรือบันทึกการติดตามประสิทธิภาพของเบราว์เซอร์ |
-| [พิมพ์ข้อความ](#พิมพ์ข้อความ) | พิมพ์ข้อความลงในฟิลด์อินพุต |
-| [อัปโหลดไฟล์](#อัปโหลดไฟล์) | อัปโหลดไฟล์ไปยังองค์ประกอบ file input |
-| [ตั้งค่าหน้าต่าง](#ตั้งค่าหน้าต่าง) | รับหรือกำหนดขนาดหน้าต่างเบราว์เซอร์ |
-| [รอ](#รอ) | รอระยะเวลาหรือจนกว่าองค์ประกอบจะปรากฏ |
+| [Detect List](#detect-list) | Auto-detect repeating items on any page (articles, products, search results). No selectors needed. |
+| [Handle Dialog](#handle-dialog) | Handle alert, confirm, and prompt dialogs |
+| [Download File](#download-file) | Download file from browser |
+| [Drag and Drop](#drag-and-drop) | Drag and drop elements |
+| [Device Emulation](#device-emulation) | Emulate mobile devices, tablets, and custom viewports |
+| [Ensure Browser](#ensure-browser) | Ensure a browser session exists (reuse or launch) |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code in page context |
+| [Extract Data](#extract-data) | Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Extract Nested](#extract-nested) | Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children. |
+| [Find Elements](#find-elements) | Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Fill Form](#fill-form) | Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM. |
+| [Switch Frame](#switch-frame) | Switch to iframe or frame context |
+| [Mock Geolocation](#mock-geolocation) | Mock browser geolocation |
+| [Go to URL](#go-to-url) | Navigate to a specific URL |
+| [Hover Element](#hover-element) | Hover mouse over an element |
+| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
+| [Launch Browser](#launch-browser) | Launch a new browser instance with Playwright |
+| [Login](#login) | Auto-detect and fill login forms. Handles username + password + submit with post-login verification. |
+| [Page Navigation](#page-navigation) | Navigate back, forward, or reload the page |
+| [Network Monitor](#network-monitor) | Monitor and intercept network requests |
+| [List Pages](#list-pages) | List all open browser pages/tabs with details |
+| [Paginate & Extract](#paginate--extract) | Auto-paginate through pages and extract data. Supports retry and checkpoint resume. |
+| [Generate PDF](#generate-pdf) | Generate PDF from current page |
+| [Performance Metrics](#performance-metrics) | Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics |
+| [Browser Pool](#browser-pool) | Manage multiple named browser instances for parallel automation. |
+| [Press Key](#press-key) | Press a keyboard key |
+| [Rotate Proxy](#rotate-proxy) | Rotate through a list of proxies. Relaunches browser with the next proxy. |
+| [Extract Article](#extract-article) | Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode. |
+| [Record Actions](#record-actions) | Record user actions as workflow |
+| [Release Browser](#release-browser) | Release browser session (close only if owned) |
+| [Capture Response](#capture-response) | Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls. |
+| [Check Robots.txt](#check-robots.txt) | Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping. |
+| [Take Screenshot](#take-screenshot) | Take a screenshot of the current page |
+| [Scroll Page](#scroll-page) | Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Select Option](#select-option) | Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering. |
+| [DOM Snapshot](#dom-snapshot) | Capture DOM snapshot in HTML, MHTML, or text format |
+| [Browser Storage](#browser-storage) | Access localStorage and sessionStorage |
+| [Manage Tabs](#manage-tabs) | Create, switch, and close browser tabs |
+| [Extract Table](#extract-table) | Extract HTML tables as structured data. Auto-detects headers from thead/th. |
+| [Throttle](#throttle) | Per-domain rate limiting. Waits between requests to the same domain to avoid bans. |
+| [Performance Trace](#performance-trace) | Start/stop Chrome DevTools performance tracing (Chromium only) |
+| [Type Text](#type-text) | Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Upload File](#upload-file) | Upload file to file input element |
+| [Resize Viewport](#resize-viewport) | Resize browser viewport to specific dimensions |
+| [Wait](#wait) | Wait for a duration or until an element appears |
 
 ## Modules
 
-### จัดการการท้าทาย
+### Handle Challenge
 
 `browser.challenge`
 
-ตรวจจับและจัดการกับการท้าทายของระบบป้องกันบอทอัตโนมัติ (Cloudflare, CAPTCHA)
+Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop.
 
 **Parameters:**
 
@@ -107,11 +107,11 @@ auto_wait_seconds: 30
 human_fallback: false
 ```
 
-### คลิกองค์ประกอบ
+### Click Element
 
 `browser.click`
 
-คลิกองค์ประกอบบนหน้า
+Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -131,8 +131,8 @@ human_fallback: false
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `selector` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | Selector that was used |
 | `method` | string | Click method used |
 
 **Example:** Example
@@ -156,11 +156,11 @@ click_method: selector
 selector: #submit-button
 ```
 
-### ปิดเบราว์เซอร์
+### Close Browser
 
 `browser.close`
 
-ปิดอินสแตนซ์เบราว์เซอร์และปล่อยทรัพยากร
+Close the browser instance and release resources
 
 **Parameters:**
 
@@ -172,19 +172,19 @@ selector: #submit-button
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ปิดอินสแตนซ์เบราว์เซอร์ |
-| `message` | string | ปิดอินสแตนซ์เบราว์เซอร์ |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
 ```yaml
 ```
 
-### เชื่อมต่อระยะไกล
+### Connect Remote
 
 `browser.connect`
 
-เชื่อมต่อบริการเบราว์เซอร์ระยะไกล (Browserless, BrowserBase) Fingerprint จริง, ผ่าน Cloudflare
+Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs.
 
 **Parameters:**
 
@@ -222,11 +222,11 @@ ws_endpoint: wss://connect.browserbase.com?apiKey=KEY
 ws_endpoint: ws://localhost:3000
 ```
 
-### จับคอนโซล
+### Capture Console
 
 `browser.console`
 
-จับบันทึกคอนโซลเบราว์เซอร์ (ข้อผิดพลาด คำเตือน ข้อมูล)
+Capture browser console logs (errors, warnings, info)
 
 **Parameters:**
 
@@ -240,9 +240,9 @@ ws_endpoint: ws://localhost:3000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `messages` | array | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `count` | number | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
+| `status` | string | Operation status (success/error) |
+| `messages` | array | The messages |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -257,11 +257,11 @@ level: error
 timeout: 5000
 ```
 
-### จัดการคุกกี้
+### Manage Cookies
 
 `browser.cookies`
 
-รับ ตั้งค่า หรือล้างคุกกี้เบราว์เซอร์
+Get, set, or clear browser cookies
 
 **Parameters:**
 
@@ -280,9 +280,9 @@ timeout: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `cookies` | array | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `count` | number | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
+| `status` | string | Operation status (success/error) |
+| `cookies` | array | Browser cookies |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -312,11 +312,11 @@ domain: example.com
 action: clear
 ```
 
-### ไฟล์คุกกี้
+### Cookies File
 
 `browser.cookies_file`
 
-นำเข้าหรือส่งออกคุกกี้เบราว์เซอร์จาก/ไปยังไฟล์ JSON
+Import or export browser cookies to/from a JSON file for session persistence.
 
 **Parameters:**
 
@@ -423,11 +423,11 @@ text: Login
 match_mode: best
 ```
 
-### ตรวจจับรายการ
+### Detect List
 
 `browser.detect_list`
 
-ตรวจจับรายการซ้ำบนหน้าเว็บอัตโนมัติ (บทความ, สินค้า, ผลการค้นหา)
+Auto-detect repeating items on any page (articles, products, search results). No selectors needed.
 
 **Parameters:**
 
@@ -467,11 +467,11 @@ min_items: 5
 max_items: 50
 ```
 
-### จัดการ Dialog
+### Handle Dialog
 
 `browser.dialog`
 
-จัดการกล่องโต้ตอบ alert, confirm และ prompt
+Handle alert, confirm, and prompt dialogs
 
 **Parameters:**
 
@@ -485,10 +485,10 @@ max_items: 50
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `message` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `type` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `default_value` | string | ข้อความผลลัพธ์อธิบายผลลัพธ์ |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `type` | string | The type |
+| `default_value` | string | The default value |
 
 **Example:** Example
 
@@ -516,11 +516,11 @@ action: listen
 timeout: 5000
 ```
 
-### ดาวน์โหลดไฟล์
+### Download File
 
 `browser.download`
 
-ดาวน์โหลดไฟล์จากเบราว์เซอร์
+Download file from browser
 
 **Parameters:**
 
@@ -534,10 +534,10 @@ timeout: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `path` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `filename` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `size` | number | เส้นทางไฟล์หรือทรัพยากร |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -554,11 +554,11 @@ save_path: /downloads/large-file.zip
 timeout_ms: 120000
 ```
 
-### ลากและวาง
+### Drag and Drop
 
 `browser.drag`
 
-ลากและวางองค์ประกอบ
+Drag and drop elements
 
 **Parameters:**
 
@@ -574,9 +574,9 @@ timeout_ms: 120000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ตำแหน่งภายในองค์ประกอบเป้าหมาย {x, y} เป็นเปอร์เซ็นต์ |
-| `source` | string | ตำแหน่งภายในองค์ประกอบเป้าหมาย {x, y} เป็นเปอร์เซ็นต์ |
-| `target` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
+| `status` | string | Operation status (success/error) |
+| `source` | string | The source |
+| `target` | string | The target |
 
 **Example:** Example
 
@@ -593,32 +593,32 @@ target: .container
 target_position: {"x": 0.5, "y": 0.5}
 ```
 
-### จำลองอุปกรณ์
+### Device Emulation
 
 `browser.emulate`
 
-จำลองอุปกรณ์หรือกำหนดขนาดหน้าต่างเอง
+Emulate mobile devices, tablets, and custom viewports
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | ชื่ออุปกรณ์ที่จะจำลอง (เช่น iPhone 13) |
-| `width` | number | No | - | ความกว้างของหน้าต่างในพิกเซล |
-| `height` | number | No | - | ความสูงของหน้าต่างในพิกเซล |
-| `user_agent` | string | No | - | สตริง user agent ที่กำหนดเอง |
-| `device_scale_factor` | number | No | - | อัตราส่วนพิกเซลของอุปกรณ์ |
-| `is_mobile` | boolean | No | - | จำลองอุปกรณ์มือถือหรือไม่ |
-| `has_touch` | boolean | No | - | อุปกรณ์มีการรองรับการสัมผัสหรือไม่ |
+| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | Device preset or "custom" for manual settings |
+| `width` | number | No | - | Custom viewport width (for custom device) |
+| `height` | number | No | - | Custom viewport height (for custom device) |
+| `user_agent` | string | No | - | Custom user agent string |
+| `device_scale_factor` | number | No | - | Device pixel ratio (1-3) |
+| `is_mobile` | boolean | No | - | Enable mobile browser behavior |
+| `has_touch` | boolean | No | - | Enable touch event support |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ผิดพลาด) |
-| `device` | string | ชื่ออุปกรณ์ที่ถูกจำลอง |
-| `viewport` | object | ขนาดหน้าต่างปัจจุบัน |
-| `is_mobile` | boolean | การจำลองมือถือเปิดใช้งานหรือไม่ |
+| `status` | string | Operation status |
+| `device` | string | Emulated device name |
+| `viewport` | object | Applied viewport dimensions |
+| `is_mobile` | boolean | Whether mobile mode is enabled |
 
 **Example:** Example
 
@@ -650,11 +650,11 @@ device: desktop_chrome
 user_agent: CustomBot/1.0
 ```
 
-### ตรวจสอบเบราว์เซอร์
+### Ensure Browser
 
 `browser.ensure`
 
-ตรวจสอบให้แน่ใจว่ามีเซสชันเบราว์เซอร์อยู่ (ใช้ซ้ำหรือเปิดใหม่)
+Ensure a browser session exists (reuse or launch)
 
 **Parameters:**
 
@@ -668,9 +668,9 @@ user_agent: CustomBot/1.0
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | เบราว์เซอร์ถูกเปิดใหม่หรือใช้ซ้ำ |
-| `message` | string | เบราว์เซอร์ถูกเปิดใหม่หรือใช้ซ้ำ |
-| `is_owner` | boolean | เบราว์เซอร์ถูกเปิดใหม่หรือใช้ซ้ำ |
+| `status` | string | Whether browser was launched or reused |
+| `message` | string | Result message |
+| `is_owner` | boolean | Whether this step owns the browser (responsible for closing) |
 
 **Example:** Example
 
@@ -684,11 +684,11 @@ headless: false
 headless: true
 ```
 
-### รัน JavaScript
+### Execute JavaScript
 
 `browser.evaluate`
 
-รันโค้ด JavaScript ในบริบทหน้า
+Execute JavaScript code in page context
 
 **Parameters:**
 
@@ -701,8 +701,8 @@ headless: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `result` | any | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
+| `status` | string | Operation status (success/error) |
+| `result` | any | The operation result |
 
 **Example:** Example
 
@@ -729,11 +729,11 @@ args: ["#header"]
 script: document.body.style.backgroundColor = "red"; return "done"
 ```
 
-### ดึงข้อมูล
+### Extract Data
 
 `browser.extract`
 
-ดึงข้อมูลที่มีโครงสร้างจากหน้า
+Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -747,9 +747,9 @@ script: document.body.style.backgroundColor = "red"; return "done"
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `data` | array | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `count` | number | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -759,11 +759,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### ดึงข้อมูลซ้อน
+### Extract Nested
 
 `browser.extract_nested`
 
-ดึงข้อมูลแบบซ้อน/โครงสร้างต้นไม้ (ความคิดเห็น, เธรด, โฟลเดอร์)
+Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children.
 
 **Parameters:**
 
@@ -797,11 +797,11 @@ fields: {"author": {"selector": ".author"}, "text": {"selector": ".body"}, "date
 root_selector: li.item
 ```
 
-### ค้นหาองค์ประกอบ
+### Find Elements
 
 `browser.find`
 
-ค้นหาองค์ประกอบในหน้าและส่งคืนรายการ ID องค์ประกอบ
+Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -814,9 +814,9 @@ root_selector: li.item
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `count` | number | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `element_ids` | array | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
+| `status` | string | Operation status (success/error) |
+| `count` | number | Number of items |
+| `element_ids` | array | The element ids |
 
 **Example:** Find search results
 
@@ -825,11 +825,11 @@ selector: div.tF2Cxc
 limit: 10
 ```
 
-### กรอกฟอร์ม
+### Fill Form
 
 `browser.form`
 
-กรอกฟอร์มอัตโนมัติด้วยการตรวจจับช่องกรอก
+Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM.
 
 **Parameters:**
 
@@ -847,9 +847,9 @@ limit: 10
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filled_fields` | array | หน่วงเวลาระหว่างการกรอกแต่ละช่อง (เพื่อให้ดูเป็นธรรมชาติ) |
-| `failed_fields` | array | รายการช่องที่ถูกกรอกแล้ว |
-| `submitted` | boolean | รายการช่องที่ถูกกรอกแล้ว |
+| `filled_fields` | array | List of fields that were filled |
+| `failed_fields` | array | List of fields that failed to fill |
+| `submitted` | boolean | Whether form was submitted |
 
 **Example:** Example
 
@@ -865,11 +865,11 @@ data: {"username": "john_doe", "bio": "Hello world"}
 field_mapping: {"username": "#user-name-input", "bio": "textarea.bio-field"}
 ```
 
-### สลับ Frame
+### Switch Frame
 
 `browser.frame`
 
-สลับไปยังบริบท iframe หรือ frame
+Switch to iframe or frame context
 
 **Parameters:**
 
@@ -885,10 +885,10 @@ field_mapping: {"username": "#user-name-input", "bio": "textarea.bio-field"}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | การดำเนินการ Frame (enter เพื่อสลับไป frame, list เพื่อแสดงรายการ frames ทั้งหมด) |
-| `frame_url` | string | การดำเนินการ Frame (enter เพื่อสลับไป frame, list เพื่อแสดงรายการ frames ทั้งหมด) |
-| `frame_name` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `frames` | array | URL ของ Frame |
+| `status` | string | Operation status (success/error) |
+| `frame_url` | string | Frame URL |
+| `frame_name` | string | The frame name |
+| `frames` | array | List of frames |
 
 **Example:** Example
 
@@ -914,11 +914,11 @@ action: exit
 action: list
 ```
 
-### จำลอง Geolocation
+### Mock Geolocation
 
 `browser.geolocation`
 
-จำลองตำแหน่งทางภูมิศาสตร์ของเบราว์เซอร์
+Mock browser geolocation
 
 **Parameters:**
 
@@ -932,8 +932,8 @@ action: list
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ความแม่นยำตำแหน่งเป็นเมตร |
-| `location` | object | ความแม่นยำตำแหน่งเป็นเมตร |
+| `status` | string | Operation status (success/error) |
+| `location` | object | The location |
 
 **Example:** Example
 
@@ -957,11 +957,11 @@ latitude: 35.6762
 longitude: 139.6503
 ```
 
-### ไปยัง URL
+### Go to URL
 
 `browser.goto`
 
-นำทางไปยัง URL ที่ระบุ
+Navigate to a specific URL
 
 **Parameters:**
 
@@ -976,8 +976,8 @@ longitude: 139.6503
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `url` | string | นำทางไปยัง URL ที่ระบุ |
+| `status` | string | Operation status (success/error) |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -986,11 +986,11 @@ url: https://www.google.com
 wait_until: domcontentloaded
 ```
 
-### วางเมาส์เหนือองค์ประกอบ
+### Hover Element
 
 `browser.hover`
 
-วางเมาส์เหนือองค์ประกอบ
+Hover mouse over an element
 
 **Parameters:**
 
@@ -1004,8 +1004,8 @@ wait_until: domcontentloaded
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `selector` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1020,11 +1020,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### โต้ตอบเบราว์เซอร์
+### Browser Interact
 
 `browser.interact`
 
-หยุดชั่วคราวเพื่อให้ผู้ใช้โต้ตอบกับหน้าเบราว์เซอร์
+Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
 
 **Parameters:**
 
@@ -1038,11 +1038,11 @@ timeout_ms: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ |
-| `action` | string | การดำเนินการที่ทำ (click/select/type/toggle) |
-| `selector` | string | CSS selector ขององค์ประกอบที่โต้ตอบ |
-| `value` | string | ค่าที่ใช้ (สำหรับการ select/type) |
-| `url` | string | URL ของหน้าขณะโต้ตอบ |
+| `status` | string | Operation status |
+| `action` | string | Action executed (click/select/type/toggle) |
+| `selector` | string | CSS selector of the interacted element |
+| `value` | string | Value used (for select/type actions) |
+| `url` | string | Page URL at time of interaction |
 
 **Example:** Example
 
@@ -1051,11 +1051,11 @@ title: Choose a department
 description: Select the department you want to register for
 ```
 
-### เปิดเบราว์เซอร์
+### Launch Browser
 
 `browser.launch`
 
-เปิดอินสแตนซ์เบราว์เซอร์ใหม่ด้วย Playwright
+Launch a new browser instance with Playwright
 
 **Parameters:**
 
@@ -1064,25 +1064,25 @@ description: Select the department you want to register for
 | `headless` | boolean | No | `False` | Run browser without visible window |
 | `width` | number | No | `1280` | Browser viewport width in pixels |
 | `height` | number | No | `720` | Browser viewport height in pixels |
-| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | เอนจินเบราว์เซอร์ที่จะใช้ (chromium, firefox, webkit) |
+| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Browser engine to use |
 | `channel` | select (``, `chrome`, `msedge`) | No | - | Use system Chrome instead of bundled Chromium for better anti-detection bypass |
 | `behavior` | select (`fast`, `normal`, `careful`, `human_like`) | No | `fast` | How the browser interacts: fast (no delays), normal, careful (mouse movement), human_like (full simulation) |
 | `stealth` | boolean | No | `True` | Anti-detection patches: WebGL fingerprint, canvas noise, navigator fixes. Always recommended. |
-| `proxy` | string | No | - | URL ของเซิร์ฟเวอร์พร็อกซี |
-| `user_agent` | string | No | - | สตริง user agent ที่กำหนดเอง |
+| `proxy` | string | No | - | HTTP/SOCKS proxy server URL. For rotation use browser.proxy_rotate. |
+| `user_agent` | string | No | - | Custom user agent string |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |
-| `slow_mo` | number | No | `0` | ชะลอการทำงานตามมิลลิวินาทีที่ระบุ |
+| `slow_mo` | number | No | `0` | Delay between Playwright actions in ms (low-level, prefer Behavior Profile) |
 | `record_video_dir` | string | No | - | Directory to save recorded videos (enables Playwright video recording) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `message` | string | เปิดอินสแตนซ์เบราว์เซอร์ใหม่ |
-| `browser_type` | string | ประเภทของเบราว์เซอร์ที่เปิดใช้งาน |
-| `headless` | boolean | เบราว์เซอร์ทำงานแบบไม่แสดงผลหรือไม่ |
-| `viewport` | object | ขนาดหน้าต่างปัจจุบัน |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `browser_type` | string | Browser engine used |
+| `headless` | boolean | Whether browser is in headless mode |
+| `viewport` | object | Browser viewport dimensions |
 | `behavior` | string | Active behavior profile |
 
 **Example:** Example
@@ -1105,11 +1105,11 @@ behavior: human_like
 stealth: true
 ```
 
-### เข้าสู่ระบบ
+### Login
 
 `browser.login`
 
-ตรวจจับและกรอกฟอร์มเข้าสู่ระบบอัตโนมัติพร้อมการยืนยันหลังเข้าสู่ระบบ
+Auto-detect and fill login forms. Handles username + password + submit with post-login verification.
 
 **Parameters:**
 
@@ -1149,11 +1149,11 @@ password_selector: #pass
 submit_selector: #login-btn
 ```
 
-### นำทางประวัติ
+### Page Navigation
 
 `browser.navigation`
 
-นำทางประวัติเบราว์เซอร์ (ย้อนกลับ, ไปข้างหน้า, โหลดซ้ำ)
+Navigate back, forward, or reload the page
 
 **Parameters:**
 
@@ -1167,9 +1167,9 @@ submit_selector: #login-btn
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ผิดพลาด) |
-| `action` | string | การกระทำการนำทางที่ดำเนินการ |
-| `url` | string | URL ปัจจุบันหลังการนำทาง |
+| `status` | string | Operation status (success/error) |
+| `action` | string | Navigation action performed |
+| `url` | string | Current URL after navigation |
 
 **Example:** Example
 
@@ -1190,11 +1190,11 @@ action: reload
 wait_until: networkidle
 ```
 
-### ตรวจสอบเครือข่าย
+### Network Monitor
 
 `browser.network`
 
-ติดตามและดักจับคำขอเครือข่าย
+Monitor and intercept network requests
 
 **Parameters:**
 
@@ -1210,9 +1210,9 @@ wait_until: networkidle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | การตอบกลับที่จะส่งคืนสำหรับคำขอที่ดักจับ |
-| `requests` | array | การตอบกลับที่จะส่งคืนสำหรับคำขอที่ดักจับ |
-| `blocked_count` | number | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
+| `status` | string | Operation status (success/error) |
+| `requests` | array | Captured network requests |
+| `blocked_count` | number | The blocked count |
 
 **Example:** Example
 
@@ -1237,27 +1237,27 @@ url_pattern: .*users.*
 mock_response: {"status": 200, "body": "{\"users\": []}"}
 ```
 
-### รายการหน้า
+### List Pages
 
 `browser.pages`
 
-แสดงรายการหน้า/แท็บเบราว์เซอร์ที่เปิดอยู่ทั้งหมด
+List all open browser pages/tabs with details
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `include_details` | boolean | No | `True` | รวมข้อมูลรายละเอียดสำหรับแต่ละหน้า |
-| `include_content_info` | boolean | No | `False` | รวมข้อมูลประเภทเนื้อหาสำหรับแต่ละหน้า |
+| `include_details` | boolean | No | `True` | Include URL, title, and viewport info for each page |
+| `include_content_info` | boolean | No | `False` | Include page load state and frame count (slower) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการทำงาน (สำเร็จ/ผิดพลาด) |
-| `pages` | array | รายการหน้าที่เปิดอยู่ |
-| `count` | number | จำนวนหน้าที่เปิดอยู่ |
-| `current_index` | number | ดัชนีของหน้าที่ใช้งานอยู่ในปัจจุบัน |
+| `status` | string | Operation status |
+| `pages` | array | List of page information |
+| `count` | number | Number of open pages |
+| `current_index` | number | Index of the current active page |
 
 **Example:** Example
 
@@ -1278,11 +1278,11 @@ include_details: true
 include_content_info: true
 ```
 
-### แบ่งหน้า & ดึงข้อมูล
+### Paginate & Extract
 
 `browser.pagination`
 
-แบ่งหน้าอัตโนมัติและดึงข้อมูล
+Auto-paginate through pages and extract data. Supports retry and checkpoint resume.
 
 **Parameters:**
 
@@ -1307,10 +1307,10 @@ include_content_info: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `items` | array | ตัวเลือกที่ปรากฏเมื่อไม่มีหน้าเพิ่มเติม (หยุดการแบ่งหน้า) |
-| `total_items` | integer | รายการทั้งหมดที่ดึงจากทุกหน้า |
-| `pages_processed` | integer | รายการทั้งหมดที่ดึงจากทุกหน้า |
-| `stopped_reason` | string | จำนวนหน้าที่ประมวลผล |
+| `items` | array | All extracted items from all pages |
+| `total_items` | integer | Total number of items extracted |
+| `pages_processed` | integer | Number of pages processed |
+| `stopped_reason` | string | Why pagination stopped (max_pages, max_items, no_more, error) |
 | `retries_used` | integer | Total number of retries across all pages |
 | `resumed` | boolean | Whether execution resumed from a checkpoint |
 
@@ -1334,11 +1334,11 @@ no_more_indicator: .end-of-feed
 checkpoint_path: /tmp/feed_checkpoint.json
 ```
 
-### สร้าง PDF
+### Generate PDF
 
 `browser.pdf`
 
-สร้าง PDF จากหน้าปัจจุบัน
+Generate PDF from current page
 
 **Parameters:**
 
@@ -1357,9 +1357,9 @@ checkpoint_path: /tmp/feed_checkpoint.json
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ขนาดการแสดงผลหน้าเว็บ (0.1-2) |
-| `path` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `size` | number | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -1381,26 +1381,26 @@ path: /output/custom.pdf
 margin: {"top": "1cm", "bottom": "1cm", "left": "2cm", "right": "2cm"}
 ```
 
-### ข้อมูลประสิทธิภาพ
+### Performance Metrics
 
 `browser.performance`
 
-รวบรวมข้อมูลประสิทธิภาพของเบราว์เซอร์
+Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | array | No | `['all']` | ข้อมูลประสิทธิภาพที่ต้องการรวบรวม |
-| `timeout_ms` | number | No | `3000` | เวลาหมดในหน่วยมิลลิวินาที |
-| `setup_observers` | boolean | No | `True` | ตั้งค่าผู้สังเกตก่อนการรวบรวม |
+| `metrics` | array | No | `['all']` | Which metrics to collect (default: all) |
+| `timeout_ms` | number | No | `3000` | Time to wait for metrics collection (for LCP, CLS) |
+| `setup_observers` | boolean | No | `True` | Install PerformanceObservers for better metric tracking |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการทำงาน (สำเร็จ/ผิดพลาด) |
-| `metrics` | object | ข้อมูลประสิทธิภาพที่รวบรวมได้ |
+| `status` | string | Operation status |
+| `metrics` | object | Collected performance metrics |
 
 **Example:** Example
 
@@ -1422,11 +1422,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### กลุ่มเบราว์เซอร์
+### Browser Pool
 
 `browser.pool`
 
-จัดการเบราว์เซอร์หลายอินสแตนซ์สำหรับการทำงานอัตโนมัติแบบขนาน
+Manage multiple named browser instances for parallel automation.
 
 **Parameters:**
 
@@ -1466,11 +1466,11 @@ name: scraper1
 action: list
 ```
 
-### กดปุ่ม
+### Press Key
 
 `browser.press`
 
-กดปุ่มแป้นพิมพ์
+Press a keyboard key
 
 **Parameters:**
 
@@ -1482,8 +1482,8 @@ action: list
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `key` | string | กดปุ่มแป้นพิมพ์ |
+| `status` | string | Operation status (success/error) |
+| `key` | string | Key identifier |
 
 **Example:** Example
 
@@ -1497,11 +1497,11 @@ key: Enter
 key: Escape
 ```
 
-### หมุนเวียนพร็อกซี
+### Rotate Proxy
 
 `browser.proxy_rotate`
 
-สลับรายการพร็อกซีพร้อมตรวจจับพร็อกซีที่ใช้ไม่ได้
+Rotate through a list of proxies. Relaunches browser with the next proxy.
 
 **Parameters:**
 
@@ -1538,11 +1538,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### ดึงบทความ
+### Extract Article
 
 `browser.readability`
 
-ดึงบทความอัจฉริยะ — ดึงหัวข้อ, ผู้เขียน, วันที่ และเนื้อหาหลักจากทุกหน้าเว็บ
+Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode.
 
 **Parameters:**
 
@@ -1551,7 +1551,7 @@ action: rotate
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - | CSS selector สำหรับพื้นที่เนื้อหา เว้นว่างเพื่อตรวจจับอัตโนมัติ |
+| `selector` | string | No | - | CSS selector for the content area. Leave empty for auto-detection. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1603,11 +1603,11 @@ title_selector: .article-headline h1
 selector: .article-body
 ```
 
-### บันทึกการกระทำ
+### Record Actions
 
 `browser.record`
 
-บันทึกการกระทำของผู้ใช้เป็น workflow
+Record user actions as workflow
 
 **Parameters:**
 
@@ -1621,9 +1621,9 @@ selector: .article-body
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | รูปแบบสำหรับ workflow ที่บันทึก (yaml หรือ json) |
-| `recording` | array | รูปแบบสำหรับ workflow ที่บันทึก (yaml หรือ json) |
-| `workflow` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
+| `status` | string | Operation status (success/error) |
+| `recording` | array | Recording data or path |
+| `workflow` | string | The workflow |
 
 **Example:** Example
 
@@ -1644,25 +1644,25 @@ output_format: yaml
 action: get
 ```
 
-### ปล่อยเบราว์เซอร์
+### Release Browser
 
 `browser.release`
 
-ปล่อยเซสชันเบราว์เซอร์ (ปิดเฉพาะถ้าเป็นเจ้าของ)
+Release browser session (close only if owned)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `force` | boolean | No | `False` | ปิดเบราว์เซอร์แม้ไม่ได้เป็นเจ้าของโดยเทมเพลตนี้ |
+| `force` | boolean | No | `False` | Close browser even if not owned by this template |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ปิดเบราว์เซอร์แม้ไม่ได้เป็นเจ้าของโดยเทมเพลตนี้ |
-| `message` | string | ดำเนินการอะไร |
-| `was_owner` | boolean | ดำเนินการอะไร |
+| `status` | string | What action was taken |
+| `message` | string | Result message |
+| `was_owner` | boolean | Whether this template owned the browser |
 
 **Example:** Example
 
@@ -1675,11 +1675,11 @@ action: get
 force: true
 ```
 
-### จับการตอบกลับ
+### Capture Response
 
 `browser.response`
 
-จับเนื้อหาการตอบกลับ API (XHR/fetch) ดึง JSON จาก API บนหน้าเว็บ
+Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls.
 
 **Parameters:**
 
@@ -1712,11 +1712,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### ตรวจสอบ Robots.txt
+### Check Robots.txt
 
 `browser.robots`
 
-ตรวจสอบการปฏิบัติตาม robots.txt และค้นหา sitemap
+Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping.
 
 **Parameters:**
 
@@ -1747,11 +1747,11 @@ check_url: /api/data
 ```yaml
 ```
 
-### ถ่ายภาพหน้าจอ
+### Take Screenshot
 
 `browser.screenshot`
 
-ถ่ายภาพหน้าจอของหน้าปัจจุบัน
+Take a screenshot of the current page
 
 **Parameters:**
 
@@ -1766,8 +1766,8 @@ check_url: /api/data
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `filepath` | string | ถ่ายภาพหน้าจอของหน้าปัจจุบัน |
+| `status` | string | Operation status (success/error) |
+| `filepath` | string | Path to the file |
 
 **Example:** Example
 
@@ -1775,11 +1775,11 @@ check_url: /api/data
 path: output/page.png
 ```
 
-### เลื่อนหน้า
+### Scroll Page
 
 `browser.scroll`
 
-เลื่อนหน้าไปยังองค์ประกอบ ตำแหน่ง หรือทิศทาง
+Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1794,8 +1794,8 @@ path: output/page.png
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `scrolled_to` | object | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
+| `status` | string | Operation status (success/error) |
+| `scrolled_to` | object | The scrolled to |
 
 **Example:** Example
 
@@ -1818,11 +1818,11 @@ amount: 10000
 behavior: smooth
 ```
 
-### เลือกตัวเลือก
+### Select Option
 
 `browser.select`
 
-เลือกตัวเลือกจากองค์ประกอบ dropdown
+Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1838,9 +1838,9 @@ behavior: smooth
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `selected` | array | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `selector` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
+| `status` | string | Operation status (success/error) |
+| `selected` | array | The selected |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1866,11 +1866,11 @@ select_method: index
 index: 2
 ```
 
-### แยกวิเคราะห์ Sitemap
+### Parse Sitemap
 
 `browser.sitemap`
 
-แยกวิเคราะห์ sitemap.xml และดึง URL พร้อม metadata
+Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering.
 
 **Parameters:**
 
@@ -1902,29 +1902,29 @@ url_pattern: /blog/
 max_urls: 100
 ```
 
-### ภาพ DOM
+### DOM Snapshot
 
 `browser.snapshot`
 
-จับภาพ DOM ของหน้าปัจจุบัน
+Capture DOM snapshot in HTML, MHTML, or text format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`html`, `mhtml`, `text`) | No | `html` | รูปแบบผลลัพธ์ (html หรือ text) |
-| `selector` | string | No | - | ตัวเลือก CSS เพื่อจับภาพองค์ประกอบเฉพาะ |
-| `path` | string | No | - | เส้นทางในการบันทึกภาพ |
+| `format` | select (`html`, `mhtml`, `text`) | No | `html` | Snapshot format |
+| `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการทำงาน (สำเร็จ/ผิดพลาด) |
-| `format` | string | รูปแบบของภาพ |
-| `content` | string | เนื้อหาภาพ |
-| `path` | string | เส้นทางที่บันทึกภาพ |
-| `size_bytes` | number | ขนาดของภาพในหน่วยไบต์ |
+| `status` | string | Operation status |
+| `format` | string | Snapshot format used |
+| `content` | string | Snapshot content (if no path specified) |
+| `path` | string | Path to saved file |
+| `size_bytes` | number | Content size in bytes |
 
 **Example:** Example
 
@@ -1954,11 +1954,11 @@ selector: #main
 path: /tmp/section.html
 ```
 
-### พื้นที่เก็บข้อมูลของเบราว์เซอร์
+### Browser Storage
 
 `browser.storage`
 
-เข้าถึง localStorage และ sessionStorage
+Access localStorage and sessionStorage
 
 **Parameters:**
 
@@ -1973,10 +1973,10 @@ path: /tmp/section.html
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `value` | any | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `keys` | array | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `length` | number | ค่าที่ส่งคืน |
+| `status` | string | Operation status (success/error) |
+| `value` | any | The returned value |
+| `keys` | array | List of keys |
+| `length` | number | Length of data |
 
 **Example:** Example
 
@@ -2009,11 +2009,11 @@ action: keys
 type: local
 ```
 
-### จัดการแท็บ
+### Manage Tabs
 
 `browser.tab`
 
-สร้าง สลับ และปิดแท็บเบราว์เซอร์
+Create, switch, and close browser tabs
 
 **Parameters:**
 
@@ -2028,10 +2028,10 @@ type: local
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ดัชนีแท็บที่จะสลับไปหรือปิด (เริ่มจาก 0) |
-| `tab_count` | number | ดัชนีแท็บที่จะสลับไปหรือปิด (เริ่มจาก 0) |
-| `current_index` | number | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `tabs` | array | จำนวนแท็บ |
+| `status` | string | Operation status (success/error) |
+| `tab_count` | number | The tab count |
+| `current_index` | number | The current index |
+| `tabs` | array | List of open tabs |
 
 **Example:** Example
 
@@ -2059,11 +2059,11 @@ action: close
 action: list
 ```
 
-### ดึงตาราง
+### Extract Table
 
 `browser.table`
 
-ดึงตาราง HTML เป็นข้อมูลมีโครงสร้างพร้อมหัวตารางที่ตรวจจับอัตโนมัติ
+Extract HTML tables as structured data. Auto-detects headers from thead/th.
 
 **Parameters:**
 
@@ -2095,11 +2095,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### จำกัดความเร็ว
+### Throttle
 
 `browser.throttle`
 
-จำกัดอัตราตามโดเมน รอระหว่างคำขอเพื่อป้องกันการถูกบล็อก
+Per-domain rate limiting. Waits between requests to the same domain to avoid bans.
 
 **Parameters:**
 
@@ -2142,29 +2142,29 @@ min_interval_ms: 1500
 max_interval_ms: 8000
 ```
 
-### การติดตามเบราว์เซอร์
+### Performance Trace
 
 `browser.trace`
 
-เริ่ม หยุด หรือบันทึกการติดตามประสิทธิภาพของเบราว์เซอร์
+Start/stop Chrome DevTools performance tracing (Chromium only)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | - | การกระทำการติดตาม (เริ่ม หยุด บันทึก) |
-| `categories` | array | No | `['devtools.timeline']` | หมวดหมู่การติดตามที่ต้องการจับภาพ |
-| `screenshots` | boolean | No | `True` | รวมภาพหน้าจอในการติดตาม |
-| `path` | string | No | - | เส้นทางในการบันทึกไฟล์การติดตาม |
+| `action` | string | Yes | - | Start or stop tracing |
+| `categories` | array | No | `['devtools.timeline']` | CDP trace categories (default: devtools.timeline) |
+| `screenshots` | boolean | No | `True` | Include screenshots in trace (increases file size) |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการทำงาน (สำเร็จ/ผิดพลาด) |
-| `tracing` | boolean | การติดตามกำลังทำงานอยู่หรือไม่ |
-| `path` | string | เส้นทางที่บันทึกการติดตาม |
-| `size_bytes` | number | ขนาดของไฟล์การติดตามในหน่วยไบต์ |
+| `status` | string | Operation status (success/error) |
+| `tracing` | boolean | Whether tracing is active |
+| `path` | string | Path to trace file (when stopped) |
+| `size_bytes` | number | Trace file size in bytes |
 
 **Example:** Example
 
@@ -2188,11 +2188,11 @@ action: stop
 path: /tmp/performance-trace.json
 ```
 
-### พิมพ์ข้อความ
+### Type Text
 
 `browser.type`
 
-พิมพ์ข้อความลงในฟิลด์อินพุต
+Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -2213,8 +2213,8 @@ path: /tmp/performance-trace.json
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `selector` | string | พิมพ์ข้อความลงในฟิลด์อินพุต |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 | `method` | string | Type method used |
 
 **Example:** Example
@@ -2250,11 +2250,11 @@ selector: #email
 text: user@example.com
 ```
 
-### อัปโหลดไฟล์
+### Upload File
 
 `browser.upload`
 
-อัปโหลดไฟล์ไปยังองค์ประกอบ file input
+Upload file to file input element
 
 **Parameters:**
 
@@ -2268,10 +2268,10 @@ text: user@example.com
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `filename` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `size` | number | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `selector` | string | ชื่อไฟล์ |
+| `status` | string | Operation status (success/error) |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -2287,26 +2287,26 @@ selector: #file-upload
 file_path: /path/to/document.pdf
 ```
 
-### ตั้งค่าหน้าต่าง
+### Resize Viewport
 
 `browser.viewport`
 
-รับหรือกำหนดขนาดหน้าต่างเบราว์เซอร์
+Resize browser viewport to specific dimensions
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `width` | number | Yes | `1280` | ความกว้างของหน้าต่างเป็นพิกเซล |
-| `height` | number | Yes | `720` | ความสูงของหน้าต่างเป็นพิกเซล |
+| `width` | number | Yes | `1280` | Viewport width in pixels |
+| `height` | number | Yes | `720` | Viewport height in pixels |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ผิดพลาด) |
-| `viewport` | object | ขนาดหน้าต่างปัจจุบัน |
-| `previous_viewport` | object | ขนาดหน้าต่างก่อนหน้า |
+| `status` | string | Operation status |
+| `viewport` | object | Applied viewport dimensions |
+| `previous_viewport` | object | Previous viewport dimensions |
 
 **Example:** Example
 
@@ -2336,11 +2336,11 @@ width: 1366
 height: 768
 ```
 
-### รอ
+### Wait
 
 `browser.wait`
 
-รอระยะเวลาหรือจนกว่าองค์ประกอบจะปรากฏ
+Wait for a duration or until an element appears
 
 **Parameters:**
 
@@ -2348,16 +2348,16 @@ height: 768
 |------|------|----------|---------|-------------|
 | `duration_ms` | number | No | `1000` | Duration of the operation in milliseconds |
 | `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
-| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | สถานะที่ต้องรอ (แสดง, ซ่อน, แนบ, ถอด) |
+| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | Element state to wait for |
 | `timeout_ms` | number | No | `30000` | Maximum time to wait in milliseconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `selector` | string | สถานะการดำเนินการ (สำเร็จ/ข้อผิดพลาด) |
-| `duration_ms` | number | รอระยะเวลาหรือองค์ประกอบจะปรากฏ |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was waited for |
+| `duration_ms` | number | Wait duration in milliseconds |
 
 **Example:** Example
 

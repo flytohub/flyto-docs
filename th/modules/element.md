@@ -6,31 +6,31 @@ DOM element query, attribute, and text extraction.
 
 | Module | Description |
 |--------|-------------|
-| [ดึง Attribute](#ดึง-attribute) | ดึง element |
-| [คิวรี Element](#คิวรี-element) | ค้นหา element ลูกภายใน element |
-| [ดึงข้อความ](#ดึงข้อความ) | ดึง element |
+| [Get Attribute](#get-attribute) | Get element's attribute value |
+| [Query Element](#query-element) | Find child elements within element |
+| [Get Text](#get-text) | Get element's text content |
 
 ## Modules
 
-### ดึง Attribute
+### Get Attribute
 
 `element.attribute`
 
-ดึง element
+Get element's attribute value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | รหัส Element (UUID) |
-| `name` | string | Yes | - | รหัส Element (UUID) |
+| `element_id` | string | Yes | - | Element ID (UUID) |
+| `name` | string | Yes | - | Attribute name (e.g. href, src, class) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ชื่อ attribute (เช่น href, src, class) |
-| `value` | string | สถานะการดำเนินการ (success/error) |
+| `status` | string | Operation status (success/error) |
+| `value` | string | The returned value |
 
 **Example:** Get href attribute
 
@@ -39,28 +39,28 @@ element_id: ${link_element}
 name: href
 ```
 
-### คิวรี Element
+### Query Element
 
 `element.query`
 
-ค้นหา element ลูกภายใน element
+Find child elements within element
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | รหัส element แม่ (UUID) |
-| `selector` | string | Yes | - | รหัส element แม่ (UUID) |
-| `all` | boolean | No | `False` | CSS selector สำหรับค้นหา element ลูก |
+| `element_id` | string | Yes | - | Parent element ID (UUID) |
+| `selector` | string | Yes | - | CSS selector to find child elements |
+| `all` | boolean | No | `False` | Whether to find all matching elements (default: false, find first only) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ค้นหา element ที่ตรงกันทั้งหมดหรือไม่ (ค่าเริ่มต้น: false, ค้นหาเฉพาะอันแรก) |
-| `element_id` | string | สถานะการดำเนินการ (success/error) |
-| `element_ids` | array | สถานะการดำเนินการ (success/error) |
-| `count` | number | รหัส element ที่พบ (โหมดเดี่ยว) |
+| `status` | string | Operation status (success/error) |
+| `element_id` | string | Found element ID (single mode) |
+| `element_ids` | array | List of found element IDs (all mode) |
+| `count` | number | Number of elements found |
 
 **Example:** Find child element
 
@@ -69,24 +69,24 @@ element_id: ${result_item}
 selector: h3
 ```
 
-### ดึงข้อความ
+### Get Text
 
 `element.text`
 
-ดึง element
+Get element's text content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | รหัส Element (UUID) |
+| `element_id` | string | Yes | - | Element ID (UUID) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | รหัส Element (UUID) |
-| `text` | string | รหัส Element (UUID) |
+| `status` | string | Operation status (success/error) |
+| `text` | string | Text content |
 
 **Example:** Get element text
 

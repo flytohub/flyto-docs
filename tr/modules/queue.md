@@ -6,76 +6,76 @@ In-memory and Redis message queue operations.
 
 | Module | Description |
 |--------|-------------|
-| [Öğe Kuyruktan Çıkar](#öğe-kuyruktan-çıkar) | Bir öğeyi kuyruktan çıkarın ve geri döndürün |
-| [Öğe Kuyruğa Ekle](#öğe-kuyruğa-ekle) | Bir öğeyi bellek içi veya Redis kuyruğuna ekleyin |
-| [Kuyruk Boyutu](#kuyruk-boyutu) | Bir kuyruğun mevcut boyutunu alın |
+| [Dequeue Item](#dequeue-item) | Remove and return an item from a queue |
+| [Enqueue Item](#enqueue-item) | Add an item to an in-memory or Redis queue |
+| [Queue Size](#queue-size) | Get the current size of a queue |
 
 ## Modules
 
-### Öğe Kuyruktan Çıkar
+### Dequeue Item
 
 `queue.dequeue`
 
-Bir öğeyi kuyruktan çıkarın ve geri döndürün
+Remove and return an item from a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Öğeyi çıkaracağınız kuyruğun adı |
-| `backend` | string | No | `memory` | Kullanılacak kuyruk arka planı |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis bağlantı URL'si |
-| `timeout` | number | No | `0` | Zaman aşımı süresi saniye cinsinden (0 = engellemesiz) |
+| `queue_name` | string | Yes | - | Name of the queue to dequeue from |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
+| `timeout` | number | No | `0` | Timeout in seconds (0 = non-blocking) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | any | Kuyruktan çıkarılan öğe (kuyruk boşsa null) |
-| `queue_name` | string | Kuyruğun adı |
-| `remaining` | number | Kuyrukta kalan öğeler |
-| `empty` | boolean | Kuyruğun boş olup olmadığı |
+| `data` | any | The dequeued item (null if queue is empty) |
+| `queue_name` | string | Name of the queue |
+| `remaining` | number | Remaining items in the queue |
+| `empty` | boolean | Whether the queue was empty |
 
-### Öğe Kuyruğa Ekle
+### Enqueue Item
 
 `queue.enqueue`
 
-Bir öğeyi bellek içi veya Redis kuyruğuna ekleyin
+Add an item to an in-memory or Redis queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Öğeyi ekleyeceğiniz kuyruğun adı |
-| `data` | string | Yes | - | Kuyruğa eklenecek veri (herhangi bir JSON-serializable değer) |
-| `backend` | string | No | `memory` | Kullanılacak kuyruk arka planı |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis bağlantı URL'si |
+| `queue_name` | string | Yes | - | Name of the queue to add the item to |
+| `data` | string | Yes | - | Data to enqueue (any JSON-serializable value) |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Kuyruğun adı |
-| `position` | number | Öğenin kuyruktaki konumu |
-| `queue_size` | number | Kuyruğa eklemeden sonra mevcut kuyruk boyutu |
+| `queue_name` | string | Name of the queue |
+| `position` | number | Position of the item in the queue |
+| `queue_size` | number | Current size of the queue after enqueue |
 
-### Kuyruk Boyutu
+### Queue Size
 
 `queue.size`
 
-Bir kuyruğun mevcut boyutunu alın
+Get the current size of a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Kontrol edilecek kuyruğun adı |
-| `backend` | string | No | `memory` | Kullanılacak kuyruk arka planı |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis bağlantı URL'si |
+| `queue_name` | string | Yes | - | Name of the queue to check |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Kuyruğun adı |
-| `size` | number | Kuyruktaki mevcut öğe sayısı |
+| `queue_name` | string | Name of the queue |
+| `size` | number | Current number of items in the queue |

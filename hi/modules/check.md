@@ -6,148 +6,148 @@ Runtime type checking utilities.
 
 | Module | Description |
 |--------|-------------|
-| [क्या Array है](#क्या-array-है) | जांचें कि कोई मान एक array है |
-| [क्या खाली है](#क्या-खाली-है) | जांचें कि कोई मान खाली है |
-| [क्या Null है](#क्या-null-है) | जांचें कि कोई मान null/None है |
-| [क्या संख्या है](#क्या-संख्या-है) | जांचें कि कोई मान एक संख्या है |
-| [क्या Object है](#क्या-object-है) | जांचें कि कोई मान एक object है |
-| [क्या String है](#क्या-string-है) | जांचें कि कोई मान एक string है |
-| [प्रकार](#प्रकार) | किसी मान का प्रकार प्राप्त करें |
+| [Is Array](#is-array) | Check if a value is an array |
+| [Is Empty](#is-empty) | Check if a value is empty |
+| [Is Null](#is-null) | Check if a value is null/None |
+| [Is Number](#is-number) | Check if a value is a number |
+| [Is Object](#is-object) | Check if a value is an object |
+| [Is String](#is-string) | Check if a value is a string |
+| [Type Of](#type-of) | Get the type of a value |
 
 ## Modules
 
-### क्या Array है
+### Is Array
 
 `check.is_array`
 
-जांचें कि कोई मान एक array है
+Check if a value is an array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | जांचने के लिए मान |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_array` | boolean | जांचने के लिए मान |
-| `length` | number | क्या मान एक array है |
+| `is_array` | boolean | Whether value is an array |
+| `length` | number | Array length (if array) |
 
-### क्या खाली है
+### Is Empty
 
 `check.is_empty`
 
-जांचें कि कोई मान खाली है
+Check if a value is empty
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | जांचने के लिए मान |
-| `trim_strings` | boolean | No | `True` | जांचने के लिए मान |
+| `value` | any | Yes | - | Value to check |
+| `trim_strings` | boolean | No | `True` | Treat whitespace-only strings as empty |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_empty` | boolean | केवल whitespace वाले स्ट्रिंग्स को खाली मानें |
-| `type` | string | क्या मान खाली है |
+| `is_empty` | boolean | Whether value is empty |
+| `type` | string | Type of value |
 
-### क्या Null है
+### Is Null
 
 `check.is_null`
 
-जांचें कि कोई मान null/None है
+Check if a value is null/None
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | No | - | जांचने के लिए मान |
+| `value` | any | No | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_null` | boolean | जांचने के लिए मान |
+| `is_null` | boolean | Whether value is null |
 
-### क्या संख्या है
+### Is Number
 
 `check.is_number`
 
-जांचें कि कोई मान एक संख्या है
+Check if a value is a number
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | जांचने के लिए मान |
-| `parse_string` | boolean | No | `False` | जांचने के लिए मान |
-| `integer_only` | boolean | No | `False` | संख्यात्मक स्ट्रिंग्स को संख्या मानें |
+| `value` | any | Yes | - | Value to check |
+| `parse_string` | boolean | No | `False` | Consider numeric strings as numbers |
+| `integer_only` | boolean | No | `False` | Only accept integers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_number` | boolean | केवल पूर्णांक स्वीकार करें |
-| `is_integer` | boolean | क्या मान एक संख्या है |
-| `is_float` | boolean | क्या मान एक संख्या है |
+| `is_number` | boolean | Whether value is a number |
+| `is_integer` | boolean | Whether value is an integer |
+| `is_float` | boolean | Whether value is a float |
 
-### क्या Object है
+### Is Object
 
 `check.is_object`
 
-जांचें कि कोई मान एक object है
+Check if a value is an object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | जांचने के लिए मान |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_object` | boolean | जांचने के लिए मान |
-| `keys` | array | क्या मान एक object है |
+| `is_object` | boolean | Whether value is an object |
+| `keys` | array | Object keys (if object) |
 
-### क्या String है
+### Is String
 
 `check.is_string`
 
-जांचें कि कोई मान एक string है
+Check if a value is a string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | जांचने के लिए मान |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_string` | boolean | जांचने के लिए मान |
-| `length` | number | क्या मान एक string है |
+| `is_string` | boolean | Whether value is a string |
+| `length` | number | String length (if string) |
 
-### प्रकार
+### Type Of
 
 `check.type_of`
 
-किसी मान का प्रकार प्राप्त करें
+Get the type of a value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | No | - | जांचने के लिए मान |
+| `value` | any | No | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `type` | string | जांचने के लिए मान |
-| `is_primitive` | boolean | प्रकार का नाम |
+| `type` | string | Type name |
+| `is_primitive` | boolean | Whether type is primitive |

@@ -6,10 +6,10 @@ Ping, port scan, traceroute, and WHOIS lookup.
 
 | Module | Description |
 |--------|-------------|
-| [Ping](#ping) | Bağlantıyı kontrol etmek ve gecikmeyi ölçmek için bir hosta ping atın |
-| [Port Tarama](#port-tarama) | Hangi portların açık olduğunu kontrol etmek için bir host üzerinde portları tarayın |
-| [Traceroute](#traceroute) | Bir hedef hosta ulaşmak için paketlerin izlediği yolu izleyin |
-| [WHOIS Sorgulama](#whois-sorgulama) | Bir alan adı için kayıt bilgilerini almak amacıyla WHOIS sorgulaması yapın |
+| [Ping](#ping) | Ping a host to check connectivity and measure latency |
+| [Port Scan](#port-scan) | Scan ports on a host to check which are open |
+| [Traceroute](#traceroute) | Trace the route packets take to reach a destination host |
+| [WHOIS Lookup](#whois-lookup) | Perform WHOIS lookup for a domain to retrieve registration information |
 
 ## Modules
 
@@ -17,26 +17,26 @@ Ping, port scan, traceroute, and WHOIS lookup.
 
 `network.ping`
 
-Bağlantıyı kontrol etmek ve gecikmeyi ölçmek için bir hosta ping atın
+Ping a host to check connectivity and measure latency
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | Ping atılacak host adı veya IP adresi |
-| `count` | number | No | `4` | Gönderilecek ping paketi sayısı |
-| `timeout` | number | No | `5` | Her paket için saniye cinsinden zaman aşımı |
+| `host` | string | Yes | - | Hostname or IP address to ping |
+| `count` | number | No | `4` | Number of ping packets to send |
+| `timeout` | number | No | `5` | Timeout in seconds for each packet |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `host` | string | Ping atılan host |
-| `alive` | boolean | Hostun yanıt verip vermediği |
-| `packets_sent` | number | Gönderilen paket sayısı |
-| `packets_received` | number | Alınan paket sayısı |
-| `packet_loss_pct` | number | Paket kaybı yüzdesi |
-| `latency_ms` | object | Gecikme istatistikleri milisaniye cinsinden (min, ort, maks) |
+| `host` | string | The pinged host |
+| `alive` | boolean | Whether the host responded |
+| `packets_sent` | number | Number of packets sent |
+| `packets_received` | number | Number of packets received |
+| `packet_loss_pct` | number | Packet loss percentage |
+| `latency_ms` | object | Latency statistics in milliseconds (min, avg, max) |
 
 **Example:** Ping a host
 
@@ -46,28 +46,28 @@ count: 4
 timeout: 5
 ```
 
-### Port Tarama
+### Port Scan
 
 `network.port_scan`
 
-Hangi portların açık olduğunu kontrol etmek için bir host üzerinde portları tarayın
+Scan ports on a host to check which are open
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | Tarama yapılacak host adı veya IP adresi |
-| `ports` | string | No | - | Tarama yapılacak portlar: virgülle ayrılmış (80,443), aralık (80-443) veya yaygın portlar için boş bırakın |
-| `timeout` | number | No | `1.0` | Her port için saniye cinsinden bağlantı zaman aşımı |
+| `host` | string | Yes | - | Hostname or IP address to scan |
+| `ports` | string | No | - | Ports to scan: comma-separated (80,443), range (80-443), or leave empty for common ports |
+| `timeout` | number | No | `1.0` | Connection timeout in seconds per port |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `host` | string | Taranan host |
-| `open_ports` | array | Açık port numaralarının listesi |
-| `closed_ports` | array | Kapalı port numaralarının listesi |
-| `scan_time_ms` | number | Toplam tarama süresi milisaniye cinsinden |
+| `host` | string | The scanned host |
+| `open_ports` | array | List of open port numbers |
+| `closed_ports` | array | List of closed port numbers |
+| `scan_time_ms` | number | Total scan time in milliseconds |
 
 **Example:** Scan common ports
 
@@ -87,23 +87,23 @@ timeout: 2.0
 
 `network.traceroute`
 
-Bir hedef hosta ulaşmak için paketlerin izlediği yolu izleyin
+Trace the route packets take to reach a destination host
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | Yolun izleneceği host adı veya IP adresi |
-| `max_hops` | number | No | `30` | İzlenecek maksimum atlama sayısı |
-| `timeout` | number | No | `5` | Her bir deneme için saniye cinsinden zaman aşımı |
+| `host` | string | Yes | - | Hostname or IP address to trace route to |
+| `max_hops` | number | No | `30` | Maximum number of hops to trace |
+| `timeout` | number | No | `5` | Timeout in seconds for each probe |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `host` | string | Hedef host |
-| `hops` | array | Yol boyunca atlamaların listesi |
-| `total_hops` | number | Hedefe ulaşmak için toplam atlama sayısı |
+| `host` | string | The target host |
+| `hops` | array | List of hops along the route |
+| `total_hops` | number | Total number of hops to reach destination |
 
 **Example:** Trace route to host
 
@@ -112,28 +112,28 @@ host: google.com
 max_hops: 30
 ```
 
-### WHOIS Sorgulama
+### WHOIS Lookup
 
 `network.whois`
 
-Bir alan adı için kayıt bilgilerini almak amacıyla WHOIS sorgulaması yapın
+Perform WHOIS lookup for a domain to retrieve registration information
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `domain` | string | Yes | - | Sorgulanacak alan adı |
+| `domain` | string | Yes | - | Domain name to look up |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `domain` | string | Sorgulanan alan adı |
-| `registrar` | string | Alan adı kayıt kuruluşu |
-| `creation_date` | string | Alan adının oluşturulma tarihi |
-| `expiration_date` | string | Alan adının sona erme tarihi |
-| `name_servers` | array | Ad sunucularının listesi |
-| `raw` | string | Tam ham WHOIS çıktısı |
+| `domain` | string | The queried domain |
+| `registrar` | string | Domain registrar |
+| `creation_date` | string | Domain creation date |
+| `expiration_date` | string | Domain expiration date |
+| `name_servers` | array | List of name servers |
+| `raw` | string | Full raw WHOIS output |
 
 **Example:** WHOIS lookup
 

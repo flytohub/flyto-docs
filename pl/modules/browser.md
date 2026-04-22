@@ -6,68 +6,68 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [Obsługa Zabezpieczeń](#obsługa-zabezpieczeń) | Automatyczne wykrywanie i obsługa zabezpieczeń anty-bot (Cloudflare, CAPTCHA) |
-| [Kliknij element](#kliknij-element) | Kliknij element na stronie |
-| [Zamknij przegladarke](#zamknij-przegladarke) | Zamknij instancje przegladarki i zwolnij zasoby |
-| [Połącz Zdalnie](#połącz-zdalnie) | Połącz z zdalną usługą przeglądarki (Browserless, BrowserBase). Prawdziwe fingerprint, bypass Cloudflare. |
-| [Przechwytuj konsole](#przechwytuj-konsole) | Przechwytuj logi konsoli przegladarki (bledy, ostrzezenia, informacje) |
-| [Zarzadzaj ciasteczkami](#zarzadzaj-ciasteczkami) | Pobierz, ustaw lub wyczysc ciasteczka przegladarki |
-| [Plik Ciasteczek](#plik-ciasteczek) | Importuj lub eksportuj ciasteczka przeglądarki do/z pliku JSON. |
+| [Handle Challenge](#handle-challenge) | Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop. |
+| [Click Element](#click-element) | Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Close Browser](#close-browser) | Close the browser instance and release resources |
+| [Connect Remote](#connect-remote) | Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs. |
+| [Capture Console](#capture-console) | Capture browser console logs (errors, warnings, info) |
+| [Manage Cookies](#manage-cookies) | Get, set, or clear browser cookies |
+| [Cookies File](#cookies-file) | Import or export browser cookies to/from a JSON file for session persistence. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [Wykryj Listę](#wykryj-listę) | Automatyczne wykrywanie powtarzających się elementów na stronie (artykuły, produkty, wyniki wyszukiwania) |
-| [Obsluz okno dialogowe](#obsluz-okno-dialogowe) | Obsluguj okna dialogowe alert, confirm i prompt |
-| [Pobierz plik](#pobierz-plik) | Pobierz plik z przegladarki |
-| [Przeciagnij i upusc](#przeciagnij-i-upusc) | Przeciagnij i upusc elementy |
-| [Symuluj Urządzenie](#symuluj-urządzenie) | Symuluj urządzenie lub ustaw niestandardowy widok |
-| [Upewnij się, że przeglądarka](#upewnij-się,-że-przeglądarka) | Upewnij się, że istnieje sesja przeglądarki (ponowne użycie lub uruchomienie) |
-| [Wykonaj JavaScript](#wykonaj-javascript) | Wykonaj kod JavaScript w kontekscie strony |
-| [Wyodrebnij dane](#wyodrebnij-dane) | Wyodrebnij ustrukturyzowane dane ze strony |
-| [Wyodrębnij Zagnieżdżone](#wyodrębnij-zagnieżdżone) | Wyodrębnij dane drzewiaste/zagnieżdżone (komentarze, wątki, foldery). |
-| [Znajdz elementy](#znajdz-elementy) | Znajdz elementy na stronie i zwroc liste ID elementow |
-| [Wypełnij formularz](#wypełnij-formularz) | Inteligentne wypełnianie formularzy z automatycznym wykrywaniem pól |
-| [Przelacz ramke](#przelacz-ramke) | Przelacz na kontekst iframe lub frame |
-| [Symuluj geolokalizacje](#symuluj-geolokalizacje) | Symuluj geolokalizacje przegladarki |
-| [Przejdz do URL](#przejdz-do-url) | Przejdz do okreslonego URL |
-| [Najedz na element](#najedz-na-element) | Najedz myszka na element |
-| [Interakcja z Przeglądarką](#interakcja-z-przeglądarką) | Wstrzymaj, aby użytkownik mógł wejść w interakcję ze stroną przeglądarki |
-| [Uruchom przegladarke](#uruchom-przegladarke) | Uruchom nowa instancje przegladarki z Playwright |
-| [Logowanie](#logowanie) | Automatyczne wykrywanie i wypełnianie formularzy logowania z weryfikacją po zalogowaniu. |
-| [Nawigacja w Historii](#nawigacja-w-historii) | Nawiguj w historii przeglądarki (wstecz, do przodu, odśwież) |
-| [Monitor sieci](#monitor-sieci) | Monitoruj i przechwytuj zadania sieciowe |
-| [Lista Stron](#lista-stron) | Wyświetl wszystkie otwarte strony/karty przeglądarki |
-| [Paginuj i wyodrębnij](#paginuj-i-wyodrębnij) | Automatyczne paginowanie przez strony i wyodrębnianie danych |
-| [Wygeneruj PDF](#wygeneruj-pdf) | Wygeneruj PDF z biezacej strony |
-| [Metryki Wydajności](#metryki-wydajności) | Zbieraj metryki wydajności przeglądarki |
-| [Pula Przeglądarek](#pula-przeglądarek) | Zarządzanie wieloma nazwanymi instancjami przeglądarki do równoległej automatyzacji. |
-| [Nacisnij klawisz](#nacisnij-klawisz) | Nacisnij klawisz klawiatury |
-| [Rotacja Proxy](#rotacja-proxy) | Rotacja między listą proxy z wykrywaniem nieaktywnych proxy. |
-| [Wyodrębnij Artykuł](#wyodrębnij-artykuł) | Inteligentna ekstrakcja artykułów — wyodrębnia tytuł, autora, datę i główną treść z dowolnej strony |
-| [Nagrywaj akcje](#nagrywaj-akcje) | Nagrywaj akcje uzytkownika jako przeplyw |
-| [Zwolnij przeglądarkę](#zwolnij-przeglądarkę) | Zwolnij sesję przeglądarki (zamknij tylko, jeśli posiadasz) |
-| [Przechwyć Odpowiedź](#przechwyć-odpowiedź) | Przechwytuj treści odpowiedzi API (XHR/fetch). Wyodrębnij JSON z wywołań API strony. |
-| [Sprawdź Robots.txt](#sprawdź-robots.txt) | Sprawdź zgodność z robots.txt i odkryj mapy witryn. |
-| [Zrob zrzut ekranu](#zrob-zrzut-ekranu) | Zrob zrzut ekranu biezacej strony |
-| [Przewin strone](#przewin-strone) | Przewin strone do elementu, pozycji lub kierunku |
-| [Wybierz opcje](#wybierz-opcje) | Wybierz opcje z elementu rozwijanego |
-| [Parsuj Mapę Witryny](#parsuj-mapę-witryny) | Parsuj sitemap.xml i wyodrębnij adresy URL z metadanymi. |
-| [Zrzut DOM](#zrzut-dom) | Zrób zrzut DOM bieżącej strony |
-| [Magazyn przegladarki](#magazyn-przegladarki) | Dostep do localStorage i sessionStorage |
-| [Zarzadzaj kartami](#zarzadzaj-kartami) | Tworzenie, przelaczanie i zamykanie kart przegladarki |
-| [Wyodrębnij Tabelę](#wyodrębnij-tabelę) | Wyodrębnij tabele HTML jako dane strukturalne z automatycznie wykrytymi nagłówkami. |
-| [Ograniczenie](#ograniczenie) | Ograniczenie częstotliwości żądań na domenę. Czeka między żądaniami, aby uniknąć blokad. |
-| [Ślad Przeglądarki](#ślad-przeglądarki) | Rozpocznij, zatrzymaj lub zapisz ślady wydajności przeglądarki |
-| [Wpisz tekst](#wpisz-tekst) | Wpisz tekst w pole wejsciowe |
-| [Przeslij plik](#przeslij-plik) | Przeslij plik do elementu wejscia pliku |
-| [Ustaw widok](#ustaw-widok) | Pobierz lub ustaw rozmiar widoku przeglądarki |
-| [Czekaj](#czekaj) | Czekaj przez okreslony czas lub az pojawi sie element |
+| [Detect List](#detect-list) | Auto-detect repeating items on any page (articles, products, search results). No selectors needed. |
+| [Handle Dialog](#handle-dialog) | Handle alert, confirm, and prompt dialogs |
+| [Download File](#download-file) | Download file from browser |
+| [Drag and Drop](#drag-and-drop) | Drag and drop elements |
+| [Device Emulation](#device-emulation) | Emulate mobile devices, tablets, and custom viewports |
+| [Ensure Browser](#ensure-browser) | Ensure a browser session exists (reuse or launch) |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code in page context |
+| [Extract Data](#extract-data) | Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Extract Nested](#extract-nested) | Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children. |
+| [Find Elements](#find-elements) | Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Fill Form](#fill-form) | Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM. |
+| [Switch Frame](#switch-frame) | Switch to iframe or frame context |
+| [Mock Geolocation](#mock-geolocation) | Mock browser geolocation |
+| [Go to URL](#go-to-url) | Navigate to a specific URL |
+| [Hover Element](#hover-element) | Hover mouse over an element |
+| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
+| [Launch Browser](#launch-browser) | Launch a new browser instance with Playwright |
+| [Login](#login) | Auto-detect and fill login forms. Handles username + password + submit with post-login verification. |
+| [Page Navigation](#page-navigation) | Navigate back, forward, or reload the page |
+| [Network Monitor](#network-monitor) | Monitor and intercept network requests |
+| [List Pages](#list-pages) | List all open browser pages/tabs with details |
+| [Paginate & Extract](#paginate--extract) | Auto-paginate through pages and extract data. Supports retry and checkpoint resume. |
+| [Generate PDF](#generate-pdf) | Generate PDF from current page |
+| [Performance Metrics](#performance-metrics) | Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics |
+| [Browser Pool](#browser-pool) | Manage multiple named browser instances for parallel automation. |
+| [Press Key](#press-key) | Press a keyboard key |
+| [Rotate Proxy](#rotate-proxy) | Rotate through a list of proxies. Relaunches browser with the next proxy. |
+| [Extract Article](#extract-article) | Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode. |
+| [Record Actions](#record-actions) | Record user actions as workflow |
+| [Release Browser](#release-browser) | Release browser session (close only if owned) |
+| [Capture Response](#capture-response) | Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls. |
+| [Check Robots.txt](#check-robots.txt) | Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping. |
+| [Take Screenshot](#take-screenshot) | Take a screenshot of the current page |
+| [Scroll Page](#scroll-page) | Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Select Option](#select-option) | Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering. |
+| [DOM Snapshot](#dom-snapshot) | Capture DOM snapshot in HTML, MHTML, or text format |
+| [Browser Storage](#browser-storage) | Access localStorage and sessionStorage |
+| [Manage Tabs](#manage-tabs) | Create, switch, and close browser tabs |
+| [Extract Table](#extract-table) | Extract HTML tables as structured data. Auto-detects headers from thead/th. |
+| [Throttle](#throttle) | Per-domain rate limiting. Waits between requests to the same domain to avoid bans. |
+| [Performance Trace](#performance-trace) | Start/stop Chrome DevTools performance tracing (Chromium only) |
+| [Type Text](#type-text) | Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Upload File](#upload-file) | Upload file to file input element |
+| [Resize Viewport](#resize-viewport) | Resize browser viewport to specific dimensions |
+| [Wait](#wait) | Wait for a duration or until an element appears |
 
 ## Modules
 
-### Obsługa Zabezpieczeń
+### Handle Challenge
 
 `browser.challenge`
 
-Automatyczne wykrywanie i obsługa zabezpieczeń anty-bot (Cloudflare, CAPTCHA)
+Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop.
 
 **Parameters:**
 
@@ -107,11 +107,11 @@ auto_wait_seconds: 30
 human_fallback: false
 ```
 
-### Kliknij element
+### Click Element
 
 `browser.click`
 
-Kliknij element na stronie
+Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -131,8 +131,8 @@ Kliknij element na stronie
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | Status operacji (sukces/blad) |
-| `selector` | string | Status operacji (sukces/blad) |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | Selector that was used |
 | `method` | string | Click method used |
 
 **Example:** Example
@@ -156,11 +156,11 @@ click_method: selector
 selector: #submit-button
 ```
 
-### Zamknij przegladarke
+### Close Browser
 
 `browser.close`
 
-Zamknij instancje przegladarki i zwolnij zasoby
+Close the browser instance and release resources
 
 **Parameters:**
 
@@ -172,19 +172,19 @@ Zamknij instancje przegladarki i zwolnij zasoby
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Zamknij instancje przegladarki |
-| `message` | string | Zamknij instancje przegladarki |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
 ```yaml
 ```
 
-### Połącz Zdalnie
+### Connect Remote
 
 `browser.connect`
 
-Połącz z zdalną usługą przeglądarki (Browserless, BrowserBase). Prawdziwe fingerprint, bypass Cloudflare.
+Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs.
 
 **Parameters:**
 
@@ -222,11 +222,11 @@ ws_endpoint: wss://connect.browserbase.com?apiKey=KEY
 ws_endpoint: ws://localhost:3000
 ```
 
-### Przechwytuj konsole
+### Capture Console
 
 `browser.console`
 
-Przechwytuj logi konsoli przegladarki (bledy, ostrzezenia, informacje)
+Capture browser console logs (errors, warnings, info)
 
 **Parameters:**
 
@@ -240,9 +240,9 @@ Przechwytuj logi konsoli przegladarki (bledy, ostrzezenia, informacje)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `messages` | array | Status operacji (sukces/blad) |
-| `count` | number | Status operacji (sukces/blad) |
+| `status` | string | Operation status (success/error) |
+| `messages` | array | The messages |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -257,11 +257,11 @@ level: error
 timeout: 5000
 ```
 
-### Zarzadzaj ciasteczkami
+### Manage Cookies
 
 `browser.cookies`
 
-Pobierz, ustaw lub wyczysc ciasteczka przegladarki
+Get, set, or clear browser cookies
 
 **Parameters:**
 
@@ -280,9 +280,9 @@ Pobierz, ustaw lub wyczysc ciasteczka przegladarki
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `cookies` | array | Status operacji (sukces/blad) |
-| `count` | number | Status operacji (sukces/blad) |
+| `status` | string | Operation status (success/error) |
+| `cookies` | array | Browser cookies |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -312,11 +312,11 @@ domain: example.com
 action: clear
 ```
 
-### Plik Ciasteczek
+### Cookies File
 
 `browser.cookies_file`
 
-Importuj lub eksportuj ciasteczka przeglądarki do/z pliku JSON.
+Import or export browser cookies to/from a JSON file for session persistence.
 
 **Parameters:**
 
@@ -423,11 +423,11 @@ text: Login
 match_mode: best
 ```
 
-### Wykryj Listę
+### Detect List
 
 `browser.detect_list`
 
-Automatyczne wykrywanie powtarzających się elementów na stronie (artykuły, produkty, wyniki wyszukiwania)
+Auto-detect repeating items on any page (articles, products, search results). No selectors needed.
 
 **Parameters:**
 
@@ -467,11 +467,11 @@ min_items: 5
 max_items: 50
 ```
 
-### Obsluz okno dialogowe
+### Handle Dialog
 
 `browser.dialog`
 
-Obsluguj okna dialogowe alert, confirm i prompt
+Handle alert, confirm, and prompt dialogs
 
 **Parameters:**
 
@@ -485,10 +485,10 @@ Obsluguj okna dialogowe alert, confirm i prompt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `message` | string | Status operacji (sukces/blad) |
-| `type` | string | Status operacji (sukces/blad) |
-| `default_value` | string | Wiadomosc wyniku opisujaca rezultat |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `type` | string | The type |
+| `default_value` | string | The default value |
 
 **Example:** Example
 
@@ -516,11 +516,11 @@ action: listen
 timeout: 5000
 ```
 
-### Pobierz plik
+### Download File
 
 `browser.download`
 
-Pobierz plik z przegladarki
+Download file from browser
 
 **Parameters:**
 
@@ -534,10 +534,10 @@ Pobierz plik z przegladarki
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `path` | string | Status operacji (sukces/blad) |
-| `filename` | string | Status operacji (sukces/blad) |
-| `size` | number | Sciezka do pliku lub zasobu |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -554,11 +554,11 @@ save_path: /downloads/large-file.zip
 timeout_ms: 120000
 ```
 
-### Przeciagnij i upusc
+### Drag and Drop
 
 `browser.drag`
 
-Przeciagnij i upusc elementy
+Drag and drop elements
 
 **Parameters:**
 
@@ -574,9 +574,9 @@ Przeciagnij i upusc elementy
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Pozycja w elemencie docelowym {x, y} jako procenty |
-| `source` | string | Pozycja w elemencie docelowym {x, y} jako procenty |
-| `target` | string | Status operacji (sukces/blad) |
+| `status` | string | Operation status (success/error) |
+| `source` | string | The source |
+| `target` | string | The target |
 
 **Example:** Example
 
@@ -593,32 +593,32 @@ target: .container
 target_position: {"x": 0.5, "y": 0.5}
 ```
 
-### Symuluj Urządzenie
+### Device Emulation
 
 `browser.emulate`
 
-Symuluj urządzenie lub ustaw niestandardowy widok
+Emulate mobile devices, tablets, and custom viewports
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | Nazwa urządzenia do symulacji (np. iPhone 13) |
-| `width` | number | No | - | Szerokość widoku w pikselach |
-| `height` | number | No | - | Wysokość widoku w pikselach |
-| `user_agent` | string | No | - | Niestandardowy ciąg agenta użytkownika |
-| `device_scale_factor` | number | No | - | Współczynnik skali pikseli urządzenia |
-| `is_mobile` | boolean | No | - | Czy symulować urządzenie mobilne |
-| `has_touch` | boolean | No | - | Czy urządzenie obsługuje dotyk |
+| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | Device preset or "custom" for manual settings |
+| `width` | number | No | - | Custom viewport width (for custom device) |
+| `height` | number | No | - | Custom viewport height (for custom device) |
+| `user_agent` | string | No | - | Custom user agent string |
+| `device_scale_factor` | number | No | - | Device pixel ratio (1-3) |
+| `is_mobile` | boolean | No | - | Enable mobile browser behavior |
+| `has_touch` | boolean | No | - | Enable touch event support |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/błąd) |
-| `device` | string | Nazwa urządzenia, które było symulowane |
-| `viewport` | object | Aktualne wymiary widoku |
-| `is_mobile` | boolean | Czy symulacja mobilna jest aktywna |
+| `status` | string | Operation status |
+| `device` | string | Emulated device name |
+| `viewport` | object | Applied viewport dimensions |
+| `is_mobile` | boolean | Whether mobile mode is enabled |
 
 **Example:** Example
 
@@ -650,11 +650,11 @@ device: desktop_chrome
 user_agent: CustomBot/1.0
 ```
 
-### Upewnij się, że przeglądarka
+### Ensure Browser
 
 `browser.ensure`
 
-Upewnij się, że istnieje sesja przeglądarki (ponowne użycie lub uruchomienie)
+Ensure a browser session exists (reuse or launch)
 
 **Parameters:**
 
@@ -668,9 +668,9 @@ Upewnij się, że istnieje sesja przeglądarki (ponowne użycie lub uruchomienie
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Czy przeglądarka została uruchomiona lub ponownie użyta |
-| `message` | string | Czy przeglądarka została uruchomiona lub ponownie użyta |
-| `is_owner` | boolean | Czy przeglądarka została uruchomiona lub ponownie użyta |
+| `status` | string | Whether browser was launched or reused |
+| `message` | string | Result message |
+| `is_owner` | boolean | Whether this step owns the browser (responsible for closing) |
 
 **Example:** Example
 
@@ -684,11 +684,11 @@ headless: false
 headless: true
 ```
 
-### Wykonaj JavaScript
+### Execute JavaScript
 
 `browser.evaluate`
 
-Wykonaj kod JavaScript w kontekscie strony
+Execute JavaScript code in page context
 
 **Parameters:**
 
@@ -701,8 +701,8 @@ Wykonaj kod JavaScript w kontekscie strony
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `result` | any | Status operacji (sukces/blad) |
+| `status` | string | Operation status (success/error) |
+| `result` | any | The operation result |
 
 **Example:** Example
 
@@ -729,11 +729,11 @@ args: ["#header"]
 script: document.body.style.backgroundColor = "red"; return "done"
 ```
 
-### Wyodrebnij dane
+### Extract Data
 
 `browser.extract`
 
-Wyodrebnij ustrukturyzowane dane ze strony
+Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -747,9 +747,9 @@ Wyodrebnij ustrukturyzowane dane ze strony
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `data` | array | Status operacji (sukces/blad) |
-| `count` | number | Status operacji (sukces/blad) |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -759,11 +759,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### Wyodrębnij Zagnieżdżone
+### Extract Nested
 
 `browser.extract_nested`
 
-Wyodrębnij dane drzewiaste/zagnieżdżone (komentarze, wątki, foldery).
+Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children.
 
 **Parameters:**
 
@@ -797,11 +797,11 @@ fields: {"author": {"selector": ".author"}, "text": {"selector": ".body"}, "date
 root_selector: li.item
 ```
 
-### Znajdz elementy
+### Find Elements
 
 `browser.find`
 
-Znajdz elementy na stronie i zwroc liste ID elementow
+Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -814,9 +814,9 @@ Znajdz elementy na stronie i zwroc liste ID elementow
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `count` | number | Status operacji (sukces/blad) |
-| `element_ids` | array | Status operacji (sukces/blad) |
+| `status` | string | Operation status (success/error) |
+| `count` | number | Number of items |
+| `element_ids` | array | The element ids |
 
 **Example:** Find search results
 
@@ -825,11 +825,11 @@ selector: div.tF2Cxc
 limit: 10
 ```
 
-### Wypełnij formularz
+### Fill Form
 
 `browser.form`
 
-Inteligentne wypełnianie formularzy z automatycznym wykrywaniem pól
+Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM.
 
 **Parameters:**
 
@@ -847,9 +847,9 @@ Inteligentne wypełnianie formularzy z automatycznym wykrywaniem pól
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filled_fields` | array | Opóźnienie między wypełnianiem każdego pola (dla bardziej ludzkiego zachowania) |
-| `failed_fields` | array | Lista pól, które zostały wypełnione |
-| `submitted` | boolean | Lista pól, które zostały wypełnione |
+| `filled_fields` | array | List of fields that were filled |
+| `failed_fields` | array | List of fields that failed to fill |
+| `submitted` | boolean | Whether form was submitted |
 
 **Example:** Example
 
@@ -865,11 +865,11 @@ data: {"username": "john_doe", "bio": "Hello world"}
 field_mapping: {"username": "#user-name-input", "bio": "textarea.bio-field"}
 ```
 
-### Przelacz ramke
+### Switch Frame
 
 `browser.frame`
 
-Przelacz na kontekst iframe lub frame
+Switch to iframe or frame context
 
 **Parameters:**
 
@@ -885,10 +885,10 @@ Przelacz na kontekst iframe lub frame
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Akcja ramki (enter aby przelaeczyc na ramke, list aby wylistowac wszystkie ramki) |
-| `frame_url` | string | Akcja ramki (enter aby przelaeczyc na ramke, list aby wylistowac wszystkie ramki) |
-| `frame_name` | string | Status operacji (sukces/blad) |
-| `frames` | array | URL ramki |
+| `status` | string | Operation status (success/error) |
+| `frame_url` | string | Frame URL |
+| `frame_name` | string | The frame name |
+| `frames` | array | List of frames |
 
 **Example:** Example
 
@@ -914,11 +914,11 @@ action: exit
 action: list
 ```
 
-### Symuluj geolokalizacje
+### Mock Geolocation
 
 `browser.geolocation`
 
-Symuluj geolokalizacje przegladarki
+Mock browser geolocation
 
 **Parameters:**
 
@@ -932,8 +932,8 @@ Symuluj geolokalizacje przegladarki
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Dokladnosc pozycji w metrach |
-| `location` | object | Dokladnosc pozycji w metrach |
+| `status` | string | Operation status (success/error) |
+| `location` | object | The location |
 
 **Example:** Example
 
@@ -957,11 +957,11 @@ latitude: 35.6762
 longitude: 139.6503
 ```
 
-### Przejdz do URL
+### Go to URL
 
 `browser.goto`
 
-Przejdz do okreslonego URL
+Navigate to a specific URL
 
 **Parameters:**
 
@@ -976,8 +976,8 @@ Przejdz do okreslonego URL
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `url` | string | Przejdz do okreslonego URL |
+| `status` | string | Operation status (success/error) |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -986,11 +986,11 @@ url: https://www.google.com
 wait_until: domcontentloaded
 ```
 
-### Najedz na element
+### Hover Element
 
 `browser.hover`
 
-Najedz myszka na element
+Hover mouse over an element
 
 **Parameters:**
 
@@ -1004,8 +1004,8 @@ Najedz myszka na element
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `selector` | string | Status operacji (sukces/blad) |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1020,11 +1020,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### Interakcja z Przeglądarką
+### Browser Interact
 
 `browser.interact`
 
-Wstrzymaj, aby użytkownik mógł wejść w interakcję ze stroną przeglądarki
+Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
 
 **Parameters:**
 
@@ -1038,11 +1038,11 @@ Wstrzymaj, aby użytkownik mógł wejść w interakcję ze stroną przeglądarki
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji |
-| `action` | string | Wykonana akcja (kliknięcie/wybór/wpisanie/przełączenie) |
-| `selector` | string | Selektor CSS elementu, z którym wykonano interakcję |
-| `value` | string | Użyta wartość (dla akcji wyboru/wpisywania) |
-| `url` | string | URL strony w momencie interakcji |
+| `status` | string | Operation status |
+| `action` | string | Action executed (click/select/type/toggle) |
+| `selector` | string | CSS selector of the interacted element |
+| `value` | string | Value used (for select/type actions) |
+| `url` | string | Page URL at time of interaction |
 
 **Example:** Example
 
@@ -1051,11 +1051,11 @@ title: Choose a department
 description: Select the department you want to register for
 ```
 
-### Uruchom przegladarke
+### Launch Browser
 
 `browser.launch`
 
-Uruchom nowa instancje przegladarki z Playwright
+Launch a new browser instance with Playwright
 
 **Parameters:**
 
@@ -1064,25 +1064,25 @@ Uruchom nowa instancje przegladarki z Playwright
 | `headless` | boolean | No | `False` | Run browser without visible window |
 | `width` | number | No | `1280` | Browser viewport width in pixels |
 | `height` | number | No | `720` | Browser viewport height in pixels |
-| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Silnik przeglądarki do użycia (chromium, firefox, webkit) |
+| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Browser engine to use |
 | `channel` | select (``, `chrome`, `msedge`) | No | - | Use system Chrome instead of bundled Chromium for better anti-detection bypass |
 | `behavior` | select (`fast`, `normal`, `careful`, `human_like`) | No | `fast` | How the browser interacts: fast (no delays), normal, careful (mouse movement), human_like (full simulation) |
 | `stealth` | boolean | No | `True` | Anti-detection patches: WebGL fingerprint, canvas noise, navigator fixes. Always recommended. |
-| `proxy` | string | No | - | URL serwera proxy |
-| `user_agent` | string | No | - | Niestandardowy ciąg agenta użytkownika |
+| `proxy` | string | No | - | HTTP/SOCKS proxy server URL. For rotation use browser.proxy_rotate. |
+| `user_agent` | string | No | - | Custom user agent string |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |
-| `slow_mo` | number | No | `0` | Spowolnij operacje o określoną liczbę milisekund |
+| `slow_mo` | number | No | `0` | Delay between Playwright actions in ms (low-level, prefer Behavior Profile) |
 | `record_video_dir` | string | No | - | Directory to save recorded videos (enables Playwright video recording) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `message` | string | Uruchom nowa instancje przegladarki |
-| `browser_type` | string | Typ uruchomionej przeglądarki |
-| `headless` | boolean | Czy przeglądarka działa w trybie bezgłowym |
-| `viewport` | object | Aktualne wymiary widoku |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `browser_type` | string | Browser engine used |
+| `headless` | boolean | Whether browser is in headless mode |
+| `viewport` | object | Browser viewport dimensions |
 | `behavior` | string | Active behavior profile |
 
 **Example:** Example
@@ -1105,11 +1105,11 @@ behavior: human_like
 stealth: true
 ```
 
-### Logowanie
+### Login
 
 `browser.login`
 
-Automatyczne wykrywanie i wypełnianie formularzy logowania z weryfikacją po zalogowaniu.
+Auto-detect and fill login forms. Handles username + password + submit with post-login verification.
 
 **Parameters:**
 
@@ -1149,11 +1149,11 @@ password_selector: #pass
 submit_selector: #login-btn
 ```
 
-### Nawigacja w Historii
+### Page Navigation
 
 `browser.navigation`
 
-Nawiguj w historii przeglądarki (wstecz, do przodu, odśwież)
+Navigate back, forward, or reload the page
 
 **Parameters:**
 
@@ -1167,9 +1167,9 @@ Nawiguj w historii przeglądarki (wstecz, do przodu, odśwież)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/błąd) |
-| `action` | string | Wykonana akcja nawigacji |
-| `url` | string | Aktualny URL po nawigacji |
+| `status` | string | Operation status (success/error) |
+| `action` | string | Navigation action performed |
+| `url` | string | Current URL after navigation |
 
 **Example:** Example
 
@@ -1190,11 +1190,11 @@ action: reload
 wait_until: networkidle
 ```
 
-### Monitor sieci
+### Network Monitor
 
 `browser.network`
 
-Monitoruj i przechwytuj zadania sieciowe
+Monitor and intercept network requests
 
 **Parameters:**
 
@@ -1210,9 +1210,9 @@ Monitoruj i przechwytuj zadania sieciowe
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Odpowiedz do zwrocenia dla przechwyconych zadan |
-| `requests` | array | Odpowiedz do zwrocenia dla przechwyconych zadan |
-| `blocked_count` | number | Status operacji (sukces/blad) |
+| `status` | string | Operation status (success/error) |
+| `requests` | array | Captured network requests |
+| `blocked_count` | number | The blocked count |
 
 **Example:** Example
 
@@ -1237,27 +1237,27 @@ url_pattern: .*users.*
 mock_response: {"status": 200, "body": "{\"users\": []}"}
 ```
 
-### Lista Stron
+### List Pages
 
 `browser.pages`
 
-Wyświetl wszystkie otwarte strony/karty przeglądarki
+List all open browser pages/tabs with details
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `include_details` | boolean | No | `True` | Uwzględnij szczegółowe informacje dla każdej strony |
-| `include_content_info` | boolean | No | `False` | Uwzględnij informacje o typie treści dla każdej strony |
+| `include_details` | boolean | No | `True` | Include URL, title, and viewport info for each page |
+| `include_content_info` | boolean | No | `False` | Include page load state and frame count (slower) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/błąd) |
-| `pages` | array | Lista otwartych stron |
-| `count` | number | Liczba otwartych stron |
-| `current_index` | number | Indeks aktualnie aktywnej strony |
+| `status` | string | Operation status |
+| `pages` | array | List of page information |
+| `count` | number | Number of open pages |
+| `current_index` | number | Index of the current active page |
 
 **Example:** Example
 
@@ -1278,11 +1278,11 @@ include_details: true
 include_content_info: true
 ```
 
-### Paginuj i wyodrębnij
+### Paginate & Extract
 
 `browser.pagination`
 
-Automatyczne paginowanie przez strony i wyodrębnianie danych
+Auto-paginate through pages and extract data. Supports retry and checkpoint resume.
 
 **Parameters:**
 
@@ -1307,10 +1307,10 @@ Automatyczne paginowanie przez strony i wyodrębnianie danych
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `items` | array | Selektor, który pojawia się, gdy nie ma więcej stron (zatrzymuje paginację) |
-| `total_items` | integer | Wszystkie wyodrębnione elementy ze wszystkich stron |
-| `pages_processed` | integer | Wszystkie wyodrębnione elementy ze wszystkich stron |
-| `stopped_reason` | string | Liczba przetworzonych stron |
+| `items` | array | All extracted items from all pages |
+| `total_items` | integer | Total number of items extracted |
+| `pages_processed` | integer | Number of pages processed |
+| `stopped_reason` | string | Why pagination stopped (max_pages, max_items, no_more, error) |
 | `retries_used` | integer | Total number of retries across all pages |
 | `resumed` | boolean | Whether execution resumed from a checkpoint |
 
@@ -1334,11 +1334,11 @@ no_more_indicator: .end-of-feed
 checkpoint_path: /tmp/feed_checkpoint.json
 ```
 
-### Wygeneruj PDF
+### Generate PDF
 
 `browser.pdf`
 
-Wygeneruj PDF z biezacej strony
+Generate PDF from current page
 
 **Parameters:**
 
@@ -1357,9 +1357,9 @@ Wygeneruj PDF z biezacej strony
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Skala renderowania strony (0.1-2) |
-| `path` | string | Status operacji (sukces/blad) |
-| `size` | number | Status operacji (sukces/blad) |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -1381,26 +1381,26 @@ path: /output/custom.pdf
 margin: {"top": "1cm", "bottom": "1cm", "left": "2cm", "right": "2cm"}
 ```
 
-### Metryki Wydajności
+### Performance Metrics
 
 `browser.performance`
 
-Zbieraj metryki wydajności przeglądarki
+Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | array | No | `['all']` | Metryki wydajności do zebrania |
-| `timeout_ms` | number | No | `3000` | Limit czasu w milisekundach |
-| `setup_observers` | boolean | No | `True` | Skonfiguruj obserwatorów wydajności przed zebraniem |
+| `metrics` | array | No | `['all']` | Which metrics to collect (default: all) |
+| `timeout_ms` | number | No | `3000` | Time to wait for metrics collection (for LCP, CLS) |
+| `setup_observers` | boolean | No | `True` | Install PerformanceObservers for better metric tracking |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/błąd) |
-| `metrics` | object | Zebrane metryki wydajności |
+| `status` | string | Operation status |
+| `metrics` | object | Collected performance metrics |
 
 **Example:** Example
 
@@ -1422,11 +1422,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### Pula Przeglądarek
+### Browser Pool
 
 `browser.pool`
 
-Zarządzanie wieloma nazwanymi instancjami przeglądarki do równoległej automatyzacji.
+Manage multiple named browser instances for parallel automation.
 
 **Parameters:**
 
@@ -1466,11 +1466,11 @@ name: scraper1
 action: list
 ```
 
-### Nacisnij klawisz
+### Press Key
 
 `browser.press`
 
-Nacisnij klawisz klawiatury
+Press a keyboard key
 
 **Parameters:**
 
@@ -1482,8 +1482,8 @@ Nacisnij klawisz klawiatury
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `key` | string | Nacisnij klawisz klawiatury |
+| `status` | string | Operation status (success/error) |
+| `key` | string | Key identifier |
 
 **Example:** Example
 
@@ -1497,11 +1497,11 @@ key: Enter
 key: Escape
 ```
 
-### Rotacja Proxy
+### Rotate Proxy
 
 `browser.proxy_rotate`
 
-Rotacja między listą proxy z wykrywaniem nieaktywnych proxy.
+Rotate through a list of proxies. Relaunches browser with the next proxy.
 
 **Parameters:**
 
@@ -1538,11 +1538,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### Wyodrębnij Artykuł
+### Extract Article
 
 `browser.readability`
 
-Inteligentna ekstrakcja artykułów — wyodrębnia tytuł, autora, datę i główną treść z dowolnej strony
+Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode.
 
 **Parameters:**
 
@@ -1551,7 +1551,7 @@ Inteligentna ekstrakcja artykułów — wyodrębnia tytuł, autora, datę i gł�
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - | Selektor CSS dla obszaru treści. Pozostaw puste dla automatycznego wykrywania. |
+| `selector` | string | No | - | CSS selector for the content area. Leave empty for auto-detection. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1603,11 +1603,11 @@ title_selector: .article-headline h1
 selector: .article-body
 ```
 
-### Nagrywaj akcje
+### Record Actions
 
 `browser.record`
 
-Nagrywaj akcje uzytkownika jako przeplyw
+Record user actions as workflow
 
 **Parameters:**
 
@@ -1621,9 +1621,9 @@ Nagrywaj akcje uzytkownika jako przeplyw
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Format dla nagranego przeplywu (yaml lub json) |
-| `recording` | array | Format dla nagranego przeplywu (yaml lub json) |
-| `workflow` | string | Status operacji (sukces/blad) |
+| `status` | string | Operation status (success/error) |
+| `recording` | array | Recording data or path |
+| `workflow` | string | The workflow |
 
 **Example:** Example
 
@@ -1644,25 +1644,25 @@ output_format: yaml
 action: get
 ```
 
-### Zwolnij przeglądarkę
+### Release Browser
 
 `browser.release`
 
-Zwolnij sesję przeglądarki (zamknij tylko, jeśli posiadasz)
+Release browser session (close only if owned)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `force` | boolean | No | `False` | Zamknij przeglądarkę, nawet jeśli nie jest posiadana przez ten szablon |
+| `force` | boolean | No | `False` | Close browser even if not owned by this template |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Zamknij przeglądarkę, nawet jeśli nie jest posiadana przez ten szablon |
-| `message` | string | Jakie działanie zostało podjęte |
-| `was_owner` | boolean | Jakie działanie zostało podjęte |
+| `status` | string | What action was taken |
+| `message` | string | Result message |
+| `was_owner` | boolean | Whether this template owned the browser |
 
 **Example:** Example
 
@@ -1675,11 +1675,11 @@ Zwolnij sesję przeglądarki (zamknij tylko, jeśli posiadasz)
 force: true
 ```
 
-### Przechwyć Odpowiedź
+### Capture Response
 
 `browser.response`
 
-Przechwytuj treści odpowiedzi API (XHR/fetch). Wyodrębnij JSON z wywołań API strony.
+Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls.
 
 **Parameters:**
 
@@ -1712,11 +1712,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### Sprawdź Robots.txt
+### Check Robots.txt
 
 `browser.robots`
 
-Sprawdź zgodność z robots.txt i odkryj mapy witryn.
+Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping.
 
 **Parameters:**
 
@@ -1747,11 +1747,11 @@ check_url: /api/data
 ```yaml
 ```
 
-### Zrob zrzut ekranu
+### Take Screenshot
 
 `browser.screenshot`
 
-Zrob zrzut ekranu biezacej strony
+Take a screenshot of the current page
 
 **Parameters:**
 
@@ -1766,8 +1766,8 @@ Zrob zrzut ekranu biezacej strony
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `filepath` | string | Zrob zrzut ekranu biezacej strony |
+| `status` | string | Operation status (success/error) |
+| `filepath` | string | Path to the file |
 
 **Example:** Example
 
@@ -1775,11 +1775,11 @@ Zrob zrzut ekranu biezacej strony
 path: output/page.png
 ```
 
-### Przewin strone
+### Scroll Page
 
 `browser.scroll`
 
-Przewin strone do elementu, pozycji lub kierunku
+Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1794,8 +1794,8 @@ Przewin strone do elementu, pozycji lub kierunku
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `scrolled_to` | object | Status operacji (sukces/blad) |
+| `status` | string | Operation status (success/error) |
+| `scrolled_to` | object | The scrolled to |
 
 **Example:** Example
 
@@ -1818,11 +1818,11 @@ amount: 10000
 behavior: smooth
 ```
 
-### Wybierz opcje
+### Select Option
 
 `browser.select`
 
-Wybierz opcje z elementu rozwijanego
+Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1838,9 +1838,9 @@ Wybierz opcje z elementu rozwijanego
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `selected` | array | Status operacji (sukces/blad) |
-| `selector` | string | Status operacji (sukces/blad) |
+| `status` | string | Operation status (success/error) |
+| `selected` | array | The selected |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1866,11 +1866,11 @@ select_method: index
 index: 2
 ```
 
-### Parsuj Mapę Witryny
+### Parse Sitemap
 
 `browser.sitemap`
 
-Parsuj sitemap.xml i wyodrębnij adresy URL z metadanymi.
+Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering.
 
 **Parameters:**
 
@@ -1902,29 +1902,29 @@ url_pattern: /blog/
 max_urls: 100
 ```
 
-### Zrzut DOM
+### DOM Snapshot
 
 `browser.snapshot`
 
-Zrób zrzut DOM bieżącej strony
+Capture DOM snapshot in HTML, MHTML, or text format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`html`, `mhtml`, `text`) | No | `html` | Format wyjściowy (html lub tekst) |
-| `selector` | string | No | - | Selektor CSS do zrzutu konkretnego elementu |
-| `path` | string | No | - | Ścieżka do zapisania zrzutu |
+| `format` | select (`html`, `mhtml`, `text`) | No | `html` | Snapshot format |
+| `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/błąd) |
-| `format` | string | Format zrzutu |
-| `content` | string | Zawartość zrzutu |
-| `path` | string | Ścieżka, gdzie zapisano zrzut |
-| `size_bytes` | number | Rozmiar zrzutu w bajtach |
+| `status` | string | Operation status |
+| `format` | string | Snapshot format used |
+| `content` | string | Snapshot content (if no path specified) |
+| `path` | string | Path to saved file |
+| `size_bytes` | number | Content size in bytes |
 
 **Example:** Example
 
@@ -1954,11 +1954,11 @@ selector: #main
 path: /tmp/section.html
 ```
 
-### Magazyn przegladarki
+### Browser Storage
 
 `browser.storage`
 
-Dostep do localStorage i sessionStorage
+Access localStorage and sessionStorage
 
 **Parameters:**
 
@@ -1973,10 +1973,10 @@ Dostep do localStorage i sessionStorage
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `value` | any | Status operacji (sukces/blad) |
-| `keys` | array | Status operacji (sukces/blad) |
-| `length` | number | Zwrocona wartosc |
+| `status` | string | Operation status (success/error) |
+| `value` | any | The returned value |
+| `keys` | array | List of keys |
+| `length` | number | Length of data |
 
 **Example:** Example
 
@@ -2009,11 +2009,11 @@ action: keys
 type: local
 ```
 
-### Zarzadzaj kartami
+### Manage Tabs
 
 `browser.tab`
 
-Tworzenie, przelaczanie i zamykanie kart przegladarki
+Create, switch, and close browser tabs
 
 **Parameters:**
 
@@ -2028,10 +2028,10 @@ Tworzenie, przelaczanie i zamykanie kart przegladarki
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Indeks karty do przelaczenia lub zamkniecia (od 0) |
-| `tab_count` | number | Indeks karty do przelaczenia lub zamkniecia (od 0) |
-| `current_index` | number | Status operacji (sukces/blad) |
-| `tabs` | array | Liczba kart |
+| `status` | string | Operation status (success/error) |
+| `tab_count` | number | The tab count |
+| `current_index` | number | The current index |
+| `tabs` | array | List of open tabs |
 
 **Example:** Example
 
@@ -2059,11 +2059,11 @@ action: close
 action: list
 ```
 
-### Wyodrębnij Tabelę
+### Extract Table
 
 `browser.table`
 
-Wyodrębnij tabele HTML jako dane strukturalne z automatycznie wykrytymi nagłówkami.
+Extract HTML tables as structured data. Auto-detects headers from thead/th.
 
 **Parameters:**
 
@@ -2095,11 +2095,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### Ograniczenie
+### Throttle
 
 `browser.throttle`
 
-Ograniczenie częstotliwości żądań na domenę. Czeka między żądaniami, aby uniknąć blokad.
+Per-domain rate limiting. Waits between requests to the same domain to avoid bans.
 
 **Parameters:**
 
@@ -2142,29 +2142,29 @@ min_interval_ms: 1500
 max_interval_ms: 8000
 ```
 
-### Ślad Przeglądarki
+### Performance Trace
 
 `browser.trace`
 
-Rozpocznij, zatrzymaj lub zapisz ślady wydajności przeglądarki
+Start/stop Chrome DevTools performance tracing (Chromium only)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | - | Akcja śledzenia (rozpocznij, zatrzymaj, zapisz) |
-| `categories` | array | No | `['devtools.timeline']` | Kategorie śledzenia do uchwycenia |
-| `screenshots` | boolean | No | `True` | Uwzględnij zrzuty ekranu w śladzie |
-| `path` | string | No | - | Ścieżka do zapisania pliku śladu |
+| `action` | string | Yes | - | Start or stop tracing |
+| `categories` | array | No | `['devtools.timeline']` | CDP trace categories (default: devtools.timeline) |
+| `screenshots` | boolean | No | `True` | Include screenshots in trace (increases file size) |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/błąd) |
-| `tracing` | boolean | Czy śledzenie jest obecnie aktywne |
-| `path` | string | Ścieżka, gdzie zapisano ślad |
-| `size_bytes` | number | Rozmiar pliku śladu w bajtach |
+| `status` | string | Operation status (success/error) |
+| `tracing` | boolean | Whether tracing is active |
+| `path` | string | Path to trace file (when stopped) |
+| `size_bytes` | number | Trace file size in bytes |
 
 **Example:** Example
 
@@ -2188,11 +2188,11 @@ action: stop
 path: /tmp/performance-trace.json
 ```
 
-### Wpisz tekst
+### Type Text
 
 `browser.type`
 
-Wpisz tekst w pole wejsciowe
+Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -2213,8 +2213,8 @@ Wpisz tekst w pole wejsciowe
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | Status operacji (sukces/blad) |
-| `selector` | string | Wpisz tekst w pole wejsciowe |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 | `method` | string | Type method used |
 
 **Example:** Example
@@ -2250,11 +2250,11 @@ selector: #email
 text: user@example.com
 ```
 
-### Przeslij plik
+### Upload File
 
 `browser.upload`
 
-Przeslij plik do elementu wejscia pliku
+Upload file to file input element
 
 **Parameters:**
 
@@ -2268,10 +2268,10 @@ Przeslij plik do elementu wejscia pliku
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `filename` | string | Status operacji (sukces/blad) |
-| `size` | number | Status operacji (sukces/blad) |
-| `selector` | string | Nazwa pliku |
+| `status` | string | Operation status (success/error) |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -2287,26 +2287,26 @@ selector: #file-upload
 file_path: /path/to/document.pdf
 ```
 
-### Ustaw widok
+### Resize Viewport
 
 `browser.viewport`
 
-Pobierz lub ustaw rozmiar widoku przeglądarki
+Resize browser viewport to specific dimensions
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `width` | number | Yes | `1280` | Szerokość widoku w pikselach |
-| `height` | number | Yes | `720` | Wysokość widoku w pikselach |
+| `width` | number | Yes | `1280` | Viewport width in pixels |
+| `height` | number | Yes | `720` | Viewport height in pixels |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/błąd) |
-| `viewport` | object | Aktualne wymiary widoku |
-| `previous_viewport` | object | Poprzednie wymiary widoku |
+| `status` | string | Operation status |
+| `viewport` | object | Applied viewport dimensions |
+| `previous_viewport` | object | Previous viewport dimensions |
 
 **Example:** Example
 
@@ -2336,11 +2336,11 @@ width: 1366
 height: 768
 ```
 
-### Czekaj
+### Wait
 
 `browser.wait`
 
-Czekaj przez okreslony czas lub az pojawi sie element
+Wait for a duration or until an element appears
 
 **Parameters:**
 
@@ -2348,16 +2348,16 @@ Czekaj przez okreslony czas lub az pojawi sie element
 |------|------|----------|---------|-------------|
 | `duration_ms` | number | No | `1000` | Duration of the operation in milliseconds |
 | `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
-| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | Stan do oczekiwania (widoczny, ukryty, dołączony, odłączony) |
+| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | Element state to wait for |
 | `timeout_ms` | number | No | `30000` | Maximum time to wait in milliseconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operacji (sukces/blad) |
-| `selector` | string | Status operacji (sukces/blad) |
-| `duration_ms` | number | Czekaj przez okreslony czas lub az pojawi sie element |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was waited for |
+| `duration_ms` | number | Wait duration in milliseconds |
 
 **Example:** Example
 

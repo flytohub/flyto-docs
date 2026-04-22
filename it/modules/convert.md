@@ -6,115 +6,115 @@ Type casting between data types.
 
 | Module | Description |
 |--------|-------------|
-| [In Array](#in-array) | Converti il valore in un array |
-| [In Booleano](#in-booleano) | Converti il valore in booleano |
-| [In Numero](#in-numero) | Converti il valore in numero |
-| [In Oggetto](#in-oggetto) | Converti il valore in oggetto |
-| [In Stringa](#in-stringa) | Converti qualsiasi valore in stringa |
+| [To Array](#to-array) | Convert value to array |
+| [To Boolean](#to-boolean) | Convert value to boolean |
+| [To Number](#to-number) | Convert value to number |
+| [To Object](#to-object) | Convert value to object |
+| [To String](#to-string) | Convert any value to string |
 
 ## Modules
 
-### In Array
+### To Array
 
 `convert.to_array`
 
-Converti il valore in un array
+Convert value to array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Valore da convertire |
-| `split_string` | boolean | No | `False` | Valore da convertire |
-| `delimiter` | string | No | - | Dividi la stringa in caratteri |
+| `value` | any | Yes | - | Value to convert |
+| `split_string` | boolean | No | `False` | Split string into characters |
+| `delimiter` | string | No | - | Delimiter for string splitting |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Delimitatore per la divisione delle stringhe |
-| `length` | number | Array convertito |
-| `original_type` | string | Array convertito |
+| `result` | array | Converted array |
+| `length` | number | Array length |
+| `original_type` | string | Original value type |
 
-### In Booleano
+### To Boolean
 
 `convert.to_boolean`
 
-Converti il valore in booleano
+Convert value to boolean
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Valore da convertire |
-| `strict` | boolean | No | `False` | Valore da convertire |
+| `value` | any | Yes | - | Value to convert |
+| `strict` | boolean | No | `False` | Only accept true/false strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Accetta solo stringhe true/false |
-| `original_type` | string | Booleano convertito |
+| `result` | boolean | Converted boolean |
+| `original_type` | string | Original value type |
 
-### In Numero
+### To Number
 
 `convert.to_number`
 
-Converti il valore in numero
+Convert value to number
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Valore da convertire |
-| `default` | number | No | `0` | Valore da convertire |
-| `integer` | boolean | No | `False` | Valore predefinito se la conversione fallisce |
+| `value` | any | Yes | - | Value to convert |
+| `default` | number | No | `0` | Default value if conversion fails |
+| `integer` | boolean | No | `False` | Convert to integer |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Converti in intero |
-| `success` | boolean | Numero convertito |
-| `original_type` | string | Numero convertito |
+| `result` | number | Converted number |
+| `success` | boolean | Whether conversion succeeded |
+| `original_type` | string | Original value type |
 
-### In Oggetto
+### To Object
 
 `convert.to_object`
 
-Converti il valore in oggetto
+Convert value to object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Valore da convertire |
-| `key_name` | string | No | `value` | Valore da convertire |
+| `value` | any | Yes | - | Value to convert |
+| `key_name` | string | No | `value` | Key name for wrapping non-objects |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Nome chiave per avvolgere i non-oggetti |
-| `keys` | array | Oggetto convertito |
-| `original_type` | string | Oggetto convertito |
+| `result` | object | Converted object |
+| `keys` | array | Object keys |
+| `original_type` | string | Original value type |
 
-### In Stringa
+### To String
 
 `convert.to_string`
 
-Converti qualsiasi valore in stringa
+Convert any value to string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Valore da convertire |
-| `pretty` | boolean | No | `False` | Valore da convertire |
+| `value` | any | Yes | - | Value to convert |
+| `pretty` | boolean | No | `False` | Format objects/arrays with indentation |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Formatta oggetti/array con indentazione |
-| `original_type` | string | Rappresentazione in stringa |
+| `result` | string | String representation |
+| `original_type` | string | Original value type |

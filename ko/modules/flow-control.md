@@ -6,60 +6,60 @@ Branching, loops, parallelism, subflows, triggers, and error handling.
 
 | Module | Description |
 |--------|-------------|
-| [배치 처리](#배치-처리) | 설정 가능한 크기로 항목을 배치 처리합니다 |
-| [분기](#분기) | 표현식 평가에 기반한 조건 분기 |
-| [중단점](#중단점) | 인간 승인 또는 입력을 위해 워크플로 실행 일시 정지 |
-| [회로 차단기](#회로-차단기) | 연쇄 실패를 방지하기 위한 회로 차단기 패턴 |
-| [컨테이너](#컨테이너) | 복잡한 워크플로 구성을 위한 내장 서브플로 컨테이너 |
-| [디바운스](#디바운스) | 빠른 반복 호출을 방지하기 위한 디바운스 실행 |
-| [종료](#종료) | 명시적 워크플로 종료 노드 |
-| [오류 처리기](#오류-처리기) | 상위 노드에서 발생한 오류를 잡아 처리합니다 |
-| [오류 워크플로우 트리거](#오류-워크플로우-트리거) | 다른 워크플로우가 실패할 때 트리거되는 오류 워크플로우의 진입점 |
-| [각각에 대해](#각각에-대해) | 목록을 반복하며 각 항목에 대해 단계 실행 |
-| [포크](#포크) | 실행을 병렬 분기로 분할 |
-| [이동](#이동) | 다른 단계로 무조건 점프 |
-| [워크플로 호출](#워크플로-호출) | 외부 워크플로 파일 실행 |
-| [조인](#조인) | 병렬 분기 완료 대기 |
-| [루프](#루프) | 출력 포트 라우팅을 사용하여 N번 단계 반복 |
-| [병합](#병합) | 여러 입력을 단일 출력으로 병합 |
-| [병렬](#병렬) | 다양한 전략으로 여러 작업을 병렬로 실행합니다 |
-| [속도 제한](#속도-제한) | 토큰 버킷 또는 슬라이딩 윈도우를 사용한 속도 제한 실행 |
-| [재시도](#재시도) | 구성 가능한 백오프로 실패한 작업 재시도 |
-| [시작](#시작) | 명시적 워크플로 시작 노드 |
-| [서브플로](#서브플로) | 외부 워크플로 참조 및 실행 |
-| [스위치](#스위치) | 값 매칭에 기반한 다중 분기 |
-| [속도 제한](#속도-제한) | 최소 간격으로 실행 속도 제한 |
-| [트리거](#트리거) | 워크플로 진입점 - 수동, 웹훅, 스케줄 또는 이벤트 |
+| [Batch Process](#batch-process) | Process items in batches with configurable size |
+| [Branch](#branch) | Conditional branching based on expression evaluation |
+| [Breakpoint](#breakpoint) | Pause workflow execution for human approval or input |
+| [Circuit Breaker](#circuit-breaker) | Circuit breaker pattern for fault tolerance |
+| [Container](#container) | Embedded subflow container for organizing complex workflows |
+| [Debounce](#debounce) | Debounce execution to prevent rapid repeated calls |
+| [End](#end) | Explicit workflow end node |
+| [Error Handler](#error-handler) | Catches and handles errors from upstream nodes |
+| [Error Workflow Trigger](#error-workflow-trigger) | Entry point for error workflows - triggered when another workflow fails |
+| [For Each](#for-each) | Iterate over a list and execute steps for each item |
+| [Fork](#fork) | Split execution into parallel branches |
+| [Goto](#goto) | Unconditional jump to another step |
+| [Invoke Workflow](#invoke-workflow) | Execute an external workflow file |
+| [Join](#join) | Wait for parallel branches to complete |
+| [Loop](#loop) | Repeat steps N times using output port routing |
+| [Merge](#merge) | Merge multiple inputs into a single output |
+| [Parallel](#parallel) | Execute multiple tasks in parallel with different strategies |
+| [Rate Limit](#rate-limit) | Rate limiter with token bucket strategy |
+| [Retry](#retry) | Retry with exponential backoff |
+| [Start](#start) | Explicit workflow start node |
+| [Subflow](#subflow) | Reference and execute an external workflow |
+| [Switch](#switch) | Multi-way branching based on value matching |
+| [Throttle](#throttle) | Throttle execution rate with minimum interval |
+| [Trigger](#trigger) | Workflow entry point - manual, webhook, schedule, event, mcp, or polling |
 
 ## Modules
 
-### 배치 처리
+### Batch Process
 
 `flow.batch`
 
-설정 가능한 크기로 항목을 배치 처리합니다
+Process items in batches with configurable size
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `items` | array | Yes | - | Array of items to process. Can be numbers, strings, or objects. |
-| `batch_size` | number | Yes | `10` | 배치당 항목 수 |
-| `delay_ms` | number | No | `0` | 배치 간 대기 시간 (속도 제한용) |
-| `continue_on_error` | boolean | No | `False` | 하나가 실패해도 남은 배치를 계속 처리 |
-| `parallel_batches` | number | No | `1` | 하나가 실패해도 남은 배치를 계속 처리 |
+| `batch_size` | number | Yes | `10` | Number of items per batch |
+| `delay_ms` | number | No | `0` | Milliseconds to wait between batches (for rate limiting) |
+| `continue_on_error` | boolean | No | `False` | Continue processing remaining batches if one fails |
+| `parallel_batches` | number | No | `1` | Number of batches to process in parallel (1 for sequential) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 병렬로 처리할 배치 수 (순차적 처리는 1) |
-| `batch` | array | 라우팅 이벤트 (배치/완료/오류) |
-| `batch_index` | number | 라우팅 이벤트 (배치/완료/오류) |
-| `total_batches` | number | 현재 배치 항목 |
-| `total_items` | number | 현재 배치 인덱스 (0부터 시작) |
-| `is_last_batch` | boolean | 총 배치 수 |
-| `progress` | object | 총 항목 수 |
+| `__event__` | string | Event for routing (batch/completed/error) |
+| `batch` | array | Current batch items |
+| `batch_index` | number | Current batch index (0-based) |
+| `total_batches` | number | Total number of batches |
+| `total_items` | number | Total number of items |
+| `is_last_batch` | boolean | Whether this is the last batch |
+| `progress` | object | Progress information |
 
 **Example:** Example
 
@@ -85,11 +85,11 @@ parallel_batches: 3
 continue_on_error: true
 ```
 
-### 분기
+### Branch
 
 `flow.branch`
 
-표현식 평가에 기반한 조건 분기
+Conditional branching based on expression evaluation
 
 **Parameters:**
 
@@ -101,11 +101,11 @@ continue_on_error: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅 이벤트 (true/false/error) |
-| `outputs` | object | 포트별 출력 값 |
-| `result` | boolean | 분기 결과 |
-| `condition` | string | 조건 값 |
-| `resolved_condition` | string | 조건 평가 결과 |
+| `__event__` | string | Event for routing (true/false/error) |
+| `outputs` | object | Output values by port |
+| `result` | boolean | Condition evaluation result |
+| `condition` | string | Original condition expression |
+| `resolved_condition` | string | Condition after variable resolution |
 
 **Example:** Example
 
@@ -119,11 +119,11 @@ condition: ${search_step.count} > 0
 condition: ${api_call.status} == success
 ```
 
-### 중단점
+### Breakpoint
 
 `flow.breakpoint`
 
-인간 승인 또는 입력을 위해 워크플로 실행 일시 정지
+Pause workflow execution for human approval or input
 
 **Parameters:**
 
@@ -142,15 +142,15 @@ condition: ${api_call.status} == success
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅 이벤트 (approved/rejected/timeout) |
-| `breakpoint_id` | string | 중단점 ID |
-| `status` | string | 상태 |
-| `approved_by` | array | 승인자 |
-| `rejected_by` | array | 거부자 |
-| `custom_inputs` | object | 사용자 정의 입력 값 |
-| `comments` | array | 검토 코멘트 |
-| `resolved_at` | string | 해결 시간 |
-| `wait_duration_ms` | integer | 대기 시간 (ms) |
+| `__event__` | string | Event for routing (approved/rejected/timeout) |
+| `breakpoint_id` | string | Unique breakpoint identifier |
+| `status` | string | Final status (approved/rejected/timeout/cancelled) |
+| `approved_by` | array | List of users who approved |
+| `rejected_by` | array | List of users who rejected |
+| `custom_inputs` | object | Values collected from custom fields |
+| `comments` | array | Comments from approvers |
+| `resolved_at` | string | ISO timestamp of resolution |
+| `wait_duration_ms` | integer | Time spent waiting for approval |
 
 **Example:** Example
 
@@ -175,29 +175,29 @@ title: Adjustment Required
 custom_fields: [{"name": "reason", "label": "Reason", "type": "text", "required": true}, {"name": "amount", "label": "Amount", "type": "number", "required": true}]
 ```
 
-### 회로 차단기
+### Circuit Breaker
 
 `flow.circuit_breaker`
 
-연쇄 실패를 방지하기 위한 회로 차단기 패턴
+Circuit breaker pattern for fault tolerance
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `failure_threshold` | number | Yes | `5` | 회로가 열리기 전 실패 횟수 |
-| `reset_timeout_ms` | number | No | `60000` | 회로가 반개방으로 전환되기 전의 시간 (밀리초) |
-| `half_open_max` | number | No | `1` | 반개방 상태에서 허용되는 최대 요청 수 |
+| `failure_threshold` | number | Yes | `5` | Number of failures before opening the circuit |
+| `reset_timeout_ms` | number | No | `60000` | Time to wait before transitioning from open to half-open |
+| `half_open_max` | number | No | `1` | Maximum test requests allowed in half-open state |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅을 위한 이벤트 (허용/거부/반개방) |
-| `state` | string | 회로 상태 (닫힘/열림/반개방) |
-| `failure_count` | number | 연속 실패 횟수 |
-| `last_failure_time_ms` | number | 마지막 실패의 타임스탬프 (밀리초) |
-| `time_until_half_open_ms` | number | 회로가 반개방으로 전환될 때까지의 밀리초 |
+| `__event__` | string | Event for routing (closed/open/half_open) |
+| `state` | string | Current circuit breaker state |
+| `failure_count` | number | Current number of consecutive failures |
+| `last_failure_time_ms` | number | Timestamp of last failure |
+| `time_until_half_open_ms` | number | Milliseconds until circuit transitions to half-open |
 
 **Example:** Example
 
@@ -222,11 +222,11 @@ reset_timeout_ms: 120000
 half_open_max: 3
 ```
 
-### 컨테이너
+### Container
 
 `flow.container`
 
-복잡한 워크플로 구성을 위한 내장 서브플로 컨테이너
+Embedded subflow container for organizing complex workflows
 
 **Parameters:**
 
@@ -241,12 +241,12 @@ half_open_max: 3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅 이벤트 (success/error) |
-| `outputs` | object | 포트별 출력 값 |
-| `subflow_result` | object | 서브플로 결과 |
-| `exported_variables` | object | 내보낸 변수 |
-| `node_count` | integer | 노드 수 |
-| `execution_time_ms` | number | 실행 시간 (ms) |
+| `__event__` | string | Event for routing (success/error) |
+| `outputs` | object | Output values by port |
+| `subflow_result` | object | Result from subflow execution |
+| `exported_variables` | object | Variables exported from subflow |
+| `node_count` | integer | Number of nodes in subflow |
+| `execution_time_ms` | number | Total subflow execution time in milliseconds |
 
 **Example:** Example
 
@@ -262,29 +262,29 @@ subflow: {"nodes": [], "edges": []}
 inherit_context: false
 ```
 
-### 디바운스
+### Debounce
 
 `flow.debounce`
 
-빠른 반복 호출을 방지하기 위한 디바운스 실행
+Debounce execution to prevent rapid repeated calls
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `delay_ms` | number | Yes | - | 마지막 호출 후 실행까지의 대기 시간 |
-| `leading` | boolean | No | `False` | 선행 엣지에서 실행 (첫 호출 즉시 트리거) |
-| `trailing` | boolean | No | `True` | 후행 엣지에서 실행 (지연 만료 후) |
+| `delay_ms` | number | Yes | - | Wait time in milliseconds before allowing execution |
+| `leading` | boolean | No | `False` | Execute on the leading edge (first call immediately) |
+| `trailing` | boolean | No | `True` | Execute on the trailing edge (after delay of inactivity) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅을 위한 이벤트 (실행됨/디바운스됨) |
-| `last_call_ms` | number | 마지막 호출의 타임스탬프 (밀리초) |
-| `calls_debounced` | number | 마지막 실행 이후 디바운스된 호출 수 |
-| `time_since_last_ms` | number | 마지막 호출 이후 경과 시간 (밀리초) |
-| `edge` | string | 어느 엣지가 실행을 트리거했는지 (선행/후행) |
+| `__event__` | string | Event for routing (executed/skipped) |
+| `last_call_ms` | number | Timestamp of the last call |
+| `calls_debounced` | number | Number of calls that were debounced (skipped) |
+| `time_since_last_ms` | number | Time since last call in milliseconds |
+| `edge` | string | Which edge triggered execution (leading/trailing) |
 
 **Example:** Example
 
@@ -308,11 +308,11 @@ leading: true
 trailing: true
 ```
 
-### 종료
+### End
 
 `flow.end`
 
-명시적 워크플로 종료 노드
+Explicit workflow end node
 
 **Parameters:**
 
@@ -325,9 +325,9 @@ trailing: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅 이벤트 (__end__) |
-| `ended_at` | string | 종료 시간 |
-| `workflow_result` | object | 워크플로 결과 |
+| `__event__` | string | Event for routing (__end__) |
+| `ended_at` | string | ISO timestamp of end |
+| `workflow_result` | object | Mapped workflow output |
 
 **Example:** Example
 
@@ -340,29 +340,29 @@ trailing: true
 output_mapping: {"result": "${process.output}", "status": "success"}
 ```
 
-### 오류 처리기
+### Error Handler
 
 `flow.error_handle`
 
-상위 노드에서 발생한 오류를 잡아 처리합니다
+Catches and handles errors from upstream nodes
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | `log_and_continue` | 오류에 대해 할 작업 |
-| `include_traceback` | boolean | No | `True` | 출력에 전체 스택 추적 포함 |
-| `error_code_mapping` | object | No | `{}` | 출력에 전체 스택 추적 포함 |
-| `fallback_value` | any | No | - | 오류 코드를 사용자 정의 작업에 매핑 |
+| `action` | string | Yes | `log_and_continue` | What to do with the error |
+| `include_traceback` | boolean | No | `True` | Include full stack trace in output |
+| `error_code_mapping` | object | No | `{}` | Map error codes to custom actions |
+| `fallback_value` | any | No | - | Value to use when error is suppressed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 오류가 억제될 때 사용할 값 |
-| `outputs` | object | 라우팅 이벤트 (처리됨/에스컬레이트) |
-| `error_info` | object | 라우팅 이벤트 (처리됨/에스컬레이트) |
-| `action_taken` | string | 취해진 조치 |
+| `__event__` | string | Event for routing (handled/escalate) |
+| `outputs` | object | Output values by port |
+| `error_info` | object | Extracted error information |
+| `action_taken` | string | What action was taken |
 
 **Example:** Example
 
@@ -385,11 +385,11 @@ action: transform
 error_code_mapping: {"TIMEOUT": {"retry": true, "delay": 5000}, "NOT_FOUND": {"skip": true}}
 ```
 
-### 오류 워크플로우 트리거
+### Error Workflow Trigger
 
 `flow.error_workflow_trigger`
 
-다른 워크플로우가 실패할 때 트리거되는 오류 워크플로우의 진입점
+Entry point for error workflows - triggered when another workflow fails
 
 **Parameters:**
 
@@ -401,9 +401,9 @@ error_code_mapping: {"TIMEOUT": {"retry": true, "delay": 5000}, "NOT_FOUND": {"s
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 이 오류 워크플로우의 설명 |
-| `error_context` | object | 라우팅 이벤트 (트리거됨) |
-| `triggered_at` | string | 오류 워크플로우가 트리거된 ISO 타임스탬프 |
+| `__event__` | string | Event for routing (triggered) |
+| `error_context` | object | Complete error context from failed workflow |
+| `triggered_at` | string | ISO timestamp when error workflow was triggered |
 
 **Example:** Example
 
@@ -417,33 +417,33 @@ description: Send Slack notification on workflow failure
 description: Log all workflow errors to monitoring system
 ```
 
-### 각각에 대해
+### For Each
 
 `flow.foreach`
 
-목록을 반복하며 각 항목에 대해 단계 실행
+Iterate over a list and execute steps for each item
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `items` | string | Yes | - | 반복할 항목 목록 (${variable} 참조 지원) |
-| `steps` | array | No | - | 각 항목에 대해 실행할 단계 |
-| `item_var` | string | No | `item` | 현재 항목의 변수명 |
-| `index_var` | string | No | `index` | 현재 인덱스의 변수명 |
-| `output_mode` | string | No | `collect` | 결과 수집 모드 |
+| `items` | string | Yes | - | Array to iterate over — use gear icon to reference a previous step output |
+| `steps` | array | No | - | Steps to execute for each item (nested mode only) |
+| `item_var` | string | No | `item` | Variable name for current item |
+| `index_var` | string | No | `index` | Variable name for current index |
+| `output_mode` | string | No | `collect` | How to collect results: collect (array), last (single), none |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅 이벤트 (iterate/done) |
-| `__set_context` | object | 컨텍스트 설정 |
-| `outputs` | object | 포트별 출력 값 |
-| `iteration` | number | 현재 반복 인덱스 |
-| `status` | string | 작업 상태 |
-| `results` | array | 수집된 결과 |
-| `count` | number | 총 항목 수 |
+| `__event__` | string | Event for routing (iterate/done) |
+| `__set_context` | object | Scope variables set on each iteration |
+| `outputs` | object | Output values by port |
+| `iteration` | number | Current iteration index |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of items processed |
 
 **Example:** Example
 
@@ -459,11 +459,11 @@ item_var: element
 steps: [{"module": "element.text", "params": {"element_id": "${element}"}, "output": "text"}]
 ```
 
-### 포크
+### Fork
 
 `flow.fork`
 
-실행을 병렬 분기로 분할
+Split execution into parallel branches
 
 **Parameters:**
 
@@ -475,9 +475,9 @@ steps: [{"module": "element.text", "params": {"element_id": "${element}"}, "outp
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅 이벤트 (fork/error) |
-| `input_data` | any | 입력 데이터 |
-| `branch_count` | integer | 분기 수 |
+| `__event__` | string | Event for routing (fork/error) |
+| `input_data` | any | Input data passed to all branches |
+| `branch_count` | integer | Number of branches created |
 
 **Example:** Example
 
@@ -491,11 +491,11 @@ branch_count: 2
 branch_count: 3
 ```
 
-### 이동
+### Goto
 
 `flow.goto`
 
-다른 단계로 무조건 점프
+Unconditional jump to another step
 
 **Parameters:**
 
@@ -508,9 +508,9 @@ branch_count: 3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅 이벤트 (goto) |
-| `target` | string | 대상 단계 |
-| `iteration` | number | 반복 횟수 |
+| `__event__` | string | Event for routing (goto) |
+| `target` | string | ID of the target step |
+| `iteration` | number | Current iteration count for this goto |
 
 **Example:** Example
 
@@ -525,11 +525,11 @@ max_iterations: 10
 target: cleanup_step
 ```
 
-### 워크플로 호출
+### Invoke Workflow
 
 `flow.invoke`
 
-외부 워크플로 파일 실행
+Execute an external workflow file
 
 **Parameters:**
 
@@ -544,10 +544,10 @@ target: cleanup_step
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 호출된 워크플로에 전달할 매개변수 |
-| `result` | any | 최대 실행 시간(초) |
-| `workflow_id` | string | 라우팅 이벤트(성공/오류) |
-| `execution_time_ms` | number | 워크플로 실행 결과 |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Workflow execution result |
+| `workflow_id` | string | Invoked workflow ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 
@@ -565,11 +565,11 @@ workflow_params: {"data": "${input.data}"}
 output_mapping: {"processed": "result.data"}
 ```
 
-### 조인
+### Join
 
 `flow.join`
 
-병렬 분기 완료 대기
+Wait for parallel branches to complete
 
 **Parameters:**
 
@@ -584,10 +584,10 @@ output_mapping: {"processed": "result.data"}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅 이벤트 (joined/timeout/error) |
-| `joined_data` | array | 조인된 데이터 |
-| `completed_count` | integer | 완료된 분기 수 |
-| `strategy` | string | 조인 전략 |
+| `__event__` | string | Event for routing (joined/timeout/error) |
+| `joined_data` | array | Data from all completed inputs |
+| `completed_count` | integer | Number of inputs completed |
+| `strategy` | string | Strategy used for joining |
 
 **Example:** Example
 
@@ -605,31 +605,31 @@ input_count: 3
 cancel_pending: true
 ```
 
-### 루프
+### Loop
 
 `flow.loop`
 
-출력 포트 라우팅을 사용하여 N번 단계 반복
+Repeat steps N times using output port routing
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `times` | number | Yes | `1` | 반복 횟수 |
-| `target` | string | No | - | 대상 단계 (더 이상 사용되지 않음) |
-| `steps` | array | No | - | 각 반복에 대해 실행할 단계 |
-| `index_var` | string | No | `index` | 현재 인덱스의 변수명 |
+| `times` | number | Yes | `1` | Number of times to repeat |
+| `target` | string | No | - | DEPRECATED: Use output ports and edges instead |
+| `steps` | array | No | - | Steps to execute for each iteration (nested mode) |
+| `index_var` | string | No | `index` | Variable name for current index |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅 이벤트 (iterate/done) |
-| `outputs` | object | 포트별 출력 값 |
-| `iteration` | number | 현재 반복 |
-| `status` | string | 작업 상태 |
-| `results` | array | 수집된 결과 |
-| `count` | number | 총 반복 횟수 |
+| `__event__` | string | Event for routing (iterate/done/error) |
+| `outputs` | object | Output values by port |
+| `iteration` | number | Current iteration count |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of iterations completed |
 
 **Example:** Example
 
@@ -644,11 +644,11 @@ times: 5
 steps: [{"module": "browser.click", "params": {"selector": ".next"}}]
 ```
 
-### 병합
+### Merge
 
 `flow.merge`
 
-여러 입력을 단일 출력으로 병합
+Merge multiple inputs into a single output
 
 **Parameters:**
 
@@ -661,10 +661,10 @@ steps: [{"module": "browser.click", "params": {"selector": ".next"}}]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅 이벤트 (merged/error) |
-| `merged_data` | any | 병합된 데이터 |
-| `input_count` | integer | 입력 수 |
-| `strategy` | string | 병합 전략 |
+| `__event__` | string | Event for routing (merged/error) |
+| `merged_data` | any | Merged data based on strategy |
+| `input_count` | integer | Number of inputs received |
+| `strategy` | string | Strategy used for merging |
 
 **Example:** Example
 
@@ -680,33 +680,33 @@ strategy: first
 input_count: 2
 ```
 
-### 병렬
+### Parallel
 
 `flow.parallel`
 
-다양한 전략으로 여러 작업을 병렬로 실행합니다
+Execute multiple tasks in parallel with different strategies
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tasks` | array | Yes | - | 병렬로 실행할 작업 정의 배열 |
-| `mode` | string | No | `all` | 병렬로 실행할 작업 정의 배열 |
+| `tasks` | array | Yes | - | Array of task definitions to execute in parallel |
+| `mode` | string | No | `all` | Parallel execution mode |
 | `timeout_ms` | number | No | `60000` | Maximum wait time in milliseconds |
-| `fail_fast` | boolean | No | `True` | 첫 번째 실패 시 모든 작업 중지 (mode=all에만 해당) |
-| `concurrency_limit` | number | No | `0` | 첫 번째 실패 시 모든 작업 중지 (mode=all에만 해당) |
+| `fail_fast` | boolean | No | `True` | Stop all tasks on first failure (only for mode=all) |
+| `concurrency_limit` | number | No | `0` | Maximum number of concurrent tasks (0 for unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 최대 동시 작업 수 (무제한은 0) |
-| `results` | array | 라우팅 이벤트 (완료/부분/오류) |
-| `completed_count` | number | 라우팅 이벤트 (완료/부분/오류) |
-| `failed_count` | number | 모든 작업의 결과 |
-| `total_count` | number | 성공적으로 완료된 작업 수 |
-| `mode` | string | 실패한 작업 수 |
-| `duration_ms` | number | 총 작업 수 |
+| `__event__` | string | Event for routing (completed/partial/error) |
+| `results` | array | Results from all tasks |
+| `completed_count` | number | Number of successfully completed tasks |
+| `failed_count` | number | Number of failed tasks |
+| `total_count` | number | Total number of tasks |
+| `mode` | string | Execution mode used |
+| `duration_ms` | number | Total execution time in milliseconds |
 
 **Example:** Example
 
@@ -730,30 +730,30 @@ tasks: [{"module": "http.get", "params": {"url": "https://api1.example.com"}}, {
 mode: settle
 ```
 
-### 속도 제한
+### Rate Limit
 
 `flow.rate_limit`
 
-토큰 버킷 또는 슬라이딩 윈도우를 사용한 속도 제한 실행
+Rate limiter with token bucket strategy
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `max_requests` | number | Yes | - | 윈도우당 허용되는 최대 요청 수 |
-| `window_ms` | number | No | `60000` | 시간 윈도우 (밀리초) |
-| `strategy` | string | No | `token_bucket` | 속도 제한 전략 (토큰 버킷 또는 슬라이딩 윈도우) |
-| `queue_overflow` | string | No | `wait` | 큐가 가득 찼을 때의 동작 (드롭 또는 오류) |
+| `max_requests` | number | Yes | - | Maximum number of requests allowed per window |
+| `window_ms` | number | No | `60000` | Time window in milliseconds |
+| `strategy` | string | No | `token_bucket` | Rate limiting strategy |
+| `queue_overflow` | string | No | `wait` | Behavior when rate limit is exceeded |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅을 위한 이벤트 (허용/제한) |
-| `tokens_remaining` | number | 버킷에 남아있는 토큰 수 |
-| `window_reset_ms` | number | 윈도우가 재설정될 때까지의 밀리초 |
-| `requests_in_window` | number | 현재 윈도우 내 요청 수 |
-| `wait_ms` | number | 다음 허용 요청까지 대기해야 하는 밀리초 |
+| `__event__` | string | Event for routing (allowed/throttled/error) |
+| `tokens_remaining` | number | Number of tokens remaining in the bucket |
+| `window_reset_ms` | number | Milliseconds until the window resets |
+| `requests_in_window` | number | Number of requests made in current window |
+| `wait_ms` | number | Milliseconds to wait before retry (if throttled) |
 
 **Example:** Example
 
@@ -781,32 +781,32 @@ strategy: sliding_window
 queue_overflow: wait
 ```
 
-### 재시도
+### Retry
 
 `flow.retry`
 
-구성 가능한 백오프로 실패한 작업 재시도
+Retry with exponential backoff
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `max_retries` | number | Yes | `3` | 최대 재시도 시도 횟수 |
-| `initial_delay_ms` | number | No | `1000` | 첫 번째 재시도 전 초기 지연 시간 (밀리초) |
-| `backoff_multiplier` | number | No | `2.0` | 지수 백오프를 위한 배수 |
-| `max_delay_ms` | number | No | `30000` | 재시도 간 최대 지연 시간 (밀리초) |
-| `retry_on_errors` | array | No | `[]` | 재시도할 오류 유형 (비어 있으면 모두 재시도) |
+| `max_retries` | number | Yes | `3` | Maximum number of retry attempts |
+| `initial_delay_ms` | number | No | `1000` | Initial delay before first retry in milliseconds |
+| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g. 2.0 doubles delay each retry) |
+| `max_delay_ms` | number | No | `30000` | Maximum delay cap in milliseconds |
+| `retry_on_errors` | array | No | `[]` | Optional list of error codes to retry on (empty = retry on all errors) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅을 위한 이벤트 (재시도/성공/실패) |
-| `attempt` | number | 현재 시도 횟수 |
-| `max_retries` | number | 구성된 최대 재시도 횟수 |
-| `delay_ms` | number | 다음 재시도 전 지연 시간 (밀리초) |
-| `total_elapsed_ms` | number | 총 경과 시간 (밀리초) |
-| `last_error` | object | 마지막 오류 메시지 |
+| `__event__` | string | Event for routing (success/retry/exhausted) |
+| `attempt` | number | Current attempt number (1-based) |
+| `max_retries` | number | Maximum retry attempts configured |
+| `delay_ms` | number | Delay before this attempt in milliseconds |
+| `total_elapsed_ms` | number | Total time elapsed across all attempts |
+| `last_error` | object | Last error that triggered a retry |
 
 **Example:** Example
 
@@ -831,30 +831,30 @@ initial_delay_ms: 2000
 retry_on_errors: ["TIMEOUT", "RATE_LIMIT", "429", "503"]
 ```
 
-### 시작
+### Start
 
 `flow.start`
 
-명시적 워크플로 시작 노드
+Explicit workflow start node
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅 이벤트 (start) |
-| `started_at` | string | 시작 시간 |
-| `workflow_id` | string | 워크플로 ID |
+| `__event__` | string | Event for routing (start) |
+| `started_at` | string | ISO timestamp of start |
+| `workflow_id` | string | Workflow ID if available |
 
 **Example:** Example
 
 ```yaml
 ```
 
-### 서브플로
+### Subflow
 
 `flow.subflow`
 
-외부 워크플로 참조 및 실행
+Reference and execute an external workflow
 
 **Parameters:**
 
@@ -870,10 +870,10 @@ retry_on_errors: ["TIMEOUT", "RATE_LIMIT", "429", "503"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅 이벤트 (success/error) |
-| `result` | any | 실행 결과 |
-| `execution_id` | string | 실행 ID |
-| `workflow_ref` | string | 워크플로 참조 |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Subflow execution result |
+| `execution_id` | string | Subflow execution ID (for spawn/async) |
+| `workflow_ref` | string | Referenced workflow |
 
 **Example:** Example
 
@@ -891,11 +891,11 @@ workflow_ref: workflows/send_notifications
 execution_mode: spawn
 ```
 
-### 스위치
+### Switch
 
 `flow.switch`
 
-값 매칭에 기반한 다중 분기
+Multi-way branching based on value matching
 
 **Parameters:**
 
@@ -908,10 +908,10 @@ execution_mode: spawn
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅 이벤트 (case:value 또는 default) |
-| `outputs` | object | 포트별 출력 값 |
-| `matched_case` | string | 일치한 케이스 |
-| `value` | any | 일치한 값 |
+| `__event__` | string | Event for routing (case:value or default) |
+| `outputs` | object | Output values by port |
+| `matched_case` | string | The case that matched |
+| `value` | any | The resolved value that was matched |
 
 **Example:** Example
 
@@ -927,28 +927,28 @@ expression: ${input.type}
 cases: [{"id": "img", "value": "image", "label": "Image"}, {"id": "vid", "value": "video", "label": "Video"}, {"id": "txt", "value": "text", "label": "Text"}]
 ```
 
-### 속도 제한
+### Throttle
 
 `flow.throttle`
 
-최소 간격으로 실행 속도 제한
+Throttle execution rate with minimum interval
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `interval_ms` | number | Yes | - | 실행 간 최소 시간 (밀리초) |
-| `leading` | boolean | No | `True` | 선행 엣지에서 실행 (첫 호출 즉시 통과) |
+| `interval_ms` | number | Yes | - | Minimum time between executions in milliseconds |
+| `leading` | boolean | No | `True` | Execute on the leading edge (first call passes immediately) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅을 위한 이벤트 (실행/제한) |
-| `last_execution_ms` | number | 마지막 허용된 실행의 타임스탬프 |
-| `calls_throttled` | number | 마지막 실행 이후 제한된 호출 수 |
-| `time_since_last_ms` | number | 마지막 실행 이후 경과 시간 (밀리초) |
-| `remaining_ms` | number | 다음 실행이 허용되기까지 남은 밀리초 |
+| `__event__` | string | Event for routing (executed/throttled) |
+| `last_execution_ms` | number | Timestamp of last allowed execution |
+| `calls_throttled` | number | Number of calls throttled since last execution |
+| `time_since_last_ms` | number | Time elapsed since last execution in milliseconds |
+| `remaining_ms` | number | Milliseconds remaining until next execution is allowed |
 
 **Example:** Example
 
@@ -970,11 +970,11 @@ interval_ms: 5000
 leading: false
 ```
 
-### 트리거
+### Trigger
 
 `flow.trigger`
 
-워크플로 진입점 - 수동, 웹훅, 스케줄 또는 이벤트
+Workflow entry point - manual, webhook, schedule, event, mcp, or polling
 
 **Parameters:**
 
@@ -999,10 +999,10 @@ leading: false
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라우팅 이벤트 (triggered/error) |
-| `trigger_data` | object | 트리거 데이터 |
-| `trigger_type` | string | 트리거 유형 |
-| `triggered_at` | string | 트리거 시간 |
+| `__event__` | string | Event for routing (triggered/error) |
+| `trigger_data` | object | Data from trigger source |
+| `trigger_type` | string | Type of trigger |
+| `triggered_at` | string | ISO timestamp |
 
 **Example:** Example
 

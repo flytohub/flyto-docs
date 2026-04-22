@@ -6,123 +6,123 @@ Number, currency, duration, filesize, and percentage formatting.
 
 | Module | Description |
 |--------|-------------|
-| [मुद्रा स्वरूपित करें](#मुद्रा-स्वरूपित-करें) | संख्याओं को मुद्रा के रूप में स्वरूपित करें |
-| [अवधि स्वरूपित करें](#अवधि-स्वरूपित-करें) | सेकंड को मानव-पठनीय अवधि के रूप में स्वरूपित करें |
-| [फ़ाइल आकार स्वरूपित करें](#फ़ाइल-आकार-स्वरूपित-करें) | बाइट्स को मानव-पठनीय फ़ाइल आकार के रूप में स्वरूपित करें |
-| [संख्या स्वरूपित करें](#संख्या-स्वरूपित-करें) | संख्याओं को विभाजकों और दशमलव के साथ स्वरूपित करें |
-| [प्रतिशत स्वरूपित करें](#प्रतिशत-स्वरूपित-करें) | संख्याओं को प्रतिशत के रूप में स्वरूपित करें |
+| [Format Currency](#format-currency) | Format numbers as currency |
+| [Format Duration](#format-duration) | Format seconds as human-readable duration |
+| [Format Filesize](#format-filesize) | Format bytes as human-readable file size |
+| [Format Number](#format-number) | Format numbers with separators and decimals |
+| [Format Percentage](#format-percentage) | Format numbers as percentages |
 
 ## Modules
 
-### मुद्रा स्वरूपित करें
+### Format Currency
 
 `format.currency`
 
-संख्याओं को मुद्रा के रूप में स्वरूपित करें
+Format numbers as currency
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `amount` | number | Yes | - | स्वरूपित करने के लिए राशि |
-| `currency` | string | No | `USD` | स्वरूपित करने के लिए राशि |
-| `decimal_places` | number | No | `2` | दशमलव स्थानों की संख्या |
-| `symbol_position` | string | No | `before` | दशमलव स्थानों की संख्या |
+| `amount` | number | Yes | - | Amount to format |
+| `currency` | string | No | `USD` | Currency code (USD, EUR, GBP, etc) |
+| `decimal_places` | number | No | `2` | Number of decimal places |
+| `symbol_position` | string | No | `before` | Position of currency symbol |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | स्वरूपित मुद्रा स्ट्रिंग |
-| `original` | number | स्वरूपित मुद्रा स्ट्रिंग |
-| `symbol` | string | स्वरूपित मुद्रा स्ट्रिंग |
+| `result` | string | Formatted currency string |
+| `original` | number | Original amount |
+| `symbol` | string | Currency symbol used |
 
-### अवधि स्वरूपित करें
+### Format Duration
 
 `format.duration`
 
-सेकंड को मानव-पठनीय अवधि के रूप में स्वरूपित करें
+Format seconds as human-readable duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | Yes | - | सेकंड में अवधि |
-| `format` | string | No | `short` | सेकंड में अवधि |
-| `show_zero` | boolean | No | `False` | शून्य इकाइयाँ दिखाएं |
+| `seconds` | number | Yes | - | Duration in seconds |
+| `format` | string | No | `short` | Output format style |
+| `show_zero` | boolean | No | `False` | Show units that are zero |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | शून्य इकाइयाँ दिखाएं |
-| `original` | number | स्वरूपित अवधि स्ट्रिंग |
-| `parts` | object | स्वरूपित अवधि स्ट्रिंग |
+| `result` | string | Formatted duration string |
+| `original` | number | Original seconds |
+| `parts` | object | Duration parts (days, hours, minutes, seconds) |
 
-### फ़ाइल आकार स्वरूपित करें
+### Format Filesize
 
 `format.filesize`
 
-बाइट्स को मानव-पठनीय फ़ाइल आकार के रूप में स्वरूपित करें
+Format bytes as human-readable file size
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bytes` | number | Yes | - | बाइट्स में आकार |
-| `binary` | boolean | No | `False` | बाइट्स में आकार |
-| `decimal_places` | number | No | `2` | दशमलव (KB, MB) के बजाय बाइनरी इकाइयों (KiB, MiB) का उपयोग करें |
+| `bytes` | number | Yes | - | Size in bytes |
+| `binary` | boolean | No | `False` | Use binary units (KiB, MiB) instead of decimal (KB, MB) |
+| `decimal_places` | number | No | `2` | Number of decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | दशमलव स्थानों की संख्या |
-| `original` | number | स्वरूपित फ़ाइल आकार स्ट्रिंग |
-| `unit` | string | स्वरूपित फ़ाइल आकार स्ट्रिंग |
-| `value` | number | मूल बाइट्स |
+| `result` | string | Formatted file size string |
+| `original` | number | Original bytes |
+| `unit` | string | Unit used |
+| `value` | number | Numeric value in unit |
 
-### संख्या स्वरूपित करें
+### Format Number
 
 `format.number`
 
-संख्याओं को विभाजकों और दशमलव के साथ स्वरूपित करें
+Format numbers with separators and decimals
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `number` | number | Yes | - | स्वरूपित करने के लिए संख्या |
-| `decimal_places` | number | No | `2` | स्वरूपित करने के लिए संख्या |
-| `thousand_separator` | string | No | `,` | दशमलव स्थानों की संख्या |
-| `decimal_separator` | string | No | `.` | हजारों के लिए विभाजक |
+| `number` | number | Yes | - | Number to format |
+| `decimal_places` | number | No | `2` | Number of decimal places |
+| `thousand_separator` | string | No | `,` | Separator for thousands |
+| `decimal_separator` | string | No | `.` | Separator for decimals |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | दशमलव के लिए विभाजक |
-| `original` | number | स्वरूपित संख्या स्ट्रिंग |
+| `result` | string | Formatted number string |
+| `original` | number | Original number |
 
-### प्रतिशत स्वरूपित करें
+### Format Percentage
 
 `format.percentage`
 
-संख्याओं को प्रतिशत के रूप में स्वरूपित करें
+Format numbers as percentages
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | number | Yes | - | मूल्य को प्रतिशत के रूप में स्वरूपित करें |
-| `is_ratio` | boolean | No | `True` | मूल्य को प्रतिशत के रूप में स्वरूपित करें |
-| `decimal_places` | number | No | `1` | इनपुट एक अनुपात (0-1) है जिसे 100 से गुणा करने की आवश्यकता है |
-| `include_sign` | boolean | No | `False` | दशमलव स्थानों की संख्या |
+| `value` | number | Yes | - | Value to format as percentage |
+| `is_ratio` | boolean | No | `True` | Input is a ratio (0-1) that needs to be multiplied by 100 |
+| `decimal_places` | number | No | `1` | Number of decimal places |
+| `include_sign` | boolean | No | `False` | Include + sign for positive values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | सकारात्मक मानों के लिए + चिह्न शामिल करें |
-| `original` | number | स्वरूपित प्रतिशत स्ट्रिंग |
-| `numeric` | number | स्वरूपित प्रतिशत स्ट्रिंग |
+| `result` | string | Formatted percentage string |
+| `original` | number | Original value |
+| `numeric` | number | Numeric percentage value |

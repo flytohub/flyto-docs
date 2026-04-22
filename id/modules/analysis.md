@@ -6,20 +6,20 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 
 | Module | Description |
 |--------|-------------|
-| [Keterbacaan HTML](#keterbacaan-html) | Analisis keterbacaan konten |
-| [Ekstrak Form](#ekstrak-form) | Ekstrak data form dari HTML |
-| [Ekstrak Metadata](#ekstrak-metadata) | Ekstrak metadata dari HTML |
-| [Ekstrak Tabel](#ekstrak-tabel) | Ekstrak data tabel dari HTML |
-| [Temukan Pola](#temukan-pola) | Temukan pola data berulang di HTML |
-| [Struktur HTML](#struktur-html) | Analisis struktur DOM HTML |
+| [HTML Readability](#html-readability) | Analyze content readability |
+| [Extract Forms](#extract-forms) | Extract form data from HTML |
+| [Extract Metadata](#extract-metadata) | Extract metadata from HTML |
+| [Extract Tables](#extract-tables) | Extract table data from HTML |
+| [Find Patterns](#find-patterns) | Find repeating data patterns in HTML |
+| [HTML Structure](#html-structure) | Analyze HTML DOM structure |
 
 ## Modules
 
-### Keterbacaan HTML
+### HTML Readability
 
 `analysis.html.analyze_readability`
 
-Analisis keterbacaan konten
+Analyze content readability
 
 **Parameters:**
 
@@ -34,11 +34,11 @@ Analisis keterbacaan konten
 | `type` | any | object |
 | `properties` | any |  |
 
-### Ekstrak Form
+### Extract Forms
 
 `analysis.html.extract_forms`
 
-Ekstrak data form dari HTML
+Extract form data from HTML
 
 **Parameters:**
 
@@ -53,11 +53,11 @@ Ekstrak data form dari HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Ekstrak Metadata
+### Extract Metadata
 
 `analysis.html.extract_metadata`
 
-Ekstrak metadata dari HTML
+Extract metadata from HTML
 
 **Parameters:**
 
@@ -72,11 +72,11 @@ Ekstrak metadata dari HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Ekstrak Tabel
+### Extract Tables
 
 `analysis.html.extract_tables`
 
-Ekstrak data tabel dari HTML
+Extract table data from HTML
 
 **Parameters:**
 
@@ -91,11 +91,11 @@ Ekstrak data tabel dari HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Temukan Pola
+### Find Patterns
 
 `analysis.html.find_patterns`
 
-Temukan pola data berulang di HTML
+Find repeating data patterns in HTML
 
 **Parameters:**
 
@@ -110,11 +110,11 @@ Temukan pola data berulang di HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Struktur HTML
+### HTML Structure
 
 `analysis.html.structure`
 
-Analisis struktur DOM HTML
+Analyze HTML DOM structure
 
 **Parameters:**
 

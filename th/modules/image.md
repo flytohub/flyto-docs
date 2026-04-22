@@ -6,23 +6,23 @@ Resize, crop, compress, convert, OCR, QR codes, and watermarks.
 
 | Module | Description |
 |--------|-------------|
-| [บีบอัดรูปภาพ](#บีบอัดรูปภาพ) | บีบอัดรูปภาพเพื่อลดขนาดไฟล์โดยรักษาคุณภาพ |
-| [แปลงรูปภาพ](#แปลงรูปภาพ) | แปลงรูปภาพเป็นรูปแบบอื่น (PNG, JPEG, WEBP ฯลฯ) |
-| [ครอบตัดรูปภาพ](#ครอบตัดรูปภาพ) | ครอบตัดรูปภาพตามพิกัดที่กำหนด |
-| [ดาวน์โหลดรูปภาพ](#ดาวน์โหลดรูปภาพ) | ดาวน์โหลดรูปภาพจาก URL ไปยังไฟล์ในเครื่อง |
-| [OCR ดึงข้อความ](#ocr-ดึงข้อความ) | ดึงข้อความจากรูปภาพด้วย OCR |
-| [สร้าง QR Code](#สร้าง-qr-code) | สร้าง QR code จากข้อความ, URL หรือข้อมูล |
-| [ปรับขนาดรูปภาพ](#ปรับขนาดรูปภาพ) | ปรับขนาดรูปภาพตามขนาดที่กำหนดด้วยอัลกอริทึมต่างๆ |
-| [หมุนรูปภาพ](#หมุนรูปภาพ) | หมุนรูปภาพตามองศาที่กำหนด |
-| [เพิ่มลายน้ำ](#เพิ่มลายน้ำ) | เพิ่มลายน้ำข้อความหรือรูปภาพลงในรูปภาพ |
+| [Compress Image](#compress-image) | Compress images to reduce file size while maintaining quality |
+| [Convert Image](#convert-image) | Convert image to different format (PNG, JPEG, WEBP, etc.) |
+| [Crop Image](#crop-image) | Crop image to specified region |
+| [Download Image](#download-image) | Download image from URL to local file |
+| [OCR - Extract Text](#ocr---extract-text) | Extract text from images using Tesseract OCR |
+| [Generate QR Code](#generate-qr-code) | Generate QR codes from text, URLs, or data |
+| [Resize Image](#resize-image) | Resize images to specified dimensions with various algorithms |
+| [Rotate Image](#rotate-image) | Rotate image by specified angle |
+| [Add Watermark](#add-watermark) | Add text or image watermark to images |
 
 ## Modules
 
-### บีบอัดรูปภาพ
+### Compress Image
 
 `image.compress`
 
-บีบอัดรูปภาพเพื่อลดขนาดไฟล์โดยรักษาคุณภาพ
+Compress images to reduce file size while maintaining quality
 
 **Parameters:**
 
@@ -39,10 +39,10 @@ Resize, crop, compress, convert, OCR, QR codes, and watermarks.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | พาธไปยังรูปภาพที่บีบอัด |
-| `original_size_bytes` | number | พาธไปยังรูปภาพที่บีบอัด |
-| `compressed_size_bytes` | number | ขนาดไฟล์ต้นฉบับเป็นไบต์ |
-| `compression_ratio` | number | ขนาดไฟล์ที่บีบอัดเป็นไบต์ |
+| `output_path` | string | Path to the compressed image |
+| `original_size_bytes` | number | Original file size in bytes |
+| `compressed_size_bytes` | number | Compressed file size in bytes |
+| `compression_ratio` | number | Compression ratio (original/compressed) |
 
 **Example:** Compress with quality setting
 
@@ -58,11 +58,11 @@ input_path: /path/to/image.png
 max_size_kb: 500
 ```
 
-### แปลงรูปภาพ
+### Convert Image
 
 `image.convert`
 
-แปลงรูปภาพเป็นรูปแบบอื่น (PNG, JPEG, WEBP ฯลฯ)
+Convert image to different format (PNG, JPEG, WEBP, etc.)
 
 **Parameters:**
 
@@ -78,10 +78,10 @@ max_size_kb: 500
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | พาธไปยังรูปภาพที่แปลง |
-| `size` | number | พาธไปยังรูปภาพที่แปลง |
-| `format` | string | พาธไปยังรูปภาพที่แปลง |
-| `dimensions` | object | ขนาดไฟล์เป็นไบต์ |
+| `path` | string | Path to the converted image |
+| `size` | number | File size in bytes |
+| `format` | string | Output format |
+| `dimensions` | object | Image dimensions {width, height} |
 
 **Example:** Convert PNG to JPEG
 
@@ -91,32 +91,32 @@ format: jpeg
 quality: 90
 ```
 
-### ครอบตัดรูปภาพ
+### Crop Image
 
 `image.crop`
 
-ครอบตัดรูปภาพตามพิกัดที่กำหนด
+Crop image to specified region
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | เส้นทางไปยังรูปภาพต้นฉบับ |
-| `output_path` | string | Yes | - | เส้นทางสำหรับรูปภาพที่ส่งออก |
-| `left` | number | Yes | - | พิกัดด้านซ้ายของพื้นที่ครอบตัด |
-| `top` | number | Yes | - | พิกัดด้านบนของพื้นที่ครอบตัด |
-| `right` | number | Yes | - | พิกัดด้านขวาของพื้นที่ครอบตัด |
-| `bottom` | number | Yes | - | พิกัดด้านล่างของพื้นที่ครอบตัด |
+| `input_path` | string | Yes | - | Path to the source image |
+| `output_path` | string | Yes | - | Path to save the cropped image |
+| `left` | number | Yes | - | Left coordinate of crop region (pixels) |
+| `top` | number | Yes | - | Top coordinate of crop region (pixels) |
+| `right` | number | Yes | - | Right coordinate of crop region (pixels) |
+| `bottom` | number | Yes | - | Bottom coordinate of crop region (pixels) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | เส้นทางไปยังรูปภาพที่ถูกครอบตัด |
-| `width` | integer | ความกว้างของรูปภาพที่ถูกครอบตัด |
-| `height` | integer | ความสูงของรูปภาพที่ถูกครอบตัด |
-| `original_width` | integer | ความกว้างของรูปภาพต้นฉบับ |
-| `original_height` | integer | ความสูงของรูปภาพต้นฉบับ |
+| `output_path` | string | Path to the cropped image |
+| `width` | integer | Width of the cropped image |
+| `height` | integer | Height of the cropped image |
+| `original_width` | integer | Original image width |
+| `original_height` | integer | Original image height |
 
 **Example:** Crop center region
 
@@ -129,11 +129,11 @@ right: 500
 bottom: 400
 ```
 
-### ดาวน์โหลดรูปภาพ
+### Download Image
 
 `image.download`
 
-ดาวน์โหลดรูปภาพจาก URL ไปยังไฟล์ในเครื่อง
+Download image from URL to local file
 
 **Parameters:**
 
@@ -149,10 +149,10 @@ bottom: 400
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | พาธไฟล์ในเครื่องของรูปภาพที่ดาวน์โหลด |
-| `size` | number | พาธไฟล์ในเครื่องของรูปภาพที่ดาวน์โหลด |
-| `content_type` | string | พาธไฟล์ในเครื่องของรูปภาพที่ดาวน์โหลด |
-| `filename` | string | ขนาดไฟล์เป็นไบต์ |
+| `path` | string | Local file path of downloaded image |
+| `size` | number | File size in bytes |
+| `content_type` | string | Content type of the image |
+| `filename` | string | Filename of the downloaded image |
 
 **Example:** Download image from URL
 
@@ -161,28 +161,28 @@ url: https://example.com/photo.jpg
 output_dir: /tmp/images
 ```
 
-### OCR ดึงข้อความ
+### OCR - Extract Text
 
 `image.ocr`
 
-ดึงข้อความจากรูปภาพด้วย OCR
+Extract text from images using Tesseract OCR
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | Yes | - | เส้นทางไปยังไฟล์รูปภาพ |
-| `language` | string | No | `eng` | รหัสภาษาสำหรับ OCR (เช่น eng, chi_sim) |
-| `psm` | number | No | `3` | โหมดการแบ่งหน้า Tesseract |
-| `output_type` | select (`text`, `data`, `boxes`) | No | `text` | ประเภทของผลลัพธ์ OCR (ข้อความหรือข้อมูล) |
+| `image_path` | string | Yes | - | Path to the image file |
+| `language` | string | No | `eng` | OCR language code (e.g. eng, chi_tra, jpn) |
+| `psm` | number | No | `3` | Tesseract page segmentation mode (0-13) |
+| `output_type` | select (`text`, `data`, `boxes`) | No | `text` | Type of OCR output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | ข้อความที่ดึงจากรูปภาพ |
-| `confidence` | number | คะแนนความมั่นใจของ OCR |
-| `language` | string | ภาษาที่ใช้สำหรับ OCR |
+| `text` | string | Extracted text from the image |
+| `confidence` | number | Average OCR confidence score (0-100) |
+| `language` | string | Language used for OCR |
 
 **Example:** Extract text from image
 
@@ -191,11 +191,11 @@ image_path: /path/to/document.png
 language: eng
 ```
 
-### สร้าง QR Code
+### Generate QR Code
 
 `image.qrcode_generate`
 
-สร้าง QR code จากข้อความ, URL หรือข้อมูล
+Generate QR codes from text, URLs, or data
 
 **Parameters:**
 
@@ -216,9 +216,9 @@ language: eng
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | พาธไปยังรูปภาพ QR code ที่สร้าง |
-| `file_size` | number | พาธไปยังรูปภาพ QR code ที่สร้าง |
-| `dimensions` | object | ขนาดไฟล์เอาต์พุตเป็นไบต์ |
+| `output_path` | string | Path to the generated QR code image |
+| `file_size` | number | Size of the output file in bytes |
+| `dimensions` | object | Image dimensions {width, height} |
 
 **Example:** Generate URL QR code
 
@@ -244,11 +244,11 @@ format: svg
 border: 2
 ```
 
-### ปรับขนาดรูปภาพ
+### Resize Image
 
 `image.resize`
 
-ปรับขนาดรูปภาพตามขนาดที่กำหนดด้วยอัลกอริทึมต่างๆ
+Resize images to specified dimensions with various algorithms
 
 **Parameters:**
 
@@ -266,9 +266,9 @@ border: 2
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | พาธไปยังรูปภาพที่ปรับขนาด |
-| `original_size` | object | พาธไปยังรูปภาพที่ปรับขนาด |
-| `new_size` | object | พาธไปยังรูปภาพที่ปรับขนาด |
+| `output_path` | string | Path to the resized image |
+| `original_size` | object | Original image dimensions |
+| `new_size` | object | New image dimensions |
 
 **Example:** Resize to specific dimensions
 
@@ -285,30 +285,30 @@ input_path: /path/to/image.png
 scale: 0.5
 ```
 
-### หมุนรูปภาพ
+### Rotate Image
 
 `image.rotate`
 
-หมุนรูปภาพตามองศาที่กำหนด
+Rotate image by specified angle
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | เส้นทางไปยังรูปภาพต้นฉบับ |
-| `output_path` | string | Yes | - | เส้นทางสำหรับรูปภาพที่ส่งออก |
-| `angle` | number | Yes | - | มุมการหมุนเป็นองศา |
-| `expand` | boolean | No | `True` | ขยายผลลัพธ์เพื่อรองรับรูปภาพที่หมุนทั้งหมด |
-| `fill_color` | string | No | `#000000` | สีเติมพื้นที่ว่างหลังจากหมุน |
+| `input_path` | string | Yes | - | Path to the source image |
+| `output_path` | string | Yes | - | Path to save the rotated image |
+| `angle` | number | Yes | - | Rotation angle in degrees (counter-clockwise) |
+| `expand` | boolean | No | `True` | Expand output canvas to fit the entire rotated image |
+| `fill_color` | string | No | `#000000` | Background fill color for empty areas (hex) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | เส้นทางไปยังรูปภาพที่ถูกหมุน |
-| `width` | integer | ความกว้างของรูปภาพที่ถูกหมุน |
-| `height` | integer | ความสูงของรูปภาพที่ถูกหมุน |
-| `angle` | number | มุมที่รูปภาพถูกหมุน |
+| `output_path` | string | Path to the rotated image |
+| `width` | integer | Width of the rotated image |
+| `height` | integer | Height of the rotated image |
+| `angle` | number | Rotation angle applied |
 
 **Example:** Rotate 90 degrees
 
@@ -318,30 +318,30 @@ output_path: /path/to/rotated.png
 angle: 90
 ```
 
-### เพิ่มลายน้ำ
+### Add Watermark
 
 `image.watermark`
 
-เพิ่มลายน้ำข้อความหรือรูปภาพลงในรูปภาพ
+Add text or image watermark to images
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | เส้นทางไปยังภาพต้นฉบับ |
-| `output_path` | string | Yes | - | เส้นทางสำหรับภาพผลลัพธ์ |
-| `text` | string | No | - | ข้อความที่ใช้เป็นลายน้ำ |
-| `watermark_image` | string | No | - | เส้นทางไปยังไฟล์ภาพที่ใช้เป็นลายน้ำ |
-| `position` | select (`center`, `top-left`, `top-right`, `bottom-left`, `bottom-right`) | No | `bottom-right` | ตำแหน่งของลายน้ำบนภาพ |
-| `opacity` | number | No | `0.5` | ความโปร่งใสของลายน้ำ (0.0 ถึง 1.0) |
-| `font_size` | number | No | `36` | ขนาดตัวอักษรสำหรับลายน้ำข้อความ |
+| `input_path` | string | Yes | - | Path to the source image |
+| `output_path` | string | Yes | - | Path to save the watermarked image |
+| `text` | string | No | - | Text to use as watermark (optional if watermark_image is set) |
+| `watermark_image` | string | No | - | Path to watermark image (optional if text is set) |
+| `position` | select (`center`, `top-left`, `top-right`, `bottom-left`, `bottom-right`) | No | `bottom-right` | Watermark position on the image |
+| `opacity` | number | No | `0.5` | Watermark opacity (0.0 = transparent, 1.0 = opaque) |
+| `font_size` | number | No | `36` | Font size for text watermark |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | เส้นทางไปยังภาพที่มีลายน้ำ |
-| `watermark_type` | string | ประเภทของลายน้ำที่ใช้ (ข้อความหรือภาพ) |
+| `output_path` | string | Path to the watermarked image |
+| `watermark_type` | string | Type of watermark applied (text or image) |
 
 **Example:** Add text watermark
 

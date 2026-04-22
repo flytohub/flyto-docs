@@ -6,44 +6,44 @@ Visual verification, Figma comparison, style capture, and report generation.
 
 | Module | Description |
 |--------|-------------|
-| [Annoter la Capture d'écran](#annoter-la-capture-d'écran) | Dessinez des boîtes de délimitation étiquetées sur les captures d'écran pour marquer les différences |
-| [Capturer les styles de l'élément](#capturer-les-styles-de-l'élément) | Capturer les styles calculés à partir d'un élément du navigateur |
-| [Comparer les styles](#comparer-les-styles) | Comparer les styles capturés avec les valeurs attendues |
-| [Récupérer le style Figma](#récupérer-le-style-figma) | Récupérer les tokens de design depuis l'API Figma (le token reste local) |
-| [Générer le rapport](#générer-le-rapport) | Générer un rapport de vérification en HTML/JSON/Markdown |
-| [Charger le jeu de règles](#charger-le-jeu-de-règles) | Charger les règles de vérification depuis un fichier YAML |
-| [Exécuter la vérification](#exécuter-la-vérification) | Exécuter la vérification complète du design : capture → comparaison → rapport |
-| [Exécuter la vérification des spécifications](#exécuter-la-vérification-des-spécifications) | Vérification dynamique des spécifications - composer n'importe quel module via YAML |
-| [Différence Visuelle](#différence-visuelle) | Comparez visuellement le design de référence avec le site de développement, annotez les différences |
+| [Annotate Screenshot](#annotate-screenshot) | Draw labeled bounding boxes on screenshots to mark differences |
+| [Capture Element Styles](#capture-element-styles) | Capture computed styles from browser element |
+| [Compare Styles](#compare-styles) | Compare captured styles with expected values |
+| [Fetch Figma Style](#fetch-figma-style) | Fetch design tokens from Figma API (token stays local) |
+| [Generate Report](#generate-report) | Generate verification report in HTML/JSON/Markdown |
+| [Load Ruleset](#load-ruleset) | Load verification rules from YAML file |
+| [Run Verification](#run-verification) | Run full design verification: capture → compare → report |
+| [Run Spec Verification](#run-spec-verification) | Dynamic spec verification - compose any modules via YAML |
+| [Visual Diff](#visual-diff) | Compare reference design with dev site visually, annotate differences |
 
 ## Modules
 
-### Annoter la Capture d'écran
+### Annotate Screenshot
 
 `verify.annotate`
 
-Dessinez des boîtes de délimitation étiquetées sur les captures d'écran pour marquer les différences
+Draw labeled bounding boxes on screenshots to mark differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | Yes | - | Chemin vers l'image de la capture d'écran |
-| `annotations` | array | Yes | - | Tableau d'annotations : [{label, x, y, largeur, hauteur, couleur?, description?}] |
-| `output_path` | string | No | - | Chemin de sortie pour l'image annotée (par défaut : ajoute le suffixe _annotated) |
+| `image_path` | string | Yes | - | Path to the screenshot image |
+| `annotations` | array | Yes | - | Array of annotations: [{label, x, y, width, height, color?, description?}] |
+| `output_path` | string | No | - | Output path for annotated image (default: adds _annotated suffix) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Chemin vers l'image annotée |
-| `annotation_count` | integer | Nombre d'annotations dessinées |
+| `output_path` | string | Path to annotated image |
+| `annotation_count` | integer | Number of annotations drawn |
 
-### Capturer les styles de l'élément
+### Capture Element Styles
 
 `verify.capture`
 
-Capturer les styles calculés à partir d'un élément du navigateur
+Capture computed styles from browser element
 
 **Parameters:**
 
@@ -62,11 +62,11 @@ Capturer les styles calculés à partir d'un élément du navigateur
 | `element` | object | Captured element with styles |
 | `found` | boolean | Whether element was found |
 
-### Comparer les styles
+### Compare Styles
 
 `verify.compare`
 
-Comparer les styles capturés avec les valeurs attendues
+Compare captured styles with expected values
 
 **Parameters:**
 
@@ -93,11 +93,11 @@ Comparer les styles capturés avec les valeurs attendues
 | `error_count` | number | Number of errors |
 | `warning_count` | number | Number of warnings |
 
-### Récupérer le style Figma
+### Fetch Figma Style
 
 `verify.figma`
 
-Récupérer les tokens de design depuis l'API Figma (le token reste local)
+Fetch design tokens from Figma API (token stays local)
 
 **Parameters:**
 
@@ -115,11 +115,11 @@ Récupérer les tokens de design depuis l'API Figma (le token reste local)
 | `node` | object | Figma node data |
 | `style` | object | Extracted style |
 
-### Générer le rapport
+### Generate Report
 
 `verify.report`
 
-Générer un rapport de vérification en HTML/JSON/Markdown
+Generate verification report in HTML/JSON/Markdown
 
 **Parameters:**
 
@@ -139,11 +139,11 @@ Générer un rapport de vérification en HTML/JSON/Markdown
 | `report_path` | string | Path to generated report |
 | `summary` | object | Summary statistics |
 
-### Charger le jeu de règles
+### Load Ruleset
 
 `verify.ruleset`
 
-Charger les règles de vérification depuis un fichier YAML
+Load verification rules from YAML file
 
 **Parameters:**
 
@@ -158,11 +158,11 @@ Charger les règles de vérification depuis un fichier YAML
 | `ruleset` | object | Parsed ruleset |
 | `rules_count` | integer | Number of rules |
 
-### Exécuter la vérification
+### Run Verification
 
 `verify.run`
 
-Exécuter la vérification complète du design : capture → comparaison → rapport
+Run full design verification: capture → compare → report
 
 **Parameters:**
 
@@ -212,11 +212,11 @@ url: http://localhost:3000
 ruleset_path: ./design-rules.yaml
 ```
 
-### Exécuter la vérification des spécifications
+### Run Spec Verification
 
 `verify.spec`
 
-Vérification dynamique des spécifications - composer n'importe quel module via YAML
+Dynamic spec verification - compose any modules via YAML
 
 **Parameters:**
 
@@ -233,31 +233,31 @@ Vérification dynamique des spécifications - composer n'importe quel module via
 | `summary` | object |  |
 | `results` | array |  |
 
-### Différence Visuelle
+### Visual Diff
 
 `verify.visual_diff`
 
-Comparez visuellement le design de référence avec le site de développement, annotez les différences
+Compare reference design with dev site visually, annotate differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `reference_url` | string | Yes | - | URL ou chemin local de l'image de référence |
-| `dev_url` | string | Yes | - | URL du site de développement à comparer |
-| `output_dir` | string | No | `./verify-reports/visual-diff` | Répertoire de sortie pour les rapports |
-| `focus_areas` | array | No | - | Zones à focaliser (par ex. ["en-tête", "formulaire de connexion"]) |
-| `viewport_width` | number | No | `1280` | Largeur de la fenêtre du navigateur |
-| `viewport_height` | number | No | `800` | Hauteur de la fenêtre du navigateur |
-| `model` | string | No | `gpt-4o` | Modèle de vision à utiliser |
-| `api_key` | string | No | - | Clé API OpenAI (ou utilisez la variable d'environnement OPENAI_API_KEY) |
+| `reference_url` | string | Yes | - | URL or local image path of reference design |
+| `dev_url` | string | Yes | - | URL of development site to compare |
+| `output_dir` | string | No | `./verify-reports/visual-diff` | Output directory for reports |
+| `focus_areas` | array | No | - | Areas to focus on (e.g. ["header", "login form"]) |
+| `viewport_width` | number | No | `1280` | Browser viewport width |
+| `viewport_height` | number | No | `800` | Browser viewport height |
+| `model` | string | No | `gpt-4o` | Vision model to use |
+| `api_key` | string | No | - | OpenAI API key (or use OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `similarity_score` | number | Pourcentage de similarité (0-100) |
-| `annotations` | array | Liste des différences annotées |
-| `annotated_image` | string | Chemin vers la capture d'écran annotée |
-| `report_path` | string | Chemin vers le rapport HTML |
-| `summary` | string | Résumé des différences |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `annotations` | array | List of annotated differences |
+| `annotated_image` | string | Path to annotated screenshot |
+| `report_path` | string | Path to HTML report |
+| `summary` | string | Summary of differences |

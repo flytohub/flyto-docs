@@ -6,47 +6,47 @@ SHA-256 and SHA-512 cryptographic hashing.
 
 | Module | Description |
 |--------|-------------|
-| [SHA-256 해시](#sha-256-해시) | 텍스트의 SHA-256 암호화 해시 계산 |
-| [SHA-512 해시](#sha-512-해시) | 텍스트의 SHA-512 암호화 해시 계산 |
+| [SHA-256 Hash](#sha-256-hash) | Calculate SHA-256 cryptographic hash of text |
+| [SHA-512 Hash](#sha-512-hash) | Calculate SHA-512 cryptographic hash of text |
 
 ## Modules
 
-### SHA-256 해시
+### SHA-256 Hash
 
 `hash.sha256`
 
-텍스트의 SHA-256 암호화 해시 계산
+Calculate SHA-256 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 해시할 텍스트 |
-| `encoding` | string | No | `utf-8` | 해시할 텍스트 |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | 텍스트 인코딩 |
-| `algorithm` | string | SHA-256 해시 (64개 16진수 문자) |
+| `hash` | string | SHA-256 hash (64 hex characters) |
+| `algorithm` | string | Hash algorithm used |
 
-### SHA-512 해시
+### SHA-512 Hash
 
 `hash.sha512`
 
-텍스트의 SHA-512 암호화 해시 계산
+Calculate SHA-512 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 해시할 텍스트 |
-| `encoding` | string | No | `utf-8` | 해시할 텍스트 |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | 텍스트 인코딩 |
-| `algorithm` | string | SHA-512 해시 (128개 16진수 문자) |
+| `hash` | string | SHA-512 hash (128 hex characters) |
+| `algorithm` | string | Hash algorithm used |

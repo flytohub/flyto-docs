@@ -6,28 +6,28 @@ AWS S3, Azure Blob, Google Cloud Storage, and Google Workspace integrations.
 
 | Module | Description |
 |--------|-------------|
-| [S3 객체 삭제](#s3-객체-삭제) | AWS S3 버킷에서 객체를 삭제합니다 |
-| [S3 다운로드](#s3-다운로드) | AWS S3 버킷에서 로컬 경로로 파일을 다운로드합니다 |
-| [S3 객체 목록](#s3-객체-목록) | AWS S3 버킷의 객체를 선택적 접두사 필터로 나열합니다 |
-| [S3 업로드](#s3-업로드) | 로컬 파일을 AWS S3 버킷에 업로드합니다 |
-| [AWS S3 다운로드](#aws-s3-다운로드) | AWS S3 버킷에서 파일 다운로드 |
-| [AWS S3 업로드](#aws-s3-업로드) | AWS S3 버킷에 파일 또는 데이터 업로드 |
-| [Azure 다운로드](#azure-다운로드) | Azure Blob Storage에서 파일 다운로드 |
-| [Azure 업로드](#azure-업로드) | Azure Blob Storage에 파일 업로드 |
-| [GCS 다운로드](#gcs-다운로드) | Google Cloud Storage에서 파일 다운로드 |
-| [GCS 업로드](#gcs-업로드) | Google Cloud Storage에 파일 업로드 |
-| [캘린더 이벤트 생성](#캘린더-이벤트-생성) | Google 캘린더에 새 이벤트 생성 |
-| [캘린더 이벤트 목록](#캘린더-이벤트-목록) | Google 캘린더에서 다가오는 이벤트 목록 |
-| [Gmail 검색](#gmail-검색) | Gmail 검색 쿼리 문법을 사용하여 Gmail 메시지 검색 |
-| [Gmail 보내기](#gmail-보내기) | Gmail API를 통해 이메일 보내기 |
+| [S3 Delete Object](#s3-delete-object) | Delete an object from an AWS S3 bucket |
+| [S3 Download](#s3-download) | Download a file from an AWS S3 bucket to a local path |
+| [S3 List Objects](#s3-list-objects) | List objects in an AWS S3 bucket with optional prefix filter |
+| [S3 Upload](#s3-upload) | Upload a local file to an AWS S3 bucket |
+| [AWS S3 Download](#aws-s3-download) | Download a file from AWS S3 bucket |
+| [AWS S3 Upload](#aws-s3-upload) | Upload a file or data to AWS S3 bucket |
+| [Azure Download](#azure-download) | Download file from Azure Blob Storage |
+| [Azure Upload](#azure-upload) | Upload file to Azure Blob Storage |
+| [GCS Download](#gcs-download) | Download file from Google Cloud Storage |
+| [GCS Upload](#gcs-upload) | Upload file to Google Cloud Storage |
+| [Calendar Create Event](#calendar-create-event) | Create a new event in Google Calendar |
+| [Calendar List Events](#calendar-list-events) | List upcoming events from Google Calendar |
+| [Gmail Search](#gmail-search) | Search Gmail messages using Gmail search query syntax |
+| [Gmail Send](#gmail-send) | Send an email via the Gmail API |
 
 ## Modules
 
-### S3 객체 삭제
+### S3 Delete Object
 
 `aws.s3.delete`
 
-AWS S3 버킷에서 객체를 삭제합니다
+Delete an object from an AWS S3 bucket
 
 **Parameters:**
 
@@ -43,9 +43,9 @@ AWS S3 버킷에서 객체를 삭제합니다
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bucket` | string | S3 버킷 이름 |
-| `key` | string | 삭제된 객체 키 |
-| `deleted` | boolean | 객체가 성공적으로 삭제되었는지 여부 |
+| `bucket` | string | S3 bucket name |
+| `key` | string | Deleted object key |
+| `deleted` | boolean | Whether the object was deleted successfully |
 
 **Example:** Delete an object
 
@@ -54,11 +54,11 @@ bucket: my-bucket
 key: uploads/old-file.txt
 ```
 
-### S3 다운로드
+### S3 Download
 
 `aws.s3.download`
 
-AWS S3 버킷에서 로컬 경로로 파일을 다운로드합니다
+Download a file from an AWS S3 bucket to a local path
 
 **Parameters:**
 
@@ -75,9 +75,9 @@ AWS S3 버킷에서 로컬 경로로 파일을 다운로드합니다
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 파일이 저장된 로컬 파일 경로 |
-| `size` | number | 파일 크기 (바이트) |
-| `content_type` | string | 다운로드된 파일의 MIME 유형 |
+| `path` | string | Local file path where the file was saved |
+| `size` | number | File size in bytes |
+| `content_type` | string | MIME type of the downloaded file |
 
 **Example:** Download a file from S3
 
@@ -87,11 +87,11 @@ key: data/report.csv
 output_path: /tmp/report.csv
 ```
 
-### S3 객체 목록
+### S3 List Objects
 
 `aws.s3.list`
 
-AWS S3 버킷의 객체를 선택적 접두사 필터로 나열합니다
+List objects in an AWS S3 bucket with optional prefix filter
 
 **Parameters:**
 
@@ -108,9 +108,9 @@ AWS S3 버킷의 객체를 선택적 접두사 필터로 나열합니다
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `objects` | array | S3 객체 목록 |
-| `count` | number | 반환된 객체 수 |
-| `truncated` | boolean | 결과가 잘렸는지 여부 |
+| `objects` | array | List of S3 objects |
+| `count` | number | Number of objects returned |
+| `truncated` | boolean | Whether the results are truncated |
 
 **Example:** List objects with prefix
 
@@ -120,11 +120,11 @@ prefix: uploads/
 max_keys: 50
 ```
 
-### S3 업로드
+### S3 Upload
 
 `aws.s3.upload`
 
-로컬 파일을 AWS S3 버킷에 업로드합니다
+Upload a local file to an AWS S3 bucket
 
 **Parameters:**
 
@@ -142,10 +142,10 @@ max_keys: 50
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bucket` | string | S3 버킷 이름 |
-| `key` | string | S3 객체 키 |
-| `url` | string | 업로드된 객체의 공개 URL |
-| `size` | number | 파일 크기 (바이트) |
+| `bucket` | string | S3 bucket name |
+| `key` | string | S3 object key |
+| `url` | string | Public URL of the uploaded object |
+| `size` | number | File size in bytes |
 
 **Example:** Upload a local file
 
@@ -155,22 +155,22 @@ key: data/report.csv
 file_path: /tmp/report.csv
 ```
 
-### AWS S3 다운로드
+### AWS S3 Download
 
 `cloud.aws_s3.download`
 
-AWS S3 버킷에서 파일 다운로드
+Download a file from AWS S3 bucket
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `aws_access_key_id` | string | No | - | AWS 액세스 키 ID (기본값: env.AWS_ACCESS_KEY_ID) |
-| `aws_secret_access_key` | string | No | - | AWS 시크릿 액세스 키 (기본값: env.AWS_SECRET_ACCESS_KEY) |
-| `region` | string | No | `us-east-1` | AWS 리전 (기본값: env.AWS_REGION 또는 us-east-1) |
-| `bucket` | string | Yes | - | S3 버킷 이름 |
-| `key` | string | Yes | - | S3 버킷 이름 |
-| `file_path` | string | No | - | S3 객체 키 (버킷 내 파일 경로) |
+| `aws_access_key_id` | string | No | - | AWS access key ID (defaults to env.AWS_ACCESS_KEY_ID) |
+| `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
+| `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
+| `bucket` | string | Yes | - | S3 bucket name |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to save downloaded content |
 
 **Output:**
 
@@ -196,34 +196,34 @@ key: backups/database.sql
 file_path: /tmp/downloaded.sql
 ```
 
-### AWS S3 업로드
+### AWS S3 Upload
 
 `cloud.aws_s3.upload`
 
-AWS S3 버킷에 파일 또는 데이터 업로드
+Upload a file or data to AWS S3 bucket
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `aws_access_key_id` | string | No | - | AWS 액세스 키 ID (기본값: env.AWS_ACCESS_KEY_ID) |
-| `aws_secret_access_key` | string | No | - | AWS 시크릿 액세스 키 (기본값: env.AWS_SECRET_ACCESS_KEY) |
-| `region` | string | No | `us-east-1` | AWS 리전 (기본값: env.AWS_REGION 또는 us-east-1) |
-| `bucket` | string | Yes | - | S3 버킷 이름 |
-| `key` | string | Yes | - | S3 버킷 이름 |
-| `file_path` | string | No | - | S3 객체 키 (버킷 내 파일 경로) |
-| `content` | string | No | - | 업로드할 로컬 파일 경로 |
-| `content_type` | string | No | - | 파일의 MIME 유형 |
-| `acl` | string | No | `private` | 파일의 MIME 유형 |
+| `aws_access_key_id` | string | No | - | AWS access key ID (defaults to env.AWS_ACCESS_KEY_ID) |
+| `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
+| `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
+| `bucket` | string | Yes | - | S3 bucket name |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to upload |
+| `content` | string | No | - | File content to upload (as string or base64) |
+| `content_type` | string | No | - | MIME type of the file |
+| `acl` | string | No | `private` | Access control list for the object |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | 업로드된 객체의 S3 URL |
-| `bucket` | string | 업로드된 객체의 S3 URL |
-| `key` | string | 업로드된 객체의 S3 URL |
-| `etag` | string | 버킷 이름 |
+| `url` | string | S3 URL of uploaded object |
+| `bucket` | string | Bucket name |
+| `key` | string | Object key |
+| `etag` | string | ETag of uploaded object |
 
 **Example:** Upload text content
 
@@ -243,20 +243,20 @@ file_path: /tmp/backup.sql
 acl: private
 ```
 
-### Azure 다운로드
+### Azure Download
 
 `cloud.azure.download`
 
-Azure Blob Storage에서 파일 다운로드
+Download file from Azure Blob Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `connection_string` | string | No | - | Azure Storage 연결 문자열 (env var AZURE_STORAGE_CONNECTION_STRING 사용) |
-| `container` | string | Yes | - | Azure Storage 연결 문자열 (env var AZURE_STORAGE_CONNECTION_STRING 사용) |
-| `blob_name` | string | Yes | - | Azure 컨테이너 이름 |
-| `destination_path` | string | Yes | - | 다운로드할 Blob |
+| `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | Yes | - | Blob to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -283,30 +283,30 @@ blob_name: photos/vacation.jpg
 destination_path: /tmp/photo.jpg
 ```
 
-### Azure 업로드
+### Azure Upload
 
 `cloud.azure.upload`
 
-Azure Blob Storage에 파일 업로드
+Upload file to Azure Blob Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `file_path` | string | Yes | - | 업로드할 로컬 파일 경로 |
-| `connection_string` | string | No | - | 업로드할 로컬 파일 경로 |
-| `container` | string | Yes | - | Azure Storage 연결 문자열 (env var AZURE_STORAGE_CONNECTION_STRING 사용) |
-| `blob_name` | string | No | - | Azure 컨테이너 이름 |
-| `content_type` | string | No | - | 업로드된 blob의 이름 (기본값: 파일명) |
+| `file_path` | string | Yes | - | Local file path to upload |
+| `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | No | - | Name for the uploaded blob (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | MIME 유형 (선택사항) |
-| `container` | string | MIME 유형 (선택사항) |
-| `blob_name` | string | URL 주소 |
-| `size` | number | 컨테이너 |
+| `url` | string | URL address |
+| `container` | string | The container |
+| `blob_name` | string | The blob name |
+| `size` | number | Size in bytes |
 
 **Example:** Upload image
 
@@ -325,19 +325,19 @@ container: documents
 blob_name: reports/monthly.pdf
 ```
 
-### GCS 다운로드
+### GCS Download
 
 `cloud.gcs.download`
 
-Google Cloud Storage에서 파일 다운로드
+Download file from Google Cloud Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bucket` | string | Yes | - | GCS 버킷 이름 |
-| `object_name` | string | Yes | - | GCS 버킷 이름 |
-| `destination_path` | string | Yes | - | 다운로드할 객체 |
+| `bucket` | string | Yes | - | GCS bucket name |
+| `object_name` | string | Yes | - | Object to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -364,31 +364,31 @@ object_name: photos/vacation.jpg
 destination_path: /tmp/photo.jpg
 ```
 
-### GCS 업로드
+### GCS Upload
 
 `cloud.gcs.upload`
 
-Google Cloud Storage에 파일 업로드
+Upload file to Google Cloud Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `file_path` | string | Yes | - | 업로드할 로컬 파일 경로 |
-| `bucket` | string | Yes | - | 업로드할 로컬 파일 경로 |
-| `object_name` | string | No | - | GCS 버킷 이름 |
-| `content_type` | string | No | - | 업로드된 객체의 이름 (기본값: 파일명) |
-| `public` | boolean | No | `False` | MIME 유형 (선택사항) |
+| `file_path` | string | Yes | - | Local file path to upload |
+| `bucket` | string | Yes | - | GCS bucket name |
+| `object_name` | string | No | - | Name for the uploaded object (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
+| `public` | boolean | No | `False` | Make file publicly accessible |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | 파일을 공개적으로 접근 가능하게 설정 |
-| `bucket` | string | 파일을 공개적으로 접근 가능하게 설정 |
-| `object_name` | string | URL 주소 |
-| `size` | number | 저장소 버킷 이름 |
-| `public_url` | string | 저장소의 객체 이름 |
+| `url` | string | URL address |
+| `bucket` | string | Storage bucket name |
+| `object_name` | string | Object name in storage |
+| `size` | number | Size in bytes |
+| `public_url` | string | Public accessible URL |
 
 **Example:** Upload image
 
@@ -408,11 +408,11 @@ bucket: data-backup
 object_name: reports/daily.csv
 ```
 
-### 캘린더 이벤트 생성
+### Calendar Create Event
 
 `google.calendar.create_event`
 
-Google 캘린더에 새 이벤트 생성
+Create a new event in Google Calendar
 
 **Parameters:**
 
@@ -431,11 +431,11 @@ Google 캘린더에 새 이벤트 생성
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `event_id` | string | 생성된 이벤트 ID |
-| `summary` | string | 이벤트 제목 |
-| `start` | string | 이벤트 시작 시간 |
-| `end` | string | 이벤트 종료 시간 |
-| `html_link` | string | Google 캘린더에서 이벤트를 보는 링크 |
+| `event_id` | string | Created event ID |
+| `summary` | string | Event title |
+| `start` | string | Event start time |
+| `end` | string | Event end time |
+| `html_link` | string | Link to view the event in Google Calendar |
 
 **Example:** Create a meeting event
 
@@ -448,11 +448,11 @@ attendees: alice@example.com, bob@example.com
 timezone: America/New_York
 ```
 
-### 캘린더 이벤트 목록
+### Calendar List Events
 
 `google.calendar.list_events`
 
-Google 캘린더에서 다가오는 이벤트 목록
+List upcoming events from Google Calendar
 
 **Parameters:**
 
@@ -467,8 +467,8 @@ Google 캘린더에서 다가오는 이벤트 목록
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `events` | array | 캘린더 이벤트 목록 |
-| `count` | number | 반환된 이벤트 수 |
+| `events` | array | List of calendar events |
+| `count` | number | Number of events returned |
 
 **Example:** List next 5 events
 
@@ -477,11 +477,11 @@ access_token: <oauth2-token>
 max_results: 5
 ```
 
-### Gmail 검색
+### Gmail Search
 
 `google.gmail.search`
 
-Gmail 검색 쿼리 문법을 사용하여 Gmail 메시지 검색
+Search Gmail messages using Gmail search query syntax
 
 **Parameters:**
 
@@ -495,8 +495,8 @@ Gmail 검색 쿼리 문법을 사용하여 Gmail 메시지 검색
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `messages` | array | 일치하는 메시지 목록 |
-| `total` | number | 반환된 메시지 총 수 |
+| `messages` | array | List of matching messages |
+| `total` | number | Total number of messages returned |
 
 **Example:** Search for emails from a specific sender
 
@@ -506,11 +506,11 @@ query: from:boss@company.com is:unread
 max_results: 5
 ```
 
-### Gmail 보내기
+### Gmail Send
 
 `google.gmail.send`
 
-Gmail API를 통해 이메일 보내기
+Send an email via the Gmail API
 
 **Parameters:**
 
@@ -528,9 +528,9 @@ Gmail API를 통해 이메일 보내기
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `message_id` | string | Gmail 메시지 ID |
-| `thread_id` | string | Gmail 스레드 ID |
-| `to` | string | 받는 사람 이메일 주소 |
+| `message_id` | string | Gmail message ID |
+| `thread_id` | string | Gmail thread ID |
+| `to` | string | Recipient email address |
 
 **Example:** Send a plain text email
 

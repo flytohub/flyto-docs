@@ -6,15 +6,15 @@ Execute reusable templates as workflow steps.
 
 | Module | Description |
 |--------|-------------|
-| [執行範本](#執行範本) | 將範本從你的資料庫中執行為工作流程步驟 |
+| [Invoke Template](#invoke-template) | Execute a template from your library as a workflow step |
 
 ## Modules
 
-### 執行範本
+### Invoke Template
 
 `template.invoke`
 
-將範本從你的資料庫中執行為工作流程步驟
+Execute a template from your library as a workflow step
 
 **Parameters:**
 
@@ -29,10 +29,10 @@ Execute reusable templates as workflow steps.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 資料庫項目的 ID（購買/分叉/擁有） |
-| `result` | any | 最大執行時間（秒） |
-| `template_id` | string | 路由事件（成功/錯誤） |
-| `execution_time_ms` | number | 範本執行結果 |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Template execution result |
+| `template_id` | string | Executed template ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 

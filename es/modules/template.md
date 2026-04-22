@@ -6,15 +6,15 @@ Execute reusable templates as workflow steps.
 
 | Module | Description |
 |--------|-------------|
-| [Invocar Plantilla](#invocar-plantilla) | Ejecuta una plantilla de tu biblioteca como un paso de flujo de trabajo |
+| [Invoke Template](#invoke-template) | Execute a template from your library as a workflow step |
 
 ## Modules
 
-### Invocar Plantilla
+### Invoke Template
 
 `template.invoke`
 
-Ejecuta una plantilla de tu biblioteca como un paso de flujo de trabajo
+Execute a template from your library as a workflow step
 
 **Parameters:**
 
@@ -29,10 +29,10 @@ Ejecuta una plantilla de tu biblioteca como un paso de flujo de trabajo
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ID del elemento de la biblioteca (compra/fork/propio) |
-| `result` | any | Tiempo máximo de ejecución en segundos |
-| `template_id` | string | Evento para enrutamiento (éxito/error) |
-| `execution_time_ms` | number | Resultado de ejecución de la plantilla |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Template execution result |
+| `template_id` | string | Executed template ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 

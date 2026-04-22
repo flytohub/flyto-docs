@@ -6,115 +6,115 @@ Type casting between data types.
 
 | Module | Description |
 |--------|-------------|
-| [Array में](#array-में) | मान को array में बदलें |
-| [Boolean में](#boolean-में) | मान को boolean में बदलें |
-| [संख्या में](#संख्या-में) | मान को संख्या में बदलें |
-| [Object में](#object-में) | मान को object में बदलें |
-| [स्ट्रिंग में](#स्ट्रिंग-में) | किसी भी मान को स्ट्रिंग में बदलें |
+| [To Array](#to-array) | Convert value to array |
+| [To Boolean](#to-boolean) | Convert value to boolean |
+| [To Number](#to-number) | Convert value to number |
+| [To Object](#to-object) | Convert value to object |
+| [To String](#to-string) | Convert any value to string |
 
 ## Modules
 
-### Array में
+### To Array
 
 `convert.to_array`
 
-मान को array में बदलें
+Convert value to array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | बदलने के लिए मान |
-| `split_string` | boolean | No | `False` | बदलने के लिए मान |
-| `delimiter` | string | No | - | स्ट्रिंग को अक्षरों में विभाजित करें |
+| `value` | any | Yes | - | Value to convert |
+| `split_string` | boolean | No | `False` | Split string into characters |
+| `delimiter` | string | No | - | Delimiter for string splitting |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | स्ट्रिंग को विभाजित करने के लिए डिलीमीटर |
-| `length` | number | बदला हुआ array |
-| `original_type` | string | बदला हुआ array |
+| `result` | array | Converted array |
+| `length` | number | Array length |
+| `original_type` | string | Original value type |
 
-### Boolean में
+### To Boolean
 
 `convert.to_boolean`
 
-मान को boolean में बदलें
+Convert value to boolean
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | बदलने के लिए मान |
-| `strict` | boolean | No | `False` | बदलने के लिए मान |
+| `value` | any | Yes | - | Value to convert |
+| `strict` | boolean | No | `False` | Only accept true/false strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | केवल true/false स्ट्रिंग स्वीकार करें |
-| `original_type` | string | बदला हुआ boolean |
+| `result` | boolean | Converted boolean |
+| `original_type` | string | Original value type |
 
-### संख्या में
+### To Number
 
 `convert.to_number`
 
-मान को संख्या में बदलें
+Convert value to number
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | बदलने के लिए मान |
-| `default` | number | No | `0` | बदलने के लिए मान |
-| `integer` | boolean | No | `False` | यदि परिवर्तन विफल होता है तो डिफ़ॉल्ट मान |
+| `value` | any | Yes | - | Value to convert |
+| `default` | number | No | `0` | Default value if conversion fails |
+| `integer` | boolean | No | `False` | Convert to integer |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | पूर्णांक में बदलें |
-| `success` | boolean | बदली हुई संख्या |
-| `original_type` | string | बदली हुई संख्या |
+| `result` | number | Converted number |
+| `success` | boolean | Whether conversion succeeded |
+| `original_type` | string | Original value type |
 
-### Object में
+### To Object
 
 `convert.to_object`
 
-मान को object में बदलें
+Convert value to object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | बदलने के लिए मान |
-| `key_name` | string | No | `value` | बदलने के लिए मान |
+| `value` | any | Yes | - | Value to convert |
+| `key_name` | string | No | `value` | Key name for wrapping non-objects |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | गैर-ऑब्जेक्ट्स को लपेटने के लिए कुंजी नाम |
-| `keys` | array | बदला हुआ object |
-| `original_type` | string | बदला हुआ object |
+| `result` | object | Converted object |
+| `keys` | array | Object keys |
+| `original_type` | string | Original value type |
 
-### स्ट्रिंग में
+### To String
 
 `convert.to_string`
 
-किसी भी मान को स्ट्रिंग में बदलें
+Convert any value to string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | बदलने के लिए मान |
-| `pretty` | boolean | No | `False` | बदलने के लिए मान |
+| `value` | any | Yes | - | Value to convert |
+| `pretty` | boolean | No | `False` | Format objects/arrays with indentation |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | इंडेंटेशन के साथ ऑब्जेक्ट्स/arrays को फॉर्मेट करें |
-| `original_type` | string | स्ट्रिंग प्रतिनिधित्व |
+| `result` | string | String representation |
+| `original_type` | string | Original value type |

@@ -6,32 +6,32 @@ Environment variable management and .env file loading.
 
 | Module | Description |
 |--------|-------------|
-| [पर्यावरण वेरिएबल प्राप्त करें](#पर्यावरण-वेरिएबल-प्राप्त-करें) | एक पर्यावरण वेरिएबल का मान प्राप्त करें |
-| [.env फ़ाइल लोड करें](#.env-फ़ाइल-लोड-करें) | .env फ़ाइल से पर्यावरण वेरिएबल लोड करें |
-| [पर्यावरण वेरिएबल सेट करें](#पर्यावरण-वेरिएबल-सेट-करें) | वर्तमान प्रक्रिया में एक पर्यावरण वेरिएबल सेट करें |
+| [Get Environment Variable](#get-environment-variable) | Get the value of an environment variable |
+| [Load .env File](#load-.env-file) | Load environment variables from a .env file |
+| [Set Environment Variable](#set-environment-variable) | Set an environment variable in the current process |
 
 ## Modules
 
-### पर्यावरण वेरिएबल प्राप्त करें
+### Get Environment Variable
 
 `env.get`
 
-एक पर्यावरण वेरिएबल का मान प्राप्त करें
+Get the value of an environment variable
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | पर्यावरण वेरिएबल का नाम |
-| `default` | string | No | - | डिफ़ॉल्ट मान यदि वेरिएबल सेट नहीं है |
+| `name` | string | Yes | - | Name of the environment variable |
+| `default` | string | No | - | Default value if the variable is not set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | वेरिएबल का नाम |
-| `value` | string | वेरिएबल का मान (या डिफ़ॉल्ट यदि सेट नहीं है) |
-| `exists` | boolean | क्या वेरिएबल पर्यावरण में मौजूद है |
+| `name` | string | Variable name |
+| `value` | string | Variable value (or default if not set) |
+| `exists` | boolean | Whether the variable exists in the environment |
 
 **Example:** Get HOME variable
 
@@ -46,25 +46,25 @@ name: MY_APP_PORT
 default: 8080
 ```
 
-### .env फ़ाइल लोड करें
+### Load .env File
 
 `env.load_dotenv`
 
-.env फ़ाइल से पर्यावरण वेरिएबल लोड करें
+Load environment variables from a .env file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | `.env` | .env फ़ाइल का पथ |
-| `override` | boolean | No | `False` | क्या मौजूदा पर्यावरण वेरिएबल को अधिलेखित करना है |
+| `path` | string | Yes | `.env` | Path to the .env file |
+| `override` | boolean | No | `False` | Whether to override existing environment variables |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `loaded_count` | number | लोड किए गए वेरिएबल की संख्या |
-| `variables` | array | लोड किए गए वेरिएबल नामों की सूची |
+| `loaded_count` | number | Number of variables loaded |
+| `variables` | array | List of variable names that were loaded |
 
 **Example:** Load .env file
 
@@ -73,26 +73,26 @@ path: .env
 override: false
 ```
 
-### पर्यावरण वेरिएबल सेट करें
+### Set Environment Variable
 
 `env.set`
 
-वर्तमान प्रक्रिया में एक पर्यावरण वेरिएबल सेट करें
+Set an environment variable in the current process
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | सेट करने के लिए पर्यावरण वेरिएबल का नाम |
-| `value` | string | Yes | - | पर्यावरण वेरिएबल को असाइन करने के लिए मान |
+| `name` | string | Yes | - | Name of the environment variable to set |
+| `value` | string | Yes | - | Value to assign to the environment variable |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | वेरिएबल का नाम |
-| `value` | string | नया मान जो सेट किया गया |
-| `previous_value` | string | पिछला मान (null यदि पहले सेट नहीं किया गया) |
+| `name` | string | Variable name |
+| `value` | string | New value that was set |
+| `previous_value` | string | Previous value (null if not previously set) |
 
 **Example:** Set an environment variable
 

@@ -6,37 +6,37 @@ AES encryption/decryption, HMAC, JWT tokens, and secure random generation.
 
 | Module | Description |
 |--------|-------------|
-| [복호화](#복호화) | AES 암호화를 사용하여 데이터 복호화 |
-| [암호화](#암호화) | AES 암호화를 사용하여 데이터 암호화 |
-| [HMAC](#hmac) | HMAC 서명 생성 |
-| [JWT 생성](#jwt-생성) | 서명된 JWT 토큰 생성 |
-| [JWT 검증](#jwt-검증) | JWT 토큰 검증 및 디코딩 |
-| [랜덤 바이트](#랜덤-바이트) | 암호학적으로 안전한 랜덤 바이트 생성 |
-| [랜덤 문자열](#랜덤-문자열) | 암호학적으로 안전한 랜덤 문자열 생성 |
+| [Decrypt](#decrypt) | AES symmetric decryption |
+| [Encrypt](#encrypt) | AES symmetric encryption |
+| [HMAC](#hmac) | Generate HMAC signature |
+| [Create JWT](#create-jwt) | Create JWT (JSON Web Token) tokens |
+| [Verify JWT](#verify-jwt) | Verify and decode JWT tokens |
+| [Random Bytes](#random-bytes) | Generate cryptographically secure random bytes |
+| [Random String](#random-string) | Generate cryptographically secure random string |
 
 ## Modules
 
-### 복호화
+### Decrypt
 
 `crypto.decrypt`
 
-AES 암호화를 사용하여 데이터 복호화
+AES symmetric decryption
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `ciphertext` | string | Yes | - | 복호화할 암호화된 데이터 |
-| `key` | string | Yes | - | 암호화 키 |
-| `mode` | select (`CBC`, `GCM`) | No | `GCM` | AES 암호 모드 (CBC, GCM 등) |
-| `input_format` | select (`base64`, `hex`) | No | `base64` | 입력 암호문의 형식 (hex 또는 base64) |
+| `ciphertext` | string | Yes | - | Encrypted ciphertext to decrypt |
+| `key` | string | Yes | - | Decryption passphrase (must match encryption passphrase) |
+| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Decryption mode (must match encryption mode) |
+| `input_format` | select (`base64`, `hex`) | No | `base64` | Encoding format of the ciphertext input |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `plaintext` | string | 복호화된 평문 |
-| `algorithm` | string | 복호화에 사용된 알고리즘 |
+| `plaintext` | string | Decrypted plaintext |
+| `algorithm` | string | Decryption algorithm used |
 
 **Example:** Decrypt AES-GCM ciphertext
 
@@ -46,28 +46,28 @@ key: my-secret-passphrase
 mode: GCM
 ```
 
-### 암호화
+### Encrypt
 
 `crypto.encrypt`
 
-AES 암호화를 사용하여 데이터 암호화
+AES symmetric encryption
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `plaintext` | string | Yes | - | 암호화할 데이터 |
-| `key` | string | Yes | - | 암호화 키 |
-| `mode` | select (`CBC`, `GCM`) | No | `GCM` | AES 암호 모드 (CBC, GCM 등) |
-| `output_format` | select (`base64`, `hex`) | No | `base64` | 출력 암호문의 형식 (hex 또는 base64) |
+| `plaintext` | string | Yes | - | Text to encrypt |
+| `key` | string | Yes | - | Encryption passphrase (key is derived via PBKDF2) |
+| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Encryption mode |
+| `output_format` | select (`base64`, `hex`) | No | `base64` | Encoding format for the ciphertext output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ciphertext` | string | 암호화된 암호문 |
-| `algorithm` | string | 암호화에 사용된 알고리즘 |
-| `mode` | string | 사용된 암호 모드 |
+| `ciphertext` | string | Encrypted ciphertext |
+| `algorithm` | string | Encryption algorithm used |
+| `mode` | string | Encryption mode used |
 
 **Example:** Encrypt with AES-GCM
 
@@ -81,48 +81,48 @@ mode: GCM
 
 `crypto.hmac`
 
-HMAC 서명 생성
+Generate HMAC signature
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `message` | string | Yes | - | 서명할 메시지 |
-| `key` | string | Yes | - | 서명할 메시지 |
-| `algorithm` | select (`sha256`, `sha512`, `sha1`, `md5`) | No | `sha256` | HMAC의 비밀 키 |
-| `encoding` | select (`hex`, `base64`) | No | `hex` | 출력 인코딩 형식 |
+| `message` | string | Yes | - | Message to sign |
+| `key` | string | Yes | - | Secret key for HMAC |
+| `algorithm` | select (`sha256`, `sha512`, `sha1`, `md5`) | No | `sha256` | Hash algorithm |
+| `encoding` | select (`hex`, `base64`) | No | `hex` | Output encoding format |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `signature` | string | 출력 인코딩 형식 |
-| `algorithm` | string | HMAC 서명 |
+| `signature` | string | HMAC signature |
+| `algorithm` | string | Algorithm used |
 
-### JWT 생성
+### Create JWT
 
 `crypto.jwt_create`
 
-서명된 JWT 토큰 생성
+Create JWT (JSON Web Token) tokens
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `payload` | object | Yes | - | JWT 페이로드 데이터 (객체) |
-| `secret` | string | Yes | - | 토큰 서명을 위한 비밀 키 |
-| `algorithm` | select (`HS256`, `HS384`, `HS512`, `RS256`) | No | `HS256` | JWT 서명 알고리즘 (HS256, RS256 등) |
-| `expires_in` | number | No | - | 토큰 만료 시간 (초) |
-| `issuer` | string | No | - | 토큰 발급자 클레임 |
-| `audience` | string | No | - | 토큰의 대상 |
+| `payload` | object | Yes | - | JWT payload claims (JSON object) |
+| `secret` | string | Yes | - | Secret key for signing the token |
+| `algorithm` | select (`HS256`, `HS384`, `HS512`, `RS256`) | No | `HS256` | Signing algorithm |
+| `expires_in` | number | No | - | Token expiration time in seconds (optional) |
+| `issuer` | string | No | - | Token issuer (iss claim) |
+| `audience` | string | No | - | Token audience (aud claim) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `token` | string | 생성된 JWT 토큰 |
-| `algorithm` | string | 서명에 사용된 알고리즘 |
-| `expires_at` | string | 토큰 만료 타임스탬프 |
+| `token` | string | Signed JWT token |
+| `algorithm` | string | Algorithm used for signing |
+| `expires_at` | string | Token expiration timestamp (ISO 8601) or null |
 
 **Example:** Create a JWT with expiration
 
@@ -133,30 +133,30 @@ algorithm: HS256
 expires_in: 3600
 ```
 
-### JWT 검증
+### Verify JWT
 
 `crypto.jwt_verify`
 
-JWT 토큰 검증 및 디코딩
+Verify and decode JWT tokens
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `token` | string | Yes | - | 검증할 JWT 토큰 |
-| `secret` | string | Yes | - | 토큰 서명에 사용된 비밀 키 |
-| `algorithms` | array | No | `['HS256']` | 허용된 서명 알고리즘 |
-| `verify_exp` | boolean | No | `True` | 만료 클레임을 검증할지 여부 |
-| `audience` | string | No | - | 예상되는 대상 클레임 |
-| `issuer` | string | No | - | 예상 발행자 클레임 |
+| `token` | string | Yes | - | JWT token to verify and decode |
+| `secret` | string | Yes | - | Secret key for verifying the token signature |
+| `algorithms` | array | No | `['HS256']` | List of allowed signing algorithms |
+| `verify_exp` | boolean | No | `True` | Whether to verify the token expiration |
+| `audience` | string | No | - | Expected audience (aud claim) |
+| `issuer` | string | No | - | Expected issuer (iss claim) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 토큰이 유효한지 여부 |
-| `payload` | object | 디코딩된 JWT 페이로드 |
-| `header` | object | JWT 헤더 데이터 |
+| `valid` | boolean | Whether the token is valid |
+| `payload` | object | Decoded JWT payload |
+| `header` | object | Decoded JWT header |
 
 **Example:** Verify a JWT token
 
@@ -167,43 +167,43 @@ algorithms: ["HS256"]
 verify_exp: true
 ```
 
-### 랜덤 바이트
+### Random Bytes
 
 `crypto.random_bytes`
 
-암호학적으로 안전한 랜덤 바이트 생성
+Generate cryptographically secure random bytes
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | Yes | `32` | 바이트 수 |
-| `encoding` | string | No | `hex` | 출력 인코딩 |
+| `length` | number | Yes | `32` | Number of bytes |
+| `encoding` | string | No | `hex` | Output encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bytes` | string | 랜덤 바이트 (인코딩됨) |
-| `length` | number | 랜덤 바이트 (인코딩됨) |
+| `bytes` | string | Random bytes (encoded) |
+| `length` | number | Number of bytes generated |
 
-### 랜덤 문자열
+### Random String
 
 `crypto.random_string`
 
-암호학적으로 안전한 랜덤 문자열 생성
+Generate cryptographically secure random string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | Yes | `16` | 문자열 길이 |
-| `charset` | string | No | `alphanumeric` | 사용할 문자 |
-| `uppercase` | boolean | No | `False` | 대문자로 변환 |
+| `length` | number | Yes | `16` | String length |
+| `charset` | string | No | `alphanumeric` | Characters to use |
+| `uppercase` | boolean | No | `False` | Convert to uppercase |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `string` | string | 대문자로 변환 |
-| `length` | number | 랜덤 문자열 |
+| `string` | string | Random string |
+| `length` | number | String length |

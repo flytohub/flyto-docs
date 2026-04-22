@@ -44,7 +44,7 @@ Insert data into database tables
 | Field | Type | Description |
 |-------|------|-------------|
 | `inserted_count` | number | Number of rows inserted |
-| `returning_data` | array | Number of rows inserted |
+| `returning_data` | array | Returned data from insert |
 
 **Example:** Insert single row
 
@@ -80,8 +80,8 @@ Execute SQL queries on PostgreSQL, MySQL, or SQLite databases
 | Field | Type | Description |
 |-------|------|-------------|
 | `rows` | array | Query result rows |
-| `row_count` | number | Query result rows |
-| `columns` | array | Query result rows |
+| `row_count` | number | Number of rows returned/affected |
+| `columns` | array | Column names |
 
 **Example:** Select with parameters
 
@@ -150,7 +150,7 @@ Query documents from MongoDB collection
 | Field | Type | Description |
 |-------|------|-------------|
 | `documents` | array | Array of matching documents |
-| `count` | number | Array of matching documents |
+| `count` | number | Number of documents returned |
 
 **Example:** Find all active users
 
@@ -193,7 +193,7 @@ Insert one or more documents into MongoDB collection
 | Field | Type | Description |
 |-------|------|-------------|
 | `inserted_count` | number | Number of documents inserted |
-| `inserted_ids` | array | Number of documents inserted |
+| `inserted_ids` | array | Array of inserted document IDs |
 
 **Example:** Insert single document
 
@@ -234,8 +234,8 @@ Execute a SQL query on MySQL database and return results
 | Field | Type | Description |
 |-------|------|-------------|
 | `rows` | array | Array of result rows as objects |
-| `row_count` | number | Array of result rows as objects |
-| `columns` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select products
 
@@ -269,8 +269,8 @@ Execute a SQL query on PostgreSQL database and return results
 | Field | Type | Description |
 |-------|------|-------------|
 | `rows` | array | Array of result rows as objects |
-| `row_count` | number | Array of result rows as objects |
-| `columns` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select users
 
@@ -305,8 +305,8 @@ Get a value from Redis cache
 | Field | Type | Description |
 |-------|------|-------------|
 | `value` | any | The returned value |
-| `exists` | boolean | The returned value |
-| `key` | string | The returned value |
+| `exists` | boolean | The exists |
+| `key` | string | Key identifier |
 
 **Example:** Get cached value
 

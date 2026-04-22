@@ -6,47 +6,47 @@ SHA-256 and SHA-512 cryptographic hashing.
 
 | Module | Description |
 |--------|-------------|
-| [Skrót SHA-256](#skrót-sha-256) | Oblicz kryptograficzny skrót SHA-256 tekstu |
-| [Skrót SHA-512](#skrót-sha-512) | Oblicz kryptograficzny skrót SHA-512 tekstu |
+| [SHA-256 Hash](#sha-256-hash) | Calculate SHA-256 cryptographic hash of text |
+| [SHA-512 Hash](#sha-512-hash) | Calculate SHA-512 cryptographic hash of text |
 
 ## Modules
 
-### Skrót SHA-256
+### SHA-256 Hash
 
 `hash.sha256`
 
-Oblicz kryptograficzny skrót SHA-256 tekstu
+Calculate SHA-256 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Tekst do skrótu |
-| `encoding` | string | No | `utf-8` | Tekst do skrótu |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | Kodowanie tekstu |
-| `algorithm` | string | Skrót SHA-256 (64 znaki szesnastkowe) |
+| `hash` | string | SHA-256 hash (64 hex characters) |
+| `algorithm` | string | Hash algorithm used |
 
-### Skrót SHA-512
+### SHA-512 Hash
 
 `hash.sha512`
 
-Oblicz kryptograficzny skrót SHA-512 tekstu
+Calculate SHA-512 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Tekst do skrótu |
-| `encoding` | string | No | `utf-8` | Tekst do skrótu |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | Kodowanie tekstu |
-| `algorithm` | string | Skrót SHA-512 (128 znaków szesnastkowych) |
+| `hash` | string | SHA-512 hash (128 hex characters) |
+| `algorithm` | string | Hash algorithm used |

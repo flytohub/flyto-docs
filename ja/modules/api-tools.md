@@ -6,10 +6,10 @@ GitHub API, HTTP requests, and search engine integrations.
 
 | Module | Description |
 |--------|-------------|
-| [GitHub Issue作成](#github-issue作成) | GitHubリポジトリに新しいIssueを作成する |
+| [Create GitHub Issue](#create-github-issue) | Create a new issue in a GitHub repository |
 | [Create GitHub Pull Request](#create-github-pull-request) | Create a new pull request in a GitHub repository |
-| [GitHubリポジトリ取得](#githubリポジトリ取得) | GitHubリポジトリの情報を取得する |
-| [GitHub Issue一覧](#github-issue一覧) | GitHubリポジトリからIssueを一覧表示する |
+| [Get GitHub Repository](#get-github-repository) | Get information about a GitHub repository |
+| [List GitHub Issues](#list-github-issues) | List issues from a GitHub repository |
 | [List GitHub Repositories](#list-github-repositories) | List repositories for a GitHub user or the authenticated user |
 | [Google Search (API)](#google-search-api) | Use Google Custom Search API to search keywords |
 | [HTTP GET Request](#http-get-request) | Send HTTP GET request to any URL |
@@ -18,11 +18,11 @@ GitHub API, HTTP requests, and search engine integrations.
 
 ## Modules
 
-### GitHub Issue作成
+### Create GitHub Issue
 
 `api.github.create_issue`
 
-GitHubリポジトリに新しいIssueを作成する
+Create a new issue in a GitHub repository
 
 **Parameters:**
 
@@ -94,32 +94,32 @@ head: feature/auth
 base: main
 ```
 
-### GitHubリポジトリ取得
+### Get GitHub Repository
 
 `api.github.get_repo`
 
-GitHubリポジトリの情報を取得する
+Get information about a GitHub repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `owner` | string | Yes | - | リポジトリオーナー（ユーザー名または組織） |
-| `repo` | string | Yes | - | リポジトリ名 |
-| `token` | string | No | - | GitHub個人アクセストークン（任意だが推奨） |
+| `owner` | string | Yes | - | Repository owner (username or organization) |
+| `repo` | string | Yes | - | Repository name |
+| `token` | string | No | - | GitHub Personal Access Token (optional but recommended) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `repo` | object | リポジトリ情報 |
-| `name` | string | リポジトリ名 |
-| `full_name` | string | リポジトリのフルネーム |
-| `description` | string | リポジトリの説明 |
-| `stars` | number | スター数 |
-| `forks` | number | フォーク数 |
-| `url` | string | リポジトリURL |
+| `status` | string | Operation status (success/error) |
+| `repo` | object | Repository information |
+| `name` | string | Name of the item |
+| `full_name` | string | Full repository name |
+| `description` | string | Item description |
+| `stars` | number | Number of stars |
+| `forks` | number | Number of forks |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -128,11 +128,11 @@ owner: octocat
 repo: Hello-World
 ```
 
-### GitHub Issue一覧
+### List GitHub Issues
 
 `api.github.list_issues`
 
-GitHubリポジトリからIssueを一覧表示する
+List issues from a GitHub repository
 
 **Parameters:**
 
@@ -219,10 +219,10 @@ Use Google Custom Search API to search keywords
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作ステータス |
-| `data` | array | 検索結果データ |
-| `count` | number | 検索結果数 |
-| `total_results` | number | 総結果数 |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
+| `total_results` | number | Total number of search results available |
 
 **Example:** Search Python tutorials
 
@@ -251,10 +251,10 @@ Send HTTP GET request to any URL
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | HTTP ステータスコード |
-| `headers` | object | レスポンスヘッダー |
-| `body` | string | レスポンスボディ |
-| `json` | object | JSON レスポンス（該当する場合） |
+| `status_code` | number | HTTP status code |
+| `headers` | object | HTTP headers |
+| `body` | string | Response body content |
+| `json` | object | Parsed JSON response data |
 
 **Example:** Fetch API data
 

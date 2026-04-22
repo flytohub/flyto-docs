@@ -6,76 +6,76 @@ In-memory and Redis message queue operations.
 
 | Module | Description |
 |--------|-------------|
-| [आइटम हटाएं](#आइटम-हटाएं) | कतार से एक आइटम हटाएं और लौटाएं |
-| [आइटम जोड़ें](#आइटम-जोड़ें) | एक आइटम को इन-मेमोरी या Redis कतार में जोड़ें |
-| [कतार का आकार](#कतार-का-आकार) | कतार का वर्तमान आकार प्राप्त करें |
+| [Dequeue Item](#dequeue-item) | Remove and return an item from a queue |
+| [Enqueue Item](#enqueue-item) | Add an item to an in-memory or Redis queue |
+| [Queue Size](#queue-size) | Get the current size of a queue |
 
 ## Modules
 
-### आइटम हटाएं
+### Dequeue Item
 
 `queue.dequeue`
 
-कतार से एक आइटम हटाएं और लौटाएं
+Remove and return an item from a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | जिस कतार से आइटम हटाना है उसका नाम |
-| `backend` | string | No | `memory` | उपयोग करने के लिए कतार बैकएंड |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis कनेक्शन URL |
-| `timeout` | number | No | `0` | सेकंड में समय सीमा (0 = गैर-ब्लॉकिंग) |
+| `queue_name` | string | Yes | - | Name of the queue to dequeue from |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
+| `timeout` | number | No | `0` | Timeout in seconds (0 = non-blocking) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | any | हटाया गया आइटम (यदि कतार खाली है तो null) |
-| `queue_name` | string | कतार का नाम |
-| `remaining` | number | कतार में शेष आइटम |
-| `empty` | boolean | क्या कतार खाली थी |
+| `data` | any | The dequeued item (null if queue is empty) |
+| `queue_name` | string | Name of the queue |
+| `remaining` | number | Remaining items in the queue |
+| `empty` | boolean | Whether the queue was empty |
 
-### आइटम जोड़ें
+### Enqueue Item
 
 `queue.enqueue`
 
-एक आइटम को इन-मेमोरी या Redis कतार में जोड़ें
+Add an item to an in-memory or Redis queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | जिस कतार में आइटम जोड़ना है उसका नाम |
-| `data` | string | Yes | - | जोड़ने के लिए डेटा (कोई भी JSON-सीरीयलाइज़ेबल मान) |
-| `backend` | string | No | `memory` | उपयोग करने के लिए कतार बैकएंड |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis कनेक्शन URL |
+| `queue_name` | string | Yes | - | Name of the queue to add the item to |
+| `data` | string | Yes | - | Data to enqueue (any JSON-serializable value) |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | कतार का नाम |
-| `position` | number | कतार में आइटम की स्थिति |
-| `queue_size` | number | जोड़ने के बाद कतार का वर्तमान आकार |
+| `queue_name` | string | Name of the queue |
+| `position` | number | Position of the item in the queue |
+| `queue_size` | number | Current size of the queue after enqueue |
 
-### कतार का आकार
+### Queue Size
 
 `queue.size`
 
-कतार का वर्तमान आकार प्राप्त करें
+Get the current size of a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | जिस कतार का आकार जांचना है उसका नाम |
-| `backend` | string | No | `memory` | उपयोग करने के लिए कतार बैकएंड |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis कनेक्शन URL |
+| `queue_name` | string | Yes | - | Name of the queue to check |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | कतार का नाम |
-| `size` | number | कतार में वर्तमान आइटम की संख्या |
+| `queue_name` | string | Name of the queue |
+| `size` | number | Current number of items in the queue |

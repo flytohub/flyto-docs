@@ -6,148 +6,148 @@ Runtime type checking utilities.
 
 | Module | Description |
 |--------|-------------|
-| [È Array](#è-array) | Verifica se un valore è un array |
-| [È Vuoto](#è-vuoto) | Verifica se un valore è vuoto |
-| [È Null](#è-null) | Verifica se un valore è null/None |
-| [È Numero](#è-numero) | Verifica se un valore è un numero |
-| [È Oggetto](#è-oggetto) | Verifica se un valore è un oggetto |
-| [È Stringa](#è-stringa) | Verifica se un valore è una stringa |
-| [Tipo Di](#tipo-di) | Ottieni il tipo di un valore |
+| [Is Array](#is-array) | Check if a value is an array |
+| [Is Empty](#is-empty) | Check if a value is empty |
+| [Is Null](#is-null) | Check if a value is null/None |
+| [Is Number](#is-number) | Check if a value is a number |
+| [Is Object](#is-object) | Check if a value is an object |
+| [Is String](#is-string) | Check if a value is a string |
+| [Type Of](#type-of) | Get the type of a value |
 
 ## Modules
 
-### È Array
+### Is Array
 
 `check.is_array`
 
-Verifica se un valore è un array
+Check if a value is an array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Valore da verificare |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_array` | boolean | Valore da verificare |
-| `length` | number | Se il valore è un array |
+| `is_array` | boolean | Whether value is an array |
+| `length` | number | Array length (if array) |
 
-### È Vuoto
+### Is Empty
 
 `check.is_empty`
 
-Verifica se un valore è vuoto
+Check if a value is empty
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Valore da verificare |
-| `trim_strings` | boolean | No | `True` | Valore da verificare |
+| `value` | any | Yes | - | Value to check |
+| `trim_strings` | boolean | No | `True` | Treat whitespace-only strings as empty |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_empty` | boolean | Considera le stringhe solo con spazi come vuote |
-| `type` | string | Se il valore è vuoto |
+| `is_empty` | boolean | Whether value is empty |
+| `type` | string | Type of value |
 
-### È Null
+### Is Null
 
 `check.is_null`
 
-Verifica se un valore è null/None
+Check if a value is null/None
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | No | - | Valore da verificare |
+| `value` | any | No | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_null` | boolean | Valore da verificare |
+| `is_null` | boolean | Whether value is null |
 
-### È Numero
+### Is Number
 
 `check.is_number`
 
-Verifica se un valore è un numero
+Check if a value is a number
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Valore da verificare |
-| `parse_string` | boolean | No | `False` | Valore da verificare |
-| `integer_only` | boolean | No | `False` | Considera le stringhe numeriche come numeri |
+| `value` | any | Yes | - | Value to check |
+| `parse_string` | boolean | No | `False` | Consider numeric strings as numbers |
+| `integer_only` | boolean | No | `False` | Only accept integers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_number` | boolean | Accetta solo interi |
-| `is_integer` | boolean | Se il valore è un numero |
-| `is_float` | boolean | Se il valore è un numero |
+| `is_number` | boolean | Whether value is a number |
+| `is_integer` | boolean | Whether value is an integer |
+| `is_float` | boolean | Whether value is a float |
 
-### È Oggetto
+### Is Object
 
 `check.is_object`
 
-Verifica se un valore è un oggetto
+Check if a value is an object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Valore da verificare |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_object` | boolean | Valore da verificare |
-| `keys` | array | Se il valore è un oggetto |
+| `is_object` | boolean | Whether value is an object |
+| `keys` | array | Object keys (if object) |
 
-### È Stringa
+### Is String
 
 `check.is_string`
 
-Verifica se un valore è una stringa
+Check if a value is a string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | Valore da verificare |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_string` | boolean | Valore da verificare |
-| `length` | number | Se il valore è una stringa |
+| `is_string` | boolean | Whether value is a string |
+| `length` | number | String length (if string) |
 
-### Tipo Di
+### Type Of
 
 `check.type_of`
 
-Ottieni il tipo di un valore
+Get the type of a value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | No | - | Valore da verificare |
+| `value` | any | No | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `type` | string | Valore da verificare |
-| `is_primitive` | boolean | Nome del tipo |
+| `type` | string | Type name |
+| `is_primitive` | boolean | Whether type is primitive |

@@ -6,19 +6,19 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Module | Description |
 |--------|-------------|
-| [Manifest Uygula](#manifest-uygula) | kubectl apply ile bir Kubernetes manifesti uygula |
-| [Kaynağı Tanımla](#kaynağı-tanımla) | Bir Kubernetes kaynağını detaylı olarak tanımla |
-| [Podları Al](#podları-al) | Bir namespace içindeki Kubernetes podlarını listele |
-| [Pod Loglarını Al](#pod-loglarını-al) | Bir Kubernetes podundan logları al |
-| [Dağıtımı Ölçeklendir](#dağıtımı-ölçeklendir) | Bir Kubernetes dağıtımını belirtilen kopya sayısına ölçeklendir |
+| [Apply Manifest](#apply-manifest) | Apply a Kubernetes manifest via kubectl apply |
+| [Describe Resource](#describe-resource) | Describe a Kubernetes resource in detail |
+| [Get Pods](#get-pods) | List Kubernetes pods in a namespace |
+| [Get Pod Logs](#get-pod-logs) | Retrieve logs from a Kubernetes pod |
+| [Scale Deployment](#scale-deployment) | Scale a Kubernetes deployment to a specified replica count |
 
 ## Modules
 
-### Manifest Uygula
+### Apply Manifest
 
 `k8s.apply`
 
-kubectl apply ile bir Kubernetes manifesti uygula
+Apply a Kubernetes manifest via kubectl apply
 
 **Parameters:**
 
@@ -32,16 +32,16 @@ kubectl apply ile bir Kubernetes manifesti uygula
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `kind` | string | Kaynak türü (ör. Deployment, Service) |
-| `name` | string | Kaynak adı |
-| `namespace` | string | Kaynak namespace |
-| `action` | string | Yapılan işlem (oluşturuldu, yapılandırıldı, değişmedi) |
+| `kind` | string | Resource kind (e.g. Deployment, Service) |
+| `name` | string | Resource name |
+| `namespace` | string | Resource namespace |
+| `action` | string | Action taken (created, configured, unchanged) |
 
-### Kaynağı Tanımla
+### Describe Resource
 
 `k8s.describe`
 
-Bir Kubernetes kaynağını detaylı olarak tanımla
+Describe a Kubernetes resource in detail
 
 **Parameters:**
 
@@ -56,16 +56,16 @@ Bir Kubernetes kaynağını detaylı olarak tanımla
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `resource_type` | string | Tanımlanan kaynak türü |
-| `name` | string | Kaynak adı |
+| `resource_type` | string | Resource type that was described |
+| `name` | string | Resource name |
 | `namespace` | string | Kubernetes namespace |
-| `description` | string | Tam kubectl describe çıktı metni |
+| `description` | string | Full kubectl describe output text |
 
-### Podları Al
+### Get Pods
 
 `k8s.get_pods`
 
-Bir namespace içindeki Kubernetes podlarını listele
+List Kubernetes pods in a namespace
 
 **Parameters:**
 
@@ -79,14 +79,14 @@ Bir namespace içindeki Kubernetes podlarını listele
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pods` | array | Durum bilgisi ile pod listesi |
-| `count` | number | Bulunan toplam pod sayısı |
+| `pods` | array | List of pods with status information |
+| `count` | number | Total number of pods found |
 
-### Pod Loglarını Al
+### Get Pod Logs
 
 `k8s.logs`
 
-Bir Kubernetes podundan logları al
+Retrieve logs from a Kubernetes pod
 
 **Parameters:**
 
@@ -103,15 +103,15 @@ Bir Kubernetes podundan logları al
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pod` | string | Pod adı |
-| `logs` | string | Log çıktı metni |
-| `lines` | number | Dönen log satır sayısı |
+| `pod` | string | Pod name |
+| `logs` | string | Log output text |
+| `lines` | number | Number of log lines returned |
 
-### Dağıtımı Ölçeklendir
+### Scale Deployment
 
 `k8s.scale`
 
-Bir Kubernetes dağıtımını belirtilen kopya sayısına ölçeklendir
+Scale a Kubernetes deployment to a specified replica count
 
 **Parameters:**
 
@@ -126,7 +126,7 @@ Bir Kubernetes dağıtımını belirtilen kopya sayısına ölçeklendir
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deployment` | string | Dağıtım adı |
-| `replicas` | number | İstenen kopya sayısı |
+| `deployment` | string | Deployment name |
+| `replicas` | number | Requested replica count |
 | `namespace` | string | Kubernetes namespace |
-| `scaled` | boolean | Ölçeklendirme işleminin başarılı olup olmadığı |
+| `scaled` | boolean | Whether the scale operation succeeded |

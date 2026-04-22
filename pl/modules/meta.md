@@ -6,34 +6,34 @@ Module generation, listing, testing, and documentation.
 
 | Module | Description |
 |--------|-------------|
-| [Lista dostepnych modulow](#lista-dostepnych-modulow) | Wylistuj wszystkie dostepne moduly w rejestrze |
-| [Zaktualizuj dokumentacje modulow](#zaktualizuj-dokumentacje-modulow) | Wygeneruj lub zaktualizuj dokumentacje MODULES.md z rejestru |
+| [List Available Modules](#list-available-modules) | List all available modules in the registry |
+| [Update Module Documentation](#update-module-documentation) | Generate or update MODULES.md documentation from registry |
 
 ## Modules
 
-### Lista dostepnych modulow
+### List Available Modules
 
 `meta.modules.list`
 
-Wylistuj wszystkie dostepne moduly w rejestrze
+List all available modules in the registry
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `category` | string | No | - | Filtruj moduly wedlug kategorii (np. browser, data, ai) |
-| `tags` | array | No | - | Filtruj moduly wedlug kategorii (np. browser, data, ai) |
-| `include_params` | boolean | No | `True` | Filtruj moduly wedlug tagow |
-| `include_output` | boolean | No | `True` | Dolacz schemat parametrow w wyjsciu |
-| `format` | select (`json`, `markdown`, `compact`) | No | `json` | Dolacz schemat wyjscia w odpowiedzi |
+| `category` | string | No | - | Filter modules by category (e.g., browser, data, ai) |
+| `tags` | array | No | - | Filter modules by tags |
+| `include_params` | boolean | No | `True` | Include parameter schema in output |
+| `include_output` | boolean | No | `True` | Include output schema in response |
+| `format` | select (`json`, `markdown`, `compact`) | No | `json` | Format for module list output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `modules` | array | Lista zarejestrowanych modulow |
-| `count` | number | Schemat parametrow |
-| `formatted` | string | Schemat wyjscia |
+| `modules` | array | List of registered modules |
+| `count` | number | Number of items |
+| `formatted` | string | The formatted |
 
 **Example:** List all modules
 
@@ -60,26 +60,26 @@ format: markdown
 format: compact
 ```
 
-### Zaktualizuj dokumentacje modulow
+### Update Module Documentation
 
 `meta.modules.update_docs`
 
-Wygeneruj lub zaktualizuj dokumentacje MODULES.md z rejestru
+Generate or update MODULES.md documentation from registry
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | No | `docs/MODULES.md` | Sciezka do zapisu pliku MODULES.md |
-| `include_examples` | boolean | No | `True` | Dolacz przyklady uzycia w dokumentacji |
+| `output_path` | string | No | `docs/MODULES.md` | Path to write MODULES.md file |
+| `include_examples` | boolean | No | `True` | Include usage examples in documentation |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `file_path` | string | Dolacz przyklady uzycia w dokumentacji |
-| `modules_count` | number | Sciezka pliku |
-| `categories` | array | Sciezka pliku |
+| `file_path` | string | The file path |
+| `modules_count` | number | The modules count |
+| `categories` | array | The categories |
 
 **Example:** Update module documentation
 

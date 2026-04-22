@@ -6,23 +6,23 @@ Datetime operations, delay, MD5 hash, and random utilities.
 
 | Module | Description |
 |--------|-------------|
-| [समय जोड़ें](#समय-जोड़ें) | दिनांक/समय में समय जोड़ें |
-| [दिनांक/समय फ़ॉर्मेट करें](#दिनांकसमय-फ़ॉर्मेट-करें) | दिनांक/समय को स्ट्रिंग में फ़ॉर्मेट करें |
-| [दिनांक/समय पार्स करें](#दिनांकसमय-पार्स-करें) | स्ट्रिंग को दिनांक/समय में पार्स करें |
-| [समय घटाएं](#समय-घटाएं) | दिनांक/समय से समय घटाएं |
-| [वर्तमान दिनांक/समय](#वर्तमान-दिनांकसमय) | वर्तमान दिनांक और समय प्राप्त करें |
-| [विलंब/स्लीप](#विलंबस्लीप) | निर्दिष्ट अवधि के लिए वर्कफ़्लो निष्पादन रोकें |
-| [MD5 हैश](#md5-हैश) | टेक्स्ट का MD5 हैश गणना करें |
-| [रैंडम नंबर](#रैंडम-नंबर) | रेंज में रैंडम नंबर जनरेट करें |
-| [रैंडम स्ट्रिंग](#रैंडम-स्ट्रिंग) | रैंडम स्ट्रिंग या UUID जनरेट करें |
+| [Add Time](#add-time) | Add time to datetime |
+| [Format DateTime](#format-datetime) | Format datetime to string |
+| [Parse DateTime](#parse-datetime) | Parse string to datetime |
+| [Subtract Time](#subtract-time) | Subtract time from datetime |
+| [Current Date/Time](#current-datetime) | Get current date and time |
+| [Delay/Sleep](#delaysleep) | Pause workflow execution for specified duration |
+| [MD5 Hash](#md5-hash) | Calculate MD5 hash of text |
+| [Random Number](#random-number) | Generate random number in range |
+| [Random String](#random-string) | Generate random string or UUID |
 
 ## Modules
 
-### समय जोड़ें
+### Add Time
 
 `datetime.add`
 
-दिनांक/समय में समय जोड़ें
+Add time to datetime
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ Datetime operations, delay, MD5 hash, and random utilities.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | ऑपरेशन परिणाम |
-| `timestamp` | number | ऑपरेशन परिणाम |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Add 7 days
 
@@ -56,11 +56,11 @@ hours: 2
 minutes: 30
 ```
 
-### दिनांक/समय फ़ॉर्मेट करें
+### Format DateTime
 
 `datetime.format`
 
-दिनांक/समय को स्ट्रिंग में फ़ॉर्मेट करें
+Format datetime to string
 
 **Parameters:**
 
@@ -73,8 +73,8 @@ minutes: 30
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | ऑपरेशन परिणाम |
-| `timestamp` | number | ऑपरेशन परिणाम |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Format current time
 
@@ -90,11 +90,11 @@ datetime: 2024-01-15T10:30:00
 format: %B %d, %Y
 ```
 
-### दिनांक/समय पार्स करें
+### Parse DateTime
 
 `datetime.parse`
 
-स्ट्रिंग को दिनांक/समय में पार्स करें
+Parse string to datetime
 
 **Parameters:**
 
@@ -107,14 +107,14 @@ format: %B %d, %Y
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | ऑपरेशन परिणाम |
-| `timestamp` | number | ऑपरेशन परिणाम |
-| `year` | number | ऑपरेशन परिणाम |
-| `month` | number | Unix टाइमस्टैम्प |
-| `day` | number | वर्ष घटक |
-| `hour` | number | माह घटक |
-| `minute` | number | दिन घटक |
-| `second` | number | घंटा घटक |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
+| `year` | number | Year component |
+| `month` | number | Month component |
+| `day` | number | Day component |
+| `hour` | number | Hour component |
+| `minute` | number | Minute component |
+| `second` | number | Second component |
 
 **Example:** Parse ISO format
 
@@ -129,11 +129,11 @@ datetime_string: January 15, 2024
 format: %B %d, %Y
 ```
 
-### समय घटाएं
+### Subtract Time
 
 `datetime.subtract`
 
-दिनांक/समय से समय घटाएं
+Subtract time from datetime
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ format: %B %d, %Y
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | ऑपरेशन परिणाम |
-| `timestamp` | number | ऑपरेशन परिणाम |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Subtract 7 days
 
@@ -166,28 +166,28 @@ datetime: 2024-01-15T10:00:00
 hours: 1
 ```
 
-### वर्तमान दिनांक/समय
+### Current Date/Time
 
 `utility.datetime.now`
 
-वर्तमान दिनांक और समय प्राप्त करें
+Get current date and time
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | आउटपुट फ़ॉर्मेट |
-| `custom_format` | string | No | - | Python strftime फ़ॉर्मेट (यदि format=custom) |
-| `timezone` | string | No | `UTC` | Python strftime फ़ॉर्मेट (यदि format=custom) |
+| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | Output format |
+| `custom_format` | string | No | - | Python strftime format (if format=custom) |
+| `timezone` | string | No | `UTC` | Timezone (default: UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | टाइमज़ोन (डिफ़ॉल्ट: UTC) |
-| `datetime` | string | ऑपरेशन स्थिति (सफलता/त्रुटि) |
-| `timestamp` | number | ऑपरेशन स्थिति (सफलता/त्रुटि) |
-| `iso` | string | फ़ॉर्मेट किया गया दिनांक/समय |
+| `status` | string | Operation status (success/error) |
+| `datetime` | string | Formatted date/time |
+| `timestamp` | number | Unix timestamp |
+| `iso` | string | ISO format |
 
 **Example:** Example
 
@@ -201,25 +201,25 @@ format: iso
 format: unix
 ```
 
-### विलंब/स्लीप
+### Delay/Sleep
 
 `utility.delay`
 
-निर्दिष्ट अवधि के लिए वर्कफ़्लो निष्पादन रोकें
+Pause workflow execution for specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `duration_ms` | number | No | `1000` | मिलीसेकंड में कितनी देर प्रतीक्षा करें |
-| `duration_seconds` | number | No | - | विकल्प: सेकंड में अवधि |
+| `duration_ms` | number | No | `1000` | How long to wait in milliseconds |
+| `duration_seconds` | number | No | - | Alternative: duration in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | विकल्प: सेकंड में अवधि |
-| `waited_ms` | number | ऑपरेशन स्थिति (सफलता/त्रुटि) |
+| `status` | string | Operation status (success/error) |
+| `waited_ms` | number | Actual wait time in ms |
 
 **Example:** Example
 
@@ -233,25 +233,25 @@ duration_seconds: 2
 duration_ms: 500
 ```
 
-### MD5 हैश
+### MD5 Hash
 
 `utility.hash.md5`
 
-टेक्स्ट का MD5 हैश गणना करें
+Calculate MD5 hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | हैश करने के लिए टेक्स्ट |
-| `encoding` | string | No | `utf-8` | हैश करने के लिए टेक्स्ट |
+| `text` | text | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | टेक्स्ट एन्कोडिंग |
-| `hash` | string | टेक्स्ट एन्कोडिंग |
+| `status` | string | Operation status (success/error) |
+| `hash` | string | MD5 hash (hexadecimal) |
 
 **Example:** Example
 
@@ -259,26 +259,26 @@ duration_ms: 500
 text: Hello World
 ```
 
-### रैंडम नंबर
+### Random Number
 
 `utility.random.number`
 
-रेंज में रैंडम नंबर जनरेट करें
+Generate random number in range
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `min` | number | No | `0` | न्यूनतम मान (समावेशी) |
-| `max` | number | No | `100` | न्यूनतम मान (समावेशी) |
-| `decimals` | number | No | `0` | अधिकतम मान (समावेशी) |
+| `min` | number | No | `0` | Minimum value (inclusive) |
+| `max` | number | No | `100` | Maximum value (inclusive) |
+| `decimals` | number | No | `0` | Number of decimal places (0 for integers) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | दशमलव स्थानों की संख्या (पूर्णांक के लिए 0) |
-| `value` | number | ऑपरेशन स्थिति (सफलता/त्रुटि) |
+| `status` | string | Operation status (success/error) |
+| `value` | number | Random number |
 
 **Example:** Example
 
@@ -296,25 +296,25 @@ max: 1
 decimals: 2
 ```
 
-### रैंडम स्ट्रिंग
+### Random String
 
 `utility.random.string`
 
-रैंडम स्ट्रिंग या UUID जनरेट करें
+Generate random string or UUID
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | No | `16` | स्ट्रिंग लंबाई |
-| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | स्ट्रिंग लंबाई |
+| `length` | number | No | `16` | String length |
+| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | Which characters to use |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ऑपरेशन स्थिति (सफलता/त्रुटि) |
-| `value` | string | ऑपरेशन स्थिति (सफलता/त्रुटि) |
+| `status` | string | Operation status (success/error) |
+| `value` | string | Random string |
 
 **Example:** Example
 

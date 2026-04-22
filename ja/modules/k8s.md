@@ -6,19 +6,19 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Module | Description |
 |--------|-------------|
-| [マニフェストを適用](#マニフェストを適用) | kubectl applyでKubernetesマニフェストを適用 |
-| [リソースを説明](#リソースを説明) | Kubernetesリソースを詳細に説明 |
-| [ポッドを取得](#ポッドを取得) | ネームスペース内のKubernetesポッドを一覧表示 |
-| [ポッドログを取得](#ポッドログを取得) | Kubernetesポッドからログを取得 |
-| [デプロイメントをスケール](#デプロイメントをスケール) | 指定されたレプリカ数にKubernetesデプロイメントをスケール |
+| [Apply Manifest](#apply-manifest) | Apply a Kubernetes manifest via kubectl apply |
+| [Describe Resource](#describe-resource) | Describe a Kubernetes resource in detail |
+| [Get Pods](#get-pods) | List Kubernetes pods in a namespace |
+| [Get Pod Logs](#get-pod-logs) | Retrieve logs from a Kubernetes pod |
+| [Scale Deployment](#scale-deployment) | Scale a Kubernetes deployment to a specified replica count |
 
 ## Modules
 
-### マニフェストを適用
+### Apply Manifest
 
 `k8s.apply`
 
-kubectl applyでKubernetesマニフェストを適用
+Apply a Kubernetes manifest via kubectl apply
 
 **Parameters:**
 
@@ -32,16 +32,16 @@ kubectl applyでKubernetesマニフェストを適用
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `kind` | string | リソースの種類（例：Deployment, Service） |
-| `name` | string | リソース名 |
-| `namespace` | string | リソースのネームスペース |
-| `action` | string | 実行されたアクション（作成, 設定, 変更なし） |
+| `kind` | string | Resource kind (e.g. Deployment, Service) |
+| `name` | string | Resource name |
+| `namespace` | string | Resource namespace |
+| `action` | string | Action taken (created, configured, unchanged) |
 
-### リソースを説明
+### Describe Resource
 
 `k8s.describe`
 
-Kubernetesリソースを詳細に説明
+Describe a Kubernetes resource in detail
 
 **Parameters:**
 
@@ -56,16 +56,16 @@ Kubernetesリソースを詳細に説明
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `resource_type` | string | 説明されたリソースの種類 |
-| `name` | string | リソース名 |
-| `namespace` | string | Kubernetesネームスペース |
-| `description` | string | kubectl describeの完全な出力テキスト |
+| `resource_type` | string | Resource type that was described |
+| `name` | string | Resource name |
+| `namespace` | string | Kubernetes namespace |
+| `description` | string | Full kubectl describe output text |
 
-### ポッドを取得
+### Get Pods
 
 `k8s.get_pods`
 
-ネームスペース内のKubernetesポッドを一覧表示
+List Kubernetes pods in a namespace
 
 **Parameters:**
 
@@ -79,14 +79,14 @@ Kubernetesリソースを詳細に説明
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pods` | array | ステータス情報を含むポッドの一覧 |
-| `count` | number | 見つかったポッドの総数 |
+| `pods` | array | List of pods with status information |
+| `count` | number | Total number of pods found |
 
-### ポッドログを取得
+### Get Pod Logs
 
 `k8s.logs`
 
-Kubernetesポッドからログを取得
+Retrieve logs from a Kubernetes pod
 
 **Parameters:**
 
@@ -103,15 +103,15 @@ Kubernetesポッドからログを取得
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pod` | string | ポッド名 |
-| `logs` | string | ログ出力テキスト |
-| `lines` | number | 返されたログ行数 |
+| `pod` | string | Pod name |
+| `logs` | string | Log output text |
+| `lines` | number | Number of log lines returned |
 
-### デプロイメントをスケール
+### Scale Deployment
 
 `k8s.scale`
 
-指定されたレプリカ数にKubernetesデプロイメントをスケール
+Scale a Kubernetes deployment to a specified replica count
 
 **Parameters:**
 
@@ -126,7 +126,7 @@ Kubernetesポッドからログを取得
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deployment` | string | デプロイメント名 |
-| `replicas` | number | 要求されたレプリカ数 |
-| `namespace` | string | Kubernetesネームスペース |
-| `scaled` | boolean | スケール操作が成功したかどうか |
+| `deployment` | string | Deployment name |
+| `replicas` | number | Requested replica count |
+| `namespace` | string | Kubernetes namespace |
+| `scaled` | boolean | Whether the scale operation succeeded |

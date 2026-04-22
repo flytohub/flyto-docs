@@ -6,41 +6,41 @@ Google Sheets, Notion, Airtable, and Stripe integrations.
 
 | Module | Description |
 |--------|-------------|
-| [Đọc Google Sheets](#đọc-google-sheets) | Đọc dữ liệu từ bảng tính Google Sheets |
-| [Ghi Google Sheets](#ghi-google-sheets) | Ghi dữ liệu vào bảng tính Google Sheets |
-| [Tạo trang Notion](#tạo-trang-notion) | Tạo trang mới trong cơ sở dữ liệu Notion |
-| [Truy vấn cơ sở dữ liệu Notion](#truy-vấn-cơ-sở-dữ-liệu-notion) | Truy vấn trang từ cơ sở dữ liệu Notion với bộ lọc và sắp xếp |
-| [Stripe Tạo thanh toán](#stripe-tạo-thanh-toán) | Tạo payment intent với Stripe |
-| [Stripe Lấy khách hàng](#stripe-lấy-khách-hàng) | Lấy thông tin khách hàng từ Stripe |
-| [Stripe Liệt kê giao dịch](#stripe-liệt-kê-giao-dịch) | Liệt kê các giao dịch gần đây từ Stripe |
-| [Airtable Tạo bản ghi](#airtable-tạo-bản-ghi) | Tạo bản ghi mới trong bảng Airtable |
-| [Airtable Đọc bản ghi](#airtable-đọc-bản-ghi) | Đọc bản ghi từ bảng Airtable |
-| [Airtable Cập nhật bản ghi](#airtable-cập-nhật-bản-ghi) | Cập nhật bản ghi hiện có trong bảng Airtable |
+| [Google Sheets Read](#google-sheets-read) | Read data from Google Sheets spreadsheet |
+| [Google Sheets Write](#google-sheets-write) | Write data to Google Sheets spreadsheet |
+| [Notion Create Page](#notion-create-page) | Create a new page in Notion database |
+| [Notion Query Database](#notion-query-database) | Query pages from Notion database with filters and sorting |
+| [Stripe Create Payment](#stripe-create-payment) | Create a payment intent with Stripe |
+| [Stripe Get Customer](#stripe-get-customer) | Retrieve customer information from Stripe |
+| [Stripe List Charges](#stripe-list-charges) | List recent charges from Stripe |
+| [Airtable Create Record](#airtable-create-record) | Create a new record in Airtable table |
+| [Airtable Read Records](#airtable-read-records) | Read records from Airtable table |
+| [Airtable Update Record](#airtable-update-record) | Update an existing record in Airtable table |
 
 ## Modules
 
-### Đọc Google Sheets
+### Google Sheets Read
 
 `api.google_sheets.read`
 
-Đọc dữ liệu từ bảng tính Google Sheets
+Read data from Google Sheets spreadsheet
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `credentials` | object | No | - | Thông tin xác thực JSON tài khoản dịch vụ Google (mặc định là env.GOOGLE_CREDENTIALS_JSON) |
-| `spreadsheet_id` | string | Yes | - | ID bảng tính Google Sheets (từ URL) |
-| `range` | string | Yes | - | Phạm vi ký hiệu A1 để đọc |
-| `include_header` | boolean | No | `True` | Phân tích hàng đầu tiên làm tiêu đề cột |
+| `credentials` | object | No | - | Google service account JSON credentials (defaults to env.GOOGLE_CREDENTIALS_JSON) |
+| `spreadsheet_id` | string | Yes | - | Google Sheets spreadsheet ID (from URL) |
+| `range` | string | Yes | - | A1 notation range to read |
+| `include_header` | boolean | No | `True` | Parse first row as column headers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `values` | array | Phân tích hàng đầu tiên làm tiêu đề cột |
-| `data` | array | Mảng các hàng (mỗi hàng là mảng các giá trị) |
-| `row_count` | number | Mảng các hàng (mỗi hàng là mảng các giá trị) |
+| `values` | array | Array of rows (each row is array of values) |
+| `data` | array | Array of row objects (if include_header=true) |
+| `row_count` | number | Number of rows read |
 
 **Example:** Read with headers
 
@@ -50,30 +50,30 @@ range: Sheet1!A1:D100
 include_header: true
 ```
 
-### Ghi Google Sheets
+### Google Sheets Write
 
 `api.google_sheets.write`
 
-Ghi dữ liệu vào bảng tính Google Sheets
+Write data to Google Sheets spreadsheet
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `credentials` | object | No | - | Thông tin xác thực JSON tài khoản dịch vụ Google (mặc định là env.GOOGLE_CREDENTIALS_JSON) |
-| `spreadsheet_id` | string | Yes | - | ID bảng tính Google Sheets (từ URL) |
-| `range` | string | Yes | - | ID bảng tính Google Sheets (từ URL) |
-| `values` | array | Yes | - | Phạm vi ký hiệu A1 để ghi |
-| `value_input_option` | string | No | `USER_ENTERED` | Cách diễn giải giá trị đầu vào |
+| `credentials` | object | No | - | Google service account JSON credentials (defaults to env.GOOGLE_CREDENTIALS_JSON) |
+| `spreadsheet_id` | string | Yes | - | Google Sheets spreadsheet ID (from URL) |
+| `range` | string | Yes | - | A1 notation range to write |
+| `values` | array | Yes | - | Array of rows to write (each row is array of values) |
+| `value_input_option` | string | No | `USER_ENTERED` | How to interpret input values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `updated_range` | string | Phạm vi đã cập nhật |
-| `updated_rows` | number | Phạm vi đã cập nhật |
-| `updated_columns` | number | Phạm vi đã cập nhật |
-| `updated_cells` | number | Số hàng đã cập nhật |
+| `updated_range` | string | Range that was updated |
+| `updated_rows` | number | Number of rows updated |
+| `updated_columns` | number | Number of columns updated |
+| `updated_cells` | number | Number of cells updated |
 
 **Example:** Write data with headers
 
@@ -83,28 +83,28 @@ range: Sheet1!A1
 values: [["Name", "Email", "Status"], ["John Doe", "john@example.com", "Active"], ["Jane Smith", "jane@example.com", "Active"]]
 ```
 
-### Tạo trang Notion
+### Notion Create Page
 
 `api.notion.create_page`
 
-Tạo trang mới trong cơ sở dữ liệu Notion
+Create a new page in Notion database
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Token tích hợp Notion (mặc định là env.NOTION_API_KEY) |
-| `database_id` | string | Yes | - | ID cơ sở dữ liệu Notion (chuỗi hex 32 ký tự) |
-| `properties` | object | Yes | - | Thuộc tính trang (tiêu đề, văn bản, select, v.v.) |
-| `content` | array | No | - | Thuộc tính trang (tiêu đề, văn bản, select, v.v.) |
+| `api_key` | string | No | - | Notion integration token (defaults to env.NOTION_API_KEY) |
+| `database_id` | string | Yes | - | Notion database ID (32-char hex string) |
+| `properties` | object | Yes | - | Page properties (title, text, select, etc.) |
+| `content` | array | No | - | Page content as Notion blocks |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `page_id` | string | Nội dung trang dưới dạng blocks Notion |
-| `url` | string | Nội dung trang dưới dạng blocks Notion |
-| `created_time` | string | ID trang đã tạo |
+| `page_id` | string | Created page ID |
+| `url` | string | URL to the created page |
+| `created_time` | string | Page creation timestamp |
 
 **Example:** Create task page
 
@@ -113,29 +113,29 @@ database_id: your_database_id
 properties: {"Name": {"title": [{"text": {"content": "New Task"}}]}, "Status": {"select": {"name": "In Progress"}}, "Priority": {"select": {"name": "High"}}}
 ```
 
-### Truy vấn cơ sở dữ liệu Notion
+### Notion Query Database
 
 `api.notion.query_database`
 
-Truy vấn trang từ cơ sở dữ liệu Notion với bộ lọc và sắp xếp
+Query pages from Notion database with filters and sorting
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Token tích hợp Notion (mặc định là env.NOTION_API_KEY) |
-| `database_id` | string | Yes | - | ID cơ sở dữ liệu Notion |
-| `filter` | object | No | - | ID cơ sở dữ liệu Notion |
-| `sorts` | array | No | - | Điều kiện lọc cho truy vấn |
-| `page_size` | number | No | `100` | Thứ tự sắp xếp kết quả |
+| `api_key` | string | No | - | Notion integration token (defaults to env.NOTION_API_KEY) |
+| `database_id` | string | Yes | - | Notion database ID |
+| `filter` | object | No | - | Filter conditions for query |
+| `sorts` | array | No | - | Sort order for results |
+| `page_size` | number | No | `100` | Number of results to return |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `results` | array | Số kết quả trả về |
-| `count` | number | Mảng các đối tượng trang |
-| `has_more` | boolean | Mảng các đối tượng trang |
+| `results` | array | Array of page objects |
+| `count` | number | Number of results returned |
+| `has_more` | boolean | Whether there are more results |
 
 **Example:** Query all pages
 
@@ -151,31 +151,31 @@ filter: {"property": "Status", "select": {"equals": "In Progress"}}
 sorts: [{"property": "Created", "direction": "descending"}]
 ```
 
-### Stripe Tạo thanh toán
+### Stripe Create Payment
 
 `payment.stripe.create_payment`
 
-Tạo payment intent với Stripe
+Create a payment intent with Stripe
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Khóa bí mật Stripe (hoặc sử dụng biến env STRIPE_API_KEY) |
-| `amount` | number | Yes | - | Khóa bí mật Stripe (hoặc sử dụng biến env STRIPE_API_KEY) |
-| `currency` | string | No | `usd` | Số tiền tính bằng cent (ví dụ: 1000 cho $10.00) |
-| `description` | string | No | - | Mã tiền tệ ba chữ cái (ví dụ: usd, eur) |
-| `customer` | string | No | - | Mô tả thanh toán |
+| `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `amount` | number | Yes | - | Amount in cents (e.g. 1000 for $10.00) |
+| `currency` | string | No | `usd` | Three-letter currency code (e.g. usd, eur) |
+| `description` | string | No | - | Payment description |
+| `customer` | string | No | - | Stripe customer ID (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | ID khách hàng Stripe (tùy chọn) |
-| `amount` | number | ID khách hàng Stripe (tùy chọn) |
-| `currency` | string | Định danh duy nhất |
-| `status` | string | Số tiền thanh toán |
-| `client_secret` | string | Mã tiền tệ |
+| `id` | string | Unique identifier |
+| `amount` | number | Payment amount |
+| `currency` | string | Currency code |
+| `status` | string | Operation status (success/error) |
+| `client_secret` | string | Client secret for payment |
 
 **Example:** Create $50 payment
 
@@ -194,18 +194,18 @@ customer: cus_XXXXXXXXXXXXXXX
 description: Subscription payment
 ```
 
-### Stripe Lấy khách hàng
+### Stripe Get Customer
 
 `payment.stripe.get_customer`
 
-Lấy thông tin khách hàng từ Stripe
+Retrieve customer information from Stripe
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Khóa bí mật Stripe (hoặc sử dụng biến env STRIPE_API_KEY) |
-| `customer_id` | string | Yes | - | Khóa bí mật Stripe (hoặc sử dụng biến env STRIPE_API_KEY) |
+| `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `customer_id` | string | Yes | - | Stripe customer ID |
 
 **Output:**
 
@@ -223,19 +223,19 @@ Lấy thông tin khách hàng từ Stripe
 customer_id: cus_XXXXXXXXXXXXXXX
 ```
 
-### Stripe Liệt kê giao dịch
+### Stripe List Charges
 
 `payment.stripe.list_charges`
 
-Liệt kê các giao dịch gần đây từ Stripe
+List recent charges from Stripe
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Khóa bí mật Stripe (hoặc sử dụng biến env STRIPE_API_KEY) |
-| `limit` | number | No | `10` | Khóa bí mật Stripe (hoặc sử dụng biến env STRIPE_API_KEY) |
-| `customer` | string | No | - | Lọc theo ID khách hàng (tùy chọn) |
+| `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `limit` | number | No | `10` | Number of charges to return (1-100) |
+| `customer` | string | No | - | Filter by customer ID (optional) |
 
 **Output:**
 
@@ -258,20 +258,20 @@ customer: cus_XXXXXXXXXXXXXXX
 limit: 50
 ```
 
-### Airtable Tạo bản ghi
+### Airtable Create Record
 
 `productivity.airtable.create`
 
-Tạo bản ghi mới trong bảng Airtable
+Create a new record in Airtable table
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Khóa API Airtable (hoặc sử dụng biến env AIRTABLE_API_KEY) |
-| `base_id` | string | Yes | - | Khóa API Airtable (hoặc sử dụng biến env AIRTABLE_API_KEY) |
-| `table_name` | string | Yes | - | ID cơ sở Airtable |
-| `fields` | json | Yes | - | Tên bảng |
+| `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `fields` | json | Yes | - | Record fields as JSON object |
 
 **Output:**
 
@@ -297,28 +297,28 @@ table_name: Tasks
 fields: {"Title": "Review PR", "Assignee": "Alice", "Priority": "High"}
 ```
 
-### Airtable Đọc bản ghi
+### Airtable Read Records
 
 `productivity.airtable.read`
 
-Đọc bản ghi từ bảng Airtable
+Read records from Airtable table
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Khóa API Airtable (hoặc sử dụng biến env AIRTABLE_API_KEY) |
-| `base_id` | string | Yes | - | Khóa API Airtable (hoặc sử dụng biến env AIRTABLE_API_KEY) |
-| `table_name` | string | Yes | - | ID cơ sở Airtable |
-| `view` | string | No | - | Tên bảng |
-| `max_records` | number | No | `100` | Tên view để sử dụng (tùy chọn) |
+| `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `view` | string | No | - | View name to use (optional) |
+| `max_records` | number | No | `100` | Maximum number of records to return |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `records` | array | Số bản ghi tối đa trả về |
-| `count` | number | Các bản ghi |
+| `records` | array | The records |
+| `count` | number | Number of items |
 
 **Example:** Read all customers
 
@@ -337,21 +337,21 @@ view: Active Tasks
 max_records: 50
 ```
 
-### Airtable Cập nhật bản ghi
+### Airtable Update Record
 
 `productivity.airtable.update`
 
-Cập nhật bản ghi hiện có trong bảng Airtable
+Update an existing record in Airtable table
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Khóa API Airtable (hoặc sử dụng biến env AIRTABLE_API_KEY) |
-| `base_id` | string | Yes | - | Khóa API Airtable (hoặc sử dụng biến env AIRTABLE_API_KEY) |
-| `table_name` | string | Yes | - | ID cơ sở Airtable |
-| `record_id` | string | Yes | - | Tên bảng |
-| `fields` | json | Yes | - | ID bản ghi cần cập nhật |
+| `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `record_id` | string | Yes | - | ID of the record to update |
+| `fields` | json | Yes | - | Fields to update as JSON object |
 
 **Output:**
 

@@ -6,8 +6,8 @@ Execute GraphQL queries and mutations.
 
 | Module | Description |
 |--------|-------------|
-| [GraphQL Mutation](#graphql-mutation) | ดำเนินการ GraphQL mutation กับ endpoint |
-| [GraphQL Query](#graphql-query) | ดำเนินการ GraphQL query กับ endpoint |
+| [GraphQL Mutation](#graphql-mutation) | Execute a GraphQL mutation against an endpoint |
+| [GraphQL Query](#graphql-query) | Execute a GraphQL query against an endpoint |
 
 ## Modules
 
@@ -15,25 +15,25 @@ Execute GraphQL queries and mutations.
 
 `graphql.mutation`
 
-ดำเนินการ GraphQL mutation กับ endpoint
+Execute a GraphQL mutation against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL ของ GraphQL endpoint |
-| `mutation` | string | Yes | - | สตริงของ GraphQL mutation |
-| `variables` | object | No | - | ตัวแปรของ GraphQL mutation ในรูปแบบคู่คีย์-ค่า |
-| `headers` | object | No | - | HTTP headers เพิ่มเติมที่จะส่งพร้อมกับคำขอ |
-| `auth_token` | string | No | - | Bearer token สำหรับการยืนยันตัวตน (เพิ่มเป็น Authorization header) |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `mutation` | string | Yes | - | GraphQL mutation string |
+| `variables` | object | No | - | GraphQL mutation variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | ข้อมูลการตอบกลับของ GraphQL |
-| `errors` | array | ข้อผิดพลาดของ GraphQL (null ถ้าไม่มีข้อผิดพลาด) |
-| `status_code` | number | รหัสสถานะ HTTP |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Create user mutation
 
@@ -47,25 +47,25 @@ variables: {"input": {"name": "John", "email": "john@example.com"}}
 
 `graphql.query`
 
-ดำเนินการ GraphQL query กับ endpoint
+Execute a GraphQL query against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL ของ GraphQL endpoint |
-| `query` | string | Yes | - | สตริงของ GraphQL query |
-| `variables` | object | No | - | ตัวแปรของ GraphQL query ในรูปแบบคู่คีย์-ค่า |
-| `headers` | object | No | - | HTTP headers เพิ่มเติมที่จะส่งพร้อมกับคำขอ |
-| `auth_token` | string | No | - | Bearer token สำหรับการยืนยันตัวตน (เพิ่มเป็น Authorization header) |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `query` | string | Yes | - | GraphQL query string |
+| `variables` | object | No | - | GraphQL query variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | ข้อมูลการตอบกลับของ GraphQL |
-| `errors` | array | ข้อผิดพลาดของ GraphQL (null ถ้าไม่มีข้อผิดพลาด) |
-| `status_code` | number | รหัสสถานะ HTTP |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Simple query
 

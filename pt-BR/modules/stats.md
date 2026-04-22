@@ -28,15 +28,15 @@ Calculate arithmetic mean of numbers
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `numbers` | array | Yes | - | Array of numbers |
-| `precision` | number | No | `2` | Array of numbers |
+| `precision` | number | No | `2` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `mean` | number | Decimal places |
-| `count` | number | Arithmetic mean |
-| `sum` | number | Arithmetic mean |
+| `mean` | number | Arithmetic mean |
+| `count` | number | Number of values |
+| `sum` | number | Sum of values |
 
 ### Median
 
@@ -54,8 +54,8 @@ Calculate median (middle value) of numbers
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `median` | number | Array of numbers |
-| `count` | number | Median value |
+| `median` | number | Median value |
+| `count` | number | Number of values |
 
 ### Min/Max
 
@@ -73,11 +73,11 @@ Find minimum and maximum values
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `min` | number | Array of numbers |
-| `max` | number | Minimum value |
-| `range` | number | Minimum value |
-| `min_index` | number | Maximum value |
-| `max_index` | number | Range (max - min) |
+| `min` | number | Minimum value |
+| `max` | number | Maximum value |
+| `range` | number | Range (max - min) |
+| `min_index` | number | Index of minimum |
+| `max_index` | number | Index of maximum |
 
 ### Mode
 
@@ -90,15 +90,15 @@ Calculate mode (most frequent value)
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `values` | array | Yes | - | Array of values |
-| `all_modes` | boolean | No | `False` | Array of values |
+| `all_modes` | boolean | No | `False` | Return all modes if multiple exist |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `mode` | any | Return all modes if multiple exist |
-| `frequency` | number | Most frequent value(s) |
-| `count` | number | Most frequent value(s) |
+| `mode` | any | Most frequent value(s) |
+| `frequency` | number | Frequency of mode |
+| `count` | number | Number of values |
 
 ### Percentile
 
@@ -111,14 +111,14 @@ Calculate percentile of numbers
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `numbers` | array | Yes | - | Array of numbers |
-| `percentile` | number | Yes | `50` | Array of numbers |
+| `percentile` | number | Yes | `50` | Percentile to calculate (0-100) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | number | Percentile to calculate (0-100) |
-| `percentile` | number | Percentile value |
+| `value` | number | Percentile value |
+| `percentile` | number | Percentile requested |
 
 ### Standard Deviation
 
@@ -132,15 +132,15 @@ Calculate standard deviation of numbers
 |------|------|----------|---------|-------------|
 | `numbers` | array | Yes | - | Array of numbers |
 | `population` | boolean | No | `False` | Use population formula (divide by N instead of N-1) |
-| `precision` | number | No | `4` | Use population formula (divide by N instead of N-1) |
+| `precision` | number | No | `4` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `std_dev` | number | Decimal places |
-| `variance` | number | Standard deviation |
-| `mean` | number | Standard deviation |
+| `std_dev` | number | Standard deviation |
+| `variance` | number | Variance |
+| `mean` | number | Mean value |
 
 ### Sum
 
@@ -158,8 +158,8 @@ Calculate sum of numbers
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sum` | number | Array of numbers |
-| `count` | number | Sum of numbers |
+| `sum` | number | Sum of numbers |
+| `count` | number | Number of values |
 
 ### Variance
 
@@ -172,12 +172,12 @@ Calculate variance of numbers
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `numbers` | array | Yes | - | Array of numbers |
-| `population` | boolean | No | `False` | Array of numbers |
-| `precision` | number | No | `4` | Use population formula |
+| `population` | boolean | No | `False` | Use population formula |
+| `precision` | number | No | `4` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `variance` | number | Decimal places |
-| `mean` | number | Variance value |
+| `variance` | number | Variance value |
+| `mean` | number | Mean value |

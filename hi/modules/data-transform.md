@@ -6,32 +6,32 @@ CSV, JSON, XML, YAML parsing, generation, and pipeline transformations.
 
 | Module | Description |
 |--------|-------------|
-| [CSV फ़ाइल पढ़ें](#csv-फ़ाइल-पढ़ें) | CSV फ़ाइल पढ़ें और ऑब्जेक्ट सरणी में पार्स करें |
-| [CSV फ़ाइल लिखें](#csv-फ़ाइल-लिखें) | ऑब्जेक्ट सरणी को CSV फ़ाइल में लिखें |
+| [Read CSV File](#read-csv-file) | Read and parse CSV file into array of objects |
+| [Write CSV File](#write-csv-file) | Write array of objects to CSV file |
 | [Deduplicate Records](#deduplicate-records) | Remove duplicate records from an array by key fields. Optionally persists seen hashes to disk or execution context for cross-run dedup. Use storage=context in cloud/stateless environments where disk is ephemeral. |
-| [JSON पार्स करें](#json-पार्स-करें) | JSON स्ट्रिंग को ऑब्जेक्ट में पार्स करें |
-| [JSON स्ट्रिंगिफाई](#json-स्ट्रिंगिफाई) | ऑब्जेक्ट को JSON स्ट्रिंग में बदलें |
-| [JSON से CSV](#json-से-csv) | JSON डेटा या फ़ाइलों को CSV फ़ॉर्मेट में बदलें |
-| [डेटा पाइपलाइन](#डेटा-पाइपलाइन) | एक ही चरण में कई डेटा रूपांतरणों को जोड़ें |
-| [टेक्स्ट टेम्पलेट](#टेक्स्ट-टेम्पलेट) | टेक्स्ट टेम्पलेट को वेरिएबल्स से भरें |
+| [Parse JSON](#parse-json) | Parse JSON string into object |
+| [JSON Stringify](#json-stringify) | Convert object to JSON string |
+| [JSON to CSV](#json-to-csv) | Convert JSON data or files to CSV format |
+| [Data Pipeline](#data-pipeline) | Chain multiple data transformations in a single step |
+| [Text Template](#text-template) | Fill text template with variables |
 | [Validate Records](#validate-records) | Validate extracted records against field rules. Splits output into valid and invalid arrays. |
-| [XML बनाएं](#xml-बनाएं) | ऑब्जेक्ट या एरे से XML स्ट्रिंग बनाएं |
-| [XML पार्स करें](#xml-पार्स-करें) | XML स्ट्रिंग को ऑब्जेक्ट में पार्स करें |
-| [YAML बनाएं](#yaml-बनाएं) | ऑब्जेक्ट या एरे से YAML स्ट्रिंग बनाएं |
-| [YAML पार्स करें](#yaml-पार्स-करें) | YAML स्ट्रिंग को ऑब्जेक्ट में पार्स करें |
-| [ऑब्जेक्ट कुंजियां](#ऑब्जेक्ट-कुंजियां) | ऑब्जेक्ट से सभी कुंजियां प्राप्त करें |
-| [ऑब्जेक्ट मर्ज](#ऑब्जेक्ट-मर्ज) | कई ऑब्जेक्ट को एक में मर्ज करें |
-| [ऑब्जेक्ट ओमिट](#ऑब्जेक्ट-ओमिट) | ऑब्जेक्ट से विशिष्ट कुंजियां हटाएं |
-| [ऑब्जेक्ट पिक](#ऑब्जेक्ट-पिक) | ऑब्जेक्ट से विशिष्ट कुंजियां चुनें |
-| [ऑब्जेक्ट मान](#ऑब्जेक्ट-मान) | ऑब्जेक्ट से सभी मान प्राप्त करें |
+| [Generate XML](#generate-xml) | Generate XML string from Python dict |
+| [Parse XML](#parse-xml) | Parse XML string or file into Python dict |
+| [Generate YAML](#generate-yaml) | Generate YAML string from Python object |
+| [Parse YAML](#parse-yaml) | Parse YAML string or file into Python object |
+| [Object Keys](#object-keys) | Get all keys from an object |
+| [Object Merge](#object-merge) | Merge multiple objects into one |
+| [Object Omit](#object-omit) | Omit specific keys from an object |
+| [Object Pick](#object-pick) | Pick specific keys from an object |
+| [Object Values](#object-values) | Get all values from an object |
 
 ## Modules
 
-### CSV फ़ाइल पढ़ें
+### Read CSV File
 
 `data.csv.read`
 
-CSV फ़ाइल पढ़ें और ऑब्जेक्ट सरणी में पार्स करें
+Read and parse CSV file into array of objects
 
 **Parameters:**
 
@@ -46,10 +46,10 @@ CSV फ़ाइल पढ़ें और ऑब्जेक्ट सरणी
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ऑपरेशन स्थिति |
-| `data` | array | ऑपरेशन स्थिति |
-| `rows` | number | ऑपरेशन स्थिति |
-| `columns` | array | पंक्ति ऑब्जेक्ट की सरणी |
+| `status` | string | Operation status |
+| `data` | array | Array of row objects |
+| `rows` | number | Number of rows |
+| `columns` | array | Column names |
 
 **Example:** Example
 
@@ -59,11 +59,11 @@ delimiter: ,
 encoding: utf-8
 ```
 
-### CSV फ़ाइल लिखें
+### Write CSV File
 
 `data.csv.write`
 
-ऑब्जेक्ट सरणी को CSV फ़ाइल में लिखें
+Write array of objects to CSV file
 
 **Parameters:**
 
@@ -78,9 +78,9 @@ encoding: utf-8
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ऑपरेशन स्थिति |
-| `file_path` | string | ऑपरेशन स्थिति |
-| `rows_written` | number | ऑपरेशन स्थिति |
+| `status` | string | Operation status |
+| `file_path` | string | Path to written file |
+| `rows_written` | number | Number of rows written |
 
 **Example:** Example
 
@@ -130,11 +130,11 @@ keys: ["url"]
 hash_file: /tmp/seen.json
 ```
 
-### JSON पार्स करें
+### Parse JSON
 
 `data.json.parse`
 
-JSON स्ट्रिंग को ऑब्जेक्ट में पार्स करें
+Parse JSON string into object
 
 **Parameters:**
 
@@ -146,8 +146,8 @@ JSON स्ट्रिंग को ऑब्जेक्ट में पा�
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ऑपरेशन स्थिति |
-| `data` | object | ऑपरेशन स्थिति |
+| `status` | string | Operation status |
+| `data` | object | Parsed object |
 
 **Example:** Example
 
@@ -155,11 +155,11 @@ JSON स्ट्रिंग को ऑब्जेक्ट में पा�
 json_string: {"name": "John", "age": 30}
 ```
 
-### JSON स्ट्रिंगिफाई
+### JSON Stringify
 
 `data.json.stringify`
 
-ऑब्जेक्ट को JSON स्ट्रिंग में बदलें
+Convert object to JSON string
 
 **Parameters:**
 
@@ -173,8 +173,8 @@ json_string: {"name": "John", "age": 30}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ऑपरेशन स्थिति |
-| `json` | string | ऑपरेशन स्थिति |
+| `status` | string | Operation status |
+| `json` | string | JSON string |
 
 **Example:** Example
 
@@ -183,11 +183,11 @@ data: {"name": "John", "age": 30}
 pretty: true
 ```
 
-### JSON से CSV
+### JSON to CSV
 
 `data.json_to_csv`
 
-JSON डेटा या फ़ाइलों को CSV फ़ॉर्मेट में बदलें
+Convert JSON data or files to CSV format
 
 **Parameters:**
 
@@ -204,10 +204,10 @@ JSON डेटा या फ़ाइलों को CSV फ़ॉर्मे�
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | जनरेट की गई CSV फ़ाइल का पथ |
-| `row_count` | number | जनरेट की गई CSV फ़ाइल का पथ |
-| `column_count` | number | जनरेट की गई CSV फ़ाइल का पथ |
-| `columns` | array | लिखी गई पंक्तियों की संख्या |
+| `output_path` | string | Path to the generated CSV file |
+| `row_count` | number | Number of rows written |
+| `column_count` | number | Number of columns |
+| `columns` | array | List of column names |
 
 **Example:** Convert JSON array to CSV
 
@@ -223,27 +223,27 @@ input_data: /path/to/data.json
 output_path: /path/to/output.csv
 ```
 
-### डेटा पाइपलाइन
+### Data Pipeline
 
 `data.pipeline`
 
-एक ही चरण में कई डेटा रूपांतरणों को जोड़ें
+Chain multiple data transformations in a single step
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input` | any | Yes | - | रूपांतरित करने के लिए इनपुट डेटा (array या object) |
-| `steps` | array | Yes | - | रूपांतरित करने के लिए इनपुट डेटा (array या object) |
+| `input` | any | Yes | - | Input data to transform (array or object) |
+| `steps` | array | Yes | - | Array of transformation steps to apply in order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | क्रम में लागू करने के लिए रूपांतरण चरणों की सूची |
-| `original_count` | integer | रूपांतरित डेटा |
-| `result_count` | integer | रूपांतरित डेटा |
-| `steps_applied` | integer | रूपांतरण के बाद आइटम की गिनती |
+| `result` | any | Transformed data |
+| `original_count` | integer | Count of items before transformation |
+| `result_count` | integer | Count of items after transformation |
+| `steps_applied` | integer | Number of transformation steps applied |
 
 **Example:** Example
 
@@ -266,11 +266,11 @@ input: ${input.data}
 steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}, {"pick": ["id", "name", "timestamp"]}, {"sort": {"field": "timestamp", "order": "desc"}}, {"skip": 5}, {"limit": 20}]
 ```
 
-### टेक्स्ट टेम्पलेट
+### Text Template
 
 `data.text.template`
 
-टेक्स्ट टेम्पलेट को वेरिएबल्स से भरें
+Fill text template with variables
 
 **Parameters:**
 
@@ -283,8 +283,8 @@ steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ऑपरेशन स्थिति |
-| `result` | string | ऑपरेशन स्थिति |
+| `status` | string | Operation status |
+| `result` | string | Filled template |
 
 **Example:** Example
 
@@ -334,27 +334,27 @@ mode: flag
 drop_fields: ["__index", "html"]
 ```
 
-### XML बनाएं
+### Generate XML
 
 `data.xml.generate`
 
-ऑब्जेक्ट या एरे से XML स्ट्रिंग बनाएं
+Generate XML string from Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | object | Yes | - | XML में बदलने के लिए डेटा |
-| `root_tag` | string | No | `root` | रूट तत्व टैग नाम |
-| `pretty` | boolean | No | `True` | XML आउटपुट को सुंदर रूप में प्रदर्शित करें |
-| `encoding` | string | No | `utf-8` | XML आउटपुट के लिए वर्ण एन्कोडिंग |
-| `declaration` | boolean | No | `True` | XML घोषणा हेडर शामिल करें |
+| `data` | object | Yes | - | Python dict or object to convert to XML |
+| `root_tag` | string | No | `root` | Tag name for the root XML element |
+| `pretty` | boolean | No | `True` | Format XML with indentation for readability |
+| `encoding` | string | No | `utf-8` | XML encoding declaration value |
+| `declaration` | boolean | No | `True` | Include <?xml version="1.0"?> declaration at top |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `xml` | string | बनी हुई XML स्ट्रिंग |
+| `xml` | string | Generated XML string |
 
 **Example:** Example
 
@@ -364,26 +364,26 @@ root_tag: users
 pretty: true
 ```
 
-### XML पार्स करें
+### Parse XML
 
 `data.xml.parse`
 
-XML स्ट्रिंग को ऑब्जेक्ट में पार्स करें
+Parse XML string or file into Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | पार्स करने के लिए XML स्ट्रिंग |
-| `file_path` | string | No | - | पार्स करने के लिए XML फ़ाइल का पथ |
-| `preserve_attributes` | boolean | No | `True` | पार्स किए गए आउटपुट में XML विशेषताओं को संरक्षित करें |
+| `content` | string | No | - | XML string to parse |
+| `file_path` | string | No | - | Path to XML file (used if content is empty) |
+| `preserve_attributes` | boolean | No | `True` | Include XML element attributes as @attributes in output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | पार्स की गई XML ऑब्जेक्ट के रूप में |
-| `root_tag` | string | रूट तत्व टैग नाम |
+| `result` | object | Parsed XML as nested dict |
+| `root_tag` | string | Root element tag name |
 
 **Example:** Example
 
@@ -392,27 +392,27 @@ content: <users><user id="1"><name>John</name></user></users>
 preserve_attributes: true
 ```
 
-### YAML बनाएं
+### Generate YAML
 
 `data.yaml.generate`
 
-ऑब्जेक्ट या एरे से YAML स्ट्रिंग बनाएं
+Generate YAML string from Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | any | Yes | - | YAML में बदलने के लिए डेटा |
-| `default_flow_style` | boolean | No | `False` | नेस्टेड संरचनाओं के लिए फ्लो स्टाइल का उपयोग करें |
-| `sort_keys` | boolean | No | `False` | कुंजियों को वर्णानुक्रम में क्रमित करें |
-| `indent` | number | No | `2` | इंडेंटेशन के लिए स्पेस की संख्या |
-| `allow_unicode` | boolean | No | `True` | आउटपुट में यूनिकोड वर्णों की अनुमति दें |
+| `data` | any | Yes | - | Python object, array, or value to convert to YAML |
+| `default_flow_style` | boolean | No | `False` | Use inline/flow style (JSON-like) instead of block style |
+| `sort_keys` | boolean | No | `False` | Sort dictionary keys alphabetically |
+| `indent` | number | No | `2` | Number of spaces for indentation |
+| `allow_unicode` | boolean | No | `True` | Allow unicode characters in output without escaping |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `yaml` | string | बनी हुई YAML स्ट्रिंग |
+| `yaml` | string | Generated YAML string |
 
 **Example:** Example
 
@@ -422,26 +422,26 @@ sort_keys: false
 indent: 2
 ```
 
-### YAML पार्स करें
+### Parse YAML
 
 `data.yaml.parse`
 
-YAML स्ट्रिंग को ऑब्जेक्ट में पार्स करें
+Parse YAML string or file into Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | पार्स करने के लिए YAML स्ट्रिंग |
-| `file_path` | string | No | - | पार्स करने के लिए YAML फ़ाइल का पथ |
-| `multi_document` | boolean | No | `False` | मल्टी-डॉक्यूमेंट YAML (--- से अलग) पार्स करें |
+| `content` | string | No | - | YAML string to parse |
+| `file_path` | string | No | - | Path to YAML file (used if content is empty) |
+| `multi_document` | boolean | No | `False` | Parse multiple YAML documents separated by --- (uses safe_load_all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | पार्स की गई YAML ऑब्जेक्ट या एरे के रूप में |
-| `type` | string | पार्स किए गए परिणाम का प्रकार |
+| `result` | any | Parsed YAML data (object, array, or scalar) |
+| `type` | string | Type of parsed result: object, array, or scalar |
 
 **Example:** Example
 
@@ -464,11 +464,11 @@ name: Jane
 multi_document: true
 ```
 
-### ऑब्जेक्ट कुंजियां
+### Object Keys
 
 `object.keys`
 
-ऑब्जेक्ट से सभी कुंजियां प्राप्त करें
+Get all keys from an object
 
 **Parameters:**
 
@@ -480,8 +480,8 @@ multi_document: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `keys` | array | ऑब्जेक्ट कुंजियों की सूची |
-| `count` | number | ऑब्जेक्ट कुंजियों की सूची |
+| `keys` | array | List of object keys |
+| `count` | number | Number of keys |
 
 **Example:** Get object keys
 
@@ -489,11 +489,11 @@ multi_document: true
 object: {"name": "John", "age": 30, "city": "NYC"}
 ```
 
-### ऑब्जेक्ट मर्ज
+### Object Merge
 
 `object.merge`
 
-कई ऑब्जेक्ट को एक में मर्ज करें
+Merge multiple objects into one
 
 **Parameters:**
 
@@ -505,7 +505,7 @@ object: {"name": "John", "age": 30, "city": "NYC"}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | मर्ज किया गया ऑब्जेक्ट |
+| `result` | object | Merged object |
 
 **Example:** Merge user data
 
@@ -513,11 +513,11 @@ object: {"name": "John", "age": 30, "city": "NYC"}
 objects: [{"name": "John", "age": 30}, {"city": "NYC", "country": "USA"}, {"job": "Engineer"}]
 ```
 
-### ऑब्जेक्ट ओमिट
+### Object Omit
 
 `object.omit`
 
-ऑब्जेक्ट से विशिष्ट कुंजियां हटाएं
+Omit specific keys from an object
 
 **Parameters:**
 
@@ -530,7 +530,7 @@ objects: [{"name": "John", "age": 30}, {"city": "NYC", "country": "USA"}, {"job"
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | हटाई गई कुंजियों के बिना ऑब्जेक्ट |
+| `result` | object | Object without omitted keys |
 
 **Example:** Omit sensitive fields
 
@@ -539,11 +539,11 @@ object: {"name": "John", "age": 30, "password": "secret", "ssn": "123-45-6789"}
 keys: ["password", "ssn"]
 ```
 
-### ऑब्जेक्ट पिक
+### Object Pick
 
 `object.pick`
 
-ऑब्जेक्ट से विशिष्ट कुंजियां चुनें
+Pick specific keys from an object
 
 **Parameters:**
 
@@ -556,7 +556,7 @@ keys: ["password", "ssn"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | केवल चुनी गई कुंजियों वाला ऑब्जेक्ट |
+| `result` | object | Object with only picked keys |
 
 **Example:** Pick user fields
 
@@ -565,11 +565,11 @@ object: {"name": "John", "age": 30, "email": "john@example.com", "password": "se
 keys: ["name", "email"]
 ```
 
-### ऑब्जेक्ट मान
+### Object Values
 
 `object.values`
 
-ऑब्जेक्ट से सभी मान प्राप्त करें
+Get all values from an object
 
 **Parameters:**
 
@@ -581,8 +581,8 @@ keys: ["name", "email"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `values` | array | ऑब्जेक्ट मानों की सूची |
-| `count` | number | ऑब्जेक्ट मानों की सूची |
+| `values` | array | List of object values |
+| `count` | number | Number of values |
 
 **Example:** Get object values
 

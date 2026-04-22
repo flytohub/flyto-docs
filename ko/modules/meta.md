@@ -6,34 +6,34 @@ Module generation, listing, testing, and documentation.
 
 | Module | Description |
 |--------|-------------|
-| [사용 가능한 모듈 나열](#사용-가능한-모듈-나열) | 레지스트리의 모든 사용 가능한 모듈 나열 |
-| [모듈 문서 업데이트](#모듈-문서-업데이트) | 레지스트리에서 MODULES.md 문서 생성 또는 업데이트 |
+| [List Available Modules](#list-available-modules) | List all available modules in the registry |
+| [Update Module Documentation](#update-module-documentation) | Generate or update MODULES.md documentation from registry |
 
 ## Modules
 
-### 사용 가능한 모듈 나열
+### List Available Modules
 
 `meta.modules.list`
 
-레지스트리의 모든 사용 가능한 모듈 나열
+List all available modules in the registry
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `category` | string | No | - | 카테고리별 모듈 필터링 (예: browser, data, ai) |
-| `tags` | array | No | - | 카테고리별 모듈 필터링 (예: browser, data, ai) |
-| `include_params` | boolean | No | `True` | 태그별 모듈 필터링 |
-| `include_output` | boolean | No | `True` | 출력에 매개변수 스키마 포함 |
-| `format` | select (`json`, `markdown`, `compact`) | No | `json` | 응답에 출력 스키마 포함 |
+| `category` | string | No | - | Filter modules by category (e.g., browser, data, ai) |
+| `tags` | array | No | - | Filter modules by tags |
+| `include_params` | boolean | No | `True` | Include parameter schema in output |
+| `include_output` | boolean | No | `True` | Include output schema in response |
+| `format` | select (`json`, `markdown`, `compact`) | No | `json` | Format for module list output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `modules` | array | 등록된 모듈 목록 |
-| `count` | number | 매개변수 스키마 |
-| `formatted` | string | 출력 스키마 |
+| `modules` | array | List of registered modules |
+| `count` | number | Number of items |
+| `formatted` | string | The formatted |
 
 **Example:** List all modules
 
@@ -60,26 +60,26 @@ format: markdown
 format: compact
 ```
 
-### 모듈 문서 업데이트
+### Update Module Documentation
 
 `meta.modules.update_docs`
 
-레지스트리에서 MODULES.md 문서 생성 또는 업데이트
+Generate or update MODULES.md documentation from registry
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | No | `docs/MODULES.md` | MODULES.md 파일을 작성할 경로 |
-| `include_examples` | boolean | No | `True` | 문서에 사용 예제 포함 |
+| `output_path` | string | No | `docs/MODULES.md` | Path to write MODULES.md file |
+| `include_examples` | boolean | No | `True` | Include usage examples in documentation |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `file_path` | string | 문서에 사용 예제 포함 |
-| `modules_count` | number | 파일 경로 |
-| `categories` | array | 파일 경로 |
+| `file_path` | string | The file path |
+| `modules_count` | number | The modules count |
+| `categories` | array | The categories |
 
 **Example:** Update module documentation
 

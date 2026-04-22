@@ -6,76 +6,76 @@ In-memory and Redis message queue operations.
 
 | Module | Description |
 |--------|-------------|
-| [Keluarkan Item](#keluarkan-item) | Hapus dan kembalikan item dari antrian |
-| [Tambahkan Item](#tambahkan-item) | Tambahkan item ke antrian dalam memori atau Redis |
-| [Ukuran Antrian](#ukuran-antrian) | Dapatkan ukuran antrian saat ini |
+| [Dequeue Item](#dequeue-item) | Remove and return an item from a queue |
+| [Enqueue Item](#enqueue-item) | Add an item to an in-memory or Redis queue |
+| [Queue Size](#queue-size) | Get the current size of a queue |
 
 ## Modules
 
-### Keluarkan Item
+### Dequeue Item
 
 `queue.dequeue`
 
-Hapus dan kembalikan item dari antrian
+Remove and return an item from a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nama antrian untuk mengeluarkan item |
-| `backend` | string | No | `memory` | Backend antrian yang digunakan |
-| `redis_url` | string | No | `redis://localhost:6379` | URL koneksi Redis |
-| `timeout` | number | No | `0` | Waktu habis dalam detik (0 = non-blok) |
+| `queue_name` | string | Yes | - | Name of the queue to dequeue from |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
+| `timeout` | number | No | `0` | Timeout in seconds (0 = non-blocking) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | any | Item yang dikeluarkan (null jika antrian kosong) |
-| `queue_name` | string | Nama antrian |
-| `remaining` | number | Sisa item dalam antrian |
-| `empty` | boolean | Apakah antrian kosong |
+| `data` | any | The dequeued item (null if queue is empty) |
+| `queue_name` | string | Name of the queue |
+| `remaining` | number | Remaining items in the queue |
+| `empty` | boolean | Whether the queue was empty |
 
-### Tambahkan Item
+### Enqueue Item
 
 `queue.enqueue`
 
-Tambahkan item ke antrian dalam memori atau Redis
+Add an item to an in-memory or Redis queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nama antrian untuk menambahkan item |
-| `data` | string | Yes | - | Data untuk ditambahkan ke antrian (nilai yang dapat diserialisasi JSON) |
-| `backend` | string | No | `memory` | Backend antrian yang digunakan |
-| `redis_url` | string | No | `redis://localhost:6379` | URL koneksi Redis |
+| `queue_name` | string | Yes | - | Name of the queue to add the item to |
+| `data` | string | Yes | - | Data to enqueue (any JSON-serializable value) |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Nama antrian |
-| `position` | number | Posisi item dalam antrian |
-| `queue_size` | number | Ukuran antrian saat ini setelah penambahan |
+| `queue_name` | string | Name of the queue |
+| `position` | number | Position of the item in the queue |
+| `queue_size` | number | Current size of the queue after enqueue |
 
-### Ukuran Antrian
+### Queue Size
 
 `queue.size`
 
-Dapatkan ukuran antrian saat ini
+Get the current size of a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nama antrian untuk diperiksa |
-| `backend` | string | No | `memory` | Backend antrian yang digunakan |
-| `redis_url` | string | No | `redis://localhost:6379` | URL koneksi Redis |
+| `queue_name` | string | Yes | - | Name of the queue to check |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Nama antrian |
-| `size` | number | Jumlah item saat ini dalam antrian |
+| `queue_name` | string | Name of the queue |
+| `size` | number | Current number of items in the queue |

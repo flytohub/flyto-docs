@@ -6,22 +6,22 @@ Excel, PDF, and Word document read/write/convert.
 
 | Module | Description |
 |--------|-------------|
-| [Excel Oku](#excel-oku) | Excel dosyalarından veri oku (xlsx, xls) |
-| [Excel Yaz](#excel-yaz) | Excel dosyalarına veri yaz (xlsx) |
-| [PDF Formu Doldur](#pdf-formu-doldur) | PDF form alanlarını verilerle doldur ve isteğe bağlı olarak görüntü ekle |
-| [PDF Oluştur](#pdf-oluştur) | HTML içeriğinden veya metinden PDF dosyaları oluştur |
-| [PDF Ayrıştır](#pdf-ayrıştır) | PDF dosyalarından metin ve meta verileri çıkar |
-| [PDF'den Word'e](#pdf'den-word'e) | PDF dosyalarını Word belgelerine (.docx) dönüştür |
-| [Word Belgesini Ayrıştır](#word-belgesini-ayrıştır) | Word belgelerinden (.docx) metin ve içerik çıkar |
-| [Word'den PDF'e](#word'den-pdf'e) | Word belgelerini (.docx) PDF dosyalarına dönüştür |
+| [Read Excel](#read-excel) | Read data from Excel files (xlsx, xls) |
+| [Write Excel](#write-excel) | Write data to Excel files (xlsx) |
+| [Fill PDF Form](#fill-pdf-form) | Fill PDF form fields with data and optionally insert images |
+| [Generate PDF](#generate-pdf) | Generate PDF files from HTML content or text |
+| [Parse PDF](#parse-pdf) | Extract text and metadata from PDF files |
+| [PDF to Word](#pdf-to-word) | Convert PDF files to Word documents (.docx) |
+| [Parse Word Document](#parse-word-document) | Extract text and content from Word documents (.docx) |
+| [Word to PDF](#word-to-pdf) | Convert Word documents (.docx) to PDF files |
 
 ## Modules
 
-### Excel Oku
+### Read Excel
 
 `excel.read`
 
-Excel dosyalarından veri oku (xlsx, xls)
+Read data from Excel files (xlsx, xls)
 
 **Parameters:**
 
@@ -37,10 +37,10 @@ Excel dosyalarından veri oku (xlsx, xls)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | array | Çıkarılan veri satırları |
-| `headers` | array | Çıkarılan veri satırları |
-| `row_count` | number | Çıkarılan veri satırları |
-| `sheet_names` | array | Sütun başlıkları |
+| `data` | array | Extracted data rows |
+| `headers` | array | Column headers |
+| `row_count` | number | Number of data rows |
+| `sheet_names` | array | All sheet names in the workbook |
 
 **Example:** Read entire sheet
 
@@ -49,11 +49,11 @@ path: /tmp/data.xlsx
 as_dict: true
 ```
 
-### Excel Yaz
+### Write Excel
 
 `excel.write`
 
-Excel dosyalarına veri yaz (xlsx)
+Write data to Excel files (xlsx)
 
 **Parameters:**
 
@@ -69,9 +69,9 @@ Excel dosyalarına veri yaz (xlsx)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Oluşturulan Excel dosyasının yolu |
-| `row_count` | number | Oluşturulan Excel dosyasının yolu |
-| `size` | number | Oluşturulan Excel dosyasının yolu |
+| `path` | string | Path to the created Excel file |
+| `row_count` | number | Number of data rows written |
+| `size` | number | File size in bytes |
 
 **Example:** Write data to Excel
 
@@ -80,11 +80,11 @@ path: /tmp/output.xlsx
 data: [{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]
 ```
 
-### PDF Formu Doldur
+### Fill PDF Form
 
 `pdf.fill_form`
 
-PDF form alanlarını verilerle doldur ve isteğe bağlı olarak görüntü ekle
+Fill PDF form fields with data and optionally insert images
 
 **Parameters:**
 
@@ -100,10 +100,10 @@ PDF form alanlarını verilerle doldur ve isteğe bağlı olarak görüntü ekle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Doldurulan PDF'in yolu |
-| `fields_filled` | number | Doldurulan PDF'in yolu |
-| `images_inserted` | number | Doldurulan PDF'in yolu |
-| `file_size_bytes` | number | Eklenen görüntü sayısı |
+| `output_path` | string | Path to the filled PDF |
+| `fields_filled` | number | Number of fields filled |
+| `images_inserted` | number | Number of images inserted |
+| `file_size_bytes` | number | Size of the output PDF in bytes |
 
 **Example:** Fill form with text fields
 
@@ -122,11 +122,11 @@ fields: {"name": "Jane Doe"}
 images: [{"file": "/photos/jane.jpg", "page": 1, "x": 50, "y": 650, "width": 100, "height": 120}]
 ```
 
-### PDF Oluştur
+### Generate PDF
 
 `pdf.generate`
 
-HTML içeriğinden veya metinden PDF dosyaları oluştur
+Generate PDF files from HTML content or text
 
 **Parameters:**
 
@@ -146,9 +146,9 @@ HTML içeriğinden veya metinden PDF dosyaları oluştur
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Oluşturulan PDF'in yolu |
-| `page_count` | number | Oluşturulan PDF'in yolu |
-| `file_size_bytes` | number | PDF'teki sayfa sayısı |
+| `output_path` | string | Path to the generated PDF |
+| `page_count` | number | Number of pages in the PDF |
+| `file_size_bytes` | number | Size of the generated PDF in bytes |
 
 **Example:** Generate from HTML
 
@@ -158,11 +158,11 @@ output_path: /path/to/report.pdf
 title: Monthly Report
 ```
 
-### PDF Ayrıştır
+### Parse PDF
 
 `pdf.parse`
 
-PDF dosyalarından metin ve meta verileri çıkar
+Extract text and metadata from PDF files
 
 **Parameters:**
 
@@ -177,10 +177,10 @@ PDF dosyalarından metin ve meta verileri çıkar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | Çıkarılan metin içeriği |
-| `pages` | array | Çıkarılan metin içeriği |
-| `metadata` | object | Çıkarılan metin içeriği |
-| `page_count` | number | Sayfa başına metin içeriği |
+| `text` | string | Extracted text content |
+| `pages` | array | Text content per page |
+| `metadata` | object | PDF metadata (title, author, etc.) |
+| `page_count` | number | Total number of pages |
 
 **Example:** Extract all text from PDF
 
@@ -189,11 +189,11 @@ path: /tmp/document.pdf
 pages: all
 ```
 
-### PDF'den Word'e
+### PDF to Word
 
 `pdf.to_word`
 
-PDF dosyalarını Word belgelerine (.docx) dönüştür
+Convert PDF files to Word documents (.docx)
 
 **Parameters:**
 
@@ -208,9 +208,9 @@ PDF dosyalarını Word belgelerine (.docx) dönüştür
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Oluşturulan Word belgesinin yolu |
-| `page_count` | number | Oluşturulan Word belgesinin yolu |
-| `file_size` | number | Dönüştürülen sayfa sayısı |
+| `output_path` | string | Path to the generated Word document |
+| `page_count` | number | Number of pages converted |
+| `file_size` | number | Size of the output file in bytes |
 
 **Example:** Convert entire PDF to Word
 
@@ -226,11 +226,11 @@ output_path: /tmp/output.docx
 pages: 1-5
 ```
 
-### Word Belgesini Ayrıştır
+### Parse Word Document
 
 `word.parse`
 
-Word belgelerinden (.docx) metin ve içerik çıkar
+Extract text and content from Word documents (.docx)
 
 **Parameters:**
 
@@ -246,11 +246,11 @@ Word belgelerinden (.docx) metin ve içerik çıkar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | Belgenin tam metin içeriği |
-| `paragraphs` | array | Belgenin tam metin içeriği |
-| `tables` | array | Belgenin tam metin içeriği |
-| `images` | array | Paragraf listesi |
-| `metadata` | object | Dizi olarak çıkarılan tablolar |
+| `text` | string | Full text content of the document |
+| `paragraphs` | array | List of paragraphs |
+| `tables` | array | Extracted tables as arrays |
+| `images` | array | Paths to extracted images |
+| `metadata` | object | Document metadata |
 
 **Example:** Extract text from Word
 
@@ -267,11 +267,11 @@ extract_images: true
 images_output_dir: /path/to/images/
 ```
 
-### Word'den PDF'e
+### Word to PDF
 
 `word.to_pdf`
 
-Word belgelerini (.docx) PDF dosyalarına dönüştür
+Convert Word documents (.docx) to PDF files
 
 **Parameters:**
 
@@ -285,9 +285,9 @@ Word belgelerini (.docx) PDF dosyalarına dönüştür
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Oluşturulan PDF dosyasının yolu |
-| `file_size` | number | Oluşturulan PDF dosyasının yolu |
-| `method_used` | string | Çıktı dosyasının bayt cinsinden boyutu |
+| `output_path` | string | Path to the generated PDF file |
+| `file_size` | number | Size of the output file in bytes |
+| `method_used` | string | Conversion method that was used |
 
 **Example:** Convert Word to PDF
 

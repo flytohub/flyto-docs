@@ -6,17 +6,17 @@ Copy, move, and delete files.
 
 | Module | Description |
 |--------|-------------|
-| [फ़ाइल कॉपी करें](#फ़ाइल-कॉपी-करें) | फ़ाइल को दूसरे स्थान पर कॉपी करें |
-| [फ़ाइल हटाएं](#फ़ाइल-हटाएं) | फ़ाइल सिस्टम से फ़ाइल हटाएं |
-| [फ़ाइल स्थानांतरित करें](#फ़ाइल-स्थानांतरित-करें) | फ़ाइल को स्थानांतरित करें या नाम बदलें |
+| [Copy File](#copy-file) | Copy a file to another location |
+| [Delete File](#delete-file) | Delete a file from the filesystem |
+| [Move File](#move-file) | Move or rename a file |
 
 ## Modules
 
-### फ़ाइल कॉपी करें
+### Copy File
 
 `file.copy`
 
-फ़ाइल को दूसरे स्थान पर कॉपी करें
+Copy a file to another location
 
 **Parameters:**
 
@@ -30,10 +30,10 @@ Copy, move, and delete files.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `copied` | boolean | कॉपी किया गया |
-| `source` | string | कॉपी किया गया |
-| `destination` | string | कॉपी किया गया |
-| `size` | number | स्रोत |
+| `copied` | boolean | The copied |
+| `source` | string | The source |
+| `destination` | string | The destination |
+| `size` | number | Size in bytes |
 
 **Example:** Backup file
 
@@ -50,11 +50,11 @@ source: config.yaml
 destination: config.backup.yaml
 ```
 
-### फ़ाइल हटाएं
+### Delete File
 
 `file.delete`
 
-फ़ाइल सिस्टम से फ़ाइल हटाएं
+Delete a file from the filesystem
 
 **Parameters:**
 
@@ -67,8 +67,8 @@ destination: config.backup.yaml
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deleted` | boolean | हटाया गया |
-| `file_path` | string | हटाया गया |
+| `deleted` | boolean | The deleted |
+| `file_path` | string | The file path |
 
 **Example:** Delete temporary file
 
@@ -83,11 +83,11 @@ ignore_missing: true
 file_path: logs/app.log
 ```
 
-### फ़ाइल स्थानांतरित करें
+### Move File
 
 `file.move`
 
-फ़ाइल को स्थानांतरित करें या नाम बदलें
+Move or rename a file
 
 **Parameters:**
 
@@ -100,9 +100,9 @@ file_path: logs/app.log
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `moved` | boolean | स्थानांतरित किया गया |
-| `source` | string | स्थानांतरित किया गया |
-| `destination` | string | स्थानांतरित किया गया |
+| `moved` | boolean | The moved |
+| `source` | string | The source |
+| `destination` | string | The destination |
 
 **Example:** Move file to archive
 

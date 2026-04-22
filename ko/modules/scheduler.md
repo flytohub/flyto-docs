@@ -6,74 +6,74 @@ Cron parsing, delay, and interval calculations.
 
 | Module | Description |
 |--------|-------------|
-| [크론 표현식 분석](#크론-표현식-분석) | 크론 표현식을 분석하고 다음 N번 실행 시간을 계산 |
-| [지연 / 대기](#지연--대기) | 지정된 기간 동안 실행 일시 중지 |
-| [간격 계산](#간격-계산) | 간격 시간과 다음 발생 시점 계산 |
+| [Parse Cron Expression](#parse-cron-expression) | Parse cron expression and calculate next N run times |
+| [Delay / Sleep](#delay--sleep) | Pause execution for a specified duration |
+| [Calculate Interval](#calculate-interval) | Calculate interval timing and next occurrences |
 
 ## Modules
 
-### 크론 표현식 분석
+### Parse Cron Expression
 
 `scheduler.cron_parse`
 
-크론 표현식을 분석하고 다음 N번 실행 시간을 계산
+Parse cron expression and calculate next N run times
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `expression` | string | Yes | - | 표준 5필드 크론 표현식 (예: "0 9 * * MON-FRI") |
-| `count` | number | No | `5` | 계산할 다음 실행 횟수 |
-| `timezone` | string | No | `0` | 계산에 사용할 시간대 (UTC 오프셋, 예: "+8" 또는 "-5", 기본값 "0"은 UTC) |
+| `expression` | string | Yes | - | Standard 5-field cron expression (e.g. "0 9 * * MON-FRI") |
+| `count` | number | No | `5` | Number of next run times to calculate |
+| `timezone` | string | No | `0` | Timezone for calculation (UTC offset like "+8" or "-5", default "0" for UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `expression` | string | 분석된 크론 표현식 |
-| `description` | string | 일정의 사람이 읽을 수 있는 설명 |
-| `next_runs` | array | 다음 실행 시간을 ISO 날짜 시간 문자열로 나열 |
-| `is_valid` | boolean | 표현식이 유효한지 여부 |
+| `expression` | string | The parsed cron expression |
+| `description` | string | Human-readable description of the schedule |
+| `next_runs` | array | List of next run times as ISO datetime strings |
+| `is_valid` | boolean | Whether the expression is valid |
 
-### 지연 / 대기
+### Delay / Sleep
 
 `scheduler.delay`
 
-지정된 기간 동안 실행 일시 중지
+Pause execution for a specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | Yes | - | 지연할 초 수 |
-| `message` | string | No | - | 결과에 포함할 선택적 메시지 |
+| `seconds` | number | Yes | - | Number of seconds to delay |
+| `message` | string | No | - | Optional message to include in the result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `delayed_seconds` | number | 실제 지연된 초 수 |
-| `message` | string | 제공된 메시지 또는 기본값 |
+| `delayed_seconds` | number | Actual number of seconds delayed |
+| `message` | string | The provided message or default |
 
-### 간격 계산
+### Calculate Interval
 
 `scheduler.interval`
 
-간격 시간과 다음 발생 시점 계산
+Calculate interval timing and next occurrences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | No | `0` | 간격 초 구성 요소 |
-| `minutes` | number | No | `0` | 간격 분 구성 요소 |
-| `hours` | number | No | `0` | 간격 시간 구성 요소 |
-| `start_time` | string | No | - | ISO 8601 형식의 시작 시간 (기본값: 현재) |
+| `seconds` | number | No | `0` | Interval seconds component |
+| `minutes` | number | No | `0` | Interval minutes component |
+| `hours` | number | No | `0` | Interval hours component |
+| `start_time` | string | No | - | Start time in ISO 8601 format (default: now) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `interval_seconds` | number | 총 간격(초 단위) |
-| `next_runs` | array | 다음 5번의 실행 시간을 ISO 날짜 시간 문자열로 나열 |
-| `human_readable` | string | 사람이 읽을 수 있는 간격 설명 |
+| `interval_seconds` | number | Total interval in seconds |
+| `next_runs` | array | List of next 5 run times as ISO datetime strings |
+| `human_readable` | string | Human-readable interval description |

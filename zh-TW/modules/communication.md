@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [讀取電子郵件](#讀取電子郵件) | 從 IMAP 伺服器讀取電子郵件 |
-| [發送電子郵件](#發送電子郵件) | 透過 SMTP 伺服器發送電子郵件 |
-| [傳送 Slack 訊息](#傳送-slack-訊息) | 透過 incoming webhook 傳送訊息到 Slack 頻道 |
-| [觸發 Webhook](#觸發-webhook) | 發送 HTTP POST 請求到 webhook URL |
+| [Read Email](#read-email) | Read emails from IMAP server |
+| [Send Email](#send-email) | Send email via SMTP server |
+| [Send Slack Message](#send-slack-message) | Send messages to Slack channels via incoming webhook |
+| [Trigger Webhook](#trigger-webhook) | Send HTTP POST request to a webhook URL |
 
 ## Modules
 
-### 讀取電子郵件
+### Read Email
 
 `email.read`
 
-從 IMAP 伺服器讀取電子郵件
+Read emails from IMAP server
 
 **Parameters:**
 
@@ -38,8 +38,8 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `emails` | array | 電子郵件物件列表 |
-| `count` | number | 電子郵件物件列表 |
+| `emails` | array | List of email objects |
+| `count` | number | Number of emails fetched |
 
 **Example:** Read recent unread emails
 
@@ -49,11 +49,11 @@ unread_only: true
 limit: 5
 ```
 
-### 發送電子郵件
+### Send Email
 
 `email.send`
 
-透過 SMTP 伺服器發送電子郵件
+Send email via SMTP server
 
 **Parameters:**
 
@@ -77,9 +77,9 @@ limit: 5
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sent` | boolean | 郵件是否成功發送 |
-| `message_id` | string | 郵件是否成功發送 |
-| `recipients` | array | 郵件是否成功發送 |
+| `sent` | boolean | Whether email was sent successfully |
+| `message_id` | string | Email message ID |
+| `recipients` | array | List of recipients |
 
 **Example:** Send simple email
 
@@ -89,11 +89,11 @@ subject: Hello
 body: This is a test email.
 ```
 
-### 傳送 Slack 訊息
+### Send Slack Message
 
 `slack.send`
 
-透過 incoming webhook 傳送訊息到 Slack 頻道
+Send messages to Slack channels via incoming webhook
 
 **Parameters:**
 
@@ -111,7 +111,7 @@ body: This is a test email.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sent` | boolean | 訊息是否成功傳送 |
+| `sent` | boolean | Whether message was sent successfully |
 
 **Example:** Send simple message
 
@@ -127,11 +127,11 @@ username: Flyto Bot
 icon_emoji: :white_check_mark:
 ```
 
-### 觸發 Webhook
+### Trigger Webhook
 
 `webhook.trigger`
 
-發送 HTTP POST 請求到 webhook URL
+Send HTTP POST request to a webhook URL
 
 **Parameters:**
 
@@ -149,9 +149,9 @@ icon_emoji: :white_check_mark:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | HTTP 回應狀態碼 |
-| `response` | object | HTTP 回應狀態碼 |
-| `headers` | object | HTTP 回應狀態碼 |
+| `status_code` | number | HTTP response status code |
+| `response` | object | Response body (if JSON) |
+| `headers` | object | Response headers |
 
 **Example:** Simple POST webhook
 

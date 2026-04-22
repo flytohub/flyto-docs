@@ -6,23 +6,23 @@ MongoDB, MySQL, PostgreSQL, and Redis database operations.
 
 | Module | Description |
 |--------|-------------|
-| [데이터베이스 삽입](#데이터베이스-삽입) | 데이터베이스 테이블에 데이터 삽입 |
-| [데이터베이스 쿼리](#데이터베이스-쿼리) | PostgreSQL, MySQL 또는 SQLite 데이터베이스에서 SQL 쿼리 실행 |
-| [데이터베이스 업데이트](#데이터베이스-업데이트) | 데이터베이스 테이블의 데이터 업데이트 |
-| [MongoDB 찾기](#mongodb-찾기) | MongoDB 컬렉션에서 문서 쿼리 |
-| [MongoDB 삽입](#mongodb-삽입) | MongoDB 컬렉션에 하나 이상의 문서 삽입 |
-| [MySQL 쿼리](#mysql-쿼리) | MySQL 데이터베이스에서 SQL 쿼리 실행 및 결과 반환 |
-| [PostgreSQL 쿼리](#postgresql-쿼리) | PostgreSQL 데이터베이스에서 SQL 쿼리 실행 및 결과 반환 |
-| [Redis 가져오기](#redis-가져오기) | Redis 캐시에서 값 가져오기 |
-| [Redis 설정](#redis-설정) | Redis 캐시에 값 설정 |
+| [Database Insert](#database-insert) | Insert data into database tables |
+| [Database Query](#database-query) | Execute SQL queries on PostgreSQL, MySQL, or SQLite databases |
+| [Database Update](#database-update) | Update data in database tables |
+| [MongoDB Find](#mongodb-find) | Query documents from MongoDB collection |
+| [MongoDB Insert](#mongodb-insert) | Insert one or more documents into MongoDB collection |
+| [MySQL Query](#mysql-query) | Execute a SQL query on MySQL database and return results |
+| [PostgreSQL Query](#postgresql-query) | Execute a SQL query on PostgreSQL database and return results |
+| [Redis Get](#redis-get) | Get a value from Redis cache |
+| [Redis Set](#redis-set) | Set a value in Redis cache |
 
 ## Modules
 
-### 데이터베이스 삽입
+### Database Insert
 
 `database.insert`
 
-데이터베이스 테이블에 데이터 삽입
+Insert data into database tables
 
 **Parameters:**
 
@@ -43,8 +43,8 @@ MongoDB, MySQL, PostgreSQL, and Redis database operations.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | 삽입된 행 수 |
-| `returning_data` | array | 삽입된 행 수 |
+| `inserted_count` | number | Number of rows inserted |
+| `returning_data` | array | Returned data from insert |
 
 **Example:** Insert single row
 
@@ -54,11 +54,11 @@ data: {"name": "John", "email": "john@example.com"}
 database_type: postgresql
 ```
 
-### 데이터베이스 쿼리
+### Database Query
 
 `database.query`
 
-PostgreSQL, MySQL 또는 SQLite 데이터베이스에서 SQL 쿼리 실행
+Execute SQL queries on PostgreSQL, MySQL, or SQLite databases
 
 **Parameters:**
 
@@ -79,9 +79,9 @@ PostgreSQL, MySQL 또는 SQLite 데이터베이스에서 SQL 쿼리 실행
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | 쿼리 결과 행 |
-| `row_count` | number | 쿼리 결과 행 |
-| `columns` | array | 쿼리 결과 행 |
+| `rows` | array | Query result rows |
+| `row_count` | number | Number of rows returned/affected |
+| `columns` | array | Column names |
 
 **Example:** Select with parameters
 
@@ -91,11 +91,11 @@ params: ["active"]
 database_type: postgresql
 ```
 
-### 데이터베이스 업데이트
+### Database Update
 
 `database.update`
 
-데이터베이스 테이블의 데이터 업데이트
+Update data in database tables
 
 **Parameters:**
 
@@ -116,7 +116,7 @@ database_type: postgresql
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `updated_count` | number | 업데이트된 행 수 |
+| `updated_count` | number | Number of rows updated |
 
 **Example:** Update user status
 
@@ -127,11 +127,11 @@ where: {"id": 123}
 database_type: postgresql
 ```
 
-### MongoDB 찾기
+### MongoDB Find
 
 `db.mongodb.find`
 
-MongoDB 컬렉션에서 문서 쿼리
+Query documents from MongoDB collection
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ MongoDB 컬렉션에서 문서 쿼리
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `documents` | array | 일치하는 문서 배열 |
-| `count` | number | 일치하는 문서 배열 |
+| `documents` | array | Array of matching documents |
+| `count` | number | Number of documents returned |
 
 **Example:** Find all active users
 
@@ -172,11 +172,11 @@ sort: {"created_at": -1}
 limit: 20
 ```
 
-### MongoDB 삽입
+### MongoDB Insert
 
 `db.mongodb.insert`
 
-MongoDB 컬렉션에 하나 이상의 문서 삽입
+Insert one or more documents into MongoDB collection
 
 **Parameters:**
 
@@ -192,8 +192,8 @@ MongoDB 컬렉션에 하나 이상의 문서 삽입
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | 삽입된 문서 수 |
-| `inserted_ids` | array | 삽입된 문서 수 |
+| `inserted_count` | number | Number of documents inserted |
+| `inserted_ids` | array | Array of inserted document IDs |
 
 **Example:** Insert single document
 
@@ -211,11 +211,11 @@ collection: products
 documents: [{"name": "Product A", "price": 19.99}, {"name": "Product B", "price": 29.99}]
 ```
 
-### MySQL 쿼리
+### MySQL Query
 
 `db.mysql.query`
 
-MySQL 데이터베이스에서 SQL 쿼리 실행 및 결과 반환
+Execute a SQL query on MySQL database and return results
 
 **Parameters:**
 
@@ -233,9 +233,9 @@ MySQL 데이터베이스에서 SQL 쿼리 실행 및 결과 반환
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | 객체 형태의 결과 행 배열 |
-| `row_count` | number | 객체 형태의 결과 행 배열 |
-| `columns` | array | 객체 형태의 결과 행 배열 |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select products
 
@@ -250,11 +250,11 @@ query: SELECT * FROM orders WHERE customer_id = %s AND created_at > %s
 params: ["${customer_id}", "2024-01-01"]
 ```
 
-### PostgreSQL 쿼리
+### PostgreSQL Query
 
 `db.postgresql.query`
 
-PostgreSQL 데이터베이스에서 SQL 쿼리 실행 및 결과 반환
+Execute a SQL query on PostgreSQL database and return results
 
 **Parameters:**
 
@@ -268,9 +268,9 @@ PostgreSQL 데이터베이스에서 SQL 쿼리 실행 및 결과 반환
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | 객체 형태의 결과 행 배열 |
-| `row_count` | number | 객체 형태의 결과 행 배열 |
-| `columns` | array | 객체 형태의 결과 행 배열 |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select users
 
@@ -285,11 +285,11 @@ query: SELECT * FROM orders WHERE user_id = $1 AND status = $2
 params: ["${user_id}", "completed"]
 ```
 
-### Redis 가져오기
+### Redis Get
 
 `db.redis.get`
 
-Redis 캐시에서 값 가져오기
+Get a value from Redis cache
 
 **Parameters:**
 
@@ -304,9 +304,9 @@ Redis 캐시에서 값 가져오기
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | 반환된 값 |
-| `exists` | boolean | 반환된 값 |
-| `key` | string | 반환된 값 |
+| `value` | any | The returned value |
+| `exists` | boolean | The exists |
+| `key` | string | Key identifier |
 
 **Example:** Get cached value
 
@@ -324,11 +324,11 @@ port: 6379
 db: 1
 ```
 
-### Redis 설정
+### Redis Set
 
 `db.redis.set`
 
-Redis 캐시에 값 설정
+Set a value in Redis cache
 
 **Parameters:**
 

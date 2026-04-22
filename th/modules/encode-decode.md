@@ -27,16 +27,16 @@ Decode Base64 encoded text
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | text | Yes | - | Base64 encoded text to decode |
-| `encoding` | string | No | `utf-8` | Base64 encoded text to decode |
-| `url_safe` | boolean | No | `False` | Character encoding for output |
+| `encoding` | string | No | `utf-8` | Character encoding for output |
+| `url_safe` | boolean | No | `False` | Input is URL-safe Base64 |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Input is URL-safe Base64 |
-| `original` | string | Decoded string |
-| `valid` | boolean | Decoded string |
+| `result` | string | Decoded string |
+| `original` | string | Original Base64 input |
+| `valid` | boolean | Whether decoding was successful |
 
 ### Hex Decode
 
@@ -49,15 +49,15 @@ Decode hexadecimal to text
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | text | Yes | - | Hexadecimal text to decode |
-| `encoding` | string | No | `utf-8` | Hexadecimal text to decode |
+| `encoding` | string | No | `utf-8` | Character encoding for output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Character encoding for output |
-| `original` | string | Decoded string |
-| `valid` | boolean | Decoded string |
+| `result` | string | Decoded string |
+| `original` | string | Original hex input |
+| `valid` | boolean | Whether decoding was successful |
 
 ### URL Decode
 
@@ -70,14 +70,14 @@ Decode URL encoded text
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | text | Yes | - | URL encoded text to decode |
-| `plus_spaces` | boolean | No | `False` | URL encoded text to decode |
+| `plus_spaces` | boolean | No | `False` | Treat + as space (form decoding) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Treat + as space (form decoding) |
-| `original` | string | Decoded string |
+| `result` | string | Decoded string |
+| `original` | string | Original URL encoded input |
 
 ### Base64 Encode
 
@@ -90,16 +90,16 @@ Encode text to Base64
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | text | Yes | - | Text to encode |
-| `encoding` | string | No | `utf-8` | Text to encode |
-| `url_safe` | boolean | No | `False` | Character encoding |
+| `encoding` | string | No | `utf-8` | Character encoding |
+| `url_safe` | boolean | No | `False` | Use URL-safe Base64 encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Use URL-safe Base64 encoding |
-| `original` | string | Base64 encoded string |
-| `length` | number | Base64 encoded string |
+| `result` | string | Base64 encoded string |
+| `original` | string | Original input |
+| `length` | number | Length of encoded string |
 
 ### Hex Encode
 
@@ -112,17 +112,17 @@ Encode text to hexadecimal
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | text | Yes | - | Text to encode to hex |
-| `encoding` | string | No | `utf-8` | Text to encode to hex |
-| `uppercase` | boolean | No | `False` | Character encoding |
-| `separator` | string | No | - | Use uppercase hex letters |
+| `encoding` | string | No | `utf-8` | Character encoding |
+| `uppercase` | boolean | No | `False` | Use uppercase hex letters |
+| `separator` | string | No | - | Separator between hex bytes |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Separator between hex bytes |
-| `original` | string | Hex encoded string |
-| `byte_count` | number | Hex encoded string |
+| `result` | string | Hex encoded string |
+| `original` | string | Original input |
+| `byte_count` | number | Number of bytes encoded |
 
 ### HTML Encode
 
@@ -135,14 +135,14 @@ Encode text to HTML entities
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | text | Yes | - | Text to encode as HTML entities |
-| `quote` | boolean | No | `True` | Text to encode as HTML entities |
+| `quote` | boolean | No | `True` | Also encode quote characters |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Also encode quote characters |
-| `original` | string | HTML encoded string |
+| `result` | string | HTML encoded string |
+| `original` | string | Original input |
 
 ### URL Encode
 
@@ -155,12 +155,12 @@ URL encode text (percent encoding)
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | text | Yes | - | Text to URL encode |
-| `plus_spaces` | boolean | No | `False` | Text to URL encode |
-| `safe` | string | No | - | Use + instead of %20 for spaces (form encoding) |
+| `plus_spaces` | boolean | No | `False` | Use + instead of %20 for spaces (form encoding) |
+| `safe` | string | No | - | Characters that should not be encoded |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Characters that should not be encoded |
-| `original` | string | URL encoded string |
+| `result` | string | URL encoded string |
+| `original` | string | Original input |

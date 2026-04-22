@@ -6,26 +6,26 @@ List manipulation — chunk, flatten, group, map, reduce, zip, and more.
 
 | Module | Description |
 |--------|-------------|
-| [Decoupage de tableau](#decoupage-de-tableau) | Diviser un tableau en morceaux de taille specifiee |
-| [Compacter](#compacter) | Retirer les valeurs nulles/vides du tableau |
-| [Difference de tableau](#difference-de-tableau) | Trouver les elements du premier tableau absents des autres |
-| [Supprimer](#supprimer) | Supprimer les N premiers éléments du tableau |
-| [Aplatir le tableau](#aplatir-le-tableau) | Aplatir les tableaux imbriques en un seul tableau |
-| [Grouper Par](#grouper-par) | Grouper les éléments du tableau par une clé |
-| [Intersection de tableaux](#intersection-de-tableaux) | Trouver les elements communs entre les tableaux |
-| [Joindre le tableau](#joindre-le-tableau) | Joindre les elements d'un tableau en chaine |
-| [Mapper le tableau](#mapper-le-tableau) | Transformer chaque element d'un tableau |
-| [Reduire le tableau](#reduire-le-tableau) | Reduire un tableau a une seule valeur |
-| [Prendre](#prendre) | Prendre les N premiers éléments du tableau |
-| [Fusionner Tableaux](#fusionner-tableaux) | Combiner plusieurs tableaux élément par élément |
+| [Array Chunk](#array-chunk) | Split array into chunks of specified size |
+| [Compact](#compact) | Remove null/empty values from array |
+| [Array Difference](#array-difference) | Find elements in first array not in others |
+| [Drop](#drop) | Drop first N elements from array |
+| [Array Flatten](#array-flatten) | Flatten nested arrays into single array |
+| [Group By](#group-by) | Group array elements by a key |
+| [Array Intersection](#array-intersection) | Find common elements between arrays |
+| [Array Join](#array-join) | Join array elements into string |
+| [Array Map](#array-map) | Transform each element in an array |
+| [Array Reduce](#array-reduce) | Reduce array to single value |
+| [Take](#take) | Take first N elements from array |
+| [Zip Arrays](#zip-arrays) | Combine multiple arrays element-wise |
 
 ## Modules
 
-### Decoupage de tableau
+### Array Chunk
 
 `array.chunk`
 
-Diviser un tableau en morceaux de taille specifiee
+Split array into chunks of specified size
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ Diviser un tableau en morceaux de taille specifiee
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Tableau de morceaux |
-| `chunks` | number | Tableau de morceaux |
+| `result` | array | Array of chunks |
+| `chunks` | number | Number of chunks |
 
 **Example:** Chunk into groups of 3
 
@@ -55,33 +55,33 @@ array: ["a", "b", "c", "d", "e"]
 size: 2
 ```
 
-### Compacter
+### Compact
 
 `array.compact`
 
-Retirer les valeurs nulles/vides du tableau
+Remove null/empty values from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Tableau à compacter |
-| `remove_empty_strings` | boolean | No | `True` | Retirer les chaînes vides |
-| `remove_zero` | boolean | No | `False` | Retirer les chaînes vides |
-| `remove_false` | boolean | No | `False` | Retirer les valeurs zéro |
+| `array` | array | Yes | - | Array to compact |
+| `remove_empty_strings` | boolean | No | `True` | Remove empty strings |
+| `remove_zero` | boolean | No | `False` | Remove zero values |
+| `remove_false` | boolean | No | `False` | Remove false values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Retirer les valeurs fausses |
-| `removed` | number | Tableau compacté |
+| `result` | array | Compacted array |
+| `removed` | number | Number of items removed |
 
-### Difference de tableau
+### Array Difference
 
 `array.difference`
 
-Trouver les elements du premier tableau absents des autres
+Find elements in first array not in others
 
 **Parameters:**
 
@@ -94,8 +94,8 @@ Trouver les elements du premier tableau absents des autres
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Elements uniques au premier tableau |
-| `length` | number | Elements uniques au premier tableau |
+| `result` | array | Elements unique to first array |
+| `length` | number | Number of unique elements |
 
 **Example:** Find unique elements
 
@@ -104,31 +104,31 @@ array: [1, 2, 3, 4, 5]
 subtract: [[2, 4], [5]]
 ```
 
-### Supprimer
+### Drop
 
 `array.drop`
 
-Supprimer les N premiers éléments du tableau
+Drop first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Tableau source |
-| `count` | number | Yes | `1` | Tableau source |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to drop |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Nombre d'éléments à supprimer |
-| `dropped` | number | Éléments restants |
+| `result` | array | Remaining elements |
+| `dropped` | number | Number of elements dropped |
 
-### Aplatir le tableau
+### Array Flatten
 
 `array.flatten`
 
-Aplatir les tableaux imbriques en un seul tableau
+Flatten nested arrays into single array
 
 **Parameters:**
 
@@ -141,8 +141,8 @@ Aplatir les tableaux imbriques en un seul tableau
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Tableau aplati |
-| `length` | number | Tableau aplati |
+| `result` | array | Flattened array |
+| `length` | number | Length of flattened array |
 
 **Example:** Flatten one level
 
@@ -158,32 +158,32 @@ array: [[1, [2, [3, [4]]]]]
 depth: -1
 ```
 
-### Grouper Par
+### Group By
 
 `array.group_by`
 
-Grouper les éléments du tableau par une clé
+Group array elements by a key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Tableau d'objets à grouper |
-| `key` | string | Yes | - | Tableau d'objets à grouper |
+| `array` | array | Yes | - | Array of objects to group |
+| `key` | string | Yes | - | Property name to group by |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `groups` | object | Nom de la propriété pour grouper |
-| `keys` | array | Résultats groupés |
-| `count` | number | Résultats groupés |
+| `groups` | object | Grouped results |
+| `keys` | array | Group keys |
+| `count` | number | Number of groups |
 
-### Intersection de tableaux
+### Array Intersection
 
 `array.intersection`
 
-Trouver les elements communs entre les tableaux
+Find common elements between arrays
 
 **Parameters:**
 
@@ -195,8 +195,8 @@ Trouver les elements communs entre les tableaux
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Elements communs |
-| `length` | number | Elements communs |
+| `result` | array | Common elements |
+| `length` | number | Number of common elements |
 
 **Example:** Find common elements
 
@@ -204,11 +204,11 @@ Trouver les elements communs entre les tableaux
 arrays: [[1, 2, 3, 4], [2, 3, 5], [2, 3, 6]]
 ```
 
-### Joindre le tableau
+### Array Join
 
 `array.join`
 
-Joindre les elements d'un tableau en chaine
+Join array elements into string
 
 **Parameters:**
 
@@ -222,7 +222,7 @@ Joindre les elements d'un tableau en chaine
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Chaine jointe |
+| `result` | string | Joined string |
 
 **Example:** Join with comma
 
@@ -239,11 +239,11 @@ separator:
 
 ```
 
-### Mapper le tableau
+### Array Map
 
 `array.map`
 
-Transformer chaque element d'un tableau
+Transform each element in an array
 
 **Parameters:**
 
@@ -257,8 +257,8 @@ Transformer chaque element d'un tableau
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Tableau transforme |
-| `length` | number | Tableau transforme |
+| `result` | array | Transformed array |
+| `length` | number | Length of result array |
 
 **Example:** Multiply numbers
 
@@ -276,11 +276,11 @@ operation: extract
 value: name
 ```
 
-### Reduire le tableau
+### Array Reduce
 
 `array.reduce`
 
-Reduire un tableau a une seule valeur
+Reduce array to single value
 
 **Parameters:**
 
@@ -295,8 +295,8 @@ Reduire un tableau a une seule valeur
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | Valeur reduite |
-| `operation` | string | Valeur reduite |
+| `result` | any | Reduced value |
+| `operation` | string | Operation that was applied |
 
 **Example:** Sum numbers
 
@@ -313,42 +313,42 @@ operation: join
 separator:  
 ```
 
-### Prendre
+### Take
 
 `array.take`
 
-Prendre les N premiers éléments du tableau
+Take first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Tableau source |
-| `count` | number | Yes | `1` | Tableau source |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to take |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Nombre d'éléments à prendre |
-| `length` | number | Éléments pris |
+| `result` | array | Taken elements |
+| `length` | number | Number of elements taken |
 
-### Fusionner Tableaux
+### Zip Arrays
 
 `array.zip`
 
-Combiner plusieurs tableaux élément par élément
+Combine multiple arrays element-wise
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | Tableau de tableaux à fusionner |
-| `fill_value` | any | No | - | Tableau de tableaux à fusionner |
+| `arrays` | array | Yes | - | Array of arrays to zip |
+| `fill_value` | any | No | - | Value for missing elements |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Valeur pour les éléments manquants |
-| `length` | number | Tableau fusionné |
+| `result` | array | Zipped array |
+| `length` | number | Result length |

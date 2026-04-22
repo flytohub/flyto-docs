@@ -2,147 +2,205 @@
 
 Assertion utilities: equal, contains, length, true, not null, greater than.
 
-**6 modules**
+**8 modules**
 
 | Module | Description |
 |--------|-------------|
-| [斷言包含](#斷言包含) | 斷言集合包含某個值 |
-| [斷言相等](#斷言相等) | 斷言兩個值相等 |
-| [斷言大於](#斷言大於) | 斷言某值大於另一個值 |
-| [斷言長度](#斷言長度) | 斷言集合具有預期的長度 |
-| [斷言非空](#斷言非空) | 斷言值不是 null 或 undefined |
-| [斷言為真](#斷言為真) | 斷言條件為 true |
+| [Assert Contains](#assert-contains) | Assert that a collection contains a value |
+| [Assert Equal](#assert-equal) | Assert that two values are equal |
+| [Assert Greater Than](#assert-greater-than) | Assert that a value is greater than another |
+| [Assert Length](#assert-length) | Assert that a collection has expected length |
+| [Assert Not Null](#assert-not-null) | Assert that a value is not null or undefined |
+| [Assert Status](#assert-status) | Compare probe statuses to a baseline to derive exploitable/sanitized verdict |
+| [Assert Timing](#assert-timing) | Compare probe duration to a baseline to detect time-based oracles |
+| [Assert True](#assert-true) | Assert that a condition is true |
 
 ## Modules
 
-### 斷言包含
+### Assert Contains
 
 `test.assert_contains`
 
-斷言集合包含某個值
+Assert that a collection contains a value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `collection` | ['array', 'string'] | Yes | - | 要搜尋的集合 |
-| `value` | ['string', 'number', 'boolean'] | Yes | - | 要搜尋的集合 |
-| `message` | string | No | - | 要尋找的值 |
+| `collection` | ['array', 'string'] | Yes | - | Collection to search in |
+| `value` | ['string', 'number', 'boolean'] | Yes | - | Value to find |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | 自訂錯誤訊息 |
-| `collection` | ['array', 'string'] | 斷言是否通過 |
-| `value` | ['string', 'number', 'boolean'] | 斷言集合包含某個值 |
-| `message` | string | 斷言集合包含某個值 |
+| `passed` | boolean | Whether assertion passed |
+| `collection` | ['array', 'string'] | Collection searched |
+| `value` | ['string', 'number', 'boolean'] | Value searched for |
+| `message` | string | Result message |
 
-### 斷言相等
+### Assert Equal
 
 `test.assert_equal`
 
-斷言兩個值相等
+Assert that two values are equal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | 實際值 |
-| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | 實際值 |
-| `message` | string | No | - | 預期值 |
+| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Actual value |
+| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Expected value |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | 自訂錯誤訊息 |
-| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | 斷言是否通過 |
-| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | 斷言兩個值相等 |
-| `message` | string | 斷言兩個值相等 |
+| `passed` | boolean | Whether assertion passed |
+| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Actual value received |
+| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Expected value |
+| `message` | string | Result message |
 
-### 斷言大於
+### Assert Greater Than
 
 `test.assert_greater_than`
 
-斷言某值大於另一個值
+Assert that a value is greater than another
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | number | Yes | - | 實際值 |
-| `threshold` | number | Yes | - | 實際值 |
-| `message` | string | No | - | 門檻值 |
+| `actual` | number | Yes | - | Actual value |
+| `threshold` | number | Yes | - | Threshold value |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | 自訂錯誤訊息 |
-| `actual` | number | 斷言是否通過 |
-| `threshold` | number | 斷言某值大於另一個值 |
-| `message` | string | 斷言某值大於另一個值 |
+| `passed` | boolean | Whether assertion passed |
+| `actual` | number | Actual value |
+| `threshold` | number | Threshold value |
+| `message` | string | Result message |
 
-### 斷言長度
+### Assert Length
 
 `test.assert_length`
 
-斷言集合具有預期的長度
+Assert that a collection has expected length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `collection` | ['array', 'string'] | Yes | - | 要檢查的集合 |
-| `expected_length` | number | Yes | - | 要檢查的集合 |
-| `message` | string | No | - | 預期長度 |
+| `collection` | ['array', 'string'] | Yes | - | Collection to check |
+| `expected_length` | number | Yes | - | Expected length |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | 自訂錯誤訊息 |
-| `actual_length` | number | 自訂錯誤訊息 |
-| `expected_length` | number | 斷言集合具有預期的長度 |
-| `message` | string | 斷言集合具有預期的長度 |
+| `passed` | boolean | Whether assertion passed |
+| `actual_length` | number | Actual length |
+| `expected_length` | number | Expected length |
+| `message` | string | Result message |
 
-### 斷言非空
+### Assert Not Null
 
 `test.assert_not_null`
 
-斷言值不是 null 或 undefined
+Assert that a value is not null or undefined
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | ['string', 'number', 'boolean', 'object', 'array', 'null'] | Yes | - | 要檢查的值 |
-| `message` | string | No | - | 要檢查的值 |
+| `value` | ['string', 'number', 'boolean', 'object', 'array', 'null'] | Yes | - | Value to check |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | 斷言值不是 null 或 undefined |
-| `message` | string | 斷言值不是 null 或 undefined |
+| `passed` | boolean | Whether assertion passed |
+| `message` | string | Result message |
 
-### 斷言為真
+### Assert Status
+
+`test.assert_status`
+
+Compare probe statuses to a baseline to derive exploitable/sanitized verdict
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `source` | ['array', 'object'] | Yes | - | Batch result data (array of {status,...} from http.batch) |
+| `baseline_index` | number | No | `0` |  |
+| `probe_indices` | array | No | - | Indices to compare against the baseline |
+| `expected_blocked` | array | No | `[401, 403]` |  |
+| `on_bypass` | string | No | `exploitable` |  |
+| `on_blocked` | string | No | `sanitized` |  |
+| `on_error` | string | No | `unreachable` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `passed` | boolean | True when verdict != on_bypass |
+| `verdict` | string | One of on_bypass/on_blocked/on_error values |
+| `baseline` | object | Baseline probe summary |
+| `probes` | array | Per-probe decision detail |
+
+### Assert Timing
+
+`test.assert_timing`
+
+Compare probe duration to a baseline to detect time-based oracles
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `source` | ['array', 'object'] | Yes | - | Batch result data (array of {duration_ms,...} from http.batch) |
+| `baseline_index` | number | No | `0` |  |
+| `probe_index` | number | Yes | - |  |
+| `threshold_ms` | number | No | `3000` | Minimum probe-vs-baseline delta to flag as exploitable |
+| `on_slow` | string | No | `exploitable` |  |
+| `on_normal` | string | No | `inconclusive` |  |
+| `on_error` | string | No | `unreachable` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `passed` | boolean | True when verdict != on_slow |
+| `verdict` | string | on_slow/on_normal/on_error value |
+| `baseline_ms` | number | Baseline duration in ms |
+| `probe_ms` | number | Probe duration in ms |
+| `delta_ms` | number | probe_ms - baseline_ms |
+| `threshold_ms` | number | Threshold used |
+
+### Assert True
 
 `test.assert_true`
 
-斷言條件為 true
+Assert that a condition is true
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `condition` | boolean | Yes | - | 要檢查的條件 |
-| `message` | string | No | - | 要檢查的條件 |
+| `condition` | boolean | Yes | - | Condition to check |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | 斷言條件為 true |
-| `message` | string | 斷言條件為 true |
+| `passed` | boolean | Whether assertion passed |
+| `message` | string | Result message |

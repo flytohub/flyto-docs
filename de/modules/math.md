@@ -6,19 +6,19 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Module | Description |
 |--------|-------------|
-| [Absolutwert](#absolutwert) | Absolutwert einer Zahl ermitteln |
-| [Aufrunden](#aufrunden) | Zahl auf nächste ganze Zahl aufrunden |
-| [Abrunden](#abrunden) | Zahl auf nächste ganze Zahl abrunden |
-| [Potenz/Exponent](#potenzexponent) | Zahl potenzieren |
-| [Zahl runden](#zahl-runden) | Zahl auf angegebene Dezimalstellen runden |
+| [Absolute Value](#absolute-value) | Get absolute value of a number |
+| [Ceiling Number](#ceiling-number) | Round number up to nearest integer |
+| [Floor Number](#floor-number) | Round number down to nearest integer |
+| [Power/Exponent](#powerexponent) | Raise number to a power |
+| [Round Number](#round-number) | Round number to specified decimal places |
 
 ## Modules
 
-### Absolutwert
+### Absolute Value
 
 `math.abs`
 
-Absolutwert einer Zahl ermitteln
+Get absolute value of a number
 
 **Parameters:**
 
@@ -30,8 +30,8 @@ Absolutwert einer Zahl ermitteln
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Absolutwert |
-| `original` | number | Absolutwert |
+| `result` | number | Absolute value |
+| `original` | number | Original number |
 
 **Example:** Absolute of negative number
 
@@ -45,11 +45,11 @@ number: -5
 number: 3.14
 ```
 
-### Aufrunden
+### Ceiling Number
 
 `math.ceil`
 
-Zahl auf nächste ganze Zahl aufrunden
+Round number up to nearest integer
 
 **Parameters:**
 
@@ -61,8 +61,8 @@ Zahl auf nächste ganze Zahl aufrunden
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Aufgerundeter Wert |
-| `original` | number | Aufgerundeter Wert |
+| `result` | number | Ceiling value |
+| `original` | number | Original number |
 
 **Example:** Ceiling positive number
 
@@ -76,11 +76,11 @@ number: 3.2
 number: -2.7
 ```
 
-### Abrunden
+### Floor Number
 
 `math.floor`
 
-Zahl auf nächste ganze Zahl abrunden
+Round number down to nearest integer
 
 **Parameters:**
 
@@ -92,8 +92,8 @@ Zahl auf nächste ganze Zahl abrunden
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Abgerundeter Wert |
-| `original` | number | Abgerundeter Wert |
+| `result` | number | Floored value |
+| `original` | number | Original number |
 
 **Example:** Floor positive number
 
@@ -107,11 +107,11 @@ number: 3.7
 number: -2.3
 ```
 
-### Potenz/Exponent
+### Power/Exponent
 
 `math.power`
 
-Zahl potenzieren
+Raise number to a power
 
 **Parameters:**
 
@@ -124,9 +124,9 @@ Zahl potenzieren
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Ergebnis von Basis hoch Exponent |
-| `base` | number | Ergebnis von Basis hoch Exponent |
-| `exponent` | number | Ergebnis von Basis hoch Exponent |
+| `result` | number | Result of base raised to exponent |
+| `base` | number | Base number |
+| `exponent` | number | Exponent used |
 
 **Example:** Square a number
 
@@ -142,11 +142,11 @@ base: 27
 exponent: 0.333333
 ```
 
-### Zahl runden
+### Round Number
 
 `math.round`
 
-Zahl auf angegebene Dezimalstellen runden
+Round number to specified decimal places
 
 **Parameters:**
 
@@ -159,9 +159,9 @@ Zahl auf angegebene Dezimalstellen runden
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Gerundeter Wert |
-| `original` | number | Gerundeter Wert |
-| `decimals` | number | Gerundeter Wert |
+| `result` | number | Rounded value |
+| `original` | number | Original number |
+| `decimals` | number | Decimal places used |
 
 **Example:** Round to integer
 

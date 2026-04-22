@@ -6,132 +6,132 @@ File path utilities: join, normalize, basename, dirname, extension.
 
 | Module | Description |
 |--------|-------------|
-| [Nama Dasar Path](#nama-dasar-path) | Dapatkan nama file dari path |
-| [Nama Direktori Path](#nama-direktori-path) | Dapatkan nama direktori dari path |
-| [Ekstensi Path](#ekstensi-path) | Dapatkan ekstensi file dari path |
-| [Path Absolut](#path-absolut) | Periksa apakah path absolut |
-| [Gabung Path](#gabung-path) | Gabungkan komponen path |
-| [Normalisasi Path](#normalisasi-path) | Normalisasi path file |
+| [Path Basename](#path-basename) | Get file name from path |
+| [Path Dirname](#path-dirname) | Get directory name from path |
+| [Path Extension](#path-extension) | Get file extension from path |
+| [Path Is Absolute](#path-is-absolute) | Check if path is absolute |
+| [Path Join](#path-join) | Join path components |
+| [Path Normalize](#path-normalize) | Normalize a file path |
 
 ## Modules
 
-### Nama Dasar Path
+### Path Basename
 
 `path.basename`
 
-Dapatkan nama file dari path
+Get file name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Path file |
-| `remove_extension` | boolean | No | `False` | Path file |
+| `path` | string | Yes | - | File path |
+| `remove_extension` | boolean | No | `False` | Remove file extension from result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Hapus ekstensi file dari hasil |
-| `original` | string | Nama file |
-| `extension` | string | Nama file |
+| `result` | string | File name |
+| `original` | string | Original path |
+| `extension` | string | File extension |
 
-### Nama Direktori Path
+### Path Dirname
 
 `path.dirname`
 
-Dapatkan nama direktori dari path
+Get directory name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Path file |
+| `path` | string | Yes | - | File path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Path file |
-| `original` | string | Nama direktori |
+| `result` | string | Directory name |
+| `original` | string | Original path |
 
-### Ekstensi Path
+### Path Extension
 
 `path.extension`
 
-Dapatkan ekstensi file dari path
+Get file extension from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Path file |
-| `include_dot` | boolean | No | `True` | Path file |
+| `path` | string | Yes | - | File path |
+| `include_dot` | boolean | No | `True` | Include the dot in extension |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Sertakan titik dalam ekstensi |
-| `original` | string | Ekstensi file |
-| `has_extension` | boolean | Ekstensi file |
+| `result` | string | File extension |
+| `original` | string | Original path |
+| `has_extension` | boolean | Whether file has extension |
 
-### Path Absolut
+### Path Is Absolute
 
 `path.is_absolute`
 
-Periksa apakah path absolut
+Check if path is absolute
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Path file untuk diperiksa |
+| `path` | string | Yes | - | File path to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Path file untuk diperiksa |
-| `path` | string | Apakah path absolut |
-| `absolute` | string | Apakah path absolut |
+| `result` | boolean | Whether path is absolute |
+| `path` | string | The checked path |
+| `absolute` | string | Absolute version of the path |
 
-### Gabung Path
+### Path Join
 
 `path.join`
 
-Gabungkan komponen path
+Join path components
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `parts` | array | Yes | - | Komponen path untuk digabungkan |
+| `parts` | array | Yes | - | Path components to join |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Komponen path untuk digabungkan |
-| `parts` | array | Path yang digabungkan |
+| `result` | string | Joined path |
+| `parts` | array | Original path parts |
 
-### Normalisasi Path
+### Path Normalize
 
 `path.normalize`
 
-Normalisasi path file
+Normalize a file path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Path file untuk dinormalisasi |
-| `resolve` | boolean | No | `False` | Path file untuk dinormalisasi |
+| `path` | string | Yes | - | File path to normalize |
+| `resolve` | boolean | No | `False` | Resolve to absolute path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Ubah menjadi path absolut |
-| `original` | string | Path yang dinormalisasi |
-| `is_absolute` | boolean | Path yang dinormalisasi |
+| `result` | string | Normalized path |
+| `original` | string | Original path |
+| `is_absolute` | boolean | Whether result is absolute |

@@ -2,7 +2,7 @@
 
 Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and testing.
 
-**44 modules**
+**45 modules**
 
 | Module | Description |
 |--------|-------------|
@@ -11,14 +11,15 @@ Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and t
 | [Array Unique](#array-unique) | Remove duplicate values from array |
 | [OAuth2 Token Exchange](#oauth2-token-exchange) | Exchange authorization code, refresh token, or client credentials for an access token |
 | [DNS Lookup](#dns-lookup) | DNS lookup for domain records |
-| [Text Diff](#text-diff) | Generate diff between two text strings |
-| [Edit File](#edit-file) | Replace text in a file using exact string matching |
+| [Diff Content](#diff-content) | Generate unified diff between original and modified content |
+| [Edit File](#edit-file) | Replace a string in a file (targeted edit, not full overwrite) |
 | [Check File Exists](#check-file-exists) | Check if a file or directory exists |
 | [Read File](#read-file) | Read content from a file |
 | [Write File](#write-file) | Write content to a file |
 | [Git Clone](#git-clone) | Clone a git repository |
 | [Git Commit](#git-commit) | Create a git commit |
 | [Git Diff](#git-diff) | Get git diff |
+| [HTTP Batch](#http-batch) | Run a batch of HTTP probes sequentially and capture timing + body |
 | [HTTP Paginate](#http-paginate) | Automatically iterate through paginated API endpoints and collect all results |
 | [HTTP Request](#http-request) | Send HTTP request and receive response |
 | [Assert HTTP Response](#assert-http-response) | Assert and validate HTTP response properties |
@@ -72,7 +73,7 @@ Filter array elements by condition
 | Field | Type | Description |
 |-------|------|-------------|
 | `filtered` | array | Filtered array |
-| `count` | number | Filtered array |
+| `count` | number | Number of items in filtered array |
 
 **Example:** Filter numbers greater than 5
 
@@ -100,7 +101,7 @@ Sort array elements in ascending or descending order
 | Field | Type | Description |
 |-------|------|-------------|
 | `sorted` | array | Sorted array |
-| `count` | number | Sorted array |
+| `count` | number | Number of items |
 
 **Example:** Sort numbers ascending
 
@@ -127,8 +128,8 @@ Remove duplicate values from array
 | Field | Type | Description |
 |-------|------|-------------|
 | `unique` | array | Array with unique values |
-| `count` | number | Array with unique values |
-| `duplicates_removed` | number | Array with unique values |
+| `count` | number | Number of unique items |
+| `duplicates_removed` | number | Number of duplicates removed |
 
 **Example:** Remove duplicates
 
@@ -249,27 +250,27 @@ domain: example.com
 record_type: MX
 ```
 
-### Text Diff
+### Diff Content
 
 `file.diff`
 
-Generate diff between two text strings
+Generate unified diff between original and modified content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `original` | string | Yes | - | Original text |
-| `modified` | string | Yes | - | Modified text |
+| `original` | string | Yes | - | Original content for comparison |
+| `modified` | string | Yes | - | Modified content for comparison |
 | `context_lines` | number | No | `3` | Number of context lines around changes |
-| `filename` | string | No | `file` | Filename to use in diff header |
+| `filename` | string | No | `file` | Name of the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `diff` | string | Unified diff output |
-| `changed` | boolean | Whether there are any changes |
+| `changed` | boolean | Whether content differs |
 | `additions` | number | Number of added lines |
 | `deletions` | number | Number of deleted lines |
 
@@ -287,25 +288,25 @@ filename: test.txt
 
 `file.edit`
 
-Replace text in a file using exact string matching
+Replace a string in a file (targeted edit, not full overwrite)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Path to the file to edit |
+| `path` | string | Yes | - | Path to the file |
 | `old_string` | string | Yes | - | Text to find and replace |
 | `new_string` | string | Yes | - | Replacement text |
-| `replace_all` | boolean | No | `False` | Replace all occurrences instead of just the first |
-| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | File encoding |
+| `replace_all` | boolean | No | `False` | Whether to replace all occurrences |
+| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | Character encoding for the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Path of the edited file |
+| `path` | string | File path that was edited |
 | `replacements` | number | Number of replacements made |
-| `diff` | string | Diff showing what changed |
+| `diff` | string | Unified diff of changes |
 
 **Example:** Replace string in file
 
@@ -332,8 +333,8 @@ Check if a file or directory exists
 | Field | Type | Description |
 |-------|------|-------------|
 | `exists` | boolean | Whether path exists |
-| `is_file` | boolean | Whether path exists |
-| `is_directory` | boolean | Whether path exists |
+| `is_file` | boolean | Whether path is a file |
+| `is_directory` | boolean | Whether path is a directory |
 
 **Example:** Check file exists
 
@@ -359,7 +360,7 @@ Read content from a file
 | Field | Type | Description |
 |-------|------|-------------|
 | `content` | string | File content |
-| `size` | number | File content |
+| `size` | number | File size in bytes |
 
 **Example:** Read text file
 
@@ -388,7 +389,7 @@ Write content to a file
 | Field | Type | Description |
 |-------|------|-------------|
 | `path` | string | File path |
-| `bytes_written` | number | File path |
+| `bytes_written` | number | Number of bytes written |
 
 **Example:** Write text file
 
@@ -522,6 +523,35 @@ staged: true
 stat_only: true
 ```
 
+### HTTP Batch
+
+`http.batch`
+
+Run a batch of HTTP probes sequentially and capture timing + body
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `requests` | array | Yes | - | List of request dicts: {method, url, headers?, body?, label?} |
+| `description` | string | No | - | Informational description of the batch intent |
+| `measure_time` | boolean | No | `False` | Execute requests sequentially for reliable timing comparison |
+| `timeout` | number | No | `30` |  |
+| `verify_ssl` | boolean | No | `True` |  |
+| `ssrf_protection` | boolean | No | `True` |  |
+| `detect_patterns` | array | No | - | Optional list of substrings to report matches for across all bodies |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `ok` | boolean | Whether the batch completed (does not imply all requests succeeded) |
+| `data` | array | Per-request results: [{label, status, body, duration_ms, ok, ...}] |
+| `count` | number | Number of requests executed |
+| `failed_count` | number | Number of requests that errored or returned non-2xx |
+| `total_duration_ms` | number | Total elapsed ms across the batch |
+| `detected` | array | Pattern match summary when detect_patterns provided |
+
 ### HTTP Paginate
 
 `http.paginate`
@@ -633,14 +663,14 @@ Send HTTP request and receive response
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether request was successful (2xx status) |
-| `status` | number | Whether request was successful (2xx status) |
-| `status_text` | string | Whether request was successful (2xx status) |
-| `headers` | object | HTTP status code |
-| `body` | any | HTTP status text |
-| `url` | string | Response headers |
-| `duration_ms` | number | Response body (parsed JSON or text) |
-| `content_type` | string | Final URL (after redirects) |
-| `content_length` | number | Response Content-Type |
+| `status` | number | HTTP status code |
+| `status_text` | string | HTTP status text |
+| `headers` | object | Response headers |
+| `body` | any | Response body (parsed JSON or text) |
+| `url` | string | Final URL (after redirects) |
+| `duration_ms` | number | Request duration in milliseconds |
+| `content_type` | string | Response Content-Type |
+| `content_length` | number | Response body size in bytes |
 
 **Example:** Simple GET request
 
@@ -701,11 +731,11 @@ Assert and validate HTTP response properties
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether all assertions passed |
-| `passed` | number | Whether all assertions passed |
-| `failed` | number | Whether all assertions passed |
-| `total` | number | Number of passed assertions |
-| `assertions` | array | Number of failed assertions |
-| `errors` | array | Detailed assertion results |
+| `passed` | number | Number of passed assertions |
+| `failed` | number | Number of failed assertions |
+| `total` | number | Total number of assertions |
+| `assertions` | array | Detailed assertion results |
+| `errors` | array | List of error messages for failed assertions |
 
 **Example:** Assert status 200
 
@@ -848,11 +878,11 @@ Interact with LLM APIs for intelligent operations
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether the request succeeded |
-| `response` | string | Whether the request succeeded |
-| `parsed` | any | Whether the request succeeded |
-| `model` | string | The LLM response text |
-| `tokens_used` | number | Parsed response (if JSON format requested) |
-| `finish_reason` | string | Model used |
+| `response` | string | The LLM response text |
+| `parsed` | any | Parsed response (if JSON format requested) |
+| `model` | string | Model used |
+| `tokens_used` | number | Total tokens consumed |
+| `finish_reason` | string | Why the response ended |
 
 **Example:** Code Review
 
@@ -905,10 +935,10 @@ Automatically generate code fixes based on issues
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether operation succeeded |
-| `fixes` | array | Whether operation succeeded |
-| `applied` | array | Whether operation succeeded |
-| `failed` | array | List of generated fixes |
-| `summary` | string | List of applied fixes (if fix_mode is apply) |
+| `fixes` | array | List of generated fixes |
+| `applied` | array | List of applied fixes (if fix_mode is apply) |
+| `failed` | array | Fixes that could not be applied |
+| `summary` | string | Summary of fixes |
 
 **Example:** Fix UI Issues
 
@@ -948,8 +978,8 @@ Perform basic mathematical operations
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | number | Calculation result |
-| `operation` | string | Calculation result |
-| `expression` | string | Calculation result |
+| `operation` | string | Operation performed |
+| `expression` | string | Human-readable expression |
 
 **Example:** Add two numbers
 
@@ -1020,19 +1050,19 @@ Check if network port(s) are open or closed
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `port` | any | Yes | - | Port number or array of ports to check |
-| `host` | string | No | `localhost` | Port number or array of ports to check |
-| `connect_timeout` | number | No | `2` | Host to connect to |
-| `expect_open` | boolean | No | - | Timeout for each connection attempt |
+| `host` | string | No | `localhost` | Host to connect to |
+| `connect_timeout` | number | No | `2` | Timeout for each connection attempt |
+| `expect_open` | boolean | No | - | Set to true to assert ports are open, false for closed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Set to true to assert ports are open, false for closed |
-| `results` | array | Whether all checks passed (if expect_open is set) |
-| `open_ports` | array | Whether all checks passed (if expect_open is set) |
-| `closed_ports` | array | Array of port check results |
-| `summary` | object | List of open ports |
+| `ok` | boolean | Whether all checks passed (if expect_open is set) |
+| `results` | array | Array of port check results |
+| `open_ports` | array | List of open ports |
+| `closed_ports` | array | List of closed ports |
+| `summary` | object | Summary statistics |
 
 **Example:** Check single port
 
@@ -1067,20 +1097,20 @@ Wait for a network port to become available
 |------|------|----------|---------|-------------|
 | `port` | number | Yes | - | Port number to wait for |
 | `host` | string | No | `localhost` | Host to connect to |
-| `timeout` | number | No | `60` | Host to connect to |
-| `interval` | number | No | `500` | Maximum time to wait |
-| `expect_closed` | boolean | No | `False` | Time between connection attempts in milliseconds |
+| `timeout` | number | No | `60` | Maximum time to wait |
+| `interval` | number | No | `500` | Time between connection attempts in milliseconds |
+| `expect_closed` | boolean | No | `False` | Wait for port to become unavailable instead |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Wait for port to become unavailable instead |
-| `available` | boolean | Whether port is in expected state |
-| `host` | string | Whether port is in expected state |
-| `port` | number | Whether port is currently available |
-| `wait_time_ms` | number | Host that was checked |
-| `attempts` | number | Port that was checked |
+| `ok` | boolean | Whether port is in expected state |
+| `available` | boolean | Whether port is currently available |
+| `host` | string | Host that was checked |
+| `port` | number | Port that was checked |
+| `wait_time_ms` | number | Time spent waiting in milliseconds |
+| `attempts` | number | Number of connection attempts |
 
 **Example:** Wait for dev server
 
@@ -1123,10 +1153,10 @@ List all running background processes
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Operation success |
-| `processes` | array | Operation success |
-| `count` | number | Operation success |
-| `running` | number | List of process information |
-| `stopped` | number | Total number of processes |
+| `processes` | array | List of process information |
+| `count` | number | Total number of processes |
+| `running` | number | Number of running processes |
+| `stopped` | number | Number of stopped processes |
 
 **Example:** List all processes
 
@@ -1164,13 +1194,13 @@ Start a background process (server, service, etc.)
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether process started successfully |
-| `pid` | number | Whether process started successfully |
-| `process_id` | string | Whether process started successfully |
-| `name` | string | Process ID |
-| `command` | string | Internal process identifier for process.stop |
-| `cwd` | string | Process name |
-| `started_at` | string | The executed command |
-| `initial_output` | string | ISO timestamp when process started |
+| `pid` | number | Process ID |
+| `process_id` | string | Internal process identifier for process.stop |
+| `name` | string | Process name |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory |
+| `started_at` | string | ISO timestamp when process started |
+| `initial_output` | string | Initial stdout output (if wait_for_output was used) |
 
 **Example:** Start dev server
 
@@ -1221,9 +1251,9 @@ Stop a running background process
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether all processes were stopped successfully |
-| `stopped` | array | Whether all processes were stopped successfully |
-| `failed` | array | List of stopped process info |
-| `count` | number | List of stopped process info |
+| `stopped` | array | List of stopped process info |
+| `failed` | array | List of processes that failed to stop |
+| `count` | number | Number of processes stopped |
 
 **Example:** Stop by process ID
 
@@ -1274,12 +1304,12 @@ Execute a shell command and capture output
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether command executed successfully (exit code 0) |
-| `exit_code` | number | Whether command executed successfully (exit code 0) |
-| `stdout` | string | Whether command executed successfully (exit code 0) |
-| `stderr` | string | Command exit code |
-| `command` | string | Standard output |
-| `cwd` | string | Standard error output |
-| `duration_ms` | number | The executed command |
+| `exit_code` | number | Command exit code |
+| `stdout` | string | Standard output |
+| `stderr` | string | Standard error output |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory used |
+| `duration_ms` | number | Execution duration in milliseconds |
 
 **Example:** Run npm install
 
@@ -1438,9 +1468,9 @@ Execute end-to-end test steps sequentially
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether the operation succeeded |
-| `passed` | number | Whether the operation succeeded |
-| `failed` | number | Whether the operation succeeded |
-| `results` | array | Number of tests passed |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
 ### Quality Gate
 
@@ -1453,17 +1483,17 @@ Evaluate quality metrics against defined thresholds
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `metrics` | object | Yes | - | Metrics to evaluate |
-| `thresholds` | object | Yes | - | Metrics to evaluate |
+| `thresholds` | object | Yes | - | Threshold values for each metric |
 | `fail_on_breach` | boolean | No | `True` | Whether to fail on breach |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Threshold values for each metric |
-| `passed` | boolean | Whether the operation succeeded |
-| `results` | array | Whether the operation succeeded |
-| `summary` | string | Number of tests passed |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `results` | array | List of results |
+| `summary` | string | The summary |
 
 ### Run HTTP Tests
 
@@ -1484,9 +1514,9 @@ Execute HTTP API test suite
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether the operation succeeded |
-| `passed` | number | Whether the operation succeeded |
-| `failed` | number | Whether the operation succeeded |
-| `results` | array | Number of tests passed |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
 ### Run Linter
 
@@ -1507,9 +1537,9 @@ Run linting checks on source code
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether the operation succeeded |
-| `errors` | number | Whether the operation succeeded |
-| `warnings` | number | Whether the operation succeeded |
-| `issues` | array | Number of errors encountered |
+| `errors` | number | Number of errors encountered |
+| `warnings` | number | The warnings |
+| `issues` | array | The issues |
 
 ### Generate Report
 
@@ -1530,9 +1560,9 @@ Generate test execution report
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether the operation succeeded |
-| `report` | string | Whether the operation succeeded |
-| `format` | string | Whether the operation succeeded |
-| `summary` | object | The report |
+| `report` | string | The report |
+| `format` | string | The format |
+| `summary` | object | The summary |
 
 ### Run Scenario
 
@@ -1551,9 +1581,9 @@ Execute scenario-based test (BDD style)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Scenario definition with given/when/then |
-| `passed` | boolean | Whether the operation succeeded |
-| `steps` | array | Whether the operation succeeded |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `steps` | array | The steps |
 
 ### Security Scan
 
@@ -1574,8 +1604,8 @@ Scan for security vulnerabilities
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether the operation succeeded |
-| `vulnerabilities` | array | Whether the operation succeeded |
-| `summary` | object | Whether the operation succeeded |
+| `vulnerabilities` | array | The vulnerabilities |
+| `summary` | object | The summary |
 
 ### Run Test Suite
 
@@ -1589,17 +1619,17 @@ Execute a collection of tests
 |------|------|----------|---------|-------------|
 | `tests` | array | Yes | - | Array of test definitions |
 | `parallel` | boolean | No | `False` | Whether to parallel |
-| `max_failures` | number | No | `0` | Array of test definitions |
+| `max_failures` | number | No | `0` | 0 = no limit |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 0 = no limit |
-| `passed` | number | 0 = no limit |
-| `failed` | number | Whether the operation succeeded |
-| `skipped` | number | Number of tests passed |
-| `results` | array | Number of tests failed |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `skipped` | number | Number of tests skipped |
+| `results` | array | List of results |
 
 ### Run Unit Tests
 
@@ -1620,10 +1650,10 @@ Execute unit tests
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether the operation succeeded |
-| `passed` | number | Whether the operation succeeded |
-| `failed` | number | Whether the operation succeeded |
-| `errors` | number | Number of tests passed |
-| `results` | array | Number of tests failed |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `errors` | number | Number of errors encountered |
+| `results` | array | List of results |
 
 ### Visual Compare
 
@@ -1636,18 +1666,18 @@ Compare visual outputs for differences
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `actual` | string | Yes | - | Path or base64 of actual image |
-| `expected` | string | Yes | - | Path or base64 of actual image |
-| `threshold` | number | No | `0.1` | Path or base64 of expected image |
+| `expected` | string | Yes | - | Path or base64 of expected image |
+| `threshold` | number | No | `0.1` | Max allowed difference (0-1) |
 | `output_diff` | boolean | No | `True` | Whether to output diff |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Max allowed difference (0-1) |
-| `match` | boolean | Whether the operation succeeded |
-| `difference` | number | Whether the operation succeeded |
-| `diff_image` | string | The match |
+| `ok` | boolean | Whether the operation succeeded |
+| `match` | boolean | The match |
+| `difference` | number | The difference |
+| `diff_image` | string | The diff image |
 
 ### Evaluate UI Quality
 
@@ -1660,7 +1690,7 @@ Comprehensive UI quality evaluation with multi-dimensional scoring
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `screenshot` | string | Yes | - | Screenshot path or URL to evaluate |
-| `app_type` | string | No | `web_app` | Screenshot path or URL to evaluate |
+| `app_type` | string | No | `web_app` | Type of application for context-aware evaluation |
 | `page_type` | string | No | - | Type of page being evaluated |
 | `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | Specific criteria to evaluate (defaults to all) |
 | `target_audience` | string | No | - | Description of target users |
@@ -1672,14 +1702,14 @@ Comprehensive UI quality evaluation with multi-dimensional scoring
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | OpenAI API key (defaults to OPENAI_API_KEY env var) |
-| `passed` | boolean | Whether evaluation succeeded |
-| `overall_score` | number | Whether evaluation succeeded |
-| `scores` | object | Overall UI quality score (0-100) |
-| `strengths` | array | Overall UI quality score (0-100) |
-| `issues` | array | Scores by evaluation criteria |
-| `recommendations` | array | List of UI strengths |
-| `summary` | string | Specific improvement recommendations |
+| `ok` | boolean | Whether evaluation succeeded |
+| `passed` | boolean | Whether UI meets minimum score threshold |
+| `overall_score` | number | Overall UI quality score (0-100) |
+| `scores` | object | Scores by evaluation criteria |
+| `strengths` | array | List of UI strengths |
+| `issues` | array | List of issues found with severity |
+| `recommendations` | array | Specific improvement recommendations |
+| `summary` | string | Executive summary of evaluation |
 
 **Example:** Evaluate Dashboard
 
@@ -1726,10 +1756,10 @@ Analyze images using OpenAI Vision API (GPT-4V)
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether analysis succeeded |
-| `analysis` | string | Whether analysis succeeded |
-| `structured` | object | The AI analysis result |
-| `model` | string | Structured analysis data (if output_format is structured/json) |
-| `tokens_used` | number | Model used for analysis |
+| `analysis` | string | The AI analysis result |
+| `structured` | object | Structured analysis data (if output_format is structured/json) |
+| `model` | string | Model used for analysis |
+| `tokens_used` | number | Total tokens used |
 
 **Example:** UI Review
 
@@ -1781,11 +1811,11 @@ Compare two images and identify visual differences
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether comparison succeeded |
-| `has_differences` | boolean | Whether comparison succeeded |
-| `similarity_score` | number | Whether significant differences were found |
-| `differences` | array | Similarity percentage (0-100) |
-| `summary` | string | List of identified differences |
-| `recommendation` | string | Summary of comparison results |
+| `has_differences` | boolean | Whether significant differences were found |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `differences` | array | List of identified differences |
+| `summary` | string | Summary of comparison results |
+| `recommendation` | string | Pass/Fail recommendation based on threshold |
 
 **Example:** Visual Regression Test
 

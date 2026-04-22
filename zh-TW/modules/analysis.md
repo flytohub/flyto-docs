@@ -6,20 +6,20 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 
 | Module | Description |
 |--------|-------------|
-| [HTML 可讀性](#html-可讀性) | 分析內容可讀性 |
-| [擷取表單](#擷取表單) | 從 HTML 擷取表單資料 |
-| [擷取中繼資料](#擷取中繼資料) | 從 HTML 擷取中繼資料 |
-| [擷取表格](#擷取表格) | 從 HTML 擷取表格資料 |
-| [尋找模式](#尋找模式) | 在 HTML 中尋找重複的資料模式 |
-| [HTML 結構](#html-結構) | 分析 HTML DOM 結構 |
+| [HTML Readability](#html-readability) | Analyze content readability |
+| [Extract Forms](#extract-forms) | Extract form data from HTML |
+| [Extract Metadata](#extract-metadata) | Extract metadata from HTML |
+| [Extract Tables](#extract-tables) | Extract table data from HTML |
+| [Find Patterns](#find-patterns) | Find repeating data patterns in HTML |
+| [HTML Structure](#html-structure) | Analyze HTML DOM structure |
 
 ## Modules
 
-### HTML 可讀性
+### HTML Readability
 
 `analysis.html.analyze_readability`
 
-分析內容可讀性
+Analyze content readability
 
 **Parameters:**
 
@@ -34,11 +34,11 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 | `type` | any | object |
 | `properties` | any |  |
 
-### 擷取表單
+### Extract Forms
 
 `analysis.html.extract_forms`
 
-從 HTML 擷取表單資料
+Extract form data from HTML
 
 **Parameters:**
 
@@ -53,11 +53,11 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 | `type` | any | object |
 | `properties` | any |  |
 
-### 擷取中繼資料
+### Extract Metadata
 
 `analysis.html.extract_metadata`
 
-從 HTML 擷取中繼資料
+Extract metadata from HTML
 
 **Parameters:**
 
@@ -72,11 +72,11 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 | `type` | any | object |
 | `properties` | any |  |
 
-### 擷取表格
+### Extract Tables
 
 `analysis.html.extract_tables`
 
-從 HTML 擷取表格資料
+Extract table data from HTML
 
 **Parameters:**
 
@@ -91,11 +91,11 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 | `type` | any | object |
 | `properties` | any |  |
 
-### 尋找模式
+### Find Patterns
 
 `analysis.html.find_patterns`
 
-在 HTML 中尋找重複的資料模式
+Find repeating data patterns in HTML
 
 **Parameters:**
 
@@ -110,11 +110,11 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 | `type` | any | object |
 | `properties` | any |  |
 
-### HTML 結構
+### HTML Structure
 
 `analysis.html.structure`
 
-分析 HTML DOM 結構
+Analyze HTML DOM structure
 
 **Parameters:**
 

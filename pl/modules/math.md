@@ -6,19 +6,19 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Module | Description |
 |--------|-------------|
-| [Wartosc bezwzgledna](#wartosc-bezwzgledna) | Pobierz wartosc bezwzgledna liczby |
-| [Sufit liczby](#sufit-liczby) | Zaokraglij liczbe w gore do najblizszej liczby calkowitej |
-| [Podloga liczby](#podloga-liczby) | Zaokraglij liczbe w dol do najblizszej liczby calkowitej |
-| [Potega/Wykladnik](#potegawykladnik) | Podnies liczbe do potegi |
-| [Zaokraglij liczbe](#zaokraglij-liczbe) | Zaokraglij liczbe do okreslonej liczby miejsc dziesietnych |
+| [Absolute Value](#absolute-value) | Get absolute value of a number |
+| [Ceiling Number](#ceiling-number) | Round number up to nearest integer |
+| [Floor Number](#floor-number) | Round number down to nearest integer |
+| [Power/Exponent](#powerexponent) | Raise number to a power |
+| [Round Number](#round-number) | Round number to specified decimal places |
 
 ## Modules
 
-### Wartosc bezwzgledna
+### Absolute Value
 
 `math.abs`
 
-Pobierz wartosc bezwzgledna liczby
+Get absolute value of a number
 
 **Parameters:**
 
@@ -30,8 +30,8 @@ Pobierz wartosc bezwzgledna liczby
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Wartosc bezwzgledna |
-| `original` | number | Wartosc bezwzgledna |
+| `result` | number | Absolute value |
+| `original` | number | Original number |
 
 **Example:** Absolute of negative number
 
@@ -45,11 +45,11 @@ number: -5
 number: 3.14
 ```
 
-### Sufit liczby
+### Ceiling Number
 
 `math.ceil`
 
-Zaokraglij liczbe w gore do najblizszej liczby calkowitej
+Round number up to nearest integer
 
 **Parameters:**
 
@@ -61,8 +61,8 @@ Zaokraglij liczbe w gore do najblizszej liczby calkowitej
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Wartosc sufitu |
-| `original` | number | Wartosc sufitu |
+| `result` | number | Ceiling value |
+| `original` | number | Original number |
 
 **Example:** Ceiling positive number
 
@@ -76,11 +76,11 @@ number: 3.2
 number: -2.7
 ```
 
-### Podloga liczby
+### Floor Number
 
 `math.floor`
 
-Zaokraglij liczbe w dol do najblizszej liczby calkowitej
+Round number down to nearest integer
 
 **Parameters:**
 
@@ -92,8 +92,8 @@ Zaokraglij liczbe w dol do najblizszej liczby calkowitej
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Wartosc podlogi |
-| `original` | number | Wartosc podlogi |
+| `result` | number | Floored value |
+| `original` | number | Original number |
 
 **Example:** Floor positive number
 
@@ -107,11 +107,11 @@ number: 3.7
 number: -2.3
 ```
 
-### Potega/Wykladnik
+### Power/Exponent
 
 `math.power`
 
-Podnies liczbe do potegi
+Raise number to a power
 
 **Parameters:**
 
@@ -124,9 +124,9 @@ Podnies liczbe do potegi
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Wynik podniesienia podstawy do wykladnika |
-| `base` | number | Wynik podniesienia podstawy do wykladnika |
-| `exponent` | number | Wynik podniesienia podstawy do wykladnika |
+| `result` | number | Result of base raised to exponent |
+| `base` | number | Base number |
+| `exponent` | number | Exponent used |
 
 **Example:** Square a number
 
@@ -142,11 +142,11 @@ base: 27
 exponent: 0.333333
 ```
 
-### Zaokraglij liczbe
+### Round Number
 
 `math.round`
 
-Zaokraglij liczbe do okreslonej liczby miejsc dziesietnych
+Round number to specified decimal places
 
 **Parameters:**
 
@@ -159,9 +159,9 @@ Zaokraglij liczbe do okreslonej liczby miejsc dziesietnych
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Zaokraglona wartosc |
-| `original` | number | Zaokraglona wartosc |
-| `decimals` | number | Zaokraglona wartosc |
+| `result` | number | Rounded value |
+| `original` | number | Original number |
+| `decimals` | number | Decimal places used |
 
 **Example:** Round to integer
 

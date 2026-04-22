@@ -31,9 +31,9 @@ Copy a file to another location
 | Field | Type | Description |
 |-------|------|-------------|
 | `copied` | boolean | The copied |
-| `source` | string | The copied |
-| `destination` | string | The copied |
-| `size` | number | The source |
+| `source` | string | The source |
+| `destination` | string | The destination |
+| `size` | number | Size in bytes |
 
 **Example:** Backup file
 
@@ -68,7 +68,7 @@ Delete a file from the filesystem
 | Field | Type | Description |
 |-------|------|-------------|
 | `deleted` | boolean | The deleted |
-| `file_path` | string | The deleted |
+| `file_path` | string | The file path |
 
 **Example:** Delete temporary file
 
@@ -101,8 +101,8 @@ Move or rename a file
 | Field | Type | Description |
 |-------|------|-------------|
 | `moved` | boolean | The moved |
-| `source` | string | The moved |
-| `destination` | string | The moved |
+| `source` | string | The source |
+| `destination` | string | The destination |
 
 **Example:** Move file to archive
 

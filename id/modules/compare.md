@@ -6,15 +6,15 @@ Threshold-based change detection.
 
 | Module | Description |
 |--------|-------------|
-| [Deteksi Perubahan](#deteksi-perubahan) | Deteksi jika nilai telah berubah melebihi batas (berdasarkan jumlah atau persentase) |
+| [Detect Change](#detect-change) | Detect if a value has changed beyond threshold (by amount or percentage) |
 
 ## Modules
 
-### Deteksi Perubahan
+### Detect Change
 
 `compare.change`
 
-Deteksi jika nilai telah berubah melebihi batas (berdasarkan jumlah atau persentase)
+Detect if a value has changed beyond threshold (by amount or percentage)
 
 **Parameters:**
 
@@ -22,22 +22,22 @@ Deteksi jika nilai telah berubah melebihi batas (berdasarkan jumlah atau persent
 |------|------|----------|---------|-------------|
 | `current_value` | number | Yes | - | The current/new value to compare |
 | `previous_value` | number | Yes | - | The previous/old value to compare against |
-| `mode` | select (`percent`, `absolute`, `any`) | No | `percent` | Nilai sebelumnya/lama untuk dibandingkan |
-| `threshold` | number | No | `5` | Perubahan minimum untuk memicu (5 = 5% atau 5 unit) |
-| `direction` | select (`both`, `up`, `down`) | No | `both` | Arah perubahan yang akan dideteksi |
+| `mode` | select (`percent`, `absolute`, `any`) | No | `percent` | How to measure change |
+| `threshold` | number | No | `5` | Minimum change to trigger (5 = 5% or 5 units) |
+| `direction` | select (`both`, `up`, `down`) | No | `both` | Which direction of change to detect |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah operasi berhasil |
-| `changed` | boolean | Apakah operasi berhasil |
-| `direction` | string | Apakah operasi berhasil |
-| `change_percent` | number | Arah perubahan:  |
-| `change_absolute` | number | Perubahan persentase (positif = naik, negatif = turun) |
+| `ok` | boolean | Whether the operation succeeded |
+| `changed` | boolean | Whether value changed beyond threshold |
+| `direction` | string | Direction of change: "up", "down", or "none" |
+| `change_percent` | number | Percentage change (positive = up, negative = down) |
+| `change_absolute` | number | Absolute change (positive = up, negative = down) |
 | `current_value` | number | The current value |
 | `previous_value` | number | The previous value |
-| `summary` | string | Nilai saat ini |
+| `summary` | string | Human-readable summary (e.g., "+3.5%") |
 
 **Example:** Crypto price alert (5% change)
 

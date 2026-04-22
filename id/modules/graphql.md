@@ -6,34 +6,34 @@ Execute GraphQL queries and mutations.
 
 | Module | Description |
 |--------|-------------|
-| [Mutasi GraphQL](#mutasi-graphql) | Jalankan mutasi GraphQL terhadap endpoint |
-| [Query GraphQL](#query-graphql) | Jalankan query GraphQL terhadap endpoint |
+| [GraphQL Mutation](#graphql-mutation) | Execute a GraphQL mutation against an endpoint |
+| [GraphQL Query](#graphql-query) | Execute a GraphQL query against an endpoint |
 
 ## Modules
 
-### Mutasi GraphQL
+### GraphQL Mutation
 
 `graphql.mutation`
 
-Jalankan mutasi GraphQL terhadap endpoint
+Execute a GraphQL mutation against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL endpoint GraphQL |
-| `mutation` | string | Yes | - | String mutasi GraphQL |
-| `variables` | object | No | - | Variabel mutasi GraphQL sebagai pasangan kunci-nilai |
-| `headers` | object | No | - | Header HTTP tambahan untuk dikirim dengan permintaan |
-| `auth_token` | string | No | - | Token bearer untuk autentikasi (ditambahkan sebagai header Authorization) |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `mutation` | string | Yes | - | GraphQL mutation string |
+| `variables` | object | No | - | GraphQL mutation variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | Data respons GraphQL |
-| `errors` | array | Kesalahan GraphQL (null jika tidak ada kesalahan) |
-| `status_code` | number | Kode status HTTP |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Create user mutation
 
@@ -43,29 +43,29 @@ mutation: mutation CreateUser($input: UserInput!) { createUser(input: $input) { 
 variables: {"input": {"name": "John", "email": "john@example.com"}}
 ```
 
-### Query GraphQL
+### GraphQL Query
 
 `graphql.query`
 
-Jalankan query GraphQL terhadap endpoint
+Execute a GraphQL query against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL endpoint GraphQL |
-| `query` | string | Yes | - | String query GraphQL |
-| `variables` | object | No | - | Variabel query GraphQL sebagai pasangan kunci-nilai |
-| `headers` | object | No | - | Header HTTP tambahan untuk dikirim dengan permintaan |
-| `auth_token` | string | No | - | Token bearer untuk autentikasi (ditambahkan sebagai header Authorization) |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `query` | string | Yes | - | GraphQL query string |
+| `variables` | object | No | - | GraphQL query variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | Data respons GraphQL |
-| `errors` | array | Kesalahan GraphQL (null jika tidak ada kesalahan) |
-| `status_code` | number | Kode status HTTP |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Simple query
 

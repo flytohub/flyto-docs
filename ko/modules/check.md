@@ -6,148 +6,148 @@ Runtime type checking utilities.
 
 | Module | Description |
 |--------|-------------|
-| [배열 여부](#배열-여부) | 값이 배열인지 확인 |
-| [비어 있는지 여부](#비어-있는지-여부) | 값이 비어 있는지 확인 |
-| [Null 여부](#null-여부) | 값이 null/None인지 확인 |
-| [숫자 여부](#숫자-여부) | 값이 숫자인지 확인 |
-| [객체 여부](#객체-여부) | 값이 객체인지 확인 |
-| [문자열 여부](#문자열-여부) | 값이 문자열인지 확인 |
-| [타입](#타입) | 값의 타입 가져오기 |
+| [Is Array](#is-array) | Check if a value is an array |
+| [Is Empty](#is-empty) | Check if a value is empty |
+| [Is Null](#is-null) | Check if a value is null/None |
+| [Is Number](#is-number) | Check if a value is a number |
+| [Is Object](#is-object) | Check if a value is an object |
+| [Is String](#is-string) | Check if a value is a string |
+| [Type Of](#type-of) | Get the type of a value |
 
 ## Modules
 
-### 배열 여부
+### Is Array
 
 `check.is_array`
 
-값이 배열인지 확인
+Check if a value is an array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 확인할 값 |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_array` | boolean | 확인할 값 |
-| `length` | number | 값이 배열인지 여부 |
+| `is_array` | boolean | Whether value is an array |
+| `length` | number | Array length (if array) |
 
-### 비어 있는지 여부
+### Is Empty
 
 `check.is_empty`
 
-값이 비어 있는지 확인
+Check if a value is empty
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 확인할 값 |
-| `trim_strings` | boolean | No | `True` | 확인할 값 |
+| `value` | any | Yes | - | Value to check |
+| `trim_strings` | boolean | No | `True` | Treat whitespace-only strings as empty |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_empty` | boolean | 공백만 있는 문자열을 비어 있는 것으로 처리 |
-| `type` | string | 값이 비어 있는지 여부 |
+| `is_empty` | boolean | Whether value is empty |
+| `type` | string | Type of value |
 
-### Null 여부
+### Is Null
 
 `check.is_null`
 
-값이 null/None인지 확인
+Check if a value is null/None
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | No | - | 확인할 값 |
+| `value` | any | No | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_null` | boolean | 확인할 값 |
+| `is_null` | boolean | Whether value is null |
 
-### 숫자 여부
+### Is Number
 
 `check.is_number`
 
-값이 숫자인지 확인
+Check if a value is a number
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 확인할 값 |
-| `parse_string` | boolean | No | `False` | 확인할 값 |
-| `integer_only` | boolean | No | `False` | 숫자 문자열을 숫자로 간주 |
+| `value` | any | Yes | - | Value to check |
+| `parse_string` | boolean | No | `False` | Consider numeric strings as numbers |
+| `integer_only` | boolean | No | `False` | Only accept integers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_number` | boolean | 정수만 허용 |
-| `is_integer` | boolean | 값이 숫자인지 여부 |
-| `is_float` | boolean | 값이 숫자인지 여부 |
+| `is_number` | boolean | Whether value is a number |
+| `is_integer` | boolean | Whether value is an integer |
+| `is_float` | boolean | Whether value is a float |
 
-### 객체 여부
+### Is Object
 
 `check.is_object`
 
-값이 객체인지 확인
+Check if a value is an object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 확인할 값 |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_object` | boolean | 확인할 값 |
-| `keys` | array | 값이 객체인지 여부 |
+| `is_object` | boolean | Whether value is an object |
+| `keys` | array | Object keys (if object) |
 
-### 문자열 여부
+### Is String
 
 `check.is_string`
 
-값이 문자열인지 확인
+Check if a value is a string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 확인할 값 |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_string` | boolean | 확인할 값 |
-| `length` | number | 값이 문자열인지 여부 |
+| `is_string` | boolean | Whether value is a string |
+| `length` | number | String length (if string) |
 
-### 타입
+### Type Of
 
 `check.type_of`
 
-값의 타입 가져오기
+Get the type of a value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | No | - | 확인할 값 |
+| `value` | any | No | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `type` | string | 확인할 값 |
-| `is_primitive` | boolean | 타입 이름 |
+| `type` | string | Type name |
+| `is_primitive` | boolean | Whether type is primitive |

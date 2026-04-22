@@ -6,33 +6,33 @@ Execute JavaScript, Python, or shell commands in isolated environments.
 
 | Module | Description |
 |--------|-------------|
-| [Exécuter JavaScript](#exécuter-javascript) | Exécuter du code JavaScript via Node.js avec un délai |
-| [Exécuter Python](#exécuter-python) | Exécuter du code Python dans un sous-processus avec un délai |
-| [Exécuter Shell](#exécuter-shell) | Exécuter une commande shell avec un délai et un contrôle d'environnement |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code via Node.js with timeout |
+| [Execute Python](#execute-python) | Execute Python code in a subprocess with timeout |
+| [Execute Shell](#execute-shell) | Execute a shell command with timeout and environment control |
 
 ## Modules
 
-### Exécuter JavaScript
+### Execute JavaScript
 
 `sandbox.execute_js`
 
-Exécuter du code JavaScript via Node.js avec un délai
+Execute JavaScript code via Node.js with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | Code JavaScript à exécuter via Node.js |
-| `timeout` | number | No | `10` | Délai d'exécution en secondes |
+| `code` | string | Yes | - | JavaScript code to execute via Node.js |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | Sortie standard du script |
-| `stderr` | string | Erreur standard du script |
-| `exit_code` | number | Code de sortie du processus (0 = succès) |
-| `execution_time_ms` | number | Temps d'exécution en millisecondes |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple console.log
 
@@ -48,28 +48,28 @@ code: const data = { name: "test", value: 42 };
 console.log(JSON.stringify(data, null, 2));
 ```
 
-### Exécuter Python
+### Execute Python
 
 `sandbox.execute_python`
 
-Exécuter du code Python dans un sous-processus avec un délai
+Execute Python code in a subprocess with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | Code Python à exécuter |
-| `timeout` | number | No | `10` | Délai d'exécution en secondes |
-| `allowed_modules` | array | No | - | Liste blanche des modules importables (laisser vide pour autoriser tous) |
+| `code` | string | Yes | - | Python code to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `allowed_modules` | array | No | - | Whitelist of importable modules (leave empty to allow all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | Sortie standard du script |
-| `stderr` | string | Erreur standard du script |
-| `exit_code` | number | Code de sortie du processus (0 = succès) |
-| `execution_time_ms` | number | Temps d'exécution en millisecondes |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple print
 
@@ -86,29 +86,29 @@ print(math.pi)
 allowed_modules: ["math"]
 ```
 
-### Exécuter Shell
+### Execute Shell
 
 `sandbox.execute_shell`
 
-Exécuter une commande shell avec un délai et un contrôle d'environnement
+Execute a shell command with timeout and environment control
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `command` | string | Yes | - | Commande shell à exécuter |
-| `timeout` | number | No | `10` | Délai d'exécution en secondes |
-| `working_dir` | string | No | - | Répertoire de travail pour la commande |
-| `env` | object | No | - | Variables d'environnement supplémentaires à définir (fusionnées avec l'environnement actuel) |
+| `command` | string | Yes | - | Shell command to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `working_dir` | string | No | - | Working directory for the command |
+| `env` | object | No | - | Additional environment variables to set (merged with current env) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | Sortie standard de la commande |
-| `stderr` | string | Erreur standard de la commande |
-| `exit_code` | number | Code de sortie du processus (0 = succès) |
-| `execution_time_ms` | number | Temps d'exécution en millisecondes |
+| `stdout` | string | Standard output from the command |
+| `stderr` | string | Standard error from the command |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple echo
 

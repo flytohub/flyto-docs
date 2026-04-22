@@ -6,26 +6,26 @@ List manipulation — chunk, flatten, group, map, reduce, zip, and more.
 
 | Module | Description |
 |--------|-------------|
-| [陣列分塊](#陣列分塊) | 將陣列分割成指定大小的區塊 |
-| [壓縮](#壓縮) | 移除陣列中的 null/空值 |
-| [陣列差集](#陣列差集) | 找出第一個陣列中不在其他陣列的元素 |
-| [移除](#移除) | 從陣列中移除前 N 個元素 |
-| [陣列展平](#陣列展平) | 將巢狀陣列展平為單一陣列 |
-| [分組依據](#分組依據) | 依鍵值將陣列元素分組 |
-| [陣列交集](#陣列交集) | 找出陣列之間的共同元素 |
-| [陣列合併](#陣列合併) | 將陣列元素合併成字串 |
-| [陣列映射](#陣列映射) | 轉換陣列中的每個元素 |
-| [陣列縮減](#陣列縮減) | 將陣列縮減為單一值 |
-| [取出](#取出) | 從陣列中取出前 N 個元素 |
-| [壓縮陣列](#壓縮陣列) | 逐元素結合多個陣列 |
+| [Array Chunk](#array-chunk) | Split array into chunks of specified size |
+| [Compact](#compact) | Remove null/empty values from array |
+| [Array Difference](#array-difference) | Find elements in first array not in others |
+| [Drop](#drop) | Drop first N elements from array |
+| [Array Flatten](#array-flatten) | Flatten nested arrays into single array |
+| [Group By](#group-by) | Group array elements by a key |
+| [Array Intersection](#array-intersection) | Find common elements between arrays |
+| [Array Join](#array-join) | Join array elements into string |
+| [Array Map](#array-map) | Transform each element in an array |
+| [Array Reduce](#array-reduce) | Reduce array to single value |
+| [Take](#take) | Take first N elements from array |
+| [Zip Arrays](#zip-arrays) | Combine multiple arrays element-wise |
 
 ## Modules
 
-### 陣列分塊
+### Array Chunk
 
 `array.chunk`
 
-將陣列分割成指定大小的區塊
+Split array into chunks of specified size
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ List manipulation — chunk, flatten, group, map, reduce, zip, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 區塊陣列 |
-| `chunks` | number | 區塊陣列 |
+| `result` | array | Array of chunks |
+| `chunks` | number | Number of chunks |
 
 **Example:** Chunk into groups of 3
 
@@ -55,33 +55,33 @@ array: ["a", "b", "c", "d", "e"]
 size: 2
 ```
 
-### 壓縮
+### Compact
 
 `array.compact`
 
-移除陣列中的 null/空值
+Remove null/empty values from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | 要壓縮的陣列 |
-| `remove_empty_strings` | boolean | No | `True` | 移除空字串 |
-| `remove_zero` | boolean | No | `False` | 移除空字串 |
-| `remove_false` | boolean | No | `False` | 移除零值 |
+| `array` | array | Yes | - | Array to compact |
+| `remove_empty_strings` | boolean | No | `True` | Remove empty strings |
+| `remove_zero` | boolean | No | `False` | Remove zero values |
+| `remove_false` | boolean | No | `False` | Remove false values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 移除 false 值 |
-| `removed` | number | 壓縮後的陣列 |
+| `result` | array | Compacted array |
+| `removed` | number | Number of items removed |
 
-### 陣列差集
+### Array Difference
 
 `array.difference`
 
-找出第一個陣列中不在其他陣列的元素
+Find elements in first array not in others
 
 **Parameters:**
 
@@ -94,8 +94,8 @@ size: 2
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 第一個陣列的唯一元素 |
-| `length` | number | 差集長度 |
+| `result` | array | Elements unique to first array |
+| `length` | number | Number of unique elements |
 
 **Example:** Find unique elements
 
@@ -104,31 +104,31 @@ array: [1, 2, 3, 4, 5]
 subtract: [[2, 4], [5]]
 ```
 
-### 移除
+### Drop
 
 `array.drop`
 
-從陣列中移除前 N 個元素
+Drop first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | 來源陣列 |
-| `count` | number | Yes | `1` | 來源陣列 |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to drop |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 要移除的元素數量 |
-| `dropped` | number | 剩餘的元素 |
+| `result` | array | Remaining elements |
+| `dropped` | number | Number of elements dropped |
 
-### 陣列展平
+### Array Flatten
 
 `array.flatten`
 
-將巢狀陣列展平為單一陣列
+Flatten nested arrays into single array
 
 **Parameters:**
 
@@ -141,8 +141,8 @@ subtract: [[2, 4], [5]]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 展平後的陣列 |
-| `length` | number | 展平後的長度 |
+| `result` | array | Flattened array |
+| `length` | number | Length of flattened array |
 
 **Example:** Flatten one level
 
@@ -158,32 +158,32 @@ array: [[1, [2, [3, [4]]]]]
 depth: -1
 ```
 
-### 分組依據
+### Group By
 
 `array.group_by`
 
-依鍵值將陣列元素分組
+Group array elements by a key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | 要分組的物件陣列 |
-| `key` | string | Yes | - | 要分組的物件陣列 |
+| `array` | array | Yes | - | Array of objects to group |
+| `key` | string | Yes | - | Property name to group by |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `groups` | object | 用來分組的屬性名稱 |
-| `keys` | array | 分組結果 |
-| `count` | number | 分組結果 |
+| `groups` | object | Grouped results |
+| `keys` | array | Group keys |
+| `count` | number | Number of groups |
 
-### 陣列交集
+### Array Intersection
 
 `array.intersection`
 
-找出陣列之間的共同元素
+Find common elements between arrays
 
 **Parameters:**
 
@@ -195,8 +195,8 @@ depth: -1
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 共同元素 |
-| `length` | number | 交集長度 |
+| `result` | array | Common elements |
+| `length` | number | Number of common elements |
 
 **Example:** Find common elements
 
@@ -204,11 +204,11 @@ depth: -1
 arrays: [[1, 2, 3, 4], [2, 3, 5], [2, 3, 6]]
 ```
 
-### 陣列合併
+### Array Join
 
 `array.join`
 
-將陣列元素合併成字串
+Join array elements into string
 
 **Parameters:**
 
@@ -222,7 +222,7 @@ arrays: [[1, 2, 3, 4], [2, 3, 5], [2, 3, 6]]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 合併後的字串 |
+| `result` | string | Joined string |
 
 **Example:** Join with comma
 
@@ -239,11 +239,11 @@ separator:
 
 ```
 
-### 陣列映射
+### Array Map
 
 `array.map`
 
-轉換陣列中的每個元素
+Transform each element in an array
 
 **Parameters:**
 
@@ -257,8 +257,8 @@ separator:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 轉換後的陣列 |
-| `length` | number | 轉換後的長度 |
+| `result` | array | Transformed array |
+| `length` | number | Length of result array |
 
 **Example:** Multiply numbers
 
@@ -276,11 +276,11 @@ operation: extract
 value: name
 ```
 
-### 陣列縮減
+### Array Reduce
 
 `array.reduce`
 
-將陣列縮減為單一值
+Reduce array to single value
 
 **Parameters:**
 
@@ -295,8 +295,8 @@ value: name
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | 縮減後的值 |
-| `operation` | string | 執行的操作 |
+| `result` | any | Reduced value |
+| `operation` | string | Operation that was applied |
 
 **Example:** Sum numbers
 
@@ -313,42 +313,42 @@ operation: join
 separator:  
 ```
 
-### 取出
+### Take
 
 `array.take`
 
-從陣列中取出前 N 個元素
+Take first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | 來源陣列 |
-| `count` | number | Yes | `1` | 來源陣列 |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to take |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 要取出的元素數量 |
-| `length` | number | 取出的元素 |
+| `result` | array | Taken elements |
+| `length` | number | Number of elements taken |
 
-### 壓縮陣列
+### Zip Arrays
 
 `array.zip`
 
-逐元素結合多個陣列
+Combine multiple arrays element-wise
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | 要壓縮的陣列組 |
-| `fill_value` | any | No | - | 要壓縮的陣列組 |
+| `arrays` | array | Yes | - | Array of arrays to zip |
+| `fill_value` | any | No | - | Value for missing elements |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 缺少元素的值 |
-| `length` | number | 壓縮後的陣列 |
+| `result` | array | Zipped array |
+| `length` | number | Result length |

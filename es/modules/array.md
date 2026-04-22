@@ -6,26 +6,26 @@ List manipulation — chunk, flatten, group, map, reduce, zip, and more.
 
 | Module | Description |
 |--------|-------------|
-| [Fragmentar array](#fragmentar-array) | Dividir array en fragmentos de tamano especificado |
-| [Compactar](#compactar) | Eliminar valores nulos/vacíos del array |
-| [Diferencia de array](#diferencia-de-array) | Encontrar elementos en primer array que no estan en otros |
-| [Eliminar](#eliminar) | Eliminar los primeros N elementos del array |
-| [Aplanar array](#aplanar-array) | Aplanar arrays anidados en un solo array |
-| [Agrupar Por](#agrupar-por) | Agrupar elementos del array por una clave |
-| [Interseccion de array](#interseccion-de-array) | Encontrar elementos comunes entre arrays |
-| [Unir array](#unir-array) | Unir elementos de array en cadena |
-| [Mapear array](#mapear-array) | Transformar cada elemento en un array |
-| [Reducir array](#reducir-array) | Reducir array a un solo valor |
-| [Tomar](#tomar) | Tomar los primeros N elementos del array |
-| [Unir Arrays](#unir-arrays) | Combinar múltiples arrays elemento por elemento |
+| [Array Chunk](#array-chunk) | Split array into chunks of specified size |
+| [Compact](#compact) | Remove null/empty values from array |
+| [Array Difference](#array-difference) | Find elements in first array not in others |
+| [Drop](#drop) | Drop first N elements from array |
+| [Array Flatten](#array-flatten) | Flatten nested arrays into single array |
+| [Group By](#group-by) | Group array elements by a key |
+| [Array Intersection](#array-intersection) | Find common elements between arrays |
+| [Array Join](#array-join) | Join array elements into string |
+| [Array Map](#array-map) | Transform each element in an array |
+| [Array Reduce](#array-reduce) | Reduce array to single value |
+| [Take](#take) | Take first N elements from array |
+| [Zip Arrays](#zip-arrays) | Combine multiple arrays element-wise |
 
 ## Modules
 
-### Fragmentar array
+### Array Chunk
 
 `array.chunk`
 
-Dividir array en fragmentos de tamano especificado
+Split array into chunks of specified size
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ Dividir array en fragmentos de tamano especificado
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Array de fragmentos |
-| `chunks` | number | Array de fragmentos |
+| `result` | array | Array of chunks |
+| `chunks` | number | Number of chunks |
 
 **Example:** Chunk into groups of 3
 
@@ -55,33 +55,33 @@ array: ["a", "b", "c", "d", "e"]
 size: 2
 ```
 
-### Compactar
+### Compact
 
 `array.compact`
 
-Eliminar valores nulos/vacíos del array
+Remove null/empty values from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Array a compactar |
-| `remove_empty_strings` | boolean | No | `True` | Eliminar cadenas vacías |
-| `remove_zero` | boolean | No | `False` | Eliminar cadenas vacías |
-| `remove_false` | boolean | No | `False` | Eliminar valores cero |
+| `array` | array | Yes | - | Array to compact |
+| `remove_empty_strings` | boolean | No | `True` | Remove empty strings |
+| `remove_zero` | boolean | No | `False` | Remove zero values |
+| `remove_false` | boolean | No | `False` | Remove false values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Eliminar valores falsos |
-| `removed` | number | Array compactado |
+| `result` | array | Compacted array |
+| `removed` | number | Number of items removed |
 
-### Diferencia de array
+### Array Difference
 
 `array.difference`
 
-Encontrar elementos en primer array que no estan en otros
+Find elements in first array not in others
 
 **Parameters:**
 
@@ -94,8 +94,8 @@ Encontrar elementos en primer array que no estan en otros
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Elementos unicos del primer array |
-| `length` | number | Elementos unicos del primer array |
+| `result` | array | Elements unique to first array |
+| `length` | number | Number of unique elements |
 
 **Example:** Find unique elements
 
@@ -104,31 +104,31 @@ array: [1, 2, 3, 4, 5]
 subtract: [[2, 4], [5]]
 ```
 
-### Eliminar
+### Drop
 
 `array.drop`
 
-Eliminar los primeros N elementos del array
+Drop first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Array de origen |
-| `count` | number | Yes | `1` | Array de origen |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to drop |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Número de elementos a eliminar |
-| `dropped` | number | Elementos restantes |
+| `result` | array | Remaining elements |
+| `dropped` | number | Number of elements dropped |
 
-### Aplanar array
+### Array Flatten
 
 `array.flatten`
 
-Aplanar arrays anidados en un solo array
+Flatten nested arrays into single array
 
 **Parameters:**
 
@@ -141,8 +141,8 @@ Aplanar arrays anidados en un solo array
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Array aplanado |
-| `length` | number | Array aplanado |
+| `result` | array | Flattened array |
+| `length` | number | Length of flattened array |
 
 **Example:** Flatten one level
 
@@ -158,32 +158,32 @@ array: [[1, [2, [3, [4]]]]]
 depth: -1
 ```
 
-### Agrupar Por
+### Group By
 
 `array.group_by`
 
-Agrupar elementos del array por una clave
+Group array elements by a key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Array de objetos a agrupar |
-| `key` | string | Yes | - | Array de objetos a agrupar |
+| `array` | array | Yes | - | Array of objects to group |
+| `key` | string | Yes | - | Property name to group by |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `groups` | object | Nombre de la propiedad para agrupar |
-| `keys` | array | Resultados agrupados |
-| `count` | number | Resultados agrupados |
+| `groups` | object | Grouped results |
+| `keys` | array | Group keys |
+| `count` | number | Number of groups |
 
-### Interseccion de array
+### Array Intersection
 
 `array.intersection`
 
-Encontrar elementos comunes entre arrays
+Find common elements between arrays
 
 **Parameters:**
 
@@ -195,8 +195,8 @@ Encontrar elementos comunes entre arrays
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Elementos comunes |
-| `length` | number | Elementos comunes |
+| `result` | array | Common elements |
+| `length` | number | Number of common elements |
 
 **Example:** Find common elements
 
@@ -204,11 +204,11 @@ Encontrar elementos comunes entre arrays
 arrays: [[1, 2, 3, 4], [2, 3, 5], [2, 3, 6]]
 ```
 
-### Unir array
+### Array Join
 
 `array.join`
 
-Unir elementos de array en cadena
+Join array elements into string
 
 **Parameters:**
 
@@ -222,7 +222,7 @@ Unir elementos de array en cadena
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Cadena unida |
+| `result` | string | Joined string |
 
 **Example:** Join with comma
 
@@ -239,11 +239,11 @@ separator:
 
 ```
 
-### Mapear array
+### Array Map
 
 `array.map`
 
-Transformar cada elemento en un array
+Transform each element in an array
 
 **Parameters:**
 
@@ -257,8 +257,8 @@ Transformar cada elemento en un array
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Array transformado |
-| `length` | number | Array transformado |
+| `result` | array | Transformed array |
+| `length` | number | Length of result array |
 
 **Example:** Multiply numbers
 
@@ -276,11 +276,11 @@ operation: extract
 value: name
 ```
 
-### Reducir array
+### Array Reduce
 
 `array.reduce`
 
-Reducir array a un solo valor
+Reduce array to single value
 
 **Parameters:**
 
@@ -295,8 +295,8 @@ Reducir array a un solo valor
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | Valor reducido |
-| `operation` | string | Valor reducido |
+| `result` | any | Reduced value |
+| `operation` | string | Operation that was applied |
 
 **Example:** Sum numbers
 
@@ -313,42 +313,42 @@ operation: join
 separator:  
 ```
 
-### Tomar
+### Take
 
 `array.take`
 
-Tomar los primeros N elementos del array
+Take first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Array de origen |
-| `count` | number | Yes | `1` | Array de origen |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to take |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Número de elementos a tomar |
-| `length` | number | Elementos tomados |
+| `result` | array | Taken elements |
+| `length` | number | Number of elements taken |
 
-### Unir Arrays
+### Zip Arrays
 
 `array.zip`
 
-Combinar múltiples arrays elemento por elemento
+Combine multiple arrays element-wise
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | Array de arrays a unir |
-| `fill_value` | any | No | - | Array de arrays a unir |
+| `arrays` | array | Yes | - | Array of arrays to zip |
+| `fill_value` | any | No | - | Value for missing elements |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Valor para elementos faltantes |
-| `length` | number | Array unido |
+| `result` | array | Zipped array |
+| `length` | number | Result length |

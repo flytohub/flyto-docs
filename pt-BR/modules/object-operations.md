@@ -6,110 +6,110 @@ Deep merge, flatten, dot-path get/set, and unflatten.
 
 | Module | Description |
 |--------|-------------|
-| [Mescla Profunda](#mescla-profunda) | Mesclar profundamente vários objetos |
-| [Achatamento de Objeto](#achatamento-de-objeto) | Achatamento de objeto aninhado para um único nível |
-| [Obter Valor](#obter-valor) | Obter valor do objeto pelo caminho |
-| [Definir Valor](#definir-valor) | Definir valor no objeto pelo caminho |
-| [Desfazer Achatamento de Objeto](#desfazer-achatamento-de-objeto) | Desfazer achatamento de objeto com notação de ponto para aninhado |
+| [Deep Merge](#deep-merge) | Deep merge multiple objects |
+| [Flatten Object](#flatten-object) | Flatten nested object to single level |
+| [Get Value](#get-value) | Get value from object by path |
+| [Set Value](#set-value) | Set value in object by path |
+| [Unflatten Object](#unflatten-object) | Unflatten object with dot notation to nested |
 
 ## Modules
 
-### Mescla Profunda
+### Deep Merge
 
 `object.deep_merge`
 
-Mesclar profundamente vários objetos
+Deep merge multiple objects
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `objects` | array | Yes | - | Array de objetos para mesclar |
-| `array_merge` | string | No | `replace` | Array de objetos para mesclar |
+| `objects` | array | Yes | - | Array of objects to merge |
+| `array_merge` | string | No | `replace` | How to merge arrays |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Objeto mesclado |
+| `result` | object | Merged object |
 
-### Achatamento de Objeto
+### Flatten Object
 
 `object.flatten`
 
-Achatamento de objeto aninhado para um único nível
+Flatten nested object to single level
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | Objeto aninhado para achatar |
-| `separator` | string | No | `.` | Objeto aninhado para achatar |
-| `max_depth` | number | No | `0` | Separador de chave |
+| `object` | object | Yes | - | Nested object to flatten |
+| `separator` | string | No | `.` | Key separator |
+| `max_depth` | number | No | `0` | Maximum depth to flatten (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Profundidade máxima para achatar (0 = ilimitado) |
-| `keys` | array | Objeto achatado |
+| `result` | object | Flattened object |
+| `keys` | array | Flattened keys |
 
-### Obter Valor
+### Get Value
 
 `object.get`
 
-Obter valor do objeto pelo caminho
+Get value from object by path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | Objeto de onde obter o valor |
-| `path` | string | Yes | - | Objeto de onde obter o valor |
-| `default` | any | No | - | Caminho em notação de ponto |
+| `object` | object | Yes | - | Object to get value from |
+| `path` | string | Yes | - | Dot notation path |
+| `default` | any | No | - | Default value if path not found |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | Valor padrão se o caminho não for encontrado |
-| `found` | boolean | Valor recuperado |
+| `value` | any | Retrieved value |
+| `found` | boolean | Whether path was found |
 
-### Definir Valor
+### Set Value
 
 `object.set`
 
-Definir valor no objeto pelo caminho
+Set value in object by path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | Objeto a modificar |
-| `path` | string | Yes | - | Objeto a modificar |
-| `value` | any | Yes | - | Caminho em notação de ponto |
+| `object` | object | Yes | - | Object to modify |
+| `path` | string | Yes | - | Dot notation path |
+| `value` | any | Yes | - | Value to set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Valor a definir |
+| `result` | object | Modified object |
 
-### Desfazer Achatamento de Objeto
+### Unflatten Object
 
 `object.unflatten`
 
-Desfazer achatamento de objeto com notação de ponto para aninhado
+Unflatten object with dot notation to nested
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | Objeto achatado para desfazer |
-| `separator` | string | No | `.` | Objeto achatado para desfazer |
+| `object` | object | Yes | - | Flat object to unflatten |
+| `separator` | string | No | `.` | Key separator |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Separador de chave |
+| `result` | object | Nested object |

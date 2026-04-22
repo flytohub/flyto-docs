@@ -6,7 +6,7 @@ HTTP request utilities.
 
 | Module | Description |
 |--------|-------------|
-| [HTTP GET](#http-get) | Invia una richiesta HTTP GET e ricevi una risposta |
+| [HTTP GET](#http-get) | Send HTTP GET request to an API endpoint |
 
 ## Modules
 
@@ -14,16 +14,16 @@ HTTP request utilities.
 
 `http.get`
 
-Invia una richiesta HTTP GET e ricevi una risposta
+Send HTTP GET request to an API endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL a cui inviare la richiesta GET |
-| `headers` | object | No | `{}` | Intestazioni della richiesta come oggetto chiave-valore |
-| `query` | object | No | `{}` | Parametri della stringa di query come oggetto chiave-valore |
-| `timeout` | number | No | `30` | Timeout della richiesta in millisecondi |
+| `url` | string | Yes | - | Target URL |
+| `headers` | object | No | `{}` | HTTP request headers as key-value pairs |
+| `query` | object | No | `{}` | URL query string parameters as key-value pairs |
+| `timeout` | number | No | `30` | Maximum time to wait in seconds |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
 | `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
@@ -31,7 +31,7 @@ Invia una richiesta HTTP GET e ricevi una risposta
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Se la richiesta è stata completata con successo (stato 2xx) |
-| `status` | number | Codice di stato HTTP |
-| `body` | any | Corpo della risposta (JSON analizzato o testo) |
-| `headers` | object | Intestazioni della risposta |
+| `ok` | boolean | Whether the operation succeeded |
+| `status` | number | HTTP status code |
+| `body` | any | Response body content |
+| `headers` | object | Response headers |

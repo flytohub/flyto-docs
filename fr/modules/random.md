@@ -6,92 +6,92 @@ Random number, UUID, choice, and shuffle.
 
 | Module | Description |
 |--------|-------------|
-| [Choix Aléatoire](#choix-aléatoire) | Sélectionner des éléments aléatoires d'un tableau |
-| [Nombre Aléatoire](#nombre-aléatoire) | Générer un nombre aléatoire dans une plage |
-| [Mélanger le Tableau](#mélanger-le-tableau) | Mélanger aléatoirement les éléments du tableau |
-| [Générer UUID](#générer-uuid) | Générer un UUID aléatoire (v4) |
+| [Random Choice](#random-choice) | Select random element(s) from an array |
+| [Random Number](#random-number) | Generate random number within a range |
+| [Shuffle Array](#shuffle-array) | Randomly shuffle array elements |
+| [Generate UUID](#generate-uuid) | Generate random UUID (v4) |
 
 ## Modules
 
-### Choix Aléatoire
+### Random Choice
 
 `random.choice`
 
-Sélectionner des éléments aléatoires d'un tableau
+Select random element(s) from an array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Tableau à partir duquel choisir |
-| `count` | number | No | `1` | Tableau à partir duquel choisir |
-| `unique` | boolean | No | `True` | Nombre d'éléments à choisir |
+| `array` | array | Yes | - | Array to pick from |
+| `count` | number | No | `1` | Number of elements to pick |
+| `unique` | boolean | No | `True` | Pick unique elements (no duplicates) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `choice` | any | Choisir des éléments uniques (sans doublons) |
-| `count` | number | Élément(s) sélectionné(s) |
+| `choice` | any | Selected element(s) |
+| `count` | number | Number of elements selected |
 
-### Nombre Aléatoire
+### Random Number
 
 `random.number`
 
-Générer un nombre aléatoire dans une plage
+Generate random number within a range
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `min` | number | No | `0` | Valeur minimale (incluse) |
-| `max` | number | No | `100` | Valeur minimale (incluse) |
-| `integer` | boolean | No | `True` | Valeur maximale (incluse) |
-| `precision` | number | No | `2` | Générer uniquement des entiers |
+| `min` | number | No | `0` | Minimum value (inclusive) |
+| `max` | number | No | `100` | Maximum value (inclusive) |
+| `integer` | boolean | No | `True` | Generate integers only |
+| `precision` | number | No | `2` | Decimal places for float |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `number` | number | Décimales pour le flottant |
-| `min` | number | Nombre aléatoire généré |
-| `max` | number | Nombre aléatoire généré |
+| `number` | number | Generated random number |
+| `min` | number | Minimum bound used |
+| `max` | number | Maximum bound used |
 
-### Mélanger le Tableau
+### Shuffle Array
 
 `random.shuffle`
 
-Mélanger aléatoirement les éléments du tableau
+Randomly shuffle array elements
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Tableau à mélanger |
+| `array` | array | Yes | - | Array to shuffle |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Tableau à mélanger |
-| `length` | number | Tableau mélangé |
+| `result` | array | Shuffled array |
+| `length` | number | Array length |
 
-### Générer UUID
+### Generate UUID
 
 `random.uuid`
 
-Générer un UUID aléatoire (v4)
+Generate random UUID (v4)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `uppercase` | boolean | No | `False` | Retourner l'UUID en majuscules |
-| `remove_hyphens` | boolean | No | `False` | Retourner l'UUID en majuscules |
+| `uppercase` | boolean | No | `False` | Return uppercase UUID |
+| `remove_hyphens` | boolean | No | `False` | Remove hyphens from UUID |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `uuid` | string | Supprimer les tirets de l'UUID |
-| `version` | number | UUID généré |
+| `uuid` | string | Generated UUID |
+| `version` | number | UUID version |

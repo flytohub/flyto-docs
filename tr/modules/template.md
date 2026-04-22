@@ -6,15 +6,15 @@ Execute reusable templates as workflow steps.
 
 | Module | Description |
 |--------|-------------|
-| [Şablon Çağır](#şablon-çağır) | Kitaplığınızdaki bir şablonu iş akışı adımı olarak çalıştırın |
+| [Invoke Template](#invoke-template) | Execute a template from your library as a workflow step |
 
 ## Modules
 
-### Şablon Çağır
+### Invoke Template
 
 `template.invoke`
 
-Kitaplığınızdaki bir şablonu iş akışı adımı olarak çalıştırın
+Execute a template from your library as a workflow step
 
 **Parameters:**
 
@@ -29,10 +29,10 @@ Kitaplığınızdaki bir şablonu iş akışı adımı olarak çalıştırın
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Kütüphane öğesinin kimliği (satın alma/çatallama/sahip olunan) |
-| `result` | any | Maksimum yürütme süresi saniye cinsinden |
-| `template_id` | string | Yönlendirme için olay (başarı/hata) |
-| `execution_time_ms` | number | Şablon yürütme sonucu |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Template execution result |
+| `template_id` | string | Executed template ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 

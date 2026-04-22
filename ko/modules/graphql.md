@@ -6,34 +6,34 @@ Execute GraphQL queries and mutations.
 
 | Module | Description |
 |--------|-------------|
-| [GraphQL 변이](#graphql-변이) | 엔드포인트에 GraphQL 변이 실행 |
-| [GraphQL 쿼리](#graphql-쿼리) | 엔드포인트에 GraphQL 쿼리 실행 |
+| [GraphQL Mutation](#graphql-mutation) | Execute a GraphQL mutation against an endpoint |
+| [GraphQL Query](#graphql-query) | Execute a GraphQL query against an endpoint |
 
 ## Modules
 
-### GraphQL 변이
+### GraphQL Mutation
 
 `graphql.mutation`
 
-엔드포인트에 GraphQL 변이 실행
+Execute a GraphQL mutation against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | GraphQL 엔드포인트 URL |
-| `mutation` | string | Yes | - | GraphQL 변이 문자열 |
-| `variables` | object | No | - | 키-값 쌍으로 된 GraphQL 변이 변수 |
-| `headers` | object | No | - | 요청과 함께 보낼 추가 HTTP 헤더 |
-| `auth_token` | string | No | - | 인증을 위한 Bearer 토큰 (Authorization 헤더로 추가됨) |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `mutation` | string | Yes | - | GraphQL mutation string |
+| `variables` | object | No | - | GraphQL mutation variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | GraphQL 응답 데이터 |
-| `errors` | array | GraphQL 오류 (오류가 없으면 null) |
-| `status_code` | number | HTTP 상태 코드 |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Create user mutation
 
@@ -43,29 +43,29 @@ mutation: mutation CreateUser($input: UserInput!) { createUser(input: $input) { 
 variables: {"input": {"name": "John", "email": "john@example.com"}}
 ```
 
-### GraphQL 쿼리
+### GraphQL Query
 
 `graphql.query`
 
-엔드포인트에 GraphQL 쿼리 실행
+Execute a GraphQL query against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | GraphQL 엔드포인트 URL |
-| `query` | string | Yes | - | GraphQL 쿼리 문자열 |
-| `variables` | object | No | - | 키-값 쌍으로 된 GraphQL 쿼리 변수 |
-| `headers` | object | No | - | 요청과 함께 보낼 추가 HTTP 헤더 |
-| `auth_token` | string | No | - | 인증을 위한 Bearer 토큰 (Authorization 헤더로 추가됨) |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `query` | string | Yes | - | GraphQL query string |
+| `variables` | object | No | - | GraphQL query variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | GraphQL 응답 데이터 |
-| `errors` | array | GraphQL 오류 (오류가 없으면 null) |
-| `status_code` | number | HTTP 상태 코드 |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Simple query
 

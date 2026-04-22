@@ -6,42 +6,42 @@ Retry, fallback, and circuit breaker patterns.
 
 | Module | Description |
 |--------|-------------|
-| [Devre Kesici](#devre-kesici) | Devre kesici deseni ile zincirleme hataları önleyin |
-| [Yedek](#yedek) | İşlem başarısız olduğunda yedek değer sağlayın |
-| [Yeniden Dene](#yeniden-dene) | Yeniden deneme mantığıyla işlemleri sarın |
+| [Circuit Breaker](#circuit-breaker) | Protect against cascading failures with circuit breaker pattern |
+| [Fallback](#fallback) | Provide fallback value when operation fails |
+| [Retry](#retry) | Wrap operations with configurable retry logic |
 
 ## Modules
 
-### Devre Kesici
+### Circuit Breaker
 
 `error.circuit_breaker`
 
-Devre kesici deseni ile zincirleme hataları önleyin
+Protect against cascading failures with circuit breaker pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | object | Yes | - | Devre kesici ile korunacak eylem |
-| `circuit_id` | string | Yes | - | Devre kesici ile korunacak eylem |
-| `failure_threshold` | number | No | `5` | Bu devre için benzersiz kimlik (durum takibi için) |
-| `failure_window_ms` | number | No | `60000` | Hataları saymak için zaman penceresi |
-| `recovery_timeout_ms` | number | No | `30000` | Kurtarma denemesi öncesi süre (yarı açık durum) |
-| `success_threshold` | number | No | `3` | Devrenin kapanması için yarı açık durumda gereken başarılı istekler |
-| `fallback` | object | No | - | Devre açıkken alternatif eylem |
-| `fallback_value` | any | No | - | Devre açıkken alternatif eylem |
-| `track_errors` | array | No | `[]` | Devre açıkken döndürülecek statik değer |
+| `action` | object | Yes | - | The action to protect with circuit breaker |
+| `circuit_id` | string | Yes | - | Unique identifier for this circuit (for state tracking) |
+| `failure_threshold` | number | No | `5` | Number of failures before opening circuit |
+| `failure_window_ms` | number | No | `60000` | Time window for counting failures |
+| `recovery_timeout_ms` | number | No | `30000` | Time before attempting recovery (half-open state) |
+| `success_threshold` | number | No | `3` | Successful requests needed in half-open to close circuit |
+| `fallback` | object | No | - | Alternative action when circuit is open |
+| `fallback_value` | any | No | - | Static value to return when circuit is open |
+| `track_errors` | array | No | `[]` | Only count these error codes toward threshold (empty = all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Yalnızca bu hata kodlarını eşik için say (boş = hepsi) |
-| `result` | any | Yönlendirme için olay (başarı/devre açık/yedek) |
-| `circuit_state` | string | Eylem veya yedek sonuç |
-| `failure_count` | number | Devrenin mevcut durumu (kapalı/açık/yarı açık) |
-| `last_failure_time` | string | Pencere içindeki mevcut hata sayısı |
-| `circuit_opened_at` | string | Son hatanın zaman damgası |
+| `__event__` | string | Event for routing (success/circuit_open/fallback) |
+| `result` | any | Result from action or fallback |
+| `circuit_state` | string | Current state of circuit (closed/open/half_open) |
+| `failure_count` | number | Current failure count in window |
+| `last_failure_time` | string | Timestamp of last failure |
+| `circuit_opened_at` | string | When circuit was opened |
 
 **Example:** Example
 
@@ -71,31 +71,31 @@ failure_threshold: 3
 fallback_value: {"users": [], "from_cache": false}
 ```
 
-### Yedek
+### Fallback
 
 `error.fallback`
 
-İşlem başarısız olduğunda yedek değer sağlayın
+Provide fallback value when operation fails
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `operation` | object | No | - | Denenecek birincil işlem |
-| `fallback_value` | any | No | - | Denenecek birincil işlem |
-| `fallback_operation` | object | No | - | Başarısızlıkta döndürülecek statik değer |
-| `fallback_on` | array | No | `[]` | Başarısızlıkta yürütülecek alternatif işlem |
-| `include_error_info` | boolean | No | `True` | Yedeği tetikleyen hata kodları (boş = tüm hatalar) |
-| `log_fallback` | boolean | No | `True` | Çıkışa orijinal hata bilgisini dahil et |
+| `operation` | object | No | - | The primary operation to attempt |
+| `fallback_value` | any | No | - | Static value to return on failure |
+| `fallback_operation` | object | No | - | Alternative operation to execute on failure |
+| `fallback_on` | array | No | `[]` | Error codes that trigger fallback (empty = all errors) |
+| `include_error_info` | boolean | No | `True` | Include original error information in output |
+| `log_fallback` | boolean | No | `True` | Log when fallback is used |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | Yedek kullanıldığında kaydedin |
-| `used_fallback` | boolean | Birincil işlemden veya yedekten sonuç |
-| `source` | string | Yedek kullanılıp kullanılmadığı |
-| `original_error` | object | Sonucun kaynağı (birincil/yedek değer/yedek işlem) |
+| `result` | any | Result from primary operation or fallback |
+| `used_fallback` | boolean | Whether fallback was used |
+| `source` | string | Source of result (primary/fallback_value/fallback_operation) |
+| `original_error` | object | Original error if fallback was used |
 
 **Example:** Example
 
@@ -119,34 +119,34 @@ fallback_value: {"status": "unavailable"}
 fallback_on: ["NETWORK_ERROR", "TIMEOUT_ERROR"]
 ```
 
-### Yeniden Dene
+### Retry
 
 `error.retry`
 
-Yeniden deneme mantığıyla işlemleri sarın
+Wrap operations with configurable retry logic
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `operation` | object | Yes | - | Yeniden denenecek işlem (modül ID ve parametreler) |
-| `max_retries` | number | No | `3` | Yeniden denenecek işlem (modül ID ve parametreler) |
-| `initial_delay_ms` | number | No | `1000` | Maksimum yeniden deneme sayısı |
-| `max_delay_ms` | number | No | `30000` | İlk yeniden denemeden önceki başlangıç gecikmesi |
-| `backoff_multiplier` | number | No | `2.0` | Üstel geri çekilme çarpanı (örneğin, 2 her denemede gecikmeyi iki katına çıkarır) |
-| `jitter` | boolean | No | `True` | Kalabalık etkisini önlemek için gecikmeye rastgele oynama ekleyin |
-| `retry_on` | array | No | `[]` | Kalabalık etkisini önlemek için gecikmeye rastgele oynama ekleyin |
-| `timeout_per_attempt_ms` | number | No | `0` | Yeniden denenecek hata kodlarının listesi (boş = tümünü dene) |
+| `operation` | object | Yes | - | The operation to retry (module ID and params) |
+| `max_retries` | number | No | `3` | Maximum number of retry attempts |
+| `initial_delay_ms` | number | No | `1000` | Initial delay before first retry |
+| `max_delay_ms` | number | No | `30000` | Maximum delay between retries |
+| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g., 2 doubles delay each retry) |
+| `jitter` | boolean | No | `True` | Add random jitter to delay to prevent thundering herd |
+| `retry_on` | array | No | `[]` | List of error codes to retry on (empty = retry all) |
+| `timeout_per_attempt_ms` | number | No | `0` | Timeout for each attempt (0 for no timeout) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Her deneme için zaman aşımı (0 zaman aşımı yok) |
-| `result` | any | Yönlendirme için olay (başarı/tükenmiş) |
-| `attempts` | number | Yönlendirme için olay (başarı/tükenmiş) |
-| `total_delay_ms` | number | Başarılı denemenin sonucu |
-| `errors` | array | Yapılan deneme sayısı |
+| `__event__` | string | Event for routing (success/exhausted) |
+| `result` | any | Result from successful attempt |
+| `attempts` | number | Number of attempts made |
+| `total_delay_ms` | number | Total time spent in delays |
+| `errors` | array | Errors from each failed attempt |
 
 **Example:** Example
 

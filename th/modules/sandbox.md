@@ -6,33 +6,33 @@ Execute JavaScript, Python, or shell commands in isolated environments.
 
 | Module | Description |
 |--------|-------------|
-| [รัน JavaScript](#รัน-javascript) | รันโค้ด JavaScript ผ่าน Node.js พร้อมกำหนดเวลาหมด |
-| [รัน Python](#รัน-python) | รันโค้ด Python ใน subprocess พร้อมกำหนดเวลาหมด |
-| [รัน Shell](#รัน-shell) | รันคำสั่ง shell พร้อมกำหนดเวลาหมดและควบคุมสภาพแวดล้อม |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code via Node.js with timeout |
+| [Execute Python](#execute-python) | Execute Python code in a subprocess with timeout |
+| [Execute Shell](#execute-shell) | Execute a shell command with timeout and environment control |
 
 ## Modules
 
-### รัน JavaScript
+### Execute JavaScript
 
 `sandbox.execute_js`
 
-รันโค้ด JavaScript ผ่าน Node.js พร้อมกำหนดเวลาหมด
+Execute JavaScript code via Node.js with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | โค้ด JavaScript ที่จะรันผ่าน Node.js |
-| `timeout` | number | No | `10` | เวลาหมดในการรันเป็นวินาที |
+| `code` | string | Yes | - | JavaScript code to execute via Node.js |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | ผลลัพธ์มาตรฐานจากสคริปต์ |
-| `stderr` | string | ข้อผิดพลาดมาตรฐานจากสคริปต์ |
-| `exit_code` | number | รหัสออกจากกระบวนการ (0 = สำเร็จ) |
-| `execution_time_ms` | number | เวลารันเป็นมิลลิวินาที |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple console.log
 
@@ -48,28 +48,28 @@ code: const data = { name: "test", value: 42 };
 console.log(JSON.stringify(data, null, 2));
 ```
 
-### รัน Python
+### Execute Python
 
 `sandbox.execute_python`
 
-รันโค้ด Python ใน subprocess พร้อมกำหนดเวลาหมด
+Execute Python code in a subprocess with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | โค้ด Python ที่จะรัน |
-| `timeout` | number | No | `10` | เวลาหมดในการรันเป็นวินาที |
-| `allowed_modules` | array | No | - | รายการโมดูลที่สามารถนำเข้าได้ (ปล่อยว่างเพื่ออนุญาตทั้งหมด) |
+| `code` | string | Yes | - | Python code to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `allowed_modules` | array | No | - | Whitelist of importable modules (leave empty to allow all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | ผลลัพธ์มาตรฐานจากสคริปต์ |
-| `stderr` | string | ข้อผิดพลาดมาตรฐานจากสคริปต์ |
-| `exit_code` | number | รหัสออกจากกระบวนการ (0 = สำเร็จ) |
-| `execution_time_ms` | number | เวลารันเป็นมิลลิวินาที |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple print
 
@@ -86,29 +86,29 @@ print(math.pi)
 allowed_modules: ["math"]
 ```
 
-### รัน Shell
+### Execute Shell
 
 `sandbox.execute_shell`
 
-รันคำสั่ง shell พร้อมกำหนดเวลาหมดและควบคุมสภาพแวดล้อม
+Execute a shell command with timeout and environment control
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `command` | string | Yes | - | คำสั่ง shell ที่จะรัน |
-| `timeout` | number | No | `10` | เวลาหมดในการรันเป็นวินาที |
-| `working_dir` | string | No | - | ไดเรกทอรีทำงานสำหรับคำสั่ง |
-| `env` | object | No | - | ตัวแปรสภาพแวดล้อมเพิ่มเติมที่จะตั้งค่า (รวมกับสภาพแวดล้อมปัจจุบัน) |
+| `command` | string | Yes | - | Shell command to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `working_dir` | string | No | - | Working directory for the command |
+| `env` | object | No | - | Additional environment variables to set (merged with current env) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | ผลลัพธ์มาตรฐานจากคำสั่ง |
-| `stderr` | string | ข้อผิดพลาดมาตรฐานจากคำสั่ง |
-| `exit_code` | number | รหัสออกจากกระบวนการ (0 = สำเร็จ) |
-| `execution_time_ms` | number | เวลารันเป็นมิลลิวินาที |
+| `stdout` | string | Standard output from the command |
+| `stderr` | string | Standard error from the command |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple echo
 

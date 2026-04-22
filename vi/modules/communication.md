@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [Đọc Email](#đọc-email) | Đọc email từ máy chủ IMAP |
-| [Gửi Email](#gửi-email) | Gửi email qua máy chủ SMTP |
-| [Gửi tin nhắn Slack](#gửi-tin-nhắn-slack) | Gửi tin nhắn đến kênh Slack qua incoming webhook |
-| [Kích hoạt Webhook](#kích-hoạt-webhook) | Gửi yêu cầu HTTP POST đến URL webhook |
+| [Read Email](#read-email) | Read emails from IMAP server |
+| [Send Email](#send-email) | Send email via SMTP server |
+| [Send Slack Message](#send-slack-message) | Send messages to Slack channels via incoming webhook |
+| [Trigger Webhook](#trigger-webhook) | Send HTTP POST request to a webhook URL |
 
 ## Modules
 
-### Đọc Email
+### Read Email
 
 `email.read`
 
-Đọc email từ máy chủ IMAP
+Read emails from IMAP server
 
 **Parameters:**
 
@@ -38,8 +38,8 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `emails` | array | Danh sách các đối tượng email |
-| `count` | number | Danh sách các đối tượng email |
+| `emails` | array | List of email objects |
+| `count` | number | Number of emails fetched |
 
 **Example:** Read recent unread emails
 
@@ -49,11 +49,11 @@ unread_only: true
 limit: 5
 ```
 
-### Gửi Email
+### Send Email
 
 `email.send`
 
-Gửi email qua máy chủ SMTP
+Send email via SMTP server
 
 **Parameters:**
 
@@ -77,9 +77,9 @@ Gửi email qua máy chủ SMTP
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sent` | boolean | Email có được gửi thành công không |
-| `message_id` | string | Email có được gửi thành công không |
-| `recipients` | array | Email có được gửi thành công không |
+| `sent` | boolean | Whether email was sent successfully |
+| `message_id` | string | Email message ID |
+| `recipients` | array | List of recipients |
 
 **Example:** Send simple email
 
@@ -89,11 +89,11 @@ subject: Hello
 body: This is a test email.
 ```
 
-### Gửi tin nhắn Slack
+### Send Slack Message
 
 `slack.send`
 
-Gửi tin nhắn đến kênh Slack qua incoming webhook
+Send messages to Slack channels via incoming webhook
 
 **Parameters:**
 
@@ -111,7 +111,7 @@ Gửi tin nhắn đến kênh Slack qua incoming webhook
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sent` | boolean | Tin nhắn có được gửi thành công không |
+| `sent` | boolean | Whether message was sent successfully |
 
 **Example:** Send simple message
 
@@ -127,11 +127,11 @@ username: Flyto Bot
 icon_emoji: :white_check_mark:
 ```
 
-### Kích hoạt Webhook
+### Trigger Webhook
 
 `webhook.trigger`
 
-Gửi yêu cầu HTTP POST đến URL webhook
+Send HTTP POST request to a webhook URL
 
 **Parameters:**
 
@@ -149,9 +149,9 @@ Gửi yêu cầu HTTP POST đến URL webhook
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | Mã trạng thái phản hồi HTTP |
-| `response` | object | Mã trạng thái phản hồi HTTP |
-| `headers` | object | Mã trạng thái phản hồi HTTP |
+| `status_code` | number | HTTP response status code |
+| `response` | object | Response body (if JSON) |
+| `headers` | object | Response headers |
 
 **Example:** Simple POST webhook
 

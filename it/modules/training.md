@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [Pratica Analisi](#pratica-analisi) | Analizza struttura sito web per pratica |
-| [Pratica Esecuzione](#pratica-esecuzione) | Esegui sessione pratica |
-| [Pratica Inferenza Schema](#pratica-inferenza-schema) | Inferisci schema dati dal sito web |
-| [Statistiche Pratica](#statistiche-pratica) | Ottieni statistiche pratica |
+| [Practice Analyze](#practice-analyze) | Analyze website structure for practice |
+| [Practice Execute](#practice-execute) | Execute practice session |
+| [Practice Infer Schema](#practice-infer-schema) | Infer data schema from website |
+| [Practice Stats](#practice-stats) | Get practice statistics |
 
 ## Modules
 
-### Pratica Analisi
+### Practice Analyze
 
 `training.practice.analyze`
 
-Analizza struttura sito web per pratica
+Analyze website structure for practice
 
 **Parameters:**
 
@@ -29,14 +29,14 @@ Analizza struttura sito web per pratica
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Analizza struttura sito web |
-| `structure` | object | Analizza struttura sito web |
+| `status` | string | Operation status (success/error) |
+| `structure` | object | The structure |
 
-### Pratica Esecuzione
+### Practice Execute
 
 `training.practice.execute`
 
-Esegui sessione pratica
+Execute practice session
 
 **Parameters:**
 
@@ -49,14 +49,14 @@ Esegui sessione pratica
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Esegui sessione pratica |
-| `items_processed` | number | Esegui sessione pratica |
+| `status` | string | Operation status (success/error) |
+| `items_processed` | number | The items processed |
 
-### Pratica Inferenza Schema
+### Practice Infer Schema
 
 `training.practice.infer_schema`
 
-Inferisci schema dati dal sito web
+Infer data schema from website
 
 **Parameters:**
 
@@ -69,20 +69,20 @@ Inferisci schema dati dal sito web
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Inferisci schema dati |
-| `schema` | object | Inferisci schema dati |
+| `status` | string | Operation status (success/error) |
+| `schema` | object | The schema |
 
-### Statistiche Pratica
+### Practice Stats
 
 `training.practice.stats`
 
-Ottieni statistiche pratica
+Get practice statistics
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total_sessions` | number | Le sessioni totali |
-| `successful_sessions` | number | Le sessioni totali |
-| `success_rate` | number | Ottieni statistiche pratica |
-| `history` | array | Ottieni statistiche pratica |
+| `total_sessions` | number | The total sessions |
+| `successful_sessions` | number | The successful sessions |
+| `success_rate` | number | The success rate |
+| `history` | array | The history |

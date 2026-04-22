@@ -6,47 +6,47 @@ SHA-256 and SHA-512 cryptographic hashing.
 
 | Module | Description |
 |--------|-------------|
-| [Hachage SHA-256](#hachage-sha-256) | Calculer le hachage cryptographique SHA-256 du texte |
-| [Hachage SHA-512](#hachage-sha-512) | Calculer le hachage cryptographique SHA-512 du texte |
+| [SHA-256 Hash](#sha-256-hash) | Calculate SHA-256 cryptographic hash of text |
+| [SHA-512 Hash](#sha-512-hash) | Calculate SHA-512 cryptographic hash of text |
 
 ## Modules
 
-### Hachage SHA-256
+### SHA-256 Hash
 
 `hash.sha256`
 
-Calculer le hachage cryptographique SHA-256 du texte
+Calculate SHA-256 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Texte à hacher |
-| `encoding` | string | No | `utf-8` | Texte à hacher |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | Encodage du texte |
-| `algorithm` | string | Hachage SHA-256 (64 caractères hexadécimaux) |
+| `hash` | string | SHA-256 hash (64 hex characters) |
+| `algorithm` | string | Hash algorithm used |
 
-### Hachage SHA-512
+### SHA-512 Hash
 
 `hash.sha512`
 
-Calculer le hachage cryptographique SHA-512 du texte
+Calculate SHA-512 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Texte à hacher |
-| `encoding` | string | No | `utf-8` | Texte à hacher |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | Encodage du texte |
-| `algorithm` | string | Hachage SHA-512 (128 caractères hexadécimaux) |
+| `hash` | string | SHA-512 hash (128 hex characters) |
+| `algorithm` | string | Hash algorithm used |

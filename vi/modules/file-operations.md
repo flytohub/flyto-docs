@@ -6,17 +6,17 @@ Copy, move, and delete files.
 
 | Module | Description |
 |--------|-------------|
-| [Sao chép tệp](#sao-chép-tệp) | Sao chép tệp sang vị trí khác |
-| [Xóa tệp](#xóa-tệp) | Xóa tệp khỏi hệ thống tệp |
-| [Di chuyển tệp](#di-chuyển-tệp) | Di chuyển hoặc đổi tên tệp |
+| [Copy File](#copy-file) | Copy a file to another location |
+| [Delete File](#delete-file) | Delete a file from the filesystem |
+| [Move File](#move-file) | Move or rename a file |
 
 ## Modules
 
-### Sao chép tệp
+### Copy File
 
 `file.copy`
 
-Sao chép tệp sang vị trí khác
+Copy a file to another location
 
 **Parameters:**
 
@@ -30,10 +30,10 @@ Sao chép tệp sang vị trí khác
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `copied` | boolean | Đã sao chép |
-| `source` | string | Đã sao chép |
-| `destination` | string | Đã sao chép |
-| `size` | number | Nguồn |
+| `copied` | boolean | The copied |
+| `source` | string | The source |
+| `destination` | string | The destination |
+| `size` | number | Size in bytes |
 
 **Example:** Backup file
 
@@ -50,11 +50,11 @@ source: config.yaml
 destination: config.backup.yaml
 ```
 
-### Xóa tệp
+### Delete File
 
 `file.delete`
 
-Xóa tệp khỏi hệ thống tệp
+Delete a file from the filesystem
 
 **Parameters:**
 
@@ -67,8 +67,8 @@ Xóa tệp khỏi hệ thống tệp
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deleted` | boolean | Đã xóa |
-| `file_path` | string | Đã xóa |
+| `deleted` | boolean | The deleted |
+| `file_path` | string | The file path |
 
 **Example:** Delete temporary file
 
@@ -83,11 +83,11 @@ ignore_missing: true
 file_path: logs/app.log
 ```
 
-### Di chuyển tệp
+### Move File
 
 `file.move`
 
-Di chuyển hoặc đổi tên tệp
+Move or rename a file
 
 **Parameters:**
 
@@ -100,9 +100,9 @@ Di chuyển hoặc đổi tên tệp
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `moved` | boolean | Đã di chuyển |
-| `source` | string | Đã di chuyển |
-| `destination` | string | Đã di chuyển |
+| `moved` | boolean | The moved |
+| `source` | string | The source |
+| `destination` | string | The destination |
 
 **Example:** Move file to archive
 

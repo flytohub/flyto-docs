@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [練習分析](#練習分析) | 分析網站結構以供練習 |
-| [練習執行](#練習執行) | 執行練習會話 |
-| [練習推斷結構](#練習推斷結構) | 從網站推斷資料結構 |
-| [練習統計](#練習統計) | 取得練習統計資料 |
+| [Practice Analyze](#practice-analyze) | Analyze website structure for practice |
+| [Practice Execute](#practice-execute) | Execute practice session |
+| [Practice Infer Schema](#practice-infer-schema) | Infer data schema from website |
+| [Practice Stats](#practice-stats) | Get practice statistics |
 
 ## Modules
 
-### 練習分析
+### Practice Analyze
 
 `training.practice.analyze`
 
-分析網站結構以供練習
+Analyze website structure for practice
 
 **Parameters:**
 
@@ -29,14 +29,14 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 分析網站結構 |
-| `structure` | object | 分析網站結構 |
+| `status` | string | Operation status (success/error) |
+| `structure` | object | The structure |
 
-### 練習執行
+### Practice Execute
 
 `training.practice.execute`
 
-執行練習會話
+Execute practice session
 
 **Parameters:**
 
@@ -49,14 +49,14 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 執行練習會話 |
-| `items_processed` | number | 執行練習會話 |
+| `status` | string | Operation status (success/error) |
+| `items_processed` | number | The items processed |
 
-### 練習推斷結構
+### Practice Infer Schema
 
 `training.practice.infer_schema`
 
-從網站推斷資料結構
+Infer data schema from website
 
 **Parameters:**
 
@@ -69,20 +69,20 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 推斷資料結構 |
-| `schema` | object | 推斷資料結構 |
+| `status` | string | Operation status (success/error) |
+| `schema` | object | The schema |
 
-### 練習統計
+### Practice Stats
 
 `training.practice.stats`
 
-取得練習統計資料
+Get practice statistics
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total_sessions` | number | 總會話數 |
-| `successful_sessions` | number | 總會話數 |
-| `success_rate` | number | 取得練習統計資料 |
-| `history` | array | 取得練習統計資料 |
+| `total_sessions` | number | The total sessions |
+| `successful_sessions` | number | The successful sessions |
+| `success_rate` | number | The success rate |
+| `history` | array | The history |

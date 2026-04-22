@@ -6,23 +6,23 @@ Datetime operations, delay, MD5 hash, and random utilities.
 
 | Module | Description |
 |--------|-------------|
-| [เพิ่มเวลา](#เพิ่มเวลา) | เพิ่มเวลาให้กับวันที่เวลา |
-| [จัดรูปแบบวันที่เวลา](#จัดรูปแบบวันที่เวลา) | จัดรูปแบบวันที่เวลาเป็นข้อความ |
-| [แปลงวันที่เวลา](#แปลงวันที่เวลา) | แปลงข้อความเป็นวันที่เวลา |
-| [ลบเวลา](#ลบเวลา) | ลบเวลาออกจากวันที่เวลา |
-| [วันที่/เวลาปัจจุบัน](#วันที่เวลาปัจจุบัน) | รับวันที่และเวลาปัจจุบัน |
-| [หน่วงเวลา/พัก](#หน่วงเวลาพัก) | หยุดการทำงานของเวิร์กโฟลว์ชั่วคราวตามระยะเวลาที่กำหนด |
-| [แฮช MD5](#แฮช-md5) | คำนวณแฮช MD5 ของข้อความ |
-| [ตัวเลขสุ่ม](#ตัวเลขสุ่ม) | สร้างตัวเลขสุ่มในช่วง |
-| [ข้อความสุ่ม](#ข้อความสุ่ม) | สร้างข้อความสุ่มหรือ UUID |
+| [Add Time](#add-time) | Add time to datetime |
+| [Format DateTime](#format-datetime) | Format datetime to string |
+| [Parse DateTime](#parse-datetime) | Parse string to datetime |
+| [Subtract Time](#subtract-time) | Subtract time from datetime |
+| [Current Date/Time](#current-datetime) | Get current date and time |
+| [Delay/Sleep](#delaysleep) | Pause workflow execution for specified duration |
+| [MD5 Hash](#md5-hash) | Calculate MD5 hash of text |
+| [Random Number](#random-number) | Generate random number in range |
+| [Random String](#random-string) | Generate random string or UUID |
 
 ## Modules
 
-### เพิ่มเวลา
+### Add Time
 
 `datetime.add`
 
-เพิ่มเวลาให้กับวันที่เวลา
+Add time to datetime
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ Datetime operations, delay, MD5 hash, and random utilities.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | ผลลัพธ์การดำเนินการ |
-| `timestamp` | number | ผลลัพธ์การดำเนินการ |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Add 7 days
 
@@ -56,11 +56,11 @@ hours: 2
 minutes: 30
 ```
 
-### จัดรูปแบบวันที่เวลา
+### Format DateTime
 
 `datetime.format`
 
-จัดรูปแบบวันที่เวลาเป็นข้อความ
+Format datetime to string
 
 **Parameters:**
 
@@ -73,8 +73,8 @@ minutes: 30
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | ผลลัพธ์การดำเนินการ |
-| `timestamp` | number | ผลลัพธ์การดำเนินการ |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Format current time
 
@@ -90,11 +90,11 @@ datetime: 2024-01-15T10:30:00
 format: %B %d, %Y
 ```
 
-### แปลงวันที่เวลา
+### Parse DateTime
 
 `datetime.parse`
 
-แปลงข้อความเป็นวันที่เวลา
+Parse string to datetime
 
 **Parameters:**
 
@@ -107,14 +107,14 @@ format: %B %d, %Y
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | ผลลัพธ์การดำเนินการ |
-| `timestamp` | number | ผลลัพธ์การดำเนินการ |
-| `year` | number | ผลลัพธ์การดำเนินการ |
-| `month` | number | Unix timestamp |
-| `day` | number | ส่วนประกอบปี |
-| `hour` | number | ส่วนประกอบเดือน |
-| `minute` | number | ส่วนประกอบวัน |
-| `second` | number | ส่วนประกอบชั่วโมง |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
+| `year` | number | Year component |
+| `month` | number | Month component |
+| `day` | number | Day component |
+| `hour` | number | Hour component |
+| `minute` | number | Minute component |
+| `second` | number | Second component |
 
 **Example:** Parse ISO format
 
@@ -129,11 +129,11 @@ datetime_string: January 15, 2024
 format: %B %d, %Y
 ```
 
-### ลบเวลา
+### Subtract Time
 
 `datetime.subtract`
 
-ลบเวลาออกจากวันที่เวลา
+Subtract time from datetime
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ format: %B %d, %Y
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | ผลลัพธ์การดำเนินการ |
-| `timestamp` | number | ผลลัพธ์การดำเนินการ |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Subtract 7 days
 
@@ -166,28 +166,28 @@ datetime: 2024-01-15T10:00:00
 hours: 1
 ```
 
-### วันที่/เวลาปัจจุบัน
+### Current Date/Time
 
 `utility.datetime.now`
 
-รับวันที่และเวลาปัจจุบัน
+Get current date and time
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | รูปแบบเอาต์พุต |
-| `custom_format` | string | No | - | รูปแบบ Python strftime (ถ้า format=custom) |
-| `timezone` | string | No | `UTC` | รูปแบบ Python strftime (ถ้า format=custom) |
+| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | Output format |
+| `custom_format` | string | No | - | Python strftime format (if format=custom) |
+| `timezone` | string | No | `UTC` | Timezone (default: UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | เขตเวลา (ค่าเริ่มต้น: UTC) |
-| `datetime` | string | สถานะการดำเนินการ (success/error) |
-| `timestamp` | number | สถานะการดำเนินการ (success/error) |
-| `iso` | string | วันที่/เวลาที่จัดรูปแบบ |
+| `status` | string | Operation status (success/error) |
+| `datetime` | string | Formatted date/time |
+| `timestamp` | number | Unix timestamp |
+| `iso` | string | ISO format |
 
 **Example:** Example
 
@@ -201,25 +201,25 @@ format: iso
 format: unix
 ```
 
-### หน่วงเวลา/พัก
+### Delay/Sleep
 
 `utility.delay`
 
-หยุดการทำงานของเวิร์กโฟลว์ชั่วคราวตามระยะเวลาที่กำหนด
+Pause workflow execution for specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `duration_ms` | number | No | `1000` | ระยะเวลาที่จะรอเป็นมิลลิวินาที |
-| `duration_seconds` | number | No | - | ทางเลือก: ระยะเวลาเป็นวินาที |
+| `duration_ms` | number | No | `1000` | How long to wait in milliseconds |
+| `duration_seconds` | number | No | - | Alternative: duration in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ทางเลือก: ระยะเวลาเป็นวินาที |
-| `waited_ms` | number | สถานะการดำเนินการ (success/error) |
+| `status` | string | Operation status (success/error) |
+| `waited_ms` | number | Actual wait time in ms |
 
 **Example:** Example
 
@@ -233,25 +233,25 @@ duration_seconds: 2
 duration_ms: 500
 ```
 
-### แฮช MD5
+### MD5 Hash
 
 `utility.hash.md5`
 
-คำนวณแฮช MD5 ของข้อความ
+Calculate MD5 hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | ข้อความที่จะแฮช |
-| `encoding` | string | No | `utf-8` | ข้อความที่จะแฮช |
+| `text` | text | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | การเข้ารหัสข้อความ |
-| `hash` | string | การเข้ารหัสข้อความ |
+| `status` | string | Operation status (success/error) |
+| `hash` | string | MD5 hash (hexadecimal) |
 
 **Example:** Example
 
@@ -259,26 +259,26 @@ duration_ms: 500
 text: Hello World
 ```
 
-### ตัวเลขสุ่ม
+### Random Number
 
 `utility.random.number`
 
-สร้างตัวเลขสุ่มในช่วง
+Generate random number in range
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `min` | number | No | `0` | ค่าต่ำสุด (รวม) |
-| `max` | number | No | `100` | ค่าต่ำสุด (รวม) |
-| `decimals` | number | No | `0` | ค่าสูงสุด (รวม) |
+| `min` | number | No | `0` | Minimum value (inclusive) |
+| `max` | number | No | `100` | Maximum value (inclusive) |
+| `decimals` | number | No | `0` | Number of decimal places (0 for integers) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | จำนวนทศนิยม (0 สำหรับจำนวนเต็ม) |
-| `value` | number | สถานะการดำเนินการ (success/error) |
+| `status` | string | Operation status (success/error) |
+| `value` | number | Random number |
 
 **Example:** Example
 
@@ -296,25 +296,25 @@ max: 1
 decimals: 2
 ```
 
-### ข้อความสุ่ม
+### Random String
 
 `utility.random.string`
 
-สร้างข้อความสุ่มหรือ UUID
+Generate random string or UUID
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | No | `16` | ความยาวข้อความ |
-| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | ความยาวข้อความ |
+| `length` | number | No | `16` | String length |
+| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | Which characters to use |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ (success/error) |
-| `value` | string | สถานะการดำเนินการ (success/error) |
+| `status` | string | Operation status (success/error) |
+| `value` | string | Random string |
 
 **Example:** Example
 

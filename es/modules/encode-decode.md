@@ -6,161 +6,161 @@ Base64, hex, URL, and HTML encoding and decoding.
 
 | Module | Description |
 |--------|-------------|
-| [Decodificar Base64](#decodificar-base64) | Decodificar texto codificado en Base64 |
-| [Decodificar Hex](#decodificar-hex) | Decodificar hexadecimal a texto |
-| [Decodificar URL](#decodificar-url) | Decodificar texto codificado en URL |
-| [Codificar Base64](#codificar-base64) | Codificar texto a Base64 |
-| [Codificar Hex](#codificar-hex) | Codificar texto a hexadecimal |
-| [Codificar HTML](#codificar-html) | Codificar texto a entidades HTML |
-| [Codificar URL](#codificar-url) | Codificar texto en URL (codificación porcentual) |
+| [Base64 Decode](#base64-decode) | Decode Base64 encoded text |
+| [Hex Decode](#hex-decode) | Decode hexadecimal to text |
+| [URL Decode](#url-decode) | Decode URL encoded text |
+| [Base64 Encode](#base64-encode) | Encode text to Base64 |
+| [Hex Encode](#hex-encode) | Encode text to hexadecimal |
+| [HTML Encode](#html-encode) | Encode text to HTML entities |
+| [URL Encode](#url-encode) | URL encode text (percent encoding) |
 
 ## Modules
 
-### Decodificar Base64
+### Base64 Decode
 
 `decode.base64`
 
-Decodificar texto codificado en Base64
+Decode Base64 encoded text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Texto codificado en Base64 para decodificar |
-| `encoding` | string | No | `utf-8` | Texto codificado en Base64 para decodificar |
-| `url_safe` | boolean | No | `False` | Codificación de caracteres para salida |
+| `text` | text | Yes | - | Base64 encoded text to decode |
+| `encoding` | string | No | `utf-8` | Character encoding for output |
+| `url_safe` | boolean | No | `False` | Input is URL-safe Base64 |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | La entrada es Base64 seguro para URL |
-| `original` | string | Cadena decodificada |
-| `valid` | boolean | Cadena decodificada |
+| `result` | string | Decoded string |
+| `original` | string | Original Base64 input |
+| `valid` | boolean | Whether decoding was successful |
 
-### Decodificar Hex
+### Hex Decode
 
 `decode.hex`
 
-Decodificar hexadecimal a texto
+Decode hexadecimal to text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Texto hexadecimal para decodificar |
-| `encoding` | string | No | `utf-8` | Texto hexadecimal para decodificar |
+| `text` | text | Yes | - | Hexadecimal text to decode |
+| `encoding` | string | No | `utf-8` | Character encoding for output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Codificación de caracteres para salida |
-| `original` | string | Cadena decodificada |
-| `valid` | boolean | Cadena decodificada |
+| `result` | string | Decoded string |
+| `original` | string | Original hex input |
+| `valid` | boolean | Whether decoding was successful |
 
-### Decodificar URL
+### URL Decode
 
 `decode.url`
 
-Decodificar texto codificado en URL
+Decode URL encoded text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Texto codificado en URL para decodificar |
-| `plus_spaces` | boolean | No | `False` | Texto codificado en URL para decodificar |
+| `text` | text | Yes | - | URL encoded text to decode |
+| `plus_spaces` | boolean | No | `False` | Treat + as space (form decoding) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Tratar + como espacio (decodificación de formulario) |
-| `original` | string | Cadena decodificada |
+| `result` | string | Decoded string |
+| `original` | string | Original URL encoded input |
 
-### Codificar Base64
+### Base64 Encode
 
 `encode.base64`
 
-Codificar texto a Base64
+Encode text to Base64
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Texto a codificar |
-| `encoding` | string | No | `utf-8` | Texto a codificar |
-| `url_safe` | boolean | No | `False` | Codificación de caracteres |
+| `text` | text | Yes | - | Text to encode |
+| `encoding` | string | No | `utf-8` | Character encoding |
+| `url_safe` | boolean | No | `False` | Use URL-safe Base64 encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Usar codificación Base64 segura para URL |
-| `original` | string | Cadena codificada en Base64 |
-| `length` | number | Cadena codificada en Base64 |
+| `result` | string | Base64 encoded string |
+| `original` | string | Original input |
+| `length` | number | Length of encoded string |
 
-### Codificar Hex
+### Hex Encode
 
 `encode.hex`
 
-Codificar texto a hexadecimal
+Encode text to hexadecimal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Texto a codificar en hex |
-| `encoding` | string | No | `utf-8` | Texto a codificar en hex |
-| `uppercase` | boolean | No | `False` | Codificación de caracteres |
-| `separator` | string | No | - | Usar letras hexadecimales en mayúsculas |
+| `text` | text | Yes | - | Text to encode to hex |
+| `encoding` | string | No | `utf-8` | Character encoding |
+| `uppercase` | boolean | No | `False` | Use uppercase hex letters |
+| `separator` | string | No | - | Separator between hex bytes |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Separador entre bytes hexadecimales |
-| `original` | string | Cadena codificada en hex |
-| `byte_count` | number | Cadena codificada en hex |
+| `result` | string | Hex encoded string |
+| `original` | string | Original input |
+| `byte_count` | number | Number of bytes encoded |
 
-### Codificar HTML
+### HTML Encode
 
 `encode.html`
 
-Codificar texto a entidades HTML
+Encode text to HTML entities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Texto a codificar como entidades HTML |
-| `quote` | boolean | No | `True` | Texto a codificar como entidades HTML |
+| `text` | text | Yes | - | Text to encode as HTML entities |
+| `quote` | boolean | No | `True` | Also encode quote characters |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | También codificar caracteres de comillas |
-| `original` | string | Cadena codificada en HTML |
+| `result` | string | HTML encoded string |
+| `original` | string | Original input |
 
-### Codificar URL
+### URL Encode
 
 `encode.url`
 
-Codificar texto en URL (codificación porcentual)
+URL encode text (percent encoding)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Texto a codificar en URL |
-| `plus_spaces` | boolean | No | `False` | Texto a codificar en URL |
-| `safe` | string | No | - | Usar + en lugar de %20 para espacios (codificación de formularios) |
+| `text` | text | Yes | - | Text to URL encode |
+| `plus_spaces` | boolean | No | `False` | Use + instead of %20 for spaces (form encoding) |
+| `safe` | string | No | - | Characters that should not be encoded |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Caracteres que no deben ser codificados |
-| `original` | string | Cadena codificada en URL |
+| `result` | string | URL encoded string |
+| `original` | string | Original input |

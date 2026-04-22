@@ -6,9 +6,9 @@ DOM element query, attribute, and text extraction.
 
 | Module | Description |
 |--------|-------------|
-| [Get Attribute](#get-attribute) | Get element |
+| [Get Attribute](#get-attribute) | Get element's attribute value |
 | [Query Element](#query-element) | Find child elements within element |
-| [Get Text](#get-text) | Get element |
+| [Get Text](#get-text) | Get element's text content |
 
 ## Modules
 
@@ -16,21 +16,21 @@ DOM element query, attribute, and text extraction.
 
 `element.attribute`
 
-Get element
+Get element's attribute value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `element_id` | string | Yes | - | Element ID (UUID) |
-| `name` | string | Yes | - | Element ID (UUID) |
+| `name` | string | Yes | - | Attribute name (e.g. href, src, class) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Attribute name (e.g. href, src, class) |
-| `value` | string | Operation status (success/error) |
+| `status` | string | Operation status (success/error) |
+| `value` | string | The returned value |
 
 **Example:** Get href attribute
 
@@ -50,17 +50,17 @@ Find child elements within element
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `element_id` | string | Yes | - | Parent element ID (UUID) |
-| `selector` | string | Yes | - | Parent element ID (UUID) |
-| `all` | boolean | No | `False` | CSS selector to find child elements |
+| `selector` | string | Yes | - | CSS selector to find child elements |
+| `all` | boolean | No | `False` | Whether to find all matching elements (default: false, find first only) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Whether to find all matching elements (default: false, find first only) |
-| `element_id` | string | Operation status (success/error) |
-| `element_ids` | array | Operation status (success/error) |
-| `count` | number | Found element ID (single mode) |
+| `status` | string | Operation status (success/error) |
+| `element_id` | string | Found element ID (single mode) |
+| `element_ids` | array | List of found element IDs (all mode) |
+| `count` | number | Number of elements found |
 
 **Example:** Find child element
 
@@ -73,7 +73,7 @@ selector: h3
 
 `element.text`
 
-Get element
+Get element's text content
 
 **Parameters:**
 
@@ -85,8 +85,8 @@ Get element
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Element ID (UUID) |
-| `text` | string | Element ID (UUID) |
+| `status` | string | Operation status (success/error) |
+| `text` | string | Text content |
 
 **Example:** Get element text
 

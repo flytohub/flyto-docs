@@ -6,100 +6,100 @@ In-memory key-value cache with TTL support.
 
 | Module | Description |
 |--------|-------------|
-| [ล้างแคช](#ล้างแคช) | ล้างรายการแคชทั้งหมดหรือกรองตามรูปแบบ |
-| [ลบแคช](#ลบแคช) | ลบรายการแคชโดยใช้คีย์ |
-| [ดึงข้อมูลแคช](#ดึงข้อมูลแคช) | ดึงค่าจากแคชโดยใช้คีย์ |
-| [ตั้งค่าแคช](#ตั้งค่าแคช) | ตั้งค่าในแคชพร้อม TTL แบบเลือกได้ |
+| [Cache Clear](#cache-clear) | Clear all cache entries or filter by pattern |
+| [Cache Delete](#cache-delete) | Delete a cache entry by key |
+| [Cache Get](#cache-get) | Get a value from cache by key |
+| [Cache Set](#cache-set) | Set a value in cache with optional TTL |
 
 ## Modules
 
-### ล้างแคช
+### Cache Clear
 
 `cache.clear`
 
-ล้างรายการแคชทั้งหมดหรือกรองตามรูปแบบ
+Clear all cache entries or filter by pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `pattern` | string | No | `*` | รูปแบบ Glob ที่จะจับคู่คีย์ (เช่น "user:*", ค่าเริ่มต้น "*" ล้างทั้งหมด) |
-| `backend` | string | No | `memory` | แบ็กเอนด์แคชที่ใช้ |
-| `redis_url` | string | No | `redis://localhost:6379` | URL การเชื่อมต่อ Redis |
+| `pattern` | string | No | `*` | Glob pattern to match keys (e.g. "user:*", default "*" clears all) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `cleared_count` | number | จำนวนรายการแคชที่ถูกล้าง |
-| `backend` | string | แบ็กเอนด์ที่ใช้ |
+| `cleared_count` | number | Number of cache entries cleared |
+| `backend` | string | The backend used |
 
-### ลบแคช
+### Cache Delete
 
 `cache.delete`
 
-ลบรายการแคชโดยใช้คีย์
+Delete a cache entry by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | คีย์แคชที่ต้องการลบ |
-| `backend` | string | No | `memory` | แบ็กเอนด์แคชที่ใช้ |
-| `redis_url` | string | No | `redis://localhost:6379` | URL การเชื่อมต่อ Redis |
+| `key` | string | Yes | - | The cache key to delete |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | คีย์แคช |
-| `deleted` | boolean | พบและลบคีย์หรือไม่ |
-| `backend` | string | แบ็กเอนด์ที่ใช้ |
+| `key` | string | The cache key |
+| `deleted` | boolean | Whether the key was found and deleted |
+| `backend` | string | The backend used |
 
-### ดึงข้อมูลแคช
+### Cache Get
 
 `cache.get`
 
-ดึงค่าจากแคชโดยใช้คีย์
+Get a value from cache by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | คีย์แคชที่ต้องการค้นหา |
-| `backend` | string | No | `memory` | แบ็กเอนด์แคชที่ใช้ |
-| `redis_url` | string | No | `redis://localhost:6379` | URL การเชื่อมต่อ Redis |
+| `key` | string | Yes | - | The cache key to look up |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | คีย์แคช |
-| `value` | any | ค่าที่แคชไว้ (null ถ้าไม่พบ) |
-| `hit` | boolean | พบคีย์ในแคชหรือไม่ |
-| `backend` | string | แบ็กเอนด์ที่ใช้ |
+| `key` | string | The cache key |
+| `value` | any | The cached value (null if not found) |
+| `hit` | boolean | Whether the key was found in cache |
+| `backend` | string | The backend used |
 
-### ตั้งค่าแคช
+### Cache Set
 
 `cache.set`
 
-ตั้งค่าในแคชพร้อม TTL แบบเลือกได้
+Set a value in cache with optional TTL
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | คีย์แคชที่ใช้เก็บค่า |
-| `value` | string | Yes | - | ค่าที่จะเก็บในแคช (ค่า JSON ที่ serialize ได้) |
-| `ttl` | number | No | `0` | เวลาหมดอายุในวินาที (0 = ไม่หมดอายุ) |
-| `backend` | string | No | `memory` | แบ็กเอนด์แคชที่ใช้ |
-| `redis_url` | string | No | `redis://localhost:6379` | URL การเชื่อมต่อ Redis |
+| `key` | string | Yes | - | The cache key to store the value under |
+| `value` | string | Yes | - | The value to cache (any JSON-serializable value) |
+| `ttl` | number | No | `0` | Time-to-live in seconds (0 = no expiry) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | คีย์แคช |
-| `stored` | boolean | ค่าเก็บสำเร็จหรือไม่ |
-| `ttl` | number | TTL ในวินาที (0 = ไม่หมดอายุ) |
-| `backend` | string | แบ็กเอนด์ที่ใช้ |
+| `key` | string | The cache key |
+| `stored` | boolean | Whether the value was stored successfully |
+| `ttl` | number | The TTL in seconds (0 = no expiry) |
+| `backend` | string | The backend used |

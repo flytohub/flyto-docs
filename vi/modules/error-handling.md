@@ -6,9 +6,9 @@ Retry, fallback, and circuit breaker patterns.
 
 | Module | Description |
 |--------|-------------|
-| [Circuit Breaker](#circuit-breaker) | Bảo vệ chống lại lỗi dây chuyền với mẫu circuit breaker |
-| [Dự phòng](#dự-phòng) | Cung cấp giá trị dự phòng khi hoạt động thất bại |
-| [Thử lại](#thử-lại) | Bao bọc các hoạt động với logic thử lại có thể cấu hình |
+| [Circuit Breaker](#circuit-breaker) | Protect against cascading failures with circuit breaker pattern |
+| [Fallback](#fallback) | Provide fallback value when operation fails |
+| [Retry](#retry) | Wrap operations with configurable retry logic |
 
 ## Modules
 
@@ -16,32 +16,32 @@ Retry, fallback, and circuit breaker patterns.
 
 `error.circuit_breaker`
 
-Bảo vệ chống lại lỗi dây chuyền với mẫu circuit breaker
+Protect against cascading failures with circuit breaker pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | object | Yes | - | Hành động được bảo vệ với circuit breaker |
-| `circuit_id` | string | Yes | - | Hành động được bảo vệ với circuit breaker |
-| `failure_threshold` | number | No | `5` | Định danh duy nhất cho circuit này (để theo dõi trạng thái) |
-| `failure_window_ms` | number | No | `60000` | Cửa sổ thời gian để đếm thất bại |
-| `recovery_timeout_ms` | number | No | `30000` | Thời gian trước khi thử khôi phục (trạng thái nửa mở) |
-| `success_threshold` | number | No | `3` | Số yêu cầu thành công cần thiết trong trạng thái nửa mở để đóng circuit |
-| `fallback` | object | No | - | Hành động thay thế khi circuit mở |
-| `fallback_value` | any | No | - | Hành động thay thế khi circuit mở |
-| `track_errors` | array | No | `[]` | Giá trị tĩnh để trả về khi circuit mở |
+| `action` | object | Yes | - | The action to protect with circuit breaker |
+| `circuit_id` | string | Yes | - | Unique identifier for this circuit (for state tracking) |
+| `failure_threshold` | number | No | `5` | Number of failures before opening circuit |
+| `failure_window_ms` | number | No | `60000` | Time window for counting failures |
+| `recovery_timeout_ms` | number | No | `30000` | Time before attempting recovery (half-open state) |
+| `success_threshold` | number | No | `3` | Successful requests needed in half-open to close circuit |
+| `fallback` | object | No | - | Alternative action when circuit is open |
+| `fallback_value` | any | No | - | Static value to return when circuit is open |
+| `track_errors` | array | No | `[]` | Only count these error codes toward threshold (empty = all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Chỉ đếm các mã lỗi này vào ngưỡng (để trống = tất cả) |
-| `result` | any | Sự kiện để định tuyến (thành công/circuit mở/dự phòng) |
-| `circuit_state` | string | Kết quả từ hành động hoặc dự phòng |
-| `failure_count` | number | Trạng thái hiện tại của circuit (đóng/mở/nửa mở) |
-| `last_failure_time` | string | Số lần thất bại hiện tại trong cửa sổ |
-| `circuit_opened_at` | string | Dấu thời gian của lần thất bại cuối |
+| `__event__` | string | Event for routing (success/circuit_open/fallback) |
+| `result` | any | Result from action or fallback |
+| `circuit_state` | string | Current state of circuit (closed/open/half_open) |
+| `failure_count` | number | Current failure count in window |
+| `last_failure_time` | string | Timestamp of last failure |
+| `circuit_opened_at` | string | When circuit was opened |
 
 **Example:** Example
 
@@ -71,31 +71,31 @@ failure_threshold: 3
 fallback_value: {"users": [], "from_cache": false}
 ```
 
-### Dự phòng
+### Fallback
 
 `error.fallback`
 
-Cung cấp giá trị dự phòng khi hoạt động thất bại
+Provide fallback value when operation fails
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `operation` | object | No | - | Hoạt động chính để thử |
-| `fallback_value` | any | No | - | Hoạt động chính để thử |
-| `fallback_operation` | object | No | - | Giá trị tĩnh để trả về khi thất bại |
-| `fallback_on` | array | No | `[]` | Hoạt động thay thế để thực hiện khi thất bại |
-| `include_error_info` | boolean | No | `True` | Mã lỗi kích hoạt dự phòng (để trống = tất cả lỗi) |
-| `log_fallback` | boolean | No | `True` | Bao gồm thông tin lỗi gốc trong đầu ra |
+| `operation` | object | No | - | The primary operation to attempt |
+| `fallback_value` | any | No | - | Static value to return on failure |
+| `fallback_operation` | object | No | - | Alternative operation to execute on failure |
+| `fallback_on` | array | No | `[]` | Error codes that trigger fallback (empty = all errors) |
+| `include_error_info` | boolean | No | `True` | Include original error information in output |
+| `log_fallback` | boolean | No | `True` | Log when fallback is used |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | Ghi lại khi sử dụng dự phòng |
-| `used_fallback` | boolean | Kết quả từ hoạt động chính hoặc dự phòng |
-| `source` | string | Có sử dụng dự phòng hay không |
-| `original_error` | object | Nguồn của kết quả (chính/dự phòng giá trị/dự phòng hoạt động) |
+| `result` | any | Result from primary operation or fallback |
+| `used_fallback` | boolean | Whether fallback was used |
+| `source` | string | Source of result (primary/fallback_value/fallback_operation) |
+| `original_error` | object | Original error if fallback was used |
 
 **Example:** Example
 
@@ -119,34 +119,34 @@ fallback_value: {"status": "unavailable"}
 fallback_on: ["NETWORK_ERROR", "TIMEOUT_ERROR"]
 ```
 
-### Thử lại
+### Retry
 
 `error.retry`
 
-Bao bọc các hoạt động với logic thử lại có thể cấu hình
+Wrap operations with configurable retry logic
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `operation` | object | Yes | - | Hoạt động cần thử lại (ID module và tham số) |
-| `max_retries` | number | No | `3` | Hoạt động cần thử lại (ID module và tham số) |
-| `initial_delay_ms` | number | No | `1000` | Số lần thử lại tối đa |
-| `max_delay_ms` | number | No | `30000` | Độ trễ ban đầu trước lần thử lại đầu tiên |
-| `backoff_multiplier` | number | No | `2.0` | Hệ số nhân cho backoff lũy thừa (ví dụ: 2 sẽ tăng gấp đôi độ trễ mỗi lần thử lại) |
-| `jitter` | boolean | No | `True` | Thêm độ trễ ngẫu nhiên để tránh hiện tượng bầy đàn |
-| `retry_on` | array | No | `[]` | Thêm độ trễ ngẫu nhiên để tránh hiện tượng bầy đàn |
-| `timeout_per_attempt_ms` | number | No | `0` | Danh sách mã lỗi cần thử lại (để trống = thử lại tất cả) |
+| `operation` | object | Yes | - | The operation to retry (module ID and params) |
+| `max_retries` | number | No | `3` | Maximum number of retry attempts |
+| `initial_delay_ms` | number | No | `1000` | Initial delay before first retry |
+| `max_delay_ms` | number | No | `30000` | Maximum delay between retries |
+| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g., 2 doubles delay each retry) |
+| `jitter` | boolean | No | `True` | Add random jitter to delay to prevent thundering herd |
+| `retry_on` | array | No | `[]` | List of error codes to retry on (empty = retry all) |
+| `timeout_per_attempt_ms` | number | No | `0` | Timeout for each attempt (0 for no timeout) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Thời gian chờ cho mỗi lần thử (0 để không có thời gian chờ) |
-| `result` | any | Sự kiện để định tuyến (thành công/hết lần thử) |
-| `attempts` | number | Sự kiện để định tuyến (thành công/hết lần thử) |
-| `total_delay_ms` | number | Kết quả từ lần thử thành công |
-| `errors` | array | Số lần thử đã thực hiện |
+| `__event__` | string | Event for routing (success/exhausted) |
+| `result` | any | Result from successful attempt |
+| `attempts` | number | Number of attempts made |
+| `total_delay_ms` | number | Total time spent in delays |
+| `errors` | array | Errors from each failed attempt |
 
 **Example:** Example
 

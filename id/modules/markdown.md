@@ -6,30 +6,30 @@ Parse frontmatter, convert to HTML, and generate table of contents.
 
 | Module | Description |
 |--------|-------------|
-| [Mengurai Frontmatter](#mengurai-frontmatter) | Ekstrak frontmatter YAML dari konten Markdown |
-| [Markdown ke HTML](#markdown-ke-html) | Ubah teks Markdown ke HTML |
-| [Buat Daftar Isi](#buat-daftar-isi) | Buat daftar isi dari judul-judul Markdown |
+| [Parse Frontmatter](#parse-frontmatter) | Extract YAML frontmatter from Markdown content |
+| [Markdown to HTML](#markdown-to-html) | Convert Markdown text to HTML |
+| [Generate Table of Contents](#generate-table-of-contents) | Generate a table of contents from Markdown headings |
 
 ## Modules
 
-### Mengurai Frontmatter
+### Parse Frontmatter
 
 `markdown.parse_frontmatter`
 
-Ekstrak frontmatter YAML dari konten Markdown
+Extract YAML frontmatter from Markdown content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Konten Markdown dengan frontmatter |
+| `text` | string | Yes | - | Markdown content with frontmatter |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `frontmatter` | object | Frontmatter yang telah di-parse sebagai kamus |
-| `content` | string | Konten Markdown tanpa frontmatter |
+| `frontmatter` | object | Parsed frontmatter as a dictionary |
+| `content` | string | Markdown content without frontmatter |
 
 **Example:** Parse YAML frontmatter
 
@@ -47,25 +47,25 @@ tags:
 Content here.
 ```
 
-### Markdown ke HTML
+### Markdown to HTML
 
 `markdown.to_html`
 
-Ubah teks Markdown ke HTML
+Convert Markdown text to HTML
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Konten Markdown untuk diubah |
-| `extensions` | array | No | - | Ekstensi Markdown yang diaktifkan (hanya digunakan dengan pustaka markdown) |
+| `text` | string | Yes | - | Markdown content to convert |
+| `extensions` | array | No | - | Markdown extensions to enable (only used with the markdown library) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `html` | string | Konten HTML yang telah diubah |
-| `word_count` | number | Jumlah kata dari teks input |
+| `html` | string | Converted HTML content |
+| `word_count` | number | Word count of the input text |
 
 **Example:** Convert markdown to HTML
 
@@ -75,25 +75,25 @@ text: # Hello
 This is **bold** and *italic*.
 ```
 
-### Buat Daftar Isi
+### Generate Table of Contents
 
 `markdown.toc`
 
-Buat daftar isi dari judul-judul Markdown
+Generate a table of contents from Markdown headings
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Konten Markdown untuk mengekstrak judul |
-| `max_depth` | number | No | `3` | Kedalaman judul maksimum yang disertakan (1-6) |
+| `text` | string | Yes | - | Markdown content to extract headings from |
+| `max_depth` | number | No | `3` | Maximum heading depth to include (1-6) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `toc` | array | Daftar judul dengan level, judul, dan slug |
-| `toc_markdown` | string | Daftar isi Markdown yang diformat |
+| `toc` | array | List of headings with level, title, and slug |
+| `toc_markdown` | string | Formatted Markdown table of contents |
 
 **Example:** Generate TOC from markdown
 

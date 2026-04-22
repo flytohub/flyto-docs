@@ -6,44 +6,44 @@ Visual verification, Figma comparison, style capture, and report generation.
 
 | Module | Description |
 |--------|-------------|
-| [Annota Screenshot](#annota-screenshot) | Disegna riquadri etichettati sugli screenshot per segnare le differenze |
-| [Acquisisci Stili Elemento](#acquisisci-stili-elemento) | Acquisisci stili calcolati dall'elemento del browser |
-| [Confronta Stili](#confronta-stili) | Confronta gli stili acquisiti con i valori attesi |
-| [Recupera Stile Figma](#recupera-stile-figma) | Recupera i token di design dall'API di Figma (il token rimane locale) |
-| [Genera Rapporto](#genera-rapporto) | Genera un rapporto di verifica in HTML/JSON/Markdown |
-| [Carica Set di Regole](#carica-set-di-regole) | Carica regole di verifica da un file YAML |
-| [Esegui Verifica](#esegui-verifica) | Esegui la verifica completa del design: acquisizione → confronto → rapporto |
-| [Esegui Verifica Specifiche](#esegui-verifica-specifiche) | Verifica dinamica delle specifiche - componi qualsiasi modulo tramite YAML |
-| [Diff Visivo](#diff-visivo) | Confronta visivamente il design di riferimento con il sito di sviluppo, annota le differenze |
+| [Annotate Screenshot](#annotate-screenshot) | Draw labeled bounding boxes on screenshots to mark differences |
+| [Capture Element Styles](#capture-element-styles) | Capture computed styles from browser element |
+| [Compare Styles](#compare-styles) | Compare captured styles with expected values |
+| [Fetch Figma Style](#fetch-figma-style) | Fetch design tokens from Figma API (token stays local) |
+| [Generate Report](#generate-report) | Generate verification report in HTML/JSON/Markdown |
+| [Load Ruleset](#load-ruleset) | Load verification rules from YAML file |
+| [Run Verification](#run-verification) | Run full design verification: capture → compare → report |
+| [Run Spec Verification](#run-spec-verification) | Dynamic spec verification - compose any modules via YAML |
+| [Visual Diff](#visual-diff) | Compare reference design with dev site visually, annotate differences |
 
 ## Modules
 
-### Annota Screenshot
+### Annotate Screenshot
 
 `verify.annotate`
 
-Disegna riquadri etichettati sugli screenshot per segnare le differenze
+Draw labeled bounding boxes on screenshots to mark differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | Yes | - | Percorso dell'immagine dello screenshot |
-| `annotations` | array | Yes | - | Array di annotazioni: [{label, x, y, larghezza, altezza, colore?, descrizione?}] |
-| `output_path` | string | No | - | Percorso di output per l'immagine annotata (predefinito: aggiunge suffisso _annotated) |
+| `image_path` | string | Yes | - | Path to the screenshot image |
+| `annotations` | array | Yes | - | Array of annotations: [{label, x, y, width, height, color?, description?}] |
+| `output_path` | string | No | - | Output path for annotated image (default: adds _annotated suffix) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Percorso dell'immagine annotata |
-| `annotation_count` | integer | Numero di annotazioni disegnate |
+| `output_path` | string | Path to annotated image |
+| `annotation_count` | integer | Number of annotations drawn |
 
-### Acquisisci Stili Elemento
+### Capture Element Styles
 
 `verify.capture`
 
-Acquisisci stili calcolati dall'elemento del browser
+Capture computed styles from browser element
 
 **Parameters:**
 
@@ -62,11 +62,11 @@ Acquisisci stili calcolati dall'elemento del browser
 | `element` | object | Captured element with styles |
 | `found` | boolean | Whether element was found |
 
-### Confronta Stili
+### Compare Styles
 
 `verify.compare`
 
-Confronta gli stili acquisiti con i valori attesi
+Compare captured styles with expected values
 
 **Parameters:**
 
@@ -93,11 +93,11 @@ Confronta gli stili acquisiti con i valori attesi
 | `error_count` | number | Number of errors |
 | `warning_count` | number | Number of warnings |
 
-### Recupera Stile Figma
+### Fetch Figma Style
 
 `verify.figma`
 
-Recupera i token di design dall'API di Figma (il token rimane locale)
+Fetch design tokens from Figma API (token stays local)
 
 **Parameters:**
 
@@ -115,11 +115,11 @@ Recupera i token di design dall'API di Figma (il token rimane locale)
 | `node` | object | Figma node data |
 | `style` | object | Extracted style |
 
-### Genera Rapporto
+### Generate Report
 
 `verify.report`
 
-Genera un rapporto di verifica in HTML/JSON/Markdown
+Generate verification report in HTML/JSON/Markdown
 
 **Parameters:**
 
@@ -139,11 +139,11 @@ Genera un rapporto di verifica in HTML/JSON/Markdown
 | `report_path` | string | Path to generated report |
 | `summary` | object | Summary statistics |
 
-### Carica Set di Regole
+### Load Ruleset
 
 `verify.ruleset`
 
-Carica regole di verifica da un file YAML
+Load verification rules from YAML file
 
 **Parameters:**
 
@@ -158,11 +158,11 @@ Carica regole di verifica da un file YAML
 | `ruleset` | object | Parsed ruleset |
 | `rules_count` | integer | Number of rules |
 
-### Esegui Verifica
+### Run Verification
 
 `verify.run`
 
-Esegui la verifica completa del design: acquisizione → confronto → rapporto
+Run full design verification: capture → compare → report
 
 **Parameters:**
 
@@ -212,11 +212,11 @@ url: http://localhost:3000
 ruleset_path: ./design-rules.yaml
 ```
 
-### Esegui Verifica Specifiche
+### Run Spec Verification
 
 `verify.spec`
 
-Verifica dinamica delle specifiche - componi qualsiasi modulo tramite YAML
+Dynamic spec verification - compose any modules via YAML
 
 **Parameters:**
 
@@ -233,31 +233,31 @@ Verifica dinamica delle specifiche - componi qualsiasi modulo tramite YAML
 | `summary` | object |  |
 | `results` | array |  |
 
-### Diff Visivo
+### Visual Diff
 
 `verify.visual_diff`
 
-Confronta visivamente il design di riferimento con il sito di sviluppo, annota le differenze
+Compare reference design with dev site visually, annotate differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `reference_url` | string | Yes | - | URL o percorso locale dell'immagine di riferimento |
-| `dev_url` | string | Yes | - | URL del sito di sviluppo da confrontare |
-| `output_dir` | string | No | `./verify-reports/visual-diff` | Directory di output per i report |
-| `focus_areas` | array | No | - | Aree su cui concentrarsi (es. ["header", "modulo di login"]) |
-| `viewport_width` | number | No | `1280` | Larghezza del viewport del browser |
-| `viewport_height` | number | No | `800` | Altezza del viewport del browser |
-| `model` | string | No | `gpt-4o` | Modello di visione da utilizzare |
-| `api_key` | string | No | - | Chiave API OpenAI (o usa la variabile d'ambiente OPENAI_API_KEY) |
+| `reference_url` | string | Yes | - | URL or local image path of reference design |
+| `dev_url` | string | Yes | - | URL of development site to compare |
+| `output_dir` | string | No | `./verify-reports/visual-diff` | Output directory for reports |
+| `focus_areas` | array | No | - | Areas to focus on (e.g. ["header", "login form"]) |
+| `viewport_width` | number | No | `1280` | Browser viewport width |
+| `viewport_height` | number | No | `800` | Browser viewport height |
+| `model` | string | No | `gpt-4o` | Vision model to use |
+| `api_key` | string | No | - | OpenAI API key (or use OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `similarity_score` | number | Percentuale di somiglianza (0-100) |
-| `annotations` | array | Elenco delle differenze annotate |
-| `annotated_image` | string | Percorso dello screenshot annotato |
-| `report_path` | string | Percorso del report HTML |
-| `summary` | string | Riepilogo delle differenze |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `annotations` | array | List of annotated differences |
+| `annotated_image` | string | Path to annotated screenshot |
+| `report_path` | string | Path to HTML report |
+| `summary` | string | Summary of differences |

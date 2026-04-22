@@ -6,28 +6,28 @@ AWS S3, Azure Blob, Google Cloud Storage, and Google Workspace integrations.
 
 | Module | Description |
 |--------|-------------|
-| [S3 Nesnesini Sil](#s3-nesnesini-sil) | AWS S3 kovasından bir nesneyi silin |
-| [S3 İndirme](#s3-i̇ndirme) | AWS S3 kovasından bir dosyayı yerel bir yola indirin |
-| [S3 Nesneleri Listele](#s3-nesneleri-listele) | AWS S3 kovasındaki nesneleri isteğe bağlı ön ek filtresiyle listeleyin |
-| [S3 Yükleme](#s3-yükleme) | Yerel bir dosyayı AWS S3 kovasına yükleyin |
-| [AWS S3 İndir](#aws-s3-i̇ndir) | AWS S3 kovasından dosya indir |
-| [AWS S3 Yükle](#aws-s3-yükle) | AWS S3 kovasına dosya veya veri yükle |
-| [Azure İndir](#azure-i̇ndir) | Azure Blob Storage'dan dosya indir |
-| [Azure Yükle](#azure-yükle) | Azure Blob Storage'a dosya yükle |
-| [GCS İndir](#gcs-i̇ndir) | Google Cloud Storage'dan dosya indir |
-| [GCS Yükle](#gcs-yükle) | Google Cloud Storage'a dosya yükle |
-| [Takvim Etkinlik Oluştur](#takvim-etkinlik-oluştur) | Google Takvim'de yeni bir etkinlik oluştur |
-| [Takvim Etkinlikleri Listele](#takvim-etkinlikleri-listele) | Google Takvim'den yaklaşan etkinlikleri listele |
-| [Gmail Ara](#gmail-ara) | Gmail arama sorgusu ile Gmail mesajlarını ara |
-| [Gmail Gönder](#gmail-gönder) | Gmail API ile bir e-posta gönder |
+| [S3 Delete Object](#s3-delete-object) | Delete an object from an AWS S3 bucket |
+| [S3 Download](#s3-download) | Download a file from an AWS S3 bucket to a local path |
+| [S3 List Objects](#s3-list-objects) | List objects in an AWS S3 bucket with optional prefix filter |
+| [S3 Upload](#s3-upload) | Upload a local file to an AWS S3 bucket |
+| [AWS S3 Download](#aws-s3-download) | Download a file from AWS S3 bucket |
+| [AWS S3 Upload](#aws-s3-upload) | Upload a file or data to AWS S3 bucket |
+| [Azure Download](#azure-download) | Download file from Azure Blob Storage |
+| [Azure Upload](#azure-upload) | Upload file to Azure Blob Storage |
+| [GCS Download](#gcs-download) | Download file from Google Cloud Storage |
+| [GCS Upload](#gcs-upload) | Upload file to Google Cloud Storage |
+| [Calendar Create Event](#calendar-create-event) | Create a new event in Google Calendar |
+| [Calendar List Events](#calendar-list-events) | List upcoming events from Google Calendar |
+| [Gmail Search](#gmail-search) | Search Gmail messages using Gmail search query syntax |
+| [Gmail Send](#gmail-send) | Send an email via the Gmail API |
 
 ## Modules
 
-### S3 Nesnesini Sil
+### S3 Delete Object
 
 `aws.s3.delete`
 
-AWS S3 kovasından bir nesneyi silin
+Delete an object from an AWS S3 bucket
 
 **Parameters:**
 
@@ -43,9 +43,9 @@ AWS S3 kovasından bir nesneyi silin
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bucket` | string | S3 kova adı |
-| `key` | string | Silinen nesne anahtarı |
-| `deleted` | boolean | Nesnenin başarıyla silinip silinmediği |
+| `bucket` | string | S3 bucket name |
+| `key` | string | Deleted object key |
+| `deleted` | boolean | Whether the object was deleted successfully |
 
 **Example:** Delete an object
 
@@ -54,11 +54,11 @@ bucket: my-bucket
 key: uploads/old-file.txt
 ```
 
-### S3 İndirme
+### S3 Download
 
 `aws.s3.download`
 
-AWS S3 kovasından bir dosyayı yerel bir yola indirin
+Download a file from an AWS S3 bucket to a local path
 
 **Parameters:**
 
@@ -75,9 +75,9 @@ AWS S3 kovasından bir dosyayı yerel bir yola indirin
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Dosyanın kaydedildiği yerel dosya yolu |
-| `size` | number | Dosya boyutu bayt cinsinden |
-| `content_type` | string | İndirilen dosyanın MIME türü |
+| `path` | string | Local file path where the file was saved |
+| `size` | number | File size in bytes |
+| `content_type` | string | MIME type of the downloaded file |
 
 **Example:** Download a file from S3
 
@@ -87,11 +87,11 @@ key: data/report.csv
 output_path: /tmp/report.csv
 ```
 
-### S3 Nesneleri Listele
+### S3 List Objects
 
 `aws.s3.list`
 
-AWS S3 kovasındaki nesneleri isteğe bağlı ön ek filtresiyle listeleyin
+List objects in an AWS S3 bucket with optional prefix filter
 
 **Parameters:**
 
@@ -108,9 +108,9 @@ AWS S3 kovasındaki nesneleri isteğe bağlı ön ek filtresiyle listeleyin
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `objects` | array | S3 nesneleri listesi |
-| `count` | number | Dönen nesne sayısı |
-| `truncated` | boolean | Sonuçların kesilip kesilmediği |
+| `objects` | array | List of S3 objects |
+| `count` | number | Number of objects returned |
+| `truncated` | boolean | Whether the results are truncated |
 
 **Example:** List objects with prefix
 
@@ -120,11 +120,11 @@ prefix: uploads/
 max_keys: 50
 ```
 
-### S3 Yükleme
+### S3 Upload
 
 `aws.s3.upload`
 
-Yerel bir dosyayı AWS S3 kovasına yükleyin
+Upload a local file to an AWS S3 bucket
 
 **Parameters:**
 
@@ -142,10 +142,10 @@ Yerel bir dosyayı AWS S3 kovasına yükleyin
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bucket` | string | S3 kova adı |
-| `key` | string | S3 nesne anahtarı |
-| `url` | string | Yüklenen nesnenin genel URL'si |
-| `size` | number | Dosya boyutu bayt cinsinden |
+| `bucket` | string | S3 bucket name |
+| `key` | string | S3 object key |
+| `url` | string | Public URL of the uploaded object |
+| `size` | number | File size in bytes |
 
 **Example:** Upload a local file
 
@@ -155,22 +155,22 @@ key: data/report.csv
 file_path: /tmp/report.csv
 ```
 
-### AWS S3 İndir
+### AWS S3 Download
 
 `cloud.aws_s3.download`
 
-AWS S3 kovasından dosya indir
+Download a file from AWS S3 bucket
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `aws_access_key_id` | string | No | - | AWS erişim anahtarı kimliği (varsayılan: env.AWS_ACCESS_KEY_ID) |
-| `aws_secret_access_key` | string | No | - | AWS gizli erişim anahtarı (varsayılan: env.AWS_SECRET_ACCESS_KEY) |
-| `region` | string | No | `us-east-1` | AWS bölgesi (varsayılan: env.AWS_REGION veya us-east-1) |
-| `bucket` | string | Yes | - | S3 kova adı |
-| `key` | string | Yes | - | S3 kova adı |
-| `file_path` | string | No | - | S3 nesne anahtarı (kovadaki dosya yolu) |
+| `aws_access_key_id` | string | No | - | AWS access key ID (defaults to env.AWS_ACCESS_KEY_ID) |
+| `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
+| `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
+| `bucket` | string | Yes | - | S3 bucket name |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to save downloaded content |
 
 **Output:**
 
@@ -196,34 +196,34 @@ key: backups/database.sql
 file_path: /tmp/downloaded.sql
 ```
 
-### AWS S3 Yükle
+### AWS S3 Upload
 
 `cloud.aws_s3.upload`
 
-AWS S3 kovasına dosya veya veri yükle
+Upload a file or data to AWS S3 bucket
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `aws_access_key_id` | string | No | - | AWS erişim anahtarı kimliği (varsayılan: env.AWS_ACCESS_KEY_ID) |
-| `aws_secret_access_key` | string | No | - | AWS gizli erişim anahtarı (varsayılan: env.AWS_SECRET_ACCESS_KEY) |
-| `region` | string | No | `us-east-1` | AWS bölgesi (varsayılan: env.AWS_REGION veya us-east-1) |
-| `bucket` | string | Yes | - | S3 kova adı |
-| `key` | string | Yes | - | S3 kova adı |
-| `file_path` | string | No | - | S3 nesne anahtarı (kovadaki dosya yolu) |
-| `content` | string | No | - | Yüklenecek yerel dosya yolu |
-| `content_type` | string | No | - | Dosyanın MIME türü |
-| `acl` | string | No | `private` | Dosyanın MIME türü |
+| `aws_access_key_id` | string | No | - | AWS access key ID (defaults to env.AWS_ACCESS_KEY_ID) |
+| `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
+| `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
+| `bucket` | string | Yes | - | S3 bucket name |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to upload |
+| `content` | string | No | - | File content to upload (as string or base64) |
+| `content_type` | string | No | - | MIME type of the file |
+| `acl` | string | No | `private` | Access control list for the object |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | Yüklenen nesnenin S3 URL'si |
-| `bucket` | string | Yüklenen nesnenin S3 URL'si |
-| `key` | string | Yüklenen nesnenin S3 URL'si |
-| `etag` | string | Kova adı |
+| `url` | string | S3 URL of uploaded object |
+| `bucket` | string | Bucket name |
+| `key` | string | Object key |
+| `etag` | string | ETag of uploaded object |
 
 **Example:** Upload text content
 
@@ -243,20 +243,20 @@ file_path: /tmp/backup.sql
 acl: private
 ```
 
-### Azure İndir
+### Azure Download
 
 `cloud.azure.download`
 
-Azure Blob Storage'dan dosya indir
+Download file from Azure Blob Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `connection_string` | string | No | - | Azure Storage bağlantı dizesi (AZURE_STORAGE_CONNECTION_STRING env var kullan) |
-| `container` | string | Yes | - | Azure Storage bağlantı dizesi (AZURE_STORAGE_CONNECTION_STRING env var kullan) |
-| `blob_name` | string | Yes | - | Azure kapsayıcı adı |
-| `destination_path` | string | Yes | - | İndirilecek blob |
+| `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | Yes | - | Blob to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -283,30 +283,30 @@ blob_name: photos/vacation.jpg
 destination_path: /tmp/photo.jpg
 ```
 
-### Azure Yükle
+### Azure Upload
 
 `cloud.azure.upload`
 
-Azure Blob Storage'a dosya yükle
+Upload file to Azure Blob Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `file_path` | string | Yes | - | Yüklenecek yerel dosya yolu |
-| `connection_string` | string | No | - | Yüklenecek yerel dosya yolu |
-| `container` | string | Yes | - | Azure Storage bağlantı dizesi (AZURE_STORAGE_CONNECTION_STRING env var kullan) |
-| `blob_name` | string | No | - | Azure kapsayıcı adı |
-| `content_type` | string | No | - | Yüklenen blob için ad (varsayılan: dosya adı) |
+| `file_path` | string | Yes | - | Local file path to upload |
+| `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | No | - | Name for the uploaded blob (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | MIME türü (isteğe bağlı) |
-| `container` | string | MIME türü (isteğe bağlı) |
-| `blob_name` | string | URL adresi |
-| `size` | number | Kapsayıcı |
+| `url` | string | URL address |
+| `container` | string | The container |
+| `blob_name` | string | The blob name |
+| `size` | number | Size in bytes |
 
 **Example:** Upload image
 
@@ -325,19 +325,19 @@ container: documents
 blob_name: reports/monthly.pdf
 ```
 
-### GCS İndir
+### GCS Download
 
 `cloud.gcs.download`
 
-Google Cloud Storage'dan dosya indir
+Download file from Google Cloud Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bucket` | string | Yes | - | GCS kova adı |
-| `object_name` | string | Yes | - | GCS kova adı |
-| `destination_path` | string | Yes | - | İndirilecek nesne |
+| `bucket` | string | Yes | - | GCS bucket name |
+| `object_name` | string | Yes | - | Object to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -364,31 +364,31 @@ object_name: photos/vacation.jpg
 destination_path: /tmp/photo.jpg
 ```
 
-### GCS Yükle
+### GCS Upload
 
 `cloud.gcs.upload`
 
-Google Cloud Storage'a dosya yükle
+Upload file to Google Cloud Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `file_path` | string | Yes | - | Yüklenecek yerel dosya yolu |
-| `bucket` | string | Yes | - | Yüklenecek yerel dosya yolu |
-| `object_name` | string | No | - | GCS kova adı |
-| `content_type` | string | No | - | Yüklenen nesne için ad (varsayılan: dosya adı) |
-| `public` | boolean | No | `False` | MIME türü (isteğe bağlı) |
+| `file_path` | string | Yes | - | Local file path to upload |
+| `bucket` | string | Yes | - | GCS bucket name |
+| `object_name` | string | No | - | Name for the uploaded object (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
+| `public` | boolean | No | `False` | Make file publicly accessible |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | Dosyayı herkese açık yap |
-| `bucket` | string | Dosyayı herkese açık yap |
-| `object_name` | string | URL adresi |
-| `size` | number | Depolama kova adı |
-| `public_url` | string | Depolamadaki nesne adı |
+| `url` | string | URL address |
+| `bucket` | string | Storage bucket name |
+| `object_name` | string | Object name in storage |
+| `size` | number | Size in bytes |
+| `public_url` | string | Public accessible URL |
 
 **Example:** Upload image
 
@@ -408,11 +408,11 @@ bucket: data-backup
 object_name: reports/daily.csv
 ```
 
-### Takvim Etkinlik Oluştur
+### Calendar Create Event
 
 `google.calendar.create_event`
 
-Google Takvim'de yeni bir etkinlik oluştur
+Create a new event in Google Calendar
 
 **Parameters:**
 
@@ -431,11 +431,11 @@ Google Takvim'de yeni bir etkinlik oluştur
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `event_id` | string | Oluşturulan etkinlik kimliği |
-| `summary` | string | Etkinlik başlığı |
-| `start` | string | Etkinlik başlangıç saati |
-| `end` | string | Etkinlik bitiş saati |
-| `html_link` | string | Google Takvim'de etkinliği görüntüleme bağlantısı |
+| `event_id` | string | Created event ID |
+| `summary` | string | Event title |
+| `start` | string | Event start time |
+| `end` | string | Event end time |
+| `html_link` | string | Link to view the event in Google Calendar |
 
 **Example:** Create a meeting event
 
@@ -448,11 +448,11 @@ attendees: alice@example.com, bob@example.com
 timezone: America/New_York
 ```
 
-### Takvim Etkinlikleri Listele
+### Calendar List Events
 
 `google.calendar.list_events`
 
-Google Takvim'den yaklaşan etkinlikleri listele
+List upcoming events from Google Calendar
 
 **Parameters:**
 
@@ -467,8 +467,8 @@ Google Takvim'den yaklaşan etkinlikleri listele
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `events` | array | Takvim etkinliklerinin listesi |
-| `count` | number | Dönen etkinlik sayısı |
+| `events` | array | List of calendar events |
+| `count` | number | Number of events returned |
 
 **Example:** List next 5 events
 
@@ -477,11 +477,11 @@ access_token: <oauth2-token>
 max_results: 5
 ```
 
-### Gmail Ara
+### Gmail Search
 
 `google.gmail.search`
 
-Gmail arama sorgusu ile Gmail mesajlarını ara
+Search Gmail messages using Gmail search query syntax
 
 **Parameters:**
 
@@ -495,8 +495,8 @@ Gmail arama sorgusu ile Gmail mesajlarını ara
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `messages` | array | Eşleşen mesajların listesi |
-| `total` | number | Dönen toplam mesaj sayısı |
+| `messages` | array | List of matching messages |
+| `total` | number | Total number of messages returned |
 
 **Example:** Search for emails from a specific sender
 
@@ -506,11 +506,11 @@ query: from:boss@company.com is:unread
 max_results: 5
 ```
 
-### Gmail Gönder
+### Gmail Send
 
 `google.gmail.send`
 
-Gmail API ile bir e-posta gönder
+Send an email via the Gmail API
 
 **Parameters:**
 
@@ -528,9 +528,9 @@ Gmail API ile bir e-posta gönder
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `message_id` | string | Gmail mesaj kimliği |
-| `thread_id` | string | Gmail konu kimliği |
-| `to` | string | Alıcı e-posta adresi |
+| `message_id` | string | Gmail message ID |
+| `thread_id` | string | Gmail thread ID |
+| `to` | string | Recipient email address |
 
 **Example:** Send a plain text email
 

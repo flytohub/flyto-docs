@@ -6,33 +6,33 @@ Execute JavaScript, Python, or shell commands in isolated environments.
 
 | Module | Description |
 |--------|-------------|
-| [JavaScript Çalıştır](#javascript-çalıştır) | JavaScript kodunu Node.js aracılığıyla zaman aşımı ile çalıştır |
-| [Python Çalıştır](#python-çalıştır) | Python kodunu bir alt süreçte zaman aşımı ile çalıştır |
-| [Kabuk Komutu Çalıştır](#kabuk-komutu-çalıştır) | Zaman aşımı ve ortam kontrolü ile bir kabuk komutu çalıştır |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code via Node.js with timeout |
+| [Execute Python](#execute-python) | Execute Python code in a subprocess with timeout |
+| [Execute Shell](#execute-shell) | Execute a shell command with timeout and environment control |
 
 ## Modules
 
-### JavaScript Çalıştır
+### Execute JavaScript
 
 `sandbox.execute_js`
 
-JavaScript kodunu Node.js aracılığıyla zaman aşımı ile çalıştır
+Execute JavaScript code via Node.js with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | Node.js aracılığıyla çalıştırılacak JavaScript kodu |
-| `timeout` | number | No | `10` | Çalıştırma zaman aşımı süresi (saniye cinsinden) |
+| `code` | string | Yes | - | JavaScript code to execute via Node.js |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | Skriptten standart çıktı |
-| `stderr` | string | Skriptten standart hata |
-| `exit_code` | number | İşlem çıkış kodu (0 = başarı) |
-| `execution_time_ms` | number | Çalıştırma süresi (milisaniye cinsinden) |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple console.log
 
@@ -48,28 +48,28 @@ code: const data = { name: "test", value: 42 };
 console.log(JSON.stringify(data, null, 2));
 ```
 
-### Python Çalıştır
+### Execute Python
 
 `sandbox.execute_python`
 
-Python kodunu bir alt süreçte zaman aşımı ile çalıştır
+Execute Python code in a subprocess with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | Çalıştırılacak Python kodu |
-| `timeout` | number | No | `10` | Çalıştırma zaman aşımı süresi (saniye cinsinden) |
-| `allowed_modules` | array | No | - | İçe aktarılabilir modüllerin beyaz listesi (hepsine izin vermek için boş bırakın) |
+| `code` | string | Yes | - | Python code to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `allowed_modules` | array | No | - | Whitelist of importable modules (leave empty to allow all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | Skriptten standart çıktı |
-| `stderr` | string | Skriptten standart hata |
-| `exit_code` | number | İşlem çıkış kodu (0 = başarı) |
-| `execution_time_ms` | number | Çalıştırma süresi (milisaniye cinsinden) |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple print
 
@@ -86,29 +86,29 @@ print(math.pi)
 allowed_modules: ["math"]
 ```
 
-### Kabuk Komutu Çalıştır
+### Execute Shell
 
 `sandbox.execute_shell`
 
-Zaman aşımı ve ortam kontrolü ile bir kabuk komutu çalıştır
+Execute a shell command with timeout and environment control
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `command` | string | Yes | - | Çalıştırılacak kabuk komutu |
-| `timeout` | number | No | `10` | Çalıştırma zaman aşımı süresi (saniye cinsinden) |
-| `working_dir` | string | No | - | Komut için çalışma dizini |
-| `env` | object | No | - | Ayarlanacak ek ortam değişkenleri (mevcut ortamla birleştirilir) |
+| `command` | string | Yes | - | Shell command to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `working_dir` | string | No | - | Working directory for the command |
+| `env` | object | No | - | Additional environment variables to set (merged with current env) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | Komuttan standart çıktı |
-| `stderr` | string | Komuttan standart hata |
-| `exit_code` | number | İşlem çıkış kodu (0 = başarı) |
-| `execution_time_ms` | number | Çalıştırma süresi (milisaniye cinsinden) |
+| `stdout` | string | Standard output from the command |
+| `stderr` | string | Standard error from the command |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple echo
 

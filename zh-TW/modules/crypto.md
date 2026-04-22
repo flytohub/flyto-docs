@@ -6,37 +6,37 @@ AES encryption/decryption, HMAC, JWT tokens, and secure random generation.
 
 | Module | Description |
 |--------|-------------|
-| [解密](#解密) | 使用 AES 加密解密資料 |
-| [加密](#加密) | 使用 AES 加密加密資料 |
-| [HMAC](#hmac) | 產生 HMAC 簽章 |
-| [建立 JWT](#建立-jwt) | 建立簽名的 JWT token |
-| [驗證 JWT](#驗證-jwt) | 驗證並解碼 JWT token |
-| [隨機位元組](#隨機位元組) | 產生密碼學安全的隨機位元組 |
-| [隨機字串](#隨機字串) | 產生密碼學安全的隨機字串 |
+| [Decrypt](#decrypt) | AES symmetric decryption |
+| [Encrypt](#encrypt) | AES symmetric encryption |
+| [HMAC](#hmac) | Generate HMAC signature |
+| [Create JWT](#create-jwt) | Create JWT (JSON Web Token) tokens |
+| [Verify JWT](#verify-jwt) | Verify and decode JWT tokens |
+| [Random Bytes](#random-bytes) | Generate cryptographically secure random bytes |
+| [Random String](#random-string) | Generate cryptographically secure random string |
 
 ## Modules
 
-### 解密
+### Decrypt
 
 `crypto.decrypt`
 
-使用 AES 加密解密資料
+AES symmetric decryption
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `ciphertext` | string | Yes | - | 要解密的加密資料 |
-| `key` | string | Yes | - | 加密金鑰 |
-| `mode` | select (`CBC`, `GCM`) | No | `GCM` | AES 加密模式（CBC, GCM 等） |
-| `input_format` | select (`base64`, `hex`) | No | `base64` | 輸入密文的格式（hex 或 base64） |
+| `ciphertext` | string | Yes | - | Encrypted ciphertext to decrypt |
+| `key` | string | Yes | - | Decryption passphrase (must match encryption passphrase) |
+| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Decryption mode (must match encryption mode) |
+| `input_format` | select (`base64`, `hex`) | No | `base64` | Encoding format of the ciphertext input |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `plaintext` | string | 解密後的明文 |
-| `algorithm` | string | 解密使用的演算法 |
+| `plaintext` | string | Decrypted plaintext |
+| `algorithm` | string | Decryption algorithm used |
 
 **Example:** Decrypt AES-GCM ciphertext
 
@@ -46,28 +46,28 @@ key: my-secret-passphrase
 mode: GCM
 ```
 
-### 加密
+### Encrypt
 
 `crypto.encrypt`
 
-使用 AES 加密加密資料
+AES symmetric encryption
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `plaintext` | string | Yes | - | 要加密的資料 |
-| `key` | string | Yes | - | 加密金鑰 |
-| `mode` | select (`CBC`, `GCM`) | No | `GCM` | AES 加密模式（CBC, GCM 等） |
-| `output_format` | select (`base64`, `hex`) | No | `base64` | 輸出密文的格式（hex 或 base64） |
+| `plaintext` | string | Yes | - | Text to encrypt |
+| `key` | string | Yes | - | Encryption passphrase (key is derived via PBKDF2) |
+| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Encryption mode |
+| `output_format` | select (`base64`, `hex`) | No | `base64` | Encoding format for the ciphertext output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ciphertext` | string | 加密後的密文 |
-| `algorithm` | string | 加密使用的演算法 |
-| `mode` | string | 使用的加密模式 |
+| `ciphertext` | string | Encrypted ciphertext |
+| `algorithm` | string | Encryption algorithm used |
+| `mode` | string | Encryption mode used |
 
 **Example:** Encrypt with AES-GCM
 
@@ -81,48 +81,48 @@ mode: GCM
 
 `crypto.hmac`
 
-產生 HMAC 簽章
+Generate HMAC signature
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `message` | string | Yes | - | 要簽名的訊息 |
-| `key` | string | Yes | - | 要簽名的訊息 |
-| `algorithm` | select (`sha256`, `sha512`, `sha1`, `md5`) | No | `sha256` | HMAC 的密鑰 |
-| `encoding` | select (`hex`, `base64`) | No | `hex` | 輸出編碼格式 |
+| `message` | string | Yes | - | Message to sign |
+| `key` | string | Yes | - | Secret key for HMAC |
+| `algorithm` | select (`sha256`, `sha512`, `sha1`, `md5`) | No | `sha256` | Hash algorithm |
+| `encoding` | select (`hex`, `base64`) | No | `hex` | Output encoding format |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `signature` | string | 輸出編碼格式 |
-| `algorithm` | string | HMAC 簽章 |
+| `signature` | string | HMAC signature |
+| `algorithm` | string | Algorithm used |
 
-### 建立 JWT
+### Create JWT
 
 `crypto.jwt_create`
 
-建立簽名的 JWT token
+Create JWT (JSON Web Token) tokens
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `payload` | object | Yes | - | JWT 載荷資料（物件） |
-| `secret` | string | Yes | - | 簽名 token 的密鑰 |
-| `algorithm` | select (`HS256`, `HS384`, `HS512`, `RS256`) | No | `HS256` | JWT 簽名演算法（HS256, RS256 等） |
-| `expires_in` | number | No | - | Token 過期時間（秒） |
-| `issuer` | string | No | - | Token 發行者聲明 |
-| `audience` | string | No | - | Token 的預期受眾 |
+| `payload` | object | Yes | - | JWT payload claims (JSON object) |
+| `secret` | string | Yes | - | Secret key for signing the token |
+| `algorithm` | select (`HS256`, `HS384`, `HS512`, `RS256`) | No | `HS256` | Signing algorithm |
+| `expires_in` | number | No | - | Token expiration time in seconds (optional) |
+| `issuer` | string | No | - | Token issuer (iss claim) |
+| `audience` | string | No | - | Token audience (aud claim) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `token` | string | 生成的 JWT token |
-| `algorithm` | string | 簽名使用的演算法 |
-| `expires_at` | string | Token 過期時間戳記 |
+| `token` | string | Signed JWT token |
+| `algorithm` | string | Algorithm used for signing |
+| `expires_at` | string | Token expiration timestamp (ISO 8601) or null |
 
 **Example:** Create a JWT with expiration
 
@@ -133,30 +133,30 @@ algorithm: HS256
 expires_in: 3600
 ```
 
-### 驗證 JWT
+### Verify JWT
 
 `crypto.jwt_verify`
 
-驗證並解碼 JWT token
+Verify and decode JWT tokens
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `token` | string | Yes | - | 要驗證的 JWT 令牌 |
-| `secret` | string | Yes | - | 用於簽署令牌的密鑰 |
-| `algorithms` | array | No | `['HS256']` | 允許的簽名演算法 |
-| `verify_exp` | boolean | No | `True` | 是否驗證過期聲明 |
-| `audience` | string | No | - | 預期的受眾聲明 |
-| `issuer` | string | No | - | 預期的發行者聲明 |
+| `token` | string | Yes | - | JWT token to verify and decode |
+| `secret` | string | Yes | - | Secret key for verifying the token signature |
+| `algorithms` | array | No | `['HS256']` | List of allowed signing algorithms |
+| `verify_exp` | boolean | No | `True` | Whether to verify the token expiration |
+| `audience` | string | No | - | Expected audience (aud claim) |
+| `issuer` | string | No | - | Expected issuer (iss claim) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | Token 是否有效 |
-| `payload` | object | 解碼後的 JWT 載荷 |
-| `header` | object | JWT 標頭資料 |
+| `valid` | boolean | Whether the token is valid |
+| `payload` | object | Decoded JWT payload |
+| `header` | object | Decoded JWT header |
 
 **Example:** Verify a JWT token
 
@@ -167,43 +167,43 @@ algorithms: ["HS256"]
 verify_exp: true
 ```
 
-### 隨機位元組
+### Random Bytes
 
 `crypto.random_bytes`
 
-產生密碼學安全的隨機位元組
+Generate cryptographically secure random bytes
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | Yes | `32` | 位元組數量 |
-| `encoding` | string | No | `hex` | 輸出編碼 |
+| `length` | number | Yes | `32` | Number of bytes |
+| `encoding` | string | No | `hex` | Output encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bytes` | string | 隨機位元組（已編碼） |
-| `length` | number | 隨機位元組（已編碼） |
+| `bytes` | string | Random bytes (encoded) |
+| `length` | number | Number of bytes generated |
 
-### 隨機字串
+### Random String
 
 `crypto.random_string`
 
-產生密碼學安全的隨機字串
+Generate cryptographically secure random string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | Yes | `16` | 字串長度 |
-| `charset` | string | No | `alphanumeric` | 使用的字元 |
-| `uppercase` | boolean | No | `False` | 轉換為大寫 |
+| `length` | number | Yes | `16` | String length |
+| `charset` | string | No | `alphanumeric` | Characters to use |
+| `uppercase` | boolean | No | `False` | Convert to uppercase |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `string` | string | 轉換為大寫 |
-| `length` | number | 隨機字串 |
+| `string` | string | Random string |
+| `length` | number | String length |

@@ -29,10 +29,10 @@ Execute a template from your library as a workflow step
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ID of the library item (purchase/fork/owned) |
-| `result` | any | Maximum execution time in seconds |
-| `template_id` | string | Event for routing (success/error) |
-| `execution_time_ms` | number | Template execution result |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Template execution result |
+| `template_id` | string | Executed template ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 

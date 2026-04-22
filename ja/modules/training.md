@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [練習分析](#練習分析) | 練習用のウェブサイト構造を分析 |
-| [練習実行](#練習実行) | 練習セッションを実行 |
-| [練習スキーマ推論](#練習スキーマ推論) | ウェブサイトからデータスキーマを推論 |
-| [練習統計](#練習統計) | 練習統計を取得 |
+| [Practice Analyze](#practice-analyze) | Analyze website structure for practice |
+| [Practice Execute](#practice-execute) | Execute practice session |
+| [Practice Infer Schema](#practice-infer-schema) | Infer data schema from website |
+| [Practice Stats](#practice-stats) | Get practice statistics |
 
 ## Modules
 
-### 練習分析
+### Practice Analyze
 
 `training.practice.analyze`
 
-練習用のウェブサイト構造を分析
+Analyze website structure for practice
 
 **Parameters:**
 
@@ -29,14 +29,14 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ウェブサイト構造を分析 |
-| `structure` | object | ウェブサイト構造を分析 |
+| `status` | string | Operation status (success/error) |
+| `structure` | object | The structure |
 
-### 練習実行
+### Practice Execute
 
 `training.practice.execute`
 
-練習セッションを実行
+Execute practice session
 
 **Parameters:**
 
@@ -49,14 +49,14 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 練習セッションを実行 |
-| `items_processed` | number | 練習セッションを実行 |
+| `status` | string | Operation status (success/error) |
+| `items_processed` | number | The items processed |
 
-### 練習スキーマ推論
+### Practice Infer Schema
 
 `training.practice.infer_schema`
 
-ウェブサイトからデータスキーマを推論
+Infer data schema from website
 
 **Parameters:**
 
@@ -69,20 +69,20 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | データスキーマを推論 |
-| `schema` | object | データスキーマを推論 |
+| `status` | string | Operation status (success/error) |
+| `schema` | object | The schema |
 
-### 練習統計
+### Practice Stats
 
 `training.practice.stats`
 
-練習統計を取得
+Get practice statistics
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total_sessions` | number | 総セッション数 |
-| `successful_sessions` | number | 総セッション数 |
-| `success_rate` | number | 練習統計を取得 |
-| `history` | array | 練習統計を取得 |
+| `total_sessions` | number | The total sessions |
+| `successful_sessions` | number | The successful sessions |
+| `success_rate` | number | The success rate |
+| `history` | array | The history |

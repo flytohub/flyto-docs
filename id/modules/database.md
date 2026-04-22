@@ -6,23 +6,23 @@ MongoDB, MySQL, PostgreSQL, and Redis database operations.
 
 | Module | Description |
 |--------|-------------|
-| [Masukkan Database](#masukkan-database) | Sisipkan data ke tabel database |
-| [Kueri Database](#kueri-database) | Eksekusi kueri SQL pada database PostgreSQL, MySQL, atau SQLite |
-| [Perbarui Database](#perbarui-database) | Perbarui data di tabel database |
-| [MongoDB Temukan](#mongodb-temukan) | Kueri dokumen dari koleksi MongoDB |
-| [MongoDB Masukkan](#mongodb-masukkan) | Sisipkan satu atau lebih dokumen ke koleksi MongoDB |
-| [MySQL Kueri](#mysql-kueri) | Eksekusi kueri SQL pada database MySQL dan kembalikan hasil |
-| [PostgreSQL Kueri](#postgresql-kueri) | Eksekusi kueri SQL pada database PostgreSQL dan kembalikan hasil |
-| [Redis Dapatkan](#redis-dapatkan) | Ambil nilai dari cache Redis |
-| [Redis Atur](#redis-atur) | Atur nilai di cache Redis |
+| [Database Insert](#database-insert) | Insert data into database tables |
+| [Database Query](#database-query) | Execute SQL queries on PostgreSQL, MySQL, or SQLite databases |
+| [Database Update](#database-update) | Update data in database tables |
+| [MongoDB Find](#mongodb-find) | Query documents from MongoDB collection |
+| [MongoDB Insert](#mongodb-insert) | Insert one or more documents into MongoDB collection |
+| [MySQL Query](#mysql-query) | Execute a SQL query on MySQL database and return results |
+| [PostgreSQL Query](#postgresql-query) | Execute a SQL query on PostgreSQL database and return results |
+| [Redis Get](#redis-get) | Get a value from Redis cache |
+| [Redis Set](#redis-set) | Set a value in Redis cache |
 
 ## Modules
 
-### Masukkan Database
+### Database Insert
 
 `database.insert`
 
-Sisipkan data ke tabel database
+Insert data into database tables
 
 **Parameters:**
 
@@ -43,8 +43,8 @@ Sisipkan data ke tabel database
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | Jumlah baris yang disisipkan |
-| `returning_data` | array | Jumlah baris yang disisipkan |
+| `inserted_count` | number | Number of rows inserted |
+| `returning_data` | array | Returned data from insert |
 
 **Example:** Insert single row
 
@@ -54,11 +54,11 @@ data: {"name": "John", "email": "john@example.com"}
 database_type: postgresql
 ```
 
-### Kueri Database
+### Database Query
 
 `database.query`
 
-Eksekusi kueri SQL pada database PostgreSQL, MySQL, atau SQLite
+Execute SQL queries on PostgreSQL, MySQL, or SQLite databases
 
 **Parameters:**
 
@@ -79,9 +79,9 @@ Eksekusi kueri SQL pada database PostgreSQL, MySQL, atau SQLite
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | Baris hasil kueri |
-| `row_count` | number | Baris hasil kueri |
-| `columns` | array | Baris hasil kueri |
+| `rows` | array | Query result rows |
+| `row_count` | number | Number of rows returned/affected |
+| `columns` | array | Column names |
 
 **Example:** Select with parameters
 
@@ -91,11 +91,11 @@ params: ["active"]
 database_type: postgresql
 ```
 
-### Perbarui Database
+### Database Update
 
 `database.update`
 
-Perbarui data di tabel database
+Update data in database tables
 
 **Parameters:**
 
@@ -116,7 +116,7 @@ Perbarui data di tabel database
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `updated_count` | number | Jumlah baris yang diperbarui |
+| `updated_count` | number | Number of rows updated |
 
 **Example:** Update user status
 
@@ -127,11 +127,11 @@ where: {"id": 123}
 database_type: postgresql
 ```
 
-### MongoDB Temukan
+### MongoDB Find
 
 `db.mongodb.find`
 
-Kueri dokumen dari koleksi MongoDB
+Query documents from MongoDB collection
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ Kueri dokumen dari koleksi MongoDB
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `documents` | array | Array dokumen yang cocok |
-| `count` | number | Array dokumen yang cocok |
+| `documents` | array | Array of matching documents |
+| `count` | number | Number of documents returned |
 
 **Example:** Find all active users
 
@@ -172,11 +172,11 @@ sort: {"created_at": -1}
 limit: 20
 ```
 
-### MongoDB Masukkan
+### MongoDB Insert
 
 `db.mongodb.insert`
 
-Sisipkan satu atau lebih dokumen ke koleksi MongoDB
+Insert one or more documents into MongoDB collection
 
 **Parameters:**
 
@@ -192,8 +192,8 @@ Sisipkan satu atau lebih dokumen ke koleksi MongoDB
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | Jumlah dokumen yang disisipkan |
-| `inserted_ids` | array | Jumlah dokumen yang disisipkan |
+| `inserted_count` | number | Number of documents inserted |
+| `inserted_ids` | array | Array of inserted document IDs |
 
 **Example:** Insert single document
 
@@ -211,11 +211,11 @@ collection: products
 documents: [{"name": "Product A", "price": 19.99}, {"name": "Product B", "price": 29.99}]
 ```
 
-### MySQL Kueri
+### MySQL Query
 
 `db.mysql.query`
 
-Eksekusi kueri SQL pada database MySQL dan kembalikan hasil
+Execute a SQL query on MySQL database and return results
 
 **Parameters:**
 
@@ -233,9 +233,9 @@ Eksekusi kueri SQL pada database MySQL dan kembalikan hasil
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | Array baris hasil sebagai objek |
-| `row_count` | number | Array baris hasil sebagai objek |
-| `columns` | array | Array baris hasil sebagai objek |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select products
 
@@ -250,11 +250,11 @@ query: SELECT * FROM orders WHERE customer_id = %s AND created_at > %s
 params: ["${customer_id}", "2024-01-01"]
 ```
 
-### PostgreSQL Kueri
+### PostgreSQL Query
 
 `db.postgresql.query`
 
-Eksekusi kueri SQL pada database PostgreSQL dan kembalikan hasil
+Execute a SQL query on PostgreSQL database and return results
 
 **Parameters:**
 
@@ -268,9 +268,9 @@ Eksekusi kueri SQL pada database PostgreSQL dan kembalikan hasil
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | Array baris hasil sebagai objek |
-| `row_count` | number | Array baris hasil sebagai objek |
-| `columns` | array | Array baris hasil sebagai objek |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select users
 
@@ -285,11 +285,11 @@ query: SELECT * FROM orders WHERE user_id = $1 AND status = $2
 params: ["${user_id}", "completed"]
 ```
 
-### Redis Dapatkan
+### Redis Get
 
 `db.redis.get`
 
-Ambil nilai dari cache Redis
+Get a value from Redis cache
 
 **Parameters:**
 
@@ -304,9 +304,9 @@ Ambil nilai dari cache Redis
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | Nilai yang dikembalikan |
-| `exists` | boolean | Nilai yang dikembalikan |
-| `key` | string | Nilai yang dikembalikan |
+| `value` | any | The returned value |
+| `exists` | boolean | The exists |
+| `key` | string | Key identifier |
 
 **Example:** Get cached value
 
@@ -324,11 +324,11 @@ port: 6379
 db: 1
 ```
 
-### Redis Atur
+### Redis Set
 
 `db.redis.set`
 
-Atur nilai di cache Redis
+Set a value in Redis cache
 
 **Parameters:**
 

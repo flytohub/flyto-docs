@@ -6,38 +6,38 @@ Build, run, inspect, and manage Docker containers.
 
 | Module | Description |
 |--------|-------------|
-| [Bangun Gambar Docker](#bangun-gambar-docker) | Bangun gambar Docker dari Dockerfile |
-| [Periksa Kontainer Docker](#periksa-kontainer-docker) | Dapatkan informasi detail tentang kontainer Docker |
-| [Dapatkan Log Container](#dapatkan-log-container) | Dapatkan log dari container Docker |
-| [Daftar Container Docker](#daftar-container-docker) | Daftar container Docker |
-| [Jalankan Kontainer Docker](#jalankan-kontainer-docker) | Jalankan kontainer Docker dari gambar |
-| [Hentikan Kontainer Docker](#hentikan-kontainer-docker) | Hentikan kontainer Docker yang sedang berjalan |
+| [Build Docker Image](#build-docker-image) | Build a Docker image from a Dockerfile |
+| [Inspect Docker Container](#inspect-docker-container) | Get detailed information about a Docker container |
+| [Get Container Logs](#get-container-logs) | Get logs from a Docker container |
+| [List Docker Containers](#list-docker-containers) | List Docker containers |
+| [Run Docker Container](#run-docker-container) | Run a Docker container from an image |
+| [Stop Docker Container](#stop-docker-container) | Stop a running Docker container |
 
 ## Modules
 
-### Bangun Gambar Docker
+### Build Docker Image
 
 `docker.build`
 
-Bangun gambar Docker dari Dockerfile
+Build a Docker image from a Dockerfile
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Path ke direktori konteks build |
-| `tag` | string | Yes | - | Nama dan opsional tag gambar (mis. myapp:latest) |
-| `dockerfile` | string | No | - | Path ke Dockerfile (relatif terhadap konteks build) |
-| `build_args` | object | No | - | Variabel waktu build (mis. {"NODE_ENV": "production"}) |
-| `no_cache` | boolean | No | `False` | Jangan gunakan cache saat membangun gambar |
+| `path` | string | Yes | - | Path to the build context directory |
+| `tag` | string | Yes | - | Name and optionally tag the image (e.g. myapp:latest) |
+| `dockerfile` | string | No | - | Path to the Dockerfile (relative to build context) |
+| `build_args` | object | No | - | Build-time variables (e.g. {"NODE_ENV": "production"}) |
+| `no_cache` | boolean | No | `False` | Do not use cache when building the image |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `image_id` | string | ID gambar yang dibangun |
-| `tag` | string | Tag yang diterapkan pada gambar |
-| `size` | string | Ukuran gambar yang dibangun |
+| `image_id` | string | ID of the built image |
+| `tag` | string | Tag applied to the image |
+| `size` | string | Size of the built image |
 
 **Example:** Build from current directory
 
@@ -56,29 +56,29 @@ build_args: {"NODE_ENV": "production"}
 no_cache: true
 ```
 
-### Periksa Kontainer Docker
+### Inspect Docker Container
 
 `docker.inspect_container`
 
-Dapatkan informasi detail tentang kontainer Docker
+Get detailed information about a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | ID atau nama kontainer untuk diperiksa |
+| `container` | string | Yes | - | Container ID or name to inspect |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | ID kontainer pendek |
-| `name` | string | Nama Container |
-| `state` | object | Status Container (status, berjalan, pid, exit_code, dll.) |
-| `image` | string | Image yang digunakan oleh container |
-| `network_settings` | object | Konfigurasi jaringan (IP, port, jaringan) |
-| `mounts` | array | Volume dan bind mounts |
-| `config` | object | Konfigurasi container (env, cmd, label, dll.) |
+| `id` | string | Short container ID |
+| `name` | string | Container name |
+| `state` | object | Container state (status, running, pid, exit_code, etc.) |
+| `image` | string | Image used by the container |
+| `network_settings` | object | Network configuration (IP, ports, networks) |
+| `mounts` | array | Volume and bind mounts |
+| `config` | object | Container configuration (env, cmd, labels, etc.) |
 
 **Example:** Inspect a container by name
 
@@ -92,27 +92,27 @@ container: my-nginx
 container: a1b2c3d4e5f6
 ```
 
-### Dapatkan Log Container
+### Get Container Logs
 
 `docker.logs`
 
-Dapatkan log dari container Docker
+Get logs from a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | ID atau nama Container |
-| `tail` | number | No | `100` | Jumlah baris yang ditampilkan dari akhir log |
-| `follow` | boolean | No | `False` | Ikuti keluaran log (streaming hingga timeout) |
-| `timestamps` | boolean | No | `False` | Tampilkan timestamp dalam keluaran log |
+| `container` | string | Yes | - | Container ID or name |
+| `tail` | number | No | `100` | Number of lines to show from the end of the logs |
+| `follow` | boolean | No | `False` | Follow log output (streams until timeout) |
+| `timestamps` | boolean | No | `False` | Show timestamps in log output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `logs` | string | Keluaran log container |
-| `lines` | number | Jumlah baris log yang dikembalikan |
+| `logs` | string | Container log output |
+| `lines` | number | Number of log lines returned |
 
 **Example:** Get last 50 lines
 
@@ -129,25 +129,25 @@ tail: 100
 timestamps: true
 ```
 
-### Daftar Container Docker
+### List Docker Containers
 
 `docker.ps`
 
-Daftar container Docker
+List Docker containers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `all` | boolean | No | `False` | Tampilkan semua container (default hanya yang berjalan) |
-| `filters` | object | No | - | Filter container (mis. {"name": "my-app", "status": "running"}) |
+| `all` | boolean | No | `False` | Show all containers (default shows just running) |
+| `filters` | object | No | - | Filter containers (e.g. {"name": "my-app", "status": "running"}) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `containers` | array | Daftar container dengan id, nama, image, status, port |
-| `count` | number | Jumlah container yang ditemukan |
+| `containers` | array | List of containers with id, name, image, status, ports |
+| `count` | number | Number of containers found |
 
 **Example:** List running containers
 
@@ -166,32 +166,32 @@ all: true
 filters: {"name": "nginx"}
 ```
 
-### Jalankan Kontainer Docker
+### Run Docker Container
 
 `docker.run`
 
-Jalankan kontainer Docker dari gambar
+Run a Docker container from an image
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image` | string | Yes | - | Gambar Docker yang akan dijalankan (mis. nginx:latest) |
-| `command` | string | No | - | Perintah untuk dijalankan di dalam kontainer |
-| `name` | string | No | - | Beri nama pada kontainer |
-| `ports` | object | No | - | Pemetaan port sebagai host:kontainer (mis. {"8080": "80"}) |
-| `volumes` | object | No | - | Pemetaan volume sebagai host_path:container_path |
-| `env` | object | No | - | Variabel lingkungan untuk diatur di dalam kontainer |
-| `detach` | boolean | No | `True` | Jalankan kontainer di latar belakang |
-| `remove` | boolean | No | `False` | Hapus kontainer secara otomatis saat keluar |
-| `network` | string | No | - | Hubungkan kontainer ke jaringan |
+| `image` | string | Yes | - | Docker image to run (e.g. nginx:latest) |
+| `command` | string | No | - | Command to run inside the container |
+| `name` | string | No | - | Assign a name to the container |
+| `ports` | object | No | - | Port mappings as host:container (e.g. {"8080": "80"}) |
+| `volumes` | object | No | - | Volume mappings as host_path:container_path |
+| `env` | object | No | - | Environment variables to set in the container |
+| `detach` | boolean | No | `True` | Run container in background |
+| `remove` | boolean | No | `False` | Automatically remove the container when it exits |
+| `network` | string | No | - | Connect the container to a network |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | ID kontainer yang dibuat |
-| `status` | string | Status kontainer setelah dijalankan |
+| `container_id` | string | ID of the created container |
+| `status` | string | Container status after run |
 
 **Example:** Run Nginx web server
 
@@ -211,25 +211,25 @@ remove: true
 detach: false
 ```
 
-### Hentikan Kontainer Docker
+### Stop Docker Container
 
 `docker.stop`
 
-Hentikan kontainer Docker yang sedang berjalan
+Stop a running Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | ID atau nama kontainer untuk dihentikan |
-| `timeout` | number | No | `10` | Detik untuk menunggu sebelum mematikan kontainer |
+| `container` | string | Yes | - | Container ID or name to stop |
+| `timeout` | number | No | `10` | Seconds to wait before killing the container |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | ID atau nama kontainer yang dihentikan |
-| `stopped` | boolean | Apakah kontainer berhasil dihentikan |
+| `container_id` | string | ID or name of the stopped container |
+| `stopped` | boolean | Whether the container was successfully stopped |
 
 **Example:** Stop a container by name
 

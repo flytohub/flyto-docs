@@ -6,100 +6,100 @@ In-memory key-value cache with TTL support.
 
 | Module | Description |
 |--------|-------------|
-| [快取清除](#快取清除) | 清除所有快取項目或按模式篩選 |
-| [快取刪除](#快取刪除) | 根據鍵刪除快取項目 |
-| [快取獲取](#快取獲取) | 根據鍵從快取中獲取值 |
-| [快取設定](#快取設定) | 在快取中設定值，可選擇 TTL |
+| [Cache Clear](#cache-clear) | Clear all cache entries or filter by pattern |
+| [Cache Delete](#cache-delete) | Delete a cache entry by key |
+| [Cache Get](#cache-get) | Get a value from cache by key |
+| [Cache Set](#cache-set) | Set a value in cache with optional TTL |
 
 ## Modules
 
-### 快取清除
+### Cache Clear
 
 `cache.clear`
 
-清除所有快取項目或按模式篩選
+Clear all cache entries or filter by pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `pattern` | string | No | `*` | 匹配鍵的全域模式（例如 "user:*"，預設 "*" 清除所有） |
-| `backend` | string | No | `memory` | 使用的快取後端 |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis 連線 URL |
+| `pattern` | string | No | `*` | Glob pattern to match keys (e.g. "user:*", default "*" clears all) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `cleared_count` | number | 清除的快取項目數量 |
-| `backend` | string | 使用的後端 |
+| `cleared_count` | number | Number of cache entries cleared |
+| `backend` | string | The backend used |
 
-### 快取刪除
+### Cache Delete
 
 `cache.delete`
 
-根據鍵刪除快取項目
+Delete a cache entry by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | 要刪除的快取鍵 |
-| `backend` | string | No | `memory` | 使用的快取後端 |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis 連線 URL |
+| `key` | string | Yes | - | The cache key to delete |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | 快取鍵 |
-| `deleted` | boolean | 鍵是否找到並刪除 |
-| `backend` | string | 使用的後端 |
+| `key` | string | The cache key |
+| `deleted` | boolean | Whether the key was found and deleted |
+| `backend` | string | The backend used |
 
-### 快取獲取
+### Cache Get
 
 `cache.get`
 
-根據鍵從快取中獲取值
+Get a value from cache by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | 要查找的快取鍵 |
-| `backend` | string | No | `memory` | 使用的快取後端 |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis 連線 URL |
+| `key` | string | Yes | - | The cache key to look up |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | 快取鍵 |
-| `value` | any | 快取的值（若未找到則為 null） |
-| `hit` | boolean | 是否在快取中找到鍵 |
-| `backend` | string | 使用的後端 |
+| `key` | string | The cache key |
+| `value` | any | The cached value (null if not found) |
+| `hit` | boolean | Whether the key was found in cache |
+| `backend` | string | The backend used |
 
-### 快取設定
+### Cache Set
 
 `cache.set`
 
-在快取中設定值，可選擇 TTL
+Set a value in cache with optional TTL
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | 要儲存值的快取鍵 |
-| `value` | string | Yes | - | 要快取的值（任何可 JSON 序列化的值） |
-| `ttl` | number | No | `0` | 存活時間（秒）（0 = 不過期） |
-| `backend` | string | No | `memory` | 使用的快取後端 |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis 連線 URL |
+| `key` | string | Yes | - | The cache key to store the value under |
+| `value` | string | Yes | - | The value to cache (any JSON-serializable value) |
+| `ttl` | number | No | `0` | Time-to-live in seconds (0 = no expiry) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | 快取鍵 |
-| `stored` | boolean | 值是否成功儲存 |
-| `ttl` | number | TTL 秒數（0 = 不過期） |
-| `backend` | string | 使用的後端 |
+| `key` | string | The cache key |
+| `stored` | boolean | Whether the value was stored successfully |
+| `ttl` | number | The TTL in seconds (0 = no expiry) |
+| `backend` | string | The backend used |

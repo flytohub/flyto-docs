@@ -6,178 +6,178 @@ Statistical functions: mean, median, mode, std dev, percentile, and more.
 
 | Module | Description |
 |--------|-------------|
-| [औसत (मीन)](#औसत-मीन) | संख्याओं का अंकगणितीय औसत निकालें |
-| [माध्य](#माध्य) | संख्याओं का माध्य (बीच का मान) निकालें |
-| [न्यूनतम/अधिकतम](#न्यूनतमअधिकतम) | न्यूनतम और अधिकतम मान खोजें |
-| [मोड](#मोड) | मोड (सबसे अधिक बार आने वाला मान) निकालें |
-| [पर्सेंटाइल](#पर्सेंटाइल) | संख्याओं का पर्सेंटाइल निकालें |
-| [मानक विचलन](#मानक-विचलन) | संख्याओं का मानक विचलन निकालें |
-| [Sum](#sum) | संख्याओं का योग निकालें |
-| [विचलन](#विचलन) | संख्याओं का विचलन निकालें |
+| [Mean (Average)](#mean-average) | Calculate arithmetic mean of numbers |
+| [Median](#median) | Calculate median (middle value) of numbers |
+| [Min/Max](#minmax) | Find minimum and maximum values |
+| [Mode](#mode) | Calculate mode (most frequent value) |
+| [Percentile](#percentile) | Calculate percentile of numbers |
+| [Standard Deviation](#standard-deviation) | Calculate standard deviation of numbers |
+| [Sum](#sum) | Calculate sum of numbers |
+| [Variance](#variance) | Calculate variance of numbers |
 
 ## Modules
 
-### औसत (मीन)
+### Mean (Average)
 
 `stats.mean`
 
-संख्याओं का अंकगणितीय औसत निकालें
+Calculate arithmetic mean of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | संख्याओं की सूची |
-| `precision` | number | No | `2` | संख्याओं की सूची |
+| `numbers` | array | Yes | - | Array of numbers |
+| `precision` | number | No | `2` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `mean` | number | दशमलव स्थान |
-| `count` | number | अंकगणितीय औसत |
-| `sum` | number | अंकगणितीय औसत |
+| `mean` | number | Arithmetic mean |
+| `count` | number | Number of values |
+| `sum` | number | Sum of values |
 
-### माध्य
+### Median
 
 `stats.median`
 
-संख्याओं का माध्य (बीच का मान) निकालें
+Calculate median (middle value) of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | संख्याओं की सूची |
+| `numbers` | array | Yes | - | Array of numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `median` | number | संख्याओं की सूची |
-| `count` | number | माध्य मान |
+| `median` | number | Median value |
+| `count` | number | Number of values |
 
-### न्यूनतम/अधिकतम
+### Min/Max
 
 `stats.min_max`
 
-न्यूनतम और अधिकतम मान खोजें
+Find minimum and maximum values
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | संख्याओं की सूची |
+| `numbers` | array | Yes | - | Array of numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `min` | number | संख्याओं की सूची |
-| `max` | number | न्यूनतम मान |
-| `range` | number | न्यूनतम मान |
-| `min_index` | number | अधिकतम मान |
-| `max_index` | number | रेंज (अधिकतम - न्यूनतम) |
+| `min` | number | Minimum value |
+| `max` | number | Maximum value |
+| `range` | number | Range (max - min) |
+| `min_index` | number | Index of minimum |
+| `max_index` | number | Index of maximum |
 
-### मोड
+### Mode
 
 `stats.mode`
 
-मोड (सबसे अधिक बार आने वाला मान) निकालें
+Calculate mode (most frequent value)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | मानों की सूची |
-| `all_modes` | boolean | No | `False` | मानों की सूची |
+| `values` | array | Yes | - | Array of values |
+| `all_modes` | boolean | No | `False` | Return all modes if multiple exist |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `mode` | any | यदि एक से अधिक मोड हैं तो सभी लौटाएं |
-| `frequency` | number | सबसे अधिक बार आने वाला मान |
-| `count` | number | सबसे अधिक बार आने वाला मान |
+| `mode` | any | Most frequent value(s) |
+| `frequency` | number | Frequency of mode |
+| `count` | number | Number of values |
 
-### पर्सेंटाइल
+### Percentile
 
 `stats.percentile`
 
-संख्याओं का पर्सेंटाइल निकालें
+Calculate percentile of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | संख्याओं की सूची |
-| `percentile` | number | Yes | `50` | संख्याओं की सूची |
+| `numbers` | array | Yes | - | Array of numbers |
+| `percentile` | number | Yes | `50` | Percentile to calculate (0-100) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | number | पर्सेंटाइल निकालें (0-100) |
-| `percentile` | number | पर्सेंटाइल मान |
+| `value` | number | Percentile value |
+| `percentile` | number | Percentile requested |
 
-### मानक विचलन
+### Standard Deviation
 
 `stats.std_dev`
 
-संख्याओं का मानक विचलन निकालें
+Calculate standard deviation of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | संख्याओं की सूची |
-| `population` | boolean | No | `False` | जनसंख्या सूत्र का उपयोग करें (N-1 के बजाय N से विभाजित करें) |
-| `precision` | number | No | `4` | जनसंख्या सूत्र का उपयोग करें (N-1 के बजाय N से विभाजित करें) |
+| `numbers` | array | Yes | - | Array of numbers |
+| `population` | boolean | No | `False` | Use population formula (divide by N instead of N-1) |
+| `precision` | number | No | `4` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `std_dev` | number | दशमलव स्थान |
-| `variance` | number | मानक विचलन |
-| `mean` | number | मानक विचलन |
+| `std_dev` | number | Standard deviation |
+| `variance` | number | Variance |
+| `mean` | number | Mean value |
 
 ### Sum
 
 `stats.sum`
 
-संख्याओं का योग निकालें
+Calculate sum of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | संख्याओं की सूची |
+| `numbers` | array | Yes | - | Array of numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sum` | number | संख्याओं की सूची |
-| `count` | number | संख्याओं का योग |
+| `sum` | number | Sum of numbers |
+| `count` | number | Number of values |
 
-### विचलन
+### Variance
 
 `stats.variance`
 
-संख्याओं का विचलन निकालें
+Calculate variance of numbers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `numbers` | array | Yes | - | संख्याओं की सूची |
-| `population` | boolean | No | `False` | संख्याओं की सूची |
-| `precision` | number | No | `4` | जनसंख्या सूत्र का उपयोग करें |
+| `numbers` | array | Yes | - | Array of numbers |
+| `population` | boolean | No | `False` | Use population formula |
+| `precision` | number | No | `4` | Decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `variance` | number | दशमलव स्थान |
-| `mean` | number | विचलन मान |
+| `variance` | number | Variance value |
+| `mean` | number | Mean value |

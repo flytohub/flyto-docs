@@ -6,114 +6,114 @@ Boolean logic operations: AND, OR, NOT, equals, contains.
 
 | Module | Description |
 |--------|-------------|
-| [논리 AND](#논리-and) | 논리적 AND 연산 수행 |
-| [논리 포함](#논리-포함) | 값이 다른 값을 포함하는지 확인 |
-| [논리 같음](#논리-같음) | 두 값이 같은지 확인 |
-| [논리 NOT](#논리-not) | 논리적 NOT 연산 수행 |
-| [논리 OR](#논리-or) | 논리적 OR 연산 수행 |
+| [Logic AND](#logic-and) | Perform logical AND operation |
+| [Logic Contains](#logic-contains) | Check if a value contains another value |
+| [Logic Equals](#logic-equals) | Check if two values are equal |
+| [Logic NOT](#logic-not) | Perform logical NOT operation |
+| [Logic OR](#logic-or) | Perform logical OR operation |
 
 ## Modules
 
-### 논리 AND
+### Logic AND
 
 `logic.and`
 
-논리적 AND 연산 수행
+Perform logical AND operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | AND 연산을 위한 불리언 값 |
+| `values` | array | Yes | - | Boolean values to AND together |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | AND 연산을 위한 불리언 값 |
-| `true_count` | number | AND 연산 결과 |
-| `total_count` | number | AND 연산 결과 |
+| `result` | boolean | Result of AND operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |
 
-### 논리 포함
+### Logic Contains
 
 `logic.contains`
 
-값이 다른 값을 포함하는지 확인
+Check if a value contains another value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `haystack` | text | Yes | - | 검색할 대상 (문자열, 배열, 객체) |
-| `needle` | text | Yes | - | 검색할 대상 (문자열, 배열, 객체) |
-| `case_sensitive` | boolean | No | `True` | 검색할 값 |
+| `haystack` | text | Yes | - | Value to search in (string, array, or object) |
+| `needle` | text | Yes | - | Value to search for |
+| `case_sensitive` | boolean | No | `True` | Case sensitive search for strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 대소문자 구분 문자열 검색 |
-| `position` | number | 대상에 검색 값이 포함되어 있는지 |
-| `count` | number | 대상에 검색 값이 포함되어 있는지 |
+| `result` | boolean | Whether haystack contains needle |
+| `position` | number | Position/index where found (-1 if not found) |
+| `count` | number | Number of occurrences |
 
-### 논리 같음
+### Logic Equals
 
 `logic.equals`
 
-두 값이 같은지 확인
+Check if two values are equal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `a` | text | Yes | - | 비교할 첫 번째 값 |
-| `b` | text | Yes | - | 비교할 첫 번째 값 |
-| `strict` | boolean | No | `False` | 비교할 두 번째 값 |
-| `case_sensitive` | boolean | No | `True` | 동일한 유형 요구 (유형 강제 변환 없음) |
+| `a` | text | Yes | - | First value to compare |
+| `b` | text | Yes | - | Second value to compare |
+| `strict` | boolean | No | `False` | Require same type (no type coercion) |
+| `case_sensitive` | boolean | No | `True` | Case sensitive string comparison |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 대소문자 구분 문자열 비교 |
-| `type_a` | string | 값이 같은지 여부 |
-| `type_b` | string | 값이 같은지 여부 |
+| `result` | boolean | Whether values are equal |
+| `type_a` | string | Type of first value |
+| `type_b` | string | Type of second value |
 
-### 논리 NOT
+### Logic NOT
 
 `logic.not`
 
-논리적 NOT 연산 수행
+Perform logical NOT operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | boolean | Yes | `False` | 부정할 불리언 값 |
+| `value` | boolean | Yes | `False` | Boolean value to negate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 부정할 불리언 값 |
-| `original` | boolean | 부정된 결과 |
+| `result` | boolean | Negated result |
+| `original` | boolean | Original value |
 
-### 논리 OR
+### Logic OR
 
 `logic.or`
 
-논리적 OR 연산 수행
+Perform logical OR operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | OR 연산을 위한 불리언 값 |
+| `values` | array | Yes | - | Boolean values to OR together |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | OR 연산을 위한 불리언 값 |
-| `true_count` | number | OR 연산 결과 |
-| `total_count` | number | OR 연산 결과 |
+| `result` | boolean | Result of OR operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |

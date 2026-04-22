@@ -6,92 +6,92 @@ Random number, UUID, choice, and shuffle.
 
 | Module | Description |
 |--------|-------------|
-| [Pilihan Acak](#pilihan-acak) | Pilih elemen acak dari array |
-| [Angka Acak](#angka-acak) | Hasilkan angka acak dalam rentang |
-| [Acak Array](#acak-array) | Acak elemen array secara acak |
-| [Hasilkan UUID](#hasilkan-uuid) | Hasilkan UUID acak (v4) |
+| [Random Choice](#random-choice) | Select random element(s) from an array |
+| [Random Number](#random-number) | Generate random number within a range |
+| [Shuffle Array](#shuffle-array) | Randomly shuffle array elements |
+| [Generate UUID](#generate-uuid) | Generate random UUID (v4) |
 
 ## Modules
 
-### Pilihan Acak
+### Random Choice
 
 `random.choice`
 
-Pilih elemen acak dari array
+Select random element(s) from an array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Array untuk dipilih |
-| `count` | number | No | `1` | Array untuk dipilih |
-| `unique` | boolean | No | `True` | Jumlah elemen yang dipilih |
+| `array` | array | Yes | - | Array to pick from |
+| `count` | number | No | `1` | Number of elements to pick |
+| `unique` | boolean | No | `True` | Pick unique elements (no duplicates) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `choice` | any | Pilih elemen unik (tanpa duplikat) |
-| `count` | number | Elemen yang dipilih |
+| `choice` | any | Selected element(s) |
+| `count` | number | Number of elements selected |
 
-### Angka Acak
+### Random Number
 
 `random.number`
 
-Hasilkan angka acak dalam rentang
+Generate random number within a range
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `min` | number | No | `0` | Nilai minimum (inklusif) |
-| `max` | number | No | `100` | Nilai minimum (inklusif) |
-| `integer` | boolean | No | `True` | Nilai maksimum (inklusif) |
-| `precision` | number | No | `2` | Hasilkan hanya bilangan bulat |
+| `min` | number | No | `0` | Minimum value (inclusive) |
+| `max` | number | No | `100` | Maximum value (inclusive) |
+| `integer` | boolean | No | `True` | Generate integers only |
+| `precision` | number | No | `2` | Decimal places for float |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `number` | number | Tempat desimal untuk float |
-| `min` | number | Angka acak yang dihasilkan |
-| `max` | number | Angka acak yang dihasilkan |
+| `number` | number | Generated random number |
+| `min` | number | Minimum bound used |
+| `max` | number | Maximum bound used |
 
-### Acak Array
+### Shuffle Array
 
 `random.shuffle`
 
-Acak elemen array secara acak
+Randomly shuffle array elements
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Array untuk diacak |
+| `array` | array | Yes | - | Array to shuffle |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Array untuk diacak |
-| `length` | number | Array yang diacak |
+| `result` | array | Shuffled array |
+| `length` | number | Array length |
 
-### Hasilkan UUID
+### Generate UUID
 
 `random.uuid`
 
-Hasilkan UUID acak (v4)
+Generate random UUID (v4)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `uppercase` | boolean | No | `False` | Kembalikan UUID huruf besar |
-| `remove_hyphens` | boolean | No | `False` | Kembalikan UUID huruf besar |
+| `uppercase` | boolean | No | `False` | Return uppercase UUID |
+| `remove_hyphens` | boolean | No | `False` | Remove hyphens from UUID |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `uuid` | string | Hapus tanda hubung dari UUID |
-| `version` | number | UUID yang dihasilkan |
+| `uuid` | string | Generated UUID |
+| `version` | number | UUID version |

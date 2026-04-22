@@ -6,33 +6,33 @@ Send messages via Slack, Discord, Teams, Telegram, email, SMS, and WhatsApp.
 
 | Module | Description |
 |--------|-------------|
-| [Twilio Buat Panggilan](#twilio-buat-panggilan) | Lakukan panggilan suara via Twilio |
-| [Twilio Kirim SMS](#twilio-kirim-sms) | Kirim pesan SMS via Twilio |
-| [Kirim Pesan Discord](#kirim-pesan-discord) | Kirim pesan ke Discord via webhook |
-| [Kirim Email](#kirim-email) | Kirim email via SMTP |
-| [Kirim Pesan Slack](#kirim-pesan-slack) | Kirim pesan ke Slack via webhook |
-| [Kirim Pesan Teams](#kirim-pesan-teams) | Kirim pesan ke Microsoft Teams melalui webhook masuk |
-| [Kirim Pesan Telegram](#kirim-pesan-telegram) | Kirim pesan via Telegram Bot API |
-| [Kirim Pesan WhatsApp](#kirim-pesan-whatsapp) | Kirim pesan melalui WhatsApp Business API (Meta Cloud API) |
-| [Kirim Notifikasi](#kirim-notifikasi) | Kirim notifikasi ke Telegram, Discord, Slack, LINE, atau URL webhook lainnya |
+| [Twilio Make Call](#twilio-make-call) | Make a voice call via Twilio |
+| [Twilio Send SMS](#twilio-send-sms) | Send SMS message via Twilio |
+| [Send Discord Message](#send-discord-message) | Send message to Discord via webhook |
+| [Send Email](#send-email) | Send email via SMTP |
+| [Send Slack Message](#send-slack-message) | Send message to Slack via webhook |
+| [Send Teams Message](#send-teams-message) | Send message to Microsoft Teams via incoming webhook |
+| [Send Telegram Message](#send-telegram-message) | Send message via Telegram Bot API |
+| [Send WhatsApp Message](#send-whatsapp-message) | Send message via WhatsApp Business API (Meta Cloud API) |
+| [Send Notification](#send-notification) | Send notification to Telegram, Discord, Slack, LINE, or any webhook URL |
 
 ## Modules
 
-### Twilio Buat Panggilan
+### Twilio Make Call
 
 `communication.twilio.make_call`
 
-Lakukan panggilan suara via Twilio
+Make a voice call via Twilio
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `account_sid` | string | No | - | Account SID Twilio (atau gunakan env TWILIO_ACCOUNT_SID) |
-| `auth_token` | string | No | - | Auth Token Twilio (atau gunakan env TWILIO_AUTH_TOKEN) |
-| `from_number` | string | Yes | - | Auth Token Twilio (atau gunakan env TWILIO_AUTH_TOKEN) |
-| `to_number` | string | Yes | - | Nomor telepon Twilio |
-| `twiml_url` | string | Yes | - | Nomor telepon penerima |
+| `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
+| `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
+| `from_number` | string | Yes | - | Twilio phone number |
+| `to_number` | string | Yes | - | Recipient phone number |
+| `twiml_url` | string | Yes | - | URL to TwiML instructions |
 
 **Output:**
 
@@ -51,30 +51,30 @@ to_number: +0987654321
 twiml_url: https://example.com/voice.xml
 ```
 
-### Twilio Kirim SMS
+### Twilio Send SMS
 
 `communication.twilio.send_sms`
 
-Kirim pesan SMS via Twilio
+Send SMS message via Twilio
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `account_sid` | string | No | - | Account SID Twilio (atau gunakan env TWILIO_ACCOUNT_SID) |
-| `auth_token` | string | No | - | Auth Token Twilio (atau gunakan env TWILIO_AUTH_TOKEN) |
-| `from_number` | string | Yes | - | Nomor telepon Twilio (mis. +1234567890) |
-| `to_number` | string | Yes | - | Nomor telepon Twilio (mis. +1234567890) |
-| `message` | string | Yes | - | Nomor telepon penerima (mis. +1234567890) |
+| `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
+| `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
+| `from_number` | string | Yes | - | Twilio phone number (e.g. +1234567890) |
+| `to_number` | string | Yes | - | Recipient phone number (e.g. +1234567890) |
+| `message` | string | Yes | - | SMS message text |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sid` | string | Teks pesan SMS |
-| `status` | string | Teks pesan SMS |
-| `to` | string | SID |
-| `from` | string | Status operasi (success/error) |
+| `sid` | string | The sid |
+| `status` | string | Operation status (success/error) |
+| `to` | string | The to |
+| `from` | string | The from |
 
 **Example:** Send notification SMS
 
@@ -92,28 +92,28 @@ to_number: +0987654321
 message: Your verification code is: 123456
 ```
 
-### Kirim Pesan Discord
+### Send Discord Message
 
 `notification.discord.send_message`
 
-Kirim pesan ke Discord via webhook
+Send message to Discord via webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | No | - | URL webhook Discord (dari env.DISCORD_WEBHOOK_URL atau input langsung) |
-| `content` | string | Yes | - | URL webhook Discord (dari env.DISCORD_WEBHOOK_URL atau input langsung) |
-| `username` | string | No | - | Pesan untuk dikirim |
-| `avatar_url` | string | No | - | Override username bot (opsional) |
+| `webhook_url` | string | No | - | Discord webhook URL (from env.DISCORD_WEBHOOK_URL or direct input) |
+| `content` | string | Yes | - | The message to send |
+| `username` | string | No | - | Override bot username (optional) |
+| `avatar_url` | string | No | - | Bot avatar image URL (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | URL gambar avatar bot (opsional) |
-| `sent` | boolean | Status operasi (sukses/error) |
-| `message` | string | Kirim pesan ke channel Discord via URL webhook |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -121,33 +121,33 @@ Kirim pesan ke Discord via webhook
 content: Workflow completed successfully!
 ```
 
-### Kirim Email
+### Send Email
 
 `notification.email.send`
 
-Kirim email via SMTP
+Send email via SMTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `smtp_server` | string | Yes | - | Hostname server SMTP (mis., smtp.gmail.com) |
-| `smtp_port` | number | No | `587` | Hostname server SMTP (mis., smtp.gmail.com) |
-| `username` | string | Yes | - | Port SMTP (587 untuk TLS, 465 untuk SSL) |
-| `password` | string | Yes | - | Username SMTP |
-| `from_email` | string | Yes | - | Password SMTP (gunakan variabel env!) |
-| `to_email` | string | Yes | - | Alamat email pengirim |
-| `subject` | string | Yes | - | Alamat email penerima |
-| `body` | text | Yes | - | Subjek email |
-| `html` | boolean | No | `False` | Body email (mendukung HTML) |
+| `smtp_server` | string | Yes | - | SMTP server hostname (e.g., smtp.gmail.com) |
+| `smtp_port` | number | No | `587` | SMTP port (587 for TLS, 465 for SSL) |
+| `username` | string | Yes | - | SMTP username |
+| `password` | string | Yes | - | SMTP password (use env variable!) |
+| `from_email` | string | Yes | - | Sender email address |
+| `to_email` | string | Yes | - | Recipient email address |
+| `subject` | string | Yes | - | Email subject |
+| `body` | text | Yes | - | Email body (HTML supported) |
+| `html` | boolean | No | `False` | Send body as HTML |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Kirim body sebagai HTML |
-| `sent` | boolean | Status operasi (sukses/error) |
-| `message` | string | Status operasi (sukses/error) |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -160,29 +160,29 @@ subject: Workflow Complete
 body: Your automation workflow has finished successfully.
 ```
 
-### Kirim Pesan Slack
+### Send Slack Message
 
 `notification.slack.send_message`
 
-Kirim pesan ke Slack via webhook
+Send message to Slack via webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | No | - | URL webhook Slack (dari env.SLACK_WEBHOOK_URL atau input langsung) |
-| `text` | string | Yes | - | URL webhook Slack (dari env.SLACK_WEBHOOK_URL atau input langsung) |
-| `channel` | string | No | - | Pesan untuk dikirim |
-| `username` | string | No | - | Override channel default (opsional) |
-| `icon_emoji` | string | No | - | Override username bot (opsional) |
+| `webhook_url` | string | No | - | Slack webhook URL (from env.SLACK_WEBHOOK_URL or direct input) |
+| `text` | string | Yes | - | The message to send |
+| `channel` | string | No | - | Override default channel (optional) |
+| `username` | string | No | - | Override bot username (optional) |
+| `icon_emoji` | string | No | - | Bot icon emoji (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Emoji ikon bot (opsional) |
-| `sent` | boolean | Status operasi (sukses/error) |
-| `message` | string | Status operasi (sukses/error) |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -199,28 +199,28 @@ username: Alert Bot
 icon_emoji: :warning:
 ```
 
-### Kirim Pesan Teams
+### Send Teams Message
 
 `notification.teams.send_message`
 
-Kirim pesan ke Microsoft Teams melalui webhook masuk
+Send message to Microsoft Teams via incoming webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | Yes | - | URL webhook masuk Microsoft Teams |
-| `message` | text | Yes | - | Teks pesan yang akan dikirim |
-| `title` | string | No | - | Judul kartu pesan (opsional) |
-| `color` | string | No | - | Kode warna tema hex (opsional) |
-| `sections` | array | No | - | Bagian MessageCard tambahan (opsional) |
+| `webhook_url` | string | Yes | - | Microsoft Teams incoming webhook URL |
+| `message` | text | Yes | - | The message text to send |
+| `title` | string | No | - | Message card title (optional) |
+| `color` | string | No | - | Theme color hex code (optional) |
+| `sections` | array | No | - | Additional MessageCard sections (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah operasi berhasil |
-| `data` | object | Data respons dengan status dan webhook_url |
+| `ok` | boolean | Whether the operation succeeded |
+| `data` | object | Response data with status and webhook_url |
 
 **Example:** Example
 
@@ -231,29 +231,29 @@ title: Deploy Status
 color: #00FF00
 ```
 
-### Kirim Pesan Telegram
+### Send Telegram Message
 
 `notification.telegram.send_message`
 
-Kirim pesan via Telegram Bot API
+Send message via Telegram Bot API
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bot_token` | string | No | - | Token bot Telegram (dari env.TELEGRAM_BOT_TOKEN atau input langsung) |
-| `chat_id` | string | Yes | - | Token bot Telegram (dari env.TELEGRAM_BOT_TOKEN atau input langsung) |
-| `text` | string | Yes | - | ID chat Telegram atau username channel |
-| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | Pesan untuk dikirim |
+| `bot_token` | string | No | - | Telegram bot token (from env.TELEGRAM_BOT_TOKEN or direct input) |
+| `chat_id` | string | Yes | - | Telegram chat ID or channel username |
+| `text` | string | Yes | - | The message to send |
+| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | Message formatting mode |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Mode format pesan |
-| `sent` | boolean | Status operasi (sukses/error) |
-| `message_id` | number | Status operasi (sukses/error) |
-| `message` | string | Apakah notifikasi terkirim |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message_id` | number | Message identifier |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -270,30 +270,30 @@ text: *Bold* _italic_ `code`
 parse_mode: Markdown
 ```
 
-### Kirim Pesan WhatsApp
+### Send WhatsApp Message
 
 `notification.whatsapp.send_message`
 
-Kirim pesan melalui WhatsApp Business API (Meta Cloud API)
+Send message via WhatsApp Business API (Meta Cloud API)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `phone_number_id` | string | Yes | - | ID nomor telepon pengirim WhatsApp Business |
-| `to` | string | Yes | - | Nomor telepon penerima dengan kode negara |
-| `message` | text | Yes | - | Teks pesan yang akan dikirim |
-| `access_token` | password | Yes | - | Token akses Meta untuk WhatsApp Business API |
-| `message_type` | select (`text`, `template`) | No | `text` | Jenis pesan yang akan dikirim |
-| `template_name` | string | No | - | Nama template pesan WhatsApp (diperlukan jika message_type adalah template) |
-| `template_language` | string | No | `en` | Kode bahasa template |
+| `phone_number_id` | string | Yes | - | WhatsApp Business sender phone number ID |
+| `to` | string | Yes | - | Recipient phone number with country code |
+| `message` | text | Yes | - | The message text to send |
+| `access_token` | password | Yes | - | Meta access token for WhatsApp Business API |
+| `message_type` | select (`text`, `template`) | No | `text` | Type of message to send |
+| `template_name` | string | No | - | WhatsApp message template name (required if message_type is "template") |
+| `template_language` | string | No | `en` | Template language code |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah operasi berhasil |
-| `data` | object | Data respons dengan status, message_id, dan to |
+| `ok` | boolean | Whether the operation succeeded |
+| `data` | object | Response data with status, message_id, and to |
 
 **Example:** Example
 
@@ -316,29 +316,29 @@ template_name: hello_world
 template_language: en
 ```
 
-### Kirim Notifikasi
+### Send Notification
 
 `notify.send`
 
-Kirim notifikasi ke Telegram, Discord, Slack, LINE, atau URL webhook lainnya
+Send notification to Telegram, Discord, Slack, LINE, or any webhook URL
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL Webhook (Telegram, Discord, Slack, atau kustom) |
-| `message` | string | Yes | - | Konten pesan notifikasi |
-| `title` | string | No | - | Judul opsional (untuk Discord, Slack, Teams) |
-| `chat_id` | string | No | - | ID chat Telegram (diperlukan untuk Telegram) |
+| `url` | string | Yes | - | Webhook URL (Telegram, Discord, Slack, or custom) |
+| `message` | string | Yes | - | Notification message content |
+| `title` | string | No | - | Optional title (for Discord, Slack, Teams) |
+| `chat_id` | string | No | - | Telegram chat ID (required for Telegram) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Apakah notifikasi berhasil dikirim |
-| `platform` | string | Platform terdeteksi (telegram, discord, slack, dll.) |
-| `status_code` | number | Kode status respons HTTP |
-| `response` | object | Respons dari webhook |
+| `ok` | boolean | Whether notification was sent successfully |
+| `platform` | string | Detected platform (telegram, discord, slack, etc.) |
+| `status_code` | number | HTTP response status code |
+| `response` | object | Response from the webhook |
 
 **Example:** Send Telegram notification
 

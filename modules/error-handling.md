@@ -23,25 +23,25 @@ Protect against cascading failures with circuit breaker pattern
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `action` | object | Yes | - | The action to protect with circuit breaker |
-| `circuit_id` | string | Yes | - | The action to protect with circuit breaker |
-| `failure_threshold` | number | No | `5` | Unique identifier for this circuit (for state tracking) |
+| `circuit_id` | string | Yes | - | Unique identifier for this circuit (for state tracking) |
+| `failure_threshold` | number | No | `5` | Number of failures before opening circuit |
 | `failure_window_ms` | number | No | `60000` | Time window for counting failures |
 | `recovery_timeout_ms` | number | No | `30000` | Time before attempting recovery (half-open state) |
 | `success_threshold` | number | No | `3` | Successful requests needed in half-open to close circuit |
 | `fallback` | object | No | - | Alternative action when circuit is open |
-| `fallback_value` | any | No | - | Alternative action when circuit is open |
-| `track_errors` | array | No | `[]` | Static value to return when circuit is open |
+| `fallback_value` | any | No | - | Static value to return when circuit is open |
+| `track_errors` | array | No | `[]` | Only count these error codes toward threshold (empty = all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Only count these error codes toward threshold (empty = all) |
-| `result` | any | Event for routing (success/circuit_open/fallback) |
-| `circuit_state` | string | Result from action or fallback |
-| `failure_count` | number | Current state of circuit (closed/open/half_open) |
-| `last_failure_time` | string | Current failure count in window |
-| `circuit_opened_at` | string | Timestamp of last failure |
+| `__event__` | string | Event for routing (success/circuit_open/fallback) |
+| `result` | any | Result from action or fallback |
+| `circuit_state` | string | Current state of circuit (closed/open/half_open) |
+| `failure_count` | number | Current failure count in window |
+| `last_failure_time` | string | Timestamp of last failure |
+| `circuit_opened_at` | string | When circuit was opened |
 
 **Example:** Example
 
@@ -82,20 +82,20 @@ Provide fallback value when operation fails
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `operation` | object | No | - | The primary operation to attempt |
-| `fallback_value` | any | No | - | The primary operation to attempt |
-| `fallback_operation` | object | No | - | Static value to return on failure |
-| `fallback_on` | array | No | `[]` | Alternative operation to execute on failure |
-| `include_error_info` | boolean | No | `True` | Error codes that trigger fallback (empty = all errors) |
-| `log_fallback` | boolean | No | `True` | Include original error information in output |
+| `fallback_value` | any | No | - | Static value to return on failure |
+| `fallback_operation` | object | No | - | Alternative operation to execute on failure |
+| `fallback_on` | array | No | `[]` | Error codes that trigger fallback (empty = all errors) |
+| `include_error_info` | boolean | No | `True` | Include original error information in output |
+| `log_fallback` | boolean | No | `True` | Log when fallback is used |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | Log when fallback is used |
-| `used_fallback` | boolean | Result from primary operation or fallback |
-| `source` | string | Whether fallback was used |
-| `original_error` | object | Source of result (primary/fallback_value/fallback_operation) |
+| `result` | any | Result from primary operation or fallback |
+| `used_fallback` | boolean | Whether fallback was used |
+| `source` | string | Source of result (primary/fallback_value/fallback_operation) |
+| `original_error` | object | Original error if fallback was used |
 
 **Example:** Example
 
@@ -130,23 +130,23 @@ Wrap operations with configurable retry logic
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `operation` | object | Yes | - | The operation to retry (module ID and params) |
-| `max_retries` | number | No | `3` | The operation to retry (module ID and params) |
-| `initial_delay_ms` | number | No | `1000` | Maximum number of retry attempts |
-| `max_delay_ms` | number | No | `30000` | Initial delay before first retry |
+| `max_retries` | number | No | `3` | Maximum number of retry attempts |
+| `initial_delay_ms` | number | No | `1000` | Initial delay before first retry |
+| `max_delay_ms` | number | No | `30000` | Maximum delay between retries |
 | `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g., 2 doubles delay each retry) |
 | `jitter` | boolean | No | `True` | Add random jitter to delay to prevent thundering herd |
-| `retry_on` | array | No | `[]` | Add random jitter to delay to prevent thundering herd |
-| `timeout_per_attempt_ms` | number | No | `0` | List of error codes to retry on (empty = retry all) |
+| `retry_on` | array | No | `[]` | List of error codes to retry on (empty = retry all) |
+| `timeout_per_attempt_ms` | number | No | `0` | Timeout for each attempt (0 for no timeout) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Timeout for each attempt (0 for no timeout) |
-| `result` | any | Event for routing (success/exhausted) |
-| `attempts` | number | Event for routing (success/exhausted) |
-| `total_delay_ms` | number | Result from successful attempt |
-| `errors` | array | Number of attempts made |
+| `__event__` | string | Event for routing (success/exhausted) |
+| `result` | any | Result from successful attempt |
+| `attempts` | number | Number of attempts made |
+| `total_delay_ms` | number | Total time spent in delays |
+| `errors` | array | Errors from each failed attempt |
 
 **Example:** Example
 

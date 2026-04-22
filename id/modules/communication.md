@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [Baca Email](#baca-email) | Baca email dari server IMAP |
-| [Kirim Email](#kirim-email) | Kirim email via server SMTP |
-| [Kirim Pesan Slack](#kirim-pesan-slack) | Kirim pesan ke channel Slack via incoming webhook |
-| [Picu Webhook](#picu-webhook) | Kirim permintaan HTTP POST ke URL webhook |
+| [Read Email](#read-email) | Read emails from IMAP server |
+| [Send Email](#send-email) | Send email via SMTP server |
+| [Send Slack Message](#send-slack-message) | Send messages to Slack channels via incoming webhook |
+| [Trigger Webhook](#trigger-webhook) | Send HTTP POST request to a webhook URL |
 
 ## Modules
 
-### Baca Email
+### Read Email
 
 `email.read`
 
-Baca email dari server IMAP
+Read emails from IMAP server
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ Baca email dari server IMAP
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `emails` | array | Daftar objek email |
-| `count` | number | Daftar objek email |
+| `emails` | array | List of email objects |
+| `count` | number | Number of emails fetched |
 
 **Example:** Read recent unread emails
 
@@ -49,11 +49,11 @@ unread_only: true
 limit: 5
 ```
 
-### Kirim Email
+### Send Email
 
 `email.send`
 
-Kirim email via server SMTP
+Send email via SMTP server
 
 **Parameters:**
 
@@ -77,9 +77,9 @@ Kirim email via server SMTP
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sent` | boolean | Apakah email berhasil dikirim |
-| `message_id` | string | Apakah email berhasil dikirim |
-| `recipients` | array | Apakah email berhasil dikirim |
+| `sent` | boolean | Whether email was sent successfully |
+| `message_id` | string | Email message ID |
+| `recipients` | array | List of recipients |
 
 **Example:** Send simple email
 
@@ -89,11 +89,11 @@ subject: Hello
 body: This is a test email.
 ```
 
-### Kirim Pesan Slack
+### Send Slack Message
 
 `slack.send`
 
-Kirim pesan ke channel Slack via incoming webhook
+Send messages to Slack channels via incoming webhook
 
 **Parameters:**
 
@@ -111,7 +111,7 @@ Kirim pesan ke channel Slack via incoming webhook
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sent` | boolean | Apakah pesan berhasil dikirim |
+| `sent` | boolean | Whether message was sent successfully |
 
 **Example:** Send simple message
 
@@ -127,11 +127,11 @@ username: Flyto Bot
 icon_emoji: :white_check_mark:
 ```
 
-### Picu Webhook
+### Trigger Webhook
 
 `webhook.trigger`
 
-Kirim permintaan HTTP POST ke URL webhook
+Send HTTP POST request to a webhook URL
 
 **Parameters:**
 
@@ -149,9 +149,9 @@ Kirim permintaan HTTP POST ke URL webhook
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | Kode status respons HTTP |
-| `response` | object | Kode status respons HTTP |
-| `headers` | object | Kode status respons HTTP |
+| `status_code` | number | HTTP response status code |
+| `response` | object | Response body (if JSON) |
+| `headers` | object | Response headers |
 
 **Example:** Simple POST webhook
 

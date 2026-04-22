@@ -6,47 +6,47 @@ SHA-256 and SHA-512 cryptographic hashing.
 
 | Module | Description |
 |--------|-------------|
-| [SHA-256 雜湊](#sha-256-雜湊) | 計算文字的 SHA-256 加密雜湊值 |
-| [SHA-512 雜湊](#sha-512-雜湊) | 計算文字的 SHA-512 加密雜湊值 |
+| [SHA-256 Hash](#sha-256-hash) | Calculate SHA-256 cryptographic hash of text |
+| [SHA-512 Hash](#sha-512-hash) | Calculate SHA-512 cryptographic hash of text |
 
 ## Modules
 
-### SHA-256 雜湊
+### SHA-256 Hash
 
 `hash.sha256`
 
-計算文字的 SHA-256 加密雜湊值
+Calculate SHA-256 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 要雜湊的文字 |
-| `encoding` | string | No | `utf-8` | 要雜湊的文字 |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | 文字編碼 |
-| `algorithm` | string | SHA-256 雜湊（64 個十六進位字元） |
+| `hash` | string | SHA-256 hash (64 hex characters) |
+| `algorithm` | string | Hash algorithm used |
 
-### SHA-512 雜湊
+### SHA-512 Hash
 
 `hash.sha512`
 
-計算文字的 SHA-512 加密雜湊值
+Calculate SHA-512 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 要雜湊的文字 |
-| `encoding` | string | No | `utf-8` | 要雜湊的文字 |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | 文字編碼 |
-| `algorithm` | string | SHA-512 雜湊（128 個十六進位字元） |
+| `hash` | string | SHA-512 hash (128 hex characters) |
+| `algorithm` | string | Hash algorithm used |

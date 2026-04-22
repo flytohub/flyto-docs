@@ -6,114 +6,114 @@ Boolean logic operations: AND, OR, NOT, equals, contains.
 
 | Module | Description |
 |--------|-------------|
-| [ตรรกะ AND](#ตรรกะ-and) | ทำการดำเนินการทางตรรกะ AND |
-| [ตรรกะ Contains](#ตรรกะ-contains) | ตรวจสอบว่าค่าหนึ่งมีอีกค่าหนึ่งหรือไม่ |
-| [ตรรกะ Equals](#ตรรกะ-equals) | ตรวจสอบค่าสองค่าเท่ากันหรือไม่ |
-| [ตรรกะ NOT](#ตรรกะ-not) | ทำการดำเนินการทางตรรกะ NOT |
-| [ตรรกะ OR](#ตรรกะ-or) | ทำการดำเนินการทางตรรกะ OR |
+| [Logic AND](#logic-and) | Perform logical AND operation |
+| [Logic Contains](#logic-contains) | Check if a value contains another value |
+| [Logic Equals](#logic-equals) | Check if two values are equal |
+| [Logic NOT](#logic-not) | Perform logical NOT operation |
+| [Logic OR](#logic-or) | Perform logical OR operation |
 
 ## Modules
 
-### ตรรกะ AND
+### Logic AND
 
 `logic.and`
 
-ทำการดำเนินการทางตรรกะ AND
+Perform logical AND operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | ค่าบูลีนสำหรับ AND ร่วมกัน |
+| `values` | array | Yes | - | Boolean values to AND together |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | ค่าบูลีนสำหรับ AND ร่วมกัน |
-| `true_count` | number | ผลลัพธ์ของการดำเนินการ AND |
-| `total_count` | number | ผลลัพธ์ของการดำเนินการ AND |
+| `result` | boolean | Result of AND operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |
 
-### ตรรกะ Contains
+### Logic Contains
 
 `logic.contains`
 
-ตรวจสอบว่าค่าหนึ่งมีอีกค่าหนึ่งหรือไม่
+Check if a value contains another value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `haystack` | text | Yes | - | ค่าที่ต้องการค้นหาใน (สตริง, อาเรย์, หรือออบเจ็กต์) |
-| `needle` | text | Yes | - | ค่าที่ต้องการค้นหาใน (สตริง, อาเรย์, หรือออบเจ็กต์) |
-| `case_sensitive` | boolean | No | `True` | ค่าที่ต้องการค้นหา |
+| `haystack` | text | Yes | - | Value to search in (string, array, or object) |
+| `needle` | text | Yes | - | Value to search for |
+| `case_sensitive` | boolean | No | `True` | Case sensitive search for strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | การค้นหาสตริงที่คำนึงถึงตัวพิมพ์เล็กใหญ่ |
-| `position` | number | ตรวจสอบว่า haystack มี needle หรือไม่ |
-| `count` | number | ตรวจสอบว่า haystack มี needle หรือไม่ |
+| `result` | boolean | Whether haystack contains needle |
+| `position` | number | Position/index where found (-1 if not found) |
+| `count` | number | Number of occurrences |
 
-### ตรรกะ Equals
+### Logic Equals
 
 `logic.equals`
 
-ตรวจสอบค่าสองค่าเท่ากันหรือไม่
+Check if two values are equal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `a` | text | Yes | - | ค่าแรกที่ต้องการเปรียบเทียบ |
-| `b` | text | Yes | - | ค่าแรกที่ต้องการเปรียบเทียบ |
-| `strict` | boolean | No | `False` | ค่าที่สองที่ต้องการเปรียบเทียบ |
-| `case_sensitive` | boolean | No | `True` | ต้องการประเภทเดียวกัน (ไม่มีการบังคับประเภท) |
+| `a` | text | Yes | - | First value to compare |
+| `b` | text | Yes | - | Second value to compare |
+| `strict` | boolean | No | `False` | Require same type (no type coercion) |
+| `case_sensitive` | boolean | No | `True` | Case sensitive string comparison |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | การเปรียบเทียบสตริงที่คำนึงถึงตัวพิมพ์เล็กใหญ่ |
-| `type_a` | string | ตรวจสอบว่าค่าเท่ากันหรือไม่ |
-| `type_b` | string | ตรวจสอบว่าค่าเท่ากันหรือไม่ |
+| `result` | boolean | Whether values are equal |
+| `type_a` | string | Type of first value |
+| `type_b` | string | Type of second value |
 
-### ตรรกะ NOT
+### Logic NOT
 
 `logic.not`
 
-ทำการดำเนินการทางตรรกะ NOT
+Perform logical NOT operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | boolean | Yes | `False` | ค่าบูลีนที่ต้องการปฏิเสธ |
+| `value` | boolean | Yes | `False` | Boolean value to negate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | ค่าบูลีนที่ต้องการปฏิเสธ |
-| `original` | boolean | ผลลัพธ์ที่ถูกปฏิเสธ |
+| `result` | boolean | Negated result |
+| `original` | boolean | Original value |
 
-### ตรรกะ OR
+### Logic OR
 
 `logic.or`
 
-ทำการดำเนินการทางตรรกะ OR
+Perform logical OR operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | ค่าบูลีนสำหรับ OR ร่วมกัน |
+| `values` | array | Yes | - | Boolean values to OR together |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | ค่าบูลีนสำหรับ OR ร่วมกัน |
-| `true_count` | number | ผลลัพธ์ของการดำเนินการ OR |
-| `total_count` | number | ผลลัพธ์ของการดำเนินการ OR |
+| `result` | boolean | Result of OR operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |

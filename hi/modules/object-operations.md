@@ -6,110 +6,110 @@ Deep merge, flatten, dot-path get/set, and unflatten.
 
 | Module | Description |
 |--------|-------------|
-| [गहरा मर्ज](#गहरा-मर्ज) | कई ऑब्जेक्ट्स को गहराई से मर्ज करें |
-| [ऑब्जेक्ट समतल करें](#ऑब्जेक्ट-समतल-करें) | नेस्टेड ऑब्जेक्ट को एक स्तर पर समतल करें |
-| [मान प्राप्त करें](#मान-प्राप्त-करें) | पथ द्वारा ऑब्जेक्ट से मान प्राप्त करें |
-| [मान सेट करें](#मान-सेट-करें) | पथ द्वारा ऑब्जेक्ट में मान सेट करें |
-| [ऑब्जेक्ट अनफ्लैटन करें](#ऑब्जेक्ट-अनफ्लैटन-करें) | डॉट नोटेशन के साथ ऑब्जेक्ट को नेस्टेड में अनफ्लैटन करें |
+| [Deep Merge](#deep-merge) | Deep merge multiple objects |
+| [Flatten Object](#flatten-object) | Flatten nested object to single level |
+| [Get Value](#get-value) | Get value from object by path |
+| [Set Value](#set-value) | Set value in object by path |
+| [Unflatten Object](#unflatten-object) | Unflatten object with dot notation to nested |
 
 ## Modules
 
-### गहरा मर्ज
+### Deep Merge
 
 `object.deep_merge`
 
-कई ऑब्जेक्ट्स को गहराई से मर्ज करें
+Deep merge multiple objects
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `objects` | array | Yes | - | मर्ज करने के लिए ऑब्जेक्ट्स की सूची |
-| `array_merge` | string | No | `replace` | मर्ज करने के लिए ऑब्जेक्ट्स की सूची |
+| `objects` | array | Yes | - | Array of objects to merge |
+| `array_merge` | string | No | `replace` | How to merge arrays |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | मर्ज किया गया ऑब्जेक्ट |
+| `result` | object | Merged object |
 
-### ऑब्जेक्ट समतल करें
+### Flatten Object
 
 `object.flatten`
 
-नेस्टेड ऑब्जेक्ट को एक स्तर पर समतल करें
+Flatten nested object to single level
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | समतल करने के लिए नेस्टेड ऑब्जेक्ट |
-| `separator` | string | No | `.` | समतल करने के लिए नेस्टेड ऑब्जेक्ट |
-| `max_depth` | number | No | `0` | की सेपरेटर |
+| `object` | object | Yes | - | Nested object to flatten |
+| `separator` | string | No | `.` | Key separator |
+| `max_depth` | number | No | `0` | Maximum depth to flatten (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | समतल करने की अधिकतम गहराई (0 = असीमित) |
-| `keys` | array | समतल किया गया ऑब्जेक्ट |
+| `result` | object | Flattened object |
+| `keys` | array | Flattened keys |
 
-### मान प्राप्त करें
+### Get Value
 
 `object.get`
 
-पथ द्वारा ऑब्जेक्ट से मान प्राप्त करें
+Get value from object by path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | जिससे मान प्राप्त करना है वह ऑब्जेक्ट |
-| `path` | string | Yes | - | जिससे मान प्राप्त करना है वह ऑब्जेक्ट |
-| `default` | any | No | - | डॉट नोटेशन पथ |
+| `object` | object | Yes | - | Object to get value from |
+| `path` | string | Yes | - | Dot notation path |
+| `default` | any | No | - | Default value if path not found |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | यदि पथ नहीं मिला तो डिफ़ॉल्ट मान |
-| `found` | boolean | प्राप्त किया गया मान |
+| `value` | any | Retrieved value |
+| `found` | boolean | Whether path was found |
 
-### मान सेट करें
+### Set Value
 
 `object.set`
 
-पथ द्वारा ऑब्जेक्ट में मान सेट करें
+Set value in object by path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | संशोधित करने के लिए ऑब्जेक्ट |
-| `path` | string | Yes | - | संशोधित करने के लिए ऑब्जेक्ट |
-| `value` | any | Yes | - | डॉट नोटेशन पथ |
+| `object` | object | Yes | - | Object to modify |
+| `path` | string | Yes | - | Dot notation path |
+| `value` | any | Yes | - | Value to set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | सेट करने के लिए मान |
+| `result` | object | Modified object |
 
-### ऑब्जेक्ट अनफ्लैटन करें
+### Unflatten Object
 
 `object.unflatten`
 
-डॉट नोटेशन के साथ ऑब्जेक्ट को नेस्टेड में अनफ्लैटन करें
+Unflatten object with dot notation to nested
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | अनफ्लैटन करने के लिए फ्लैट ऑब्जेक्ट |
-| `separator` | string | No | `.` | अनफ्लैटन करने के लिए फ्लैट ऑब्जेक्ट |
+| `object` | object | Yes | - | Flat object to unflatten |
+| `separator` | string | No | `.` | Key separator |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | की सेपरेटर |
+| `result` | object | Nested object |

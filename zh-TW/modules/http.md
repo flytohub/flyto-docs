@@ -6,7 +6,7 @@ HTTP request utilities.
 
 | Module | Description |
 |--------|-------------|
-| [HTTP GET](#http-get) | 發送 HTTP GET 請求並接收回應 |
+| [HTTP GET](#http-get) | Send HTTP GET request to an API endpoint |
 
 ## Modules
 
@@ -14,16 +14,16 @@ HTTP request utilities.
 
 `http.get`
 
-發送 HTTP GET 請求並接收回應
+Send HTTP GET request to an API endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | 發送 GET 請求的 URL |
-| `headers` | object | No | `{}` | 請求標頭作為鍵值對物件 |
-| `query` | object | No | `{}` | 查詢字串參數作為鍵值對物件 |
-| `timeout` | number | No | `30` | 請求逾時毫秒數 |
+| `url` | string | Yes | - | Target URL |
+| `headers` | object | No | `{}` | HTTP request headers as key-value pairs |
+| `query` | object | No | `{}` | URL query string parameters as key-value pairs |
+| `timeout` | number | No | `30` | Maximum time to wait in seconds |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
 | `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
@@ -31,7 +31,7 @@ HTTP request utilities.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 請求是否成功（2xx 狀態） |
-| `status` | number | HTTP 狀態碼 |
-| `body` | any | 回應主體（解析後的 JSON 或文字） |
-| `headers` | object | 回應標頭 |
+| `ok` | boolean | Whether the operation succeeded |
+| `status` | number | HTTP status code |
+| `body` | any | Response body content |
+| `headers` | object | Response headers |

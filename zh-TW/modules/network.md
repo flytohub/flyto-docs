@@ -6,10 +6,10 @@ Ping, port scan, traceroute, and WHOIS lookup.
 
 | Module | Description |
 |--------|-------------|
-| [Ping](#ping) | Ping 主機以檢查連線性和測量延遲 |
-| [埠掃描](#埠掃描) | 掃描主機上的埠以檢查哪些是開放的 |
-| [路由追蹤](#路由追蹤) | 追蹤封包到達目標主機的路徑 |
-| [WHOIS 查詢](#whois-查詢) | 對域名進行 WHOIS 查詢以獲取註冊資訊 |
+| [Ping](#ping) | Ping a host to check connectivity and measure latency |
+| [Port Scan](#port-scan) | Scan ports on a host to check which are open |
+| [Traceroute](#traceroute) | Trace the route packets take to reach a destination host |
+| [WHOIS Lookup](#whois-lookup) | Perform WHOIS lookup for a domain to retrieve registration information |
 
 ## Modules
 
@@ -17,26 +17,26 @@ Ping, port scan, traceroute, and WHOIS lookup.
 
 `network.ping`
 
-Ping 主機以檢查連線性和測量延遲
+Ping a host to check connectivity and measure latency
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | 要 Ping 的主機名稱或 IP 位址 |
-| `count` | number | No | `4` | 要發送的 Ping 封包數量 |
-| `timeout` | number | No | `5` | 每個封包的逾時秒數 |
+| `host` | string | Yes | - | Hostname or IP address to ping |
+| `count` | number | No | `4` | Number of ping packets to send |
+| `timeout` | number | No | `5` | Timeout in seconds for each packet |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `host` | string | 被 Ping 的主機 |
-| `alive` | boolean | 主機是否有回應 |
-| `packets_sent` | number | 發送的封包數量 |
-| `packets_received` | number | 接收的封包數量 |
-| `packet_loss_pct` | number | 封包遺失百分比 |
-| `latency_ms` | object | 延遲統計（毫秒）（最小值、平均值、最大值） |
+| `host` | string | The pinged host |
+| `alive` | boolean | Whether the host responded |
+| `packets_sent` | number | Number of packets sent |
+| `packets_received` | number | Number of packets received |
+| `packet_loss_pct` | number | Packet loss percentage |
+| `latency_ms` | object | Latency statistics in milliseconds (min, avg, max) |
 
 **Example:** Ping a host
 
@@ -46,28 +46,28 @@ count: 4
 timeout: 5
 ```
 
-### 埠掃描
+### Port Scan
 
 `network.port_scan`
 
-掃描主機上的埠以檢查哪些是開放的
+Scan ports on a host to check which are open
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | 要掃描的主機名稱或 IP 位址 |
-| `ports` | string | No | - | 要掃描的埠：用逗號分隔 (80,443)，範圍 (80-443)，或留空以掃描常用埠 |
-| `timeout` | number | No | `1.0` | 每個埠的連線逾時秒數 |
+| `host` | string | Yes | - | Hostname or IP address to scan |
+| `ports` | string | No | - | Ports to scan: comma-separated (80,443), range (80-443), or leave empty for common ports |
+| `timeout` | number | No | `1.0` | Connection timeout in seconds per port |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `host` | string | 被掃描的主機 |
-| `open_ports` | array | 開放埠號列表 |
-| `closed_ports` | array | 關閉埠號列表 |
-| `scan_time_ms` | number | 總掃描時間（毫秒） |
+| `host` | string | The scanned host |
+| `open_ports` | array | List of open port numbers |
+| `closed_ports` | array | List of closed port numbers |
+| `scan_time_ms` | number | Total scan time in milliseconds |
 
 **Example:** Scan common ports
 
@@ -83,27 +83,27 @@ ports: 80-443
 timeout: 2.0
 ```
 
-### 路由追蹤
+### Traceroute
 
 `network.traceroute`
 
-追蹤封包到達目標主機的路徑
+Trace the route packets take to reach a destination host
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | 要追蹤路徑的主機名稱或 IP 位址 |
-| `max_hops` | number | No | `30` | 要追蹤的最大跳數 |
-| `timeout` | number | No | `5` | 每次探測的逾時秒數 |
+| `host` | string | Yes | - | Hostname or IP address to trace route to |
+| `max_hops` | number | No | `30` | Maximum number of hops to trace |
+| `timeout` | number | No | `5` | Timeout in seconds for each probe |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `host` | string | 目標主機 |
-| `hops` | array | 路徑上的跳數列表 |
-| `total_hops` | number | 到達目的地的總跳數 |
+| `host` | string | The target host |
+| `hops` | array | List of hops along the route |
+| `total_hops` | number | Total number of hops to reach destination |
 
 **Example:** Trace route to host
 
@@ -112,28 +112,28 @@ host: google.com
 max_hops: 30
 ```
 
-### WHOIS 查詢
+### WHOIS Lookup
 
 `network.whois`
 
-對域名進行 WHOIS 查詢以獲取註冊資訊
+Perform WHOIS lookup for a domain to retrieve registration information
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `domain` | string | Yes | - | 要查詢的域名 |
+| `domain` | string | Yes | - | Domain name to look up |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `domain` | string | 查詢的域名 |
-| `registrar` | string | 域名註冊商 |
-| `creation_date` | string | 域名創建日期 |
-| `expiration_date` | string | 域名到期日期 |
-| `name_servers` | array | 名稱伺服器列表 |
-| `raw` | string | 完整的原始 WHOIS 輸出 |
+| `domain` | string | The queried domain |
+| `registrar` | string | Domain registrar |
+| `creation_date` | string | Domain creation date |
+| `expiration_date` | string | Domain expiration date |
+| `name_servers` | array | List of name servers |
+| `raw` | string | Full raw WHOIS output |
 
 **Example:** WHOIS lookup
 

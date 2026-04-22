@@ -6,60 +6,60 @@ Branching, loops, parallelism, subflows, triggers, and error handling.
 
 | Module | Description |
 |--------|-------------|
-| [बैच प्रोसेस](#बैच-प्रोसेस) | आइटम्स को बैच में प्रोसेस करें, जिसमें आकार को कॉन्फ़िगर किया जा सकता है |
-| [ब्रांच](#ब्रांच) | एक्सप्रेशन मूल्यांकन के आधार पर सशर्त ब्रांचिंग |
-| [ब्रेकपॉइंट](#ब्रेकपॉइंट) | मानवीय अनुमोदन या इनपुट के लिए वर्कफ़्लो निष्पादन रोकें |
-| [सर्किट ब्रेकर](#सर्किट-ब्रेकर) | कैस्केडिंग विफलताओं को रोकने के लिए सर्किट ब्रेकर पैटर्न |
-| [कंटेनर](#कंटेनर) | जटिल वर्कफ़्लो को व्यवस्थित करने के लिए एम्बेडेड सबफ्लो कंटेनर |
-| [डिबाउंस](#डिबाउंस) | तेज़ी से दोहराए गए कॉल को रोकने के लिए डिबाउंस निष्पादन |
-| [समाप्त](#समाप्त) | स्पष्ट वर्कफ़्लो समाप्ति नोड |
-| [त्रुटि हैंडलर](#त्रुटि-हैंडलर) | उपरी नोड्स से त्रुटियों को पकड़ता और संभालता है |
-| [त्रुटि वर्कफ़्लो ट्रिगर](#त्रुटि-वर्कफ़्लो-ट्रिगर) | त्रुटि वर्कफ़्लोज़ के लिए प्रवेश बिंदु - जब कोई अन्य वर्कफ़्लो विफल होता है तो ट्रिगर होता है |
-| [प्रत्येक के लिए](#प्रत्येक-के-लिए) | सूची पर पुनरावृत्ति करें और प्रत्येक आइटम के लिए चरण निष्पादित करें |
-| [फ़ोर्क](#फ़ोर्क) | समानांतर शाखाओं में निष्पादन विभाजित करें |
-| [गोटो](#गोटो) | दूसरे चरण पर बिना शर्त छलांग |
-| [वर्कफ़्लो बुलाएं](#वर्कफ़्लो-बुलाएं) | एक बाहरी वर्कफ़्लो फ़ाइल निष्पादित करें |
-| [जॉइन](#जॉइन) | समानांतर शाखाओं के पूर्ण होने की प्रतीक्षा करें |
-| [लूप](#लूप) | आउटपुट पोर्ट राउटिंग का उपयोग करके N बार चरण दोहराएं |
-| [मर्ज](#मर्ज) | कई इनपुट को एक आउटपुट में मर्ज करें |
-| [समानांतर](#समानांतर) | विभिन्न रणनीतियों के साथ समानांतर में कई कार्य निष्पादित करें |
-| [दर सीमा](#दर-सीमा) | टोकन बकेट या स्लाइडिंग विंडो का उपयोग करके दर सीमा निष्पादन |
-| [पुनः प्रयास करें](#पुनः-प्रयास-करें) | विफल ऑपरेशन्स को पुनः प्रयास करें, कॉन्फ़िगर करने योग्य बैकऑफ़ के साथ |
-| [प्रारंभ](#प्रारंभ) | स्पष्ट वर्कफ़्लो प्रारंभ नोड |
-| [सबफ्लो](#सबफ्लो) | बाहरी वर्कफ़्लो का संदर्भ लें और निष्पादित करें |
-| [स्विच](#स्विच) | मान मिलान के आधार पर बहु-मार्ग ब्रांचिंग |
-| [थ्रॉटल](#थ्रॉटल) | न्यूनतम अंतराल के साथ निष्पादन दर को थ्रॉटल करें |
-| [ट्रिगर](#ट्रिगर) | वर्कफ़्लो प्रवेश बिंदु - मैनुअल, वेबहुक, शेड्यूल, या इवेंट |
+| [Batch Process](#batch-process) | Process items in batches with configurable size |
+| [Branch](#branch) | Conditional branching based on expression evaluation |
+| [Breakpoint](#breakpoint) | Pause workflow execution for human approval or input |
+| [Circuit Breaker](#circuit-breaker) | Circuit breaker pattern for fault tolerance |
+| [Container](#container) | Embedded subflow container for organizing complex workflows |
+| [Debounce](#debounce) | Debounce execution to prevent rapid repeated calls |
+| [End](#end) | Explicit workflow end node |
+| [Error Handler](#error-handler) | Catches and handles errors from upstream nodes |
+| [Error Workflow Trigger](#error-workflow-trigger) | Entry point for error workflows - triggered when another workflow fails |
+| [For Each](#for-each) | Iterate over a list and execute steps for each item |
+| [Fork](#fork) | Split execution into parallel branches |
+| [Goto](#goto) | Unconditional jump to another step |
+| [Invoke Workflow](#invoke-workflow) | Execute an external workflow file |
+| [Join](#join) | Wait for parallel branches to complete |
+| [Loop](#loop) | Repeat steps N times using output port routing |
+| [Merge](#merge) | Merge multiple inputs into a single output |
+| [Parallel](#parallel) | Execute multiple tasks in parallel with different strategies |
+| [Rate Limit](#rate-limit) | Rate limiter with token bucket strategy |
+| [Retry](#retry) | Retry with exponential backoff |
+| [Start](#start) | Explicit workflow start node |
+| [Subflow](#subflow) | Reference and execute an external workflow |
+| [Switch](#switch) | Multi-way branching based on value matching |
+| [Throttle](#throttle) | Throttle execution rate with minimum interval |
+| [Trigger](#trigger) | Workflow entry point - manual, webhook, schedule, event, mcp, or polling |
 
 ## Modules
 
-### बैच प्रोसेस
+### Batch Process
 
 `flow.batch`
 
-आइटम्स को बैच में प्रोसेस करें, जिसमें आकार को कॉन्फ़िगर किया जा सकता है
+Process items in batches with configurable size
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `items` | array | Yes | - | Array of items to process. Can be numbers, strings, or objects. |
-| `batch_size` | number | Yes | `10` | प्रति बैच आइटम्स की संख्या |
-| `delay_ms` | number | No | `0` | बैचों के बीच प्रतीक्षा करने के लिए मिलीसेकंड (दर सीमित करने के लिए) |
-| `continue_on_error` | boolean | No | `False` | यदि एक विफल हो जाता है तो शेष बैचों को प्रोसेस करना जारी रखें |
-| `parallel_batches` | number | No | `1` | यदि एक विफल हो जाता है तो शेष बैचों को प्रोसेस करना जारी रखें |
+| `batch_size` | number | Yes | `10` | Number of items per batch |
+| `delay_ms` | number | No | `0` | Milliseconds to wait between batches (for rate limiting) |
+| `continue_on_error` | boolean | No | `False` | Continue processing remaining batches if one fails |
+| `parallel_batches` | number | No | `1` | Number of batches to process in parallel (1 for sequential) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | समानांतर में प्रोसेस करने के लिए बैचों की संख्या (क्रमिक के लिए 1) |
-| `batch` | array | रूटिंग के लिए इवेंट (बैच/पूरा/त्रुटि) |
-| `batch_index` | number | रूटिंग के लिए इवेंट (बैच/पूरा/त्रुटि) |
-| `total_batches` | number | वर्तमान बैच आइटम्स |
-| `total_items` | number | वर्तमान बैच इंडेक्स (0-आधारित) |
-| `is_last_batch` | boolean | कुल बैचों की संख्या |
-| `progress` | object | कुल आइटम्स की संख्या |
+| `__event__` | string | Event for routing (batch/completed/error) |
+| `batch` | array | Current batch items |
+| `batch_index` | number | Current batch index (0-based) |
+| `total_batches` | number | Total number of batches |
+| `total_items` | number | Total number of items |
+| `is_last_batch` | boolean | Whether this is the last batch |
+| `progress` | object | Progress information |
 
 **Example:** Example
 
@@ -85,11 +85,11 @@ parallel_batches: 3
 continue_on_error: true
 ```
 
-### ब्रांच
+### Branch
 
 `flow.branch`
 
-एक्सप्रेशन मूल्यांकन के आधार पर सशर्त ब्रांचिंग
+Conditional branching based on expression evaluation
 
 **Parameters:**
 
@@ -101,11 +101,11 @@ continue_on_error: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | राउटिंग इवेंट (true/false/error) |
-| `outputs` | object | पोर्ट द्वारा आउटपुट मान |
-| `result` | boolean | ब्रांच परिणाम |
-| `condition` | string | शर्त मान |
-| `resolved_condition` | string | शर्त मूल्यांकन परिणाम |
+| `__event__` | string | Event for routing (true/false/error) |
+| `outputs` | object | Output values by port |
+| `result` | boolean | Condition evaluation result |
+| `condition` | string | Original condition expression |
+| `resolved_condition` | string | Condition after variable resolution |
 
 **Example:** Example
 
@@ -119,11 +119,11 @@ condition: ${search_step.count} > 0
 condition: ${api_call.status} == success
 ```
 
-### ब्रेकपॉइंट
+### Breakpoint
 
 `flow.breakpoint`
 
-मानवीय अनुमोदन या इनपुट के लिए वर्कफ़्लो निष्पादन रोकें
+Pause workflow execution for human approval or input
 
 **Parameters:**
 
@@ -142,15 +142,15 @@ condition: ${api_call.status} == success
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | राउटिंग इवेंट (approved/rejected/timeout) |
-| `breakpoint_id` | string | ब्रेकपॉइंट ID |
-| `status` | string | स्थिति |
-| `approved_by` | array | अनुमोदनकर्ता |
-| `rejected_by` | array | अस्वीकृतकर्ता |
-| `custom_inputs` | object | कस्टम इनपुट मान |
-| `comments` | array | समीक्षा टिप्पणियां |
-| `resolved_at` | string | हल किया गया समय |
-| `wait_duration_ms` | integer | प्रतीक्षा अवधि (ms) |
+| `__event__` | string | Event for routing (approved/rejected/timeout) |
+| `breakpoint_id` | string | Unique breakpoint identifier |
+| `status` | string | Final status (approved/rejected/timeout/cancelled) |
+| `approved_by` | array | List of users who approved |
+| `rejected_by` | array | List of users who rejected |
+| `custom_inputs` | object | Values collected from custom fields |
+| `comments` | array | Comments from approvers |
+| `resolved_at` | string | ISO timestamp of resolution |
+| `wait_duration_ms` | integer | Time spent waiting for approval |
 
 **Example:** Example
 
@@ -175,29 +175,29 @@ title: Adjustment Required
 custom_fields: [{"name": "reason", "label": "Reason", "type": "text", "required": true}, {"name": "amount", "label": "Amount", "type": "number", "required": true}]
 ```
 
-### सर्किट ब्रेकर
+### Circuit Breaker
 
 `flow.circuit_breaker`
 
-कैस्केडिंग विफलताओं को रोकने के लिए सर्किट ब्रेकर पैटर्न
+Circuit breaker pattern for fault tolerance
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `failure_threshold` | number | Yes | `5` | सर्किट खोलने से पहले विफलताओं की संख्या |
-| `reset_timeout_ms` | number | No | `60000` | सर्किट के आधा खुला होने से पहले का समय मिलीसेकंड में |
-| `half_open_max` | number | No | `1` | आधा खुले स्थिति में अनुमत अधिकतम अनुरोध |
+| `failure_threshold` | number | Yes | `5` | Number of failures before opening the circuit |
+| `reset_timeout_ms` | number | No | `60000` | Time to wait before transitioning from open to half-open |
+| `half_open_max` | number | No | `1` | Maximum test requests allowed in half-open state |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | रूटिंग के लिए इवेंट (अनुमत/अस्वीकृत/आधा खुला) |
-| `state` | string | सर्किट की स्थिति (बंद/खुला/आधा खुला) |
-| `failure_count` | number | लगातार विफलताओं की संख्या |
-| `last_failure_time_ms` | number | मिलीसेकंड में अंतिम विफलता का समय |
-| `time_until_half_open_ms` | number | सर्किट के आधा खुला होने तक का समय मिलीसेकंड में |
+| `__event__` | string | Event for routing (closed/open/half_open) |
+| `state` | string | Current circuit breaker state |
+| `failure_count` | number | Current number of consecutive failures |
+| `last_failure_time_ms` | number | Timestamp of last failure |
+| `time_until_half_open_ms` | number | Milliseconds until circuit transitions to half-open |
 
 **Example:** Example
 
@@ -222,11 +222,11 @@ reset_timeout_ms: 120000
 half_open_max: 3
 ```
 
-### कंटेनर
+### Container
 
 `flow.container`
 
-जटिल वर्कफ़्लो को व्यवस्थित करने के लिए एम्बेडेड सबफ्लो कंटेनर
+Embedded subflow container for organizing complex workflows
 
 **Parameters:**
 
@@ -241,12 +241,12 @@ half_open_max: 3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | राउटिंग इवेंट (success/error) |
-| `outputs` | object | पोर्ट द्वारा आउटपुट मान |
-| `subflow_result` | object | सबफ्लो परिणाम |
-| `exported_variables` | object | निर्यातित वेरिएबल्स |
-| `node_count` | integer | नोड गणना |
-| `execution_time_ms` | number | निष्पादन समय (ms) |
+| `__event__` | string | Event for routing (success/error) |
+| `outputs` | object | Output values by port |
+| `subflow_result` | object | Result from subflow execution |
+| `exported_variables` | object | Variables exported from subflow |
+| `node_count` | integer | Number of nodes in subflow |
+| `execution_time_ms` | number | Total subflow execution time in milliseconds |
 
 **Example:** Example
 
@@ -262,29 +262,29 @@ subflow: {"nodes": [], "edges": []}
 inherit_context: false
 ```
 
-### डिबाउंस
+### Debounce
 
 `flow.debounce`
 
-तेज़ी से दोहराए गए कॉल को रोकने के लिए डिबाउंस निष्पादन
+Debounce execution to prevent rapid repeated calls
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `delay_ms` | number | Yes | - | अंतिम कॉल के बाद निष्पादन से पहले प्रतीक्षा समय |
-| `leading` | boolean | No | `False` | लीडिंग किनारे पर निष्पादित करें (पहला कॉल तुरंत ट्रिगर करता है) |
-| `trailing` | boolean | No | `True` | ट्रेलिंग किनारे पर निष्पादित करें (विलंब समाप्त होने के बाद) |
+| `delay_ms` | number | Yes | - | Wait time in milliseconds before allowing execution |
+| `leading` | boolean | No | `False` | Execute on the leading edge (first call immediately) |
+| `trailing` | boolean | No | `True` | Execute on the trailing edge (after delay of inactivity) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | रूटिंग के लिए इवेंट (निष्पादित/डिबाउंस) |
-| `last_call_ms` | number | अंतिम कॉल का समय मिलीसेकंड में |
-| `calls_debounced` | number | अंतिम निष्पादन के बाद डिबाउंस किए गए कॉल की संख्या |
-| `time_since_last_ms` | number | अंतिम कॉल के बाद से बीता समय मिलीसेकंड में |
-| `edge` | string | कौन सा किनारा निष्पादन को ट्रिगर करता है (लीडिंग/ट्रेलिंग) |
+| `__event__` | string | Event for routing (executed/skipped) |
+| `last_call_ms` | number | Timestamp of the last call |
+| `calls_debounced` | number | Number of calls that were debounced (skipped) |
+| `time_since_last_ms` | number | Time since last call in milliseconds |
+| `edge` | string | Which edge triggered execution (leading/trailing) |
 
 **Example:** Example
 
@@ -308,11 +308,11 @@ leading: true
 trailing: true
 ```
 
-### समाप्त
+### End
 
 `flow.end`
 
-स्पष्ट वर्कफ़्लो समाप्ति नोड
+Explicit workflow end node
 
 **Parameters:**
 
@@ -325,9 +325,9 @@ trailing: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | राउटिंग इवेंट (__end__) |
-| `ended_at` | string | समाप्ति समय |
-| `workflow_result` | object | वर्कफ़्लो परिणाम |
+| `__event__` | string | Event for routing (__end__) |
+| `ended_at` | string | ISO timestamp of end |
+| `workflow_result` | object | Mapped workflow output |
 
 **Example:** Example
 
@@ -340,29 +340,29 @@ trailing: true
 output_mapping: {"result": "${process.output}", "status": "success"}
 ```
 
-### त्रुटि हैंडलर
+### Error Handler
 
 `flow.error_handle`
 
-उपरी नोड्स से त्रुटियों को पकड़ता और संभालता है
+Catches and handles errors from upstream nodes
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | `log_and_continue` | त्रुटि के साथ क्या करना है |
-| `include_traceback` | boolean | No | `True` | आउटपुट में पूर्ण स्टैक ट्रेस शामिल करें |
-| `error_code_mapping` | object | No | `{}` | आउटपुट में पूर्ण स्टैक ट्रेस शामिल करें |
-| `fallback_value` | any | No | - | त्रुटि कोड्स को कस्टम क्रियाओं से मैप करें |
+| `action` | string | Yes | `log_and_continue` | What to do with the error |
+| `include_traceback` | boolean | No | `True` | Include full stack trace in output |
+| `error_code_mapping` | object | No | `{}` | Map error codes to custom actions |
+| `fallback_value` | any | No | - | Value to use when error is suppressed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | जब त्रुटि को दबा दिया जाता है तो उपयोग करने के लिए मान |
-| `outputs` | object | रूटिंग के लिए इवेंट (संभाला/बढ़ाना) |
-| `error_info` | object | रूटिंग के लिए इवेंट (संभाला/बढ़ाना) |
-| `action_taken` | string | कौन सी कार्रवाई की गई |
+| `__event__` | string | Event for routing (handled/escalate) |
+| `outputs` | object | Output values by port |
+| `error_info` | object | Extracted error information |
+| `action_taken` | string | What action was taken |
 
 **Example:** Example
 
@@ -385,11 +385,11 @@ action: transform
 error_code_mapping: {"TIMEOUT": {"retry": true, "delay": 5000}, "NOT_FOUND": {"skip": true}}
 ```
 
-### त्रुटि वर्कफ़्लो ट्रिगर
+### Error Workflow Trigger
 
 `flow.error_workflow_trigger`
 
-त्रुटि वर्कफ़्लोज़ के लिए प्रवेश बिंदु - जब कोई अन्य वर्कफ़्लो विफल होता है तो ट्रिगर होता है
+Entry point for error workflows - triggered when another workflow fails
 
 **Parameters:**
 
@@ -401,9 +401,9 @@ error_code_mapping: {"TIMEOUT": {"retry": true, "delay": 5000}, "NOT_FOUND": {"s
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | इस त्रुटि वर्कफ़्लो का विवरण |
-| `error_context` | object | रूटिंग के लिए इवेंट (ट्रिगर किया गया) |
-| `triggered_at` | string | जब त्रुटि वर्कफ़्लो ट्रिगर किया गया था तब का ISO टाइमस्टैम्प |
+| `__event__` | string | Event for routing (triggered) |
+| `error_context` | object | Complete error context from failed workflow |
+| `triggered_at` | string | ISO timestamp when error workflow was triggered |
 
 **Example:** Example
 
@@ -417,33 +417,33 @@ description: Send Slack notification on workflow failure
 description: Log all workflow errors to monitoring system
 ```
 
-### प्रत्येक के लिए
+### For Each
 
 `flow.foreach`
 
-सूची पर पुनरावृत्ति करें और प्रत्येक आइटम के लिए चरण निष्पादित करें
+Iterate over a list and execute steps for each item
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `items` | string | Yes | - | पुनरावृत्ति के लिए आइटम की सूची (${variable} संदर्भ का समर्थन करता है) |
-| `steps` | array | No | - | प्रत्येक आइटम के लिए निष्पादित करने के चरण |
-| `item_var` | string | No | `item` | वर्तमान आइटम के लिए वेरिएबल नाम |
-| `index_var` | string | No | `index` | वर्तमान इंडेक्स के लिए वेरिएबल नाम |
-| `output_mode` | string | No | `collect` | परिणाम संग्रह मोड |
+| `items` | string | Yes | - | Array to iterate over — use gear icon to reference a previous step output |
+| `steps` | array | No | - | Steps to execute for each item (nested mode only) |
+| `item_var` | string | No | `item` | Variable name for current item |
+| `index_var` | string | No | `index` | Variable name for current index |
+| `output_mode` | string | No | `collect` | How to collect results: collect (array), last (single), none |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | राउटिंग इवेंट (iterate/done) |
-| `__set_context` | object | संदर्भ सेट करें |
-| `outputs` | object | पोर्ट द्वारा आउटपुट मान |
-| `iteration` | number | वर्तमान पुनरावृत्ति इंडेक्स |
-| `status` | string | ऑपरेशन स्थिति |
-| `results` | array | एकत्रित परिणाम |
-| `count` | number | कुल आइटम गणना |
+| `__event__` | string | Event for routing (iterate/done) |
+| `__set_context` | object | Scope variables set on each iteration |
+| `outputs` | object | Output values by port |
+| `iteration` | number | Current iteration index |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of items processed |
 
 **Example:** Example
 
@@ -459,11 +459,11 @@ item_var: element
 steps: [{"module": "element.text", "params": {"element_id": "${element}"}, "output": "text"}]
 ```
 
-### फ़ोर्क
+### Fork
 
 `flow.fork`
 
-समानांतर शाखाओं में निष्पादन विभाजित करें
+Split execution into parallel branches
 
 **Parameters:**
 
@@ -475,9 +475,9 @@ steps: [{"module": "element.text", "params": {"element_id": "${element}"}, "outp
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | राउटिंग इवेंट (fork/error) |
-| `input_data` | any | इनपुट डेटा |
-| `branch_count` | integer | शाखा गणना |
+| `__event__` | string | Event for routing (fork/error) |
+| `input_data` | any | Input data passed to all branches |
+| `branch_count` | integer | Number of branches created |
 
 **Example:** Example
 
@@ -491,11 +491,11 @@ branch_count: 2
 branch_count: 3
 ```
 
-### गोटो
+### Goto
 
 `flow.goto`
 
-दूसरे चरण पर बिना शर्त छलांग
+Unconditional jump to another step
 
 **Parameters:**
 
@@ -508,9 +508,9 @@ branch_count: 3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | राउटिंग इवेंट (goto) |
-| `target` | string | लक्ष्य चरण |
-| `iteration` | number | पुनरावृत्ति गणना |
+| `__event__` | string | Event for routing (goto) |
+| `target` | string | ID of the target step |
+| `iteration` | number | Current iteration count for this goto |
 
 **Example:** Example
 
@@ -525,11 +525,11 @@ max_iterations: 10
 target: cleanup_step
 ```
 
-### वर्कफ़्लो बुलाएं
+### Invoke Workflow
 
 `flow.invoke`
 
-एक बाहरी वर्कफ़्लो फ़ाइल निष्पादित करें
+Execute an external workflow file
 
 **Parameters:**
 
@@ -544,10 +544,10 @@ target: cleanup_step
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | बुलाए गए वर्कफ़्लो को पास करने के लिए पैरामीटर |
-| `result` | any | अधिकतम निष्पादन समय सेकंड में |
-| `workflow_id` | string | रूटिंग के लिए घटना (सफलता/त्रुटि) |
-| `execution_time_ms` | number | वर्कफ़्लो निष्पादन परिणाम |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Workflow execution result |
+| `workflow_id` | string | Invoked workflow ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 
@@ -565,11 +565,11 @@ workflow_params: {"data": "${input.data}"}
 output_mapping: {"processed": "result.data"}
 ```
 
-### जॉइन
+### Join
 
 `flow.join`
 
-समानांतर शाखाओं के पूर्ण होने की प्रतीक्षा करें
+Wait for parallel branches to complete
 
 **Parameters:**
 
@@ -584,10 +584,10 @@ output_mapping: {"processed": "result.data"}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | राउटिंग इवेंट (joined/timeout/error) |
-| `joined_data` | array | जॉइन किया गया डेटा |
-| `completed_count` | integer | पूर्ण शाखा गणना |
-| `strategy` | string | जॉइन रणनीति |
+| `__event__` | string | Event for routing (joined/timeout/error) |
+| `joined_data` | array | Data from all completed inputs |
+| `completed_count` | integer | Number of inputs completed |
+| `strategy` | string | Strategy used for joining |
 
 **Example:** Example
 
@@ -605,31 +605,31 @@ input_count: 3
 cancel_pending: true
 ```
 
-### लूप
+### Loop
 
 `flow.loop`
 
-आउटपुट पोर्ट राउटिंग का उपयोग करके N बार चरण दोहराएं
+Repeat steps N times using output port routing
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `times` | number | Yes | `1` | पुनरावृत्तियों की संख्या |
-| `target` | string | No | - | लक्ष्य चरण (अप्रचलित) |
-| `steps` | array | No | - | प्रत्येक पुनरावृत्ति के लिए निष्पादित करने के चरण |
-| `index_var` | string | No | `index` | वर्तमान इंडेक्स के लिए वेरिएबल नाम |
+| `times` | number | Yes | `1` | Number of times to repeat |
+| `target` | string | No | - | DEPRECATED: Use output ports and edges instead |
+| `steps` | array | No | - | Steps to execute for each iteration (nested mode) |
+| `index_var` | string | No | `index` | Variable name for current index |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | राउटिंग इवेंट (iterate/done) |
-| `outputs` | object | पोर्ट द्वारा आउटपुट मान |
-| `iteration` | number | वर्तमान पुनरावृत्ति |
-| `status` | string | ऑपरेशन स्थिति |
-| `results` | array | एकत्रित परिणाम |
-| `count` | number | कुल पुनरावृत्तियां |
+| `__event__` | string | Event for routing (iterate/done/error) |
+| `outputs` | object | Output values by port |
+| `iteration` | number | Current iteration count |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of iterations completed |
 
 **Example:** Example
 
@@ -644,11 +644,11 @@ times: 5
 steps: [{"module": "browser.click", "params": {"selector": ".next"}}]
 ```
 
-### मर्ज
+### Merge
 
 `flow.merge`
 
-कई इनपुट को एक आउटपुट में मर्ज करें
+Merge multiple inputs into a single output
 
 **Parameters:**
 
@@ -661,10 +661,10 @@ steps: [{"module": "browser.click", "params": {"selector": ".next"}}]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | राउटिंग इवेंट (merged/error) |
-| `merged_data` | any | मर्ज किया गया डेटा |
-| `input_count` | integer | इनपुट गणना |
-| `strategy` | string | मर्ज रणनीति |
+| `__event__` | string | Event for routing (merged/error) |
+| `merged_data` | any | Merged data based on strategy |
+| `input_count` | integer | Number of inputs received |
+| `strategy` | string | Strategy used for merging |
 
 **Example:** Example
 
@@ -680,33 +680,33 @@ strategy: first
 input_count: 2
 ```
 
-### समानांतर
+### Parallel
 
 `flow.parallel`
 
-विभिन्न रणनीतियों के साथ समानांतर में कई कार्य निष्पादित करें
+Execute multiple tasks in parallel with different strategies
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tasks` | array | Yes | - | समानांतर में निष्पादित करने के लिए कार्य परिभाषाओं की सूची |
-| `mode` | string | No | `all` | समानांतर में निष्पादित करने के लिए कार्य परिभाषाओं की सूची |
+| `tasks` | array | Yes | - | Array of task definitions to execute in parallel |
+| `mode` | string | No | `all` | Parallel execution mode |
 | `timeout_ms` | number | No | `60000` | Maximum wait time in milliseconds |
-| `fail_fast` | boolean | No | `True` | पहली विफलता पर सभी कार्य रोकें (केवल mode=all के लिए) |
-| `concurrency_limit` | number | No | `0` | पहली विफलता पर सभी कार्य रोकें (केवल mode=all के लिए) |
+| `fail_fast` | boolean | No | `True` | Stop all tasks on first failure (only for mode=all) |
+| `concurrency_limit` | number | No | `0` | Maximum number of concurrent tasks (0 for unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | अधिकतम समवर्ती कार्यों की संख्या (असीमित के लिए 0) |
-| `results` | array | रूटिंग के लिए इवेंट (पूरा/आंशिक/त्रुटि) |
-| `completed_count` | number | रूटिंग के लिए इवेंट (पूरा/आंशिक/त्रुटि) |
-| `failed_count` | number | सभी कार्यों के परिणाम |
-| `total_count` | number | सफलतापूर्वक पूर्ण कार्यों की संख्या |
-| `mode` | string | असफल कार्यों की संख्या |
-| `duration_ms` | number | कुल कार्यों की संख्या |
+| `__event__` | string | Event for routing (completed/partial/error) |
+| `results` | array | Results from all tasks |
+| `completed_count` | number | Number of successfully completed tasks |
+| `failed_count` | number | Number of failed tasks |
+| `total_count` | number | Total number of tasks |
+| `mode` | string | Execution mode used |
+| `duration_ms` | number | Total execution time in milliseconds |
 
 **Example:** Example
 
@@ -730,30 +730,30 @@ tasks: [{"module": "http.get", "params": {"url": "https://api1.example.com"}}, {
 mode: settle
 ```
 
-### दर सीमा
+### Rate Limit
 
 `flow.rate_limit`
 
-टोकन बकेट या स्लाइडिंग विंडो का उपयोग करके दर सीमा निष्पादन
+Rate limiter with token bucket strategy
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `max_requests` | number | Yes | - | प्रति विंडो अनुमत अधिकतम अनुरोधों की संख्या |
-| `window_ms` | number | No | `60000` | मिलीसेकंड में समय विंडो |
-| `strategy` | string | No | `token_bucket` | दर सीमित करने की रणनीति (टोकन बकेट या स्लाइडिंग विंडो) |
-| `queue_overflow` | string | No | `wait` | जब कतार भरी हो तो व्यवहार (ड्रॉप या त्रुटि) |
+| `max_requests` | number | Yes | - | Maximum number of requests allowed per window |
+| `window_ms` | number | No | `60000` | Time window in milliseconds |
+| `strategy` | string | No | `token_bucket` | Rate limiting strategy |
+| `queue_overflow` | string | No | `wait` | Behavior when rate limit is exceeded |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | रूटिंग के लिए इवेंट (अनुमत/सीमित) |
-| `tokens_remaining` | number | बकेट में बचे हुए टोकन |
-| `window_reset_ms` | number | विंडो रीसेट होने तक का समय मिलीसेकंड में |
-| `requests_in_window` | number | वर्तमान विंडो में अनुरोधों की संख्या |
-| `wait_ms` | number | अगले अनुमत अनुरोध से पहले प्रतीक्षा का समय मिलीसेकंड में |
+| `__event__` | string | Event for routing (allowed/throttled/error) |
+| `tokens_remaining` | number | Number of tokens remaining in the bucket |
+| `window_reset_ms` | number | Milliseconds until the window resets |
+| `requests_in_window` | number | Number of requests made in current window |
+| `wait_ms` | number | Milliseconds to wait before retry (if throttled) |
 
 **Example:** Example
 
@@ -781,32 +781,32 @@ strategy: sliding_window
 queue_overflow: wait
 ```
 
-### पुनः प्रयास करें
+### Retry
 
 `flow.retry`
 
-विफल ऑपरेशन्स को पुनः प्रयास करें, कॉन्फ़िगर करने योग्य बैकऑफ़ के साथ
+Retry with exponential backoff
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `max_retries` | number | Yes | `3` | पुनः प्रयासों की अधिकतम संख्या |
-| `initial_delay_ms` | number | No | `1000` | पहले पुनः प्रयास से पहले प्रारंभिक विलंब (मिलीसेकंड में) |
-| `backoff_multiplier` | number | No | `2.0` | घातीय बैकऑफ़ के लिए गुणक |
-| `max_delay_ms` | number | No | `30000` | पुनः प्रयासों के बीच अधिकतम विलंब (मिलीसेकंड में) |
-| `retry_on_errors` | array | No | `[]` | जिन त्रुटियों पर पुनः प्रयास करना है (खाली का अर्थ है सभी पर पुनः प्रयास) |
+| `max_retries` | number | Yes | `3` | Maximum number of retry attempts |
+| `initial_delay_ms` | number | No | `1000` | Initial delay before first retry in milliseconds |
+| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g. 2.0 doubles delay each retry) |
+| `max_delay_ms` | number | No | `30000` | Maximum delay cap in milliseconds |
+| `retry_on_errors` | array | No | `[]` | Optional list of error codes to retry on (empty = retry on all errors) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | रूटिंग के लिए इवेंट (पुनः प्रयास/सफल/विफल) |
-| `attempt` | number | वर्तमान प्रयास संख्या |
-| `max_retries` | number | कॉन्फ़िगर की गई अधिकतम पुनः प्रयास संख्या |
-| `delay_ms` | number | अगले पुनः प्रयास से पहले विलंब (मिलीसेकंड में) |
-| `total_elapsed_ms` | number | कुल व्यतीत समय (मिलीसेकंड में) |
-| `last_error` | object | अंतिम त्रुटि संदेश |
+| `__event__` | string | Event for routing (success/retry/exhausted) |
+| `attempt` | number | Current attempt number (1-based) |
+| `max_retries` | number | Maximum retry attempts configured |
+| `delay_ms` | number | Delay before this attempt in milliseconds |
+| `total_elapsed_ms` | number | Total time elapsed across all attempts |
+| `last_error` | object | Last error that triggered a retry |
 
 **Example:** Example
 
@@ -831,30 +831,30 @@ initial_delay_ms: 2000
 retry_on_errors: ["TIMEOUT", "RATE_LIMIT", "429", "503"]
 ```
 
-### प्रारंभ
+### Start
 
 `flow.start`
 
-स्पष्ट वर्कफ़्लो प्रारंभ नोड
+Explicit workflow start node
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | राउटिंग इवेंट (start) |
-| `started_at` | string | प्रारंभ समय |
-| `workflow_id` | string | वर्कफ़्लो ID |
+| `__event__` | string | Event for routing (start) |
+| `started_at` | string | ISO timestamp of start |
+| `workflow_id` | string | Workflow ID if available |
 
 **Example:** Example
 
 ```yaml
 ```
 
-### सबफ्लो
+### Subflow
 
 `flow.subflow`
 
-बाहरी वर्कफ़्लो का संदर्भ लें और निष्पादित करें
+Reference and execute an external workflow
 
 **Parameters:**
 
@@ -870,10 +870,10 @@ retry_on_errors: ["TIMEOUT", "RATE_LIMIT", "429", "503"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | राउटिंग इवेंट (success/error) |
-| `result` | any | निष्पादन परिणाम |
-| `execution_id` | string | निष्पादन ID |
-| `workflow_ref` | string | वर्कफ़्लो संदर्भ |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Subflow execution result |
+| `execution_id` | string | Subflow execution ID (for spawn/async) |
+| `workflow_ref` | string | Referenced workflow |
 
 **Example:** Example
 
@@ -891,11 +891,11 @@ workflow_ref: workflows/send_notifications
 execution_mode: spawn
 ```
 
-### स्विच
+### Switch
 
 `flow.switch`
 
-मान मिलान के आधार पर बहु-मार्ग ब्रांचिंग
+Multi-way branching based on value matching
 
 **Parameters:**
 
@@ -908,10 +908,10 @@ execution_mode: spawn
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | राउटिंग इवेंट (case:value या default) |
-| `outputs` | object | पोर्ट द्वारा आउटपुट मान |
-| `matched_case` | string | मिलान किया गया केस |
-| `value` | any | मिलान किया गया मान |
+| `__event__` | string | Event for routing (case:value or default) |
+| `outputs` | object | Output values by port |
+| `matched_case` | string | The case that matched |
+| `value` | any | The resolved value that was matched |
 
 **Example:** Example
 
@@ -927,28 +927,28 @@ expression: ${input.type}
 cases: [{"id": "img", "value": "image", "label": "Image"}, {"id": "vid", "value": "video", "label": "Video"}, {"id": "txt", "value": "text", "label": "Text"}]
 ```
 
-### थ्रॉटल
+### Throttle
 
 `flow.throttle`
 
-न्यूनतम अंतराल के साथ निष्पादन दर को थ्रॉटल करें
+Throttle execution rate with minimum interval
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `interval_ms` | number | Yes | - | निष्पादनों के बीच न्यूनतम समय (मिलीसेकंड में) |
-| `leading` | boolean | No | `True` | लीडिंग एज पर निष्पादित करें (पहली कॉल तुरंत पास होती है) |
+| `interval_ms` | number | Yes | - | Minimum time between executions in milliseconds |
+| `leading` | boolean | No | `True` | Execute on the leading edge (first call passes immediately) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | रूटिंग के लिए इवेंट (निष्पादित/थ्रॉटल्ड) |
-| `last_execution_ms` | number | अंतिम अनुमत निष्पादन का टाइमस्टैम्प |
-| `calls_throttled` | number | पिछले निष्पादन के बाद से थ्रॉटल की गई कॉल की संख्या |
-| `time_since_last_ms` | number | अंतिम निष्पादन के बाद से व्यतीत समय (मिलीसेकंड में) |
-| `remaining_ms` | number | अगले निष्पादन की अनुमति तक शेष मिलीसेकंड |
+| `__event__` | string | Event for routing (executed/throttled) |
+| `last_execution_ms` | number | Timestamp of last allowed execution |
+| `calls_throttled` | number | Number of calls throttled since last execution |
+| `time_since_last_ms` | number | Time elapsed since last execution in milliseconds |
+| `remaining_ms` | number | Milliseconds remaining until next execution is allowed |
 
 **Example:** Example
 
@@ -970,11 +970,11 @@ interval_ms: 5000
 leading: false
 ```
 
-### ट्रिगर
+### Trigger
 
 `flow.trigger`
 
-वर्कफ़्लो प्रवेश बिंदु - मैनुअल, वेबहुक, शेड्यूल, या इवेंट
+Workflow entry point - manual, webhook, schedule, event, mcp, or polling
 
 **Parameters:**
 
@@ -999,10 +999,10 @@ leading: false
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | राउटिंग इवेंट (triggered/error) |
-| `trigger_data` | object | ट्रिगर डेटा |
-| `trigger_type` | string | ट्रिगर प्रकार |
-| `triggered_at` | string | ट्रिगर समय |
+| `__event__` | string | Event for routing (triggered/error) |
+| `trigger_data` | object | Data from trigger source |
+| `trigger_type` | string | Type of trigger |
+| `triggered_at` | string | ISO timestamp |
 
 **Example:** Example
 

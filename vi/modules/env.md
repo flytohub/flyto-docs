@@ -6,32 +6,32 @@ Environment variable management and .env file loading.
 
 | Module | Description |
 |--------|-------------|
-| [Lấy biến môi trường](#lấy-biến-môi-trường) | Lấy giá trị của biến môi trường |
-| [Tải tệp .env](#tải-tệp-.env) | Tải biến môi trường từ tệp .env |
-| [Thiết lập biến môi trường](#thiết-lập-biến-môi-trường) | Thiết lập biến môi trường trong tiến trình hiện tại |
+| [Get Environment Variable](#get-environment-variable) | Get the value of an environment variable |
+| [Load .env File](#load-.env-file) | Load environment variables from a .env file |
+| [Set Environment Variable](#set-environment-variable) | Set an environment variable in the current process |
 
 ## Modules
 
-### Lấy biến môi trường
+### Get Environment Variable
 
 `env.get`
 
-Lấy giá trị của biến môi trường
+Get the value of an environment variable
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | Tên của biến môi trường |
-| `default` | string | No | - | Giá trị mặc định nếu biến chưa được thiết lập |
+| `name` | string | Yes | - | Name of the environment variable |
+| `default` | string | No | - | Default value if the variable is not set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Tên biến |
-| `value` | string | Giá trị biến (hoặc mặc định nếu chưa thiết lập) |
-| `exists` | boolean | Biến có tồn tại trong môi trường không |
+| `name` | string | Variable name |
+| `value` | string | Variable value (or default if not set) |
+| `exists` | boolean | Whether the variable exists in the environment |
 
 **Example:** Get HOME variable
 
@@ -46,25 +46,25 @@ name: MY_APP_PORT
 default: 8080
 ```
 
-### Tải tệp .env
+### Load .env File
 
 `env.load_dotenv`
 
-Tải biến môi trường từ tệp .env
+Load environment variables from a .env file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | `.env` | Đường dẫn đến tệp .env |
-| `override` | boolean | No | `False` | Có ghi đè biến môi trường hiện có không |
+| `path` | string | Yes | `.env` | Path to the .env file |
+| `override` | boolean | No | `False` | Whether to override existing environment variables |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `loaded_count` | number | Số lượng biến đã tải |
-| `variables` | array | Danh sách tên biến đã tải |
+| `loaded_count` | number | Number of variables loaded |
+| `variables` | array | List of variable names that were loaded |
 
 **Example:** Load .env file
 
@@ -73,26 +73,26 @@ path: .env
 override: false
 ```
 
-### Thiết lập biến môi trường
+### Set Environment Variable
 
 `env.set`
 
-Thiết lập biến môi trường trong tiến trình hiện tại
+Set an environment variable in the current process
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | Tên của biến môi trường cần thiết lập |
-| `value` | string | Yes | - | Giá trị gán cho biến môi trường |
+| `name` | string | Yes | - | Name of the environment variable to set |
+| `value` | string | Yes | - | Value to assign to the environment variable |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Tên biến |
-| `value` | string | Giá trị mới đã thiết lập |
-| `previous_value` | string | Giá trị trước đó (null nếu chưa thiết lập trước) |
+| `name` | string | Variable name |
+| `value` | string | New value that was set |
+| `previous_value` | string | Previous value (null if not previously set) |
 
 **Example:** Set an environment variable
 

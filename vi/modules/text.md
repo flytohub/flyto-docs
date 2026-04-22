@@ -31,12 +31,12 @@ Count characters in text
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total` | number | Text to analyze |
-| `without_spaces` | number | Total character count |
-| `letters` | number | Total character count |
-| `digits` | number | Count without spaces |
-| `spaces` | number | Letter count |
-| `lines` | number | Digit count |
+| `total` | number | Total character count |
+| `without_spaces` | number | Count without spaces |
+| `letters` | number | Letter count |
+| `digits` | number | Digit count |
+| `spaces` | number | Space count |
+| `lines` | number | Line count |
 
 ### Detect Encoding
 
@@ -54,10 +54,10 @@ Detect text encoding
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `encoding` | string | Text or bytes to detect encoding |
-| `confidence` | number | Detected encoding |
-| `is_ascii` | boolean | Detected encoding |
-| `has_bom` | boolean | Confidence score (0-1) |
+| `encoding` | string | Detected encoding |
+| `confidence` | number | Confidence score (0-1) |
+| `is_ascii` | boolean | Whether text is pure ASCII |
+| `has_bom` | boolean | Whether BOM was detected |
 
 ### Extract Emails
 
@@ -70,16 +70,16 @@ Extract all email addresses from text
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | text | Yes | - | Text to extract emails from |
-| `unique` | boolean | No | `True` | Text to extract emails from |
-| `lowercase` | boolean | No | `True` | Return only unique emails |
+| `unique` | boolean | No | `True` | Return only unique emails |
+| `lowercase` | boolean | No | `True` | Convert emails to lowercase |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `emails` | array | Convert emails to lowercase |
-| `count` | number | List of extracted emails |
-| `domains` | array | List of extracted emails |
+| `emails` | array | List of extracted emails |
+| `count` | number | Number of emails found |
+| `domains` | array | Unique domains found |
 
 ### Extract Numbers
 
@@ -92,18 +92,18 @@ Extract all numbers from text
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | text | Yes | - | Text to extract numbers from |
-| `include_decimals` | boolean | No | `True` | Text to extract numbers from |
-| `include_negative` | boolean | No | `True` | Include decimal numbers |
+| `include_decimals` | boolean | No | `True` | Include decimal numbers |
+| `include_negative` | boolean | No | `True` | Include negative numbers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `numbers` | array | Include negative numbers |
-| `count` | number | List of extracted numbers |
-| `sum` | number | List of extracted numbers |
-| `min` | number | Number of numbers found |
-| `max` | number | Sum of all numbers |
+| `numbers` | array | List of extracted numbers |
+| `count` | number | Number of numbers found |
+| `sum` | number | Sum of all numbers |
+| `min` | number | Minimum value |
+| `max` | number | Maximum value |
 
 ### Extract URLs
 
@@ -116,14 +116,14 @@ Extract all URLs from text
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | text | Yes | - | Text to extract URLs from |
-| `unique` | boolean | No | `True` | Text to extract URLs from |
+| `unique` | boolean | No | `True` | Return only unique URLs |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `urls` | array | Return only unique URLs |
-| `count` | number | List of extracted URLs |
+| `urls` | array | List of extracted URLs |
+| `count` | number | Number of URLs found |
 
 ### Word Count
 
@@ -141,8 +141,8 @@ Count words in text
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `word_count` | number | Text to analyze |
-| `unique_words` | number | Total word count |
-| `sentence_count` | number | Total word count |
-| `paragraph_count` | number | Number of unique words |
-| `avg_word_length` | number | Approximate sentence count |
+| `word_count` | number | Total word count |
+| `unique_words` | number | Number of unique words |
+| `sentence_count` | number | Approximate sentence count |
+| `paragraph_count` | number | Paragraph count |
+| `avg_word_length` | number | Average word length |

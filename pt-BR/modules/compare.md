@@ -6,15 +6,15 @@ Threshold-based change detection.
 
 | Module | Description |
 |--------|-------------|
-| [Detectar Mudança](#detectar-mudança) | Detectar se um valor mudou além do limite (por quantidade ou porcentagem) |
+| [Detect Change](#detect-change) | Detect if a value has changed beyond threshold (by amount or percentage) |
 
 ## Modules
 
-### Detectar Mudança
+### Detect Change
 
 `compare.change`
 
-Detectar se um valor mudou além do limite (por quantidade ou porcentagem)
+Detect if a value has changed beyond threshold (by amount or percentage)
 
 **Parameters:**
 
@@ -22,22 +22,22 @@ Detectar se um valor mudou além do limite (por quantidade ou porcentagem)
 |------|------|----------|---------|-------------|
 | `current_value` | number | Yes | - | The current/new value to compare |
 | `previous_value` | number | Yes | - | The previous/old value to compare against |
-| `mode` | select (`percent`, `absolute`, `any`) | No | `percent` | O valor anterior/antigo para comparar |
-| `threshold` | number | No | `5` | Mudança mínima para acionar (5 = 5% ou 5 unidades) |
-| `direction` | select (`both`, `up`, `down`) | No | `both` | Qual direção de mudança detectar |
+| `mode` | select (`percent`, `absolute`, `any`) | No | `percent` | How to measure change |
+| `threshold` | number | No | `5` | Minimum change to trigger (5 = 5% or 5 units) |
+| `direction` | select (`both`, `up`, `down`) | No | `both` | Which direction of change to detect |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Se a operação foi bem-sucedida |
-| `changed` | boolean | Se a operação foi bem-sucedida |
-| `direction` | string | Se a operação foi bem-sucedida |
-| `change_percent` | number | Direção da mudança:  |
-| `change_absolute` | number | Mudança percentual (positivo = aumento, negativo = diminuição) |
+| `ok` | boolean | Whether the operation succeeded |
+| `changed` | boolean | Whether value changed beyond threshold |
+| `direction` | string | Direction of change: "up", "down", or "none" |
+| `change_percent` | number | Percentage change (positive = up, negative = down) |
+| `change_absolute` | number | Absolute change (positive = up, negative = down) |
 | `current_value` | number | The current value |
 | `previous_value` | number | The previous value |
-| `summary` | string | O valor atual |
+| `summary` | string | Human-readable summary (e.g., "+3.5%") |
 
 **Example:** Crypto price alert (5% change)
 

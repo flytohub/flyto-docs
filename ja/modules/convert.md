@@ -6,115 +6,115 @@ Type casting between data types.
 
 | Module | Description |
 |--------|-------------|
-| [配列に変換](#配列に変換) | 値を配列に変換 |
-| [ブール値に変換](#ブール値に変換) | 値をブール値に変換 |
-| [数値に変換](#数値に変換) | 値を数値に変換 |
-| [オブジェクトに変換](#オブジェクトに変換) | 値をオブジェクトに変換 |
-| [文字列に変換](#文字列に変換) | 任意の値を文字列に変換 |
+| [To Array](#to-array) | Convert value to array |
+| [To Boolean](#to-boolean) | Convert value to boolean |
+| [To Number](#to-number) | Convert value to number |
+| [To Object](#to-object) | Convert value to object |
+| [To String](#to-string) | Convert any value to string |
 
 ## Modules
 
-### 配列に変換
+### To Array
 
 `convert.to_array`
 
-値を配列に変換
+Convert value to array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 変換する値 |
-| `split_string` | boolean | No | `False` | 変換する値 |
-| `delimiter` | string | No | - | 文字列を文字に分割 |
+| `value` | any | Yes | - | Value to convert |
+| `split_string` | boolean | No | `False` | Split string into characters |
+| `delimiter` | string | No | - | Delimiter for string splitting |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 文字列分割のデリミタ |
-| `length` | number | 変換された配列 |
-| `original_type` | string | 変換された配列 |
+| `result` | array | Converted array |
+| `length` | number | Array length |
+| `original_type` | string | Original value type |
 
-### ブール値に変換
+### To Boolean
 
 `convert.to_boolean`
 
-値をブール値に変換
+Convert value to boolean
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 変換する値 |
-| `strict` | boolean | No | `False` | 変換する値 |
+| `value` | any | Yes | - | Value to convert |
+| `strict` | boolean | No | `False` | Only accept true/false strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | true/false のみ受け付ける |
-| `original_type` | string | 変換されたブール値 |
+| `result` | boolean | Converted boolean |
+| `original_type` | string | Original value type |
 
-### 数値に変換
+### To Number
 
 `convert.to_number`
 
-値を数値に変換
+Convert value to number
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 変換する値 |
-| `default` | number | No | `0` | 変換する値 |
-| `integer` | boolean | No | `False` | 変換失敗時のデフォルト値 |
+| `value` | any | Yes | - | Value to convert |
+| `default` | number | No | `0` | Default value if conversion fails |
+| `integer` | boolean | No | `False` | Convert to integer |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 整数に変換 |
-| `success` | boolean | 変換された数値 |
-| `original_type` | string | 変換された数値 |
+| `result` | number | Converted number |
+| `success` | boolean | Whether conversion succeeded |
+| `original_type` | string | Original value type |
 
-### オブジェクトに変換
+### To Object
 
 `convert.to_object`
 
-値をオブジェクトに変換
+Convert value to object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 変換する値 |
-| `key_name` | string | No | `value` | 変換する値 |
+| `value` | any | Yes | - | Value to convert |
+| `key_name` | string | No | `value` | Key name for wrapping non-objects |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 非オブジェクトをラップするキー名 |
-| `keys` | array | 変換されたオブジェクト |
-| `original_type` | string | 変換されたオブジェクト |
+| `result` | object | Converted object |
+| `keys` | array | Object keys |
+| `original_type` | string | Original value type |
 
-### 文字列に変換
+### To String
 
 `convert.to_string`
 
-任意の値を文字列に変換
+Convert any value to string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 変換する値 |
-| `pretty` | boolean | No | `False` | 変換する値 |
+| `value` | any | Yes | - | Value to convert |
+| `pretty` | boolean | No | `False` | Format objects/arrays with indentation |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | オブジェクト/配列をインデント付きでフォーマット |
-| `original_type` | string | 文字列表現 |
+| `result` | string | String representation |
+| `original_type` | string | Original value type |

@@ -22,7 +22,7 @@ Detect if a value has changed beyond threshold (by amount or percentage)
 |------|------|----------|---------|-------------|
 | `current_value` | number | Yes | - | The current/new value to compare |
 | `previous_value` | number | Yes | - | The previous/old value to compare against |
-| `mode` | select (`percent`, `absolute`, `any`) | No | `percent` | The previous/old value to compare against |
+| `mode` | select (`percent`, `absolute`, `any`) | No | `percent` | How to measure change |
 | `threshold` | number | No | `5` | Minimum change to trigger (5 = 5% or 5 units) |
 | `direction` | select (`both`, `up`, `down`) | No | `both` | Which direction of change to detect |
 
@@ -31,13 +31,13 @@ Detect if a value has changed beyond threshold (by amount or percentage)
 | Field | Type | Description |
 |-------|------|-------------|
 | `ok` | boolean | Whether the operation succeeded |
-| `changed` | boolean | Whether the operation succeeded |
-| `direction` | string | Whether the operation succeeded |
-| `change_percent` | number | Direction of change:  |
-| `change_absolute` | number | Percentage change (positive = up, negative = down) |
+| `changed` | boolean | Whether value changed beyond threshold |
+| `direction` | string | Direction of change: "up", "down", or "none" |
+| `change_percent` | number | Percentage change (positive = up, negative = down) |
+| `change_absolute` | number | Absolute change (positive = up, negative = down) |
 | `current_value` | number | The current value |
 | `previous_value` | number | The previous value |
-| `summary` | string | The current value |
+| `summary` | string | Human-readable summary (e.g., "+3.5%") |
 
 **Example:** Crypto price alert (5% change)
 

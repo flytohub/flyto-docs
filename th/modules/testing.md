@@ -2,147 +2,205 @@
 
 Assertion utilities: equal, contains, length, true, not null, greater than.
 
-**6 modules**
+**8 modules**
 
 | Module | Description |
 |--------|-------------|
-| [ยืนยันมีค่า](#ยืนยันมีค่า) | ยืนยันว่าคอลเลกชันมีค่า |
-| [ยืนยันเท่ากัน](#ยืนยันเท่ากัน) | ยืนยันว่าสองค่าเท่ากัน |
-| [ยืนยันมากกว่า](#ยืนยันมากกว่า) | ยืนยันว่าค่ามากกว่าค่าอื่น |
-| [ยืนยันความยาว](#ยืนยันความยาว) | ยืนยันว่าคอลเลกชันมีความยาวที่คาดหวัง |
-| [ยืนยันไม่ใช่ Null](#ยืนยันไม่ใช่-null) | ยืนยันว่าค่าไม่ใช่ null หรือ undefined |
-| [ยืนยันจริง](#ยืนยันจริง) | ยืนยันว่าเงื่อนไขเป็นจริง |
+| [Assert Contains](#assert-contains) | Assert that a collection contains a value |
+| [Assert Equal](#assert-equal) | Assert that two values are equal |
+| [Assert Greater Than](#assert-greater-than) | Assert that a value is greater than another |
+| [Assert Length](#assert-length) | Assert that a collection has expected length |
+| [Assert Not Null](#assert-not-null) | Assert that a value is not null or undefined |
+| [Assert Status](#assert-status) | Compare probe statuses to a baseline to derive exploitable/sanitized verdict |
+| [Assert Timing](#assert-timing) | Compare probe duration to a baseline to detect time-based oracles |
+| [Assert True](#assert-true) | Assert that a condition is true |
 
 ## Modules
 
-### ยืนยันมีค่า
+### Assert Contains
 
 `test.assert_contains`
 
-ยืนยันว่าคอลเลกชันมีค่า
+Assert that a collection contains a value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `collection` | ['array', 'string'] | Yes | - | คอลเลกชันที่จะค้นหา |
-| `value` | ['string', 'number', 'boolean'] | Yes | - | คอลเลกชันที่จะค้นหา |
-| `message` | string | No | - | ค่าที่จะค้นหา |
+| `collection` | ['array', 'string'] | Yes | - | Collection to search in |
+| `value` | ['string', 'number', 'boolean'] | Yes | - | Value to find |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | ข้อความข้อผิดพลาดที่กำหนดเอง |
-| `collection` | ['array', 'string'] | การยืนยันผ่านหรือไม่ |
-| `value` | ['string', 'number', 'boolean'] | ยืนยันว่าคอลเลกชันมีค่า |
-| `message` | string | ยืนยันว่าคอลเลกชันมีค่า |
+| `passed` | boolean | Whether assertion passed |
+| `collection` | ['array', 'string'] | Collection searched |
+| `value` | ['string', 'number', 'boolean'] | Value searched for |
+| `message` | string | Result message |
 
-### ยืนยันเท่ากัน
+### Assert Equal
 
 `test.assert_equal`
 
-ยืนยันว่าสองค่าเท่ากัน
+Assert that two values are equal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | ค่าจริง |
-| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | ค่าจริง |
-| `message` | string | No | - | ค่าที่คาดหวัง |
+| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Actual value |
+| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Expected value |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | ข้อความข้อผิดพลาดที่กำหนดเอง |
-| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | การยืนยันผ่านหรือไม่ |
-| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | ยืนยันว่าสองค่าเท่ากัน |
-| `message` | string | ยืนยันว่าสองค่าเท่ากัน |
+| `passed` | boolean | Whether assertion passed |
+| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Actual value received |
+| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Expected value |
+| `message` | string | Result message |
 
-### ยืนยันมากกว่า
+### Assert Greater Than
 
 `test.assert_greater_than`
 
-ยืนยันว่าค่ามากกว่าค่าอื่น
+Assert that a value is greater than another
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | number | Yes | - | ค่าจริง |
-| `threshold` | number | Yes | - | ค่าจริง |
-| `message` | string | No | - | ค่าเกณฑ์ |
+| `actual` | number | Yes | - | Actual value |
+| `threshold` | number | Yes | - | Threshold value |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | ข้อความข้อผิดพลาดที่กำหนดเอง |
-| `actual` | number | การยืนยันผ่านหรือไม่ |
-| `threshold` | number | ยืนยันว่าค่ามากกว่าค่าอื่น |
-| `message` | string | ยืนยันว่าค่ามากกว่าค่าอื่น |
+| `passed` | boolean | Whether assertion passed |
+| `actual` | number | Actual value |
+| `threshold` | number | Threshold value |
+| `message` | string | Result message |
 
-### ยืนยันความยาว
+### Assert Length
 
 `test.assert_length`
 
-ยืนยันว่าคอลเลกชันมีความยาวที่คาดหวัง
+Assert that a collection has expected length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `collection` | ['array', 'string'] | Yes | - | คอลเลกชันที่จะตรวจสอบ |
-| `expected_length` | number | Yes | - | คอลเลกชันที่จะตรวจสอบ |
-| `message` | string | No | - | ความยาวที่คาดหวัง |
+| `collection` | ['array', 'string'] | Yes | - | Collection to check |
+| `expected_length` | number | Yes | - | Expected length |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | ข้อความข้อผิดพลาดที่กำหนดเอง |
-| `actual_length` | number | ข้อความข้อผิดพลาดที่กำหนดเอง |
-| `expected_length` | number | ยืนยันว่าคอลเลกชันมีความยาวที่คาดหวัง |
-| `message` | string | ยืนยันว่าคอลเลกชันมีความยาวที่คาดหวัง |
+| `passed` | boolean | Whether assertion passed |
+| `actual_length` | number | Actual length |
+| `expected_length` | number | Expected length |
+| `message` | string | Result message |
 
-### ยืนยันไม่ใช่ Null
+### Assert Not Null
 
 `test.assert_not_null`
 
-ยืนยันว่าค่าไม่ใช่ null หรือ undefined
+Assert that a value is not null or undefined
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | ['string', 'number', 'boolean', 'object', 'array', 'null'] | Yes | - | ค่าที่จะตรวจสอบ |
-| `message` | string | No | - | ค่าที่จะตรวจสอบ |
+| `value` | ['string', 'number', 'boolean', 'object', 'array', 'null'] | Yes | - | Value to check |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | ยืนยันว่าค่าไม่ใช่ null หรือ undefined |
-| `message` | string | ยืนยันว่าค่าไม่ใช่ null หรือ undefined |
+| `passed` | boolean | Whether assertion passed |
+| `message` | string | Result message |
 
-### ยืนยันจริง
+### Assert Status
+
+`test.assert_status`
+
+Compare probe statuses to a baseline to derive exploitable/sanitized verdict
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `source` | ['array', 'object'] | Yes | - | Batch result data (array of {status,...} from http.batch) |
+| `baseline_index` | number | No | `0` |  |
+| `probe_indices` | array | No | - | Indices to compare against the baseline |
+| `expected_blocked` | array | No | `[401, 403]` |  |
+| `on_bypass` | string | No | `exploitable` |  |
+| `on_blocked` | string | No | `sanitized` |  |
+| `on_error` | string | No | `unreachable` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `passed` | boolean | True when verdict != on_bypass |
+| `verdict` | string | One of on_bypass/on_blocked/on_error values |
+| `baseline` | object | Baseline probe summary |
+| `probes` | array | Per-probe decision detail |
+
+### Assert Timing
+
+`test.assert_timing`
+
+Compare probe duration to a baseline to detect time-based oracles
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `source` | ['array', 'object'] | Yes | - | Batch result data (array of {duration_ms,...} from http.batch) |
+| `baseline_index` | number | No | `0` |  |
+| `probe_index` | number | Yes | - |  |
+| `threshold_ms` | number | No | `3000` | Minimum probe-vs-baseline delta to flag as exploitable |
+| `on_slow` | string | No | `exploitable` |  |
+| `on_normal` | string | No | `inconclusive` |  |
+| `on_error` | string | No | `unreachable` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `passed` | boolean | True when verdict != on_slow |
+| `verdict` | string | on_slow/on_normal/on_error value |
+| `baseline_ms` | number | Baseline duration in ms |
+| `probe_ms` | number | Probe duration in ms |
+| `delta_ms` | number | probe_ms - baseline_ms |
+| `threshold_ms` | number | Threshold used |
+
+### Assert True
 
 `test.assert_true`
 
-ยืนยันว่าเงื่อนไขเป็นจริง
+Assert that a condition is true
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `condition` | boolean | Yes | - | เงื่อนไขที่จะตรวจสอบ |
-| `message` | string | No | - | เงื่อนไขที่จะตรวจสอบ |
+| `condition` | boolean | Yes | - | Condition to check |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | ยืนยันว่าเงื่อนไขเป็นจริง |
-| `message` | string | ยืนยันว่าเงื่อนไขเป็นจริง |
+| `passed` | boolean | Whether assertion passed |
+| `message` | string | Result message |

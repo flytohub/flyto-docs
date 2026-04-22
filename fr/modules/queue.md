@@ -6,76 +6,76 @@ In-memory and Redis message queue operations.
 
 | Module | Description |
 |--------|-------------|
-| [Retirer de la file](#retirer-de-la-file) | Retirer et retourner un élément d'une file d'attente |
-| [Mettre en file d'attente](#mettre-en-file-d'attente) | Ajouter un élément à une file d'attente en mémoire ou Redis |
-| [Taille de la file](#taille-de-la-file) | Obtenir la taille actuelle d'une file |
+| [Dequeue Item](#dequeue-item) | Remove and return an item from a queue |
+| [Enqueue Item](#enqueue-item) | Add an item to an in-memory or Redis queue |
+| [Queue Size](#queue-size) | Get the current size of a queue |
 
 ## Modules
 
-### Retirer de la file
+### Dequeue Item
 
 `queue.dequeue`
 
-Retirer et retourner un élément d'une file d'attente
+Remove and return an item from a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nom de la file d'attente à retirer |
-| `backend` | string | No | `memory` | Backend de file d'attente à utiliser |
-| `redis_url` | string | No | `redis://localhost:6379` | URL de connexion Redis |
-| `timeout` | number | No | `0` | Délai d'attente en secondes (0 = non-bloquant) |
+| `queue_name` | string | Yes | - | Name of the queue to dequeue from |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
+| `timeout` | number | No | `0` | Timeout in seconds (0 = non-blocking) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | any | L'élément retiré (null si la file est vide) |
-| `queue_name` | string | Nom de la file |
-| `remaining` | number | Éléments restants dans la file |
-| `empty` | boolean | Si la file était vide |
+| `data` | any | The dequeued item (null if queue is empty) |
+| `queue_name` | string | Name of the queue |
+| `remaining` | number | Remaining items in the queue |
+| `empty` | boolean | Whether the queue was empty |
 
-### Mettre en file d'attente
+### Enqueue Item
 
 `queue.enqueue`
 
-Ajouter un élément à une file d'attente en mémoire ou Redis
+Add an item to an in-memory or Redis queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nom de la file d'attente à laquelle ajouter l'élément |
-| `data` | string | Yes | - | Données à mettre en file d'attente (valeur sérialisable en JSON) |
-| `backend` | string | No | `memory` | Backend de file d'attente à utiliser |
-| `redis_url` | string | No | `redis://localhost:6379` | URL de connexion Redis |
+| `queue_name` | string | Yes | - | Name of the queue to add the item to |
+| `data` | string | Yes | - | Data to enqueue (any JSON-serializable value) |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Nom de la file |
-| `position` | number | Position de l'élément dans la file |
-| `queue_size` | number | Taille actuelle de la file après l'ajout |
+| `queue_name` | string | Name of the queue |
+| `position` | number | Position of the item in the queue |
+| `queue_size` | number | Current size of the queue after enqueue |
 
-### Taille de la file
+### Queue Size
 
 `queue.size`
 
-Obtenir la taille actuelle d'une file
+Get the current size of a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nom de la file à vérifier |
-| `backend` | string | No | `memory` | Backend de file d'attente à utiliser |
-| `redis_url` | string | No | `redis://localhost:6379` | URL de connexion Redis |
+| `queue_name` | string | Yes | - | Name of the queue to check |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Nom de la file |
-| `size` | number | Nombre actuel d'éléments dans la file |
+| `queue_name` | string | Name of the queue |
+| `size` | number | Current number of items in the queue |

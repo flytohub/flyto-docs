@@ -6,68 +6,68 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [處理驗證](#處理驗證) | 自動偵測並處理反機器人驗證（Cloudflare、CAPTCHA） |
-| [點擊元素](#點擊元素) | 點擊頁面上的元素 |
-| [關閉瀏覽器](#關閉瀏覽器) | 關閉瀏覽器實例並釋放資源 |
-| [連接遠端瀏覽器](#連接遠端瀏覽器) | 連接遠端瀏覽器服務（Browserless、BrowserBase），真實指紋繞過 Cloudflare |
-| [擷取主控台](#擷取主控台) | 擷取瀏覽器主控台日誌（錯誤、警告、資訊） |
-| [管理 Cookie](#管理-cookie) | 取得、設定或清除瀏覽器 Cookie |
-| [Cookie 檔案](#cookie-檔案) | 將瀏覽器 Cookie 匯出/匯入 JSON 檔案 |
+| [Handle Challenge](#handle-challenge) | Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop. |
+| [Click Element](#click-element) | Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Close Browser](#close-browser) | Close the browser instance and release resources |
+| [Connect Remote](#connect-remote) | Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs. |
+| [Capture Console](#capture-console) | Capture browser console logs (errors, warnings, info) |
+| [Manage Cookies](#manage-cookies) | Get, set, or clear browser cookies |
+| [Cookies File](#cookies-file) | Import or export browser cookies to/from a JSON file for session persistence. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [偵測列表](#偵測列表) | 自動偵測頁面上的重複項目（文章、商品、搜尋結果） |
-| [處理對話框](#處理對話框) | 處理 alert、confirm 和 prompt 對話框 |
-| [下載檔案](#下載檔案) | 從瀏覽器下載檔案 |
-| [拖放](#拖放) | 拖放元素 |
-| [模擬裝置](#模擬裝置) | 模擬裝置或設定自訂視窗大小 |
-| [確保瀏覽器](#確保瀏覽器) | 確保存在瀏覽器工作階段（重用或啟動） |
-| [執行 JavaScript](#執行-javascript) | 在頁面上下文中執行 JavaScript 程式碼 |
-| [擷取資料](#擷取資料) | 從頁面擷取結構化資料 |
-| [擷取巢狀資料](#擷取巢狀資料) | 提取樹狀/巢狀資料（留言串、討論串、資料夾結構） |
-| [尋找元素](#尋找元素) | 在頁面中尋找元素並回傳元素 ID 列表 |
-| [填寫表單](#填寫表單) | 智慧填表，自動偵測欄位 |
-| [切換框架](#切換框架) | 切換到 iframe 或框架上下文 |
-| [模擬地理位置](#模擬地理位置) | 模擬瀏覽器地理位置 |
-| [前往網址](#前往網址) | 開啟指定的網址 |
-| [懸停元素](#懸停元素) | 將滑鼠懸停在元素上 |
-| [瀏覽器互動](#瀏覽器互動) | 暫停讓使用者與瀏覽器頁面互動 |
-| [啟動瀏覽器](#啟動瀏覽器) | 使用 Playwright 啟動新的瀏覽器實例 |
-| [登入](#登入) | 自動偵測並填寫登入表單，支援登入後驗證 |
-| [導航歷史](#導航歷史) | 瀏覽器歷史記錄導航（返回、前進、重新載入） |
-| [網路監控](#網路監控) | 監控和攔截網路請求 |
-| [列出頁面](#列出頁面) | 列出所有開啟的瀏覽器頁面/分頁 |
-| [翻頁與擷取](#翻頁與擷取) | 自動翻頁並擷取資料 |
-| [產生 PDF](#產生-pdf) | 從目前頁面產生 PDF |
-| [效能指標](#效能指標) | 收集瀏覽器效能指標 |
-| [瀏覽器池](#瀏覽器池) | 管理多個命名瀏覽器實例，支援並行自動化 |
-| [按鍵](#按鍵) | 按下鍵盤按鍵 |
-| [代理輪替](#代理輪替) | 輪替代理伺服器列表，支援死代理偵測 |
-| [擷取文章](#擷取文章) | 智慧文章擷取 — 自動提取標題、作者、日期與正文內容 |
-| [錄製操作](#錄製操作) | 錄製使用者操作為工作流程 |
-| [釋放瀏覽器](#釋放瀏覽器) | 釋放瀏覽器會話（僅在擁有時關閉） |
-| [擷取回應](#擷取回應) | 擷取 API 回應內容（XHR/fetch），提取頁面 API 的 JSON 資料 |
-| [檢查 Robots.txt](#檢查-robots.txt) | 檢查 robots.txt 合規性並發現 sitemap |
-| [截圖](#截圖) | 擷取目前頁面的截圖 |
-| [捲動頁面](#捲動頁面) | 捲動頁面到元素、位置或方向 |
-| [選擇選項](#選擇選項) | 從下拉選單選擇選項 |
-| [解析 Sitemap](#解析-sitemap) | 解析 sitemap.xml 並提取 URL 及中繼資料 |
-| [DOM 快照](#dom-快照) | 擷取當前頁面的 DOM 快照 |
-| [瀏覽器儲存空間](#瀏覽器儲存空間) | 存取 localStorage 和 sessionStorage |
-| [管理分頁](#管理分頁) | 建立、切換和關閉瀏覽器分頁 |
-| [擷取表格](#擷取表格) | 將 HTML 表格提取為結構化資料，自動偵測表頭 |
-| [請求限流](#請求限流) | 按域名限流，避免請求過快被封鎖 |
-| [瀏覽器追蹤](#瀏覽器追蹤) | 開始、停止或儲存瀏覽器效能追蹤 |
-| [輸入文字](#輸入文字) | 在輸入欄位中輸入文字 |
-| [上傳檔案](#上傳檔案) | 上傳檔案到檔案輸入元素 |
-| [設定視窗](#設定視窗) | 取得或設定瀏覽器視窗大小 |
-| [等待](#等待) | 等待一段時間或直到元素出現 |
+| [Detect List](#detect-list) | Auto-detect repeating items on any page (articles, products, search results). No selectors needed. |
+| [Handle Dialog](#handle-dialog) | Handle alert, confirm, and prompt dialogs |
+| [Download File](#download-file) | Download file from browser |
+| [Drag and Drop](#drag-and-drop) | Drag and drop elements |
+| [Device Emulation](#device-emulation) | Emulate mobile devices, tablets, and custom viewports |
+| [Ensure Browser](#ensure-browser) | Ensure a browser session exists (reuse or launch) |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code in page context |
+| [Extract Data](#extract-data) | Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Extract Nested](#extract-nested) | Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children. |
+| [Find Elements](#find-elements) | Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Fill Form](#fill-form) | Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM. |
+| [Switch Frame](#switch-frame) | Switch to iframe or frame context |
+| [Mock Geolocation](#mock-geolocation) | Mock browser geolocation |
+| [Go to URL](#go-to-url) | Navigate to a specific URL |
+| [Hover Element](#hover-element) | Hover mouse over an element |
+| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
+| [Launch Browser](#launch-browser) | Launch a new browser instance with Playwright |
+| [Login](#login) | Auto-detect and fill login forms. Handles username + password + submit with post-login verification. |
+| [Page Navigation](#page-navigation) | Navigate back, forward, or reload the page |
+| [Network Monitor](#network-monitor) | Monitor and intercept network requests |
+| [List Pages](#list-pages) | List all open browser pages/tabs with details |
+| [Paginate & Extract](#paginate--extract) | Auto-paginate through pages and extract data. Supports retry and checkpoint resume. |
+| [Generate PDF](#generate-pdf) | Generate PDF from current page |
+| [Performance Metrics](#performance-metrics) | Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics |
+| [Browser Pool](#browser-pool) | Manage multiple named browser instances for parallel automation. |
+| [Press Key](#press-key) | Press a keyboard key |
+| [Rotate Proxy](#rotate-proxy) | Rotate through a list of proxies. Relaunches browser with the next proxy. |
+| [Extract Article](#extract-article) | Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode. |
+| [Record Actions](#record-actions) | Record user actions as workflow |
+| [Release Browser](#release-browser) | Release browser session (close only if owned) |
+| [Capture Response](#capture-response) | Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls. |
+| [Check Robots.txt](#check-robots.txt) | Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping. |
+| [Take Screenshot](#take-screenshot) | Take a screenshot of the current page |
+| [Scroll Page](#scroll-page) | Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Select Option](#select-option) | Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering. |
+| [DOM Snapshot](#dom-snapshot) | Capture DOM snapshot in HTML, MHTML, or text format |
+| [Browser Storage](#browser-storage) | Access localStorage and sessionStorage |
+| [Manage Tabs](#manage-tabs) | Create, switch, and close browser tabs |
+| [Extract Table](#extract-table) | Extract HTML tables as structured data. Auto-detects headers from thead/th. |
+| [Throttle](#throttle) | Per-domain rate limiting. Waits between requests to the same domain to avoid bans. |
+| [Performance Trace](#performance-trace) | Start/stop Chrome DevTools performance tracing (Chromium only) |
+| [Type Text](#type-text) | Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Upload File](#upload-file) | Upload file to file input element |
+| [Resize Viewport](#resize-viewport) | Resize browser viewport to specific dimensions |
+| [Wait](#wait) | Wait for a duration or until an element appears |
 
 ## Modules
 
-### 處理驗證
+### Handle Challenge
 
 `browser.challenge`
 
-自動偵測並處理反機器人驗證（Cloudflare、CAPTCHA）
+Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop.
 
 **Parameters:**
 
@@ -107,11 +107,11 @@ auto_wait_seconds: 30
 human_fallback: false
 ```
 
-### 點擊元素
+### Click Element
 
 `browser.click`
 
-點擊頁面上的元素
+Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -131,8 +131,8 @@ human_fallback: false
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | 操作狀態（成功/錯誤） |
-| `selector` | string | 被點擊的選擇器 |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | Selector that was used |
 | `method` | string | Click method used |
 
 **Example:** Example
@@ -156,11 +156,11 @@ click_method: selector
 selector: #submit-button
 ```
 
-### 關閉瀏覽器
+### Close Browser
 
 `browser.close`
 
-關閉瀏覽器實例並釋放資源
+Close the browser instance and release resources
 
 **Parameters:**
 
@@ -172,19 +172,19 @@ selector: #submit-button
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `message` | string | 關閉結果訊息 |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
 ```yaml
 ```
 
-### 連接遠端瀏覽器
+### Connect Remote
 
 `browser.connect`
 
-連接遠端瀏覽器服務（Browserless、BrowserBase），真實指紋繞過 Cloudflare
+Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs.
 
 **Parameters:**
 
@@ -222,11 +222,11 @@ ws_endpoint: wss://connect.browserbase.com?apiKey=KEY
 ws_endpoint: ws://localhost:3000
 ```
 
-### 擷取主控台
+### Capture Console
 
 `browser.console`
 
-擷取瀏覽器主控台日誌（錯誤、警告、資訊）
+Capture browser console logs (errors, warnings, info)
 
 **Parameters:**
 
@@ -240,9 +240,9 @@ ws_endpoint: ws://localhost:3000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `messages` | array | 主控台訊息列表 |
-| `count` | number | 日誌數量 |
+| `status` | string | Operation status (success/error) |
+| `messages` | array | The messages |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -257,11 +257,11 @@ level: error
 timeout: 5000
 ```
 
-### 管理 Cookie
+### Manage Cookies
 
 `browser.cookies`
 
-取得、設定或清除瀏覽器 Cookie
+Get, set, or clear browser cookies
 
 **Parameters:**
 
@@ -280,9 +280,9 @@ timeout: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `cookies` | array | Cookie 列表 |
-| `count` | number | Cookie 數量 |
+| `status` | string | Operation status (success/error) |
+| `cookies` | array | Browser cookies |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -312,11 +312,11 @@ domain: example.com
 action: clear
 ```
 
-### Cookie 檔案
+### Cookies File
 
 `browser.cookies_file`
 
-將瀏覽器 Cookie 匯出/匯入 JSON 檔案
+Import or export browser cookies to/from a JSON file for session persistence.
 
 **Parameters:**
 
@@ -423,11 +423,11 @@ text: Login
 match_mode: best
 ```
 
-### 偵測列表
+### Detect List
 
 `browser.detect_list`
 
-自動偵測頁面上的重複項目（文章、商品、搜尋結果）
+Auto-detect repeating items on any page (articles, products, search results). No selectors needed.
 
 **Parameters:**
 
@@ -467,11 +467,11 @@ min_items: 5
 max_items: 50
 ```
 
-### 處理對話框
+### Handle Dialog
 
 `browser.dialog`
 
-處理 alert、confirm 和 prompt 對話框
+Handle alert, confirm, and prompt dialogs
 
 **Parameters:**
 
@@ -485,10 +485,10 @@ max_items: 50
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `message` | string | 對話框訊息 |
-| `type` | string | 對話框類型 |
-| `default_value` | string | 對話框預設值 |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `type` | string | The type |
+| `default_value` | string | The default value |
 
 **Example:** Example
 
@@ -516,11 +516,11 @@ action: listen
 timeout: 5000
 ```
 
-### 下載檔案
+### Download File
 
 `browser.download`
 
-從瀏覽器下載檔案
+Download file from browser
 
 **Parameters:**
 
@@ -534,10 +534,10 @@ timeout: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `path` | string | 檔案路徑 |
-| `filename` | string | 檔案名稱 |
-| `size` | number | 檔案大小 |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -554,11 +554,11 @@ save_path: /downloads/large-file.zip
 timeout_ms: 120000
 ```
 
-### 拖放
+### Drag and Drop
 
 `browser.drag`
 
-拖放元素
+Drag and drop elements
 
 **Parameters:**
 
@@ -574,9 +574,9 @@ timeout_ms: 120000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `source` | string | 來源元素位置 |
-| `target` | string | 目標元素位置 |
+| `status` | string | Operation status (success/error) |
+| `source` | string | The source |
+| `target` | string | The target |
 
 **Example:** Example
 
@@ -593,32 +593,32 @@ target: .container
 target_position: {"x": 0.5, "y": 0.5}
 ```
 
-### 模擬裝置
+### Device Emulation
 
 `browser.emulate`
 
-模擬裝置或設定自訂視窗大小
+Emulate mobile devices, tablets, and custom viewports
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | 要模擬的裝置名稱（例如 iPhone 13） |
-| `width` | number | No | - | 視窗寬度（像素） |
-| `height` | number | No | - | 視窗高度（像素） |
-| `user_agent` | string | No | - | 自訂使用者代理字串 |
-| `device_scale_factor` | number | No | - | 裝置像素比 |
-| `is_mobile` | boolean | No | - | 是否模擬行動裝置 |
-| `has_touch` | boolean | No | - | 裝置是否支援觸控 |
+| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | Device preset or "custom" for manual settings |
+| `width` | number | No | - | Custom viewport width (for custom device) |
+| `height` | number | No | - | Custom viewport height (for custom device) |
+| `user_agent` | string | No | - | Custom user agent string |
+| `device_scale_factor` | number | No | - | Device pixel ratio (1-3) |
+| `is_mobile` | boolean | No | - | Enable mobile browser behavior |
+| `has_touch` | boolean | No | - | Enable touch event support |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態（成功/錯誤） |
-| `device` | string | 模擬的裝置名稱 |
-| `viewport` | object | 目前的視窗尺寸 |
-| `is_mobile` | boolean | 是否啟用行動裝置模擬 |
+| `status` | string | Operation status |
+| `device` | string | Emulated device name |
+| `viewport` | object | Applied viewport dimensions |
+| `is_mobile` | boolean | Whether mobile mode is enabled |
 
 **Example:** Example
 
@@ -650,11 +650,11 @@ device: desktop_chrome
 user_agent: CustomBot/1.0
 ```
 
-### 確保瀏覽器
+### Ensure Browser
 
 `browser.ensure`
 
-確保存在瀏覽器工作階段（重用或啟動）
+Ensure a browser session exists (reuse or launch)
 
 **Parameters:**
 
@@ -668,9 +668,9 @@ user_agent: CustomBot/1.0
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 瀏覽器是被啟動還是重用 |
-| `message` | string | 瀏覽器是被啟動還是重用 |
-| `is_owner` | boolean | 瀏覽器是被啟動還是重用 |
+| `status` | string | Whether browser was launched or reused |
+| `message` | string | Result message |
+| `is_owner` | boolean | Whether this step owns the browser (responsible for closing) |
 
 **Example:** Example
 
@@ -684,11 +684,11 @@ headless: false
 headless: true
 ```
 
-### 執行 JavaScript
+### Execute JavaScript
 
 `browser.evaluate`
 
-在頁面上下文中執行 JavaScript 程式碼
+Execute JavaScript code in page context
 
 **Parameters:**
 
@@ -701,8 +701,8 @@ headless: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `result` | any | 執行結果 |
+| `status` | string | Operation status (success/error) |
+| `result` | any | The operation result |
 
 **Example:** Example
 
@@ -729,11 +729,11 @@ args: ["#header"]
 script: document.body.style.backgroundColor = "red"; return "done"
 ```
 
-### 擷取資料
+### Extract Data
 
 `browser.extract`
 
-從頁面擷取結構化資料
+Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -747,9 +747,9 @@ script: document.body.style.backgroundColor = "red"; return "done"
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `data` | array | 擷取的資料 |
-| `count` | number | 擷取的項目數量 |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -759,11 +759,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### 擷取巢狀資料
+### Extract Nested
 
 `browser.extract_nested`
 
-提取樹狀/巢狀資料（留言串、討論串、資料夾結構）
+Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children.
 
 **Parameters:**
 
@@ -797,11 +797,11 @@ fields: {"author": {"selector": ".author"}, "text": {"selector": ".body"}, "date
 root_selector: li.item
 ```
 
-### 尋找元素
+### Find Elements
 
 `browser.find`
 
-在頁面中尋找元素並回傳元素 ID 列表
+Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -814,9 +814,9 @@ root_selector: li.item
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `count` | number | 找到的元素數量 |
-| `element_ids` | array | 元素 ID 列表 |
+| `status` | string | Operation status (success/error) |
+| `count` | number | Number of items |
+| `element_ids` | array | The element ids |
 
 **Example:** Find search results
 
@@ -825,11 +825,11 @@ selector: div.tF2Cxc
 limit: 10
 ```
 
-### 填寫表單
+### Fill Form
 
 `browser.form`
 
-智慧填表，自動偵測欄位
+Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM.
 
 **Parameters:**
 
@@ -847,9 +847,9 @@ limit: 10
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filled_fields` | array | 每個欄位填寫的延遲時間（模擬人類行為） |
-| `failed_fields` | array | 已填寫欄位的清單 |
-| `submitted` | boolean | 已填寫欄位的清單 |
+| `filled_fields` | array | List of fields that were filled |
+| `failed_fields` | array | List of fields that failed to fill |
+| `submitted` | boolean | Whether form was submitted |
 
 **Example:** Example
 
@@ -865,11 +865,11 @@ data: {"username": "john_doe", "bio": "Hello world"}
 field_mapping: {"username": "#user-name-input", "bio": "textarea.bio-field"}
 ```
 
-### 切換框架
+### Switch Frame
 
 `browser.frame`
 
-切換到 iframe 或框架上下文
+Switch to iframe or frame context
 
 **Parameters:**
 
@@ -885,10 +885,10 @@ field_mapping: {"username": "#user-name-input", "bio": "textarea.bio-field"}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `frame_url` | string | 框架 URL |
-| `frame_name` | string | 框架名稱 |
-| `frames` | array | 框架列表 |
+| `status` | string | Operation status (success/error) |
+| `frame_url` | string | Frame URL |
+| `frame_name` | string | The frame name |
+| `frames` | array | List of frames |
 
 **Example:** Example
 
@@ -914,11 +914,11 @@ action: exit
 action: list
 ```
 
-### 模擬地理位置
+### Mock Geolocation
 
 `browser.geolocation`
 
-模擬瀏覽器地理位置
+Mock browser geolocation
 
 **Parameters:**
 
@@ -932,8 +932,8 @@ action: list
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `location` | object | 位置資訊 |
+| `status` | string | Operation status (success/error) |
+| `location` | object | The location |
 
 **Example:** Example
 
@@ -957,11 +957,11 @@ latitude: 35.6762
 longitude: 139.6503
 ```
 
-### 前往網址
+### Go to URL
 
 `browser.goto`
 
-開啟指定的網址
+Navigate to a specific URL
 
 **Parameters:**
 
@@ -976,8 +976,8 @@ longitude: 139.6503
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `url` | string | 實際開啟的網址 |
+| `status` | string | Operation status (success/error) |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -986,11 +986,11 @@ url: https://www.google.com
 wait_until: domcontentloaded
 ```
 
-### 懸停元素
+### Hover Element
 
 `browser.hover`
 
-將滑鼠懸停在元素上
+Hover mouse over an element
 
 **Parameters:**
 
@@ -1004,8 +1004,8 @@ wait_until: domcontentloaded
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `selector` | string | 懸停的選擇器 |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1020,11 +1020,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### 瀏覽器互動
+### Browser Interact
 
 `browser.interact`
 
-暫停讓使用者與瀏覽器頁面互動
+Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
 
 **Parameters:**
 
@@ -1038,11 +1038,11 @@ timeout_ms: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `action` | string | 執行的動作（點擊/選擇/輸入/切換） |
-| `selector` | string | 互動元素的 CSS 選擇器 |
-| `value` | string | 使用的值（用於選擇/輸入動作） |
-| `url` | string | 互動時的頁面 URL |
+| `status` | string | Operation status |
+| `action` | string | Action executed (click/select/type/toggle) |
+| `selector` | string | CSS selector of the interacted element |
+| `value` | string | Value used (for select/type actions) |
+| `url` | string | Page URL at time of interaction |
 
 **Example:** Example
 
@@ -1051,11 +1051,11 @@ title: Choose a department
 description: Select the department you want to register for
 ```
 
-### 啟動瀏覽器
+### Launch Browser
 
 `browser.launch`
 
-使用 Playwright 啟動新的瀏覽器實例
+Launch a new browser instance with Playwright
 
 **Parameters:**
 
@@ -1064,25 +1064,25 @@ description: Select the department you want to register for
 | `headless` | boolean | No | `False` | Run browser without visible window |
 | `width` | number | No | `1280` | Browser viewport width in pixels |
 | `height` | number | No | `720` | Browser viewport height in pixels |
-| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | 要使用的瀏覽器引擎（chromium、firefox、webkit） |
+| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Browser engine to use |
 | `channel` | select (``, `chrome`, `msedge`) | No | - | Use system Chrome instead of bundled Chromium for better anti-detection bypass |
 | `behavior` | select (`fast`, `normal`, `careful`, `human_like`) | No | `fast` | How the browser interacts: fast (no delays), normal, careful (mouse movement), human_like (full simulation) |
 | `stealth` | boolean | No | `True` | Anti-detection patches: WebGL fingerprint, canvas noise, navigator fixes. Always recommended. |
-| `proxy` | string | No | - | 代理伺服器 URL |
-| `user_agent` | string | No | - | 自訂使用者代理字串 |
+| `proxy` | string | No | - | HTTP/SOCKS proxy server URL. For rotation use browser.proxy_rotate. |
+| `user_agent` | string | No | - | Custom user agent string |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |
-| `slow_mo` | number | No | `0` | 以指定毫秒數放慢操作 |
+| `slow_mo` | number | No | `0` | Delay between Playwright actions in ms (low-level, prefer Behavior Profile) |
 | `record_video_dir` | string | No | - | Directory to save recorded videos (enables Playwright video recording) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `message` | string | 啟動結果訊息 |
-| `browser_type` | string | 啟動的瀏覽器類型 |
-| `headless` | boolean | 瀏覽器是否以無頭模式運行 |
-| `viewport` | object | 目前的視窗尺寸 |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `browser_type` | string | Browser engine used |
+| `headless` | boolean | Whether browser is in headless mode |
+| `viewport` | object | Browser viewport dimensions |
 | `behavior` | string | Active behavior profile |
 
 **Example:** Example
@@ -1105,11 +1105,11 @@ behavior: human_like
 stealth: true
 ```
 
-### 登入
+### Login
 
 `browser.login`
 
-自動偵測並填寫登入表單，支援登入後驗證
+Auto-detect and fill login forms. Handles username + password + submit with post-login verification.
 
 **Parameters:**
 
@@ -1149,11 +1149,11 @@ password_selector: #pass
 submit_selector: #login-btn
 ```
 
-### 導航歷史
+### Page Navigation
 
 `browser.navigation`
 
-瀏覽器歷史記錄導航（返回、前進、重新載入）
+Navigate back, forward, or reload the page
 
 **Parameters:**
 
@@ -1167,9 +1167,9 @@ submit_selector: #login-btn
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態（成功/錯誤） |
-| `action` | string | 執行的導航動作 |
-| `url` | string | 導航後的當前 URL |
+| `status` | string | Operation status (success/error) |
+| `action` | string | Navigation action performed |
+| `url` | string | Current URL after navigation |
 
 **Example:** Example
 
@@ -1190,11 +1190,11 @@ action: reload
 wait_until: networkidle
 ```
 
-### 網路監控
+### Network Monitor
 
 `browser.network`
 
-監控和攔截網路請求
+Monitor and intercept network requests
 
 **Parameters:**
 
@@ -1210,9 +1210,9 @@ wait_until: networkidle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `requests` | array | 請求列表 |
-| `blocked_count` | number | 被阻擋的請求數量 |
+| `status` | string | Operation status (success/error) |
+| `requests` | array | Captured network requests |
+| `blocked_count` | number | The blocked count |
 
 **Example:** Example
 
@@ -1237,27 +1237,27 @@ url_pattern: .*users.*
 mock_response: {"status": 200, "body": "{\"users\": []}"}
 ```
 
-### 列出頁面
+### List Pages
 
 `browser.pages`
 
-列出所有開啟的瀏覽器頁面/分頁
+List all open browser pages/tabs with details
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `include_details` | boolean | No | `True` | 包含每個頁面的詳細資訊 |
-| `include_content_info` | boolean | No | `False` | 包含每個頁面的內容類型資訊 |
+| `include_details` | boolean | No | `True` | Include URL, title, and viewport info for each page |
+| `include_content_info` | boolean | No | `False` | Include page load state and frame count (slower) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態（成功/錯誤） |
-| `pages` | array | 開啟頁面的清單 |
-| `count` | number | 開啟頁面的數量 |
-| `current_index` | number | 目前使用中頁面的索引 |
+| `status` | string | Operation status |
+| `pages` | array | List of page information |
+| `count` | number | Number of open pages |
+| `current_index` | number | Index of the current active page |
 
 **Example:** Example
 
@@ -1278,11 +1278,11 @@ include_details: true
 include_content_info: true
 ```
 
-### 翻頁與擷取
+### Paginate & Extract
 
 `browser.pagination`
 
-自動翻頁並擷取資料
+Auto-paginate through pages and extract data. Supports retry and checkpoint resume.
 
 **Parameters:**
 
@@ -1307,10 +1307,10 @@ include_content_info: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `items` | array | 當沒有更多頁面時出現的選擇器（停止翻頁） |
-| `total_items` | integer | 所有頁面中擷取的所有項目 |
-| `pages_processed` | integer | 所有頁面中擷取的所有項目 |
-| `stopped_reason` | string | 處理的頁數 |
+| `items` | array | All extracted items from all pages |
+| `total_items` | integer | Total number of items extracted |
+| `pages_processed` | integer | Number of pages processed |
+| `stopped_reason` | string | Why pagination stopped (max_pages, max_items, no_more, error) |
 | `retries_used` | integer | Total number of retries across all pages |
 | `resumed` | boolean | Whether execution resumed from a checkpoint |
 
@@ -1334,11 +1334,11 @@ no_more_indicator: .end-of-feed
 checkpoint_path: /tmp/feed_checkpoint.json
 ```
 
-### 產生 PDF
+### Generate PDF
 
 `browser.pdf`
 
-從目前頁面產生 PDF
+Generate PDF from current page
 
 **Parameters:**
 
@@ -1357,9 +1357,9 @@ checkpoint_path: /tmp/feed_checkpoint.json
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `path` | string | PDF 檔案路徑 |
-| `size` | number | PDF 檔案大小 |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -1381,26 +1381,26 @@ path: /output/custom.pdf
 margin: {"top": "1cm", "bottom": "1cm", "left": "2cm", "right": "2cm"}
 ```
 
-### 效能指標
+### Performance Metrics
 
 `browser.performance`
 
-收集瀏覽器效能指標
+Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | array | No | `['all']` | 要收集的效能指標 |
-| `timeout_ms` | number | No | `3000` | 超時時間（毫秒） |
-| `setup_observers` | boolean | No | `True` | 在收集前設置效能觀察者 |
+| `metrics` | array | No | `['all']` | Which metrics to collect (default: all) |
+| `timeout_ms` | number | No | `3000` | Time to wait for metrics collection (for LCP, CLS) |
+| `setup_observers` | boolean | No | `True` | Install PerformanceObservers for better metric tracking |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態（成功/錯誤） |
-| `metrics` | object | 收集到的效能指標 |
+| `status` | string | Operation status |
+| `metrics` | object | Collected performance metrics |
 
 **Example:** Example
 
@@ -1422,11 +1422,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### 瀏覽器池
+### Browser Pool
 
 `browser.pool`
 
-管理多個命名瀏覽器實例，支援並行自動化
+Manage multiple named browser instances for parallel automation.
 
 **Parameters:**
 
@@ -1466,11 +1466,11 @@ name: scraper1
 action: list
 ```
 
-### 按鍵
+### Press Key
 
 `browser.press`
 
-按下鍵盤按鍵
+Press a keyboard key
 
 **Parameters:**
 
@@ -1482,8 +1482,8 @@ action: list
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `key` | string | 按下的按鍵 |
+| `status` | string | Operation status (success/error) |
+| `key` | string | Key identifier |
 
 **Example:** Example
 
@@ -1497,11 +1497,11 @@ key: Enter
 key: Escape
 ```
 
-### 代理輪替
+### Rotate Proxy
 
 `browser.proxy_rotate`
 
-輪替代理伺服器列表，支援死代理偵測
+Rotate through a list of proxies. Relaunches browser with the next proxy.
 
 **Parameters:**
 
@@ -1538,11 +1538,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### 擷取文章
+### Extract Article
 
 `browser.readability`
 
-智慧文章擷取 — 自動提取標題、作者、日期與正文內容
+Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode.
 
 **Parameters:**
 
@@ -1551,7 +1551,7 @@ action: rotate
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - | 內容區域的 CSS 選擇器，留空自動偵測 |
+| `selector` | string | No | - | CSS selector for the content area. Leave empty for auto-detection. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1603,11 +1603,11 @@ title_selector: .article-headline h1
 selector: .article-body
 ```
 
-### 錄製操作
+### Record Actions
 
 `browser.record`
 
-錄製使用者操作為工作流程
+Record user actions as workflow
 
 **Parameters:**
 
@@ -1621,9 +1621,9 @@ selector: .article-body
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `recording` | array | 錄製狀態 |
-| `workflow` | string | 錄製的工作流程 |
+| `status` | string | Operation status (success/error) |
+| `recording` | array | Recording data or path |
+| `workflow` | string | The workflow |
 
 **Example:** Example
 
@@ -1644,25 +1644,25 @@ output_format: yaml
 action: get
 ```
 
-### 釋放瀏覽器
+### Release Browser
 
 `browser.release`
 
-釋放瀏覽器會話（僅在擁有時關閉）
+Release browser session (close only if owned)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `force` | boolean | No | `False` | 即使此範本不擁有也關閉瀏覽器 |
+| `force` | boolean | No | `False` | Close browser even if not owned by this template |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 即使此範本不擁有也關閉瀏覽器 |
-| `message` | string | 執行的操作 |
-| `was_owner` | boolean | 執行的操作 |
+| `status` | string | What action was taken |
+| `message` | string | Result message |
+| `was_owner` | boolean | Whether this template owned the browser |
 
 **Example:** Example
 
@@ -1675,11 +1675,11 @@ action: get
 force: true
 ```
 
-### 擷取回應
+### Capture Response
 
 `browser.response`
 
-擷取 API 回應內容（XHR/fetch），提取頁面 API 的 JSON 資料
+Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls.
 
 **Parameters:**
 
@@ -1712,11 +1712,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### 檢查 Robots.txt
+### Check Robots.txt
 
 `browser.robots`
 
-檢查 robots.txt 合規性並發現 sitemap
+Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping.
 
 **Parameters:**
 
@@ -1747,11 +1747,11 @@ check_url: /api/data
 ```yaml
 ```
 
-### 截圖
+### Take Screenshot
 
 `browser.screenshot`
 
-擷取目前頁面的截圖
+Take a screenshot of the current page
 
 **Parameters:**
 
@@ -1766,8 +1766,8 @@ check_url: /api/data
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `filepath` | string | 截圖檔案路徑 |
+| `status` | string | Operation status (success/error) |
+| `filepath` | string | Path to the file |
 
 **Example:** Example
 
@@ -1775,11 +1775,11 @@ check_url: /api/data
 path: output/page.png
 ```
 
-### 捲動頁面
+### Scroll Page
 
 `browser.scroll`
 
-捲動頁面到元素、位置或方向
+Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1794,8 +1794,8 @@ path: output/page.png
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `scrolled_to` | object | 捲動到的位置 |
+| `status` | string | Operation status (success/error) |
+| `scrolled_to` | object | The scrolled to |
 
 **Example:** Example
 
@@ -1818,11 +1818,11 @@ amount: 10000
 behavior: smooth
 ```
 
-### 選擇選項
+### Select Option
 
 `browser.select`
 
-從下拉選單選擇選項
+Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1838,9 +1838,9 @@ behavior: smooth
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `selected` | array | 選擇的值 |
-| `selector` | string | 選擇器 |
+| `status` | string | Operation status (success/error) |
+| `selected` | array | The selected |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1866,11 +1866,11 @@ select_method: index
 index: 2
 ```
 
-### 解析 Sitemap
+### Parse Sitemap
 
 `browser.sitemap`
 
-解析 sitemap.xml 並提取 URL 及中繼資料
+Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering.
 
 **Parameters:**
 
@@ -1902,29 +1902,29 @@ url_pattern: /blog/
 max_urls: 100
 ```
 
-### DOM 快照
+### DOM Snapshot
 
 `browser.snapshot`
 
-擷取當前頁面的 DOM 快照
+Capture DOM snapshot in HTML, MHTML, or text format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`html`, `mhtml`, `text`) | No | `html` | 輸出格式（html 或 text） |
-| `selector` | string | No | - | 擷取特定元素的 CSS 選擇器 |
-| `path` | string | No | - | 儲存快照的路徑 |
+| `format` | select (`html`, `mhtml`, `text`) | No | `html` | Snapshot format |
+| `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態（成功/錯誤） |
-| `format` | string | 快照的格式 |
-| `content` | string | 快照內容 |
-| `path` | string | 快照儲存的路徑 |
-| `size_bytes` | number | 快照的大小（位元組） |
+| `status` | string | Operation status |
+| `format` | string | Snapshot format used |
+| `content` | string | Snapshot content (if no path specified) |
+| `path` | string | Path to saved file |
+| `size_bytes` | number | Content size in bytes |
 
 **Example:** Example
 
@@ -1954,11 +1954,11 @@ selector: #main
 path: /tmp/section.html
 ```
 
-### 瀏覽器儲存空間
+### Browser Storage
 
 `browser.storage`
 
-存取 localStorage 和 sessionStorage
+Access localStorage and sessionStorage
 
 **Parameters:**
 
@@ -1973,10 +1973,10 @@ path: /tmp/section.html
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `value` | any | 取得的值 |
-| `keys` | array | 儲存的鍵列表 |
-| `length` | number | 儲存項目數量 |
+| `status` | string | Operation status (success/error) |
+| `value` | any | The returned value |
+| `keys` | array | List of keys |
+| `length` | number | Length of data |
 
 **Example:** Example
 
@@ -2009,11 +2009,11 @@ action: keys
 type: local
 ```
 
-### 管理分頁
+### Manage Tabs
 
 `browser.tab`
 
-建立、切換和關閉瀏覽器分頁
+Create, switch, and close browser tabs
 
 **Parameters:**
 
@@ -2028,10 +2028,10 @@ type: local
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `tab_count` | number | 分頁總數 |
-| `current_index` | number | 目前分頁索引 |
-| `tabs` | array | 分頁列表 |
+| `status` | string | Operation status (success/error) |
+| `tab_count` | number | The tab count |
+| `current_index` | number | The current index |
+| `tabs` | array | List of open tabs |
 
 **Example:** Example
 
@@ -2059,11 +2059,11 @@ action: close
 action: list
 ```
 
-### 擷取表格
+### Extract Table
 
 `browser.table`
 
-將 HTML 表格提取為結構化資料，自動偵測表頭
+Extract HTML tables as structured data. Auto-detects headers from thead/th.
 
 **Parameters:**
 
@@ -2095,11 +2095,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### 請求限流
+### Throttle
 
 `browser.throttle`
 
-按域名限流，避免請求過快被封鎖
+Per-domain rate limiting. Waits between requests to the same domain to avoid bans.
 
 **Parameters:**
 
@@ -2142,29 +2142,29 @@ min_interval_ms: 1500
 max_interval_ms: 8000
 ```
 
-### 瀏覽器追蹤
+### Performance Trace
 
 `browser.trace`
 
-開始、停止或儲存瀏覽器效能追蹤
+Start/stop Chrome DevTools performance tracing (Chromium only)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | - | 追蹤動作（開始、停止、儲存） |
-| `categories` | array | No | `['devtools.timeline']` | 要擷取的追蹤類別 |
-| `screenshots` | boolean | No | `True` | 在追蹤中包含螢幕截圖 |
-| `path` | string | No | - | 儲存追蹤檔案的路徑 |
+| `action` | string | Yes | - | Start or stop tracing |
+| `categories` | array | No | `['devtools.timeline']` | CDP trace categories (default: devtools.timeline) |
+| `screenshots` | boolean | No | `True` | Include screenshots in trace (increases file size) |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態（成功/錯誤） |
-| `tracing` | boolean | 追蹤是否目前正在進行 |
-| `path` | string | 追蹤儲存的路徑 |
-| `size_bytes` | number | 追蹤檔案的大小（位元組） |
+| `status` | string | Operation status (success/error) |
+| `tracing` | boolean | Whether tracing is active |
+| `path` | string | Path to trace file (when stopped) |
+| `size_bytes` | number | Trace file size in bytes |
 
 **Example:** Example
 
@@ -2188,11 +2188,11 @@ action: stop
 path: /tmp/performance-trace.json
 ```
 
-### 輸入文字
+### Type Text
 
 `browser.type`
 
-在輸入欄位中輸入文字
+Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -2213,8 +2213,8 @@ path: /tmp/performance-trace.json
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | 操作狀態 |
-| `selector` | string | 輸入的選擇器 |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 | `method` | string | Type method used |
 
 **Example:** Example
@@ -2250,11 +2250,11 @@ selector: #email
 text: user@example.com
 ```
 
-### 上傳檔案
+### Upload File
 
 `browser.upload`
 
-上傳檔案到檔案輸入元素
+Upload file to file input element
 
 **Parameters:**
 
@@ -2268,10 +2268,10 @@ text: user@example.com
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `filename` | string | 檔案名稱 |
-| `size` | number | 檔案大小 |
-| `selector` | string | 選擇器 |
+| `status` | string | Operation status (success/error) |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -2287,26 +2287,26 @@ selector: #file-upload
 file_path: /path/to/document.pdf
 ```
 
-### 設定視窗
+### Resize Viewport
 
 `browser.viewport`
 
-取得或設定瀏覽器視窗大小
+Resize browser viewport to specific dimensions
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `width` | number | Yes | `1280` | 視窗寬度（像素） |
-| `height` | number | Yes | `720` | 視窗高度（像素） |
+| `width` | number | Yes | `1280` | Viewport width in pixels |
+| `height` | number | Yes | `720` | Viewport height in pixels |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態（成功/錯誤） |
-| `viewport` | object | 目前的視窗尺寸 |
-| `previous_viewport` | object | 先前的視窗尺寸 |
+| `status` | string | Operation status |
+| `viewport` | object | Applied viewport dimensions |
+| `previous_viewport` | object | Previous viewport dimensions |
 
 **Example:** Example
 
@@ -2336,11 +2336,11 @@ width: 1366
 height: 768
 ```
 
-### 等待
+### Wait
 
 `browser.wait`
 
-等待一段時間或直到元素出現
+Wait for a duration or until an element appears
 
 **Parameters:**
 
@@ -2348,16 +2348,16 @@ height: 768
 |------|------|----------|---------|-------------|
 | `duration_ms` | number | No | `1000` | Duration of the operation in milliseconds |
 | `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
-| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | 等待的狀態（可見、隱藏、附加、分離） |
+| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | Element state to wait for |
 | `timeout_ms` | number | No | `30000` | Maximum time to wait in milliseconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `selector` | string | 等待的選擇器 |
-| `duration_ms` | number | 等待時間（毫秒） |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was waited for |
+| `duration_ms` | number | Wait duration in milliseconds |
 
 **Example:** Example
 

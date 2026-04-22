@@ -6,23 +6,23 @@ Datetime operations, delay, MD5 hash, and random utilities.
 
 | Module | Description |
 |--------|-------------|
-| [Zaman Ekle](#zaman-ekle) | Tarih saate zaman ekle |
-| [Tarih Saat Biçimlendir](#tarih-saat-biçimlendir) | Tarih saati dizeye biçimlendir |
-| [Tarih Saat Ayrıştır](#tarih-saat-ayrıştır) | Dizeyi tarih saate ayrıştır |
-| [Zaman Çıkar](#zaman-çıkar) | Tarih saatten zaman çıkar |
-| [Geçerli Tarih/Saat](#geçerli-tarihsaat) | Geçerli tarih ve saati al |
-| [Gecikme/Uyku](#gecikmeuyku) | İş akışı yürütmesini belirtilen süre boyunca duraklat |
-| [MD5 Hash](#md5-hash) | Metnin MD5 hash değerini hesapla |
-| [Rastgele Sayı](#rastgele-sayı) | Aralıkta rastgele sayı üret |
-| [Rastgele Dize](#rastgele-dize) | Rastgele dize veya UUID üret |
+| [Add Time](#add-time) | Add time to datetime |
+| [Format DateTime](#format-datetime) | Format datetime to string |
+| [Parse DateTime](#parse-datetime) | Parse string to datetime |
+| [Subtract Time](#subtract-time) | Subtract time from datetime |
+| [Current Date/Time](#current-datetime) | Get current date and time |
+| [Delay/Sleep](#delaysleep) | Pause workflow execution for specified duration |
+| [MD5 Hash](#md5-hash) | Calculate MD5 hash of text |
+| [Random Number](#random-number) | Generate random number in range |
+| [Random String](#random-string) | Generate random string or UUID |
 
 ## Modules
 
-### Zaman Ekle
+### Add Time
 
 `datetime.add`
 
-Tarih saate zaman ekle
+Add time to datetime
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ Tarih saate zaman ekle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | İşlem sonucu |
-| `timestamp` | number | İşlem sonucu |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Add 7 days
 
@@ -56,11 +56,11 @@ hours: 2
 minutes: 30
 ```
 
-### Tarih Saat Biçimlendir
+### Format DateTime
 
 `datetime.format`
 
-Tarih saati dizeye biçimlendir
+Format datetime to string
 
 **Parameters:**
 
@@ -73,8 +73,8 @@ Tarih saati dizeye biçimlendir
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | İşlem sonucu |
-| `timestamp` | number | İşlem sonucu |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Format current time
 
@@ -90,11 +90,11 @@ datetime: 2024-01-15T10:30:00
 format: %B %d, %Y
 ```
 
-### Tarih Saat Ayrıştır
+### Parse DateTime
 
 `datetime.parse`
 
-Dizeyi tarih saate ayrıştır
+Parse string to datetime
 
 **Parameters:**
 
@@ -107,14 +107,14 @@ Dizeyi tarih saate ayrıştır
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | İşlem sonucu |
-| `timestamp` | number | İşlem sonucu |
-| `year` | number | İşlem sonucu |
-| `month` | number | Unix zaman damgası |
-| `day` | number | Yıl bileşeni |
-| `hour` | number | Ay bileşeni |
-| `minute` | number | Gün bileşeni |
-| `second` | number | Saat bileşeni |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
+| `year` | number | Year component |
+| `month` | number | Month component |
+| `day` | number | Day component |
+| `hour` | number | Hour component |
+| `minute` | number | Minute component |
+| `second` | number | Second component |
 
 **Example:** Parse ISO format
 
@@ -129,11 +129,11 @@ datetime_string: January 15, 2024
 format: %B %d, %Y
 ```
 
-### Zaman Çıkar
+### Subtract Time
 
 `datetime.subtract`
 
-Tarih saatten zaman çıkar
+Subtract time from datetime
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ Tarih saatten zaman çıkar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | İşlem sonucu |
-| `timestamp` | number | İşlem sonucu |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Subtract 7 days
 
@@ -166,28 +166,28 @@ datetime: 2024-01-15T10:00:00
 hours: 1
 ```
 
-### Geçerli Tarih/Saat
+### Current Date/Time
 
 `utility.datetime.now`
 
-Geçerli tarih ve saati al
+Get current date and time
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | Çıktı biçimi |
-| `custom_format` | string | No | - | Python strftime biçimi (format=custom ise) |
-| `timezone` | string | No | `UTC` | Python strftime biçimi (format=custom ise) |
+| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | Output format |
+| `custom_format` | string | No | - | Python strftime format (if format=custom) |
+| `timezone` | string | No | `UTC` | Timezone (default: UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Saat dilimi (varsayılan: UTC) |
-| `datetime` | string | İşlem durumu (success/error) |
-| `timestamp` | number | İşlem durumu (success/error) |
-| `iso` | string | Biçimlendirilmiş tarih/saat |
+| `status` | string | Operation status (success/error) |
+| `datetime` | string | Formatted date/time |
+| `timestamp` | number | Unix timestamp |
+| `iso` | string | ISO format |
 
 **Example:** Example
 
@@ -201,25 +201,25 @@ format: iso
 format: unix
 ```
 
-### Gecikme/Uyku
+### Delay/Sleep
 
 `utility.delay`
 
-İş akışı yürütmesini belirtilen süre boyunca duraklat
+Pause workflow execution for specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `duration_ms` | number | No | `1000` | Milisaniye cinsinden bekleme süresi |
-| `duration_seconds` | number | No | - | Alternatif: saniye cinsinden süre |
+| `duration_ms` | number | No | `1000` | How long to wait in milliseconds |
+| `duration_seconds` | number | No | - | Alternative: duration in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Alternatif: saniye cinsinden süre |
-| `waited_ms` | number | İşlem durumu (success/error) |
+| `status` | string | Operation status (success/error) |
+| `waited_ms` | number | Actual wait time in ms |
 
 **Example:** Example
 
@@ -237,21 +237,21 @@ duration_ms: 500
 
 `utility.hash.md5`
 
-Metnin MD5 hash değerini hesapla
+Calculate MD5 hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Hash'lenecek metin |
-| `encoding` | string | No | `utf-8` | Hash'lenecek metin |
+| `text` | text | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Metin kodlaması |
-| `hash` | string | Metin kodlaması |
+| `status` | string | Operation status (success/error) |
+| `hash` | string | MD5 hash (hexadecimal) |
 
 **Example:** Example
 
@@ -259,26 +259,26 @@ Metnin MD5 hash değerini hesapla
 text: Hello World
 ```
 
-### Rastgele Sayı
+### Random Number
 
 `utility.random.number`
 
-Aralıkta rastgele sayı üret
+Generate random number in range
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `min` | number | No | `0` | Minimum değer (dahil) |
-| `max` | number | No | `100` | Minimum değer (dahil) |
-| `decimals` | number | No | `0` | Maksimum değer (dahil) |
+| `min` | number | No | `0` | Minimum value (inclusive) |
+| `max` | number | No | `100` | Maximum value (inclusive) |
+| `decimals` | number | No | `0` | Number of decimal places (0 for integers) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Ondalık basamak sayısı (tam sayılar için 0) |
-| `value` | number | İşlem durumu (success/error) |
+| `status` | string | Operation status (success/error) |
+| `value` | number | Random number |
 
 **Example:** Example
 
@@ -296,25 +296,25 @@ max: 1
 decimals: 2
 ```
 
-### Rastgele Dize
+### Random String
 
 `utility.random.string`
 
-Rastgele dize veya UUID üret
+Generate random string or UUID
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | No | `16` | Dize uzunluğu |
-| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | Dize uzunluğu |
+| `length` | number | No | `16` | String length |
+| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | Which characters to use |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | İşlem durumu (success/error) |
-| `value` | string | İşlem durumu (success/error) |
+| `status` | string | Operation status (success/error) |
+| `value` | string | Random string |
 
 **Example:** Example
 

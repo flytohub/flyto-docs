@@ -6,161 +6,161 @@ Base64, hex, URL, and HTML encoding and decoding.
 
 | Module | Description |
 |--------|-------------|
-| [Base64 डिकोड](#base64-डिकोड) | Base64 एन्कोडेड टेक्स्ट को डिकोड करें |
-| [हेक्स डिकोड](#हेक्स-डिकोड) | हेक्साडेसिमल को टेक्स्ट में डिकोड करें |
-| [URL डिकोड](#url-डिकोड) | URL एन्कोडेड टेक्स्ट को डिकोड करें |
-| [Base64 एन्कोड](#base64-एन्कोड) | पाठ को Base64 में एन्कोड करें |
-| [हेक्स एन्कोड](#हेक्स-एन्कोड) | पाठ को हेक्साडेसिमल में एन्कोड करें |
-| [HTML एन्कोड](#html-एन्कोड) | पाठ को HTML एंटिटी में एन्कोड करें |
-| [URL एन्कोड](#url-एन्कोड) | URL एन्कोड पाठ (प्रतिशत एन्कोडिंग) |
+| [Base64 Decode](#base64-decode) | Decode Base64 encoded text |
+| [Hex Decode](#hex-decode) | Decode hexadecimal to text |
+| [URL Decode](#url-decode) | Decode URL encoded text |
+| [Base64 Encode](#base64-encode) | Encode text to Base64 |
+| [Hex Encode](#hex-encode) | Encode text to hexadecimal |
+| [HTML Encode](#html-encode) | Encode text to HTML entities |
+| [URL Encode](#url-encode) | URL encode text (percent encoding) |
 
 ## Modules
 
-### Base64 डिकोड
+### Base64 Decode
 
 `decode.base64`
 
-Base64 एन्कोडेड टेक्स्ट को डिकोड करें
+Decode Base64 encoded text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | डिकोड करने के लिए Base64 एन्कोडेड टेक्स्ट |
-| `encoding` | string | No | `utf-8` | डिकोड करने के लिए Base64 एन्कोडेड टेक्स्ट |
-| `url_safe` | boolean | No | `False` | आउटपुट के लिए कैरेक्टर एन्कोडिंग |
+| `text` | text | Yes | - | Base64 encoded text to decode |
+| `encoding` | string | No | `utf-8` | Character encoding for output |
+| `url_safe` | boolean | No | `False` | Input is URL-safe Base64 |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | इनपुट URL-सुरक्षित Base64 है |
-| `original` | string | डिकोड की गई स्ट्रिंग |
-| `valid` | boolean | डिकोड की गई स्ट्रिंग |
+| `result` | string | Decoded string |
+| `original` | string | Original Base64 input |
+| `valid` | boolean | Whether decoding was successful |
 
-### हेक्स डिकोड
+### Hex Decode
 
 `decode.hex`
 
-हेक्साडेसिमल को टेक्स्ट में डिकोड करें
+Decode hexadecimal to text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | डिकोड करने के लिए हेक्साडेसिमल टेक्स्ट |
-| `encoding` | string | No | `utf-8` | डिकोड करने के लिए हेक्साडेसिमल टेक्स्ट |
+| `text` | text | Yes | - | Hexadecimal text to decode |
+| `encoding` | string | No | `utf-8` | Character encoding for output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | आउटपुट के लिए कैरेक्टर एन्कोडिंग |
-| `original` | string | डिकोड की गई स्ट्रिंग |
-| `valid` | boolean | डिकोड की गई स्ट्रिंग |
+| `result` | string | Decoded string |
+| `original` | string | Original hex input |
+| `valid` | boolean | Whether decoding was successful |
 
-### URL डिकोड
+### URL Decode
 
 `decode.url`
 
-URL एन्कोडेड टेक्स्ट को डिकोड करें
+Decode URL encoded text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | डिकोड करने के लिए URL एन्कोडेड टेक्स्ट |
-| `plus_spaces` | boolean | No | `False` | डिकोड करने के लिए URL एन्कोडेड टेक्स्ट |
+| `text` | text | Yes | - | URL encoded text to decode |
+| `plus_spaces` | boolean | No | `False` | Treat + as space (form decoding) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | + को स्पेस के रूप में ट्रीट करें (फॉर्म डिकोडिंग) |
-| `original` | string | डिकोड की गई स्ट्रिंग |
+| `result` | string | Decoded string |
+| `original` | string | Original URL encoded input |
 
-### Base64 एन्कोड
+### Base64 Encode
 
 `encode.base64`
 
-पाठ को Base64 में एन्कोड करें
+Encode text to Base64
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | एन्कोड करने के लिए पाठ |
-| `encoding` | string | No | `utf-8` | एन्कोड करने के लिए पाठ |
-| `url_safe` | boolean | No | `False` | वर्ण एन्कोडिंग |
+| `text` | text | Yes | - | Text to encode |
+| `encoding` | string | No | `utf-8` | Character encoding |
+| `url_safe` | boolean | No | `False` | Use URL-safe Base64 encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | URL-सुरक्षित Base64 एन्कोडिंग का उपयोग करें |
-| `original` | string | Base64 एन्कोड किया गया स्ट्रिंग |
-| `length` | number | Base64 एन्कोड किया गया स्ट्रिंग |
+| `result` | string | Base64 encoded string |
+| `original` | string | Original input |
+| `length` | number | Length of encoded string |
 
-### हेक्स एन्कोड
+### Hex Encode
 
 `encode.hex`
 
-पाठ को हेक्साडेसिमल में एन्कोड करें
+Encode text to hexadecimal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | पाठ को हेक्स में एन्कोड करने के लिए |
-| `encoding` | string | No | `utf-8` | पाठ को हेक्स में एन्कोड करने के लिए |
-| `uppercase` | boolean | No | `False` | वर्ण एन्कोडिंग |
-| `separator` | string | No | - | बड़े अक्षरों में हेक्स अक्षरों का उपयोग करें |
+| `text` | text | Yes | - | Text to encode to hex |
+| `encoding` | string | No | `utf-8` | Character encoding |
+| `uppercase` | boolean | No | `False` | Use uppercase hex letters |
+| `separator` | string | No | - | Separator between hex bytes |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | हेक्स बाइट्स के बीच विभाजक |
-| `original` | string | हेक्स एन्कोड किया गया स्ट्रिंग |
-| `byte_count` | number | हेक्स एन्कोड किया गया स्ट्रिंग |
+| `result` | string | Hex encoded string |
+| `original` | string | Original input |
+| `byte_count` | number | Number of bytes encoded |
 
-### HTML एन्कोड
+### HTML Encode
 
 `encode.html`
 
-पाठ को HTML एंटिटी में एन्कोड करें
+Encode text to HTML entities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | HTML एंटिटी के रूप में एन्कोड करने के लिए पाठ |
-| `quote` | boolean | No | `True` | HTML एंटिटी के रूप में एन्कोड करने के लिए पाठ |
+| `text` | text | Yes | - | Text to encode as HTML entities |
+| `quote` | boolean | No | `True` | Also encode quote characters |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | उद्धरण वर्णों को भी एन्कोड करें |
-| `original` | string | HTML एन्कोड किया गया स्ट्रिंग |
+| `result` | string | HTML encoded string |
+| `original` | string | Original input |
 
-### URL एन्कोड
+### URL Encode
 
 `encode.url`
 
-URL एन्कोड पाठ (प्रतिशत एन्कोडिंग)
+URL encode text (percent encoding)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | URL एन्कोड करने के लिए पाठ |
-| `plus_spaces` | boolean | No | `False` | URL एन्कोड करने के लिए पाठ |
-| `safe` | string | No | - | स्पेस के लिए %20 की बजाय + का उपयोग करें (फॉर्म एन्कोडिंग) |
+| `text` | text | Yes | - | Text to URL encode |
+| `plus_spaces` | boolean | No | `False` | Use + instead of %20 for spaces (form encoding) |
+| `safe` | string | No | - | Characters that should not be encoded |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | वर्ण जो एन्कोड नहीं होने चाहिए |
-| `original` | string | URL एन्कोड किया गया स्ट्रिंग |
+| `result` | string | URL encoded string |
+| `original` | string | Original input |

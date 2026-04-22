@@ -6,23 +6,23 @@ Datetime operations, delay, MD5 hash, and random utilities.
 
 | Module | Description |
 |--------|-------------|
-| [Tambah Waktu](#tambah-waktu) | Tambah waktu ke datetime |
-| [Format TanggalWaktu](#format-tanggalwaktu) | Format datetime ke string |
-| [Ubah TanggalWaktu](#ubah-tanggalwaktu) | Parse string ke datetime |
-| [Kurangi Waktu](#kurangi-waktu) | Kurangi waktu dari datetime |
-| [Tanggal/Waktu Saat Ini](#tanggalwaktu-saat-ini) | Dapatkan tanggal dan waktu saat ini |
-| [Tunda/Tidur](#tundatidur) | Jeda eksekusi workflow untuk durasi tertentu |
-| [Hash MD5](#hash-md5) | Hitung hash MD5 dari teks |
-| [Angka Acak](#angka-acak) | Hasilkan angka acak dalam rentang |
-| [String Acak](#string-acak) | Hasilkan string acak atau UUID |
+| [Add Time](#add-time) | Add time to datetime |
+| [Format DateTime](#format-datetime) | Format datetime to string |
+| [Parse DateTime](#parse-datetime) | Parse string to datetime |
+| [Subtract Time](#subtract-time) | Subtract time from datetime |
+| [Current Date/Time](#current-datetime) | Get current date and time |
+| [Delay/Sleep](#delaysleep) | Pause workflow execution for specified duration |
+| [MD5 Hash](#md5-hash) | Calculate MD5 hash of text |
+| [Random Number](#random-number) | Generate random number in range |
+| [Random String](#random-string) | Generate random string or UUID |
 
 ## Modules
 
-### Tambah Waktu
+### Add Time
 
 `datetime.add`
 
-Tambah waktu ke datetime
+Add time to datetime
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ Tambah waktu ke datetime
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Hasil operasi |
-| `timestamp` | number | Hasil operasi |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Add 7 days
 
@@ -56,11 +56,11 @@ hours: 2
 minutes: 30
 ```
 
-### Format TanggalWaktu
+### Format DateTime
 
 `datetime.format`
 
-Format datetime ke string
+Format datetime to string
 
 **Parameters:**
 
@@ -73,8 +73,8 @@ Format datetime ke string
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Hasil operasi |
-| `timestamp` | number | Hasil operasi |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Format current time
 
@@ -90,11 +90,11 @@ datetime: 2024-01-15T10:30:00
 format: %B %d, %Y
 ```
 
-### Ubah TanggalWaktu
+### Parse DateTime
 
 `datetime.parse`
 
-Parse string ke datetime
+Parse string to datetime
 
 **Parameters:**
 
@@ -107,14 +107,14 @@ Parse string ke datetime
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Hasil operasi |
-| `timestamp` | number | Hasil operasi |
-| `year` | number | Hasil operasi |
-| `month` | number | Timestamp Unix |
-| `day` | number | Komponen tahun |
-| `hour` | number | Komponen bulan |
-| `minute` | number | Komponen hari |
-| `second` | number | Komponen jam |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
+| `year` | number | Year component |
+| `month` | number | Month component |
+| `day` | number | Day component |
+| `hour` | number | Hour component |
+| `minute` | number | Minute component |
+| `second` | number | Second component |
 
 **Example:** Parse ISO format
 
@@ -129,11 +129,11 @@ datetime_string: January 15, 2024
 format: %B %d, %Y
 ```
 
-### Kurangi Waktu
+### Subtract Time
 
 `datetime.subtract`
 
-Kurangi waktu dari datetime
+Subtract time from datetime
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ Kurangi waktu dari datetime
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Hasil operasi |
-| `timestamp` | number | Hasil operasi |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Subtract 7 days
 
@@ -166,28 +166,28 @@ datetime: 2024-01-15T10:00:00
 hours: 1
 ```
 
-### Tanggal/Waktu Saat Ini
+### Current Date/Time
 
 `utility.datetime.now`
 
-Dapatkan tanggal dan waktu saat ini
+Get current date and time
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | Format output |
-| `custom_format` | string | No | - | Format strftime Python (jika format=custom) |
-| `timezone` | string | No | `UTC` | Format strftime Python (jika format=custom) |
+| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | Output format |
+| `custom_format` | string | No | - | Python strftime format (if format=custom) |
+| `timezone` | string | No | `UTC` | Timezone (default: UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Zona waktu (default: UTC) |
-| `datetime` | string | Status operasi (sukses/error) |
-| `timestamp` | number | Status operasi (sukses/error) |
-| `iso` | string | Tanggal/waktu terformat |
+| `status` | string | Operation status (success/error) |
+| `datetime` | string | Formatted date/time |
+| `timestamp` | number | Unix timestamp |
+| `iso` | string | ISO format |
 
 **Example:** Example
 
@@ -201,25 +201,25 @@ format: iso
 format: unix
 ```
 
-### Tunda/Tidur
+### Delay/Sleep
 
 `utility.delay`
 
-Jeda eksekusi workflow untuk durasi tertentu
+Pause workflow execution for specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `duration_ms` | number | No | `1000` | Berapa lama menunggu dalam milidetik |
-| `duration_seconds` | number | No | - | Alternatif: durasi dalam detik |
+| `duration_ms` | number | No | `1000` | How long to wait in milliseconds |
+| `duration_seconds` | number | No | - | Alternative: duration in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Alternatif: durasi dalam detik |
-| `waited_ms` | number | Status operasi (sukses/error) |
+| `status` | string | Operation status (success/error) |
+| `waited_ms` | number | Actual wait time in ms |
 
 **Example:** Example
 
@@ -233,25 +233,25 @@ duration_seconds: 2
 duration_ms: 500
 ```
 
-### Hash MD5
+### MD5 Hash
 
 `utility.hash.md5`
 
-Hitung hash MD5 dari teks
+Calculate MD5 hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Teks untuk di-hash |
-| `encoding` | string | No | `utf-8` | Teks untuk di-hash |
+| `text` | text | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Encoding teks |
-| `hash` | string | Encoding teks |
+| `status` | string | Operation status (success/error) |
+| `hash` | string | MD5 hash (hexadecimal) |
 
 **Example:** Example
 
@@ -259,26 +259,26 @@ Hitung hash MD5 dari teks
 text: Hello World
 ```
 
-### Angka Acak
+### Random Number
 
 `utility.random.number`
 
-Hasilkan angka acak dalam rentang
+Generate random number in range
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `min` | number | No | `0` | Nilai minimum (inklusif) |
-| `max` | number | No | `100` | Nilai minimum (inklusif) |
-| `decimals` | number | No | `0` | Nilai maksimum (inklusif) |
+| `min` | number | No | `0` | Minimum value (inclusive) |
+| `max` | number | No | `100` | Maximum value (inclusive) |
+| `decimals` | number | No | `0` | Number of decimal places (0 for integers) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Jumlah tempat desimal (0 untuk integer) |
-| `value` | number | Status operasi (sukses/error) |
+| `status` | string | Operation status (success/error) |
+| `value` | number | Random number |
 
 **Example:** Example
 
@@ -296,25 +296,25 @@ max: 1
 decimals: 2
 ```
 
-### String Acak
+### Random String
 
 `utility.random.string`
 
-Hasilkan string acak atau UUID
+Generate random string or UUID
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | No | `16` | Panjang string |
-| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | Panjang string |
+| `length` | number | No | `16` | String length |
+| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | Which characters to use |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Status operasi (sukses/error) |
-| `value` | string | Status operasi (sukses/error) |
+| `status` | string | Operation status (success/error) |
+| `value` | string | Random string |
 
 **Example:** Example
 

@@ -6,33 +6,33 @@ Send messages via Slack, Discord, Teams, Telegram, email, SMS, and WhatsApp.
 
 | Module | Description |
 |--------|-------------|
-| [Fazer Chamada Twilio](#fazer-chamada-twilio) | Fazer chamada de voz via Twilio |
-| [Enviar SMS Twilio](#enviar-sms-twilio) | Enviar mensagem SMS via Twilio |
-| [Enviar Mensagem Discord](#enviar-mensagem-discord) | Enviar mensagem para Discord via webhook |
-| [Enviar Email](#enviar-email) | Enviar email via SMTP |
-| [Enviar Mensagem Slack](#enviar-mensagem-slack) | Enviar mensagem para Slack via webhook |
-| [Enviar Mensagem para o Teams](#enviar-mensagem-para-o-teams) | Enviar mensagem para o Microsoft Teams via webhook de entrada |
-| [Enviar Mensagem Telegram](#enviar-mensagem-telegram) | Enviar mensagem via API de Bot do Telegram |
-| [Enviar Mensagem pelo WhatsApp](#enviar-mensagem-pelo-whatsapp) | Enviar mensagem via WhatsApp Business API (Meta Cloud API) |
+| [Twilio Make Call](#twilio-make-call) | Make a voice call via Twilio |
+| [Twilio Send SMS](#twilio-send-sms) | Send SMS message via Twilio |
+| [Send Discord Message](#send-discord-message) | Send message to Discord via webhook |
+| [Send Email](#send-email) | Send email via SMTP |
+| [Send Slack Message](#send-slack-message) | Send message to Slack via webhook |
+| [Send Teams Message](#send-teams-message) | Send message to Microsoft Teams via incoming webhook |
+| [Send Telegram Message](#send-telegram-message) | Send message via Telegram Bot API |
+| [Send WhatsApp Message](#send-whatsapp-message) | Send message via WhatsApp Business API (Meta Cloud API) |
 | [Send Notification](#send-notification) | Send notification to Telegram, Discord, Slack, LINE, or any webhook URL |
 
 ## Modules
 
-### Fazer Chamada Twilio
+### Twilio Make Call
 
 `communication.twilio.make_call`
 
-Fazer chamada de voz via Twilio
+Make a voice call via Twilio
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `account_sid` | string | No | - | SID da Conta Twilio (ou use env TWILIO_ACCOUNT_SID) |
-| `auth_token` | string | No | - | Token de Autenticacao Twilio (ou use env TWILIO_AUTH_TOKEN) |
-| `from_number` | string | Yes | - | Token de Autenticacao Twilio (ou use env TWILIO_AUTH_TOKEN) |
-| `to_number` | string | Yes | - | Numero de telefone Twilio |
-| `twiml_url` | string | Yes | - | Numero de telefone do destinatario |
+| `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
+| `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
+| `from_number` | string | Yes | - | Twilio phone number |
+| `to_number` | string | Yes | - | Recipient phone number |
+| `twiml_url` | string | Yes | - | URL to TwiML instructions |
 
 **Output:**
 
@@ -51,30 +51,30 @@ to_number: +0987654321
 twiml_url: https://example.com/voice.xml
 ```
 
-### Enviar SMS Twilio
+### Twilio Send SMS
 
 `communication.twilio.send_sms`
 
-Enviar mensagem SMS via Twilio
+Send SMS message via Twilio
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `account_sid` | string | No | - | SID da Conta Twilio (ou use env TWILIO_ACCOUNT_SID) |
-| `auth_token` | string | No | - | Token de Autenticacao Twilio (ou use env TWILIO_AUTH_TOKEN) |
-| `from_number` | string | Yes | - | Numero de telefone Twilio (ex: +1234567890) |
-| `to_number` | string | Yes | - | Numero de telefone Twilio (ex: +1234567890) |
-| `message` | string | Yes | - | Numero de telefone do destinatario (ex: +1234567890) |
+| `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
+| `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
+| `from_number` | string | Yes | - | Twilio phone number (e.g. +1234567890) |
+| `to_number` | string | Yes | - | Recipient phone number (e.g. +1234567890) |
+| `message` | string | Yes | - | SMS message text |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sid` | string | Texto da mensagem SMS |
-| `status` | string | Texto da mensagem SMS |
-| `to` | string | O sid |
-| `from` | string | Status da operacao (sucesso/erro) |
+| `sid` | string | The sid |
+| `status` | string | Operation status (success/error) |
+| `to` | string | The to |
+| `from` | string | The from |
 
 **Example:** Send notification SMS
 
@@ -92,28 +92,28 @@ to_number: +0987654321
 message: Your verification code is: 123456
 ```
 
-### Enviar Mensagem Discord
+### Send Discord Message
 
 `notification.discord.send_message`
 
-Enviar mensagem para Discord via webhook
+Send message to Discord via webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | No | - | URL de webhook do Discord (de env.DISCORD_WEBHOOK_URL ou entrada direta) |
-| `content` | string | Yes | - | URL de webhook do Discord (de env.DISCORD_WEBHOOK_URL ou entrada direta) |
-| `username` | string | No | - | A mensagem para enviar |
-| `avatar_url` | string | No | - | Sobrescrever nome de usuario do bot (opcional) |
+| `webhook_url` | string | No | - | Discord webhook URL (from env.DISCORD_WEBHOOK_URL or direct input) |
+| `content` | string | Yes | - | The message to send |
+| `username` | string | No | - | Override bot username (optional) |
+| `avatar_url` | string | No | - | Bot avatar image URL (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | URL da imagem do avatar do bot (opcional) |
-| `sent` | boolean | Status da operacao (sucesso/erro) |
-| `message` | string | Enviar mensagem para canal Discord via URL de webhook |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -121,33 +121,33 @@ Enviar mensagem para Discord via webhook
 content: Workflow completed successfully!
 ```
 
-### Enviar Email
+### Send Email
 
 `notification.email.send`
 
-Enviar email via SMTP
+Send email via SMTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `smtp_server` | string | Yes | - | Hostname do servidor SMTP (ex: smtp.gmail.com) |
-| `smtp_port` | number | No | `587` | Hostname do servidor SMTP (ex: smtp.gmail.com) |
-| `username` | string | Yes | - | Porta SMTP (587 para TLS, 465 para SSL) |
-| `password` | string | Yes | - | Usuario SMTP |
-| `from_email` | string | Yes | - | Senha SMTP (use variavel de ambiente!) |
-| `to_email` | string | Yes | - | Endereco de email do remetente |
-| `subject` | string | Yes | - | Endereco de email do destinatario |
-| `body` | text | Yes | - | Assunto do email |
-| `html` | boolean | No | `False` | Corpo do email (HTML suportado) |
+| `smtp_server` | string | Yes | - | SMTP server hostname (e.g., smtp.gmail.com) |
+| `smtp_port` | number | No | `587` | SMTP port (587 for TLS, 465 for SSL) |
+| `username` | string | Yes | - | SMTP username |
+| `password` | string | Yes | - | SMTP password (use env variable!) |
+| `from_email` | string | Yes | - | Sender email address |
+| `to_email` | string | Yes | - | Recipient email address |
+| `subject` | string | Yes | - | Email subject |
+| `body` | text | Yes | - | Email body (HTML supported) |
+| `html` | boolean | No | `False` | Send body as HTML |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Enviar corpo como HTML |
-| `sent` | boolean | Status da operacao (sucesso/erro) |
-| `message` | string | Status da operacao (sucesso/erro) |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -160,29 +160,29 @@ subject: Workflow Complete
 body: Your automation workflow has finished successfully.
 ```
 
-### Enviar Mensagem Slack
+### Send Slack Message
 
 `notification.slack.send_message`
 
-Enviar mensagem para Slack via webhook
+Send message to Slack via webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | No | - | URL de webhook do Slack (de env.SLACK_WEBHOOK_URL ou entrada direta) |
-| `text` | string | Yes | - | URL de webhook do Slack (de env.SLACK_WEBHOOK_URL ou entrada direta) |
-| `channel` | string | No | - | A mensagem para enviar |
-| `username` | string | No | - | Sobrescrever canal padrao (opcional) |
-| `icon_emoji` | string | No | - | Sobrescrever nome de usuario do bot (opcional) |
+| `webhook_url` | string | No | - | Slack webhook URL (from env.SLACK_WEBHOOK_URL or direct input) |
+| `text` | string | Yes | - | The message to send |
+| `channel` | string | No | - | Override default channel (optional) |
+| `username` | string | No | - | Override bot username (optional) |
+| `icon_emoji` | string | No | - | Bot icon emoji (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Emoji de icone do bot (opcional) |
-| `sent` | boolean | Status da operacao (sucesso/erro) |
-| `message` | string | Status da operacao (sucesso/erro) |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -199,28 +199,28 @@ username: Alert Bot
 icon_emoji: :warning:
 ```
 
-### Enviar Mensagem para o Teams
+### Send Teams Message
 
 `notification.teams.send_message`
 
-Enviar mensagem para o Microsoft Teams via webhook de entrada
+Send message to Microsoft Teams via incoming webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | Yes | - | URL do webhook de entrada do Microsoft Teams |
-| `message` | text | Yes | - | O texto da mensagem para enviar |
-| `title` | string | No | - | Título do cartão de mensagem (opcional) |
-| `color` | string | No | - | Código hexadecimal da cor do tema (opcional) |
-| `sections` | array | No | - | Seções adicionais do MessageCard (opcional) |
+| `webhook_url` | string | Yes | - | Microsoft Teams incoming webhook URL |
+| `message` | text | Yes | - | The message text to send |
+| `title` | string | No | - | Message card title (optional) |
+| `color` | string | No | - | Theme color hex code (optional) |
+| `sections` | array | No | - | Additional MessageCard sections (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Se a operação foi bem-sucedida |
-| `data` | object | Dados de resposta com status e webhook_url |
+| `ok` | boolean | Whether the operation succeeded |
+| `data` | object | Response data with status and webhook_url |
 
 **Example:** Example
 
@@ -231,29 +231,29 @@ title: Deploy Status
 color: #00FF00
 ```
 
-### Enviar Mensagem Telegram
+### Send Telegram Message
 
 `notification.telegram.send_message`
 
-Enviar mensagem via API de Bot do Telegram
+Send message via Telegram Bot API
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bot_token` | string | No | - | Token do bot Telegram (de env.TELEGRAM_BOT_TOKEN ou entrada direta) |
-| `chat_id` | string | Yes | - | Token do bot Telegram (de env.TELEGRAM_BOT_TOKEN ou entrada direta) |
-| `text` | string | Yes | - | ID do chat do Telegram ou nome de usuario do canal |
-| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | A mensagem para enviar |
+| `bot_token` | string | No | - | Telegram bot token (from env.TELEGRAM_BOT_TOKEN or direct input) |
+| `chat_id` | string | Yes | - | Telegram chat ID or channel username |
+| `text` | string | Yes | - | The message to send |
+| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | Message formatting mode |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Modo de formatacao da mensagem |
-| `sent` | boolean | Status da operacao (sucesso/erro) |
-| `message_id` | number | Status da operacao (sucesso/erro) |
-| `message` | string | Se a notificacao foi enviada |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message_id` | number | Message identifier |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -270,30 +270,30 @@ text: *Bold* _italic_ `code`
 parse_mode: Markdown
 ```
 
-### Enviar Mensagem pelo WhatsApp
+### Send WhatsApp Message
 
 `notification.whatsapp.send_message`
 
-Enviar mensagem via WhatsApp Business API (Meta Cloud API)
+Send message via WhatsApp Business API (Meta Cloud API)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `phone_number_id` | string | Yes | - | ID do número de telefone do remetente do WhatsApp Business |
-| `to` | string | Yes | - | Número de telefone do destinatário com código do país |
-| `message` | text | Yes | - | O texto da mensagem para enviar |
-| `access_token` | password | Yes | - | Token de acesso Meta para WhatsApp Business API |
-| `message_type` | select (`text`, `template`) | No | `text` | Tipo de mensagem para enviar |
-| `template_name` | string | No | - | Nome do modelo de mensagem do WhatsApp (necessário se message_type for modelo) |
-| `template_language` | string | No | `en` | Código do idioma do modelo |
+| `phone_number_id` | string | Yes | - | WhatsApp Business sender phone number ID |
+| `to` | string | Yes | - | Recipient phone number with country code |
+| `message` | text | Yes | - | The message text to send |
+| `access_token` | password | Yes | - | Meta access token for WhatsApp Business API |
+| `message_type` | select (`text`, `template`) | No | `text` | Type of message to send |
+| `template_name` | string | No | - | WhatsApp message template name (required if message_type is "template") |
+| `template_language` | string | No | `en` | Template language code |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Se a operação foi bem-sucedida |
-| `data` | object | Dados de resposta com status, message_id e para |
+| `ok` | boolean | Whether the operation succeeded |
+| `data` | object | Response data with status, message_id, and to |
 
 **Example:** Example
 

@@ -6,10 +6,10 @@ GitHub API, HTTP requests, and search engine integrations.
 
 | Module | Description |
 |--------|-------------|
-| [GitHub 이슈 생성](#github-이슈-생성) | GitHub 저장소에 새 이슈 생성 |
+| [Create GitHub Issue](#create-github-issue) | Create a new issue in a GitHub repository |
 | [Create GitHub Pull Request](#create-github-pull-request) | Create a new pull request in a GitHub repository |
-| [GitHub 저장소 정보 가져오기](#github-저장소-정보-가져오기) | GitHub 저장소에 대한 정보 가져오기 |
-| [GitHub 이슈 목록](#github-이슈-목록) | GitHub 저장소의 이슈 목록 가져오기 |
+| [Get GitHub Repository](#get-github-repository) | Get information about a GitHub repository |
+| [List GitHub Issues](#list-github-issues) | List issues from a GitHub repository |
 | [List GitHub Repositories](#list-github-repositories) | List repositories for a GitHub user or the authenticated user |
 | [Google Search (API)](#google-search-api) | Use Google Custom Search API to search keywords |
 | [HTTP GET Request](#http-get-request) | Send HTTP GET request to any URL |
@@ -18,11 +18,11 @@ GitHub API, HTTP requests, and search engine integrations.
 
 ## Modules
 
-### GitHub 이슈 생성
+### Create GitHub Issue
 
 `api.github.create_issue`
 
-GitHub 저장소에 새 이슈 생성
+Create a new issue in a GitHub repository
 
 **Parameters:**
 
@@ -94,32 +94,32 @@ head: feature/auth
 base: main
 ```
 
-### GitHub 저장소 정보 가져오기
+### Get GitHub Repository
 
 `api.github.get_repo`
 
-GitHub 저장소에 대한 정보 가져오기
+Get information about a GitHub repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `owner` | string | Yes | - | 저장소 소유자 (사용자 이름 또는 조직) |
-| `repo` | string | Yes | - | 저장소 소유자 (사용자 이름 또는 조직) |
-| `token` | string | No | - | 저장소 이름 |
+| `owner` | string | Yes | - | Repository owner (username or organization) |
+| `repo` | string | Yes | - | Repository name |
+| `token` | string | No | - | GitHub Personal Access Token (optional but recommended) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | GitHub Personal Access Token (선택사항이지만 권장) |
-| `repo` | object | 작업 상태 (성공/오류) |
-| `name` | string | 작업 상태 (성공/오류) |
-| `full_name` | string | 저장소 정보 |
-| `description` | string | 항목 이름 |
-| `stars` | number | 전체 저장소 이름 |
-| `forks` | number | 항목 설명 |
-| `url` | string | GitHub 저장소 정보 가져오기 |
+| `status` | string | Operation status (success/error) |
+| `repo` | object | Repository information |
+| `name` | string | Name of the item |
+| `full_name` | string | Full repository name |
+| `description` | string | Item description |
+| `stars` | number | Number of stars |
+| `forks` | number | Number of forks |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -128,11 +128,11 @@ owner: octocat
 repo: Hello-World
 ```
 
-### GitHub 이슈 목록
+### List GitHub Issues
 
 `api.github.list_issues`
 
-GitHub 저장소의 이슈 목록 가져오기
+List issues from a GitHub repository
 
 **Parameters:**
 
@@ -219,10 +219,10 @@ Use Google Custom Search API to search keywords
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 |
-| `data` | array | 검색 결과 데이터 |
-| `count` | number | 검색 결과 수 |
-| `total_results` | number | 총 결과 수 |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
+| `total_results` | number | Total number of search results available |
 
 **Example:** Search Python tutorials
 
@@ -251,10 +251,10 @@ Send HTTP GET request to any URL
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | HTTP 상태 코드 |
-| `headers` | object | 응답 헤더 |
-| `body` | string | 응답 본문 |
-| `json` | object | JSON 응답 (해당하는 경우) |
+| `status_code` | number | HTTP status code |
+| `headers` | object | HTTP headers |
+| `body` | string | Response body content |
+| `json` | object | Parsed JSON response data |
 
 **Example:** Fetch API data
 

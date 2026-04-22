@@ -6,33 +6,33 @@ Execute JavaScript, Python, or shell commands in isolated environments.
 
 | Module | Description |
 |--------|-------------|
-| [Chạy JavaScript](#chạy-javascript) | Chạy mã JavaScript qua Node.js với thời gian chờ |
-| [Chạy Python](#chạy-python) | Chạy mã Python trong một tiến trình phụ với thời gian chờ |
-| [Chạy Shell](#chạy-shell) | Chạy lệnh shell với thời gian chờ và kiểm soát môi trường |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code via Node.js with timeout |
+| [Execute Python](#execute-python) | Execute Python code in a subprocess with timeout |
+| [Execute Shell](#execute-shell) | Execute a shell command with timeout and environment control |
 
 ## Modules
 
-### Chạy JavaScript
+### Execute JavaScript
 
 `sandbox.execute_js`
 
-Chạy mã JavaScript qua Node.js với thời gian chờ
+Execute JavaScript code via Node.js with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | Mã JavaScript để chạy qua Node.js |
-| `timeout` | number | No | `10` | Thời gian chờ chạy tính bằng giây |
+| `code` | string | Yes | - | JavaScript code to execute via Node.js |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | Đầu ra chuẩn từ script |
-| `stderr` | string | Lỗi chuẩn từ script |
-| `exit_code` | number | Mã thoát của tiến trình (0 = thành công) |
-| `execution_time_ms` | number | Thời gian chạy tính bằng mili giây |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple console.log
 
@@ -48,28 +48,28 @@ code: const data = { name: "test", value: 42 };
 console.log(JSON.stringify(data, null, 2));
 ```
 
-### Chạy Python
+### Execute Python
 
 `sandbox.execute_python`
 
-Chạy mã Python trong một tiến trình phụ với thời gian chờ
+Execute Python code in a subprocess with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | Mã Python để chạy |
-| `timeout` | number | No | `10` | Thời gian chờ chạy tính bằng giây |
-| `allowed_modules` | array | No | - | Danh sách trắng các mô-đun có thể nhập (để trống để cho phép tất cả) |
+| `code` | string | Yes | - | Python code to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `allowed_modules` | array | No | - | Whitelist of importable modules (leave empty to allow all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | Đầu ra chuẩn từ script |
-| `stderr` | string | Lỗi chuẩn từ script |
-| `exit_code` | number | Mã thoát của tiến trình (0 = thành công) |
-| `execution_time_ms` | number | Thời gian chạy tính bằng mili giây |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple print
 
@@ -86,29 +86,29 @@ print(math.pi)
 allowed_modules: ["math"]
 ```
 
-### Chạy Shell
+### Execute Shell
 
 `sandbox.execute_shell`
 
-Chạy lệnh shell với thời gian chờ và kiểm soát môi trường
+Execute a shell command with timeout and environment control
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `command` | string | Yes | - | Lệnh shell để chạy |
-| `timeout` | number | No | `10` | Thời gian chờ chạy tính bằng giây |
-| `working_dir` | string | No | - | Thư mục làm việc cho lệnh |
-| `env` | object | No | - | Các biến môi trường bổ sung để thiết lập (kết hợp với môi trường hiện tại) |
+| `command` | string | Yes | - | Shell command to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `working_dir` | string | No | - | Working directory for the command |
+| `env` | object | No | - | Additional environment variables to set (merged with current env) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | Đầu ra chuẩn từ lệnh |
-| `stderr` | string | Lỗi chuẩn từ lệnh |
-| `exit_code` | number | Mã thoát của tiến trình (0 = thành công) |
-| `execution_time_ms` | number | Thời gian chạy tính bằng mili giây |
+| `stdout` | string | Standard output from the command |
+| `stderr` | string | Standard error from the command |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple echo
 

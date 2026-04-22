@@ -6,148 +6,148 @@ Runtime type checking utilities.
 
 | Module | Description |
 |--------|-------------|
-| [是否為陣列](#是否為陣列) | 檢查值是否為陣列 |
-| [是否為空](#是否為空) | 檢查值是否為空 |
-| [是否為 Null](#是否為-null) | 檢查值是否為 null/None |
-| [是否為數字](#是否為數字) | 檢查值是否為數字 |
-| [是否為物件](#是否為物件) | 檢查值是否為物件 |
-| [是否為字串](#是否為字串) | 檢查值是否為字串 |
-| [類型](#類型) | 取得值的類型 |
+| [Is Array](#is-array) | Check if a value is an array |
+| [Is Empty](#is-empty) | Check if a value is empty |
+| [Is Null](#is-null) | Check if a value is null/None |
+| [Is Number](#is-number) | Check if a value is a number |
+| [Is Object](#is-object) | Check if a value is an object |
+| [Is String](#is-string) | Check if a value is a string |
+| [Type Of](#type-of) | Get the type of a value |
 
 ## Modules
 
-### 是否為陣列
+### Is Array
 
 `check.is_array`
 
-檢查值是否為陣列
+Check if a value is an array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 要檢查的值 |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_array` | boolean | 要檢查的值 |
-| `length` | number | 值是否為陣列 |
+| `is_array` | boolean | Whether value is an array |
+| `length` | number | Array length (if array) |
 
-### 是否為空
+### Is Empty
 
 `check.is_empty`
 
-檢查值是否為空
+Check if a value is empty
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 要檢查的值 |
-| `trim_strings` | boolean | No | `True` | 要檢查的值 |
+| `value` | any | Yes | - | Value to check |
+| `trim_strings` | boolean | No | `True` | Treat whitespace-only strings as empty |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_empty` | boolean | 將僅有空白的字串視為空 |
-| `type` | string | 值是否為空 |
+| `is_empty` | boolean | Whether value is empty |
+| `type` | string | Type of value |
 
-### 是否為 Null
+### Is Null
 
 `check.is_null`
 
-檢查值是否為 null/None
+Check if a value is null/None
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | No | - | 要檢查的值 |
+| `value` | any | No | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_null` | boolean | 要檢查的值 |
+| `is_null` | boolean | Whether value is null |
 
-### 是否為數字
+### Is Number
 
 `check.is_number`
 
-檢查值是否為數字
+Check if a value is a number
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 要檢查的值 |
-| `parse_string` | boolean | No | `False` | 要檢查的值 |
-| `integer_only` | boolean | No | `False` | 將數字字串視為數字 |
+| `value` | any | Yes | - | Value to check |
+| `parse_string` | boolean | No | `False` | Consider numeric strings as numbers |
+| `integer_only` | boolean | No | `False` | Only accept integers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_number` | boolean | 僅接受整數 |
-| `is_integer` | boolean | 值是否為數字 |
-| `is_float` | boolean | 值是否為數字 |
+| `is_number` | boolean | Whether value is a number |
+| `is_integer` | boolean | Whether value is an integer |
+| `is_float` | boolean | Whether value is a float |
 
-### 是否為物件
+### Is Object
 
 `check.is_object`
 
-檢查值是否為物件
+Check if a value is an object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 要檢查的值 |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_object` | boolean | 要檢查的值 |
-| `keys` | array | 值是否為物件 |
+| `is_object` | boolean | Whether value is an object |
+| `keys` | array | Object keys (if object) |
 
-### 是否為字串
+### Is String
 
 `check.is_string`
 
-檢查值是否為字串
+Check if a value is a string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | Yes | - | 要檢查的值 |
+| `value` | any | Yes | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_string` | boolean | 要檢查的值 |
-| `length` | number | 值是否為字串 |
+| `is_string` | boolean | Whether value is a string |
+| `length` | number | String length (if string) |
 
-### 類型
+### Type Of
 
 `check.type_of`
 
-取得值的類型
+Get the type of a value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | any | No | - | 要檢查的值 |
+| `value` | any | No | - | Value to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `type` | string | 要檢查的值 |
-| `is_primitive` | boolean | 類型名稱 |
+| `type` | string | Type name |
+| `is_primitive` | boolean | Whether type is primitive |

@@ -6,38 +6,38 @@ Build, run, inspect, and manage Docker containers.
 
 | Module | Description |
 |--------|-------------|
-| [สร้าง Docker Image](#สร้าง-docker-image) | สร้าง Docker image จาก Dockerfile |
-| [ตรวจสอบ Docker Container](#ตรวจสอบ-docker-container) | รับข้อมูลรายละเอียดเกี่ยวกับ Docker container |
-| [รับบันทึกคอนเทนเนอร์](#รับบันทึกคอนเทนเนอร์) | รับบันทึกจากคอนเทนเนอร์ Docker |
-| [รายการคอนเทนเนอร์ Docker](#รายการคอนเทนเนอร์-docker) | รายการคอนเทนเนอร์ Docker |
-| [รัน Docker Container](#รัน-docker-container) | รัน Docker container จาก image |
-| [หยุด Docker Container](#หยุด-docker-container) | หยุด Docker container ที่กำลังรัน |
+| [Build Docker Image](#build-docker-image) | Build a Docker image from a Dockerfile |
+| [Inspect Docker Container](#inspect-docker-container) | Get detailed information about a Docker container |
+| [Get Container Logs](#get-container-logs) | Get logs from a Docker container |
+| [List Docker Containers](#list-docker-containers) | List Docker containers |
+| [Run Docker Container](#run-docker-container) | Run a Docker container from an image |
+| [Stop Docker Container](#stop-docker-container) | Stop a running Docker container |
 
 ## Modules
 
-### สร้าง Docker Image
+### Build Docker Image
 
 `docker.build`
 
-สร้าง Docker image จาก Dockerfile
+Build a Docker image from a Dockerfile
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | เส้นทางไปยังไดเรกทอรีบริบทการสร้าง |
-| `tag` | string | Yes | - | ตั้งชื่อและแท็กให้กับ image (เช่น myapp:latest) |
-| `dockerfile` | string | No | - | เส้นทางไปยัง Dockerfile (สัมพันธ์กับบริบทการสร้าง) |
-| `build_args` | object | No | - | ตัวแปรขณะสร้าง (เช่น {"NODE_ENV": "production"}) |
-| `no_cache` | boolean | No | `False` | ไม่ใช้แคชเมื่อสร้าง image |
+| `path` | string | Yes | - | Path to the build context directory |
+| `tag` | string | Yes | - | Name and optionally tag the image (e.g. myapp:latest) |
+| `dockerfile` | string | No | - | Path to the Dockerfile (relative to build context) |
+| `build_args` | object | No | - | Build-time variables (e.g. {"NODE_ENV": "production"}) |
+| `no_cache` | boolean | No | `False` | Do not use cache when building the image |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `image_id` | string | ID ของ image ที่สร้าง |
-| `tag` | string | แท็กที่ใช้กับ image |
-| `size` | string | ขนาดของ image ที่สร้าง |
+| `image_id` | string | ID of the built image |
+| `tag` | string | Tag applied to the image |
+| `size` | string | Size of the built image |
 
 **Example:** Build from current directory
 
@@ -56,29 +56,29 @@ build_args: {"NODE_ENV": "production"}
 no_cache: true
 ```
 
-### ตรวจสอบ Docker Container
+### Inspect Docker Container
 
 `docker.inspect_container`
 
-รับข้อมูลรายละเอียดเกี่ยวกับ Docker container
+Get detailed information about a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | ID หรือชื่อของ container ที่จะตรวจสอบ |
+| `container` | string | Yes | - | Container ID or name to inspect |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | ID สั้นของ container |
-| `name` | string | ชื่อคอนเทนเนอร์ |
-| `state` | object | สถานะของคอนเทนเนอร์ (สถานะ, กำลังทำงาน, pid, รหัสออก, ฯลฯ) |
-| `image` | string | อิมเมจที่ใช้โดยคอนเทนเนอร์ |
-| `network_settings` | object | การตั้งค่าเครือข่าย (IP, พอร์ต, เครือข่าย) |
-| `mounts` | array | การติดตั้งโวลุ่มและการเชื่อมโยง |
-| `config` | object | การตั้งค่าคอนเทนเนอร์ (env, cmd, labels, ฯลฯ) |
+| `id` | string | Short container ID |
+| `name` | string | Container name |
+| `state` | object | Container state (status, running, pid, exit_code, etc.) |
+| `image` | string | Image used by the container |
+| `network_settings` | object | Network configuration (IP, ports, networks) |
+| `mounts` | array | Volume and bind mounts |
+| `config` | object | Container configuration (env, cmd, labels, etc.) |
 
 **Example:** Inspect a container by name
 
@@ -92,27 +92,27 @@ container: my-nginx
 container: a1b2c3d4e5f6
 ```
 
-### รับบันทึกคอนเทนเนอร์
+### Get Container Logs
 
 `docker.logs`
 
-รับบันทึกจากคอนเทนเนอร์ Docker
+Get logs from a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | ID หรือชื่อคอนเทนเนอร์ |
-| `tail` | number | No | `100` | จำนวนบรรทัดที่จะแสดงจากท้ายบันทึก |
-| `follow` | boolean | No | `False` | ติดตามผลบันทึก (สตรีมจนกว่าจะหมดเวลา) |
-| `timestamps` | boolean | No | `False` | แสดงเวลาประทับในผลบันทึก |
+| `container` | string | Yes | - | Container ID or name |
+| `tail` | number | No | `100` | Number of lines to show from the end of the logs |
+| `follow` | boolean | No | `False` | Follow log output (streams until timeout) |
+| `timestamps` | boolean | No | `False` | Show timestamps in log output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `logs` | string | ผลบันทึกของคอนเทนเนอร์ |
-| `lines` | number | จำนวนบรรทัดบันทึกที่คืนค่า |
+| `logs` | string | Container log output |
+| `lines` | number | Number of log lines returned |
 
 **Example:** Get last 50 lines
 
@@ -129,25 +129,25 @@ tail: 100
 timestamps: true
 ```
 
-### รายการคอนเทนเนอร์ Docker
+### List Docker Containers
 
 `docker.ps`
 
-รายการคอนเทนเนอร์ Docker
+List Docker containers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `all` | boolean | No | `False` | แสดงคอนเทนเนอร์ทั้งหมด (ค่าเริ่มต้นแสดงเฉพาะที่กำลังทำงาน) |
-| `filters` | object | No | - | กรองคอนเทนเนอร์ (เช่น {"name": "my-app", "status": "running"}) |
+| `all` | boolean | No | `False` | Show all containers (default shows just running) |
+| `filters` | object | No | - | Filter containers (e.g. {"name": "my-app", "status": "running"}) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `containers` | array | รายการคอนเทนเนอร์พร้อม id, ชื่อ, อิมเมจ, สถานะ, พอร์ต |
-| `count` | number | จำนวนคอนเทนเนอร์ที่พบ |
+| `containers` | array | List of containers with id, name, image, status, ports |
+| `count` | number | Number of containers found |
 
 **Example:** List running containers
 
@@ -166,32 +166,32 @@ all: true
 filters: {"name": "nginx"}
 ```
 
-### รัน Docker Container
+### Run Docker Container
 
 `docker.run`
 
-รัน Docker container จาก image
+Run a Docker container from an image
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image` | string | Yes | - | Docker image ที่จะรัน (เช่น nginx:latest) |
-| `command` | string | No | - | คำสั่งที่จะรันใน container |
-| `name` | string | No | - | ตั้งชื่อให้กับ container |
-| `ports` | object | No | - | การแมปพอร์ตเป็น host:container (เช่น {"8080": "80"}) |
-| `volumes` | object | No | - | การแมปโวลุ่มเป็น host_path:container_path |
-| `env` | object | No | - | ตัวแปรสภาพแวดล้อมที่จะตั้งค่าใน container |
-| `detach` | boolean | No | `True` | รัน container ในพื้นหลัง |
-| `remove` | boolean | No | `False` | ลบ container อัตโนมัติเมื่อสิ้นสุดการทำงาน |
-| `network` | string | No | - | เชื่อมต่อ container เข้ากับเครือข่าย |
+| `image` | string | Yes | - | Docker image to run (e.g. nginx:latest) |
+| `command` | string | No | - | Command to run inside the container |
+| `name` | string | No | - | Assign a name to the container |
+| `ports` | object | No | - | Port mappings as host:container (e.g. {"8080": "80"}) |
+| `volumes` | object | No | - | Volume mappings as host_path:container_path |
+| `env` | object | No | - | Environment variables to set in the container |
+| `detach` | boolean | No | `True` | Run container in background |
+| `remove` | boolean | No | `False` | Automatically remove the container when it exits |
+| `network` | string | No | - | Connect the container to a network |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | ID ของ container ที่สร้าง |
-| `status` | string | สถานะของ container หลังจากรัน |
+| `container_id` | string | ID of the created container |
+| `status` | string | Container status after run |
 
 **Example:** Run Nginx web server
 
@@ -211,25 +211,25 @@ remove: true
 detach: false
 ```
 
-### หยุด Docker Container
+### Stop Docker Container
 
 `docker.stop`
 
-หยุด Docker container ที่กำลังรัน
+Stop a running Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | ID หรือชื่อของ container ที่จะหยุด |
-| `timeout` | number | No | `10` | จำนวนวินาทีที่จะรอก่อนหยุด container |
+| `container` | string | Yes | - | Container ID or name to stop |
+| `timeout` | number | No | `10` | Seconds to wait before killing the container |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | ID หรือชื่อของ container ที่หยุด |
-| `stopped` | boolean | container หยุดสำเร็จหรือไม่ |
+| `container_id` | string | ID or name of the stopped container |
+| `stopped` | boolean | Whether the container was successfully stopped |
 
 **Example:** Stop a container by name
 

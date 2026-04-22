@@ -6,32 +6,32 @@ Persistent key-value storage.
 
 | Module | Description |
 |--------|-------------|
-| [저장된 값 삭제](#저장된-값-삭제) | 영구 키-값 저장소에서 값을 삭제합니다 |
-| [저장된 값 가져오기](#저장된-값-가져오기) | 영구 키-값 저장소에서 값을 검색합니다 |
-| [값 저장](#값-저장) | 영구 키-값 저장소에 값을 저장합니다 |
+| [Delete Stored Value](#delete-stored-value) | Delete a value from persistent key-value storage |
+| [Get Stored Value](#get-stored-value) | Retrieve a value from persistent key-value storage |
+| [Store Value](#store-value) | Store a value in persistent key-value storage |
 
 ## Modules
 
-### 저장된 값 삭제
+### Delete Stored Value
 
 `storage.delete`
 
-영구 키-값 저장소에서 값을 삭제합니다
+Delete a value from persistent key-value storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `namespace` | string | Yes | `default` | 저장소 네임스페이스 |
-| `key` | string | Yes | - | 저장소 네임스페이스 |
+| `namespace` | string | Yes | `default` | Storage namespace |
+| `key` | string | Yes | - | Key to delete |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 삭제할 키 |
-| `deleted` | boolean | 작업이 성공했는지 여부 |
-| `key` | string | 작업이 성공했는지 여부 |
+| `ok` | boolean | Whether the operation succeeded |
+| `deleted` | boolean | Whether the key existed and was deleted |
+| `key` | string | The key that was deleted |
 
 **Example:** Delete cached value
 
@@ -40,28 +40,28 @@ namespace: cache
 key: api_response
 ```
 
-### 저장된 값 가져오기
+### Get Stored Value
 
 `storage.get`
 
-영구 키-값 저장소에서 값을 검색합니다
+Retrieve a value from persistent key-value storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `namespace` | string | Yes | `default` | 저장소 네임스페이스 (예: 워크플로 이름 또는 프로젝트) |
-| `key` | string | Yes | - | 저장소 네임스페이스 (예: 워크플로 이름 또는 프로젝트) |
-| `default` | any | No | - | 검색할 키 |
+| `namespace` | string | Yes | `default` | Storage namespace (e.g., workflow name or project) |
+| `key` | string | Yes | - | Key to retrieve |
+| `default` | any | No | - | Value to return if key does not exist |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 키가 존재하지 않을 경우 반환할 값 |
-| `found` | boolean | 작업이 성공했는지 여부 |
-| `value` | any | 작업이 성공했는지 여부 |
-| `key` | string | 키가 발견되었는지 여부(만료되지 않음) |
+| `ok` | boolean | Whether the operation succeeded |
+| `found` | boolean | Whether the key was found (not expired) |
+| `value` | any | The stored value or default |
+| `key` | string | The key that was queried |
 
 **Example:** Get last BTC price
 
@@ -78,29 +78,29 @@ namespace: my-workflow
 key: last_run_status
 ```
 
-### 값 저장
+### Store Value
 
 `storage.set`
 
-영구 키-값 저장소에 값을 저장합니다
+Store a value in persistent key-value storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `namespace` | string | Yes | `default` | 저장소 네임스페이스 (예: 워크플로 이름 또는 프로젝트) |
-| `key` | string | Yes | - | 저장소 네임스페이스 (예: 워크플로 이름 또는 프로젝트) |
-| `value` | any | Yes | - | 값을 저장할 키 |
+| `namespace` | string | Yes | `default` | Storage namespace (e.g., workflow name or project) |
+| `key` | string | Yes | - | Key to store value under |
+| `value` | any | Yes | - | Value to store (string, number, or object) |
 | `ttl_seconds` | number | No | `0` | Time to live in seconds (optional, 0 = no expiration) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 초 단위의 수명 (선택 사항, 0 = 만료 없음) |
-| `key` | string | 작업이 성공했는지 여부 |
-| `stored_at` | number | 작업이 성공했는지 여부 |
-| `expires_at` | number | 저장된 키 |
+| `ok` | boolean | Whether the operation succeeded |
+| `key` | string | The key that was stored |
+| `stored_at` | number | Unix timestamp when value was stored |
+| `expires_at` | number | Unix timestamp when value expires (if TTL set) |
 
 **Example:** Store BTC price
 

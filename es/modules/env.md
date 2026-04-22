@@ -6,32 +6,32 @@ Environment variable management and .env file loading.
 
 | Module | Description |
 |--------|-------------|
-| [Obtener Variable de Entorno](#obtener-variable-de-entorno) | Obtener el valor de una variable de entorno |
-| [Cargar Archivo .env](#cargar-archivo-.env) | Cargar variables de entorno desde un archivo .env |
-| [Establecer Variable de Entorno](#establecer-variable-de-entorno) | Establecer una variable de entorno en el proceso actual |
+| [Get Environment Variable](#get-environment-variable) | Get the value of an environment variable |
+| [Load .env File](#load-.env-file) | Load environment variables from a .env file |
+| [Set Environment Variable](#set-environment-variable) | Set an environment variable in the current process |
 
 ## Modules
 
-### Obtener Variable de Entorno
+### Get Environment Variable
 
 `env.get`
 
-Obtener el valor de una variable de entorno
+Get the value of an environment variable
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | Nombre de la variable de entorno |
-| `default` | string | No | - | Valor predeterminado si la variable no está establecida |
+| `name` | string | Yes | - | Name of the environment variable |
+| `default` | string | No | - | Default value if the variable is not set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Nombre de la variable |
-| `value` | string | Valor de la variable (o predeterminado si no está establecida) |
-| `exists` | boolean | Si la variable existe en el entorno |
+| `name` | string | Variable name |
+| `value` | string | Variable value (or default if not set) |
+| `exists` | boolean | Whether the variable exists in the environment |
 
 **Example:** Get HOME variable
 
@@ -46,25 +46,25 @@ name: MY_APP_PORT
 default: 8080
 ```
 
-### Cargar Archivo .env
+### Load .env File
 
 `env.load_dotenv`
 
-Cargar variables de entorno desde un archivo .env
+Load environment variables from a .env file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | `.env` | Ruta al archivo .env |
-| `override` | boolean | No | `False` | Si se deben sobrescribir las variables de entorno existentes |
+| `path` | string | Yes | `.env` | Path to the .env file |
+| `override` | boolean | No | `False` | Whether to override existing environment variables |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `loaded_count` | number | Número de variables cargadas |
-| `variables` | array | Lista de nombres de variables que se cargaron |
+| `loaded_count` | number | Number of variables loaded |
+| `variables` | array | List of variable names that were loaded |
 
 **Example:** Load .env file
 
@@ -73,26 +73,26 @@ path: .env
 override: false
 ```
 
-### Establecer Variable de Entorno
+### Set Environment Variable
 
 `env.set`
 
-Establecer una variable de entorno en el proceso actual
+Set an environment variable in the current process
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | Nombre de la variable de entorno a establecer |
-| `value` | string | Yes | - | Valor a asignar a la variable de entorno |
+| `name` | string | Yes | - | Name of the environment variable to set |
+| `value` | string | Yes | - | Value to assign to the environment variable |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Nombre de la variable |
-| `value` | string | Nuevo valor que se estableció |
-| `previous_value` | string | Valor anterior (nulo si no estaba establecido previamente) |
+| `name` | string | Variable name |
+| `value` | string | New value that was set |
+| `previous_value` | string | Previous value (null if not previously set) |
 
 **Example:** Set an environment variable
 

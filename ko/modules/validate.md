@@ -6,167 +6,167 @@ Validate email, URL, phone, IP, UUID, credit card, and JSON Schema.
 
 | Module | Description |
 |--------|-------------|
-| [신용카드 유효성 검사](#신용카드-유효성-검사) | Luhn 알고리즘을 사용하여 신용카드 번호 유효성 검사 |
-| [이메일 유효성 검사](#이메일-유효성-검사) | 이메일 주소 형식 유효성 검사 |
-| [IP 유효성 검사](#ip-유효성-검사) | IPv4 또는 IPv6 주소 형식 유효성 검사 |
-| [JSON 스키마 유효성 검사](#json-스키마-유효성-검사) | JSON 데이터를 JSON 스키마에 따라 유효성 검사 |
-| [전화번호 유효성 검사](#전화번호-유효성-검사) | 전화번호 형식 유효성 검사 |
-| [URL 유효성 검사](#url-유효성-검사) | URL 형식 및 구조 유효성 검사 |
-| [UUID 검증](#uuid-검증) | UUID 형식 및 버전 검증 |
+| [Validate Credit Card](#validate-credit-card) | Validate credit card number using Luhn algorithm |
+| [Validate Email](#validate-email) | Validate email address format |
+| [Validate IP](#validate-ip) | Validate IPv4 or IPv6 address format |
+| [Validate JSON Schema](#validate-json-schema) | Validate JSON data against a JSON Schema |
+| [Validate Phone](#validate-phone) | Validate phone number format |
+| [Validate URL](#validate-url) | Validate URL format and structure |
+| [Validate UUID](#validate-uuid) | Validate UUID format and version |
 
 ## Modules
 
-### 신용카드 유효성 검사
+### Validate Credit Card
 
 `validate.credit_card`
 
-Luhn 알고리즘을 사용하여 신용카드 번호 유효성 검사
+Validate credit card number using Luhn algorithm
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `card_number` | string | Yes | - | 유효성을 검사할 신용카드 번호 |
+| `card_number` | string | Yes | - | Credit card number to validate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 유효성을 검사할 신용카드 번호 |
-| `card_type` | string | 카드 번호가 유효한지 여부 |
-| `masked` | string | 카드 번호가 유효한지 여부 |
-| `luhn_valid` | boolean | 마스킹된 카드 번호 (****1234) |
+| `valid` | boolean | Whether the card number is valid |
+| `card_type` | string | Detected card type (visa, mastercard, etc) |
+| `masked` | string | Masked card number (****1234) |
+| `luhn_valid` | boolean | Whether the Luhn checksum is valid |
 
-### 이메일 유효성 검사
+### Validate Email
 
 `validate.email`
 
-이메일 주소 형식 유효성 검사
+Validate email address format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `email` | string | Yes | - | 유효성을 검사할 이메일 주소 |
+| `email` | string | Yes | - | Email address to validate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 유효성을 검사할 이메일 주소 |
-| `email` | string | 이메일이 유효한지 여부 |
-| `local_part` | string | 이메일이 유효한지 여부 |
-| `domain` | string | 유효성 검사를 마친 이메일 |
+| `valid` | boolean | Whether the email is valid |
+| `email` | string | The validated email |
+| `local_part` | string | The local part (before @) |
+| `domain` | string | The domain part (after @) |
 
-### IP 유효성 검사
+### Validate IP
 
 `validate.ip`
 
-IPv4 또는 IPv6 주소 형식 유효성 검사
+Validate IPv4 or IPv6 address format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `ip` | string | Yes | - | 유효성을 검사할 IP 주소 |
-| `version` | string | No | `any` | 유효성을 검사할 IP 주소 |
+| `ip` | string | Yes | - | IP address to validate |
+| `version` | string | No | `any` | Expected IP version (any, v4, v6) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | IP 주소가 유효한지 여부 |
-| `ip` | string | IP 주소가 유효한지 여부 |
-| `version` | string | IP 주소가 유효한지 여부 |
-| `is_private` | boolean | 유효성 검사를 마친 IP 주소 |
-| `is_loopback` | boolean | 감지된 IP 버전 (v4 또는 v6) |
+| `valid` | boolean | Whether the IP address is valid |
+| `ip` | string | The validated IP address |
+| `version` | string | Detected IP version (v4 or v6) |
+| `is_private` | boolean | Whether the IP is in a private range |
+| `is_loopback` | boolean | Whether the IP is a loopback address |
 
-### JSON 스키마 유효성 검사
+### Validate JSON Schema
 
 `validate.json_schema`
 
-JSON 데이터를 JSON 스키마에 따라 유효성 검사
+Validate JSON data against a JSON Schema
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | text | Yes | - | 유효성을 검사할 JSON 데이터 (문자열 또는 객체) |
-| `schema` | text | Yes | - | 유효성을 검사할 JSON 데이터 (문자열 또는 객체) |
+| `data` | text | Yes | - | JSON data to validate (string or object) |
+| `schema` | text | Yes | - | JSON Schema to validate against |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 유효성을 검사할 JSON 스키마 |
-| `errors` | array | 데이터가 유효한지 여부 |
-| `error_count` | number | 데이터가 유효한지 여부 |
+| `valid` | boolean | Whether the data is valid |
+| `errors` | array | List of validation errors |
+| `error_count` | number | Number of validation errors |
 
-### 전화번호 유효성 검사
+### Validate Phone
 
 `validate.phone`
 
-전화번호 형식 유효성 검사
+Validate phone number format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `phone` | string | Yes | - | 유효성을 검사할 전화번호 |
-| `region` | string | No | `international` | 유효성을 검사할 전화번호 |
+| `phone` | string | Yes | - | Phone number to validate |
+| `region` | string | No | `international` | Region code for validation (international, us, tw, cn, jp) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 전화번호가 유효한지 여부 |
-| `phone` | string | 전화번호가 유효한지 여부 |
-| `normalized` | string | 전화번호가 유효한지 여부 |
-| `region` | string | 유효성 검사를 마친 전화번호 |
+| `valid` | boolean | Whether the phone number is valid |
+| `phone` | string | The validated phone number |
+| `normalized` | string | Normalized phone number (digits only) |
+| `region` | string | Region used for validation |
 
-### URL 유효성 검사
+### Validate URL
 
 `validate.url`
 
-URL 형식 및 구조 유효성 검사
+Validate URL format and structure
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | 검증할 URL |
-| `require_https` | boolean | No | `False` | 검증할 URL |
+| `url` | string | Yes | - | URL to validate |
+| `require_https` | boolean | No | `False` | Only accept HTTPS URLs |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | HTTPS URL만 허용 |
-| `url` | string | URL이 유효한지 여부 |
-| `scheme` | string | URL이 유효한지 여부 |
-| `host` | string | 유효성 검사를 마친 URL |
-| `port` | number | URL 스킴 (http, https 등) |
-| `path` | string | 호스트/도메인 이름 |
-| `query` | string | 지정된 경우 포트 번호 |
+| `valid` | boolean | Whether the URL is valid |
+| `url` | string | The validated URL |
+| `scheme` | string | URL scheme (http, https, etc) |
+| `host` | string | Host/domain name |
+| `port` | number | Port number if specified |
+| `path` | string | URL path |
+| `query` | string | Query string |
 
-### UUID 검증
+### Validate UUID
 
 `validate.uuid`
 
-UUID 형식 및 버전 검증
+Validate UUID format and version
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `uuid` | string | Yes | - | 검증할 UUID |
-| `version` | number | No | `0` | 검증할 UUID |
+| `uuid` | string | Yes | - | UUID to validate |
+| `version` | number | No | `0` | Expected UUID version (1-5, or 0 for any) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | 예상되는 UUID 버전 (1-5, 또는 0은 모든 버전) |
-| `uuid` | string | UUID가 유효한지 여부 |
-| `version` | number | UUID가 유효한지 여부 |
-| `variant` | string | 검증된 UUID |
+| `valid` | boolean | Whether the UUID is valid |
+| `uuid` | string | The validated UUID |
+| `version` | number | Detected UUID version |
+| `variant` | string | UUID variant |

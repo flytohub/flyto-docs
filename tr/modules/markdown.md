@@ -6,30 +6,30 @@ Parse frontmatter, convert to HTML, and generate table of contents.
 
 | Module | Description |
 |--------|-------------|
-| [Ön Maddeyi Ayrıştır](#ön-maddeyi-ayrıştır) | Markdown içeriğinden YAML ön maddeyi çıkar |
-| [Markdown'dan HTML'ye](#markdown'dan-html'ye) | Markdown metnini HTML'ye dönüştür |
-| [İçindekiler Tablosu Oluştur](#i̇çindekiler-tablosu-oluştur) | Markdown başlıklarından içindekiler tablosu oluştur |
+| [Parse Frontmatter](#parse-frontmatter) | Extract YAML frontmatter from Markdown content |
+| [Markdown to HTML](#markdown-to-html) | Convert Markdown text to HTML |
+| [Generate Table of Contents](#generate-table-of-contents) | Generate a table of contents from Markdown headings |
 
 ## Modules
 
-### Ön Maddeyi Ayrıştır
+### Parse Frontmatter
 
 `markdown.parse_frontmatter`
 
-Markdown içeriğinden YAML ön maddeyi çıkar
+Extract YAML frontmatter from Markdown content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Ön madde içeren Markdown içeriği |
+| `text` | string | Yes | - | Markdown content with frontmatter |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `frontmatter` | object | Sözlük olarak ayrıştırılmış ön madde |
-| `content` | string | Ön madde olmadan Markdown içeriği |
+| `frontmatter` | object | Parsed frontmatter as a dictionary |
+| `content` | string | Markdown content without frontmatter |
 
 **Example:** Parse YAML frontmatter
 
@@ -47,25 +47,25 @@ tags:
 Content here.
 ```
 
-### Markdown'dan HTML'ye
+### Markdown to HTML
 
 `markdown.to_html`
 
-Markdown metnini HTML'ye dönüştür
+Convert Markdown text to HTML
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Dönüştürülecek Markdown içeriği |
-| `extensions` | array | No | - | Etkinleştirilecek Markdown uzantıları (sadece markdown kütüphanesi ile kullanılır) |
+| `text` | string | Yes | - | Markdown content to convert |
+| `extensions` | array | No | - | Markdown extensions to enable (only used with the markdown library) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `html` | string | Dönüştürülmüş HTML içeriği |
-| `word_count` | number | Girdi metninin kelime sayısı |
+| `html` | string | Converted HTML content |
+| `word_count` | number | Word count of the input text |
 
 **Example:** Convert markdown to HTML
 
@@ -75,25 +75,25 @@ text: # Hello
 This is **bold** and *italic*.
 ```
 
-### İçindekiler Tablosu Oluştur
+### Generate Table of Contents
 
 `markdown.toc`
 
-Markdown başlıklarından içindekiler tablosu oluştur
+Generate a table of contents from Markdown headings
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Başlıkları çıkarmak için Markdown içeriği |
-| `max_depth` | number | No | `3` | Dahil edilecek maksimum başlık derinliği (1-6) |
+| `text` | string | Yes | - | Markdown content to extract headings from |
+| `max_depth` | number | No | `3` | Maximum heading depth to include (1-6) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `toc` | array | Seviye, başlık ve slug ile başlık listesi |
-| `toc_markdown` | string | Biçimlendirilmiş Markdown içindekiler tablosu |
+| `toc` | array | List of headings with level, title, and slug |
+| `toc_markdown` | string | Formatted Markdown table of contents |
 
 **Example:** Generate TOC from markdown
 

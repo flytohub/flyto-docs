@@ -6,74 +6,74 @@ Cron parsing, delay, and interval calculations.
 
 | Module | Description |
 |--------|-------------|
-| [Cron İfadesini Ayrıştır](#cron-i̇fadesini-ayrıştır) | Cron ifadesini ayrıştır ve sonraki N çalıştırma zamanlarını hesapla |
-| [Gecikme / Uyku](#gecikme--uyku) | Belirtilen süre boyunca yürütmeyi duraklat |
-| [Aralığı Hesapla](#aralığı-hesapla) | Aralık zamanlamasını ve sonraki gerçekleşmeleri hesapla |
+| [Parse Cron Expression](#parse-cron-expression) | Parse cron expression and calculate next N run times |
+| [Delay / Sleep](#delay--sleep) | Pause execution for a specified duration |
+| [Calculate Interval](#calculate-interval) | Calculate interval timing and next occurrences |
 
 ## Modules
 
-### Cron İfadesini Ayrıştır
+### Parse Cron Expression
 
 `scheduler.cron_parse`
 
-Cron ifadesini ayrıştır ve sonraki N çalıştırma zamanlarını hesapla
+Parse cron expression and calculate next N run times
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `expression` | string | Yes | - | Standart 5 alanlı cron ifadesi (ör. "0 9 * * MON-FRI") |
-| `count` | number | No | `5` | Hesaplanacak sonraki çalıştırma sayısı |
-| `timezone` | string | No | `0` | Hesaplama için zaman dilimi (UTC ofseti "+8" veya "-5" gibi, varsayılan "0" UTC için) |
+| `expression` | string | Yes | - | Standard 5-field cron expression (e.g. "0 9 * * MON-FRI") |
+| `count` | number | No | `5` | Number of next run times to calculate |
+| `timezone` | string | No | `0` | Timezone for calculation (UTC offset like "+8" or "-5", default "0" for UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `expression` | string | Ayrıştırılmış cron ifadesi |
-| `description` | string | Programın insan tarafından okunabilir açıklaması |
-| `next_runs` | array | Sonraki çalıştırma zamanlarının ISO tarih saat dizeleri listesi |
-| `is_valid` | boolean | İfadenin geçerli olup olmadığı |
+| `expression` | string | The parsed cron expression |
+| `description` | string | Human-readable description of the schedule |
+| `next_runs` | array | List of next run times as ISO datetime strings |
+| `is_valid` | boolean | Whether the expression is valid |
 
-### Gecikme / Uyku
+### Delay / Sleep
 
 `scheduler.delay`
 
-Belirtilen süre boyunca yürütmeyi duraklat
+Pause execution for a specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | Yes | - | Gecikme süresi saniye cinsinden |
-| `message` | string | No | - | Sonuçta dahil edilecek isteğe bağlı mesaj |
+| `seconds` | number | Yes | - | Number of seconds to delay |
+| `message` | string | No | - | Optional message to include in the result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `delayed_seconds` | number | Gerçek gecikme süresi saniye cinsinden |
-| `message` | string | Sağlanan mesaj veya varsayılan |
+| `delayed_seconds` | number | Actual number of seconds delayed |
+| `message` | string | The provided message or default |
 
-### Aralığı Hesapla
+### Calculate Interval
 
 `scheduler.interval`
 
-Aralık zamanlamasını ve sonraki gerçekleşmeleri hesapla
+Calculate interval timing and next occurrences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | No | `0` | Aralık saniye bileşeni |
-| `minutes` | number | No | `0` | Aralık dakika bileşeni |
-| `hours` | number | No | `0` | Aralık saat bileşeni |
-| `start_time` | string | No | - | ISO 8601 formatında başlangıç saati (varsayılan: şimdi) |
+| `seconds` | number | No | `0` | Interval seconds component |
+| `minutes` | number | No | `0` | Interval minutes component |
+| `hours` | number | No | `0` | Interval hours component |
+| `start_time` | string | No | - | Start time in ISO 8601 format (default: now) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `interval_seconds` | number | Toplam aralık süresi saniye cinsinden |
-| `next_runs` | array | Sonraki 5 çalıştırma zamanının ISO tarih saat dizeleri listesi |
-| `human_readable` | string | İnsan tarafından okunabilir aralık açıklaması |
+| `interval_seconds` | number | Total interval in seconds |
+| `next_runs` | array | List of next 5 run times as ISO datetime strings |
+| `human_readable` | string | Human-readable interval description |

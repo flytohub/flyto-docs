@@ -6,100 +6,100 @@ In-memory key-value cache with TTL support.
 
 | Module | Description |
 |--------|-------------|
-| [Xóa Toàn Bộ Cache](#xóa-toàn-bộ-cache) | Xóa tất cả các mục cache hoặc lọc theo mẫu |
-| [Xóa Cache](#xóa-cache) | Xóa một mục cache bằng key |
-| [Lấy Cache](#lấy-cache) | Lấy giá trị từ cache bằng key |
-| [Đặt Cache](#đặt-cache) | Đặt giá trị trong cache với TTL tùy chọn |
+| [Cache Clear](#cache-clear) | Clear all cache entries or filter by pattern |
+| [Cache Delete](#cache-delete) | Delete a cache entry by key |
+| [Cache Get](#cache-get) | Get a value from cache by key |
+| [Cache Set](#cache-set) | Set a value in cache with optional TTL |
 
 ## Modules
 
-### Xóa Toàn Bộ Cache
+### Cache Clear
 
 `cache.clear`
 
-Xóa tất cả các mục cache hoặc lọc theo mẫu
+Clear all cache entries or filter by pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `pattern` | string | No | `*` | Mẫu glob để khớp khóa (ví dụ: "user:*", mặc định "*" xóa tất cả) |
-| `backend` | string | No | `memory` | Backend cache để sử dụng |
-| `redis_url` | string | No | `redis://localhost:6379` | URL kết nối Redis |
+| `pattern` | string | No | `*` | Glob pattern to match keys (e.g. "user:*", default "*" clears all) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `cleared_count` | number | Số lượng mục cache đã xóa |
-| `backend` | string | Backend đã sử dụng |
+| `cleared_count` | number | Number of cache entries cleared |
+| `backend` | string | The backend used |
 
-### Xóa Cache
+### Cache Delete
 
 `cache.delete`
 
-Xóa một mục cache bằng key
+Delete a cache entry by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | Khóa cache cần xóa |
-| `backend` | string | No | `memory` | Backend cache để sử dụng |
-| `redis_url` | string | No | `redis://localhost:6379` | URL kết nối Redis |
+| `key` | string | Yes | - | The cache key to delete |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | Khóa cache |
-| `deleted` | boolean | Khóa có được tìm thấy và xóa không |
-| `backend` | string | Backend đã sử dụng |
+| `key` | string | The cache key |
+| `deleted` | boolean | Whether the key was found and deleted |
+| `backend` | string | The backend used |
 
-### Lấy Cache
+### Cache Get
 
 `cache.get`
 
-Lấy giá trị từ cache bằng key
+Get a value from cache by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | Khóa cache cần tìm |
-| `backend` | string | No | `memory` | Backend cache để sử dụng |
-| `redis_url` | string | No | `redis://localhost:6379` | URL kết nối Redis |
+| `key` | string | Yes | - | The cache key to look up |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | Khóa cache |
-| `value` | any | Giá trị cache (null nếu không tìm thấy) |
-| `hit` | boolean | Khóa có được tìm thấy trong cache không |
-| `backend` | string | Backend đã sử dụng |
+| `key` | string | The cache key |
+| `value` | any | The cached value (null if not found) |
+| `hit` | boolean | Whether the key was found in cache |
+| `backend` | string | The backend used |
 
-### Đặt Cache
+### Cache Set
 
 `cache.set`
 
-Đặt giá trị trong cache với TTL tùy chọn
+Set a value in cache with optional TTL
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | Khóa cache để lưu trữ giá trị |
-| `value` | string | Yes | - | Giá trị để cache (bất kỳ giá trị nào có thể tuần tự hóa JSON) |
-| `ttl` | number | No | `0` | Thời gian sống tính bằng giây (0 = không hết hạn) |
-| `backend` | string | No | `memory` | Backend cache để sử dụng |
-| `redis_url` | string | No | `redis://localhost:6379` | URL kết nối Redis |
+| `key` | string | Yes | - | The cache key to store the value under |
+| `value` | string | Yes | - | The value to cache (any JSON-serializable value) |
+| `ttl` | number | No | `0` | Time-to-live in seconds (0 = no expiry) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | Khóa cache |
-| `stored` | boolean | Giá trị có được lưu trữ thành công không |
-| `ttl` | number | TTL tính bằng giây (0 = không hết hạn) |
-| `backend` | string | Backend đã sử dụng |
+| `key` | string | The cache key |
+| `stored` | boolean | Whether the value was stored successfully |
+| `ttl` | number | The TTL in seconds (0 = no expiry) |
+| `backend` | string | The backend used |

@@ -2,62 +2,63 @@
 
 Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and testing.
 
-**44 modules**
+**45 modules**
 
 | Module | Description |
 |--------|-------------|
-| [배열 필터](#배열-필터) | 조건으로 배열 요소 필터링 |
-| [배열 정렬](#배열-정렬) | 배열 요소를 오름차순 또는 내림차순으로 정렬 |
-| [배열 고유값](#배열-고유값) | 배열에서 중복 값 제거 |
+| [Filter Array](#filter-array) | Filter array elements by condition |
+| [Sort Array](#sort-array) | Sort array elements in ascending or descending order |
+| [Array Unique](#array-unique) | Remove duplicate values from array |
 | [OAuth2 Token Exchange](#oauth2-token-exchange) | Exchange authorization code, refresh token, or client credentials for an access token |
-| [DNS 조회](#dns-조회) | 도메인 레코드에 대한 DNS 조회 |
-| [텍스트 차이](#텍스트-차이) | 두 텍스트 문자열 간의 차이점 생성 |
-| [파일 편집](#파일-편집) | 정확한 문자열 매칭을 사용하여 파일의 텍스트 교체 |
-| [파일 존재 확인](#파일-존재-확인) | 파일 또는 디렉토리 존재 여부 확인 |
-| [파일 읽기](#파일-읽기) | 파일에서 내용 읽기 |
-| [파일 쓰기](#파일-쓰기) | 파일에 내용 쓰기 |
-| [Git 클론](#git-클론) | Git 저장소를 클론합니다 |
-| [Git 커밋](#git-커밋) | Git 커밋을 생성합니다 |
-| [Git 차이](#git-차이) | Git 차이를 가져옵니다 |
+| [DNS Lookup](#dns-lookup) | DNS lookup for domain records |
+| [Diff Content](#diff-content) | Generate unified diff between original and modified content |
+| [Edit File](#edit-file) | Replace a string in a file (targeted edit, not full overwrite) |
+| [Check File Exists](#check-file-exists) | Check if a file or directory exists |
+| [Read File](#read-file) | Read content from a file |
+| [Write File](#write-file) | Write content to a file |
+| [Git Clone](#git-clone) | Clone a git repository |
+| [Git Commit](#git-commit) | Create a git commit |
+| [Git Diff](#git-diff) | Get git diff |
+| [HTTP Batch](#http-batch) | Run a batch of HTTP probes sequentially and capture timing + body |
 | [HTTP Paginate](#http-paginate) | Automatically iterate through paginated API endpoints and collect all results |
-| [HTTP 요청](#http-요청) | HTTP 요청 전송 및 응답 수신 |
-| [HTTP 응답 검증](#http-응답-검증) | HTTP 응답 속성 검증 및 확인 |
+| [HTTP Request](#http-request) | Send HTTP request and receive response |
+| [Assert HTTP Response](#assert-http-response) | Assert and validate HTTP response properties |
 | [HTTP Session](#http-session) | Send a sequence of HTTP requests with persistent cookies (login → action → logout) |
 | [Webhook Wait](#webhook-wait) | Start a temporary server and wait for an incoming webhook callback |
-| [LLM 채팅](#llm-채팅) | 지능형 작업을 위해 LLM API와 상호작용 |
-| [AI 코드 수정](#ai-코드-수정) | 이슈에 기반하여 자동으로 코드 수정 생성 |
-| [계산](#계산) | 기본 수학 연산 수행 |
-| [HTTP 상태 확인](#http-상태-확인) | HTTP 상태 확인 / 가동 시간 모니터 |
-| [포트 확인](#포트-확인) | 네트워크 포트가 열려있는지 닫혀있는지 확인 |
-| [포트 대기](#포트-대기) | 네트워크 포트가 사용 가능해질 때까지 대기 |
-| [프로세스 나열](#프로세스-나열) | 실행 중인 모든 백그라운드 프로세스 나열 |
-| [백그라운드 프로세스 시작](#백그라운드-프로세스-시작) | 백그라운드 프로세스 시작 (서버, 서비스 등) |
-| [프로세스 중지](#프로세스-중지) | 실행 중인 백그라운드 프로세스 중지 |
-| [셸 명령 실행](#셸-명령-실행) | 셸 명령 실행 및 출력 캡처 |
-| [SSH 실행](#ssh-실행) | SSH를 통해 원격 서버에서 명령 실행 |
-| [SFTP 다운로드](#sftp-다운로드) | SFTP를 통해 원격 서버에서 파일 다운로드 |
-| [SFTP 업로드](#sftp-업로드) | SFTP를 통해 원격 서버에 파일 업로드 |
-| [E2E 단계 실행](#e2e-단계-실행) | 엔드투엔드 테스트 단계를 순차적으로 실행 |
-| [품질 게이트](#품질-게이트) | 정의된 임계값에 대해 품질 메트릭 평가 |
-| [HTTP 테스트 실행](#http-테스트-실행) | HTTP API 테스트 스위트 실행 |
-| [린터 실행](#린터-실행) | 소스 코드에서 린트 검사 실행 |
-| [보고서 생성](#보고서-생성) | 테스트 실행 보고서 생성 |
-| [시나리오 실행](#시나리오-실행) | 시나리오 기반 테스트 실행 (BDD 스타일) |
-| [보안 스캔](#보안-스캔) | 보안 취약점 스캔 |
-| [테스트 스위트 실행](#테스트-스위트-실행) | 테스트 모음 실행 |
-| [단위 테스트 실행](#단위-테스트-실행) | 단위 테스트 실행 |
-| [시각적 비교](#시각적-비교) | 시각적 출력의 차이 비교 |
-| [UI 품질 평가](#ui-품질-평가) | 다차원 점수를 통한 종합적인 UI 품질 평가 |
-| [AI로 이미지 분석](#ai로-이미지-분석) | OpenAI Vision API(GPT-4V)를 사용하여 이미지 분석 |
-| [이미지 비교](#이미지-비교) | 두 이미지를 비교하여 시각적 차이 식별 |
+| [LLM Chat](#llm-chat) | Interact with LLM APIs for intelligent operations |
+| [AI Code Fix](#ai-code-fix) | Automatically generate code fixes based on issues |
+| [Calculate](#calculate) | Perform basic mathematical operations |
+| [HTTP Health Check](#http-health-check) | HTTP health check / uptime monitor |
+| [Check Port](#check-port) | Check if network port(s) are open or closed |
+| [Wait for Port](#wait-for-port) | Wait for a network port to become available |
+| [List Processes](#list-processes) | List all running background processes |
+| [Start Background Process](#start-background-process) | Start a background process (server, service, etc.) |
+| [Stop Process](#stop-process) | Stop a running background process |
+| [Execute Shell Command](#execute-shell-command) | Execute a shell command and capture output |
+| [SSH Execute](#ssh-execute) | Execute command on remote server via SSH |
+| [SFTP Download](#sftp-download) | Download file from remote server via SFTP |
+| [SFTP Upload](#sftp-upload) | Upload file to remote server via SFTP |
+| [Run E2E Steps](#run-e2e-steps) | Execute end-to-end test steps sequentially |
+| [Quality Gate](#quality-gate) | Evaluate quality metrics against defined thresholds |
+| [Run HTTP Tests](#run-http-tests) | Execute HTTP API test suite |
+| [Run Linter](#run-linter) | Run linting checks on source code |
+| [Generate Report](#generate-report) | Generate test execution report |
+| [Run Scenario](#run-scenario) | Execute scenario-based test (BDD style) |
+| [Security Scan](#security-scan) | Scan for security vulnerabilities |
+| [Run Test Suite](#run-test-suite) | Execute a collection of tests |
+| [Run Unit Tests](#run-unit-tests) | Execute unit tests |
+| [Visual Compare](#visual-compare) | Compare visual outputs for differences |
+| [Evaluate UI Quality](#evaluate-ui-quality) | Comprehensive UI quality evaluation with multi-dimensional scoring |
+| [Analyze Image with AI](#analyze-image-with-ai) | Analyze images using OpenAI Vision API (GPT-4V) |
+| [Compare Images](#compare-images) | Compare two images and identify visual differences |
 
 ## Modules
 
-### 배열 필터
+### Filter Array
 
 `array.filter`
 
-조건으로 배열 요소 필터링
+Filter array elements by condition
 
 **Parameters:**
 
@@ -71,8 +72,8 @@ Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and t
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filtered` | array | 필터링된 배열 |
-| `count` | number | 필터링된 배열 |
+| `filtered` | array | Filtered array |
+| `count` | number | Number of items in filtered array |
 
 **Example:** Filter numbers greater than 5
 
@@ -82,11 +83,11 @@ condition: gt
 value: 5
 ```
 
-### 배열 정렬
+### Sort Array
 
 `array.sort`
 
-배열 요소를 오름차순 또는 내림차순으로 정렬
+Sort array elements in ascending or descending order
 
 **Parameters:**
 
@@ -99,8 +100,8 @@ value: 5
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sorted` | array | 정렬된 배열 |
-| `count` | number | 정렬된 배열 |
+| `sorted` | array | Sorted array |
+| `count` | number | Number of items |
 
 **Example:** Sort numbers ascending
 
@@ -109,11 +110,11 @@ array: [5, 2, 8, 1, 9]
 order: asc
 ```
 
-### 배열 고유값
+### Array Unique
 
 `array.unique`
 
-배열에서 중복 값 제거
+Remove duplicate values from array
 
 **Parameters:**
 
@@ -126,9 +127,9 @@ order: asc
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `unique` | array | 고유 값 배열 |
-| `count` | number | 고유 값 배열 |
-| `duplicates_removed` | number | 고유 값 배열 |
+| `unique` | array | Array with unique values |
+| `count` | number | Number of unique items |
+| `duplicates_removed` | number | Number of duplicates removed |
 
 **Example:** Remove duplicates
 
@@ -214,19 +215,19 @@ client_secret: ${env.GITHUB_CLIENT_SECRET}
 code: abc123...
 ```
 
-### DNS 조회
+### DNS Lookup
 
 `dns.lookup`
 
-도메인 레코드에 대한 DNS 조회
+DNS lookup for domain records
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `domain` | string | Yes | - | 조회할 도메인 이름 |
-| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | 조회할 DNS 레코드 유형 |
-| `timeout` | number | No | `10` | 초 단위의 조회 시간 초과 |
+| `domain` | string | Yes | - | Domain name to look up |
+| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | DNS record type to query |
+| `timeout` | number | No | `10` | Query timeout in seconds |
 
 **Output:**
 
@@ -249,29 +250,29 @@ domain: example.com
 record_type: MX
 ```
 
-### 텍스트 차이
+### Diff Content
 
 `file.diff`
 
-두 텍스트 문자열 간의 차이점 생성
+Generate unified diff between original and modified content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `original` | string | Yes | - | 원본 텍스트 |
-| `modified` | string | Yes | - | 수정된 텍스트 |
-| `context_lines` | number | No | `3` | 변경 사항 주변의 문맥 줄 수 |
-| `filename` | string | No | `file` | 차이 헤더에 사용할 파일명 |
+| `original` | string | Yes | - | Original content for comparison |
+| `modified` | string | Yes | - | Modified content for comparison |
+| `context_lines` | number | No | `3` | Number of context lines around changes |
+| `filename` | string | No | `file` | Name of the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `diff` | string | 통합된 차이 출력 |
-| `changed` | boolean | 변경 사항이 있는지 여부 |
-| `additions` | number | 추가된 줄 수 |
-| `deletions` | number | 삭제된 줄 수 |
+| `diff` | string | Unified diff output |
+| `changed` | boolean | Whether content differs |
+| `additions` | number | Number of added lines |
+| `deletions` | number | Number of deleted lines |
 
 **Example:** Diff two strings
 
@@ -283,29 +284,29 @@ world!
 filename: test.txt
 ```
 
-### 파일 편집
+### Edit File
 
 `file.edit`
 
-정확한 문자열 매칭을 사용하여 파일의 텍스트 교체
+Replace a string in a file (targeted edit, not full overwrite)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 편집할 파일의 경로 |
-| `old_string` | string | Yes | - | 찾아 교체할 텍스트 |
-| `new_string` | string | Yes | - | 교체할 텍스트 |
-| `replace_all` | boolean | No | `False` | 첫 번째만이 아닌 모든 발생을 교체 |
-| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | 파일 인코딩 |
+| `path` | string | Yes | - | Path to the file |
+| `old_string` | string | Yes | - | Text to find and replace |
+| `new_string` | string | Yes | - | Replacement text |
+| `replace_all` | boolean | No | `False` | Whether to replace all occurrences |
+| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | Character encoding for the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 편집된 파일의 경로 |
-| `replacements` | number | 교체된 횟수 |
-| `diff` | string | 변경된 내용을 보여주는 차이 |
+| `path` | string | File path that was edited |
+| `replacements` | number | Number of replacements made |
+| `diff` | string | Unified diff of changes |
 
 **Example:** Replace string in file
 
@@ -315,11 +316,11 @@ old_string: def hello():
 new_string: def hello_world():
 ```
 
-### 파일 존재 확인
+### Check File Exists
 
 `file.exists`
 
-파일 또는 디렉토리 존재 여부 확인
+Check if a file or directory exists
 
 **Parameters:**
 
@@ -331,9 +332,9 @@ new_string: def hello_world():
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `exists` | boolean | 경로 존재 여부 |
-| `is_file` | boolean | 경로 존재 여부 |
-| `is_directory` | boolean | 경로 존재 여부 |
+| `exists` | boolean | Whether path exists |
+| `is_file` | boolean | Whether path is a file |
+| `is_directory` | boolean | Whether path is a directory |
 
 **Example:** Check file exists
 
@@ -341,11 +342,11 @@ new_string: def hello_world():
 path: /tmp/data.txt
 ```
 
-### 파일 읽기
+### Read File
 
 `file.read`
 
-파일에서 내용 읽기
+Read content from a file
 
 **Parameters:**
 
@@ -358,8 +359,8 @@ path: /tmp/data.txt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `content` | string | 파일 내용 |
-| `size` | number | 파일 내용 |
+| `content` | string | File content |
+| `size` | number | File size in bytes |
 
 **Example:** Read text file
 
@@ -368,11 +369,11 @@ path: /tmp/data.txt
 encoding: utf-8
 ```
 
-### 파일 쓰기
+### Write File
 
 `file.write`
 
-파일에 내용 쓰기
+Write content to a file
 
 **Parameters:**
 
@@ -387,8 +388,8 @@ encoding: utf-8
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 파일 경로 |
-| `bytes_written` | number | 파일 경로 |
+| `path` | string | File path |
+| `bytes_written` | number | Number of bytes written |
 
 **Example:** Write text file
 
@@ -398,21 +399,21 @@ content: Hello World
 mode: overwrite
 ```
 
-### Git 클론
+### Git Clone
 
 `git.clone`
 
-Git 저장소를 클론합니다
+Clone a git repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | Git 저장소 URL (HTTPS 또는 SSH) |
-| `destination` | string | Yes | - | 클론할 로컬 경로 |
-| `branch` | string | No | - | 클론 후 체크아웃할 브랜치 |
-| `depth` | number | No | - | 얕은 클론 깊이 (전체 클론 시 생략) |
-| `token` | string | No | - | 개인 액세스 토큰 (비공개 저장소용) |
+| `url` | string | Yes | - | Git repository URL (HTTPS or SSH) |
+| `destination` | string | Yes | - | Local path to clone into |
+| `branch` | string | No | - | Branch to checkout after clone |
+| `depth` | number | No | - | Shallow clone depth (omit for full clone) |
+| `token` | string | No | - | Personal access token for private repos |
 
 **Output:**
 
@@ -437,22 +438,22 @@ branch: develop
 depth: 1
 ```
 
-### Git 커밋
+### Git Commit
 
 `git.commit`
 
-Git 커밋을 생성합니다
+Create a git commit
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | Git 저장소 경로 |
-| `message` | string | Yes | - | 커밋 메시지 |
-| `add_all` | boolean | No | `False` | 커밋 전 모든 변경사항 스테이징 (git add -A) |
-| `files` | array | No | - | 커밋 전 스테이징할 특정 파일 |
-| `author_name` | string | No | - | 커밋 작성자 이름 재정의 |
-| `author_email` | string | No | - | 커밋 작성자 이메일 재정의 |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `message` | string | Yes | - | Commit message |
+| `add_all` | boolean | No | `False` | Stage all changes before committing (git add -A) |
+| `files` | array | No | - | Specific files to stage before committing |
+| `author_name` | string | No | - | Override commit author name |
+| `author_email` | string | No | - | Override commit author email |
 
 **Output:**
 
@@ -477,21 +478,21 @@ message: fix: correct typo in readme
 files: ["README.md"]
 ```
 
-### Git 차이
+### Git Diff
 
 `git.diff`
 
-Git 차이를 가져옵니다
+Get git diff
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | Git 저장소 경로 |
-| `ref1` | string | No | `HEAD` | 첫 번째 참조 (커밋, 브랜치, 태그) |
-| `ref2` | string | No | - | 비교할 두 번째 참조 |
-| `staged` | boolean | No | `False` | 스테이징된 변경사항만 표시 (--cached) |
-| `stat_only` | boolean | No | `False` | 파일 통계만 표시 (--stat) |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `ref1` | string | No | `HEAD` | First reference (commit, branch, tag) |
+| `ref2` | string | No | - | Second reference to compare against |
+| `staged` | boolean | No | `False` | Show only staged changes (--cached) |
+| `stat_only` | boolean | No | `False` | Show only file statistics (--stat) |
 
 **Output:**
 
@@ -521,6 +522,35 @@ repo_path: /home/user/project
 staged: true
 stat_only: true
 ```
+
+### HTTP Batch
+
+`http.batch`
+
+Run a batch of HTTP probes sequentially and capture timing + body
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `requests` | array | Yes | - | List of request dicts: {method, url, headers?, body?, label?} |
+| `description` | string | No | - | Informational description of the batch intent |
+| `measure_time` | boolean | No | `False` | Execute requests sequentially for reliable timing comparison |
+| `timeout` | number | No | `30` |  |
+| `verify_ssl` | boolean | No | `True` |  |
+| `ssrf_protection` | boolean | No | `True` |  |
+| `detect_patterns` | array | No | - | Optional list of substrings to report matches for across all bodies |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `ok` | boolean | Whether the batch completed (does not imply all requests succeeded) |
+| `data` | array | Per-request results: [{label, status, body, duration_ms, ok, ...}] |
+| `count` | number | Number of requests executed |
+| `failed_count` | number | Number of requests that errored or returned non-2xx |
+| `total_duration_ms` | number | Total elapsed ms across the batch |
+| `detected` | array | Pattern match summary when detect_patterns provided |
 
 ### HTTP Paginate
 
@@ -602,11 +632,11 @@ page_size: 100
 auth: {"type": "bearer", "token": "${env.GITHUB_TOKEN}"}
 ```
 
-### HTTP 요청
+### HTTP Request
 
 `http.request`
 
-HTTP 요청 전송 및 응답 수신
+Send HTTP request and receive response
 
 **Parameters:**
 
@@ -632,15 +662,15 @@ HTTP 요청 전송 및 응답 수신
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 요청 성공 여부 (2xx 상태) |
-| `status` | number | 요청 성공 여부 (2xx 상태) |
-| `status_text` | string | 요청 성공 여부 (2xx 상태) |
-| `headers` | object | HTTP 상태 코드 |
-| `body` | any | HTTP 상태 텍스트 |
-| `url` | string | 응답 헤더 |
-| `duration_ms` | number | 응답 본문 (파싱된 JSON 또는 텍스트) |
-| `content_type` | string | 최종 URL (리디렉션 후) |
-| `content_length` | number | 응답 Content-Type |
+| `ok` | boolean | Whether request was successful (2xx status) |
+| `status` | number | HTTP status code |
+| `status_text` | string | HTTP status text |
+| `headers` | object | Response headers |
+| `body` | any | Response body (parsed JSON or text) |
+| `url` | string | Final URL (after redirects) |
+| `duration_ms` | number | Request duration in milliseconds |
+| `content_type` | string | Response Content-Type |
+| `content_length` | number | Response body size in bytes |
 
 **Example:** Simple GET request
 
@@ -673,11 +703,11 @@ method: GET
 query: {"q": "flyto", "limit": 10}
 ```
 
-### HTTP 응답 검증
+### Assert HTTP Response
 
 `http.response_assert`
 
-HTTP 응답 속성 검증 및 확인
+Assert and validate HTTP response properties
 
 **Parameters:**
 
@@ -700,12 +730,12 @@ HTTP 응답 속성 검증 및 확인
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 모든 검증 통과 여부 |
-| `passed` | number | 모든 검증 통과 여부 |
-| `failed` | number | 모든 검증 통과 여부 |
-| `total` | number | 통과한 검증 수 |
-| `assertions` | array | 실패한 검증 수 |
-| `errors` | array | 상세 검증 결과 |
+| `ok` | boolean | Whether all assertions passed |
+| `passed` | number | Number of passed assertions |
+| `failed` | number | Number of failed assertions |
+| `total` | number | Total number of assertions |
+| `assertions` | array | Detailed assertion results |
+| `errors` | array | List of error messages for failed assertions |
 
 **Example:** Assert status 200
 
@@ -821,11 +851,11 @@ use_ngrok: true
 ngrok_token: ${env.NGROK_AUTH_TOKEN}
 ```
 
-### LLM 채팅
+### LLM Chat
 
 `llm.chat`
 
-지능형 작업을 위해 LLM API와 상호작용
+Interact with LLM APIs for intelligent operations
 
 **Parameters:**
 
@@ -847,12 +877,12 @@ ngrok_token: ${env.NGROK_AUTH_TOKEN}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 요청 성공 여부 |
-| `response` | string | 요청 성공 여부 |
-| `parsed` | any | 요청 성공 여부 |
-| `model` | string | LLM 응답 텍스트 |
-| `tokens_used` | number | 파싱된 응답 (JSON 형식 요청 시) |
-| `finish_reason` | string | 사용된 모델 |
+| `ok` | boolean | Whether the request succeeded |
+| `response` | string | The LLM response text |
+| `parsed` | any | Parsed response (if JSON format requested) |
+| `model` | string | Model used |
+| `tokens_used` | number | Total tokens consumed |
+| `finish_reason` | string | Why the response ended |
 
 **Example:** Code Review
 
@@ -882,11 +912,11 @@ system_prompt: You are a DevOps engineer. Return JSON: {"decision": "yes/no", "r
 response_format: json
 ```
 
-### AI 코드 수정
+### AI Code Fix
 
 `llm.code_fix`
 
-이슈에 기반하여 자동으로 코드 수정 생성
+Automatically generate code fixes based on issues
 
 **Parameters:**
 
@@ -904,11 +934,11 @@ response_format: json
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 작업 성공 여부 |
-| `fixes` | array | 작업 성공 여부 |
-| `applied` | array | 작업 성공 여부 |
-| `failed` | array | 생성된 수정 목록 |
-| `summary` | string | 적용된 수정 목록 (fix_mode가 apply인 경우) |
+| `ok` | boolean | Whether operation succeeded |
+| `fixes` | array | List of generated fixes |
+| `applied` | array | List of applied fixes (if fix_mode is apply) |
+| `failed` | array | Fixes that could not be applied |
+| `summary` | string | Summary of fixes |
 
 **Example:** Fix UI Issues
 
@@ -928,11 +958,11 @@ fix_mode: apply
 backup: true
 ```
 
-### 계산
+### Calculate
 
 `math.calculate`
 
-기본 수학 연산 수행
+Perform basic mathematical operations
 
 **Parameters:**
 
@@ -947,9 +977,9 @@ backup: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 계산 결과 |
-| `operation` | string | 계산 결과 |
-| `expression` | string | 계산 결과 |
+| `result` | number | Calculation result |
+| `operation` | string | Operation performed |
+| `expression` | string | Human-readable expression |
 
 **Example:** Add two numbers
 
@@ -967,25 +997,25 @@ a: 2
 b: 8
 ```
 
-### HTTP 상태 확인
+### HTTP Health Check
 
 `monitor.http_check`
 
-HTTP 상태 확인 / 가동 시간 모니터
+HTTP health check / uptime monitor
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | 확인할 URL |
-| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | HTTP 메서드 |
-| `expected_status` | number | No | `200` | 예상 HTTP 상태 코드 |
-| `timeout_ms` | number | No | `10000` | 밀리초 단위 요청 시간 초과 |
-| `headers` | object | No | - | 사용자 정의 요청 헤더 |
-| `body` | string | No | - | 요청 본문 (POST용) |
-| `check_ssl` | boolean | No | `True` | SSL 인증서 유효성 및 만료 확인 |
-| `contains` | string | No | - | 응답 본문에 이 문자열이 포함되어야 함 |
-| `follow_redirects` | boolean | No | `True` | HTTP 리디렉션 따르기 |
+| `url` | string | Yes | - | URL to check |
+| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | HTTP method |
+| `expected_status` | number | No | `200` | Expected HTTP status code |
+| `timeout_ms` | number | No | `10000` | Request timeout in milliseconds |
+| `headers` | object | No | - | Custom request headers |
+| `body` | string | No | - | Request body (for POST) |
+| `check_ssl` | boolean | No | `True` | Check SSL certificate validity and expiry |
+| `contains` | string | No | - | Response body must contain this string |
+| `follow_redirects` | boolean | No | `True` | Follow HTTP redirects |
 
 **Output:**
 
@@ -1009,30 +1039,30 @@ contains: "status":"ok"
 timeout_ms: 5000
 ```
 
-### 포트 확인
+### Check Port
 
 `port.check`
 
-네트워크 포트가 열려있는지 닫혀있는지 확인
+Check if network port(s) are open or closed
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | any | Yes | - | 확인할 포트 번호 또는 포트 배열 |
-| `host` | string | No | `localhost` | 확인할 포트 번호 또는 포트 배열 |
-| `connect_timeout` | number | No | `2` | 연결할 호스트 |
-| `expect_open` | boolean | No | - | 각 연결 시도의 타임아웃 |
+| `port` | any | Yes | - | Port number or array of ports to check |
+| `host` | string | No | `localhost` | Host to connect to |
+| `connect_timeout` | number | No | `2` | Timeout for each connection attempt |
+| `expect_open` | boolean | No | - | Set to true to assert ports are open, false for closed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 포트 열림 여부 확인 설정 (true: 열림, false: 닫힘) |
-| `results` | array | 모든 확인 통과 여부 (expect_open 설정 시) |
-| `open_ports` | array | 모든 확인 통과 여부 (expect_open 설정 시) |
-| `closed_ports` | array | 포트 확인 결과 배열 |
-| `summary` | object | 열린 포트 목록 |
+| `ok` | boolean | Whether all checks passed (if expect_open is set) |
+| `results` | array | Array of port check results |
+| `open_ports` | array | List of open ports |
+| `closed_ports` | array | List of closed ports |
+| `summary` | object | Summary statistics |
 
 **Example:** Check single port
 
@@ -1055,32 +1085,32 @@ host: example.com
 expect_open: true
 ```
 
-### 포트 대기
+### Wait for Port
 
 `port.wait`
 
-네트워크 포트가 사용 가능해질 때까지 대기
+Wait for a network port to become available
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | number | Yes | - | 대기할 포트 번호 |
-| `host` | string | No | `localhost` | 연결할 호스트 |
-| `timeout` | number | No | `60` | 연결할 호스트 |
-| `interval` | number | No | `500` | 최대 대기 시간 |
-| `expect_closed` | boolean | No | `False` | 연결 시도 간 시간 (밀리초) |
+| `port` | number | Yes | - | Port number to wait for |
+| `host` | string | No | `localhost` | Host to connect to |
+| `timeout` | number | No | `60` | Maximum time to wait |
+| `interval` | number | No | `500` | Time between connection attempts in milliseconds |
+| `expect_closed` | boolean | No | `False` | Wait for port to become unavailable instead |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 포트가 사용 불가능해질 때까지 대기 |
-| `available` | boolean | 포트가 예상 상태인지 여부 |
-| `host` | string | 포트가 예상 상태인지 여부 |
-| `port` | number | 포트가 현재 사용 가능한지 여부 |
-| `wait_time_ms` | number | 확인된 호스트 |
-| `attempts` | number | 확인된 포트 |
+| `ok` | boolean | Whether port is in expected state |
+| `available` | boolean | Whether port is currently available |
+| `host` | string | Host that was checked |
+| `port` | number | Port that was checked |
+| `wait_time_ms` | number | Time spent waiting in milliseconds |
+| `attempts` | number | Number of connection attempts |
 
 **Example:** Wait for dev server
 
@@ -1105,11 +1135,11 @@ expect_closed: true
 timeout: 10
 ```
 
-### 프로세스 나열
+### List Processes
 
 `process.list`
 
-실행 중인 모든 백그라운드 프로세스 나열
+List all running background processes
 
 **Parameters:**
 
@@ -1122,11 +1152,11 @@ timeout: 10
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 작업 성공 |
-| `processes` | array | 작업 성공 |
-| `count` | number | 작업 성공 |
-| `running` | number | 프로세스 정보 목록 |
-| `stopped` | number | 총 프로세스 수 |
+| `ok` | boolean | Operation success |
+| `processes` | array | List of process information |
+| `count` | number | Total number of processes |
+| `running` | number | Number of running processes |
+| `stopped` | number | Number of stopped processes |
 
 **Example:** List all processes
 
@@ -1139,11 +1169,11 @@ timeout: 10
 filter_name: dev
 ```
 
-### 백그라운드 프로세스 시작
+### Start Background Process
 
 `process.start`
 
-백그라운드 프로세스 시작 (서버, 서비스 등)
+Start a background process (server, service, etc.)
 
 **Parameters:**
 
@@ -1163,14 +1193,14 @@ filter_name: dev
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 프로세스 시작 성공 여부 |
-| `pid` | number | 프로세스 시작 성공 여부 |
-| `process_id` | string | 프로세스 시작 성공 여부 |
-| `name` | string | 프로세스 ID |
-| `command` | string | process.stop을 위한 내부 프로세스 식별자 |
-| `cwd` | string | 프로세스 이름 |
-| `started_at` | string | 실행된 명령 |
-| `initial_output` | string | 프로세스 시작 시간 (ISO 타임스탬프) |
+| `ok` | boolean | Whether process started successfully |
+| `pid` | number | Process ID |
+| `process_id` | string | Internal process identifier for process.stop |
+| `name` | string | Process name |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory |
+| `started_at` | string | ISO timestamp when process started |
+| `initial_output` | string | Initial stdout output (if wait_for_output was used) |
 
 **Example:** Start dev server
 
@@ -1198,11 +1228,11 @@ name: api-server
 wait_for_output: listening
 ```
 
-### 프로세스 중지
+### Stop Process
 
 `process.stop`
 
-실행 중인 백그라운드 프로세스 중지
+Stop a running background process
 
 **Parameters:**
 
@@ -1220,10 +1250,10 @@ wait_for_output: listening
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 모든 프로세스가 성공적으로 중지되었는지 여부 |
-| `stopped` | array | 모든 프로세스가 성공적으로 중지되었는지 여부 |
-| `failed` | array | 중지된 프로세스 정보 목록 |
-| `count` | number | 중지된 프로세스 정보 목록 |
+| `ok` | boolean | Whether all processes were stopped successfully |
+| `stopped` | array | List of stopped process info |
+| `failed` | array | List of processes that failed to stop |
+| `count` | number | Number of processes stopped |
 
 **Example:** Stop by process ID
 
@@ -1250,11 +1280,11 @@ force: true
 stop_all: true
 ```
 
-### 셸 명령 실행
+### Execute Shell Command
 
 `shell.exec`
 
-셸 명령 실행 및 출력 캡처
+Execute a shell command and capture output
 
 **Parameters:**
 
@@ -1273,13 +1303,13 @@ stop_all: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 명령 실행 성공 여부 (종료 코드 0) |
-| `exit_code` | number | 명령 실행 성공 여부 (종료 코드 0) |
-| `stdout` | string | 명령 실행 성공 여부 (종료 코드 0) |
-| `stderr` | string | 명령 종료 코드 |
-| `command` | string | 표준 출력 |
-| `cwd` | string | 표준 오류 출력 |
-| `duration_ms` | number | 실행된 명령 |
+| `ok` | boolean | Whether command executed successfully (exit code 0) |
+| `exit_code` | number | Command exit code |
+| `stdout` | string | Standard output |
+| `stderr` | string | Standard error output |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory used |
+| `duration_ms` | number | Execution duration in milliseconds |
 
 **Example:** Run npm install
 
@@ -1309,23 +1339,23 @@ cwd: ./frontend
 env: {"NODE_ENV": "production"}
 ```
 
-### SSH 실행
+### SSH Execute
 
 `ssh.exec`
 
-SSH를 통해 원격 서버에서 명령 실행
+Execute command on remote server via SSH
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | SSH 서버 호스트명 또는 IP |
-| `port` | number | No | `22` | SSH 포트 |
-| `username` | string | Yes | - | SSH 사용자 이름 |
-| `password` | string | No | - | SSH 비밀번호 |
-| `private_key` | string | No | - | PEM 형식 개인 키 |
-| `command` | string | Yes | - | 원격 서버에서 실행할 명령어 |
-| `timeout` | number | No | `30` | 명령어 타임아웃(초) |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `command` | string | Yes | - | Command to execute on remote server |
+| `timeout` | number | No | `30` | Command timeout in seconds |
 
 **Output:**
 
@@ -1350,23 +1380,23 @@ username: root
 command: systemctl restart nginx
 ```
 
-### SFTP 다운로드
+### SFTP Download
 
 `ssh.sftp_download`
 
-SFTP를 통해 원격 서버에서 파일 다운로드
+Download file from remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | SSH 서버 호스트명 또는 IP |
-| `port` | number | No | `22` | SSH 포트 |
-| `username` | string | Yes | - | SSH 사용자 이름 |
-| `password` | string | No | - | SSH 비밀번호 |
-| `private_key` | string | No | - | PEM 형식의 개인 키 |
-| `remote_path` | string | Yes | - | 원격 서버의 파일 경로 |
-| `local_path` | string | Yes | - | 로컬 컴퓨터의 대상 경로 |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `remote_path` | string | Yes | - | Path to file on remote server |
+| `local_path` | string | Yes | - | Destination path on local machine |
 
 **Output:**
 
@@ -1384,24 +1414,24 @@ remote_path: /var/log/nginx/access.log
 local_path: /tmp/access.log
 ```
 
-### SFTP 업로드
+### SFTP Upload
 
 `ssh.sftp_upload`
 
-SFTP를 통해 원격 서버에 파일 업로드
+Upload file to remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | SSH 서버 호스트명 또는 IP |
-| `port` | number | No | `22` | SSH 포트 |
-| `username` | string | Yes | - | SSH 사용자 이름 |
-| `password` | string | No | - | SSH 비밀번호 |
-| `private_key` | string | No | - | PEM 형식 개인 키 |
-| `local_path` | string | Yes | - | 업로드할 로컬 파일 경로 |
-| `remote_path` | string | Yes | - | 원격 서버의 대상 경로 |
-| `overwrite` | boolean | No | `True` | 기존 원격 파일 덮어쓰기 |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `local_path` | string | Yes | - | Path to local file to upload |
+| `remote_path` | string | Yes | - | Destination path on remote server |
+| `overwrite` | boolean | No | `True` | Overwrite existing remote file |
 
 **Output:**
 
@@ -1419,17 +1449,17 @@ local_path: /tmp/app.tar.gz
 remote_path: /opt/releases/app.tar.gz
 ```
 
-### E2E 단계 실행
+### Run E2E Steps
 
 `testing.e2e.run_steps`
 
-엔드투엔드 테스트 단계를 순차적으로 실행
+Execute end-to-end test steps sequentially
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `steps` | array | Yes | - | 테스트 단계 정의 배열 |
+| `steps` | array | Yes | - | Array of test step definitions |
 | `stop_on_failure` | boolean | No | `True` | Whether to stop on failure |
 | `timeout_per_step` | number | No | `30000` | Timeout Per Step value |
 
@@ -1437,45 +1467,45 @@ remote_path: /opt/releases/app.tar.gz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 작업 성공 여부 |
-| `passed` | number | 작업 성공 여부 |
-| `failed` | number | 작업 성공 여부 |
-| `results` | array | 통과한 테스트 수 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### 품질 게이트
+### Quality Gate
 
 `testing.gate.evaluate`
 
-정의된 임계값에 대해 품질 메트릭 평가
+Evaluate quality metrics against defined thresholds
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | object | Yes | - | 평가할 메트릭 |
-| `thresholds` | object | Yes | - | 평가할 메트릭 |
+| `metrics` | object | Yes | - | Metrics to evaluate |
+| `thresholds` | object | Yes | - | Threshold values for each metric |
 | `fail_on_breach` | boolean | No | `True` | Whether to fail on breach |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 각 메트릭의 임계값 |
-| `passed` | boolean | 작업 성공 여부 |
-| `results` | array | 작업 성공 여부 |
-| `summary` | string | 통과한 테스트 수 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `results` | array | List of results |
+| `summary` | string | The summary |
 
-### HTTP 테스트 실행
+### Run HTTP Tests
 
 `testing.http.run_suite`
 
-HTTP API 테스트 스위트 실행
+Execute HTTP API test suite
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | HTTP 테스트 정의 배열 |
+| `tests` | array | Yes | - | Array of HTTP test definitions |
 | `base_url` | string | No | - | Base URL for API requests |
 | `headers` | object | No | `{}` | HTTP request headers |
 
@@ -1483,22 +1513,22 @@ HTTP API 테스트 스위트 실행
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 작업 성공 여부 |
-| `passed` | number | 작업 성공 여부 |
-| `failed` | number | 작업 성공 여부 |
-| `results` | array | 통과한 테스트 수 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### 린터 실행
+### Run Linter
 
 `testing.lint.run`
 
-소스 코드에서 린트 검사 실행
+Run linting checks on source code
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | 린트할 파일 또는 디렉토리 |
+| `paths` | array | Yes | - | Files or directories to lint |
 | `linter` | string | No | `auto` | Linter |
 | `fix` | boolean | No | `False` | Whether to fix |
 
@@ -1506,16 +1536,16 @@ HTTP API 테스트 스위트 실행
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 작업 성공 여부 |
-| `errors` | number | 작업 성공 여부 |
-| `warnings` | number | 작업 성공 여부 |
-| `issues` | array | 발생한 오류 수 |
+| `ok` | boolean | Whether the operation succeeded |
+| `errors` | number | Number of errors encountered |
+| `warnings` | number | The warnings |
+| `issues` | array | The issues |
 
-### 보고서 생성
+### Generate Report
 
 `testing.report.generate`
 
-테스트 실행 보고서 생성
+Generate test execution report
 
 **Parameters:**
 
@@ -1529,43 +1559,43 @@ HTTP API 테스트 스위트 실행
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 작업 성공 여부 |
-| `report` | string | 작업 성공 여부 |
-| `format` | string | 작업 성공 여부 |
-| `summary` | object | 보고서 |
+| `ok` | boolean | Whether the operation succeeded |
+| `report` | string | The report |
+| `format` | string | The format |
+| `summary` | object | The summary |
 
-### 시나리오 실행
+### Run Scenario
 
 `testing.scenario.run`
 
-시나리오 기반 테스트 실행 (BDD 스타일)
+Execute scenario-based test (BDD style)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `scenario` | object | Yes | - | given/when/then 시나리오 정의 |
+| `scenario` | object | Yes | - | Scenario definition with given/when/then |
 | `context` | object | No | `{}` | Additional context data |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | given/when/then 시나리오 정의 |
-| `passed` | boolean | 작업 성공 여부 |
-| `steps` | array | 작업 성공 여부 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `steps` | array | The steps |
 
-### 보안 스캔
+### Security Scan
 
 `testing.security.scan`
 
-보안 취약점 스캔
+Scan for security vulnerabilities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `targets` | array | Yes | - | 스캔할 파일, URL 또는 경로 |
+| `targets` | array | Yes | - | Files, URLs, or paths to scan |
 | `scan_type` | string | No | `all` | Scan Type |
 | `severity_threshold` | string | No | `medium` | Severity Threshold |
 
@@ -1573,45 +1603,45 @@ HTTP API 테스트 스위트 실행
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 작업 성공 여부 |
-| `vulnerabilities` | array | 작업 성공 여부 |
-| `summary` | object | 작업 성공 여부 |
+| `ok` | boolean | Whether the operation succeeded |
+| `vulnerabilities` | array | The vulnerabilities |
+| `summary` | object | The summary |
 
-### 테스트 스위트 실행
+### Run Test Suite
 
 `testing.suite.run`
 
-테스트 모음 실행
+Execute a collection of tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | 테스트 정의 배열 |
+| `tests` | array | Yes | - | Array of test definitions |
 | `parallel` | boolean | No | `False` | Whether to parallel |
-| `max_failures` | number | No | `0` | 테스트 정의 배열 |
+| `max_failures` | number | No | `0` | 0 = no limit |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 0 = 제한 없음 |
-| `passed` | number | 0 = 제한 없음 |
-| `failed` | number | 작업 성공 여부 |
-| `skipped` | number | 통과한 테스트 수 |
-| `results` | array | 실패한 테스트 수 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `skipped` | number | Number of tests skipped |
+| `results` | array | List of results |
 
-### 단위 테스트 실행
+### Run Unit Tests
 
 `testing.unit.run`
 
-단위 테스트 실행
+Execute unit tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | 테스트 파일 또는 디렉토리 경로 |
+| `paths` | array | Yes | - | Paths to test files or directories |
 | `pattern` | string | No | `test_*.py` | Pattern |
 | `verbose` | boolean | No | `False` | Whether to verbose |
 
@@ -1619,67 +1649,67 @@ HTTP API 테스트 스위트 실행
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 작업 성공 여부 |
-| `passed` | number | 작업 성공 여부 |
-| `failed` | number | 작업 성공 여부 |
-| `errors` | number | 통과한 테스트 수 |
-| `results` | array | 실패한 테스트 수 |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `errors` | number | Number of errors encountered |
+| `results` | array | List of results |
 
-### 시각적 비교
+### Visual Compare
 
 `testing.visual.compare`
 
-시각적 출력의 차이 비교
+Compare visual outputs for differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | string | Yes | - | 실제 이미지의 경로 또는 base64 |
-| `expected` | string | Yes | - | 실제 이미지의 경로 또는 base64 |
-| `threshold` | number | No | `0.1` | 예상 이미지의 경로 또는 base64 |
+| `actual` | string | Yes | - | Path or base64 of actual image |
+| `expected` | string | Yes | - | Path or base64 of expected image |
+| `threshold` | number | No | `0.1` | Max allowed difference (0-1) |
 | `output_diff` | boolean | No | `True` | Whether to output diff |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 최대 허용 차이 (0-1) |
-| `match` | boolean | 작업 성공 여부 |
-| `difference` | number | 작업 성공 여부 |
-| `diff_image` | string | 일치 여부 |
+| `ok` | boolean | Whether the operation succeeded |
+| `match` | boolean | The match |
+| `difference` | number | The difference |
+| `diff_image` | string | The diff image |
 
-### UI 품질 평가
+### Evaluate UI Quality
 
 `ui.evaluate`
 
-다차원 점수를 통한 종합적인 UI 품질 평가
+Comprehensive UI quality evaluation with multi-dimensional scoring
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `screenshot` | string | Yes | - | 평가할 스크린샷 경로 또는 URL |
-| `app_type` | string | No | `web_app` | 평가할 스크린샷 경로 또는 URL |
-| `page_type` | string | No | - | 평가할 페이지 유형 |
-| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | 평가할 특정 기준 (기본값: 전체) |
-| `target_audience` | string | No | - | 대상 사용자 설명 |
-| `brand_guidelines` | string | No | - | 확인할 간략한 브랜드 가이드라인 |
-| `min_score` | number | No | `70` | 통과를 위한 최소 전체 점수 (0-100) |
-| `api_key` | string | No | - | OpenAI API 키 (기본값: OPENAI_API_KEY 환경 변수) |
+| `screenshot` | string | Yes | - | Screenshot path or URL to evaluate |
+| `app_type` | string | No | `web_app` | Type of application for context-aware evaluation |
+| `page_type` | string | No | - | Type of page being evaluated |
+| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | Specific criteria to evaluate (defaults to all) |
+| `target_audience` | string | No | - | Description of target users |
+| `brand_guidelines` | string | No | - | Brief brand guidelines to check against |
+| `min_score` | number | No | `70` | Minimum overall score to pass (0-100) |
+| `api_key` | string | No | - | OpenAI API key (defaults to OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | OpenAI API 키 (기본값: OPENAI_API_KEY 환경 변수) |
-| `passed` | boolean | 평가 성공 여부 |
-| `overall_score` | number | 평가 성공 여부 |
-| `scores` | object | 전체 UI 품질 점수 (0-100) |
-| `strengths` | array | 전체 UI 품질 점수 (0-100) |
-| `issues` | array | 평가 기준별 점수 |
-| `recommendations` | array | UI 강점 목록 |
-| `summary` | string | 구체적인 개선 권장 사항 |
+| `ok` | boolean | Whether evaluation succeeded |
+| `passed` | boolean | Whether UI meets minimum score threshold |
+| `overall_score` | number | Overall UI quality score (0-100) |
+| `scores` | object | Scores by evaluation criteria |
+| `strengths` | array | List of UI strengths |
+| `issues` | array | List of issues found with severity |
+| `recommendations` | array | Specific improvement recommendations |
+| `summary` | string | Executive summary of evaluation |
 
 **Example:** Evaluate Dashboard
 
@@ -1700,11 +1730,11 @@ page_type: product detail
 evaluation_criteria: ["usability", "cta_effectiveness", "visual_design"]
 ```
 
-### AI로 이미지 분석
+### Analyze Image with AI
 
 `vision.analyze`
 
-OpenAI Vision API(GPT-4V)를 사용하여 이미지 분석
+Analyze images using OpenAI Vision API (GPT-4V)
 
 **Parameters:**
 
@@ -1725,11 +1755,11 @@ OpenAI Vision API(GPT-4V)를 사용하여 이미지 분석
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 분석 성공 여부 |
-| `analysis` | string | 분석 성공 여부 |
-| `structured` | object | AI 분석 결과 |
-| `model` | string | 구조화된 분석 데이터 (output_format이 structured/json인 경우) |
-| `tokens_used` | number | 분석에 사용된 모델 |
+| `ok` | boolean | Whether analysis succeeded |
+| `analysis` | string | The AI analysis result |
+| `structured` | object | Structured analysis data (if output_format is structured/json) |
+| `model` | string | Model used for analysis |
+| `tokens_used` | number | Total tokens used |
 
 **Example:** UI Review
 
@@ -1756,11 +1786,11 @@ prompt: Evaluate accessibility: color contrast, text readability, button sizes, 
 analysis_type: accessibility
 ```
 
-### 이미지 비교
+### Compare Images
 
 `vision.compare`
 
-두 이미지를 비교하여 시각적 차이 식별
+Compare two images and identify visual differences
 
 **Parameters:**
 
@@ -1780,12 +1810,12 @@ analysis_type: accessibility
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 비교 성공 여부 |
-| `has_differences` | boolean | 비교 성공 여부 |
-| `similarity_score` | number | 중요한 차이점 발견 여부 |
-| `differences` | array | 유사도 백분율 (0-100) |
-| `summary` | string | 식별된 차이점 목록 |
-| `recommendation` | string | 비교 결과 요약 |
+| `ok` | boolean | Whether comparison succeeded |
+| `has_differences` | boolean | Whether significant differences were found |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `differences` | array | List of identified differences |
+| `summary` | string | Summary of comparison results |
+| `recommendation` | string | Pass/Fail recommendation based on threshold |
 
 **Example:** Visual Regression Test
 

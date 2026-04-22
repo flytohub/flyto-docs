@@ -6,23 +6,23 @@ MongoDB, MySQL, PostgreSQL, and Redis database operations.
 
 | Module | Description |
 |--------|-------------|
-| [Chèn cơ sở dữ liệu](#chèn-cơ-sở-dữ-liệu) | Chèn dữ liệu vào các bảng cơ sở dữ liệu |
-| [Truy vấn cơ sở dữ liệu](#truy-vấn-cơ-sở-dữ-liệu) | Thực thi truy vấn SQL trên cơ sở dữ liệu PostgreSQL, MySQL hoặc SQLite |
-| [Cập nhật cơ sở dữ liệu](#cập-nhật-cơ-sở-dữ-liệu) | Cập nhật dữ liệu trong các bảng cơ sở dữ liệu |
-| [MongoDB Find](#mongodb-find) | Truy vấn tài liệu từ collection MongoDB |
-| [MongoDB Insert](#mongodb-insert) | Chèn một hoặc nhiều tài liệu vào collection MongoDB |
-| [Truy vấn MySQL](#truy-vấn-mysql) | Thực thi truy vấn SQL trên cơ sở dữ liệu MySQL và trả về kết quả |
-| [Truy vấn PostgreSQL](#truy-vấn-postgresql) | Thực thi truy vấn SQL trên cơ sở dữ liệu PostgreSQL và trả về kết quả |
-| [Redis Get](#redis-get) | Lấy giá trị từ cache Redis |
-| [Redis Set](#redis-set) | Đặt giá trị trong cache Redis |
+| [Database Insert](#database-insert) | Insert data into database tables |
+| [Database Query](#database-query) | Execute SQL queries on PostgreSQL, MySQL, or SQLite databases |
+| [Database Update](#database-update) | Update data in database tables |
+| [MongoDB Find](#mongodb-find) | Query documents from MongoDB collection |
+| [MongoDB Insert](#mongodb-insert) | Insert one or more documents into MongoDB collection |
+| [MySQL Query](#mysql-query) | Execute a SQL query on MySQL database and return results |
+| [PostgreSQL Query](#postgresql-query) | Execute a SQL query on PostgreSQL database and return results |
+| [Redis Get](#redis-get) | Get a value from Redis cache |
+| [Redis Set](#redis-set) | Set a value in Redis cache |
 
 ## Modules
 
-### Chèn cơ sở dữ liệu
+### Database Insert
 
 `database.insert`
 
-Chèn dữ liệu vào các bảng cơ sở dữ liệu
+Insert data into database tables
 
 **Parameters:**
 
@@ -43,8 +43,8 @@ Chèn dữ liệu vào các bảng cơ sở dữ liệu
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | Số hàng đã chèn |
-| `returning_data` | array | Số hàng đã chèn |
+| `inserted_count` | number | Number of rows inserted |
+| `returning_data` | array | Returned data from insert |
 
 **Example:** Insert single row
 
@@ -54,11 +54,11 @@ data: {"name": "John", "email": "john@example.com"}
 database_type: postgresql
 ```
 
-### Truy vấn cơ sở dữ liệu
+### Database Query
 
 `database.query`
 
-Thực thi truy vấn SQL trên cơ sở dữ liệu PostgreSQL, MySQL hoặc SQLite
+Execute SQL queries on PostgreSQL, MySQL, or SQLite databases
 
 **Parameters:**
 
@@ -79,9 +79,9 @@ Thực thi truy vấn SQL trên cơ sở dữ liệu PostgreSQL, MySQL hoặc SQ
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | Các hàng kết quả truy vấn |
-| `row_count` | number | Các hàng kết quả truy vấn |
-| `columns` | array | Các hàng kết quả truy vấn |
+| `rows` | array | Query result rows |
+| `row_count` | number | Number of rows returned/affected |
+| `columns` | array | Column names |
 
 **Example:** Select with parameters
 
@@ -91,11 +91,11 @@ params: ["active"]
 database_type: postgresql
 ```
 
-### Cập nhật cơ sở dữ liệu
+### Database Update
 
 `database.update`
 
-Cập nhật dữ liệu trong các bảng cơ sở dữ liệu
+Update data in database tables
 
 **Parameters:**
 
@@ -116,7 +116,7 @@ Cập nhật dữ liệu trong các bảng cơ sở dữ liệu
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `updated_count` | number | Số hàng đã cập nhật |
+| `updated_count` | number | Number of rows updated |
 
 **Example:** Update user status
 
@@ -131,7 +131,7 @@ database_type: postgresql
 
 `db.mongodb.find`
 
-Truy vấn tài liệu từ collection MongoDB
+Query documents from MongoDB collection
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ Truy vấn tài liệu từ collection MongoDB
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `documents` | array | Mảng các tài liệu khớp |
-| `count` | number | Mảng các tài liệu khớp |
+| `documents` | array | Array of matching documents |
+| `count` | number | Number of documents returned |
 
 **Example:** Find all active users
 
@@ -176,7 +176,7 @@ limit: 20
 
 `db.mongodb.insert`
 
-Chèn một hoặc nhiều tài liệu vào collection MongoDB
+Insert one or more documents into MongoDB collection
 
 **Parameters:**
 
@@ -192,8 +192,8 @@ Chèn một hoặc nhiều tài liệu vào collection MongoDB
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | Số tài liệu đã chèn |
-| `inserted_ids` | array | Số tài liệu đã chèn |
+| `inserted_count` | number | Number of documents inserted |
+| `inserted_ids` | array | Array of inserted document IDs |
 
 **Example:** Insert single document
 
@@ -211,11 +211,11 @@ collection: products
 documents: [{"name": "Product A", "price": 19.99}, {"name": "Product B", "price": 29.99}]
 ```
 
-### Truy vấn MySQL
+### MySQL Query
 
 `db.mysql.query`
 
-Thực thi truy vấn SQL trên cơ sở dữ liệu MySQL và trả về kết quả
+Execute a SQL query on MySQL database and return results
 
 **Parameters:**
 
@@ -233,9 +233,9 @@ Thực thi truy vấn SQL trên cơ sở dữ liệu MySQL và trả về kết 
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | Mảng các hàng kết quả dưới dạng đối tượng |
-| `row_count` | number | Mảng các hàng kết quả dưới dạng đối tượng |
-| `columns` | array | Mảng các hàng kết quả dưới dạng đối tượng |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select products
 
@@ -250,11 +250,11 @@ query: SELECT * FROM orders WHERE customer_id = %s AND created_at > %s
 params: ["${customer_id}", "2024-01-01"]
 ```
 
-### Truy vấn PostgreSQL
+### PostgreSQL Query
 
 `db.postgresql.query`
 
-Thực thi truy vấn SQL trên cơ sở dữ liệu PostgreSQL và trả về kết quả
+Execute a SQL query on PostgreSQL database and return results
 
 **Parameters:**
 
@@ -268,9 +268,9 @@ Thực thi truy vấn SQL trên cơ sở dữ liệu PostgreSQL và trả về k
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | Mảng các hàng kết quả dưới dạng đối tượng |
-| `row_count` | number | Mảng các hàng kết quả dưới dạng đối tượng |
-| `columns` | array | Mảng các hàng kết quả dưới dạng đối tượng |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select users
 
@@ -289,7 +289,7 @@ params: ["${user_id}", "completed"]
 
 `db.redis.get`
 
-Lấy giá trị từ cache Redis
+Get a value from Redis cache
 
 **Parameters:**
 
@@ -304,9 +304,9 @@ Lấy giá trị từ cache Redis
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | Giá trị trả về |
-| `exists` | boolean | Giá trị trả về |
-| `key` | string | Giá trị trả về |
+| `value` | any | The returned value |
+| `exists` | boolean | The exists |
+| `key` | string | Key identifier |
 
 **Example:** Get cached value
 
@@ -328,7 +328,7 @@ db: 1
 
 `db.redis.set`
 
-Đặt giá trị trong cache Redis
+Set a value in Redis cache
 
 **Parameters:**
 

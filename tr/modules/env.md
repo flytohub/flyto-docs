@@ -6,32 +6,32 @@ Environment variable management and .env file loading.
 
 | Module | Description |
 |--------|-------------|
-| [Ortam Değişkenini Al](#ortam-değişkenini-al) | Bir ortam değişkeninin değerini al |
-| [.env Dosyasını Yükle](#.env-dosyasını-yükle) | .env dosyasından ortam değişkenlerini yükle |
-| [Ortam Değişkenini Ayarla](#ortam-değişkenini-ayarla) | Geçerli işlemde bir ortam değişkeni ayarla |
+| [Get Environment Variable](#get-environment-variable) | Get the value of an environment variable |
+| [Load .env File](#load-.env-file) | Load environment variables from a .env file |
+| [Set Environment Variable](#set-environment-variable) | Set an environment variable in the current process |
 
 ## Modules
 
-### Ortam Değişkenini Al
+### Get Environment Variable
 
 `env.get`
 
-Bir ortam değişkeninin değerini al
+Get the value of an environment variable
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | Ortam değişkeninin adı |
-| `default` | string | No | - | Değişken ayarlanmamışsa varsayılan değer |
+| `name` | string | Yes | - | Name of the environment variable |
+| `default` | string | No | - | Default value if the variable is not set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Değişken adı |
-| `value` | string | Değişken değeri (ayarlanmamışsa varsayılan) |
-| `exists` | boolean | Değişken ortamda mevcut mu |
+| `name` | string | Variable name |
+| `value` | string | Variable value (or default if not set) |
+| `exists` | boolean | Whether the variable exists in the environment |
 
 **Example:** Get HOME variable
 
@@ -46,25 +46,25 @@ name: MY_APP_PORT
 default: 8080
 ```
 
-### .env Dosyasını Yükle
+### Load .env File
 
 `env.load_dotenv`
 
-.env dosyasından ortam değişkenlerini yükle
+Load environment variables from a .env file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | `.env` | .env dosyasının yolu |
-| `override` | boolean | No | `False` | Mevcut ortam değişkenlerini geçersiz kılmak isteyip istemediğiniz |
+| `path` | string | Yes | `.env` | Path to the .env file |
+| `override` | boolean | No | `False` | Whether to override existing environment variables |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `loaded_count` | number | Yüklenen değişken sayısı |
-| `variables` | array | Yüklenen değişken adlarının listesi |
+| `loaded_count` | number | Number of variables loaded |
+| `variables` | array | List of variable names that were loaded |
 
 **Example:** Load .env file
 
@@ -73,26 +73,26 @@ path: .env
 override: false
 ```
 
-### Ortam Değişkenini Ayarla
+### Set Environment Variable
 
 `env.set`
 
-Geçerli işlemde bir ortam değişkeni ayarla
+Set an environment variable in the current process
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | Ayarlanacak ortam değişkeninin adı |
-| `value` | string | Yes | - | Ortam değişkenine atanacak değer |
+| `name` | string | Yes | - | Name of the environment variable to set |
+| `value` | string | Yes | - | Value to assign to the environment variable |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Değişken adı |
-| `value` | string | Ayarlanan yeni değer |
-| `previous_value` | string | Önceki değer (daha önce ayarlanmamışsa null) |
+| `name` | string | Variable name |
+| `value` | string | New value that was set |
+| `previous_value` | string | Previous value (null if not previously set) |
 
 **Example:** Set an environment variable
 

@@ -6,92 +6,92 @@ Random number, UUID, choice, and shuffle.
 
 | Module | Description |
 |--------|-------------|
-| [ランダム選択](#ランダム選択) | 配列からランダムに要素を選ぶ |
-| [ランダム数](#ランダム数) | 範囲内でランダムな数字を生成 |
-| [配列シャッフル](#配列シャッフル) | 配列の要素をランダムにシャッフル |
-| [UUID生成](#uuid生成) | ランダムなUUID（v4）を生成 |
+| [Random Choice](#random-choice) | Select random element(s) from an array |
+| [Random Number](#random-number) | Generate random number within a range |
+| [Shuffle Array](#shuffle-array) | Randomly shuffle array elements |
+| [Generate UUID](#generate-uuid) | Generate random UUID (v4) |
 
 ## Modules
 
-### ランダム選択
+### Random Choice
 
 `random.choice`
 
-配列からランダムに要素を選ぶ
+Select random element(s) from an array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | 選ぶ対象の配列 |
-| `count` | number | No | `1` | 選ぶ対象の配列 |
-| `unique` | boolean | No | `True` | 選ぶ要素の数 |
+| `array` | array | Yes | - | Array to pick from |
+| `count` | number | No | `1` | Number of elements to pick |
+| `unique` | boolean | No | `True` | Pick unique elements (no duplicates) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `choice` | any | 重複なしでユニークな要素を選ぶ |
-| `count` | number | 選ばれた要素 |
+| `choice` | any | Selected element(s) |
+| `count` | number | Number of elements selected |
 
-### ランダム数
+### Random Number
 
 `random.number`
 
-範囲内でランダムな数字を生成
+Generate random number within a range
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `min` | number | No | `0` | 最小値（含む） |
-| `max` | number | No | `100` | 最小値（含む） |
-| `integer` | boolean | No | `True` | 最大値（含む） |
-| `precision` | number | No | `2` | 整数のみ生成 |
+| `min` | number | No | `0` | Minimum value (inclusive) |
+| `max` | number | No | `100` | Maximum value (inclusive) |
+| `integer` | boolean | No | `True` | Generate integers only |
+| `precision` | number | No | `2` | Decimal places for float |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `number` | number | 小数点以下の桁数 |
-| `min` | number | 生成されたランダム数 |
-| `max` | number | 生成されたランダム数 |
+| `number` | number | Generated random number |
+| `min` | number | Minimum bound used |
+| `max` | number | Maximum bound used |
 
-### 配列シャッフル
+### Shuffle Array
 
 `random.shuffle`
 
-配列の要素をランダムにシャッフル
+Randomly shuffle array elements
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | シャッフルする配列 |
+| `array` | array | Yes | - | Array to shuffle |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | シャッフルする配列 |
-| `length` | number | シャッフルされた配列 |
+| `result` | array | Shuffled array |
+| `length` | number | Array length |
 
-### UUID生成
+### Generate UUID
 
 `random.uuid`
 
-ランダムなUUID（v4）を生成
+Generate random UUID (v4)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `uppercase` | boolean | No | `False` | 大文字のUUIDを返す |
-| `remove_hyphens` | boolean | No | `False` | 大文字のUUIDを返す |
+| `uppercase` | boolean | No | `False` | Return uppercase UUID |
+| `remove_hyphens` | boolean | No | `False` | Remove hyphens from UUID |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `uuid` | string | UUIDからハイフンを削除 |
-| `version` | number | 生成されたUUID |
+| `uuid` | string | Generated UUID |
+| `version` | number | UUID version |

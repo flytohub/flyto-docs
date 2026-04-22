@@ -6,34 +6,34 @@ Create and extract ZIP, TAR, and gzip archives.
 
 | Module | Description |
 |--------|-------------|
-| [Gunzip 압축 해제](#gunzip-압축-해제) | gzip으로 압축된 파일 해제 |
-| [Gzip 압축](#gzip-압축) | 단일 파일을 gzip으로 압축 |
-| [TAR 아카이브 생성](#tar-아카이브-생성) | 선택적 gzip/bz2/xz 압축으로 TAR 아카이브 생성 |
-| [TAR 아카이브 추출](#tar-아카이브-추출) | TAR 아카이브에서 파일 추출 (압축 자동 감지) |
-| [ZIP 아카이브 생성](#zip-아카이브-생성) | 파일 목록에서 ZIP 아카이브 생성 |
-| [ZIP 아카이브 추출](#zip-아카이브-추출) | ZIP 아카이브에서 파일 추출 |
+| [Gunzip Decompress](#gunzip-decompress) | Decompress a gzip-compressed file |
+| [Gzip Compress](#gzip-compress) | Compress a single file using gzip |
+| [Create TAR Archive](#create-tar-archive) | Create a TAR archive with optional gzip/bz2/xz compression |
+| [Extract TAR Archive](#extract-tar-archive) | Extract files from a TAR archive (auto-detects compression) |
+| [Create ZIP Archive](#create-zip-archive) | Create a ZIP archive from a list of files |
+| [Extract ZIP Archive](#extract-zip-archive) | Extract files from a ZIP archive |
 
 ## Modules
 
-### Gunzip 압축 해제
+### Gunzip Decompress
 
 `archive.gunzip`
 
-gzip으로 압축된 파일 해제
+Decompress a gzip-compressed file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | gzip으로 압축된 파일의 경로 |
-| `output_path` | string | No | - | 압축 해제된 파일의 경로 (기본값은 .gz 확장자 없는 입력 경로) |
+| `input_path` | string | Yes | - | Path to the gzip-compressed file |
+| `output_path` | string | No | - | Path for the decompressed file (defaults to input without .gz extension) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 압축 해제된 파일의 경로 |
-| `size` | number | 압축 해제된 파일 크기 (바이트) |
+| `path` | string | Path to the decompressed file |
+| `size` | number | Decompressed file size in bytes |
 
 **Example:** Decompress a gzip file
 
@@ -41,27 +41,27 @@ gzip으로 압축된 파일 해제
 input_path: /tmp/data.txt.gz
 ```
 
-### Gzip 압축
+### Gzip Compress
 
 `archive.gzip`
 
-단일 파일을 gzip으로 압축
+Compress a single file using gzip
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | 압축할 파일의 경로 |
-| `output_path` | string | No | - | 압축된 파일의 경로 (기본값은 입력 경로 + .gz) |
+| `input_path` | string | Yes | - | Path to the file to compress |
+| `output_path` | string | No | - | Path for the compressed file (defaults to input_path + .gz) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 압축된 파일의 경로 |
-| `original_size` | number | 원본 파일 크기 (바이트) |
-| `compressed_size` | number | 압축된 파일 크기 (바이트) |
-| `ratio` | number | 압축 비율 (압축된 크기 / 원본 크기) |
+| `path` | string | Path to the compressed file |
+| `original_size` | number | Original file size in bytes |
+| `compressed_size` | number | Compressed file size in bytes |
+| `ratio` | number | Compression ratio (compressed / original) |
 
 **Example:** Compress a file with gzip
 
@@ -69,27 +69,27 @@ input_path: /tmp/data.txt.gz
 input_path: /tmp/data.txt
 ```
 
-### TAR 아카이브 생성
+### Create TAR Archive
 
 `archive.tar_create`
 
-선택적 gzip/bz2/xz 압축으로 TAR 아카이브 생성
+Create a TAR archive with optional gzip/bz2/xz compression
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | Yes | - | 출력 TAR 파일의 경로 |
-| `files` | array | Yes | - | 아카이브에 포함할 파일 경로 목록 |
-| `compression` | select (`none`, `gzip`, `bz2`, `xz`) | No | `gzip` | 압축 방법 |
+| `output_path` | string | Yes | - | Path for the output TAR file |
+| `files` | array | Yes | - | List of file paths to include in the archive |
+| `compression` | select (`none`, `gzip`, `bz2`, `xz`) | No | `gzip` | Compression method |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 생성된 TAR 파일의 경로 |
-| `size` | number | 아카이브 크기 (바이트) |
-| `file_count` | number | 아카이브 내 파일 수 |
+| `path` | string | Path to the created TAR file |
+| `size` | number | Archive size in bytes |
+| `file_count` | number | Number of files in the archive |
 
 **Example:** Create gzipped TAR archive
 
@@ -99,25 +99,25 @@ files: ["/tmp/file1.txt", "/tmp/file2.txt"]
 compression: gzip
 ```
 
-### TAR 아카이브 추출
+### Extract TAR Archive
 
 `archive.tar_extract`
 
-TAR 아카이브에서 파일 추출 (압축 자동 감지)
+Extract files from a TAR archive (auto-detects compression)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `archive_path` | string | Yes | - | 추출할 TAR 아카이브 경로 |
-| `output_dir` | string | Yes | - | 파일을 추출할 디렉토리 |
+| `archive_path` | string | Yes | - | Path to the TAR archive to extract |
+| `output_dir` | string | Yes | - | Directory to extract files into |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted_files` | array | 추출된 파일 경로 목록 |
-| `total_size` | number | 추출된 파일의 총 크기 (바이트) |
+| `extracted_files` | array | List of extracted file paths |
+| `total_size` | number | Total size of extracted files in bytes |
 
 **Example:** Extract TAR.GZ archive
 
@@ -126,28 +126,28 @@ archive_path: /tmp/archive.tar.gz
 output_dir: /tmp/extracted/
 ```
 
-### ZIP 아카이브 생성
+### Create ZIP Archive
 
 `archive.zip_create`
 
-파일 목록에서 ZIP 아카이브 생성
+Create a ZIP archive from a list of files
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | Yes | - | 출력 ZIP 파일의 경로 |
-| `files` | array | Yes | - | 아카이브에 포함할 파일 경로 목록 |
-| `compression` | select (`stored`, `deflated`, `bzip2`, `lzma`) | No | `deflated` | 압축 방법 |
-| `password` | string | No | - | 아카이브 보호를 위한 선택적 비밀번호 (추출 전용, 제한적 지원) |
+| `output_path` | string | Yes | - | Path for the output ZIP file |
+| `files` | array | Yes | - | List of file paths to include in the archive |
+| `compression` | select (`stored`, `deflated`, `bzip2`, `lzma`) | No | `deflated` | Compression method |
+| `password` | string | No | - | Optional password to protect the archive (extraction only, limited support) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 생성된 ZIP 파일의 경로 |
-| `size` | number | 아카이브 크기 (바이트) |
-| `file_count` | number | 아카이브 내 파일 수 |
+| `path` | string | Path to the created ZIP file |
+| `size` | number | Archive size in bytes |
+| `file_count` | number | Number of files in the archive |
 
 **Example:** Create ZIP from files
 
@@ -157,26 +157,26 @@ files: ["/tmp/file1.txt", "/tmp/file2.txt"]
 compression: deflated
 ```
 
-### ZIP 아카이브 추출
+### Extract ZIP Archive
 
 `archive.zip_extract`
 
-ZIP 아카이브에서 파일 추출
+Extract files from a ZIP archive
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `archive_path` | string | Yes | - | 추출할 ZIP 아카이브의 경로 |
-| `output_dir` | string | Yes | - | 파일을 추출할 디렉토리 |
-| `password` | string | No | - | 암호화된 아카이브의 비밀번호 |
+| `archive_path` | string | Yes | - | Path to the ZIP archive to extract |
+| `output_dir` | string | Yes | - | Directory to extract files into |
+| `password` | string | No | - | Password for encrypted archives |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted_files` | array | 추출된 파일 경로 목록 |
-| `total_size` | number | 추출된 파일의 총 크기 (바이트) |
+| `extracted_files` | array | List of extracted file paths |
+| `total_size` | number | Total size of extracted files in bytes |
 
 **Example:** Extract ZIP archive
 

@@ -6,26 +6,26 @@ List manipulation — chunk, flatten, group, map, reduce, zip, and more.
 
 | Module | Description |
 |--------|-------------|
-| [Dizi Parçala](#dizi-parçala) | Diziyi belirtilen boyutta parçalara böl |
+| [Array Chunk](#array-chunk) | Split array into chunks of specified size |
 | [Compact](#compact) | Remove null/empty values from array |
-| [Dizi Farkı](#dizi-farkı) | Diğerlerinde olmayan ilk dizideki öğeleri bul |
+| [Array Difference](#array-difference) | Find elements in first array not in others |
 | [Drop](#drop) | Drop first N elements from array |
-| [Dizi Düzleştir](#dizi-düzleştir) | İç içe dizileri tek diziye düzleştir |
+| [Array Flatten](#array-flatten) | Flatten nested arrays into single array |
 | [Group By](#group-by) | Group array elements by a key |
-| [Dizi Kesişimi](#dizi-kesişimi) | Diziler arasındaki ortak öğeleri bul |
-| [Dizi Birleştir](#dizi-birleştir) | Dizi öğelerini dizeye birleştir |
-| [Dizi Eşle](#dizi-eşle) | Dizideki her öğeyi dönüştür |
-| [Dizi İndirge](#dizi-i̇ndirge) | Diziyi tek değere indirge |
+| [Array Intersection](#array-intersection) | Find common elements between arrays |
+| [Array Join](#array-join) | Join array elements into string |
+| [Array Map](#array-map) | Transform each element in an array |
+| [Array Reduce](#array-reduce) | Reduce array to single value |
 | [Take](#take) | Take first N elements from array |
 | [Zip Arrays](#zip-arrays) | Combine multiple arrays element-wise |
 
 ## Modules
 
-### Dizi Parçala
+### Array Chunk
 
 `array.chunk`
 
-Diziyi belirtilen boyutta parçalara böl
+Split array into chunks of specified size
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ Diziyi belirtilen boyutta parçalara böl
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Parça dizisi |
-| `chunks` | number | Parça dizisi |
+| `result` | array | Array of chunks |
+| `chunks` | number | Number of chunks |
 
 **Example:** Chunk into groups of 3
 
@@ -67,21 +67,21 @@ Remove null/empty values from array
 |------|------|----------|---------|-------------|
 | `array` | array | Yes | - | Array to compact |
 | `remove_empty_strings` | boolean | No | `True` | Remove empty strings |
-| `remove_zero` | boolean | No | `False` | Remove empty strings |
-| `remove_false` | boolean | No | `False` | Remove zero values |
+| `remove_zero` | boolean | No | `False` | Remove zero values |
+| `remove_false` | boolean | No | `False` | Remove false values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Remove false values |
-| `removed` | number | Compacted array |
+| `result` | array | Compacted array |
+| `removed` | number | Number of items removed |
 
-### Dizi Farkı
+### Array Difference
 
 `array.difference`
 
-Diğerlerinde olmayan ilk dizideki öğeleri bul
+Find elements in first array not in others
 
 **Parameters:**
 
@@ -94,8 +94,8 @@ Diğerlerinde olmayan ilk dizideki öğeleri bul
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | İlk diziye özgü öğeler |
-| `length` | number | İlk diziye özgü öğeler |
+| `result` | array | Elements unique to first array |
+| `length` | number | Number of unique elements |
 
 **Example:** Find unique elements
 
@@ -115,20 +115,20 @@ Drop first N elements from array
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `array` | array | Yes | - | Source array |
-| `count` | number | Yes | `1` | Source array |
+| `count` | number | Yes | `1` | Number of elements to drop |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Number of elements to drop |
-| `dropped` | number | Remaining elements |
+| `result` | array | Remaining elements |
+| `dropped` | number | Number of elements dropped |
 
-### Dizi Düzleştir
+### Array Flatten
 
 `array.flatten`
 
-İç içe dizileri tek diziye düzleştir
+Flatten nested arrays into single array
 
 **Parameters:**
 
@@ -141,8 +141,8 @@ Drop first N elements from array
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Düzleştirilmiş dizi |
-| `length` | number | Düzleştirilmiş dizi |
+| `result` | array | Flattened array |
+| `length` | number | Length of flattened array |
 
 **Example:** Flatten one level
 
@@ -169,21 +169,21 @@ Group array elements by a key
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `array` | array | Yes | - | Array of objects to group |
-| `key` | string | Yes | - | Array of objects to group |
+| `key` | string | Yes | - | Property name to group by |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `groups` | object | Property name to group by |
-| `keys` | array | Grouped results |
-| `count` | number | Grouped results |
+| `groups` | object | Grouped results |
+| `keys` | array | Group keys |
+| `count` | number | Number of groups |
 
-### Dizi Kesişimi
+### Array Intersection
 
 `array.intersection`
 
-Diziler arasındaki ortak öğeleri bul
+Find common elements between arrays
 
 **Parameters:**
 
@@ -195,8 +195,8 @@ Diziler arasındaki ortak öğeleri bul
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Ortak öğeler |
-| `length` | number | Ortak öğeler |
+| `result` | array | Common elements |
+| `length` | number | Number of common elements |
 
 **Example:** Find common elements
 
@@ -204,11 +204,11 @@ Diziler arasındaki ortak öğeleri bul
 arrays: [[1, 2, 3, 4], [2, 3, 5], [2, 3, 6]]
 ```
 
-### Dizi Birleştir
+### Array Join
 
 `array.join`
 
-Dizi öğelerini dizeye birleştir
+Join array elements into string
 
 **Parameters:**
 
@@ -222,7 +222,7 @@ Dizi öğelerini dizeye birleştir
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Birleştirilmiş dize |
+| `result` | string | Joined string |
 
 **Example:** Join with comma
 
@@ -239,11 +239,11 @@ separator:
 
 ```
 
-### Dizi Eşle
+### Array Map
 
 `array.map`
 
-Dizideki her öğeyi dönüştür
+Transform each element in an array
 
 **Parameters:**
 
@@ -257,8 +257,8 @@ Dizideki her öğeyi dönüştür
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Dönüştürülmüş dizi |
-| `length` | number | Dönüştürülmüş dizi |
+| `result` | array | Transformed array |
+| `length` | number | Length of result array |
 
 **Example:** Multiply numbers
 
@@ -276,11 +276,11 @@ operation: extract
 value: name
 ```
 
-### Dizi İndirge
+### Array Reduce
 
 `array.reduce`
 
-Diziyi tek değere indirge
+Reduce array to single value
 
 **Parameters:**
 
@@ -295,8 +295,8 @@ Diziyi tek değere indirge
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | İndirgenmiş değer |
-| `operation` | string | İndirgenmiş değer |
+| `result` | any | Reduced value |
+| `operation` | string | Operation that was applied |
 
 **Example:** Sum numbers
 
@@ -324,14 +324,14 @@ Take first N elements from array
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `array` | array | Yes | - | Source array |
-| `count` | number | Yes | `1` | Source array |
+| `count` | number | Yes | `1` | Number of elements to take |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Number of elements to take |
-| `length` | number | Taken elements |
+| `result` | array | Taken elements |
+| `length` | number | Number of elements taken |
 
 ### Zip Arrays
 
@@ -344,11 +344,11 @@ Combine multiple arrays element-wise
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `arrays` | array | Yes | - | Array of arrays to zip |
-| `fill_value` | any | No | - | Array of arrays to zip |
+| `fill_value` | any | No | - | Value for missing elements |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Value for missing elements |
-| `length` | number | Zipped array |
+| `result` | array | Zipped array |
+| `length` | number | Result length |

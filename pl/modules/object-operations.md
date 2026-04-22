@@ -6,110 +6,110 @@ Deep merge, flatten, dot-path get/set, and unflatten.
 
 | Module | Description |
 |--------|-------------|
-| [Głębokie Scalanie](#głębokie-scalanie) | Głębokie scalanie wielu obiektów |
-| [Spłaszcz Obiekt](#spłaszcz-obiekt) | Spłaszczenie zagnieżdżonego obiektu do jednego poziomu |
-| [Pobierz Wartość](#pobierz-wartość) | Pobierz wartość z obiektu według ścieżki |
-| [Ustaw Wartość](#ustaw-wartość) | Ustaw wartość w obiekcie według ścieżki |
-| [Rozpakuj Obiekt](#rozpakuj-obiekt) | Rozpakuj obiekt z notacją kropkową do zagnieżdżonego |
+| [Deep Merge](#deep-merge) | Deep merge multiple objects |
+| [Flatten Object](#flatten-object) | Flatten nested object to single level |
+| [Get Value](#get-value) | Get value from object by path |
+| [Set Value](#set-value) | Set value in object by path |
+| [Unflatten Object](#unflatten-object) | Unflatten object with dot notation to nested |
 
 ## Modules
 
-### Głębokie Scalanie
+### Deep Merge
 
 `object.deep_merge`
 
-Głębokie scalanie wielu obiektów
+Deep merge multiple objects
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `objects` | array | Yes | - | Tablica obiektów do scalenia |
-| `array_merge` | string | No | `replace` | Tablica obiektów do scalenia |
+| `objects` | array | Yes | - | Array of objects to merge |
+| `array_merge` | string | No | `replace` | How to merge arrays |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Scalony obiekt |
+| `result` | object | Merged object |
 
-### Spłaszcz Obiekt
+### Flatten Object
 
 `object.flatten`
 
-Spłaszczenie zagnieżdżonego obiektu do jednego poziomu
+Flatten nested object to single level
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | Zagnieżdżony obiekt do spłaszczenia |
-| `separator` | string | No | `.` | Zagnieżdżony obiekt do spłaszczenia |
-| `max_depth` | number | No | `0` | Separator kluczy |
+| `object` | object | Yes | - | Nested object to flatten |
+| `separator` | string | No | `.` | Key separator |
+| `max_depth` | number | No | `0` | Maximum depth to flatten (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Maksymalna głębokość spłaszczenia (0 = bez ograniczeń) |
-| `keys` | array | Spłaszczony obiekt |
+| `result` | object | Flattened object |
+| `keys` | array | Flattened keys |
 
-### Pobierz Wartość
+### Get Value
 
 `object.get`
 
-Pobierz wartość z obiektu według ścieżki
+Get value from object by path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | Obiekt, z którego pobrać wartość |
-| `path` | string | Yes | - | Obiekt, z którego pobrać wartość |
-| `default` | any | No | - | Ścieżka w notacji kropkowej |
+| `object` | object | Yes | - | Object to get value from |
+| `path` | string | Yes | - | Dot notation path |
+| `default` | any | No | - | Default value if path not found |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | Domyślna wartość, jeśli ścieżka nie zostanie znaleziona |
-| `found` | boolean | Pobrana wartość |
+| `value` | any | Retrieved value |
+| `found` | boolean | Whether path was found |
 
-### Ustaw Wartość
+### Set Value
 
 `object.set`
 
-Ustaw wartość w obiekcie według ścieżki
+Set value in object by path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | Obiekt do modyfikacji |
-| `path` | string | Yes | - | Obiekt do modyfikacji |
-| `value` | any | Yes | - | Ścieżka w notacji kropkowej |
+| `object` | object | Yes | - | Object to modify |
+| `path` | string | Yes | - | Dot notation path |
+| `value` | any | Yes | - | Value to set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Wartość do ustawienia |
+| `result` | object | Modified object |
 
-### Rozpakuj Obiekt
+### Unflatten Object
 
 `object.unflatten`
 
-Rozpakuj obiekt z notacją kropkową do zagnieżdżonego
+Unflatten object with dot notation to nested
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | Płaski obiekt do rozpakowania |
-| `separator` | string | No | `.` | Płaski obiekt do rozpakowania |
+| `object` | object | Yes | - | Flat object to unflatten |
+| `separator` | string | No | `.` | Key separator |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Separator kluczy |
+| `result` | object | Nested object |

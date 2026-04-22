@@ -25,16 +25,16 @@ Convert value to array
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `value` | any | Yes | - | Value to convert |
-| `split_string` | boolean | No | `False` | Value to convert |
-| `delimiter` | string | No | - | Split string into characters |
+| `split_string` | boolean | No | `False` | Split string into characters |
+| `delimiter` | string | No | - | Delimiter for string splitting |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Delimiter for string splitting |
-| `length` | number | Converted array |
-| `original_type` | string | Converted array |
+| `result` | array | Converted array |
+| `length` | number | Array length |
+| `original_type` | string | Original value type |
 
 ### To Boolean
 
@@ -47,14 +47,14 @@ Convert value to boolean
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `value` | any | Yes | - | Value to convert |
-| `strict` | boolean | No | `False` | Value to convert |
+| `strict` | boolean | No | `False` | Only accept true/false strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Only accept true/false strings |
-| `original_type` | string | Converted boolean |
+| `result` | boolean | Converted boolean |
+| `original_type` | string | Original value type |
 
 ### To Number
 
@@ -67,16 +67,16 @@ Convert value to number
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `value` | any | Yes | - | Value to convert |
-| `default` | number | No | `0` | Value to convert |
-| `integer` | boolean | No | `False` | Default value if conversion fails |
+| `default` | number | No | `0` | Default value if conversion fails |
+| `integer` | boolean | No | `False` | Convert to integer |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Convert to integer |
-| `success` | boolean | Converted number |
-| `original_type` | string | Converted number |
+| `result` | number | Converted number |
+| `success` | boolean | Whether conversion succeeded |
+| `original_type` | string | Original value type |
 
 ### To Object
 
@@ -89,15 +89,15 @@ Convert value to object
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `value` | any | Yes | - | Value to convert |
-| `key_name` | string | No | `value` | Value to convert |
+| `key_name` | string | No | `value` | Key name for wrapping non-objects |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Key name for wrapping non-objects |
-| `keys` | array | Converted object |
-| `original_type` | string | Converted object |
+| `result` | object | Converted object |
+| `keys` | array | Object keys |
+| `original_type` | string | Original value type |
 
 ### To String
 
@@ -110,11 +110,11 @@ Convert any value to string
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `value` | any | Yes | - | Value to convert |
-| `pretty` | boolean | No | `False` | Value to convert |
+| `pretty` | boolean | No | `False` | Format objects/arrays with indentation |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Format objects/arrays with indentation |
-| `original_type` | string | String representation |
+| `result` | string | String representation |
+| `original_type` | string | Original value type |

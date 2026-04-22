@@ -6,161 +6,161 @@ Base64, hex, URL, and HTML encoding and decoding.
 
 | Module | Description |
 |--------|-------------|
-| [Base64 デコード](#base64-デコード) | Base64 エンコードされたテキストをデコード |
-| [Hex デコード](#hex-デコード) | 16進数をテキストにデコード |
-| [URL デコード](#url-デコード) | URLエンコードされたテキストをデコード |
-| [Base64エンコード](#base64エンコード) | テキストをBase64にエンコード |
-| [16進エンコード](#16進エンコード) | テキストを16進数にエンコード |
-| [HTMLエンコード](#htmlエンコード) | テキストをHTMLエンティティにエンコード |
-| [URLエンコード](#urlエンコード) | URLエンコード（パーセントエンコーディング） |
+| [Base64 Decode](#base64-decode) | Decode Base64 encoded text |
+| [Hex Decode](#hex-decode) | Decode hexadecimal to text |
+| [URL Decode](#url-decode) | Decode URL encoded text |
+| [Base64 Encode](#base64-encode) | Encode text to Base64 |
+| [Hex Encode](#hex-encode) | Encode text to hexadecimal |
+| [HTML Encode](#html-encode) | Encode text to HTML entities |
+| [URL Encode](#url-encode) | URL encode text (percent encoding) |
 
 ## Modules
 
-### Base64 デコード
+### Base64 Decode
 
 `decode.base64`
 
-Base64 エンコードされたテキストをデコード
+Decode Base64 encoded text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | デコードするBase64エンコードされたテキスト |
-| `encoding` | string | No | `utf-8` | デコードするBase64エンコードされたテキスト |
-| `url_safe` | boolean | No | `False` | 出力の文字エンコーディング |
+| `text` | text | Yes | - | Base64 encoded text to decode |
+| `encoding` | string | No | `utf-8` | Character encoding for output |
+| `url_safe` | boolean | No | `False` | Input is URL-safe Base64 |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 入力はURLセーフなBase64です |
-| `original` | string | デコードされた文字列 |
-| `valid` | boolean | デコードされた文字列 |
+| `result` | string | Decoded string |
+| `original` | string | Original Base64 input |
+| `valid` | boolean | Whether decoding was successful |
 
-### Hex デコード
+### Hex Decode
 
 `decode.hex`
 
-16進数をテキストにデコード
+Decode hexadecimal to text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | デコードする16進数テキスト |
-| `encoding` | string | No | `utf-8` | デコードする16進数テキスト |
+| `text` | text | Yes | - | Hexadecimal text to decode |
+| `encoding` | string | No | `utf-8` | Character encoding for output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 出力の文字エンコーディング |
-| `original` | string | デコードされた文字列 |
-| `valid` | boolean | デコードされた文字列 |
+| `result` | string | Decoded string |
+| `original` | string | Original hex input |
+| `valid` | boolean | Whether decoding was successful |
 
-### URL デコード
+### URL Decode
 
 `decode.url`
 
-URLエンコードされたテキストをデコード
+Decode URL encoded text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | デコードするURLエンコードされたテキスト |
-| `plus_spaces` | boolean | No | `False` | デコードするURLエンコードされたテキスト |
+| `text` | text | Yes | - | URL encoded text to decode |
+| `plus_spaces` | boolean | No | `False` | Treat + as space (form decoding) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | +をスペースとして扱う（フォームデコード） |
-| `original` | string | デコードされた文字列 |
+| `result` | string | Decoded string |
+| `original` | string | Original URL encoded input |
 
-### Base64エンコード
+### Base64 Encode
 
 `encode.base64`
 
-テキストをBase64にエンコード
+Encode text to Base64
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | エンコードするテキスト |
-| `encoding` | string | No | `utf-8` | エンコードするテキスト |
-| `url_safe` | boolean | No | `False` | 文字エンコーディング |
+| `text` | text | Yes | - | Text to encode |
+| `encoding` | string | No | `utf-8` | Character encoding |
+| `url_safe` | boolean | No | `False` | Use URL-safe Base64 encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | URLセーフなBase64エンコードを使用 |
-| `original` | string | Base64エンコードされた文字列 |
-| `length` | number | Base64エンコードされた文字列 |
+| `result` | string | Base64 encoded string |
+| `original` | string | Original input |
+| `length` | number | Length of encoded string |
 
-### 16進エンコード
+### Hex Encode
 
 `encode.hex`
 
-テキストを16進数にエンコード
+Encode text to hexadecimal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 16進にエンコードするテキスト |
-| `encoding` | string | No | `utf-8` | 16進にエンコードするテキスト |
-| `uppercase` | boolean | No | `False` | 文字エンコーディング |
-| `separator` | string | No | - | 大文字の16進文字を使用 |
+| `text` | text | Yes | - | Text to encode to hex |
+| `encoding` | string | No | `utf-8` | Character encoding |
+| `uppercase` | boolean | No | `False` | Use uppercase hex letters |
+| `separator` | string | No | - | Separator between hex bytes |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 16進バイト間のセパレーター |
-| `original` | string | 16進エンコードされた文字列 |
-| `byte_count` | number | 16進エンコードされた文字列 |
+| `result` | string | Hex encoded string |
+| `original` | string | Original input |
+| `byte_count` | number | Number of bytes encoded |
 
-### HTMLエンコード
+### HTML Encode
 
 `encode.html`
 
-テキストをHTMLエンティティにエンコード
+Encode text to HTML entities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | HTMLエンティティとしてエンコードするテキスト |
-| `quote` | boolean | No | `True` | HTMLエンティティとしてエンコードするテキスト |
+| `text` | text | Yes | - | Text to encode as HTML entities |
+| `quote` | boolean | No | `True` | Also encode quote characters |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 引用符もエンコード |
-| `original` | string | HTMLエンコードされた文字列 |
+| `result` | string | HTML encoded string |
+| `original` | string | Original input |
 
-### URLエンコード
+### URL Encode
 
 `encode.url`
 
-URLエンコード（パーセントエンコーディング）
+URL encode text (percent encoding)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | URLエンコードするテキスト |
-| `plus_spaces` | boolean | No | `False` | URLエンコードするテキスト |
-| `safe` | string | No | - | スペースに%20の代わりに+を使用（フォームエンコーディング） |
+| `text` | text | Yes | - | Text to URL encode |
+| `plus_spaces` | boolean | No | `False` | Use + instead of %20 for spaces (form encoding) |
+| `safe` | string | No | - | Characters that should not be encoded |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | エンコードしない文字 |
-| `original` | string | URLエンコードされた文字列 |
+| `result` | string | URL encoded string |
+| `original` | string | Original input |

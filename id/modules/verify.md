@@ -6,44 +6,44 @@ Visual verification, Figma comparison, style capture, and report generation.
 
 | Module | Description |
 |--------|-------------|
-| [Anotasi Tangkapan Layar](#anotasi-tangkapan-layar) | Gambar kotak berlabel pada tangkapan layar untuk menandai perbedaan |
-| [Tangkap Gaya Elemen](#tangkap-gaya-elemen) | Tangkap gaya yang dihitung dari elemen browser |
-| [Bandingkan Gaya](#bandingkan-gaya) | Bandingkan gaya yang ditangkap dengan nilai yang diharapkan |
-| [Ambil Gaya Figma](#ambil-gaya-figma) | Ambil token desain dari Figma API (token tetap lokal) |
-| [Buat Laporan](#buat-laporan) | Buat laporan verifikasi dalam HTML/JSON/Markdown |
-| [Muat Aturan](#muat-aturan) | Muat aturan verifikasi dari file YAML |
-| [Jalankan Verifikasi](#jalankan-verifikasi) | Jalankan verifikasi desain lengkap: tangkap → bandingkan → laporan |
-| [Jalankan Verifikasi Spesifikasi](#jalankan-verifikasi-spesifikasi) | Verifikasi spesifikasi dinamis - susun modul apa saja melalui YAML |
-| [Perbedaan Visual](#perbedaan-visual) | Bandingkan desain referensi dengan situs dev secara visual, anotasi perbedaan |
+| [Annotate Screenshot](#annotate-screenshot) | Draw labeled bounding boxes on screenshots to mark differences |
+| [Capture Element Styles](#capture-element-styles) | Capture computed styles from browser element |
+| [Compare Styles](#compare-styles) | Compare captured styles with expected values |
+| [Fetch Figma Style](#fetch-figma-style) | Fetch design tokens from Figma API (token stays local) |
+| [Generate Report](#generate-report) | Generate verification report in HTML/JSON/Markdown |
+| [Load Ruleset](#load-ruleset) | Load verification rules from YAML file |
+| [Run Verification](#run-verification) | Run full design verification: capture → compare → report |
+| [Run Spec Verification](#run-spec-verification) | Dynamic spec verification - compose any modules via YAML |
+| [Visual Diff](#visual-diff) | Compare reference design with dev site visually, annotate differences |
 
 ## Modules
 
-### Anotasi Tangkapan Layar
+### Annotate Screenshot
 
 `verify.annotate`
 
-Gambar kotak berlabel pada tangkapan layar untuk menandai perbedaan
+Draw labeled bounding boxes on screenshots to mark differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | Yes | - | Jalur ke gambar tangkapan layar |
-| `annotations` | array | Yes | - | Array anotasi: [{label, x, y, width, height, color?, description?}] |
-| `output_path` | string | No | - | Jalur keluaran untuk gambar yang dianotasi (default: menambahkan akhiran _annotated) |
+| `image_path` | string | Yes | - | Path to the screenshot image |
+| `annotations` | array | Yes | - | Array of annotations: [{label, x, y, width, height, color?, description?}] |
+| `output_path` | string | No | - | Output path for annotated image (default: adds _annotated suffix) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Jalur ke gambar yang dianotasi |
-| `annotation_count` | integer | Jumlah anotasi yang digambar |
+| `output_path` | string | Path to annotated image |
+| `annotation_count` | integer | Number of annotations drawn |
 
-### Tangkap Gaya Elemen
+### Capture Element Styles
 
 `verify.capture`
 
-Tangkap gaya yang dihitung dari elemen browser
+Capture computed styles from browser element
 
 **Parameters:**
 
@@ -62,11 +62,11 @@ Tangkap gaya yang dihitung dari elemen browser
 | `element` | object | Captured element with styles |
 | `found` | boolean | Whether element was found |
 
-### Bandingkan Gaya
+### Compare Styles
 
 `verify.compare`
 
-Bandingkan gaya yang ditangkap dengan nilai yang diharapkan
+Compare captured styles with expected values
 
 **Parameters:**
 
@@ -93,11 +93,11 @@ Bandingkan gaya yang ditangkap dengan nilai yang diharapkan
 | `error_count` | number | Number of errors |
 | `warning_count` | number | Number of warnings |
 
-### Ambil Gaya Figma
+### Fetch Figma Style
 
 `verify.figma`
 
-Ambil token desain dari Figma API (token tetap lokal)
+Fetch design tokens from Figma API (token stays local)
 
 **Parameters:**
 
@@ -115,11 +115,11 @@ Ambil token desain dari Figma API (token tetap lokal)
 | `node` | object | Figma node data |
 | `style` | object | Extracted style |
 
-### Buat Laporan
+### Generate Report
 
 `verify.report`
 
-Buat laporan verifikasi dalam HTML/JSON/Markdown
+Generate verification report in HTML/JSON/Markdown
 
 **Parameters:**
 
@@ -139,11 +139,11 @@ Buat laporan verifikasi dalam HTML/JSON/Markdown
 | `report_path` | string | Path to generated report |
 | `summary` | object | Summary statistics |
 
-### Muat Aturan
+### Load Ruleset
 
 `verify.ruleset`
 
-Muat aturan verifikasi dari file YAML
+Load verification rules from YAML file
 
 **Parameters:**
 
@@ -158,11 +158,11 @@ Muat aturan verifikasi dari file YAML
 | `ruleset` | object | Parsed ruleset |
 | `rules_count` | integer | Number of rules |
 
-### Jalankan Verifikasi
+### Run Verification
 
 `verify.run`
 
-Jalankan verifikasi desain lengkap: tangkap → bandingkan → laporan
+Run full design verification: capture → compare → report
 
 **Parameters:**
 
@@ -212,11 +212,11 @@ url: http://localhost:3000
 ruleset_path: ./design-rules.yaml
 ```
 
-### Jalankan Verifikasi Spesifikasi
+### Run Spec Verification
 
 `verify.spec`
 
-Verifikasi spesifikasi dinamis - susun modul apa saja melalui YAML
+Dynamic spec verification - compose any modules via YAML
 
 **Parameters:**
 
@@ -233,31 +233,31 @@ Verifikasi spesifikasi dinamis - susun modul apa saja melalui YAML
 | `summary` | object |  |
 | `results` | array |  |
 
-### Perbedaan Visual
+### Visual Diff
 
 `verify.visual_diff`
 
-Bandingkan desain referensi dengan situs dev secara visual, anotasi perbedaan
+Compare reference design with dev site visually, annotate differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `reference_url` | string | Yes | - | URL atau jalur gambar lokal dari desain referensi |
-| `dev_url` | string | Yes | - | URL situs pengembangan untuk dibandingkan |
-| `output_dir` | string | No | `./verify-reports/visual-diff` | Direktori keluaran untuk laporan |
-| `focus_areas` | array | No | - | Area yang difokuskan (misalnya ["header", "form login"]) |
-| `viewport_width` | number | No | `1280` | Lebar jendela tampilan browser |
-| `viewport_height` | number | No | `800` | Tinggi jendela tampilan browser |
-| `model` | string | No | `gpt-4o` | Model visi yang digunakan |
-| `api_key` | string | No | - | Kunci API OpenAI (atau gunakan variabel lingkungan OPENAI_API_KEY) |
+| `reference_url` | string | Yes | - | URL or local image path of reference design |
+| `dev_url` | string | Yes | - | URL of development site to compare |
+| `output_dir` | string | No | `./verify-reports/visual-diff` | Output directory for reports |
+| `focus_areas` | array | No | - | Areas to focus on (e.g. ["header", "login form"]) |
+| `viewport_width` | number | No | `1280` | Browser viewport width |
+| `viewport_height` | number | No | `800` | Browser viewport height |
+| `model` | string | No | `gpt-4o` | Vision model to use |
+| `api_key` | string | No | - | OpenAI API key (or use OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `similarity_score` | number | Persentase kesamaan (0-100) |
-| `annotations` | array | Daftar perbedaan yang dianotasi |
-| `annotated_image` | string | Jalur ke tangkapan layar yang dianotasi |
-| `report_path` | string | Jalur ke laporan HTML |
-| `summary` | string | Ringkasan perbedaan |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `annotations` | array | List of annotated differences |
+| `annotated_image` | string | Path to annotated screenshot |
+| `report_path` | string | Path to HTML report |
+| `summary` | string | Summary of differences |

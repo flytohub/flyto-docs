@@ -6,19 +6,19 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Module | Description |
 |--------|-------------|
-| [Giá trị tuyệt đối](#giá-trị-tuyệt-đối) | Lấy giá trị tuyệt đối của một số |
-| [Làm tròn lên](#làm-tròn-lên) | Làm tròn số lên số nguyên gần nhất |
-| [Làm tròn xuống](#làm-tròn-xuống) | Làm tròn số xuống số nguyên gần nhất |
-| [Lũy thừa](#lũy-thừa) | Nâng số lên lũy thừa |
-| [Làm tròn số](#làm-tròn-số) | Làm tròn số đến số chữ số thập phân chỉ định |
+| [Absolute Value](#absolute-value) | Get absolute value of a number |
+| [Ceiling Number](#ceiling-number) | Round number up to nearest integer |
+| [Floor Number](#floor-number) | Round number down to nearest integer |
+| [Power/Exponent](#powerexponent) | Raise number to a power |
+| [Round Number](#round-number) | Round number to specified decimal places |
 
 ## Modules
 
-### Giá trị tuyệt đối
+### Absolute Value
 
 `math.abs`
 
-Lấy giá trị tuyệt đối của một số
+Get absolute value of a number
 
 **Parameters:**
 
@@ -30,8 +30,8 @@ Lấy giá trị tuyệt đối của một số
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Giá trị tuyệt đối |
-| `original` | number | Giá trị tuyệt đối |
+| `result` | number | Absolute value |
+| `original` | number | Original number |
 
 **Example:** Absolute of negative number
 
@@ -45,11 +45,11 @@ number: -5
 number: 3.14
 ```
 
-### Làm tròn lên
+### Ceiling Number
 
 `math.ceil`
 
-Làm tròn số lên số nguyên gần nhất
+Round number up to nearest integer
 
 **Parameters:**
 
@@ -61,8 +61,8 @@ Làm tròn số lên số nguyên gần nhất
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Giá trị làm tròn lên |
-| `original` | number | Giá trị làm tròn lên |
+| `result` | number | Ceiling value |
+| `original` | number | Original number |
 
 **Example:** Ceiling positive number
 
@@ -76,11 +76,11 @@ number: 3.2
 number: -2.7
 ```
 
-### Làm tròn xuống
+### Floor Number
 
 `math.floor`
 
-Làm tròn số xuống số nguyên gần nhất
+Round number down to nearest integer
 
 **Parameters:**
 
@@ -92,8 +92,8 @@ Làm tròn số xuống số nguyên gần nhất
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Giá trị làm tròn xuống |
-| `original` | number | Giá trị làm tròn xuống |
+| `result` | number | Floored value |
+| `original` | number | Original number |
 
 **Example:** Floor positive number
 
@@ -107,11 +107,11 @@ number: 3.7
 number: -2.3
 ```
 
-### Lũy thừa
+### Power/Exponent
 
 `math.power`
 
-Nâng số lên lũy thừa
+Raise number to a power
 
 **Parameters:**
 
@@ -124,9 +124,9 @@ Nâng số lên lũy thừa
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Kết quả của cơ số nâng lên số mũ |
-| `base` | number | Kết quả của cơ số nâng lên số mũ |
-| `exponent` | number | Kết quả của cơ số nâng lên số mũ |
+| `result` | number | Result of base raised to exponent |
+| `base` | number | Base number |
+| `exponent` | number | Exponent used |
 
 **Example:** Square a number
 
@@ -142,11 +142,11 @@ base: 27
 exponent: 0.333333
 ```
 
-### Làm tròn số
+### Round Number
 
 `math.round`
 
-Làm tròn số đến số chữ số thập phân chỉ định
+Round number to specified decimal places
 
 **Parameters:**
 
@@ -159,9 +159,9 @@ Làm tròn số đến số chữ số thập phân chỉ định
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Giá trị đã làm tròn |
-| `original` | number | Giá trị đã làm tròn |
-| `decimals` | number | Giá trị đã làm tròn |
+| `result` | number | Rounded value |
+| `original` | number | Original number |
+| `decimals` | number | Decimal places used |
 
 **Example:** Round to integer
 

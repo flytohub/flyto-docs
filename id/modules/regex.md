@@ -6,124 +6,124 @@ Pattern matching: match, extract, replace, split, and test.
 
 | Module | Description |
 |--------|-------------|
-| [Ekstrak Regex](#ekstrak-regex) | Ekstrak grup bernama dari teks |
-| [Cocokkan Regex](#cocokkan-regex) | Temukan semua kecocokan pola dalam teks |
-| [Ganti Regex](#ganti-regex) | Ganti kecocokan pola dalam teks |
-| [Pisah Regex](#pisah-regex) | Pisahkan teks dengan pola regex |
-| [Uji Regex](#uji-regex) | Uji apakah string cocok dengan pola regex |
+| [Regex Extract](#regex-extract) | Extract named groups from text |
+| [Regex Match](#regex-match) | Find all matches of a pattern in text |
+| [Regex Replace](#regex-replace) | Replace pattern matches in text |
+| [Regex Split](#regex-split) | Split text by a regex pattern |
+| [Regex Test](#regex-test) | Test if string matches a regex pattern |
 
 ## Modules
 
-### Ekstrak Regex
+### Regex Extract
 
 `regex.extract`
 
-Ekstrak grup bernama dari teks
+Extract named groups from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Teks untuk diekstrak |
-| `pattern` | string | Yes | - | Teks untuk diekstrak |
-| `ignore_case` | boolean | No | `False` | Pencocokan tidak peka huruf besar/kecil |
+| `text` | string | Yes | - | Text to extract from |
+| `pattern` | string | Yes | - | Regex with named groups (?P<name>...) |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted` | object | Pencocokan tidak peka huruf besar/kecil |
-| `matched` | boolean | Grup bernama yang diekstrak |
-| `full_match` | string | Grup bernama yang diekstrak |
+| `extracted` | object | Extracted named groups |
+| `matched` | boolean | Whether pattern matched |
+| `full_match` | string | Full matched text |
 
-### Cocokkan Regex
+### Regex Match
 
 `regex.match`
 
-Temukan semua kecocokan pola dalam teks
+Find all matches of a pattern in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Teks untuk dicari |
-| `pattern` | string | Yes | - | Teks untuk dicari |
-| `ignore_case` | boolean | No | `False` | Pola ekspresi reguler |
-| `first_only` | boolean | No | `False` | Pencocokan tidak peka huruf besar/kecil |
+| `text` | string | Yes | - | Text to search |
+| `pattern` | string | Yes | - | Regular expression pattern |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `first_only` | boolean | No | `False` | Return only the first match |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `matches` | array | Kembalikan hanya kecocokan pertama |
-| `count` | number | Daftar kecocokan |
-| `groups` | array | Daftar kecocokan |
+| `matches` | array | List of matches |
+| `count` | number | Number of matches |
+| `groups` | array | Captured groups from each match |
 
-### Ganti Regex
+### Regex Replace
 
 `regex.replace`
 
-Ganti kecocokan pola dalam teks
+Replace pattern matches in text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Teks untuk diproses |
-| `pattern` | string | Yes | - | Teks untuk diproses |
-| `replacement` | string | Yes | - | Pola ekspresi reguler |
-| `ignore_case` | boolean | No | `False` | Teks pengganti (mendukung backreferences) |
-| `count` | number | No | `0` | Pencocokan tidak peka huruf besar/kecil |
+| `text` | string | Yes | - | Text to process |
+| `pattern` | string | Yes | - | Regular expression pattern |
+| `replacement` | string | Yes | - | Replacement text (supports backreferences) |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `count` | number | No | `0` | Maximum replacements (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Penggantian maksimum (0 = tidak terbatas) |
-| `replacements` | number | Teks dengan penggantian |
-| `original` | string | Teks dengan penggantian |
+| `result` | string | Text with replacements |
+| `replacements` | number | Number of replacements made |
+| `original` | string | Original text |
 
-### Pisah Regex
+### Regex Split
 
 `regex.split`
 
-Pisahkan teks dengan pola regex
+Split text by a regex pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Teks untuk dipisah |
-| `pattern` | string | Yes | - | Teks untuk dipisah |
-| `ignore_case` | boolean | No | `False` | Pola ekspresi reguler untuk pemisah |
-| `max_split` | number | No | `0` | Pencocokan tidak peka huruf besar/kecil |
-| `remove_empty` | boolean | No | `False` | Jumlah maksimum pemisahan (0 = tidak terbatas) |
+| `text` | string | Yes | - | Text to split |
+| `pattern` | string | Yes | - | Regular expression pattern for delimiter |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `max_split` | number | No | `0` | Maximum number of splits (0 = unlimited) |
+| `remove_empty` | boolean | No | `False` | Remove empty strings from result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Hapus string kosong dari hasil |
-| `count` | number | Bagian yang dipisah |
+| `result` | array | Split parts |
+| `count` | number | Number of parts |
 
-### Uji Regex
+### Regex Test
 
 `regex.test`
 
-Uji apakah string cocok dengan pola regex
+Test if string matches a regex pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Teks untuk diuji |
-| `pattern` | string | Yes | - | Teks untuk diuji |
-| `ignore_case` | boolean | No | `False` | Pola ekspresi reguler |
-| `full_match` | boolean | No | `False` | Pencocokan tidak peka huruf besar/kecil |
+| `text` | string | Yes | - | Text to test |
+| `pattern` | string | Yes | - | Regular expression pattern |
+| `ignore_case` | boolean | No | `False` | Case-insensitive matching |
+| `full_match` | boolean | No | `False` | Require pattern to match entire string |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Memerlukan pola untuk mencocokkan seluruh string |
-| `pattern` | string | Apakah pola cocok |
+| `result` | boolean | Whether pattern matches |
+| `pattern` | string | Pattern used |

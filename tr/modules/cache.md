@@ -6,10 +6,10 @@ In-memory key-value cache with TTL support.
 
 | Module | Description |
 |--------|-------------|
-| [Cache Clear](#cache-clear) | Tüm önbellek kayıtlarını temizle veya desene göre filtrele |
-| [Cache Delete](#cache-delete) | Anahtara göre önbellek kaydını sil |
-| [Cache Get](#cache-get) | Anahtara göre önbellekten bir değer al |
-| [Cache Set](#cache-set) | Opsiyonel TTL ile önbelleğe bir değer ayarla |
+| [Cache Clear](#cache-clear) | Clear all cache entries or filter by pattern |
+| [Cache Delete](#cache-delete) | Delete a cache entry by key |
+| [Cache Get](#cache-get) | Get a value from cache by key |
+| [Cache Set](#cache-set) | Set a value in cache with optional TTL |
 
 ## Modules
 
@@ -17,89 +17,89 @@ In-memory key-value cache with TTL support.
 
 `cache.clear`
 
-Tüm önbellek kayıtlarını temizle veya desene göre filtrele
+Clear all cache entries or filter by pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `pattern` | string | No | `*` | Anahtarları eşleştirmek için glob deseni (ör. "user:*", varsayılan "*" hepsini temizler) |
-| `backend` | string | No | `memory` | Kullanılacak önbellek altyapısı |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis bağlantı URL'si |
+| `pattern` | string | No | `*` | Glob pattern to match keys (e.g. "user:*", default "*" clears all) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `cleared_count` | number | Temizlenen önbellek kayıtlarının sayısı |
-| `backend` | string | Kullanılan altyapı |
+| `cleared_count` | number | Number of cache entries cleared |
+| `backend` | string | The backend used |
 
 ### Cache Delete
 
 `cache.delete`
 
-Anahtara göre önbellek kaydını sil
+Delete a cache entry by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | Silinecek önbellek anahtarı |
-| `backend` | string | No | `memory` | Kullanılacak önbellek altyapısı |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis bağlantı URL'si |
+| `key` | string | Yes | - | The cache key to delete |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | Önbellek anahtarı |
-| `deleted` | boolean | Anahtar bulundu ve silindi mi |
-| `backend` | string | Kullanılan altyapı |
+| `key` | string | The cache key |
+| `deleted` | boolean | Whether the key was found and deleted |
+| `backend` | string | The backend used |
 
 ### Cache Get
 
 `cache.get`
 
-Anahtara göre önbellekten bir değer al
+Get a value from cache by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | Aranacak önbellek anahtarı |
-| `backend` | string | No | `memory` | Kullanılacak önbellek altyapısı |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis bağlantı URL'si |
+| `key` | string | Yes | - | The cache key to look up |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | Önbellek anahtarı |
-| `value` | any | Önbellekteki değer (bulunamazsa null) |
-| `hit` | boolean | Anahtar önbellekte bulundu mu |
-| `backend` | string | Kullanılan altyapı |
+| `key` | string | The cache key |
+| `value` | any | The cached value (null if not found) |
+| `hit` | boolean | Whether the key was found in cache |
+| `backend` | string | The backend used |
 
 ### Cache Set
 
 `cache.set`
 
-Opsiyonel TTL ile önbelleğe bir değer ayarla
+Set a value in cache with optional TTL
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | Değerin saklanacağı önbellek anahtarı |
-| `value` | string | Yes | - | Önbelleğe alınacak değer (herhangi bir JSON-serializable değer) |
-| `ttl` | number | No | `0` | Saniye cinsinden yaşam süresi (0 = süresiz) |
-| `backend` | string | No | `memory` | Kullanılacak önbellek altyapısı |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis bağlantı URL'si |
+| `key` | string | Yes | - | The cache key to store the value under |
+| `value` | string | Yes | - | The value to cache (any JSON-serializable value) |
+| `ttl` | number | No | `0` | Time-to-live in seconds (0 = no expiry) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | Önbellek anahtarı |
-| `stored` | boolean | Değer başarıyla saklandı mı |
-| `ttl` | number | Saniye cinsinden TTL (0 = süresiz) |
-| `backend` | string | Kullanılan altyapı |
+| `key` | string | The cache key |
+| `stored` | boolean | Whether the value was stored successfully |
+| `ttl` | number | The TTL in seconds (0 = no expiry) |
+| `backend` | string | The backend used |

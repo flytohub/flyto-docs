@@ -6,25 +6,25 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Module | Description |
 |--------|-------------|
-| [Stringa Minuscolo](#stringa-minuscolo) | Converti una stringa in minuscolo |
-| [Riempire Stringa](#riempire-stringa) | Riempire una stringa a una lunghezza specificata |
-| [Sostituisci Stringa](#sostituisci-stringa) | Sostituisci occorrenze di una sottostringa in una stringa |
-| [Inverti Stringa](#inverti-stringa) | Inverti i caratteri in una stringa |
-| [Slugify](#slugify) | Convertire il testo in uno slug adatto per URL |
-| [Dividi Stringa](#dividi-stringa) | Dividi una stringa in un array usando un delimitatore |
-| [Template](#template) | Eseguire un template con sostituzione di variabili |
-| [Stringa Title Case](#stringa-title-case) | Converti stringa in title case |
-| [Taglia Stringa](#taglia-stringa) | Rimuovi spazi bianchi da entrambe le estremita di una stringa |
-| [Troncare Stringa](#troncare-stringa) | Troncare una stringa a una lunghezza massima |
-| [Stringa Maiuscolo](#stringa-maiuscolo) | Converti una stringa in maiuscolo |
+| [String Lowercase](#string-lowercase) | Convert a string to lowercase |
+| [Pad String](#pad-string) | Pad a string to a specified length |
+| [String Replace](#string-replace) | Replace occurrences of a substring in a string |
+| [String Reverse](#string-reverse) | Reverse the characters in a string |
+| [Slugify](#slugify) | Convert text to URL-friendly slug |
+| [Split String](#split-string) | Split a string into an array using a delimiter |
+| [Template](#template) | Render a template with variable substitution |
+| [Title Case String](#title-case-string) | Convert string to title case |
+| [String Trim](#string-trim) | Remove whitespace from both ends of a string |
+| [Truncate String](#truncate-string) | Truncate a string to a maximum length |
+| [String Uppercase](#string-uppercase) | Convert a string to uppercase |
 
 ## Modules
 
-### Stringa Minuscolo
+### String Lowercase
 
 `string.lowercase`
 
-Converti una stringa in minuscolo
+Convert a string to lowercase
 
 **Parameters:**
 
@@ -36,38 +36,38 @@ Converti una stringa in minuscolo
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Stringa convertita in minuscolo |
-| `original` | string | Stringa convertita in minuscolo |
-| `status` | string | Stringa convertita in minuscolo |
+| `result` | string | Lowercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### Riempire Stringa
+### Pad String
 
 `string.pad`
 
-Riempire una stringa a una lunghezza specificata
+Pad a string to a specified length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Testo da riempire |
-| `length` | number | Yes | - | Testo da riempire |
-| `pad_char` | string | No | ` ` | Lunghezza desiderata |
-| `position` | string | No | `end` | Carattere con cui riempire |
+| `text` | string | Yes | - | Text to pad |
+| `length` | number | Yes | - | Target length |
+| `pad_char` | string | No | ` ` | Character to pad with |
+| `position` | string | No | `end` | Where to add padding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Stringa riempita |
-| `original` | string | Stringa riempita |
-| `added` | number | Stringa riempita |
+| `result` | string | Padded string |
+| `original` | string | Original string |
+| `added` | number | Characters added |
 
-### Sostituisci Stringa
+### String Replace
 
 `string.replace`
 
-Sostituisci occorrenze di una sottostringa in una stringa
+Replace occurrences of a substring in a string
 
 **Parameters:**
 
@@ -81,17 +81,17 @@ Sostituisci occorrenze di una sottostringa in una stringa
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Stringa con sostituzioni applicate |
-| `original` | string | Stringa con sostituzioni applicate |
-| `search` | string | Stringa con sostituzioni applicate |
-| `replace` | string | Stringa input originale |
-| `status` | string | Stringa di ricerca che e stata sostituita |
+| `result` | string | String with replacements applied |
+| `original` | string | Original input string |
+| `search` | string | Search string that was replaced |
+| `replace` | string | Replacement string used |
+| `status` | string | Operation status |
 
-### Inverti Stringa
+### String Reverse
 
 `string.reverse`
 
-Inverti i caratteri in una stringa
+Reverse the characters in a string
 
 **Parameters:**
 
@@ -103,37 +103,37 @@ Inverti i caratteri in una stringa
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Stringa invertita |
-| `original` | string | Stringa invertita |
-| `length` | number | Stringa invertita |
+| `result` | string | Reversed string |
+| `original` | string | Original input string |
+| `length` | number | String length |
 
 ### Slugify
 
 `string.slugify`
 
-Convertire il testo in uno slug adatto per URL
+Convert text to URL-friendly slug
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Testo da convertire in slug |
-| `separator` | string | No | `-` | Testo da convertire in slug |
-| `lowercase` | boolean | No | `True` | Separatore di parole |
-| `max_length` | number | No | `0` | Convertire in minuscolo |
+| `text` | string | Yes | - | Text to slugify |
+| `separator` | string | No | `-` | Word separator |
+| `lowercase` | boolean | No | `True` | Convert to lowercase |
+| `max_length` | number | No | `0` | Maximum slug length (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Lunghezza massima dello slug (0 = illimitato) |
-| `original` | string | Slug adatto per URL |
+| `result` | string | URL-friendly slug |
+| `original` | string | Original text |
 
-### Dividi Stringa
+### Split String
 
 `string.split`
 
-Dividi una stringa in un array usando un delimitatore
+Split a string into an array using a delimiter
 
 **Parameters:**
 
@@ -147,41 +147,41 @@ Dividi una stringa in un array usando un delimitatore
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `parts` | array | Array delle parti stringa divise |
-| `result` | array | Array delle parti stringa divise |
-| `length` | number | Array delle parti stringa divise |
-| `original` | string | Alias per parti - array delle parti stringa divise |
-| `delimiter` | string | Numero di parti dopo la divisione |
-| `status` | string | Stringa input originale |
+| `parts` | array | Array of split string parts |
+| `result` | array | Alias for parts - array of split string parts |
+| `length` | number | Number of parts after split |
+| `original` | string | Original input string |
+| `delimiter` | string | Delimiter used for splitting |
+| `status` | string | Operation status |
 
 ### Template
 
 `string.template`
 
-Eseguire un template con sostituzione di variabili
+Render a template with variable substitution
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `template` | string | Yes | - | Stringa template con segnaposti {<!-- -->{variable}<!-- -->} |
-| `variables` | object | Yes | - | Variabili da sostituire |
-| `missing_value` | string | No | - | Valore per variabili non definite |
-| `preserve_missing` | boolean | No | `False` | Valore per variabili non definite |
+| `template` | string | Yes | - | Template string with {<!-- -->{variable}<!-- -->} placeholders |
+| `variables` | object | Yes | - | Variables to substitute |
+| `missing_value` | string | No | - | Value for undefined variables |
+| `preserve_missing` | boolean | No | `False` | Keep placeholder if variable is missing |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Mantenere il placeholder se la variabile manca |
-| `replaced` | number | Template eseguito |
-| `missing` | array | Template eseguito |
+| `result` | string | Rendered template |
+| `replaced` | number | Number of replacements made |
+| `missing` | array | Missing variable names |
 
-### Stringa Title Case
+### Title Case String
 
 `string.titlecase`
 
-Converti stringa in title case
+Convert string to title case
 
 **Parameters:**
 
@@ -193,7 +193,7 @@ Converti stringa in title case
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Stringa convertita in title case |
+| `result` | string | Title case converted string |
 
 **Example:** Convert to title case
 
@@ -207,11 +207,11 @@ text: hello world from flyto
 text: john doe
 ```
 
-### Taglia Stringa
+### String Trim
 
 `string.trim`
 
-Rimuovi spazi bianchi da entrambe le estremita di una stringa
+Remove whitespace from both ends of a string
 
 **Parameters:**
 
@@ -223,39 +223,39 @@ Rimuovi spazi bianchi da entrambe le estremita di una stringa
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Stringa tagliata con spazi bianchi rimossi |
-| `original` | string | Stringa tagliata con spazi bianchi rimossi |
-| `status` | string | Stringa tagliata con spazi bianchi rimossi |
+| `result` | string | Trimmed string with whitespace removed |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### Troncare Stringa
+### Truncate String
 
 `string.truncate`
 
-Troncare una stringa a una lunghezza massima
+Truncate a string to a maximum length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Testo da troncare |
-| `length` | number | Yes | - | Testo da troncare |
-| `suffix` | string | No | `...` | Lunghezza massima |
-| `word_boundary` | boolean | No | `False` | Testo da aggiungere se troncato |
+| `text` | string | Yes | - | Text to truncate |
+| `length` | number | Yes | - | Maximum length |
+| `suffix` | string | No | `...` | Text to append if truncated |
+| `word_boundary` | boolean | No | `False` | Break at word boundary |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Interrompere al limite di parola |
-| `original` | string | Stringa troncata |
-| `truncated` | boolean | Stringa troncata |
-| `removed` | number | Stringa originale |
+| `result` | string | Truncated string |
+| `original` | string | Original string |
+| `truncated` | boolean | Whether string was truncated |
+| `removed` | number | Characters removed |
 
-### Stringa Maiuscolo
+### String Uppercase
 
 `string.uppercase`
 
-Converti una stringa in maiuscolo
+Convert a string to uppercase
 
 **Parameters:**
 
@@ -267,6 +267,6 @@ Converti una stringa in maiuscolo
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Stringa convertita in maiuscolo |
-| `original` | string | Stringa convertita in maiuscolo |
-| `status` | string | Stringa convertita in maiuscolo |
+| `result` | string | Uppercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |

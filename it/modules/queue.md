@@ -6,76 +6,76 @@ In-memory and Redis message queue operations.
 
 | Module | Description |
 |--------|-------------|
-| [Rimuovi elemento](#rimuovi-elemento) | Rimuovi e restituisci un elemento da una coda |
-| [Accoda elemento](#accoda-elemento) | Aggiungi un elemento a una coda in memoria o Redis |
-| [Dimensione coda](#dimensione-coda) | Ottieni la dimensione attuale di una coda |
+| [Dequeue Item](#dequeue-item) | Remove and return an item from a queue |
+| [Enqueue Item](#enqueue-item) | Add an item to an in-memory or Redis queue |
+| [Queue Size](#queue-size) | Get the current size of a queue |
 
 ## Modules
 
-### Rimuovi elemento
+### Dequeue Item
 
 `queue.dequeue`
 
-Rimuovi e restituisci un elemento da una coda
+Remove and return an item from a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nome della coda da cui rimuovere |
-| `backend` | string | No | `memory` | Backend della coda da utilizzare |
-| `redis_url` | string | No | `redis://localhost:6379` | URL di connessione Redis |
-| `timeout` | number | No | `0` | Timeout in secondi (0 = non bloccante) |
+| `queue_name` | string | Yes | - | Name of the queue to dequeue from |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
+| `timeout` | number | No | `0` | Timeout in seconds (0 = non-blocking) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | any | L'elemento rimosso (null se la coda è vuota) |
-| `queue_name` | string | Nome della coda |
-| `remaining` | number | Elementi rimanenti nella coda |
-| `empty` | boolean | Se la coda era vuota |
+| `data` | any | The dequeued item (null if queue is empty) |
+| `queue_name` | string | Name of the queue |
+| `remaining` | number | Remaining items in the queue |
+| `empty` | boolean | Whether the queue was empty |
 
-### Accoda elemento
+### Enqueue Item
 
 `queue.enqueue`
 
-Aggiungi un elemento a una coda in memoria o Redis
+Add an item to an in-memory or Redis queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nome della coda a cui aggiungere l'elemento |
-| `data` | string | Yes | - | Dati da accodare (qualsiasi valore serializzabile in JSON) |
-| `backend` | string | No | `memory` | Backend della coda da utilizzare |
-| `redis_url` | string | No | `redis://localhost:6379` | URL di connessione Redis |
+| `queue_name` | string | Yes | - | Name of the queue to add the item to |
+| `data` | string | Yes | - | Data to enqueue (any JSON-serializable value) |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Nome della coda |
-| `position` | number | Posizione dell'elemento nella coda |
-| `queue_size` | number | Dimensione attuale della coda dopo l'accodamento |
+| `queue_name` | string | Name of the queue |
+| `position` | number | Position of the item in the queue |
+| `queue_size` | number | Current size of the queue after enqueue |
 
-### Dimensione coda
+### Queue Size
 
 `queue.size`
 
-Ottieni la dimensione attuale di una coda
+Get the current size of a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nome della coda da controllare |
-| `backend` | string | No | `memory` | Backend della coda da utilizzare |
-| `redis_url` | string | No | `redis://localhost:6379` | URL di connessione Redis |
+| `queue_name` | string | Yes | - | Name of the queue to check |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Nome della coda |
-| `size` | number | Numero attuale di elementi nella coda |
+| `queue_name` | string | Name of the queue |
+| `size` | number | Current number of items in the queue |

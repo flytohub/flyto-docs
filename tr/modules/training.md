@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [Uygulama Analizi](#uygulama-analizi) | Uygulama için web sitesi yapısını analiz et |
-| [Uygulama Yürütme](#uygulama-yürütme) | Uygulama oturumunu yürüt |
-| [Uygulama Şema Çıkarımı](#uygulama-şema-çıkarımı) | Web sitesinden veri şemasını çıkar |
-| [Uygulama İstatistikleri](#uygulama-i̇statistikleri) | Uygulama istatistiklerini al |
+| [Practice Analyze](#practice-analyze) | Analyze website structure for practice |
+| [Practice Execute](#practice-execute) | Execute practice session |
+| [Practice Infer Schema](#practice-infer-schema) | Infer data schema from website |
+| [Practice Stats](#practice-stats) | Get practice statistics |
 
 ## Modules
 
-### Uygulama Analizi
+### Practice Analyze
 
 `training.practice.analyze`
 
-Uygulama için web sitesi yapısını analiz et
+Analyze website structure for practice
 
 **Parameters:**
 
@@ -29,14 +29,14 @@ Uygulama için web sitesi yapısını analiz et
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Web sitesi yapısını analiz et |
-| `structure` | object | Web sitesi yapısını analiz et |
+| `status` | string | Operation status (success/error) |
+| `structure` | object | The structure |
 
-### Uygulama Yürütme
+### Practice Execute
 
 `training.practice.execute`
 
-Uygulama oturumunu yürüt
+Execute practice session
 
 **Parameters:**
 
@@ -49,14 +49,14 @@ Uygulama oturumunu yürüt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Uygulama oturumunu yürüt |
-| `items_processed` | number | Uygulama oturumunu yürüt |
+| `status` | string | Operation status (success/error) |
+| `items_processed` | number | The items processed |
 
-### Uygulama Şema Çıkarımı
+### Practice Infer Schema
 
 `training.practice.infer_schema`
 
-Web sitesinden veri şemasını çıkar
+Infer data schema from website
 
 **Parameters:**
 
@@ -69,20 +69,20 @@ Web sitesinden veri şemasını çıkar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Veri şemasını çıkar |
-| `schema` | object | Veri şemasını çıkar |
+| `status` | string | Operation status (success/error) |
+| `schema` | object | The schema |
 
-### Uygulama İstatistikleri
+### Practice Stats
 
 `training.practice.stats`
 
-Uygulama istatistiklerini al
+Get practice statistics
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total_sessions` | number | Toplam oturumlar |
-| `successful_sessions` | number | Toplam oturumlar |
-| `success_rate` | number | Uygulama istatistiklerini al |
-| `history` | array | Uygulama istatistiklerini al |
+| `total_sessions` | number | The total sessions |
+| `successful_sessions` | number | The successful sessions |
+| `success_rate` | number | The success rate |
+| `history` | array | The history |

@@ -6,132 +6,132 @@ File path utilities: join, normalize, basename, dirname, extension.
 
 | Module | Description |
 |--------|-------------|
-| [Nombre Base del Camino](#nombre-base-del-camino) | Obtener el nombre del archivo del camino |
-| [Nombre del Directorio del Camino](#nombre-del-directorio-del-camino) | Obtener el nombre del directorio del camino |
-| [Extensión del Camino](#extensión-del-camino) | Obtener la extensión del archivo del camino |
-| [Camino Absoluto](#camino-absoluto) | Verificar si el camino es absoluto |
-| [Unir Caminos](#unir-caminos) | Unir componentes del camino |
-| [Normalizar Camino](#normalizar-camino) | Normalizar una ruta de archivo |
+| [Path Basename](#path-basename) | Get file name from path |
+| [Path Dirname](#path-dirname) | Get directory name from path |
+| [Path Extension](#path-extension) | Get file extension from path |
+| [Path Is Absolute](#path-is-absolute) | Check if path is absolute |
+| [Path Join](#path-join) | Join path components |
+| [Path Normalize](#path-normalize) | Normalize a file path |
 
 ## Modules
 
-### Nombre Base del Camino
+### Path Basename
 
 `path.basename`
 
-Obtener el nombre del archivo del camino
+Get file name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Ruta del archivo |
-| `remove_extension` | boolean | No | `False` | Ruta del archivo |
+| `path` | string | Yes | - | File path |
+| `remove_extension` | boolean | No | `False` | Remove file extension from result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Eliminar la extensión del archivo del resultado |
-| `original` | string | Nombre del archivo |
-| `extension` | string | Nombre del archivo |
+| `result` | string | File name |
+| `original` | string | Original path |
+| `extension` | string | File extension |
 
-### Nombre del Directorio del Camino
+### Path Dirname
 
 `path.dirname`
 
-Obtener el nombre del directorio del camino
+Get directory name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Ruta del archivo |
+| `path` | string | Yes | - | File path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Ruta del archivo |
-| `original` | string | Nombre del directorio |
+| `result` | string | Directory name |
+| `original` | string | Original path |
 
-### Extensión del Camino
+### Path Extension
 
 `path.extension`
 
-Obtener la extensión del archivo del camino
+Get file extension from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Ruta del archivo |
-| `include_dot` | boolean | No | `True` | Ruta del archivo |
+| `path` | string | Yes | - | File path |
+| `include_dot` | boolean | No | `True` | Include the dot in extension |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Incluir el punto en la extensión |
-| `original` | string | Extensión del archivo |
-| `has_extension` | boolean | Extensión del archivo |
+| `result` | string | File extension |
+| `original` | string | Original path |
+| `has_extension` | boolean | Whether file has extension |
 
-### Camino Absoluto
+### Path Is Absolute
 
 `path.is_absolute`
 
-Verificar si el camino es absoluto
+Check if path is absolute
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Ruta del archivo a verificar |
+| `path` | string | Yes | - | File path to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Ruta del archivo a verificar |
-| `path` | string | Si el camino es absoluto |
-| `absolute` | string | Si el camino es absoluto |
+| `result` | boolean | Whether path is absolute |
+| `path` | string | The checked path |
+| `absolute` | string | Absolute version of the path |
 
-### Unir Caminos
+### Path Join
 
 `path.join`
 
-Unir componentes del camino
+Join path components
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `parts` | array | Yes | - | Componentes del camino a unir |
+| `parts` | array | Yes | - | Path components to join |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Componentes del camino a unir |
-| `parts` | array | Camino unido |
+| `result` | string | Joined path |
+| `parts` | array | Original path parts |
 
-### Normalizar Camino
+### Path Normalize
 
 `path.normalize`
 
-Normalizar una ruta de archivo
+Normalize a file path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Ruta del archivo a normalizar |
-| `resolve` | boolean | No | `False` | Ruta del archivo a normalizar |
+| `path` | string | Yes | - | File path to normalize |
+| `resolve` | boolean | No | `False` | Resolve to absolute path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Resolver a camino absoluto |
-| `original` | string | Camino normalizado |
-| `is_absolute` | boolean | Camino normalizado |
+| `result` | string | Normalized path |
+| `original` | string | Original path |
+| `is_absolute` | boolean | Whether result is absolute |

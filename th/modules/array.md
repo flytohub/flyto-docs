@@ -6,26 +6,26 @@ List manipulation — chunk, flatten, group, map, reduce, zip, and more.
 
 | Module | Description |
 |--------|-------------|
-| [แบ่งอาเรย์](#แบ่งอาเรย์) | แบ่งอาร์เรย์เป็นชิ้นตามขนาดที่กำหนด |
-| [บีบอัด](#บีบอัด) | ลบค่า null/ว่างเปล่าออกจากอาเรย์ |
-| [ความแตกต่างของอาเรย์](#ความแตกต่างของอาเรย์) | หาองค์ประกอบในอาร์เรย์แรกที่ไม่อยู่ในอื่น ๆ |
-| [ลบ](#ลบ) | ลบ N องค์ประกอบแรกจากอาเรย์ |
-| [แบนอาเรย์](#แบนอาเรย์) | ทำให้อาร์เรย์ซ้อนเป็นอาร์เรย์เดียว |
-| [จัดกลุ่มตาม](#จัดกลุ่มตาม) | จัดกลุ่มองค์ประกอบอาเรย์ตามคีย์ |
-| [จุดตัดของอาเรย์](#จุดตัดของอาเรย์) | หาองค์ประกอบที่เหมือนกันระหว่างอาร์เรย์ |
-| [รวมอาเรย์](#รวมอาเรย์) | รวมองค์ประกอบอาร์เรย์เป็นสตริง |
-| [แมปอาเรย์](#แมปอาเรย์) | แปลงแต่ละองค์ประกอบในอาร์เรย์ |
-| [ลดอาเรย์](#ลดอาเรย์) | ลดอาร์เรย์เป็นค่าเดียว |
-| [นำ](#นำ) | นำ N องค์ประกอบแรกจากอาเรย์ |
-| [ซิปอาเรย์](#ซิปอาเรย์) | รวมอาเรย์หลายอันตามลำดับ |
+| [Array Chunk](#array-chunk) | Split array into chunks of specified size |
+| [Compact](#compact) | Remove null/empty values from array |
+| [Array Difference](#array-difference) | Find elements in first array not in others |
+| [Drop](#drop) | Drop first N elements from array |
+| [Array Flatten](#array-flatten) | Flatten nested arrays into single array |
+| [Group By](#group-by) | Group array elements by a key |
+| [Array Intersection](#array-intersection) | Find common elements between arrays |
+| [Array Join](#array-join) | Join array elements into string |
+| [Array Map](#array-map) | Transform each element in an array |
+| [Array Reduce](#array-reduce) | Reduce array to single value |
+| [Take](#take) | Take first N elements from array |
+| [Zip Arrays](#zip-arrays) | Combine multiple arrays element-wise |
 
 ## Modules
 
-### แบ่งอาเรย์
+### Array Chunk
 
 `array.chunk`
 
-แบ่งอาร์เรย์เป็นชิ้นตามขนาดที่กำหนด
+Split array into chunks of specified size
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ List manipulation — chunk, flatten, group, map, reduce, zip, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | อาร์เรย์ของชิ้น |
-| `chunks` | number | อาร์เรย์ของชิ้น |
+| `result` | array | Array of chunks |
+| `chunks` | number | Number of chunks |
 
 **Example:** Chunk into groups of 3
 
@@ -55,33 +55,33 @@ array: ["a", "b", "c", "d", "e"]
 size: 2
 ```
 
-### บีบอัด
+### Compact
 
 `array.compact`
 
-ลบค่า null/ว่างเปล่าออกจากอาเรย์
+Remove null/empty values from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | อาเรย์ที่ต้องการบีบอัด |
-| `remove_empty_strings` | boolean | No | `True` | ลบสตริงที่ว่างเปล่า |
-| `remove_zero` | boolean | No | `False` | ลบสตริงที่ว่างเปล่า |
-| `remove_false` | boolean | No | `False` | ลบค่าที่เป็นศูนย์ |
+| `array` | array | Yes | - | Array to compact |
+| `remove_empty_strings` | boolean | No | `True` | Remove empty strings |
+| `remove_zero` | boolean | No | `False` | Remove zero values |
+| `remove_false` | boolean | No | `False` | Remove false values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | ลบค่าที่เป็นเท็จ |
-| `removed` | number | อาเรย์ที่บีบอัดแล้ว |
+| `result` | array | Compacted array |
+| `removed` | number | Number of items removed |
 
-### ความแตกต่างของอาเรย์
+### Array Difference
 
 `array.difference`
 
-หาองค์ประกอบในอาร์เรย์แรกที่ไม่อยู่ในอื่น ๆ
+Find elements in first array not in others
 
 **Parameters:**
 
@@ -94,8 +94,8 @@ size: 2
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | องค์ประกอบเฉพาะในอาร์เรย์แรก |
-| `length` | number | องค์ประกอบเฉพาะในอาร์เรย์แรก |
+| `result` | array | Elements unique to first array |
+| `length` | number | Number of unique elements |
 
 **Example:** Find unique elements
 
@@ -104,31 +104,31 @@ array: [1, 2, 3, 4, 5]
 subtract: [[2, 4], [5]]
 ```
 
-### ลบ
+### Drop
 
 `array.drop`
 
-ลบ N องค์ประกอบแรกจากอาเรย์
+Drop first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | อาเรย์ต้นทาง |
-| `count` | number | Yes | `1` | อาเรย์ต้นทาง |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to drop |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | จำนวนองค์ประกอบที่จะลบ |
-| `dropped` | number | องค์ประกอบที่เหลือ |
+| `result` | array | Remaining elements |
+| `dropped` | number | Number of elements dropped |
 
-### แบนอาเรย์
+### Array Flatten
 
 `array.flatten`
 
-ทำให้อาร์เรย์ซ้อนเป็นอาร์เรย์เดียว
+Flatten nested arrays into single array
 
 **Parameters:**
 
@@ -141,8 +141,8 @@ subtract: [[2, 4], [5]]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | อาร์เรย์ที่ทำให้แบนแล้ว |
-| `length` | number | อาร์เรย์ที่ทำให้แบนแล้ว |
+| `result` | array | Flattened array |
+| `length` | number | Length of flattened array |
 
 **Example:** Flatten one level
 
@@ -158,32 +158,32 @@ array: [[1, [2, [3, [4]]]]]
 depth: -1
 ```
 
-### จัดกลุ่มตาม
+### Group By
 
 `array.group_by`
 
-จัดกลุ่มองค์ประกอบอาเรย์ตามคีย์
+Group array elements by a key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | อาเรย์ของออบเจ็กต์ที่ต้องการจัดกลุ่ม |
-| `key` | string | Yes | - | อาเรย์ของออบเจ็กต์ที่ต้องการจัดกลุ่ม |
+| `array` | array | Yes | - | Array of objects to group |
+| `key` | string | Yes | - | Property name to group by |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `groups` | object | ชื่อคุณสมบัติที่ใช้จัดกลุ่ม |
-| `keys` | array | ผลลัพธ์ที่จัดกลุ่มแล้ว |
-| `count` | number | ผลลัพธ์ที่จัดกลุ่มแล้ว |
+| `groups` | object | Grouped results |
+| `keys` | array | Group keys |
+| `count` | number | Number of groups |
 
-### จุดตัดของอาเรย์
+### Array Intersection
 
 `array.intersection`
 
-หาองค์ประกอบที่เหมือนกันระหว่างอาร์เรย์
+Find common elements between arrays
 
 **Parameters:**
 
@@ -195,8 +195,8 @@ depth: -1
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | องค์ประกอบที่เหมือนกัน |
-| `length` | number | องค์ประกอบที่เหมือนกัน |
+| `result` | array | Common elements |
+| `length` | number | Number of common elements |
 
 **Example:** Find common elements
 
@@ -204,11 +204,11 @@ depth: -1
 arrays: [[1, 2, 3, 4], [2, 3, 5], [2, 3, 6]]
 ```
 
-### รวมอาเรย์
+### Array Join
 
 `array.join`
 
-รวมองค์ประกอบอาร์เรย์เป็นสตริง
+Join array elements into string
 
 **Parameters:**
 
@@ -222,7 +222,7 @@ arrays: [[1, 2, 3, 4], [2, 3, 5], [2, 3, 6]]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | สตริงที่รวมแล้ว |
+| `result` | string | Joined string |
 
 **Example:** Join with comma
 
@@ -239,11 +239,11 @@ separator:
 
 ```
 
-### แมปอาเรย์
+### Array Map
 
 `array.map`
 
-แปลงแต่ละองค์ประกอบในอาร์เรย์
+Transform each element in an array
 
 **Parameters:**
 
@@ -257,8 +257,8 @@ separator:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | อาร์เรย์ที่แปลงแล้ว |
-| `length` | number | อาร์เรย์ที่แปลงแล้ว |
+| `result` | array | Transformed array |
+| `length` | number | Length of result array |
 
 **Example:** Multiply numbers
 
@@ -276,11 +276,11 @@ operation: extract
 value: name
 ```
 
-### ลดอาเรย์
+### Array Reduce
 
 `array.reduce`
 
-ลดอาร์เรย์เป็นค่าเดียว
+Reduce array to single value
 
 **Parameters:**
 
@@ -295,8 +295,8 @@ value: name
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | ค่าที่ลดแล้ว |
-| `operation` | string | ค่าที่ลดแล้ว |
+| `result` | any | Reduced value |
+| `operation` | string | Operation that was applied |
 
 **Example:** Sum numbers
 
@@ -313,42 +313,42 @@ operation: join
 separator:  
 ```
 
-### นำ
+### Take
 
 `array.take`
 
-นำ N องค์ประกอบแรกจากอาเรย์
+Take first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | อาเรย์ต้นทาง |
-| `count` | number | Yes | `1` | อาเรย์ต้นทาง |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to take |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | จำนวนองค์ประกอบที่จะนำ |
-| `length` | number | องค์ประกอบที่นำมา |
+| `result` | array | Taken elements |
+| `length` | number | Number of elements taken |
 
-### ซิปอาเรย์
+### Zip Arrays
 
 `array.zip`
 
-รวมอาเรย์หลายอันตามลำดับ
+Combine multiple arrays element-wise
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | อาเรย์ของอาเรย์ที่ต้องการซิป |
-| `fill_value` | any | No | - | อาเรย์ของอาเรย์ที่ต้องการ zip |
+| `arrays` | array | Yes | - | Array of arrays to zip |
+| `fill_value` | any | No | - | Value for missing elements |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | ค่าเมื่อองค์ประกอบหายไป |
-| `length` | number | อาเรย์ที่ซิปแล้ว |
+| `result` | array | Zipped array |
+| `length` | number | Result length |

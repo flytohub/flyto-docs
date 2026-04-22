@@ -6,26 +6,26 @@ List manipulation — chunk, flatten, group, map, reduce, zip, and more.
 
 | Module | Description |
 |--------|-------------|
-| [Potong Array](#potong-array) | Bagi array menjadi potongan dengan ukuran tertentu |
-| [Kompak](#kompak) | Hapus nilai null/kosong dari array |
-| [Perbedaan Array](#perbedaan-array) | Temukan elemen di array pertama yang tidak ada di lainnya |
-| [Hapus](#hapus) | Hapus N elemen pertama dari array |
-| [Ratakan Array](#ratakan-array) | Ratakan array bersarang menjadi array tunggal |
-| [Kelompokkan Berdasarkan](#kelompokkan-berdasarkan) | Kelompokkan elemen array berdasarkan kunci |
-| [Irisan Array](#irisan-array) | Temukan elemen umum antar array |
-| [Gabung Array](#gabung-array) | Gabungkan elemen array menjadi string |
-| [Peta Array](#peta-array) | Transformasi setiap elemen dalam array |
-| [Reduksi Array](#reduksi-array) | Reduksi array menjadi nilai tunggal |
-| [Ambil](#ambil) | Ambil N elemen pertama dari array |
-| [Zip Array](#zip-array) | Gabungkan beberapa array elemen demi elemen |
+| [Array Chunk](#array-chunk) | Split array into chunks of specified size |
+| [Compact](#compact) | Remove null/empty values from array |
+| [Array Difference](#array-difference) | Find elements in first array not in others |
+| [Drop](#drop) | Drop first N elements from array |
+| [Array Flatten](#array-flatten) | Flatten nested arrays into single array |
+| [Group By](#group-by) | Group array elements by a key |
+| [Array Intersection](#array-intersection) | Find common elements between arrays |
+| [Array Join](#array-join) | Join array elements into string |
+| [Array Map](#array-map) | Transform each element in an array |
+| [Array Reduce](#array-reduce) | Reduce array to single value |
+| [Take](#take) | Take first N elements from array |
+| [Zip Arrays](#zip-arrays) | Combine multiple arrays element-wise |
 
 ## Modules
 
-### Potong Array
+### Array Chunk
 
 `array.chunk`
 
-Bagi array menjadi potongan dengan ukuran tertentu
+Split array into chunks of specified size
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ Bagi array menjadi potongan dengan ukuran tertentu
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Array potongan |
-| `chunks` | number | Array potongan |
+| `result` | array | Array of chunks |
+| `chunks` | number | Number of chunks |
 
 **Example:** Chunk into groups of 3
 
@@ -55,33 +55,33 @@ array: ["a", "b", "c", "d", "e"]
 size: 2
 ```
 
-### Kompak
+### Compact
 
 `array.compact`
 
-Hapus nilai null/kosong dari array
+Remove null/empty values from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Array untuk dikompak |
-| `remove_empty_strings` | boolean | No | `True` | Hapus string kosong |
-| `remove_zero` | boolean | No | `False` | Hapus string kosong |
-| `remove_false` | boolean | No | `False` | Hapus nilai nol |
+| `array` | array | Yes | - | Array to compact |
+| `remove_empty_strings` | boolean | No | `True` | Remove empty strings |
+| `remove_zero` | boolean | No | `False` | Remove zero values |
+| `remove_false` | boolean | No | `False` | Remove false values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Hapus nilai false |
-| `removed` | number | Array yang dikompak |
+| `result` | array | Compacted array |
+| `removed` | number | Number of items removed |
 
-### Perbedaan Array
+### Array Difference
 
 `array.difference`
 
-Temukan elemen di array pertama yang tidak ada di lainnya
+Find elements in first array not in others
 
 **Parameters:**
 
@@ -94,8 +94,8 @@ Temukan elemen di array pertama yang tidak ada di lainnya
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Elemen unik di array pertama |
-| `length` | number | Elemen unik di array pertama |
+| `result` | array | Elements unique to first array |
+| `length` | number | Number of unique elements |
 
 **Example:** Find unique elements
 
@@ -104,31 +104,31 @@ array: [1, 2, 3, 4, 5]
 subtract: [[2, 4], [5]]
 ```
 
-### Hapus
+### Drop
 
 `array.drop`
 
-Hapus N elemen pertama dari array
+Drop first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Array sumber |
-| `count` | number | Yes | `1` | Array sumber |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to drop |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Jumlah elemen yang dihapus |
-| `dropped` | number | Elemen yang tersisa |
+| `result` | array | Remaining elements |
+| `dropped` | number | Number of elements dropped |
 
-### Ratakan Array
+### Array Flatten
 
 `array.flatten`
 
-Ratakan array bersarang menjadi array tunggal
+Flatten nested arrays into single array
 
 **Parameters:**
 
@@ -141,8 +141,8 @@ Ratakan array bersarang menjadi array tunggal
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Array yang diratakan |
-| `length` | number | Array yang diratakan |
+| `result` | array | Flattened array |
+| `length` | number | Length of flattened array |
 
 **Example:** Flatten one level
 
@@ -158,32 +158,32 @@ array: [[1, [2, [3, [4]]]]]
 depth: -1
 ```
 
-### Kelompokkan Berdasarkan
+### Group By
 
 `array.group_by`
 
-Kelompokkan elemen array berdasarkan kunci
+Group array elements by a key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Array objek untuk dikelompokkan |
-| `key` | string | Yes | - | Array objek untuk dikelompokkan |
+| `array` | array | Yes | - | Array of objects to group |
+| `key` | string | Yes | - | Property name to group by |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `groups` | object | Nama properti untuk dikelompokkan |
-| `keys` | array | Hasil yang dikelompokkan |
-| `count` | number | Hasil yang dikelompokkan |
+| `groups` | object | Grouped results |
+| `keys` | array | Group keys |
+| `count` | number | Number of groups |
 
-### Irisan Array
+### Array Intersection
 
 `array.intersection`
 
-Temukan elemen umum antar array
+Find common elements between arrays
 
 **Parameters:**
 
@@ -195,8 +195,8 @@ Temukan elemen umum antar array
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Elemen umum |
-| `length` | number | Elemen umum |
+| `result` | array | Common elements |
+| `length` | number | Number of common elements |
 
 **Example:** Find common elements
 
@@ -204,11 +204,11 @@ Temukan elemen umum antar array
 arrays: [[1, 2, 3, 4], [2, 3, 5], [2, 3, 6]]
 ```
 
-### Gabung Array
+### Array Join
 
 `array.join`
 
-Gabungkan elemen array menjadi string
+Join array elements into string
 
 **Parameters:**
 
@@ -222,7 +222,7 @@ Gabungkan elemen array menjadi string
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | String yang digabungkan |
+| `result` | string | Joined string |
 
 **Example:** Join with comma
 
@@ -239,11 +239,11 @@ separator:
 
 ```
 
-### Peta Array
+### Array Map
 
 `array.map`
 
-Transformasi setiap elemen dalam array
+Transform each element in an array
 
 **Parameters:**
 
@@ -257,8 +257,8 @@ Transformasi setiap elemen dalam array
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Array yang ditransformasi |
-| `length` | number | Array yang ditransformasi |
+| `result` | array | Transformed array |
+| `length` | number | Length of result array |
 
 **Example:** Multiply numbers
 
@@ -276,11 +276,11 @@ operation: extract
 value: name
 ```
 
-### Reduksi Array
+### Array Reduce
 
 `array.reduce`
 
-Reduksi array menjadi nilai tunggal
+Reduce array to single value
 
 **Parameters:**
 
@@ -295,8 +295,8 @@ Reduksi array menjadi nilai tunggal
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | Nilai yang direduksi |
-| `operation` | string | Nilai yang direduksi |
+| `result` | any | Reduced value |
+| `operation` | string | Operation that was applied |
 
 **Example:** Sum numbers
 
@@ -313,42 +313,42 @@ operation: join
 separator:  
 ```
 
-### Ambil
+### Take
 
 `array.take`
 
-Ambil N elemen pertama dari array
+Take first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Array sumber |
-| `count` | number | Yes | `1` | Array sumber |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to take |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Jumlah elemen yang diambil |
-| `length` | number | Elemen yang diambil |
+| `result` | array | Taken elements |
+| `length` | number | Number of elements taken |
 
-### Zip Array
+### Zip Arrays
 
 `array.zip`
 
-Gabungkan beberapa array elemen demi elemen
+Combine multiple arrays element-wise
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | Array dari array untuk di-zip |
-| `fill_value` | any | No | - | Array dari array untuk di-zip |
+| `arrays` | array | Yes | - | Array of arrays to zip |
+| `fill_value` | any | No | - | Value for missing elements |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Nilai untuk elemen yang hilang |
-| `length` | number | Array yang di-zip |
+| `result` | array | Zipped array |
+| `length` | number | Result length |

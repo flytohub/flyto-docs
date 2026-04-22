@@ -6,19 +6,19 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Module | Description |
 |--------|-------------|
-| [Zastosuj manifest](#zastosuj-manifest) | Zastosuj manifest Kubernetes za pomocą kubectl apply |
-| [Opisz zasób](#opisz-zasób) | Szczegółowy opis zasobu Kubernetes |
-| [Pobierz pody](#pobierz-pody) | Wyświetl listę podów Kubernetes w przestrzeni nazw |
-| [Pobierz logi poda](#pobierz-logi-poda) | Pobierz logi z poda Kubernetes |
-| [Skaluj wdrożenie](#skaluj-wdrożenie) | Skaluj wdrożenie Kubernetes do określonej liczby replik |
+| [Apply Manifest](#apply-manifest) | Apply a Kubernetes manifest via kubectl apply |
+| [Describe Resource](#describe-resource) | Describe a Kubernetes resource in detail |
+| [Get Pods](#get-pods) | List Kubernetes pods in a namespace |
+| [Get Pod Logs](#get-pod-logs) | Retrieve logs from a Kubernetes pod |
+| [Scale Deployment](#scale-deployment) | Scale a Kubernetes deployment to a specified replica count |
 
 ## Modules
 
-### Zastosuj manifest
+### Apply Manifest
 
 `k8s.apply`
 
-Zastosuj manifest Kubernetes za pomocą kubectl apply
+Apply a Kubernetes manifest via kubectl apply
 
 **Parameters:**
 
@@ -32,16 +32,16 @@ Zastosuj manifest Kubernetes za pomocą kubectl apply
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `kind` | string | Rodzaj zasobu (np. Deployment, Service) |
-| `name` | string | Nazwa zasobu |
-| `namespace` | string | Przestrzeń nazw zasobu |
-| `action` | string | Podjęta akcja (utworzono, skonfigurowano, bez zmian) |
+| `kind` | string | Resource kind (e.g. Deployment, Service) |
+| `name` | string | Resource name |
+| `namespace` | string | Resource namespace |
+| `action` | string | Action taken (created, configured, unchanged) |
 
-### Opisz zasób
+### Describe Resource
 
 `k8s.describe`
 
-Szczegółowy opis zasobu Kubernetes
+Describe a Kubernetes resource in detail
 
 **Parameters:**
 
@@ -56,16 +56,16 @@ Szczegółowy opis zasobu Kubernetes
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `resource_type` | string | Typ opisanego zasobu |
-| `name` | string | Nazwa zasobu |
-| `namespace` | string | Przestrzeń nazw Kubernetes |
-| `description` | string | Pełny tekst wyjściowy kubectl describe |
+| `resource_type` | string | Resource type that was described |
+| `name` | string | Resource name |
+| `namespace` | string | Kubernetes namespace |
+| `description` | string | Full kubectl describe output text |
 
-### Pobierz pody
+### Get Pods
 
 `k8s.get_pods`
 
-Wyświetl listę podów Kubernetes w przestrzeni nazw
+List Kubernetes pods in a namespace
 
 **Parameters:**
 
@@ -79,14 +79,14 @@ Wyświetl listę podów Kubernetes w przestrzeni nazw
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pods` | array | Lista podów z informacjami o statusie |
-| `count` | number | Łączna liczba znalezionych podów |
+| `pods` | array | List of pods with status information |
+| `count` | number | Total number of pods found |
 
-### Pobierz logi poda
+### Get Pod Logs
 
 `k8s.logs`
 
-Pobierz logi z poda Kubernetes
+Retrieve logs from a Kubernetes pod
 
 **Parameters:**
 
@@ -103,15 +103,15 @@ Pobierz logi z poda Kubernetes
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pod` | string | Nazwa poda |
-| `logs` | string | Tekst wyjściowy logów |
-| `lines` | number | Liczba zwróconych linii logów |
+| `pod` | string | Pod name |
+| `logs` | string | Log output text |
+| `lines` | number | Number of log lines returned |
 
-### Skaluj wdrożenie
+### Scale Deployment
 
 `k8s.scale`
 
-Skaluj wdrożenie Kubernetes do określonej liczby replik
+Scale a Kubernetes deployment to a specified replica count
 
 **Parameters:**
 
@@ -126,7 +126,7 @@ Skaluj wdrożenie Kubernetes do określonej liczby replik
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deployment` | string | Nazwa wdrożenia |
-| `replicas` | number | Żądana liczba replik |
-| `namespace` | string | Przestrzeń nazw Kubernetes |
-| `scaled` | boolean | Czy operacja skalowania się powiodła |
+| `deployment` | string | Deployment name |
+| `replicas` | number | Requested replica count |
+| `namespace` | string | Kubernetes namespace |
+| `scaled` | boolean | Whether the scale operation succeeded |

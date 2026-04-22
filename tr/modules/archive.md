@@ -6,34 +6,34 @@ Create and extract ZIP, TAR, and gzip archives.
 
 | Module | Description |
 |--------|-------------|
-| [Gunzip Aç](#gunzip-aç) | Gzip ile sıkıştırılmış bir dosyayı aç |
-| [Gzip Sıkıştır](#gzip-sıkıştır) | Tek bir dosyayı gzip ile sıkıştır |
-| [TAR Arşivi Oluştur](#tar-arşivi-oluştur) | İsteğe bağlı gzip/bz2/xz sıkıştırması ile TAR arşivi oluştur |
-| [TAR Arşivini Çıkar](#tar-arşivini-çıkar) | TAR arşivinden dosyaları çıkar (sıkıştırmayı otomatik algılar) |
-| [ZIP Arşivi Oluştur](#zip-arşivi-oluştur) | Bir dosya listesinden ZIP arşivi oluştur |
-| [ZIP Arşivini Çıkar](#zip-arşivini-çıkar) | ZIP arşivinden dosyaları çıkar |
+| [Gunzip Decompress](#gunzip-decompress) | Decompress a gzip-compressed file |
+| [Gzip Compress](#gzip-compress) | Compress a single file using gzip |
+| [Create TAR Archive](#create-tar-archive) | Create a TAR archive with optional gzip/bz2/xz compression |
+| [Extract TAR Archive](#extract-tar-archive) | Extract files from a TAR archive (auto-detects compression) |
+| [Create ZIP Archive](#create-zip-archive) | Create a ZIP archive from a list of files |
+| [Extract ZIP Archive](#extract-zip-archive) | Extract files from a ZIP archive |
 
 ## Modules
 
-### Gunzip Aç
+### Gunzip Decompress
 
 `archive.gunzip`
 
-Gzip ile sıkıştırılmış bir dosyayı aç
+Decompress a gzip-compressed file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | Gzip ile sıkıştırılmış dosyanın yolu |
-| `output_path` | string | No | - | Açılmış dosya için yol (varsayılan: .gz uzantısı olmadan girdi) |
+| `input_path` | string | Yes | - | Path to the gzip-compressed file |
+| `output_path` | string | No | - | Path for the decompressed file (defaults to input without .gz extension) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Açılmış dosyanın yolu |
-| `size` | number | Açılmış dosya boyutu (bayt cinsinden) |
+| `path` | string | Path to the decompressed file |
+| `size` | number | Decompressed file size in bytes |
 
 **Example:** Decompress a gzip file
 
@@ -41,27 +41,27 @@ Gzip ile sıkıştırılmış bir dosyayı aç
 input_path: /tmp/data.txt.gz
 ```
 
-### Gzip Sıkıştır
+### Gzip Compress
 
 `archive.gzip`
 
-Tek bir dosyayı gzip ile sıkıştır
+Compress a single file using gzip
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | Sıkıştırılacak dosyanın yolu |
-| `output_path` | string | No | - | Sıkıştırılmış dosya için yol (varsayılan: girdi_yolu + .gz) |
+| `input_path` | string | Yes | - | Path to the file to compress |
+| `output_path` | string | No | - | Path for the compressed file (defaults to input_path + .gz) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Sıkıştırılmış dosyanın yolu |
-| `original_size` | number | Orijinal dosya boyutu (bayt cinsinden) |
-| `compressed_size` | number | Sıkıştırılmış dosya boyutu (bayt cinsinden) |
-| `ratio` | number | Sıkıştırma oranı (sıkıştırılmış / orijinal) |
+| `path` | string | Path to the compressed file |
+| `original_size` | number | Original file size in bytes |
+| `compressed_size` | number | Compressed file size in bytes |
+| `ratio` | number | Compression ratio (compressed / original) |
 
 **Example:** Compress a file with gzip
 
@@ -69,27 +69,27 @@ Tek bir dosyayı gzip ile sıkıştır
 input_path: /tmp/data.txt
 ```
 
-### TAR Arşivi Oluştur
+### Create TAR Archive
 
 `archive.tar_create`
 
-İsteğe bağlı gzip/bz2/xz sıkıştırması ile TAR arşivi oluştur
+Create a TAR archive with optional gzip/bz2/xz compression
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | Yes | - | Çıktı TAR dosyası için yol |
-| `files` | array | Yes | - | Arşive dahil edilecek dosya yollarının listesi |
-| `compression` | select (`none`, `gzip`, `bz2`, `xz`) | No | `gzip` | Sıkıştırma yöntemi |
+| `output_path` | string | Yes | - | Path for the output TAR file |
+| `files` | array | Yes | - | List of file paths to include in the archive |
+| `compression` | select (`none`, `gzip`, `bz2`, `xz`) | No | `gzip` | Compression method |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Oluşturulan TAR dosyasının yolu |
-| `size` | number | Arşiv boyutu (bayt olarak) |
-| `file_count` | number | Arşivdeki dosya sayısı |
+| `path` | string | Path to the created TAR file |
+| `size` | number | Archive size in bytes |
+| `file_count` | number | Number of files in the archive |
 
 **Example:** Create gzipped TAR archive
 
@@ -99,25 +99,25 @@ files: ["/tmp/file1.txt", "/tmp/file2.txt"]
 compression: gzip
 ```
 
-### TAR Arşivini Çıkar
+### Extract TAR Archive
 
 `archive.tar_extract`
 
-TAR arşivinden dosyaları çıkar (sıkıştırmayı otomatik algılar)
+Extract files from a TAR archive (auto-detects compression)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `archive_path` | string | Yes | - | Çıkarılacak TAR arşivinin yolu |
-| `output_dir` | string | Yes | - | Dosyaların çıkarılacağı dizin |
+| `archive_path` | string | Yes | - | Path to the TAR archive to extract |
+| `output_dir` | string | Yes | - | Directory to extract files into |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted_files` | array | Çıkarılan dosya yollarının listesi |
-| `total_size` | number | Çıkarılan dosyaların toplam boyutu (bayt olarak) |
+| `extracted_files` | array | List of extracted file paths |
+| `total_size` | number | Total size of extracted files in bytes |
 
 **Example:** Extract TAR.GZ archive
 
@@ -126,28 +126,28 @@ archive_path: /tmp/archive.tar.gz
 output_dir: /tmp/extracted/
 ```
 
-### ZIP Arşivi Oluştur
+### Create ZIP Archive
 
 `archive.zip_create`
 
-Bir dosya listesinden ZIP arşivi oluştur
+Create a ZIP archive from a list of files
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | Yes | - | Çıktı ZIP dosyası için yol |
-| `files` | array | Yes | - | Arşive dahil edilecek dosya yollarının listesi |
-| `compression` | select (`stored`, `deflated`, `bzip2`, `lzma`) | No | `deflated` | Sıkıştırma yöntemi |
-| `password` | string | No | - | Arşivi korumak için isteğe bağlı parola (sadece çıkarma, sınırlı destek) |
+| `output_path` | string | Yes | - | Path for the output ZIP file |
+| `files` | array | Yes | - | List of file paths to include in the archive |
+| `compression` | select (`stored`, `deflated`, `bzip2`, `lzma`) | No | `deflated` | Compression method |
+| `password` | string | No | - | Optional password to protect the archive (extraction only, limited support) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Oluşturulan ZIP dosyasının yolu |
-| `size` | number | Arşiv boyutu (bayt cinsinden) |
-| `file_count` | number | Arşivdeki dosya sayısı |
+| `path` | string | Path to the created ZIP file |
+| `size` | number | Archive size in bytes |
+| `file_count` | number | Number of files in the archive |
 
 **Example:** Create ZIP from files
 
@@ -157,26 +157,26 @@ files: ["/tmp/file1.txt", "/tmp/file2.txt"]
 compression: deflated
 ```
 
-### ZIP Arşivini Çıkar
+### Extract ZIP Archive
 
 `archive.zip_extract`
 
-ZIP arşivinden dosyaları çıkar
+Extract files from a ZIP archive
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `archive_path` | string | Yes | - | Çıkarılacak ZIP arşivinin yolu |
-| `output_dir` | string | Yes | - | Dosyaların çıkarılacağı dizin |
-| `password` | string | No | - | Şifreli arşivler için parola |
+| `archive_path` | string | Yes | - | Path to the ZIP archive to extract |
+| `output_dir` | string | Yes | - | Directory to extract files into |
+| `password` | string | No | - | Password for encrypted archives |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted_files` | array | Çıkarılan dosya yollarının listesi |
-| `total_size` | number | Çıkarılan dosyaların toplam boyutu (bayt cinsinden) |
+| `extracted_files` | array | List of extracted file paths |
+| `total_size` | number | Total size of extracted files in bytes |
 
 **Example:** Extract ZIP archive
 

@@ -6,22 +6,22 @@ Excel, PDF, and Word document read/write/convert.
 
 | Module | Description |
 |--------|-------------|
-| [讀取 Excel](#讀取-excel) | 從 Excel 檔案（xlsx、xls）讀取資料 |
-| [寫入 Excel](#寫入-excel) | 將資料寫入 Excel 檔案（xlsx） |
-| [填寫 PDF 表單](#填寫-pdf-表單) | 填寫 PDF 表單欄位並可選擇插入圖片 |
-| [產生 PDF](#產生-pdf) | 從 HTML 內容或文字產生 PDF 檔案 |
-| [解析 PDF](#解析-pdf) | 從 PDF 檔案擷取文字和中繼資料 |
-| [PDF 轉 Word](#pdf-轉-word) | 將 PDF 檔案轉換為 Word 文件（.docx） |
-| [解析 Word 文件](#解析-word-文件) | 從 Word 文件（.docx）擷取文字和內容 |
-| [Word 轉 PDF](#word-轉-pdf) | 將 Word 文件（.docx）轉換為 PDF 檔案 |
+| [Read Excel](#read-excel) | Read data from Excel files (xlsx, xls) |
+| [Write Excel](#write-excel) | Write data to Excel files (xlsx) |
+| [Fill PDF Form](#fill-pdf-form) | Fill PDF form fields with data and optionally insert images |
+| [Generate PDF](#generate-pdf) | Generate PDF files from HTML content or text |
+| [Parse PDF](#parse-pdf) | Extract text and metadata from PDF files |
+| [PDF to Word](#pdf-to-word) | Convert PDF files to Word documents (.docx) |
+| [Parse Word Document](#parse-word-document) | Extract text and content from Word documents (.docx) |
+| [Word to PDF](#word-to-pdf) | Convert Word documents (.docx) to PDF files |
 
 ## Modules
 
-### 讀取 Excel
+### Read Excel
 
 `excel.read`
 
-從 Excel 檔案（xlsx、xls）讀取資料
+Read data from Excel files (xlsx, xls)
 
 **Parameters:**
 
@@ -37,10 +37,10 @@ Excel, PDF, and Word document read/write/convert.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | array | 擷取的資料列 |
-| `headers` | array | 擷取的資料列 |
-| `row_count` | number | 擷取的資料列 |
-| `sheet_names` | array | 欄位標頭 |
+| `data` | array | Extracted data rows |
+| `headers` | array | Column headers |
+| `row_count` | number | Number of data rows |
+| `sheet_names` | array | All sheet names in the workbook |
 
 **Example:** Read entire sheet
 
@@ -49,11 +49,11 @@ path: /tmp/data.xlsx
 as_dict: true
 ```
 
-### 寫入 Excel
+### Write Excel
 
 `excel.write`
 
-將資料寫入 Excel 檔案（xlsx）
+Write data to Excel files (xlsx)
 
 **Parameters:**
 
@@ -69,9 +69,9 @@ as_dict: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 建立的 Excel 檔案路徑 |
-| `row_count` | number | 建立的 Excel 檔案路徑 |
-| `size` | number | 建立的 Excel 檔案路徑 |
+| `path` | string | Path to the created Excel file |
+| `row_count` | number | Number of data rows written |
+| `size` | number | File size in bytes |
 
 **Example:** Write data to Excel
 
@@ -80,11 +80,11 @@ path: /tmp/output.xlsx
 data: [{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]
 ```
 
-### 填寫 PDF 表單
+### Fill PDF Form
 
 `pdf.fill_form`
 
-填寫 PDF 表單欄位並可選擇插入圖片
+Fill PDF form fields with data and optionally insert images
 
 **Parameters:**
 
@@ -100,10 +100,10 @@ data: [{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 已填寫 PDF 的路徑 |
-| `fields_filled` | number | 已填寫 PDF 的路徑 |
-| `images_inserted` | number | 已填寫 PDF 的路徑 |
-| `file_size_bytes` | number | 插入的圖片數量 |
+| `output_path` | string | Path to the filled PDF |
+| `fields_filled` | number | Number of fields filled |
+| `images_inserted` | number | Number of images inserted |
+| `file_size_bytes` | number | Size of the output PDF in bytes |
 
 **Example:** Fill form with text fields
 
@@ -122,11 +122,11 @@ fields: {"name": "Jane Doe"}
 images: [{"file": "/photos/jane.jpg", "page": 1, "x": 50, "y": 650, "width": 100, "height": 120}]
 ```
 
-### 產生 PDF
+### Generate PDF
 
 `pdf.generate`
 
-從 HTML 內容或文字產生 PDF 檔案
+Generate PDF files from HTML content or text
 
 **Parameters:**
 
@@ -146,9 +146,9 @@ images: [{"file": "/photos/jane.jpg", "page": 1, "x": 50, "y": 650, "width": 100
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 產生的 PDF 路徑 |
-| `page_count` | number | 產生的 PDF 路徑 |
-| `file_size_bytes` | number | PDF 的頁數 |
+| `output_path` | string | Path to the generated PDF |
+| `page_count` | number | Number of pages in the PDF |
+| `file_size_bytes` | number | Size of the generated PDF in bytes |
 
 **Example:** Generate from HTML
 
@@ -158,11 +158,11 @@ output_path: /path/to/report.pdf
 title: Monthly Report
 ```
 
-### 解析 PDF
+### Parse PDF
 
 `pdf.parse`
 
-從 PDF 檔案擷取文字和中繼資料
+Extract text and metadata from PDF files
 
 **Parameters:**
 
@@ -177,10 +177,10 @@ title: Monthly Report
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | 擷取的文字內容 |
-| `pages` | array | 擷取的文字內容 |
-| `metadata` | object | 擷取的文字內容 |
-| `page_count` | number | 每頁的文字內容 |
+| `text` | string | Extracted text content |
+| `pages` | array | Text content per page |
+| `metadata` | object | PDF metadata (title, author, etc.) |
+| `page_count` | number | Total number of pages |
 
 **Example:** Extract all text from PDF
 
@@ -189,11 +189,11 @@ path: /tmp/document.pdf
 pages: all
 ```
 
-### PDF 轉 Word
+### PDF to Word
 
 `pdf.to_word`
 
-將 PDF 檔案轉換為 Word 文件（.docx）
+Convert PDF files to Word documents (.docx)
 
 **Parameters:**
 
@@ -208,9 +208,9 @@ pages: all
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 產生的 Word 文件路徑 |
-| `page_count` | number | 產生的 Word 文件路徑 |
-| `file_size` | number | 轉換的頁數 |
+| `output_path` | string | Path to the generated Word document |
+| `page_count` | number | Number of pages converted |
+| `file_size` | number | Size of the output file in bytes |
 
 **Example:** Convert entire PDF to Word
 
@@ -226,11 +226,11 @@ output_path: /tmp/output.docx
 pages: 1-5
 ```
 
-### 解析 Word 文件
+### Parse Word Document
 
 `word.parse`
 
-從 Word 文件（.docx）擷取文字和內容
+Extract text and content from Word documents (.docx)
 
 **Parameters:**
 
@@ -246,11 +246,11 @@ pages: 1-5
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | 文件的完整文字內容 |
-| `paragraphs` | array | 文件的完整文字內容 |
-| `tables` | array | 文件的完整文字內容 |
-| `images` | array | 段落列表 |
-| `metadata` | object | 擷取的表格（陣列格式） |
+| `text` | string | Full text content of the document |
+| `paragraphs` | array | List of paragraphs |
+| `tables` | array | Extracted tables as arrays |
+| `images` | array | Paths to extracted images |
+| `metadata` | object | Document metadata |
 
 **Example:** Extract text from Word
 
@@ -267,11 +267,11 @@ extract_images: true
 images_output_dir: /path/to/images/
 ```
 
-### Word 轉 PDF
+### Word to PDF
 
 `word.to_pdf`
 
-將 Word 文件（.docx）轉換為 PDF 檔案
+Convert Word documents (.docx) to PDF files
 
 **Parameters:**
 
@@ -285,9 +285,9 @@ images_output_dir: /path/to/images/
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 產生的 PDF 檔案路徑 |
-| `file_size` | number | 產生的 PDF 檔案路徑 |
-| `method_used` | string | 輸出檔案大小（位元組） |
+| `output_path` | string | Path to the generated PDF file |
+| `file_size` | number | Size of the output file in bytes |
+| `method_used` | string | Conversion method that was used |
 
 **Example:** Convert Word to PDF
 

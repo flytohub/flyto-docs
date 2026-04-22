@@ -6,132 +6,132 @@ File path utilities: join, normalize, basename, dirname, extension.
 
 | Module | Description |
 |--------|-------------|
-| [경로 베이스 이름](#경로-베이스-이름) | 경로에서 파일 이름 가져오기 |
-| [경로 디렉토리 이름](#경로-디렉토리-이름) | 경로에서 디렉토리 이름 가져오기 |
-| [경로 확장자](#경로-확장자) | 경로에서 파일 확장자 가져오기 |
-| [경로 절대 여부](#경로-절대-여부) | 경로가 절대 경로인지 확인 |
-| [경로 연결](#경로-연결) | 경로 구성 요소 연결 |
-| [경로 정규화](#경로-정규화) | 파일 경로 정규화 |
+| [Path Basename](#path-basename) | Get file name from path |
+| [Path Dirname](#path-dirname) | Get directory name from path |
+| [Path Extension](#path-extension) | Get file extension from path |
+| [Path Is Absolute](#path-is-absolute) | Check if path is absolute |
+| [Path Join](#path-join) | Join path components |
+| [Path Normalize](#path-normalize) | Normalize a file path |
 
 ## Modules
 
-### 경로 베이스 이름
+### Path Basename
 
 `path.basename`
 
-경로에서 파일 이름 가져오기
+Get file name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 파일 경로 |
-| `remove_extension` | boolean | No | `False` | 파일 경로 |
+| `path` | string | Yes | - | File path |
+| `remove_extension` | boolean | No | `False` | Remove file extension from result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 결과에서 파일 확장자 제거 |
-| `original` | string | 파일 이름 |
-| `extension` | string | 파일 이름 |
+| `result` | string | File name |
+| `original` | string | Original path |
+| `extension` | string | File extension |
 
-### 경로 디렉토리 이름
+### Path Dirname
 
 `path.dirname`
 
-경로에서 디렉토리 이름 가져오기
+Get directory name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 파일 경로 |
+| `path` | string | Yes | - | File path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 파일 경로 |
-| `original` | string | 디렉토리 이름 |
+| `result` | string | Directory name |
+| `original` | string | Original path |
 
-### 경로 확장자
+### Path Extension
 
 `path.extension`
 
-경로에서 파일 확장자 가져오기
+Get file extension from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 파일 경로 |
-| `include_dot` | boolean | No | `True` | 파일 경로 |
+| `path` | string | Yes | - | File path |
+| `include_dot` | boolean | No | `True` | Include the dot in extension |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 확장자에 점 포함 |
-| `original` | string | 파일 확장자 |
-| `has_extension` | boolean | 파일 확장자 |
+| `result` | string | File extension |
+| `original` | string | Original path |
+| `has_extension` | boolean | Whether file has extension |
 
-### 경로 절대 여부
+### Path Is Absolute
 
 `path.is_absolute`
 
-경로가 절대 경로인지 확인
+Check if path is absolute
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 확인할 파일 경로 |
+| `path` | string | Yes | - | File path to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 확인할 파일 경로 |
-| `path` | string | 경로가 절대 경로인지 여부 |
-| `absolute` | string | 경로가 절대 경로인지 여부 |
+| `result` | boolean | Whether path is absolute |
+| `path` | string | The checked path |
+| `absolute` | string | Absolute version of the path |
 
-### 경로 연결
+### Path Join
 
 `path.join`
 
-경로 구성 요소 연결
+Join path components
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `parts` | array | Yes | - | 연결할 경로 구성 요소 |
+| `parts` | array | Yes | - | Path components to join |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 연결할 경로 구성 요소 |
-| `parts` | array | 연결된 경로 |
+| `result` | string | Joined path |
+| `parts` | array | Original path parts |
 
-### 경로 정규화
+### Path Normalize
 
 `path.normalize`
 
-파일 경로 정규화
+Normalize a file path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 정규화할 파일 경로 |
-| `resolve` | boolean | No | `False` | 정규화할 파일 경로 |
+| `path` | string | Yes | - | File path to normalize |
+| `resolve` | boolean | No | `False` | Resolve to absolute path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 절대 경로로 변환 |
-| `original` | string | 정규화된 경로 |
-| `is_absolute` | boolean | 정규화된 경로 |
+| `result` | string | Normalized path |
+| `original` | string | Original path |
+| `is_absolute` | boolean | Whether result is absolute |

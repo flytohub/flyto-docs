@@ -6,89 +6,89 @@ Set operations: union, intersection, difference, unique.
 
 | Module | Description |
 |--------|-------------|
-| [सेट अंतर](#सेट-अंतर) | पहले array में मौजूद तत्व जो अन्य में नहीं हैं |
-| [सेट प्रतिच्छेदन](#सेट-प्रतिच्छेदन) | दो या अधिक arrays का प्रतिच्छेदन प्राप्त करें |
-| [सेट संघ](#सेट-संघ) | दो या अधिक arrays का संघ प्राप्त करें |
-| [सेट अद्वितीय](#सेट-अद्वितीय) | array से डुप्लिकेट तत्व हटाएं |
+| [Set Difference](#set-difference) | Get elements in first array but not in others |
+| [Set Intersection](#set-intersection) | Get intersection of two or more arrays |
+| [Set Union](#set-union) | Get union of two or more arrays |
+| [Set Unique](#set-unique) | Remove duplicate elements from array |
 
 ## Modules
 
-### सेट अंतर
+### Set Difference
 
 `set.difference`
 
-पहले array में मौजूद तत्व जो अन्य में नहीं हैं
+Get elements in first array but not in others
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `source` | array | Yes | - | स्रोत array |
-| `exclude` | array | Yes | - | स्रोत array |
+| `source` | array | Yes | - | Source array |
+| `exclude` | array | Yes | - | Arrays of elements to exclude |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | छोड़ने वाले तत्वों के arrays |
-| `count` | number | स्रोत में तत्व लेकिन exclude arrays में नहीं |
-| `removed_count` | number | स्रोत में तत्व लेकिन exclude arrays में नहीं |
+| `result` | array | Elements in source but not in exclude arrays |
+| `count` | number | Number of remaining elements |
+| `removed_count` | number | Number of elements removed |
 
-### सेट प्रतिच्छेदन
+### Set Intersection
 
 `set.intersection`
 
-दो या अधिक arrays का प्रतिच्छेदन प्राप्त करें
+Get intersection of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | प्रतिच्छेदन के लिए arrays (arrays का array) |
+| `arrays` | array | Yes | - | Arrays to intersect (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | प्रतिच्छेदन के लिए arrays (arrays का array) |
-| `count` | number | सभी arrays का प्रतिच्छेदन |
+| `result` | array | Intersection of all arrays |
+| `count` | number | Number of common elements |
 
-### सेट संघ
+### Set Union
 
 `set.union`
 
-दो या अधिक arrays का संघ प्राप्त करें
+Get union of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | मिलाने के लिए arrays (arrays का array) |
+| `arrays` | array | Yes | - | Arrays to combine (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | मिलाने के लिए arrays (arrays का array) |
-| `count` | number | सभी arrays का संघ |
+| `result` | array | Union of all arrays |
+| `count` | number | Number of unique elements |
 
-### सेट अद्वितीय
+### Set Unique
 
 `set.unique`
 
-array से डुप्लिकेट तत्व हटाएं
+Remove duplicate elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | डुप्लिकेट हटाने के लिए array |
-| `preserve_order` | boolean | No | `True` | डुप्लिकेट हटाने के लिए array |
+| `array` | array | Yes | - | Array to deduplicate |
+| `preserve_order` | boolean | No | `True` | Keep first occurrence order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | पहली घटना का क्रम बनाए रखें |
-| `count` | number | अद्वितीय तत्वों के साथ array |
-| `duplicates_removed` | number | अद्वितीय तत्वों के साथ array |
+| `result` | array | Array with unique elements |
+| `count` | number | Number of unique elements |
+| `duplicates_removed` | number | Number of duplicates removed |

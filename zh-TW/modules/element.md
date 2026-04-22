@@ -6,31 +6,31 @@ DOM element query, attribute, and text extraction.
 
 | Module | Description |
 |--------|-------------|
-| [取得屬性](#取得屬性) | 取得元素的屬性 |
-| [查詢元素](#查詢元素) | 在元素內尋找子元素 |
-| [取得文字](#取得文字) | 取得元素的文字內容 |
+| [Get Attribute](#get-attribute) | Get element's attribute value |
+| [Query Element](#query-element) | Find child elements within element |
+| [Get Text](#get-text) | Get element's text content |
 
 ## Modules
 
-### 取得屬性
+### Get Attribute
 
 `element.attribute`
 
-取得元素的屬性
+Get element's attribute value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | 元素 ID（UUID） |
-| `name` | string | Yes | - | 屬性名稱（例如 href、src、class） |
+| `element_id` | string | Yes | - | Element ID (UUID) |
+| `name` | string | Yes | - | Attribute name (e.g. href, src, class) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `value` | string | 屬性值 |
+| `status` | string | Operation status (success/error) |
+| `value` | string | The returned value |
 
 **Example:** Get href attribute
 
@@ -39,28 +39,28 @@ element_id: ${link_element}
 name: href
 ```
 
-### 查詢元素
+### Query Element
 
 `element.query`
 
-在元素內尋找子元素
+Find child elements within element
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | 父元素 ID（UUID） |
-| `selector` | string | Yes | - | 尋找子元素的 CSS 選擇器 |
-| `all` | boolean | No | `False` | 是否尋找所有符合的元素（預設：false，只找第一個） |
+| `element_id` | string | Yes | - | Parent element ID (UUID) |
+| `selector` | string | Yes | - | CSS selector to find child elements |
+| `all` | boolean | No | `False` | Whether to find all matching elements (default: false, find first only) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `element_id` | string | 找到的元素 ID（單一模式） |
-| `element_ids` | array | 找到的元素 ID 列表（全部模式） |
-| `count` | number | 找到的元素數量 |
+| `status` | string | Operation status (success/error) |
+| `element_id` | string | Found element ID (single mode) |
+| `element_ids` | array | List of found element IDs (all mode) |
+| `count` | number | Number of elements found |
 
 **Example:** Find child element
 
@@ -69,24 +69,24 @@ element_id: ${result_item}
 selector: h3
 ```
 
-### 取得文字
+### Get Text
 
 `element.text`
 
-取得元素的文字內容
+Get element's text content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | 元素 ID（UUID） |
+| `element_id` | string | Yes | - | Element ID (UUID) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `text` | string | 元素的文字內容 |
+| `status` | string | Operation status (success/error) |
+| `text` | string | Text content |
 
 **Example:** Get element text
 

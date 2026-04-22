@@ -6,32 +6,32 @@ Environment variable management and .env file loading.
 
 | Module | Description |
 |--------|-------------|
-| [환경 변수 가져오기](#환경-변수-가져오기) | 환경 변수의 값을 가져옵니다 |
-| [.env 파일 불러오기](#.env-파일-불러오기) | .env 파일에서 환경 변수를 불러옵니다 |
-| [환경 변수 설정](#환경-변수-설정) | 현재 프로세스에 환경 변수를 설정합니다 |
+| [Get Environment Variable](#get-environment-variable) | Get the value of an environment variable |
+| [Load .env File](#load-.env-file) | Load environment variables from a .env file |
+| [Set Environment Variable](#set-environment-variable) | Set an environment variable in the current process |
 
 ## Modules
 
-### 환경 변수 가져오기
+### Get Environment Variable
 
 `env.get`
 
-환경 변수의 값을 가져옵니다
+Get the value of an environment variable
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | 환경 변수의 이름 |
-| `default` | string | No | - | 변수가 설정되지 않은 경우의 기본값 |
+| `name` | string | Yes | - | Name of the environment variable |
+| `default` | string | No | - | Default value if the variable is not set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | 변수 이름 |
-| `value` | string | 변수 값 (설정되지 않은 경우 기본값) |
-| `exists` | boolean | 환경에 변수가 존재하는지 여부 |
+| `name` | string | Variable name |
+| `value` | string | Variable value (or default if not set) |
+| `exists` | boolean | Whether the variable exists in the environment |
 
 **Example:** Get HOME variable
 
@@ -46,25 +46,25 @@ name: MY_APP_PORT
 default: 8080
 ```
 
-### .env 파일 불러오기
+### Load .env File
 
 `env.load_dotenv`
 
-.env 파일에서 환경 변수를 불러옵니다
+Load environment variables from a .env file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | `.env` | .env 파일의 경로 |
-| `override` | boolean | No | `False` | 기존 환경 변수를 덮어쓸지 여부 |
+| `path` | string | Yes | `.env` | Path to the .env file |
+| `override` | boolean | No | `False` | Whether to override existing environment variables |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `loaded_count` | number | 불러온 변수의 수 |
-| `variables` | array | 불러온 변수 이름 목록 |
+| `loaded_count` | number | Number of variables loaded |
+| `variables` | array | List of variable names that were loaded |
 
 **Example:** Load .env file
 
@@ -73,26 +73,26 @@ path: .env
 override: false
 ```
 
-### 환경 변수 설정
+### Set Environment Variable
 
 `env.set`
 
-현재 프로세스에 환경 변수를 설정합니다
+Set an environment variable in the current process
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | 설정할 환경 변수의 이름 |
-| `value` | string | Yes | - | 환경 변수에 할당할 값 |
+| `name` | string | Yes | - | Name of the environment variable to set |
+| `value` | string | Yes | - | Value to assign to the environment variable |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | 변수 이름 |
-| `value` | string | 설정된 새 값 |
-| `previous_value` | string | 이전 값 (이전에 설정되지 않은 경우 null) |
+| `name` | string | Variable name |
+| `value` | string | New value that was set |
+| `previous_value` | string | Previous value (null if not previously set) |
 
 **Example:** Set an environment variable
 

@@ -6,132 +6,132 @@ File path utilities: join, normalize, basename, dirname, extension.
 
 | Module | Description |
 |--------|-------------|
-| [Nom de fichier](#nom-de-fichier) | Obtenir le nom de fichier à partir du chemin |
-| [Nom du répertoire](#nom-du-répertoire) | Obtenir le nom du répertoire à partir du chemin |
-| [Extension du fichier](#extension-du-fichier) | Obtenir l'extension du fichier à partir du chemin |
-| [Chemin Absolu](#chemin-absolu) | Vérifier si le chemin est absolu |
-| [Joindre Chemin](#joindre-chemin) | Joindre les composants du chemin |
-| [Normaliser Chemin](#normaliser-chemin) | Normaliser un chemin de fichier |
+| [Path Basename](#path-basename) | Get file name from path |
+| [Path Dirname](#path-dirname) | Get directory name from path |
+| [Path Extension](#path-extension) | Get file extension from path |
+| [Path Is Absolute](#path-is-absolute) | Check if path is absolute |
+| [Path Join](#path-join) | Join path components |
+| [Path Normalize](#path-normalize) | Normalize a file path |
 
 ## Modules
 
-### Nom de fichier
+### Path Basename
 
 `path.basename`
 
-Obtenir le nom de fichier à partir du chemin
+Get file name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Chemin du fichier |
-| `remove_extension` | boolean | No | `False` | Chemin du fichier |
+| `path` | string | Yes | - | File path |
+| `remove_extension` | boolean | No | `False` | Remove file extension from result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Supprimer l'extension du fichier du résultat |
-| `original` | string | Nom de fichier |
-| `extension` | string | Nom de fichier |
+| `result` | string | File name |
+| `original` | string | Original path |
+| `extension` | string | File extension |
 
-### Nom du répertoire
+### Path Dirname
 
 `path.dirname`
 
-Obtenir le nom du répertoire à partir du chemin
+Get directory name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Chemin du fichier |
+| `path` | string | Yes | - | File path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Chemin du fichier |
-| `original` | string | Nom du répertoire |
+| `result` | string | Directory name |
+| `original` | string | Original path |
 
-### Extension du fichier
+### Path Extension
 
 `path.extension`
 
-Obtenir l'extension du fichier à partir du chemin
+Get file extension from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Chemin du fichier |
-| `include_dot` | boolean | No | `True` | Chemin du fichier |
+| `path` | string | Yes | - | File path |
+| `include_dot` | boolean | No | `True` | Include the dot in extension |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Inclure le point dans l'extension |
-| `original` | string | Extension du fichier |
-| `has_extension` | boolean | Extension du fichier |
+| `result` | string | File extension |
+| `original` | string | Original path |
+| `has_extension` | boolean | Whether file has extension |
 
-### Chemin Absolu
+### Path Is Absolute
 
 `path.is_absolute`
 
-Vérifier si le chemin est absolu
+Check if path is absolute
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Chemin du fichier à vérifier |
+| `path` | string | Yes | - | File path to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Chemin du fichier à vérifier |
-| `path` | string | Si le chemin est absolu |
-| `absolute` | string | Si le chemin est absolu |
+| `result` | boolean | Whether path is absolute |
+| `path` | string | The checked path |
+| `absolute` | string | Absolute version of the path |
 
-### Joindre Chemin
+### Path Join
 
 `path.join`
 
-Joindre les composants du chemin
+Join path components
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `parts` | array | Yes | - | Composants du chemin à joindre |
+| `parts` | array | Yes | - | Path components to join |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Composants du chemin à joindre |
-| `parts` | array | Chemin joint |
+| `result` | string | Joined path |
+| `parts` | array | Original path parts |
 
-### Normaliser Chemin
+### Path Normalize
 
 `path.normalize`
 
-Normaliser un chemin de fichier
+Normalize a file path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Chemin du fichier à normaliser |
-| `resolve` | boolean | No | `False` | Chemin du fichier à normaliser |
+| `path` | string | Yes | - | File path to normalize |
+| `resolve` | boolean | No | `False` | Resolve to absolute path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Résoudre en chemin absolu |
-| `original` | string | Chemin normalisé |
-| `is_absolute` | boolean | Chemin normalisé |
+| `result` | string | Normalized path |
+| `original` | string | Original path |
+| `is_absolute` | boolean | Whether result is absolute |

@@ -6,19 +6,19 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Module | Description |
 |--------|-------------|
-| [Valor Absoluto](#valor-absoluto) | Obter valor absoluto de um numero |
-| [Arredondar para Cima](#arredondar-para-cima) | Arredondar numero para cima para inteiro mais proximo |
-| [Arredondar para Baixo](#arredondar-para-baixo) | Arredondar numero para baixo para inteiro mais proximo |
-| [Potencia/Expoente](#potenciaexpoente) | Elevar numero a uma potencia |
-| [Arredondar Numero](#arredondar-numero) | Arredondar numero para casas decimais especificadas |
+| [Absolute Value](#absolute-value) | Get absolute value of a number |
+| [Ceiling Number](#ceiling-number) | Round number up to nearest integer |
+| [Floor Number](#floor-number) | Round number down to nearest integer |
+| [Power/Exponent](#powerexponent) | Raise number to a power |
+| [Round Number](#round-number) | Round number to specified decimal places |
 
 ## Modules
 
-### Valor Absoluto
+### Absolute Value
 
 `math.abs`
 
-Obter valor absoluto de um numero
+Get absolute value of a number
 
 **Parameters:**
 
@@ -30,8 +30,8 @@ Obter valor absoluto de um numero
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Valor absoluto |
-| `original` | number | Valor absoluto |
+| `result` | number | Absolute value |
+| `original` | number | Original number |
 
 **Example:** Absolute of negative number
 
@@ -45,11 +45,11 @@ number: -5
 number: 3.14
 ```
 
-### Arredondar para Cima
+### Ceiling Number
 
 `math.ceil`
 
-Arredondar numero para cima para inteiro mais proximo
+Round number up to nearest integer
 
 **Parameters:**
 
@@ -61,8 +61,8 @@ Arredondar numero para cima para inteiro mais proximo
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Valor arredondado para cima |
-| `original` | number | Valor arredondado para cima |
+| `result` | number | Ceiling value |
+| `original` | number | Original number |
 
 **Example:** Ceiling positive number
 
@@ -76,11 +76,11 @@ number: 3.2
 number: -2.7
 ```
 
-### Arredondar para Baixo
+### Floor Number
 
 `math.floor`
 
-Arredondar numero para baixo para inteiro mais proximo
+Round number down to nearest integer
 
 **Parameters:**
 
@@ -92,8 +92,8 @@ Arredondar numero para baixo para inteiro mais proximo
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Valor arredondado para baixo |
-| `original` | number | Valor arredondado para baixo |
+| `result` | number | Floored value |
+| `original` | number | Original number |
 
 **Example:** Floor positive number
 
@@ -107,11 +107,11 @@ number: 3.7
 number: -2.3
 ```
 
-### Potencia/Expoente
+### Power/Exponent
 
 `math.power`
 
-Elevar numero a uma potencia
+Raise number to a power
 
 **Parameters:**
 
@@ -124,9 +124,9 @@ Elevar numero a uma potencia
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Resultado da base elevada ao expoente |
-| `base` | number | Resultado da base elevada ao expoente |
-| `exponent` | number | Resultado da base elevada ao expoente |
+| `result` | number | Result of base raised to exponent |
+| `base` | number | Base number |
+| `exponent` | number | Exponent used |
 
 **Example:** Square a number
 
@@ -142,11 +142,11 @@ base: 27
 exponent: 0.333333
 ```
 
-### Arredondar Numero
+### Round Number
 
 `math.round`
 
-Arredondar numero para casas decimais especificadas
+Round number to specified decimal places
 
 **Parameters:**
 
@@ -159,9 +159,9 @@ Arredondar numero para casas decimais especificadas
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Valor arredondado |
-| `original` | number | Valor arredondado |
-| `decimals` | number | Valor arredondado |
+| `result` | number | Rounded value |
+| `original` | number | Original number |
+| `decimals` | number | Decimal places used |
 
 **Example:** Round to integer
 

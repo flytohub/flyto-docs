@@ -2,147 +2,205 @@
 
 Assertion utilities: equal, contains, length, true, not null, greater than.
 
-**6 modules**
+**8 modules**
 
 | Module | Description |
 |--------|-------------|
-| [İçerme Doğrula](#i̇çerme-doğrula) | Koleksiyonun bir değer içerdiğini doğrula |
-| [Eşitlik Doğrula](#eşitlik-doğrula) | İki değerin eşit olduğunu doğrula |
-| [Büyüklük Doğrula](#büyüklük-doğrula) | Değerin başka bir değerden büyük olduğunu doğrula |
-| [Uzunluk Doğrula](#uzunluk-doğrula) | Koleksiyonun beklenen uzunluğa sahip olduğunu doğrula |
-| [Null Olmama Doğrula](#null-olmama-doğrula) | Değerin null veya undefined olmadığını doğrula |
-| [Doğruluk Doğrula](#doğruluk-doğrula) | Koşulun doğru olduğunu doğrula |
+| [Assert Contains](#assert-contains) | Assert that a collection contains a value |
+| [Assert Equal](#assert-equal) | Assert that two values are equal |
+| [Assert Greater Than](#assert-greater-than) | Assert that a value is greater than another |
+| [Assert Length](#assert-length) | Assert that a collection has expected length |
+| [Assert Not Null](#assert-not-null) | Assert that a value is not null or undefined |
+| [Assert Status](#assert-status) | Compare probe statuses to a baseline to derive exploitable/sanitized verdict |
+| [Assert Timing](#assert-timing) | Compare probe duration to a baseline to detect time-based oracles |
+| [Assert True](#assert-true) | Assert that a condition is true |
 
 ## Modules
 
-### İçerme Doğrula
+### Assert Contains
 
 `test.assert_contains`
 
-Koleksiyonun bir değer içerdiğini doğrula
+Assert that a collection contains a value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `collection` | ['array', 'string'] | Yes | - | Aranacak koleksiyon |
-| `value` | ['string', 'number', 'boolean'] | Yes | - | Aranacak koleksiyon |
-| `message` | string | No | - | Bulunacak değer |
+| `collection` | ['array', 'string'] | Yes | - | Collection to search in |
+| `value` | ['string', 'number', 'boolean'] | Yes | - | Value to find |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Özel hata mesajı |
-| `collection` | ['array', 'string'] | Doğrulama geçti mi |
-| `value` | ['string', 'number', 'boolean'] | Koleksiyonun bir değer içerdiğini doğrula |
-| `message` | string | Koleksiyonun bir değer içerdiğini doğrula |
+| `passed` | boolean | Whether assertion passed |
+| `collection` | ['array', 'string'] | Collection searched |
+| `value` | ['string', 'number', 'boolean'] | Value searched for |
+| `message` | string | Result message |
 
-### Eşitlik Doğrula
+### Assert Equal
 
 `test.assert_equal`
 
-İki değerin eşit olduğunu doğrula
+Assert that two values are equal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Gerçek değer |
-| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Gerçek değer |
-| `message` | string | No | - | Beklenen değer |
+| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Actual value |
+| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Expected value |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Özel hata mesajı |
-| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Doğrulama geçti mi |
-| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | İki değerin eşit olduğunu doğrula |
-| `message` | string | İki değerin eşit olduğunu doğrula |
+| `passed` | boolean | Whether assertion passed |
+| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Actual value received |
+| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Expected value |
+| `message` | string | Result message |
 
-### Büyüklük Doğrula
+### Assert Greater Than
 
 `test.assert_greater_than`
 
-Değerin başka bir değerden büyük olduğunu doğrula
+Assert that a value is greater than another
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | number | Yes | - | Gerçek değer |
-| `threshold` | number | Yes | - | Gerçek değer |
-| `message` | string | No | - | Eşik değeri |
+| `actual` | number | Yes | - | Actual value |
+| `threshold` | number | Yes | - | Threshold value |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Özel hata mesajı |
-| `actual` | number | Doğrulama geçti mi |
-| `threshold` | number | Değerin başka bir değerden büyük olduğunu doğrula |
-| `message` | string | Değerin başka bir değerden büyük olduğunu doğrula |
+| `passed` | boolean | Whether assertion passed |
+| `actual` | number | Actual value |
+| `threshold` | number | Threshold value |
+| `message` | string | Result message |
 
-### Uzunluk Doğrula
+### Assert Length
 
 `test.assert_length`
 
-Koleksiyonun beklenen uzunluğa sahip olduğunu doğrula
+Assert that a collection has expected length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `collection` | ['array', 'string'] | Yes | - | Kontrol edilecek koleksiyon |
-| `expected_length` | number | Yes | - | Kontrol edilecek koleksiyon |
-| `message` | string | No | - | Beklenen uzunluk |
+| `collection` | ['array', 'string'] | Yes | - | Collection to check |
+| `expected_length` | number | Yes | - | Expected length |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Özel hata mesajı |
-| `actual_length` | number | Özel hata mesajı |
-| `expected_length` | number | Koleksiyonun beklenen uzunluğa sahip olduğunu doğrula |
-| `message` | string | Koleksiyonun beklenen uzunluğa sahip olduğunu doğrula |
+| `passed` | boolean | Whether assertion passed |
+| `actual_length` | number | Actual length |
+| `expected_length` | number | Expected length |
+| `message` | string | Result message |
 
-### Null Olmama Doğrula
+### Assert Not Null
 
 `test.assert_not_null`
 
-Değerin null veya undefined olmadığını doğrula
+Assert that a value is not null or undefined
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | ['string', 'number', 'boolean', 'object', 'array', 'null'] | Yes | - | Kontrol edilecek değer |
-| `message` | string | No | - | Kontrol edilecek değer |
+| `value` | ['string', 'number', 'boolean', 'object', 'array', 'null'] | Yes | - | Value to check |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Değerin null veya undefined olmadığını doğrula |
-| `message` | string | Değerin null veya undefined olmadığını doğrula |
+| `passed` | boolean | Whether assertion passed |
+| `message` | string | Result message |
 
-### Doğruluk Doğrula
+### Assert Status
+
+`test.assert_status`
+
+Compare probe statuses to a baseline to derive exploitable/sanitized verdict
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `source` | ['array', 'object'] | Yes | - | Batch result data (array of {status,...} from http.batch) |
+| `baseline_index` | number | No | `0` |  |
+| `probe_indices` | array | No | - | Indices to compare against the baseline |
+| `expected_blocked` | array | No | `[401, 403]` |  |
+| `on_bypass` | string | No | `exploitable` |  |
+| `on_blocked` | string | No | `sanitized` |  |
+| `on_error` | string | No | `unreachable` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `passed` | boolean | True when verdict != on_bypass |
+| `verdict` | string | One of on_bypass/on_blocked/on_error values |
+| `baseline` | object | Baseline probe summary |
+| `probes` | array | Per-probe decision detail |
+
+### Assert Timing
+
+`test.assert_timing`
+
+Compare probe duration to a baseline to detect time-based oracles
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `source` | ['array', 'object'] | Yes | - | Batch result data (array of {duration_ms,...} from http.batch) |
+| `baseline_index` | number | No | `0` |  |
+| `probe_index` | number | Yes | - |  |
+| `threshold_ms` | number | No | `3000` | Minimum probe-vs-baseline delta to flag as exploitable |
+| `on_slow` | string | No | `exploitable` |  |
+| `on_normal` | string | No | `inconclusive` |  |
+| `on_error` | string | No | `unreachable` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `passed` | boolean | True when verdict != on_slow |
+| `verdict` | string | on_slow/on_normal/on_error value |
+| `baseline_ms` | number | Baseline duration in ms |
+| `probe_ms` | number | Probe duration in ms |
+| `delta_ms` | number | probe_ms - baseline_ms |
+| `threshold_ms` | number | Threshold used |
+
+### Assert True
 
 `test.assert_true`
 
-Koşulun doğru olduğunu doğrula
+Assert that a condition is true
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `condition` | boolean | Yes | - | Kontrol edilecek koşul |
-| `message` | string | No | - | Kontrol edilecek koşul |
+| `condition` | boolean | Yes | - | Condition to check |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Koşulun doğru olduğunu doğrula |
-| `message` | string | Koşulun doğru olduğunu doğrula |
+| `passed` | boolean | Whether assertion passed |
+| `message` | string | Result message |

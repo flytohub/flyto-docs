@@ -6,167 +6,167 @@ Validate email, URL, phone, IP, UUID, credit card, and JSON Schema.
 
 | Module | Description |
 |--------|-------------|
-| [Validasi Kartu Kredit](#validasi-kartu-kredit) | Validasi nomor kartu kredit menggunakan algoritma Luhn |
-| [Validasi Email](#validasi-email) | Validasi format alamat email |
-| [Validasi IP](#validasi-ip) | Validasi format alamat IPv4 atau IPv6 |
-| [Validasi JSON Schema](#validasi-json-schema) | Validasi data JSON terhadap JSON Schema |
-| [Validasi Telepon](#validasi-telepon) | Validasi format nomor telepon |
-| [Validasi URL](#validasi-url) | Validasi format dan struktur URL |
-| [Validasi UUID](#validasi-uuid) | Validasi format dan versi UUID |
+| [Validate Credit Card](#validate-credit-card) | Validate credit card number using Luhn algorithm |
+| [Validate Email](#validate-email) | Validate email address format |
+| [Validate IP](#validate-ip) | Validate IPv4 or IPv6 address format |
+| [Validate JSON Schema](#validate-json-schema) | Validate JSON data against a JSON Schema |
+| [Validate Phone](#validate-phone) | Validate phone number format |
+| [Validate URL](#validate-url) | Validate URL format and structure |
+| [Validate UUID](#validate-uuid) | Validate UUID format and version |
 
 ## Modules
 
-### Validasi Kartu Kredit
+### Validate Credit Card
 
 `validate.credit_card`
 
-Validasi nomor kartu kredit menggunakan algoritma Luhn
+Validate credit card number using Luhn algorithm
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `card_number` | string | Yes | - | Nomor kartu kredit untuk divalidasi |
+| `card_number` | string | Yes | - | Credit card number to validate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | Nomor kartu kredit untuk divalidasi |
-| `card_type` | string | Apakah nomor kartu valid |
-| `masked` | string | Apakah nomor kartu valid |
-| `luhn_valid` | boolean | Nomor kartu yang disamarkan (****1234) |
+| `valid` | boolean | Whether the card number is valid |
+| `card_type` | string | Detected card type (visa, mastercard, etc) |
+| `masked` | string | Masked card number (****1234) |
+| `luhn_valid` | boolean | Whether the Luhn checksum is valid |
 
-### Validasi Email
+### Validate Email
 
 `validate.email`
 
-Validasi format alamat email
+Validate email address format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `email` | string | Yes | - | Alamat email untuk divalidasi |
+| `email` | string | Yes | - | Email address to validate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | Alamat email untuk divalidasi |
-| `email` | string | Apakah email valid |
-| `local_part` | string | Apakah email valid |
-| `domain` | string | Email yang divalidasi |
+| `valid` | boolean | Whether the email is valid |
+| `email` | string | The validated email |
+| `local_part` | string | The local part (before @) |
+| `domain` | string | The domain part (after @) |
 
-### Validasi IP
+### Validate IP
 
 `validate.ip`
 
-Validasi format alamat IPv4 atau IPv6
+Validate IPv4 or IPv6 address format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `ip` | string | Yes | - | Alamat IP untuk divalidasi |
-| `version` | string | No | `any` | Alamat IP untuk divalidasi |
+| `ip` | string | Yes | - | IP address to validate |
+| `version` | string | No | `any` | Expected IP version (any, v4, v6) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | Apakah alamat IP valid |
-| `ip` | string | Apakah alamat IP valid |
-| `version` | string | Apakah alamat IP valid |
-| `is_private` | boolean | Alamat IP yang divalidasi |
-| `is_loopback` | boolean | Versi IP yang terdeteksi (v4 atau v6) |
+| `valid` | boolean | Whether the IP address is valid |
+| `ip` | string | The validated IP address |
+| `version` | string | Detected IP version (v4 or v6) |
+| `is_private` | boolean | Whether the IP is in a private range |
+| `is_loopback` | boolean | Whether the IP is a loopback address |
 
-### Validasi JSON Schema
+### Validate JSON Schema
 
 `validate.json_schema`
 
-Validasi data JSON terhadap JSON Schema
+Validate JSON data against a JSON Schema
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | text | Yes | - | Data JSON untuk divalidasi (string atau objek) |
-| `schema` | text | Yes | - | Data JSON untuk divalidasi (string atau objek) |
+| `data` | text | Yes | - | JSON data to validate (string or object) |
+| `schema` | text | Yes | - | JSON Schema to validate against |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | JSON Schema untuk divalidasi |
-| `errors` | array | Apakah data valid |
-| `error_count` | number | Apakah data valid |
+| `valid` | boolean | Whether the data is valid |
+| `errors` | array | List of validation errors |
+| `error_count` | number | Number of validation errors |
 
-### Validasi Telepon
+### Validate Phone
 
 `validate.phone`
 
-Validasi format nomor telepon
+Validate phone number format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `phone` | string | Yes | - | Nomor telepon untuk divalidasi |
-| `region` | string | No | `international` | Nomor telepon untuk divalidasi |
+| `phone` | string | Yes | - | Phone number to validate |
+| `region` | string | No | `international` | Region code for validation (international, us, tw, cn, jp) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | Apakah nomor telepon valid |
-| `phone` | string | Apakah nomor telepon valid |
-| `normalized` | string | Apakah nomor telepon valid |
-| `region` | string | Nomor telepon yang divalidasi |
+| `valid` | boolean | Whether the phone number is valid |
+| `phone` | string | The validated phone number |
+| `normalized` | string | Normalized phone number (digits only) |
+| `region` | string | Region used for validation |
 
-### Validasi URL
+### Validate URL
 
 `validate.url`
 
-Validasi format dan struktur URL
+Validate URL format and structure
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL untuk divalidasi |
-| `require_https` | boolean | No | `False` | URL untuk divalidasi |
+| `url` | string | Yes | - | URL to validate |
+| `require_https` | boolean | No | `False` | Only accept HTTPS URLs |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | Hanya menerima URL HTTPS |
-| `url` | string | Apakah URL valid |
-| `scheme` | string | Apakah URL valid |
-| `host` | string | URL yang divalidasi |
-| `port` | number | Skema URL (http, https, dll) |
-| `path` | string | Nama host/domain |
-| `query` | string | Nomor port jika ditentukan |
+| `valid` | boolean | Whether the URL is valid |
+| `url` | string | The validated URL |
+| `scheme` | string | URL scheme (http, https, etc) |
+| `host` | string | Host/domain name |
+| `port` | number | Port number if specified |
+| `path` | string | URL path |
+| `query` | string | Query string |
 
-### Validasi UUID
+### Validate UUID
 
 `validate.uuid`
 
-Validasi format dan versi UUID
+Validate UUID format and version
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `uuid` | string | Yes | - | UUID untuk divalidasi |
-| `version` | number | No | `0` | UUID untuk divalidasi |
+| `uuid` | string | Yes | - | UUID to validate |
+| `version` | number | No | `0` | Expected UUID version (1-5, or 0 for any) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | Versi UUID yang diharapkan (1-5, atau 0 untuk sembarang) |
-| `uuid` | string | Apakah UUID valid |
-| `version` | number | Apakah UUID valid |
-| `variant` | string | UUID yang divalidasi |
+| `valid` | boolean | Whether the UUID is valid |
+| `uuid` | string | The validated UUID |
+| `version` | number | Detected UUID version |
+| `variant` | string | UUID variant |

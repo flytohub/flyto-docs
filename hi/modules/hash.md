@@ -6,47 +6,47 @@ SHA-256 and SHA-512 cryptographic hashing.
 
 | Module | Description |
 |--------|-------------|
-| [SHA-256 हैश](#sha-256-हैश) | पाठ का SHA-256 क्रिप्टोग्राफिक हैश गणना करें |
-| [SHA-512 हैश](#sha-512-हैश) | पाठ का SHA-512 क्रिप्टोग्राफिक हैश गणना करें |
+| [SHA-256 Hash](#sha-256-hash) | Calculate SHA-256 cryptographic hash of text |
+| [SHA-512 Hash](#sha-512-hash) | Calculate SHA-512 cryptographic hash of text |
 
 ## Modules
 
-### SHA-256 हैश
+### SHA-256 Hash
 
 `hash.sha256`
 
-पाठ का SHA-256 क्रिप्टोग्राफिक हैश गणना करें
+Calculate SHA-256 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | हैश करने के लिए पाठ |
-| `encoding` | string | No | `utf-8` | हैश करने के लिए पाठ |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | पाठ एन्कोडिंग |
-| `algorithm` | string | SHA-256 हैश (64 हेक्स वर्ण) |
+| `hash` | string | SHA-256 hash (64 hex characters) |
+| `algorithm` | string | Hash algorithm used |
 
-### SHA-512 हैश
+### SHA-512 Hash
 
 `hash.sha512`
 
-पाठ का SHA-512 क्रिप्टोग्राफिक हैश गणना करें
+Calculate SHA-512 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | हैश करने के लिए पाठ |
-| `encoding` | string | No | `utf-8` | हैश करने के लिए पाठ |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | पाठ एन्कोडिंग |
-| `algorithm` | string | SHA-512 हैश (128 हेक्स वर्ण) |
+| `hash` | string | SHA-512 hash (128 hex characters) |
+| `algorithm` | string | Hash algorithm used |

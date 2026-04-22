@@ -6,17 +6,17 @@ Copy, move, and delete files.
 
 | Module | Description |
 |--------|-------------|
-| [คัดลอกไฟล์](#คัดลอกไฟล์) | คัดลอกไฟล์ไปยังตำแหน่งอื่น |
-| [ลบไฟล์](#ลบไฟล์) | ลบไฟล์จากระบบไฟล์ |
-| [ย้ายไฟล์](#ย้ายไฟล์) | ย้ายหรือเปลี่ยนชื่อไฟล์ |
+| [Copy File](#copy-file) | Copy a file to another location |
+| [Delete File](#delete-file) | Delete a file from the filesystem |
+| [Move File](#move-file) | Move or rename a file |
 
 ## Modules
 
-### คัดลอกไฟล์
+### Copy File
 
 `file.copy`
 
-คัดลอกไฟล์ไปยังตำแหน่งอื่น
+Copy a file to another location
 
 **Parameters:**
 
@@ -30,10 +30,10 @@ Copy, move, and delete files.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `copied` | boolean | ไฟล์ที่คัดลอก |
-| `source` | string | ไฟล์ที่คัดลอก |
-| `destination` | string | ไฟล์ที่คัดลอก |
-| `size` | number | ไฟล์ต้นทาง |
+| `copied` | boolean | The copied |
+| `source` | string | The source |
+| `destination` | string | The destination |
+| `size` | number | Size in bytes |
 
 **Example:** Backup file
 
@@ -50,11 +50,11 @@ source: config.yaml
 destination: config.backup.yaml
 ```
 
-### ลบไฟล์
+### Delete File
 
 `file.delete`
 
-ลบไฟล์จากระบบไฟล์
+Delete a file from the filesystem
 
 **Parameters:**
 
@@ -67,8 +67,8 @@ destination: config.backup.yaml
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deleted` | boolean | ไฟล์ที่ลบ |
-| `file_path` | string | ไฟล์ที่ลบ |
+| `deleted` | boolean | The deleted |
+| `file_path` | string | The file path |
 
 **Example:** Delete temporary file
 
@@ -83,11 +83,11 @@ ignore_missing: true
 file_path: logs/app.log
 ```
 
-### ย้ายไฟล์
+### Move File
 
 `file.move`
 
-ย้ายหรือเปลี่ยนชื่อไฟล์
+Move or rename a file
 
 **Parameters:**
 
@@ -100,9 +100,9 @@ file_path: logs/app.log
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `moved` | boolean | ไฟล์ที่ย้าย |
-| `source` | string | ไฟล์ที่ย้าย |
-| `destination` | string | ไฟล์ที่ย้าย |
+| `moved` | boolean | The moved |
+| `source` | string | The source |
+| `destination` | string | The destination |
 
 **Example:** Move file to archive
 

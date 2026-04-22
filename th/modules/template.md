@@ -6,15 +6,15 @@ Execute reusable templates as workflow steps.
 
 | Module | Description |
 |--------|-------------|
-| [เรียกใช้เทมเพลต](#เรียกใช้เทมเพลต) | เรียกใช้เทมเพลตจากคลังของคุณเป็นขั้นตอนการทำงาน |
+| [Invoke Template](#invoke-template) | Execute a template from your library as a workflow step |
 
 ## Modules
 
-### เรียกใช้เทมเพลต
+### Invoke Template
 
 `template.invoke`
 
-เรียกใช้เทมเพลตจากคลังของคุณเป็นขั้นตอนการทำงาน
+Execute a template from your library as a workflow step
 
 **Parameters:**
 
@@ -29,10 +29,10 @@ Execute reusable templates as workflow steps.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ID ของรายการในคลัง (ซื้อ/ฟอร์ก/เป็นเจ้าของ) |
-| `result` | any | เวลาการเรียกใช้สูงสุดเป็นวินาที |
-| `template_id` | string | เหตุการณ์สำหรับการจัดเส้นทาง (สำเร็จ/ผิดพลาด) |
-| `execution_time_ms` | number | ผลลัพธ์การเรียกใช้เทมเพลต |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Template execution result |
+| `template_id` | string | Executed template ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 

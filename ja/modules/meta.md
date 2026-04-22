@@ -6,34 +6,34 @@ Module generation, listing, testing, and documentation.
 
 | Module | Description |
 |--------|-------------|
-| [利用可能なモジュールを一覧表示](#利用可能なモジュールを一覧表示) | レジストリ内のすべての利用可能なモジュールを一覧表示 |
-| [モジュールドキュメント更新](#モジュールドキュメント更新) | レジストリからMODULES.mdドキュメントを生成または更新 |
+| [List Available Modules](#list-available-modules) | List all available modules in the registry |
+| [Update Module Documentation](#update-module-documentation) | Generate or update MODULES.md documentation from registry |
 
 ## Modules
 
-### 利用可能なモジュールを一覧表示
+### List Available Modules
 
 `meta.modules.list`
 
-レジストリ内のすべての利用可能なモジュールを一覧表示
+List all available modules in the registry
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `category` | string | No | - | カテゴリでモジュールをフィルタ（例: browser, data, ai） |
-| `tags` | array | No | - | カテゴリでモジュールをフィルタ（例: browser, data, ai） |
-| `include_params` | boolean | No | `True` | タグでモジュールをフィルタ |
-| `include_output` | boolean | No | `True` | 出力にパラメータスキーマを含める |
-| `format` | select (`json`, `markdown`, `compact`) | No | `json` | レスポンスに出力スキーマを含める |
+| `category` | string | No | - | Filter modules by category (e.g., browser, data, ai) |
+| `tags` | array | No | - | Filter modules by tags |
+| `include_params` | boolean | No | `True` | Include parameter schema in output |
+| `include_output` | boolean | No | `True` | Include output schema in response |
+| `format` | select (`json`, `markdown`, `compact`) | No | `json` | Format for module list output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `modules` | array | 登録されたモジュールのリスト |
-| `count` | number | パラメータスキーマ |
-| `formatted` | string | 出力スキーマ |
+| `modules` | array | List of registered modules |
+| `count` | number | Number of items |
+| `formatted` | string | The formatted |
 
 **Example:** List all modules
 
@@ -60,26 +60,26 @@ format: markdown
 format: compact
 ```
 
-### モジュールドキュメント更新
+### Update Module Documentation
 
 `meta.modules.update_docs`
 
-レジストリからMODULES.mdドキュメントを生成または更新
+Generate or update MODULES.md documentation from registry
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | No | `docs/MODULES.md` | MODULES.mdファイルを書き込むパス |
-| `include_examples` | boolean | No | `True` | ドキュメントに使用例を含める |
+| `output_path` | string | No | `docs/MODULES.md` | Path to write MODULES.md file |
+| `include_examples` | boolean | No | `True` | Include usage examples in documentation |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `file_path` | string | ドキュメントに使用例を含める |
-| `modules_count` | number | ファイルパス |
-| `categories` | array | ファイルパス |
+| `file_path` | string | The file path |
+| `modules_count` | number | The modules count |
+| `categories` | array | The categories |
 
 **Example:** Update module documentation
 

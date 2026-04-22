@@ -6,132 +6,132 @@ File path utilities: join, normalize, basename, dirname, extension.
 
 | Module | Description |
 |--------|-------------|
-| [पथ बेसनाम](#पथ-बेसनाम) | पथ से फ़ाइल नाम प्राप्त करें |
-| [पथ डिर्नाम](#पथ-डिर्नाम) | पथ से डायरेक्टरी नाम प्राप्त करें |
-| [पथ एक्सटेंशन](#पथ-एक्सटेंशन) | पथ से फ़ाइल एक्सटेंशन प्राप्त करें |
-| [पथ पूर्ण है](#पथ-पूर्ण-है) | जाँचें कि पथ पूर्ण है या नहीं |
-| [पथ जोड़ें](#पथ-जोड़ें) | पथ घटकों को जोड़ें |
-| [पथ सामान्य करें](#पथ-सामान्य-करें) | फ़ाइल पथ को सामान्य करें |
+| [Path Basename](#path-basename) | Get file name from path |
+| [Path Dirname](#path-dirname) | Get directory name from path |
+| [Path Extension](#path-extension) | Get file extension from path |
+| [Path Is Absolute](#path-is-absolute) | Check if path is absolute |
+| [Path Join](#path-join) | Join path components |
+| [Path Normalize](#path-normalize) | Normalize a file path |
 
 ## Modules
 
-### पथ बेसनाम
+### Path Basename
 
 `path.basename`
 
-पथ से फ़ाइल नाम प्राप्त करें
+Get file name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | फ़ाइल पथ |
-| `remove_extension` | boolean | No | `False` | फ़ाइल पथ |
+| `path` | string | Yes | - | File path |
+| `remove_extension` | boolean | No | `False` | Remove file extension from result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | परिणाम से फ़ाइल एक्सटेंशन हटाएं |
-| `original` | string | फ़ाइल नाम |
-| `extension` | string | फ़ाइल नाम |
+| `result` | string | File name |
+| `original` | string | Original path |
+| `extension` | string | File extension |
 
-### पथ डिर्नाम
+### Path Dirname
 
 `path.dirname`
 
-पथ से डायरेक्टरी नाम प्राप्त करें
+Get directory name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | फ़ाइल पथ |
+| `path` | string | Yes | - | File path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | फ़ाइल पथ |
-| `original` | string | डायरेक्टरी नाम |
+| `result` | string | Directory name |
+| `original` | string | Original path |
 
-### पथ एक्सटेंशन
+### Path Extension
 
 `path.extension`
 
-पथ से फ़ाइल एक्सटेंशन प्राप्त करें
+Get file extension from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | फ़ाइल पथ |
-| `include_dot` | boolean | No | `True` | फ़ाइल पथ |
+| `path` | string | Yes | - | File path |
+| `include_dot` | boolean | No | `True` | Include the dot in extension |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | एक्सटेंशन में डॉट शामिल करें |
-| `original` | string | फ़ाइल एक्सटेंशन |
-| `has_extension` | boolean | फ़ाइल एक्सटेंशन |
+| `result` | string | File extension |
+| `original` | string | Original path |
+| `has_extension` | boolean | Whether file has extension |
 
-### पथ पूर्ण है
+### Path Is Absolute
 
 `path.is_absolute`
 
-जाँचें कि पथ पूर्ण है या नहीं
+Check if path is absolute
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | जाँचने के लिए फ़ाइल पथ |
+| `path` | string | Yes | - | File path to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | जाँचने के लिए फ़ाइल पथ |
-| `path` | string | क्या पथ पूर्ण है |
-| `absolute` | string | क्या पथ पूर्ण है |
+| `result` | boolean | Whether path is absolute |
+| `path` | string | The checked path |
+| `absolute` | string | Absolute version of the path |
 
-### पथ जोड़ें
+### Path Join
 
 `path.join`
 
-पथ घटकों को जोड़ें
+Join path components
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `parts` | array | Yes | - | जोड़ने के लिए पथ घटक |
+| `parts` | array | Yes | - | Path components to join |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | जोड़ने के लिए पथ घटक |
-| `parts` | array | जुड़ा हुआ पथ |
+| `result` | string | Joined path |
+| `parts` | array | Original path parts |
 
-### पथ सामान्य करें
+### Path Normalize
 
 `path.normalize`
 
-फ़ाइल पथ को सामान्य करें
+Normalize a file path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | सामान्य करने के लिए फ़ाइल पथ |
-| `resolve` | boolean | No | `False` | सामान्य करने के लिए फ़ाइल पथ |
+| `path` | string | Yes | - | File path to normalize |
+| `resolve` | boolean | No | `False` | Resolve to absolute path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | पूर्ण पथ पर हल करें |
-| `original` | string | सामान्यीकृत पथ |
-| `is_absolute` | boolean | सामान्यीकृत पथ |
+| `result` | string | Normalized path |
+| `original` | string | Original path |
+| `is_absolute` | boolean | Whether result is absolute |

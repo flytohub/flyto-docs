@@ -6,34 +6,34 @@ Execute GraphQL queries and mutations.
 
 | Module | Description |
 |--------|-------------|
-| [GraphQL म्यूटेशन](#graphql-म्यूटेशन) | एक एन्डपॉइंट पर GraphQL म्यूटेशन चलाएं |
-| [GraphQL क्वेरी](#graphql-क्वेरी) | एक एन्डपॉइंट पर GraphQL क्वेरी चलाएं |
+| [GraphQL Mutation](#graphql-mutation) | Execute a GraphQL mutation against an endpoint |
+| [GraphQL Query](#graphql-query) | Execute a GraphQL query against an endpoint |
 
 ## Modules
 
-### GraphQL म्यूटेशन
+### GraphQL Mutation
 
 `graphql.mutation`
 
-एक एन्डपॉइंट पर GraphQL म्यूटेशन चलाएं
+Execute a GraphQL mutation against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | GraphQL एन्डपॉइंट URL |
-| `mutation` | string | Yes | - | GraphQL म्यूटेशन स्ट्रिंग |
-| `variables` | object | No | - | GraphQL म्यूटेशन वेरिएबल्स को कुंजी-मूल्य जोड़े के रूप में |
-| `headers` | object | No | - | अनुरोध के साथ भेजने के लिए अतिरिक्त HTTP हेडर्स |
-| `auth_token` | string | No | - | प्रमाणीकरण के लिए बियरर टोकन (Authorization हेडर के रूप में जोड़ा गया) |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `mutation` | string | Yes | - | GraphQL mutation string |
+| `variables` | object | No | - | GraphQL mutation variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | GraphQL प्रतिक्रिया डेटा |
-| `errors` | array | GraphQL त्रुटियाँ (यदि कोई त्रुटि नहीं है तो null) |
-| `status_code` | number | HTTP स्थिति कोड |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Create user mutation
 
@@ -43,29 +43,29 @@ mutation: mutation CreateUser($input: UserInput!) { createUser(input: $input) { 
 variables: {"input": {"name": "John", "email": "john@example.com"}}
 ```
 
-### GraphQL क्वेरी
+### GraphQL Query
 
 `graphql.query`
 
-एक एन्डपॉइंट पर GraphQL क्वेरी चलाएं
+Execute a GraphQL query against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | GraphQL एन्डपॉइंट URL |
-| `query` | string | Yes | - | GraphQL क्वेरी स्ट्रिंग |
-| `variables` | object | No | - | GraphQL क्वेरी वेरिएबल्स को कुंजी-मूल्य जोड़े के रूप में |
-| `headers` | object | No | - | अनुरोध के साथ भेजने के लिए अतिरिक्त HTTP हेडर्स |
-| `auth_token` | string | No | - | प्रमाणीकरण के लिए बियरर टोकन (Authorization हेडर के रूप में जोड़ा गया) |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `query` | string | Yes | - | GraphQL query string |
+| `variables` | object | No | - | GraphQL query variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | GraphQL प्रतिक्रिया डेटा |
-| `errors` | array | GraphQL त्रुटियाँ (यदि कोई त्रुटि नहीं है तो null) |
-| `status_code` | number | HTTP स्थिति कोड |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Simple query
 

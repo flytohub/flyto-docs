@@ -6,19 +6,19 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Module | Description |
 |--------|-------------|
-| [매니페스트 적용](#매니페스트-적용) | kubectl apply를 통해 Kubernetes 매니페스트 적용 |
-| [자원 설명](#자원-설명) | Kubernetes 자원을 상세히 설명 |
-| [Pod 가져오기](#pod-가져오기) | 네임스페이스 내 Kubernetes pod 목록 |
-| [Pod 로그 가져오기](#pod-로그-가져오기) | Kubernetes pod에서 로그 가져오기 |
-| [배포 확장](#배포-확장) | 지정된 복제본 수로 Kubernetes 배포 확장 |
+| [Apply Manifest](#apply-manifest) | Apply a Kubernetes manifest via kubectl apply |
+| [Describe Resource](#describe-resource) | Describe a Kubernetes resource in detail |
+| [Get Pods](#get-pods) | List Kubernetes pods in a namespace |
+| [Get Pod Logs](#get-pod-logs) | Retrieve logs from a Kubernetes pod |
+| [Scale Deployment](#scale-deployment) | Scale a Kubernetes deployment to a specified replica count |
 
 ## Modules
 
-### 매니페스트 적용
+### Apply Manifest
 
 `k8s.apply`
 
-kubectl apply를 통해 Kubernetes 매니페스트 적용
+Apply a Kubernetes manifest via kubectl apply
 
 **Parameters:**
 
@@ -32,16 +32,16 @@ kubectl apply를 통해 Kubernetes 매니페스트 적용
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `kind` | string | 자원 종류 (예: Deployment, Service) |
-| `name` | string | 자원 이름 |
-| `namespace` | string | 자원 네임스페이스 |
-| `action` | string | 수행된 작업 (생성됨, 구성됨, 변경 없음) |
+| `kind` | string | Resource kind (e.g. Deployment, Service) |
+| `name` | string | Resource name |
+| `namespace` | string | Resource namespace |
+| `action` | string | Action taken (created, configured, unchanged) |
 
-### 자원 설명
+### Describe Resource
 
 `k8s.describe`
 
-Kubernetes 자원을 상세히 설명
+Describe a Kubernetes resource in detail
 
 **Parameters:**
 
@@ -56,16 +56,16 @@ Kubernetes 자원을 상세히 설명
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `resource_type` | string | 설명된 자원 유형 |
-| `name` | string | 자원 이름 |
-| `namespace` | string | Kubernetes 네임스페이스 |
-| `description` | string | 전체 kubectl describe 출력 텍스트 |
+| `resource_type` | string | Resource type that was described |
+| `name` | string | Resource name |
+| `namespace` | string | Kubernetes namespace |
+| `description` | string | Full kubectl describe output text |
 
-### Pod 가져오기
+### Get Pods
 
 `k8s.get_pods`
 
-네임스페이스 내 Kubernetes pod 목록
+List Kubernetes pods in a namespace
 
 **Parameters:**
 
@@ -79,14 +79,14 @@ Kubernetes 자원을 상세히 설명
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pods` | array | 상태 정보가 포함된 pod 목록 |
-| `count` | number | 발견된 pod의 총 수 |
+| `pods` | array | List of pods with status information |
+| `count` | number | Total number of pods found |
 
-### Pod 로그 가져오기
+### Get Pod Logs
 
 `k8s.logs`
 
-Kubernetes pod에서 로그 가져오기
+Retrieve logs from a Kubernetes pod
 
 **Parameters:**
 
@@ -103,15 +103,15 @@ Kubernetes pod에서 로그 가져오기
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pod` | string | Pod 이름 |
-| `logs` | string | 로그 출력 텍스트 |
-| `lines` | number | 반환된 로그 줄 수 |
+| `pod` | string | Pod name |
+| `logs` | string | Log output text |
+| `lines` | number | Number of log lines returned |
 
-### 배포 확장
+### Scale Deployment
 
 `k8s.scale`
 
-지정된 복제본 수로 Kubernetes 배포 확장
+Scale a Kubernetes deployment to a specified replica count
 
 **Parameters:**
 
@@ -126,7 +126,7 @@ Kubernetes pod에서 로그 가져오기
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deployment` | string | 배포 이름 |
-| `replicas` | number | 요청된 복제본 수 |
-| `namespace` | string | Kubernetes 네임스페이스 |
-| `scaled` | boolean | 확장 작업이 성공했는지 여부 |
+| `deployment` | string | Deployment name |
+| `replicas` | number | Requested replica count |
+| `namespace` | string | Kubernetes namespace |
+| `scaled` | boolean | Whether the scale operation succeeded |

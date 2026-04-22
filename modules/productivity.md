@@ -38,9 +38,9 @@ Read data from Google Sheets spreadsheet
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `values` | array | Parse first row as column headers |
-| `data` | array | Array of rows (each row is array of values) |
-| `row_count` | number | Array of rows (each row is array of values) |
+| `values` | array | Array of rows (each row is array of values) |
+| `data` | array | Array of row objects (if include_header=true) |
+| `row_count` | number | Number of rows read |
 
 **Example:** Read with headers
 
@@ -62,8 +62,8 @@ Write data to Google Sheets spreadsheet
 |------|------|----------|---------|-------------|
 | `credentials` | object | No | - | Google service account JSON credentials (defaults to env.GOOGLE_CREDENTIALS_JSON) |
 | `spreadsheet_id` | string | Yes | - | Google Sheets spreadsheet ID (from URL) |
-| `range` | string | Yes | - | Google Sheets spreadsheet ID (from URL) |
-| `values` | array | Yes | - | A1 notation range to write |
+| `range` | string | Yes | - | A1 notation range to write |
+| `values` | array | Yes | - | Array of rows to write (each row is array of values) |
 | `value_input_option` | string | No | `USER_ENTERED` | How to interpret input values |
 
 **Output:**
@@ -71,9 +71,9 @@ Write data to Google Sheets spreadsheet
 | Field | Type | Description |
 |-------|------|-------------|
 | `updated_range` | string | Range that was updated |
-| `updated_rows` | number | Range that was updated |
-| `updated_columns` | number | Range that was updated |
-| `updated_cells` | number | Number of rows updated |
+| `updated_rows` | number | Number of rows updated |
+| `updated_columns` | number | Number of columns updated |
+| `updated_cells` | number | Number of cells updated |
 
 **Example:** Write data with headers
 
@@ -96,15 +96,15 @@ Create a new page in Notion database
 | `api_key` | string | No | - | Notion integration token (defaults to env.NOTION_API_KEY) |
 | `database_id` | string | Yes | - | Notion database ID (32-char hex string) |
 | `properties` | object | Yes | - | Page properties (title, text, select, etc.) |
-| `content` | array | No | - | Page properties (title, text, select, etc.) |
+| `content` | array | No | - | Page content as Notion blocks |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `page_id` | string | Page content as Notion blocks |
-| `url` | string | Page content as Notion blocks |
-| `created_time` | string | Created page ID |
+| `page_id` | string | Created page ID |
+| `url` | string | URL to the created page |
+| `created_time` | string | Page creation timestamp |
 
 **Example:** Create task page
 
@@ -125,17 +125,17 @@ Query pages from Notion database with filters and sorting
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Notion integration token (defaults to env.NOTION_API_KEY) |
 | `database_id` | string | Yes | - | Notion database ID |
-| `filter` | object | No | - | Notion database ID |
-| `sorts` | array | No | - | Filter conditions for query |
-| `page_size` | number | No | `100` | Sort order for results |
+| `filter` | object | No | - | Filter conditions for query |
+| `sorts` | array | No | - | Sort order for results |
+| `page_size` | number | No | `100` | Number of results to return |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `results` | array | Number of results to return |
-| `count` | number | Array of page objects |
-| `has_more` | boolean | Array of page objects |
+| `results` | array | Array of page objects |
+| `count` | number | Number of results returned |
+| `has_more` | boolean | Whether there are more results |
 
 **Example:** Query all pages
 
@@ -162,20 +162,20 @@ Create a payment intent with Stripe
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
-| `amount` | number | Yes | - | Stripe secret key (or use STRIPE_API_KEY env) |
-| `currency` | string | No | `usd` | Amount in cents (e.g. 1000 for $10.00) |
-| `description` | string | No | - | Three-letter currency code (e.g. usd, eur) |
-| `customer` | string | No | - | Payment description |
+| `amount` | number | Yes | - | Amount in cents (e.g. 1000 for $10.00) |
+| `currency` | string | No | `usd` | Three-letter currency code (e.g. usd, eur) |
+| `description` | string | No | - | Payment description |
+| `customer` | string | No | - | Stripe customer ID (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | Stripe customer ID (optional) |
-| `amount` | number | Stripe customer ID (optional) |
-| `currency` | string | Unique identifier |
-| `status` | string | Payment amount |
-| `client_secret` | string | Currency code |
+| `id` | string | Unique identifier |
+| `amount` | number | Payment amount |
+| `currency` | string | Currency code |
+| `status` | string | Operation status (success/error) |
+| `client_secret` | string | Client secret for payment |
 
 **Example:** Create $50 payment
 
@@ -205,7 +205,7 @@ Retrieve customer information from Stripe
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
-| `customer_id` | string | Yes | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `customer_id` | string | Yes | - | Stripe customer ID |
 
 **Output:**
 
@@ -234,7 +234,7 @@ List recent charges from Stripe
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
-| `limit` | number | No | `10` | Stripe secret key (or use STRIPE_API_KEY env) |
+| `limit` | number | No | `10` | Number of charges to return (1-100) |
 | `customer` | string | No | - | Filter by customer ID (optional) |
 
 **Output:**
@@ -269,9 +269,9 @@ Create a new record in Airtable table
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
-| `base_id` | string | Yes | - | Airtable API key (or use AIRTABLE_API_KEY env) |
-| `table_name` | string | Yes | - | Airtable base ID |
-| `fields` | json | Yes | - | Name of the table |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `fields` | json | Yes | - | Record fields as JSON object |
 
 **Output:**
 
@@ -308,17 +308,17 @@ Read records from Airtable table
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
-| `base_id` | string | Yes | - | Airtable API key (or use AIRTABLE_API_KEY env) |
-| `table_name` | string | Yes | - | Airtable base ID |
-| `view` | string | No | - | Name of the table |
-| `max_records` | number | No | `100` | View name to use (optional) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `view` | string | No | - | View name to use (optional) |
+| `max_records` | number | No | `100` | Maximum number of records to return |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `records` | array | Maximum number of records to return |
-| `count` | number | The records |
+| `records` | array | The records |
+| `count` | number | Number of items |
 
 **Example:** Read all customers
 
@@ -348,10 +348,10 @@ Update an existing record in Airtable table
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
-| `base_id` | string | Yes | - | Airtable API key (or use AIRTABLE_API_KEY env) |
-| `table_name` | string | Yes | - | Airtable base ID |
-| `record_id` | string | Yes | - | Name of the table |
-| `fields` | json | Yes | - | ID of the record to update |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `record_id` | string | Yes | - | ID of the record to update |
+| `fields` | json | Yes | - | Fields to update as JSON object |
 
 **Output:**
 

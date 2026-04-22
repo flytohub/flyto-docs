@@ -6,42 +6,42 @@ Retry, fallback, and circuit breaker patterns.
 
 | Module | Description |
 |--------|-------------|
-| [Interruptor de Circuito](#interruptor-de-circuito) | Protege contra fallas en cascada con el patrón de interruptor de circuito |
-| [Alternativa](#alternativa) | Proporciona un valor alternativo cuando la operación falla |
-| [Reintentar](#reintentar) | Envuelve operaciones con lógica de reintento configurable |
+| [Circuit Breaker](#circuit-breaker) | Protect against cascading failures with circuit breaker pattern |
+| [Fallback](#fallback) | Provide fallback value when operation fails |
+| [Retry](#retry) | Wrap operations with configurable retry logic |
 
 ## Modules
 
-### Interruptor de Circuito
+### Circuit Breaker
 
 `error.circuit_breaker`
 
-Protege contra fallas en cascada con el patrón de interruptor de circuito
+Protect against cascading failures with circuit breaker pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | object | Yes | - | La acción a proteger con el interruptor de circuito |
-| `circuit_id` | string | Yes | - | La acción a proteger con el interruptor de circuito |
-| `failure_threshold` | number | No | `5` | Identificador único para este circuito (para seguimiento de estado) |
-| `failure_window_ms` | number | No | `60000` | Ventana de tiempo para contar fallas |
-| `recovery_timeout_ms` | number | No | `30000` | Tiempo antes de intentar recuperación (estado medio abierto) |
-| `success_threshold` | number | No | `3` | Solicitudes exitosas necesarias en medio abierto para cerrar el circuito |
-| `fallback` | object | No | - | Acción alternativa cuando el circuito está abierto |
-| `fallback_value` | any | No | - | Acción alternativa cuando el circuito está abierto |
-| `track_errors` | array | No | `[]` | Valor estático a devolver cuando el circuito está abierto |
+| `action` | object | Yes | - | The action to protect with circuit breaker |
+| `circuit_id` | string | Yes | - | Unique identifier for this circuit (for state tracking) |
+| `failure_threshold` | number | No | `5` | Number of failures before opening circuit |
+| `failure_window_ms` | number | No | `60000` | Time window for counting failures |
+| `recovery_timeout_ms` | number | No | `30000` | Time before attempting recovery (half-open state) |
+| `success_threshold` | number | No | `3` | Successful requests needed in half-open to close circuit |
+| `fallback` | object | No | - | Alternative action when circuit is open |
+| `fallback_value` | any | No | - | Static value to return when circuit is open |
+| `track_errors` | array | No | `[]` | Only count these error codes toward threshold (empty = all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Solo cuenta estos códigos de error hacia el umbral (vacío = todos) |
-| `result` | any | Evento para enrutamiento (éxito/circuito_abierto/alternativa) |
-| `circuit_state` | string | Resultado de la acción o alternativa |
-| `failure_count` | number | Estado actual del circuito (cerrado/abierto/medio abierto) |
-| `last_failure_time` | string | Conteo actual de fallas en la ventana |
-| `circuit_opened_at` | string | Marca de tiempo de la última falla |
+| `__event__` | string | Event for routing (success/circuit_open/fallback) |
+| `result` | any | Result from action or fallback |
+| `circuit_state` | string | Current state of circuit (closed/open/half_open) |
+| `failure_count` | number | Current failure count in window |
+| `last_failure_time` | string | Timestamp of last failure |
+| `circuit_opened_at` | string | When circuit was opened |
 
 **Example:** Example
 
@@ -71,31 +71,31 @@ failure_threshold: 3
 fallback_value: {"users": [], "from_cache": false}
 ```
 
-### Alternativa
+### Fallback
 
 `error.fallback`
 
-Proporciona un valor alternativo cuando la operación falla
+Provide fallback value when operation fails
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `operation` | object | No | - | La operación primaria a intentar |
-| `fallback_value` | any | No | - | La operación primaria a intentar |
-| `fallback_operation` | object | No | - | Valor estático a devolver en caso de falla |
-| `fallback_on` | array | No | `[]` | Operación alternativa a ejecutar en caso de falla |
-| `include_error_info` | boolean | No | `True` | Códigos de error que activan la alternativa (vacío = todos los errores) |
-| `log_fallback` | boolean | No | `True` | Incluir información del error original en la salida |
+| `operation` | object | No | - | The primary operation to attempt |
+| `fallback_value` | any | No | - | Static value to return on failure |
+| `fallback_operation` | object | No | - | Alternative operation to execute on failure |
+| `fallback_on` | array | No | `[]` | Error codes that trigger fallback (empty = all errors) |
+| `include_error_info` | boolean | No | `True` | Include original error information in output |
+| `log_fallback` | boolean | No | `True` | Log when fallback is used |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | Registro cuando se usa la alternativa |
-| `used_fallback` | boolean | Resultado de la operación primaria o alternativa |
-| `source` | string | Si se usó la alternativa |
-| `original_error` | object | Fuente del resultado (primario/valor_alternativo/operación_alternativa) |
+| `result` | any | Result from primary operation or fallback |
+| `used_fallback` | boolean | Whether fallback was used |
+| `source` | string | Source of result (primary/fallback_value/fallback_operation) |
+| `original_error` | object | Original error if fallback was used |
 
 **Example:** Example
 
@@ -119,34 +119,34 @@ fallback_value: {"status": "unavailable"}
 fallback_on: ["NETWORK_ERROR", "TIMEOUT_ERROR"]
 ```
 
-### Reintentar
+### Retry
 
 `error.retry`
 
-Envuelve operaciones con lógica de reintento configurable
+Wrap operations with configurable retry logic
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `operation` | object | Yes | - | La operación a reintentar (ID del módulo y parámetros) |
-| `max_retries` | number | No | `3` | La operación a reintentar (ID del módulo y parámetros) |
-| `initial_delay_ms` | number | No | `1000` | Número máximo de intentos de reintento |
-| `max_delay_ms` | number | No | `30000` | Retraso inicial antes del primer reintento |
-| `backoff_multiplier` | number | No | `2.0` | Multiplicador para retroceso exponencial (ej., 2 duplica el retraso en cada reintento) |
-| `jitter` | boolean | No | `True` | Añadir variación aleatoria al retraso para prevenir sobrecarga |
-| `retry_on` | array | No | `[]` | Añadir variación aleatoria al retraso para prevenir sobrecarga |
-| `timeout_per_attempt_ms` | number | No | `0` | Lista de códigos de error para reintentar (vacío = reintentar todos) |
+| `operation` | object | Yes | - | The operation to retry (module ID and params) |
+| `max_retries` | number | No | `3` | Maximum number of retry attempts |
+| `initial_delay_ms` | number | No | `1000` | Initial delay before first retry |
+| `max_delay_ms` | number | No | `30000` | Maximum delay between retries |
+| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g., 2 doubles delay each retry) |
+| `jitter` | boolean | No | `True` | Add random jitter to delay to prevent thundering herd |
+| `retry_on` | array | No | `[]` | List of error codes to retry on (empty = retry all) |
+| `timeout_per_attempt_ms` | number | No | `0` | Timeout for each attempt (0 for no timeout) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Tiempo de espera para cada intento (0 para sin límite) |
-| `result` | any | Evento para enrutamiento (éxito/exhausto) |
-| `attempts` | number | Evento para enrutamiento (éxito/exhausto) |
-| `total_delay_ms` | number | Resultado del intento exitoso |
-| `errors` | array | Número de intentos realizados |
+| `__event__` | string | Event for routing (success/exhausted) |
+| `result` | any | Result from successful attempt |
+| `attempts` | number | Number of attempts made |
+| `total_delay_ms` | number | Total time spent in delays |
+| `errors` | array | Errors from each failed attempt |
 
 **Example:** Example
 

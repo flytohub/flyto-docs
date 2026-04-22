@@ -6,76 +6,76 @@ In-memory and Redis message queue operations.
 
 | Module | Description |
 |--------|-------------|
-| [항목 제거](#항목-제거) | 큐에서 항목을 제거하고 반환 |
-| [항목 추가](#항목-추가) | 항목을 메모리 또는 Redis 큐에 추가 |
-| [큐 크기](#큐-크기) | 큐의 현재 크기 가져오기 |
+| [Dequeue Item](#dequeue-item) | Remove and return an item from a queue |
+| [Enqueue Item](#enqueue-item) | Add an item to an in-memory or Redis queue |
+| [Queue Size](#queue-size) | Get the current size of a queue |
 
 ## Modules
 
-### 항목 제거
+### Dequeue Item
 
 `queue.dequeue`
 
-큐에서 항목을 제거하고 반환
+Remove and return an item from a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | 항목을 제거할 큐의 이름 |
-| `backend` | string | No | `memory` | 사용할 큐 백엔드 |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis 연결 URL |
-| `timeout` | number | No | `0` | 초 단위 타임아웃 (0 = 비차단) |
+| `queue_name` | string | Yes | - | Name of the queue to dequeue from |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
+| `timeout` | number | No | `0` | Timeout in seconds (0 = non-blocking) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | any | 제거된 항목 (큐가 비어 있으면 null) |
-| `queue_name` | string | 큐의 이름 |
-| `remaining` | number | 큐에 남은 항목 |
-| `empty` | boolean | 큐가 비어 있는지 여부 |
+| `data` | any | The dequeued item (null if queue is empty) |
+| `queue_name` | string | Name of the queue |
+| `remaining` | number | Remaining items in the queue |
+| `empty` | boolean | Whether the queue was empty |
 
-### 항목 추가
+### Enqueue Item
 
 `queue.enqueue`
 
-항목을 메모리 또는 Redis 큐에 추가
+Add an item to an in-memory or Redis queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | 항목을 추가할 큐의 이름 |
-| `data` | string | Yes | - | 큐에 추가할 데이터 (JSON 직렬화 가능한 값) |
-| `backend` | string | No | `memory` | 사용할 큐 백엔드 |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis 연결 URL |
+| `queue_name` | string | Yes | - | Name of the queue to add the item to |
+| `data` | string | Yes | - | Data to enqueue (any JSON-serializable value) |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | 큐의 이름 |
-| `position` | number | 큐에서 항목의 위치 |
-| `queue_size` | number | 항목 추가 후 큐의 현재 크기 |
+| `queue_name` | string | Name of the queue |
+| `position` | number | Position of the item in the queue |
+| `queue_size` | number | Current size of the queue after enqueue |
 
-### 큐 크기
+### Queue Size
 
 `queue.size`
 
-큐의 현재 크기 가져오기
+Get the current size of a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | 확인할 큐의 이름 |
-| `backend` | string | No | `memory` | 사용할 큐 백엔드 |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis 연결 URL |
+| `queue_name` | string | Yes | - | Name of the queue to check |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | 큐의 이름 |
-| `size` | number | 큐의 현재 항목 수 |
+| `queue_name` | string | Name of the queue |
+| `size` | number | Current number of items in the queue |

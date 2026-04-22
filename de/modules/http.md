@@ -6,7 +6,7 @@ HTTP request utilities.
 
 | Module | Description |
 |--------|-------------|
-| [HTTP GET](#http-get) | HTTP GET-Anfrage senden und Antwort erhalten |
+| [HTTP GET](#http-get) | Send HTTP GET request to an API endpoint |
 
 ## Modules
 
@@ -14,16 +14,16 @@ HTTP request utilities.
 
 `http.get`
 
-HTTP GET-Anfrage senden und Antwort erhalten
+Send HTTP GET request to an API endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL, an die die GET-Anfrage gesendet wird |
-| `headers` | object | No | `{}` | Anfrage-Header als Schlüssel-Wert-Paar |
-| `query` | object | No | `{}` | Abfrageparameter als Schlüssel-Wert-Paar |
-| `timeout` | number | No | `30` | Anfrage-Timeout in Millisekunden |
+| `url` | string | Yes | - | Target URL |
+| `headers` | object | No | `{}` | HTTP request headers as key-value pairs |
+| `query` | object | No | `{}` | URL query string parameters as key-value pairs |
+| `timeout` | number | No | `30` | Maximum time to wait in seconds |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
 | `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
@@ -31,7 +31,7 @@ HTTP GET-Anfrage senden und Antwort erhalten
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Ob die Anfrage erfolgreich war (2xx Status) |
-| `status` | number | HTTP-Statuscode |
-| `body` | any | Antwortinhalt (geparstes JSON oder Text) |
-| `headers` | object | Antwort-Header |
+| `ok` | boolean | Whether the operation succeeded |
+| `status` | number | HTTP status code |
+| `body` | any | Response body content |
+| `headers` | object | Response headers |

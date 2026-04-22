@@ -6,68 +6,68 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [챌린지 처리](#챌린지-처리) | 안티봇 챌린지 (Cloudflare, CAPTCHA) 를 자동 감지하고 처리 |
-| [요소 클릭](#요소-클릭) | 페이지의 요소 클릭 |
-| [브라우저 닫기](#브라우저-닫기) | 브라우저 인스턴스 닫기 및 리소스 해제 |
-| [원격 연결](#원격-연결) | 원격 브라우저 서비스 (Browserless, BrowserBase) 에 연결. 실제 핑거프린트로 Cloudflare 우회. |
-| [콘솔 캡처](#콘솔-캡처) | 브라우저 콘솔 로그 캡처 (오류, 경고, 정보) |
-| [쿠키 관리](#쿠키-관리) | 브라우저 쿠키 가져오기, 설정 또는 지우기 |
-| [쿠키 파일](#쿠키-파일) | 브라우저 쿠키를 JSON 파일로 가져오기/내보내기. |
+| [Handle Challenge](#handle-challenge) | Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop. |
+| [Click Element](#click-element) | Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Close Browser](#close-browser) | Close the browser instance and release resources |
+| [Connect Remote](#connect-remote) | Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs. |
+| [Capture Console](#capture-console) | Capture browser console logs (errors, warnings, info) |
+| [Manage Cookies](#manage-cookies) | Get, set, or clear browser cookies |
+| [Cookies File](#cookies-file) | Import or export browser cookies to/from a JSON file for session persistence. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [리스트 감지](#리스트-감지) | 페이지의 반복 항목 (기사, 상품, 검색 결과) 을 자동 감지 |
-| [대화상자 처리](#대화상자-처리) | 경고, 확인 및 프롬프트 대화상자 처리 |
-| [파일 다운로드](#파일-다운로드) | 브라우저에서 파일 다운로드 |
-| [드래그 앤 드롭](#드래그-앤-드롭) | 요소 드래그 앤 드롭 |
-| [장치 에뮬레이트](#장치-에뮬레이트) | 장치를 에뮬레이트하거나 사용자 정의 뷰포트 설정 |
-| [브라우저 확인](#브라우저-확인) | 브라우저 세션이 존재하는지 확인 (재사용 또는 실행) |
-| [JavaScript 실행](#javascript-실행) | 페이지 컨텍스트에서 JavaScript 코드 실행 |
-| [데이터 추출](#데이터-추출) | 페이지에서 구조화된 데이터 추출 |
-| [중첩 추출](#중첩-추출) | 트리/중첩 구조 데이터 (댓글, 스레드, 폴더) 를 추출. |
-| [요소 찾기](#요소-찾기) | 페이지에서 요소 찾기 및 요소 ID 목록 반환 |
-| [양식 채우기](#양식-채우기) | 자동 필드 감지로 스마트하게 양식 채우기 |
-| [프레임 전환](#프레임-전환) | iframe 또는 frame 컨텍스트로 전환 |
-| [지오로케이션 모킹](#지오로케이션-모킹) | 브라우저 지오로케이션 모킹 |
-| [URL로 이동](#url로-이동) | 특정 URL로 이동 |
-| [요소 호버](#요소-호버) | 요소 위로 마우스 호버 |
-| [브라우저 조작](#브라우저-조작) | 사용자가 브라우저 페이지를 조작할 때까지 일시 정지 |
-| [브라우저 실행](#브라우저-실행) | Playwright로 새 브라우저 인스턴스 실행 |
-| [로그인](#로그인) | 로그인 폼을 자동 감지하여 입력하고, 로그인 후 검증을 수행. |
-| [기록 탐색](#기록-탐색) | 브라우저 기록 탐색 (뒤로, 앞으로, 새로고침) |
-| [네트워크 모니터](#네트워크-모니터) | 네트워크 요청 모니터링 및 가로채기 |
-| [페이지 목록](#페이지-목록) | 열려 있는 모든 브라우저 페이지/탭 목록 |
-| [페이지 넘기기 및 추출](#페이지-넘기기-및-추출) | 페이지를 자동으로 넘기면서 데이터 추출 |
-| [PDF 생성](#pdf-생성) | 현재 페이지에서 PDF 생성 |
-| [성능 지표](#성능-지표) | 브라우저 성능 지표 수집 |
-| [브라우저 풀](#브라우저-풀) | 병렬 자동화를 위한 여러 개의 명명된 브라우저 인스턴스를 관리. |
-| [키 누르기](#키-누르기) | 키보드 키 누르기 |
-| [프록시 순환](#프록시-순환) | 프록시 목록을 순환하며 비활성 프록시를 감지. |
-| [기사 추출](#기사-추출) | 스마트 기사 추출 — 웹페이지에서 제목, 저자, 날짜, 본문을 추출 |
-| [작업 기록](#작업-기록) | 사용자 작업을 워크플로로 기록 |
-| [브라우저 해제](#브라우저-해제) | 브라우저 세션 해제 (소유한 경우에만 닫기) |
-| [응답 캡처](#응답-캡처) | API 응답 본문 (XHR/fetch) 을 캡처. 페이지 API 호출에서 JSON 추출. |
-| [Robots.txt 확인](#robots.txt-확인) | robots.txt 준수 여부를 확인하고 사이트맵을 탐색. |
-| [스크린샷 촬영](#스크린샷-촬영) | 현재 페이지의 스크린샷 촬영 |
-| [페이지 스크롤](#페이지-스크롤) | 페이지를 요소, 위치 또는 방향으로 스크롤 |
-| [옵션 선택](#옵션-선택) | 드롭다운 요소에서 옵션 선택 |
-| [사이트맵 파싱](#사이트맵-파싱) | sitemap.xml을 파싱하여 메타데이터와 함께 URL을 추출. |
-| [DOM 스냅샷](#dom-스냅샷) | 현재 페이지의 DOM 스냅샷 캡처 |
-| [브라우저 저장소](#브라우저-저장소) | localStorage 및 sessionStorage 접근 |
-| [탭 관리](#탭-관리) | 브라우저 탭 생성, 전환 및 닫기 |
-| [테이블 추출](#테이블-추출) | HTML 테이블을 헤더 자동 감지로 구조화된 데이터로 추출. |
-| [스로틀](#스로틀) | 도메인별 요청 제한. 차단 방지를 위해 요청 간 대기. |
-| [브라우저 추적](#브라우저-추적) | 브라우저 성능 추적 시작, 중지 또는 저장 |
-| [텍스트 입력](#텍스트-입력) | 입력 필드에 텍스트 입력 |
-| [파일 업로드](#파일-업로드) | 파일 입력 요소에 파일 업로드 |
-| [뷰포트 설정](#뷰포트-설정) | 브라우저 뷰포트 크기 가져오기 또는 설정하기 |
-| [대기](#대기) | 지정된 시간 동안 또는 요소가 나타날 때까지 대기 |
+| [Detect List](#detect-list) | Auto-detect repeating items on any page (articles, products, search results). No selectors needed. |
+| [Handle Dialog](#handle-dialog) | Handle alert, confirm, and prompt dialogs |
+| [Download File](#download-file) | Download file from browser |
+| [Drag and Drop](#drag-and-drop) | Drag and drop elements |
+| [Device Emulation](#device-emulation) | Emulate mobile devices, tablets, and custom viewports |
+| [Ensure Browser](#ensure-browser) | Ensure a browser session exists (reuse or launch) |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code in page context |
+| [Extract Data](#extract-data) | Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Extract Nested](#extract-nested) | Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children. |
+| [Find Elements](#find-elements) | Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Fill Form](#fill-form) | Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM. |
+| [Switch Frame](#switch-frame) | Switch to iframe or frame context |
+| [Mock Geolocation](#mock-geolocation) | Mock browser geolocation |
+| [Go to URL](#go-to-url) | Navigate to a specific URL |
+| [Hover Element](#hover-element) | Hover mouse over an element |
+| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
+| [Launch Browser](#launch-browser) | Launch a new browser instance with Playwright |
+| [Login](#login) | Auto-detect and fill login forms. Handles username + password + submit with post-login verification. |
+| [Page Navigation](#page-navigation) | Navigate back, forward, or reload the page |
+| [Network Monitor](#network-monitor) | Monitor and intercept network requests |
+| [List Pages](#list-pages) | List all open browser pages/tabs with details |
+| [Paginate & Extract](#paginate--extract) | Auto-paginate through pages and extract data. Supports retry and checkpoint resume. |
+| [Generate PDF](#generate-pdf) | Generate PDF from current page |
+| [Performance Metrics](#performance-metrics) | Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics |
+| [Browser Pool](#browser-pool) | Manage multiple named browser instances for parallel automation. |
+| [Press Key](#press-key) | Press a keyboard key |
+| [Rotate Proxy](#rotate-proxy) | Rotate through a list of proxies. Relaunches browser with the next proxy. |
+| [Extract Article](#extract-article) | Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode. |
+| [Record Actions](#record-actions) | Record user actions as workflow |
+| [Release Browser](#release-browser) | Release browser session (close only if owned) |
+| [Capture Response](#capture-response) | Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls. |
+| [Check Robots.txt](#check-robots.txt) | Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping. |
+| [Take Screenshot](#take-screenshot) | Take a screenshot of the current page |
+| [Scroll Page](#scroll-page) | Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Select Option](#select-option) | Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering. |
+| [DOM Snapshot](#dom-snapshot) | Capture DOM snapshot in HTML, MHTML, or text format |
+| [Browser Storage](#browser-storage) | Access localStorage and sessionStorage |
+| [Manage Tabs](#manage-tabs) | Create, switch, and close browser tabs |
+| [Extract Table](#extract-table) | Extract HTML tables as structured data. Auto-detects headers from thead/th. |
+| [Throttle](#throttle) | Per-domain rate limiting. Waits between requests to the same domain to avoid bans. |
+| [Performance Trace](#performance-trace) | Start/stop Chrome DevTools performance tracing (Chromium only) |
+| [Type Text](#type-text) | Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Upload File](#upload-file) | Upload file to file input element |
+| [Resize Viewport](#resize-viewport) | Resize browser viewport to specific dimensions |
+| [Wait](#wait) | Wait for a duration or until an element appears |
 
 ## Modules
 
-### 챌린지 처리
+### Handle Challenge
 
 `browser.challenge`
 
-안티봇 챌린지 (Cloudflare, CAPTCHA) 를 자동 감지하고 처리
+Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop.
 
 **Parameters:**
 
@@ -107,11 +107,11 @@ auto_wait_seconds: 30
 human_fallback: false
 ```
 
-### 요소 클릭
+### Click Element
 
 `browser.click`
 
-페이지의 요소 클릭
+Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -131,8 +131,8 @@ human_fallback: false
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | 작업 상태 (성공/오류) |
-| `selector` | string | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | Selector that was used |
 | `method` | string | Click method used |
 
 **Example:** Example
@@ -156,11 +156,11 @@ click_method: selector
 selector: #submit-button
 ```
 
-### 브라우저 닫기
+### Close Browser
 
 `browser.close`
 
-브라우저 인스턴스 닫기 및 리소스 해제
+Close the browser instance and release resources
 
 **Parameters:**
 
@@ -172,19 +172,19 @@ selector: #submit-button
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 브라우저 인스턴스 닫기 |
-| `message` | string | 브라우저 인스턴스 닫기 |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
 ```yaml
 ```
 
-### 원격 연결
+### Connect Remote
 
 `browser.connect`
 
-원격 브라우저 서비스 (Browserless, BrowserBase) 에 연결. 실제 핑거프린트로 Cloudflare 우회.
+Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs.
 
 **Parameters:**
 
@@ -222,11 +222,11 @@ ws_endpoint: wss://connect.browserbase.com?apiKey=KEY
 ws_endpoint: ws://localhost:3000
 ```
 
-### 콘솔 캡처
+### Capture Console
 
 `browser.console`
 
-브라우저 콘솔 로그 캡처 (오류, 경고, 정보)
+Capture browser console logs (errors, warnings, info)
 
 **Parameters:**
 
@@ -240,9 +240,9 @@ ws_endpoint: ws://localhost:3000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `messages` | array | 작업 상태 (성공/오류) |
-| `count` | number | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `messages` | array | The messages |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -257,11 +257,11 @@ level: error
 timeout: 5000
 ```
 
-### 쿠키 관리
+### Manage Cookies
 
 `browser.cookies`
 
-브라우저 쿠키 가져오기, 설정 또는 지우기
+Get, set, or clear browser cookies
 
 **Parameters:**
 
@@ -280,9 +280,9 @@ timeout: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `cookies` | array | 작업 상태 (성공/오류) |
-| `count` | number | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `cookies` | array | Browser cookies |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -312,11 +312,11 @@ domain: example.com
 action: clear
 ```
 
-### 쿠키 파일
+### Cookies File
 
 `browser.cookies_file`
 
-브라우저 쿠키를 JSON 파일로 가져오기/내보내기.
+Import or export browser cookies to/from a JSON file for session persistence.
 
 **Parameters:**
 
@@ -423,11 +423,11 @@ text: Login
 match_mode: best
 ```
 
-### 리스트 감지
+### Detect List
 
 `browser.detect_list`
 
-페이지의 반복 항목 (기사, 상품, 검색 결과) 을 자동 감지
+Auto-detect repeating items on any page (articles, products, search results). No selectors needed.
 
 **Parameters:**
 
@@ -467,11 +467,11 @@ min_items: 5
 max_items: 50
 ```
 
-### 대화상자 처리
+### Handle Dialog
 
 `browser.dialog`
 
-경고, 확인 및 프롬프트 대화상자 처리
+Handle alert, confirm, and prompt dialogs
 
 **Parameters:**
 
@@ -485,10 +485,10 @@ max_items: 50
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `message` | string | 작업 상태 (성공/오류) |
-| `type` | string | 작업 상태 (성공/오류) |
-| `default_value` | string | 결과를 설명하는 메시지 |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `type` | string | The type |
+| `default_value` | string | The default value |
 
 **Example:** Example
 
@@ -516,11 +516,11 @@ action: listen
 timeout: 5000
 ```
 
-### 파일 다운로드
+### Download File
 
 `browser.download`
 
-브라우저에서 파일 다운로드
+Download file from browser
 
 **Parameters:**
 
@@ -534,10 +534,10 @@ timeout: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `path` | string | 작업 상태 (성공/오류) |
-| `filename` | string | 작업 상태 (성공/오류) |
-| `size` | number | 파일 또는 리소스 경로 |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -554,11 +554,11 @@ save_path: /downloads/large-file.zip
 timeout_ms: 120000
 ```
 
-### 드래그 앤 드롭
+### Drag and Drop
 
 `browser.drag`
 
-요소 드래그 앤 드롭
+Drag and drop elements
 
 **Parameters:**
 
@@ -574,9 +574,9 @@ timeout_ms: 120000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 대상 요소 내 위치 {x, y} (백분율) |
-| `source` | string | 대상 요소 내 위치 {x, y} (백분율) |
-| `target` | string | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `source` | string | The source |
+| `target` | string | The target |
 
 **Example:** Example
 
@@ -593,32 +593,32 @@ target: .container
 target_position: {"x": 0.5, "y": 0.5}
 ```
 
-### 장치 에뮬레이트
+### Device Emulation
 
 `browser.emulate`
 
-장치를 에뮬레이트하거나 사용자 정의 뷰포트 설정
+Emulate mobile devices, tablets, and custom viewports
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | 에뮬레이트할 장치 이름 (예: iPhone 13) |
-| `width` | number | No | - | 뷰포트 너비 (픽셀) |
-| `height` | number | No | - | 뷰포트 높이 (픽셀) |
-| `user_agent` | string | No | - | 사용자 정의 User Agent 문자열 |
-| `device_scale_factor` | number | No | - | 장치 픽셀 비율 |
-| `is_mobile` | boolean | No | - | 모바일 장치 에뮬레이션 여부 |
-| `has_touch` | boolean | No | - | 장치에 터치 지원 여부 |
+| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | Device preset or "custom" for manual settings |
+| `width` | number | No | - | Custom viewport width (for custom device) |
+| `height` | number | No | - | Custom viewport height (for custom device) |
+| `user_agent` | string | No | - | Custom user agent string |
+| `device_scale_factor` | number | No | - | Device pixel ratio (1-3) |
+| `is_mobile` | boolean | No | - | Enable mobile browser behavior |
+| `has_touch` | boolean | No | - | Enable touch event support |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `device` | string | 에뮬레이트된 장치 이름 |
-| `viewport` | object | 현재 뷰포트 크기 |
-| `is_mobile` | boolean | 모바일 에뮬레이션 활성 여부 |
+| `status` | string | Operation status |
+| `device` | string | Emulated device name |
+| `viewport` | object | Applied viewport dimensions |
+| `is_mobile` | boolean | Whether mobile mode is enabled |
 
 **Example:** Example
 
@@ -650,11 +650,11 @@ device: desktop_chrome
 user_agent: CustomBot/1.0
 ```
 
-### 브라우저 확인
+### Ensure Browser
 
 `browser.ensure`
 
-브라우저 세션이 존재하는지 확인 (재사용 또는 실행)
+Ensure a browser session exists (reuse or launch)
 
 **Parameters:**
 
@@ -668,9 +668,9 @@ user_agent: CustomBot/1.0
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 브라우저가 실행되었는지 또는 재사용되었는지 여부 |
-| `message` | string | 브라우저가 실행되었는지 또는 재사용되었는지 여부 |
-| `is_owner` | boolean | 브라우저가 실행되었는지 또는 재사용되었는지 여부 |
+| `status` | string | Whether browser was launched or reused |
+| `message` | string | Result message |
+| `is_owner` | boolean | Whether this step owns the browser (responsible for closing) |
 
 **Example:** Example
 
@@ -684,11 +684,11 @@ headless: false
 headless: true
 ```
 
-### JavaScript 실행
+### Execute JavaScript
 
 `browser.evaluate`
 
-페이지 컨텍스트에서 JavaScript 코드 실행
+Execute JavaScript code in page context
 
 **Parameters:**
 
@@ -701,8 +701,8 @@ headless: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `result` | any | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `result` | any | The operation result |
 
 **Example:** Example
 
@@ -729,11 +729,11 @@ args: ["#header"]
 script: document.body.style.backgroundColor = "red"; return "done"
 ```
 
-### 데이터 추출
+### Extract Data
 
 `browser.extract`
 
-페이지에서 구조화된 데이터 추출
+Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -747,9 +747,9 @@ script: document.body.style.backgroundColor = "red"; return "done"
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `data` | array | 작업 상태 (성공/오류) |
-| `count` | number | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -759,11 +759,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### 중첩 추출
+### Extract Nested
 
 `browser.extract_nested`
 
-트리/중첩 구조 데이터 (댓글, 스레드, 폴더) 를 추출.
+Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children.
 
 **Parameters:**
 
@@ -797,11 +797,11 @@ fields: {"author": {"selector": ".author"}, "text": {"selector": ".body"}, "date
 root_selector: li.item
 ```
 
-### 요소 찾기
+### Find Elements
 
 `browser.find`
 
-페이지에서 요소 찾기 및 요소 ID 목록 반환
+Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -814,9 +814,9 @@ root_selector: li.item
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `count` | number | 작업 상태 (성공/오류) |
-| `element_ids` | array | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `count` | number | Number of items |
+| `element_ids` | array | The element ids |
 
 **Example:** Find search results
 
@@ -825,11 +825,11 @@ selector: div.tF2Cxc
 limit: 10
 ```
 
-### 양식 채우기
+### Fill Form
 
 `browser.form`
 
-자동 필드 감지로 스마트하게 양식 채우기
+Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM.
 
 **Parameters:**
 
@@ -847,9 +847,9 @@ limit: 10
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filled_fields` | array | 각 필드를 채우는 사이의 지연 시간 (더 자연스러운 동작을 위해) |
-| `failed_fields` | array | 채워진 필드 목록 |
-| `submitted` | boolean | 채워진 필드 목록 |
+| `filled_fields` | array | List of fields that were filled |
+| `failed_fields` | array | List of fields that failed to fill |
+| `submitted` | boolean | Whether form was submitted |
 
 **Example:** Example
 
@@ -865,11 +865,11 @@ data: {"username": "john_doe", "bio": "Hello world"}
 field_mapping: {"username": "#user-name-input", "bio": "textarea.bio-field"}
 ```
 
-### 프레임 전환
+### Switch Frame
 
 `browser.frame`
 
-iframe 또는 frame 컨텍스트로 전환
+Switch to iframe or frame context
 
 **Parameters:**
 
@@ -885,10 +885,10 @@ iframe 또는 frame 컨텍스트로 전환
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 프레임 작업 (enter: 프레임 전환, list: 모든 프레임 나열) |
-| `frame_url` | string | 프레임 작업 (enter: 프레임 전환, list: 모든 프레임 나열) |
-| `frame_name` | string | 작업 상태 (성공/오류) |
-| `frames` | array | 프레임 URL |
+| `status` | string | Operation status (success/error) |
+| `frame_url` | string | Frame URL |
+| `frame_name` | string | The frame name |
+| `frames` | array | List of frames |
 
 **Example:** Example
 
@@ -914,11 +914,11 @@ action: exit
 action: list
 ```
 
-### 지오로케이션 모킹
+### Mock Geolocation
 
 `browser.geolocation`
 
-브라우저 지오로케이션 모킹
+Mock browser geolocation
 
 **Parameters:**
 
@@ -932,8 +932,8 @@ action: list
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 위치 정확도 (미터) |
-| `location` | object | 위치 정확도 (미터) |
+| `status` | string | Operation status (success/error) |
+| `location` | object | The location |
 
 **Example:** Example
 
@@ -957,11 +957,11 @@ latitude: 35.6762
 longitude: 139.6503
 ```
 
-### URL로 이동
+### Go to URL
 
 `browser.goto`
 
-특정 URL로 이동
+Navigate to a specific URL
 
 **Parameters:**
 
@@ -976,8 +976,8 @@ longitude: 139.6503
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `url` | string | 특정 URL로 이동 |
+| `status` | string | Operation status (success/error) |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -986,11 +986,11 @@ url: https://www.google.com
 wait_until: domcontentloaded
 ```
 
-### 요소 호버
+### Hover Element
 
 `browser.hover`
 
-요소 위로 마우스 호버
+Hover mouse over an element
 
 **Parameters:**
 
@@ -1004,8 +1004,8 @@ wait_until: domcontentloaded
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `selector` | string | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1020,11 +1020,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### 브라우저 조작
+### Browser Interact
 
 `browser.interact`
 
-사용자가 브라우저 페이지를 조작할 때까지 일시 정지
+Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
 
 **Parameters:**
 
@@ -1038,11 +1038,11 @@ timeout_ms: 5000
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 |
-| `action` | string | 실행된 액션 (click/select/type/toggle) |
-| `selector` | string | 조작된 요소의 CSS 셀렉터 |
-| `value` | string | 사용된 값 (select/type 액션용) |
-| `url` | string | 조작 시점의 페이지 URL |
+| `status` | string | Operation status |
+| `action` | string | Action executed (click/select/type/toggle) |
+| `selector` | string | CSS selector of the interacted element |
+| `value` | string | Value used (for select/type actions) |
+| `url` | string | Page URL at time of interaction |
 
 **Example:** Example
 
@@ -1051,11 +1051,11 @@ title: Choose a department
 description: Select the department you want to register for
 ```
 
-### 브라우저 실행
+### Launch Browser
 
 `browser.launch`
 
-Playwright로 새 브라우저 인스턴스 실행
+Launch a new browser instance with Playwright
 
 **Parameters:**
 
@@ -1064,25 +1064,25 @@ Playwright로 새 브라우저 인스턴스 실행
 | `headless` | boolean | No | `False` | Run browser without visible window |
 | `width` | number | No | `1280` | Browser viewport width in pixels |
 | `height` | number | No | `720` | Browser viewport height in pixels |
-| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | 사용할 브라우저 엔진 (chromium, firefox, webkit) |
+| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Browser engine to use |
 | `channel` | select (``, `chrome`, `msedge`) | No | - | Use system Chrome instead of bundled Chromium for better anti-detection bypass |
 | `behavior` | select (`fast`, `normal`, `careful`, `human_like`) | No | `fast` | How the browser interacts: fast (no delays), normal, careful (mouse movement), human_like (full simulation) |
 | `stealth` | boolean | No | `True` | Anti-detection patches: WebGL fingerprint, canvas noise, navigator fixes. Always recommended. |
-| `proxy` | string | No | - | 프록시 서버 URL |
-| `user_agent` | string | No | - | 사용자 정의 User Agent 문자열 |
+| `proxy` | string | No | - | HTTP/SOCKS proxy server URL. For rotation use browser.proxy_rotate. |
+| `user_agent` | string | No | - | Custom user agent string |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |
-| `slow_mo` | number | No | `0` | 지정된 밀리초만큼 작업 속도 늦추기 |
+| `slow_mo` | number | No | `0` | Delay between Playwright actions in ms (low-level, prefer Behavior Profile) |
 | `record_video_dir` | string | No | - | Directory to save recorded videos (enables Playwright video recording) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `message` | string | 새 브라우저 인스턴스 실행 |
-| `browser_type` | string | 실행된 브라우저 유형 |
-| `headless` | boolean | 브라우저가 헤드리스로 실행 중인지 여부 |
-| `viewport` | object | 현재 뷰포트 크기 |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `browser_type` | string | Browser engine used |
+| `headless` | boolean | Whether browser is in headless mode |
+| `viewport` | object | Browser viewport dimensions |
 | `behavior` | string | Active behavior profile |
 
 **Example:** Example
@@ -1105,11 +1105,11 @@ behavior: human_like
 stealth: true
 ```
 
-### 로그인
+### Login
 
 `browser.login`
 
-로그인 폼을 자동 감지하여 입력하고, 로그인 후 검증을 수행.
+Auto-detect and fill login forms. Handles username + password + submit with post-login verification.
 
 **Parameters:**
 
@@ -1149,11 +1149,11 @@ password_selector: #pass
 submit_selector: #login-btn
 ```
 
-### 기록 탐색
+### Page Navigation
 
 `browser.navigation`
 
-브라우저 기록 탐색 (뒤로, 앞으로, 새로고침)
+Navigate back, forward, or reload the page
 
 **Parameters:**
 
@@ -1167,9 +1167,9 @@ submit_selector: #login-btn
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `action` | string | 수행된 탐색 작업 |
-| `url` | string | 탐색 후 현재 URL |
+| `status` | string | Operation status (success/error) |
+| `action` | string | Navigation action performed |
+| `url` | string | Current URL after navigation |
 
 **Example:** Example
 
@@ -1190,11 +1190,11 @@ action: reload
 wait_until: networkidle
 ```
 
-### 네트워크 모니터
+### Network Monitor
 
 `browser.network`
 
-네트워크 요청 모니터링 및 가로채기
+Monitor and intercept network requests
 
 **Parameters:**
 
@@ -1210,9 +1210,9 @@ wait_until: networkidle
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 가로챈 요청에 반환할 응답 |
-| `requests` | array | 가로챈 요청에 반환할 응답 |
-| `blocked_count` | number | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `requests` | array | Captured network requests |
+| `blocked_count` | number | The blocked count |
 
 **Example:** Example
 
@@ -1237,27 +1237,27 @@ url_pattern: .*users.*
 mock_response: {"status": 200, "body": "{\"users\": []}"}
 ```
 
-### 페이지 목록
+### List Pages
 
 `browser.pages`
 
-열려 있는 모든 브라우저 페이지/탭 목록
+List all open browser pages/tabs with details
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `include_details` | boolean | No | `True` | 각 페이지의 세부 정보 포함 |
-| `include_content_info` | boolean | No | `False` | 각 페이지의 콘텐츠 유형 정보 포함 |
+| `include_details` | boolean | No | `True` | Include URL, title, and viewport info for each page |
+| `include_content_info` | boolean | No | `False` | Include page load state and frame count (slower) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `pages` | array | 열려 있는 페이지 목록 |
-| `count` | number | 열려 있는 페이지 수 |
-| `current_index` | number | 현재 활성 페이지의 인덱스 |
+| `status` | string | Operation status |
+| `pages` | array | List of page information |
+| `count` | number | Number of open pages |
+| `current_index` | number | Index of the current active page |
 
 **Example:** Example
 
@@ -1278,11 +1278,11 @@ include_details: true
 include_content_info: true
 ```
 
-### 페이지 넘기기 및 추출
+### Paginate & Extract
 
 `browser.pagination`
 
-페이지를 자동으로 넘기면서 데이터 추출
+Auto-paginate through pages and extract data. Supports retry and checkpoint resume.
 
 **Parameters:**
 
@@ -1307,10 +1307,10 @@ include_content_info: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `items` | array | 더 이상 페이지가 없을 때 나타나는 선택자 (페이지 넘기기 중지) |
-| `total_items` | integer | 모든 페이지에서 추출된 모든 항목 |
-| `pages_processed` | integer | 모든 페이지에서 추출된 모든 항목 |
-| `stopped_reason` | string | 처리된 페이지 수 |
+| `items` | array | All extracted items from all pages |
+| `total_items` | integer | Total number of items extracted |
+| `pages_processed` | integer | Number of pages processed |
+| `stopped_reason` | string | Why pagination stopped (max_pages, max_items, no_more, error) |
 | `retries_used` | integer | Total number of retries across all pages |
 | `resumed` | boolean | Whether execution resumed from a checkpoint |
 
@@ -1334,11 +1334,11 @@ no_more_indicator: .end-of-feed
 checkpoint_path: /tmp/feed_checkpoint.json
 ```
 
-### PDF 생성
+### Generate PDF
 
 `browser.pdf`
 
-현재 페이지에서 PDF 생성
+Generate PDF from current page
 
 **Parameters:**
 
@@ -1357,9 +1357,9 @@ checkpoint_path: /tmp/feed_checkpoint.json
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 웹페이지 렌더링 스케일 (0.1-2) |
-| `path` | string | 작업 상태 (성공/오류) |
-| `size` | number | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -1381,26 +1381,26 @@ path: /output/custom.pdf
 margin: {"top": "1cm", "bottom": "1cm", "left": "2cm", "right": "2cm"}
 ```
 
-### 성능 지표
+### Performance Metrics
 
 `browser.performance`
 
-브라우저 성능 지표 수집
+Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | array | No | `['all']` | 수집할 성능 지표 |
-| `timeout_ms` | number | No | `3000` | 밀리초 단위의 시간 초과 |
-| `setup_observers` | boolean | No | `True` | 수집 전에 성능 관찰자 설정 |
+| `metrics` | array | No | `['all']` | Which metrics to collect (default: all) |
+| `timeout_ms` | number | No | `3000` | Time to wait for metrics collection (for LCP, CLS) |
+| `setup_observers` | boolean | No | `True` | Install PerformanceObservers for better metric tracking |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `metrics` | object | 수집된 성능 지표 |
+| `status` | string | Operation status |
+| `metrics` | object | Collected performance metrics |
 
 **Example:** Example
 
@@ -1422,11 +1422,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### 브라우저 풀
+### Browser Pool
 
 `browser.pool`
 
-병렬 자동화를 위한 여러 개의 명명된 브라우저 인스턴스를 관리.
+Manage multiple named browser instances for parallel automation.
 
 **Parameters:**
 
@@ -1466,11 +1466,11 @@ name: scraper1
 action: list
 ```
 
-### 키 누르기
+### Press Key
 
 `browser.press`
 
-키보드 키 누르기
+Press a keyboard key
 
 **Parameters:**
 
@@ -1482,8 +1482,8 @@ action: list
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `key` | string | 키보드 키 누르기 |
+| `status` | string | Operation status (success/error) |
+| `key` | string | Key identifier |
 
 **Example:** Example
 
@@ -1497,11 +1497,11 @@ key: Enter
 key: Escape
 ```
 
-### 프록시 순환
+### Rotate Proxy
 
 `browser.proxy_rotate`
 
-프록시 목록을 순환하며 비활성 프록시를 감지.
+Rotate through a list of proxies. Relaunches browser with the next proxy.
 
 **Parameters:**
 
@@ -1538,11 +1538,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### 기사 추출
+### Extract Article
 
 `browser.readability`
 
-스마트 기사 추출 — 웹페이지에서 제목, 저자, 날짜, 본문을 추출
+Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode.
 
 **Parameters:**
 
@@ -1551,7 +1551,7 @@ action: rotate
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - | 콘텐츠 영역의 CSS 셀렉터. 비워두면 자동 감지. |
+| `selector` | string | No | - | CSS selector for the content area. Leave empty for auto-detection. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1603,11 +1603,11 @@ title_selector: .article-headline h1
 selector: .article-body
 ```
 
-### 작업 기록
+### Record Actions
 
 `browser.record`
 
-사용자 작업을 워크플로로 기록
+Record user actions as workflow
 
 **Parameters:**
 
@@ -1621,9 +1621,9 @@ selector: .article-body
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 기록된 워크플로 형식 (yaml 또는 json) |
-| `recording` | array | 기록된 워크플로 형식 (yaml 또는 json) |
-| `workflow` | string | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `recording` | array | Recording data or path |
+| `workflow` | string | The workflow |
 
 **Example:** Example
 
@@ -1644,25 +1644,25 @@ output_format: yaml
 action: get
 ```
 
-### 브라우저 해제
+### Release Browser
 
 `browser.release`
 
-브라우저 세션 해제 (소유한 경우에만 닫기)
+Release browser session (close only if owned)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `force` | boolean | No | `False` | 이 템플릿이 소유하지 않은 경우에도 브라우저 닫기 |
+| `force` | boolean | No | `False` | Close browser even if not owned by this template |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 이 템플릿이 소유하지 않은 경우에도 브라우저 닫기 |
-| `message` | string | 수행된 작업 |
-| `was_owner` | boolean | 수행된 작업 |
+| `status` | string | What action was taken |
+| `message` | string | Result message |
+| `was_owner` | boolean | Whether this template owned the browser |
 
 **Example:** Example
 
@@ -1675,11 +1675,11 @@ action: get
 force: true
 ```
 
-### 응답 캡처
+### Capture Response
 
 `browser.response`
 
-API 응답 본문 (XHR/fetch) 을 캡처. 페이지 API 호출에서 JSON 추출.
+Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls.
 
 **Parameters:**
 
@@ -1712,11 +1712,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### Robots.txt 확인
+### Check Robots.txt
 
 `browser.robots`
 
-robots.txt 준수 여부를 확인하고 사이트맵을 탐색.
+Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping.
 
 **Parameters:**
 
@@ -1747,11 +1747,11 @@ check_url: /api/data
 ```yaml
 ```
 
-### 스크린샷 촬영
+### Take Screenshot
 
 `browser.screenshot`
 
-현재 페이지의 스크린샷 촬영
+Take a screenshot of the current page
 
 **Parameters:**
 
@@ -1766,8 +1766,8 @@ check_url: /api/data
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `filepath` | string | 현재 페이지의 스크린샷 촬영 |
+| `status` | string | Operation status (success/error) |
+| `filepath` | string | Path to the file |
 
 **Example:** Example
 
@@ -1775,11 +1775,11 @@ check_url: /api/data
 path: output/page.png
 ```
 
-### 페이지 스크롤
+### Scroll Page
 
 `browser.scroll`
 
-페이지를 요소, 위치 또는 방향으로 스크롤
+Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1794,8 +1794,8 @@ path: output/page.png
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `scrolled_to` | object | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `scrolled_to` | object | The scrolled to |
 
 **Example:** Example
 
@@ -1818,11 +1818,11 @@ amount: 10000
 behavior: smooth
 ```
 
-### 옵션 선택
+### Select Option
 
 `browser.select`
 
-드롭다운 요소에서 옵션 선택
+Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1838,9 +1838,9 @@ behavior: smooth
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `selected` | array | 작업 상태 (성공/오류) |
-| `selector` | string | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `selected` | array | The selected |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1866,11 +1866,11 @@ select_method: index
 index: 2
 ```
 
-### 사이트맵 파싱
+### Parse Sitemap
 
 `browser.sitemap`
 
-sitemap.xml을 파싱하여 메타데이터와 함께 URL을 추출.
+Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering.
 
 **Parameters:**
 
@@ -1902,29 +1902,29 @@ url_pattern: /blog/
 max_urls: 100
 ```
 
-### DOM 스냅샷
+### DOM Snapshot
 
 `browser.snapshot`
 
-현재 페이지의 DOM 스냅샷 캡처
+Capture DOM snapshot in HTML, MHTML, or text format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`html`, `mhtml`, `text`) | No | `html` | 출력 형식 (html 또는 text) |
-| `selector` | string | No | - | 특정 요소를 스냅샷하기 위한 CSS 선택자 |
-| `path` | string | No | - | 스냅샷을 저장할 경로 |
+| `format` | select (`html`, `mhtml`, `text`) | No | `html` | Snapshot format |
+| `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `format` | string | 스냅샷 형식 |
-| `content` | string | 스냅샷 콘텐츠 |
-| `path` | string | 스냅샷이 저장된 경로 |
-| `size_bytes` | number | 바이트 단위의 스냅샷 크기 |
+| `status` | string | Operation status |
+| `format` | string | Snapshot format used |
+| `content` | string | Snapshot content (if no path specified) |
+| `path` | string | Path to saved file |
+| `size_bytes` | number | Content size in bytes |
 
 **Example:** Example
 
@@ -1954,11 +1954,11 @@ selector: #main
 path: /tmp/section.html
 ```
 
-### 브라우저 저장소
+### Browser Storage
 
 `browser.storage`
 
-localStorage 및 sessionStorage 접근
+Access localStorage and sessionStorage
 
 **Parameters:**
 
@@ -1973,10 +1973,10 @@ localStorage 및 sessionStorage 접근
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `value` | any | 작업 상태 (성공/오류) |
-| `keys` | array | 작업 상태 (성공/오류) |
-| `length` | number | 반환된 값 |
+| `status` | string | Operation status (success/error) |
+| `value` | any | The returned value |
+| `keys` | array | List of keys |
+| `length` | number | Length of data |
 
 **Example:** Example
 
@@ -2009,11 +2009,11 @@ action: keys
 type: local
 ```
 
-### 탭 관리
+### Manage Tabs
 
 `browser.tab`
 
-브라우저 탭 생성, 전환 및 닫기
+Create, switch, and close browser tabs
 
 **Parameters:**
 
@@ -2028,10 +2028,10 @@ type: local
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 전환 또는 닫을 탭 인덱스 (0부터 시작) |
-| `tab_count` | number | 전환 또는 닫을 탭 인덱스 (0부터 시작) |
-| `current_index` | number | 작업 상태 (성공/오류) |
-| `tabs` | array | 탭 수 |
+| `status` | string | Operation status (success/error) |
+| `tab_count` | number | The tab count |
+| `current_index` | number | The current index |
+| `tabs` | array | List of open tabs |
 
 **Example:** Example
 
@@ -2059,11 +2059,11 @@ action: close
 action: list
 ```
 
-### 테이블 추출
+### Extract Table
 
 `browser.table`
 
-HTML 테이블을 헤더 자동 감지로 구조화된 데이터로 추출.
+Extract HTML tables as structured data. Auto-detects headers from thead/th.
 
 **Parameters:**
 
@@ -2095,11 +2095,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### 스로틀
+### Throttle
 
 `browser.throttle`
 
-도메인별 요청 제한. 차단 방지를 위해 요청 간 대기.
+Per-domain rate limiting. Waits between requests to the same domain to avoid bans.
 
 **Parameters:**
 
@@ -2142,29 +2142,29 @@ min_interval_ms: 1500
 max_interval_ms: 8000
 ```
 
-### 브라우저 추적
+### Performance Trace
 
 `browser.trace`
 
-브라우저 성능 추적 시작, 중지 또는 저장
+Start/stop Chrome DevTools performance tracing (Chromium only)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | - | 추적 작업 (시작, 중지, 저장) |
-| `categories` | array | No | `['devtools.timeline']` | 캡처할 추적 카테고리 |
-| `screenshots` | boolean | No | `True` | 추적에 스크린샷 포함 |
-| `path` | string | No | - | 추적 파일을 저장할 경로 |
+| `action` | string | Yes | - | Start or stop tracing |
+| `categories` | array | No | `['devtools.timeline']` | CDP trace categories (default: devtools.timeline) |
+| `screenshots` | boolean | No | `True` | Include screenshots in trace (increases file size) |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `tracing` | boolean | 현재 추적이 활성화되어 있는지 여부 |
-| `path` | string | 추적이 저장된 경로 |
-| `size_bytes` | number | 바이트 단위의 추적 파일 크기 |
+| `status` | string | Operation status (success/error) |
+| `tracing` | boolean | Whether tracing is active |
+| `path` | string | Path to trace file (when stopped) |
+| `size_bytes` | number | Trace file size in bytes |
 
 **Example:** Example
 
@@ -2188,11 +2188,11 @@ action: stop
 path: /tmp/performance-trace.json
 ```
 
-### 텍스트 입력
+### Type Text
 
 `browser.type`
 
-입력 필드에 텍스트 입력
+Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -2213,8 +2213,8 @@ path: /tmp/performance-trace.json
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | 작업 상태 (성공/오류) |
-| `selector` | string | 입력 필드에 텍스트 입력 |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 | `method` | string | Type method used |
 
 **Example:** Example
@@ -2250,11 +2250,11 @@ selector: #email
 text: user@example.com
 ```
 
-### 파일 업로드
+### Upload File
 
 `browser.upload`
 
-파일 입력 요소에 파일 업로드
+Upload file to file input element
 
 **Parameters:**
 
@@ -2268,10 +2268,10 @@ text: user@example.com
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `filename` | string | 작업 상태 (성공/오류) |
-| `size` | number | 작업 상태 (성공/오류) |
-| `selector` | string | 파일 이름 |
+| `status` | string | Operation status (success/error) |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -2287,26 +2287,26 @@ selector: #file-upload
 file_path: /path/to/document.pdf
 ```
 
-### 뷰포트 설정
+### Resize Viewport
 
 `browser.viewport`
 
-브라우저 뷰포트 크기 가져오기 또는 설정하기
+Resize browser viewport to specific dimensions
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `width` | number | Yes | `1280` | 뷰포트 너비 (픽셀) |
-| `height` | number | Yes | `720` | 뷰포트 높이 (픽셀) |
+| `width` | number | Yes | `1280` | Viewport width in pixels |
+| `height` | number | Yes | `720` | Viewport height in pixels |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `viewport` | object | 현재 뷰포트 크기 |
-| `previous_viewport` | object | 이전 뷰포트 크기 |
+| `status` | string | Operation status |
+| `viewport` | object | Applied viewport dimensions |
+| `previous_viewport` | object | Previous viewport dimensions |
 
 **Example:** Example
 
@@ -2336,11 +2336,11 @@ width: 1366
 height: 768
 ```
 
-### 대기
+### Wait
 
 `browser.wait`
 
-지정된 시간 동안 또는 요소가 나타날 때까지 대기
+Wait for a duration or until an element appears
 
 **Parameters:**
 
@@ -2348,16 +2348,16 @@ height: 768
 |------|------|----------|---------|-------------|
 | `duration_ms` | number | No | `1000` | Duration of the operation in milliseconds |
 | `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
-| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | 기다릴 상태 (보임, 숨김, 첨부됨, 분리됨) |
+| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | Element state to wait for |
 | `timeout_ms` | number | No | `30000` | Maximum time to wait in milliseconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `selector` | string | 작업 상태 (성공/오류) |
-| `duration_ms` | number | 시간 동안 또는 요소가 나타날 때까지 대기 |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was waited for |
+| `duration_ms` | number | Wait duration in milliseconds |
 
 **Example:** Example
 

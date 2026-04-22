@@ -25,7 +25,7 @@ Deep merge multiple objects
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `objects` | array | Yes | - | Array of objects to merge |
-| `array_merge` | string | No | `replace` | Array of objects to merge |
+| `array_merge` | string | No | `replace` | How to merge arrays |
 
 **Output:**
 
@@ -44,15 +44,15 @@ Flatten nested object to single level
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `object` | object | Yes | - | Nested object to flatten |
-| `separator` | string | No | `.` | Nested object to flatten |
-| `max_depth` | number | No | `0` | Key separator |
+| `separator` | string | No | `.` | Key separator |
+| `max_depth` | number | No | `0` | Maximum depth to flatten (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Maximum depth to flatten (0 = unlimited) |
-| `keys` | array | Flattened object |
+| `result` | object | Flattened object |
+| `keys` | array | Flattened keys |
 
 ### Get Value
 
@@ -65,15 +65,15 @@ Get value from object by path
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `object` | object | Yes | - | Object to get value from |
-| `path` | string | Yes | - | Object to get value from |
-| `default` | any | No | - | Dot notation path |
+| `path` | string | Yes | - | Dot notation path |
+| `default` | any | No | - | Default value if path not found |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | Default value if path not found |
-| `found` | boolean | Retrieved value |
+| `value` | any | Retrieved value |
+| `found` | boolean | Whether path was found |
 
 ### Set Value
 
@@ -86,14 +86,14 @@ Set value in object by path
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `object` | object | Yes | - | Object to modify |
-| `path` | string | Yes | - | Object to modify |
-| `value` | any | Yes | - | Dot notation path |
+| `path` | string | Yes | - | Dot notation path |
+| `value` | any | Yes | - | Value to set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Value to set |
+| `result` | object | Modified object |
 
 ### Unflatten Object
 
@@ -106,10 +106,10 @@ Unflatten object with dot notation to nested
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `object` | object | Yes | - | Flat object to unflatten |
-| `separator` | string | No | `.` | Flat object to unflatten |
+| `separator` | string | No | `.` | Key separator |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Key separator |
+| `result` | object | Nested object |

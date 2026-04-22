@@ -6,76 +6,76 @@ In-memory and Redis message queue operations.
 
 | Module | Description |
 |--------|-------------|
-| [Desencolar ítem](#desencolar-ítem) | Remover y devolver un ítem de una cola |
-| [Encolar ítem](#encolar-ítem) | Agregar un ítem a una cola en memoria o Redis |
-| [Tamaño de la cola](#tamaño-de-la-cola) | Obtener el tamaño actual de una cola |
+| [Dequeue Item](#dequeue-item) | Remove and return an item from a queue |
+| [Enqueue Item](#enqueue-item) | Add an item to an in-memory or Redis queue |
+| [Queue Size](#queue-size) | Get the current size of a queue |
 
 ## Modules
 
-### Desencolar ítem
+### Dequeue Item
 
 `queue.dequeue`
 
-Remover y devolver un ítem de una cola
+Remove and return an item from a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nombre de la cola de la que desencolar |
-| `backend` | string | No | `memory` | Backend de cola a usar |
-| `redis_url` | string | No | `redis://localhost:6379` | URL de conexión a Redis |
-| `timeout` | number | No | `0` | Tiempo de espera en segundos (0 = no bloqueante) |
+| `queue_name` | string | Yes | - | Name of the queue to dequeue from |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
+| `timeout` | number | No | `0` | Timeout in seconds (0 = non-blocking) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | any | El ítem desencolado (nulo si la cola está vacía) |
-| `queue_name` | string | Nombre de la cola |
-| `remaining` | number | Ítems restantes en la cola |
-| `empty` | boolean | Si la cola estaba vacía |
+| `data` | any | The dequeued item (null if queue is empty) |
+| `queue_name` | string | Name of the queue |
+| `remaining` | number | Remaining items in the queue |
+| `empty` | boolean | Whether the queue was empty |
 
-### Encolar ítem
+### Enqueue Item
 
 `queue.enqueue`
 
-Agregar un ítem a una cola en memoria o Redis
+Add an item to an in-memory or Redis queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nombre de la cola a la que agregar el ítem |
-| `data` | string | Yes | - | Datos a encolar (cualquier valor serializable en JSON) |
-| `backend` | string | No | `memory` | Backend de cola a usar |
-| `redis_url` | string | No | `redis://localhost:6379` | URL de conexión a Redis |
+| `queue_name` | string | Yes | - | Name of the queue to add the item to |
+| `data` | string | Yes | - | Data to enqueue (any JSON-serializable value) |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Nombre de la cola |
-| `position` | number | Posición del ítem en la cola |
-| `queue_size` | number | Tamaño actual de la cola después de encolar |
+| `queue_name` | string | Name of the queue |
+| `position` | number | Position of the item in the queue |
+| `queue_size` | number | Current size of the queue after enqueue |
 
-### Tamaño de la cola
+### Queue Size
 
 `queue.size`
 
-Obtener el tamaño actual de una cola
+Get the current size of a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nombre de la cola a verificar |
-| `backend` | string | No | `memory` | Backend de cola a usar |
-| `redis_url` | string | No | `redis://localhost:6379` | URL de conexión a Redis |
+| `queue_name` | string | Yes | - | Name of the queue to check |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Nombre de la cola |
-| `size` | number | Número actual de ítems en la cola |
+| `queue_name` | string | Name of the queue |
+| `size` | number | Current number of items in the queue |

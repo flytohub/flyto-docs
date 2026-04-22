@@ -6,19 +6,19 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Module | Description |
 |--------|-------------|
-| [ค่าสัมบูรณ์](#ค่าสัมบูรณ์) | รับค่าสัมบูรณ์ของตัวเลข |
-| [ปัดขึ้น](#ปัดขึ้น) | ปัดเศษตัวเลขขึ้นเป็นจำนวนเต็มที่ใกล้ที่สุด |
-| [ปัดลง](#ปัดลง) | ปัดเศษตัวเลขลงเป็นจำนวนเต็มที่ใกล้ที่สุด |
-| [ยกกำลัง](#ยกกำลัง) | ยกกำลังตัวเลข |
-| [ปัดเศษ](#ปัดเศษ) | ปัดเศษตัวเลขตามจำนวนทศนิยมที่กำหนด |
+| [Absolute Value](#absolute-value) | Get absolute value of a number |
+| [Ceiling Number](#ceiling-number) | Round number up to nearest integer |
+| [Floor Number](#floor-number) | Round number down to nearest integer |
+| [Power/Exponent](#powerexponent) | Raise number to a power |
+| [Round Number](#round-number) | Round number to specified decimal places |
 
 ## Modules
 
-### ค่าสัมบูรณ์
+### Absolute Value
 
 `math.abs`
 
-รับค่าสัมบูรณ์ของตัวเลข
+Get absolute value of a number
 
 **Parameters:**
 
@@ -30,8 +30,8 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | ค่าสัมบูรณ์ |
-| `original` | number | ค่าสัมบูรณ์ |
+| `result` | number | Absolute value |
+| `original` | number | Original number |
 
 **Example:** Absolute of negative number
 
@@ -45,11 +45,11 @@ number: -5
 number: 3.14
 ```
 
-### ปัดขึ้น
+### Ceiling Number
 
 `math.ceil`
 
-ปัดเศษตัวเลขขึ้นเป็นจำนวนเต็มที่ใกล้ที่สุด
+Round number up to nearest integer
 
 **Parameters:**
 
@@ -61,8 +61,8 @@ number: 3.14
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | ค่าที่ปัดขึ้น |
-| `original` | number | ค่าที่ปัดขึ้น |
+| `result` | number | Ceiling value |
+| `original` | number | Original number |
 
 **Example:** Ceiling positive number
 
@@ -76,11 +76,11 @@ number: 3.2
 number: -2.7
 ```
 
-### ปัดลง
+### Floor Number
 
 `math.floor`
 
-ปัดเศษตัวเลขลงเป็นจำนวนเต็มที่ใกล้ที่สุด
+Round number down to nearest integer
 
 **Parameters:**
 
@@ -92,8 +92,8 @@ number: -2.7
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | ค่าที่ปัดลง |
-| `original` | number | ค่าที่ปัดลง |
+| `result` | number | Floored value |
+| `original` | number | Original number |
 
 **Example:** Floor positive number
 
@@ -107,11 +107,11 @@ number: 3.7
 number: -2.3
 ```
 
-### ยกกำลัง
+### Power/Exponent
 
 `math.power`
 
-ยกกำลังตัวเลข
+Raise number to a power
 
 **Parameters:**
 
@@ -124,9 +124,9 @@ number: -2.3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | ผลของฐานยกกำลังเลขชี้กำลัง |
-| `base` | number | ผลของฐานยกกำลังเลขชี้กำลัง |
-| `exponent` | number | ผลของฐานยกกำลังเลขชี้กำลัง |
+| `result` | number | Result of base raised to exponent |
+| `base` | number | Base number |
+| `exponent` | number | Exponent used |
 
 **Example:** Square a number
 
@@ -142,11 +142,11 @@ base: 27
 exponent: 0.333333
 ```
 
-### ปัดเศษ
+### Round Number
 
 `math.round`
 
-ปัดเศษตัวเลขตามจำนวนทศนิยมที่กำหนด
+Round number to specified decimal places
 
 **Parameters:**
 
@@ -159,9 +159,9 @@ exponent: 0.333333
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | ค่าที่ปัดเศษ |
-| `original` | number | ค่าที่ปัดเศษ |
-| `decimals` | number | ค่าที่ปัดเศษ |
+| `result` | number | Rounded value |
+| `original` | number | Original number |
+| `decimals` | number | Decimal places used |
 
 **Example:** Round to integer
 

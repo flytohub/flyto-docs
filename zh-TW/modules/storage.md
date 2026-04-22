@@ -6,32 +6,32 @@ Persistent key-value storage.
 
 | Module | Description |
 |--------|-------------|
-| [刪除儲存的值](#刪除儲存的值) | 從持久化的鍵值儲存中刪除一個值 |
-| [取得儲存的值](#取得儲存的值) | 從持久化的鍵值儲存中取得一個值 |
-| [儲存值](#儲存值) | 在持久化的鍵值儲存中儲存一個值 |
+| [Delete Stored Value](#delete-stored-value) | Delete a value from persistent key-value storage |
+| [Get Stored Value](#get-stored-value) | Retrieve a value from persistent key-value storage |
+| [Store Value](#store-value) | Store a value in persistent key-value storage |
 
 ## Modules
 
-### 刪除儲存的值
+### Delete Stored Value
 
 `storage.delete`
 
-從持久化的鍵值儲存中刪除一個值
+Delete a value from persistent key-value storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `namespace` | string | Yes | `default` | 儲存命名空間 |
-| `key` | string | Yes | - | 儲存命名空間 |
+| `namespace` | string | Yes | `default` | Storage namespace |
+| `key` | string | Yes | - | Key to delete |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 要刪除的鍵 |
-| `deleted` | boolean | 操作是否成功 |
-| `key` | string | 操作是否成功 |
+| `ok` | boolean | Whether the operation succeeded |
+| `deleted` | boolean | Whether the key existed and was deleted |
+| `key` | string | The key that was deleted |
 
 **Example:** Delete cached value
 
@@ -40,28 +40,28 @@ namespace: cache
 key: api_response
 ```
 
-### 取得儲存的值
+### Get Stored Value
 
 `storage.get`
 
-從持久化的鍵值儲存中取得一個值
+Retrieve a value from persistent key-value storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `namespace` | string | Yes | `default` | 儲存命名空間（例如，工作流程名稱或專案） |
-| `key` | string | Yes | - | 儲存命名空間（例如，工作流程名稱或專案） |
-| `default` | any | No | - | 要取得的鍵 |
+| `namespace` | string | Yes | `default` | Storage namespace (e.g., workflow name or project) |
+| `key` | string | Yes | - | Key to retrieve |
+| `default` | any | No | - | Value to return if key does not exist |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 如果鍵不存在要返回的值 |
-| `found` | boolean | 操作是否成功 |
-| `value` | any | 操作是否成功 |
-| `key` | string | 鍵是否被找到（未過期） |
+| `ok` | boolean | Whether the operation succeeded |
+| `found` | boolean | Whether the key was found (not expired) |
+| `value` | any | The stored value or default |
+| `key` | string | The key that was queried |
 
 **Example:** Get last BTC price
 
@@ -78,29 +78,29 @@ namespace: my-workflow
 key: last_run_status
 ```
 
-### 儲存值
+### Store Value
 
 `storage.set`
 
-在持久化的鍵值儲存中儲存一個值
+Store a value in persistent key-value storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `namespace` | string | Yes | `default` | 儲存命名空間（例如，工作流程名稱或專案） |
-| `key` | string | Yes | - | 儲存命名空間（例如，工作流程名稱或專案） |
-| `value` | any | Yes | - | 要在其下儲存值的鍵 |
+| `namespace` | string | Yes | `default` | Storage namespace (e.g., workflow name or project) |
+| `key` | string | Yes | - | Key to store value under |
+| `value` | any | Yes | - | Value to store (string, number, or object) |
 | `ttl_seconds` | number | No | `0` | Time to live in seconds (optional, 0 = no expiration) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 存活時間（秒）（可選，0 = 不過期） |
-| `key` | string | 操作是否成功 |
-| `stored_at` | number | 操作是否成功 |
-| `expires_at` | number | 已儲存的鍵 |
+| `ok` | boolean | Whether the operation succeeded |
+| `key` | string | The key that was stored |
+| `stored_at` | number | Unix timestamp when value was stored |
+| `expires_at` | number | Unix timestamp when value expires (if TTL set) |
 
 **Example:** Store BTC price
 

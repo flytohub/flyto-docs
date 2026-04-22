@@ -6,7 +6,7 @@ HTTP request utilities.
 
 | Module | Description |
 |--------|-------------|
-| [HTTP GET](#http-get) | Envoyer une requête HTTP GET et recevoir une réponse |
+| [HTTP GET](#http-get) | Send HTTP GET request to an API endpoint |
 
 ## Modules
 
@@ -14,16 +14,16 @@ HTTP request utilities.
 
 `http.get`
 
-Envoyer une requête HTTP GET et recevoir une réponse
+Send HTTP GET request to an API endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL à laquelle envoyer la requête GET |
-| `headers` | object | No | `{}` | En-têtes de la requête sous forme d'objet clé-valeur |
-| `query` | object | No | `{}` | Paramètres de la chaîne de requête sous forme d'objet clé-valeur |
-| `timeout` | number | No | `30` | Délai d'attente de la requête en millisecondes |
+| `url` | string | Yes | - | Target URL |
+| `headers` | object | No | `{}` | HTTP request headers as key-value pairs |
+| `query` | object | No | `{}` | URL query string parameters as key-value pairs |
+| `timeout` | number | No | `30` | Maximum time to wait in seconds |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
 | `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
@@ -31,7 +31,7 @@ Envoyer une requête HTTP GET et recevoir une réponse
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Si la requête a réussi (statut 2xx) |
-| `status` | number | Code de statut HTTP |
-| `body` | any | Corps de la réponse (JSON analysé ou texte) |
-| `headers` | object | En-têtes de la réponse |
+| `ok` | boolean | Whether the operation succeeded |
+| `status` | number | HTTP status code |
+| `body` | any | Response body content |
+| `headers` | object | Response headers |

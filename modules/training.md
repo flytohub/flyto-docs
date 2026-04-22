@@ -29,8 +29,8 @@ Analyze website structure for practice
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Analyze website structure |
-| `structure` | object | Analyze website structure |
+| `status` | string | Operation status (success/error) |
+| `structure` | object | The structure |
 
 ### Practice Execute
 
@@ -49,8 +49,8 @@ Execute practice session
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Execute practice session |
-| `items_processed` | number | Execute practice session |
+| `status` | string | Operation status (success/error) |
+| `items_processed` | number | The items processed |
 
 ### Practice Infer Schema
 
@@ -69,8 +69,8 @@ Infer data schema from website
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Infer data schema |
-| `schema` | object | Infer data schema |
+| `status` | string | Operation status (success/error) |
+| `schema` | object | The schema |
 
 ### Practice Stats
 
@@ -83,6 +83,6 @@ Get practice statistics
 | Field | Type | Description |
 |-------|------|-------------|
 | `total_sessions` | number | The total sessions |
-| `successful_sessions` | number | The total sessions |
-| `success_rate` | number | Get practice statistics |
-| `history` | array | Get practice statistics |
+| `successful_sessions` | number | The successful sessions |
+| `success_rate` | number | The success rate |
+| `history` | array | The history |

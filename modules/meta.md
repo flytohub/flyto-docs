@@ -22,18 +22,18 @@ List all available modules in the registry
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `category` | string | No | - | Filter modules by category (e.g., browser, data, ai) |
-| `tags` | array | No | - | Filter modules by category (e.g., browser, data, ai) |
-| `include_params` | boolean | No | `True` | Filter modules by tags |
-| `include_output` | boolean | No | `True` | Include parameter schema in output |
-| `format` | select (`json`, `markdown`, `compact`) | No | `json` | Include output schema in response |
+| `tags` | array | No | - | Filter modules by tags |
+| `include_params` | boolean | No | `True` | Include parameter schema in output |
+| `include_output` | boolean | No | `True` | Include output schema in response |
+| `format` | select (`json`, `markdown`, `compact`) | No | `json` | Format for module list output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `modules` | array | List of registered modules |
-| `count` | number | The params schema |
-| `formatted` | string | The output schema |
+| `count` | number | Number of items |
+| `formatted` | string | The formatted |
 
 **Example:** List all modules
 
@@ -77,9 +77,9 @@ Generate or update MODULES.md documentation from registry
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `file_path` | string | Include usage examples in documentation |
-| `modules_count` | number | The file path |
-| `categories` | array | The file path |
+| `file_path` | string | The file path |
+| `modules_count` | number | The modules count |
+| `categories` | array | The categories |
 
 **Example:** Update module documentation
 

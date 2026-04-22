@@ -6,19 +6,19 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Module | Description |
 |--------|-------------|
-| [絶対値](#絶対値) | 数値の絶対値を取得 |
-| [切り上げ](#切り上げ) | 数値を最も近い整数に切り上げ |
-| [切り下げ](#切り下げ) | 数値を最も近い整数に切り下げ |
-| [べき乗/指数](#べき乗指数) | 数値をべき乗 |
-| [四捨五入](#四捨五入) | 数値を指定した小数点以下の桁数に四捨五入 |
+| [Absolute Value](#absolute-value) | Get absolute value of a number |
+| [Ceiling Number](#ceiling-number) | Round number up to nearest integer |
+| [Floor Number](#floor-number) | Round number down to nearest integer |
+| [Power/Exponent](#powerexponent) | Raise number to a power |
+| [Round Number](#round-number) | Round number to specified decimal places |
 
 ## Modules
 
-### 絶対値
+### Absolute Value
 
 `math.abs`
 
-数値の絶対値を取得
+Get absolute value of a number
 
 **Parameters:**
 
@@ -30,8 +30,8 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 絶対値 |
-| `original` | number | 絶対値 |
+| `result` | number | Absolute value |
+| `original` | number | Original number |
 
 **Example:** Absolute of negative number
 
@@ -45,11 +45,11 @@ number: -5
 number: 3.14
 ```
 
-### 切り上げ
+### Ceiling Number
 
 `math.ceil`
 
-数値を最も近い整数に切り上げ
+Round number up to nearest integer
 
 **Parameters:**
 
@@ -61,8 +61,8 @@ number: 3.14
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 切り上げ値 |
-| `original` | number | 切り上げ値 |
+| `result` | number | Ceiling value |
+| `original` | number | Original number |
 
 **Example:** Ceiling positive number
 
@@ -76,11 +76,11 @@ number: 3.2
 number: -2.7
 ```
 
-### 切り下げ
+### Floor Number
 
 `math.floor`
 
-数値を最も近い整数に切り下げ
+Round number down to nearest integer
 
 **Parameters:**
 
@@ -92,8 +92,8 @@ number: -2.7
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 切り下げ値 |
-| `original` | number | 切り下げ値 |
+| `result` | number | Floored value |
+| `original` | number | Original number |
 
 **Example:** Floor positive number
 
@@ -107,11 +107,11 @@ number: 3.7
 number: -2.3
 ```
 
-### べき乗/指数
+### Power/Exponent
 
 `math.power`
 
-数値をべき乗
+Raise number to a power
 
 **Parameters:**
 
@@ -124,9 +124,9 @@ number: -2.3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 底を指数でべき乗した結果 |
-| `base` | number | 底を指数でべき乗した結果 |
-| `exponent` | number | 底を指数でべき乗した結果 |
+| `result` | number | Result of base raised to exponent |
+| `base` | number | Base number |
+| `exponent` | number | Exponent used |
 
 **Example:** Square a number
 
@@ -142,11 +142,11 @@ base: 27
 exponent: 0.333333
 ```
 
-### 四捨五入
+### Round Number
 
 `math.round`
 
-数値を指定した小数点以下の桁数に四捨五入
+Round number to specified decimal places
 
 **Parameters:**
 
@@ -159,9 +159,9 @@ exponent: 0.333333
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 四捨五入された値 |
-| `original` | number | 四捨五入された値 |
-| `decimals` | number | 四捨五入された値 |
+| `result` | number | Rounded value |
+| `original` | number | Original number |
+| `decimals` | number | Decimal places used |
 
 **Example:** Round to integer
 

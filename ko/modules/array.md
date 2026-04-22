@@ -6,26 +6,26 @@ List manipulation — chunk, flatten, group, map, reduce, zip, and more.
 
 | Module | Description |
 |--------|-------------|
-| [배열 청크](#배열-청크) | 배열을 지정된 크기의 청크로 분할 |
-| [압축](#압축) | 배열에서 null/빈 값을 제거합니다 |
-| [배열 차집합](#배열-차집합) | 첫 번째 배열에서 다른 배열에 없는 요소 찾기 |
-| [제거](#제거) | 배열에서 처음 N개의 요소를 제거합니다 |
-| [배열 평탄화](#배열-평탄화) | 중첩 배열을 단일 배열로 평탄화 |
-| [그룹화](#그룹화) | 배열 요소를 키로 그룹화합니다 |
-| [배열 교집합](#배열-교집합) | 배열 간 공통 요소 찾기 |
-| [배열 결합](#배열-결합) | 배열 요소를 문자열로 결합 |
-| [배열 맵](#배열-맵) | 배열의 각 요소 변환 |
-| [배열 리듀스](#배열-리듀스) | 배열을 단일 값으로 축소 |
-| [가져오기](#가져오기) | 배열에서 처음 N개의 요소를 가져옵니다 |
-| [배열 결합](#배열-결합) | 여러 배열을 요소별로 결합합니다 |
+| [Array Chunk](#array-chunk) | Split array into chunks of specified size |
+| [Compact](#compact) | Remove null/empty values from array |
+| [Array Difference](#array-difference) | Find elements in first array not in others |
+| [Drop](#drop) | Drop first N elements from array |
+| [Array Flatten](#array-flatten) | Flatten nested arrays into single array |
+| [Group By](#group-by) | Group array elements by a key |
+| [Array Intersection](#array-intersection) | Find common elements between arrays |
+| [Array Join](#array-join) | Join array elements into string |
+| [Array Map](#array-map) | Transform each element in an array |
+| [Array Reduce](#array-reduce) | Reduce array to single value |
+| [Take](#take) | Take first N elements from array |
+| [Zip Arrays](#zip-arrays) | Combine multiple arrays element-wise |
 
 ## Modules
 
-### 배열 청크
+### Array Chunk
 
 `array.chunk`
 
-배열을 지정된 크기의 청크로 분할
+Split array into chunks of specified size
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ List manipulation — chunk, flatten, group, map, reduce, zip, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 청크 배열 |
-| `chunks` | number | 청크 배열 |
+| `result` | array | Array of chunks |
+| `chunks` | number | Number of chunks |
 
 **Example:** Chunk into groups of 3
 
@@ -55,33 +55,33 @@ array: ["a", "b", "c", "d", "e"]
 size: 2
 ```
 
-### 압축
+### Compact
 
 `array.compact`
 
-배열에서 null/빈 값을 제거합니다
+Remove null/empty values from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | 압축할 배열 |
-| `remove_empty_strings` | boolean | No | `True` | 빈 문자열을 제거합니다 |
-| `remove_zero` | boolean | No | `False` | 빈 문자열을 제거합니다 |
-| `remove_false` | boolean | No | `False` | 0 값을 제거합니다 |
+| `array` | array | Yes | - | Array to compact |
+| `remove_empty_strings` | boolean | No | `True` | Remove empty strings |
+| `remove_zero` | boolean | No | `False` | Remove zero values |
+| `remove_false` | boolean | No | `False` | Remove false values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 거짓 값을 제거합니다 |
-| `removed` | number | 압축된 배열 |
+| `result` | array | Compacted array |
+| `removed` | number | Number of items removed |
 
-### 배열 차집합
+### Array Difference
 
 `array.difference`
 
-첫 번째 배열에서 다른 배열에 없는 요소 찾기
+Find elements in first array not in others
 
 **Parameters:**
 
@@ -94,8 +94,8 @@ size: 2
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 첫 번째 배열에만 있는 요소 |
-| `length` | number | 첫 번째 배열에만 있는 요소 |
+| `result` | array | Elements unique to first array |
+| `length` | number | Number of unique elements |
 
 **Example:** Find unique elements
 
@@ -104,31 +104,31 @@ array: [1, 2, 3, 4, 5]
 subtract: [[2, 4], [5]]
 ```
 
-### 제거
+### Drop
 
 `array.drop`
 
-배열에서 처음 N개의 요소를 제거합니다
+Drop first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | 원본 배열 |
-| `count` | number | Yes | `1` | 원본 배열 |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to drop |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 제거할 요소의 수 |
-| `dropped` | number | 남은 요소들 |
+| `result` | array | Remaining elements |
+| `dropped` | number | Number of elements dropped |
 
-### 배열 평탄화
+### Array Flatten
 
 `array.flatten`
 
-중첩 배열을 단일 배열로 평탄화
+Flatten nested arrays into single array
 
 **Parameters:**
 
@@ -141,8 +141,8 @@ subtract: [[2, 4], [5]]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 평탄화된 배열 |
-| `length` | number | 평탄화된 배열 |
+| `result` | array | Flattened array |
+| `length` | number | Length of flattened array |
 
 **Example:** Flatten one level
 
@@ -158,32 +158,32 @@ array: [[1, [2, [3, [4]]]]]
 depth: -1
 ```
 
-### 그룹화
+### Group By
 
 `array.group_by`
 
-배열 요소를 키로 그룹화합니다
+Group array elements by a key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | 그룹화할 객체 배열 |
-| `key` | string | Yes | - | 그룹화할 객체 배열 |
+| `array` | array | Yes | - | Array of objects to group |
+| `key` | string | Yes | - | Property name to group by |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `groups` | object | 그룹화할 속성 이름 |
-| `keys` | array | 그룹화된 결과 |
-| `count` | number | 그룹화된 결과 |
+| `groups` | object | Grouped results |
+| `keys` | array | Group keys |
+| `count` | number | Number of groups |
 
-### 배열 교집합
+### Array Intersection
 
 `array.intersection`
 
-배열 간 공통 요소 찾기
+Find common elements between arrays
 
 **Parameters:**
 
@@ -195,8 +195,8 @@ depth: -1
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 공통 요소 |
-| `length` | number | 공통 요소 |
+| `result` | array | Common elements |
+| `length` | number | Number of common elements |
 
 **Example:** Find common elements
 
@@ -204,11 +204,11 @@ depth: -1
 arrays: [[1, 2, 3, 4], [2, 3, 5], [2, 3, 6]]
 ```
 
-### 배열 결합
+### Array Join
 
 `array.join`
 
-배열 요소를 문자열로 결합
+Join array elements into string
 
 **Parameters:**
 
@@ -222,7 +222,7 @@ arrays: [[1, 2, 3, 4], [2, 3, 5], [2, 3, 6]]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 결합된 문자열 |
+| `result` | string | Joined string |
 
 **Example:** Join with comma
 
@@ -239,11 +239,11 @@ separator:
 
 ```
 
-### 배열 맵
+### Array Map
 
 `array.map`
 
-배열의 각 요소 변환
+Transform each element in an array
 
 **Parameters:**
 
@@ -257,8 +257,8 @@ separator:
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 변환된 배열 |
-| `length` | number | 변환된 배열 |
+| `result` | array | Transformed array |
+| `length` | number | Length of result array |
 
 **Example:** Multiply numbers
 
@@ -276,11 +276,11 @@ operation: extract
 value: name
 ```
 
-### 배열 리듀스
+### Array Reduce
 
 `array.reduce`
 
-배열을 단일 값으로 축소
+Reduce array to single value
 
 **Parameters:**
 
@@ -295,8 +295,8 @@ value: name
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | 축소된 값 |
-| `operation` | string | 축소된 값 |
+| `result` | any | Reduced value |
+| `operation` | string | Operation that was applied |
 
 **Example:** Sum numbers
 
@@ -313,42 +313,42 @@ operation: join
 separator:  
 ```
 
-### 가져오기
+### Take
 
 `array.take`
 
-배열에서 처음 N개의 요소를 가져옵니다
+Take first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | 원본 배열 |
-| `count` | number | Yes | `1` | 원본 배열 |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to take |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 가져올 요소의 수 |
-| `length` | number | 가져온 요소들 |
+| `result` | array | Taken elements |
+| `length` | number | Number of elements taken |
 
-### 배열 결합
+### Zip Arrays
 
 `array.zip`
 
-여러 배열을 요소별로 결합합니다
+Combine multiple arrays element-wise
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | 결합할 배열의 배열 |
-| `fill_value` | any | No | - | 결합할 배열의 배열 |
+| `arrays` | array | Yes | - | Array of arrays to zip |
+| `fill_value` | any | No | - | Value for missing elements |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 누락된 요소의 값 |
-| `length` | number | 결합된 배열 |
+| `result` | array | Zipped array |
+| `length` | number | Result length |

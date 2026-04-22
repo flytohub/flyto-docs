@@ -6,89 +6,89 @@ Set operations: union, intersection, difference, unique.
 
 | Module | Description |
 |--------|-------------|
-| [Diferencia de Conjuntos](#diferencia-de-conjuntos) | Obtener elementos en el primer array pero no en los otros |
-| [Intersección de Conjuntos](#intersección-de-conjuntos) | Obtener la intersección de dos o más arrays |
-| [Unión de Conjuntos](#unión-de-conjuntos) | Obtener la unión de dos o más arrays |
-| [Conjunto Único](#conjunto-único) | Eliminar elementos duplicados del array |
+| [Set Difference](#set-difference) | Get elements in first array but not in others |
+| [Set Intersection](#set-intersection) | Get intersection of two or more arrays |
+| [Set Union](#set-union) | Get union of two or more arrays |
+| [Set Unique](#set-unique) | Remove duplicate elements from array |
 
 ## Modules
 
-### Diferencia de Conjuntos
+### Set Difference
 
 `set.difference`
 
-Obtener elementos en el primer array pero no en los otros
+Get elements in first array but not in others
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `source` | array | Yes | - | Array de origen |
-| `exclude` | array | Yes | - | Array de origen |
+| `source` | array | Yes | - | Source array |
+| `exclude` | array | Yes | - | Arrays of elements to exclude |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Arrays de elementos a excluir |
-| `count` | number | Elementos en el origen pero no en los arrays a excluir |
-| `removed_count` | number | Elementos en el origen pero no en los arrays a excluir |
+| `result` | array | Elements in source but not in exclude arrays |
+| `count` | number | Number of remaining elements |
+| `removed_count` | number | Number of elements removed |
 
-### Intersección de Conjuntos
+### Set Intersection
 
 `set.intersection`
 
-Obtener la intersección de dos o más arrays
+Get intersection of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | Arrays para intersectar (array de arrays) |
+| `arrays` | array | Yes | - | Arrays to intersect (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Arrays para intersectar (array de arrays) |
-| `count` | number | Intersección de todos los arrays |
+| `result` | array | Intersection of all arrays |
+| `count` | number | Number of common elements |
 
-### Unión de Conjuntos
+### Set Union
 
 `set.union`
 
-Obtener la unión de dos o más arrays
+Get union of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | Arrays para combinar (array de arrays) |
+| `arrays` | array | Yes | - | Arrays to combine (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Arrays para combinar (array de arrays) |
-| `count` | number | Unión de todos los arrays |
+| `result` | array | Union of all arrays |
+| `count` | number | Number of unique elements |
 
-### Conjunto Único
+### Set Unique
 
 `set.unique`
 
-Eliminar elementos duplicados del array
+Remove duplicate elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Array para eliminar duplicados |
-| `preserve_order` | boolean | No | `True` | Array para eliminar duplicados |
+| `array` | array | Yes | - | Array to deduplicate |
+| `preserve_order` | boolean | No | `True` | Keep first occurrence order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Mantener el orden de la primera aparición |
-| `count` | number | Array con elementos únicos |
-| `duplicates_removed` | number | Array con elementos únicos |
+| `result` | array | Array with unique elements |
+| `count` | number | Number of unique elements |
+| `duplicates_removed` | number | Number of duplicates removed |

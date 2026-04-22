@@ -6,123 +6,123 @@ Number, currency, duration, filesize, and percentage formatting.
 
 | Module | Description |
 |--------|-------------|
-| [통화 포맷](#통화-포맷) | 숫자를 통화로 포맷 |
-| [기간 포맷](#기간-포맷) | 초를 사람이 읽을 수 있는 기간으로 포맷 |
-| [파일 크기 포맷](#파일-크기-포맷) | 바이트를 사람이 읽을 수 있는 파일 크기로 포맷 |
-| [숫자 포맷](#숫자-포맷) | 숫자를 구분자와 소수로 포맷 |
-| [백분율 포맷](#백분율-포맷) | 숫자를 백분율로 포맷 |
+| [Format Currency](#format-currency) | Format numbers as currency |
+| [Format Duration](#format-duration) | Format seconds as human-readable duration |
+| [Format Filesize](#format-filesize) | Format bytes as human-readable file size |
+| [Format Number](#format-number) | Format numbers with separators and decimals |
+| [Format Percentage](#format-percentage) | Format numbers as percentages |
 
 ## Modules
 
-### 통화 포맷
+### Format Currency
 
 `format.currency`
 
-숫자를 통화로 포맷
+Format numbers as currency
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `amount` | number | Yes | - | 포맷할 금액 |
-| `currency` | string | No | `USD` | 포맷할 금액 |
-| `decimal_places` | number | No | `2` | 소수 자릿수 |
-| `symbol_position` | string | No | `before` | 소수 자릿수 |
+| `amount` | number | Yes | - | Amount to format |
+| `currency` | string | No | `USD` | Currency code (USD, EUR, GBP, etc) |
+| `decimal_places` | number | No | `2` | Number of decimal places |
+| `symbol_position` | string | No | `before` | Position of currency symbol |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 포맷된 통화 문자열 |
-| `original` | number | 포맷된 통화 문자열 |
-| `symbol` | string | 포맷된 통화 문자열 |
+| `result` | string | Formatted currency string |
+| `original` | number | Original amount |
+| `symbol` | string | Currency symbol used |
 
-### 기간 포맷
+### Format Duration
 
 `format.duration`
 
-초를 사람이 읽을 수 있는 기간으로 포맷
+Format seconds as human-readable duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | Yes | - | 초 단위 기간 |
-| `format` | string | No | `short` | 초 단위 기간 |
-| `show_zero` | boolean | No | `False` | 0인 단위 표시 |
+| `seconds` | number | Yes | - | Duration in seconds |
+| `format` | string | No | `short` | Output format style |
+| `show_zero` | boolean | No | `False` | Show units that are zero |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 0인 단위 표시 |
-| `original` | number | 포맷된 기간 문자열 |
-| `parts` | object | 포맷된 기간 문자열 |
+| `result` | string | Formatted duration string |
+| `original` | number | Original seconds |
+| `parts` | object | Duration parts (days, hours, minutes, seconds) |
 
-### 파일 크기 포맷
+### Format Filesize
 
 `format.filesize`
 
-바이트를 사람이 읽을 수 있는 파일 크기로 포맷
+Format bytes as human-readable file size
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bytes` | number | Yes | - | 바이트 단위 크기 |
-| `binary` | boolean | No | `False` | 바이트 단위 크기 |
-| `decimal_places` | number | No | `2` | 십진수(KB, MB) 대신 이진수(KiB, MiB) 사용 |
+| `bytes` | number | Yes | - | Size in bytes |
+| `binary` | boolean | No | `False` | Use binary units (KiB, MiB) instead of decimal (KB, MB) |
+| `decimal_places` | number | No | `2` | Number of decimal places |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 소수 자릿수 |
-| `original` | number | 포맷된 파일 크기 문자열 |
-| `unit` | string | 포맷된 파일 크기 문자열 |
-| `value` | number | 원래 바이트 |
+| `result` | string | Formatted file size string |
+| `original` | number | Original bytes |
+| `unit` | string | Unit used |
+| `value` | number | Numeric value in unit |
 
-### 숫자 포맷
+### Format Number
 
 `format.number`
 
-숫자를 구분자와 소수로 포맷
+Format numbers with separators and decimals
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `number` | number | Yes | - | 포맷할 숫자 |
-| `decimal_places` | number | No | `2` | 포맷할 숫자 |
-| `thousand_separator` | string | No | `,` | 소수 자릿수 |
-| `decimal_separator` | string | No | `.` | 천 단위 구분자 |
+| `number` | number | Yes | - | Number to format |
+| `decimal_places` | number | No | `2` | Number of decimal places |
+| `thousand_separator` | string | No | `,` | Separator for thousands |
+| `decimal_separator` | string | No | `.` | Separator for decimals |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 소수 구분자 |
-| `original` | number | 포맷된 숫자 문자열 |
+| `result` | string | Formatted number string |
+| `original` | number | Original number |
 
-### 백분율 포맷
+### Format Percentage
 
 `format.percentage`
 
-숫자를 백분율로 포맷
+Format numbers as percentages
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | number | Yes | - | 백분율로 형식화할 값 |
-| `is_ratio` | boolean | No | `True` | 백분율로 형식화할 값 |
-| `decimal_places` | number | No | `1` | 입력은 0-1 사이의 비율로 100을 곱해야 함 |
-| `include_sign` | boolean | No | `False` | 소수점 자릿수 |
+| `value` | number | Yes | - | Value to format as percentage |
+| `is_ratio` | boolean | No | `True` | Input is a ratio (0-1) that needs to be multiplied by 100 |
+| `decimal_places` | number | No | `1` | Number of decimal places |
+| `include_sign` | boolean | No | `False` | Include + sign for positive values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 양수에 + 기호 포함 |
-| `original` | number | 형식화된 백분율 문자열 |
-| `numeric` | number | 형식화된 백분율 문자열 |
+| `result` | string | Formatted percentage string |
+| `original` | number | Original value |
+| `numeric` | number | Numeric percentage value |

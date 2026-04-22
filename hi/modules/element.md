@@ -6,31 +6,31 @@ DOM element query, attribute, and text extraction.
 
 | Module | Description |
 |--------|-------------|
-| [एट्रिब्यूट प्राप्त करें](#एट्रिब्यूट-प्राप्त-करें) | एलिमेंट प्राप्त करें |
-| [एलिमेंट क्वेरी](#एलिमेंट-क्वेरी) | एलिमेंट के भीतर चाइल्ड एलिमेंट्स खोजें |
-| [टेक्स्ट प्राप्त करें](#टेक्स्ट-प्राप्त-करें) | एलिमेंट प्राप्त करें |
+| [Get Attribute](#get-attribute) | Get element's attribute value |
+| [Query Element](#query-element) | Find child elements within element |
+| [Get Text](#get-text) | Get element's text content |
 
 ## Modules
 
-### एट्रिब्यूट प्राप्त करें
+### Get Attribute
 
 `element.attribute`
 
-एलिमेंट प्राप्त करें
+Get element's attribute value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | एलिमेंट ID (UUID) |
-| `name` | string | Yes | - | एलिमेंट ID (UUID) |
+| `element_id` | string | Yes | - | Element ID (UUID) |
+| `name` | string | Yes | - | Attribute name (e.g. href, src, class) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | एट्रिब्यूट नाम (जैसे href, src, class) |
-| `value` | string | ऑपरेशन स्थिति (सफलता/त्रुटि) |
+| `status` | string | Operation status (success/error) |
+| `value` | string | The returned value |
 
 **Example:** Get href attribute
 
@@ -39,28 +39,28 @@ element_id: ${link_element}
 name: href
 ```
 
-### एलिमेंट क्वेरी
+### Query Element
 
 `element.query`
 
-एलिमेंट के भीतर चाइल्ड एलिमेंट्स खोजें
+Find child elements within element
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | पैरेंट एलिमेंट ID (UUID) |
-| `selector` | string | Yes | - | पैरेंट एलिमेंट ID (UUID) |
-| `all` | boolean | No | `False` | चाइल्ड एलिमेंट्स खोजने के लिए CSS सेलेक्टर |
+| `element_id` | string | Yes | - | Parent element ID (UUID) |
+| `selector` | string | Yes | - | CSS selector to find child elements |
+| `all` | boolean | No | `False` | Whether to find all matching elements (default: false, find first only) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | सभी मेल खाने वाले एलिमेंट्स खोजें (डिफ़ॉल्ट: false, केवल पहला खोजें) |
-| `element_id` | string | ऑपरेशन स्थिति (सफलता/त्रुटि) |
-| `element_ids` | array | ऑपरेशन स्थिति (सफलता/त्रुटि) |
-| `count` | number | पाया गया एलिमेंट ID (सिंगल मोड) |
+| `status` | string | Operation status (success/error) |
+| `element_id` | string | Found element ID (single mode) |
+| `element_ids` | array | List of found element IDs (all mode) |
+| `count` | number | Number of elements found |
 
 **Example:** Find child element
 
@@ -69,24 +69,24 @@ element_id: ${result_item}
 selector: h3
 ```
 
-### टेक्स्ट प्राप्त करें
+### Get Text
 
 `element.text`
 
-एलिमेंट प्राप्त करें
+Get element's text content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | एलिमेंट ID (UUID) |
+| `element_id` | string | Yes | - | Element ID (UUID) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | एलिमेंट ID (UUID) |
-| `text` | string | एलिमेंट ID (UUID) |
+| `status` | string | Operation status (success/error) |
+| `text` | string | Text content |
 
 **Example:** Get element text
 

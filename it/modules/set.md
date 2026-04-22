@@ -6,89 +6,89 @@ Set operations: union, intersection, difference, unique.
 
 | Module | Description |
 |--------|-------------|
-| [Differenza Insieme](#differenza-insieme) | Ottieni elementi nel primo array ma non negli altri |
-| [Intersezione Insieme](#intersezione-insieme) | Ottieni l'intersezione di due o più array |
-| [Unione Insieme](#unione-insieme) | Ottieni l'unione di due o più array |
-| [Unico Insieme](#unico-insieme) | Rimuovi elementi duplicati dall'array |
+| [Set Difference](#set-difference) | Get elements in first array but not in others |
+| [Set Intersection](#set-intersection) | Get intersection of two or more arrays |
+| [Set Union](#set-union) | Get union of two or more arrays |
+| [Set Unique](#set-unique) | Remove duplicate elements from array |
 
 ## Modules
 
-### Differenza Insieme
+### Set Difference
 
 `set.difference`
 
-Ottieni elementi nel primo array ma non negli altri
+Get elements in first array but not in others
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `source` | array | Yes | - | Array sorgente |
-| `exclude` | array | Yes | - | Array sorgente |
+| `source` | array | Yes | - | Source array |
+| `exclude` | array | Yes | - | Arrays of elements to exclude |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Array di elementi da escludere |
-| `count` | number | Elementi nella sorgente ma non negli array da escludere |
-| `removed_count` | number | Elementi nella sorgente ma non negli array da escludere |
+| `result` | array | Elements in source but not in exclude arrays |
+| `count` | number | Number of remaining elements |
+| `removed_count` | number | Number of elements removed |
 
-### Intersezione Insieme
+### Set Intersection
 
 `set.intersection`
 
-Ottieni l'intersezione di due o più array
+Get intersection of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | Array da intersecare (array di array) |
+| `arrays` | array | Yes | - | Arrays to intersect (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Array da intersecare (array di array) |
-| `count` | number | Intersezione di tutti gli array |
+| `result` | array | Intersection of all arrays |
+| `count` | number | Number of common elements |
 
-### Unione Insieme
+### Set Union
 
 `set.union`
 
-Ottieni l'unione di due o più array
+Get union of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | Array da combinare (array di array) |
+| `arrays` | array | Yes | - | Arrays to combine (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Array da combinare (array di array) |
-| `count` | number | Unione di tutti gli array |
+| `result` | array | Union of all arrays |
+| `count` | number | Number of unique elements |
 
-### Unico Insieme
+### Set Unique
 
 `set.unique`
 
-Rimuovi elementi duplicati dall'array
+Remove duplicate elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Array da deduplicare |
-| `preserve_order` | boolean | No | `True` | Array da deduplicare |
+| `array` | array | Yes | - | Array to deduplicate |
+| `preserve_order` | boolean | No | `True` | Keep first occurrence order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Mantieni l'ordine della prima occorrenza |
-| `count` | number | Array con elementi unici |
-| `duplicates_removed` | number | Array con elementi unici |
+| `result` | array | Array with unique elements |
+| `count` | number | Number of unique elements |
+| `duplicates_removed` | number | Number of duplicates removed |

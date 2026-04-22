@@ -6,53 +6,53 @@ AI model integration, text generation, embeddings, and autonomous agents.
 
 | Module | Description |
 |--------|-------------|
-| [自律型エージェント](#自律型エージェント) | メモリと目標指向の動作を持つ自律型AIエージェント |
-| [チェーンエージェント](#チェーンエージェント) | 複数のステップを持つ順次AI処理チェーン |
-| [ツール使用エージェント](#ツール使用エージェント) | ツールや関数を呼び出せるAIエージェント |
-| [テキスト埋め込み](#テキスト埋め込み) | AIモデルを使ってテキストからベクトル埋め込みを生成 |
-| [AI抽出](#ai抽出) | AIを使ってテキストから構造化データを抽出 |
-| [ローカルOllamaチャット](#ローカルollamaチャット) | Ollama経由でローカルLLMとチャットする（完全オフライン） |
-| [AIメモリ](#aiメモリ) | AIエージェント用の会話メモリ |
-| [エンティティメモリ](#エンティティメモリ) | 会話からエンティティ（人、場所、概念）を抽出して追跡する |
-| [Redisメモリ](#redisメモリ) | Redisストレージを使用した永続的な会話メモリ |
-| [ベクターメモリ](#ベクターメモリ) | 関連コンテキスト取得のためのベクター埋め込みを使用したセマンティックメモリ |
-| [AIモデル](#aiモデル) | AIエージェント用のLLMモデル設定 |
+| [Autonomous Agent](#autonomous-agent) | Self-directed AI agent with memory and goal-oriented behavior |
+| [Chain Agent](#chain-agent) | Sequential AI processing chain with multiple steps |
+| [Tool Use Agent](#tool-use-agent) | AI Agent that can call tools/functions |
+| [AI Embed](#ai-embed) | Generate embeddings from text |
+| [AI Extract](#ai-extract) | Extract structured data from text using LLM |
+| [Local Ollama Chat](#local-ollama-chat) | Chat with local LLM via Ollama (completely offline) |
+| [AI Memory](#ai-memory) | Conversation memory for AI Agent |
+| [Entity Memory](#entity-memory) | Extract and track entities (people, places, concepts) from conversations |
+| [Redis Memory](#redis-memory) | Persistent conversation memory using Redis storage |
+| [Vector Memory](#vector-memory) | Semantic memory using vector embeddings for relevant context retrieval |
+| [AI Model](#ai-model) | LLM model configuration for AI Agent |
 | [AI Tool](#ai-tool) | Expose a module as a tool for AI Agent |
-| [ビジョン分析](#ビジョン分析) | AIビジョンモデルを使って画像を分析 |
-| [Claudeチャット](#claudeチャット) | Anthropic Claude AIにチャットメッセージを送信して応答を取得する |
-| [Google Geminiチャット](#google-geminiチャット) | Google Gemini AIにチャットメッセージを送信して応答を取得する |
-| [OpenAIチャット](#openaiチャット) | OpenAI GPTモデルにチャットメッセージを送信する |
-| [DALL-E画像生成](#dall-e画像生成) | DALL-Eを使用して画像を生成する |
-| [AIエージェント](#aiエージェント) | マルチポート接続（モデル、メモリ、ツール）を持つ自律型AIエージェント |
+| [Vision Analyze](#vision-analyze) | Analyze images using LLM vision capabilities |
+| [Claude Chat](#claude-chat) | Send a chat message to Anthropic Claude AI and get a response |
+| [Google Gemini Chat](#google-gemini-chat) | Send a chat message to Google Gemini AI and get a response |
+| [OpenAI Chat](#openai-chat) | Send a chat message to OpenAI GPT models |
+| [DALL-E Image Generation](#dall-e-image-generation) | Generate images using DALL-E |
+| [AI Agent](#ai-agent) | Autonomous AI agent with multi-port connections (model, memory, tools) |
 
 ## Modules
 
-### 自律型エージェント
+### Autonomous Agent
 
 `agent.autonomous`
 
-メモリと目標指向の動作を持つ自律型AIエージェント
+Self-directed AI agent with memory and goal-oriented behavior
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `goal` | string | Yes | - | エージェントが達成する目標 |
-| `context` | string | No | - | エージェントが達成する目標 |
-| `max_iterations` | number | No | `5` | 追加のコンテキストまたは制約 |
-| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | 最大推論ステップ数 |
-| `model` | string | No | `gpt-4o` | モデル名（例: gpt-4, llama2, mistral） |
-| `ollama_url` | string | No | `http://localhost:11434` | モデル名（例: gpt-4, llama2, mistral） |
-| `temperature` | number | No | `0.7` | OllamaサーバーURL（ollamaプロバイダーのみ） |
+| `goal` | string | Yes | - | The goal for the agent to achieve |
+| `context` | string | No | - | Additional context or constraints |
+| `max_iterations` | number | No | `5` | Maximum reasoning steps |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Choose LLM provider (cloud or local) |
+| `model` | string | No | `gpt-4o` | Model name (e.g., gpt-4, llama2, mistral) |
+| `ollama_url` | string | No | `http://localhost:11434` | Ollama server URL (only for ollama provider) |
+| `temperature` | number | No | `0.7` | Creativity level (0-2) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 創造性レベル（0-2） |
-| `thoughts` | array | 操作結果 |
-| `iterations` | number | 操作結果 |
-| `goal_achieved` | boolean | エージェントの推論ステップ |
+| `result` | string | The operation result |
+| `thoughts` | array | Agent reasoning steps |
+| `iterations` | number | The iterations |
+| `goal_achieved` | boolean | The goal achieved |
 
 **Example:** Research task
 
@@ -70,30 +70,30 @@ context: PostgreSQL database with 10M records
 max_iterations: 10
 ```
 
-### チェーンエージェント
+### Chain Agent
 
 `agent.chain`
 
-複数のステップを持つ順次AI処理チェーン
+Sequential AI processing chain with multiple steps
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input` | string | Yes | - | チェーンの初期入力 |
-| `chain_steps` | array | Yes | - | チェーンの初期入力 |
-| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | 処理ステップの配列（各ステップはプロンプトテンプレート） |
-| `model` | string | No | `gpt-4o` | モデル名（例: gpt-4, llama2, mistral） |
-| `ollama_url` | string | No | `http://localhost:11434` | モデル名（例: gpt-4, llama2, mistral） |
-| `temperature` | number | No | `0.7` | OllamaサーバーURL（ollamaプロバイダーのみ） |
+| `input` | string | Yes | - | Initial input for the chain |
+| `chain_steps` | array | Yes | - | Array of processing steps (each is a prompt template) |
+| `llm_provider` | select (`openai`, `anthropic`, `gemini`, `ollama`) | No | `openai` | Choose LLM provider (cloud or local) |
+| `model` | string | No | `gpt-4o` | Model name (e.g., gpt-4, llama2, mistral) |
+| `ollama_url` | string | No | `http://localhost:11434` | Ollama server URL (only for ollama provider) |
+| `temperature` | number | No | `0.7` | Creativity level (0-2) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 創造性レベル（0-2） |
-| `intermediate_results` | array | 操作結果 |
-| `steps_completed` | number | 操作結果 |
+| `result` | string | The operation result |
+| `intermediate_results` | array | Results from each step in the chain |
+| `steps_completed` | number | The steps completed |
 
 **Example:** Content pipeline
 
@@ -110,32 +110,32 @@ input: User behavior data shows 60% bounce rate
 chain_steps: ["Analyze what might cause this issue: {input}", "Suggest 3 solutions based on: {previous}", "Create an action plan from: {previous}"]
 ```
 
-### ツール使用エージェント
+### Tool Use Agent
 
 `agent.tool_use`
 
-ツールや関数を呼び出せるAIエージェント
+AI Agent that can call tools/functions
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | エージェントの目標やタスク |
-| `tools` | array | Yes | - | ツール定義のリスト [{name, description, parameters}] |
-| `provider` | select (`openai`, `anthropic`) | No | `openai` | エージェントのLLMプロバイダー |
-| `model` | string | No | `gpt-4o` | 使用するモデル |
-| `api_key` | string | No | - | APIキー（環境変数にフォールバック） |
-| `max_iterations` | number | No | `10` | ツール呼び出しラウンドの最大数 |
-| `system_prompt` | string | No | - | エージェントを導くためのオプションのシステムプロンプト |
+| `prompt` | string | Yes | - | The goal or task for the agent |
+| `tools` | array | Yes | - | List of tool definitions [{name, description, parameters}] |
+| `provider` | select (`openai`, `anthropic`) | No | `openai` | LLM provider for the agent |
+| `model` | string | No | `gpt-4o` | Model to use |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `max_iterations` | number | No | `10` | Maximum number of tool call rounds |
+| `system_prompt` | string | No | - | Optional system prompt to guide the agent |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | エージェントの最終応答 |
-| `tool_calls` | array | 実行中に行われたすべてのツール呼び出し |
-| `iterations` | number | 完了したイテレーション数 |
-| `model` | string | 使用されたモデル |
+| `result` | string | The agent final response |
+| `tool_calls` | array | All tool calls made during execution |
+| `iterations` | number | Number of iterations completed |
+| `model` | string | Model used |
 
 **Example:** File Processing Agent
 
@@ -147,30 +147,30 @@ model: gpt-4o
 max_iterations: 5
 ```
 
-### テキスト埋め込み
+### AI Embed
 
 `ai.embed`
 
-AIモデルを使ってテキストからベクトル埋め込みを生成
+Generate embeddings from text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 埋め込み対象のテキスト |
-| `provider` | select (`openai`, `local`) | No | `openai` | 埋め込み用AIプロバイダー |
-| `model` | string | No | `text-embedding-3-small` | 使用する埋め込みモデル |
-| `api_key` | string | No | - | APIキー（環境変数にフォールバック） |
-| `dimensions` | number | No | - | 埋め込み次元（対応モデルのみ） |
+| `text` | string | Yes | - | Single text or JSON array of texts to embed |
+| `provider` | select (`openai`, `local`) | No | `openai` | Embedding provider |
+| `model` | string | No | `text-embedding-3-small` | Embedding model to use |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `dimensions` | number | No | - | Output embedding dimensions (for supported models like text-embedding-3-*) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `embeddings` | array | ベクトル埋め込み配列 |
-| `model` | string | 埋め込みに使用されたモデル |
-| `dimensions` | number | 埋め込みベクトルの次元数 |
-| `token_count` | number | 処理されたトークン数 |
+| `embeddings` | array | List of embedding vectors |
+| `model` | string | Model used for embedding |
+| `dimensions` | number | Dimensions of each embedding vector |
+| `token_count` | number | Total tokens consumed |
 
 **Example:** Single Text Embedding
 
@@ -189,31 +189,31 @@ model: text-embedding-3-small
 dimensions: 256
 ```
 
-### AI抽出
+### AI Extract
 
 `ai.extract`
 
-AIを使ってテキストから構造化データを抽出
+Extract structured data from text using LLM
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | データを抽出するテキスト |
-| `schema` | object | Yes | - | 抽出するフィールドを定義するJSONスキーマ |
-| `instructions` | string | No | - | 追加の抽出指示 |
-| `provider` | select (`openai`, `anthropic`) | No | `openai` | 使用するAIプロバイダー |
-| `model` | string | No | `gpt-4o-mini` | 抽出に使用するモデル |
-| `api_key` | string | No | - | APIキー（環境変数にフォールバック） |
-| `temperature` | number | No | `0` | サンプリング温度（0-2） |
+| `text` | string | Yes | - | The text to extract structured data from |
+| `schema` | object | Yes | - | JSON schema describing the desired output structure |
+| `instructions` | string | No | - | Additional extraction instructions for the LLM |
+| `provider` | select (`openai`, `anthropic`) | No | `openai` | LLM provider |
+| `model` | string | No | `gpt-4o-mini` | Model to use for extraction |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `temperature` | number | No | `0` | LLM temperature (0 = deterministic) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted` | object | 抽出された構造化データ |
-| `model` | string | 抽出に使用されたモデル |
-| `raw_response` | string | 生のモデル応答 |
+| `extracted` | object | The extracted structured data |
+| `model` | string | Model used for extraction |
+| `raw_response` | string | Raw LLM response text |
 
 **Example:** Extract Contact Info
 
@@ -232,34 +232,34 @@ schema: {"type": "object", "properties": {"invoice_number": {"type": "string"}, 
 instructions: Extract all invoice fields. Parse amounts as numbers.
 ```
 
-### ローカルOllamaチャット
+### Local Ollama Chat
 
 `ai.local_ollama.chat`
 
-Ollama経由でローカルLLMとチャットする（完全オフライン）
+Chat with local LLM via Ollama (completely offline)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | ローカルLLMに送信するメッセージ |
-| `model` | select (`llama2`, `llama2:13b`, `llama2:70b`, `mistral`, `mixtral`, `codellama`, `codellama:13b`, `phi`, `neural-chat`, `starling-lm`) | No | `llama2` | 使用するモデル名 |
-| `temperature` | number | No | `0.7` | サンプリング温度（0-2） |
-| `system_message` | string | No | - | システムロールメッセージ（任意） |
-| `ollama_url` | string | No | `http://localhost:11434` | OllamaサーバーURL |
-| `max_tokens` | number | No | - | 応答の最大トークン数（任意、モデルに依存） |
+| `prompt` | string | Yes | - | The message to send to the local LLM |
+| `model` | select (`llama2`, `llama2:13b`, `llama2:70b`, `mistral`, `mixtral`, `codellama`, `codellama:13b`, `phi`, `neural-chat`, `starling-lm`) | No | `llama2` | Ollama model to use |
+| `temperature` | number | No | `0.7` | Sampling temperature (0-2) |
+| `system_message` | string | No | - | System role message (optional) |
+| `ollama_url` | string | No | `http://localhost:11434` | Ollama server URL |
+| `max_tokens` | number | No | - | Maximum tokens in response (optional, depends on model) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `response` | string | LLMからの応答 |
-| `model` | string | 使用されたモデル |
-| `context` | array | フォローアップリクエスト用の会話コンテキスト |
-| `total_duration` | number | 合計処理時間 |
-| `load_duration` | number | モデル読み込み時間 |
-| `prompt_eval_count` | number | プロンプト評価トークン数 |
-| `eval_count` | number | 評価トークン数 |
+| `response` | string | Response from the operation |
+| `model` | string | Model name or identifier |
+| `context` | array | Conversation context for follow-up requests |
+| `total_duration` | number | Total processing duration |
+| `load_duration` | number | Model loading duration |
+| `prompt_eval_count` | number | Number of prompt tokens evaluated |
+| `eval_count` | number | Number of tokens generated |
 
 **Example:** Simple local chat
 
@@ -285,29 +285,29 @@ model: mistral
 temperature: 0.7
 ```
 
-### AIメモリ
+### AI Memory
 
 `ai.memory`
 
-AIエージェント用の会話メモリ
+Conversation memory for AI Agent
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `memory_type` | select (`buffer`, `window`, `summary`) | Yes | `buffer` | メモリストレージのタイプ |
-| `window_size` | number | No | `10` | 保持する直近のメッセージ数（ウィンドウメモリ用） |
-| `session_id` | string | No | - | この会話セッションの一意識別子 |
-| `initial_messages` | array | No | `[]` | プリロードされた会話履歴 |
+| `memory_type` | select (`buffer`, `window`, `summary`) | Yes | `buffer` | Type of memory storage |
+| `window_size` | number | No | `10` | Number of recent messages to keep (for window memory) |
+| `session_id` | string | No | - | Unique identifier for this conversation session |
+| `initial_messages` | array | No | `[]` | Pre-loaded conversation history |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | メモリタイプ |
-| `session_id` | string | セッション識別子 |
-| `messages` | array | プリロードされた会話履歴 |
-| `config` | object | 設定情報 |
+| `memory_type` | string | Type of memory |
+| `session_id` | string | Session identifier |
+| `messages` | array | Current message history |
+| `config` | object | Full memory configuration |
 
 **Example:** Simple Buffer Memory
 
@@ -322,11 +322,11 @@ memory_type: window
 window_size: 5
 ```
 
-### エンティティメモリ
+### Entity Memory
 
 `ai.memory.entity`
 
-会話からエンティティ（人、場所、概念）を抽出して追跡する
+Extract and track entities (people, places, concepts) from conversations
 
 **Parameters:**
 
@@ -342,11 +342,11 @@ window_size: 5
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | メモリタイプ（entity） |
-| `session_id` | string | セッション識別子 |
-| `entities` | object | タイプ別の追跡されたエンティティ |
-| `relationships` | array | エンティティ間の関係 |
-| `config` | object | 設定情報 |
+| `memory_type` | string | Type of memory (entity) |
+| `session_id` | string | Session identifier |
+| `entities` | object | Tracked entities by type |
+| `relationships` | array | Entity relationships |
+| `config` | object | Full memory configuration |
 
 **Example:** People & Organizations
 
@@ -363,11 +363,11 @@ track_relationships: true
 max_entities: 200
 ```
 
-### Redisメモリ
+### Redis Memory
 
 `ai.memory.redis`
 
-Redisストレージを使用した永続的な会話メモリ
+Persistent conversation memory using Redis storage
 
 **Parameters:**
 
@@ -384,11 +384,11 @@ Redisストレージを使用した永続的な会話メモリ
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | メモリタイプ（redis） |
-| `session_id` | string | セッション識別子 |
-| `messages` | array | 読み込まれたメッセージ履歴 |
-| `connected` | boolean | Redis接続状態 |
-| `config` | object | 設定情報 |
+| `memory_type` | string | Type of memory (redis) |
+| `session_id` | string | Session identifier |
+| `messages` | array | Loaded message history |
+| `connected` | boolean | Redis connection status |
+| `config` | object | Full memory configuration |
 
 **Example:** Local Redis
 
@@ -407,11 +407,11 @@ ttl_seconds: 86400
 max_messages: 500
 ```
 
-### ベクターメモリ
+### Vector Memory
 
 `ai.memory.vector`
 
-関連コンテキスト取得のためのベクター埋め込みを使用したセマンティックメモリ
+Semantic memory using vector embeddings for relevant context retrieval
 
 **Parameters:**
 
@@ -427,10 +427,10 @@ max_messages: 500
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `memory_type` | string | メモリタイプ（vector） |
-| `session_id` | string | セッション識別子 |
-| `embedding_model` | string | 使用された埋め込みモデル |
-| `config` | object | 設定情報 |
+| `memory_type` | string | Type of memory (vector) |
+| `session_id` | string | Session identifier |
+| `embedding_model` | string | Embedding model used |
+| `config` | object | Full memory configuration |
 
 **Example:** Default Vector Memory
 
@@ -447,11 +447,11 @@ top_k: 10
 similarity_threshold: 0.85
 ```
 
-### AIモデル
+### AI Model
 
 `ai.model`
 
-AIエージェント用のLLMモデル設定
+LLM model configuration for AI Agent
 
 **Parameters:**
 
@@ -462,15 +462,15 @@ AIエージェント用のLLMモデル設定
 | `temperature` | number | No | `0.7` | Creativity level (0=deterministic, 1=creative) |
 | `api_key` | string | No | - | API key (leave empty to use environment variable) |
 | `base_url` | string | No | - | Custom API endpoint URL |
-| `max_tokens` | number | No | `4096` | 応答の最大トークン数 |
+| `max_tokens` | number | No | `4096` | Maximum tokens in response |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `provider` | string | LLMプロバイダー名 |
-| `model` | string | モデル名 |
-| `config` | object | 設定情報 |
+| `provider` | string | LLM provider name |
+| `model` | string | Model identifier |
+| `config` | object | Full model configuration |
 
 **Example:** OpenAI GPT-4
 
@@ -519,33 +519,33 @@ module_id: http.request
 module_id: data.json_parse
 ```
 
-### ビジョン分析
+### Vision Analyze
 
 `ai.vision.analyze`
 
-AIビジョンモデルを使って画像を分析
+Analyze images using LLM vision capabilities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | No | - | 画像ファイルのローカルパス |
-| `image_url` | string | No | - | 分析する画像のURL |
-| `prompt` | string | No | `Describe this image in detail` | 画像について分析する内容や質問 |
-| `provider` | select (`openai`, `anthropic`) | No | `openai` | ビジョン分析のAIプロバイダー |
-| `model` | string | No | `gpt-4o` | 使用するビジョンモデル |
-| `api_key` | string | No | - | APIキー（環境変数にフォールバック） |
-| `max_tokens` | number | No | `1000` | 応答の最大トークン数 |
-| `detail` | select (`low`, `high`, `auto`) | No | `auto` | 画像の詳細レベル（低/高/自動） |
+| `image_path` | string | No | - | Path to the image file on disk |
+| `image_url` | string | No | - | URL of the image (alternative to image_path) |
+| `prompt` | string | No | `Describe this image in detail` | What to analyze in the image |
+| `provider` | select (`openai`, `anthropic`) | No | `openai` | LLM provider for vision analysis |
+| `model` | string | No | `gpt-4o` | Model to use for vision analysis |
+| `api_key` | string | No | - | API key (falls back to environment variable) |
+| `max_tokens` | number | No | `1000` | Maximum tokens in response |
+| `detail` | select (`low`, `high`, `auto`) | No | `auto` | Image detail level for analysis |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `analysis` | string | 画像のAI分析 |
-| `model` | string | 分析に使用されたモデル |
-| `provider` | string | 分析に使用されたプロバイダー |
-| `tokens_used` | number | 使用されたトークン数 |
+| `analysis` | string | The vision analysis result |
+| `model` | string | Model used for analysis |
+| `provider` | string | Provider used |
+| `tokens_used` | number | Total tokens consumed |
 
 **Example:** Analyze Screenshot
 
@@ -565,31 +565,31 @@ provider: anthropic
 model: claude-sonnet-4-20250514
 ```
 
-### Claudeチャット
+### Claude Chat
 
 `api.anthropic.chat`
 
-Anthropic Claude AIにチャットメッセージを送信して応答を取得する
+Send a chat message to Anthropic Claude AI and get a response
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Anthropic APIキー（デフォルト: env.ANTHROPIC_API_KEY） |
-| `model` | string | No | `claude-sonnet-4-6` | 使用するClaudeモデル |
-| `messages` | array | Yes | - | roleとcontentを持つメッセージオブジェクトの配列 |
-| `max_tokens` | number | No | `1024` | 応答の最大トークン数 |
-| `temperature` | number | No | `1.0` | サンプリング温度（0-1）。高い値ほど出力がランダムになる |
-| `system` | string | No | - | Claudeの動作を導くシステムプロンプト |
+| `api_key` | string | No | - | Anthropic API key (defaults to env.ANTHROPIC_API_KEY) |
+| `model` | string | No | `claude-sonnet-4-6` | Claude model to use |
+| `messages` | array | Yes | - | Array of message objects with role and content |
+| `max_tokens` | number | No | `1024` | Maximum tokens in response |
+| `temperature` | number | No | `1.0` | Sampling temperature (0-1). Higher values make output more random |
+| `system` | string | No | - | System prompt to guide Claude behavior |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `content` | string | Claudeの応答テキスト |
-| `model` | string | 応答に使用されたモデル |
-| `stop_reason` | string | モデルが生成を停止した理由（end_turn、max_tokensなど） |
-| `usage` | object | トークン使用統計 |
+| `content` | string | Claude response text |
+| `model` | string | Model used for response |
+| `stop_reason` | string | Why the model stopped generating (end_turn, max_tokens, etc) |
+| `usage` | object | Token usage statistics |
 
 **Example:** Simple question
 
@@ -606,21 +606,21 @@ messages: [{"role": "user", "content": "Summarize this article: ${article_text}"
 max_tokens: 500
 ```
 
-### Google Geminiチャット
+### Google Gemini Chat
 
 `api.google_gemini.chat`
 
-Google Gemini AIにチャットメッセージを送信して応答を取得する
+Send a chat message to Google Gemini AI and get a response
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Google AI APIキー（デフォルト: env.GOOGLE_AI_API_KEY） |
-| `model` | string | No | `gemini-2.5-pro` | 使用するGeminiモデル |
-| `prompt` | string | Yes | - | Geminiに送信するテキストプロンプト |
-| `temperature` | number | No | `1.0` | ランダム性の制御（0-2）。高い値ほど出力がランダムになる |
-| `max_output_tokens` | number | No | `2048` | 応答の最大トークン数 |
+| `api_key` | string | No | - | Google AI API key (defaults to env.GOOGLE_AI_API_KEY) |
+| `model` | string | No | `gemini-2.5-pro` | Gemini model to use |
+| `prompt` | string | Yes | - | The text prompt to send to Gemini |
+| `temperature` | number | No | `1.0` | Controls randomness (0-2). Higher values make output more random |
+| `max_output_tokens` | number | No | `2048` | Maximum number of tokens in response |
 
 **Output:**
 
@@ -644,29 +644,29 @@ temperature: 0.7
 max_output_tokens: 500
 ```
 
-### OpenAIチャット
+### OpenAI Chat
 
 `api.openai.chat`
 
-OpenAI GPTモデルにチャットメッセージを送信する
+Send a chat message to OpenAI GPT models
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | GPTに送信するメッセージ |
-| `model` | select (`gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `o3`, `o3-mini`, `o4-mini`, `gpt-4-turbo-preview`) | No | `gpt-4o` | 使用するGPTモデル |
-| `temperature` | number | No | `0.7` | サンプリング温度（0-2） |
-| `max_tokens` | number | No | `1000` | 応答の最大トークン数 |
-| `system_message` | string | No | - | システムロールメッセージ（任意） |
+| `prompt` | string | Yes | - | The message to send to GPT |
+| `model` | select (`gpt-4o`, `gpt-4o-mini`, `gpt-4.1`, `gpt-4.1-mini`, `o3`, `o3-mini`, `o4-mini`, `gpt-4-turbo-preview`) | No | `gpt-4o` | OpenAI model to use |
+| `temperature` | number | No | `0.7` | Sampling temperature (0-2) |
+| `max_tokens` | number | No | `1000` | Maximum tokens in response |
+| `system_message` | string | No | - | System role message (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `response` | string | GPTからの応答 |
-| `model` | string | 使用されたモデル |
-| `usage` | object | トークン使用統計 |
+| `response` | string | Response from the operation |
+| `model` | string | Model name or identifier |
+| `usage` | object | Token usage statistics |
 
 **Example:** Simple chat
 
@@ -684,21 +684,21 @@ temperature: 0.2
 system_message: You are a Python programming expert
 ```
 
-### DALL-E画像生成
+### DALL-E Image Generation
 
 `api.openai.image`
 
-DALL-Eを使用して画像を生成する
+Generate images using DALL-E
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt` | string | Yes | - | 生成する画像の説明 |
-| `size` | select (`256x256`, `512x512`, `1024x1024`, `1792x1024`, `1024x1792`) | No | `1024x1024` | 画像サイズ |
-| `model` | select (`dall-e-3`, `dall-e-2`) | No | `dall-e-3` | DALL-Eモデルバージョン |
-| `quality` | select (`standard`, `hd`) | No | `standard` | 画像品質（DALL-E 3のみ） |
-| `n` | number | No | `1` | 生成する画像の数（1-10） |
+| `prompt` | string | Yes | - | Description of the image to generate |
+| `size` | select (`256x256`, `512x512`, `1024x1024`, `1792x1024`, `1024x1792`) | No | `1024x1024` | Image size |
+| `model` | select (`dall-e-3`, `dall-e-2`) | No | `dall-e-3` | DALL-E model version |
+| `quality` | select (`standard`, `hd`) | No | `standard` | Image quality (DALL-E 3 only) |
+| `n` | number | No | `1` | Number of images to generate (1-10) |
 
 **Output:**
 
@@ -725,32 +725,32 @@ model: dall-e-2
 n: 3
 ```
 
-### AIエージェント
+### AI Agent
 
 `llm.agent`
 
-マルチポート接続（モデル、メモリ、ツール）を持つ自律型AIエージェント
+Autonomous AI agent with multi-port connections (model, memory, tools)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `prompt_source` | select (`manual`, `auto`) | No | `manual` | タスクプロンプトの取得元 |
-| `task` | string | No | - | エージェントが完了するタスク。上流データを参照するには{<!-- -->{input}<!-- -->}を使用。 |
-| `prompt_path` | string | No | `{<!-- -->{input}<!-- -->}` | 入力からプロンプトを抽出するパス（例: {<!-- -->{input.message}<!-- -->}） |
-| `join_strategy` | select (`first`, `newline`, `separator`, `json`) | No | `first` | 配列入力の処理方法 |
+| `prompt_source` | select (`manual`, `auto`) | No | `manual` | Where to get the task prompt from |
+| `task` | string | No | - | The task for the agent to complete. Use {<!-- -->{input}<!-- -->} to reference upstream data. |
+| `prompt_path` | string | No | `{<!-- -->{input}<!-- -->}` | Path to extract prompt from input (e.g., {<!-- -->{input.message}<!-- -->}) |
+| `join_strategy` | select (`first`, `newline`, `separator`, `json`) | No | `first` | How to handle array inputs |
 | `join_separator` | string | No | `
 
 ---
 
-` | 配列項目を結合するセパレータ |
-| `max_input_size` | number | No | `10000` | プロンプトの最大文字数（オーバーフロー防止） |
+` | Separator for joining array items |
+| `max_input_size` | number | No | `10000` | Maximum characters for prompt (prevents overflow) |
 | `agent_type` | select (`tools`, `react`) | No | `tools` | Reasoning strategy for the agent |
-| `system_prompt` | string | No | `You are a helpful AI agent. Use the available tools to complete the task. Think step by step.` | エージェントの動作に関する指示 |
+| `system_prompt` | string | No | `You are a helpful AI agent. Use the available tools to complete the task. Think step by step.` | Instructions for the agent behavior |
 | `response_format` | select (`text`, `json`, `json_schema`) | No | `text` | Expected format of the final answer |
 | `output_schema` | object | No | `{}` | JSON Schema the final answer must match (for json_schema format) |
-| `context` | object | No | `{}` | モジュールIDのリスト（ツールノード接続の代替） |
-| `max_iterations` | number | No | `10` | エージェント用の追加コンテキストデータ |
+| `context` | object | No | `{}` | Additional context data for the agent |
+| `max_iterations` | number | No | `10` | Maximum number of tool calls |
 | `provider` | select (`openai`, `anthropic`, `google`, `groq`, `deepseek`, `ollama`, `custom`) | No | `openai` | AI model provider |
 | `model` | string | No | `gpt-4o` | Specific model to use |
 | `api_key` | string | No | - | API key (leave empty to use environment variable) |
@@ -761,11 +761,11 @@ n: 3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | エージェントが正常に完了したかどうか |
-| `result` | string | エージェントが正常に完了したかどうか |
-| `steps` | array | エージェントが正常に完了したかどうか |
-| `tool_calls` | number | エージェントからの最終結果 |
-| `tokens_used` | number | エージェントが実行したステップのリスト |
+| `ok` | boolean | Whether the agent completed successfully |
+| `result` | string | The final result from the agent |
+| `steps` | array | List of steps the agent took |
+| `tool_calls` | number | Number of tools called |
+| `tokens_used` | number | Total tokens consumed |
 
 **Example:** Web Research Agent
 

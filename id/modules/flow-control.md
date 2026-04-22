@@ -6,60 +6,60 @@ Branching, loops, parallelism, subflows, triggers, and error handling.
 
 | Module | Description |
 |--------|-------------|
-| [Proses Batch](#proses-batch) | Proses item dalam batch dengan ukuran yang dapat dikonfigurasi |
-| [Cabang](#cabang) | Percabangan bersyarat berdasarkan evaluasi ekspresi |
-| [Breakpoint](#breakpoint) | Jeda eksekusi workflow untuk persetujuan atau input manusia |
-| [Pemutus Sirkuit](#pemutus-sirkuit) | Pola pemutus sirkuit untuk mencegah kegagalan berantai |
-| [Container](#container) | Container subflow tertanam untuk mengorganisir workflow kompleks |
-| [Debounce](#debounce) | Menunda eksekusi untuk mencegah panggilan berulang cepat |
-| [Akhir](#akhir) | Node akhir workflow eksplisit |
-| [Penanganan Error](#penanganan-error) | Menangkap dan menangani error dari node hulu |
-| [Pemicu Alur Kerja Error](#pemicu-alur-kerja-error) | Titik masuk untuk alur kerja error - dipicu saat alur kerja lain gagal |
-| [Untuk Setiap](#untuk-setiap) | Iterasi daftar dan eksekusi langkah untuk setiap item |
-| [Fork](#fork) | Pisahkan eksekusi ke cabang paralel |
-| [Pergi Ke](#pergi-ke) | Lompat tanpa syarat ke langkah lain |
-| [Panggil Alur Kerja](#panggil-alur-kerja) | Jalankan file alur kerja eksternal |
-| [Gabung](#gabung) | Tunggu cabang paralel selesai |
-| [Loop](#loop) | Ulangi langkah N kali menggunakan routing port output |
-| [Gabung](#gabung) | Gabungkan beberapa input menjadi satu output |
-| [Paralel](#paralel) | Eksekusi beberapa tugas secara paralel dengan strategi berbeda |
-| [Batas Laju](#batas-laju) | Batas laju eksekusi menggunakan token bucket atau jendela geser |
-| [Coba Ulang](#coba-ulang) | Coba ulang operasi yang gagal dengan jeda yang dapat diatur |
-| [Mulai](#mulai) | Node awal workflow eksplisit |
-| [Subflow](#subflow) | Referensi dan eksekusi workflow eksternal |
-| [Saklar](#saklar) | Percabangan multi-arah berdasarkan pencocokan nilai |
-| [Batasi](#batasi) | Batasi laju eksekusi dengan interval minimum |
-| [Pemicu](#pemicu) | Titik masuk workflow - manual, webhook, jadwal, atau event |
+| [Batch Process](#batch-process) | Process items in batches with configurable size |
+| [Branch](#branch) | Conditional branching based on expression evaluation |
+| [Breakpoint](#breakpoint) | Pause workflow execution for human approval or input |
+| [Circuit Breaker](#circuit-breaker) | Circuit breaker pattern for fault tolerance |
+| [Container](#container) | Embedded subflow container for organizing complex workflows |
+| [Debounce](#debounce) | Debounce execution to prevent rapid repeated calls |
+| [End](#end) | Explicit workflow end node |
+| [Error Handler](#error-handler) | Catches and handles errors from upstream nodes |
+| [Error Workflow Trigger](#error-workflow-trigger) | Entry point for error workflows - triggered when another workflow fails |
+| [For Each](#for-each) | Iterate over a list and execute steps for each item |
+| [Fork](#fork) | Split execution into parallel branches |
+| [Goto](#goto) | Unconditional jump to another step |
+| [Invoke Workflow](#invoke-workflow) | Execute an external workflow file |
+| [Join](#join) | Wait for parallel branches to complete |
+| [Loop](#loop) | Repeat steps N times using output port routing |
+| [Merge](#merge) | Merge multiple inputs into a single output |
+| [Parallel](#parallel) | Execute multiple tasks in parallel with different strategies |
+| [Rate Limit](#rate-limit) | Rate limiter with token bucket strategy |
+| [Retry](#retry) | Retry with exponential backoff |
+| [Start](#start) | Explicit workflow start node |
+| [Subflow](#subflow) | Reference and execute an external workflow |
+| [Switch](#switch) | Multi-way branching based on value matching |
+| [Throttle](#throttle) | Throttle execution rate with minimum interval |
+| [Trigger](#trigger) | Workflow entry point - manual, webhook, schedule, event, mcp, or polling |
 
 ## Modules
 
-### Proses Batch
+### Batch Process
 
 `flow.batch`
 
-Proses item dalam batch dengan ukuran yang dapat dikonfigurasi
+Process items in batches with configurable size
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `items` | array | Yes | - | Array of items to process. Can be numbers, strings, or objects. |
-| `batch_size` | number | Yes | `10` | Jumlah item per batch |
-| `delay_ms` | number | No | `0` | Milidetik untuk menunggu antar batch (untuk pembatasan laju) |
-| `continue_on_error` | boolean | No | `False` | Lanjutkan memproses batch yang tersisa jika ada yang gagal |
-| `parallel_batches` | number | No | `1` | Lanjutkan memproses batch yang tersisa jika ada yang gagal |
+| `batch_size` | number | Yes | `10` | Number of items per batch |
+| `delay_ms` | number | No | `0` | Milliseconds to wait between batches (for rate limiting) |
+| `continue_on_error` | boolean | No | `False` | Continue processing remaining batches if one fails |
+| `parallel_batches` | number | No | `1` | Number of batches to process in parallel (1 for sequential) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Jumlah batch yang diproses secara paralel (1 untuk berurutan) |
-| `batch` | array | Event untuk pengaturan rute (batch/selesai/error) |
-| `batch_index` | number | Event untuk pengaturan rute (batch/selesai/error) |
-| `total_batches` | number | Item batch saat ini |
-| `total_items` | number | Indeks batch saat ini (berbasis 0) |
-| `is_last_batch` | boolean | Jumlah total batch |
-| `progress` | object | Jumlah total item |
+| `__event__` | string | Event for routing (batch/completed/error) |
+| `batch` | array | Current batch items |
+| `batch_index` | number | Current batch index (0-based) |
+| `total_batches` | number | Total number of batches |
+| `total_items` | number | Total number of items |
+| `is_last_batch` | boolean | Whether this is the last batch |
+| `progress` | object | Progress information |
 
 **Example:** Example
 
@@ -85,11 +85,11 @@ parallel_batches: 3
 continue_on_error: true
 ```
 
-### Cabang
+### Branch
 
 `flow.branch`
 
-Percabangan bersyarat berdasarkan evaluasi ekspresi
+Conditional branching based on expression evaluation
 
 **Parameters:**
 
@@ -101,11 +101,11 @@ Percabangan bersyarat berdasarkan evaluasi ekspresi
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event routing (true/false/error) |
-| `outputs` | object | Nilai output berdasarkan port |
-| `result` | boolean | Hasil cabang |
-| `condition` | string | Nilai kondisi |
-| `resolved_condition` | string | Hasil evaluasi kondisi |
+| `__event__` | string | Event for routing (true/false/error) |
+| `outputs` | object | Output values by port |
+| `result` | boolean | Condition evaluation result |
+| `condition` | string | Original condition expression |
+| `resolved_condition` | string | Condition after variable resolution |
 
 **Example:** Example
 
@@ -123,7 +123,7 @@ condition: ${api_call.status} == success
 
 `flow.breakpoint`
 
-Jeda eksekusi workflow untuk persetujuan atau input manusia
+Pause workflow execution for human approval or input
 
 **Parameters:**
 
@@ -142,15 +142,15 @@ Jeda eksekusi workflow untuk persetujuan atau input manusia
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event routing (approved/rejected/timeout) |
-| `breakpoint_id` | string | ID Breakpoint |
-| `status` | string | Status |
-| `approved_by` | array | Disetujui oleh |
-| `rejected_by` | array | Ditolak oleh |
-| `custom_inputs` | object | Nilai input kustom |
-| `comments` | array | Komentar tinjauan |
-| `resolved_at` | string | Waktu resolusi |
-| `wait_duration_ms` | integer | Durasi tunggu (ms) |
+| `__event__` | string | Event for routing (approved/rejected/timeout) |
+| `breakpoint_id` | string | Unique breakpoint identifier |
+| `status` | string | Final status (approved/rejected/timeout/cancelled) |
+| `approved_by` | array | List of users who approved |
+| `rejected_by` | array | List of users who rejected |
+| `custom_inputs` | object | Values collected from custom fields |
+| `comments` | array | Comments from approvers |
+| `resolved_at` | string | ISO timestamp of resolution |
+| `wait_duration_ms` | integer | Time spent waiting for approval |
 
 **Example:** Example
 
@@ -175,29 +175,29 @@ title: Adjustment Required
 custom_fields: [{"name": "reason", "label": "Reason", "type": "text", "required": true}, {"name": "amount", "label": "Amount", "type": "number", "required": true}]
 ```
 
-### Pemutus Sirkuit
+### Circuit Breaker
 
 `flow.circuit_breaker`
 
-Pola pemutus sirkuit untuk mencegah kegagalan berantai
+Circuit breaker pattern for fault tolerance
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `failure_threshold` | number | Yes | `5` | Jumlah kegagalan sebelum membuka sirkuit |
-| `reset_timeout_ms` | number | No | `60000` | Waktu dalam milidetik sebelum sirkuit beralih ke setengah terbuka |
-| `half_open_max` | number | No | `1` | Permintaan maksimum yang diizinkan dalam status setengah terbuka |
+| `failure_threshold` | number | Yes | `5` | Number of failures before opening the circuit |
+| `reset_timeout_ms` | number | No | `60000` | Time to wait before transitioning from open to half-open |
+| `half_open_max` | number | No | `1` | Maximum test requests allowed in half-open state |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Acara untuk pengalihan (diizinkan/ditolak/setengah terbuka) |
-| `state` | string | Status sirkuit (tertutup/terbuka/setengah terbuka) |
-| `failure_count` | number | Jumlah kegagalan berturut-turut |
-| `last_failure_time_ms` | number | Stempel waktu kegagalan terakhir dalam milidetik |
-| `time_until_half_open_ms` | number | Milidetik hingga sirkuit beralih ke setengah terbuka |
+| `__event__` | string | Event for routing (closed/open/half_open) |
+| `state` | string | Current circuit breaker state |
+| `failure_count` | number | Current number of consecutive failures |
+| `last_failure_time_ms` | number | Timestamp of last failure |
+| `time_until_half_open_ms` | number | Milliseconds until circuit transitions to half-open |
 
 **Example:** Example
 
@@ -226,7 +226,7 @@ half_open_max: 3
 
 `flow.container`
 
-Container subflow tertanam untuk mengorganisir workflow kompleks
+Embedded subflow container for organizing complex workflows
 
 **Parameters:**
 
@@ -241,12 +241,12 @@ Container subflow tertanam untuk mengorganisir workflow kompleks
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event routing (success/error) |
-| `outputs` | object | Nilai output berdasarkan port |
-| `subflow_result` | object | Hasil subflow |
-| `exported_variables` | object | Variabel yang diekspor |
-| `node_count` | integer | Jumlah node |
-| `execution_time_ms` | number | Waktu eksekusi (ms) |
+| `__event__` | string | Event for routing (success/error) |
+| `outputs` | object | Output values by port |
+| `subflow_result` | object | Result from subflow execution |
+| `exported_variables` | object | Variables exported from subflow |
+| `node_count` | integer | Number of nodes in subflow |
+| `execution_time_ms` | number | Total subflow execution time in milliseconds |
 
 **Example:** Example
 
@@ -266,25 +266,25 @@ inherit_context: false
 
 `flow.debounce`
 
-Menunda eksekusi untuk mencegah panggilan berulang cepat
+Debounce execution to prevent rapid repeated calls
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `delay_ms` | number | Yes | - | Waktu tunggu setelah panggilan terakhir sebelum eksekusi |
-| `leading` | boolean | No | `False` | Eksekusi pada tepi awal (panggilan pertama memicu segera) |
-| `trailing` | boolean | No | `True` | Eksekusi pada tepi akhir (setelah penundaan berakhir) |
+| `delay_ms` | number | Yes | - | Wait time in milliseconds before allowing execution |
+| `leading` | boolean | No | `False` | Execute on the leading edge (first call immediately) |
+| `trailing` | boolean | No | `True` | Execute on the trailing edge (after delay of inactivity) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Acara untuk pengalihan (dieksekusi/didebounce) |
-| `last_call_ms` | number | Stempel waktu panggilan terakhir dalam milidetik |
-| `calls_debounced` | number | Jumlah panggilan yang didebounce sejak eksekusi terakhir |
-| `time_since_last_ms` | number | Waktu yang berlalu sejak panggilan terakhir dalam milidetik |
-| `edge` | string | Tepi mana yang memicu eksekusi (awal/akhir) |
+| `__event__` | string | Event for routing (executed/skipped) |
+| `last_call_ms` | number | Timestamp of the last call |
+| `calls_debounced` | number | Number of calls that were debounced (skipped) |
+| `time_since_last_ms` | number | Time since last call in milliseconds |
+| `edge` | string | Which edge triggered execution (leading/trailing) |
 
 **Example:** Example
 
@@ -308,11 +308,11 @@ leading: true
 trailing: true
 ```
 
-### Akhir
+### End
 
 `flow.end`
 
-Node akhir workflow eksplisit
+Explicit workflow end node
 
 **Parameters:**
 
@@ -325,9 +325,9 @@ Node akhir workflow eksplisit
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event routing (__end__) |
-| `ended_at` | string | Waktu akhir |
-| `workflow_result` | object | Hasil workflow |
+| `__event__` | string | Event for routing (__end__) |
+| `ended_at` | string | ISO timestamp of end |
+| `workflow_result` | object | Mapped workflow output |
 
 **Example:** Example
 
@@ -340,29 +340,29 @@ Node akhir workflow eksplisit
 output_mapping: {"result": "${process.output}", "status": "success"}
 ```
 
-### Penanganan Error
+### Error Handler
 
 `flow.error_handle`
 
-Menangkap dan menangani error dari node hulu
+Catches and handles errors from upstream nodes
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | `log_and_continue` | Apa yang harus dilakukan dengan error |
-| `include_traceback` | boolean | No | `True` | Sertakan jejak tumpukan lengkap dalam output |
-| `error_code_mapping` | object | No | `{}` | Sertakan jejak tumpukan lengkap dalam output |
-| `fallback_value` | any | No | - | Peta kode error ke tindakan khusus |
+| `action` | string | Yes | `log_and_continue` | What to do with the error |
+| `include_traceback` | boolean | No | `True` | Include full stack trace in output |
+| `error_code_mapping` | object | No | `{}` | Map error codes to custom actions |
+| `fallback_value` | any | No | - | Value to use when error is suppressed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Nilai yang digunakan saat error ditekan |
-| `outputs` | object | Event untuk pengaturan rute (ditangani/eskalasi) |
-| `error_info` | object | Event untuk pengaturan rute (ditangani/eskalasi) |
-| `action_taken` | string | Tindakan yang diambil |
+| `__event__` | string | Event for routing (handled/escalate) |
+| `outputs` | object | Output values by port |
+| `error_info` | object | Extracted error information |
+| `action_taken` | string | What action was taken |
 
 **Example:** Example
 
@@ -385,11 +385,11 @@ action: transform
 error_code_mapping: {"TIMEOUT": {"retry": true, "delay": 5000}, "NOT_FOUND": {"skip": true}}
 ```
 
-### Pemicu Alur Kerja Error
+### Error Workflow Trigger
 
 `flow.error_workflow_trigger`
 
-Titik masuk untuk alur kerja error - dipicu saat alur kerja lain gagal
+Entry point for error workflows - triggered when another workflow fails
 
 **Parameters:**
 
@@ -401,9 +401,9 @@ Titik masuk untuk alur kerja error - dipicu saat alur kerja lain gagal
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Deskripsi alur kerja error ini |
-| `error_context` | object | Event untuk pengaturan rute (dipicu) |
-| `triggered_at` | string | Timestamp ISO saat alur kerja error dipicu |
+| `__event__` | string | Event for routing (triggered) |
+| `error_context` | object | Complete error context from failed workflow |
+| `triggered_at` | string | ISO timestamp when error workflow was triggered |
 
 **Example:** Example
 
@@ -417,33 +417,33 @@ description: Send Slack notification on workflow failure
 description: Log all workflow errors to monitoring system
 ```
 
-### Untuk Setiap
+### For Each
 
 `flow.foreach`
 
-Iterasi daftar dan eksekusi langkah untuk setiap item
+Iterate over a list and execute steps for each item
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `items` | string | Yes | - | Daftar item untuk diiterasi (mendukung referensi ${variabel}) |
-| `steps` | array | No | - | Langkah untuk dieksekusi untuk setiap item |
-| `item_var` | string | No | `item` | Nama variabel untuk item saat ini |
-| `index_var` | string | No | `index` | Nama variabel untuk indeks saat ini |
-| `output_mode` | string | No | `collect` | Mode pengumpulan hasil |
+| `items` | string | Yes | - | Array to iterate over — use gear icon to reference a previous step output |
+| `steps` | array | No | - | Steps to execute for each item (nested mode only) |
+| `item_var` | string | No | `item` | Variable name for current item |
+| `index_var` | string | No | `index` | Variable name for current index |
+| `output_mode` | string | No | `collect` | How to collect results: collect (array), last (single), none |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event routing (iterate/done) |
-| `__set_context` | object | Atur konteks |
-| `outputs` | object | Nilai output berdasarkan port |
-| `iteration` | number | Indeks iterasi saat ini |
-| `status` | string | Status operasi |
-| `results` | array | Hasil yang dikumpulkan |
-| `count` | number | Total jumlah item |
+| `__event__` | string | Event for routing (iterate/done) |
+| `__set_context` | object | Scope variables set on each iteration |
+| `outputs` | object | Output values by port |
+| `iteration` | number | Current iteration index |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of items processed |
 
 **Example:** Example
 
@@ -463,7 +463,7 @@ steps: [{"module": "element.text", "params": {"element_id": "${element}"}, "outp
 
 `flow.fork`
 
-Pisahkan eksekusi ke cabang paralel
+Split execution into parallel branches
 
 **Parameters:**
 
@@ -475,9 +475,9 @@ Pisahkan eksekusi ke cabang paralel
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event routing (fork/error) |
-| `input_data` | any | Data input |
-| `branch_count` | integer | Jumlah cabang |
+| `__event__` | string | Event for routing (fork/error) |
+| `input_data` | any | Input data passed to all branches |
+| `branch_count` | integer | Number of branches created |
 
 **Example:** Example
 
@@ -491,11 +491,11 @@ branch_count: 2
 branch_count: 3
 ```
 
-### Pergi Ke
+### Goto
 
 `flow.goto`
 
-Lompat tanpa syarat ke langkah lain
+Unconditional jump to another step
 
 **Parameters:**
 
@@ -508,9 +508,9 @@ Lompat tanpa syarat ke langkah lain
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event routing (goto) |
-| `target` | string | Langkah target |
-| `iteration` | number | Jumlah iterasi |
+| `__event__` | string | Event for routing (goto) |
+| `target` | string | ID of the target step |
+| `iteration` | number | Current iteration count for this goto |
 
 **Example:** Example
 
@@ -525,11 +525,11 @@ max_iterations: 10
 target: cleanup_step
 ```
 
-### Panggil Alur Kerja
+### Invoke Workflow
 
 `flow.invoke`
 
-Jalankan file alur kerja eksternal
+Execute an external workflow file
 
 **Parameters:**
 
@@ -544,10 +544,10 @@ Jalankan file alur kerja eksternal
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Parameter untuk diteruskan ke alur kerja yang dipanggil |
-| `result` | any | Waktu eksekusi maksimum dalam detik |
-| `workflow_id` | string | Event untuk routing (berhasil/gagal) |
-| `execution_time_ms` | number | Hasil eksekusi alur kerja |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Workflow execution result |
+| `workflow_id` | string | Invoked workflow ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 
@@ -565,11 +565,11 @@ workflow_params: {"data": "${input.data}"}
 output_mapping: {"processed": "result.data"}
 ```
 
-### Gabung
+### Join
 
 `flow.join`
 
-Tunggu cabang paralel selesai
+Wait for parallel branches to complete
 
 **Parameters:**
 
@@ -584,10 +584,10 @@ Tunggu cabang paralel selesai
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event routing (joined/timeout/error) |
-| `joined_data` | array | Data yang digabungkan |
-| `completed_count` | integer | Jumlah cabang selesai |
-| `strategy` | string | Strategi join |
+| `__event__` | string | Event for routing (joined/timeout/error) |
+| `joined_data` | array | Data from all completed inputs |
+| `completed_count` | integer | Number of inputs completed |
+| `strategy` | string | Strategy used for joining |
 
 **Example:** Example
 
@@ -609,27 +609,27 @@ cancel_pending: true
 
 `flow.loop`
 
-Ulangi langkah N kali menggunakan routing port output
+Repeat steps N times using output port routing
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `times` | number | Yes | `1` | Jumlah pengulangan |
-| `target` | string | No | - | Langkah target (deprecated) |
-| `steps` | array | No | - | Langkah untuk dieksekusi untuk setiap iterasi |
-| `index_var` | string | No | `index` | Nama variabel untuk indeks saat ini |
+| `times` | number | Yes | `1` | Number of times to repeat |
+| `target` | string | No | - | DEPRECATED: Use output ports and edges instead |
+| `steps` | array | No | - | Steps to execute for each iteration (nested mode) |
+| `index_var` | string | No | `index` | Variable name for current index |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event routing (iterate/done) |
-| `outputs` | object | Nilai output berdasarkan port |
-| `iteration` | number | Iterasi saat ini |
-| `status` | string | Status operasi |
-| `results` | array | Hasil yang dikumpulkan |
-| `count` | number | Total iterasi |
+| `__event__` | string | Event for routing (iterate/done/error) |
+| `outputs` | object | Output values by port |
+| `iteration` | number | Current iteration count |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of iterations completed |
 
 **Example:** Example
 
@@ -644,11 +644,11 @@ times: 5
 steps: [{"module": "browser.click", "params": {"selector": ".next"}}]
 ```
 
-### Gabung
+### Merge
 
 `flow.merge`
 
-Gabungkan beberapa input menjadi satu output
+Merge multiple inputs into a single output
 
 **Parameters:**
 
@@ -661,10 +661,10 @@ Gabungkan beberapa input menjadi satu output
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event routing (merged/error) |
-| `merged_data` | any | Data yang digabungkan |
-| `input_count` | integer | Jumlah input |
-| `strategy` | string | Strategi merge |
+| `__event__` | string | Event for routing (merged/error) |
+| `merged_data` | any | Merged data based on strategy |
+| `input_count` | integer | Number of inputs received |
+| `strategy` | string | Strategy used for merging |
 
 **Example:** Example
 
@@ -680,33 +680,33 @@ strategy: first
 input_count: 2
 ```
 
-### Paralel
+### Parallel
 
 `flow.parallel`
 
-Eksekusi beberapa tugas secara paralel dengan strategi berbeda
+Execute multiple tasks in parallel with different strategies
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tasks` | array | Yes | - | Array definisi tugas untuk dieksekusi secara paralel |
-| `mode` | string | No | `all` | Array definisi tugas untuk dieksekusi secara paralel |
+| `tasks` | array | Yes | - | Array of task definitions to execute in parallel |
+| `mode` | string | No | `all` | Parallel execution mode |
 | `timeout_ms` | number | No | `60000` | Maximum wait time in milliseconds |
-| `fail_fast` | boolean | No | `True` | Hentikan semua tugas pada kegagalan pertama (hanya untuk mode=all) |
-| `concurrency_limit` | number | No | `0` | Hentikan semua tugas pada kegagalan pertama (hanya untuk mode=all) |
+| `fail_fast` | boolean | No | `True` | Stop all tasks on first failure (only for mode=all) |
+| `concurrency_limit` | number | No | `0` | Maximum number of concurrent tasks (0 for unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Jumlah maksimum tugas bersamaan (0 untuk tidak terbatas) |
-| `results` | array | Event untuk pengalihan (selesai/parsial/error) |
-| `completed_count` | number | Event untuk pengaturan rute (selesai/parsial/error) |
-| `failed_count` | number | Hasil dari semua tugas |
-| `total_count` | number | Jumlah tugas yang berhasil diselesaikan |
-| `mode` | string | Jumlah tugas yang gagal |
-| `duration_ms` | number | Jumlah total tugas |
+| `__event__` | string | Event for routing (completed/partial/error) |
+| `results` | array | Results from all tasks |
+| `completed_count` | number | Number of successfully completed tasks |
+| `failed_count` | number | Number of failed tasks |
+| `total_count` | number | Total number of tasks |
+| `mode` | string | Execution mode used |
+| `duration_ms` | number | Total execution time in milliseconds |
 
 **Example:** Example
 
@@ -730,30 +730,30 @@ tasks: [{"module": "http.get", "params": {"url": "https://api1.example.com"}}, {
 mode: settle
 ```
 
-### Batas Laju
+### Rate Limit
 
 `flow.rate_limit`
 
-Batas laju eksekusi menggunakan token bucket atau jendela geser
+Rate limiter with token bucket strategy
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `max_requests` | number | Yes | - | Jumlah maksimum permintaan yang diizinkan per jendela |
-| `window_ms` | number | No | `60000` | Jendela waktu dalam milidetik |
-| `strategy` | string | No | `token_bucket` | Strategi pembatasan laju (token_bucket atau sliding_window) |
-| `queue_overflow` | string | No | `wait` | Perilaku saat antrian penuh (buang atau kesalahan) |
+| `max_requests` | number | Yes | - | Maximum number of requests allowed per window |
+| `window_ms` | number | No | `60000` | Time window in milliseconds |
+| `strategy` | string | No | `token_bucket` | Rate limiting strategy |
+| `queue_overflow` | string | No | `wait` | Behavior when rate limit is exceeded |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Acara untuk pengalihan (diizinkan/dibatasi) |
-| `tokens_remaining` | number | Token yang tersisa dalam bucket |
-| `window_reset_ms` | number | Milidetik hingga jendela direset |
-| `requests_in_window` | number | Jumlah permintaan dalam jendela saat ini |
-| `wait_ms` | number | Milidetik untuk menunggu sebelum permintaan berikutnya diizinkan |
+| `__event__` | string | Event for routing (allowed/throttled/error) |
+| `tokens_remaining` | number | Number of tokens remaining in the bucket |
+| `window_reset_ms` | number | Milliseconds until the window resets |
+| `requests_in_window` | number | Number of requests made in current window |
+| `wait_ms` | number | Milliseconds to wait before retry (if throttled) |
 
 **Example:** Example
 
@@ -781,32 +781,32 @@ strategy: sliding_window
 queue_overflow: wait
 ```
 
-### Coba Ulang
+### Retry
 
 `flow.retry`
 
-Coba ulang operasi yang gagal dengan jeda yang dapat diatur
+Retry with exponential backoff
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `max_retries` | number | Yes | `3` | Jumlah maksimum percobaan ulang |
-| `initial_delay_ms` | number | No | `1000` | Jeda awal sebelum percobaan ulang pertama dalam milidetik |
-| `backoff_multiplier` | number | No | `2.0` | Pengali untuk jeda eksponensial |
-| `max_delay_ms` | number | No | `30000` | Jeda maksimum antara percobaan ulang dalam milidetik |
-| `retry_on_errors` | array | No | `[]` | Jenis kesalahan untuk dicoba ulang (kosong berarti coba ulang semua) |
+| `max_retries` | number | Yes | `3` | Maximum number of retry attempts |
+| `initial_delay_ms` | number | No | `1000` | Initial delay before first retry in milliseconds |
+| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g. 2.0 doubles delay each retry) |
+| `max_delay_ms` | number | No | `30000` | Maximum delay cap in milliseconds |
+| `retry_on_errors` | array | No | `[]` | Optional list of error codes to retry on (empty = retry on all errors) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event untuk routing (coba ulang/sukses/gagal) |
-| `attempt` | number | Nomor percobaan saat ini |
-| `max_retries` | number | Jumlah maksimum percobaan ulang yang diatur |
-| `delay_ms` | number | Jeda sebelum coba ulang berikutnya dalam milidetik |
-| `total_elapsed_ms` | number | Total waktu yang berlalu dalam milidetik |
-| `last_error` | object | Pesan kesalahan terakhir |
+| `__event__` | string | Event for routing (success/retry/exhausted) |
+| `attempt` | number | Current attempt number (1-based) |
+| `max_retries` | number | Maximum retry attempts configured |
+| `delay_ms` | number | Delay before this attempt in milliseconds |
+| `total_elapsed_ms` | number | Total time elapsed across all attempts |
+| `last_error` | object | Last error that triggered a retry |
 
 **Example:** Example
 
@@ -831,19 +831,19 @@ initial_delay_ms: 2000
 retry_on_errors: ["TIMEOUT", "RATE_LIMIT", "429", "503"]
 ```
 
-### Mulai
+### Start
 
 `flow.start`
 
-Node awal workflow eksplisit
+Explicit workflow start node
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event routing (start) |
-| `started_at` | string | Waktu mulai |
-| `workflow_id` | string | ID Workflow |
+| `__event__` | string | Event for routing (start) |
+| `started_at` | string | ISO timestamp of start |
+| `workflow_id` | string | Workflow ID if available |
 
 **Example:** Example
 
@@ -854,7 +854,7 @@ Node awal workflow eksplisit
 
 `flow.subflow`
 
-Referensi dan eksekusi workflow eksternal
+Reference and execute an external workflow
 
 **Parameters:**
 
@@ -870,10 +870,10 @@ Referensi dan eksekusi workflow eksternal
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event routing (success/error) |
-| `result` | any | Hasil eksekusi |
-| `execution_id` | string | ID Eksekusi |
-| `workflow_ref` | string | Referensi workflow |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Subflow execution result |
+| `execution_id` | string | Subflow execution ID (for spawn/async) |
+| `workflow_ref` | string | Referenced workflow |
 
 **Example:** Example
 
@@ -891,11 +891,11 @@ workflow_ref: workflows/send_notifications
 execution_mode: spawn
 ```
 
-### Saklar
+### Switch
 
 `flow.switch`
 
-Percabangan multi-arah berdasarkan pencocokan nilai
+Multi-way branching based on value matching
 
 **Parameters:**
 
@@ -908,10 +908,10 @@ Percabangan multi-arah berdasarkan pencocokan nilai
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event routing (case:value atau default) |
-| `outputs` | object | Nilai output berdasarkan port |
-| `matched_case` | string | Case yang cocok |
-| `value` | any | Nilai yang cocok |
+| `__event__` | string | Event for routing (case:value or default) |
+| `outputs` | object | Output values by port |
+| `matched_case` | string | The case that matched |
+| `value` | any | The resolved value that was matched |
 
 **Example:** Example
 
@@ -927,28 +927,28 @@ expression: ${input.type}
 cases: [{"id": "img", "value": "image", "label": "Image"}, {"id": "vid", "value": "video", "label": "Video"}, {"id": "txt", "value": "text", "label": "Text"}]
 ```
 
-### Batasi
+### Throttle
 
 `flow.throttle`
 
-Batasi laju eksekusi dengan interval minimum
+Throttle execution rate with minimum interval
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `interval_ms` | number | Yes | - | Waktu minimum antara eksekusi dalam milidetik |
-| `leading` | boolean | No | `True` | Eksekusi pada tepi depan (panggilan pertama langsung lolos) |
+| `interval_ms` | number | Yes | - | Minimum time between executions in milliseconds |
+| `leading` | boolean | No | `True` | Execute on the leading edge (first call passes immediately) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event untuk routing (dieksekusi/dibatasi) |
-| `last_execution_ms` | number | Cap waktu eksekusi terakhir yang diizinkan |
-| `calls_throttled` | number | Jumlah panggilan yang dibatasi sejak eksekusi terakhir |
-| `time_since_last_ms` | number | Waktu yang berlalu sejak eksekusi terakhir dalam milidetik |
-| `remaining_ms` | number | Milidetik tersisa hingga eksekusi berikutnya diizinkan |
+| `__event__` | string | Event for routing (executed/throttled) |
+| `last_execution_ms` | number | Timestamp of last allowed execution |
+| `calls_throttled` | number | Number of calls throttled since last execution |
+| `time_since_last_ms` | number | Time elapsed since last execution in milliseconds |
+| `remaining_ms` | number | Milliseconds remaining until next execution is allowed |
 
 **Example:** Example
 
@@ -970,11 +970,11 @@ interval_ms: 5000
 leading: false
 ```
 
-### Pemicu
+### Trigger
 
 `flow.trigger`
 
-Titik masuk workflow - manual, webhook, jadwal, atau event
+Workflow entry point - manual, webhook, schedule, event, mcp, or polling
 
 **Parameters:**
 
@@ -999,10 +999,10 @@ Titik masuk workflow - manual, webhook, jadwal, atau event
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Event routing (triggered/error) |
-| `trigger_data` | object | Data trigger |
-| `trigger_type` | string | Jenis trigger |
-| `triggered_at` | string | Waktu trigger |
+| `__event__` | string | Event for routing (triggered/error) |
+| `trigger_data` | object | Data from trigger source |
+| `trigger_type` | string | Type of trigger |
+| `triggered_at` | string | ISO timestamp |
 
 **Example:** Example
 

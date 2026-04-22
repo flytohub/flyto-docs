@@ -6,132 +6,132 @@ File path utilities: join, normalize, basename, dirname, extension.
 
 | Module | Description |
 |--------|-------------|
-| [パス ベース名](#パス-ベース名) | パスからファイル名を取得 |
-| [パス ディル名](#パス-ディル名) | パスからディレクトリ名を取得 |
-| [パス 拡張子](#パス-拡張子) | パスからファイル拡張子を取得 |
-| [パス 絶対パス](#パス-絶対パス) | パスが絶対パスか確認 |
-| [パス 結合](#パス-結合) | パスの要素を結合 |
-| [パス 正規化](#パス-正規化) | ファイルパスを正規化 |
+| [Path Basename](#path-basename) | Get file name from path |
+| [Path Dirname](#path-dirname) | Get directory name from path |
+| [Path Extension](#path-extension) | Get file extension from path |
+| [Path Is Absolute](#path-is-absolute) | Check if path is absolute |
+| [Path Join](#path-join) | Join path components |
+| [Path Normalize](#path-normalize) | Normalize a file path |
 
 ## Modules
 
-### パス ベース名
+### Path Basename
 
 `path.basename`
 
-パスからファイル名を取得
+Get file name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | ファイルパス |
-| `remove_extension` | boolean | No | `False` | ファイルパス |
+| `path` | string | Yes | - | File path |
+| `remove_extension` | boolean | No | `False` | Remove file extension from result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 結果からファイル拡張子を削除 |
-| `original` | string | ファイル名 |
-| `extension` | string | ファイル名 |
+| `result` | string | File name |
+| `original` | string | Original path |
+| `extension` | string | File extension |
 
-### パス ディル名
+### Path Dirname
 
 `path.dirname`
 
-パスからディレクトリ名を取得
+Get directory name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | ファイルパス |
+| `path` | string | Yes | - | File path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | ファイルパス |
-| `original` | string | ディレクトリ名 |
+| `result` | string | Directory name |
+| `original` | string | Original path |
 
-### パス 拡張子
+### Path Extension
 
 `path.extension`
 
-パスからファイル拡張子を取得
+Get file extension from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | ファイルパス |
-| `include_dot` | boolean | No | `True` | ファイルパス |
+| `path` | string | Yes | - | File path |
+| `include_dot` | boolean | No | `True` | Include the dot in extension |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 拡張子にドットを含める |
-| `original` | string | ファイル拡張子 |
-| `has_extension` | boolean | ファイル拡張子 |
+| `result` | string | File extension |
+| `original` | string | Original path |
+| `has_extension` | boolean | Whether file has extension |
 
-### パス 絶対パス
+### Path Is Absolute
 
 `path.is_absolute`
 
-パスが絶対パスか確認
+Check if path is absolute
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 確認するファイルパス |
+| `path` | string | Yes | - | File path to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 確認するファイルパス |
-| `path` | string | パスが絶対パスかどうか |
-| `absolute` | string | パスが絶対パスかどうか |
+| `result` | boolean | Whether path is absolute |
+| `path` | string | The checked path |
+| `absolute` | string | Absolute version of the path |
 
-### パス 結合
+### Path Join
 
 `path.join`
 
-パスの要素を結合
+Join path components
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `parts` | array | Yes | - | 結合するパス要素 |
+| `parts` | array | Yes | - | Path components to join |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 結合するパス要素 |
-| `parts` | array | 結合されたパス |
+| `result` | string | Joined path |
+| `parts` | array | Original path parts |
 
-### パス 正規化
+### Path Normalize
 
 `path.normalize`
 
-ファイルパスを正規化
+Normalize a file path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | 正規化するファイルパス |
-| `resolve` | boolean | No | `False` | 正規化するファイルパス |
+| `path` | string | Yes | - | File path to normalize |
+| `resolve` | boolean | No | `False` | Resolve to absolute path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 絶対パスに解決 |
-| `original` | string | 正規化されたパス |
-| `is_absolute` | boolean | 正規化されたパス |
+| `result` | string | Normalized path |
+| `original` | string | Original path |
+| `is_absolute` | boolean | Whether result is absolute |

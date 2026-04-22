@@ -6,10 +6,10 @@ GitHub API, HTTP requests, and search engine integrations.
 
 | Module | Description |
 |--------|-------------|
-| [建立 GitHub Issue](#建立-github-issue) | 在 GitHub 儲存庫建立新的 Issue |
+| [Create GitHub Issue](#create-github-issue) | Create a new issue in a GitHub repository |
 | [Create GitHub Pull Request](#create-github-pull-request) | Create a new pull request in a GitHub repository |
-| [取得 GitHub 儲存庫](#取得-github-儲存庫) | 取得 GitHub 儲存庫的資訊 |
-| [列出 GitHub Issue](#列出-github-issue) | 列出 GitHub 儲存庫的 Issue |
+| [Get GitHub Repository](#get-github-repository) | Get information about a GitHub repository |
+| [List GitHub Issues](#list-github-issues) | List issues from a GitHub repository |
 | [List GitHub Repositories](#list-github-repositories) | List repositories for a GitHub user or the authenticated user |
 | [Google Search (API)](#google-search-api) | Use Google Custom Search API to search keywords |
 | [HTTP GET Request](#http-get-request) | Send HTTP GET request to any URL |
@@ -18,11 +18,11 @@ GitHub API, HTTP requests, and search engine integrations.
 
 ## Modules
 
-### 建立 GitHub Issue
+### Create GitHub Issue
 
 `api.github.create_issue`
 
-在 GitHub 儲存庫建立新的 Issue
+Create a new issue in a GitHub repository
 
 **Parameters:**
 
@@ -94,32 +94,32 @@ head: feature/auth
 base: main
 ```
 
-### 取得 GitHub 儲存庫
+### Get GitHub Repository
 
 `api.github.get_repo`
 
-取得 GitHub 儲存庫的資訊
+Get information about a GitHub repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `owner` | string | Yes | - | 儲存庫擁有者（使用者名稱或組織） |
-| `repo` | string | Yes | - | 儲存庫名稱 |
-| `token` | string | No | - | GitHub 個人存取權杖（選填但建議使用） |
+| `owner` | string | Yes | - | Repository owner (username or organization) |
+| `repo` | string | Yes | - | Repository name |
+| `token` | string | No | - | GitHub Personal Access Token (optional but recommended) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `repo` | object | 儲存庫資訊 |
-| `name` | string | 儲存庫名稱 |
-| `full_name` | string | 完整儲存庫名稱 |
-| `description` | string | 儲存庫描述 |
-| `stars` | number | 星星數量 |
-| `forks` | number | Fork 數量 |
-| `url` | string | 儲存庫網址 |
+| `status` | string | Operation status (success/error) |
+| `repo` | object | Repository information |
+| `name` | string | Name of the item |
+| `full_name` | string | Full repository name |
+| `description` | string | Item description |
+| `stars` | number | Number of stars |
+| `forks` | number | Number of forks |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -128,11 +128,11 @@ owner: octocat
 repo: Hello-World
 ```
 
-### 列出 GitHub Issue
+### List GitHub Issues
 
 `api.github.list_issues`
 
-列出 GitHub 儲存庫的 Issue
+List issues from a GitHub repository
 
 **Parameters:**
 
@@ -219,10 +219,10 @@ Use Google Custom Search API to search keywords
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `data` | array | 搜尋結果資料 |
-| `count` | number | 搜尋結果數量 |
-| `total_results` | number | 總結果數 |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
+| `total_results` | number | Total number of search results available |
 
 **Example:** Search Python tutorials
 
@@ -251,10 +251,10 @@ Send HTTP GET request to any URL
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | HTTP 狀態碼 |
-| `headers` | object | 回應標頭 |
-| `body` | string | 回應內容 |
-| `json` | object | JSON 回應（如果適用） |
+| `status_code` | number | HTTP status code |
+| `headers` | object | HTTP headers |
+| `body` | string | Response body content |
+| `json` | object | Parsed JSON response data |
 
 **Example:** Fetch API data
 

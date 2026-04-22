@@ -6,19 +6,19 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Module | Description |
 |--------|-------------|
-| [Valor absoluto](#valor-absoluto) | Obtener valor absoluto de un numero |
-| [Techo](#techo) | Redondear numero hacia arriba al entero mas cercano |
-| [Piso](#piso) | Redondear numero hacia abajo al entero mas cercano |
-| [Potencia/Exponente](#potenciaexponente) | Elevar numero a una potencia |
-| [Redondear numero](#redondear-numero) | Redondear numero a decimales especificados |
+| [Absolute Value](#absolute-value) | Get absolute value of a number |
+| [Ceiling Number](#ceiling-number) | Round number up to nearest integer |
+| [Floor Number](#floor-number) | Round number down to nearest integer |
+| [Power/Exponent](#powerexponent) | Raise number to a power |
+| [Round Number](#round-number) | Round number to specified decimal places |
 
 ## Modules
 
-### Valor absoluto
+### Absolute Value
 
 `math.abs`
 
-Obtener valor absoluto de un numero
+Get absolute value of a number
 
 **Parameters:**
 
@@ -30,8 +30,8 @@ Obtener valor absoluto de un numero
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Valor absoluto |
-| `original` | number | Valor absoluto |
+| `result` | number | Absolute value |
+| `original` | number | Original number |
 
 **Example:** Absolute of negative number
 
@@ -45,11 +45,11 @@ number: -5
 number: 3.14
 ```
 
-### Techo
+### Ceiling Number
 
 `math.ceil`
 
-Redondear numero hacia arriba al entero mas cercano
+Round number up to nearest integer
 
 **Parameters:**
 
@@ -61,8 +61,8 @@ Redondear numero hacia arriba al entero mas cercano
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Valor techo |
-| `original` | number | Valor techo |
+| `result` | number | Ceiling value |
+| `original` | number | Original number |
 
 **Example:** Ceiling positive number
 
@@ -76,11 +76,11 @@ number: 3.2
 number: -2.7
 ```
 
-### Piso
+### Floor Number
 
 `math.floor`
 
-Redondear numero hacia abajo al entero mas cercano
+Round number down to nearest integer
 
 **Parameters:**
 
@@ -92,8 +92,8 @@ Redondear numero hacia abajo al entero mas cercano
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Valor piso |
-| `original` | number | Valor piso |
+| `result` | number | Floored value |
+| `original` | number | Original number |
 
 **Example:** Floor positive number
 
@@ -107,11 +107,11 @@ number: 3.7
 number: -2.3
 ```
 
-### Potencia/Exponente
+### Power/Exponent
 
 `math.power`
 
-Elevar numero a una potencia
+Raise number to a power
 
 **Parameters:**
 
@@ -124,9 +124,9 @@ Elevar numero a una potencia
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Resultado de base elevada al exponente |
-| `base` | number | Resultado de base elevada al exponente |
-| `exponent` | number | Resultado de base elevada al exponente |
+| `result` | number | Result of base raised to exponent |
+| `base` | number | Base number |
+| `exponent` | number | Exponent used |
 
 **Example:** Square a number
 
@@ -142,11 +142,11 @@ base: 27
 exponent: 0.333333
 ```
 
-### Redondear numero
+### Round Number
 
 `math.round`
 
-Redondear numero a decimales especificados
+Round number to specified decimal places
 
 **Parameters:**
 
@@ -159,9 +159,9 @@ Redondear numero a decimales especificados
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Valor redondeado |
-| `original` | number | Valor redondeado |
-| `decimals` | number | Valor redondeado |
+| `result` | number | Rounded value |
+| `original` | number | Original number |
+| `decimals` | number | Decimal places used |
 
 **Example:** Round to integer
 

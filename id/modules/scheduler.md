@@ -6,74 +6,74 @@ Cron parsing, delay, and interval calculations.
 
 | Module | Description |
 |--------|-------------|
-| [Parse Ekspresi Cron](#parse-ekspresi-cron) | Parse ekspresi cron dan hitung N waktu jalankan berikutnya |
-| [Tunda / Tidur](#tunda--tidur) | Jeda eksekusi untuk durasi yang ditentukan |
-| [Hitung Interval](#hitung-interval) | Hitung waktu interval dan kejadian berikutnya |
+| [Parse Cron Expression](#parse-cron-expression) | Parse cron expression and calculate next N run times |
+| [Delay / Sleep](#delay--sleep) | Pause execution for a specified duration |
+| [Calculate Interval](#calculate-interval) | Calculate interval timing and next occurrences |
 
 ## Modules
 
-### Parse Ekspresi Cron
+### Parse Cron Expression
 
 `scheduler.cron_parse`
 
-Parse ekspresi cron dan hitung N waktu jalankan berikutnya
+Parse cron expression and calculate next N run times
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `expression` | string | Yes | - | Ekspresi cron standar 5-bidang (mis. "0 9 * * MON-FRI") |
-| `count` | number | No | `5` | Jumlah waktu jalankan berikutnya yang akan dihitung |
-| `timezone` | string | No | `0` | Zona waktu untuk perhitungan (offset UTC seperti "+8" atau "-5", default "0" untuk UTC) |
+| `expression` | string | Yes | - | Standard 5-field cron expression (e.g. "0 9 * * MON-FRI") |
+| `count` | number | No | `5` | Number of next run times to calculate |
+| `timezone` | string | No | `0` | Timezone for calculation (UTC offset like "+8" or "-5", default "0" for UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `expression` | string | Ekspresi cron yang telah di-parse |
-| `description` | string | Deskripsi jadwal yang mudah dibaca |
-| `next_runs` | array | Daftar waktu jalankan berikutnya sebagai string datetime ISO |
-| `is_valid` | boolean | Apakah ekspresi valid |
+| `expression` | string | The parsed cron expression |
+| `description` | string | Human-readable description of the schedule |
+| `next_runs` | array | List of next run times as ISO datetime strings |
+| `is_valid` | boolean | Whether the expression is valid |
 
-### Tunda / Tidur
+### Delay / Sleep
 
 `scheduler.delay`
 
-Jeda eksekusi untuk durasi yang ditentukan
+Pause execution for a specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | Yes | - | Jumlah detik untuk ditunda |
-| `message` | string | No | - | Pesan opsional untuk disertakan dalam hasil |
+| `seconds` | number | Yes | - | Number of seconds to delay |
+| `message` | string | No | - | Optional message to include in the result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `delayed_seconds` | number | Jumlah detik yang sebenarnya ditunda |
-| `message` | string | Pesan yang diberikan atau default |
+| `delayed_seconds` | number | Actual number of seconds delayed |
+| `message` | string | The provided message or default |
 
-### Hitung Interval
+### Calculate Interval
 
 `scheduler.interval`
 
-Hitung waktu interval dan kejadian berikutnya
+Calculate interval timing and next occurrences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | No | `0` | Komponen detik interval |
-| `minutes` | number | No | `0` | Komponen menit interval |
-| `hours` | number | No | `0` | Komponen jam interval |
-| `start_time` | string | No | - | Waktu mulai dalam format ISO 8601 (default: sekarang) |
+| `seconds` | number | No | `0` | Interval seconds component |
+| `minutes` | number | No | `0` | Interval minutes component |
+| `hours` | number | No | `0` | Interval hours component |
+| `start_time` | string | No | - | Start time in ISO 8601 format (default: now) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `interval_seconds` | number | Total interval dalam detik |
-| `next_runs` | array | Daftar 5 waktu jalankan berikutnya sebagai string datetime ISO |
-| `human_readable` | string | Deskripsi interval yang mudah dibaca |
+| `interval_seconds` | number | Total interval in seconds |
+| `next_runs` | array | List of next 5 run times as ISO datetime strings |
+| `human_readable` | string | Human-readable interval description |

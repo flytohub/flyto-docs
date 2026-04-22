@@ -6,25 +6,25 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Module | Description |
 |--------|-------------|
-| [문자열 소문자 변환](#문자열-소문자-변환) | 문자열을 소문자로 변환 |
-| [문자열 채우기](#문자열-채우기) | 문자열을 지정된 길이로 채우기 |
-| [문자열 대체](#문자열-대체) | 문자열 내 부분 문자열 대체 |
-| [문자열 반전](#문자열-반전) | 문자열의 문자 순서 반전 |
-| [슬러그화](#슬러그화) | 텍스트를 URL 친화적인 슬러그로 변환 |
-| [문자열 분할](#문자열-분할) | 구분자를 사용하여 문자열을 배열로 분할 |
-| [템플릿](#템플릿) | 변수 치환으로 템플릿 렌더링 |
-| [제목 대/소문자 문자열](#제목-대소문자-문자열) | 문자열을 제목 대/소문자로 변환 |
-| [문자열 트림](#문자열-트림) | 문자열 양쪽 끝의 공백 제거 |
-| [문자열 자르기](#문자열-자르기) | 문자열을 최대 길이로 자르기 |
-| [문자열 대문자 변환](#문자열-대문자-변환) | 문자열을 대문자로 변환 |
+| [String Lowercase](#string-lowercase) | Convert a string to lowercase |
+| [Pad String](#pad-string) | Pad a string to a specified length |
+| [String Replace](#string-replace) | Replace occurrences of a substring in a string |
+| [String Reverse](#string-reverse) | Reverse the characters in a string |
+| [Slugify](#slugify) | Convert text to URL-friendly slug |
+| [Split String](#split-string) | Split a string into an array using a delimiter |
+| [Template](#template) | Render a template with variable substitution |
+| [Title Case String](#title-case-string) | Convert string to title case |
+| [String Trim](#string-trim) | Remove whitespace from both ends of a string |
+| [Truncate String](#truncate-string) | Truncate a string to a maximum length |
+| [String Uppercase](#string-uppercase) | Convert a string to uppercase |
 
 ## Modules
 
-### 문자열 소문자 변환
+### String Lowercase
 
 `string.lowercase`
 
-문자열을 소문자로 변환
+Convert a string to lowercase
 
 **Parameters:**
 
@@ -36,38 +36,38 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 소문자로 변환된 문자열 |
-| `original` | string | 소문자로 변환된 문자열 |
-| `status` | string | 소문자로 변환된 문자열 |
+| `result` | string | Lowercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### 문자열 채우기
+### Pad String
 
 `string.pad`
 
-문자열을 지정된 길이로 채우기
+Pad a string to a specified length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 채울 텍스트 |
-| `length` | number | Yes | - | 채울 텍스트 |
-| `pad_char` | string | No | ` ` | 목표 길이 |
-| `position` | string | No | `end` | 채울 문자 |
+| `text` | string | Yes | - | Text to pad |
+| `length` | number | Yes | - | Target length |
+| `pad_char` | string | No | ` ` | Character to pad with |
+| `position` | string | No | `end` | Where to add padding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 채워진 문자열 |
-| `original` | string | 채워진 문자열 |
-| `added` | number | 채워진 문자열 |
+| `result` | string | Padded string |
+| `original` | string | Original string |
+| `added` | number | Characters added |
 
-### 문자열 대체
+### String Replace
 
 `string.replace`
 
-문자열 내 부분 문자열 대체
+Replace occurrences of a substring in a string
 
 **Parameters:**
 
@@ -81,17 +81,17 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 대체가 적용된 문자열 |
-| `original` | string | 대체가 적용된 문자열 |
-| `search` | string | 대체가 적용된 문자열 |
-| `replace` | string | 원본 입력 문자열 |
-| `status` | string | 대체된 검색 문자열 |
+| `result` | string | String with replacements applied |
+| `original` | string | Original input string |
+| `search` | string | Search string that was replaced |
+| `replace` | string | Replacement string used |
+| `status` | string | Operation status |
 
-### 문자열 반전
+### String Reverse
 
 `string.reverse`
 
-문자열의 문자 순서 반전
+Reverse the characters in a string
 
 **Parameters:**
 
@@ -103,37 +103,37 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 반전된 문자열 |
-| `original` | string | 반전된 문자열 |
-| `length` | number | 반전된 문자열 |
+| `result` | string | Reversed string |
+| `original` | string | Original input string |
+| `length` | number | String length |
 
-### 슬러그화
+### Slugify
 
 `string.slugify`
 
-텍스트를 URL 친화적인 슬러그로 변환
+Convert text to URL-friendly slug
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 슬러그화할 텍스트 |
-| `separator` | string | No | `-` | 슬러그화할 텍스트 |
-| `lowercase` | boolean | No | `True` | 단어 구분자 |
-| `max_length` | number | No | `0` | 소문자로 변환 |
+| `text` | string | Yes | - | Text to slugify |
+| `separator` | string | No | `-` | Word separator |
+| `lowercase` | boolean | No | `True` | Convert to lowercase |
+| `max_length` | number | No | `0` | Maximum slug length (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 최대 슬러그 길이 (0 = 무제한) |
-| `original` | string | URL 친화적인 슬러그 |
+| `result` | string | URL-friendly slug |
+| `original` | string | Original text |
 
-### 문자열 분할
+### Split String
 
 `string.split`
 
-구분자를 사용하여 문자열을 배열로 분할
+Split a string into an array using a delimiter
 
 **Parameters:**
 
@@ -147,41 +147,41 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `parts` | array | 분할된 문자열 부분 배열 |
-| `result` | array | 분할된 문자열 부분 배열 |
-| `length` | number | 분할된 문자열 부분 배열 |
-| `original` | string | parts의 별칭 - 분할된 문자열 부분 배열 |
-| `delimiter` | string | 분할 후 부분 수 |
-| `status` | string | 원본 입력 문자열 |
+| `parts` | array | Array of split string parts |
+| `result` | array | Alias for parts - array of split string parts |
+| `length` | number | Number of parts after split |
+| `original` | string | Original input string |
+| `delimiter` | string | Delimiter used for splitting |
+| `status` | string | Operation status |
 
-### 템플릿
+### Template
 
 `string.template`
 
-변수 치환으로 템플릿 렌더링
+Render a template with variable substitution
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `template` | string | Yes | - | {<!-- -->{variable}<!-- -->} 플레이스홀더가 있는 템플릿 문자열 |
-| `variables` | object | Yes | - | 치환할 변수 |
-| `missing_value` | string | No | - | 정의되지 않은 변수의 값 |
-| `preserve_missing` | boolean | No | `False` | 정의되지 않은 변수의 값 |
+| `template` | string | Yes | - | Template string with {<!-- -->{variable}<!-- -->} placeholders |
+| `variables` | object | Yes | - | Variables to substitute |
+| `missing_value` | string | No | - | Value for undefined variables |
+| `preserve_missing` | boolean | No | `False` | Keep placeholder if variable is missing |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 변수가 없으면 플레이스홀더 유지 |
-| `replaced` | number | 렌더링된 템플릿 |
-| `missing` | array | 렌더링된 템플릿 |
+| `result` | string | Rendered template |
+| `replaced` | number | Number of replacements made |
+| `missing` | array | Missing variable names |
 
-### 제목 대/소문자 문자열
+### Title Case String
 
 `string.titlecase`
 
-문자열을 제목 대/소문자로 변환
+Convert string to title case
 
 **Parameters:**
 
@@ -193,7 +193,7 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 제목 대/소문자로 변환된 문자열 |
+| `result` | string | Title case converted string |
 
 **Example:** Convert to title case
 
@@ -207,11 +207,11 @@ text: hello world from flyto
 text: john doe
 ```
 
-### 문자열 트림
+### String Trim
 
 `string.trim`
 
-문자열 양쪽 끝의 공백 제거
+Remove whitespace from both ends of a string
 
 **Parameters:**
 
@@ -223,39 +223,39 @@ text: john doe
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 공백이 제거된 트림 문자열 |
-| `original` | string | 공백이 제거된 트림 문자열 |
-| `status` | string | 공백이 제거된 트림 문자열 |
+| `result` | string | Trimmed string with whitespace removed |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### 문자열 자르기
+### Truncate String
 
 `string.truncate`
 
-문자열을 최대 길이로 자르기
+Truncate a string to a maximum length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 자를 텍스트 |
-| `length` | number | Yes | - | 자를 텍스트 |
-| `suffix` | string | No | `...` | 최대 길이 |
-| `word_boundary` | boolean | No | `False` | 잘린 경우 추가할 텍스트 |
+| `text` | string | Yes | - | Text to truncate |
+| `length` | number | Yes | - | Maximum length |
+| `suffix` | string | No | `...` | Text to append if truncated |
+| `word_boundary` | boolean | No | `False` | Break at word boundary |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 단어 경계에서 자르기 |
-| `original` | string | 잘린 문자열 |
-| `truncated` | boolean | 잘린 문자열 |
-| `removed` | number | 원본 문자열 |
+| `result` | string | Truncated string |
+| `original` | string | Original string |
+| `truncated` | boolean | Whether string was truncated |
+| `removed` | number | Characters removed |
 
-### 문자열 대문자 변환
+### String Uppercase
 
 `string.uppercase`
 
-문자열을 대문자로 변환
+Convert a string to uppercase
 
 **Parameters:**
 
@@ -267,6 +267,6 @@ text: john doe
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 대문자로 변환된 문자열 |
-| `original` | string | 대문자로 변환된 문자열 |
-| `status` | string | 대문자로 변환된 문자열 |
+| `result` | string | Uppercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |

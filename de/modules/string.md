@@ -6,25 +6,25 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Module | Description |
 |--------|-------------|
-| [String Kleinbuchstaben](#string-kleinbuchstaben) | String in Kleinbuchstaben umwandeln |
-| [Text auffüllen](#text-auffüllen) | Einen Text auf eine bestimmte Länge auffüllen |
-| [String ersetzen](#string-ersetzen) | Vorkommen eines Teilstrings in einem String ersetzen |
-| [String umkehren](#string-umkehren) | Zeichen in einem String umkehren |
-| [Slugify](#slugify) | Text in eine URL-freundliche Slug umwandeln |
-| [String aufteilen](#string-aufteilen) | String mit Trennzeichen in Array aufteilen |
-| [Vorlage](#vorlage) | Eine Vorlage mit Variablenersetzung rendern |
-| [String Titelschreibung](#string-titelschreibung) | String in Titelschreibung umwandeln |
-| [String trimmen](#string-trimmen) | Leerzeichen von beiden Enden eines Strings entfernen |
-| [Text kürzen](#text-kürzen) | Einen Text auf eine maximale Länge kürzen |
-| [String Großbuchstaben](#string-großbuchstaben) | String in Großbuchstaben umwandeln |
+| [String Lowercase](#string-lowercase) | Convert a string to lowercase |
+| [Pad String](#pad-string) | Pad a string to a specified length |
+| [String Replace](#string-replace) | Replace occurrences of a substring in a string |
+| [String Reverse](#string-reverse) | Reverse the characters in a string |
+| [Slugify](#slugify) | Convert text to URL-friendly slug |
+| [Split String](#split-string) | Split a string into an array using a delimiter |
+| [Template](#template) | Render a template with variable substitution |
+| [Title Case String](#title-case-string) | Convert string to title case |
+| [String Trim](#string-trim) | Remove whitespace from both ends of a string |
+| [Truncate String](#truncate-string) | Truncate a string to a maximum length |
+| [String Uppercase](#string-uppercase) | Convert a string to uppercase |
 
 ## Modules
 
-### String Kleinbuchstaben
+### String Lowercase
 
 `string.lowercase`
 
-String in Kleinbuchstaben umwandeln
+Convert a string to lowercase
 
 **Parameters:**
 
@@ -36,38 +36,38 @@ String in Kleinbuchstaben umwandeln
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | In Kleinbuchstaben umgewandelter String |
-| `original` | string | In Kleinbuchstaben umgewandelter String |
-| `status` | string | In Kleinbuchstaben umgewandelter String |
+| `result` | string | Lowercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### Text auffüllen
+### Pad String
 
 `string.pad`
 
-Einen Text auf eine bestimmte Länge auffüllen
+Pad a string to a specified length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Text zum Auffüllen |
-| `length` | number | Yes | - | Text zum Auffüllen |
-| `pad_char` | string | No | ` ` | Ziel-Länge |
-| `position` | string | No | `end` | Zeichen zum Auffüllen |
+| `text` | string | Yes | - | Text to pad |
+| `length` | number | Yes | - | Target length |
+| `pad_char` | string | No | ` ` | Character to pad with |
+| `position` | string | No | `end` | Where to add padding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Aufgefüllter Text |
-| `original` | string | Aufgefüllter Text |
-| `added` | number | Aufgefüllter Text |
+| `result` | string | Padded string |
+| `original` | string | Original string |
+| `added` | number | Characters added |
 
-### String ersetzen
+### String Replace
 
 `string.replace`
 
-Vorkommen eines Teilstrings in einem String ersetzen
+Replace occurrences of a substring in a string
 
 **Parameters:**
 
@@ -81,17 +81,17 @@ Vorkommen eines Teilstrings in einem String ersetzen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | String mit angewandten Ersetzungen |
-| `original` | string | String mit angewandten Ersetzungen |
-| `search` | string | String mit angewandten Ersetzungen |
-| `replace` | string | Ursprünglicher Eingabestring |
-| `status` | string | Suchstring, der ersetzt wurde |
+| `result` | string | String with replacements applied |
+| `original` | string | Original input string |
+| `search` | string | Search string that was replaced |
+| `replace` | string | Replacement string used |
+| `status` | string | Operation status |
 
-### String umkehren
+### String Reverse
 
 `string.reverse`
 
-Zeichen in einem String umkehren
+Reverse the characters in a string
 
 **Parameters:**
 
@@ -103,37 +103,37 @@ Zeichen in einem String umkehren
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Umgekehrter String |
-| `original` | string | Umgekehrter String |
-| `length` | number | Umgekehrter String |
+| `result` | string | Reversed string |
+| `original` | string | Original input string |
+| `length` | number | String length |
 
 ### Slugify
 
 `string.slugify`
 
-Text in eine URL-freundliche Slug umwandeln
+Convert text to URL-friendly slug
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Text zum Slugifizieren |
-| `separator` | string | No | `-` | Text zum Slugifizieren |
-| `lowercase` | boolean | No | `True` | Worttrenner |
-| `max_length` | number | No | `0` | In Kleinbuchstaben umwandeln |
+| `text` | string | Yes | - | Text to slugify |
+| `separator` | string | No | `-` | Word separator |
+| `lowercase` | boolean | No | `True` | Convert to lowercase |
+| `max_length` | number | No | `0` | Maximum slug length (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Maximale Slug-Länge (0 = unbegrenzt) |
-| `original` | string | URL-freundliche Slug |
+| `result` | string | URL-friendly slug |
+| `original` | string | Original text |
 
-### String aufteilen
+### Split String
 
 `string.split`
 
-String mit Trennzeichen in Array aufteilen
+Split a string into an array using a delimiter
 
 **Parameters:**
 
@@ -147,41 +147,41 @@ String mit Trennzeichen in Array aufteilen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `parts` | array | Array der aufgeteilten String-Teile |
-| `result` | array | Array der aufgeteilten String-Teile |
-| `length` | number | Array der aufgeteilten String-Teile |
-| `original` | string | Alias für Teile - Array der aufgeteilten String-Teile |
-| `delimiter` | string | Anzahl der Teile nach Aufteilung |
-| `status` | string | Ursprünglicher Eingabestring |
+| `parts` | array | Array of split string parts |
+| `result` | array | Alias for parts - array of split string parts |
+| `length` | number | Number of parts after split |
+| `original` | string | Original input string |
+| `delimiter` | string | Delimiter used for splitting |
+| `status` | string | Operation status |
 
-### Vorlage
+### Template
 
 `string.template`
 
-Eine Vorlage mit Variablenersetzung rendern
+Render a template with variable substitution
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `template` | string | Yes | - | Vorlagen-String mit {<!-- -->{variable}<!-- -->} Platzhaltern |
-| `variables` | object | Yes | - | Zu ersetzende Variablen |
-| `missing_value` | string | No | - | Wert für undefinierte Variablen |
-| `preserve_missing` | boolean | No | `False` | Wert für undefinierte Variablen |
+| `template` | string | Yes | - | Template string with {<!-- -->{variable}<!-- -->} placeholders |
+| `variables` | object | Yes | - | Variables to substitute |
+| `missing_value` | string | No | - | Value for undefined variables |
+| `preserve_missing` | boolean | No | `False` | Keep placeholder if variable is missing |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Platzhalter behalten, wenn Variable fehlt |
-| `replaced` | number | Gerenderte Vorlage |
-| `missing` | array | Gerenderte Vorlage |
+| `result` | string | Rendered template |
+| `replaced` | number | Number of replacements made |
+| `missing` | array | Missing variable names |
 
-### String Titelschreibung
+### Title Case String
 
 `string.titlecase`
 
-String in Titelschreibung umwandeln
+Convert string to title case
 
 **Parameters:**
 
@@ -193,7 +193,7 @@ String in Titelschreibung umwandeln
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | In Titelschreibung umgewandelter String |
+| `result` | string | Title case converted string |
 
 **Example:** Convert to title case
 
@@ -207,11 +207,11 @@ text: hello world from flyto
 text: john doe
 ```
 
-### String trimmen
+### String Trim
 
 `string.trim`
 
-Leerzeichen von beiden Enden eines Strings entfernen
+Remove whitespace from both ends of a string
 
 **Parameters:**
 
@@ -223,39 +223,39 @@ Leerzeichen von beiden Enden eines Strings entfernen
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Getrimmter String mit entfernten Leerzeichen |
-| `original` | string | Getrimmter String mit entfernten Leerzeichen |
-| `status` | string | Getrimmter String mit entfernten Leerzeichen |
+| `result` | string | Trimmed string with whitespace removed |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### Text kürzen
+### Truncate String
 
 `string.truncate`
 
-Einen Text auf eine maximale Länge kürzen
+Truncate a string to a maximum length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Text zum Kürzen |
-| `length` | number | Yes | - | Text zum Kürzen |
-| `suffix` | string | No | `...` | Maximale Länge |
-| `word_boundary` | boolean | No | `False` | Text, der angehängt wird, wenn abgeschnitten |
+| `text` | string | Yes | - | Text to truncate |
+| `length` | number | Yes | - | Maximum length |
+| `suffix` | string | No | `...` | Text to append if truncated |
+| `word_boundary` | boolean | No | `False` | Break at word boundary |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Am Wortende abbrechen |
-| `original` | string | Gekürzter Text |
-| `truncated` | boolean | Gekürzter Text |
-| `removed` | number | Originaltext |
+| `result` | string | Truncated string |
+| `original` | string | Original string |
+| `truncated` | boolean | Whether string was truncated |
+| `removed` | number | Characters removed |
 
-### String Großbuchstaben
+### String Uppercase
 
 `string.uppercase`
 
-String in Großbuchstaben umwandeln
+Convert a string to uppercase
 
 **Parameters:**
 
@@ -267,6 +267,6 @@ String in Großbuchstaben umwandeln
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | In Großbuchstaben umgewandelter String |
-| `original` | string | In Großbuchstaben umgewandelter String |
-| `status` | string | In Großbuchstaben umgewandelter String |
+| `result` | string | Uppercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |

@@ -6,10 +6,10 @@ GitHub API, HTTP requests, and search engine integrations.
 
 | Module | Description |
 |--------|-------------|
-| [Crea Issue GitHub](#crea-issue-github) | Crea nuovo issue in repository GitHub |
+| [Create GitHub Issue](#create-github-issue) | Create a new issue in a GitHub repository |
 | [Create GitHub Pull Request](#create-github-pull-request) | Create a new pull request in a GitHub repository |
-| [Ottieni Repository GitHub](#ottieni-repository-github) | Ottieni informazioni su repository GitHub |
-| [Elenca Issue GitHub](#elenca-issue-github) | Elenca issue da repository GitHub |
+| [Get GitHub Repository](#get-github-repository) | Get information about a GitHub repository |
+| [List GitHub Issues](#list-github-issues) | List issues from a GitHub repository |
 | [List GitHub Repositories](#list-github-repositories) | List repositories for a GitHub user or the authenticated user |
 | [Google Search (API)](#google-search-api) | Use Google Custom Search API to search keywords |
 | [HTTP GET Request](#http-get-request) | Send HTTP GET request to any URL |
@@ -18,11 +18,11 @@ GitHub API, HTTP requests, and search engine integrations.
 
 ## Modules
 
-### Crea Issue GitHub
+### Create GitHub Issue
 
 `api.github.create_issue`
 
-Crea nuovo issue in repository GitHub
+Create a new issue in a GitHub repository
 
 **Parameters:**
 
@@ -94,32 +94,32 @@ head: feature/auth
 base: main
 ```
 
-### Ottieni Repository GitHub
+### Get GitHub Repository
 
 `api.github.get_repo`
 
-Ottieni informazioni su repository GitHub
+Get information about a GitHub repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `owner` | string | Yes | - | Proprietario repository (username o organizzazione) |
-| `repo` | string | Yes | - | Proprietario repository (username o organizzazione) |
-| `token` | string | No | - | Nome repository |
+| `owner` | string | Yes | - | Repository owner (username or organization) |
+| `repo` | string | Yes | - | Repository name |
+| `token` | string | No | - | GitHub Personal Access Token (optional but recommended) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Token Accesso Personale GitHub (opzionale ma raccomandato) |
-| `repo` | object | Stato operazione (successo/errore) |
-| `name` | string | Stato operazione (successo/errore) |
-| `full_name` | string | Informazioni repository |
-| `description` | string | Nome dell'elemento |
-| `stars` | number | Nome completo repository |
-| `forks` | number | Descrizione elemento |
-| `url` | string | Recupera informazioni su repository GitHub |
+| `status` | string | Operation status (success/error) |
+| `repo` | object | Repository information |
+| `name` | string | Name of the item |
+| `full_name` | string | Full repository name |
+| `description` | string | Item description |
+| `stars` | number | Number of stars |
+| `forks` | number | Number of forks |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -128,11 +128,11 @@ owner: octocat
 repo: Hello-World
 ```
 
-### Elenca Issue GitHub
+### List GitHub Issues
 
 `api.github.list_issues`
 
-Elenca issue da repository GitHub
+List issues from a GitHub repository
 
 **Parameters:**
 
@@ -219,10 +219,10 @@ Use Google Custom Search API to search keywords
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Stato operazione |
-| `data` | array | Dati risultati ricerca |
-| `count` | number | Numero di risultati ricerca |
-| `total_results` | number | Conteggio risultati totali |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
+| `total_results` | number | Total number of search results available |
 
 **Example:** Search Python tutorials
 
@@ -251,10 +251,10 @@ Send HTTP GET request to any URL
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | Codice stato HTTP |
-| `headers` | object | Header risposta |
-| `body` | string | Corpo risposta |
-| `json` | object | Risposta JSON (se applicabile) |
+| `status_code` | number | HTTP status code |
+| `headers` | object | HTTP headers |
+| `body` | string | Response body content |
+| `json` | object | Parsed JSON response data |
 
 **Example:** Fetch API data
 

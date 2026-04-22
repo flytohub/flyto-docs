@@ -6,26 +6,26 @@ List manipulation — chunk, flatten, group, map, reduce, zip, and more.
 
 | Module | Description |
 |--------|-------------|
-| [Dzielenie tablicy](#dzielenie-tablicy) | Podziel tablice na czesci o okreslonej wielkosci |
-| [Kompaktuj](#kompaktuj) | Usuń wartości null/puste z tablicy |
-| [Roznica tablic](#roznica-tablic) | Znajdz elementy w pierwszej tablicy, ktorych nie ma w innych |
-| [Usuń](#usuń) | Usuń pierwsze N elementów z tablicy |
-| [Splaszczanie tablicy](#splaszczanie-tablicy) | Splaszcz zagniezdzene tablice do pojedynczej tablicy |
-| [Grupuj Według](#grupuj-według) | Grupuj elementy tablicy według klucza |
-| [Przeciecie tablic](#przeciecie-tablic) | Znajdz wspolne elementy miedzy tablicami |
-| [Laczenie tablicy](#laczenie-tablicy) | Polacz elementy tablicy w lancuch znakow |
-| [Mapowanie tablicy](#mapowanie-tablicy) | Przeksztalc kazdy element w tablicy |
-| [Redukcja tablicy](#redukcja-tablicy) | Zredukuj tablice do pojedynczej wartosci |
-| [Weź](#weź) | Weź pierwsze N elementów z tablicy |
-| [Połącz Tablice](#połącz-tablice) | Połącz wiele tablic element po elemencie |
+| [Array Chunk](#array-chunk) | Split array into chunks of specified size |
+| [Compact](#compact) | Remove null/empty values from array |
+| [Array Difference](#array-difference) | Find elements in first array not in others |
+| [Drop](#drop) | Drop first N elements from array |
+| [Array Flatten](#array-flatten) | Flatten nested arrays into single array |
+| [Group By](#group-by) | Group array elements by a key |
+| [Array Intersection](#array-intersection) | Find common elements between arrays |
+| [Array Join](#array-join) | Join array elements into string |
+| [Array Map](#array-map) | Transform each element in an array |
+| [Array Reduce](#array-reduce) | Reduce array to single value |
+| [Take](#take) | Take first N elements from array |
+| [Zip Arrays](#zip-arrays) | Combine multiple arrays element-wise |
 
 ## Modules
 
-### Dzielenie tablicy
+### Array Chunk
 
 `array.chunk`
 
-Podziel tablice na czesci o okreslonej wielkosci
+Split array into chunks of specified size
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ Podziel tablice na czesci o okreslonej wielkosci
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Tablica czesci |
-| `chunks` | number | Tablica czesci |
+| `result` | array | Array of chunks |
+| `chunks` | number | Number of chunks |
 
 **Example:** Chunk into groups of 3
 
@@ -55,33 +55,33 @@ array: ["a", "b", "c", "d", "e"]
 size: 2
 ```
 
-### Kompaktuj
+### Compact
 
 `array.compact`
 
-Usuń wartości null/puste z tablicy
+Remove null/empty values from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Tablica do skompaktowania |
-| `remove_empty_strings` | boolean | No | `True` | Usuń puste ciągi |
-| `remove_zero` | boolean | No | `False` | Usuń puste ciągi |
-| `remove_false` | boolean | No | `False` | Usuń wartości zero |
+| `array` | array | Yes | - | Array to compact |
+| `remove_empty_strings` | boolean | No | `True` | Remove empty strings |
+| `remove_zero` | boolean | No | `False` | Remove zero values |
+| `remove_false` | boolean | No | `False` | Remove false values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Usuń wartości fałszywe |
-| `removed` | number | Skompaktowana tablica |
+| `result` | array | Compacted array |
+| `removed` | number | Number of items removed |
 
-### Roznica tablic
+### Array Difference
 
 `array.difference`
 
-Znajdz elementy w pierwszej tablicy, ktorych nie ma w innych
+Find elements in first array not in others
 
 **Parameters:**
 
@@ -94,8 +94,8 @@ Znajdz elementy w pierwszej tablicy, ktorych nie ma w innych
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Elementy unikalne dla pierwszej tablicy |
-| `length` | number | Elementy unikalne dla pierwszej tablicy |
+| `result` | array | Elements unique to first array |
+| `length` | number | Number of unique elements |
 
 **Example:** Find unique elements
 
@@ -104,31 +104,31 @@ array: [1, 2, 3, 4, 5]
 subtract: [[2, 4], [5]]
 ```
 
-### Usuń
+### Drop
 
 `array.drop`
 
-Usuń pierwsze N elementów z tablicy
+Drop first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Tablica źródłowa |
-| `count` | number | Yes | `1` | Tablica źródłowa |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to drop |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Liczba elementów do usunięcia |
-| `dropped` | number | Pozostałe elementy |
+| `result` | array | Remaining elements |
+| `dropped` | number | Number of elements dropped |
 
-### Splaszczanie tablicy
+### Array Flatten
 
 `array.flatten`
 
-Splaszcz zagniezdzene tablice do pojedynczej tablicy
+Flatten nested arrays into single array
 
 **Parameters:**
 
@@ -141,8 +141,8 @@ Splaszcz zagniezdzene tablice do pojedynczej tablicy
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Splaszczona tablica |
-| `length` | number | Splaszczona tablica |
+| `result` | array | Flattened array |
+| `length` | number | Length of flattened array |
 
 **Example:** Flatten one level
 
@@ -158,32 +158,32 @@ array: [[1, [2, [3, [4]]]]]
 depth: -1
 ```
 
-### Grupuj Według
+### Group By
 
 `array.group_by`
 
-Grupuj elementy tablicy według klucza
+Group array elements by a key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Tablica obiektów do grupowania |
-| `key` | string | Yes | - | Tablica obiektów do grupowania |
+| `array` | array | Yes | - | Array of objects to group |
+| `key` | string | Yes | - | Property name to group by |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `groups` | object | Nazwa właściwości do grupowania |
-| `keys` | array | Wyniki grupowania |
-| `count` | number | Wyniki grupowania |
+| `groups` | object | Grouped results |
+| `keys` | array | Group keys |
+| `count` | number | Number of groups |
 
-### Przeciecie tablic
+### Array Intersection
 
 `array.intersection`
 
-Znajdz wspolne elementy miedzy tablicami
+Find common elements between arrays
 
 **Parameters:**
 
@@ -195,8 +195,8 @@ Znajdz wspolne elementy miedzy tablicami
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Wspolne elementy |
-| `length` | number | Wspolne elementy |
+| `result` | array | Common elements |
+| `length` | number | Number of common elements |
 
 **Example:** Find common elements
 
@@ -204,11 +204,11 @@ Znajdz wspolne elementy miedzy tablicami
 arrays: [[1, 2, 3, 4], [2, 3, 5], [2, 3, 6]]
 ```
 
-### Laczenie tablicy
+### Array Join
 
 `array.join`
 
-Polacz elementy tablicy w lancuch znakow
+Join array elements into string
 
 **Parameters:**
 
@@ -222,7 +222,7 @@ Polacz elementy tablicy w lancuch znakow
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Polaczony lancuch znakow |
+| `result` | string | Joined string |
 
 **Example:** Join with comma
 
@@ -239,11 +239,11 @@ separator:
 
 ```
 
-### Mapowanie tablicy
+### Array Map
 
 `array.map`
 
-Przeksztalc kazdy element w tablicy
+Transform each element in an array
 
 **Parameters:**
 
@@ -257,8 +257,8 @@ Przeksztalc kazdy element w tablicy
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Przeksztalcona tablica |
-| `length` | number | Przeksztalcona tablica |
+| `result` | array | Transformed array |
+| `length` | number | Length of result array |
 
 **Example:** Multiply numbers
 
@@ -276,11 +276,11 @@ operation: extract
 value: name
 ```
 
-### Redukcja tablicy
+### Array Reduce
 
 `array.reduce`
 
-Zredukuj tablice do pojedynczej wartosci
+Reduce array to single value
 
 **Parameters:**
 
@@ -295,8 +295,8 @@ Zredukuj tablice do pojedynczej wartosci
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | Zredukowana wartosc |
-| `operation` | string | Zredukowana wartosc |
+| `result` | any | Reduced value |
+| `operation` | string | Operation that was applied |
 
 **Example:** Sum numbers
 
@@ -313,42 +313,42 @@ operation: join
 separator:  
 ```
 
-### Weź
+### Take
 
 `array.take`
 
-Weź pierwsze N elementów z tablicy
+Take first N elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Tablica źródłowa |
-| `count` | number | Yes | `1` | Tablica źródłowa |
+| `array` | array | Yes | - | Source array |
+| `count` | number | Yes | `1` | Number of elements to take |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Liczba elementów do pobrania |
-| `length` | number | Pobrane elementy |
+| `result` | array | Taken elements |
+| `length` | number | Number of elements taken |
 
-### Połącz Tablice
+### Zip Arrays
 
 `array.zip`
 
-Połącz wiele tablic element po elemencie
+Combine multiple arrays element-wise
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | Tablica tablic do połączenia |
-| `fill_value` | any | No | - | Tablica tablic do połączenia |
+| `arrays` | array | Yes | - | Array of arrays to zip |
+| `fill_value` | any | No | - | Value for missing elements |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Wartość dla brakujących elementów |
-| `length` | number | Połączona tablica |
+| `result` | array | Zipped array |
+| `length` | number | Result length |

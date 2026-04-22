@@ -6,89 +6,89 @@ Set operations: union, intersection, difference, unique.
 
 | Module | Description |
 |--------|-------------|
-| [集合差集](#集合差集) | 取得第一個陣列中有而其他陣列中沒有的元素 |
-| [集合交集](#集合交集) | 取得兩個或多個陣列的交集 |
-| [集合聯集](#集合聯集) | 取得兩個或多個陣列的聯集 |
-| [集合唯一](#集合唯一) | 移除陣列中的重複元素 |
+| [Set Difference](#set-difference) | Get elements in first array but not in others |
+| [Set Intersection](#set-intersection) | Get intersection of two or more arrays |
+| [Set Union](#set-union) | Get union of two or more arrays |
+| [Set Unique](#set-unique) | Remove duplicate elements from array |
 
 ## Modules
 
-### 集合差集
+### Set Difference
 
 `set.difference`
 
-取得第一個陣列中有而其他陣列中沒有的元素
+Get elements in first array but not in others
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `source` | array | Yes | - | 來源陣列 |
-| `exclude` | array | Yes | - | 來源陣列 |
+| `source` | array | Yes | - | Source array |
+| `exclude` | array | Yes | - | Arrays of elements to exclude |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 要排除的元素陣列 |
-| `count` | number | 來源陣列中有而排除陣列中沒有的元素 |
-| `removed_count` | number | 來源陣列中有而排除陣列中沒有的元素 |
+| `result` | array | Elements in source but not in exclude arrays |
+| `count` | number | Number of remaining elements |
+| `removed_count` | number | Number of elements removed |
 
-### 集合交集
+### Set Intersection
 
 `set.intersection`
 
-取得兩個或多個陣列的交集
+Get intersection of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | 要交集的陣列（陣列的陣列） |
+| `arrays` | array | Yes | - | Arrays to intersect (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 要交集的陣列（陣列的陣列） |
-| `count` | number | 所有陣列的交集 |
+| `result` | array | Intersection of all arrays |
+| `count` | number | Number of common elements |
 
-### 集合聯集
+### Set Union
 
 `set.union`
 
-取得兩個或多個陣列的聯集
+Get union of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | 要合併的陣列（陣列的陣列） |
+| `arrays` | array | Yes | - | Arrays to combine (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 要合併的陣列（陣列的陣列） |
-| `count` | number | 所有陣列的聯集 |
+| `result` | array | Union of all arrays |
+| `count` | number | Number of unique elements |
 
-### 集合唯一
+### Set Unique
 
 `set.unique`
 
-移除陣列中的重複元素
+Remove duplicate elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | 要去重的陣列 |
-| `preserve_order` | boolean | No | `True` | 要去重的陣列 |
+| `array` | array | Yes | - | Array to deduplicate |
+| `preserve_order` | boolean | No | `True` | Keep first occurrence order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 保留首次出現的順序 |
-| `count` | number | 具有唯一元素的陣列 |
-| `duplicates_removed` | number | 具有唯一元素的陣列 |
+| `result` | array | Array with unique elements |
+| `count` | number | Number of unique elements |
+| `duplicates_removed` | number | Number of duplicates removed |

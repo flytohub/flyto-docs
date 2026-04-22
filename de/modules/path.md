@@ -6,132 +6,132 @@ File path utilities: join, normalize, basename, dirname, extension.
 
 | Module | Description |
 |--------|-------------|
-| [Pfad-Basename](#pfad-basename) | Dateiname aus Pfad erhalten |
-| [Pfad-Verzeichnisname](#pfad-verzeichnisname) | Verzeichnisname aus Pfad erhalten |
-| [Pfad-Erweiterung](#pfad-erweiterung) | Dateierweiterung aus Pfad erhalten |
-| [Pfad ist absolut](#pfad-ist-absolut) | Überprüfen, ob Pfad absolut ist |
-| [Pfad verbinden](#pfad-verbinden) | Pfadkomponenten verbinden |
-| [Pfad normalisieren](#pfad-normalisieren) | Dateipfad normalisieren |
+| [Path Basename](#path-basename) | Get file name from path |
+| [Path Dirname](#path-dirname) | Get directory name from path |
+| [Path Extension](#path-extension) | Get file extension from path |
+| [Path Is Absolute](#path-is-absolute) | Check if path is absolute |
+| [Path Join](#path-join) | Join path components |
+| [Path Normalize](#path-normalize) | Normalize a file path |
 
 ## Modules
 
-### Pfad-Basename
+### Path Basename
 
 `path.basename`
 
-Dateiname aus Pfad erhalten
+Get file name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Dateipfad |
-| `remove_extension` | boolean | No | `False` | Dateipfad |
+| `path` | string | Yes | - | File path |
+| `remove_extension` | boolean | No | `False` | Remove file extension from result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Dateierweiterung aus Ergebnis entfernen |
-| `original` | string | Dateiname |
-| `extension` | string | Dateiname |
+| `result` | string | File name |
+| `original` | string | Original path |
+| `extension` | string | File extension |
 
-### Pfad-Verzeichnisname
+### Path Dirname
 
 `path.dirname`
 
-Verzeichnisname aus Pfad erhalten
+Get directory name from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Dateipfad |
+| `path` | string | Yes | - | File path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Dateipfad |
-| `original` | string | Verzeichnisname |
+| `result` | string | Directory name |
+| `original` | string | Original path |
 
-### Pfad-Erweiterung
+### Path Extension
 
 `path.extension`
 
-Dateierweiterung aus Pfad erhalten
+Get file extension from path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Dateipfad |
-| `include_dot` | boolean | No | `True` | Dateipfad |
+| `path` | string | Yes | - | File path |
+| `include_dot` | boolean | No | `True` | Include the dot in extension |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Punkt in Erweiterung einbeziehen |
-| `original` | string | Dateierweiterung |
-| `has_extension` | boolean | Dateierweiterung |
+| `result` | string | File extension |
+| `original` | string | Original path |
+| `has_extension` | boolean | Whether file has extension |
 
-### Pfad ist absolut
+### Path Is Absolute
 
 `path.is_absolute`
 
-Überprüfen, ob Pfad absolut ist
+Check if path is absolute
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Zu überprüfender Dateipfad |
+| `path` | string | Yes | - | File path to check |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Zu überprüfender Dateipfad |
-| `path` | string | Ob Pfad absolut ist |
-| `absolute` | string | Ob Pfad absolut ist |
+| `result` | boolean | Whether path is absolute |
+| `path` | string | The checked path |
+| `absolute` | string | Absolute version of the path |
 
-### Pfad verbinden
+### Path Join
 
 `path.join`
 
-Pfadkomponenten verbinden
+Join path components
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `parts` | array | Yes | - | Zu verbindende Pfadkomponenten |
+| `parts` | array | Yes | - | Path components to join |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Zu verbindende Pfadkomponenten |
-| `parts` | array | Verbundenen Pfad |
+| `result` | string | Joined path |
+| `parts` | array | Original path parts |
 
-### Pfad normalisieren
+### Path Normalize
 
 `path.normalize`
 
-Dateipfad normalisieren
+Normalize a file path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Zu normalisierender Dateipfad |
-| `resolve` | boolean | No | `False` | Zu normalisierender Dateipfad |
+| `path` | string | Yes | - | File path to normalize |
+| `resolve` | boolean | No | `False` | Resolve to absolute path |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Zu absolutem Pfad auflösen |
-| `original` | string | Normalisierter Pfad |
-| `is_absolute` | boolean | Normalisierter Pfad |
+| `result` | string | Normalized path |
+| `original` | string | Original path |
+| `is_absolute` | boolean | Whether result is absolute |

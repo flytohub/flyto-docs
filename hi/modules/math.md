@@ -6,19 +6,19 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Module | Description |
 |--------|-------------|
-| [निरपेक्ष मान](#निरपेक्ष-मान) | संख्या का निरपेक्ष मान प्राप्त करें |
-| [सीलिंग संख्या](#सीलिंग-संख्या) | संख्या को निकटतम पूर्णांक तक ऊपर की ओर राउंड करें |
-| [फ्लोर संख्या](#फ्लोर-संख्या) | संख्या को निकटतम पूर्णांक तक नीचे की ओर राउंड करें |
-| [घात/एक्सपोनेंट](#घातएक्सपोनेंट) | संख्या को घात में उठाएं |
-| [संख्या राउंड करें](#संख्या-राउंड-करें) | संख्या को निर्दिष्ट दशमलव स्थानों तक राउंड करें |
+| [Absolute Value](#absolute-value) | Get absolute value of a number |
+| [Ceiling Number](#ceiling-number) | Round number up to nearest integer |
+| [Floor Number](#floor-number) | Round number down to nearest integer |
+| [Power/Exponent](#powerexponent) | Raise number to a power |
+| [Round Number](#round-number) | Round number to specified decimal places |
 
 ## Modules
 
-### निरपेक्ष मान
+### Absolute Value
 
 `math.abs`
 
-संख्या का निरपेक्ष मान प्राप्त करें
+Get absolute value of a number
 
 **Parameters:**
 
@@ -30,8 +30,8 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | निरपेक्ष मान |
-| `original` | number | निरपेक्ष मान |
+| `result` | number | Absolute value |
+| `original` | number | Original number |
 
 **Example:** Absolute of negative number
 
@@ -45,11 +45,11 @@ number: -5
 number: 3.14
 ```
 
-### सीलिंग संख्या
+### Ceiling Number
 
 `math.ceil`
 
-संख्या को निकटतम पूर्णांक तक ऊपर की ओर राउंड करें
+Round number up to nearest integer
 
 **Parameters:**
 
@@ -61,8 +61,8 @@ number: 3.14
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | सीलिंग मान |
-| `original` | number | सीलिंग मान |
+| `result` | number | Ceiling value |
+| `original` | number | Original number |
 
 **Example:** Ceiling positive number
 
@@ -76,11 +76,11 @@ number: 3.2
 number: -2.7
 ```
 
-### फ्लोर संख्या
+### Floor Number
 
 `math.floor`
 
-संख्या को निकटतम पूर्णांक तक नीचे की ओर राउंड करें
+Round number down to nearest integer
 
 **Parameters:**
 
@@ -92,8 +92,8 @@ number: -2.7
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | फ्लोर किया गया मान |
-| `original` | number | फ्लोर किया गया मान |
+| `result` | number | Floored value |
+| `original` | number | Original number |
 
 **Example:** Floor positive number
 
@@ -107,11 +107,11 @@ number: 3.7
 number: -2.3
 ```
 
-### घात/एक्सपोनेंट
+### Power/Exponent
 
 `math.power`
 
-संख्या को घात में उठाएं
+Raise number to a power
 
 **Parameters:**
 
@@ -124,9 +124,9 @@ number: -2.3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | आधार को घात में उठाने का परिणाम |
-| `base` | number | आधार को घात में उठाने का परिणाम |
-| `exponent` | number | आधार को घात में उठाने का परिणाम |
+| `result` | number | Result of base raised to exponent |
+| `base` | number | Base number |
+| `exponent` | number | Exponent used |
 
 **Example:** Square a number
 
@@ -142,11 +142,11 @@ base: 27
 exponent: 0.333333
 ```
 
-### संख्या राउंड करें
+### Round Number
 
 `math.round`
 
-संख्या को निर्दिष्ट दशमलव स्थानों तक राउंड करें
+Round number to specified decimal places
 
 **Parameters:**
 
@@ -159,9 +159,9 @@ exponent: 0.333333
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | राउंड किया गया मान |
-| `original` | number | राउंड किया गया मान |
-| `decimals` | number | राउंड किया गया मान |
+| `result` | number | Rounded value |
+| `original` | number | Original number |
+| `decimals` | number | Decimal places used |
 
 **Example:** Round to integer
 

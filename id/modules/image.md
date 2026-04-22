@@ -6,23 +6,23 @@ Resize, crop, compress, convert, OCR, QR codes, and watermarks.
 
 | Module | Description |
 |--------|-------------|
-| [Kompres Gambar](#kompres-gambar) | Kompres gambar untuk mengurangi ukuran file sambil menjaga kualitas |
-| [Konversi Gambar](#konversi-gambar) | Konversi gambar ke format berbeda (PNG, JPEG, WEBP, dll.) |
-| [Potong Gambar](#potong-gambar) | Potong gambar ke koordinat yang ditentukan |
-| [Unduh Gambar](#unduh-gambar) | Unduh gambar dari URL ke file lokal |
-| [Ekstrak Teks OCR](#ekstrak-teks-ocr) | Ekstrak teks dari gambar menggunakan OCR |
-| [Hasilkan Kode QR](#hasilkan-kode-qr) | Hasilkan kode QR dari teks, URL, atau data |
-| [Ubah Ukuran Gambar](#ubah-ukuran-gambar) | Ubah ukuran gambar ke dimensi tertentu dengan berbagai algoritma |
-| [Putar Gambar](#putar-gambar) | Putar gambar dengan derajat yang ditentukan |
-| [Tambahkan Watermark](#tambahkan-watermark) | Tambahkan watermark teks atau gambar ke gambar |
+| [Compress Image](#compress-image) | Compress images to reduce file size while maintaining quality |
+| [Convert Image](#convert-image) | Convert image to different format (PNG, JPEG, WEBP, etc.) |
+| [Crop Image](#crop-image) | Crop image to specified region |
+| [Download Image](#download-image) | Download image from URL to local file |
+| [OCR - Extract Text](#ocr---extract-text) | Extract text from images using Tesseract OCR |
+| [Generate QR Code](#generate-qr-code) | Generate QR codes from text, URLs, or data |
+| [Resize Image](#resize-image) | Resize images to specified dimensions with various algorithms |
+| [Rotate Image](#rotate-image) | Rotate image by specified angle |
+| [Add Watermark](#add-watermark) | Add text or image watermark to images |
 
 ## Modules
 
-### Kompres Gambar
+### Compress Image
 
 `image.compress`
 
-Kompres gambar untuk mengurangi ukuran file sambil menjaga kualitas
+Compress images to reduce file size while maintaining quality
 
 **Parameters:**
 
@@ -39,10 +39,10 @@ Kompres gambar untuk mengurangi ukuran file sambil menjaga kualitas
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Path ke gambar terkompres |
-| `original_size_bytes` | number | Path ke gambar terkompres |
-| `compressed_size_bytes` | number | Ukuran file asli dalam bytes |
-| `compression_ratio` | number | Ukuran file terkompres dalam bytes |
+| `output_path` | string | Path to the compressed image |
+| `original_size_bytes` | number | Original file size in bytes |
+| `compressed_size_bytes` | number | Compressed file size in bytes |
+| `compression_ratio` | number | Compression ratio (original/compressed) |
 
 **Example:** Compress with quality setting
 
@@ -58,11 +58,11 @@ input_path: /path/to/image.png
 max_size_kb: 500
 ```
 
-### Konversi Gambar
+### Convert Image
 
 `image.convert`
 
-Konversi gambar ke format berbeda (PNG, JPEG, WEBP, dll.)
+Convert image to different format (PNG, JPEG, WEBP, etc.)
 
 **Parameters:**
 
@@ -78,10 +78,10 @@ Konversi gambar ke format berbeda (PNG, JPEG, WEBP, dll.)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Path ke gambar terkonversi |
-| `size` | number | Path ke gambar terkonversi |
-| `format` | string | Path ke gambar terkonversi |
-| `dimensions` | object | Ukuran file dalam bytes |
+| `path` | string | Path to the converted image |
+| `size` | number | File size in bytes |
+| `format` | string | Output format |
+| `dimensions` | object | Image dimensions {width, height} |
 
 **Example:** Convert PNG to JPEG
 
@@ -91,32 +91,32 @@ format: jpeg
 quality: 90
 ```
 
-### Potong Gambar
+### Crop Image
 
 `image.crop`
 
-Potong gambar ke koordinat yang ditentukan
+Crop image to specified region
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | Jalur ke gambar input |
-| `output_path` | string | Yes | - | Jalur untuk gambar output |
-| `left` | number | Yes | - | Koordinat kiri area pemotongan |
-| `top` | number | Yes | - | Koordinat atas area pemotongan |
-| `right` | number | Yes | - | Koordinat kanan area pemotongan |
-| `bottom` | number | Yes | - | Koordinat bawah area pemotongan |
+| `input_path` | string | Yes | - | Path to the source image |
+| `output_path` | string | Yes | - | Path to save the cropped image |
+| `left` | number | Yes | - | Left coordinate of crop region (pixels) |
+| `top` | number | Yes | - | Top coordinate of crop region (pixels) |
+| `right` | number | Yes | - | Right coordinate of crop region (pixels) |
+| `bottom` | number | Yes | - | Bottom coordinate of crop region (pixels) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Jalur ke gambar yang dipotong |
-| `width` | integer | Lebar gambar yang dipotong |
-| `height` | integer | Tinggi gambar yang dipotong |
-| `original_width` | integer | Lebar gambar asli |
-| `original_height` | integer | Tinggi gambar asli |
+| `output_path` | string | Path to the cropped image |
+| `width` | integer | Width of the cropped image |
+| `height` | integer | Height of the cropped image |
+| `original_width` | integer | Original image width |
+| `original_height` | integer | Original image height |
 
 **Example:** Crop center region
 
@@ -129,11 +129,11 @@ right: 500
 bottom: 400
 ```
 
-### Unduh Gambar
+### Download Image
 
 `image.download`
 
-Unduh gambar dari URL ke file lokal
+Download image from URL to local file
 
 **Parameters:**
 
@@ -149,10 +149,10 @@ Unduh gambar dari URL ke file lokal
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Path file lokal gambar yang diunduh |
-| `size` | number | Path file lokal gambar yang diunduh |
-| `content_type` | string | Path file lokal gambar yang diunduh |
-| `filename` | string | Ukuran file dalam bytes |
+| `path` | string | Local file path of downloaded image |
+| `size` | number | File size in bytes |
+| `content_type` | string | Content type of the image |
+| `filename` | string | Filename of the downloaded image |
 
 **Example:** Download image from URL
 
@@ -161,28 +161,28 @@ url: https://example.com/photo.jpg
 output_dir: /tmp/images
 ```
 
-### Ekstrak Teks OCR
+### OCR - Extract Text
 
 `image.ocr`
 
-Ekstrak teks dari gambar menggunakan OCR
+Extract text from images using Tesseract OCR
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | Yes | - | Jalur ke file gambar |
-| `language` | string | No | `eng` | Kode bahasa untuk OCR (mis. eng, chi_sim) |
-| `psm` | number | No | `3` | Mode segmentasi halaman Tesseract |
-| `output_type` | select (`text`, `data`, `boxes`) | No | `text` | Jenis output OCR (teks atau data) |
+| `image_path` | string | Yes | - | Path to the image file |
+| `language` | string | No | `eng` | OCR language code (e.g. eng, chi_tra, jpn) |
+| `psm` | number | No | `3` | Tesseract page segmentation mode (0-13) |
+| `output_type` | select (`text`, `data`, `boxes`) | No | `text` | Type of OCR output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | Teks yang diekstrak dari gambar |
-| `confidence` | number | Skor kepercayaan OCR |
-| `language` | string | Bahasa yang digunakan untuk OCR |
+| `text` | string | Extracted text from the image |
+| `confidence` | number | Average OCR confidence score (0-100) |
+| `language` | string | Language used for OCR |
 
 **Example:** Extract text from image
 
@@ -191,11 +191,11 @@ image_path: /path/to/document.png
 language: eng
 ```
 
-### Hasilkan Kode QR
+### Generate QR Code
 
 `image.qrcode_generate`
 
-Hasilkan kode QR dari teks, URL, atau data
+Generate QR codes from text, URLs, or data
 
 **Parameters:**
 
@@ -216,9 +216,9 @@ Hasilkan kode QR dari teks, URL, atau data
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Path ke gambar kode QR yang dihasilkan |
-| `file_size` | number | Path ke gambar kode QR yang dihasilkan |
-| `dimensions` | object | Ukuran file output dalam bytes |
+| `output_path` | string | Path to the generated QR code image |
+| `file_size` | number | Size of the output file in bytes |
+| `dimensions` | object | Image dimensions {width, height} |
 
 **Example:** Generate URL QR code
 
@@ -244,11 +244,11 @@ format: svg
 border: 2
 ```
 
-### Ubah Ukuran Gambar
+### Resize Image
 
 `image.resize`
 
-Ubah ukuran gambar ke dimensi tertentu dengan berbagai algoritma
+Resize images to specified dimensions with various algorithms
 
 **Parameters:**
 
@@ -266,9 +266,9 @@ Ubah ukuran gambar ke dimensi tertentu dengan berbagai algoritma
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Path ke gambar yang diubah ukurannya |
-| `original_size` | object | Path ke gambar yang diubah ukurannya |
-| `new_size` | object | Path ke gambar yang diubah ukurannya |
+| `output_path` | string | Path to the resized image |
+| `original_size` | object | Original image dimensions |
+| `new_size` | object | New image dimensions |
 
 **Example:** Resize to specific dimensions
 
@@ -285,30 +285,30 @@ input_path: /path/to/image.png
 scale: 0.5
 ```
 
-### Putar Gambar
+### Rotate Image
 
 `image.rotate`
 
-Putar gambar dengan derajat yang ditentukan
+Rotate image by specified angle
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | Jalur ke gambar input |
-| `output_path` | string | Yes | - | Jalur untuk gambar output |
-| `angle` | number | Yes | - | Sudut rotasi dalam derajat |
-| `expand` | boolean | No | `True` | Perluas output untuk menampung seluruh gambar yang diputar |
-| `fill_color` | string | No | `#000000` | Warna untuk mengisi area kosong setelah rotasi |
+| `input_path` | string | Yes | - | Path to the source image |
+| `output_path` | string | Yes | - | Path to save the rotated image |
+| `angle` | number | Yes | - | Rotation angle in degrees (counter-clockwise) |
+| `expand` | boolean | No | `True` | Expand output canvas to fit the entire rotated image |
+| `fill_color` | string | No | `#000000` | Background fill color for empty areas (hex) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Jalur ke gambar yang diputar |
-| `width` | integer | Lebar gambar yang diputar |
-| `height` | integer | Tinggi gambar yang diputar |
-| `angle` | number | Sudut gambar diputar |
+| `output_path` | string | Path to the rotated image |
+| `width` | integer | Width of the rotated image |
+| `height` | integer | Height of the rotated image |
+| `angle` | number | Rotation angle applied |
 
 **Example:** Rotate 90 degrees
 
@@ -318,30 +318,30 @@ output_path: /path/to/rotated.png
 angle: 90
 ```
 
-### Tambahkan Watermark
+### Add Watermark
 
 `image.watermark`
 
-Tambahkan watermark teks atau gambar ke gambar
+Add text or image watermark to images
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | Jalur ke gambar input |
-| `output_path` | string | Yes | - | Jalur untuk gambar output |
-| `text` | string | No | - | Teks yang digunakan sebagai watermark |
-| `watermark_image` | string | No | - | Jalur ke file gambar yang digunakan sebagai watermark |
-| `position` | select (`center`, `top-left`, `top-right`, `bottom-left`, `bottom-right`) | No | `bottom-right` | Posisi watermark pada gambar |
-| `opacity` | number | No | `0.5` | Opasitas watermark (0.0 hingga 1.0) |
-| `font_size` | number | No | `36` | Ukuran font untuk watermark teks |
+| `input_path` | string | Yes | - | Path to the source image |
+| `output_path` | string | Yes | - | Path to save the watermarked image |
+| `text` | string | No | - | Text to use as watermark (optional if watermark_image is set) |
+| `watermark_image` | string | No | - | Path to watermark image (optional if text is set) |
+| `position` | select (`center`, `top-left`, `top-right`, `bottom-left`, `bottom-right`) | No | `bottom-right` | Watermark position on the image |
+| `opacity` | number | No | `0.5` | Watermark opacity (0.0 = transparent, 1.0 = opaque) |
+| `font_size` | number | No | `36` | Font size for text watermark |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Jalur ke gambar dengan watermark |
-| `watermark_type` | string | Jenis watermark yang diterapkan (teks atau gambar) |
+| `output_path` | string | Path to the watermarked image |
+| `watermark_type` | string | Type of watermark applied (text or image) |
 
 **Example:** Add text watermark
 

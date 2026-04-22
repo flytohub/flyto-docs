@@ -6,23 +6,23 @@ MongoDB, MySQL, PostgreSQL, and Redis database operations.
 
 | Module | Description |
 |--------|-------------|
-| [Insertion base de donnees](#insertion-base-de-donnees) | Inserer des donnees dans les tables de base de donnees |
-| [Requete base de donnees](#requete-base-de-donnees) | Executer des requetes SQL sur des bases de donnees PostgreSQL, MySQL ou SQLite |
-| [Mise a jour base de donnees](#mise-a-jour-base-de-donnees) | Mettre a jour des donnees dans les tables de base de donnees |
-| [Recherche MongoDB](#recherche-mongodb) | Interroger des documents depuis une collection MongoDB |
-| [Insertion MongoDB](#insertion-mongodb) | Inserer un ou plusieurs documents dans une collection MongoDB |
-| [Requete MySQL](#requete-mysql) | Executer une requete SQL sur une base de donnees MySQL et retourner les resultats |
-| [Requete PostgreSQL](#requete-postgresql) | Executer une requete SQL sur une base de donnees PostgreSQL et retourner les resultats |
-| [Redis Obtenir](#redis-obtenir) | Obtenir une valeur du cache Redis |
-| [Redis Définir](#redis-définir) | Definir une valeur dans le cache Redis |
+| [Database Insert](#database-insert) | Insert data into database tables |
+| [Database Query](#database-query) | Execute SQL queries on PostgreSQL, MySQL, or SQLite databases |
+| [Database Update](#database-update) | Update data in database tables |
+| [MongoDB Find](#mongodb-find) | Query documents from MongoDB collection |
+| [MongoDB Insert](#mongodb-insert) | Insert one or more documents into MongoDB collection |
+| [MySQL Query](#mysql-query) | Execute a SQL query on MySQL database and return results |
+| [PostgreSQL Query](#postgresql-query) | Execute a SQL query on PostgreSQL database and return results |
+| [Redis Get](#redis-get) | Get a value from Redis cache |
+| [Redis Set](#redis-set) | Set a value in Redis cache |
 
 ## Modules
 
-### Insertion base de donnees
+### Database Insert
 
 `database.insert`
 
-Inserer des donnees dans les tables de base de donnees
+Insert data into database tables
 
 **Parameters:**
 
@@ -43,8 +43,8 @@ Inserer des donnees dans les tables de base de donnees
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | Nombre de lignes inserees |
-| `returning_data` | array | Nombre de lignes inserees |
+| `inserted_count` | number | Number of rows inserted |
+| `returning_data` | array | Returned data from insert |
 
 **Example:** Insert single row
 
@@ -54,11 +54,11 @@ data: {"name": "John", "email": "john@example.com"}
 database_type: postgresql
 ```
 
-### Requete base de donnees
+### Database Query
 
 `database.query`
 
-Executer des requetes SQL sur des bases de donnees PostgreSQL, MySQL ou SQLite
+Execute SQL queries on PostgreSQL, MySQL, or SQLite databases
 
 **Parameters:**
 
@@ -79,9 +79,9 @@ Executer des requetes SQL sur des bases de donnees PostgreSQL, MySQL ou SQLite
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | Lignes de resultat de la requete |
-| `row_count` | number | Lignes de resultat de la requete |
-| `columns` | array | Lignes de resultat de la requete |
+| `rows` | array | Query result rows |
+| `row_count` | number | Number of rows returned/affected |
+| `columns` | array | Column names |
 
 **Example:** Select with parameters
 
@@ -91,11 +91,11 @@ params: ["active"]
 database_type: postgresql
 ```
 
-### Mise a jour base de donnees
+### Database Update
 
 `database.update`
 
-Mettre a jour des donnees dans les tables de base de donnees
+Update data in database tables
 
 **Parameters:**
 
@@ -116,7 +116,7 @@ Mettre a jour des donnees dans les tables de base de donnees
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `updated_count` | number | Nombre de lignes mises a jour |
+| `updated_count` | number | Number of rows updated |
 
 **Example:** Update user status
 
@@ -127,11 +127,11 @@ where: {"id": 123}
 database_type: postgresql
 ```
 
-### Recherche MongoDB
+### MongoDB Find
 
 `db.mongodb.find`
 
-Interroger des documents depuis une collection MongoDB
+Query documents from MongoDB collection
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ Interroger des documents depuis une collection MongoDB
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `documents` | array | Tableau de documents correspondants |
-| `count` | number | Tableau de documents correspondants |
+| `documents` | array | Array of matching documents |
+| `count` | number | Number of documents returned |
 
 **Example:** Find all active users
 
@@ -172,11 +172,11 @@ sort: {"created_at": -1}
 limit: 20
 ```
 
-### Insertion MongoDB
+### MongoDB Insert
 
 `db.mongodb.insert`
 
-Inserer un ou plusieurs documents dans une collection MongoDB
+Insert one or more documents into MongoDB collection
 
 **Parameters:**
 
@@ -192,8 +192,8 @@ Inserer un ou plusieurs documents dans une collection MongoDB
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `inserted_count` | number | Nombre de documents inseres |
-| `inserted_ids` | array | Nombre de documents inseres |
+| `inserted_count` | number | Number of documents inserted |
+| `inserted_ids` | array | Array of inserted document IDs |
 
 **Example:** Insert single document
 
@@ -211,11 +211,11 @@ collection: products
 documents: [{"name": "Product A", "price": 19.99}, {"name": "Product B", "price": 29.99}]
 ```
 
-### Requete MySQL
+### MySQL Query
 
 `db.mysql.query`
 
-Executer une requete SQL sur une base de donnees MySQL et retourner les resultats
+Execute a SQL query on MySQL database and return results
 
 **Parameters:**
 
@@ -233,9 +233,9 @@ Executer une requete SQL sur une base de donnees MySQL et retourner les resultat
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | Tableau de lignes de resultat en objets |
-| `row_count` | number | Tableau de lignes de resultat en objets |
-| `columns` | array | Tableau de lignes de resultat en objets |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select products
 
@@ -250,11 +250,11 @@ query: SELECT * FROM orders WHERE customer_id = %s AND created_at > %s
 params: ["${customer_id}", "2024-01-01"]
 ```
 
-### Requete PostgreSQL
+### PostgreSQL Query
 
 `db.postgresql.query`
 
-Executer une requete SQL sur une base de donnees PostgreSQL et retourner les resultats
+Execute a SQL query on PostgreSQL database and return results
 
 **Parameters:**
 
@@ -268,9 +268,9 @@ Executer une requete SQL sur une base de donnees PostgreSQL et retourner les res
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `rows` | array | Tableau de lignes de resultat en objets |
-| `row_count` | number | Tableau de lignes de resultat en objets |
-| `columns` | array | Tableau de lignes de resultat en objets |
+| `rows` | array | Array of result rows as objects |
+| `row_count` | number | Number of rows returned |
+| `columns` | array | Column names in result set |
 
 **Example:** Select users
 
@@ -285,11 +285,11 @@ query: SELECT * FROM orders WHERE user_id = $1 AND status = $2
 params: ["${user_id}", "completed"]
 ```
 
-### Redis Obtenir
+### Redis Get
 
 `db.redis.get`
 
-Obtenir une valeur du cache Redis
+Get a value from Redis cache
 
 **Parameters:**
 
@@ -304,9 +304,9 @@ Obtenir une valeur du cache Redis
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | La valeur retournee |
-| `exists` | boolean | La valeur retournee |
-| `key` | string | La valeur retournee |
+| `value` | any | The returned value |
+| `exists` | boolean | The exists |
+| `key` | string | Key identifier |
 
 **Example:** Get cached value
 
@@ -324,11 +324,11 @@ port: 6379
 db: 1
 ```
 
-### Redis Définir
+### Redis Set
 
 `db.redis.set`
 
-Definir une valeur dans le cache Redis
+Set a value in Redis cache
 
 **Parameters:**
 

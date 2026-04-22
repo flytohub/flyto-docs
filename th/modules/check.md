@@ -32,8 +32,8 @@ Check if a value is an array
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_array` | boolean | Value to check |
-| `length` | number | Whether value is an array |
+| `is_array` | boolean | Whether value is an array |
+| `length` | number | Array length (if array) |
 
 ### Is Empty
 
@@ -46,14 +46,14 @@ Check if a value is empty
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `value` | any | Yes | - | Value to check |
-| `trim_strings` | boolean | No | `True` | Value to check |
+| `trim_strings` | boolean | No | `True` | Treat whitespace-only strings as empty |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_empty` | boolean | Treat whitespace-only strings as empty |
-| `type` | string | Whether value is empty |
+| `is_empty` | boolean | Whether value is empty |
+| `type` | string | Type of value |
 
 ### Is Null
 
@@ -71,7 +71,7 @@ Check if a value is null/None
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_null` | boolean | Value to check |
+| `is_null` | boolean | Whether value is null |
 
 ### Is Number
 
@@ -84,16 +84,16 @@ Check if a value is a number
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `value` | any | Yes | - | Value to check |
-| `parse_string` | boolean | No | `False` | Value to check |
-| `integer_only` | boolean | No | `False` | Consider numeric strings as numbers |
+| `parse_string` | boolean | No | `False` | Consider numeric strings as numbers |
+| `integer_only` | boolean | No | `False` | Only accept integers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_number` | boolean | Only accept integers |
-| `is_integer` | boolean | Whether value is a number |
-| `is_float` | boolean | Whether value is a number |
+| `is_number` | boolean | Whether value is a number |
+| `is_integer` | boolean | Whether value is an integer |
+| `is_float` | boolean | Whether value is a float |
 
 ### Is Object
 
@@ -111,8 +111,8 @@ Check if a value is an object
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_object` | boolean | Value to check |
-| `keys` | array | Whether value is an object |
+| `is_object` | boolean | Whether value is an object |
+| `keys` | array | Object keys (if object) |
 
 ### Is String
 
@@ -130,8 +130,8 @@ Check if a value is a string
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `is_string` | boolean | Value to check |
-| `length` | number | Whether value is a string |
+| `is_string` | boolean | Whether value is a string |
+| `length` | number | String length (if string) |
 
 ### Type Of
 
@@ -149,5 +149,5 @@ Get the type of a value
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `type` | string | Value to check |
-| `is_primitive` | boolean | Type name |
+| `type` | string | Type name |
+| `is_primitive` | boolean | Whether type is primitive |

@@ -6,15 +6,15 @@ Execute reusable templates as workflow steps.
 
 | Module | Description |
 |--------|-------------|
-| [템플릿 호출](#템플릿-호출) | 라이브러리에서 템플릿을 워크플로 단계로 실행 |
+| [Invoke Template](#invoke-template) | Execute a template from your library as a workflow step |
 
 ## Modules
 
-### 템플릿 호출
+### Invoke Template
 
 `template.invoke`
 
-라이브러리에서 템플릿을 워크플로 단계로 실행
+Execute a template from your library as a workflow step
 
 **Parameters:**
 
@@ -29,10 +29,10 @@ Execute reusable templates as workflow steps.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | 라이브러리 항목의 ID (구매/포크/소유) |
-| `result` | any | 최대 실행 시간(초) |
-| `template_id` | string | 라우팅 이벤트 (성공/오류) |
-| `execution_time_ms` | number | 템플릿 실행 결과 |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Template execution result |
+| `template_id` | string | Executed template ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 

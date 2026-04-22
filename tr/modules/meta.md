@@ -6,34 +6,34 @@ Module generation, listing, testing, and documentation.
 
 | Module | Description |
 |--------|-------------|
-| [Mevcut Modülleri Listele](#mevcut-modülleri-listele) | Kayıt defterindeki tüm mevcut modülleri listele |
-| [Modül Dokümantasyonunu Güncelle](#modül-dokümantasyonunu-güncelle) | Kayıt defterinden MODULES.md dokümantasyonunu oluştur veya güncelle |
+| [List Available Modules](#list-available-modules) | List all available modules in the registry |
+| [Update Module Documentation](#update-module-documentation) | Generate or update MODULES.md documentation from registry |
 
 ## Modules
 
-### Mevcut Modülleri Listele
+### List Available Modules
 
 `meta.modules.list`
 
-Kayıt defterindeki tüm mevcut modülleri listele
+List all available modules in the registry
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `category` | string | No | - | Modülleri kategoriye göre filtrele (örn: browser, data, ai) |
-| `tags` | array | No | - | Modülleri kategoriye göre filtrele (örn: browser, data, ai) |
-| `include_params` | boolean | No | `True` | Modülleri etiketlere göre filtrele |
-| `include_output` | boolean | No | `True` | Çıktıya parametre şemasını dahil et |
-| `format` | select (`json`, `markdown`, `compact`) | No | `json` | Yanıta çıktı şemasını dahil et |
+| `category` | string | No | - | Filter modules by category (e.g., browser, data, ai) |
+| `tags` | array | No | - | Filter modules by tags |
+| `include_params` | boolean | No | `True` | Include parameter schema in output |
+| `include_output` | boolean | No | `True` | Include output schema in response |
+| `format` | select (`json`, `markdown`, `compact`) | No | `json` | Format for module list output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `modules` | array | Kayıtlı modüllerin listesi |
-| `count` | number | Parametre şeması |
-| `formatted` | string | Çıktı şeması |
+| `modules` | array | List of registered modules |
+| `count` | number | Number of items |
+| `formatted` | string | The formatted |
 
 **Example:** List all modules
 
@@ -60,26 +60,26 @@ format: markdown
 format: compact
 ```
 
-### Modül Dokümantasyonunu Güncelle
+### Update Module Documentation
 
 `meta.modules.update_docs`
 
-Kayıt defterinden MODULES.md dokümantasyonunu oluştur veya güncelle
+Generate or update MODULES.md documentation from registry
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | No | `docs/MODULES.md` | MODULES.md dosyasının yazılacağı yol |
-| `include_examples` | boolean | No | `True` | Dokümantasyona kullanım örnekleri dahil et |
+| `output_path` | string | No | `docs/MODULES.md` | Path to write MODULES.md file |
+| `include_examples` | boolean | No | `True` | Include usage examples in documentation |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `file_path` | string | Dokümantasyona kullanım örnekleri dahil et |
-| `modules_count` | number | Dosya yolu |
-| `categories` | array | Dosya yolu |
+| `file_path` | string | The file path |
+| `modules_count` | number | The modules count |
+| `categories` | array | The categories |
 
 **Example:** Update module documentation
 

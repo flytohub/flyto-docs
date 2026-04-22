@@ -6,114 +6,114 @@ Boolean logic operations: AND, OR, NOT, equals, contains.
 
 | Module | Description |
 |--------|-------------|
-| [Logika AND](#logika-and) | Wykonaj operację logiczną AND |
-| [Logika Zawiera](#logika-zawiera) | Sprawdź, czy wartość zawiera inną wartość |
-| [Logika Równa](#logika-równa) | Sprawdź, czy dwie wartości są równe |
-| [Logika NOT](#logika-not) | Wykonaj operację logiczną NOT |
-| [Logika OR](#logika-or) | Wykonaj operację logiczną OR |
+| [Logic AND](#logic-and) | Perform logical AND operation |
+| [Logic Contains](#logic-contains) | Check if a value contains another value |
+| [Logic Equals](#logic-equals) | Check if two values are equal |
+| [Logic NOT](#logic-not) | Perform logical NOT operation |
+| [Logic OR](#logic-or) | Perform logical OR operation |
 
 ## Modules
 
-### Logika AND
+### Logic AND
 
 `logic.and`
 
-Wykonaj operację logiczną AND
+Perform logical AND operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | Wartości logiczne do połączenia za pomocą AND |
+| `values` | array | Yes | - | Boolean values to AND together |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Wartości logiczne do połączenia za pomocą AND |
-| `true_count` | number | Wynik operacji AND |
-| `total_count` | number | Wynik operacji AND |
+| `result` | boolean | Result of AND operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |
 
-### Logika Zawiera
+### Logic Contains
 
 `logic.contains`
 
-Sprawdź, czy wartość zawiera inną wartość
+Check if a value contains another value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `haystack` | text | Yes | - | Wartość do przeszukania (ciąg, tablica lub obiekt) |
-| `needle` | text | Yes | - | Wartość do przeszukania (ciąg, tablica lub obiekt) |
-| `case_sensitive` | boolean | No | `True` | Wartość do wyszukania |
+| `haystack` | text | Yes | - | Value to search in (string, array, or object) |
+| `needle` | text | Yes | - | Value to search for |
+| `case_sensitive` | boolean | No | `True` | Case sensitive search for strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Wyszukiwanie ciągów z uwzględnieniem wielkości liter |
-| `position` | number | Czy w haystack znajduje się needle |
-| `count` | number | Czy w haystack znajduje się needle |
+| `result` | boolean | Whether haystack contains needle |
+| `position` | number | Position/index where found (-1 if not found) |
+| `count` | number | Number of occurrences |
 
-### Logika Równa
+### Logic Equals
 
 `logic.equals`
 
-Sprawdź, czy dwie wartości są równe
+Check if two values are equal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `a` | text | Yes | - | Pierwsza wartość do porównania |
-| `b` | text | Yes | - | Pierwsza wartość do porównania |
-| `strict` | boolean | No | `False` | Druga wartość do porównania |
-| `case_sensitive` | boolean | No | `True` | Wymagaj tego samego typu (bez wymuszania typu) |
+| `a` | text | Yes | - | First value to compare |
+| `b` | text | Yes | - | Second value to compare |
+| `strict` | boolean | No | `False` | Require same type (no type coercion) |
+| `case_sensitive` | boolean | No | `True` | Case sensitive string comparison |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Porównanie ciągów z uwzględnieniem wielkości liter |
-| `type_a` | string | Czy wartości są równe |
-| `type_b` | string | Czy wartości są równe |
+| `result` | boolean | Whether values are equal |
+| `type_a` | string | Type of first value |
+| `type_b` | string | Type of second value |
 
-### Logika NOT
+### Logic NOT
 
 `logic.not`
 
-Wykonaj operację logiczną NOT
+Perform logical NOT operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | boolean | Yes | `False` | Wartość logiczna do zanegowania |
+| `value` | boolean | Yes | `False` | Boolean value to negate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Wartość logiczna do zanegowania |
-| `original` | boolean | Zanegowany wynik |
+| `result` | boolean | Negated result |
+| `original` | boolean | Original value |
 
-### Logika OR
+### Logic OR
 
 `logic.or`
 
-Wykonaj operację logiczną OR
+Perform logical OR operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | Wartości logiczne do połączenia za pomocą OR |
+| `values` | array | Yes | - | Boolean values to OR together |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | Wartości logiczne do połączenia za pomocą OR |
-| `true_count` | number | Wynik operacji OR |
-| `total_count` | number | Wynik operacji OR |
+| `result` | boolean | Result of OR operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |

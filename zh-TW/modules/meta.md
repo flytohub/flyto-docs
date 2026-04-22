@@ -6,34 +6,34 @@ Module generation, listing, testing, and documentation.
 
 | Module | Description |
 |--------|-------------|
-| [列出可用模組](#列出可用模組) | 列出註冊表中所有可用的模組 |
-| [更新模組文件](#更新模組文件) | 從註冊表產生或更新 MODULES.md 文件 |
+| [List Available Modules](#list-available-modules) | List all available modules in the registry |
+| [Update Module Documentation](#update-module-documentation) | Generate or update MODULES.md documentation from registry |
 
 ## Modules
 
-### 列出可用模組
+### List Available Modules
 
 `meta.modules.list`
 
-列出註冊表中所有可用的模組
+List all available modules in the registry
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `category` | string | No | - | 依類別篩選模組（例如 browser、data、ai） |
-| `tags` | array | No | - | 依類別篩選模組（例如 browser、data、ai） |
-| `include_params` | boolean | No | `True` | 依標籤篩選模組 |
-| `include_output` | boolean | No | `True` | 在輸出中包含參數結構描述 |
-| `format` | select (`json`, `markdown`, `compact`) | No | `json` | 在回應中包含輸出結構描述 |
+| `category` | string | No | - | Filter modules by category (e.g., browser, data, ai) |
+| `tags` | array | No | - | Filter modules by tags |
+| `include_params` | boolean | No | `True` | Include parameter schema in output |
+| `include_output` | boolean | No | `True` | Include output schema in response |
+| `format` | select (`json`, `markdown`, `compact`) | No | `json` | Format for module list output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `modules` | array | 已註冊模組列表 |
-| `count` | number | 參數結構描述 |
-| `formatted` | string | 輸出結構描述 |
+| `modules` | array | List of registered modules |
+| `count` | number | Number of items |
+| `formatted` | string | The formatted |
 
 **Example:** List all modules
 
@@ -60,26 +60,26 @@ format: markdown
 format: compact
 ```
 
-### 更新模組文件
+### Update Module Documentation
 
 `meta.modules.update_docs`
 
-從註冊表產生或更新 MODULES.md 文件
+Generate or update MODULES.md documentation from registry
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | No | `docs/MODULES.md` | 寫入 MODULES.md 檔案的路徑 |
-| `include_examples` | boolean | No | `True` | 在文件中包含使用範例 |
+| `output_path` | string | No | `docs/MODULES.md` | Path to write MODULES.md file |
+| `include_examples` | boolean | No | `True` | Include usage examples in documentation |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `file_path` | string | 在文件中包含使用範例 |
-| `modules_count` | number | 檔案路徑 |
-| `categories` | array | 檔案路徑 |
+| `file_path` | string | The file path |
+| `modules_count` | number | The modules count |
+| `categories` | array | The categories |
 
 **Example:** Update module documentation
 

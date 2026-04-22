@@ -6,34 +6,34 @@ Execute GraphQL queries and mutations.
 
 | Module | Description |
 |--------|-------------|
-| [GraphQL ミューテーション](#graphql-ミューテーション) | エンドポイントに対してGraphQLミューテーションを実行 |
-| [GraphQL クエリ](#graphql-クエリ) | エンドポイントに対してGraphQLクエリを実行 |
+| [GraphQL Mutation](#graphql-mutation) | Execute a GraphQL mutation against an endpoint |
+| [GraphQL Query](#graphql-query) | Execute a GraphQL query against an endpoint |
 
 ## Modules
 
-### GraphQL ミューテーション
+### GraphQL Mutation
 
 `graphql.mutation`
 
-エンドポイントに対してGraphQLミューテーションを実行
+Execute a GraphQL mutation against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | GraphQLエンドポイントのURL |
-| `mutation` | string | Yes | - | GraphQLミューテーション文字列 |
-| `variables` | object | No | - | キーと値のペアとしてのGraphQLミューテーション変数 |
-| `headers` | object | No | - | リクエストと共に送信する追加のHTTPヘッダー |
-| `auth_token` | string | No | - | 認証用のベアラートークン（Authorizationヘッダーとして追加） |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `mutation` | string | Yes | - | GraphQL mutation string |
+| `variables` | object | No | - | GraphQL mutation variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | GraphQLレスポンスデータ |
-| `errors` | array | GraphQLエラー（エラーがない場合はnull） |
-| `status_code` | number | HTTPステータスコード |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Create user mutation
 
@@ -43,29 +43,29 @@ mutation: mutation CreateUser($input: UserInput!) { createUser(input: $input) { 
 variables: {"input": {"name": "John", "email": "john@example.com"}}
 ```
 
-### GraphQL クエリ
+### GraphQL Query
 
 `graphql.query`
 
-エンドポイントに対してGraphQLクエリを実行
+Execute a GraphQL query against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | GraphQLエンドポイントのURL |
-| `query` | string | Yes | - | GraphQLクエリ文字列 |
-| `variables` | object | No | - | キーと値のペアとしてのGraphQLクエリ変数 |
-| `headers` | object | No | - | リクエストと共に送信する追加のHTTPヘッダー |
-| `auth_token` | string | No | - | 認証用のベアラートークン（Authorizationヘッダーとして追加） |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `query` | string | Yes | - | GraphQL query string |
+| `variables` | object | No | - | GraphQL query variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | GraphQLレスポンスデータ |
-| `errors` | array | GraphQLエラー（エラーがない場合はnull） |
-| `status_code` | number | HTTPステータスコード |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Simple query
 

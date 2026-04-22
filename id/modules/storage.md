@@ -6,32 +6,32 @@ Persistent key-value storage.
 
 | Module | Description |
 |--------|-------------|
-| [Hapus Nilai Tersimpan](#hapus-nilai-tersimpan) | Hapus nilai dari penyimpanan kunci-nilai yang persisten |
-| [Ambil Nilai Tersimpan](#ambil-nilai-tersimpan) | Ambil nilai dari penyimpanan kunci-nilai yang persisten |
-| [Simpan Nilai](#simpan-nilai) | Simpan nilai dalam penyimpanan kunci-nilai yang persisten |
+| [Delete Stored Value](#delete-stored-value) | Delete a value from persistent key-value storage |
+| [Get Stored Value](#get-stored-value) | Retrieve a value from persistent key-value storage |
+| [Store Value](#store-value) | Store a value in persistent key-value storage |
 
 ## Modules
 
-### Hapus Nilai Tersimpan
+### Delete Stored Value
 
 `storage.delete`
 
-Hapus nilai dari penyimpanan kunci-nilai yang persisten
+Delete a value from persistent key-value storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `namespace` | string | Yes | `default` | Namespace penyimpanan |
-| `key` | string | Yes | - | Namespace penyimpanan |
+| `namespace` | string | Yes | `default` | Storage namespace |
+| `key` | string | Yes | - | Key to delete |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Kunci untuk dihapus |
-| `deleted` | boolean | Apakah operasi berhasil |
-| `key` | string | Apakah operasi berhasil |
+| `ok` | boolean | Whether the operation succeeded |
+| `deleted` | boolean | Whether the key existed and was deleted |
+| `key` | string | The key that was deleted |
 
 **Example:** Delete cached value
 
@@ -40,28 +40,28 @@ namespace: cache
 key: api_response
 ```
 
-### Ambil Nilai Tersimpan
+### Get Stored Value
 
 `storage.get`
 
-Ambil nilai dari penyimpanan kunci-nilai yang persisten
+Retrieve a value from persistent key-value storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `namespace` | string | Yes | `default` | Namespace penyimpanan (misalnya, nama alur kerja atau proyek) |
-| `key` | string | Yes | - | Namespace penyimpanan (misalnya, nama alur kerja atau proyek) |
-| `default` | any | No | - | Kunci untuk diambil |
+| `namespace` | string | Yes | `default` | Storage namespace (e.g., workflow name or project) |
+| `key` | string | Yes | - | Key to retrieve |
+| `default` | any | No | - | Value to return if key does not exist |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Nilai untuk dikembalikan jika kunci tidak ada |
-| `found` | boolean | Apakah operasi berhasil |
-| `value` | any | Apakah operasi berhasil |
-| `key` | string | Apakah kunci ditemukan (tidak kedaluwarsa) |
+| `ok` | boolean | Whether the operation succeeded |
+| `found` | boolean | Whether the key was found (not expired) |
+| `value` | any | The stored value or default |
+| `key` | string | The key that was queried |
 
 **Example:** Get last BTC price
 
@@ -78,29 +78,29 @@ namespace: my-workflow
 key: last_run_status
 ```
 
-### Simpan Nilai
+### Store Value
 
 `storage.set`
 
-Simpan nilai dalam penyimpanan kunci-nilai yang persisten
+Store a value in persistent key-value storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `namespace` | string | Yes | `default` | Namespace penyimpanan (misalnya, nama alur kerja atau proyek) |
-| `key` | string | Yes | - | Namespace penyimpanan (misalnya, nama alur kerja atau proyek) |
-| `value` | any | Yes | - | Kunci untuk menyimpan nilai |
+| `namespace` | string | Yes | `default` | Storage namespace (e.g., workflow name or project) |
+| `key` | string | Yes | - | Key to store value under |
+| `value` | any | Yes | - | Value to store (string, number, or object) |
 | `ttl_seconds` | number | No | `0` | Time to live in seconds (optional, 0 = no expiration) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | Waktu hidup dalam detik (opsional, 0 = tidak ada kedaluwarsa) |
-| `key` | string | Apakah operasi berhasil |
-| `stored_at` | number | Apakah operasi berhasil |
-| `expires_at` | number | Kunci yang disimpan |
+| `ok` | boolean | Whether the operation succeeded |
+| `key` | string | The key that was stored |
+| `stored_at` | number | Unix timestamp when value was stored |
+| `expires_at` | number | Unix timestamp when value expires (if TTL set) |
 
 **Example:** Store BTC price
 

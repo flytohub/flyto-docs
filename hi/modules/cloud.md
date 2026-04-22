@@ -6,28 +6,28 @@ AWS S3, Azure Blob, Google Cloud Storage, and Google Workspace integrations.
 
 | Module | Description |
 |--------|-------------|
-| [S3 वस्तु हटाएं](#s3-वस्तु-हटाएं) | AWS S3 बकेट से एक वस्तु हटाएं |
-| [S3 डाउनलोड](#s3-डाउनलोड) | AWS S3 बकेट से एक फ़ाइल को स्थानीय पथ पर डाउनलोड करें |
-| [S3 वस्तुएं सूचीबद्ध करें](#s3-वस्तुएं-सूचीबद्ध-करें) | AWS S3 बकेट में वस्तुओं को सूचीबद्ध करें, वैकल्पिक उपसर्ग फ़िल्टर के साथ |
-| [S3 अपलोड](#s3-अपलोड) | AWS S3 बकेट में एक स्थानीय फ़ाइल अपलोड करें |
-| [AWS S3 डाउनलोड](#aws-s3-डाउनलोड) | AWS S3 बकेट से फ़ाइल डाउनलोड करें |
-| [AWS S3 अपलोड](#aws-s3-अपलोड) | AWS S3 बकेट में फ़ाइल या डेटा अपलोड करें |
-| [Azure डाउनलोड](#azure-डाउनलोड) | Azure Blob Storage से फ़ाइल डाउनलोड करें |
-| [Azure अपलोड](#azure-अपलोड) | Azure Blob Storage में फ़ाइल अपलोड करें |
-| [GCS डाउनलोड](#gcs-डाउनलोड) | Google Cloud Storage से फ़ाइल डाउनलोड करें |
-| [GCS अपलोड](#gcs-अपलोड) | Google Cloud Storage में फ़ाइल अपलोड करें |
-| [कैलेंडर इवेंट बनाएं](#कैलेंडर-इवेंट-बनाएं) | Google कैलेंडर में एक नया इवेंट बनाएं |
-| [कैलेंडर इवेंट सूची](#कैलेंडर-इवेंट-सूची) | Google कैलेंडर से आगामी इवेंट की सूची |
-| [Gmail खोजें](#gmail-खोजें) | Gmail खोज क्वेरी सिंटैक्स का उपयोग करके Gmail संदेश खोजें |
-| [Gmail भेजें](#gmail-भेजें) | Gmail API के माध्यम से एक ईमेल भेजें |
+| [S3 Delete Object](#s3-delete-object) | Delete an object from an AWS S3 bucket |
+| [S3 Download](#s3-download) | Download a file from an AWS S3 bucket to a local path |
+| [S3 List Objects](#s3-list-objects) | List objects in an AWS S3 bucket with optional prefix filter |
+| [S3 Upload](#s3-upload) | Upload a local file to an AWS S3 bucket |
+| [AWS S3 Download](#aws-s3-download) | Download a file from AWS S3 bucket |
+| [AWS S3 Upload](#aws-s3-upload) | Upload a file or data to AWS S3 bucket |
+| [Azure Download](#azure-download) | Download file from Azure Blob Storage |
+| [Azure Upload](#azure-upload) | Upload file to Azure Blob Storage |
+| [GCS Download](#gcs-download) | Download file from Google Cloud Storage |
+| [GCS Upload](#gcs-upload) | Upload file to Google Cloud Storage |
+| [Calendar Create Event](#calendar-create-event) | Create a new event in Google Calendar |
+| [Calendar List Events](#calendar-list-events) | List upcoming events from Google Calendar |
+| [Gmail Search](#gmail-search) | Search Gmail messages using Gmail search query syntax |
+| [Gmail Send](#gmail-send) | Send an email via the Gmail API |
 
 ## Modules
 
-### S3 वस्तु हटाएं
+### S3 Delete Object
 
 `aws.s3.delete`
 
-AWS S3 बकेट से एक वस्तु हटाएं
+Delete an object from an AWS S3 bucket
 
 **Parameters:**
 
@@ -43,9 +43,9 @@ AWS S3 बकेट से एक वस्तु हटाएं
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bucket` | string | S3 बकेट का नाम |
-| `key` | string | हटाई गई वस्तु की कुंजी |
-| `deleted` | boolean | क्या वस्तु सफलतापूर्वक हटा दी गई |
+| `bucket` | string | S3 bucket name |
+| `key` | string | Deleted object key |
+| `deleted` | boolean | Whether the object was deleted successfully |
 
 **Example:** Delete an object
 
@@ -54,11 +54,11 @@ bucket: my-bucket
 key: uploads/old-file.txt
 ```
 
-### S3 डाउनलोड
+### S3 Download
 
 `aws.s3.download`
 
-AWS S3 बकेट से एक फ़ाइल को स्थानीय पथ पर डाउनलोड करें
+Download a file from an AWS S3 bucket to a local path
 
 **Parameters:**
 
@@ -75,9 +75,9 @@ AWS S3 बकेट से एक फ़ाइल को स्थानीय �
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | स्थानीय फ़ाइल पथ जहाँ फ़ाइल सहेजी गई थी |
-| `size` | number | फ़ाइल का आकार बाइट्स में |
-| `content_type` | string | डाउनलोड की गई फ़ाइल का MIME प्रकार |
+| `path` | string | Local file path where the file was saved |
+| `size` | number | File size in bytes |
+| `content_type` | string | MIME type of the downloaded file |
 
 **Example:** Download a file from S3
 
@@ -87,11 +87,11 @@ key: data/report.csv
 output_path: /tmp/report.csv
 ```
 
-### S3 वस्तुएं सूचीबद्ध करें
+### S3 List Objects
 
 `aws.s3.list`
 
-AWS S3 बकेट में वस्तुओं को सूचीबद्ध करें, वैकल्पिक उपसर्ग फ़िल्टर के साथ
+List objects in an AWS S3 bucket with optional prefix filter
 
 **Parameters:**
 
@@ -108,9 +108,9 @@ AWS S3 बकेट में वस्तुओं को सूचीबद्
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `objects` | array | S3 वस्तुओं की सूची |
-| `count` | number | लौटी गई वस्तुओं की संख्या |
-| `truncated` | boolean | क्या परिणाम कटे हुए हैं |
+| `objects` | array | List of S3 objects |
+| `count` | number | Number of objects returned |
+| `truncated` | boolean | Whether the results are truncated |
 
 **Example:** List objects with prefix
 
@@ -120,11 +120,11 @@ prefix: uploads/
 max_keys: 50
 ```
 
-### S3 अपलोड
+### S3 Upload
 
 `aws.s3.upload`
 
-AWS S3 बकेट में एक स्थानीय फ़ाइल अपलोड करें
+Upload a local file to an AWS S3 bucket
 
 **Parameters:**
 
@@ -142,10 +142,10 @@ AWS S3 बकेट में एक स्थानीय फ़ाइल अ�
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bucket` | string | S3 बकेट का नाम |
-| `key` | string | S3 ऑब्जेक्ट कुंजी |
-| `url` | string | अपलोड की गई वस्तु का सार्वजनिक URL |
-| `size` | number | फ़ाइल का आकार बाइट्स में |
+| `bucket` | string | S3 bucket name |
+| `key` | string | S3 object key |
+| `url` | string | Public URL of the uploaded object |
+| `size` | number | File size in bytes |
 
 **Example:** Upload a local file
 
@@ -155,22 +155,22 @@ key: data/report.csv
 file_path: /tmp/report.csv
 ```
 
-### AWS S3 डाउनलोड
+### AWS S3 Download
 
 `cloud.aws_s3.download`
 
-AWS S3 बकेट से फ़ाइल डाउनलोड करें
+Download a file from AWS S3 bucket
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `aws_access_key_id` | string | No | - | AWS एक्सेस कुंजी ID (डिफ़ॉल्ट env.AWS_ACCESS_KEY_ID) |
-| `aws_secret_access_key` | string | No | - | AWS सीक्रेट एक्सेस कुंजी (डिफ़ॉल्ट env.AWS_SECRET_ACCESS_KEY) |
-| `region` | string | No | `us-east-1` | AWS क्षेत्र (डिफ़ॉल्ट env.AWS_REGION या us-east-1) |
-| `bucket` | string | Yes | - | S3 बकेट नाम |
-| `key` | string | Yes | - | S3 बकेट नाम |
-| `file_path` | string | No | - | S3 ऑब्जेक्ट कुंजी (बकेट में फ़ाइल पथ) |
+| `aws_access_key_id` | string | No | - | AWS access key ID (defaults to env.AWS_ACCESS_KEY_ID) |
+| `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
+| `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
+| `bucket` | string | Yes | - | S3 bucket name |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to save downloaded content |
 
 **Output:**
 
@@ -196,34 +196,34 @@ key: backups/database.sql
 file_path: /tmp/downloaded.sql
 ```
 
-### AWS S3 अपलोड
+### AWS S3 Upload
 
 `cloud.aws_s3.upload`
 
-AWS S3 बकेट में फ़ाइल या डेटा अपलोड करें
+Upload a file or data to AWS S3 bucket
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `aws_access_key_id` | string | No | - | AWS एक्सेस कुंजी ID (डिफ़ॉल्ट env.AWS_ACCESS_KEY_ID) |
-| `aws_secret_access_key` | string | No | - | AWS सीक्रेट एक्सेस कुंजी (डिफ़ॉल्ट env.AWS_SECRET_ACCESS_KEY) |
-| `region` | string | No | `us-east-1` | AWS क्षेत्र (डिफ़ॉल्ट env.AWS_REGION या us-east-1) |
-| `bucket` | string | Yes | - | S3 बकेट नाम |
-| `key` | string | Yes | - | S3 बकेट नाम |
-| `file_path` | string | No | - | S3 ऑब्जेक्ट कुंजी (बकेट में फ़ाइल पथ) |
-| `content` | string | No | - | अपलोड करने के लिए स्थानीय फ़ाइल पथ |
-| `content_type` | string | No | - | फ़ाइल का MIME प्रकार |
-| `acl` | string | No | `private` | फ़ाइल का MIME प्रकार |
+| `aws_access_key_id` | string | No | - | AWS access key ID (defaults to env.AWS_ACCESS_KEY_ID) |
+| `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
+| `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
+| `bucket` | string | Yes | - | S3 bucket name |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to upload |
+| `content` | string | No | - | File content to upload (as string or base64) |
+| `content_type` | string | No | - | MIME type of the file |
+| `acl` | string | No | `private` | Access control list for the object |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | अपलोड किए गए ऑब्जेक्ट का S3 URL |
-| `bucket` | string | अपलोड किए गए ऑब्जेक्ट का S3 URL |
-| `key` | string | अपलोड किए गए ऑब्जेक्ट का S3 URL |
-| `etag` | string | बकेट नाम |
+| `url` | string | S3 URL of uploaded object |
+| `bucket` | string | Bucket name |
+| `key` | string | Object key |
+| `etag` | string | ETag of uploaded object |
 
 **Example:** Upload text content
 
@@ -243,20 +243,20 @@ file_path: /tmp/backup.sql
 acl: private
 ```
 
-### Azure डाउनलोड
+### Azure Download
 
 `cloud.azure.download`
 
-Azure Blob Storage से फ़ाइल डाउनलोड करें
+Download file from Azure Blob Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `connection_string` | string | No | - | Azure Storage कनेक्शन स्ट्रिंग (env var AZURE_STORAGE_CONNECTION_STRING उपयोग करें) |
-| `container` | string | Yes | - | Azure Storage कनेक्शन स्ट्रिंग (env var AZURE_STORAGE_CONNECTION_STRING उपयोग करें) |
-| `blob_name` | string | Yes | - | Azure कंटेनर नाम |
-| `destination_path` | string | Yes | - | डाउनलोड करने के लिए Blob |
+| `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | Yes | - | Blob to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -283,30 +283,30 @@ blob_name: photos/vacation.jpg
 destination_path: /tmp/photo.jpg
 ```
 
-### Azure अपलोड
+### Azure Upload
 
 `cloud.azure.upload`
 
-Azure Blob Storage में फ़ाइल अपलोड करें
+Upload file to Azure Blob Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `file_path` | string | Yes | - | अपलोड करने के लिए स्थानीय फ़ाइल पथ |
-| `connection_string` | string | No | - | अपलोड करने के लिए स्थानीय फ़ाइल पथ |
-| `container` | string | Yes | - | Azure Storage कनेक्शन स्ट्रिंग (env var AZURE_STORAGE_CONNECTION_STRING उपयोग करें) |
-| `blob_name` | string | No | - | Azure कंटेनर नाम |
-| `content_type` | string | No | - | अपलोड किए गए blob के लिए नाम (डिफ़ॉल्ट: फ़ाइल नाम) |
+| `file_path` | string | Yes | - | Local file path to upload |
+| `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | No | - | Name for the uploaded blob (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | MIME प्रकार (वैकल्पिक) |
-| `container` | string | MIME प्रकार (वैकल्पिक) |
-| `blob_name` | string | URL पता |
-| `size` | number | कंटेनर |
+| `url` | string | URL address |
+| `container` | string | The container |
+| `blob_name` | string | The blob name |
+| `size` | number | Size in bytes |
 
 **Example:** Upload image
 
@@ -325,19 +325,19 @@ container: documents
 blob_name: reports/monthly.pdf
 ```
 
-### GCS डाउनलोड
+### GCS Download
 
 `cloud.gcs.download`
 
-Google Cloud Storage से फ़ाइल डाउनलोड करें
+Download file from Google Cloud Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bucket` | string | Yes | - | GCS बकेट नाम |
-| `object_name` | string | Yes | - | GCS बकेट नाम |
-| `destination_path` | string | Yes | - | डाउनलोड करने के लिए ऑब्जेक्ट |
+| `bucket` | string | Yes | - | GCS bucket name |
+| `object_name` | string | Yes | - | Object to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -364,31 +364,31 @@ object_name: photos/vacation.jpg
 destination_path: /tmp/photo.jpg
 ```
 
-### GCS अपलोड
+### GCS Upload
 
 `cloud.gcs.upload`
 
-Google Cloud Storage में फ़ाइल अपलोड करें
+Upload file to Google Cloud Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `file_path` | string | Yes | - | अपलोड करने के लिए स्थानीय फ़ाइल पथ |
-| `bucket` | string | Yes | - | अपलोड करने के लिए स्थानीय फ़ाइल पथ |
-| `object_name` | string | No | - | GCS बकेट नाम |
-| `content_type` | string | No | - | अपलोड किए गए ऑब्जेक्ट के लिए नाम (डिफ़ॉल्ट: फ़ाइल नाम) |
-| `public` | boolean | No | `False` | MIME प्रकार (वैकल्पिक) |
+| `file_path` | string | Yes | - | Local file path to upload |
+| `bucket` | string | Yes | - | GCS bucket name |
+| `object_name` | string | No | - | Name for the uploaded object (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
+| `public` | boolean | No | `False` | Make file publicly accessible |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | फ़ाइल को सार्वजनिक रूप से एक्सेसिबल बनाएं |
-| `bucket` | string | फ़ाइल को सार्वजनिक रूप से एक्सेसिबल बनाएं |
-| `object_name` | string | URL पता |
-| `size` | number | स्टोरेज बकेट नाम |
-| `public_url` | string | स्टोरेज में ऑब्जेक्ट नाम |
+| `url` | string | URL address |
+| `bucket` | string | Storage bucket name |
+| `object_name` | string | Object name in storage |
+| `size` | number | Size in bytes |
+| `public_url` | string | Public accessible URL |
 
 **Example:** Upload image
 
@@ -408,11 +408,11 @@ bucket: data-backup
 object_name: reports/daily.csv
 ```
 
-### कैलेंडर इवेंट बनाएं
+### Calendar Create Event
 
 `google.calendar.create_event`
 
-Google कैलेंडर में एक नया इवेंट बनाएं
+Create a new event in Google Calendar
 
 **Parameters:**
 
@@ -431,11 +431,11 @@ Google कैलेंडर में एक नया इवेंट बन�
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `event_id` | string | बनाया गया इवेंट ID |
-| `summary` | string | इवेंट का शीर्षक |
-| `start` | string | इवेंट शुरू होने का समय |
-| `end` | string | इवेंट समाप्त होने का समय |
-| `html_link` | string | Google कैलेंडर में इवेंट देखने के लिए लिंक |
+| `event_id` | string | Created event ID |
+| `summary` | string | Event title |
+| `start` | string | Event start time |
+| `end` | string | Event end time |
+| `html_link` | string | Link to view the event in Google Calendar |
 
 **Example:** Create a meeting event
 
@@ -448,11 +448,11 @@ attendees: alice@example.com, bob@example.com
 timezone: America/New_York
 ```
 
-### कैलेंडर इवेंट सूची
+### Calendar List Events
 
 `google.calendar.list_events`
 
-Google कैलेंडर से आगामी इवेंट की सूची
+List upcoming events from Google Calendar
 
 **Parameters:**
 
@@ -467,8 +467,8 @@ Google कैलेंडर से आगामी इवेंट की स�
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `events` | array | कैलेंडर इवेंट की सूची |
-| `count` | number | वापस आए इवेंट की संख्या |
+| `events` | array | List of calendar events |
+| `count` | number | Number of events returned |
 
 **Example:** List next 5 events
 
@@ -477,11 +477,11 @@ access_token: <oauth2-token>
 max_results: 5
 ```
 
-### Gmail खोजें
+### Gmail Search
 
 `google.gmail.search`
 
-Gmail खोज क्वेरी सिंटैक्स का उपयोग करके Gmail संदेश खोजें
+Search Gmail messages using Gmail search query syntax
 
 **Parameters:**
 
@@ -495,8 +495,8 @@ Gmail खोज क्वेरी सिंटैक्स का उपयो�
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `messages` | array | मेल खाने वाले संदेशों की सूची |
-| `total` | number | वापस आए संदेशों की कुल संख्या |
+| `messages` | array | List of matching messages |
+| `total` | number | Total number of messages returned |
 
 **Example:** Search for emails from a specific sender
 
@@ -506,11 +506,11 @@ query: from:boss@company.com is:unread
 max_results: 5
 ```
 
-### Gmail भेजें
+### Gmail Send
 
 `google.gmail.send`
 
-Gmail API के माध्यम से एक ईमेल भेजें
+Send an email via the Gmail API
 
 **Parameters:**
 
@@ -528,9 +528,9 @@ Gmail API के माध्यम से एक ईमेल भेजें
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `message_id` | string | Gmail संदेश ID |
-| `thread_id` | string | Gmail थ्रेड ID |
-| `to` | string | प्राप्तकर्ता का ईमेल पता |
+| `message_id` | string | Gmail message ID |
+| `thread_id` | string | Gmail thread ID |
+| `to` | string | Recipient email address |
 
 **Example:** Send a plain text email
 

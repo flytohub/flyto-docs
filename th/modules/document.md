@@ -6,22 +6,22 @@ Excel, PDF, and Word document read/write/convert.
 
 | Module | Description |
 |--------|-------------|
-| [อ่าน Excel](#อ่าน-excel) | อ่านข้อมูลจากไฟล์ Excel (xlsx, xls) |
-| [เขียน Excel](#เขียน-excel) | เขียนข้อมูลลงไฟล์ Excel (xlsx) |
-| [กรอกฟอร์ม PDF](#กรอกฟอร์ม-pdf) | กรอกฟิลด์ฟอร์ม PDF ด้วยข้อมูลและแทรกรูปภาพ (ไม่บังคับ) |
-| [สร้าง PDF](#สร้าง-pdf) | สร้างไฟล์ PDF จากเนื้อหา HTML หรือข้อความ |
-| [แปลง PDF](#แปลง-pdf) | ดึงข้อความและ metadata จากไฟล์ PDF |
-| [PDF เป็น Word](#pdf-เป็น-word) | แปลงไฟล์ PDF เป็นเอกสาร Word (.docx) |
-| [แปลงเอกสาร Word](#แปลงเอกสาร-word) | ดึงข้อความและเนื้อหาจากเอกสาร Word (.docx) |
-| [Word เป็น PDF](#word-เป็น-pdf) | แปลงเอกสาร Word (.docx) เป็นไฟล์ PDF |
+| [Read Excel](#read-excel) | Read data from Excel files (xlsx, xls) |
+| [Write Excel](#write-excel) | Write data to Excel files (xlsx) |
+| [Fill PDF Form](#fill-pdf-form) | Fill PDF form fields with data and optionally insert images |
+| [Generate PDF](#generate-pdf) | Generate PDF files from HTML content or text |
+| [Parse PDF](#parse-pdf) | Extract text and metadata from PDF files |
+| [PDF to Word](#pdf-to-word) | Convert PDF files to Word documents (.docx) |
+| [Parse Word Document](#parse-word-document) | Extract text and content from Word documents (.docx) |
+| [Word to PDF](#word-to-pdf) | Convert Word documents (.docx) to PDF files |
 
 ## Modules
 
-### อ่าน Excel
+### Read Excel
 
 `excel.read`
 
-อ่านข้อมูลจากไฟล์ Excel (xlsx, xls)
+Read data from Excel files (xlsx, xls)
 
 **Parameters:**
 
@@ -37,10 +37,10 @@ Excel, PDF, and Word document read/write/convert.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | array | แถวข้อมูลที่ดึงออกมา |
-| `headers` | array | แถวข้อมูลที่ดึงออกมา |
-| `row_count` | number | แถวข้อมูลที่ดึงออกมา |
-| `sheet_names` | array | หัวคอลัมน์ |
+| `data` | array | Extracted data rows |
+| `headers` | array | Column headers |
+| `row_count` | number | Number of data rows |
+| `sheet_names` | array | All sheet names in the workbook |
 
 **Example:** Read entire sheet
 
@@ -49,11 +49,11 @@ path: /tmp/data.xlsx
 as_dict: true
 ```
 
-### เขียน Excel
+### Write Excel
 
 `excel.write`
 
-เขียนข้อมูลลงไฟล์ Excel (xlsx)
+Write data to Excel files (xlsx)
 
 **Parameters:**
 
@@ -69,9 +69,9 @@ as_dict: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | พาธไปยังไฟล์ Excel ที่สร้าง |
-| `row_count` | number | พาธไปยังไฟล์ Excel ที่สร้าง |
-| `size` | number | พาธไปยังไฟล์ Excel ที่สร้าง |
+| `path` | string | Path to the created Excel file |
+| `row_count` | number | Number of data rows written |
+| `size` | number | File size in bytes |
 
 **Example:** Write data to Excel
 
@@ -80,11 +80,11 @@ path: /tmp/output.xlsx
 data: [{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]
 ```
 
-### กรอกฟอร์ม PDF
+### Fill PDF Form
 
 `pdf.fill_form`
 
-กรอกฟิลด์ฟอร์ม PDF ด้วยข้อมูลและแทรกรูปภาพ (ไม่บังคับ)
+Fill PDF form fields with data and optionally insert images
 
 **Parameters:**
 
@@ -100,10 +100,10 @@ data: [{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | พาธไปยัง PDF ที่กรอกแล้ว |
-| `fields_filled` | number | พาธไปยัง PDF ที่กรอกแล้ว |
-| `images_inserted` | number | พาธไปยัง PDF ที่กรอกแล้ว |
-| `file_size_bytes` | number | จำนวนรูปภาพที่แทรก |
+| `output_path` | string | Path to the filled PDF |
+| `fields_filled` | number | Number of fields filled |
+| `images_inserted` | number | Number of images inserted |
+| `file_size_bytes` | number | Size of the output PDF in bytes |
 
 **Example:** Fill form with text fields
 
@@ -122,11 +122,11 @@ fields: {"name": "Jane Doe"}
 images: [{"file": "/photos/jane.jpg", "page": 1, "x": 50, "y": 650, "width": 100, "height": 120}]
 ```
 
-### สร้าง PDF
+### Generate PDF
 
 `pdf.generate`
 
-สร้างไฟล์ PDF จากเนื้อหา HTML หรือข้อความ
+Generate PDF files from HTML content or text
 
 **Parameters:**
 
@@ -146,9 +146,9 @@ images: [{"file": "/photos/jane.jpg", "page": 1, "x": 50, "y": 650, "width": 100
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | พาธไปยัง PDF ที่สร้าง |
-| `page_count` | number | พาธไปยัง PDF ที่สร้าง |
-| `file_size_bytes` | number | จำนวนหน้าใน PDF |
+| `output_path` | string | Path to the generated PDF |
+| `page_count` | number | Number of pages in the PDF |
+| `file_size_bytes` | number | Size of the generated PDF in bytes |
 
 **Example:** Generate from HTML
 
@@ -158,11 +158,11 @@ output_path: /path/to/report.pdf
 title: Monthly Report
 ```
 
-### แปลง PDF
+### Parse PDF
 
 `pdf.parse`
 
-ดึงข้อความและ metadata จากไฟล์ PDF
+Extract text and metadata from PDF files
 
 **Parameters:**
 
@@ -177,10 +177,10 @@ title: Monthly Report
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | เนื้อหาข้อความที่ดึง |
-| `pages` | array | เนื้อหาข้อความที่ดึง |
-| `metadata` | object | เนื้อหาข้อความที่ดึง |
-| `page_count` | number | เนื้อหาข้อความต่อหน้า |
+| `text` | string | Extracted text content |
+| `pages` | array | Text content per page |
+| `metadata` | object | PDF metadata (title, author, etc.) |
+| `page_count` | number | Total number of pages |
 
 **Example:** Extract all text from PDF
 
@@ -189,11 +189,11 @@ path: /tmp/document.pdf
 pages: all
 ```
 
-### PDF เป็น Word
+### PDF to Word
 
 `pdf.to_word`
 
-แปลงไฟล์ PDF เป็นเอกสาร Word (.docx)
+Convert PDF files to Word documents (.docx)
 
 **Parameters:**
 
@@ -208,9 +208,9 @@ pages: all
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | พาธไปยังเอกสาร Word ที่สร้าง |
-| `page_count` | number | พาธไปยังเอกสาร Word ที่สร้าง |
-| `file_size` | number | จำนวนหน้าที่แปลง |
+| `output_path` | string | Path to the generated Word document |
+| `page_count` | number | Number of pages converted |
+| `file_size` | number | Size of the output file in bytes |
 
 **Example:** Convert entire PDF to Word
 
@@ -226,11 +226,11 @@ output_path: /tmp/output.docx
 pages: 1-5
 ```
 
-### แปลงเอกสาร Word
+### Parse Word Document
 
 `word.parse`
 
-ดึงข้อความและเนื้อหาจากเอกสาร Word (.docx)
+Extract text and content from Word documents (.docx)
 
 **Parameters:**
 
@@ -246,11 +246,11 @@ pages: 1-5
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | เนื้อหาข้อความทั้งหมดของเอกสาร |
-| `paragraphs` | array | เนื้อหาข้อความทั้งหมดของเอกสาร |
-| `tables` | array | เนื้อหาข้อความทั้งหมดของเอกสาร |
-| `images` | array | รายการย่อหน้า |
-| `metadata` | object | ตารางที่ดึงออกมาเป็นอาร์เรย์ |
+| `text` | string | Full text content of the document |
+| `paragraphs` | array | List of paragraphs |
+| `tables` | array | Extracted tables as arrays |
+| `images` | array | Paths to extracted images |
+| `metadata` | object | Document metadata |
 
 **Example:** Extract text from Word
 
@@ -267,11 +267,11 @@ extract_images: true
 images_output_dir: /path/to/images/
 ```
 
-### Word เป็น PDF
+### Word to PDF
 
 `word.to_pdf`
 
-แปลงเอกสาร Word (.docx) เป็นไฟล์ PDF
+Convert Word documents (.docx) to PDF files
 
 **Parameters:**
 
@@ -285,9 +285,9 @@ images_output_dir: /path/to/images/
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | พาธไปยังไฟล์ PDF ที่สร้าง |
-| `file_size` | number | พาธไปยังไฟล์ PDF ที่สร้าง |
-| `method_used` | string | ขนาดไฟล์เอาต์พุตเป็นไบต์ |
+| `output_path` | string | Path to the generated PDF file |
+| `file_size` | number | Size of the output file in bytes |
+| `method_used` | string | Conversion method that was used |
 
 **Example:** Convert Word to PDF
 

@@ -6,110 +6,110 @@ Deep merge, flatten, dot-path get/set, and unflatten.
 
 | Module | Description |
 |--------|-------------|
-| [Penggabungan Mendalam](#penggabungan-mendalam) | Gabungkan beberapa objek secara mendalam |
-| [Ratakan Objek](#ratakan-objek) | Ratakan objek bersarang menjadi satu tingkat |
-| [Dapatkan Nilai](#dapatkan-nilai) | Dapatkan nilai dari objek berdasarkan jalur |
-| [Tetapkan Nilai](#tetapkan-nilai) | Tetapkan nilai dalam objek berdasarkan jalur |
-| [Batalkan Perataan Objek](#batalkan-perataan-objek) | Batalkan perataan objek dengan notasi titik menjadi bersarang |
+| [Deep Merge](#deep-merge) | Deep merge multiple objects |
+| [Flatten Object](#flatten-object) | Flatten nested object to single level |
+| [Get Value](#get-value) | Get value from object by path |
+| [Set Value](#set-value) | Set value in object by path |
+| [Unflatten Object](#unflatten-object) | Unflatten object with dot notation to nested |
 
 ## Modules
 
-### Penggabungan Mendalam
+### Deep Merge
 
 `object.deep_merge`
 
-Gabungkan beberapa objek secara mendalam
+Deep merge multiple objects
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `objects` | array | Yes | - | Array objek untuk digabungkan |
-| `array_merge` | string | No | `replace` | Array objek untuk digabungkan |
+| `objects` | array | Yes | - | Array of objects to merge |
+| `array_merge` | string | No | `replace` | How to merge arrays |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Objek yang digabungkan |
+| `result` | object | Merged object |
 
-### Ratakan Objek
+### Flatten Object
 
 `object.flatten`
 
-Ratakan objek bersarang menjadi satu tingkat
+Flatten nested object to single level
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | Objek bersarang untuk diratakan |
-| `separator` | string | No | `.` | Objek bersarang untuk diratakan |
-| `max_depth` | number | No | `0` | Pemisah kunci |
+| `object` | object | Yes | - | Nested object to flatten |
+| `separator` | string | No | `.` | Key separator |
+| `max_depth` | number | No | `0` | Maximum depth to flatten (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Kedalaman maksimum untuk diratakan (0 = tidak terbatas) |
-| `keys` | array | Objek yang diratakan |
+| `result` | object | Flattened object |
+| `keys` | array | Flattened keys |
 
-### Dapatkan Nilai
+### Get Value
 
 `object.get`
 
-Dapatkan nilai dari objek berdasarkan jalur
+Get value from object by path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | Objek untuk mendapatkan nilai |
-| `path` | string | Yes | - | Objek untuk mendapatkan nilai |
-| `default` | any | No | - | Jalur notasi titik |
+| `object` | object | Yes | - | Object to get value from |
+| `path` | string | Yes | - | Dot notation path |
+| `default` | any | No | - | Default value if path not found |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | any | Nilai default jika jalur tidak ditemukan |
-| `found` | boolean | Nilai yang diambil |
+| `value` | any | Retrieved value |
+| `found` | boolean | Whether path was found |
 
-### Tetapkan Nilai
+### Set Value
 
 `object.set`
 
-Tetapkan nilai dalam objek berdasarkan jalur
+Set value in object by path
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | Objek untuk dimodifikasi |
-| `path` | string | Yes | - | Objek untuk dimodifikasi |
-| `value` | any | Yes | - | Jalur notasi titik |
+| `object` | object | Yes | - | Object to modify |
+| `path` | string | Yes | - | Dot notation path |
+| `value` | any | Yes | - | Value to set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Nilai untuk ditetapkan |
+| `result` | object | Modified object |
 
-### Batalkan Perataan Objek
+### Unflatten Object
 
 `object.unflatten`
 
-Batalkan perataan objek dengan notasi titik menjadi bersarang
+Unflatten object with dot notation to nested
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `object` | object | Yes | - | Objek datar untuk dibatalkan perataan |
-| `separator` | string | No | `.` | Objek datar untuk dibatalkan perataan |
+| `object` | object | Yes | - | Flat object to unflatten |
+| `separator` | string | No | `.` | Key separator |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | Pemisah kunci |
+| `result` | object | Nested object |

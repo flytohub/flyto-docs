@@ -39,7 +39,7 @@ Split array into chunks of specified size
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | array | Array of chunks |
-| `chunks` | number | Array of chunks |
+| `chunks` | number | Number of chunks |
 
 **Example:** Chunk into groups of 3
 
@@ -67,15 +67,15 @@ Remove null/empty values from array
 |------|------|----------|---------|-------------|
 | `array` | array | Yes | - | Array to compact |
 | `remove_empty_strings` | boolean | No | `True` | Remove empty strings |
-| `remove_zero` | boolean | No | `False` | Remove empty strings |
-| `remove_false` | boolean | No | `False` | Remove zero values |
+| `remove_zero` | boolean | No | `False` | Remove zero values |
+| `remove_false` | boolean | No | `False` | Remove false values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Remove false values |
-| `removed` | number | Compacted array |
+| `result` | array | Compacted array |
+| `removed` | number | Number of items removed |
 
 ### Array Difference
 
@@ -95,7 +95,7 @@ Find elements in first array not in others
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | array | Elements unique to first array |
-| `length` | number | Elements unique to first array |
+| `length` | number | Number of unique elements |
 
 **Example:** Find unique elements
 
@@ -115,14 +115,14 @@ Drop first N elements from array
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `array` | array | Yes | - | Source array |
-| `count` | number | Yes | `1` | Source array |
+| `count` | number | Yes | `1` | Number of elements to drop |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Number of elements to drop |
-| `dropped` | number | Remaining elements |
+| `result` | array | Remaining elements |
+| `dropped` | number | Number of elements dropped |
 
 ### Array Flatten
 
@@ -142,7 +142,7 @@ Flatten nested arrays into single array
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | array | Flattened array |
-| `length` | number | Flattened array |
+| `length` | number | Length of flattened array |
 
 **Example:** Flatten one level
 
@@ -169,15 +169,15 @@ Group array elements by a key
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `array` | array | Yes | - | Array of objects to group |
-| `key` | string | Yes | - | Array of objects to group |
+| `key` | string | Yes | - | Property name to group by |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `groups` | object | Property name to group by |
-| `keys` | array | Grouped results |
-| `count` | number | Grouped results |
+| `groups` | object | Grouped results |
+| `keys` | array | Group keys |
+| `count` | number | Number of groups |
 
 ### Array Intersection
 
@@ -196,7 +196,7 @@ Find common elements between arrays
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | array | Common elements |
-| `length` | number | Common elements |
+| `length` | number | Number of common elements |
 
 **Example:** Find common elements
 
@@ -258,7 +258,7 @@ Transform each element in an array
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | array | Transformed array |
-| `length` | number | Transformed array |
+| `length` | number | Length of result array |
 
 **Example:** Multiply numbers
 
@@ -296,7 +296,7 @@ Reduce array to single value
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | any | Reduced value |
-| `operation` | string | Reduced value |
+| `operation` | string | Operation that was applied |
 
 **Example:** Sum numbers
 
@@ -324,14 +324,14 @@ Take first N elements from array
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `array` | array | Yes | - | Source array |
-| `count` | number | Yes | `1` | Source array |
+| `count` | number | Yes | `1` | Number of elements to take |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Number of elements to take |
-| `length` | number | Taken elements |
+| `result` | array | Taken elements |
+| `length` | number | Number of elements taken |
 
 ### Zip Arrays
 
@@ -344,11 +344,11 @@ Combine multiple arrays element-wise
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `arrays` | array | Yes | - | Array of arrays to zip |
-| `fill_value` | any | No | - | Array of arrays to zip |
+| `fill_value` | any | No | - | Value for missing elements |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Value for missing elements |
-| `length` | number | Zipped array |
+| `result` | array | Zipped array |
+| `length` | number | Result length |

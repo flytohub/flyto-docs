@@ -6,22 +6,22 @@ Excel, PDF, and Word document read/write/convert.
 
 | Module | Description |
 |--------|-------------|
-| [Ler Excel](#ler-excel) | Ler dados de arquivos Excel (xlsx, xls) |
-| [Escrever Excel](#escrever-excel) | Escrever dados em arquivos Excel (xlsx) |
-| [Preencher Formulario PDF](#preencher-formulario-pdf) | Preencher campos de formulario PDF com dados e opcionalmente inserir imagens |
-| [Gerar PDF](#gerar-pdf) | Gerar arquivos PDF a partir de conteudo HTML ou texto |
-| [Analisar PDF](#analisar-pdf) | Extrair texto e metadados de arquivos PDF |
-| [PDF para Word](#pdf-para-word) | Converter arquivos PDF para documentos Word (.docx) |
-| [Analisar Documento Word](#analisar-documento-word) | Extrair texto e conteudo de documentos Word (.docx) |
-| [Word para PDF](#word-para-pdf) | Converter documentos Word (.docx) para arquivos PDF |
+| [Read Excel](#read-excel) | Read data from Excel files (xlsx, xls) |
+| [Write Excel](#write-excel) | Write data to Excel files (xlsx) |
+| [Fill PDF Form](#fill-pdf-form) | Fill PDF form fields with data and optionally insert images |
+| [Generate PDF](#generate-pdf) | Generate PDF files from HTML content or text |
+| [Parse PDF](#parse-pdf) | Extract text and metadata from PDF files |
+| [PDF to Word](#pdf-to-word) | Convert PDF files to Word documents (.docx) |
+| [Parse Word Document](#parse-word-document) | Extract text and content from Word documents (.docx) |
+| [Word to PDF](#word-to-pdf) | Convert Word documents (.docx) to PDF files |
 
 ## Modules
 
-### Ler Excel
+### Read Excel
 
 `excel.read`
 
-Ler dados de arquivos Excel (xlsx, xls)
+Read data from Excel files (xlsx, xls)
 
 **Parameters:**
 
@@ -37,10 +37,10 @@ Ler dados de arquivos Excel (xlsx, xls)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | array | Linhas de dados extraidas |
-| `headers` | array | Linhas de dados extraidas |
-| `row_count` | number | Linhas de dados extraidas |
-| `sheet_names` | array | Cabecalhos das colunas |
+| `data` | array | Extracted data rows |
+| `headers` | array | Column headers |
+| `row_count` | number | Number of data rows |
+| `sheet_names` | array | All sheet names in the workbook |
 
 **Example:** Read entire sheet
 
@@ -49,11 +49,11 @@ path: /tmp/data.xlsx
 as_dict: true
 ```
 
-### Escrever Excel
+### Write Excel
 
 `excel.write`
 
-Escrever dados em arquivos Excel (xlsx)
+Write data to Excel files (xlsx)
 
 **Parameters:**
 
@@ -69,9 +69,9 @@ Escrever dados em arquivos Excel (xlsx)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Caminho para o arquivo Excel criado |
-| `row_count` | number | Caminho para o arquivo Excel criado |
-| `size` | number | Caminho para o arquivo Excel criado |
+| `path` | string | Path to the created Excel file |
+| `row_count` | number | Number of data rows written |
+| `size` | number | File size in bytes |
 
 **Example:** Write data to Excel
 
@@ -80,11 +80,11 @@ path: /tmp/output.xlsx
 data: [{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]
 ```
 
-### Preencher Formulario PDF
+### Fill PDF Form
 
 `pdf.fill_form`
 
-Preencher campos de formulario PDF com dados e opcionalmente inserir imagens
+Fill PDF form fields with data and optionally insert images
 
 **Parameters:**
 
@@ -100,10 +100,10 @@ Preencher campos de formulario PDF com dados e opcionalmente inserir imagens
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Caminho para o PDF preenchido |
-| `fields_filled` | number | Caminho para o PDF preenchido |
-| `images_inserted` | number | Caminho para o PDF preenchido |
-| `file_size_bytes` | number | Numero de imagens inseridas |
+| `output_path` | string | Path to the filled PDF |
+| `fields_filled` | number | Number of fields filled |
+| `images_inserted` | number | Number of images inserted |
+| `file_size_bytes` | number | Size of the output PDF in bytes |
 
 **Example:** Fill form with text fields
 
@@ -122,11 +122,11 @@ fields: {"name": "Jane Doe"}
 images: [{"file": "/photos/jane.jpg", "page": 1, "x": 50, "y": 650, "width": 100, "height": 120}]
 ```
 
-### Gerar PDF
+### Generate PDF
 
 `pdf.generate`
 
-Gerar arquivos PDF a partir de conteudo HTML ou texto
+Generate PDF files from HTML content or text
 
 **Parameters:**
 
@@ -146,9 +146,9 @@ Gerar arquivos PDF a partir de conteudo HTML ou texto
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Caminho para o PDF gerado |
-| `page_count` | number | Caminho para o PDF gerado |
-| `file_size_bytes` | number | Numero de paginas no PDF |
+| `output_path` | string | Path to the generated PDF |
+| `page_count` | number | Number of pages in the PDF |
+| `file_size_bytes` | number | Size of the generated PDF in bytes |
 
 **Example:** Generate from HTML
 
@@ -158,11 +158,11 @@ output_path: /path/to/report.pdf
 title: Monthly Report
 ```
 
-### Analisar PDF
+### Parse PDF
 
 `pdf.parse`
 
-Extrair texto e metadados de arquivos PDF
+Extract text and metadata from PDF files
 
 **Parameters:**
 
@@ -177,10 +177,10 @@ Extrair texto e metadados de arquivos PDF
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | Conteudo de texto extraido |
-| `pages` | array | Conteudo de texto extraido |
-| `metadata` | object | Conteudo de texto extraido |
-| `page_count` | number | Conteudo de texto por pagina |
+| `text` | string | Extracted text content |
+| `pages` | array | Text content per page |
+| `metadata` | object | PDF metadata (title, author, etc.) |
+| `page_count` | number | Total number of pages |
 
 **Example:** Extract all text from PDF
 
@@ -189,11 +189,11 @@ path: /tmp/document.pdf
 pages: all
 ```
 
-### PDF para Word
+### PDF to Word
 
 `pdf.to_word`
 
-Converter arquivos PDF para documentos Word (.docx)
+Convert PDF files to Word documents (.docx)
 
 **Parameters:**
 
@@ -208,9 +208,9 @@ Converter arquivos PDF para documentos Word (.docx)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Caminho para o documento Word gerado |
-| `page_count` | number | Caminho para o documento Word gerado |
-| `file_size` | number | Numero de paginas convertidas |
+| `output_path` | string | Path to the generated Word document |
+| `page_count` | number | Number of pages converted |
+| `file_size` | number | Size of the output file in bytes |
 
 **Example:** Convert entire PDF to Word
 
@@ -226,11 +226,11 @@ output_path: /tmp/output.docx
 pages: 1-5
 ```
 
-### Analisar Documento Word
+### Parse Word Document
 
 `word.parse`
 
-Extrair texto e conteudo de documentos Word (.docx)
+Extract text and content from Word documents (.docx)
 
 **Parameters:**
 
@@ -246,11 +246,11 @@ Extrair texto e conteudo de documentos Word (.docx)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | Conteudo de texto completo do documento |
-| `paragraphs` | array | Conteudo de texto completo do documento |
-| `tables` | array | Conteudo de texto completo do documento |
-| `images` | array | Lista de paragrafos |
-| `metadata` | object | Tabelas extraidas como arrays |
+| `text` | string | Full text content of the document |
+| `paragraphs` | array | List of paragraphs |
+| `tables` | array | Extracted tables as arrays |
+| `images` | array | Paths to extracted images |
+| `metadata` | object | Document metadata |
 
 **Example:** Extract text from Word
 
@@ -267,11 +267,11 @@ extract_images: true
 images_output_dir: /path/to/images/
 ```
 
-### Word para PDF
+### Word to PDF
 
 `word.to_pdf`
 
-Converter documentos Word (.docx) para arquivos PDF
+Convert Word documents (.docx) to PDF files
 
 **Parameters:**
 
@@ -285,9 +285,9 @@ Converter documentos Word (.docx) para arquivos PDF
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | Caminho para o arquivo PDF gerado |
-| `file_size` | number | Caminho para o arquivo PDF gerado |
-| `method_used` | string | Tamanho do arquivo de saida em bytes |
+| `output_path` | string | Path to the generated PDF file |
+| `file_size` | number | Size of the output file in bytes |
+| `method_used` | string | Conversion method that was used |
 
 **Example:** Convert Word to PDF
 

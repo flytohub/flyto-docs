@@ -6,10 +6,10 @@ GitHub API, HTTP requests, and search engine integrations.
 
 | Module | Description |
 |--------|-------------|
-| [GitHub इश्यू बनाएं](#github-इश्यू-बनाएं) | GitHub रिपॉजिटरी में नया इश्यू बनाएं |
+| [Create GitHub Issue](#create-github-issue) | Create a new issue in a GitHub repository |
 | [Create GitHub Pull Request](#create-github-pull-request) | Create a new pull request in a GitHub repository |
-| [GitHub रिपॉजिटरी प्राप्त करें](#github-रिपॉजिटरी-प्राप्त-करें) | GitHub रिपॉजिटरी के बारे में जानकारी प्राप्त करें |
-| [GitHub इश्यू सूचीबद्ध करें](#github-इश्यू-सूचीबद्ध-करें) | GitHub रिपॉजिटरी से इश्यू सूचीबद्ध करें |
+| [Get GitHub Repository](#get-github-repository) | Get information about a GitHub repository |
+| [List GitHub Issues](#list-github-issues) | List issues from a GitHub repository |
 | [List GitHub Repositories](#list-github-repositories) | List repositories for a GitHub user or the authenticated user |
 | [Google Search (API)](#google-search-api) | Use Google Custom Search API to search keywords |
 | [HTTP GET Request](#http-get-request) | Send HTTP GET request to any URL |
@@ -18,11 +18,11 @@ GitHub API, HTTP requests, and search engine integrations.
 
 ## Modules
 
-### GitHub इश्यू बनाएं
+### Create GitHub Issue
 
 `api.github.create_issue`
 
-GitHub रिपॉजिटरी में नया इश्यू बनाएं
+Create a new issue in a GitHub repository
 
 **Parameters:**
 
@@ -94,32 +94,32 @@ head: feature/auth
 base: main
 ```
 
-### GitHub रिपॉजिटरी प्राप्त करें
+### Get GitHub Repository
 
 `api.github.get_repo`
 
-GitHub रिपॉजिटरी के बारे में जानकारी प्राप्त करें
+Get information about a GitHub repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `owner` | string | Yes | - | रिपॉजिटरी मालिक (यूज़रनेम या संगठन) |
-| `repo` | string | Yes | - | रिपॉजिटरी मालिक (यूज़रनेम या संगठन) |
-| `token` | string | No | - | रिपॉजिटरी नाम |
+| `owner` | string | Yes | - | Repository owner (username or organization) |
+| `repo` | string | Yes | - | Repository name |
+| `token` | string | No | - | GitHub Personal Access Token (optional but recommended) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | GitHub पर्सनल एक्सेस टोकन (वैकल्पिक लेकिन अनुशंसित) |
-| `repo` | object | ऑपरेशन स्थिति (सफलता/त्रुटि) |
-| `name` | string | ऑपरेशन स्थिति (सफलता/त्रुटि) |
-| `full_name` | string | रिपॉजिटरी जानकारी |
-| `description` | string | आइटम का नाम |
-| `stars` | number | पूर्ण रिपॉजिटरी नाम |
-| `forks` | number | आइटम विवरण |
-| `url` | string | GitHub रिपॉजिटरी के बारे में जानकारी प्राप्त करें |
+| `status` | string | Operation status (success/error) |
+| `repo` | object | Repository information |
+| `name` | string | Name of the item |
+| `full_name` | string | Full repository name |
+| `description` | string | Item description |
+| `stars` | number | Number of stars |
+| `forks` | number | Number of forks |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -128,11 +128,11 @@ owner: octocat
 repo: Hello-World
 ```
 
-### GitHub इश्यू सूचीबद्ध करें
+### List GitHub Issues
 
 `api.github.list_issues`
 
-GitHub रिपॉजिटरी से इश्यू सूचीबद्ध करें
+List issues from a GitHub repository
 
 **Parameters:**
 
@@ -219,10 +219,10 @@ Use Google Custom Search API to search keywords
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ऑपरेशन स्थिति |
-| `data` | array | खोज परिणाम डेटा |
-| `count` | number | खोज परिणामों की संख्या |
-| `total_results` | number | कुल परिणाम गणना |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
+| `total_results` | number | Total number of search results available |
 
 **Example:** Search Python tutorials
 
@@ -251,10 +251,10 @@ Send HTTP GET request to any URL
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | HTTP स्थिति कोड |
-| `headers` | object | प्रतिक्रिया हेडर्स |
-| `body` | string | प्रतिक्रिया बॉडी |
-| `json` | object | JSON प्रतिक्रिया (यदि लागू हो) |
+| `status_code` | number | HTTP status code |
+| `headers` | object | HTTP headers |
+| `body` | string | Response body content |
+| `json` | object | Parsed JSON response data |
 
 **Example:** Fetch API data
 

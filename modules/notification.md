@@ -30,9 +30,9 @@ Make a voice call via Twilio
 |------|------|----------|---------|-------------|
 | `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
 | `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
-| `from_number` | string | Yes | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
-| `to_number` | string | Yes | - | Twilio phone number |
-| `twiml_url` | string | Yes | - | Recipient phone number |
+| `from_number` | string | Yes | - | Twilio phone number |
+| `to_number` | string | Yes | - | Recipient phone number |
+| `twiml_url` | string | Yes | - | URL to TwiML instructions |
 
 **Output:**
 
@@ -64,17 +64,17 @@ Send SMS message via Twilio
 | `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
 | `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
 | `from_number` | string | Yes | - | Twilio phone number (e.g. +1234567890) |
-| `to_number` | string | Yes | - | Twilio phone number (e.g. +1234567890) |
-| `message` | string | Yes | - | Recipient phone number (e.g. +1234567890) |
+| `to_number` | string | Yes | - | Recipient phone number (e.g. +1234567890) |
+| `message` | string | Yes | - | SMS message text |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sid` | string | SMS message text |
-| `status` | string | SMS message text |
-| `to` | string | The sid |
-| `from` | string | Operation status (success/error) |
+| `sid` | string | The sid |
+| `status` | string | Operation status (success/error) |
+| `to` | string | The to |
+| `from` | string | The from |
 
 **Example:** Send notification SMS
 
@@ -103,17 +103,17 @@ Send message to Discord via webhook
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `webhook_url` | string | No | - | Discord webhook URL (from env.DISCORD_WEBHOOK_URL or direct input) |
-| `content` | string | Yes | - | Discord webhook URL (from env.DISCORD_WEBHOOK_URL or direct input) |
-| `username` | string | No | - | The message to send |
-| `avatar_url` | string | No | - | Override bot username (optional) |
+| `content` | string | Yes | - | The message to send |
+| `username` | string | No | - | Override bot username (optional) |
+| `avatar_url` | string | No | - | Bot avatar image URL (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Bot avatar image URL (optional) |
-| `sent` | boolean | Operation status (success/error) |
-| `message` | string | Send message to Discord channel via webhook URL |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -132,22 +132,22 @@ Send email via SMTP
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `smtp_server` | string | Yes | - | SMTP server hostname (e.g., smtp.gmail.com) |
-| `smtp_port` | number | No | `587` | SMTP server hostname (e.g., smtp.gmail.com) |
-| `username` | string | Yes | - | SMTP port (587 for TLS, 465 for SSL) |
-| `password` | string | Yes | - | SMTP username |
-| `from_email` | string | Yes | - | SMTP password (use env variable!) |
-| `to_email` | string | Yes | - | Sender email address |
-| `subject` | string | Yes | - | Recipient email address |
-| `body` | text | Yes | - | Email subject |
-| `html` | boolean | No | `False` | Email body (HTML supported) |
+| `smtp_port` | number | No | `587` | SMTP port (587 for TLS, 465 for SSL) |
+| `username` | string | Yes | - | SMTP username |
+| `password` | string | Yes | - | SMTP password (use env variable!) |
+| `from_email` | string | Yes | - | Sender email address |
+| `to_email` | string | Yes | - | Recipient email address |
+| `subject` | string | Yes | - | Email subject |
+| `body` | text | Yes | - | Email body (HTML supported) |
+| `html` | boolean | No | `False` | Send body as HTML |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Send body as HTML |
-| `sent` | boolean | Operation status (success/error) |
-| `message` | string | Operation status (success/error) |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -171,18 +171,18 @@ Send message to Slack via webhook
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `webhook_url` | string | No | - | Slack webhook URL (from env.SLACK_WEBHOOK_URL or direct input) |
-| `text` | string | Yes | - | Slack webhook URL (from env.SLACK_WEBHOOK_URL or direct input) |
-| `channel` | string | No | - | The message to send |
-| `username` | string | No | - | Override default channel (optional) |
-| `icon_emoji` | string | No | - | Override bot username (optional) |
+| `text` | string | Yes | - | The message to send |
+| `channel` | string | No | - | Override default channel (optional) |
+| `username` | string | No | - | Override bot username (optional) |
+| `icon_emoji` | string | No | - | Bot icon emoji (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Bot icon emoji (optional) |
-| `sent` | boolean | Operation status (success/error) |
-| `message` | string | Operation status (success/error) |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -242,18 +242,18 @@ Send message via Telegram Bot API
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `bot_token` | string | No | - | Telegram bot token (from env.TELEGRAM_BOT_TOKEN or direct input) |
-| `chat_id` | string | Yes | - | Telegram bot token (from env.TELEGRAM_BOT_TOKEN or direct input) |
-| `text` | string | Yes | - | Telegram chat ID or channel username |
-| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | The message to send |
+| `chat_id` | string | Yes | - | Telegram chat ID or channel username |
+| `text` | string | Yes | - | The message to send |
+| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | Message formatting mode |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Message formatting mode |
-| `sent` | boolean | Operation status (success/error) |
-| `message_id` | number | Operation status (success/error) |
-| `message` | string | Whether notification was sent |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message_id` | number | Message identifier |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -285,7 +285,7 @@ Send message via WhatsApp Business API (Meta Cloud API)
 | `message` | text | Yes | - | The message text to send |
 | `access_token` | password | Yes | - | Meta access token for WhatsApp Business API |
 | `message_type` | select (`text`, `template`) | No | `text` | Type of message to send |
-| `template_name` | string | No | - | WhatsApp message template name (required if message_type is template) |
+| `template_name` | string | No | - | WhatsApp message template name (required if message_type is "template") |
 | `template_language` | string | No | `en` | Template language code |
 
 **Output:**

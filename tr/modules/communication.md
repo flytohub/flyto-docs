@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [E-posta Oku](#e-posta-oku) | IMAP sunucusundan e-postaları oku |
-| [E-posta Gönder](#e-posta-gönder) | SMTP sunucusu üzerinden e-posta gönder |
-| [Slack Mesajı Gönder](#slack-mesajı-gönder) | Gelen webhook üzerinden Slack kanallarına mesaj gönder |
-| [Webhook Tetikle](#webhook-tetikle) | Webhook URL'sine HTTP POST isteği gönder |
+| [Read Email](#read-email) | Read emails from IMAP server |
+| [Send Email](#send-email) | Send email via SMTP server |
+| [Send Slack Message](#send-slack-message) | Send messages to Slack channels via incoming webhook |
+| [Trigger Webhook](#trigger-webhook) | Send HTTP POST request to a webhook URL |
 
 ## Modules
 
-### E-posta Oku
+### Read Email
 
 `email.read`
 
-IMAP sunucusundan e-postaları oku
+Read emails from IMAP server
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ IMAP sunucusundan e-postaları oku
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `emails` | array | E-posta nesneleri listesi |
-| `count` | number | E-posta nesneleri listesi |
+| `emails` | array | List of email objects |
+| `count` | number | Number of emails fetched |
 
 **Example:** Read recent unread emails
 
@@ -49,11 +49,11 @@ unread_only: true
 limit: 5
 ```
 
-### E-posta Gönder
+### Send Email
 
 `email.send`
 
-SMTP sunucusu üzerinden e-posta gönder
+Send email via SMTP server
 
 **Parameters:**
 
@@ -77,9 +77,9 @@ SMTP sunucusu üzerinden e-posta gönder
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sent` | boolean | E-posta başarıyla gönderildi mi |
-| `message_id` | string | E-posta başarıyla gönderildi mi |
-| `recipients` | array | E-posta başarıyla gönderildi mi |
+| `sent` | boolean | Whether email was sent successfully |
+| `message_id` | string | Email message ID |
+| `recipients` | array | List of recipients |
 
 **Example:** Send simple email
 
@@ -89,11 +89,11 @@ subject: Hello
 body: This is a test email.
 ```
 
-### Slack Mesajı Gönder
+### Send Slack Message
 
 `slack.send`
 
-Gelen webhook üzerinden Slack kanallarına mesaj gönder
+Send messages to Slack channels via incoming webhook
 
 **Parameters:**
 
@@ -111,7 +111,7 @@ Gelen webhook üzerinden Slack kanallarına mesaj gönder
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sent` | boolean | Mesaj başarıyla gönderildi mi |
+| `sent` | boolean | Whether message was sent successfully |
 
 **Example:** Send simple message
 
@@ -127,11 +127,11 @@ username: Flyto Bot
 icon_emoji: :white_check_mark:
 ```
 
-### Webhook Tetikle
+### Trigger Webhook
 
 `webhook.trigger`
 
-Webhook URL'sine HTTP POST isteği gönder
+Send HTTP POST request to a webhook URL
 
 **Parameters:**
 
@@ -149,9 +149,9 @@ Webhook URL'sine HTTP POST isteği gönder
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | HTTP yanıt durum kodu |
-| `response` | object | HTTP yanıt durum kodu |
-| `headers` | object | HTTP yanıt durum kodu |
+| `status_code` | number | HTTP response status code |
+| `response` | object | Response body (if JSON) |
+| `headers` | object | Response headers |
 
 **Example:** Simple POST webhook
 

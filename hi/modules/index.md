@@ -1,6 +1,6 @@
 # Modules
 
-flyto-core ships 435+ modules. Each module is a self-contained unit of work with defined inputs, outputs, and evidence.
+flyto-core ships 438+ modules. Each module is a self-contained unit of work with defined inputs, outputs, and evidence.
 
 ## Browse by Category
 
@@ -9,7 +9,7 @@ flyto-core ships 435+ modules. Each module is a self-contained unit of work with
 | Category | Modules | Description |
 |----------|---------|-------------|
 | [Browser Automation](/hi/modules/browser) | 54 | Full web automation: navigation, interaction, data extraction, screenshots, and performance monitoring. |
-| [Atomic](/hi/modules/atomic) | 44 | Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and testing. |
+| [Atomic](/hi/modules/atomic) | 45 | Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and testing. |
 | [Flow Control](/hi/modules/flow-control) | 24 | Branching, loops, parallelism, subflows, triggers, and error handling. |
 | [File Operations](/hi/modules/file-operations) | 3 | Copy, move, and delete files. |
 | [Sandbox](/hi/modules/sandbox) | 3 | Execute JavaScript, Python, or shell commands in isolated environments. |
@@ -65,7 +65,7 @@ flyto-core ships 435+ modules. Each module is a self-contained unit of work with
 | [Validate](/hi/modules/validate) | 7 | Validate email, URL, phone, IP, UUID, credit card, and JSON Schema. |
 | [Check](/hi/modules/check) | 7 | Runtime type checking utilities. |
 | [Analysis](/hi/modules/analysis) | 6 | HTML analysis modules for readability, forms, tables, and metadata extraction. |
-| [Testing](/hi/modules/testing) | 6 | Assertion utilities: equal, contains, length, true, not null, greater than. |
+| [Testing](/hi/modules/testing) | 8 | Assertion utilities: equal, contains, length, true, not null, greater than. |
 | [Compare](/hi/modules/compare) | 1 | Threshold-based change detection. |
 
 ### Utilities

@@ -6,38 +6,38 @@ Build, run, inspect, and manage Docker containers.
 
 | Module | Description |
 |--------|-------------|
-| [Docker イメージをビルド](#docker-イメージをビルド) | Dockerfile から Docker イメージをビルド |
-| [Docker コンテナを検査](#docker-コンテナを検査) | Docker コンテナの詳細情報を取得 |
-| [コンテナログ取得](#コンテナログ取得) | Dockerコンテナからログを取得 |
-| [Dockerコンテナ一覧](#dockerコンテナ一覧) | Dockerコンテナを一覧表示 |
-| [Docker コンテナを実行](#docker-コンテナを実行) | イメージから Docker コンテナを実行 |
-| [Docker コンテナを停止](#docker-コンテナを停止) | 実行中の Docker コンテナを停止 |
+| [Build Docker Image](#build-docker-image) | Build a Docker image from a Dockerfile |
+| [Inspect Docker Container](#inspect-docker-container) | Get detailed information about a Docker container |
+| [Get Container Logs](#get-container-logs) | Get logs from a Docker container |
+| [List Docker Containers](#list-docker-containers) | List Docker containers |
+| [Run Docker Container](#run-docker-container) | Run a Docker container from an image |
+| [Stop Docker Container](#stop-docker-container) | Stop a running Docker container |
 
 ## Modules
 
-### Docker イメージをビルド
+### Build Docker Image
 
 `docker.build`
 
-Dockerfile から Docker イメージをビルド
+Build a Docker image from a Dockerfile
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | ビルドコンテキストディレクトリへのパス |
-| `tag` | string | Yes | - | イメージの名前とオプションでタグ（例: myapp:latest） |
-| `dockerfile` | string | No | - | Dockerfile へのパス（ビルドコンテキストからの相対パス） |
-| `build_args` | object | No | - | ビルド時の変数（例: {"NODE_ENV": "production"}） |
-| `no_cache` | boolean | No | `False` | イメージをビルドする際にキャッシュを使用しない |
+| `path` | string | Yes | - | Path to the build context directory |
+| `tag` | string | Yes | - | Name and optionally tag the image (e.g. myapp:latest) |
+| `dockerfile` | string | No | - | Path to the Dockerfile (relative to build context) |
+| `build_args` | object | No | - | Build-time variables (e.g. {"NODE_ENV": "production"}) |
+| `no_cache` | boolean | No | `False` | Do not use cache when building the image |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `image_id` | string | ビルドされたイメージのID |
-| `tag` | string | イメージに適用されたタグ |
-| `size` | string | ビルドされたイメージのサイズ |
+| `image_id` | string | ID of the built image |
+| `tag` | string | Tag applied to the image |
+| `size` | string | Size of the built image |
 
 **Example:** Build from current directory
 
@@ -56,29 +56,29 @@ build_args: {"NODE_ENV": "production"}
 no_cache: true
 ```
 
-### Docker コンテナを検査
+### Inspect Docker Container
 
 `docker.inspect_container`
 
-Docker コンテナの詳細情報を取得
+Get detailed information about a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | 検査するコンテナのIDまたは名前 |
+| `container` | string | Yes | - | Container ID or name to inspect |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | 短縮コンテナID |
-| `name` | string | コンテナ名 |
-| `state` | object | コンテナの状態（ステータス、実行中、pid、終了コードなど） |
-| `image` | string | コンテナで使用されるイメージ |
-| `network_settings` | object | ネットワーク設定（IP、ポート、ネットワーク） |
-| `mounts` | array | ボリュームとバインドマウント |
-| `config` | object | コンテナ設定（環境変数、コマンド、ラベルなど） |
+| `id` | string | Short container ID |
+| `name` | string | Container name |
+| `state` | object | Container state (status, running, pid, exit_code, etc.) |
+| `image` | string | Image used by the container |
+| `network_settings` | object | Network configuration (IP, ports, networks) |
+| `mounts` | array | Volume and bind mounts |
+| `config` | object | Container configuration (env, cmd, labels, etc.) |
 
 **Example:** Inspect a container by name
 
@@ -92,27 +92,27 @@ container: my-nginx
 container: a1b2c3d4e5f6
 ```
 
-### コンテナログ取得
+### Get Container Logs
 
 `docker.logs`
 
-Dockerコンテナからログを取得
+Get logs from a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | コンテナIDまたは名前 |
-| `tail` | number | No | `100` | ログの末尾から表示する行数 |
-| `follow` | boolean | No | `False` | ログ出力をフォロー（タイムアウトまでストリーム） |
-| `timestamps` | boolean | No | `False` | ログ出力にタイムスタンプを表示 |
+| `container` | string | Yes | - | Container ID or name |
+| `tail` | number | No | `100` | Number of lines to show from the end of the logs |
+| `follow` | boolean | No | `False` | Follow log output (streams until timeout) |
+| `timestamps` | boolean | No | `False` | Show timestamps in log output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `logs` | string | コンテナログ出力 |
-| `lines` | number | 返されたログ行数 |
+| `logs` | string | Container log output |
+| `lines` | number | Number of log lines returned |
 
 **Example:** Get last 50 lines
 
@@ -129,25 +129,25 @@ tail: 100
 timestamps: true
 ```
 
-### Dockerコンテナ一覧
+### List Docker Containers
 
 `docker.ps`
 
-Dockerコンテナを一覧表示
+List Docker containers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `all` | boolean | No | `False` | すべてのコンテナを表示（デフォルトは実行中のみ） |
-| `filters` | object | No | - | コンテナをフィルター（例: {"name": "my-app", "status": "running"}） |
+| `all` | boolean | No | `False` | Show all containers (default shows just running) |
+| `filters` | object | No | - | Filter containers (e.g. {"name": "my-app", "status": "running"}) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `containers` | array | ID、名前、イメージ、ステータス、ポートを含むコンテナ一覧 |
-| `count` | number | 見つかったコンテナ数 |
+| `containers` | array | List of containers with id, name, image, status, ports |
+| `count` | number | Number of containers found |
 
 **Example:** List running containers
 
@@ -166,32 +166,32 @@ all: true
 filters: {"name": "nginx"}
 ```
 
-### Docker コンテナを実行
+### Run Docker Container
 
 `docker.run`
 
-イメージから Docker コンテナを実行
+Run a Docker container from an image
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image` | string | Yes | - | 実行する Docker イメージ（例: nginx:latest） |
-| `command` | string | No | - | コンテナ内で実行するコマンド |
-| `name` | string | No | - | コンテナに名前を付ける |
-| `ports` | object | No | - | ホスト:コンテナとしてのポートマッピング（例: {"8080": "80"}） |
-| `volumes` | object | No | - | ホストパス:コンテナパスとしてのボリュームマッピング |
-| `env` | object | No | - | コンテナ内で設定する環境変数 |
-| `detach` | boolean | No | `True` | バックグラウンドでコンテナを実行 |
-| `remove` | boolean | No | `False` | コンテナが終了したときに自動的に削除 |
-| `network` | string | No | - | コンテナをネットワークに接続 |
+| `image` | string | Yes | - | Docker image to run (e.g. nginx:latest) |
+| `command` | string | No | - | Command to run inside the container |
+| `name` | string | No | - | Assign a name to the container |
+| `ports` | object | No | - | Port mappings as host:container (e.g. {"8080": "80"}) |
+| `volumes` | object | No | - | Volume mappings as host_path:container_path |
+| `env` | object | No | - | Environment variables to set in the container |
+| `detach` | boolean | No | `True` | Run container in background |
+| `remove` | boolean | No | `False` | Automatically remove the container when it exits |
+| `network` | string | No | - | Connect the container to a network |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | 作成されたコンテナのID |
-| `status` | string | 実行後のコンテナのステータス |
+| `container_id` | string | ID of the created container |
+| `status` | string | Container status after run |
 
 **Example:** Run Nginx web server
 
@@ -211,25 +211,25 @@ remove: true
 detach: false
 ```
 
-### Docker コンテナを停止
+### Stop Docker Container
 
 `docker.stop`
 
-実行中の Docker コンテナを停止
+Stop a running Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | 停止するコンテナのIDまたは名前 |
-| `timeout` | number | No | `10` | コンテナを強制終了するまでの待機秒数 |
+| `container` | string | Yes | - | Container ID or name to stop |
+| `timeout` | number | No | `10` | Seconds to wait before killing the container |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | 停止されたコンテナのIDまたは名前 |
-| `stopped` | boolean | コンテナが正常に停止されたかどうか |
+| `container_id` | string | ID or name of the stopped container |
+| `stopped` | boolean | Whether the container was successfully stopped |
 
 **Example:** Stop a container by name
 

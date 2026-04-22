@@ -6,100 +6,100 @@ In-memory key-value cache with TTL support.
 
 | Module | Description |
 |--------|-------------|
-| [캐시 지우기](#캐시-지우기) | 모든 캐시 항목 지우기 또는 패턴으로 필터링 |
-| [캐시 삭제](#캐시-삭제) | 키로 캐시 항목 삭제 |
-| [캐시 가져오기](#캐시-가져오기) | 키로 캐시에서 값 가져오기 |
-| [캐시 설정](#캐시-설정) | 옵션 TTL과 함께 캐시에 값 설정 |
+| [Cache Clear](#cache-clear) | Clear all cache entries or filter by pattern |
+| [Cache Delete](#cache-delete) | Delete a cache entry by key |
+| [Cache Get](#cache-get) | Get a value from cache by key |
+| [Cache Set](#cache-set) | Set a value in cache with optional TTL |
 
 ## Modules
 
-### 캐시 지우기
+### Cache Clear
 
 `cache.clear`
 
-모든 캐시 항목 지우기 또는 패턴으로 필터링
+Clear all cache entries or filter by pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `pattern` | string | No | `*` | 키와 일치하는 글로브 패턴 (예: "user:*", 기본값 "*"은 모두 지움) |
-| `backend` | string | No | `memory` | 사용할 캐시 백엔드 |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis 연결 URL |
+| `pattern` | string | No | `*` | Glob pattern to match keys (e.g. "user:*", default "*" clears all) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `cleared_count` | number | 지워진 캐시 항목 수 |
-| `backend` | string | 사용된 백엔드 |
+| `cleared_count` | number | Number of cache entries cleared |
+| `backend` | string | The backend used |
 
-### 캐시 삭제
+### Cache Delete
 
 `cache.delete`
 
-키로 캐시 항목 삭제
+Delete a cache entry by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | 삭제할 캐시 키 |
-| `backend` | string | No | `memory` | 사용할 캐시 백엔드 |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis 연결 URL |
+| `key` | string | Yes | - | The cache key to delete |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | 캐시 키 |
-| `deleted` | boolean | 키가 발견되어 삭제되었는지 여부 |
-| `backend` | string | 사용된 백엔드 |
+| `key` | string | The cache key |
+| `deleted` | boolean | Whether the key was found and deleted |
+| `backend` | string | The backend used |
 
-### 캐시 가져오기
+### Cache Get
 
 `cache.get`
 
-키로 캐시에서 값 가져오기
+Get a value from cache by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | 조회할 캐시 키 |
-| `backend` | string | No | `memory` | 사용할 캐시 백엔드 |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis 연결 URL |
+| `key` | string | Yes | - | The cache key to look up |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | 캐시 키 |
-| `value` | any | 캐시된 값 (없으면 null) |
-| `hit` | boolean | 캐시에서 키를 찾았는지 여부 |
-| `backend` | string | 사용된 백엔드 |
+| `key` | string | The cache key |
+| `value` | any | The cached value (null if not found) |
+| `hit` | boolean | Whether the key was found in cache |
+| `backend` | string | The backend used |
 
-### 캐시 설정
+### Cache Set
 
 `cache.set`
 
-옵션 TTL과 함께 캐시에 값 설정
+Set a value in cache with optional TTL
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | 값을 저장할 캐시 키 |
-| `value` | string | Yes | - | 캐시할 값 (JSON 직렬화 가능한 값) |
-| `ttl` | number | No | `0` | 초 단위의 수명 (0 = 만료 없음) |
-| `backend` | string | No | `memory` | 사용할 캐시 백엔드 |
-| `redis_url` | string | No | `redis://localhost:6379` | Redis 연결 URL |
+| `key` | string | Yes | - | The cache key to store the value under |
+| `value` | string | Yes | - | The value to cache (any JSON-serializable value) |
+| `ttl` | number | No | `0` | Time-to-live in seconds (0 = no expiry) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | 캐시 키 |
-| `stored` | boolean | 값이 성공적으로 저장되었는지 여부 |
-| `ttl` | number | 초 단위의 TTL (0 = 만료 없음) |
-| `backend` | string | 사용된 백엔드 |
+| `key` | string | The cache key |
+| `stored` | boolean | Whether the value was stored successfully |
+| `ttl` | number | The TTL in seconds (0 = no expiry) |
+| `backend` | string | The backend used |

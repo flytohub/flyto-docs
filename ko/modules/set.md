@@ -6,89 +6,89 @@ Set operations: union, intersection, difference, unique.
 
 | Module | Description |
 |--------|-------------|
-| [집합 차집합](#집합-차집합) | 첫 번째 배열에 있지만 다른 배열에는 없는 요소 가져오기 |
-| [집합 교집합](#집합-교집합) | 두 개 이상의 배열의 교집합 가져오기 |
-| [집합 합집합](#집합-합집합) | 두 개 이상의 배열의 합집합 가져오기 |
-| [집합 고유](#집합-고유) | 배열에서 중복 요소 제거 |
+| [Set Difference](#set-difference) | Get elements in first array but not in others |
+| [Set Intersection](#set-intersection) | Get intersection of two or more arrays |
+| [Set Union](#set-union) | Get union of two or more arrays |
+| [Set Unique](#set-unique) | Remove duplicate elements from array |
 
 ## Modules
 
-### 집합 차집합
+### Set Difference
 
 `set.difference`
 
-첫 번째 배열에 있지만 다른 배열에는 없는 요소 가져오기
+Get elements in first array but not in others
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `source` | array | Yes | - | 소스 배열 |
-| `exclude` | array | Yes | - | 소스 배열 |
+| `source` | array | Yes | - | Source array |
+| `exclude` | array | Yes | - | Arrays of elements to exclude |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 제외할 요소의 배열 |
-| `count` | number | 소스 배열에는 있지만 제외 배열에는 없는 요소 |
-| `removed_count` | number | 소스 배열에는 있지만 제외 배열에는 없는 요소 |
+| `result` | array | Elements in source but not in exclude arrays |
+| `count` | number | Number of remaining elements |
+| `removed_count` | number | Number of elements removed |
 
-### 집합 교집합
+### Set Intersection
 
 `set.intersection`
 
-두 개 이상의 배열의 교집합 가져오기
+Get intersection of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | 교집합을 구할 배열 (배열의 배열) |
+| `arrays` | array | Yes | - | Arrays to intersect (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 교집합을 구할 배열 (배열의 배열) |
-| `count` | number | 모든 배열의 교집합 |
+| `result` | array | Intersection of all arrays |
+| `count` | number | Number of common elements |
 
-### 집합 합집합
+### Set Union
 
 `set.union`
 
-두 개 이상의 배열의 합집합 가져오기
+Get union of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | 결합할 배열 (배열의 배열) |
+| `arrays` | array | Yes | - | Arrays to combine (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 결합할 배열 (배열의 배열) |
-| `count` | number | 모든 배열의 합집합 |
+| `result` | array | Union of all arrays |
+| `count` | number | Number of unique elements |
 
-### 집합 고유
+### Set Unique
 
 `set.unique`
 
-배열에서 중복 요소 제거
+Remove duplicate elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | 중복 제거할 배열 |
-| `preserve_order` | boolean | No | `True` | 중복 제거할 배열 |
+| `array` | array | Yes | - | Array to deduplicate |
+| `preserve_order` | boolean | No | `True` | Keep first occurrence order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | 첫 번째 발생 순서 유지 |
-| `count` | number | 고유한 요소가 있는 배열 |
-| `duplicates_removed` | number | 고유한 요소가 있는 배열 |
+| `result` | array | Array with unique elements |
+| `count` | number | Number of unique elements |
+| `duplicates_removed` | number | Number of duplicates removed |

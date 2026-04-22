@@ -6,25 +6,25 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Module | Description |
 |--------|-------------|
-| [小文字変換](#小文字変換) | 文字列を小文字に変換する |
-| [文字列埋め](#文字列埋め) | 文字列を指定の長さに埋める |
-| [文字列置換](#文字列置換) | 文字列内の部分文字列を置換する |
-| [文字列反転](#文字列反転) | 文字列の文字を逆順にする |
-| [スラッグ化](#スラッグ化) | テキストをURLに適したスラッグに変換 |
-| [文字列分割](#文字列分割) | 区切り文字を使用して文字列を配列に分割する |
-| [テンプレート](#テンプレート) | 変数置換でテンプレートをレンダリング |
-| [タイトルケース変換](#タイトルケース変換) | 文字列をタイトルケースに変換する |
-| [空白除去](#空白除去) | 文字列の両端から空白を除去する |
-| [文字列切り詰め](#文字列切り詰め) | 文字列を最大長に切り詰める |
-| [大文字変換](#大文字変換) | 文字列を大文字に変換する |
+| [String Lowercase](#string-lowercase) | Convert a string to lowercase |
+| [Pad String](#pad-string) | Pad a string to a specified length |
+| [String Replace](#string-replace) | Replace occurrences of a substring in a string |
+| [String Reverse](#string-reverse) | Reverse the characters in a string |
+| [Slugify](#slugify) | Convert text to URL-friendly slug |
+| [Split String](#split-string) | Split a string into an array using a delimiter |
+| [Template](#template) | Render a template with variable substitution |
+| [Title Case String](#title-case-string) | Convert string to title case |
+| [String Trim](#string-trim) | Remove whitespace from both ends of a string |
+| [Truncate String](#truncate-string) | Truncate a string to a maximum length |
+| [String Uppercase](#string-uppercase) | Convert a string to uppercase |
 
 ## Modules
 
-### 小文字変換
+### String Lowercase
 
 `string.lowercase`
 
-文字列を小文字に変換する
+Convert a string to lowercase
 
 **Parameters:**
 
@@ -36,38 +36,38 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 小文字に変換された文字列 |
-| `original` | string | 小文字に変換された文字列 |
-| `status` | string | 操作ステータス |
+| `result` | string | Lowercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### 文字列埋め
+### Pad String
 
 `string.pad`
 
-文字列を指定の長さに埋める
+Pad a string to a specified length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 埋めるテキスト |
-| `length` | number | Yes | - | 埋めるテキスト |
-| `pad_char` | string | No | ` ` | 目標の長さ |
-| `position` | string | No | `end` | 埋める文字 |
+| `text` | string | Yes | - | Text to pad |
+| `length` | number | Yes | - | Target length |
+| `pad_char` | string | No | ` ` | Character to pad with |
+| `position` | string | No | `end` | Where to add padding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 埋められた文字列 |
-| `original` | string | 埋められた文字列 |
-| `added` | number | 埋められた文字列 |
+| `result` | string | Padded string |
+| `original` | string | Original string |
+| `added` | number | Characters added |
 
-### 文字列置換
+### String Replace
 
 `string.replace`
 
-文字列内の部分文字列を置換する
+Replace occurrences of a substring in a string
 
 **Parameters:**
 
@@ -81,17 +81,17 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 置換が適用された文字列 |
-| `original` | string | 元の入力文字列 |
-| `search` | string | 置換された検索文字列 |
-| `replace` | string | 置換後の文字列 |
-| `status` | string | 操作ステータス |
+| `result` | string | String with replacements applied |
+| `original` | string | Original input string |
+| `search` | string | Search string that was replaced |
+| `replace` | string | Replacement string used |
+| `status` | string | Operation status |
 
-### 文字列反転
+### String Reverse
 
 `string.reverse`
 
-文字列の文字を逆順にする
+Reverse the characters in a string
 
 **Parameters:**
 
@@ -103,37 +103,37 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 反転された文字列 |
-| `original` | string | 元の文字列 |
-| `length` | number | 反転された文字列の長さ |
+| `result` | string | Reversed string |
+| `original` | string | Original input string |
+| `length` | number | String length |
 
-### スラッグ化
+### Slugify
 
 `string.slugify`
 
-テキストをURLに適したスラッグに変換
+Convert text to URL-friendly slug
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | スラッグ化するテキスト |
-| `separator` | string | No | `-` | スラッグ化するテキスト |
-| `lowercase` | boolean | No | `True` | 単語の区切り |
-| `max_length` | number | No | `0` | 小文字に変換 |
+| `text` | string | Yes | - | Text to slugify |
+| `separator` | string | No | `-` | Word separator |
+| `lowercase` | boolean | No | `True` | Convert to lowercase |
+| `max_length` | number | No | `0` | Maximum slug length (0 = unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 最大スラッグ長 (0 = 無制限) |
-| `original` | string | URLに適したスラッグ |
+| `result` | string | URL-friendly slug |
+| `original` | string | Original text |
 
-### 文字列分割
+### Split String
 
 `string.split`
 
-区切り文字を使用して文字列を配列に分割する
+Split a string into an array using a delimiter
 
 **Parameters:**
 
@@ -147,41 +147,41 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `parts` | array | 分割された文字列パーツの配列 |
-| `result` | array | 分割された文字列パーツの配列 |
-| `length` | number | 分割後のパーツ数 |
-| `original` | string | 元の入力文字列 |
-| `delimiter` | string | 使用された区切り文字 |
-| `status` | string | 操作ステータス |
+| `parts` | array | Array of split string parts |
+| `result` | array | Alias for parts - array of split string parts |
+| `length` | number | Number of parts after split |
+| `original` | string | Original input string |
+| `delimiter` | string | Delimiter used for splitting |
+| `status` | string | Operation status |
 
-### テンプレート
+### Template
 
 `string.template`
 
-変数置換でテンプレートをレンダリング
+Render a template with variable substitution
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `template` | string | Yes | - | {<!-- -->{variable}<!-- -->} プレースホルダーを含むテンプレート文字列 |
-| `variables` | object | Yes | - | 置換する変数 |
-| `missing_value` | string | No | - | 未定義の変数の値 |
-| `preserve_missing` | boolean | No | `False` | 未定義の変数の値 |
+| `template` | string | Yes | - | Template string with {<!-- -->{variable}<!-- -->} placeholders |
+| `variables` | object | Yes | - | Variables to substitute |
+| `missing_value` | string | No | - | Value for undefined variables |
+| `preserve_missing` | boolean | No | `False` | Keep placeholder if variable is missing |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 変数がない場合はプレースホルダーを保持 |
-| `replaced` | number | レンダリングされたテンプレート |
-| `missing` | array | レンダリングされたテンプレート |
+| `result` | string | Rendered template |
+| `replaced` | number | Number of replacements made |
+| `missing` | array | Missing variable names |
 
-### タイトルケース変換
+### Title Case String
 
 `string.titlecase`
 
-文字列をタイトルケースに変換する
+Convert string to title case
 
 **Parameters:**
 
@@ -193,7 +193,7 @@ Text manipulation: case conversion, split, pad, slugify, template, and more.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | タイトルケースに変換された文字列 |
+| `result` | string | Title case converted string |
 
 **Example:** Convert to title case
 
@@ -207,11 +207,11 @@ text: hello world from flyto
 text: john doe
 ```
 
-### 空白除去
+### String Trim
 
 `string.trim`
 
-文字列の両端から空白を除去する
+Remove whitespace from both ends of a string
 
 **Parameters:**
 
@@ -223,39 +223,39 @@ text: john doe
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 空白が除去された文字列 |
-| `original` | string | 元の文字列 |
-| `status` | string | 操作ステータス |
+| `result` | string | Trimmed string with whitespace removed |
+| `original` | string | Original input string |
+| `status` | string | Operation status |
 
-### 文字列切り詰め
+### Truncate String
 
 `string.truncate`
 
-文字列を最大長に切り詰める
+Truncate a string to a maximum length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | 切り詰めるテキスト |
-| `length` | number | Yes | - | 切り詰めるテキスト |
-| `suffix` | string | No | `...` | 最大長 |
-| `word_boundary` | boolean | No | `False` | 省略時に追加するテキスト |
+| `text` | string | Yes | - | Text to truncate |
+| `length` | number | Yes | - | Maximum length |
+| `suffix` | string | No | `...` | Text to append if truncated |
+| `word_boundary` | boolean | No | `False` | Break at word boundary |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 単語の境界で切る |
-| `original` | string | 切り詰められた文字列 |
-| `truncated` | boolean | 切り詰められた文字列 |
-| `removed` | number | 元の文字列 |
+| `result` | string | Truncated string |
+| `original` | string | Original string |
+| `truncated` | boolean | Whether string was truncated |
+| `removed` | number | Characters removed |
 
-### 大文字変換
+### String Uppercase
 
 `string.uppercase`
 
-文字列を大文字に変換する
+Convert a string to uppercase
 
 **Parameters:**
 
@@ -267,6 +267,6 @@ text: john doe
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 大文字に変換された文字列 |
-| `original` | string | 元の文字列 |
-| `status` | string | 操作ステータス |
+| `result` | string | Uppercase converted string |
+| `original` | string | Original input string |
+| `status` | string | Operation status |

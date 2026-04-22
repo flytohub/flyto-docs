@@ -6,23 +6,23 @@ Resize, crop, compress, convert, OCR, QR codes, and watermarks.
 
 | Module | Description |
 |--------|-------------|
-| [壓縮圖片](#壓縮圖片) | 壓縮圖片以減少檔案大小同時保持品質 |
-| [轉換圖片](#轉換圖片) | 將圖片轉換為不同格式（PNG、JPEG、WEBP 等） |
-| [裁剪圖片](#裁剪圖片) | 裁剪圖片到指定座標 |
-| [下載圖片](#下載圖片) | 從網址下載圖片到本機檔案 |
-| [OCR 提取文字](#ocr-提取文字) | 使用 OCR 從圖片中提取文字 |
-| [產生 QR Code](#產生-qr-code) | 從文字、網址或資料產生 QR Code |
-| [調整圖片大小](#調整圖片大小) | 使用各種演算法將圖片調整為指定尺寸 |
-| [旋轉圖片](#旋轉圖片) | 將圖片旋轉指定角度 |
-| [新增浮水印](#新增浮水印) | 為圖片新增文字或圖片浮水印 |
+| [Compress Image](#compress-image) | Compress images to reduce file size while maintaining quality |
+| [Convert Image](#convert-image) | Convert image to different format (PNG, JPEG, WEBP, etc.) |
+| [Crop Image](#crop-image) | Crop image to specified region |
+| [Download Image](#download-image) | Download image from URL to local file |
+| [OCR - Extract Text](#ocr---extract-text) | Extract text from images using Tesseract OCR |
+| [Generate QR Code](#generate-qr-code) | Generate QR codes from text, URLs, or data |
+| [Resize Image](#resize-image) | Resize images to specified dimensions with various algorithms |
+| [Rotate Image](#rotate-image) | Rotate image by specified angle |
+| [Add Watermark](#add-watermark) | Add text or image watermark to images |
 
 ## Modules
 
-### 壓縮圖片
+### Compress Image
 
 `image.compress`
 
-壓縮圖片以減少檔案大小同時保持品質
+Compress images to reduce file size while maintaining quality
 
 **Parameters:**
 
@@ -39,10 +39,10 @@ Resize, crop, compress, convert, OCR, QR codes, and watermarks.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 壓縮後圖片的路徑 |
-| `original_size_bytes` | number | 原始檔案大小（位元組） |
-| `compressed_size_bytes` | number | 壓縮後的檔案大小（位元組） |
-| `compression_ratio` | number | 壓縮比例 |
+| `output_path` | string | Path to the compressed image |
+| `original_size_bytes` | number | Original file size in bytes |
+| `compressed_size_bytes` | number | Compressed file size in bytes |
+| `compression_ratio` | number | Compression ratio (original/compressed) |
 
 **Example:** Compress with quality setting
 
@@ -58,11 +58,11 @@ input_path: /path/to/image.png
 max_size_kb: 500
 ```
 
-### 轉換圖片
+### Convert Image
 
 `image.convert`
 
-將圖片轉換為不同格式（PNG、JPEG、WEBP 等）
+Convert image to different format (PNG, JPEG, WEBP, etc.)
 
 **Parameters:**
 
@@ -78,10 +78,10 @@ max_size_kb: 500
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 轉換後圖片的路徑 |
-| `size` | number | 檔案大小（位元組） |
-| `format` | string | 輸出格式 |
-| `dimensions` | object | 圖片尺寸 |
+| `path` | string | Path to the converted image |
+| `size` | number | File size in bytes |
+| `format` | string | Output format |
+| `dimensions` | object | Image dimensions {width, height} |
 
 **Example:** Convert PNG to JPEG
 
@@ -91,32 +91,32 @@ format: jpeg
 quality: 90
 ```
 
-### 裁剪圖片
+### Crop Image
 
 `image.crop`
 
-裁剪圖片到指定座標
+Crop image to specified region
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | 輸入圖片的路徑 |
-| `output_path` | string | Yes | - | 輸出圖片的路徑 |
-| `left` | number | Yes | - | 裁剪區域的左邊座標 |
-| `top` | number | Yes | - | 裁剪區域的上邊座標 |
-| `right` | number | Yes | - | 裁剪區域的右邊座標 |
-| `bottom` | number | Yes | - | 裁剪區域的下邊座標 |
+| `input_path` | string | Yes | - | Path to the source image |
+| `output_path` | string | Yes | - | Path to save the cropped image |
+| `left` | number | Yes | - | Left coordinate of crop region (pixels) |
+| `top` | number | Yes | - | Top coordinate of crop region (pixels) |
+| `right` | number | Yes | - | Right coordinate of crop region (pixels) |
+| `bottom` | number | Yes | - | Bottom coordinate of crop region (pixels) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 裁剪後圖片的路徑 |
-| `width` | integer | 裁剪後圖片的寬度 |
-| `height` | integer | 裁剪後圖片的高度 |
-| `original_width` | integer | 原始圖片寬度 |
-| `original_height` | integer | 原始圖片高度 |
+| `output_path` | string | Path to the cropped image |
+| `width` | integer | Width of the cropped image |
+| `height` | integer | Height of the cropped image |
+| `original_width` | integer | Original image width |
+| `original_height` | integer | Original image height |
 
 **Example:** Crop center region
 
@@ -129,11 +129,11 @@ right: 500
 bottom: 400
 ```
 
-### 下載圖片
+### Download Image
 
 `image.download`
 
-從網址下載圖片到本機檔案
+Download image from URL to local file
 
 **Parameters:**
 
@@ -149,10 +149,10 @@ bottom: 400
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 下載圖片的本機路徑 |
-| `size` | number | 檔案大小（位元組） |
-| `content_type` | string | 內容類型 |
-| `filename` | string | 檔案名稱 |
+| `path` | string | Local file path of downloaded image |
+| `size` | number | File size in bytes |
+| `content_type` | string | Content type of the image |
+| `filename` | string | Filename of the downloaded image |
 
 **Example:** Download image from URL
 
@@ -161,28 +161,28 @@ url: https://example.com/photo.jpg
 output_dir: /tmp/images
 ```
 
-### OCR 提取文字
+### OCR - Extract Text
 
 `image.ocr`
 
-使用 OCR 從圖片中提取文字
+Extract text from images using Tesseract OCR
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | Yes | - | 圖片檔案的路徑 |
-| `language` | string | No | `eng` | OCR 的語言代碼（例如：eng, chi_sim） |
-| `psm` | number | No | `3` | Tesseract 頁面分割模式 |
-| `output_type` | select (`text`, `data`, `boxes`) | No | `text` | OCR 輸出的類型（文字或資料） |
+| `image_path` | string | Yes | - | Path to the image file |
+| `language` | string | No | `eng` | OCR language code (e.g. eng, chi_tra, jpn) |
+| `psm` | number | No | `3` | Tesseract page segmentation mode (0-13) |
+| `output_type` | select (`text`, `data`, `boxes`) | No | `text` | Type of OCR output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | 從圖片中提取的文字 |
-| `confidence` | number | OCR 信心指數 |
-| `language` | string | OCR 使用的語言 |
+| `text` | string | Extracted text from the image |
+| `confidence` | number | Average OCR confidence score (0-100) |
+| `language` | string | Language used for OCR |
 
 **Example:** Extract text from image
 
@@ -191,11 +191,11 @@ image_path: /path/to/document.png
 language: eng
 ```
 
-### 產生 QR Code
+### Generate QR Code
 
 `image.qrcode_generate`
 
-從文字、網址或資料產生 QR Code
+Generate QR codes from text, URLs, or data
 
 **Parameters:**
 
@@ -216,9 +216,9 @@ language: eng
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 產生的 QR Code 圖片路徑 |
-| `file_size` | number | 輸出檔案大小（位元組） |
-| `dimensions` | object | QR Code 尺寸 |
+| `output_path` | string | Path to the generated QR code image |
+| `file_size` | number | Size of the output file in bytes |
+| `dimensions` | object | Image dimensions {width, height} |
 
 **Example:** Generate URL QR code
 
@@ -244,11 +244,11 @@ format: svg
 border: 2
 ```
 
-### 調整圖片大小
+### Resize Image
 
 `image.resize`
 
-使用各種演算法將圖片調整為指定尺寸
+Resize images to specified dimensions with various algorithms
 
 **Parameters:**
 
@@ -266,9 +266,9 @@ border: 2
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 調整後圖片的路徑 |
-| `original_size` | object | 原始尺寸 |
-| `new_size` | object | 新尺寸 |
+| `output_path` | string | Path to the resized image |
+| `original_size` | object | Original image dimensions |
+| `new_size` | object | New image dimensions |
 
 **Example:** Resize to specific dimensions
 
@@ -285,30 +285,30 @@ input_path: /path/to/image.png
 scale: 0.5
 ```
 
-### 旋轉圖片
+### Rotate Image
 
 `image.rotate`
 
-將圖片旋轉指定角度
+Rotate image by specified angle
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | 輸入圖片的路徑 |
-| `output_path` | string | Yes | - | 輸出圖片的路徑 |
-| `angle` | number | Yes | - | 旋轉角度（度） |
-| `expand` | boolean | No | `True` | 展開輸出以容納整個旋轉後的圖片 |
-| `fill_color` | string | No | `#000000` | 旋轉後填補空白區域的顏色 |
+| `input_path` | string | Yes | - | Path to the source image |
+| `output_path` | string | Yes | - | Path to save the rotated image |
+| `angle` | number | Yes | - | Rotation angle in degrees (counter-clockwise) |
+| `expand` | boolean | No | `True` | Expand output canvas to fit the entire rotated image |
+| `fill_color` | string | No | `#000000` | Background fill color for empty areas (hex) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 旋轉後圖片的路徑 |
-| `width` | integer | 旋轉後圖片的寬度 |
-| `height` | integer | 旋轉後圖片的高度 |
-| `angle` | number | 圖片旋轉的角度 |
+| `output_path` | string | Path to the rotated image |
+| `width` | integer | Width of the rotated image |
+| `height` | integer | Height of the rotated image |
+| `angle` | number | Rotation angle applied |
 
 **Example:** Rotate 90 degrees
 
@@ -318,30 +318,30 @@ output_path: /path/to/rotated.png
 angle: 90
 ```
 
-### 新增浮水印
+### Add Watermark
 
 `image.watermark`
 
-為圖片新增文字或圖片浮水印
+Add text or image watermark to images
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | 輸入圖片的路徑 |
-| `output_path` | string | Yes | - | 輸出圖片的路徑 |
-| `text` | string | No | - | 用作浮水印的文字 |
-| `watermark_image` | string | No | - | 用作浮水印的圖片檔案路徑 |
-| `position` | select (`center`, `top-left`, `top-right`, `bottom-left`, `bottom-right`) | No | `bottom-right` | 浮水印在圖片上的位置 |
-| `opacity` | number | No | `0.5` | 浮水印透明度（0.0 到 1.0） |
-| `font_size` | number | No | `36` | 文字浮水印的字型大小 |
+| `input_path` | string | Yes | - | Path to the source image |
+| `output_path` | string | Yes | - | Path to save the watermarked image |
+| `text` | string | No | - | Text to use as watermark (optional if watermark_image is set) |
+| `watermark_image` | string | No | - | Path to watermark image (optional if text is set) |
+| `position` | select (`center`, `top-left`, `top-right`, `bottom-left`, `bottom-right`) | No | `bottom-right` | Watermark position on the image |
+| `opacity` | number | No | `0.5` | Watermark opacity (0.0 = transparent, 1.0 = opaque) |
+| `font_size` | number | No | `36` | Font size for text watermark |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 浮水印圖片的路徑 |
-| `watermark_type` | string | 套用的浮水印類型（文字或圖片） |
+| `output_path` | string | Path to the watermarked image |
+| `watermark_type` | string | Type of watermark applied (text or image) |
 
 **Example:** Add text watermark
 

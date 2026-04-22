@@ -6,33 +6,33 @@ Send messages via Slack, Discord, Teams, Telegram, email, SMS, and WhatsApp.
 
 | Module | Description |
 |--------|-------------|
-| [Twilio 発信](#twilio-発信) | Twilio経由で音声通話を発信 |
-| [Twilio SMS送信](#twilio-sms送信) | Twilio経由でSMSメッセージを送信 |
-| [Discordメッセージ送信](#discordメッセージ送信) | Webhook経由でDiscordにメッセージを送信 |
-| [メール送信](#メール送信) | SMTP経由でメールを送信 |
-| [Slackメッセージ送信](#slackメッセージ送信) | Webhook経由でSlackにメッセージを送信 |
-| [Teams メッセージ送信](#teams-メッセージ送信) | Microsoft Teams にメッセージを送信（インカミングWebhook経由） |
-| [Telegramメッセージ送信](#telegramメッセージ送信) | Telegram Bot API経由でメッセージを送信 |
-| [WhatsApp メッセージ送信](#whatsapp-メッセージ送信) | WhatsApp Business API（Meta Cloud API）を通じてメッセージを送信 |
-| [通知を送信](#通知を送信) | Telegram、Discord、Slack、LINE、または任意の webhook URL に通知を送信 |
+| [Twilio Make Call](#twilio-make-call) | Make a voice call via Twilio |
+| [Twilio Send SMS](#twilio-send-sms) | Send SMS message via Twilio |
+| [Send Discord Message](#send-discord-message) | Send message to Discord via webhook |
+| [Send Email](#send-email) | Send email via SMTP |
+| [Send Slack Message](#send-slack-message) | Send message to Slack via webhook |
+| [Send Teams Message](#send-teams-message) | Send message to Microsoft Teams via incoming webhook |
+| [Send Telegram Message](#send-telegram-message) | Send message via Telegram Bot API |
+| [Send WhatsApp Message](#send-whatsapp-message) | Send message via WhatsApp Business API (Meta Cloud API) |
+| [Send Notification](#send-notification) | Send notification to Telegram, Discord, Slack, LINE, or any webhook URL |
 
 ## Modules
 
-### Twilio 発信
+### Twilio Make Call
 
 `communication.twilio.make_call`
 
-Twilio経由で音声通話を発信
+Make a voice call via Twilio
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `account_sid` | string | No | - | TwilioアカウントSID（または環境変数 TWILIO_ACCOUNT_SID を使用） |
-| `auth_token` | string | No | - | Twilio認証トークン（または環境変数 TWILIO_AUTH_TOKEN を使用） |
-| `from_number` | string | Yes | - | Twilio認証トークン（または環境変数 TWILIO_AUTH_TOKEN を使用） |
-| `to_number` | string | Yes | - | Twilio電話番号 |
-| `twiml_url` | string | Yes | - | 受信者の電話番号 |
+| `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
+| `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
+| `from_number` | string | Yes | - | Twilio phone number |
+| `to_number` | string | Yes | - | Recipient phone number |
+| `twiml_url` | string | Yes | - | URL to TwiML instructions |
 
 **Output:**
 
@@ -51,30 +51,30 @@ to_number: +0987654321
 twiml_url: https://example.com/voice.xml
 ```
 
-### Twilio SMS送信
+### Twilio Send SMS
 
 `communication.twilio.send_sms`
 
-Twilio経由でSMSメッセージを送信
+Send SMS message via Twilio
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `account_sid` | string | No | - | TwilioアカウントSID（または環境変数 TWILIO_ACCOUNT_SID を使用） |
-| `auth_token` | string | No | - | Twilio認証トークン（または環境変数 TWILIO_AUTH_TOKEN を使用） |
-| `from_number` | string | Yes | - | Twilio電話番号（例: +1234567890） |
-| `to_number` | string | Yes | - | Twilio電話番号（例: +1234567890） |
-| `message` | string | Yes | - | 受信者の電話番号（例: +1234567890） |
+| `account_sid` | string | No | - | Twilio Account SID (or use TWILIO_ACCOUNT_SID env) |
+| `auth_token` | string | No | - | Twilio Auth Token (or use TWILIO_AUTH_TOKEN env) |
+| `from_number` | string | Yes | - | Twilio phone number (e.g. +1234567890) |
+| `to_number` | string | Yes | - | Recipient phone number (e.g. +1234567890) |
+| `message` | string | Yes | - | SMS message text |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sid` | string | SMSメッセージテキスト |
-| `status` | string | SMSメッセージテキスト |
-| `to` | string | SID |
-| `from` | string | 操作ステータス（成功/エラー） |
+| `sid` | string | The sid |
+| `status` | string | Operation status (success/error) |
+| `to` | string | The to |
+| `from` | string | The from |
 
 **Example:** Send notification SMS
 
@@ -92,28 +92,28 @@ to_number: +0987654321
 message: Your verification code is: 123456
 ```
 
-### Discordメッセージ送信
+### Send Discord Message
 
 `notification.discord.send_message`
 
-Webhook経由でDiscordにメッセージを送信
+Send message to Discord via webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | No | - | Discord Webhook URL（env.DISCORD_WEBHOOK_URL または直接入力） |
-| `content` | string | Yes | - | Discord Webhook URL（env.DISCORD_WEBHOOK_URL または直接入力） |
-| `username` | string | No | - | 送信するメッセージ |
-| `avatar_url` | string | No | - | ボットユーザー名をオーバーライド（任意） |
+| `webhook_url` | string | No | - | Discord webhook URL (from env.DISCORD_WEBHOOK_URL or direct input) |
+| `content` | string | Yes | - | The message to send |
+| `username` | string | No | - | Override bot username (optional) |
+| `avatar_url` | string | No | - | Bot avatar image URL (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ボットアバター画像URL（任意） |
-| `sent` | boolean | 操作ステータス（成功/エラー） |
-| `message` | string | Webhook URL経由でDiscordチャンネルにメッセージを送信 |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -121,33 +121,33 @@ Webhook経由でDiscordにメッセージを送信
 content: Workflow completed successfully!
 ```
 
-### メール送信
+### Send Email
 
 `notification.email.send`
 
-SMTP経由でメールを送信
+Send email via SMTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `smtp_server` | string | Yes | - | SMTPサーバーホスト名（例: smtp.gmail.com） |
-| `smtp_port` | number | No | `587` | SMTPサーバーホスト名（例: smtp.gmail.com） |
-| `username` | string | Yes | - | SMTPポート（TLSは587、SSLは465） |
-| `password` | string | Yes | - | SMTPユーザー名 |
-| `from_email` | string | Yes | - | SMTPパスワード（環境変数を使用してください！） |
-| `to_email` | string | Yes | - | 送信者メールアドレス |
-| `subject` | string | Yes | - | 受信者メールアドレス |
-| `body` | text | Yes | - | メール件名 |
-| `html` | boolean | No | `False` | メール本文（HTMLサポート） |
+| `smtp_server` | string | Yes | - | SMTP server hostname (e.g., smtp.gmail.com) |
+| `smtp_port` | number | No | `587` | SMTP port (587 for TLS, 465 for SSL) |
+| `username` | string | Yes | - | SMTP username |
+| `password` | string | Yes | - | SMTP password (use env variable!) |
+| `from_email` | string | Yes | - | Sender email address |
+| `to_email` | string | Yes | - | Recipient email address |
+| `subject` | string | Yes | - | Email subject |
+| `body` | text | Yes | - | Email body (HTML supported) |
+| `html` | boolean | No | `False` | Send body as HTML |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 本文をHTMLとして送信 |
-| `sent` | boolean | 操作ステータス（成功/エラー） |
-| `message` | string | 操作ステータス（成功/エラー） |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -160,29 +160,29 @@ subject: Workflow Complete
 body: Your automation workflow has finished successfully.
 ```
 
-### Slackメッセージ送信
+### Send Slack Message
 
 `notification.slack.send_message`
 
-Webhook経由でSlackにメッセージを送信
+Send message to Slack via webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | No | - | Slack Webhook URL（env.SLACK_WEBHOOK_URL または直接入力） |
-| `text` | string | Yes | - | Slack Webhook URL（env.SLACK_WEBHOOK_URL または直接入力） |
-| `channel` | string | No | - | 送信するメッセージ |
-| `username` | string | No | - | デフォルトチャンネルをオーバーライド（任意） |
-| `icon_emoji` | string | No | - | ボットユーザー名をオーバーライド（任意） |
+| `webhook_url` | string | No | - | Slack webhook URL (from env.SLACK_WEBHOOK_URL or direct input) |
+| `text` | string | Yes | - | The message to send |
+| `channel` | string | No | - | Override default channel (optional) |
+| `username` | string | No | - | Override bot username (optional) |
+| `icon_emoji` | string | No | - | Bot icon emoji (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | ボットアイコン絵文字（任意） |
-| `sent` | boolean | 操作ステータス（成功/エラー） |
-| `message` | string | 操作ステータス（成功/エラー） |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -199,28 +199,28 @@ username: Alert Bot
 icon_emoji: :warning:
 ```
 
-### Teams メッセージ送信
+### Send Teams Message
 
 `notification.teams.send_message`
 
-Microsoft Teams にメッセージを送信（インカミングWebhook経由）
+Send message to Microsoft Teams via incoming webhook
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `webhook_url` | string | Yes | - | Microsoft Teams のインカミングWebhook URL |
-| `message` | text | Yes | - | 送信するメッセージテキスト |
-| `title` | string | No | - | メッセージカードのタイトル（オプション） |
-| `color` | string | No | - | テーマカラーの16進コード（オプション） |
-| `sections` | array | No | - | 追加のMessageCardセクション（オプション） |
+| `webhook_url` | string | Yes | - | Microsoft Teams incoming webhook URL |
+| `message` | text | Yes | - | The message text to send |
+| `title` | string | No | - | Message card title (optional) |
+| `color` | string | No | - | Theme color hex code (optional) |
+| `sections` | array | No | - | Additional MessageCard sections (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作が成功したかどうか |
-| `data` | object | ステータスと webhook_url を含むレスポンスデータ |
+| `ok` | boolean | Whether the operation succeeded |
+| `data` | object | Response data with status and webhook_url |
 
 **Example:** Example
 
@@ -231,29 +231,29 @@ title: Deploy Status
 color: #00FF00
 ```
 
-### Telegramメッセージ送信
+### Send Telegram Message
 
 `notification.telegram.send_message`
 
-Telegram Bot API経由でメッセージを送信
+Send message via Telegram Bot API
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bot_token` | string | No | - | Telegramボットトークン（env.TELEGRAM_BOT_TOKEN または直接入力） |
-| `chat_id` | string | Yes | - | Telegramボットトークン（env.TELEGRAM_BOT_TOKEN または直接入力） |
-| `text` | string | Yes | - | TelegramチャットIDまたはチャンネルユーザー名 |
-| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | 送信するメッセージ |
+| `bot_token` | string | No | - | Telegram bot token (from env.TELEGRAM_BOT_TOKEN or direct input) |
+| `chat_id` | string | Yes | - | Telegram chat ID or channel username |
+| `text` | string | Yes | - | The message to send |
+| `parse_mode` | select (`Markdown`, `HTML`, `None`) | No | `Markdown` | Message formatting mode |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | メッセージフォーマットモード |
-| `sent` | boolean | 操作ステータス（成功/エラー） |
-| `message_id` | number | 操作ステータス（成功/エラー） |
-| `message` | string | 通知が送信されたかどうか |
+| `status` | string | Operation status (success/error) |
+| `sent` | boolean | Whether notification was sent |
+| `message_id` | number | Message identifier |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
@@ -270,30 +270,30 @@ text: *Bold* _italic_ `code`
 parse_mode: Markdown
 ```
 
-### WhatsApp メッセージ送信
+### Send WhatsApp Message
 
 `notification.whatsapp.send_message`
 
-WhatsApp Business API（Meta Cloud API）を通じてメッセージを送信
+Send message via WhatsApp Business API (Meta Cloud API)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `phone_number_id` | string | Yes | - | WhatsApp Business の送信者電話番号ID |
-| `to` | string | Yes | - | 国コードを含む受信者の電話番号 |
-| `message` | text | Yes | - | 送信するメッセージテキスト |
-| `access_token` | password | Yes | - | WhatsApp Business API 用のMetaアクセストークン |
-| `message_type` | select (`text`, `template`) | No | `text` | 送信するメッセージのタイプ |
-| `template_name` | string | No | - | WhatsAppメッセージテンプレート名（message_typeがテンプレートの場合は必須） |
-| `template_language` | string | No | `en` | テンプレート言語コード |
+| `phone_number_id` | string | Yes | - | WhatsApp Business sender phone number ID |
+| `to` | string | Yes | - | Recipient phone number with country code |
+| `message` | text | Yes | - | The message text to send |
+| `access_token` | password | Yes | - | Meta access token for WhatsApp Business API |
+| `message_type` | select (`text`, `template`) | No | `text` | Type of message to send |
+| `template_name` | string | No | - | WhatsApp message template name (required if message_type is "template") |
+| `template_language` | string | No | `en` | Template language code |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 操作が成功したかどうか |
-| `data` | object | ステータス、message_id、送信先を含むレスポンスデータ |
+| `ok` | boolean | Whether the operation succeeded |
+| `data` | object | Response data with status, message_id, and to |
 
 **Example:** Example
 
@@ -316,29 +316,29 @@ template_name: hello_world
 template_language: en
 ```
 
-### 通知を送信
+### Send Notification
 
 `notify.send`
 
-Telegram、Discord、Slack、LINE、または任意の webhook URL に通知を送信
+Send notification to Telegram, Discord, Slack, LINE, or any webhook URL
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | Webhook URL（Telegram、Discord、Slack、またはカスタム） |
-| `message` | string | Yes | - | 通知メッセージの内容 |
-| `title` | string | No | - | オプションのタイトル（Discord、Slack、Teams 用） |
-| `chat_id` | string | No | - | Telegram チャット ID（Telegram の場合は必須） |
+| `url` | string | Yes | - | Webhook URL (Telegram, Discord, Slack, or custom) |
+| `message` | string | Yes | - | Notification message content |
+| `title` | string | No | - | Optional title (for Discord, Slack, Teams) |
+| `chat_id` | string | No | - | Telegram chat ID (required for Telegram) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 通知が正常に送信されたかどうか |
-| `platform` | string | 検出されたプラットフォーム（telegram、discord、slack など） |
-| `status_code` | number | HTTP レスポンスステータスコード |
-| `response` | object | Webhook からの応答 |
+| `ok` | boolean | Whether notification was sent successfully |
+| `platform` | string | Detected platform (telegram, discord, slack, etc.) |
+| `status_code` | number | HTTP response status code |
+| `response` | object | Response from the webhook |
 
 **Example:** Send Telegram notification
 

@@ -2,62 +2,63 @@
 
 Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and testing.
 
-**44 modules**
+**45 modules**
 
 | Module | Description |
 |--------|-------------|
-| [กรองอาร์เรย์](#กรองอาร์เรย์) | กรององค์ประกอบอาร์เรย์ตามเงื่อนไข |
-| [เรียงลำดับอาร์เรย์](#เรียงลำดับอาร์เรย์) | เรียงลำดับองค์ประกอบอาร์เรย์จากน้อยไปมากหรือมากไปน้อย |
-| [อาเรย์ที่ไม่ซ้ำ](#อาเรย์ที่ไม่ซ้ำ) | ลบค่าซ้ำจากอาร์เรย์ |
+| [Filter Array](#filter-array) | Filter array elements by condition |
+| [Sort Array](#sort-array) | Sort array elements in ascending or descending order |
+| [Array Unique](#array-unique) | Remove duplicate values from array |
 | [OAuth2 Token Exchange](#oauth2-token-exchange) | Exchange authorization code, refresh token, or client credentials for an access token |
-| [ค้นหา DNS](#ค้นหา-dns) | ค้นหา DNS สำหรับข้อมูลโดเมน |
-| [ความแตกต่างของข้อความ](#ความแตกต่างของข้อความ) | สร้างความแตกต่างระหว่างข้อความสองสตริง |
-| [แก้ไขไฟล์](#แก้ไขไฟล์) | แทนที่ข้อความในไฟล์โดยใช้การจับคู่สตริงที่ตรงกัน |
-| [ตรวจสอบไฟล์มีอยู่](#ตรวจสอบไฟล์มีอยู่) | ตรวจสอบว่าไฟล์หรือไดเรกทอรีมีอยู่หรือไม่ |
-| [อ่านไฟล์](#อ่านไฟล์) | อ่านเนื้อหาจากไฟล์ |
-| [เขียนไฟล์](#เขียนไฟล์) | เขียนเนื้อหาลงไฟล์ |
-| [Git Clone](#git-clone) | โคลนที่เก็บ Git |
-| [Git Commit](#git-commit) | สร้างคอมมิต Git |
-| [Git Diff](#git-diff) | รับ Git diff |
+| [DNS Lookup](#dns-lookup) | DNS lookup for domain records |
+| [Diff Content](#diff-content) | Generate unified diff between original and modified content |
+| [Edit File](#edit-file) | Replace a string in a file (targeted edit, not full overwrite) |
+| [Check File Exists](#check-file-exists) | Check if a file or directory exists |
+| [Read File](#read-file) | Read content from a file |
+| [Write File](#write-file) | Write content to a file |
+| [Git Clone](#git-clone) | Clone a git repository |
+| [Git Commit](#git-commit) | Create a git commit |
+| [Git Diff](#git-diff) | Get git diff |
+| [HTTP Batch](#http-batch) | Run a batch of HTTP probes sequentially and capture timing + body |
 | [HTTP Paginate](#http-paginate) | Automatically iterate through paginated API endpoints and collect all results |
-| [คำขอ HTTP](#คำขอ-http) | ส่งคำขอ HTTP และรับการตอบกลับ |
-| [ยืนยันการตอบกลับ HTTP](#ยืนยันการตอบกลับ-http) | ยืนยันและตรวจสอบคุณสมบัติการตอบกลับ HTTP |
+| [HTTP Request](#http-request) | Send HTTP request and receive response |
+| [Assert HTTP Response](#assert-http-response) | Assert and validate HTTP response properties |
 | [HTTP Session](#http-session) | Send a sequence of HTTP requests with persistent cookies (login → action → logout) |
 | [Webhook Wait](#webhook-wait) | Start a temporary server and wait for an incoming webhook callback |
-| [แชท LLM](#แชท-llm) | โต้ตอบกับ LLM API สำหรับการดำเนินการอัจฉริยะ |
-| [AI แก้ไขโค้ด](#ai-แก้ไขโค้ด) | สร้างการแก้ไขโค้ดอัตโนมัติตามปัญหา |
-| [คำนวณ](#คำนวณ) | ดำเนินการคำนวณทางคณิตศาสตร์พื้นฐาน |
-| [ตรวจสอบสุขภาพ HTTP](#ตรวจสอบสุขภาพ-http) | ตรวจสอบสุขภาพ HTTP / ตรวจสอบเวลาใช้งาน |
-| [ตรวจสอบพอร์ต](#ตรวจสอบพอร์ต) | ตรวจสอบว่าพอร์ตเครือข่ายเปิดหรือปิด |
-| [รอพอร์ต](#รอพอร์ต) | รอให้พอร์ตเครือข่ายพร้อมใช้งาน |
-| [แสดงรายการ Process](#แสดงรายการ-process) | แสดงรายการ process พื้นหลังที่กำลังทำงาน |
-| [เริ่ม Process พื้นหลัง](#เริ่ม-process-พื้นหลัง) | เริ่ม process พื้นหลัง (เซิร์ฟเวอร์, บริการ ฯลฯ) |
-| [หยุด Process](#หยุด-process) | หยุด process พื้นหลังที่กำลังทำงาน |
-| [รันคำสั่ง Shell](#รันคำสั่ง-shell) | รันคำสั่ง shell และจับเอาต์พุต |
-| [SSH Execute](#ssh-execute) | รันคำสั่งบนเซิร์ฟเวอร์ระยะไกลผ่าน SSH |
-| [SFTP Download](#sftp-download) | ดาวน์โหลดไฟล์จากเซิร์ฟเวอร์ระยะไกลผ่าน SFTP |
-| [SFTP Upload](#sftp-upload) | อัปโหลดไฟล์ไปยังเซิร์ฟเวอร์ระยะไกลผ่าน SFTP |
-| [รันขั้นตอน E2E](#รันขั้นตอน-e2e) | ดำเนินการขั้นตอนทดสอบ end-to-end ตามลำดับ |
-| [ประตูคุณภาพ](#ประตูคุณภาพ) | ประเมินเมตริกคุณภาพเทียบกับเกณฑ์ที่กำหนด |
-| [รันการทดสอบ HTTP](#รันการทดสอบ-http) | ดำเนินการชุดทดสอบ HTTP API |
-| [รัน Linter](#รัน-linter) | รันการตรวจสอบ lint บนซอร์สโค้ด |
-| [สร้างรายงาน](#สร้างรายงาน) | สร้างรายงานการดำเนินการทดสอบ |
-| [รันสถานการณ์](#รันสถานการณ์) | ดำเนินการทดสอบตามสถานการณ์ (รูปแบบ BDD) |
-| [สแกนความปลอดภัย](#สแกนความปลอดภัย) | สแกนหาช่องโหว่ด้านความปลอดภัย |
-| [รันชุดทดสอบ](#รันชุดทดสอบ) | ดำเนินการชุดการทดสอบ |
-| [รัน Unit Tests](#รัน-unit-tests) | ดำเนินการทดสอบ unit |
-| [เปรียบเทียบภาพ](#เปรียบเทียบภาพ) | เปรียบเทียบเอาต์พุตภาพเพื่อหาความแตกต่าง |
-| [ประเมินคุณภาพ UI](#ประเมินคุณภาพ-ui) | ประเมินคุณภาพ UI อย่างครอบคลุมด้วยการให้คะแนนหลายมิติ |
-| [วิเคราะห์รูปภาพด้วย AI](#วิเคราะห์รูปภาพด้วย-ai) | วิเคราะห์รูปภาพโดยใช้ OpenAI Vision API (GPT-4V) |
-| [เปรียบเทียบรูปภาพ](#เปรียบเทียบรูปภาพ) | เปรียบเทียบสองรูปภาพและระบุความแตกต่างทางภาพ |
+| [LLM Chat](#llm-chat) | Interact with LLM APIs for intelligent operations |
+| [AI Code Fix](#ai-code-fix) | Automatically generate code fixes based on issues |
+| [Calculate](#calculate) | Perform basic mathematical operations |
+| [HTTP Health Check](#http-health-check) | HTTP health check / uptime monitor |
+| [Check Port](#check-port) | Check if network port(s) are open or closed |
+| [Wait for Port](#wait-for-port) | Wait for a network port to become available |
+| [List Processes](#list-processes) | List all running background processes |
+| [Start Background Process](#start-background-process) | Start a background process (server, service, etc.) |
+| [Stop Process](#stop-process) | Stop a running background process |
+| [Execute Shell Command](#execute-shell-command) | Execute a shell command and capture output |
+| [SSH Execute](#ssh-execute) | Execute command on remote server via SSH |
+| [SFTP Download](#sftp-download) | Download file from remote server via SFTP |
+| [SFTP Upload](#sftp-upload) | Upload file to remote server via SFTP |
+| [Run E2E Steps](#run-e2e-steps) | Execute end-to-end test steps sequentially |
+| [Quality Gate](#quality-gate) | Evaluate quality metrics against defined thresholds |
+| [Run HTTP Tests](#run-http-tests) | Execute HTTP API test suite |
+| [Run Linter](#run-linter) | Run linting checks on source code |
+| [Generate Report](#generate-report) | Generate test execution report |
+| [Run Scenario](#run-scenario) | Execute scenario-based test (BDD style) |
+| [Security Scan](#security-scan) | Scan for security vulnerabilities |
+| [Run Test Suite](#run-test-suite) | Execute a collection of tests |
+| [Run Unit Tests](#run-unit-tests) | Execute unit tests |
+| [Visual Compare](#visual-compare) | Compare visual outputs for differences |
+| [Evaluate UI Quality](#evaluate-ui-quality) | Comprehensive UI quality evaluation with multi-dimensional scoring |
+| [Analyze Image with AI](#analyze-image-with-ai) | Analyze images using OpenAI Vision API (GPT-4V) |
+| [Compare Images](#compare-images) | Compare two images and identify visual differences |
 
 ## Modules
 
-### กรองอาร์เรย์
+### Filter Array
 
 `array.filter`
 
-กรององค์ประกอบอาร์เรย์ตามเงื่อนไข
+Filter array elements by condition
 
 **Parameters:**
 
@@ -71,8 +72,8 @@ Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and t
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filtered` | array | อาร์เรย์ที่กรองแล้ว |
-| `count` | number | อาร์เรย์ที่กรองแล้ว |
+| `filtered` | array | Filtered array |
+| `count` | number | Number of items in filtered array |
 
 **Example:** Filter numbers greater than 5
 
@@ -82,11 +83,11 @@ condition: gt
 value: 5
 ```
 
-### เรียงลำดับอาร์เรย์
+### Sort Array
 
 `array.sort`
 
-เรียงลำดับองค์ประกอบอาร์เรย์จากน้อยไปมากหรือมากไปน้อย
+Sort array elements in ascending or descending order
 
 **Parameters:**
 
@@ -99,8 +100,8 @@ value: 5
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `sorted` | array | อาร์เรย์ที่เรียงลำดับแล้ว |
-| `count` | number | อาร์เรย์ที่เรียงลำดับแล้ว |
+| `sorted` | array | Sorted array |
+| `count` | number | Number of items |
 
 **Example:** Sort numbers ascending
 
@@ -109,11 +110,11 @@ array: [5, 2, 8, 1, 9]
 order: asc
 ```
 
-### อาเรย์ที่ไม่ซ้ำ
+### Array Unique
 
 `array.unique`
 
-ลบค่าซ้ำจากอาร์เรย์
+Remove duplicate values from array
 
 **Parameters:**
 
@@ -126,9 +127,9 @@ order: asc
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `unique` | array | อาร์เรย์พร้อมค่าเฉพาะ |
-| `count` | number | อาร์เรย์พร้อมค่าเฉพาะ |
-| `duplicates_removed` | number | อาร์เรย์พร้อมค่าเฉพาะ |
+| `unique` | array | Array with unique values |
+| `count` | number | Number of unique items |
+| `duplicates_removed` | number | Number of duplicates removed |
 
 **Example:** Remove duplicates
 
@@ -214,19 +215,19 @@ client_secret: ${env.GITHUB_CLIENT_SECRET}
 code: abc123...
 ```
 
-### ค้นหา DNS
+### DNS Lookup
 
 `dns.lookup`
 
-ค้นหา DNS สำหรับข้อมูลโดเมน
+DNS lookup for domain records
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `domain` | string | Yes | - | ชื่อโดเมนที่ต้องการค้นหา |
-| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | ประเภทของข้อมูล DNS ที่ต้องการค้นหา |
-| `timeout` | number | No | `10` | หมดเวลาการค้นหาในหน่วยวินาที |
+| `domain` | string | Yes | - | Domain name to look up |
+| `record_type` | select (`A`, `AAAA`, `CNAME`, `MX`, `NS`, `TXT`, `SOA`, `SRV`) | No | `A` | DNS record type to query |
+| `timeout` | number | No | `10` | Query timeout in seconds |
 
 **Output:**
 
@@ -249,29 +250,29 @@ domain: example.com
 record_type: MX
 ```
 
-### ความแตกต่างของข้อความ
+### Diff Content
 
 `file.diff`
 
-สร้างความแตกต่างระหว่างข้อความสองสตริง
+Generate unified diff between original and modified content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `original` | string | Yes | - | ข้อความต้นฉบับ |
-| `modified` | string | Yes | - | ข้อความที่แก้ไข |
-| `context_lines` | number | No | `3` | จำนวนบรรทัดบริบทที่อยู่รอบการเปลี่ยนแปลง |
-| `filename` | string | No | `file` | ชื่อไฟล์ที่ใช้ในส่วนหัวของความแตกต่าง |
+| `original` | string | Yes | - | Original content for comparison |
+| `modified` | string | Yes | - | Modified content for comparison |
+| `context_lines` | number | No | `3` | Number of context lines around changes |
+| `filename` | string | No | `file` | Name of the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `diff` | string | ผลลัพธ์ความแตกต่างแบบรวม |
-| `changed` | boolean | มีการเปลี่ยนแปลงหรือไม่ |
-| `additions` | number | จำนวนบรรทัดที่เพิ่ม |
-| `deletions` | number | จำนวนบรรทัดที่ลบ |
+| `diff` | string | Unified diff output |
+| `changed` | boolean | Whether content differs |
+| `additions` | number | Number of added lines |
+| `deletions` | number | Number of deleted lines |
 
 **Example:** Diff two strings
 
@@ -283,29 +284,29 @@ world!
 filename: test.txt
 ```
 
-### แก้ไขไฟล์
+### Edit File
 
 `file.edit`
 
-แทนที่ข้อความในไฟล์โดยใช้การจับคู่สตริงที่ตรงกัน
+Replace a string in a file (targeted edit, not full overwrite)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | เส้นทางไปยังไฟล์ที่จะแก้ไข |
-| `old_string` | string | Yes | - | ข้อความที่ต้องการค้นหาและแทนที่ |
-| `new_string` | string | Yes | - | ข้อความที่ใช้แทนที่ |
-| `replace_all` | boolean | No | `False` | แทนที่ทั้งหมดแทนที่จะเป็นเพียงครั้งแรก |
-| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | การเข้ารหัสไฟล์ |
+| `path` | string | Yes | - | Path to the file |
+| `old_string` | string | Yes | - | Text to find and replace |
+| `new_string` | string | Yes | - | Replacement text |
+| `replace_all` | boolean | No | `False` | Whether to replace all occurrences |
+| `encoding` | select (`utf-8`, `ascii`, `latin-1`, `utf-16`, `gbk`, `big5`) | No | `utf-8` | Character encoding for the file |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | เส้นทางของไฟล์ที่แก้ไข |
-| `replacements` | number | จำนวนการแทนที่ที่ทำ |
-| `diff` | string | ความแตกต่างที่แสดงสิ่งที่เปลี่ยนแปลง |
+| `path` | string | File path that was edited |
+| `replacements` | number | Number of replacements made |
+| `diff` | string | Unified diff of changes |
 
 **Example:** Replace string in file
 
@@ -315,11 +316,11 @@ old_string: def hello():
 new_string: def hello_world():
 ```
 
-### ตรวจสอบไฟล์มีอยู่
+### Check File Exists
 
 `file.exists`
 
-ตรวจสอบว่าไฟล์หรือไดเรกทอรีมีอยู่หรือไม่
+Check if a file or directory exists
 
 **Parameters:**
 
@@ -331,9 +332,9 @@ new_string: def hello_world():
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `exists` | boolean | พาธมีอยู่หรือไม่ |
-| `is_file` | boolean | พาธมีอยู่หรือไม่ |
-| `is_directory` | boolean | พาธมีอยู่หรือไม่ |
+| `exists` | boolean | Whether path exists |
+| `is_file` | boolean | Whether path is a file |
+| `is_directory` | boolean | Whether path is a directory |
 
 **Example:** Check file exists
 
@@ -341,11 +342,11 @@ new_string: def hello_world():
 path: /tmp/data.txt
 ```
 
-### อ่านไฟล์
+### Read File
 
 `file.read`
 
-อ่านเนื้อหาจากไฟล์
+Read content from a file
 
 **Parameters:**
 
@@ -358,8 +359,8 @@ path: /tmp/data.txt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `content` | string | เนื้อหาไฟล์ |
-| `size` | number | เนื้อหาไฟล์ |
+| `content` | string | File content |
+| `size` | number | File size in bytes |
 
 **Example:** Read text file
 
@@ -368,11 +369,11 @@ path: /tmp/data.txt
 encoding: utf-8
 ```
 
-### เขียนไฟล์
+### Write File
 
 `file.write`
 
-เขียนเนื้อหาลงไฟล์
+Write content to a file
 
 **Parameters:**
 
@@ -387,8 +388,8 @@ encoding: utf-8
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | พาธไฟล์ |
-| `bytes_written` | number | พาธไฟล์ |
+| `path` | string | File path |
+| `bytes_written` | number | Number of bytes written |
 
 **Example:** Write text file
 
@@ -402,17 +403,17 @@ mode: overwrite
 
 `git.clone`
 
-โคลนที่เก็บ Git
+Clone a git repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL ที่เก็บ Git (HTTPS หรือ SSH) |
-| `destination` | string | Yes | - | เส้นทางในเครื่องที่จะโคลนเข้า |
-| `branch` | string | No | - | สาขาที่จะเช็คเอาท์หลังโคลน |
-| `depth` | number | No | - | ความลึกของการโคลนแบบตื้น (ไม่ระบุสำหรับโคลนเต็ม) |
-| `token` | string | No | - | โทเค็นการเข้าถึงส่วนตัวสำหรับที่เก็บส่วนตัว |
+| `url` | string | Yes | - | Git repository URL (HTTPS or SSH) |
+| `destination` | string | Yes | - | Local path to clone into |
+| `branch` | string | No | - | Branch to checkout after clone |
+| `depth` | number | No | - | Shallow clone depth (omit for full clone) |
+| `token` | string | No | - | Personal access token for private repos |
 
 **Output:**
 
@@ -441,18 +442,18 @@ depth: 1
 
 `git.commit`
 
-สร้างคอมมิต Git
+Create a git commit
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | เส้นทางไปยังที่เก็บ Git |
-| `message` | string | Yes | - | ข้อความคอมมิต |
-| `add_all` | boolean | No | `False` | สเตจการเปลี่ยนแปลงทั้งหมดก่อนคอมมิต (git add -A) |
-| `files` | array | No | - | ไฟล์เฉพาะที่จะสเตจก่อนคอมมิต |
-| `author_name` | string | No | - | แทนที่ชื่อผู้เขียนคอมมิต |
-| `author_email` | string | No | - | แทนที่อีเมลผู้เขียนคอมมิต |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `message` | string | Yes | - | Commit message |
+| `add_all` | boolean | No | `False` | Stage all changes before committing (git add -A) |
+| `files` | array | No | - | Specific files to stage before committing |
+| `author_name` | string | No | - | Override commit author name |
+| `author_email` | string | No | - | Override commit author email |
 
 **Output:**
 
@@ -481,17 +482,17 @@ files: ["README.md"]
 
 `git.diff`
 
-รับ Git diff
+Get git diff
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `repo_path` | string | Yes | - | เส้นทางไปยังที่เก็บ Git |
-| `ref1` | string | No | `HEAD` | อ้างอิงแรก (คอมมิต, สาขา, แท็ก) |
-| `ref2` | string | No | - | อ้างอิงที่สองเพื่อเปรียบเทียบ |
-| `staged` | boolean | No | `False` | แสดงเฉพาะการเปลี่ยนแปลงที่สเตจแล้ว (--cached) |
-| `stat_only` | boolean | No | `False` | แสดงเฉพาะสถิติไฟล์ (--stat) |
+| `repo_path` | string | Yes | - | Path to git repository |
+| `ref1` | string | No | `HEAD` | First reference (commit, branch, tag) |
+| `ref2` | string | No | - | Second reference to compare against |
+| `staged` | boolean | No | `False` | Show only staged changes (--cached) |
+| `stat_only` | boolean | No | `False` | Show only file statistics (--stat) |
 
 **Output:**
 
@@ -521,6 +522,35 @@ repo_path: /home/user/project
 staged: true
 stat_only: true
 ```
+
+### HTTP Batch
+
+`http.batch`
+
+Run a batch of HTTP probes sequentially and capture timing + body
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `requests` | array | Yes | - | List of request dicts: {method, url, headers?, body?, label?} |
+| `description` | string | No | - | Informational description of the batch intent |
+| `measure_time` | boolean | No | `False` | Execute requests sequentially for reliable timing comparison |
+| `timeout` | number | No | `30` |  |
+| `verify_ssl` | boolean | No | `True` |  |
+| `ssrf_protection` | boolean | No | `True` |  |
+| `detect_patterns` | array | No | - | Optional list of substrings to report matches for across all bodies |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `ok` | boolean | Whether the batch completed (does not imply all requests succeeded) |
+| `data` | array | Per-request results: [{label, status, body, duration_ms, ok, ...}] |
+| `count` | number | Number of requests executed |
+| `failed_count` | number | Number of requests that errored or returned non-2xx |
+| `total_duration_ms` | number | Total elapsed ms across the batch |
+| `detected` | array | Pattern match summary when detect_patterns provided |
 
 ### HTTP Paginate
 
@@ -602,11 +632,11 @@ page_size: 100
 auth: {"type": "bearer", "token": "${env.GITHUB_TOKEN}"}
 ```
 
-### คำขอ HTTP
+### HTTP Request
 
 `http.request`
 
-ส่งคำขอ HTTP และรับการตอบกลับ
+Send HTTP request and receive response
 
 **Parameters:**
 
@@ -632,15 +662,15 @@ auth: {"type": "bearer", "token": "${env.GITHUB_TOKEN}"}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | คำขอสำเร็จหรือไม่ (สถานะ 2xx) |
-| `status` | number | คำขอสำเร็จหรือไม่ (สถานะ 2xx) |
-| `status_text` | string | คำขอสำเร็จหรือไม่ (สถานะ 2xx) |
-| `headers` | object | รหัสสถานะ HTTP |
-| `body` | any | ข้อความสถานะ HTTP |
-| `url` | string | ส่วนหัวการตอบกลับ |
-| `duration_ms` | number | เนื้อหาการตอบกลับ (JSON ที่แปลงแล้วหรือข้อความ) |
-| `content_type` | string | URL สุดท้าย (หลังการเปลี่ยนเส้นทาง) |
-| `content_length` | number | Content-Type ของการตอบกลับ |
+| `ok` | boolean | Whether request was successful (2xx status) |
+| `status` | number | HTTP status code |
+| `status_text` | string | HTTP status text |
+| `headers` | object | Response headers |
+| `body` | any | Response body (parsed JSON or text) |
+| `url` | string | Final URL (after redirects) |
+| `duration_ms` | number | Request duration in milliseconds |
+| `content_type` | string | Response Content-Type |
+| `content_length` | number | Response body size in bytes |
 
 **Example:** Simple GET request
 
@@ -673,11 +703,11 @@ method: GET
 query: {"q": "flyto", "limit": 10}
 ```
 
-### ยืนยันการตอบกลับ HTTP
+### Assert HTTP Response
 
 `http.response_assert`
 
-ยืนยันและตรวจสอบคุณสมบัติการตอบกลับ HTTP
+Assert and validate HTTP response properties
 
 **Parameters:**
 
@@ -700,12 +730,12 @@ query: {"q": "flyto", "limit": 10}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | การยืนยันทั้งหมดผ่านหรือไม่ |
-| `passed` | number | การยืนยันทั้งหมดผ่านหรือไม่ |
-| `failed` | number | การยืนยันทั้งหมดผ่านหรือไม่ |
-| `total` | number | จำนวนการยืนยันที่ผ่าน |
-| `assertions` | array | จำนวนการยืนยันที่ล้มเหลว |
-| `errors` | array | ผลการยืนยันโดยละเอียด |
+| `ok` | boolean | Whether all assertions passed |
+| `passed` | number | Number of passed assertions |
+| `failed` | number | Number of failed assertions |
+| `total` | number | Total number of assertions |
+| `assertions` | array | Detailed assertion results |
+| `errors` | array | List of error messages for failed assertions |
 
 **Example:** Assert status 200
 
@@ -821,11 +851,11 @@ use_ngrok: true
 ngrok_token: ${env.NGROK_AUTH_TOKEN}
 ```
 
-### แชท LLM
+### LLM Chat
 
 `llm.chat`
 
-โต้ตอบกับ LLM API สำหรับการดำเนินการอัจฉริยะ
+Interact with LLM APIs for intelligent operations
 
 **Parameters:**
 
@@ -847,12 +877,12 @@ ngrok_token: ${env.NGROK_AUTH_TOKEN}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | คำขอสำเร็จหรือไม่ |
-| `response` | string | คำขอสำเร็จหรือไม่ |
-| `parsed` | any | คำขอสำเร็จหรือไม่ |
-| `model` | string | ข้อความตอบกลับจาก LLM |
-| `tokens_used` | number | การตอบกลับที่แปลงแล้ว (หากร้องขอรูปแบบ JSON) |
-| `finish_reason` | string | โมเดลที่ใช้ |
+| `ok` | boolean | Whether the request succeeded |
+| `response` | string | The LLM response text |
+| `parsed` | any | Parsed response (if JSON format requested) |
+| `model` | string | Model used |
+| `tokens_used` | number | Total tokens consumed |
+| `finish_reason` | string | Why the response ended |
 
 **Example:** Code Review
 
@@ -882,11 +912,11 @@ system_prompt: You are a DevOps engineer. Return JSON: {"decision": "yes/no", "r
 response_format: json
 ```
 
-### AI แก้ไขโค้ด
+### AI Code Fix
 
 `llm.code_fix`
 
-สร้างการแก้ไขโค้ดอัตโนมัติตามปัญหา
+Automatically generate code fixes based on issues
 
 **Parameters:**
 
@@ -904,11 +934,11 @@ response_format: json
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | การดำเนินการสำเร็จหรือไม่ |
-| `fixes` | array | การดำเนินการสำเร็จหรือไม่ |
-| `applied` | array | การดำเนินการสำเร็จหรือไม่ |
-| `failed` | array | รายการการแก้ไขที่สร้าง |
-| `summary` | string | รายการการแก้ไขที่ใช้ (หาก fix_mode เป็น apply) |
+| `ok` | boolean | Whether operation succeeded |
+| `fixes` | array | List of generated fixes |
+| `applied` | array | List of applied fixes (if fix_mode is apply) |
+| `failed` | array | Fixes that could not be applied |
+| `summary` | string | Summary of fixes |
 
 **Example:** Fix UI Issues
 
@@ -928,11 +958,11 @@ fix_mode: apply
 backup: true
 ```
 
-### คำนวณ
+### Calculate
 
 `math.calculate`
 
-ดำเนินการคำนวณทางคณิตศาสตร์พื้นฐาน
+Perform basic mathematical operations
 
 **Parameters:**
 
@@ -947,9 +977,9 @@ backup: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | ผลการคำนวณ |
-| `operation` | string | ผลการคำนวณ |
-| `expression` | string | ผลการคำนวณ |
+| `result` | number | Calculation result |
+| `operation` | string | Operation performed |
+| `expression` | string | Human-readable expression |
 
 **Example:** Add two numbers
 
@@ -967,25 +997,25 @@ a: 2
 b: 8
 ```
 
-### ตรวจสอบสุขภาพ HTTP
+### HTTP Health Check
 
 `monitor.http_check`
 
-ตรวจสอบสุขภาพ HTTP / ตรวจสอบเวลาใช้งาน
+HTTP health check / uptime monitor
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL ที่จะตรวจสอบ |
-| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | วิธีการ HTTP |
-| `expected_status` | number | No | `200` | รหัสสถานะ HTTP ที่คาดหวัง |
-| `timeout_ms` | number | No | `10000` | หมดเวลาคำขอในหน่วยมิลลิวินาที |
-| `headers` | object | No | - | หัวข้อคำขอที่กำหนดเอง |
-| `body` | string | No | - | เนื้อหาคำขอ (สำหรับ POST) |
-| `check_ssl` | boolean | No | `True` | ตรวจสอบความถูกต้องและวันหมดอายุของใบรับรอง SSL |
-| `contains` | string | No | - | เนื้อหาการตอบกลับต้องมีสตริงนี้ |
-| `follow_redirects` | boolean | No | `True` | ติดตามการเปลี่ยนเส้นทาง HTTP |
+| `url` | string | Yes | - | URL to check |
+| `method` | select (`GET`, `HEAD`, `POST`) | No | `GET` | HTTP method |
+| `expected_status` | number | No | `200` | Expected HTTP status code |
+| `timeout_ms` | number | No | `10000` | Request timeout in milliseconds |
+| `headers` | object | No | - | Custom request headers |
+| `body` | string | No | - | Request body (for POST) |
+| `check_ssl` | boolean | No | `True` | Check SSL certificate validity and expiry |
+| `contains` | string | No | - | Response body must contain this string |
+| `follow_redirects` | boolean | No | `True` | Follow HTTP redirects |
 
 **Output:**
 
@@ -1009,30 +1039,30 @@ contains: "status":"ok"
 timeout_ms: 5000
 ```
 
-### ตรวจสอบพอร์ต
+### Check Port
 
 `port.check`
 
-ตรวจสอบว่าพอร์ตเครือข่ายเปิดหรือปิด
+Check if network port(s) are open or closed
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | any | Yes | - | หมายเลขพอร์ตหรืออาร์เรย์ของพอร์ตที่จะตรวจสอบ |
-| `host` | string | No | `localhost` | หมายเลขพอร์ตหรืออาร์เรย์ของพอร์ตที่จะตรวจสอบ |
-| `connect_timeout` | number | No | `2` | โฮสต์ที่จะเชื่อมต่อ |
-| `expect_open` | boolean | No | - | หมดเวลาสำหรับแต่ละความพยายามเชื่อมต่อ |
+| `port` | any | Yes | - | Port number or array of ports to check |
+| `host` | string | No | `localhost` | Host to connect to |
+| `connect_timeout` | number | No | `2` | Timeout for each connection attempt |
+| `expect_open` | boolean | No | - | Set to true to assert ports are open, false for closed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | ตั้งค่า true เพื่อยืนยันว่าพอร์ตเปิด, false สำหรับปิด |
-| `results` | array | การตรวจสอบทั้งหมดผ่านหรือไม่ (ถ้าตั้งค่า expect_open) |
-| `open_ports` | array | การตรวจสอบทั้งหมดผ่านหรือไม่ (ถ้าตั้งค่า expect_open) |
-| `closed_ports` | array | อาร์เรย์ผลการตรวจสอบพอร์ต |
-| `summary` | object | รายการพอร์ตที่เปิด |
+| `ok` | boolean | Whether all checks passed (if expect_open is set) |
+| `results` | array | Array of port check results |
+| `open_ports` | array | List of open ports |
+| `closed_ports` | array | List of closed ports |
+| `summary` | object | Summary statistics |
 
 **Example:** Check single port
 
@@ -1055,32 +1085,32 @@ host: example.com
 expect_open: true
 ```
 
-### รอพอร์ต
+### Wait for Port
 
 `port.wait`
 
-รอให้พอร์ตเครือข่ายพร้อมใช้งาน
+Wait for a network port to become available
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `port` | number | Yes | - | หมายเลขพอร์ตที่จะรอ |
-| `host` | string | No | `localhost` | โฮสต์ที่จะเชื่อมต่อ |
-| `timeout` | number | No | `60` | โฮสต์ที่จะเชื่อมต่อ |
-| `interval` | number | No | `500` | เวลาสูงสุดที่รอ |
-| `expect_closed` | boolean | No | `False` | เวลาระหว่างความพยายามเชื่อมต่อเป็นมิลลิวินาที |
+| `port` | number | Yes | - | Port number to wait for |
+| `host` | string | No | `localhost` | Host to connect to |
+| `timeout` | number | No | `60` | Maximum time to wait |
+| `interval` | number | No | `500` | Time between connection attempts in milliseconds |
+| `expect_closed` | boolean | No | `False` | Wait for port to become unavailable instead |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | รอให้พอร์ตไม่พร้อมใช้งานแทน |
-| `available` | boolean | พอร์ตอยู่ในสถานะที่คาดหวังหรือไม่ |
-| `host` | string | พอร์ตอยู่ในสถานะที่คาดหวังหรือไม่ |
-| `port` | number | พอร์ตพร้อมใช้งานในปัจจุบันหรือไม่ |
-| `wait_time_ms` | number | โฮสต์ที่ตรวจสอบ |
-| `attempts` | number | พอร์ตที่ตรวจสอบ |
+| `ok` | boolean | Whether port is in expected state |
+| `available` | boolean | Whether port is currently available |
+| `host` | string | Host that was checked |
+| `port` | number | Port that was checked |
+| `wait_time_ms` | number | Time spent waiting in milliseconds |
+| `attempts` | number | Number of connection attempts |
 
 **Example:** Wait for dev server
 
@@ -1105,11 +1135,11 @@ expect_closed: true
 timeout: 10
 ```
 
-### แสดงรายการ Process
+### List Processes
 
 `process.list`
 
-แสดงรายการ process พื้นหลังที่กำลังทำงาน
+List all running background processes
 
 **Parameters:**
 
@@ -1122,11 +1152,11 @@ timeout: 10
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | การดำเนินการสำเร็จ |
-| `processes` | array | การดำเนินการสำเร็จ |
-| `count` | number | การดำเนินการสำเร็จ |
-| `running` | number | รายการข้อมูล process |
-| `stopped` | number | จำนวน process ทั้งหมด |
+| `ok` | boolean | Operation success |
+| `processes` | array | List of process information |
+| `count` | number | Total number of processes |
+| `running` | number | Number of running processes |
+| `stopped` | number | Number of stopped processes |
 
 **Example:** List all processes
 
@@ -1139,11 +1169,11 @@ timeout: 10
 filter_name: dev
 ```
 
-### เริ่ม Process พื้นหลัง
+### Start Background Process
 
 `process.start`
 
-เริ่ม process พื้นหลัง (เซิร์ฟเวอร์, บริการ ฯลฯ)
+Start a background process (server, service, etc.)
 
 **Parameters:**
 
@@ -1163,14 +1193,14 @@ filter_name: dev
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | process เริ่มต้นสำเร็จหรือไม่ |
-| `pid` | number | process เริ่มต้นสำเร็จหรือไม่ |
-| `process_id` | string | process เริ่มต้นสำเร็จหรือไม่ |
-| `name` | string | รหัส process |
-| `command` | string | ตัวระบุ process ภายในสำหรับ process.stop |
-| `cwd` | string | ชื่อ process |
-| `started_at` | string | คำสั่งที่ดำเนินการ |
-| `initial_output` | string | เวลา ISO เมื่อ process เริ่มต้น |
+| `ok` | boolean | Whether process started successfully |
+| `pid` | number | Process ID |
+| `process_id` | string | Internal process identifier for process.stop |
+| `name` | string | Process name |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory |
+| `started_at` | string | ISO timestamp when process started |
+| `initial_output` | string | Initial stdout output (if wait_for_output was used) |
 
 **Example:** Start dev server
 
@@ -1198,11 +1228,11 @@ name: api-server
 wait_for_output: listening
 ```
 
-### หยุด Process
+### Stop Process
 
 `process.stop`
 
-หยุด process พื้นหลังที่กำลังทำงาน
+Stop a running background process
 
 **Parameters:**
 
@@ -1220,10 +1250,10 @@ wait_for_output: listening
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | process ทั้งหมดหยุดสำเร็จหรือไม่ |
-| `stopped` | array | process ทั้งหมดหยุดสำเร็จหรือไม่ |
-| `failed` | array | รายการข้อมูล process ที่หยุด |
-| `count` | number | รายการข้อมูล process ที่หยุด |
+| `ok` | boolean | Whether all processes were stopped successfully |
+| `stopped` | array | List of stopped process info |
+| `failed` | array | List of processes that failed to stop |
+| `count` | number | Number of processes stopped |
 
 **Example:** Stop by process ID
 
@@ -1250,11 +1280,11 @@ force: true
 stop_all: true
 ```
 
-### รันคำสั่ง Shell
+### Execute Shell Command
 
 `shell.exec`
 
-รันคำสั่ง shell และจับเอาต์พุต
+Execute a shell command and capture output
 
 **Parameters:**
 
@@ -1273,13 +1303,13 @@ stop_all: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | คำสั่งดำเนินการสำเร็จหรือไม่ (exit code 0) |
-| `exit_code` | number | คำสั่งดำเนินการสำเร็จหรือไม่ (exit code 0) |
-| `stdout` | string | คำสั่งดำเนินการสำเร็จหรือไม่ (exit code 0) |
-| `stderr` | string | รหัส exit ของคำสั่ง |
-| `command` | string | เอาต์พุตมาตรฐาน |
-| `cwd` | string | เอาต์พุตข้อผิดพลาดมาตรฐาน |
-| `duration_ms` | number | คำสั่งที่ดำเนินการ |
+| `ok` | boolean | Whether command executed successfully (exit code 0) |
+| `exit_code` | number | Command exit code |
+| `stdout` | string | Standard output |
+| `stderr` | string | Standard error output |
+| `command` | string | The executed command |
+| `cwd` | string | Working directory used |
+| `duration_ms` | number | Execution duration in milliseconds |
 
 **Example:** Run npm install
 
@@ -1313,19 +1343,19 @@ env: {"NODE_ENV": "production"}
 
 `ssh.exec`
 
-รันคำสั่งบนเซิร์ฟเวอร์ระยะไกลผ่าน SSH
+Execute command on remote server via SSH
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | ชื่อโฮสต์หรือ IP ของเซิร์ฟเวอร์ SSH |
-| `port` | number | No | `22` | พอร์ต SSH |
-| `username` | string | Yes | - | ชื่อผู้ใช้ SSH |
-| `password` | string | No | - | รหัสผ่าน SSH |
-| `private_key` | string | No | - | กุญแจส่วนตัวรูปแบบ PEM |
-| `command` | string | Yes | - | คำสั่งที่จะรันบนเซิร์ฟเวอร์ระยะไกล |
-| `timeout` | number | No | `30` | เวลาหมดของคำสั่งในวินาที |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `command` | string | Yes | - | Command to execute on remote server |
+| `timeout` | number | No | `30` | Command timeout in seconds |
 
 **Output:**
 
@@ -1354,19 +1384,19 @@ command: systemctl restart nginx
 
 `ssh.sftp_download`
 
-ดาวน์โหลดไฟล์จากเซิร์ฟเวอร์ระยะไกลผ่าน SFTP
+Download file from remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | ชื่อโฮสต์หรือ IP ของเซิร์ฟเวอร์ SSH |
-| `port` | number | No | `22` | พอร์ต SSH |
-| `username` | string | Yes | - | ชื่อผู้ใช้ SSH |
-| `password` | string | No | - | รหัสผ่าน SSH |
-| `private_key` | string | No | - | คีย์ส่วนตัวรูปแบบ PEM |
-| `remote_path` | string | Yes | - | เส้นทางไปยังไฟล์บนเซิร์ฟเวอร์ระยะไกล |
-| `local_path` | string | Yes | - | เส้นทางปลายทางบนเครื่องในพื้นที่ |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `remote_path` | string | Yes | - | Path to file on remote server |
+| `local_path` | string | Yes | - | Destination path on local machine |
 
 **Output:**
 
@@ -1388,20 +1418,20 @@ local_path: /tmp/access.log
 
 `ssh.sftp_upload`
 
-อัปโหลดไฟล์ไปยังเซิร์ฟเวอร์ระยะไกลผ่าน SFTP
+Upload file to remote server via SFTP
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | ชื่อโฮสต์หรือ IP ของเซิร์ฟเวอร์ SSH |
-| `port` | number | No | `22` | พอร์ต SSH |
-| `username` | string | Yes | - | ชื่อผู้ใช้ SSH |
-| `password` | string | No | - | รหัสผ่าน SSH |
-| `private_key` | string | No | - | กุญแจส่วนตัวรูปแบบ PEM |
-| `local_path` | string | Yes | - | เส้นทางไปยังไฟล์ในเครื่องที่จะอัปโหลด |
-| `remote_path` | string | Yes | - | เส้นทางปลายทางบนเซิร์ฟเวอร์ระยะไกล |
-| `overwrite` | boolean | No | `True` | เขียนทับไฟล์ระยะไกลที่มีอยู่ |
+| `host` | string | Yes | - | SSH server hostname or IP |
+| `port` | number | No | `22` | SSH port |
+| `username` | string | Yes | - | SSH username |
+| `password` | string | No | - | SSH password |
+| `private_key` | string | No | - | PEM-format private key |
+| `local_path` | string | Yes | - | Path to local file to upload |
+| `remote_path` | string | Yes | - | Destination path on remote server |
+| `overwrite` | boolean | No | `True` | Overwrite existing remote file |
 
 **Output:**
 
@@ -1419,17 +1449,17 @@ local_path: /tmp/app.tar.gz
 remote_path: /opt/releases/app.tar.gz
 ```
 
-### รันขั้นตอน E2E
+### Run E2E Steps
 
 `testing.e2e.run_steps`
 
-ดำเนินการขั้นตอนทดสอบ end-to-end ตามลำดับ
+Execute end-to-end test steps sequentially
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `steps` | array | Yes | - | อาร์เรย์ของคำนิยามขั้นตอนทดสอบ |
+| `steps` | array | Yes | - | Array of test step definitions |
 | `stop_on_failure` | boolean | No | `True` | Whether to stop on failure |
 | `timeout_per_step` | number | No | `30000` | Timeout Per Step value |
 
@@ -1437,45 +1467,45 @@ remote_path: /opt/releases/app.tar.gz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | การดำเนินการสำเร็จหรือไม่ |
-| `passed` | number | การดำเนินการสำเร็จหรือไม่ |
-| `failed` | number | การดำเนินการสำเร็จหรือไม่ |
-| `results` | array | จำนวนการทดสอบที่ผ่าน |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### ประตูคุณภาพ
+### Quality Gate
 
 `testing.gate.evaluate`
 
-ประเมินเมตริกคุณภาพเทียบกับเกณฑ์ที่กำหนด
+Evaluate quality metrics against defined thresholds
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | object | Yes | - | เมตริกที่จะประเมิน |
-| `thresholds` | object | Yes | - | เมตริกที่จะประเมิน |
+| `metrics` | object | Yes | - | Metrics to evaluate |
+| `thresholds` | object | Yes | - | Threshold values for each metric |
 | `fail_on_breach` | boolean | No | `True` | Whether to fail on breach |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | ค่าเกณฑ์สำหรับแต่ละเมตริก |
-| `passed` | boolean | การดำเนินการสำเร็จหรือไม่ |
-| `results` | array | การดำเนินการสำเร็จหรือไม่ |
-| `summary` | string | จำนวนการทดสอบที่ผ่าน |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `results` | array | List of results |
+| `summary` | string | The summary |
 
-### รันการทดสอบ HTTP
+### Run HTTP Tests
 
 `testing.http.run_suite`
 
-ดำเนินการชุดทดสอบ HTTP API
+Execute HTTP API test suite
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | อาร์เรย์ของคำนิยามการทดสอบ HTTP |
+| `tests` | array | Yes | - | Array of HTTP test definitions |
 | `base_url` | string | No | - | Base URL for API requests |
 | `headers` | object | No | `{}` | HTTP request headers |
 
@@ -1483,22 +1513,22 @@ remote_path: /opt/releases/app.tar.gz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | การดำเนินการสำเร็จหรือไม่ |
-| `passed` | number | การดำเนินการสำเร็จหรือไม่ |
-| `failed` | number | การดำเนินการสำเร็จหรือไม่ |
-| `results` | array | จำนวนการทดสอบที่ผ่าน |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `results` | array | List of results |
 
-### รัน Linter
+### Run Linter
 
 `testing.lint.run`
 
-รันการตรวจสอบ lint บนซอร์สโค้ด
+Run linting checks on source code
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | ไฟล์หรือไดเรกทอรีที่จะ lint |
+| `paths` | array | Yes | - | Files or directories to lint |
 | `linter` | string | No | `auto` | Linter |
 | `fix` | boolean | No | `False` | Whether to fix |
 
@@ -1506,16 +1536,16 @@ remote_path: /opt/releases/app.tar.gz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | การดำเนินการสำเร็จหรือไม่ |
-| `errors` | number | การดำเนินการสำเร็จหรือไม่ |
-| `warnings` | number | การดำเนินการสำเร็จหรือไม่ |
-| `issues` | array | จำนวนข้อผิดพลาดที่พบ |
+| `ok` | boolean | Whether the operation succeeded |
+| `errors` | number | Number of errors encountered |
+| `warnings` | number | The warnings |
+| `issues` | array | The issues |
 
-### สร้างรายงาน
+### Generate Report
 
 `testing.report.generate`
 
-สร้างรายงานการดำเนินการทดสอบ
+Generate test execution report
 
 **Parameters:**
 
@@ -1529,43 +1559,43 @@ remote_path: /opt/releases/app.tar.gz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | การดำเนินการสำเร็จหรือไม่ |
-| `report` | string | การดำเนินการสำเร็จหรือไม่ |
-| `format` | string | การดำเนินการสำเร็จหรือไม่ |
-| `summary` | object | รายงาน |
+| `ok` | boolean | Whether the operation succeeded |
+| `report` | string | The report |
+| `format` | string | The format |
+| `summary` | object | The summary |
 
-### รันสถานการณ์
+### Run Scenario
 
 `testing.scenario.run`
 
-ดำเนินการทดสอบตามสถานการณ์ (รูปแบบ BDD)
+Execute scenario-based test (BDD style)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `scenario` | object | Yes | - | คำนิยามสถานการณ์พร้อม given/when/then |
+| `scenario` | object | Yes | - | Scenario definition with given/when/then |
 | `context` | object | No | `{}` | Additional context data |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | คำนิยามสถานการณ์พร้อม given/when/then |
-| `passed` | boolean | การดำเนินการสำเร็จหรือไม่ |
-| `steps` | array | การดำเนินการสำเร็จหรือไม่ |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | boolean | Number of tests passed |
+| `steps` | array | The steps |
 
-### สแกนความปลอดภัย
+### Security Scan
 
 `testing.security.scan`
 
-สแกนหาช่องโหว่ด้านความปลอดภัย
+Scan for security vulnerabilities
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `targets` | array | Yes | - | ไฟล์, URL หรือพาธที่จะสแกน |
+| `targets` | array | Yes | - | Files, URLs, or paths to scan |
 | `scan_type` | string | No | `all` | Scan Type |
 | `severity_threshold` | string | No | `medium` | Severity Threshold |
 
@@ -1573,45 +1603,45 @@ remote_path: /opt/releases/app.tar.gz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | การดำเนินการสำเร็จหรือไม่ |
-| `vulnerabilities` | array | การดำเนินการสำเร็จหรือไม่ |
-| `summary` | object | การดำเนินการสำเร็จหรือไม่ |
+| `ok` | boolean | Whether the operation succeeded |
+| `vulnerabilities` | array | The vulnerabilities |
+| `summary` | object | The summary |
 
-### รันชุดทดสอบ
+### Run Test Suite
 
 `testing.suite.run`
 
-ดำเนินการชุดการทดสอบ
+Execute a collection of tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tests` | array | Yes | - | อาร์เรย์ของคำนิยามการทดสอบ |
+| `tests` | array | Yes | - | Array of test definitions |
 | `parallel` | boolean | No | `False` | Whether to parallel |
-| `max_failures` | number | No | `0` | อาร์เรย์ของคำนิยามการทดสอบ |
+| `max_failures` | number | No | `0` | 0 = no limit |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | 0 = ไม่จำกัด |
-| `passed` | number | 0 = ไม่จำกัด |
-| `failed` | number | การดำเนินการสำเร็จหรือไม่ |
-| `skipped` | number | จำนวนการทดสอบที่ผ่าน |
-| `results` | array | จำนวนการทดสอบที่ล้มเหลว |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `skipped` | number | Number of tests skipped |
+| `results` | array | List of results |
 
-### รัน Unit Tests
+### Run Unit Tests
 
 `testing.unit.run`
 
-ดำเนินการทดสอบ unit
+Execute unit tests
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `paths` | array | Yes | - | พาธไปยังไฟล์ทดสอบหรือไดเรกทอรี |
+| `paths` | array | Yes | - | Paths to test files or directories |
 | `pattern` | string | No | `test_*.py` | Pattern |
 | `verbose` | boolean | No | `False` | Whether to verbose |
 
@@ -1619,67 +1649,67 @@ remote_path: /opt/releases/app.tar.gz
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | การดำเนินการสำเร็จหรือไม่ |
-| `passed` | number | การดำเนินการสำเร็จหรือไม่ |
-| `failed` | number | การดำเนินการสำเร็จหรือไม่ |
-| `errors` | number | จำนวนการทดสอบที่ผ่าน |
-| `results` | array | จำนวนการทดสอบที่ล้มเหลว |
+| `ok` | boolean | Whether the operation succeeded |
+| `passed` | number | Number of tests passed |
+| `failed` | number | Number of tests failed |
+| `errors` | number | Number of errors encountered |
+| `results` | array | List of results |
 
-### เปรียบเทียบภาพ
+### Visual Compare
 
 `testing.visual.compare`
 
-เปรียบเทียบเอาต์พุตภาพเพื่อหาความแตกต่าง
+Compare visual outputs for differences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | string | Yes | - | พาธหรือ base64 ของรูปภาพจริง |
-| `expected` | string | Yes | - | พาธหรือ base64 ของรูปภาพจริง |
-| `threshold` | number | No | `0.1` | พาธหรือ base64 ของรูปภาพที่คาดหวัง |
+| `actual` | string | Yes | - | Path or base64 of actual image |
+| `expected` | string | Yes | - | Path or base64 of expected image |
+| `threshold` | number | No | `0.1` | Max allowed difference (0-1) |
 | `output_diff` | boolean | No | `True` | Whether to output diff |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | ความแตกต่างสูงสุดที่อนุญาต (0-1) |
-| `match` | boolean | การดำเนินการสำเร็จหรือไม่ |
-| `difference` | number | การดำเนินการสำเร็จหรือไม่ |
-| `diff_image` | string | การจับคู่ |
+| `ok` | boolean | Whether the operation succeeded |
+| `match` | boolean | The match |
+| `difference` | number | The difference |
+| `diff_image` | string | The diff image |
 
-### ประเมินคุณภาพ UI
+### Evaluate UI Quality
 
 `ui.evaluate`
 
-ประเมินคุณภาพ UI อย่างครอบคลุมด้วยการให้คะแนนหลายมิติ
+Comprehensive UI quality evaluation with multi-dimensional scoring
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `screenshot` | string | Yes | - | พาธหรือ URL ภาพหน้าจอที่จะประเมิน |
-| `app_type` | string | No | `web_app` | พาธหรือ URL ภาพหน้าจอที่จะประเมิน |
-| `page_type` | string | No | - | ประเภทของหน้าที่ประเมิน |
-| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | เกณฑ์เฉพาะที่จะประเมิน (ค่าเริ่มต้นทั้งหมด) |
-| `target_audience` | string | No | - | คำอธิบายผู้ใช้เป้าหมาย |
-| `brand_guidelines` | string | No | - | แนวทางแบรนด์สั้นๆ เพื่อตรวจสอบ |
-| `min_score` | number | No | `70` | คะแนนขั้นต่ำเพื่อผ่าน (0-100) |
-| `api_key` | string | No | - | OpenAI API key (ค่าเริ่มต้นใช้ OPENAI_API_KEY env var) |
+| `screenshot` | string | Yes | - | Screenshot path or URL to evaluate |
+| `app_type` | string | No | `web_app` | Type of application for context-aware evaluation |
+| `page_type` | string | No | - | Type of page being evaluated |
+| `evaluation_criteria` | array | No | `['visual_design', 'usability', 'accessibility', 'consistency', 'responsiveness']` | Specific criteria to evaluate (defaults to all) |
+| `target_audience` | string | No | - | Description of target users |
+| `brand_guidelines` | string | No | - | Brief brand guidelines to check against |
+| `min_score` | number | No | `70` | Minimum overall score to pass (0-100) |
+| `api_key` | string | No | - | OpenAI API key (defaults to OPENAI_API_KEY env var) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | OpenAI API key (ค่าเริ่มต้นใช้ OPENAI_API_KEY env var) |
-| `passed` | boolean | การประเมินสำเร็จหรือไม่ |
-| `overall_score` | number | การประเมินสำเร็จหรือไม่ |
-| `scores` | object | คะแนนคุณภาพ UI โดยรวม (0-100) |
-| `strengths` | array | คะแนนคุณภาพ UI โดยรวม (0-100) |
-| `issues` | array | คะแนนตามเกณฑ์การประเมิน |
-| `recommendations` | array | รายการจุดแข็งของ UI |
-| `summary` | string | คำแนะนำการปรับปรุงเฉพาะ |
+| `ok` | boolean | Whether evaluation succeeded |
+| `passed` | boolean | Whether UI meets minimum score threshold |
+| `overall_score` | number | Overall UI quality score (0-100) |
+| `scores` | object | Scores by evaluation criteria |
+| `strengths` | array | List of UI strengths |
+| `issues` | array | List of issues found with severity |
+| `recommendations` | array | Specific improvement recommendations |
+| `summary` | string | Executive summary of evaluation |
 
 **Example:** Evaluate Dashboard
 
@@ -1700,11 +1730,11 @@ page_type: product detail
 evaluation_criteria: ["usability", "cta_effectiveness", "visual_design"]
 ```
 
-### วิเคราะห์รูปภาพด้วย AI
+### Analyze Image with AI
 
 `vision.analyze`
 
-วิเคราะห์รูปภาพโดยใช้ OpenAI Vision API (GPT-4V)
+Analyze images using OpenAI Vision API (GPT-4V)
 
 **Parameters:**
 
@@ -1725,11 +1755,11 @@ evaluation_criteria: ["usability", "cta_effectiveness", "visual_design"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | การวิเคราะห์สำเร็จหรือไม่ |
-| `analysis` | string | การวิเคราะห์สำเร็จหรือไม่ |
-| `structured` | object | ผลการวิเคราะห์ AI |
-| `model` | string | ข้อมูลการวิเคราะห์แบบมีโครงสร้าง (ถ้า output_format เป็น structured/json) |
-| `tokens_used` | number | โมเดลที่ใช้ในการวิเคราะห์ |
+| `ok` | boolean | Whether analysis succeeded |
+| `analysis` | string | The AI analysis result |
+| `structured` | object | Structured analysis data (if output_format is structured/json) |
+| `model` | string | Model used for analysis |
+| `tokens_used` | number | Total tokens used |
 
 **Example:** UI Review
 
@@ -1756,11 +1786,11 @@ prompt: Evaluate accessibility: color contrast, text readability, button sizes, 
 analysis_type: accessibility
 ```
 
-### เปรียบเทียบรูปภาพ
+### Compare Images
 
 `vision.compare`
 
-เปรียบเทียบสองรูปภาพและระบุความแตกต่างทางภาพ
+Compare two images and identify visual differences
 
 **Parameters:**
 
@@ -1780,12 +1810,12 @@ analysis_type: accessibility
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | การเปรียบเทียบสำเร็จหรือไม่ |
-| `has_differences` | boolean | การเปรียบเทียบสำเร็จหรือไม่ |
-| `similarity_score` | number | พบความแตกต่างที่สำคัญหรือไม่ |
-| `differences` | array | เปอร์เซ็นต์ความคล้ายคลึง (0-100) |
-| `summary` | string | รายการความแตกต่างที่พบ |
-| `recommendation` | string | สรุปผลการเปรียบเทียบ |
+| `ok` | boolean | Whether comparison succeeded |
+| `has_differences` | boolean | Whether significant differences were found |
+| `similarity_score` | number | Similarity percentage (0-100) |
+| `differences` | array | List of identified differences |
+| `summary` | string | Summary of comparison results |
+| `recommendation` | string | Pass/Fail recommendation based on threshold |
 
 **Example:** Visual Regression Test
 

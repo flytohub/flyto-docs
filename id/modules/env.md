@@ -6,32 +6,32 @@ Environment variable management and .env file loading.
 
 | Module | Description |
 |--------|-------------|
-| [Dapatkan Variabel Lingkungan](#dapatkan-variabel-lingkungan) | Dapatkan nilai dari variabel lingkungan |
-| [Muat File .env](#muat-file-.env) | Muat variabel lingkungan dari file .env |
-| [Tetapkan Variabel Lingkungan](#tetapkan-variabel-lingkungan) | Tetapkan variabel lingkungan dalam proses saat ini |
+| [Get Environment Variable](#get-environment-variable) | Get the value of an environment variable |
+| [Load .env File](#load-.env-file) | Load environment variables from a .env file |
+| [Set Environment Variable](#set-environment-variable) | Set an environment variable in the current process |
 
 ## Modules
 
-### Dapatkan Variabel Lingkungan
+### Get Environment Variable
 
 `env.get`
 
-Dapatkan nilai dari variabel lingkungan
+Get the value of an environment variable
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | Nama variabel lingkungan |
-| `default` | string | No | - | Nilai default jika variabel tidak ditetapkan |
+| `name` | string | Yes | - | Name of the environment variable |
+| `default` | string | No | - | Default value if the variable is not set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Nama variabel |
-| `value` | string | Nilai variabel (atau default jika tidak ditetapkan) |
-| `exists` | boolean | Apakah variabel ada di lingkungan |
+| `name` | string | Variable name |
+| `value` | string | Variable value (or default if not set) |
+| `exists` | boolean | Whether the variable exists in the environment |
 
 **Example:** Get HOME variable
 
@@ -46,25 +46,25 @@ name: MY_APP_PORT
 default: 8080
 ```
 
-### Muat File .env
+### Load .env File
 
 `env.load_dotenv`
 
-Muat variabel lingkungan dari file .env
+Load environment variables from a .env file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | `.env` | Jalur ke file .env |
-| `override` | boolean | No | `False` | Apakah akan menimpa variabel lingkungan yang ada |
+| `path` | string | Yes | `.env` | Path to the .env file |
+| `override` | boolean | No | `False` | Whether to override existing environment variables |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `loaded_count` | number | Jumlah variabel yang dimuat |
-| `variables` | array | Daftar nama variabel yang dimuat |
+| `loaded_count` | number | Number of variables loaded |
+| `variables` | array | List of variable names that were loaded |
 
 **Example:** Load .env file
 
@@ -73,26 +73,26 @@ path: .env
 override: false
 ```
 
-### Tetapkan Variabel Lingkungan
+### Set Environment Variable
 
 `env.set`
 
-Tetapkan variabel lingkungan dalam proses saat ini
+Set an environment variable in the current process
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | Nama variabel lingkungan yang akan ditetapkan |
-| `value` | string | Yes | - | Nilai untuk diberikan kepada variabel lingkungan |
+| `name` | string | Yes | - | Name of the environment variable to set |
+| `value` | string | Yes | - | Value to assign to the environment variable |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Nama variabel |
-| `value` | string | Nilai baru yang ditetapkan |
-| `previous_value` | string | Nilai sebelumnya (null jika belum pernah ditetapkan) |
+| `name` | string | Variable name |
+| `value` | string | New value that was set |
+| `previous_value` | string | Previous value (null if not previously set) |
 
 **Example:** Set an environment variable
 

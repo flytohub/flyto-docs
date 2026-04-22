@@ -6,23 +6,23 @@ Datetime operations, delay, MD5 hash, and random utilities.
 
 | Module | Description |
 |--------|-------------|
-| [加上時間](#加上時間) | 在日期時間加上時間 |
-| [格式化日期時間](#格式化日期時間) | 將日期時間格式化為字串 |
-| [解析日期時間](#解析日期時間) | 將字串解析為日期時間 |
-| [減去時間](#減去時間) | 從日期時間減去時間 |
-| [目前日期/時間](#目前日期時間) | 取得目前日期和時間 |
-| [延遲/暫停](#延遲暫停) | 暫停工作流程執行指定的時間 |
-| [MD5 雜湊](#md5-雜湊) | 計算文字的 MD5 雜湊 |
-| [隨機數字](#隨機數字) | 在範圍內產生隨機數字 |
-| [隨機字串](#隨機字串) | 產生隨機字串或 UUID |
+| [Add Time](#add-time) | Add time to datetime |
+| [Format DateTime](#format-datetime) | Format datetime to string |
+| [Parse DateTime](#parse-datetime) | Parse string to datetime |
+| [Subtract Time](#subtract-time) | Subtract time from datetime |
+| [Current Date/Time](#current-datetime) | Get current date and time |
+| [Delay/Sleep](#delaysleep) | Pause workflow execution for specified duration |
+| [MD5 Hash](#md5-hash) | Calculate MD5 hash of text |
+| [Random Number](#random-number) | Generate random number in range |
+| [Random String](#random-string) | Generate random string or UUID |
 
 ## Modules
 
-### 加上時間
+### Add Time
 
 `datetime.add`
 
-在日期時間加上時間
+Add time to datetime
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ Datetime operations, delay, MD5 hash, and random utilities.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 結果日期時間 |
-| `timestamp` | number | Unix 時間戳記 |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Add 7 days
 
@@ -56,11 +56,11 @@ hours: 2
 minutes: 30
 ```
 
-### 格式化日期時間
+### Format DateTime
 
 `datetime.format`
 
-將日期時間格式化為字串
+Format datetime to string
 
 **Parameters:**
 
@@ -73,8 +73,8 @@ minutes: 30
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 格式化後的字串 |
-| `timestamp` | number | Unix 時間戳記 |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Format current time
 
@@ -90,11 +90,11 @@ datetime: 2024-01-15T10:30:00
 format: %B %d, %Y
 ```
 
-### 解析日期時間
+### Parse DateTime
 
 `datetime.parse`
 
-將字串解析為日期時間
+Parse string to datetime
 
 **Parameters:**
 
@@ -107,14 +107,14 @@ format: %B %d, %Y
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 解析結果 |
-| `timestamp` | number | Unix 時間戳記 |
-| `year` | number | 年 |
-| `month` | number | 月 |
-| `day` | number | 日 |
-| `hour` | number | 時 |
-| `minute` | number | 分 |
-| `second` | number | 秒 |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
+| `year` | number | Year component |
+| `month` | number | Month component |
+| `day` | number | Day component |
+| `hour` | number | Hour component |
+| `minute` | number | Minute component |
+| `second` | number | Second component |
 
 **Example:** Parse ISO format
 
@@ -129,11 +129,11 @@ datetime_string: January 15, 2024
 format: %B %d, %Y
 ```
 
-### 減去時間
+### Subtract Time
 
 `datetime.subtract`
 
-從日期時間減去時間
+Subtract time from datetime
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ format: %B %d, %Y
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 結果日期時間 |
-| `timestamp` | number | Unix 時間戳記 |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Subtract 7 days
 
@@ -166,28 +166,28 @@ datetime: 2024-01-15T10:00:00
 hours: 1
 ```
 
-### 目前日期/時間
+### Current Date/Time
 
 `utility.datetime.now`
 
-取得目前日期和時間
+Get current date and time
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | 輸出格式 |
-| `custom_format` | string | No | - | Python strftime 格式（當 format=custom 時） |
-| `timezone` | string | No | `UTC` | 時區（預設：UTC） |
+| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | Output format |
+| `custom_format` | string | No | - | Python strftime format (if format=custom) |
+| `timezone` | string | No | `UTC` | Timezone (default: UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `datetime` | string | 日期時間物件 |
-| `timestamp` | number | Unix 時間戳記（毫秒） |
-| `iso` | string | ISO 格式日期時間 |
+| `status` | string | Operation status (success/error) |
+| `datetime` | string | Formatted date/time |
+| `timestamp` | number | Unix timestamp |
+| `iso` | string | ISO format |
 
 **Example:** Example
 
@@ -201,25 +201,25 @@ format: iso
 format: unix
 ```
 
-### 延遲/暫停
+### Delay/Sleep
 
 `utility.delay`
 
-暫停工作流程執行指定的時間
+Pause workflow execution for specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `duration_ms` | number | No | `1000` | 等待時間（毫秒） |
-| `duration_seconds` | number | No | - | 替代方案：以秒為單位的時間 |
+| `duration_ms` | number | No | `1000` | How long to wait in milliseconds |
+| `duration_seconds` | number | No | - | Alternative: duration in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `waited_ms` | number | 實際等待時間（毫秒） |
+| `status` | string | Operation status (success/error) |
+| `waited_ms` | number | Actual wait time in ms |
 
 **Example:** Example
 
@@ -233,25 +233,25 @@ duration_seconds: 2
 duration_ms: 500
 ```
 
-### MD5 雜湊
+### MD5 Hash
 
 `utility.hash.md5`
 
-計算文字的 MD5 雜湊
+Calculate MD5 hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 要雜湊的文字 |
-| `encoding` | string | No | `utf-8` | 文字編碼 |
+| `text` | text | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `hash` | string | 雜湊值 |
+| `status` | string | Operation status (success/error) |
+| `hash` | string | MD5 hash (hexadecimal) |
 
 **Example:** Example
 
@@ -259,26 +259,26 @@ duration_ms: 500
 text: Hello World
 ```
 
-### 隨機數字
+### Random Number
 
 `utility.random.number`
 
-在範圍內產生隨機數字
+Generate random number in range
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `min` | number | No | `0` | 最小值（含） |
-| `max` | number | No | `100` | 最大值（含） |
-| `decimals` | number | No | `0` | 小數位數（0 表示整數） |
+| `min` | number | No | `0` | Minimum value (inclusive) |
+| `max` | number | No | `100` | Maximum value (inclusive) |
+| `decimals` | number | No | `0` | Number of decimal places (0 for integers) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `value` | number | 產生的數值 |
+| `status` | string | Operation status (success/error) |
+| `value` | number | Random number |
 
 **Example:** Example
 
@@ -296,25 +296,25 @@ max: 1
 decimals: 2
 ```
 
-### 隨機字串
+### Random String
 
 `utility.random.string`
 
-產生隨機字串或 UUID
+Generate random string or UUID
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | No | `16` | 字串長度 |
-| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | 字元集 |
+| `length` | number | No | `16` | String length |
+| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | Which characters to use |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `value` | string | 產生的字串 |
+| `status` | string | Operation status (success/error) |
+| `value` | string | Random string |
 
 **Example:** Example
 

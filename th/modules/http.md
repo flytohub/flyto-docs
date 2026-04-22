@@ -6,7 +6,7 @@ HTTP request utilities.
 
 | Module | Description |
 |--------|-------------|
-| [HTTP GET](#http-get) | ส่งคำขอ HTTP GET และรับการตอบกลับ |
+| [HTTP GET](#http-get) | Send HTTP GET request to an API endpoint |
 
 ## Modules
 
@@ -14,16 +14,16 @@ HTTP request utilities.
 
 `http.get`
 
-ส่งคำขอ HTTP GET และรับการตอบกลับ
+Send HTTP GET request to an API endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | URL ที่จะส่งคำขอ GET ไปยัง |
-| `headers` | object | No | `{}` | ส่วนหัวของคำขอในรูปแบบคีย์-ค่า |
-| `query` | object | No | `{}` | พารามิเตอร์สตริงคำถามในรูปแบบคีย์-ค่า |
-| `timeout` | number | No | `30` | หมดเวลาคำขอในหน่วยมิลลิวินาที |
+| `url` | string | Yes | - | Target URL |
+| `headers` | object | No | `{}` | HTTP request headers as key-value pairs |
+| `query` | object | No | `{}` | URL query string parameters as key-value pairs |
+| `timeout` | number | No | `30` | Maximum time to wait in seconds |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
 | `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
@@ -31,7 +31,7 @@ HTTP request utilities.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | คำขอสำเร็จหรือไม่ (สถานะ 2xx) |
-| `status` | number | รหัสสถานะ HTTP |
-| `body` | any | เนื้อหาการตอบกลับ (JSON ที่แปลงแล้วหรือข้อความ) |
-| `headers` | object | ส่วนหัวของการตอบกลับ |
+| `ok` | boolean | Whether the operation succeeded |
+| `status` | number | HTTP status code |
+| `body` | any | Response body content |
+| `headers` | object | Response headers |

@@ -6,114 +6,114 @@ Boolean logic operations: AND, OR, NOT, equals, contains.
 
 | Module | Description |
 |--------|-------------|
-| [邏輯 AND](#邏輯-and) | 執行邏輯 AND 運算 |
-| [邏輯包含](#邏輯包含) | 檢查一個值是否包含另一個值 |
-| [邏輯相等](#邏輯相等) | 檢查兩個值是否相等 |
-| [邏輯 NOT](#邏輯-not) | 執行邏輯 NOT 運算 |
-| [邏輯 OR](#邏輯-or) | 執行邏輯 OR 運算 |
+| [Logic AND](#logic-and) | Perform logical AND operation |
+| [Logic Contains](#logic-contains) | Check if a value contains another value |
+| [Logic Equals](#logic-equals) | Check if two values are equal |
+| [Logic NOT](#logic-not) | Perform logical NOT operation |
+| [Logic OR](#logic-or) | Perform logical OR operation |
 
 ## Modules
 
-### 邏輯 AND
+### Logic AND
 
 `logic.and`
 
-執行邏輯 AND 運算
+Perform logical AND operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | 要一起進行 AND 的布林值 |
+| `values` | array | Yes | - | Boolean values to AND together |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 要一起進行 AND 的布林值 |
-| `true_count` | number | AND 運算的結果 |
-| `total_count` | number | AND 運算的結果 |
+| `result` | boolean | Result of AND operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |
 
-### 邏輯包含
+### Logic Contains
 
 `logic.contains`
 
-檢查一個值是否包含另一個值
+Check if a value contains another value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `haystack` | text | Yes | - | 要搜尋的內容（字串、陣列或物件） |
-| `needle` | text | Yes | - | 要搜尋的內容（字串、陣列或物件） |
-| `case_sensitive` | boolean | No | `True` | 要搜尋的值 |
+| `haystack` | text | Yes | - | Value to search in (string, array, or object) |
+| `needle` | text | Yes | - | Value to search for |
+| `case_sensitive` | boolean | No | `True` | Case sensitive search for strings |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 區分大小寫的字串搜尋 |
-| `position` | number | haystack 是否包含 needle |
-| `count` | number | haystack 是否包含 needle |
+| `result` | boolean | Whether haystack contains needle |
+| `position` | number | Position/index where found (-1 if not found) |
+| `count` | number | Number of occurrences |
 
-### 邏輯相等
+### Logic Equals
 
 `logic.equals`
 
-檢查兩個值是否相等
+Check if two values are equal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `a` | text | Yes | - | 第一個要比較的值 |
-| `b` | text | Yes | - | 第一個要比較的值 |
-| `strict` | boolean | No | `False` | 第二個要比較的值 |
-| `case_sensitive` | boolean | No | `True` | 要求相同類型（不進行類型轉換） |
+| `a` | text | Yes | - | First value to compare |
+| `b` | text | Yes | - | Second value to compare |
+| `strict` | boolean | No | `False` | Require same type (no type coercion) |
+| `case_sensitive` | boolean | No | `True` | Case sensitive string comparison |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 區分大小寫的字串比較 |
-| `type_a` | string | 值是否相等 |
-| `type_b` | string | 值是否相等 |
+| `result` | boolean | Whether values are equal |
+| `type_a` | string | Type of first value |
+| `type_b` | string | Type of second value |
 
-### 邏輯 NOT
+### Logic NOT
 
 `logic.not`
 
-執行邏輯 NOT 運算
+Perform logical NOT operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | boolean | Yes | `False` | 要取反的布林值 |
+| `value` | boolean | Yes | `False` | Boolean value to negate |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 要取反的布林值 |
-| `original` | boolean | 取反的結果 |
+| `result` | boolean | Negated result |
+| `original` | boolean | Original value |
 
-### 邏輯 OR
+### Logic OR
 
 `logic.or`
 
-執行邏輯 OR 運算
+Perform logical OR operation
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `values` | array | Yes | - | 要一起進行 OR 的布林值 |
+| `values` | array | Yes | - | Boolean values to OR together |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | boolean | 要一起進行 OR 的布林值 |
-| `true_count` | number | OR 運算的結果 |
-| `total_count` | number | OR 運算的結果 |
+| `result` | boolean | Result of OR operation |
+| `true_count` | number | Number of true values |
+| `total_count` | number | Total number of values |

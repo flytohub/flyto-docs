@@ -6,23 +6,23 @@ Datetime operations, delay, MD5 hash, and random utilities.
 
 | Module | Description |
 |--------|-------------|
-| [Ajouter du temps](#ajouter-du-temps) | Ajouter du temps a une date/heure |
-| [Formater Date/Heure](#formater-dateheure) | Formater une date/heure en chaine |
-| [Analyser Date/Heure](#analyser-dateheure) | Analyser une chaine en date/heure |
-| [Soustraire du temps](#soustraire-du-temps) | Soustraire du temps d'une date/heure |
-| [Date/Heure actuelle](#dateheure-actuelle) | Obtenir la date et l'heure actuelles |
-| [Delai/Pause](#delaipause) | Mettre en pause l'execution du workflow pour une duree specifiee |
-| [Hachage MD5](#hachage-md5) | Calculer le hachage MD5 du texte |
-| [Nombre aleatoire](#nombre-aleatoire) | Generer un nombre aleatoire dans une plage |
-| [Chaine aleatoire](#chaine-aleatoire) | Generer une chaine aleatoire ou UUID |
+| [Add Time](#add-time) | Add time to datetime |
+| [Format DateTime](#format-datetime) | Format datetime to string |
+| [Parse DateTime](#parse-datetime) | Parse string to datetime |
+| [Subtract Time](#subtract-time) | Subtract time from datetime |
+| [Current Date/Time](#current-datetime) | Get current date and time |
+| [Delay/Sleep](#delaysleep) | Pause workflow execution for specified duration |
+| [MD5 Hash](#md5-hash) | Calculate MD5 hash of text |
+| [Random Number](#random-number) | Generate random number in range |
+| [Random String](#random-string) | Generate random string or UUID |
 
 ## Modules
 
-### Ajouter du temps
+### Add Time
 
 `datetime.add`
 
-Ajouter du temps a une date/heure
+Add time to datetime
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ Ajouter du temps a une date/heure
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Resultat de l'operation |
-| `timestamp` | number | Resultat de l'operation |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Add 7 days
 
@@ -56,11 +56,11 @@ hours: 2
 minutes: 30
 ```
 
-### Formater Date/Heure
+### Format DateTime
 
 `datetime.format`
 
-Formater une date/heure en chaine
+Format datetime to string
 
 **Parameters:**
 
@@ -73,8 +73,8 @@ Formater une date/heure en chaine
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Resultat de l'operation |
-| `timestamp` | number | Resultat de l'operation |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Format current time
 
@@ -90,11 +90,11 @@ datetime: 2024-01-15T10:30:00
 format: %B %d, %Y
 ```
 
-### Analyser Date/Heure
+### Parse DateTime
 
 `datetime.parse`
 
-Analyser une chaine en date/heure
+Parse string to datetime
 
 **Parameters:**
 
@@ -107,14 +107,14 @@ Analyser une chaine en date/heure
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Resultat de l'operation |
-| `timestamp` | number | Resultat de l'operation |
-| `year` | number | Resultat de l'operation |
-| `month` | number | Horodatage Unix |
-| `day` | number | Composant annee |
-| `hour` | number | Composant mois |
-| `minute` | number | Composant jour |
-| `second` | number | Composant heure |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
+| `year` | number | Year component |
+| `month` | number | Month component |
+| `day` | number | Day component |
+| `hour` | number | Hour component |
+| `minute` | number | Minute component |
+| `second` | number | Second component |
 
 **Example:** Parse ISO format
 
@@ -129,11 +129,11 @@ datetime_string: January 15, 2024
 format: %B %d, %Y
 ```
 
-### Soustraire du temps
+### Subtract Time
 
 `datetime.subtract`
 
-Soustraire du temps d'une date/heure
+Subtract time from datetime
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ Soustraire du temps d'une date/heure
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Resultat de l'operation |
-| `timestamp` | number | Resultat de l'operation |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Subtract 7 days
 
@@ -166,28 +166,28 @@ datetime: 2024-01-15T10:00:00
 hours: 1
 ```
 
-### Date/Heure actuelle
+### Current Date/Time
 
 `utility.datetime.now`
 
-Obtenir la date et l'heure actuelles
+Get current date and time
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | Format de sortie |
-| `custom_format` | string | No | - | Format strftime Python (si format=custom) |
-| `timezone` | string | No | `UTC` | Format strftime Python (si format=custom) |
+| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | Output format |
+| `custom_format` | string | No | - | Python strftime format (if format=custom) |
+| `timezone` | string | No | `UTC` | Timezone (default: UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Fuseau horaire (defaut: UTC) |
-| `datetime` | string | Statut de l'operation (succes/erreur) |
-| `timestamp` | number | Statut de l'operation (succes/erreur) |
-| `iso` | string | Date/heure formatee |
+| `status` | string | Operation status (success/error) |
+| `datetime` | string | Formatted date/time |
+| `timestamp` | number | Unix timestamp |
+| `iso` | string | ISO format |
 
 **Example:** Example
 
@@ -201,25 +201,25 @@ format: iso
 format: unix
 ```
 
-### Delai/Pause
+### Delay/Sleep
 
 `utility.delay`
 
-Mettre en pause l'execution du workflow pour une duree specifiee
+Pause workflow execution for specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `duration_ms` | number | No | `1000` | Combien de temps attendre en millisecondes |
-| `duration_seconds` | number | No | - | Alternative: duree en secondes |
+| `duration_ms` | number | No | `1000` | How long to wait in milliseconds |
+| `duration_seconds` | number | No | - | Alternative: duration in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Alternative: duree en secondes |
-| `waited_ms` | number | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `waited_ms` | number | Actual wait time in ms |
 
 **Example:** Example
 
@@ -233,25 +233,25 @@ duration_seconds: 2
 duration_ms: 500
 ```
 
-### Hachage MD5
+### MD5 Hash
 
 `utility.hash.md5`
 
-Calculer le hachage MD5 du texte
+Calculate MD5 hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Texte a hacher |
-| `encoding` | string | No | `utf-8` | Texte a hacher |
+| `text` | text | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Encodage du texte |
-| `hash` | string | Encodage du texte |
+| `status` | string | Operation status (success/error) |
+| `hash` | string | MD5 hash (hexadecimal) |
 
 **Example:** Example
 
@@ -259,26 +259,26 @@ Calculer le hachage MD5 du texte
 text: Hello World
 ```
 
-### Nombre aleatoire
+### Random Number
 
 `utility.random.number`
 
-Generer un nombre aleatoire dans une plage
+Generate random number in range
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `min` | number | No | `0` | Valeur minimum (inclusive) |
-| `max` | number | No | `100` | Valeur minimum (inclusive) |
-| `decimals` | number | No | `0` | Valeur maximum (inclusive) |
+| `min` | number | No | `0` | Minimum value (inclusive) |
+| `max` | number | No | `100` | Maximum value (inclusive) |
+| `decimals` | number | No | `0` | Number of decimal places (0 for integers) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Nombre de decimales (0 pour les entiers) |
-| `value` | number | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `value` | number | Random number |
 
 **Example:** Example
 
@@ -296,25 +296,25 @@ max: 1
 decimals: 2
 ```
 
-### Chaine aleatoire
+### Random String
 
 `utility.random.string`
 
-Generer une chaine aleatoire ou UUID
+Generate random string or UUID
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | No | `16` | Longueur de la chaine |
-| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | Longueur de la chaine |
+| `length` | number | No | `16` | String length |
+| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | Which characters to use |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Statut de l'operation (succes/erreur) |
-| `value` | string | Statut de l'operation (succes/erreur) |
+| `status` | string | Operation status (success/error) |
+| `value` | string | Random string |
 
 **Example:** Example
 

@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [Pratique Analyser](#pratique-analyser) | Analyser la structure du site web pour la pratique |
-| [Pratique Executer](#pratique-executer) | Executer une session de pratique |
-| [Pratique Inferer le schema](#pratique-inferer-le-schema) | Inferer le schema de donnees depuis le site web |
-| [Statistiques de pratique](#statistiques-de-pratique) | Obtenir les statistiques de pratique |
+| [Practice Analyze](#practice-analyze) | Analyze website structure for practice |
+| [Practice Execute](#practice-execute) | Execute practice session |
+| [Practice Infer Schema](#practice-infer-schema) | Infer data schema from website |
+| [Practice Stats](#practice-stats) | Get practice statistics |
 
 ## Modules
 
-### Pratique Analyser
+### Practice Analyze
 
 `training.practice.analyze`
 
-Analyser la structure du site web pour la pratique
+Analyze website structure for practice
 
 **Parameters:**
 
@@ -29,14 +29,14 @@ Analyser la structure du site web pour la pratique
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Analyser la structure du site web |
-| `structure` | object | Analyser la structure du site web |
+| `status` | string | Operation status (success/error) |
+| `structure` | object | The structure |
 
-### Pratique Executer
+### Practice Execute
 
 `training.practice.execute`
 
-Executer une session de pratique
+Execute practice session
 
 **Parameters:**
 
@@ -49,14 +49,14 @@ Executer une session de pratique
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Executer une session de pratique |
-| `items_processed` | number | Executer une session de pratique |
+| `status` | string | Operation status (success/error) |
+| `items_processed` | number | The items processed |
 
-### Pratique Inferer le schema
+### Practice Infer Schema
 
 `training.practice.infer_schema`
 
-Inferer le schema de donnees depuis le site web
+Infer data schema from website
 
 **Parameters:**
 
@@ -69,20 +69,20 @@ Inferer le schema de donnees depuis le site web
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Inferer le schema de donnees |
-| `schema` | object | Inferer le schema de donnees |
+| `status` | string | Operation status (success/error) |
+| `schema` | object | The schema |
 
-### Statistiques de pratique
+### Practice Stats
 
 `training.practice.stats`
 
-Obtenir les statistiques de pratique
+Get practice statistics
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total_sessions` | number | Le total des sessions |
-| `successful_sessions` | number | Le total des sessions |
-| `success_rate` | number | Obtenir les statistiques de pratique |
-| `history` | array | Obtenir les statistiques de pratique |
+| `total_sessions` | number | The total sessions |
+| `successful_sessions` | number | The successful sessions |
+| `success_rate` | number | The success rate |
+| `history` | array | The history |

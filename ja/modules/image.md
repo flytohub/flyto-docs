@@ -6,23 +6,23 @@ Resize, crop, compress, convert, OCR, QR codes, and watermarks.
 
 | Module | Description |
 |--------|-------------|
-| [画像圧縮](#画像圧縮) | 品質を維持しながら画像を圧縮してファイルサイズを削減 |
-| [画像変換](#画像変換) | 画像を別の形式（PNG、JPEG、WEBPなど）に変換 |
-| [画像を切り抜く](#画像を切り抜く) | 指定された座標で画像を切り抜く |
-| [画像ダウンロード](#画像ダウンロード) | URLから画像をローカルファイルにダウンロード |
-| [OCRテキスト抽出](#ocrテキスト抽出) | OCRを使って画像からテキストを抽出する |
-| [QRコード生成](#qrコード生成) | テキスト、URL、またはデータからQRコードを生成 |
-| [画像リサイズ](#画像リサイズ) | 様々なアルゴリズムで画像を指定サイズにリサイズ |
-| [画像を回転する](#画像を回転する) | 指定された角度で画像を回転する |
-| [透かしを追加](#透かしを追加) | 画像にテキストまたは画像の透かしを追加する |
+| [Compress Image](#compress-image) | Compress images to reduce file size while maintaining quality |
+| [Convert Image](#convert-image) | Convert image to different format (PNG, JPEG, WEBP, etc.) |
+| [Crop Image](#crop-image) | Crop image to specified region |
+| [Download Image](#download-image) | Download image from URL to local file |
+| [OCR - Extract Text](#ocr---extract-text) | Extract text from images using Tesseract OCR |
+| [Generate QR Code](#generate-qr-code) | Generate QR codes from text, URLs, or data |
+| [Resize Image](#resize-image) | Resize images to specified dimensions with various algorithms |
+| [Rotate Image](#rotate-image) | Rotate image by specified angle |
+| [Add Watermark](#add-watermark) | Add text or image watermark to images |
 
 ## Modules
 
-### 画像圧縮
+### Compress Image
 
 `image.compress`
 
-品質を維持しながら画像を圧縮してファイルサイズを削減
+Compress images to reduce file size while maintaining quality
 
 **Parameters:**
 
@@ -39,10 +39,10 @@ Resize, crop, compress, convert, OCR, QR codes, and watermarks.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 圧縮された画像のパス |
-| `original_size_bytes` | number | 圧縮された画像のパス |
-| `compressed_size_bytes` | number | 元のファイルサイズ（バイト） |
-| `compression_ratio` | number | 圧縮後のファイルサイズ（バイト） |
+| `output_path` | string | Path to the compressed image |
+| `original_size_bytes` | number | Original file size in bytes |
+| `compressed_size_bytes` | number | Compressed file size in bytes |
+| `compression_ratio` | number | Compression ratio (original/compressed) |
 
 **Example:** Compress with quality setting
 
@@ -58,11 +58,11 @@ input_path: /path/to/image.png
 max_size_kb: 500
 ```
 
-### 画像変換
+### Convert Image
 
 `image.convert`
 
-画像を別の形式（PNG、JPEG、WEBPなど）に変換
+Convert image to different format (PNG, JPEG, WEBP, etc.)
 
 **Parameters:**
 
@@ -78,10 +78,10 @@ max_size_kb: 500
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 変換された画像のパス |
-| `size` | number | 変換された画像のパス |
-| `format` | string | 変換された画像のパス |
-| `dimensions` | object | ファイルサイズ（バイト） |
+| `path` | string | Path to the converted image |
+| `size` | number | File size in bytes |
+| `format` | string | Output format |
+| `dimensions` | object | Image dimensions {width, height} |
 
 **Example:** Convert PNG to JPEG
 
@@ -91,32 +91,32 @@ format: jpeg
 quality: 90
 ```
 
-### 画像を切り抜く
+### Crop Image
 
 `image.crop`
 
-指定された座標で画像を切り抜く
+Crop image to specified region
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | 入力画像のパス |
-| `output_path` | string | Yes | - | 出力画像のパス |
-| `left` | number | Yes | - | 切り抜き領域の左の座標 |
-| `top` | number | Yes | - | 切り抜き領域の上の座標 |
-| `right` | number | Yes | - | 切り抜き領域の右の座標 |
-| `bottom` | number | Yes | - | 切り抜き領域の下の座標 |
+| `input_path` | string | Yes | - | Path to the source image |
+| `output_path` | string | Yes | - | Path to save the cropped image |
+| `left` | number | Yes | - | Left coordinate of crop region (pixels) |
+| `top` | number | Yes | - | Top coordinate of crop region (pixels) |
+| `right` | number | Yes | - | Right coordinate of crop region (pixels) |
+| `bottom` | number | Yes | - | Bottom coordinate of crop region (pixels) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 切り抜かれた画像のパス |
-| `width` | integer | 切り抜かれた画像の幅 |
-| `height` | integer | 切り抜かれた画像の高さ |
-| `original_width` | integer | 元の画像の幅 |
-| `original_height` | integer | 元の画像の高さ |
+| `output_path` | string | Path to the cropped image |
+| `width` | integer | Width of the cropped image |
+| `height` | integer | Height of the cropped image |
+| `original_width` | integer | Original image width |
+| `original_height` | integer | Original image height |
 
 **Example:** Crop center region
 
@@ -129,11 +129,11 @@ right: 500
 bottom: 400
 ```
 
-### 画像ダウンロード
+### Download Image
 
 `image.download`
 
-URLから画像をローカルファイルにダウンロード
+Download image from URL to local file
 
 **Parameters:**
 
@@ -149,10 +149,10 @@ URLから画像をローカルファイルにダウンロード
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | ダウンロードされた画像のローカルファイルパス |
-| `size` | number | ダウンロードされた画像のローカルファイルパス |
-| `content_type` | string | ダウンロードされた画像のローカルファイルパス |
-| `filename` | string | ファイルサイズ（バイト） |
+| `path` | string | Local file path of downloaded image |
+| `size` | number | File size in bytes |
+| `content_type` | string | Content type of the image |
+| `filename` | string | Filename of the downloaded image |
 
 **Example:** Download image from URL
 
@@ -161,28 +161,28 @@ url: https://example.com/photo.jpg
 output_dir: /tmp/images
 ```
 
-### OCRテキスト抽出
+### OCR - Extract Text
 
 `image.ocr`
 
-OCRを使って画像からテキストを抽出する
+Extract text from images using Tesseract OCR
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image_path` | string | Yes | - | 画像ファイルのパス |
-| `language` | string | No | `eng` | OCRの言語コード（例: eng, chi_sim） |
-| `psm` | number | No | `3` | Tesseractのページ分割モード |
-| `output_type` | select (`text`, `data`, `boxes`) | No | `text` | OCR出力のタイプ（テキストまたはデータ） |
+| `image_path` | string | Yes | - | Path to the image file |
+| `language` | string | No | `eng` | OCR language code (e.g. eng, chi_tra, jpn) |
+| `psm` | number | No | `3` | Tesseract page segmentation mode (0-13) |
+| `output_type` | select (`text`, `data`, `boxes`) | No | `text` | Type of OCR output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | 画像から抽出されたテキスト |
-| `confidence` | number | OCRの信頼度スコア |
-| `language` | string | OCRで使用する言語 |
+| `text` | string | Extracted text from the image |
+| `confidence` | number | Average OCR confidence score (0-100) |
+| `language` | string | Language used for OCR |
 
 **Example:** Extract text from image
 
@@ -191,11 +191,11 @@ image_path: /path/to/document.png
 language: eng
 ```
 
-### QRコード生成
+### Generate QR Code
 
 `image.qrcode_generate`
 
-テキスト、URL、またはデータからQRコードを生成
+Generate QR codes from text, URLs, or data
 
 **Parameters:**
 
@@ -216,9 +216,9 @@ language: eng
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 生成されたQRコード画像のパス |
-| `file_size` | number | 生成されたQRコード画像のパス |
-| `dimensions` | object | 出力ファイルのサイズ（バイト） |
+| `output_path` | string | Path to the generated QR code image |
+| `file_size` | number | Size of the output file in bytes |
+| `dimensions` | object | Image dimensions {width, height} |
 
 **Example:** Generate URL QR code
 
@@ -244,11 +244,11 @@ format: svg
 border: 2
 ```
 
-### 画像リサイズ
+### Resize Image
 
 `image.resize`
 
-様々なアルゴリズムで画像を指定サイズにリサイズ
+Resize images to specified dimensions with various algorithms
 
 **Parameters:**
 
@@ -266,9 +266,9 @@ border: 2
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | リサイズされた画像のパス |
-| `original_size` | object | リサイズされた画像のパス |
-| `new_size` | object | リサイズされた画像のパス |
+| `output_path` | string | Path to the resized image |
+| `original_size` | object | Original image dimensions |
+| `new_size` | object | New image dimensions |
 
 **Example:** Resize to specific dimensions
 
@@ -285,30 +285,30 @@ input_path: /path/to/image.png
 scale: 0.5
 ```
 
-### 画像を回転する
+### Rotate Image
 
 `image.rotate`
 
-指定された角度で画像を回転する
+Rotate image by specified angle
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | 入力画像のパス |
-| `output_path` | string | Yes | - | 出力画像のパス |
-| `angle` | number | Yes | - | 回転角度（度） |
-| `expand` | boolean | No | `True` | 回転された画像全体を保持するために出力を拡張する |
-| `fill_color` | string | No | `#000000` | 回転後の空白部分を埋める色 |
+| `input_path` | string | Yes | - | Path to the source image |
+| `output_path` | string | Yes | - | Path to save the rotated image |
+| `angle` | number | Yes | - | Rotation angle in degrees (counter-clockwise) |
+| `expand` | boolean | No | `True` | Expand output canvas to fit the entire rotated image |
+| `fill_color` | string | No | `#000000` | Background fill color for empty areas (hex) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 回転された画像のパス |
-| `width` | integer | 回転された画像の幅 |
-| `height` | integer | 回転された画像の高さ |
-| `angle` | number | 画像が回転された角度 |
+| `output_path` | string | Path to the rotated image |
+| `width` | integer | Width of the rotated image |
+| `height` | integer | Height of the rotated image |
+| `angle` | number | Rotation angle applied |
 
 **Example:** Rotate 90 degrees
 
@@ -318,30 +318,30 @@ output_path: /path/to/rotated.png
 angle: 90
 ```
 
-### 透かしを追加
+### Add Watermark
 
 `image.watermark`
 
-画像にテキストまたは画像の透かしを追加する
+Add text or image watermark to images
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | 入力画像のパス |
-| `output_path` | string | Yes | - | 出力画像のパス |
-| `text` | string | No | - | 透かしとして使用するテキスト |
-| `watermark_image` | string | No | - | 透かしとして使用する画像ファイルのパス |
-| `position` | select (`center`, `top-left`, `top-right`, `bottom-left`, `bottom-right`) | No | `bottom-right` | 画像上の透かしの位置 |
-| `opacity` | number | No | `0.5` | 透かしの不透明度（0.0から1.0） |
-| `font_size` | number | No | `36` | テキスト透かしのフォントサイズ |
+| `input_path` | string | Yes | - | Path to the source image |
+| `output_path` | string | Yes | - | Path to save the watermarked image |
+| `text` | string | No | - | Text to use as watermark (optional if watermark_image is set) |
+| `watermark_image` | string | No | - | Path to watermark image (optional if text is set) |
+| `position` | select (`center`, `top-left`, `top-right`, `bottom-left`, `bottom-right`) | No | `bottom-right` | Watermark position on the image |
+| `opacity` | number | No | `0.5` | Watermark opacity (0.0 = transparent, 1.0 = opaque) |
+| `font_size` | number | No | `36` | Font size for text watermark |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 透かし入り画像のパス |
-| `watermark_type` | string | 適用する透かしの種類（テキストまたは画像） |
+| `output_path` | string | Path to the watermarked image |
+| `watermark_type` | string | Type of watermark applied (text or image) |
 
 **Example:** Add text watermark
 

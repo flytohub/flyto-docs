@@ -6,19 +6,19 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Module | Description |
 |--------|-------------|
-| [絕對值](#絕對值) | 取得數字的絕對值 |
-| [向上取整](#向上取整) | 將數字向上取整到最接近的整數 |
-| [向下取整](#向下取整) | 將數字向下取整到最接近的整數 |
-| [次方/指數](#次方指數) | 將數字進行次方運算 |
-| [四捨五入](#四捨五入) | 將數字四捨五入到指定的小數位 |
+| [Absolute Value](#absolute-value) | Get absolute value of a number |
+| [Ceiling Number](#ceiling-number) | Round number up to nearest integer |
+| [Floor Number](#floor-number) | Round number down to nearest integer |
+| [Power/Exponent](#powerexponent) | Raise number to a power |
+| [Round Number](#round-number) | Round number to specified decimal places |
 
 ## Modules
 
-### 絕對值
+### Absolute Value
 
 `math.abs`
 
-取得數字的絕對值
+Get absolute value of a number
 
 **Parameters:**
 
@@ -30,8 +30,8 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 絕對值 |
-| `original` | number | 原始值 |
+| `result` | number | Absolute value |
+| `original` | number | Original number |
 
 **Example:** Absolute of negative number
 
@@ -45,11 +45,11 @@ number: -5
 number: 3.14
 ```
 
-### 向上取整
+### Ceiling Number
 
 `math.ceil`
 
-將數字向上取整到最接近的整數
+Round number up to nearest integer
 
 **Parameters:**
 
@@ -61,8 +61,8 @@ number: 3.14
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 向上取整的值 |
-| `original` | number | 原始值 |
+| `result` | number | Ceiling value |
+| `original` | number | Original number |
 
 **Example:** Ceiling positive number
 
@@ -76,11 +76,11 @@ number: 3.2
 number: -2.7
 ```
 
-### 向下取整
+### Floor Number
 
 `math.floor`
 
-將數字向下取整到最接近的整數
+Round number down to nearest integer
 
 **Parameters:**
 
@@ -92,8 +92,8 @@ number: -2.7
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 向下取整的值 |
-| `original` | number | 原始值 |
+| `result` | number | Floored value |
+| `original` | number | Original number |
 
 **Example:** Floor positive number
 
@@ -107,11 +107,11 @@ number: 3.7
 number: -2.3
 ```
 
-### 次方/指數
+### Power/Exponent
 
 `math.power`
 
-將數字進行次方運算
+Raise number to a power
 
 **Parameters:**
 
@@ -124,9 +124,9 @@ number: -2.3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 底數的指數次方結果 |
-| `base` | number | 底數 |
-| `exponent` | number | 指數 |
+| `result` | number | Result of base raised to exponent |
+| `base` | number | Base number |
+| `exponent` | number | Exponent used |
 
 **Example:** Square a number
 
@@ -142,11 +142,11 @@ base: 27
 exponent: 0.333333
 ```
 
-### 四捨五入
+### Round Number
 
 `math.round`
 
-將數字四捨五入到指定的小數位
+Round number to specified decimal places
 
 **Parameters:**
 
@@ -159,9 +159,9 @@ exponent: 0.333333
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | 四捨五入後的值 |
-| `original` | number | 原始值 |
-| `decimals` | number | 小數位數 |
+| `result` | number | Rounded value |
+| `original` | number | Original number |
+| `decimals` | number | Decimal places used |
 
 **Example:** Round to integer
 

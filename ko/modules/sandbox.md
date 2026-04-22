@@ -6,33 +6,33 @@ Execute JavaScript, Python, or shell commands in isolated environments.
 
 | Module | Description |
 |--------|-------------|
-| [JavaScript 실행](#javascript-실행) | 타임아웃과 함께 Node.js를 통해 JavaScript 코드를 실행합니다 |
-| [Python 실행](#python-실행) | 타임아웃과 함께 서브프로세스에서 Python 코드를 실행합니다 |
-| [쉘 실행](#쉘-실행) | 타임아웃 및 환경 제어와 함께 쉘 명령을 실행합니다 |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code via Node.js with timeout |
+| [Execute Python](#execute-python) | Execute Python code in a subprocess with timeout |
+| [Execute Shell](#execute-shell) | Execute a shell command with timeout and environment control |
 
 ## Modules
 
-### JavaScript 실행
+### Execute JavaScript
 
 `sandbox.execute_js`
 
-타임아웃과 함께 Node.js를 통해 JavaScript 코드를 실행합니다
+Execute JavaScript code via Node.js with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | Node.js를 통해 실행할 JavaScript 코드 |
-| `timeout` | number | No | `10` | 실행 타임아웃(초) |
+| `code` | string | Yes | - | JavaScript code to execute via Node.js |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | 스크립트의 표준 출력 |
-| `stderr` | string | 스크립트의 표준 에러 |
-| `exit_code` | number | 프로세스 종료 코드 (0 = 성공) |
-| `execution_time_ms` | number | 실행 시간 (밀리초) |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple console.log
 
@@ -48,28 +48,28 @@ code: const data = { name: "test", value: 42 };
 console.log(JSON.stringify(data, null, 2));
 ```
 
-### Python 실행
+### Execute Python
 
 `sandbox.execute_python`
 
-타임아웃과 함께 서브프로세스에서 Python 코드를 실행합니다
+Execute Python code in a subprocess with timeout
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `code` | string | Yes | - | 실행할 Python 코드 |
-| `timeout` | number | No | `10` | 실행 타임아웃(초) |
-| `allowed_modules` | array | No | - | 가져올 수 있는 모듈의 화이트리스트 (모두 허용하려면 비워 두세요) |
+| `code` | string | Yes | - | Python code to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `allowed_modules` | array | No | - | Whitelist of importable modules (leave empty to allow all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | 스크립트의 표준 출력 |
-| `stderr` | string | 스크립트의 표준 에러 |
-| `exit_code` | number | 프로세스 종료 코드 (0 = 성공) |
-| `execution_time_ms` | number | 실행 시간 (밀리초) |
+| `stdout` | string | Standard output from the script |
+| `stderr` | string | Standard error from the script |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple print
 
@@ -86,29 +86,29 @@ print(math.pi)
 allowed_modules: ["math"]
 ```
 
-### 쉘 실행
+### Execute Shell
 
 `sandbox.execute_shell`
 
-타임아웃 및 환경 제어와 함께 쉘 명령을 실행합니다
+Execute a shell command with timeout and environment control
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `command` | string | Yes | - | 실행할 쉘 명령 |
-| `timeout` | number | No | `10` | 실행 타임아웃(초) |
-| `working_dir` | string | No | - | 명령의 작업 디렉토리 |
-| `env` | object | No | - | 설정할 추가 환경 변수 (현재 환경과 병합됨) |
+| `command` | string | Yes | - | Shell command to execute |
+| `timeout` | number | No | `10` | Execution timeout in seconds |
+| `working_dir` | string | No | - | Working directory for the command |
+| `env` | object | No | - | Additional environment variables to set (merged with current env) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `stdout` | string | 명령의 표준 출력 |
-| `stderr` | string | 명령의 표준 에러 |
-| `exit_code` | number | 프로세스 종료 코드 (0 = 성공) |
-| `execution_time_ms` | number | 실행 시간 (밀리초) |
+| `stdout` | string | Standard output from the command |
+| `stderr` | string | Standard error from the command |
+| `exit_code` | number | Process exit code (0 = success) |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Simple echo
 

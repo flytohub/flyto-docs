@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [अभ्यास विश्लेषण](#अभ्यास-विश्लेषण) | अभ्यास के लिए वेबसाइट संरचना का विश्लेषण करें |
-| [अभ्यास निष्पादन](#अभ्यास-निष्पादन) | अभ्यास सेशन निष्पादित करें |
-| [अभ्यास स्कीमा अनुमान](#अभ्यास-स्कीमा-अनुमान) | वेबसाइट से डेटा स्कीमा अनुमान लगाएं |
-| [अभ्यास आंकड़े](#अभ्यास-आंकड़े) | अभ्यास आंकड़े प्राप्त करें |
+| [Practice Analyze](#practice-analyze) | Analyze website structure for practice |
+| [Practice Execute](#practice-execute) | Execute practice session |
+| [Practice Infer Schema](#practice-infer-schema) | Infer data schema from website |
+| [Practice Stats](#practice-stats) | Get practice statistics |
 
 ## Modules
 
-### अभ्यास विश्लेषण
+### Practice Analyze
 
 `training.practice.analyze`
 
-अभ्यास के लिए वेबसाइट संरचना का विश्लेषण करें
+Analyze website structure for practice
 
 **Parameters:**
 
@@ -29,14 +29,14 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | वेबसाइट संरचना का विश्लेषण करें |
-| `structure` | object | वेबसाइट संरचना का विश्लेषण करें |
+| `status` | string | Operation status (success/error) |
+| `structure` | object | The structure |
 
-### अभ्यास निष्पादन
+### Practice Execute
 
 `training.practice.execute`
 
-अभ्यास सेशन निष्पादित करें
+Execute practice session
 
 **Parameters:**
 
@@ -49,14 +49,14 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | अभ्यास सेशन निष्पादित करें |
-| `items_processed` | number | अभ्यास सेशन निष्पादित करें |
+| `status` | string | Operation status (success/error) |
+| `items_processed` | number | The items processed |
 
-### अभ्यास स्कीमा अनुमान
+### Practice Infer Schema
 
 `training.practice.infer_schema`
 
-वेबसाइट से डेटा स्कीमा अनुमान लगाएं
+Infer data schema from website
 
 **Parameters:**
 
@@ -69,20 +69,20 @@
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | डेटा स्कीमा अनुमान लगाएं |
-| `schema` | object | डेटा स्कीमा अनुमान लगाएं |
+| `status` | string | Operation status (success/error) |
+| `schema` | object | The schema |
 
-### अभ्यास आंकड़े
+### Practice Stats
 
 `training.practice.stats`
 
-अभ्यास आंकड़े प्राप्त करें
+Get practice statistics
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total_sessions` | number | कुल सेशन |
-| `successful_sessions` | number | कुल सेशन |
-| `success_rate` | number | अभ्यास आंकड़े प्राप्त करें |
-| `history` | array | अभ्यास आंकड़े प्राप्त करें |
+| `total_sessions` | number | The total sessions |
+| `successful_sessions` | number | The successful sessions |
+| `success_rate` | number | The success rate |
+| `history` | array | The history |

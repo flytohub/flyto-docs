@@ -6,37 +6,37 @@ AES encryption/decryption, HMAC, JWT tokens, and secure random generation.
 
 | Module | Description |
 |--------|-------------|
-| [Dekripsi](#dekripsi) | Dekripsi data menggunakan enkripsi AES |
-| [Enkripsi](#enkripsi) | Enkripsi data menggunakan enkripsi AES |
-| [HMAC](#hmac) | Hasilkan tanda tangan HMAC |
-| [Buat JWT](#buat-jwt) | Buat token JWT yang ditandatangani |
-| [Verifikasi JWT](#verifikasi-jwt) | Verifikasi dan dekode token JWT |
-| [Byte Acak](#byte-acak) | Hasilkan byte acak yang aman secara kriptografis |
-| [String Acak](#string-acak) | Hasilkan string acak yang aman secara kriptografis |
+| [Decrypt](#decrypt) | AES symmetric decryption |
+| [Encrypt](#encrypt) | AES symmetric encryption |
+| [HMAC](#hmac) | Generate HMAC signature |
+| [Create JWT](#create-jwt) | Create JWT (JSON Web Token) tokens |
+| [Verify JWT](#verify-jwt) | Verify and decode JWT tokens |
+| [Random Bytes](#random-bytes) | Generate cryptographically secure random bytes |
+| [Random String](#random-string) | Generate cryptographically secure random string |
 
 ## Modules
 
-### Dekripsi
+### Decrypt
 
 `crypto.decrypt`
 
-Dekripsi data menggunakan enkripsi AES
+AES symmetric decryption
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `ciphertext` | string | Yes | - | Data terenkripsi untuk didekripsi |
-| `key` | string | Yes | - | Kunci enkripsi |
-| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Mode cipher AES (CBC, GCM, dll.) |
-| `input_format` | select (`base64`, `hex`) | No | `base64` | Format dari ciphertext input (hex atau base64) |
+| `ciphertext` | string | Yes | - | Encrypted ciphertext to decrypt |
+| `key` | string | Yes | - | Decryption passphrase (must match encryption passphrase) |
+| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Decryption mode (must match encryption mode) |
+| `input_format` | select (`base64`, `hex`) | No | `base64` | Encoding format of the ciphertext input |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `plaintext` | string | Teks biasa yang telah didekripsi |
-| `algorithm` | string | Algoritma yang digunakan untuk dekripsi |
+| `plaintext` | string | Decrypted plaintext |
+| `algorithm` | string | Decryption algorithm used |
 
 **Example:** Decrypt AES-GCM ciphertext
 
@@ -46,28 +46,28 @@ key: my-secret-passphrase
 mode: GCM
 ```
 
-### Enkripsi
+### Encrypt
 
 `crypto.encrypt`
 
-Enkripsi data menggunakan enkripsi AES
+AES symmetric encryption
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `plaintext` | string | Yes | - | Data untuk dienkripsi |
-| `key` | string | Yes | - | Kunci enkripsi |
-| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Mode cipher AES (CBC, GCM, dll.) |
-| `output_format` | select (`base64`, `hex`) | No | `base64` | Format untuk ciphertext output (hex atau base64) |
+| `plaintext` | string | Yes | - | Text to encrypt |
+| `key` | string | Yes | - | Encryption passphrase (key is derived via PBKDF2) |
+| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Encryption mode |
+| `output_format` | select (`base64`, `hex`) | No | `base64` | Encoding format for the ciphertext output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ciphertext` | string | Ciphertext terenkripsi |
-| `algorithm` | string | Algoritma yang digunakan untuk enkripsi |
-| `mode` | string | Mode cipher yang digunakan |
+| `ciphertext` | string | Encrypted ciphertext |
+| `algorithm` | string | Encryption algorithm used |
+| `mode` | string | Encryption mode used |
 
 **Example:** Encrypt with AES-GCM
 
@@ -81,48 +81,48 @@ mode: GCM
 
 `crypto.hmac`
 
-Hasilkan tanda tangan HMAC
+Generate HMAC signature
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `message` | string | Yes | - | Pesan untuk ditandatangani |
-| `key` | string | Yes | - | Pesan untuk ditandatangani |
-| `algorithm` | select (`sha256`, `sha512`, `sha1`, `md5`) | No | `sha256` | Kunci rahasia untuk HMAC |
-| `encoding` | select (`hex`, `base64`) | No | `hex` | Format pengkodean keluaran |
+| `message` | string | Yes | - | Message to sign |
+| `key` | string | Yes | - | Secret key for HMAC |
+| `algorithm` | select (`sha256`, `sha512`, `sha1`, `md5`) | No | `sha256` | Hash algorithm |
+| `encoding` | select (`hex`, `base64`) | No | `hex` | Output encoding format |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `signature` | string | Format pengkodean keluaran |
-| `algorithm` | string | Tanda tangan HMAC |
+| `signature` | string | HMAC signature |
+| `algorithm` | string | Algorithm used |
 
-### Buat JWT
+### Create JWT
 
 `crypto.jwt_create`
 
-Buat token JWT yang ditandatangani
+Create JWT (JSON Web Token) tokens
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `payload` | object | Yes | - | Data payload JWT (objek) |
-| `secret` | string | Yes | - | Kunci rahasia untuk menandatangani token |
-| `algorithm` | select (`HS256`, `HS384`, `HS512`, `RS256`) | No | `HS256` | Algoritma penandatanganan JWT (HS256, RS256, dll.) |
-| `expires_in` | number | No | - | Waktu kedaluwarsa token dalam detik |
-| `issuer` | string | No | - | Klaim penerbit token |
-| `audience` | string | No | - | Audiens yang dituju untuk token |
+| `payload` | object | Yes | - | JWT payload claims (JSON object) |
+| `secret` | string | Yes | - | Secret key for signing the token |
+| `algorithm` | select (`HS256`, `HS384`, `HS512`, `RS256`) | No | `HS256` | Signing algorithm |
+| `expires_in` | number | No | - | Token expiration time in seconds (optional) |
+| `issuer` | string | No | - | Token issuer (iss claim) |
+| `audience` | string | No | - | Token audience (aud claim) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `token` | string | Token JWT yang dihasilkan |
-| `algorithm` | string | Algoritma yang digunakan untuk penandatanganan |
-| `expires_at` | string | Stempel waktu kedaluwarsa token |
+| `token` | string | Signed JWT token |
+| `algorithm` | string | Algorithm used for signing |
+| `expires_at` | string | Token expiration timestamp (ISO 8601) or null |
 
 **Example:** Create a JWT with expiration
 
@@ -133,30 +133,30 @@ algorithm: HS256
 expires_in: 3600
 ```
 
-### Verifikasi JWT
+### Verify JWT
 
 `crypto.jwt_verify`
 
-Verifikasi dan dekode token JWT
+Verify and decode JWT tokens
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `token` | string | Yes | - | Token JWT untuk diverifikasi |
-| `secret` | string | Yes | - | Kunci rahasia yang digunakan untuk menandatangani token |
-| `algorithms` | array | No | `['HS256']` | Algoritma penandatanganan yang diizinkan |
-| `verify_exp` | boolean | No | `True` | Apakah akan memverifikasi klaim kedaluwarsa |
-| `audience` | string | No | - | Klaim audiens yang diharapkan |
-| `issuer` | string | No | - | Klaim penerbit yang diharapkan |
+| `token` | string | Yes | - | JWT token to verify and decode |
+| `secret` | string | Yes | - | Secret key for verifying the token signature |
+| `algorithms` | array | No | `['HS256']` | List of allowed signing algorithms |
+| `verify_exp` | boolean | No | `True` | Whether to verify the token expiration |
+| `audience` | string | No | - | Expected audience (aud claim) |
+| `issuer` | string | No | - | Expected issuer (iss claim) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | Apakah token valid |
-| `payload` | object | Payload JWT yang telah didekode |
-| `header` | object | Data header JWT |
+| `valid` | boolean | Whether the token is valid |
+| `payload` | object | Decoded JWT payload |
+| `header` | object | Decoded JWT header |
 
 **Example:** Verify a JWT token
 
@@ -167,43 +167,43 @@ algorithms: ["HS256"]
 verify_exp: true
 ```
 
-### Byte Acak
+### Random Bytes
 
 `crypto.random_bytes`
 
-Hasilkan byte acak yang aman secara kriptografis
+Generate cryptographically secure random bytes
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | Yes | `32` | Jumlah byte |
-| `encoding` | string | No | `hex` | Pengkodean keluaran |
+| `length` | number | Yes | `32` | Number of bytes |
+| `encoding` | string | No | `hex` | Output encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bytes` | string | Byte acak (terkode) |
-| `length` | number | Byte acak (terkode) |
+| `bytes` | string | Random bytes (encoded) |
+| `length` | number | Number of bytes generated |
 
-### String Acak
+### Random String
 
 `crypto.random_string`
 
-Hasilkan string acak yang aman secara kriptografis
+Generate cryptographically secure random string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | Yes | `16` | Panjang string |
-| `charset` | string | No | `alphanumeric` | Karakter yang digunakan |
-| `uppercase` | boolean | No | `False` | Ubah menjadi huruf besar |
+| `length` | number | Yes | `16` | String length |
+| `charset` | string | No | `alphanumeric` | Characters to use |
+| `uppercase` | boolean | No | `False` | Convert to uppercase |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `string` | string | Ubah menjadi huruf besar |
-| `length` | number | String acak |
+| `string` | string | Random string |
+| `length` | number | String length |

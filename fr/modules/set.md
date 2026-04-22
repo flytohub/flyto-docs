@@ -6,89 +6,89 @@ Set operations: union, intersection, difference, unique.
 
 | Module | Description |
 |--------|-------------|
-| [Différence d'ensemble](#différence-d'ensemble) | Obtenez les éléments dans le premier tableau mais pas dans les autres |
-| [Intersection d'ensemble](#intersection-d'ensemble) | Obtenez l'intersection de deux tableaux ou plus |
-| [Union d'ensemble](#union-d'ensemble) | Obtenez l'union de deux tableaux ou plus |
-| [Ensemble unique](#ensemble-unique) | Supprimez les éléments en double du tableau |
+| [Set Difference](#set-difference) | Get elements in first array but not in others |
+| [Set Intersection](#set-intersection) | Get intersection of two or more arrays |
+| [Set Union](#set-union) | Get union of two or more arrays |
+| [Set Unique](#set-unique) | Remove duplicate elements from array |
 
 ## Modules
 
-### Différence d'ensemble
+### Set Difference
 
 `set.difference`
 
-Obtenez les éléments dans le premier tableau mais pas dans les autres
+Get elements in first array but not in others
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `source` | array | Yes | - | Tableau source |
-| `exclude` | array | Yes | - | Tableau source |
+| `source` | array | Yes | - | Source array |
+| `exclude` | array | Yes | - | Arrays of elements to exclude |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Tableaux d'éléments à exclure |
-| `count` | number | Éléments dans la source mais pas dans les tableaux à exclure |
-| `removed_count` | number | Éléments dans la source mais pas dans les tableaux à exclure |
+| `result` | array | Elements in source but not in exclude arrays |
+| `count` | number | Number of remaining elements |
+| `removed_count` | number | Number of elements removed |
 
-### Intersection d'ensemble
+### Set Intersection
 
 `set.intersection`
 
-Obtenez l'intersection de deux tableaux ou plus
+Get intersection of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | Tableaux à intersecter (tableau de tableaux) |
+| `arrays` | array | Yes | - | Arrays to intersect (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Tableaux à intersecter (tableau de tableaux) |
-| `count` | number | Intersection de tous les tableaux |
+| `result` | array | Intersection of all arrays |
+| `count` | number | Number of common elements |
 
-### Union d'ensemble
+### Set Union
 
 `set.union`
 
-Obtenez l'union de deux tableaux ou plus
+Get union of two or more arrays
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `arrays` | array | Yes | - | Tableaux à combiner (tableau de tableaux) |
+| `arrays` | array | Yes | - | Arrays to combine (array of arrays) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Tableaux à combiner (tableau de tableaux) |
-| `count` | number | Union de tous les tableaux |
+| `result` | array | Union of all arrays |
+| `count` | number | Number of unique elements |
 
-### Ensemble unique
+### Set Unique
 
 `set.unique`
 
-Supprimez les éléments en double du tableau
+Remove duplicate elements from array
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `array` | array | Yes | - | Tableau à dédupliquer |
-| `preserve_order` | boolean | No | `True` | Tableau à dédupliquer |
+| `array` | array | Yes | - | Array to deduplicate |
+| `preserve_order` | boolean | No | `True` | Keep first occurrence order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | array | Conserver l'ordre de première occurrence |
-| `count` | number | Tableau avec des éléments uniques |
-| `duplicates_removed` | number | Tableau avec des éléments uniques |
+| `result` | array | Array with unique elements |
+| `count` | number | Number of unique elements |
+| `duplicates_removed` | number | Number of duplicates removed |

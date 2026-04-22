@@ -6,32 +6,32 @@ CSV, JSON, XML, YAML parsing, generation, and pipeline transformations.
 
 | Module | Description |
 |--------|-------------|
-| [อ่านไฟล์ CSV](#อ่านไฟล์-csv) | อ่านและแยกวิเคราะห์ไฟล์ CSV เป็นอาร์เรย์ของออบเจ็กต์ |
-| [เขียนไฟล์ CSV](#เขียนไฟล์-csv) | เขียนอาร์เรย์ของออบเจ็กต์ไปยังไฟล์ CSV |
+| [Read CSV File](#read-csv-file) | Read and parse CSV file into array of objects |
+| [Write CSV File](#write-csv-file) | Write array of objects to CSV file |
 | [Deduplicate Records](#deduplicate-records) | Remove duplicate records from an array by key fields. Optionally persists seen hashes to disk or execution context for cross-run dedup. Use storage=context in cloud/stateless environments where disk is ephemeral. |
-| [แยกวิเคราะห์ JSON](#แยกวิเคราะห์-json) | แยกวิเคราะห์สตริง JSON เป็นออบเจ็กต์ |
-| [JSON Stringify](#json-stringify) | แปลงออบเจ็กต์เป็นสตริง JSON |
-| [JSON เป็น CSV](#json-เป็น-csv) | แปลงข้อมูลหรือไฟล์ JSON เป็นรูปแบบ CSV |
-| [ข้อมูลพายป์ไลน์](#ข้อมูลพายป์ไลน์) | เชื่อมโยงการแปลงข้อมูลหลายขั้นตอนในขั้นตอนเดียว |
-| [เทมเพลตข้อความ](#เทมเพลตข้อความ) | เติมเทมเพลตข้อความด้วยตัวแปร |
+| [Parse JSON](#parse-json) | Parse JSON string into object |
+| [JSON Stringify](#json-stringify) | Convert object to JSON string |
+| [JSON to CSV](#json-to-csv) | Convert JSON data or files to CSV format |
+| [Data Pipeline](#data-pipeline) | Chain multiple data transformations in a single step |
+| [Text Template](#text-template) | Fill text template with variables |
 | [Validate Records](#validate-records) | Validate extracted records against field rules. Splits output into valid and invalid arrays. |
-| [สร้าง XML](#สร้าง-xml) | สร้างสตริง XML จากอ็อบเจ็กต์หรืออาร์เรย์ |
-| [แปลง XML](#แปลง-xml) | แปลงสตริง XML เป็นอ็อบเจ็กต์ |
-| [สร้าง YAML](#สร้าง-yaml) | สร้างสตริง YAML จากอ็อบเจ็กต์หรืออาร์เรย์ |
-| [แปลง YAML](#แปลง-yaml) | แปลงสตริง YAML เป็นอ็อบเจ็กต์ |
-| [Keys ของออบเจกต์](#keys-ของออบเจกต์) | รับ keys ทั้งหมดจากออบเจกต์ |
-| [รวมออบเจกต์](#รวมออบเจกต์) | รวมออบเจกต์หลายตัวเป็นหนึ่งเดียว |
-| [ละเว้นออบเจกต์](#ละเว้นออบเจกต์) | ละเว้น keys ที่กำหนดจากออบเจกต์ |
-| [เลือกออบเจกต์](#เลือกออบเจกต์) | เลือก keys ที่กำหนดจากออบเจกต์ |
-| [Values ของออบเจกต์](#values-ของออบเจกต์) | รับ values ทั้งหมดจากออบเจกต์ |
+| [Generate XML](#generate-xml) | Generate XML string from Python dict |
+| [Parse XML](#parse-xml) | Parse XML string or file into Python dict |
+| [Generate YAML](#generate-yaml) | Generate YAML string from Python object |
+| [Parse YAML](#parse-yaml) | Parse YAML string or file into Python object |
+| [Object Keys](#object-keys) | Get all keys from an object |
+| [Object Merge](#object-merge) | Merge multiple objects into one |
+| [Object Omit](#object-omit) | Omit specific keys from an object |
+| [Object Pick](#object-pick) | Pick specific keys from an object |
+| [Object Values](#object-values) | Get all values from an object |
 
 ## Modules
 
-### อ่านไฟล์ CSV
+### Read CSV File
 
 `data.csv.read`
 
-อ่านและแยกวิเคราะห์ไฟล์ CSV เป็นอาร์เรย์ของออบเจ็กต์
+Read and parse CSV file into array of objects
 
 **Parameters:**
 
@@ -46,10 +46,10 @@ CSV, JSON, XML, YAML parsing, generation, and pipeline transformations.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ |
-| `data` | array | สถานะการดำเนินการ |
-| `rows` | number | สถานะการดำเนินการ |
-| `columns` | array | อาร์เรย์ของออบเจ็กต์แถว |
+| `status` | string | Operation status |
+| `data` | array | Array of row objects |
+| `rows` | number | Number of rows |
+| `columns` | array | Column names |
 
 **Example:** Example
 
@@ -59,11 +59,11 @@ delimiter: ,
 encoding: utf-8
 ```
 
-### เขียนไฟล์ CSV
+### Write CSV File
 
 `data.csv.write`
 
-เขียนอาร์เรย์ของออบเจ็กต์ไปยังไฟล์ CSV
+Write array of objects to CSV file
 
 **Parameters:**
 
@@ -78,9 +78,9 @@ encoding: utf-8
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ |
-| `file_path` | string | สถานะการดำเนินการ |
-| `rows_written` | number | สถานะการดำเนินการ |
+| `status` | string | Operation status |
+| `file_path` | string | Path to written file |
+| `rows_written` | number | Number of rows written |
 
 **Example:** Example
 
@@ -130,11 +130,11 @@ keys: ["url"]
 hash_file: /tmp/seen.json
 ```
 
-### แยกวิเคราะห์ JSON
+### Parse JSON
 
 `data.json.parse`
 
-แยกวิเคราะห์สตริง JSON เป็นออบเจ็กต์
+Parse JSON string into object
 
 **Parameters:**
 
@@ -146,8 +146,8 @@ hash_file: /tmp/seen.json
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ |
-| `data` | object | สถานะการดำเนินการ |
+| `status` | string | Operation status |
+| `data` | object | Parsed object |
 
 **Example:** Example
 
@@ -159,7 +159,7 @@ json_string: {"name": "John", "age": 30}
 
 `data.json.stringify`
 
-แปลงออบเจ็กต์เป็นสตริง JSON
+Convert object to JSON string
 
 **Parameters:**
 
@@ -173,8 +173,8 @@ json_string: {"name": "John", "age": 30}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ |
-| `json` | string | สถานะการดำเนินการ |
+| `status` | string | Operation status |
+| `json` | string | JSON string |
 
 **Example:** Example
 
@@ -183,11 +183,11 @@ data: {"name": "John", "age": 30}
 pretty: true
 ```
 
-### JSON เป็น CSV
+### JSON to CSV
 
 `data.json_to_csv`
 
-แปลงข้อมูลหรือไฟล์ JSON เป็นรูปแบบ CSV
+Convert JSON data or files to CSV format
 
 **Parameters:**
 
@@ -204,10 +204,10 @@ pretty: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | เส้นทางไปยังไฟล์ CSV ที่สร้างขึ้น |
-| `row_count` | number | เส้นทางไปยังไฟล์ CSV ที่สร้างขึ้น |
-| `column_count` | number | เส้นทางไปยังไฟล์ CSV ที่สร้างขึ้น |
-| `columns` | array | จำนวนแถวที่เขียน |
+| `output_path` | string | Path to the generated CSV file |
+| `row_count` | number | Number of rows written |
+| `column_count` | number | Number of columns |
+| `columns` | array | List of column names |
 
 **Example:** Convert JSON array to CSV
 
@@ -223,27 +223,27 @@ input_data: /path/to/data.json
 output_path: /path/to/output.csv
 ```
 
-### ข้อมูลพายป์ไลน์
+### Data Pipeline
 
 `data.pipeline`
 
-เชื่อมโยงการแปลงข้อมูลหลายขั้นตอนในขั้นตอนเดียว
+Chain multiple data transformations in a single step
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input` | any | Yes | - | ข้อมูลนำเข้าเพื่อแปลง (array หรือ object) |
-| `steps` | array | Yes | - | ข้อมูลนำเข้าเพื่อแปลง (array หรือ object) |
+| `input` | any | Yes | - | Input data to transform (array or object) |
+| `steps` | array | Yes | - | Array of transformation steps to apply in order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | ลำดับขั้นตอนการแปลงที่จะนำไปใช้ตามลำดับ |
-| `original_count` | integer | ข้อมูลที่แปลงแล้ว |
-| `result_count` | integer | ข้อมูลที่แปลงแล้ว |
-| `steps_applied` | integer | จำนวนรายการหลังการแปลง |
+| `result` | any | Transformed data |
+| `original_count` | integer | Count of items before transformation |
+| `result_count` | integer | Count of items after transformation |
+| `steps_applied` | integer | Number of transformation steps applied |
 
 **Example:** Example
 
@@ -266,11 +266,11 @@ input: ${input.data}
 steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}, {"pick": ["id", "name", "timestamp"]}, {"sort": {"field": "timestamp", "order": "desc"}}, {"skip": 5}, {"limit": 20}]
 ```
 
-### เทมเพลตข้อความ
+### Text Template
 
 `data.text.template`
 
-เติมเทมเพลตข้อความด้วยตัวแปร
+Fill text template with variables
 
 **Parameters:**
 
@@ -283,8 +283,8 @@ steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | สถานะการดำเนินการ |
-| `result` | string | สถานะการดำเนินการ |
+| `status` | string | Operation status |
+| `result` | string | Filled template |
 
 **Example:** Example
 
@@ -334,27 +334,27 @@ mode: flag
 drop_fields: ["__index", "html"]
 ```
 
-### สร้าง XML
+### Generate XML
 
 `data.xml.generate`
 
-สร้างสตริง XML จากอ็อบเจ็กต์หรืออาร์เรย์
+Generate XML string from Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | object | Yes | - | ข้อมูลที่จะเปลี่ยนเป็น XML |
-| `root_tag` | string | No | `root` | ชื่อแท็กขององค์ประกอบราก |
-| `pretty` | boolean | No | `True` | จัดรูปแบบ XML ให้อ่านง่าย |
-| `encoding` | string | No | `utf-8` | การเข้ารหัสอักขระสำหรับผลลัพธ์ XML |
-| `declaration` | boolean | No | `True` | รวมส่วนหัวประกาศ XML |
+| `data` | object | Yes | - | Python dict or object to convert to XML |
+| `root_tag` | string | No | `root` | Tag name for the root XML element |
+| `pretty` | boolean | No | `True` | Format XML with indentation for readability |
+| `encoding` | string | No | `utf-8` | XML encoding declaration value |
+| `declaration` | boolean | No | `True` | Include <?xml version="1.0"?> declaration at top |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `xml` | string | สตริง XML ที่สร้างขึ้น |
+| `xml` | string | Generated XML string |
 
 **Example:** Example
 
@@ -364,26 +364,26 @@ root_tag: users
 pretty: true
 ```
 
-### แปลง XML
+### Parse XML
 
 `data.xml.parse`
 
-แปลงสตริง XML เป็นอ็อบเจ็กต์
+Parse XML string or file into Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | สตริง XML ที่จะแปลง |
-| `file_path` | string | No | - | เส้นทางไปยังไฟล์ XML ที่จะแปลง |
-| `preserve_attributes` | boolean | No | `True` | รักษาคุณสมบัติ XML ในผลลัพธ์ที่แปลง |
+| `content` | string | No | - | XML string to parse |
+| `file_path` | string | No | - | Path to XML file (used if content is empty) |
+| `preserve_attributes` | boolean | No | `True` | Include XML element attributes as @attributes in output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | XML ที่แปลงเป็นอ็อบเจ็กต์ |
-| `root_tag` | string | ชื่อแท็กขององค์ประกอบราก |
+| `result` | object | Parsed XML as nested dict |
+| `root_tag` | string | Root element tag name |
 
 **Example:** Example
 
@@ -392,27 +392,27 @@ content: <users><user id="1"><name>John</name></user></users>
 preserve_attributes: true
 ```
 
-### สร้าง YAML
+### Generate YAML
 
 `data.yaml.generate`
 
-สร้างสตริง YAML จากอ็อบเจ็กต์หรืออาร์เรย์
+Generate YAML string from Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | any | Yes | - | ข้อมูลที่จะเปลี่ยนเป็น YAML |
-| `default_flow_style` | boolean | No | `False` | ใช้รูปแบบการไหลสำหรับโครงสร้างที่ซ้อนกัน |
-| `sort_keys` | boolean | No | `False` | เรียงลำดับคีย์ตามตัวอักษร |
-| `indent` | number | No | `2` | จำนวนช่องว่างสำหรับการเยื้อง |
-| `allow_unicode` | boolean | No | `True` | อนุญาตอักขระยูนิโค้ดในผลลัพธ์ |
+| `data` | any | Yes | - | Python object, array, or value to convert to YAML |
+| `default_flow_style` | boolean | No | `False` | Use inline/flow style (JSON-like) instead of block style |
+| `sort_keys` | boolean | No | `False` | Sort dictionary keys alphabetically |
+| `indent` | number | No | `2` | Number of spaces for indentation |
+| `allow_unicode` | boolean | No | `True` | Allow unicode characters in output without escaping |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `yaml` | string | สตริง YAML ที่สร้างขึ้น |
+| `yaml` | string | Generated YAML string |
 
 **Example:** Example
 
@@ -422,26 +422,26 @@ sort_keys: false
 indent: 2
 ```
 
-### แปลง YAML
+### Parse YAML
 
 `data.yaml.parse`
 
-แปลงสตริง YAML เป็นอ็อบเจ็กต์
+Parse YAML string or file into Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | สตริง YAML ที่จะแปลง |
-| `file_path` | string | No | - | เส้นทางไปยังไฟล์ YAML ที่จะแปลง |
-| `multi_document` | boolean | No | `False` | แปลง YAML หลายเอกสาร (แยกด้วย ---) |
+| `content` | string | No | - | YAML string to parse |
+| `file_path` | string | No | - | Path to YAML file (used if content is empty) |
+| `multi_document` | boolean | No | `False` | Parse multiple YAML documents separated by --- (uses safe_load_all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | YAML ที่แปลงเป็นอ็อบเจ็กต์หรืออาร์เรย์ |
-| `type` | string | ประเภทของผลลัพธ์ที่แปลง |
+| `result` | any | Parsed YAML data (object, array, or scalar) |
+| `type` | string | Type of parsed result: object, array, or scalar |
 
 **Example:** Example
 
@@ -464,11 +464,11 @@ name: Jane
 multi_document: true
 ```
 
-### Keys ของออบเจกต์
+### Object Keys
 
 `object.keys`
 
-รับ keys ทั้งหมดจากออบเจกต์
+Get all keys from an object
 
 **Parameters:**
 
@@ -480,8 +480,8 @@ multi_document: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `keys` | array | รายการ keys ของออบเจกต์ |
-| `count` | number | รายการ keys ของออบเจกต์ |
+| `keys` | array | List of object keys |
+| `count` | number | Number of keys |
 
 **Example:** Get object keys
 
@@ -489,11 +489,11 @@ multi_document: true
 object: {"name": "John", "age": 30, "city": "NYC"}
 ```
 
-### รวมออบเจกต์
+### Object Merge
 
 `object.merge`
 
-รวมออบเจกต์หลายตัวเป็นหนึ่งเดียว
+Merge multiple objects into one
 
 **Parameters:**
 
@@ -505,7 +505,7 @@ object: {"name": "John", "age": 30, "city": "NYC"}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | ออบเจกต์ที่รวมแล้ว |
+| `result` | object | Merged object |
 
 **Example:** Merge user data
 
@@ -513,11 +513,11 @@ object: {"name": "John", "age": 30, "city": "NYC"}
 objects: [{"name": "John", "age": 30}, {"city": "NYC", "country": "USA"}, {"job": "Engineer"}]
 ```
 
-### ละเว้นออบเจกต์
+### Object Omit
 
 `object.omit`
 
-ละเว้น keys ที่กำหนดจากออบเจกต์
+Omit specific keys from an object
 
 **Parameters:**
 
@@ -530,7 +530,7 @@ objects: [{"name": "John", "age": 30}, {"city": "NYC", "country": "USA"}, {"job"
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | ออบเจกต์ที่ไม่มี keys ที่ละเว้น |
+| `result` | object | Object without omitted keys |
 
 **Example:** Omit sensitive fields
 
@@ -539,11 +539,11 @@ object: {"name": "John", "age": 30, "password": "secret", "ssn": "123-45-6789"}
 keys: ["password", "ssn"]
 ```
 
-### เลือกออบเจกต์
+### Object Pick
 
 `object.pick`
 
-เลือก keys ที่กำหนดจากออบเจกต์
+Pick specific keys from an object
 
 **Parameters:**
 
@@ -556,7 +556,7 @@ keys: ["password", "ssn"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | ออบเจกต์ที่มีเฉพาะ keys ที่เลือก |
+| `result` | object | Object with only picked keys |
 
 **Example:** Pick user fields
 
@@ -565,11 +565,11 @@ object: {"name": "John", "age": 30, "email": "john@example.com", "password": "se
 keys: ["name", "email"]
 ```
 
-### Values ของออบเจกต์
+### Object Values
 
 `object.values`
 
-รับ values ทั้งหมดจากออบเจกต์
+Get all values from an object
 
 **Parameters:**
 
@@ -581,8 +581,8 @@ keys: ["name", "email"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `values` | array | รายการ values ของออบเจกต์ |
-| `count` | number | รายการ values ของออบเจกต์ |
+| `values` | array | List of object values |
+| `count` | number | Number of values |
 
 **Example:** Get object values
 

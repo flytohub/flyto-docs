@@ -6,60 +6,60 @@ Branching, loops, parallelism, subflows, triggers, and error handling.
 
 | Module | Description |
 |--------|-------------|
-| [Xử lý theo lô](#xử-lý-theo-lô) | Xử lý các mục theo lô với kích thước có thể cấu hình |
-| [Phân nhánh](#phân-nhánh) | Phân nhánh có điều kiện dựa trên đánh giá biểu thức |
-| [Điểm dừng](#điểm-dừng) | Tạm dừng thực thi workflow để phê duyệt hoặc nhập liệu của con người |
-| [Ngắt mạch](#ngắt-mạch) | Mẫu ngắt mạch để ngăn ngừa lỗi dây chuyền |
-| [Container](#container) | Container subflow nhúng để tổ chức các workflow phức tạp |
-| [Giảm thiểu](#giảm-thiểu) | Giảm thiểu thực thi để ngăn chặn các cuộc gọi lặp lại nhanh chóng |
-| [Kết thúc](#kết-thúc) | Node kết thúc workflow rõ ràng |
-| [Xử lý lỗi](#xử-lý-lỗi) | Bắt và xử lý lỗi từ các nút phía trên |
-| [Kích hoạt quy trình lỗi](#kích-hoạt-quy-trình-lỗi) | Điểm vào cho quy trình lỗi - kích hoạt khi một quy trình khác thất bại |
-| [For Each](#for-each) | Lặp qua danh sách và thực thi các bước cho mỗi mục |
-| [Fork](#fork) | Chia thực thi thành các nhánh song song |
-| [Goto](#goto) | Nhảy không điều kiện đến bước khác |
+| [Batch Process](#batch-process) | Process items in batches with configurable size |
+| [Branch](#branch) | Conditional branching based on expression evaluation |
+| [Breakpoint](#breakpoint) | Pause workflow execution for human approval or input |
+| [Circuit Breaker](#circuit-breaker) | Circuit breaker pattern for fault tolerance |
+| [Container](#container) | Embedded subflow container for organizing complex workflows |
+| [Debounce](#debounce) | Debounce execution to prevent rapid repeated calls |
+| [End](#end) | Explicit workflow end node |
+| [Error Handler](#error-handler) | Catches and handles errors from upstream nodes |
+| [Error Workflow Trigger](#error-workflow-trigger) | Entry point for error workflows - triggered when another workflow fails |
+| [For Each](#for-each) | Iterate over a list and execute steps for each item |
+| [Fork](#fork) | Split execution into parallel branches |
+| [Goto](#goto) | Unconditional jump to another step |
 | [Invoke Workflow](#invoke-workflow) | Execute an external workflow file |
-| [Join](#join) | Chờ các nhánh song song hoàn thành |
-| [Vòng lặp](#vòng-lặp) | Lặp lại các bước N lần sử dụng định tuyến cổng đầu ra |
-| [Gộp](#gộp) | Gộp nhiều đầu vào thành một đầu ra |
-| [Song song](#song-song) | Thực hiện nhiều tác vụ song song với các chiến lược khác nhau |
-| [Giới hạn tốc độ](#giới-hạn-tốc-độ) | Giới hạn tốc độ thực thi bằng cách sử dụng thùng token hoặc cửa sổ trượt |
-| [Thử lại](#thử-lại) | Thử lại các thao tác thất bại với thời gian chờ có thể cấu hình |
-| [Bắt đầu](#bắt-đầu) | Node bắt đầu workflow rõ ràng |
-| [Subflow](#subflow) | Tham chiếu và thực thi workflow bên ngoài |
-| [Switch](#switch) | Phân nhánh nhiều hướng dựa trên khớp giá trị |
-| [Giới hạn tốc độ](#giới-hạn-tốc-độ) | Giới hạn tốc độ thực thi với khoảng thời gian tối thiểu |
-| [Trigger](#trigger) | Điểm vào workflow - thủ công, webhook, lịch trình hoặc sự kiện |
+| [Join](#join) | Wait for parallel branches to complete |
+| [Loop](#loop) | Repeat steps N times using output port routing |
+| [Merge](#merge) | Merge multiple inputs into a single output |
+| [Parallel](#parallel) | Execute multiple tasks in parallel with different strategies |
+| [Rate Limit](#rate-limit) | Rate limiter with token bucket strategy |
+| [Retry](#retry) | Retry with exponential backoff |
+| [Start](#start) | Explicit workflow start node |
+| [Subflow](#subflow) | Reference and execute an external workflow |
+| [Switch](#switch) | Multi-way branching based on value matching |
+| [Throttle](#throttle) | Throttle execution rate with minimum interval |
+| [Trigger](#trigger) | Workflow entry point - manual, webhook, schedule, event, mcp, or polling |
 
 ## Modules
 
-### Xử lý theo lô
+### Batch Process
 
 `flow.batch`
 
-Xử lý các mục theo lô với kích thước có thể cấu hình
+Process items in batches with configurable size
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `items` | array | Yes | - | Array of items to process. Can be numbers, strings, or objects. |
-| `batch_size` | number | Yes | `10` | Số lượng mục mỗi lô |
-| `delay_ms` | number | No | `0` | Thời gian chờ giữa các lô (để giới hạn tốc độ) |
-| `continue_on_error` | boolean | No | `False` | Tiếp tục xử lý các lô còn lại nếu một lô thất bại |
-| `parallel_batches` | number | No | `1` | Tiếp tục xử lý các lô còn lại nếu một lô thất bại |
+| `batch_size` | number | Yes | `10` | Number of items per batch |
+| `delay_ms` | number | No | `0` | Milliseconds to wait between batches (for rate limiting) |
+| `continue_on_error` | boolean | No | `False` | Continue processing remaining batches if one fails |
+| `parallel_batches` | number | No | `1` | Number of batches to process in parallel (1 for sequential) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Số lượng lô để xử lý song song (1 để tuần tự) |
-| `batch` | array | Sự kiện để định tuyến (lô/hoàn thành/lỗi) |
-| `batch_index` | number | Sự kiện để định tuyến (lô/hoàn thành/lỗi) |
-| `total_batches` | number | Các mục của lô hiện tại |
-| `total_items` | number | Chỉ số lô hiện tại (bắt đầu từ 0) |
-| `is_last_batch` | boolean | Tổng số lô |
-| `progress` | object | Tổng số mục |
+| `__event__` | string | Event for routing (batch/completed/error) |
+| `batch` | array | Current batch items |
+| `batch_index` | number | Current batch index (0-based) |
+| `total_batches` | number | Total number of batches |
+| `total_items` | number | Total number of items |
+| `is_last_batch` | boolean | Whether this is the last batch |
+| `progress` | object | Progress information |
 
 **Example:** Example
 
@@ -85,11 +85,11 @@ parallel_batches: 3
 continue_on_error: true
 ```
 
-### Phân nhánh
+### Branch
 
 `flow.branch`
 
-Phân nhánh có điều kiện dựa trên đánh giá biểu thức
+Conditional branching based on expression evaluation
 
 **Parameters:**
 
@@ -101,11 +101,11 @@ Phân nhánh có điều kiện dựa trên đánh giá biểu thức
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện định tuyến (true/false/error) |
-| `outputs` | object | Giá trị đầu ra theo cổng |
-| `result` | boolean | Kết quả phân nhánh |
-| `condition` | string | Giá trị điều kiện |
-| `resolved_condition` | string | Kết quả đánh giá điều kiện |
+| `__event__` | string | Event for routing (true/false/error) |
+| `outputs` | object | Output values by port |
+| `result` | boolean | Condition evaluation result |
+| `condition` | string | Original condition expression |
+| `resolved_condition` | string | Condition after variable resolution |
 
 **Example:** Example
 
@@ -119,11 +119,11 @@ condition: ${search_step.count} > 0
 condition: ${api_call.status} == success
 ```
 
-### Điểm dừng
+### Breakpoint
 
 `flow.breakpoint`
 
-Tạm dừng thực thi workflow để phê duyệt hoặc nhập liệu của con người
+Pause workflow execution for human approval or input
 
 **Parameters:**
 
@@ -142,15 +142,15 @@ Tạm dừng thực thi workflow để phê duyệt hoặc nhập liệu của c
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện định tuyến (approved/rejected/timeout) |
-| `breakpoint_id` | string | ID điểm dừng |
-| `status` | string | Trạng thái |
-| `approved_by` | array | Được phê duyệt bởi |
-| `rejected_by` | array | Bị từ chối bởi |
-| `custom_inputs` | object | Giá trị đầu vào tùy chỉnh |
-| `comments` | array | Bình luận xem xét |
-| `resolved_at` | string | Thời gian giải quyết |
-| `wait_duration_ms` | integer | Thời gian chờ (ms) |
+| `__event__` | string | Event for routing (approved/rejected/timeout) |
+| `breakpoint_id` | string | Unique breakpoint identifier |
+| `status` | string | Final status (approved/rejected/timeout/cancelled) |
+| `approved_by` | array | List of users who approved |
+| `rejected_by` | array | List of users who rejected |
+| `custom_inputs` | object | Values collected from custom fields |
+| `comments` | array | Comments from approvers |
+| `resolved_at` | string | ISO timestamp of resolution |
+| `wait_duration_ms` | integer | Time spent waiting for approval |
 
 **Example:** Example
 
@@ -175,29 +175,29 @@ title: Adjustment Required
 custom_fields: [{"name": "reason", "label": "Reason", "type": "text", "required": true}, {"name": "amount", "label": "Amount", "type": "number", "required": true}]
 ```
 
-### Ngắt mạch
+### Circuit Breaker
 
 `flow.circuit_breaker`
 
-Mẫu ngắt mạch để ngăn ngừa lỗi dây chuyền
+Circuit breaker pattern for fault tolerance
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `failure_threshold` | number | Yes | `5` | Số lần thất bại trước khi mở mạch |
-| `reset_timeout_ms` | number | No | `60000` | Thời gian tính bằng mili giây trước khi mạch chuyển sang nửa mở |
-| `half_open_max` | number | No | `1` | Số yêu cầu tối đa được phép ở trạng thái nửa mở |
+| `failure_threshold` | number | Yes | `5` | Number of failures before opening the circuit |
+| `reset_timeout_ms` | number | No | `60000` | Time to wait before transitioning from open to half-open |
+| `half_open_max` | number | No | `1` | Maximum test requests allowed in half-open state |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện để định tuyến (cho phép/từ chối/nửa mở) |
-| `state` | string | Trạng thái mạch (đóng/mở/nửa mở) |
-| `failure_count` | number | Số lần thất bại liên tiếp |
-| `last_failure_time_ms` | number | Thời gian thất bại cuối cùng tính bằng mili giây |
-| `time_until_half_open_ms` | number | Số mili giây cho đến khi mạch chuyển sang nửa mở |
+| `__event__` | string | Event for routing (closed/open/half_open) |
+| `state` | string | Current circuit breaker state |
+| `failure_count` | number | Current number of consecutive failures |
+| `last_failure_time_ms` | number | Timestamp of last failure |
+| `time_until_half_open_ms` | number | Milliseconds until circuit transitions to half-open |
 
 **Example:** Example
 
@@ -226,7 +226,7 @@ half_open_max: 3
 
 `flow.container`
 
-Container subflow nhúng để tổ chức các workflow phức tạp
+Embedded subflow container for organizing complex workflows
 
 **Parameters:**
 
@@ -241,12 +241,12 @@ Container subflow nhúng để tổ chức các workflow phức tạp
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện định tuyến (success/error) |
-| `outputs` | object | Giá trị đầu ra theo cổng |
-| `subflow_result` | object | Kết quả subflow |
-| `exported_variables` | object | Các biến đã xuất |
-| `node_count` | integer | Số node |
-| `execution_time_ms` | number | Thời gian thực thi (ms) |
+| `__event__` | string | Event for routing (success/error) |
+| `outputs` | object | Output values by port |
+| `subflow_result` | object | Result from subflow execution |
+| `exported_variables` | object | Variables exported from subflow |
+| `node_count` | integer | Number of nodes in subflow |
+| `execution_time_ms` | number | Total subflow execution time in milliseconds |
 
 **Example:** Example
 
@@ -262,29 +262,29 @@ subflow: {"nodes": [], "edges": []}
 inherit_context: false
 ```
 
-### Giảm thiểu
+### Debounce
 
 `flow.debounce`
 
-Giảm thiểu thực thi để ngăn chặn các cuộc gọi lặp lại nhanh chóng
+Debounce execution to prevent rapid repeated calls
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `delay_ms` | number | Yes | - | Thời gian chờ sau cuộc gọi cuối cùng trước khi thực thi |
-| `leading` | boolean | No | `False` | Thực thi ở cạnh dẫn đầu (cuộc gọi đầu tiên kích hoạt ngay lập tức) |
-| `trailing` | boolean | No | `True` | Thực thi ở cạnh kết thúc (sau khi hết thời gian chờ) |
+| `delay_ms` | number | Yes | - | Wait time in milliseconds before allowing execution |
+| `leading` | boolean | No | `False` | Execute on the leading edge (first call immediately) |
+| `trailing` | boolean | No | `True` | Execute on the trailing edge (after delay of inactivity) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện để định tuyến (đã thực thi/đã giảm thiểu) |
-| `last_call_ms` | number | Thời gian cuộc gọi cuối cùng tính bằng mili giây |
-| `calls_debounced` | number | Số cuộc gọi đã giảm thiểu kể từ lần thực thi cuối cùng |
-| `time_since_last_ms` | number | Thời gian đã trôi qua kể từ cuộc gọi cuối cùng tính bằng mili giây |
-| `edge` | string | Cạnh nào đã kích hoạt thực thi (dẫn đầu/kết thúc) |
+| `__event__` | string | Event for routing (executed/skipped) |
+| `last_call_ms` | number | Timestamp of the last call |
+| `calls_debounced` | number | Number of calls that were debounced (skipped) |
+| `time_since_last_ms` | number | Time since last call in milliseconds |
+| `edge` | string | Which edge triggered execution (leading/trailing) |
 
 **Example:** Example
 
@@ -308,11 +308,11 @@ leading: true
 trailing: true
 ```
 
-### Kết thúc
+### End
 
 `flow.end`
 
-Node kết thúc workflow rõ ràng
+Explicit workflow end node
 
 **Parameters:**
 
@@ -325,9 +325,9 @@ Node kết thúc workflow rõ ràng
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện định tuyến (__end__) |
-| `ended_at` | string | Thời gian kết thúc |
-| `workflow_result` | object | Kết quả workflow |
+| `__event__` | string | Event for routing (__end__) |
+| `ended_at` | string | ISO timestamp of end |
+| `workflow_result` | object | Mapped workflow output |
 
 **Example:** Example
 
@@ -340,29 +340,29 @@ Node kết thúc workflow rõ ràng
 output_mapping: {"result": "${process.output}", "status": "success"}
 ```
 
-### Xử lý lỗi
+### Error Handler
 
 `flow.error_handle`
 
-Bắt và xử lý lỗi từ các nút phía trên
+Catches and handles errors from upstream nodes
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | `log_and_continue` | Làm gì với lỗi |
-| `include_traceback` | boolean | No | `True` | Bao gồm toàn bộ dấu vết trong đầu ra |
-| `error_code_mapping` | object | No | `{}` | Bao gồm toàn bộ dấu vết trong đầu ra |
-| `fallback_value` | any | No | - | Ánh xạ mã lỗi tới hành động tùy chỉnh |
+| `action` | string | Yes | `log_and_continue` | What to do with the error |
+| `include_traceback` | boolean | No | `True` | Include full stack trace in output |
+| `error_code_mapping` | object | No | `{}` | Map error codes to custom actions |
+| `fallback_value` | any | No | - | Value to use when error is suppressed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Giá trị sử dụng khi lỗi được bỏ qua |
-| `outputs` | object | Sự kiện để định tuyến (đã xử lý/nâng cấp) |
-| `error_info` | object | Sự kiện để định tuyến (đã xử lý/nâng cấp) |
-| `action_taken` | string | Hành động đã thực hiện |
+| `__event__` | string | Event for routing (handled/escalate) |
+| `outputs` | object | Output values by port |
+| `error_info` | object | Extracted error information |
+| `action_taken` | string | What action was taken |
 
 **Example:** Example
 
@@ -385,11 +385,11 @@ action: transform
 error_code_mapping: {"TIMEOUT": {"retry": true, "delay": 5000}, "NOT_FOUND": {"skip": true}}
 ```
 
-### Kích hoạt quy trình lỗi
+### Error Workflow Trigger
 
 `flow.error_workflow_trigger`
 
-Điểm vào cho quy trình lỗi - kích hoạt khi một quy trình khác thất bại
+Entry point for error workflows - triggered when another workflow fails
 
 **Parameters:**
 
@@ -401,9 +401,9 @@ error_code_mapping: {"TIMEOUT": {"retry": true, "delay": 5000}, "NOT_FOUND": {"s
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Mô tả quy trình lỗi này |
-| `error_context` | object | Sự kiện để định tuyến (đã kích hoạt) |
-| `triggered_at` | string | Dấu thời gian ISO khi quy trình lỗi được kích hoạt |
+| `__event__` | string | Event for routing (triggered) |
+| `error_context` | object | Complete error context from failed workflow |
+| `triggered_at` | string | ISO timestamp when error workflow was triggered |
 
 **Example:** Example
 
@@ -421,29 +421,29 @@ description: Log all workflow errors to monitoring system
 
 `flow.foreach`
 
-Lặp qua danh sách và thực thi các bước cho mỗi mục
+Iterate over a list and execute steps for each item
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `items` | string | Yes | - | Danh sách các mục để lặp qua (hỗ trợ tham chiếu ${variable}) |
-| `steps` | array | No | - | Các bước thực thi cho mỗi mục |
-| `item_var` | string | No | `item` | Tên biến cho mục hiện tại |
-| `index_var` | string | No | `index` | Tên biến cho chỉ số hiện tại |
-| `output_mode` | string | No | `collect` | Chế độ thu thập kết quả |
+| `items` | string | Yes | - | Array to iterate over — use gear icon to reference a previous step output |
+| `steps` | array | No | - | Steps to execute for each item (nested mode only) |
+| `item_var` | string | No | `item` | Variable name for current item |
+| `index_var` | string | No | `index` | Variable name for current index |
+| `output_mode` | string | No | `collect` | How to collect results: collect (array), last (single), none |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện định tuyến (iterate/done) |
-| `__set_context` | object | Đặt ngữ cảnh |
-| `outputs` | object | Giá trị đầu ra theo cổng |
-| `iteration` | number | Chỉ số lặp hiện tại |
-| `status` | string | Trạng thái thao tác |
-| `results` | array | Kết quả đã thu thập |
-| `count` | number | Tổng số mục |
+| `__event__` | string | Event for routing (iterate/done) |
+| `__set_context` | object | Scope variables set on each iteration |
+| `outputs` | object | Output values by port |
+| `iteration` | number | Current iteration index |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of items processed |
 
 **Example:** Example
 
@@ -463,7 +463,7 @@ steps: [{"module": "element.text", "params": {"element_id": "${element}"}, "outp
 
 `flow.fork`
 
-Chia thực thi thành các nhánh song song
+Split execution into parallel branches
 
 **Parameters:**
 
@@ -475,9 +475,9 @@ Chia thực thi thành các nhánh song song
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện định tuyến (fork/error) |
-| `input_data` | any | Dữ liệu đầu vào |
-| `branch_count` | integer | Số nhánh |
+| `__event__` | string | Event for routing (fork/error) |
+| `input_data` | any | Input data passed to all branches |
+| `branch_count` | integer | Number of branches created |
 
 **Example:** Example
 
@@ -495,7 +495,7 @@ branch_count: 3
 
 `flow.goto`
 
-Nhảy không điều kiện đến bước khác
+Unconditional jump to another step
 
 **Parameters:**
 
@@ -508,9 +508,9 @@ Nhảy không điều kiện đến bước khác
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện định tuyến (goto) |
-| `target` | string | Bước đích |
-| `iteration` | number | Số lần lặp |
+| `__event__` | string | Event for routing (goto) |
+| `target` | string | ID of the target step |
+| `iteration` | number | Current iteration count for this goto |
 
 **Example:** Example
 
@@ -544,10 +544,10 @@ Execute an external workflow file
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Parameters to pass to the invoked workflow |
-| `result` | any | Maximum execution time in seconds |
-| `workflow_id` | string | Event for routing (success/error) |
-| `execution_time_ms` | number | Workflow execution result |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Workflow execution result |
+| `workflow_id` | string | Invoked workflow ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 
@@ -569,7 +569,7 @@ output_mapping: {"processed": "result.data"}
 
 `flow.join`
 
-Chờ các nhánh song song hoàn thành
+Wait for parallel branches to complete
 
 **Parameters:**
 
@@ -584,10 +584,10 @@ Chờ các nhánh song song hoàn thành
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện định tuyến (joined/timeout/error) |
-| `joined_data` | array | Dữ liệu đã nối |
-| `completed_count` | integer | Số nhánh đã hoàn thành |
-| `strategy` | string | Chiến lược nối |
+| `__event__` | string | Event for routing (joined/timeout/error) |
+| `joined_data` | array | Data from all completed inputs |
+| `completed_count` | integer | Number of inputs completed |
+| `strategy` | string | Strategy used for joining |
 
 **Example:** Example
 
@@ -605,31 +605,31 @@ input_count: 3
 cancel_pending: true
 ```
 
-### Vòng lặp
+### Loop
 
 `flow.loop`
 
-Lặp lại các bước N lần sử dụng định tuyến cổng đầu ra
+Repeat steps N times using output port routing
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `times` | number | Yes | `1` | Số lần lặp lại |
-| `target` | string | No | - | Bước đích (đã ngừng sử dụng) |
-| `steps` | array | No | - | Các bước thực thi cho mỗi lần lặp |
-| `index_var` | string | No | `index` | Tên biến cho chỉ số hiện tại |
+| `times` | number | Yes | `1` | Number of times to repeat |
+| `target` | string | No | - | DEPRECATED: Use output ports and edges instead |
+| `steps` | array | No | - | Steps to execute for each iteration (nested mode) |
+| `index_var` | string | No | `index` | Variable name for current index |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện định tuyến (iterate/done) |
-| `outputs` | object | Giá trị đầu ra theo cổng |
-| `iteration` | number | Lần lặp hiện tại |
-| `status` | string | Trạng thái thao tác |
-| `results` | array | Kết quả đã thu thập |
-| `count` | number | Tổng số lần lặp |
+| `__event__` | string | Event for routing (iterate/done/error) |
+| `outputs` | object | Output values by port |
+| `iteration` | number | Current iteration count |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of iterations completed |
 
 **Example:** Example
 
@@ -644,11 +644,11 @@ times: 5
 steps: [{"module": "browser.click", "params": {"selector": ".next"}}]
 ```
 
-### Gộp
+### Merge
 
 `flow.merge`
 
-Gộp nhiều đầu vào thành một đầu ra
+Merge multiple inputs into a single output
 
 **Parameters:**
 
@@ -661,10 +661,10 @@ Gộp nhiều đầu vào thành một đầu ra
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện định tuyến (merged/error) |
-| `merged_data` | any | Dữ liệu đã gộp |
-| `input_count` | integer | Số đầu vào |
-| `strategy` | string | Chiến lược gộp |
+| `__event__` | string | Event for routing (merged/error) |
+| `merged_data` | any | Merged data based on strategy |
+| `input_count` | integer | Number of inputs received |
+| `strategy` | string | Strategy used for merging |
 
 **Example:** Example
 
@@ -680,33 +680,33 @@ strategy: first
 input_count: 2
 ```
 
-### Song song
+### Parallel
 
 `flow.parallel`
 
-Thực hiện nhiều tác vụ song song với các chiến lược khác nhau
+Execute multiple tasks in parallel with different strategies
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tasks` | array | Yes | - | Mảng các định nghĩa tác vụ để thực hiện song song |
-| `mode` | string | No | `all` | Mảng các định nghĩa tác vụ để thực hiện song song |
+| `tasks` | array | Yes | - | Array of task definitions to execute in parallel |
+| `mode` | string | No | `all` | Parallel execution mode |
 | `timeout_ms` | number | No | `60000` | Maximum wait time in milliseconds |
-| `fail_fast` | boolean | No | `True` | Dừng tất cả tác vụ khi gặp lỗi đầu tiên (chỉ áp dụng khi mode=all) |
-| `concurrency_limit` | number | No | `0` | Dừng tất cả tác vụ khi gặp lỗi đầu tiên (chỉ áp dụng khi mode=all) |
+| `fail_fast` | boolean | No | `True` | Stop all tasks on first failure (only for mode=all) |
+| `concurrency_limit` | number | No | `0` | Maximum number of concurrent tasks (0 for unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Số lượng tác vụ đồng thời tối đa (0 cho không giới hạn) |
-| `results` | array | Sự kiện để định tuyến (hoàn thành/một phần/lỗi) |
-| `completed_count` | number | Sự kiện để định tuyến (hoàn thành/một phần/lỗi) |
-| `failed_count` | number | Kết quả từ tất cả các tác vụ |
-| `total_count` | number | Số lượng tác vụ hoàn thành thành công |
-| `mode` | string | Số lượng tác vụ thất bại |
-| `duration_ms` | number | Tổng số tác vụ |
+| `__event__` | string | Event for routing (completed/partial/error) |
+| `results` | array | Results from all tasks |
+| `completed_count` | number | Number of successfully completed tasks |
+| `failed_count` | number | Number of failed tasks |
+| `total_count` | number | Total number of tasks |
+| `mode` | string | Execution mode used |
+| `duration_ms` | number | Total execution time in milliseconds |
 
 **Example:** Example
 
@@ -730,30 +730,30 @@ tasks: [{"module": "http.get", "params": {"url": "https://api1.example.com"}}, {
 mode: settle
 ```
 
-### Giới hạn tốc độ
+### Rate Limit
 
 `flow.rate_limit`
 
-Giới hạn tốc độ thực thi bằng cách sử dụng thùng token hoặc cửa sổ trượt
+Rate limiter with token bucket strategy
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `max_requests` | number | Yes | - | Số yêu cầu tối đa được phép mỗi cửa sổ |
-| `window_ms` | number | No | `60000` | Cửa sổ thời gian tính bằng mili giây |
-| `strategy` | string | No | `token_bucket` | Chiến lược giới hạn tốc độ (thùng token hoặc cửa sổ trượt) |
-| `queue_overflow` | string | No | `wait` | Hành vi khi hàng đợi đầy (bỏ qua hoặc lỗi) |
+| `max_requests` | number | Yes | - | Maximum number of requests allowed per window |
+| `window_ms` | number | No | `60000` | Time window in milliseconds |
+| `strategy` | string | No | `token_bucket` | Rate limiting strategy |
+| `queue_overflow` | string | No | `wait` | Behavior when rate limit is exceeded |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện để định tuyến (được phép/bị giới hạn) |
-| `tokens_remaining` | number | Số token còn lại trong thùng |
-| `window_reset_ms` | number | Số mili giây cho đến khi cửa sổ được đặt lại |
-| `requests_in_window` | number | Số yêu cầu trong cửa sổ hiện tại |
-| `wait_ms` | number | Số mili giây cần chờ trước khi yêu cầu tiếp theo được phép |
+| `__event__` | string | Event for routing (allowed/throttled/error) |
+| `tokens_remaining` | number | Number of tokens remaining in the bucket |
+| `window_reset_ms` | number | Milliseconds until the window resets |
+| `requests_in_window` | number | Number of requests made in current window |
+| `wait_ms` | number | Milliseconds to wait before retry (if throttled) |
 
 **Example:** Example
 
@@ -781,32 +781,32 @@ strategy: sliding_window
 queue_overflow: wait
 ```
 
-### Thử lại
+### Retry
 
 `flow.retry`
 
-Thử lại các thao tác thất bại với thời gian chờ có thể cấu hình
+Retry with exponential backoff
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `max_retries` | number | Yes | `3` | Số lần thử lại tối đa |
-| `initial_delay_ms` | number | No | `1000` | Thời gian chờ ban đầu trước lần thử lại đầu tiên (ms) |
-| `backoff_multiplier` | number | No | `2.0` | Hệ số nhân cho thời gian chờ lũy tiến |
-| `max_delay_ms` | number | No | `30000` | Thời gian chờ tối đa giữa các lần thử lại (ms) |
-| `retry_on_errors` | array | No | `[]` | Các loại lỗi để thử lại (để trống nghĩa là thử lại tất cả) |
+| `max_retries` | number | Yes | `3` | Maximum number of retry attempts |
+| `initial_delay_ms` | number | No | `1000` | Initial delay before first retry in milliseconds |
+| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g. 2.0 doubles delay each retry) |
+| `max_delay_ms` | number | No | `30000` | Maximum delay cap in milliseconds |
+| `retry_on_errors` | array | No | `[]` | Optional list of error codes to retry on (empty = retry on all errors) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện để định tuyến (thử lại/thành công/thất bại) |
-| `attempt` | number | Số lần thử hiện tại |
-| `max_retries` | number | Số lần thử lại tối đa được cấu hình |
-| `delay_ms` | number | Thời gian chờ trước lần thử lại tiếp theo (ms) |
-| `total_elapsed_ms` | number | Tổng thời gian đã trôi qua (ms) |
-| `last_error` | object | Thông báo lỗi cuối cùng |
+| `__event__` | string | Event for routing (success/retry/exhausted) |
+| `attempt` | number | Current attempt number (1-based) |
+| `max_retries` | number | Maximum retry attempts configured |
+| `delay_ms` | number | Delay before this attempt in milliseconds |
+| `total_elapsed_ms` | number | Total time elapsed across all attempts |
+| `last_error` | object | Last error that triggered a retry |
 
 **Example:** Example
 
@@ -831,19 +831,19 @@ initial_delay_ms: 2000
 retry_on_errors: ["TIMEOUT", "RATE_LIMIT", "429", "503"]
 ```
 
-### Bắt đầu
+### Start
 
 `flow.start`
 
-Node bắt đầu workflow rõ ràng
+Explicit workflow start node
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện định tuyến (start) |
-| `started_at` | string | Thời gian bắt đầu |
-| `workflow_id` | string | ID Workflow |
+| `__event__` | string | Event for routing (start) |
+| `started_at` | string | ISO timestamp of start |
+| `workflow_id` | string | Workflow ID if available |
 
 **Example:** Example
 
@@ -854,7 +854,7 @@ Node bắt đầu workflow rõ ràng
 
 `flow.subflow`
 
-Tham chiếu và thực thi workflow bên ngoài
+Reference and execute an external workflow
 
 **Parameters:**
 
@@ -870,10 +870,10 @@ Tham chiếu và thực thi workflow bên ngoài
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện định tuyến (success/error) |
-| `result` | any | Kết quả thực thi |
-| `execution_id` | string | ID thực thi |
-| `workflow_ref` | string | Tham chiếu workflow |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Subflow execution result |
+| `execution_id` | string | Subflow execution ID (for spawn/async) |
+| `workflow_ref` | string | Referenced workflow |
 
 **Example:** Example
 
@@ -895,7 +895,7 @@ execution_mode: spawn
 
 `flow.switch`
 
-Phân nhánh nhiều hướng dựa trên khớp giá trị
+Multi-way branching based on value matching
 
 **Parameters:**
 
@@ -908,10 +908,10 @@ Phân nhánh nhiều hướng dựa trên khớp giá trị
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện định tuyến (case:value hoặc default) |
-| `outputs` | object | Giá trị đầu ra theo cổng |
-| `matched_case` | string | Case khớp |
-| `value` | any | Giá trị khớp |
+| `__event__` | string | Event for routing (case:value or default) |
+| `outputs` | object | Output values by port |
+| `matched_case` | string | The case that matched |
+| `value` | any | The resolved value that was matched |
 
 **Example:** Example
 
@@ -927,28 +927,28 @@ expression: ${input.type}
 cases: [{"id": "img", "value": "image", "label": "Image"}, {"id": "vid", "value": "video", "label": "Video"}, {"id": "txt", "value": "text", "label": "Text"}]
 ```
 
-### Giới hạn tốc độ
+### Throttle
 
 `flow.throttle`
 
-Giới hạn tốc độ thực thi với khoảng thời gian tối thiểu
+Throttle execution rate with minimum interval
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `interval_ms` | number | Yes | - | Thời gian tối thiểu giữa các lần thực thi (ms) |
-| `leading` | boolean | No | `True` | Thực thi ở cạnh trước (lần gọi đầu tiên được phép ngay lập tức) |
+| `interval_ms` | number | Yes | - | Minimum time between executions in milliseconds |
+| `leading` | boolean | No | `True` | Execute on the leading edge (first call passes immediately) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện để định tuyến (đã thực thi/đã giới hạn) |
-| `last_execution_ms` | number | Dấu thời gian của lần thực thi được phép cuối cùng |
-| `calls_throttled` | number | Số lần gọi bị giới hạn kể từ lần thực thi cuối |
-| `time_since_last_ms` | number | Thời gian đã trôi qua kể từ lần thực thi cuối (ms) |
-| `remaining_ms` | number | Thời gian còn lại (ms) cho đến khi được phép thực thi tiếp theo |
+| `__event__` | string | Event for routing (executed/throttled) |
+| `last_execution_ms` | number | Timestamp of last allowed execution |
+| `calls_throttled` | number | Number of calls throttled since last execution |
+| `time_since_last_ms` | number | Time elapsed since last execution in milliseconds |
+| `remaining_ms` | number | Milliseconds remaining until next execution is allowed |
 
 **Example:** Example
 
@@ -974,7 +974,7 @@ leading: false
 
 `flow.trigger`
 
-Điểm vào workflow - thủ công, webhook, lịch trình hoặc sự kiện
+Workflow entry point - manual, webhook, schedule, event, mcp, or polling
 
 **Parameters:**
 
@@ -999,10 +999,10 @@ leading: false
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Sự kiện định tuyến (triggered/error) |
-| `trigger_data` | object | Dữ liệu trigger |
-| `trigger_type` | string | Loại trigger |
-| `triggered_at` | string | Thời gian kích hoạt |
+| `__event__` | string | Event for routing (triggered/error) |
+| `trigger_data` | object | Data from trigger source |
+| `trigger_type` | string | Type of trigger |
+| `triggered_at` | string | ISO timestamp |
 
 **Example:** Example
 

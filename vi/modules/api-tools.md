@@ -6,10 +6,10 @@ GitHub API, HTTP requests, and search engine integrations.
 
 | Module | Description |
 |--------|-------------|
-| [Tạo GitHub Issue](#tạo-github-issue) | Tạo issue mới trong repository GitHub |
+| [Create GitHub Issue](#create-github-issue) | Create a new issue in a GitHub repository |
 | [Create GitHub Pull Request](#create-github-pull-request) | Create a new pull request in a GitHub repository |
-| [Lấy Repository GitHub](#lấy-repository-github) | Lấy thông tin về repository GitHub |
-| [Liệt kê GitHub Issues](#liệt-kê-github-issues) | Liệt kê issues từ repository GitHub |
+| [Get GitHub Repository](#get-github-repository) | Get information about a GitHub repository |
+| [List GitHub Issues](#list-github-issues) | List issues from a GitHub repository |
 | [List GitHub Repositories](#list-github-repositories) | List repositories for a GitHub user or the authenticated user |
 | [Google Search (API)](#google-search-api) | Use Google Custom Search API to search keywords |
 | [HTTP GET Request](#http-get-request) | Send HTTP GET request to any URL |
@@ -18,11 +18,11 @@ GitHub API, HTTP requests, and search engine integrations.
 
 ## Modules
 
-### Tạo GitHub Issue
+### Create GitHub Issue
 
 `api.github.create_issue`
 
-Tạo issue mới trong repository GitHub
+Create a new issue in a GitHub repository
 
 **Parameters:**
 
@@ -94,32 +94,32 @@ head: feature/auth
 base: main
 ```
 
-### Lấy Repository GitHub
+### Get GitHub Repository
 
 `api.github.get_repo`
 
-Lấy thông tin về repository GitHub
+Get information about a GitHub repository
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `owner` | string | Yes | - | Chủ sở hữu repository (username hoặc tổ chức) |
-| `repo` | string | Yes | - | Chủ sở hữu repository (username hoặc tổ chức) |
-| `token` | string | No | - | Tên repository |
+| `owner` | string | Yes | - | Repository owner (username or organization) |
+| `repo` | string | Yes | - | Repository name |
+| `token` | string | No | - | GitHub Personal Access Token (optional but recommended) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | GitHub Personal Access Token (tùy chọn nhưng khuyến nghị) |
-| `repo` | object | Trạng thái thao tác (success/error) |
-| `name` | string | Trạng thái thao tác (success/error) |
-| `full_name` | string | Thông tin repository |
-| `description` | string | Tên của mục |
-| `stars` | number | Tên đầy đủ repository |
-| `forks` | number | Mô tả mục |
-| `url` | string | Lấy thông tin về repository GitHub |
+| `status` | string | Operation status (success/error) |
+| `repo` | object | Repository information |
+| `name` | string | Name of the item |
+| `full_name` | string | Full repository name |
+| `description` | string | Item description |
+| `stars` | number | Number of stars |
+| `forks` | number | Number of forks |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -128,11 +128,11 @@ owner: octocat
 repo: Hello-World
 ```
 
-### Liệt kê GitHub Issues
+### List GitHub Issues
 
 `api.github.list_issues`
 
-Liệt kê issues từ repository GitHub
+List issues from a GitHub repository
 
 **Parameters:**
 
@@ -219,10 +219,10 @@ Use Google Custom Search API to search keywords
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác |
-| `data` | array | Dữ liệu kết quả tìm kiếm |
-| `count` | number | Số kết quả tìm kiếm |
-| `total_results` | number | Tổng số kết quả |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
+| `total_results` | number | Total number of search results available |
 
 **Example:** Search Python tutorials
 
@@ -251,10 +251,10 @@ Send HTTP GET request to any URL
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status_code` | number | Mã trạng thái HTTP |
-| `headers` | object | Headers phản hồi |
-| `body` | string | Nội dung phản hồi |
-| `json` | object | Phản hồi JSON (nếu có) |
+| `status_code` | number | HTTP status code |
+| `headers` | object | HTTP headers |
+| `body` | string | Response body content |
+| `json` | object | Parsed JSON response data |
 
 **Example:** Fetch API data
 

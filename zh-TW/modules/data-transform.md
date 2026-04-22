@@ -6,32 +6,32 @@ CSV, JSON, XML, YAML parsing, generation, and pipeline transformations.
 
 | Module | Description |
 |--------|-------------|
-| [讀取 CSV 檔案](#讀取-csv-檔案) | 讀取並解析 CSV 檔案為物件陣列 |
-| [寫入 CSV 檔案](#寫入-csv-檔案) | 將物件陣列寫入 CSV 檔案 |
+| [Read CSV File](#read-csv-file) | Read and parse CSV file into array of objects |
+| [Write CSV File](#write-csv-file) | Write array of objects to CSV file |
 | [Deduplicate Records](#deduplicate-records) | Remove duplicate records from an array by key fields. Optionally persists seen hashes to disk or execution context for cross-run dedup. Use storage=context in cloud/stateless environments where disk is ephemeral. |
-| [解析 JSON](#解析-json) | 將 JSON 字串解析為物件 |
-| [JSON 字串化](#json-字串化) | 將物件轉換為 JSON 字串 |
-| [JSON 轉 CSV](#json-轉-csv) | 將 JSON 資料或檔案轉換為 CSV 格式 |
-| [資料管道](#資料管道) | 在單一步驟中串聯多個資料轉換 |
-| [文字範本](#文字範本) | 用變數填充文字範本 |
+| [Parse JSON](#parse-json) | Parse JSON string into object |
+| [JSON Stringify](#json-stringify) | Convert object to JSON string |
+| [JSON to CSV](#json-to-csv) | Convert JSON data or files to CSV format |
+| [Data Pipeline](#data-pipeline) | Chain multiple data transformations in a single step |
+| [Text Template](#text-template) | Fill text template with variables |
 | [Validate Records](#validate-records) | Validate extracted records against field rules. Splits output into valid and invalid arrays. |
-| [生成 XML](#生成-xml) | 從物件或陣列生成 XML 字串 |
-| [解析 XML](#解析-xml) | 將 XML 字串解析為物件 |
-| [生成 YAML](#生成-yaml) | 從物件或陣列生成 YAML 字串 |
-| [解析 YAML](#解析-yaml) | 將 YAML 字串解析為物件 |
-| [物件鍵](#物件鍵) | 取得物件的所有鍵 |
-| [物件合併](#物件合併) | 合併多個物件為一個 |
-| [物件排除](#物件排除) | 從物件中排除特定的鍵 |
-| [物件選取](#物件選取) | 從物件中選取特定的鍵 |
-| [物件值](#物件值) | 取得物件的所有值 |
+| [Generate XML](#generate-xml) | Generate XML string from Python dict |
+| [Parse XML](#parse-xml) | Parse XML string or file into Python dict |
+| [Generate YAML](#generate-yaml) | Generate YAML string from Python object |
+| [Parse YAML](#parse-yaml) | Parse YAML string or file into Python object |
+| [Object Keys](#object-keys) | Get all keys from an object |
+| [Object Merge](#object-merge) | Merge multiple objects into one |
+| [Object Omit](#object-omit) | Omit specific keys from an object |
+| [Object Pick](#object-pick) | Pick specific keys from an object |
+| [Object Values](#object-values) | Get all values from an object |
 
 ## Modules
 
-### 讀取 CSV 檔案
+### Read CSV File
 
 `data.csv.read`
 
-讀取並解析 CSV 檔案為物件陣列
+Read and parse CSV file into array of objects
 
 **Parameters:**
 
@@ -46,10 +46,10 @@ CSV, JSON, XML, YAML parsing, generation, and pipeline transformations.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `data` | array | 列物件陣列 |
-| `rows` | number | 列數 |
-| `columns` | array | 欄位名稱列表 |
+| `status` | string | Operation status |
+| `data` | array | Array of row objects |
+| `rows` | number | Number of rows |
+| `columns` | array | Column names |
 
 **Example:** Example
 
@@ -59,11 +59,11 @@ delimiter: ,
 encoding: utf-8
 ```
 
-### 寫入 CSV 檔案
+### Write CSV File
 
 `data.csv.write`
 
-將物件陣列寫入 CSV 檔案
+Write array of objects to CSV file
 
 **Parameters:**
 
@@ -78,9 +78,9 @@ encoding: utf-8
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `file_path` | string | 檔案路徑 |
-| `rows_written` | number | 寫入的列數 |
+| `status` | string | Operation status |
+| `file_path` | string | Path to written file |
+| `rows_written` | number | Number of rows written |
 
 **Example:** Example
 
@@ -130,11 +130,11 @@ keys: ["url"]
 hash_file: /tmp/seen.json
 ```
 
-### 解析 JSON
+### Parse JSON
 
 `data.json.parse`
 
-將 JSON 字串解析為物件
+Parse JSON string into object
 
 **Parameters:**
 
@@ -146,8 +146,8 @@ hash_file: /tmp/seen.json
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `data` | object | 解析後的資料 |
+| `status` | string | Operation status |
+| `data` | object | Parsed object |
 
 **Example:** Example
 
@@ -155,11 +155,11 @@ hash_file: /tmp/seen.json
 json_string: {"name": "John", "age": 30}
 ```
 
-### JSON 字串化
+### JSON Stringify
 
 `data.json.stringify`
 
-將物件轉換為 JSON 字串
+Convert object to JSON string
 
 **Parameters:**
 
@@ -173,8 +173,8 @@ json_string: {"name": "John", "age": 30}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `json` | string | JSON 字串 |
+| `status` | string | Operation status |
+| `json` | string | JSON string |
 
 **Example:** Example
 
@@ -183,11 +183,11 @@ data: {"name": "John", "age": 30}
 pretty: true
 ```
 
-### JSON 轉 CSV
+### JSON to CSV
 
 `data.json_to_csv`
 
-將 JSON 資料或檔案轉換為 CSV 格式
+Convert JSON data or files to CSV format
 
 **Parameters:**
 
@@ -204,10 +204,10 @@ pretty: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 產生的 CSV 檔案路徑 |
-| `row_count` | number | 列數 |
-| `column_count` | number | 欄位數 |
-| `columns` | array | 欄位名稱列表 |
+| `output_path` | string | Path to the generated CSV file |
+| `row_count` | number | Number of rows written |
+| `column_count` | number | Number of columns |
+| `columns` | array | List of column names |
 
 **Example:** Convert JSON array to CSV
 
@@ -223,27 +223,27 @@ input_data: /path/to/data.json
 output_path: /path/to/output.csv
 ```
 
-### 資料管道
+### Data Pipeline
 
 `data.pipeline`
 
-在單一步驟中串聯多個資料轉換
+Chain multiple data transformations in a single step
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input` | any | Yes | - | 要轉換的輸入資料（陣列或物件） |
-| `steps` | array | Yes | - | 要轉換的輸入資料（陣列或物件） |
+| `input` | any | Yes | - | Input data to transform (array or object) |
+| `steps` | array | Yes | - | Array of transformation steps to apply in order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | 依序應用的轉換步驟陣列 |
-| `original_count` | integer | 已轉換的資料 |
-| `result_count` | integer | 已轉換的資料 |
-| `steps_applied` | integer | 轉換後的項目數量 |
+| `result` | any | Transformed data |
+| `original_count` | integer | Count of items before transformation |
+| `result_count` | integer | Count of items after transformation |
+| `steps_applied` | integer | Number of transformation steps applied |
 
 **Example:** Example
 
@@ -266,11 +266,11 @@ input: ${input.data}
 steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}, {"pick": ["id", "name", "timestamp"]}, {"sort": {"field": "timestamp", "order": "desc"}}, {"skip": 5}, {"limit": 20}]
 ```
 
-### 文字範本
+### Text Template
 
 `data.text.template`
 
-用變數填充文字範本
+Fill text template with variables
 
 **Parameters:**
 
@@ -283,8 +283,8 @@ steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 操作狀態 |
-| `result` | string | 填充後的結果 |
+| `status` | string | Operation status |
+| `result` | string | Filled template |
 
 **Example:** Example
 
@@ -334,27 +334,27 @@ mode: flag
 drop_fields: ["__index", "html"]
 ```
 
-### 生成 XML
+### Generate XML
 
 `data.xml.generate`
 
-從物件或陣列生成 XML 字串
+Generate XML string from Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | object | Yes | - | 要轉換為 XML 的資料 |
-| `root_tag` | string | No | `root` | 根元素標籤名稱 |
-| `pretty` | boolean | No | `True` | 美化列印 XML 輸出 |
-| `encoding` | string | No | `utf-8` | XML 輸出的字元編碼 |
-| `declaration` | boolean | No | `True` | 包含 XML 宣告標頭 |
+| `data` | object | Yes | - | Python dict or object to convert to XML |
+| `root_tag` | string | No | `root` | Tag name for the root XML element |
+| `pretty` | boolean | No | `True` | Format XML with indentation for readability |
+| `encoding` | string | No | `utf-8` | XML encoding declaration value |
+| `declaration` | boolean | No | `True` | Include <?xml version="1.0"?> declaration at top |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `xml` | string | 生成的 XML 字串 |
+| `xml` | string | Generated XML string |
 
 **Example:** Example
 
@@ -364,26 +364,26 @@ root_tag: users
 pretty: true
 ```
 
-### 解析 XML
+### Parse XML
 
 `data.xml.parse`
 
-將 XML 字串解析為物件
+Parse XML string or file into Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | 要解析的 XML 字串 |
-| `file_path` | string | No | - | 要解析的 XML 檔案路徑 |
-| `preserve_attributes` | boolean | No | `True` | 在解析輸出中保留 XML 屬性 |
+| `content` | string | No | - | XML string to parse |
+| `file_path` | string | No | - | Path to XML file (used if content is empty) |
+| `preserve_attributes` | boolean | No | `True` | Include XML element attributes as @attributes in output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 解析後的 XML 物件 |
-| `root_tag` | string | 根元素標籤名稱 |
+| `result` | object | Parsed XML as nested dict |
+| `root_tag` | string | Root element tag name |
 
 **Example:** Example
 
@@ -392,27 +392,27 @@ content: <users><user id="1"><name>John</name></user></users>
 preserve_attributes: true
 ```
 
-### 生成 YAML
+### Generate YAML
 
 `data.yaml.generate`
 
-從物件或陣列生成 YAML 字串
+Generate YAML string from Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | any | Yes | - | 要轉換為 YAML 的資料 |
-| `default_flow_style` | boolean | No | `False` | 對巢狀結構使用流式風格 |
-| `sort_keys` | boolean | No | `False` | 按字母順序排序鍵 |
-| `indent` | number | No | `2` | 縮排的空格數 |
-| `allow_unicode` | boolean | No | `True` | 允許輸出中使用 Unicode 字元 |
+| `data` | any | Yes | - | Python object, array, or value to convert to YAML |
+| `default_flow_style` | boolean | No | `False` | Use inline/flow style (JSON-like) instead of block style |
+| `sort_keys` | boolean | No | `False` | Sort dictionary keys alphabetically |
+| `indent` | number | No | `2` | Number of spaces for indentation |
+| `allow_unicode` | boolean | No | `True` | Allow unicode characters in output without escaping |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `yaml` | string | 生成的 YAML 字串 |
+| `yaml` | string | Generated YAML string |
 
 **Example:** Example
 
@@ -422,26 +422,26 @@ sort_keys: false
 indent: 2
 ```
 
-### 解析 YAML
+### Parse YAML
 
 `data.yaml.parse`
 
-將 YAML 字串解析為物件
+Parse YAML string or file into Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | 要解析的 YAML 字串 |
-| `file_path` | string | No | - | 要解析的 YAML 檔案路徑 |
-| `multi_document` | boolean | No | `False` | 解析多文件 YAML（以 --- 分隔） |
+| `content` | string | No | - | YAML string to parse |
+| `file_path` | string | No | - | Path to YAML file (used if content is empty) |
+| `multi_document` | boolean | No | `False` | Parse multiple YAML documents separated by --- (uses safe_load_all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | 解析後的 YAML 物件或陣列 |
-| `type` | string | 解析結果的類型 |
+| `result` | any | Parsed YAML data (object, array, or scalar) |
+| `type` | string | Type of parsed result: object, array, or scalar |
 
 **Example:** Example
 
@@ -464,11 +464,11 @@ name: Jane
 multi_document: true
 ```
 
-### 物件鍵
+### Object Keys
 
 `object.keys`
 
-取得物件的所有鍵
+Get all keys from an object
 
 **Parameters:**
 
@@ -480,8 +480,8 @@ multi_document: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `keys` | array | 物件鍵列表 |
-| `count` | number | 鍵的數量 |
+| `keys` | array | List of object keys |
+| `count` | number | Number of keys |
 
 **Example:** Get object keys
 
@@ -489,11 +489,11 @@ multi_document: true
 object: {"name": "John", "age": 30, "city": "NYC"}
 ```
 
-### 物件合併
+### Object Merge
 
 `object.merge`
 
-合併多個物件為一個
+Merge multiple objects into one
 
 **Parameters:**
 
@@ -505,7 +505,7 @@ object: {"name": "John", "age": 30, "city": "NYC"}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 合併後的物件 |
+| `result` | object | Merged object |
 
 **Example:** Merge user data
 
@@ -513,11 +513,11 @@ object: {"name": "John", "age": 30, "city": "NYC"}
 objects: [{"name": "John", "age": 30}, {"city": "NYC", "country": "USA"}, {"job": "Engineer"}]
 ```
 
-### 物件排除
+### Object Omit
 
 `object.omit`
 
-從物件中排除特定的鍵
+Omit specific keys from an object
 
 **Parameters:**
 
@@ -530,7 +530,7 @@ objects: [{"name": "John", "age": 30}, {"city": "NYC", "country": "USA"}, {"job"
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 排除鍵後的物件 |
+| `result` | object | Object without omitted keys |
 
 **Example:** Omit sensitive fields
 
@@ -539,11 +539,11 @@ object: {"name": "John", "age": 30, "password": "secret", "ssn": "123-45-6789"}
 keys: ["password", "ssn"]
 ```
 
-### 物件選取
+### Object Pick
 
 `object.pick`
 
-從物件中選取特定的鍵
+Pick specific keys from an object
 
 **Parameters:**
 
@@ -556,7 +556,7 @@ keys: ["password", "ssn"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 只有選取鍵的物件 |
+| `result` | object | Object with only picked keys |
 
 **Example:** Pick user fields
 
@@ -565,11 +565,11 @@ object: {"name": "John", "age": 30, "email": "john@example.com", "password": "se
 keys: ["name", "email"]
 ```
 
-### 物件值
+### Object Values
 
 `object.values`
 
-取得物件的所有值
+Get all values from an object
 
 **Parameters:**
 
@@ -581,8 +581,8 @@ keys: ["name", "email"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `values` | array | 物件值列表 |
-| `count` | number | 值的數量 |
+| `values` | array | List of object values |
+| `count` | number | Number of values |
 
 **Example:** Get object values
 

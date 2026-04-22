@@ -6,22 +6,22 @@ Excel, PDF, and Word document read/write/convert.
 
 | Module | Description |
 |--------|-------------|
-| [Excel 읽기](#excel-읽기) | Excel 파일(xlsx, xls)에서 데이터 읽기 |
-| [Excel 쓰기](#excel-쓰기) | Excel 파일(xlsx)에 데이터 쓰기 |
-| [PDF 폼 채우기](#pdf-폼-채우기) | PDF 폼 필드에 데이터 채우기 및 선택적으로 이미지 삽입 |
-| [PDF 생성](#pdf-생성) | HTML 콘텐츠 또는 텍스트에서 PDF 파일 생성 |
-| [PDF 파싱](#pdf-파싱) | PDF 파일에서 텍스트 및 메타데이터 추출 |
-| [PDF를 Word로](#pdf를-word로) | PDF 파일을 Word 문서(.docx)로 변환 |
-| [Word 문서 파싱](#word-문서-파싱) | Word 문서(.docx)에서 텍스트 및 콘텐츠 추출 |
-| [Word를 PDF로 변환](#word를-pdf로-변환) | Word 문서(.docx)를 PDF 파일로 변환 |
+| [Read Excel](#read-excel) | Read data from Excel files (xlsx, xls) |
+| [Write Excel](#write-excel) | Write data to Excel files (xlsx) |
+| [Fill PDF Form](#fill-pdf-form) | Fill PDF form fields with data and optionally insert images |
+| [Generate PDF](#generate-pdf) | Generate PDF files from HTML content or text |
+| [Parse PDF](#parse-pdf) | Extract text and metadata from PDF files |
+| [PDF to Word](#pdf-to-word) | Convert PDF files to Word documents (.docx) |
+| [Parse Word Document](#parse-word-document) | Extract text and content from Word documents (.docx) |
+| [Word to PDF](#word-to-pdf) | Convert Word documents (.docx) to PDF files |
 
 ## Modules
 
-### Excel 읽기
+### Read Excel
 
 `excel.read`
 
-Excel 파일(xlsx, xls)에서 데이터 읽기
+Read data from Excel files (xlsx, xls)
 
 **Parameters:**
 
@@ -37,10 +37,10 @@ Excel 파일(xlsx, xls)에서 데이터 읽기
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | array | 추출된 데이터 행 |
-| `headers` | array | 추출된 데이터 행 |
-| `row_count` | number | 추출된 데이터 행 |
-| `sheet_names` | array | 열 헤더 |
+| `data` | array | Extracted data rows |
+| `headers` | array | Column headers |
+| `row_count` | number | Number of data rows |
+| `sheet_names` | array | All sheet names in the workbook |
 
 **Example:** Read entire sheet
 
@@ -49,11 +49,11 @@ path: /tmp/data.xlsx
 as_dict: true
 ```
 
-### Excel 쓰기
+### Write Excel
 
 `excel.write`
 
-Excel 파일(xlsx)에 데이터 쓰기
+Write data to Excel files (xlsx)
 
 **Parameters:**
 
@@ -69,9 +69,9 @@ Excel 파일(xlsx)에 데이터 쓰기
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 생성된 Excel 파일 경로 |
-| `row_count` | number | 생성된 Excel 파일 경로 |
-| `size` | number | 생성된 Excel 파일 경로 |
+| `path` | string | Path to the created Excel file |
+| `row_count` | number | Number of data rows written |
+| `size` | number | File size in bytes |
 
 **Example:** Write data to Excel
 
@@ -80,11 +80,11 @@ path: /tmp/output.xlsx
 data: [{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]
 ```
 
-### PDF 폼 채우기
+### Fill PDF Form
 
 `pdf.fill_form`
 
-PDF 폼 필드에 데이터 채우기 및 선택적으로 이미지 삽입
+Fill PDF form fields with data and optionally insert images
 
 **Parameters:**
 
@@ -100,10 +100,10 @@ PDF 폼 필드에 데이터 채우기 및 선택적으로 이미지 삽입
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 채워진 PDF 경로 |
-| `fields_filled` | number | 채워진 PDF 경로 |
-| `images_inserted` | number | 채워진 PDF 경로 |
-| `file_size_bytes` | number | 삽입된 이미지 수 |
+| `output_path` | string | Path to the filled PDF |
+| `fields_filled` | number | Number of fields filled |
+| `images_inserted` | number | Number of images inserted |
+| `file_size_bytes` | number | Size of the output PDF in bytes |
 
 **Example:** Fill form with text fields
 
@@ -122,11 +122,11 @@ fields: {"name": "Jane Doe"}
 images: [{"file": "/photos/jane.jpg", "page": 1, "x": 50, "y": 650, "width": 100, "height": 120}]
 ```
 
-### PDF 생성
+### Generate PDF
 
 `pdf.generate`
 
-HTML 콘텐츠 또는 텍스트에서 PDF 파일 생성
+Generate PDF files from HTML content or text
 
 **Parameters:**
 
@@ -146,9 +146,9 @@ HTML 콘텐츠 또는 텍스트에서 PDF 파일 생성
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 생성된 PDF 경로 |
-| `page_count` | number | 생성된 PDF 경로 |
-| `file_size_bytes` | number | PDF의 페이지 수 |
+| `output_path` | string | Path to the generated PDF |
+| `page_count` | number | Number of pages in the PDF |
+| `file_size_bytes` | number | Size of the generated PDF in bytes |
 
 **Example:** Generate from HTML
 
@@ -158,11 +158,11 @@ output_path: /path/to/report.pdf
 title: Monthly Report
 ```
 
-### PDF 파싱
+### Parse PDF
 
 `pdf.parse`
 
-PDF 파일에서 텍스트 및 메타데이터 추출
+Extract text and metadata from PDF files
 
 **Parameters:**
 
@@ -177,10 +177,10 @@ PDF 파일에서 텍스트 및 메타데이터 추출
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | 추출된 텍스트 콘텐츠 |
-| `pages` | array | 추출된 텍스트 콘텐츠 |
-| `metadata` | object | 추출된 텍스트 콘텐츠 |
-| `page_count` | number | 페이지별 텍스트 콘텐츠 |
+| `text` | string | Extracted text content |
+| `pages` | array | Text content per page |
+| `metadata` | object | PDF metadata (title, author, etc.) |
+| `page_count` | number | Total number of pages |
 
 **Example:** Extract all text from PDF
 
@@ -189,11 +189,11 @@ path: /tmp/document.pdf
 pages: all
 ```
 
-### PDF를 Word로
+### PDF to Word
 
 `pdf.to_word`
 
-PDF 파일을 Word 문서(.docx)로 변환
+Convert PDF files to Word documents (.docx)
 
 **Parameters:**
 
@@ -208,9 +208,9 @@ PDF 파일을 Word 문서(.docx)로 변환
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 생성된 Word 문서 경로 |
-| `page_count` | number | 생성된 Word 문서 경로 |
-| `file_size` | number | 변환된 페이지 수 |
+| `output_path` | string | Path to the generated Word document |
+| `page_count` | number | Number of pages converted |
+| `file_size` | number | Size of the output file in bytes |
 
 **Example:** Convert entire PDF to Word
 
@@ -226,11 +226,11 @@ output_path: /tmp/output.docx
 pages: 1-5
 ```
 
-### Word 문서 파싱
+### Parse Word Document
 
 `word.parse`
 
-Word 문서(.docx)에서 텍스트 및 콘텐츠 추출
+Extract text and content from Word documents (.docx)
 
 **Parameters:**
 
@@ -246,11 +246,11 @@ Word 문서(.docx)에서 텍스트 및 콘텐츠 추출
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `text` | string | 문서의 전체 텍스트 콘텐츠 |
-| `paragraphs` | array | 문서의 전체 텍스트 콘텐츠 |
-| `tables` | array | 문서의 전체 텍스트 콘텐츠 |
-| `images` | array | 단락 목록 |
-| `metadata` | object | 배열로 추출된 테이블 |
+| `text` | string | Full text content of the document |
+| `paragraphs` | array | List of paragraphs |
+| `tables` | array | Extracted tables as arrays |
+| `images` | array | Paths to extracted images |
+| `metadata` | object | Document metadata |
 
 **Example:** Extract text from Word
 
@@ -267,11 +267,11 @@ extract_images: true
 images_output_dir: /path/to/images/
 ```
 
-### Word를 PDF로 변환
+### Word to PDF
 
 `word.to_pdf`
 
-Word 문서(.docx)를 PDF 파일로 변환
+Convert Word documents (.docx) to PDF files
 
 **Parameters:**
 
@@ -285,9 +285,9 @@ Word 문서(.docx)를 PDF 파일로 변환
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 생성된 PDF 파일 경로 |
-| `file_size` | number | 생성된 PDF 파일 경로 |
-| `method_used` | string | 출력 파일 크기 (바이트) |
+| `output_path` | string | Path to the generated PDF file |
+| `file_size` | number | Size of the output file in bytes |
+| `method_used` | string | Conversion method that was used |
 
 **Example:** Convert Word to PDF
 

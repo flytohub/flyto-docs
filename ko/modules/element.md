@@ -6,31 +6,31 @@ DOM element query, attribute, and text extraction.
 
 | Module | Description |
 |--------|-------------|
-| [속성 가져오기](#속성-가져오기) | 요소 가져오기 |
-| [요소 쿼리](#요소-쿼리) | 요소 내에서 자식 요소 찾기 |
-| [텍스트 가져오기](#텍스트-가져오기) | 요소 가져오기 |
+| [Get Attribute](#get-attribute) | Get element's attribute value |
+| [Query Element](#query-element) | Find child elements within element |
+| [Get Text](#get-text) | Get element's text content |
 
 ## Modules
 
-### 속성 가져오기
+### Get Attribute
 
 `element.attribute`
 
-요소 가져오기
+Get element's attribute value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | 요소 ID (UUID) |
-| `name` | string | Yes | - | 요소 ID (UUID) |
+| `element_id` | string | Yes | - | Element ID (UUID) |
+| `name` | string | Yes | - | Attribute name (e.g. href, src, class) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 속성 이름 (예: href, src, class) |
-| `value` | string | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `value` | string | The returned value |
 
 **Example:** Get href attribute
 
@@ -39,28 +39,28 @@ element_id: ${link_element}
 name: href
 ```
 
-### 요소 쿼리
+### Query Element
 
 `element.query`
 
-요소 내에서 자식 요소 찾기
+Find child elements within element
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | 부모 요소 ID (UUID) |
-| `selector` | string | Yes | - | 부모 요소 ID (UUID) |
-| `all` | boolean | No | `False` | 자식 요소를 찾기 위한 CSS 선택자 |
+| `element_id` | string | Yes | - | Parent element ID (UUID) |
+| `selector` | string | Yes | - | CSS selector to find child elements |
+| `all` | boolean | No | `False` | Whether to find all matching elements (default: false, find first only) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 일치하는 모든 요소 찾기 여부 (기본값: false, 첫 번째만 찾기) |
-| `element_id` | string | 작업 상태 (성공/오류) |
-| `element_ids` | array | 작업 상태 (성공/오류) |
-| `count` | number | 찾은 요소 ID (단일 모드) |
+| `status` | string | Operation status (success/error) |
+| `element_id` | string | Found element ID (single mode) |
+| `element_ids` | array | List of found element IDs (all mode) |
+| `count` | number | Number of elements found |
 
 **Example:** Find child element
 
@@ -69,24 +69,24 @@ element_id: ${result_item}
 selector: h3
 ```
 
-### 텍스트 가져오기
+### Get Text
 
 `element.text`
 
-요소 가져오기
+Get element's text content
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `element_id` | string | Yes | - | 요소 ID (UUID) |
+| `element_id` | string | Yes | - | Element ID (UUID) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 요소 ID (UUID) |
-| `text` | string | 요소 ID (UUID) |
+| `status` | string | Operation status (success/error) |
+| `text` | string | Text content |
 
 **Example:** Get element text
 

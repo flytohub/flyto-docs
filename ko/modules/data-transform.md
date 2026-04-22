@@ -6,32 +6,32 @@ CSV, JSON, XML, YAML parsing, generation, and pipeline transformations.
 
 | Module | Description |
 |--------|-------------|
-| [CSV 파일 읽기](#csv-파일-읽기) | CSV 파일을 읽고 객체 배열로 파싱 |
-| [CSV 파일 쓰기](#csv-파일-쓰기) | 객체 배열을 CSV 파일에 쓰기 |
+| [Read CSV File](#read-csv-file) | Read and parse CSV file into array of objects |
+| [Write CSV File](#write-csv-file) | Write array of objects to CSV file |
 | [Deduplicate Records](#deduplicate-records) | Remove duplicate records from an array by key fields. Optionally persists seen hashes to disk or execution context for cross-run dedup. Use storage=context in cloud/stateless environments where disk is ephemeral. |
-| [JSON 파싱](#json-파싱) | JSON 문자열을 객체로 파싱 |
-| [JSON 문자열화](#json-문자열화) | 객체를 JSON 문자열로 변환 |
-| [JSON을 CSV로](#json을-csv로) | JSON 데이터 또는 파일을 CSV 형식으로 변환 |
-| [데이터 파이프라인](#데이터-파이프라인) | 여러 데이터 변환을 한 번에 연결 |
-| [텍스트 템플릿](#텍스트-템플릿) | 변수로 텍스트 템플릿 채우기 |
+| [Parse JSON](#parse-json) | Parse JSON string into object |
+| [JSON Stringify](#json-stringify) | Convert object to JSON string |
+| [JSON to CSV](#json-to-csv) | Convert JSON data or files to CSV format |
+| [Data Pipeline](#data-pipeline) | Chain multiple data transformations in a single step |
+| [Text Template](#text-template) | Fill text template with variables |
 | [Validate Records](#validate-records) | Validate extracted records against field rules. Splits output into valid and invalid arrays. |
-| [XML 생성](#xml-생성) | 객체나 배열에서 XML 문자열 생성 |
-| [XML 파싱](#xml-파싱) | XML 문자열을 객체로 파싱 |
-| [YAML 생성](#yaml-생성) | 객체나 배열에서 YAML 문자열 생성 |
-| [YAML 파싱](#yaml-파싱) | YAML 문자열을 객체로 파싱 |
-| [객체 키](#객체-키) | 객체에서 모든 키 가져오기 |
-| [객체 병합](#객체-병합) | 여러 객체를 하나로 병합 |
-| [객체 제외](#객체-제외) | 객체에서 특정 키 제외 |
-| [객체 선택](#객체-선택) | 객체에서 특정 키만 선택 |
-| [객체 값](#객체-값) | 객체에서 모든 값 가져오기 |
+| [Generate XML](#generate-xml) | Generate XML string from Python dict |
+| [Parse XML](#parse-xml) | Parse XML string or file into Python dict |
+| [Generate YAML](#generate-yaml) | Generate YAML string from Python object |
+| [Parse YAML](#parse-yaml) | Parse YAML string or file into Python object |
+| [Object Keys](#object-keys) | Get all keys from an object |
+| [Object Merge](#object-merge) | Merge multiple objects into one |
+| [Object Omit](#object-omit) | Omit specific keys from an object |
+| [Object Pick](#object-pick) | Pick specific keys from an object |
+| [Object Values](#object-values) | Get all values from an object |
 
 ## Modules
 
-### CSV 파일 읽기
+### Read CSV File
 
 `data.csv.read`
 
-CSV 파일을 읽고 객체 배열로 파싱
+Read and parse CSV file into array of objects
 
 **Parameters:**
 
@@ -46,10 +46,10 @@ CSV 파일을 읽고 객체 배열로 파싱
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 |
-| `data` | array | 작업 상태 |
-| `rows` | number | 작업 상태 |
-| `columns` | array | 행 객체 배열 |
+| `status` | string | Operation status |
+| `data` | array | Array of row objects |
+| `rows` | number | Number of rows |
+| `columns` | array | Column names |
 
 **Example:** Example
 
@@ -59,11 +59,11 @@ delimiter: ,
 encoding: utf-8
 ```
 
-### CSV 파일 쓰기
+### Write CSV File
 
 `data.csv.write`
 
-객체 배열을 CSV 파일에 쓰기
+Write array of objects to CSV file
 
 **Parameters:**
 
@@ -78,9 +78,9 @@ encoding: utf-8
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 |
-| `file_path` | string | 작업 상태 |
-| `rows_written` | number | 작업 상태 |
+| `status` | string | Operation status |
+| `file_path` | string | Path to written file |
+| `rows_written` | number | Number of rows written |
 
 **Example:** Example
 
@@ -130,11 +130,11 @@ keys: ["url"]
 hash_file: /tmp/seen.json
 ```
 
-### JSON 파싱
+### Parse JSON
 
 `data.json.parse`
 
-JSON 문자열을 객체로 파싱
+Parse JSON string into object
 
 **Parameters:**
 
@@ -146,8 +146,8 @@ JSON 문자열을 객체로 파싱
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 |
-| `data` | object | 작업 상태 |
+| `status` | string | Operation status |
+| `data` | object | Parsed object |
 
 **Example:** Example
 
@@ -155,11 +155,11 @@ JSON 문자열을 객체로 파싱
 json_string: {"name": "John", "age": 30}
 ```
 
-### JSON 문자열화
+### JSON Stringify
 
 `data.json.stringify`
 
-객체를 JSON 문자열로 변환
+Convert object to JSON string
 
 **Parameters:**
 
@@ -173,8 +173,8 @@ json_string: {"name": "John", "age": 30}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 |
-| `json` | string | 작업 상태 |
+| `status` | string | Operation status |
+| `json` | string | JSON string |
 
 **Example:** Example
 
@@ -183,11 +183,11 @@ data: {"name": "John", "age": 30}
 pretty: true
 ```
 
-### JSON을 CSV로
+### JSON to CSV
 
 `data.json_to_csv`
 
-JSON 데이터 또는 파일을 CSV 형식으로 변환
+Convert JSON data or files to CSV format
 
 **Parameters:**
 
@@ -204,10 +204,10 @@ JSON 데이터 또는 파일을 CSV 형식으로 변환
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `output_path` | string | 생성된 CSV 파일 경로 |
-| `row_count` | number | 생성된 CSV 파일 경로 |
-| `column_count` | number | 생성된 CSV 파일 경로 |
-| `columns` | array | 작성된 행 수 |
+| `output_path` | string | Path to the generated CSV file |
+| `row_count` | number | Number of rows written |
+| `column_count` | number | Number of columns |
+| `columns` | array | List of column names |
 
 **Example:** Convert JSON array to CSV
 
@@ -223,27 +223,27 @@ input_data: /path/to/data.json
 output_path: /path/to/output.csv
 ```
 
-### 데이터 파이프라인
+### Data Pipeline
 
 `data.pipeline`
 
-여러 데이터 변환을 한 번에 연결
+Chain multiple data transformations in a single step
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input` | any | Yes | - | 변환할 입력 데이터 (배열 또는 객체) |
-| `steps` | array | Yes | - | 변환할 입력 데이터 (배열 또는 객체) |
+| `input` | any | Yes | - | Input data to transform (array or object) |
+| `steps` | array | Yes | - | Array of transformation steps to apply in order |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | 적용할 변환 단계 배열 |
-| `original_count` | integer | 변환된 데이터 |
-| `result_count` | integer | 변환된 데이터 |
-| `steps_applied` | integer | 변환 후 항목 수 |
+| `result` | any | Transformed data |
+| `original_count` | integer | Count of items before transformation |
+| `result_count` | integer | Count of items after transformation |
+| `steps_applied` | integer | Number of transformation steps applied |
 
 **Example:** Example
 
@@ -266,11 +266,11 @@ input: ${input.data}
 steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}, {"pick": ["id", "name", "timestamp"]}, {"sort": {"field": "timestamp", "order": "desc"}}, {"skip": 5}, {"limit": 20}]
 ```
 
-### 텍스트 템플릿
+### Text Template
 
 `data.text.template`
 
-변수로 텍스트 템플릿 채우기
+Fill text template with variables
 
 **Parameters:**
 
@@ -283,8 +283,8 @@ steps: [{"filter": {"field": "status", "condition": "eq", "value": "completed"}}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 |
-| `result` | string | 작업 상태 |
+| `status` | string | Operation status |
+| `result` | string | Filled template |
 
 **Example:** Example
 
@@ -334,27 +334,27 @@ mode: flag
 drop_fields: ["__index", "html"]
 ```
 
-### XML 생성
+### Generate XML
 
 `data.xml.generate`
 
-객체나 배열에서 XML 문자열 생성
+Generate XML string from Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | object | Yes | - | XML로 변환할 데이터 |
-| `root_tag` | string | No | `root` | 루트 요소 태그 이름 |
-| `pretty` | boolean | No | `True` | XML 출력을 보기 좋게 출력 |
-| `encoding` | string | No | `utf-8` | XML 출력의 문자 인코딩 |
-| `declaration` | boolean | No | `True` | XML 선언 헤더 포함 |
+| `data` | object | Yes | - | Python dict or object to convert to XML |
+| `root_tag` | string | No | `root` | Tag name for the root XML element |
+| `pretty` | boolean | No | `True` | Format XML with indentation for readability |
+| `encoding` | string | No | `utf-8` | XML encoding declaration value |
+| `declaration` | boolean | No | `True` | Include <?xml version="1.0"?> declaration at top |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `xml` | string | 생성된 XML 문자열 |
+| `xml` | string | Generated XML string |
 
 **Example:** Example
 
@@ -364,26 +364,26 @@ root_tag: users
 pretty: true
 ```
 
-### XML 파싱
+### Parse XML
 
 `data.xml.parse`
 
-XML 문자열을 객체로 파싱
+Parse XML string or file into Python dict
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | 파싱할 XML 문자열 |
-| `file_path` | string | No | - | 파싱할 XML 파일 경로 |
-| `preserve_attributes` | boolean | No | `True` | 파싱된 출력에서 XML 속성 유지 |
+| `content` | string | No | - | XML string to parse |
+| `file_path` | string | No | - | Path to XML file (used if content is empty) |
+| `preserve_attributes` | boolean | No | `True` | Include XML element attributes as @attributes in output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 객체로 파싱된 XML |
-| `root_tag` | string | 루트 요소 태그 이름 |
+| `result` | object | Parsed XML as nested dict |
+| `root_tag` | string | Root element tag name |
 
 **Example:** Example
 
@@ -392,27 +392,27 @@ content: <users><user id="1"><name>John</name></user></users>
 preserve_attributes: true
 ```
 
-### YAML 생성
+### Generate YAML
 
 `data.yaml.generate`
 
-객체나 배열에서 YAML 문자열 생성
+Generate YAML string from Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `data` | any | Yes | - | YAML로 변환할 데이터 |
-| `default_flow_style` | boolean | No | `False` | 중첩 구조에 플로우 스타일 사용 |
-| `sort_keys` | boolean | No | `False` | 키를 알파벳 순으로 정렬 |
-| `indent` | number | No | `2` | 들여쓰기 공백 수 |
-| `allow_unicode` | boolean | No | `True` | 출력에 유니코드 문자 허용 |
+| `data` | any | Yes | - | Python object, array, or value to convert to YAML |
+| `default_flow_style` | boolean | No | `False` | Use inline/flow style (JSON-like) instead of block style |
+| `sort_keys` | boolean | No | `False` | Sort dictionary keys alphabetically |
+| `indent` | number | No | `2` | Number of spaces for indentation |
+| `allow_unicode` | boolean | No | `True` | Allow unicode characters in output without escaping |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `yaml` | string | 생성된 YAML 문자열 |
+| `yaml` | string | Generated YAML string |
 
 **Example:** Example
 
@@ -422,26 +422,26 @@ sort_keys: false
 indent: 2
 ```
 
-### YAML 파싱
+### Parse YAML
 
 `data.yaml.parse`
 
-YAML 문자열을 객체로 파싱
+Parse YAML string or file into Python object
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `content` | string | No | - | 파싱할 YAML 문자열 |
-| `file_path` | string | No | - | 파싱할 YAML 파일 경로 |
-| `multi_document` | boolean | No | `False` | 다중 문서 YAML 파싱 (---로 구분) |
+| `content` | string | No | - | YAML string to parse |
+| `file_path` | string | No | - | Path to YAML file (used if content is empty) |
+| `multi_document` | boolean | No | `False` | Parse multiple YAML documents separated by --- (uses safe_load_all) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | any | 객체나 배열로 파싱된 YAML |
-| `type` | string | 파싱된 결과의 유형 |
+| `result` | any | Parsed YAML data (object, array, or scalar) |
+| `type` | string | Type of parsed result: object, array, or scalar |
 
 **Example:** Example
 
@@ -464,11 +464,11 @@ name: Jane
 multi_document: true
 ```
 
-### 객체 키
+### Object Keys
 
 `object.keys`
 
-객체에서 모든 키 가져오기
+Get all keys from an object
 
 **Parameters:**
 
@@ -480,8 +480,8 @@ multi_document: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `keys` | array | 객체 키 목록 |
-| `count` | number | 객체 키 목록 |
+| `keys` | array | List of object keys |
+| `count` | number | Number of keys |
 
 **Example:** Get object keys
 
@@ -489,11 +489,11 @@ multi_document: true
 object: {"name": "John", "age": 30, "city": "NYC"}
 ```
 
-### 객체 병합
+### Object Merge
 
 `object.merge`
 
-여러 객체를 하나로 병합
+Merge multiple objects into one
 
 **Parameters:**
 
@@ -505,7 +505,7 @@ object: {"name": "John", "age": 30, "city": "NYC"}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 병합된 객체 |
+| `result` | object | Merged object |
 
 **Example:** Merge user data
 
@@ -513,11 +513,11 @@ object: {"name": "John", "age": 30, "city": "NYC"}
 objects: [{"name": "John", "age": 30}, {"city": "NYC", "country": "USA"}, {"job": "Engineer"}]
 ```
 
-### 객체 제외
+### Object Omit
 
 `object.omit`
 
-객체에서 특정 키 제외
+Omit specific keys from an object
 
 **Parameters:**
 
@@ -530,7 +530,7 @@ objects: [{"name": "John", "age": 30}, {"city": "NYC", "country": "USA"}, {"job"
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 제외된 키가 없는 객체 |
+| `result` | object | Object without omitted keys |
 
 **Example:** Omit sensitive fields
 
@@ -539,11 +539,11 @@ object: {"name": "John", "age": 30, "password": "secret", "ssn": "123-45-6789"}
 keys: ["password", "ssn"]
 ```
 
-### 객체 선택
+### Object Pick
 
 `object.pick`
 
-객체에서 특정 키만 선택
+Pick specific keys from an object
 
 **Parameters:**
 
@@ -556,7 +556,7 @@ keys: ["password", "ssn"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | object | 선택된 키만 있는 객체 |
+| `result` | object | Object with only picked keys |
 
 **Example:** Pick user fields
 
@@ -565,11 +565,11 @@ object: {"name": "John", "age": 30, "email": "john@example.com", "password": "se
 keys: ["name", "email"]
 ```
 
-### 객체 값
+### Object Values
 
 `object.values`
 
-객체에서 모든 값 가져오기
+Get all values from an object
 
 **Parameters:**
 
@@ -581,8 +581,8 @@ keys: ["name", "email"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `values` | array | 객체 값 목록 |
-| `count` | number | 객체 값 목록 |
+| `values` | array | List of object values |
+| `count` | number | Number of values |
 
 **Example:** Get object values
 

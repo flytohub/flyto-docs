@@ -6,60 +6,60 @@ Branching, loops, parallelism, subflows, triggers, and error handling.
 
 | Module | Description |
 |--------|-------------|
-| [กระบวนการชุด](#กระบวนการชุด) | ประมวลผลรายการเป็นชุดด้วยขนาดที่กำหนดได้ |
-| [แยกสาขา](#แยกสาขา) | แยกสาขาตามเงื่อนไขจากการประเมินนิพจน์ |
-| [จุดพัก](#จุดพัก) | หยุดการทำงานของเวิร์กโฟลว์เพื่อรอการอนุมัติหรืออินพุตจากผู้ใช้ |
-| [Circuit Breaker](#circuit-breaker) | รูปแบบ circuit breaker เพื่อป้องกันความล้มเหลวที่ต่อเนื่อง |
-| [คอนเทนเนอร์](#คอนเทนเนอร์) | คอนเทนเนอร์ซับโฟลว์ฝังตัวสำหรับจัดระเบียบเวิร์กโฟลว์ที่ซับซ้อน |
-| [Debounce](#debounce) | หน่วงการทำงานเพื่อป้องกันการเรียกซ้ำอย่างรวดเร็ว |
-| [สิ้นสุด](#สิ้นสุด) | โหนดสิ้นสุดเวิร์กโฟลว์ |
-| [ตัวจัดการข้อผิดพลาด](#ตัวจัดการข้อผิดพลาด) | จับและจัดการข้อผิดพลาดจากโหนดต้นน้ำ |
-| [ตัวเรียกเวิร์กโฟลว์ข้อผิดพลาด](#ตัวเรียกเวิร์กโฟลว์ข้อผิดพลาด) | จุดเริ่มต้นสำหรับเวิร์กโฟลว์ข้อผิดพลาด - เรียกใช้งานเมื่อเวิร์กโฟลว์อื่นล้มเหลว |
-| [วนซ้ำแต่ละรายการ](#วนซ้ำแต่ละรายการ) | วนซ้ำรายการและดำเนินการขั้นตอนสำหรับแต่ละรายการ |
-| [แยกสาขา](#แยกสาขา) | แยกการดำเนินการเป็นสาขาคู่ขนาน |
-| [ไปที่](#ไปที่) | กระโดดไปยังขั้นตอนอื่นโดยไม่มีเงื่อนไข |
+| [Batch Process](#batch-process) | Process items in batches with configurable size |
+| [Branch](#branch) | Conditional branching based on expression evaluation |
+| [Breakpoint](#breakpoint) | Pause workflow execution for human approval or input |
+| [Circuit Breaker](#circuit-breaker) | Circuit breaker pattern for fault tolerance |
+| [Container](#container) | Embedded subflow container for organizing complex workflows |
+| [Debounce](#debounce) | Debounce execution to prevent rapid repeated calls |
+| [End](#end) | Explicit workflow end node |
+| [Error Handler](#error-handler) | Catches and handles errors from upstream nodes |
+| [Error Workflow Trigger](#error-workflow-trigger) | Entry point for error workflows - triggered when another workflow fails |
+| [For Each](#for-each) | Iterate over a list and execute steps for each item |
+| [Fork](#fork) | Split execution into parallel branches |
+| [Goto](#goto) | Unconditional jump to another step |
 | [Invoke Workflow](#invoke-workflow) | Execute an external workflow file |
-| [รวมสาขา](#รวมสาขา) | รอให้สาขาคู่ขนานเสร็จสิ้น |
-| [วนซ้ำ](#วนซ้ำ) | ทำซ้ำขั้นตอน N ครั้งโดยใช้การกำหนดเส้นทางพอร์ตเอาต์พุต |
-| [รวม](#รวม) | รวมอินพุตหลายตัวเป็นเอาต์พุตเดียว |
-| [ขนาน](#ขนาน) | ดำเนินการหลายงานพร้อมกันด้วยกลยุทธ์ที่แตกต่างกัน |
-| [จำกัดอัตรา](#จำกัดอัตรา) | จำกัดอัตราการทำงานโดยใช้ token bucket หรือ sliding window |
-| [ลองใหม่](#ลองใหม่) | ลองทำงานที่ล้มเหลวใหม่ด้วยการตั้งค่าการถอยกลับ |
-| [เริ่มต้น](#เริ่มต้น) | โหนดเริ่มต้นเวิร์กโฟลว์ |
-| [ซับโฟลว์](#ซับโฟลว์) | อ้างอิงและดำเนินการเวิร์กโฟลว์ภายนอก |
-| [สวิตช์](#สวิตช์) | แยกสาขาหลายทางตามการจับคู่ค่า |
-| [ควบคุมอัตรา](#ควบคุมอัตรา) | ควบคุมอัตราการทำงานด้วยช่วงเวลาขั้นต่ำ |
-| [ทริกเกอร์](#ทริกเกอร์) | จุดเริ่มต้นเวิร์กโฟลว์ - แบบแมนนวล, webhook, กำหนดเวลา หรือเหตุการณ์ |
+| [Join](#join) | Wait for parallel branches to complete |
+| [Loop](#loop) | Repeat steps N times using output port routing |
+| [Merge](#merge) | Merge multiple inputs into a single output |
+| [Parallel](#parallel) | Execute multiple tasks in parallel with different strategies |
+| [Rate Limit](#rate-limit) | Rate limiter with token bucket strategy |
+| [Retry](#retry) | Retry with exponential backoff |
+| [Start](#start) | Explicit workflow start node |
+| [Subflow](#subflow) | Reference and execute an external workflow |
+| [Switch](#switch) | Multi-way branching based on value matching |
+| [Throttle](#throttle) | Throttle execution rate with minimum interval |
+| [Trigger](#trigger) | Workflow entry point - manual, webhook, schedule, event, mcp, or polling |
 
 ## Modules
 
-### กระบวนการชุด
+### Batch Process
 
 `flow.batch`
 
-ประมวลผลรายการเป็นชุดด้วยขนาดที่กำหนดได้
+Process items in batches with configurable size
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `items` | array | Yes | - | Array of items to process. Can be numbers, strings, or objects. |
-| `batch_size` | number | Yes | `10` | จำนวนรายการต่อชุด |
-| `delay_ms` | number | No | `0` | มิลลิวินาทีที่ต้องรอระหว่างชุด (สำหรับการจำกัดอัตรา) |
-| `continue_on_error` | boolean | No | `False` | ดำเนินการประมวลผลชุดที่เหลือต่อหากมีชุดหนึ่งล้มเหลว |
-| `parallel_batches` | number | No | `1` | ดำเนินการประมวลผลชุดที่เหลือต่อหากมีชุดหนึ่งล้มเหลว |
+| `batch_size` | number | Yes | `10` | Number of items per batch |
+| `delay_ms` | number | No | `0` | Milliseconds to wait between batches (for rate limiting) |
+| `continue_on_error` | boolean | No | `False` | Continue processing remaining batches if one fails |
+| `parallel_batches` | number | No | `1` | Number of batches to process in parallel (1 for sequential) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | จำนวนชุดที่จะประมวลผลพร้อมกัน (1 สำหรับตามลำดับ) |
-| `batch` | array | เหตุการณ์สำหรับการกำหนดเส้นทาง (ชุด/เสร็จสิ้น/ข้อผิดพลาด) |
-| `batch_index` | number | เหตุการณ์สำหรับการกำหนดเส้นทาง (ชุด/เสร็จสิ้น/ข้อผิดพลาด) |
-| `total_batches` | number | รายการในชุดปัจจุบัน |
-| `total_items` | number | ดัชนีชุดปัจจุบัน (เริ่มที่ 0) |
-| `is_last_batch` | boolean | จำนวนชุดทั้งหมด |
-| `progress` | object | จำนวนรายการทั้งหมด |
+| `__event__` | string | Event for routing (batch/completed/error) |
+| `batch` | array | Current batch items |
+| `batch_index` | number | Current batch index (0-based) |
+| `total_batches` | number | Total number of batches |
+| `total_items` | number | Total number of items |
+| `is_last_batch` | boolean | Whether this is the last batch |
+| `progress` | object | Progress information |
 
 **Example:** Example
 
@@ -85,11 +85,11 @@ parallel_batches: 3
 continue_on_error: true
 ```
 
-### แยกสาขา
+### Branch
 
 `flow.branch`
 
-แยกสาขาตามเงื่อนไขจากการประเมินนิพจน์
+Conditional branching based on expression evaluation
 
 **Parameters:**
 
@@ -101,11 +101,11 @@ continue_on_error: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์การกำหนดเส้นทาง (true/false/error) |
-| `outputs` | object | ค่าเอาต์พุตตามพอร์ต |
-| `result` | boolean | ผลลัพธ์การแยกสาขา |
-| `condition` | string | ค่าเงื่อนไข |
-| `resolved_condition` | string | ผลการประเมินเงื่อนไข |
+| `__event__` | string | Event for routing (true/false/error) |
+| `outputs` | object | Output values by port |
+| `result` | boolean | Condition evaluation result |
+| `condition` | string | Original condition expression |
+| `resolved_condition` | string | Condition after variable resolution |
 
 **Example:** Example
 
@@ -119,11 +119,11 @@ condition: ${search_step.count} > 0
 condition: ${api_call.status} == success
 ```
 
-### จุดพัก
+### Breakpoint
 
 `flow.breakpoint`
 
-หยุดการทำงานของเวิร์กโฟลว์เพื่อรอการอนุมัติหรืออินพุตจากผู้ใช้
+Pause workflow execution for human approval or input
 
 **Parameters:**
 
@@ -142,15 +142,15 @@ condition: ${api_call.status} == success
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์การกำหนดเส้นทาง (approved/rejected/timeout) |
-| `breakpoint_id` | string | รหัสจุดพัก |
-| `status` | string | สถานะ |
-| `approved_by` | array | อนุมัติโดย |
-| `rejected_by` | array | ปฏิเสธโดย |
-| `custom_inputs` | object | ค่าอินพุตที่กำหนดเอง |
-| `comments` | array | ความเห็นการตรวจสอบ |
-| `resolved_at` | string | เวลาที่แก้ไข |
-| `wait_duration_ms` | integer | ระยะเวลารอ (มิลลิวินาที) |
+| `__event__` | string | Event for routing (approved/rejected/timeout) |
+| `breakpoint_id` | string | Unique breakpoint identifier |
+| `status` | string | Final status (approved/rejected/timeout/cancelled) |
+| `approved_by` | array | List of users who approved |
+| `rejected_by` | array | List of users who rejected |
+| `custom_inputs` | object | Values collected from custom fields |
+| `comments` | array | Comments from approvers |
+| `resolved_at` | string | ISO timestamp of resolution |
+| `wait_duration_ms` | integer | Time spent waiting for approval |
 
 **Example:** Example
 
@@ -179,25 +179,25 @@ custom_fields: [{"name": "reason", "label": "Reason", "type": "text", "required"
 
 `flow.circuit_breaker`
 
-รูปแบบ circuit breaker เพื่อป้องกันความล้มเหลวที่ต่อเนื่อง
+Circuit breaker pattern for fault tolerance
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `failure_threshold` | number | Yes | `5` | จำนวนความล้มเหลวก่อนที่ circuit จะเปิด |
-| `reset_timeout_ms` | number | No | `60000` | เวลาในมิลลิวินาทีก่อนที่ circuit จะเปลี่ยนเป็นครึ่งเปิด |
-| `half_open_max` | number | No | `1` | จำนวนคำขอสูงสุดที่อนุญาตในสถานะครึ่งเปิด |
+| `failure_threshold` | number | Yes | `5` | Number of failures before opening the circuit |
+| `reset_timeout_ms` | number | No | `60000` | Time to wait before transitioning from open to half-open |
+| `half_open_max` | number | No | `1` | Maximum test requests allowed in half-open state |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์สำหรับการกำหนดเส้นทาง (อนุญาต/ปฏิเสธ/ครึ่งเปิด) |
-| `state` | string | สถานะของ circuit (ปิด/เปิด/ครึ่งเปิด) |
-| `failure_count` | number | จำนวนความล้มเหลวที่ต่อเนื่อง |
-| `last_failure_time_ms` | number | เวลาของความล้มเหลวครั้งล่าสุดในหน่วยมิลลิวินาที |
-| `time_until_half_open_ms` | number | มิลลิวินาทีก่อนที่ circuit จะเปลี่ยนเป็นครึ่งเปิด |
+| `__event__` | string | Event for routing (closed/open/half_open) |
+| `state` | string | Current circuit breaker state |
+| `failure_count` | number | Current number of consecutive failures |
+| `last_failure_time_ms` | number | Timestamp of last failure |
+| `time_until_half_open_ms` | number | Milliseconds until circuit transitions to half-open |
 
 **Example:** Example
 
@@ -222,11 +222,11 @@ reset_timeout_ms: 120000
 half_open_max: 3
 ```
 
-### คอนเทนเนอร์
+### Container
 
 `flow.container`
 
-คอนเทนเนอร์ซับโฟลว์ฝังตัวสำหรับจัดระเบียบเวิร์กโฟลว์ที่ซับซ้อน
+Embedded subflow container for organizing complex workflows
 
 **Parameters:**
 
@@ -241,12 +241,12 @@ half_open_max: 3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์การกำหนดเส้นทาง (success/error) |
-| `outputs` | object | ค่าเอาต์พุตตามพอร์ต |
-| `subflow_result` | object | ผลลัพธ์ซับโฟลว์ |
-| `exported_variables` | object | ตัวแปรที่ส่งออก |
-| `node_count` | integer | จำนวนโหนด |
-| `execution_time_ms` | number | เวลาดำเนินการ (มิลลิวินาที) |
+| `__event__` | string | Event for routing (success/error) |
+| `outputs` | object | Output values by port |
+| `subflow_result` | object | Result from subflow execution |
+| `exported_variables` | object | Variables exported from subflow |
+| `node_count` | integer | Number of nodes in subflow |
+| `execution_time_ms` | number | Total subflow execution time in milliseconds |
 
 **Example:** Example
 
@@ -266,25 +266,25 @@ inherit_context: false
 
 `flow.debounce`
 
-หน่วงการทำงานเพื่อป้องกันการเรียกซ้ำอย่างรวดเร็ว
+Debounce execution to prevent rapid repeated calls
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `delay_ms` | number | Yes | - | เวลารอหลังจากการเรียกครั้งล่าสุดก่อนดำเนินการ |
-| `leading` | boolean | No | `False` | ดำเนินการที่ขอบนำ (การเรียกครั้งแรกทำให้เกิดการดำเนินการทันที) |
-| `trailing` | boolean | No | `True` | ดำเนินการที่ขอบท้าย (หลังจากหมดเวลาหน่วง) |
+| `delay_ms` | number | Yes | - | Wait time in milliseconds before allowing execution |
+| `leading` | boolean | No | `False` | Execute on the leading edge (first call immediately) |
+| `trailing` | boolean | No | `True` | Execute on the trailing edge (after delay of inactivity) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์สำหรับการกำหนดเส้นทาง (ดำเนินการ/หน่วง) |
-| `last_call_ms` | number | เวลาของการเรียกครั้งล่าสุดในหน่วยมิลลิวินาที |
-| `calls_debounced` | number | จำนวนการเรียกที่ถูกหน่วงตั้งแต่การดำเนินการครั้งล่าสุด |
-| `time_since_last_ms` | number | เวลาที่ผ่านไปตั้งแต่การเรียกครั้งล่าสุดในหน่วยมิลลิวินาที |
-| `edge` | string | ขอบที่ทำให้เกิดการดำเนินการ (นำ/ท้าย) |
+| `__event__` | string | Event for routing (executed/skipped) |
+| `last_call_ms` | number | Timestamp of the last call |
+| `calls_debounced` | number | Number of calls that were debounced (skipped) |
+| `time_since_last_ms` | number | Time since last call in milliseconds |
+| `edge` | string | Which edge triggered execution (leading/trailing) |
 
 **Example:** Example
 
@@ -308,11 +308,11 @@ leading: true
 trailing: true
 ```
 
-### สิ้นสุด
+### End
 
 `flow.end`
 
-โหนดสิ้นสุดเวิร์กโฟลว์
+Explicit workflow end node
 
 **Parameters:**
 
@@ -325,9 +325,9 @@ trailing: true
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์การกำหนดเส้นทาง (__end__) |
-| `ended_at` | string | เวลาสิ้นสุด |
-| `workflow_result` | object | ผลลัพธ์เวิร์กโฟลว์ |
+| `__event__` | string | Event for routing (__end__) |
+| `ended_at` | string | ISO timestamp of end |
+| `workflow_result` | object | Mapped workflow output |
 
 **Example:** Example
 
@@ -340,29 +340,29 @@ trailing: true
 output_mapping: {"result": "${process.output}", "status": "success"}
 ```
 
-### ตัวจัดการข้อผิดพลาด
+### Error Handler
 
 `flow.error_handle`
 
-จับและจัดการข้อผิดพลาดจากโหนดต้นน้ำ
+Catches and handles errors from upstream nodes
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | `log_and_continue` | จะทำอย่างไรกับข้อผิดพลาด |
-| `include_traceback` | boolean | No | `True` | รวมการติดตามข้อผิดพลาดเต็มรูปแบบในผลลัพธ์ |
-| `error_code_mapping` | object | No | `{}` | รวมการติดตามข้อผิดพลาดเต็มรูปแบบในผลลัพธ์ |
-| `fallback_value` | any | No | - | จับคู่รหัสข้อผิดพลาดกับการกระทำที่กำหนดเอง |
+| `action` | string | Yes | `log_and_continue` | What to do with the error |
+| `include_traceback` | boolean | No | `True` | Include full stack trace in output |
+| `error_code_mapping` | object | No | `{}` | Map error codes to custom actions |
+| `fallback_value` | any | No | - | Value to use when error is suppressed |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ค่าที่จะใช้เมื่อข้อผิดพลาดถูกระงับ |
-| `outputs` | object | เหตุการณ์สำหรับการกำหนดเส้นทาง (จัดการ/ยกระดับ) |
-| `error_info` | object | เหตุการณ์สำหรับการกำหนดเส้นทาง (จัดการ/ยกระดับ) |
-| `action_taken` | string | การกระทำที่ได้ดำเนินการ |
+| `__event__` | string | Event for routing (handled/escalate) |
+| `outputs` | object | Output values by port |
+| `error_info` | object | Extracted error information |
+| `action_taken` | string | What action was taken |
 
 **Example:** Example
 
@@ -385,11 +385,11 @@ action: transform
 error_code_mapping: {"TIMEOUT": {"retry": true, "delay": 5000}, "NOT_FOUND": {"skip": true}}
 ```
 
-### ตัวเรียกเวิร์กโฟลว์ข้อผิดพลาด
+### Error Workflow Trigger
 
 `flow.error_workflow_trigger`
 
-จุดเริ่มต้นสำหรับเวิร์กโฟลว์ข้อผิดพลาด - เรียกใช้งานเมื่อเวิร์กโฟลว์อื่นล้มเหลว
+Entry point for error workflows - triggered when another workflow fails
 
 **Parameters:**
 
@@ -401,9 +401,9 @@ error_code_mapping: {"TIMEOUT": {"retry": true, "delay": 5000}, "NOT_FOUND": {"s
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | คำอธิบายของเวิร์กโฟลว์ข้อผิดพลาดนี้ |
-| `error_context` | object | เหตุการณ์สำหรับการกำหนดเส้นทาง (เรียกใช้งาน) |
-| `triggered_at` | string | เวลาประทับ ISO เมื่อเวิร์กโฟลว์ข้อผิดพลาดถูกเรียกใช้งาน |
+| `__event__` | string | Event for routing (triggered) |
+| `error_context` | object | Complete error context from failed workflow |
+| `triggered_at` | string | ISO timestamp when error workflow was triggered |
 
 **Example:** Example
 
@@ -417,33 +417,33 @@ description: Send Slack notification on workflow failure
 description: Log all workflow errors to monitoring system
 ```
 
-### วนซ้ำแต่ละรายการ
+### For Each
 
 `flow.foreach`
 
-วนซ้ำรายการและดำเนินการขั้นตอนสำหรับแต่ละรายการ
+Iterate over a list and execute steps for each item
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `items` | string | Yes | - | รายการที่จะวนซ้ำ (รองรับการอ้างอิง ${variable}) |
-| `steps` | array | No | - | ขั้นตอนที่จะดำเนินการสำหรับแต่ละรายการ |
-| `item_var` | string | No | `item` | ชื่อตัวแปรสำหรับรายการปัจจุบัน |
-| `index_var` | string | No | `index` | ชื่อตัวแปรสำหรับดัชนีปัจจุบัน |
-| `output_mode` | string | No | `collect` | โหมดการรวบรวมผลลัพธ์ |
+| `items` | string | Yes | - | Array to iterate over — use gear icon to reference a previous step output |
+| `steps` | array | No | - | Steps to execute for each item (nested mode only) |
+| `item_var` | string | No | `item` | Variable name for current item |
+| `index_var` | string | No | `index` | Variable name for current index |
+| `output_mode` | string | No | `collect` | How to collect results: collect (array), last (single), none |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์การกำหนดเส้นทาง (iterate/done) |
-| `__set_context` | object | ตั้งค่าบริบท |
-| `outputs` | object | ค่าเอาต์พุตตามพอร์ต |
-| `iteration` | number | ดัชนีการวนซ้ำปัจจุบัน |
-| `status` | string | สถานะการดำเนินการ |
-| `results` | array | ผลลัพธ์ที่รวบรวม |
-| `count` | number | จำนวนรายการทั้งหมด |
+| `__event__` | string | Event for routing (iterate/done) |
+| `__set_context` | object | Scope variables set on each iteration |
+| `outputs` | object | Output values by port |
+| `iteration` | number | Current iteration index |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of items processed |
 
 **Example:** Example
 
@@ -459,11 +459,11 @@ item_var: element
 steps: [{"module": "element.text", "params": {"element_id": "${element}"}, "output": "text"}]
 ```
 
-### แยกสาขา
+### Fork
 
 `flow.fork`
 
-แยกการดำเนินการเป็นสาขาคู่ขนาน
+Split execution into parallel branches
 
 **Parameters:**
 
@@ -475,9 +475,9 @@ steps: [{"module": "element.text", "params": {"element_id": "${element}"}, "outp
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์การกำหนดเส้นทาง (fork/error) |
-| `input_data` | any | ข้อมูลอินพุต |
-| `branch_count` | integer | จำนวนสาขา |
+| `__event__` | string | Event for routing (fork/error) |
+| `input_data` | any | Input data passed to all branches |
+| `branch_count` | integer | Number of branches created |
 
 **Example:** Example
 
@@ -491,11 +491,11 @@ branch_count: 2
 branch_count: 3
 ```
 
-### ไปที่
+### Goto
 
 `flow.goto`
 
-กระโดดไปยังขั้นตอนอื่นโดยไม่มีเงื่อนไข
+Unconditional jump to another step
 
 **Parameters:**
 
@@ -508,9 +508,9 @@ branch_count: 3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์การกำหนดเส้นทาง (goto) |
-| `target` | string | ขั้นตอนเป้าหมาย |
-| `iteration` | number | จำนวนการวนซ้ำ |
+| `__event__` | string | Event for routing (goto) |
+| `target` | string | ID of the target step |
+| `iteration` | number | Current iteration count for this goto |
 
 **Example:** Example
 
@@ -544,10 +544,10 @@ Execute an external workflow file
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | Parameters to pass to the invoked workflow |
-| `result` | any | Maximum execution time in seconds |
-| `workflow_id` | string | Event for routing (success/error) |
-| `execution_time_ms` | number | Workflow execution result |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Workflow execution result |
+| `workflow_id` | string | Invoked workflow ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 
@@ -565,11 +565,11 @@ workflow_params: {"data": "${input.data}"}
 output_mapping: {"processed": "result.data"}
 ```
 
-### รวมสาขา
+### Join
 
 `flow.join`
 
-รอให้สาขาคู่ขนานเสร็จสิ้น
+Wait for parallel branches to complete
 
 **Parameters:**
 
@@ -584,10 +584,10 @@ output_mapping: {"processed": "result.data"}
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์การกำหนดเส้นทาง (joined/timeout/error) |
-| `joined_data` | array | ข้อมูลที่รวม |
-| `completed_count` | integer | จำนวนสาขาที่เสร็จสิ้น |
-| `strategy` | string | กลยุทธ์การรวม |
+| `__event__` | string | Event for routing (joined/timeout/error) |
+| `joined_data` | array | Data from all completed inputs |
+| `completed_count` | integer | Number of inputs completed |
+| `strategy` | string | Strategy used for joining |
 
 **Example:** Example
 
@@ -605,31 +605,31 @@ input_count: 3
 cancel_pending: true
 ```
 
-### วนซ้ำ
+### Loop
 
 `flow.loop`
 
-ทำซ้ำขั้นตอน N ครั้งโดยใช้การกำหนดเส้นทางพอร์ตเอาต์พุต
+Repeat steps N times using output port routing
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `times` | number | Yes | `1` | จำนวนครั้งที่ทำซ้ำ |
-| `target` | string | No | - | ขั้นตอนเป้าหมาย (เลิกใช้แล้ว) |
-| `steps` | array | No | - | ขั้นตอนที่จะดำเนินการสำหรับแต่ละการวนซ้ำ |
-| `index_var` | string | No | `index` | ชื่อตัวแปรสำหรับดัชนีปัจจุบัน |
+| `times` | number | Yes | `1` | Number of times to repeat |
+| `target` | string | No | - | DEPRECATED: Use output ports and edges instead |
+| `steps` | array | No | - | Steps to execute for each iteration (nested mode) |
+| `index_var` | string | No | `index` | Variable name for current index |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์การกำหนดเส้นทาง (iterate/done) |
-| `outputs` | object | ค่าเอาต์พุตตามพอร์ต |
-| `iteration` | number | การวนซ้ำปัจจุบัน |
-| `status` | string | สถานะการดำเนินการ |
-| `results` | array | ผลลัพธ์ที่รวบรวม |
-| `count` | number | จำนวนการวนซ้ำทั้งหมด |
+| `__event__` | string | Event for routing (iterate/done/error) |
+| `outputs` | object | Output values by port |
+| `iteration` | number | Current iteration count |
+| `status` | string | Operation status |
+| `results` | array | Results from nested mode execution |
+| `count` | number | Number of iterations completed |
 
 **Example:** Example
 
@@ -644,11 +644,11 @@ times: 5
 steps: [{"module": "browser.click", "params": {"selector": ".next"}}]
 ```
 
-### รวม
+### Merge
 
 `flow.merge`
 
-รวมอินพุตหลายตัวเป็นเอาต์พุตเดียว
+Merge multiple inputs into a single output
 
 **Parameters:**
 
@@ -661,10 +661,10 @@ steps: [{"module": "browser.click", "params": {"selector": ".next"}}]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์การกำหนดเส้นทาง (merged/error) |
-| `merged_data` | any | ข้อมูลที่รวม |
-| `input_count` | integer | จำนวนอินพุต |
-| `strategy` | string | กลยุทธ์การรวม |
+| `__event__` | string | Event for routing (merged/error) |
+| `merged_data` | any | Merged data based on strategy |
+| `input_count` | integer | Number of inputs received |
+| `strategy` | string | Strategy used for merging |
 
 **Example:** Example
 
@@ -680,33 +680,33 @@ strategy: first
 input_count: 2
 ```
 
-### ขนาน
+### Parallel
 
 `flow.parallel`
 
-ดำเนินการหลายงานพร้อมกันด้วยกลยุทธ์ที่แตกต่างกัน
+Execute multiple tasks in parallel with different strategies
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `tasks` | array | Yes | - | อาร์เรย์ของคำจำกัดความของงานที่จะดำเนินการพร้อมกัน |
-| `mode` | string | No | `all` | อาร์เรย์ของคำจำกัดความของงานที่จะดำเนินการพร้อมกัน |
+| `tasks` | array | Yes | - | Array of task definitions to execute in parallel |
+| `mode` | string | No | `all` | Parallel execution mode |
 | `timeout_ms` | number | No | `60000` | Maximum wait time in milliseconds |
-| `fail_fast` | boolean | No | `True` | หยุดงานทั้งหมดเมื่อเกิดความล้มเหลวครั้งแรก (เฉพาะเมื่อ mode=all) |
-| `concurrency_limit` | number | No | `0` | หยุดงานทั้งหมดเมื่อเกิดความล้มเหลวครั้งแรก (เฉพาะเมื่อ mode=all) |
+| `fail_fast` | boolean | No | `True` | Stop all tasks on first failure (only for mode=all) |
+| `concurrency_limit` | number | No | `0` | Maximum number of concurrent tasks (0 for unlimited) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | จำนวนงานพร้อมกันสูงสุด (0 สำหรับไม่จำกัด) |
-| `results` | array | เหตุการณ์สำหรับการกำหนดเส้นทาง (เสร็จสิ้น/บางส่วน/ข้อผิดพลาด) |
-| `completed_count` | number | เหตุการณ์สำหรับการกำหนดเส้นทาง (เสร็จสิ้น/บางส่วน/ข้อผิดพลาด) |
-| `failed_count` | number | ผลลัพธ์จากทุกงาน |
-| `total_count` | number | จำนวนงานที่เสร็จสมบูรณ์สำเร็จ |
-| `mode` | string | จำนวนงานที่ล้มเหลว |
-| `duration_ms` | number | จำนวนงานทั้งหมด |
+| `__event__` | string | Event for routing (completed/partial/error) |
+| `results` | array | Results from all tasks |
+| `completed_count` | number | Number of successfully completed tasks |
+| `failed_count` | number | Number of failed tasks |
+| `total_count` | number | Total number of tasks |
+| `mode` | string | Execution mode used |
+| `duration_ms` | number | Total execution time in milliseconds |
 
 **Example:** Example
 
@@ -730,30 +730,30 @@ tasks: [{"module": "http.get", "params": {"url": "https://api1.example.com"}}, {
 mode: settle
 ```
 
-### จำกัดอัตรา
+### Rate Limit
 
 `flow.rate_limit`
 
-จำกัดอัตราการทำงานโดยใช้ token bucket หรือ sliding window
+Rate limiter with token bucket strategy
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `max_requests` | number | Yes | - | จำนวนคำขอสูงสุดที่อนุญาตต่อหน้าต่าง |
-| `window_ms` | number | No | `60000` | หน้าต่างเวลาในหน่วยมิลลิวินาที |
-| `strategy` | string | No | `token_bucket` | กลยุทธ์การจำกัดอัตรา (token_bucket หรือ sliding_window) |
-| `queue_overflow` | string | No | `wait` | พฤติกรรมเมื่อคิวเต็ม (ทิ้งหรือเกิดข้อผิดพลาด) |
+| `max_requests` | number | Yes | - | Maximum number of requests allowed per window |
+| `window_ms` | number | No | `60000` | Time window in milliseconds |
+| `strategy` | string | No | `token_bucket` | Rate limiting strategy |
+| `queue_overflow` | string | No | `wait` | Behavior when rate limit is exceeded |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์สำหรับการกำหนดเส้นทาง (อนุญาต/จำกัด) |
-| `tokens_remaining` | number | โทเค็นที่เหลือใน bucket |
-| `window_reset_ms` | number | มิลลิวินาทีก่อนที่หน้าต่างจะรีเซ็ต |
-| `requests_in_window` | number | จำนวนคำขอในหน้าต่างปัจจุบัน |
-| `wait_ms` | number | มิลลิวินาทีที่ต้องรอก่อนคำขอถัดไปที่อนุญาต |
+| `__event__` | string | Event for routing (allowed/throttled/error) |
+| `tokens_remaining` | number | Number of tokens remaining in the bucket |
+| `window_reset_ms` | number | Milliseconds until the window resets |
+| `requests_in_window` | number | Number of requests made in current window |
+| `wait_ms` | number | Milliseconds to wait before retry (if throttled) |
 
 **Example:** Example
 
@@ -781,32 +781,32 @@ strategy: sliding_window
 queue_overflow: wait
 ```
 
-### ลองใหม่
+### Retry
 
 `flow.retry`
 
-ลองทำงานที่ล้มเหลวใหม่ด้วยการตั้งค่าการถอยกลับ
+Retry with exponential backoff
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `max_retries` | number | Yes | `3` | จำนวนครั้งสูงสุดในการลองใหม่ |
-| `initial_delay_ms` | number | No | `1000` | ความล่าช้าเริ่มต้นก่อนลองใหม่ครั้งแรกในมิลลิวินาที |
-| `backoff_multiplier` | number | No | `2.0` | ตัวคูณสำหรับการถอยกลับแบบทวีคูณ |
-| `max_delay_ms` | number | No | `30000` | ความล่าช้าสูงสุดระหว่างการลองใหม่ในมิลลิวินาที |
-| `retry_on_errors` | array | No | `[]` | ประเภทข้อผิดพลาดที่ต้องลองใหม่ (ว่างหมายถึงลองใหม่ทั้งหมด) |
+| `max_retries` | number | Yes | `3` | Maximum number of retry attempts |
+| `initial_delay_ms` | number | No | `1000` | Initial delay before first retry in milliseconds |
+| `backoff_multiplier` | number | No | `2.0` | Multiplier for exponential backoff (e.g. 2.0 doubles delay each retry) |
+| `max_delay_ms` | number | No | `30000` | Maximum delay cap in milliseconds |
+| `retry_on_errors` | array | No | `[]` | Optional list of error codes to retry on (empty = retry on all errors) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์สำหรับการกำหนดเส้นทาง (ลองใหม่/สำเร็จ/ล้มเหลว) |
-| `attempt` | number | หมายเลขความพยายามปัจจุบัน |
-| `max_retries` | number | จำนวนครั้งสูงสุดที่กำหนดไว้สำหรับการลองใหม่ |
-| `delay_ms` | number | ความล่าช้าก่อนลองใหม่ครั้งถัดไปในมิลลิวินาที |
-| `total_elapsed_ms` | number | เวลาที่ผ่านไปทั้งหมดในมิลลิวินาที |
-| `last_error` | object | ข้อความข้อผิดพลาดล่าสุด |
+| `__event__` | string | Event for routing (success/retry/exhausted) |
+| `attempt` | number | Current attempt number (1-based) |
+| `max_retries` | number | Maximum retry attempts configured |
+| `delay_ms` | number | Delay before this attempt in milliseconds |
+| `total_elapsed_ms` | number | Total time elapsed across all attempts |
+| `last_error` | object | Last error that triggered a retry |
 
 **Example:** Example
 
@@ -831,30 +831,30 @@ initial_delay_ms: 2000
 retry_on_errors: ["TIMEOUT", "RATE_LIMIT", "429", "503"]
 ```
 
-### เริ่มต้น
+### Start
 
 `flow.start`
 
-โหนดเริ่มต้นเวิร์กโฟลว์
+Explicit workflow start node
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์การกำหนดเส้นทาง (start) |
-| `started_at` | string | เวลาเริ่มต้น |
-| `workflow_id` | string | รหัสเวิร์กโฟลว์ |
+| `__event__` | string | Event for routing (start) |
+| `started_at` | string | ISO timestamp of start |
+| `workflow_id` | string | Workflow ID if available |
 
 **Example:** Example
 
 ```yaml
 ```
 
-### ซับโฟลว์
+### Subflow
 
 `flow.subflow`
 
-อ้างอิงและดำเนินการเวิร์กโฟลว์ภายนอก
+Reference and execute an external workflow
 
 **Parameters:**
 
@@ -870,10 +870,10 @@ retry_on_errors: ["TIMEOUT", "RATE_LIMIT", "429", "503"]
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์การกำหนดเส้นทาง (success/error) |
-| `result` | any | ผลลัพธ์การดำเนินการ |
-| `execution_id` | string | รหัสการดำเนินการ |
-| `workflow_ref` | string | การอ้างอิงเวิร์กโฟลว์ |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Subflow execution result |
+| `execution_id` | string | Subflow execution ID (for spawn/async) |
+| `workflow_ref` | string | Referenced workflow |
 
 **Example:** Example
 
@@ -891,11 +891,11 @@ workflow_ref: workflows/send_notifications
 execution_mode: spawn
 ```
 
-### สวิตช์
+### Switch
 
 `flow.switch`
 
-แยกสาขาหลายทางตามการจับคู่ค่า
+Multi-way branching based on value matching
 
 **Parameters:**
 
@@ -908,10 +908,10 @@ execution_mode: spawn
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์การกำหนดเส้นทาง (case:value หรือ default) |
-| `outputs` | object | ค่าเอาต์พุตตามพอร์ต |
-| `matched_case` | string | กรณีที่ตรงกัน |
-| `value` | any | ค่าที่ตรงกัน |
+| `__event__` | string | Event for routing (case:value or default) |
+| `outputs` | object | Output values by port |
+| `matched_case` | string | The case that matched |
+| `value` | any | The resolved value that was matched |
 
 **Example:** Example
 
@@ -927,28 +927,28 @@ expression: ${input.type}
 cases: [{"id": "img", "value": "image", "label": "Image"}, {"id": "vid", "value": "video", "label": "Video"}, {"id": "txt", "value": "text", "label": "Text"}]
 ```
 
-### ควบคุมอัตรา
+### Throttle
 
 `flow.throttle`
 
-ควบคุมอัตราการทำงานด้วยช่วงเวลาขั้นต่ำ
+Throttle execution rate with minimum interval
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `interval_ms` | number | Yes | - | เวลาขั้นต่ำระหว่างการดำเนินการในมิลลิวินาที |
-| `leading` | boolean | No | `True` | ดำเนินการในขอบนำ (การเรียกครั้งแรกผ่านทันที) |
+| `interval_ms` | number | Yes | - | Minimum time between executions in milliseconds |
+| `leading` | boolean | No | `True` | Execute on the leading edge (first call passes immediately) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์สำหรับการกำหนดเส้นทาง (ดำเนินการ/ควบคุม) |
-| `last_execution_ms` | number | เวลาที่ดำเนินการครั้งล่าสุดที่อนุญาต |
-| `calls_throttled` | number | จำนวนการเรียกที่ถูกควบคุมตั้งแต่การดำเนินการครั้งล่าสุด |
-| `time_since_last_ms` | number | เวลาที่ผ่านไปตั้งแต่การดำเนินการครั้งล่าสุดในมิลลิวินาที |
-| `remaining_ms` | number | มิลลิวินาทีที่เหลือจนกว่าจะอนุญาตให้ดำเนินการครั้งถัดไป |
+| `__event__` | string | Event for routing (executed/throttled) |
+| `last_execution_ms` | number | Timestamp of last allowed execution |
+| `calls_throttled` | number | Number of calls throttled since last execution |
+| `time_since_last_ms` | number | Time elapsed since last execution in milliseconds |
+| `remaining_ms` | number | Milliseconds remaining until next execution is allowed |
 
 **Example:** Example
 
@@ -970,11 +970,11 @@ interval_ms: 5000
 leading: false
 ```
 
-### ทริกเกอร์
+### Trigger
 
 `flow.trigger`
 
-จุดเริ่มต้นเวิร์กโฟลว์ - แบบแมนนวล, webhook, กำหนดเวลา หรือเหตุการณ์
+Workflow entry point - manual, webhook, schedule, event, mcp, or polling
 
 **Parameters:**
 
@@ -999,10 +999,10 @@ leading: false
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | เหตุการณ์การกำหนดเส้นทาง (triggered/error) |
-| `trigger_data` | object | ข้อมูลทริกเกอร์ |
-| `trigger_type` | string | ประเภททริกเกอร์ |
-| `triggered_at` | string | เวลาที่ทริกเกอร์ |
+| `__event__` | string | Event for routing (triggered/error) |
+| `trigger_data` | object | Data from trigger source |
+| `trigger_type` | string | Type of trigger |
+| `triggered_at` | string | ISO timestamp |
 
 **Example:** Example
 

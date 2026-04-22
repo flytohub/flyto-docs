@@ -6,37 +6,37 @@ AES encryption/decryption, HMAC, JWT tokens, and secure random generation.
 
 | Module | Description |
 |--------|-------------|
-| [Décrypter](#décrypter) | Décrypter les données en utilisant le chiffrement AES |
-| [Chiffrer](#chiffrer) | Chiffrer les données en utilisant le chiffrement AES |
-| [HMAC](#hmac) | Générer une signature HMAC |
-| [Créer JWT](#créer-jwt) | Créer un jeton JWT signé |
-| [Vérifier JWT](#vérifier-jwt) | Vérifier et décoder un jeton JWT |
-| [Octets Aléatoires](#octets-aléatoires) | Générer des octets aléatoires sécurisés cryptographiquement |
-| [Chaîne Aléatoire](#chaîne-aléatoire) | Générer une chaîne aléatoire sécurisée cryptographiquement |
+| [Decrypt](#decrypt) | AES symmetric decryption |
+| [Encrypt](#encrypt) | AES symmetric encryption |
+| [HMAC](#hmac) | Generate HMAC signature |
+| [Create JWT](#create-jwt) | Create JWT (JSON Web Token) tokens |
+| [Verify JWT](#verify-jwt) | Verify and decode JWT tokens |
+| [Random Bytes](#random-bytes) | Generate cryptographically secure random bytes |
+| [Random String](#random-string) | Generate cryptographically secure random string |
 
 ## Modules
 
-### Décrypter
+### Decrypt
 
 `crypto.decrypt`
 
-Décrypter les données en utilisant le chiffrement AES
+AES symmetric decryption
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `ciphertext` | string | Yes | - | Données chiffrées à décrypter |
-| `key` | string | Yes | - | Clé de chiffrement |
-| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Mode de chiffrement AES (CBC, GCM, etc.) |
-| `input_format` | select (`base64`, `hex`) | No | `base64` | Format du texte chiffré en entrée (hex ou base64) |
+| `ciphertext` | string | Yes | - | Encrypted ciphertext to decrypt |
+| `key` | string | Yes | - | Decryption passphrase (must match encryption passphrase) |
+| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Decryption mode (must match encryption mode) |
+| `input_format` | select (`base64`, `hex`) | No | `base64` | Encoding format of the ciphertext input |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `plaintext` | string | Texte en clair décrypté |
-| `algorithm` | string | Algorithme utilisé pour le décryptage |
+| `plaintext` | string | Decrypted plaintext |
+| `algorithm` | string | Decryption algorithm used |
 
 **Example:** Decrypt AES-GCM ciphertext
 
@@ -46,28 +46,28 @@ key: my-secret-passphrase
 mode: GCM
 ```
 
-### Chiffrer
+### Encrypt
 
 `crypto.encrypt`
 
-Chiffrer les données en utilisant le chiffrement AES
+AES symmetric encryption
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `plaintext` | string | Yes | - | Données à chiffrer |
-| `key` | string | Yes | - | Clé de chiffrement |
-| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Mode de chiffrement AES (CBC, GCM, etc.) |
-| `output_format` | select (`base64`, `hex`) | No | `base64` | Format pour le texte chiffré en sortie (hex ou base64) |
+| `plaintext` | string | Yes | - | Text to encrypt |
+| `key` | string | Yes | - | Encryption passphrase (key is derived via PBKDF2) |
+| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Encryption mode |
+| `output_format` | select (`base64`, `hex`) | No | `base64` | Encoding format for the ciphertext output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ciphertext` | string | Texte chiffré |
-| `algorithm` | string | Algorithme utilisé pour le chiffrement |
-| `mode` | string | Mode de chiffrement utilisé |
+| `ciphertext` | string | Encrypted ciphertext |
+| `algorithm` | string | Encryption algorithm used |
+| `mode` | string | Encryption mode used |
 
 **Example:** Encrypt with AES-GCM
 
@@ -81,48 +81,48 @@ mode: GCM
 
 `crypto.hmac`
 
-Générer une signature HMAC
+Generate HMAC signature
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `message` | string | Yes | - | Message à signer |
-| `key` | string | Yes | - | Message à signer |
-| `algorithm` | select (`sha256`, `sha512`, `sha1`, `md5`) | No | `sha256` | Clé secrète pour HMAC |
-| `encoding` | select (`hex`, `base64`) | No | `hex` | Format de codage de sortie |
+| `message` | string | Yes | - | Message to sign |
+| `key` | string | Yes | - | Secret key for HMAC |
+| `algorithm` | select (`sha256`, `sha512`, `sha1`, `md5`) | No | `sha256` | Hash algorithm |
+| `encoding` | select (`hex`, `base64`) | No | `hex` | Output encoding format |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `signature` | string | Format de codage de sortie |
-| `algorithm` | string | Signature HMAC |
+| `signature` | string | HMAC signature |
+| `algorithm` | string | Algorithm used |
 
-### Créer JWT
+### Create JWT
 
 `crypto.jwt_create`
 
-Créer un jeton JWT signé
+Create JWT (JSON Web Token) tokens
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `payload` | object | Yes | - | Données de charge utile JWT (objet) |
-| `secret` | string | Yes | - | Clé secrète pour signer le jeton |
-| `algorithm` | select (`HS256`, `HS384`, `HS512`, `RS256`) | No | `HS256` | Algorithme de signature JWT (HS256, RS256, etc.) |
-| `expires_in` | number | No | - | Temps d'expiration du jeton en secondes |
-| `issuer` | string | No | - | Émetteur du jeton |
-| `audience` | string | No | - | Audience prévue pour le jeton |
+| `payload` | object | Yes | - | JWT payload claims (JSON object) |
+| `secret` | string | Yes | - | Secret key for signing the token |
+| `algorithm` | select (`HS256`, `HS384`, `HS512`, `RS256`) | No | `HS256` | Signing algorithm |
+| `expires_in` | number | No | - | Token expiration time in seconds (optional) |
+| `issuer` | string | No | - | Token issuer (iss claim) |
+| `audience` | string | No | - | Token audience (aud claim) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `token` | string | Jeton JWT généré |
-| `algorithm` | string | Algorithme utilisé pour la signature |
-| `expires_at` | string | Horodatage d'expiration du jeton |
+| `token` | string | Signed JWT token |
+| `algorithm` | string | Algorithm used for signing |
+| `expires_at` | string | Token expiration timestamp (ISO 8601) or null |
 
 **Example:** Create a JWT with expiration
 
@@ -133,30 +133,30 @@ algorithm: HS256
 expires_in: 3600
 ```
 
-### Vérifier JWT
+### Verify JWT
 
 `crypto.jwt_verify`
 
-Vérifier et décoder un jeton JWT
+Verify and decode JWT tokens
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `token` | string | Yes | - | Jeton JWT à vérifier |
-| `secret` | string | Yes | - | Clé secrète utilisée pour signer le jeton |
-| `algorithms` | array | No | `['HS256']` | Algorithmes de signature autorisés |
-| `verify_exp` | boolean | No | `True` | Vérifier la date d'expiration |
-| `audience` | string | No | - | Audience attendue |
-| `issuer` | string | No | - | Émetteur attendu |
+| `token` | string | Yes | - | JWT token to verify and decode |
+| `secret` | string | Yes | - | Secret key for verifying the token signature |
+| `algorithms` | array | No | `['HS256']` | List of allowed signing algorithms |
+| `verify_exp` | boolean | No | `True` | Whether to verify the token expiration |
+| `audience` | string | No | - | Expected audience (aud claim) |
+| `issuer` | string | No | - | Expected issuer (iss claim) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | Si le jeton est valide |
-| `payload` | object | Charge utile JWT décodée |
-| `header` | object | Données d'en-tête JWT |
+| `valid` | boolean | Whether the token is valid |
+| `payload` | object | Decoded JWT payload |
+| `header` | object | Decoded JWT header |
 
 **Example:** Verify a JWT token
 
@@ -167,43 +167,43 @@ algorithms: ["HS256"]
 verify_exp: true
 ```
 
-### Octets Aléatoires
+### Random Bytes
 
 `crypto.random_bytes`
 
-Générer des octets aléatoires sécurisés cryptographiquement
+Generate cryptographically secure random bytes
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | Yes | `32` | Nombre d'octets |
-| `encoding` | string | No | `hex` | Codage de sortie |
+| `length` | number | Yes | `32` | Number of bytes |
+| `encoding` | string | No | `hex` | Output encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bytes` | string | Octets aléatoires (encodés) |
-| `length` | number | Octets aléatoires (encodés) |
+| `bytes` | string | Random bytes (encoded) |
+| `length` | number | Number of bytes generated |
 
-### Chaîne Aléatoire
+### Random String
 
 `crypto.random_string`
 
-Générer une chaîne aléatoire sécurisée cryptographiquement
+Generate cryptographically secure random string
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | Yes | `16` | Longueur de la chaîne |
-| `charset` | string | No | `alphanumeric` | Caractères à utiliser |
-| `uppercase` | boolean | No | `False` | Convertir en majuscules |
+| `length` | number | Yes | `16` | String length |
+| `charset` | string | No | `alphanumeric` | Characters to use |
+| `uppercase` | boolean | No | `False` | Convert to uppercase |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `string` | string | Convertir en majuscules |
-| `length` | number | Chaîne aléatoire |
+| `string` | string | Random string |
+| `length` | number | String length |

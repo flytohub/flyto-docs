@@ -169,8 +169,8 @@ Download a file from AWS S3 bucket
 | `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
 | `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
 | `bucket` | string | Yes | - | S3 bucket name |
-| `key` | string | Yes | - | S3 bucket name |
-| `file_path` | string | No | - | S3 object key (file path in bucket) |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to save downloaded content |
 
 **Output:**
 
@@ -210,20 +210,20 @@ Upload a file or data to AWS S3 bucket
 | `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
 | `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
 | `bucket` | string | Yes | - | S3 bucket name |
-| `key` | string | Yes | - | S3 bucket name |
-| `file_path` | string | No | - | S3 object key (file path in bucket) |
-| `content` | string | No | - | Local file path to upload |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to upload |
+| `content` | string | No | - | File content to upload (as string or base64) |
 | `content_type` | string | No | - | MIME type of the file |
-| `acl` | string | No | `private` | MIME type of the file |
+| `acl` | string | No | `private` | Access control list for the object |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `url` | string | S3 URL of uploaded object |
-| `bucket` | string | S3 URL of uploaded object |
-| `key` | string | S3 URL of uploaded object |
-| `etag` | string | Bucket name |
+| `bucket` | string | Bucket name |
+| `key` | string | Object key |
+| `etag` | string | ETag of uploaded object |
 
 **Example:** Upload text content
 
@@ -254,9 +254,9 @@ Download file from Azure Blob Storage
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
-| `container` | string | Yes | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
-| `blob_name` | string | Yes | - | Azure container name |
-| `destination_path` | string | Yes | - | Blob to download |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | Yes | - | Blob to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -294,19 +294,19 @@ Upload file to Azure Blob Storage
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `file_path` | string | Yes | - | Local file path to upload |
-| `connection_string` | string | No | - | Local file path to upload |
-| `container` | string | Yes | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
-| `blob_name` | string | No | - | Azure container name |
-| `content_type` | string | No | - | Name for the uploaded blob (default: filename) |
+| `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | No | - | Name for the uploaded blob (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | MIME type (optional) |
-| `container` | string | MIME type (optional) |
-| `blob_name` | string | URL address |
-| `size` | number | The container |
+| `url` | string | URL address |
+| `container` | string | The container |
+| `blob_name` | string | The blob name |
+| `size` | number | Size in bytes |
 
 **Example:** Upload image
 
@@ -336,8 +336,8 @@ Download file from Google Cloud Storage
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `bucket` | string | Yes | - | GCS bucket name |
-| `object_name` | string | Yes | - | GCS bucket name |
-| `destination_path` | string | Yes | - | Object to download |
+| `object_name` | string | Yes | - | Object to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -375,20 +375,20 @@ Upload file to Google Cloud Storage
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `file_path` | string | Yes | - | Local file path to upload |
-| `bucket` | string | Yes | - | Local file path to upload |
-| `object_name` | string | No | - | GCS bucket name |
-| `content_type` | string | No | - | Name for the uploaded object (default: filename) |
-| `public` | boolean | No | `False` | MIME type (optional) |
+| `bucket` | string | Yes | - | GCS bucket name |
+| `object_name` | string | No | - | Name for the uploaded object (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
+| `public` | boolean | No | `False` | Make file publicly accessible |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | Make file publicly accessible |
-| `bucket` | string | Make file publicly accessible |
-| `object_name` | string | URL address |
-| `size` | number | Storage bucket name |
-| `public_url` | string | Object name in storage |
+| `url` | string | URL address |
+| `bucket` | string | Storage bucket name |
+| `object_name` | string | Object name in storage |
+| `size` | number | Size in bytes |
+| `public_url` | string | Public accessible URL |
 
 **Example:** Upload image
 

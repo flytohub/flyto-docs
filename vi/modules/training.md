@@ -6,18 +6,18 @@
 
 | Module | Description |
 |--------|-------------|
-| [Thực hành phân tích](#thực-hành-phân-tích) | Phân tích cấu trúc website để thực hành |
-| [Thực hành thực thi](#thực-hành-thực-thi) | Thực thi phiên thực hành |
-| [Thực hành suy luận Schema](#thực-hành-suy-luận-schema) | Suy luận schema dữ liệu từ website |
-| [Thống kê thực hành](#thống-kê-thực-hành) | Lấy thống kê thực hành |
+| [Practice Analyze](#practice-analyze) | Analyze website structure for practice |
+| [Practice Execute](#practice-execute) | Execute practice session |
+| [Practice Infer Schema](#practice-infer-schema) | Infer data schema from website |
+| [Practice Stats](#practice-stats) | Get practice statistics |
 
 ## Modules
 
-### Thực hành phân tích
+### Practice Analyze
 
 `training.practice.analyze`
 
-Phân tích cấu trúc website để thực hành
+Analyze website structure for practice
 
 **Parameters:**
 
@@ -29,14 +29,14 @@ Phân tích cấu trúc website để thực hành
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Phân tích cấu trúc website |
-| `structure` | object | Phân tích cấu trúc website |
+| `status` | string | Operation status (success/error) |
+| `structure` | object | The structure |
 
-### Thực hành thực thi
+### Practice Execute
 
 `training.practice.execute`
 
-Thực thi phiên thực hành
+Execute practice session
 
 **Parameters:**
 
@@ -49,14 +49,14 @@ Thực thi phiên thực hành
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Thực thi phiên thực hành |
-| `items_processed` | number | Thực thi phiên thực hành |
+| `status` | string | Operation status (success/error) |
+| `items_processed` | number | The items processed |
 
-### Thực hành suy luận Schema
+### Practice Infer Schema
 
 `training.practice.infer_schema`
 
-Suy luận schema dữ liệu từ website
+Infer data schema from website
 
 **Parameters:**
 
@@ -69,20 +69,20 @@ Suy luận schema dữ liệu từ website
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Suy luận schema dữ liệu |
-| `schema` | object | Suy luận schema dữ liệu |
+| `status` | string | Operation status (success/error) |
+| `schema` | object | The schema |
 
-### Thống kê thực hành
+### Practice Stats
 
 `training.practice.stats`
 
-Lấy thống kê thực hành
+Get practice statistics
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `total_sessions` | number | Tổng số phiên |
-| `successful_sessions` | number | Tổng số phiên |
-| `success_rate` | number | Lấy thống kê thực hành |
-| `history` | array | Lấy thống kê thực hành |
+| `total_sessions` | number | The total sessions |
+| `successful_sessions` | number | The successful sessions |
+| `success_rate` | number | The success rate |
+| `history` | array | The history |

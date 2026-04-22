@@ -6,47 +6,47 @@ SHA-256 and SHA-512 cryptographic hashing.
 
 | Module | Description |
 |--------|-------------|
-| [Hash SHA-256](#hash-sha-256) | Hitung hash kriptografi SHA-256 dari teks |
-| [Hash SHA-512](#hash-sha-512) | Hitung hash kriptografi SHA-512 dari teks |
+| [SHA-256 Hash](#sha-256-hash) | Calculate SHA-256 cryptographic hash of text |
+| [SHA-512 Hash](#sha-512-hash) | Calculate SHA-512 cryptographic hash of text |
 
 ## Modules
 
-### Hash SHA-256
+### SHA-256 Hash
 
 `hash.sha256`
 
-Hitung hash kriptografi SHA-256 dari teks
+Calculate SHA-256 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Teks untuk di-hash |
-| `encoding` | string | No | `utf-8` | Teks untuk di-hash |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | Pengkodean teks |
-| `algorithm` | string | Hash SHA-256 (64 karakter heksadesimal) |
+| `hash` | string | SHA-256 hash (64 hex characters) |
+| `algorithm` | string | Hash algorithm used |
 
-### Hash SHA-512
+### SHA-512 Hash
 
 `hash.sha512`
 
-Hitung hash kriptografi SHA-512 dari teks
+Calculate SHA-512 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | Teks untuk di-hash |
-| `encoding` | string | No | `utf-8` | Teks untuk di-hash |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | Pengkodean teks |
-| `algorithm` | string | Hash SHA-512 (128 karakter heksadesimal) |
+| `hash` | string | SHA-512 hash (128 hex characters) |
+| `algorithm` | string | Hash algorithm used |

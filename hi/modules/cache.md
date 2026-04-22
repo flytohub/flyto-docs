@@ -6,100 +6,100 @@ In-memory key-value cache with TTL support.
 
 | Module | Description |
 |--------|-------------|
-| [कैश साफ़ करें](#कैश-साफ़-करें) | सभी कैश प्रविष्टियों को साफ़ करें या पैटर्न द्वारा फ़िल्टर करें |
-| [कैश हटाएं](#कैश-हटाएं) | कुंजी द्वारा कैश प्रविष्टि हटाएं |
-| [कैश प्राप्त करें](#कैश-प्राप्त-करें) | कुंजी द्वारा कैश से मान प्राप्त करें |
-| [कैश सेट करें](#कैश-सेट-करें) | वैकल्पिक TTL के साथ कैश में मान सेट करें |
+| [Cache Clear](#cache-clear) | Clear all cache entries or filter by pattern |
+| [Cache Delete](#cache-delete) | Delete a cache entry by key |
+| [Cache Get](#cache-get) | Get a value from cache by key |
+| [Cache Set](#cache-set) | Set a value in cache with optional TTL |
 
 ## Modules
 
-### कैश साफ़ करें
+### Cache Clear
 
 `cache.clear`
 
-सभी कैश प्रविष्टियों को साफ़ करें या पैटर्न द्वारा फ़िल्टर करें
+Clear all cache entries or filter by pattern
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `pattern` | string | No | `*` | कुंजियों से मेल खाने के लिए ग्लोब पैटर्न (उदा. "user:*", डिफ़ॉल्ट "*" सभी साफ़ करता है) |
-| `backend` | string | No | `memory` | उपयोग करने के लिए कैश बैकएंड |
-| `redis_url` | string | No | `redis://localhost:6379` | रेडिस कनेक्शन URL |
+| `pattern` | string | No | `*` | Glob pattern to match keys (e.g. "user:*", default "*" clears all) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `cleared_count` | number | साफ़ की गई कैश प्रविष्टियों की संख्या |
-| `backend` | string | उपयोग किया गया बैकएंड |
+| `cleared_count` | number | Number of cache entries cleared |
+| `backend` | string | The backend used |
 
-### कैश हटाएं
+### Cache Delete
 
 `cache.delete`
 
-कुंजी द्वारा कैश प्रविष्टि हटाएं
+Delete a cache entry by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | हटाने के लिए कैश कुंजी |
-| `backend` | string | No | `memory` | उपयोग करने के लिए कैश बैकएंड |
-| `redis_url` | string | No | `redis://localhost:6379` | रेडिस कनेक्शन URL |
+| `key` | string | Yes | - | The cache key to delete |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | कैश कुंजी |
-| `deleted` | boolean | क्या कुंजी मिली और हटाई गई |
-| `backend` | string | उपयोग किया गया बैकएंड |
+| `key` | string | The cache key |
+| `deleted` | boolean | Whether the key was found and deleted |
+| `backend` | string | The backend used |
 
-### कैश प्राप्त करें
+### Cache Get
 
 `cache.get`
 
-कुंजी द्वारा कैश से मान प्राप्त करें
+Get a value from cache by key
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | देखने के लिए कैश कुंजी |
-| `backend` | string | No | `memory` | उपयोग करने के लिए कैश बैकएंड |
-| `redis_url` | string | No | `redis://localhost:6379` | रेडिस कनेक्शन URL |
+| `key` | string | Yes | - | The cache key to look up |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | कैश कुंजी |
-| `value` | any | कैश किया गया मान (नहीं मिलने पर null) |
-| `hit` | boolean | क्या कुंजी कैश में मिली |
-| `backend` | string | उपयोग किया गया बैकएंड |
+| `key` | string | The cache key |
+| `value` | any | The cached value (null if not found) |
+| `hit` | boolean | Whether the key was found in cache |
+| `backend` | string | The backend used |
 
-### कैश सेट करें
+### Cache Set
 
 `cache.set`
 
-वैकल्पिक TTL के साथ कैश में मान सेट करें
+Set a value in cache with optional TTL
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `key` | string | Yes | - | जिसके तहत मान संग्रहीत करना है वह कैश कुंजी |
-| `value` | string | Yes | - | कैश करने के लिए मान (कोई भी JSON-सीरियलाइज़ेबल मान) |
-| `ttl` | number | No | `0` | सेकंड में समय-से-जीवित (0 = कोई समाप्ति नहीं) |
-| `backend` | string | No | `memory` | उपयोग करने के लिए कैश बैकएंड |
-| `redis_url` | string | No | `redis://localhost:6379` | रेडिस कनेक्शन URL |
+| `key` | string | Yes | - | The cache key to store the value under |
+| `value` | string | Yes | - | The value to cache (any JSON-serializable value) |
+| `ttl` | number | No | `0` | Time-to-live in seconds (0 = no expiry) |
+| `backend` | string | No | `memory` | Cache backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `key` | string | कैश कुंजी |
-| `stored` | boolean | क्या मान सफलतापूर्वक संग्रहीत किया गया |
-| `ttl` | number | सेकंड में TTL (0 = कोई समाप्ति नहीं) |
-| `backend` | string | उपयोग किया गया बैकएंड |
+| `key` | string | The cache key |
+| `stored` | boolean | Whether the value was stored successfully |
+| `ttl` | number | The TTL in seconds (0 = no expiry) |
+| `backend` | string | The backend used |

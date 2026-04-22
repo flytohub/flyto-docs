@@ -6,47 +6,47 @@ SHA-256 and SHA-512 cryptographic hashing.
 
 | Module | Description |
 |--------|-------------|
-| [แฮช SHA-256](#แฮช-sha-256) | คำนวณแฮช SHA-256 ของข้อความ |
-| [แฮช SHA-512](#แฮช-sha-512) | คำนวณแฮช SHA-512 ของข้อความ |
+| [SHA-256 Hash](#sha-256-hash) | Calculate SHA-256 cryptographic hash of text |
+| [SHA-512 Hash](#sha-512-hash) | Calculate SHA-512 cryptographic hash of text |
 
 ## Modules
 
-### แฮช SHA-256
+### SHA-256 Hash
 
 `hash.sha256`
 
-คำนวณแฮช SHA-256 ของข้อความ
+Calculate SHA-256 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | ข้อความที่จะแฮช |
-| `encoding` | string | No | `utf-8` | ข้อความที่จะแฮช |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | การเข้ารหัสข้อความ |
-| `algorithm` | string | แฮช SHA-256 (64 อักขระฐานสิบหก) |
+| `hash` | string | SHA-256 hash (64 hex characters) |
+| `algorithm` | string | Hash algorithm used |
 
-### แฮช SHA-512
+### SHA-512 Hash
 
 `hash.sha512`
 
-คำนวณแฮช SHA-512 ของข้อความ
+Calculate SHA-512 cryptographic hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | string | Yes | - | ข้อความที่จะแฮช |
-| `encoding` | string | No | `utf-8` | ข้อความที่จะแฮช |
+| `text` | string | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `hash` | string | การเข้ารหัสข้อความ |
-| `algorithm` | string | แฮช SHA-512 (128 อักขระฐานสิบหก) |
+| `hash` | string | SHA-512 hash (128 hex characters) |
+| `algorithm` | string | Hash algorithm used |

@@ -6,20 +6,20 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 
 | Module | Description |
 |--------|-------------|
-| [Czytelnosc HTML](#czytelnosc-html) | Analizuj czytelnosc tresci |
-| [Wyodrebnij formularze](#wyodrebnij-formularze) | Wyodrebnij dane formularzy z HTML |
-| [Wyodrebnij metadane](#wyodrebnij-metadane) | Wyodrebnij metadane z HTML |
-| [Wyodrebnij tabele](#wyodrebnij-tabele) | Wyodrebnij dane tabel z HTML |
-| [Znajdz wzorce](#znajdz-wzorce) | Znajdz powtarzajace sie wzorce danych w HTML |
-| [Struktura HTML](#struktura-html) | Analizuj strukture DOM HTML |
+| [HTML Readability](#html-readability) | Analyze content readability |
+| [Extract Forms](#extract-forms) | Extract form data from HTML |
+| [Extract Metadata](#extract-metadata) | Extract metadata from HTML |
+| [Extract Tables](#extract-tables) | Extract table data from HTML |
+| [Find Patterns](#find-patterns) | Find repeating data patterns in HTML |
+| [HTML Structure](#html-structure) | Analyze HTML DOM structure |
 
 ## Modules
 
-### Czytelnosc HTML
+### HTML Readability
 
 `analysis.html.analyze_readability`
 
-Analizuj czytelnosc tresci
+Analyze content readability
 
 **Parameters:**
 
@@ -34,11 +34,11 @@ Analizuj czytelnosc tresci
 | `type` | any | object |
 | `properties` | any |  |
 
-### Wyodrebnij formularze
+### Extract Forms
 
 `analysis.html.extract_forms`
 
-Wyodrebnij dane formularzy z HTML
+Extract form data from HTML
 
 **Parameters:**
 
@@ -53,11 +53,11 @@ Wyodrebnij dane formularzy z HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Wyodrebnij metadane
+### Extract Metadata
 
 `analysis.html.extract_metadata`
 
-Wyodrebnij metadane z HTML
+Extract metadata from HTML
 
 **Parameters:**
 
@@ -72,11 +72,11 @@ Wyodrebnij metadane z HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Wyodrebnij tabele
+### Extract Tables
 
 `analysis.html.extract_tables`
 
-Wyodrebnij dane tabel z HTML
+Extract table data from HTML
 
 **Parameters:**
 
@@ -91,11 +91,11 @@ Wyodrebnij dane tabel z HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Znajdz wzorce
+### Find Patterns
 
 `analysis.html.find_patterns`
 
-Znajdz powtarzajace sie wzorce danych w HTML
+Find repeating data patterns in HTML
 
 **Parameters:**
 
@@ -110,11 +110,11 @@ Znajdz powtarzajace sie wzorce danych w HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Struktura HTML
+### HTML Structure
 
 `analysis.html.structure`
 
-Analizuj strukture DOM HTML
+Analyze HTML DOM structure
 
 **Parameters:**
 

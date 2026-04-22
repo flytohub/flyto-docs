@@ -6,41 +6,41 @@ Google Sheets, Notion, Airtable, and Stripe integrations.
 
 | Module | Description |
 |--------|-------------|
-| [Ler Google Sheets](#ler-google-sheets) | Ler dados de planilha Google Sheets |
-| [Escrever Google Sheets](#escrever-google-sheets) | Escrever dados em planilha Google Sheets |
-| [Criar Pagina Notion](#criar-pagina-notion) | Criar nova pagina em banco de dados Notion |
-| [Consultar Banco de Dados Notion](#consultar-banco-de-dados-notion) | Consultar paginas de banco de dados Notion com filtros e ordenacao |
-| [Stripe Criar Pagamento](#stripe-criar-pagamento) | Criar intencao de pagamento com Stripe |
-| [Stripe Obter Cliente](#stripe-obter-cliente) | Recuperar informacoes do cliente do Stripe |
-| [Stripe Listar Cobrancas](#stripe-listar-cobrancas) | Listar cobrancas recentes do Stripe |
-| [Airtable Criar Registro](#airtable-criar-registro) | Criar novo registro em tabela Airtable |
-| [Airtable Ler Registros](#airtable-ler-registros) | Ler registros de tabela Airtable |
-| [Airtable Atualizar Registro](#airtable-atualizar-registro) | Atualizar registro existente em tabela Airtable |
+| [Google Sheets Read](#google-sheets-read) | Read data from Google Sheets spreadsheet |
+| [Google Sheets Write](#google-sheets-write) | Write data to Google Sheets spreadsheet |
+| [Notion Create Page](#notion-create-page) | Create a new page in Notion database |
+| [Notion Query Database](#notion-query-database) | Query pages from Notion database with filters and sorting |
+| [Stripe Create Payment](#stripe-create-payment) | Create a payment intent with Stripe |
+| [Stripe Get Customer](#stripe-get-customer) | Retrieve customer information from Stripe |
+| [Stripe List Charges](#stripe-list-charges) | List recent charges from Stripe |
+| [Airtable Create Record](#airtable-create-record) | Create a new record in Airtable table |
+| [Airtable Read Records](#airtable-read-records) | Read records from Airtable table |
+| [Airtable Update Record](#airtable-update-record) | Update an existing record in Airtable table |
 
 ## Modules
 
-### Ler Google Sheets
+### Google Sheets Read
 
 `api.google_sheets.read`
 
-Ler dados de planilha Google Sheets
+Read data from Google Sheets spreadsheet
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `credentials` | object | No | - | Credenciais JSON da conta de servico Google (padrao para env.GOOGLE_CREDENTIALS_JSON) |
-| `spreadsheet_id` | string | Yes | - | ID da planilha Google Sheets (da URL) |
-| `range` | string | Yes | - | Intervalo em notacao A1 para ler |
-| `include_header` | boolean | No | `True` | Interpretar primeira linha como cabecalhos de coluna |
+| `credentials` | object | No | - | Google service account JSON credentials (defaults to env.GOOGLE_CREDENTIALS_JSON) |
+| `spreadsheet_id` | string | Yes | - | Google Sheets spreadsheet ID (from URL) |
+| `range` | string | Yes | - | A1 notation range to read |
+| `include_header` | boolean | No | `True` | Parse first row as column headers |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `values` | array | Interpretar primeira linha como cabecalhos de coluna |
-| `data` | array | Array de linhas (cada linha e array de valores) |
-| `row_count` | number | Array de linhas (cada linha e array de valores) |
+| `values` | array | Array of rows (each row is array of values) |
+| `data` | array | Array of row objects (if include_header=true) |
+| `row_count` | number | Number of rows read |
 
 **Example:** Read with headers
 
@@ -50,30 +50,30 @@ range: Sheet1!A1:D100
 include_header: true
 ```
 
-### Escrever Google Sheets
+### Google Sheets Write
 
 `api.google_sheets.write`
 
-Escrever dados em planilha Google Sheets
+Write data to Google Sheets spreadsheet
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `credentials` | object | No | - | Credenciais JSON da conta de servico Google (padrao para env.GOOGLE_CREDENTIALS_JSON) |
-| `spreadsheet_id` | string | Yes | - | ID da planilha Google Sheets (da URL) |
-| `range` | string | Yes | - | ID da planilha Google Sheets (da URL) |
-| `values` | array | Yes | - | Intervalo em notacao A1 para escrever |
-| `value_input_option` | string | No | `USER_ENTERED` | Como interpretar valores de entrada |
+| `credentials` | object | No | - | Google service account JSON credentials (defaults to env.GOOGLE_CREDENTIALS_JSON) |
+| `spreadsheet_id` | string | Yes | - | Google Sheets spreadsheet ID (from URL) |
+| `range` | string | Yes | - | A1 notation range to write |
+| `values` | array | Yes | - | Array of rows to write (each row is array of values) |
+| `value_input_option` | string | No | `USER_ENTERED` | How to interpret input values |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `updated_range` | string | Intervalo que foi atualizado |
-| `updated_rows` | number | Intervalo que foi atualizado |
-| `updated_columns` | number | Intervalo que foi atualizado |
-| `updated_cells` | number | Numero de linhas atualizadas |
+| `updated_range` | string | Range that was updated |
+| `updated_rows` | number | Number of rows updated |
+| `updated_columns` | number | Number of columns updated |
+| `updated_cells` | number | Number of cells updated |
 
 **Example:** Write data with headers
 
@@ -83,28 +83,28 @@ range: Sheet1!A1
 values: [["Name", "Email", "Status"], ["John Doe", "john@example.com", "Active"], ["Jane Smith", "jane@example.com", "Active"]]
 ```
 
-### Criar Pagina Notion
+### Notion Create Page
 
 `api.notion.create_page`
 
-Criar nova pagina em banco de dados Notion
+Create a new page in Notion database
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Token de integracao Notion (padrao para env.NOTION_API_KEY) |
-| `database_id` | string | Yes | - | ID do banco de dados Notion (string hex de 32 caracteres) |
-| `properties` | object | Yes | - | Propriedades da pagina (titulo, texto, select, etc.) |
-| `content` | array | No | - | Propriedades da pagina (titulo, texto, select, etc.) |
+| `api_key` | string | No | - | Notion integration token (defaults to env.NOTION_API_KEY) |
+| `database_id` | string | Yes | - | Notion database ID (32-char hex string) |
+| `properties` | object | Yes | - | Page properties (title, text, select, etc.) |
+| `content` | array | No | - | Page content as Notion blocks |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `page_id` | string | Conteudo da pagina como blocos Notion |
-| `url` | string | Conteudo da pagina como blocos Notion |
-| `created_time` | string | ID da pagina criada |
+| `page_id` | string | Created page ID |
+| `url` | string | URL to the created page |
+| `created_time` | string | Page creation timestamp |
 
 **Example:** Create task page
 
@@ -113,29 +113,29 @@ database_id: your_database_id
 properties: {"Name": {"title": [{"text": {"content": "New Task"}}]}, "Status": {"select": {"name": "In Progress"}}, "Priority": {"select": {"name": "High"}}}
 ```
 
-### Consultar Banco de Dados Notion
+### Notion Query Database
 
 `api.notion.query_database`
 
-Consultar paginas de banco de dados Notion com filtros e ordenacao
+Query pages from Notion database with filters and sorting
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Token de integracao Notion (padrao para env.NOTION_API_KEY) |
-| `database_id` | string | Yes | - | ID do banco de dados Notion |
-| `filter` | object | No | - | ID do banco de dados Notion |
-| `sorts` | array | No | - | Condicoes de filtro para consulta |
-| `page_size` | number | No | `100` | Ordem de classificacao para resultados |
+| `api_key` | string | No | - | Notion integration token (defaults to env.NOTION_API_KEY) |
+| `database_id` | string | Yes | - | Notion database ID |
+| `filter` | object | No | - | Filter conditions for query |
+| `sorts` | array | No | - | Sort order for results |
+| `page_size` | number | No | `100` | Number of results to return |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `results` | array | Numero de resultados a retornar |
-| `count` | number | Array de objetos de pagina |
-| `has_more` | boolean | Array de objetos de pagina |
+| `results` | array | Array of page objects |
+| `count` | number | Number of results returned |
+| `has_more` | boolean | Whether there are more results |
 
 **Example:** Query all pages
 
@@ -151,31 +151,31 @@ filter: {"property": "Status", "select": {"equals": "In Progress"}}
 sorts: [{"property": "Created", "direction": "descending"}]
 ```
 
-### Stripe Criar Pagamento
+### Stripe Create Payment
 
 `payment.stripe.create_payment`
 
-Criar intencao de pagamento com Stripe
+Create a payment intent with Stripe
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Chave secreta Stripe (ou use env STRIPE_API_KEY) |
-| `amount` | number | Yes | - | Chave secreta Stripe (ou use env STRIPE_API_KEY) |
-| `currency` | string | No | `usd` | Valor em centavos (ex: 1000 para $10.00) |
-| `description` | string | No | - | Codigo de moeda de tres letras (ex: usd, eur) |
-| `customer` | string | No | - | Descricao do pagamento |
+| `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `amount` | number | Yes | - | Amount in cents (e.g. 1000 for $10.00) |
+| `currency` | string | No | `usd` | Three-letter currency code (e.g. usd, eur) |
+| `description` | string | No | - | Payment description |
+| `customer` | string | No | - | Stripe customer ID (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | ID do cliente Stripe (opcional) |
-| `amount` | number | ID do cliente Stripe (opcional) |
-| `currency` | string | Identificador unico |
-| `status` | string | Valor do pagamento |
-| `client_secret` | string | Codigo da moeda |
+| `id` | string | Unique identifier |
+| `amount` | number | Payment amount |
+| `currency` | string | Currency code |
+| `status` | string | Operation status (success/error) |
+| `client_secret` | string | Client secret for payment |
 
 **Example:** Create $50 payment
 
@@ -194,18 +194,18 @@ customer: cus_XXXXXXXXXXXXXXX
 description: Subscription payment
 ```
 
-### Stripe Obter Cliente
+### Stripe Get Customer
 
 `payment.stripe.get_customer`
 
-Recuperar informacoes do cliente do Stripe
+Retrieve customer information from Stripe
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Chave secreta Stripe (ou use env STRIPE_API_KEY) |
-| `customer_id` | string | Yes | - | Chave secreta Stripe (ou use env STRIPE_API_KEY) |
+| `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `customer_id` | string | Yes | - | Stripe customer ID |
 
 **Output:**
 
@@ -223,19 +223,19 @@ Recuperar informacoes do cliente do Stripe
 customer_id: cus_XXXXXXXXXXXXXXX
 ```
 
-### Stripe Listar Cobrancas
+### Stripe List Charges
 
 `payment.stripe.list_charges`
 
-Listar cobrancas recentes do Stripe
+List recent charges from Stripe
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Chave secreta Stripe (ou use env STRIPE_API_KEY) |
-| `limit` | number | No | `10` | Chave secreta Stripe (ou use env STRIPE_API_KEY) |
-| `customer` | string | No | - | Filtrar por ID do cliente (opcional) |
+| `api_key` | string | No | - | Stripe secret key (or use STRIPE_API_KEY env) |
+| `limit` | number | No | `10` | Number of charges to return (1-100) |
+| `customer` | string | No | - | Filter by customer ID (optional) |
 
 **Output:**
 
@@ -258,20 +258,20 @@ customer: cus_XXXXXXXXXXXXXXX
 limit: 50
 ```
 
-### Airtable Criar Registro
+### Airtable Create Record
 
 `productivity.airtable.create`
 
-Criar novo registro em tabela Airtable
+Create a new record in Airtable table
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Chave API Airtable (ou use env AIRTABLE_API_KEY) |
-| `base_id` | string | Yes | - | Chave API Airtable (ou use env AIRTABLE_API_KEY) |
-| `table_name` | string | Yes | - | ID da base Airtable |
-| `fields` | json | Yes | - | Nome da tabela |
+| `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `fields` | json | Yes | - | Record fields as JSON object |
 
 **Output:**
 
@@ -297,28 +297,28 @@ table_name: Tasks
 fields: {"Title": "Review PR", "Assignee": "Alice", "Priority": "High"}
 ```
 
-### Airtable Ler Registros
+### Airtable Read Records
 
 `productivity.airtable.read`
 
-Ler registros de tabela Airtable
+Read records from Airtable table
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Chave API Airtable (ou use env AIRTABLE_API_KEY) |
-| `base_id` | string | Yes | - | Chave API Airtable (ou use env AIRTABLE_API_KEY) |
-| `table_name` | string | Yes | - | ID da base Airtable |
-| `view` | string | No | - | Nome da tabela |
-| `max_records` | number | No | `100` | Nome da visualizacao a usar (opcional) |
+| `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `view` | string | No | - | View name to use (optional) |
+| `max_records` | number | No | `100` | Maximum number of records to return |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `records` | array | Numero maximo de registros para retornar |
-| `count` | number | Os registros |
+| `records` | array | The records |
+| `count` | number | Number of items |
 
 **Example:** Read all customers
 
@@ -337,21 +337,21 @@ view: Active Tasks
 max_records: 50
 ```
 
-### Airtable Atualizar Registro
+### Airtable Update Record
 
 `productivity.airtable.update`
 
-Atualizar registro existente em tabela Airtable
+Update an existing record in Airtable table
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `api_key` | string | No | - | Chave API Airtable (ou use env AIRTABLE_API_KEY) |
-| `base_id` | string | Yes | - | Chave API Airtable (ou use env AIRTABLE_API_KEY) |
-| `table_name` | string | Yes | - | ID da base Airtable |
-| `record_id` | string | Yes | - | Nome da tabela |
-| `fields` | json | Yes | - | ID do registro para atualizar |
+| `api_key` | string | No | - | Airtable API key (or use AIRTABLE_API_KEY env) |
+| `base_id` | string | Yes | - | Airtable base ID |
+| `table_name` | string | Yes | - | Name of the table |
+| `record_id` | string | Yes | - | ID of the record to update |
+| `fields` | json | Yes | - | Fields to update as JSON object |
 
 **Output:**
 

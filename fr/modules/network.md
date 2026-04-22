@@ -6,10 +6,10 @@ Ping, port scan, traceroute, and WHOIS lookup.
 
 | Module | Description |
 |--------|-------------|
-| [Ping](#ping) | Pinger un hôte pour vérifier la connectivité et mesurer la latence |
-| [Analyse de ports](#analyse-de-ports) | Scanner les ports d'un hôte pour vérifier lesquels sont ouverts |
-| [Traceroute](#traceroute) | Tracer le chemin des paquets pour atteindre un hôte de destination |
-| [Recherche WHOIS](#recherche-whois) | Effectuer une recherche WHOIS pour un domaine afin d'obtenir des informations d'enregistrement |
+| [Ping](#ping) | Ping a host to check connectivity and measure latency |
+| [Port Scan](#port-scan) | Scan ports on a host to check which are open |
+| [Traceroute](#traceroute) | Trace the route packets take to reach a destination host |
+| [WHOIS Lookup](#whois-lookup) | Perform WHOIS lookup for a domain to retrieve registration information |
 
 ## Modules
 
@@ -17,26 +17,26 @@ Ping, port scan, traceroute, and WHOIS lookup.
 
 `network.ping`
 
-Pinger un hôte pour vérifier la connectivité et mesurer la latence
+Ping a host to check connectivity and measure latency
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | Nom d'hôte ou adresse IP à pinger |
-| `count` | number | No | `4` | Nombre de paquets de ping à envoyer |
-| `timeout` | number | No | `5` | Délai d'attente en secondes pour chaque paquet |
+| `host` | string | Yes | - | Hostname or IP address to ping |
+| `count` | number | No | `4` | Number of ping packets to send |
+| `timeout` | number | No | `5` | Timeout in seconds for each packet |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `host` | string | L'hôte pingé |
-| `alive` | boolean | Si l'hôte a répondu |
-| `packets_sent` | number | Nombre de paquets envoyés |
-| `packets_received` | number | Nombre de paquets reçus |
-| `packet_loss_pct` | number | Pourcentage de perte de paquets |
-| `latency_ms` | object | Statistiques de latence en millisecondes (min, moy, max) |
+| `host` | string | The pinged host |
+| `alive` | boolean | Whether the host responded |
+| `packets_sent` | number | Number of packets sent |
+| `packets_received` | number | Number of packets received |
+| `packet_loss_pct` | number | Packet loss percentage |
+| `latency_ms` | object | Latency statistics in milliseconds (min, avg, max) |
 
 **Example:** Ping a host
 
@@ -46,28 +46,28 @@ count: 4
 timeout: 5
 ```
 
-### Analyse de ports
+### Port Scan
 
 `network.port_scan`
 
-Scanner les ports d'un hôte pour vérifier lesquels sont ouverts
+Scan ports on a host to check which are open
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | Nom d'hôte ou adresse IP à scanner |
-| `ports` | string | No | - | Ports à scanner : séparés par des virgules (80,443), plage (80-443), ou laisser vide pour les ports courants |
-| `timeout` | number | No | `1.0` | Délai d'attente de connexion en secondes par port |
+| `host` | string | Yes | - | Hostname or IP address to scan |
+| `ports` | string | No | - | Ports to scan: comma-separated (80,443), range (80-443), or leave empty for common ports |
+| `timeout` | number | No | `1.0` | Connection timeout in seconds per port |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `host` | string | L'hôte scanné |
-| `open_ports` | array | Liste des numéros de ports ouverts |
-| `closed_ports` | array | Liste des numéros de ports fermés |
-| `scan_time_ms` | number | Temps total de scan en millisecondes |
+| `host` | string | The scanned host |
+| `open_ports` | array | List of open port numbers |
+| `closed_ports` | array | List of closed port numbers |
+| `scan_time_ms` | number | Total scan time in milliseconds |
 
 **Example:** Scan common ports
 
@@ -87,23 +87,23 @@ timeout: 2.0
 
 `network.traceroute`
 
-Tracer le chemin des paquets pour atteindre un hôte de destination
+Trace the route packets take to reach a destination host
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `host` | string | Yes | - | Nom d'hôte ou adresse IP pour tracer le chemin |
-| `max_hops` | number | No | `30` | Nombre maximum de sauts à tracer |
-| `timeout` | number | No | `5` | Délai d'attente en secondes pour chaque sonde |
+| `host` | string | Yes | - | Hostname or IP address to trace route to |
+| `max_hops` | number | No | `30` | Maximum number of hops to trace |
+| `timeout` | number | No | `5` | Timeout in seconds for each probe |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `host` | string | L'hôte cible |
-| `hops` | array | Liste des sauts le long du chemin |
-| `total_hops` | number | Nombre total de sauts pour atteindre la destination |
+| `host` | string | The target host |
+| `hops` | array | List of hops along the route |
+| `total_hops` | number | Total number of hops to reach destination |
 
 **Example:** Trace route to host
 
@@ -112,28 +112,28 @@ host: google.com
 max_hops: 30
 ```
 
-### Recherche WHOIS
+### WHOIS Lookup
 
 `network.whois`
 
-Effectuer une recherche WHOIS pour un domaine afin d'obtenir des informations d'enregistrement
+Perform WHOIS lookup for a domain to retrieve registration information
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `domain` | string | Yes | - | Nom de domaine à rechercher |
+| `domain` | string | Yes | - | Domain name to look up |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `domain` | string | Le domaine interrogé |
-| `registrar` | string | Registraire du domaine |
-| `creation_date` | string | Date de création du domaine |
-| `expiration_date` | string | Date d'expiration du domaine |
-| `name_servers` | array | Liste des serveurs de noms |
-| `raw` | string | Sortie brute complète WHOIS |
+| `domain` | string | The queried domain |
+| `registrar` | string | Domain registrar |
+| `creation_date` | string | Domain creation date |
+| `expiration_date` | string | Domain expiration date |
+| `name_servers` | array | List of name servers |
+| `raw` | string | Full raw WHOIS output |
 
 **Example:** WHOIS lookup
 

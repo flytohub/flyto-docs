@@ -6,28 +6,28 @@ AWS S3, Azure Blob, Google Cloud Storage, and Google Workspace integrations.
 
 | Module | Description |
 |--------|-------------|
-| [Excluir Objeto S3](#excluir-objeto-s3) | Excluir um objeto de um bucket AWS S3 |
-| [Download do S3](#download-do-s3) | Baixar um arquivo de um bucket AWS S3 para um caminho local |
-| [Listar Objetos S3](#listar-objetos-s3) | Listar objetos em um bucket AWS S3 com filtro de prefixo opcional |
-| [Upload para S3](#upload-para-s3) | Fazer upload de um arquivo local para um bucket AWS S3 |
-| [Download AWS S3](#download-aws-s3) | Baixar arquivo do bucket AWS S3 |
-| [Upload AWS S3](#upload-aws-s3) | Fazer upload de arquivo ou dados para bucket AWS S3 |
-| [Download Azure](#download-azure) | Baixar arquivo do Azure Blob Storage |
-| [Upload Azure](#upload-azure) | Fazer upload de arquivo para Azure Blob Storage |
-| [Download GCS](#download-gcs) | Baixar arquivo do Google Cloud Storage |
-| [Upload GCS](#upload-gcs) | Fazer upload de arquivo para Google Cloud Storage |
-| [Criar Evento no Calendário](#criar-evento-no-calendário) | Criar um novo evento no Google Calendar |
-| [Listar Eventos do Calendário](#listar-eventos-do-calendário) | Listar eventos futuros do Google Calendar |
-| [Buscar no Gmail](#buscar-no-gmail) | Buscar mensagens no Gmail usando a sintaxe de consulta do Gmail |
-| [Enviar Gmail](#enviar-gmail) | Enviar um email via API do Gmail |
+| [S3 Delete Object](#s3-delete-object) | Delete an object from an AWS S3 bucket |
+| [S3 Download](#s3-download) | Download a file from an AWS S3 bucket to a local path |
+| [S3 List Objects](#s3-list-objects) | List objects in an AWS S3 bucket with optional prefix filter |
+| [S3 Upload](#s3-upload) | Upload a local file to an AWS S3 bucket |
+| [AWS S3 Download](#aws-s3-download) | Download a file from AWS S3 bucket |
+| [AWS S3 Upload](#aws-s3-upload) | Upload a file or data to AWS S3 bucket |
+| [Azure Download](#azure-download) | Download file from Azure Blob Storage |
+| [Azure Upload](#azure-upload) | Upload file to Azure Blob Storage |
+| [GCS Download](#gcs-download) | Download file from Google Cloud Storage |
+| [GCS Upload](#gcs-upload) | Upload file to Google Cloud Storage |
+| [Calendar Create Event](#calendar-create-event) | Create a new event in Google Calendar |
+| [Calendar List Events](#calendar-list-events) | List upcoming events from Google Calendar |
+| [Gmail Search](#gmail-search) | Search Gmail messages using Gmail search query syntax |
+| [Gmail Send](#gmail-send) | Send an email via the Gmail API |
 
 ## Modules
 
-### Excluir Objeto S3
+### S3 Delete Object
 
 `aws.s3.delete`
 
-Excluir um objeto de um bucket AWS S3
+Delete an object from an AWS S3 bucket
 
 **Parameters:**
 
@@ -43,9 +43,9 @@ Excluir um objeto de um bucket AWS S3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bucket` | string | Nome do bucket S3 |
-| `key` | string | Chave do objeto excluído |
-| `deleted` | boolean | Se o objeto foi excluído com sucesso |
+| `bucket` | string | S3 bucket name |
+| `key` | string | Deleted object key |
+| `deleted` | boolean | Whether the object was deleted successfully |
 
 **Example:** Delete an object
 
@@ -54,11 +54,11 @@ bucket: my-bucket
 key: uploads/old-file.txt
 ```
 
-### Download do S3
+### S3 Download
 
 `aws.s3.download`
 
-Baixar um arquivo de um bucket AWS S3 para um caminho local
+Download a file from an AWS S3 bucket to a local path
 
 **Parameters:**
 
@@ -75,9 +75,9 @@ Baixar um arquivo de um bucket AWS S3 para um caminho local
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Caminho local onde o arquivo foi salvo |
-| `size` | number | Tamanho do arquivo em bytes |
-| `content_type` | string | Tipo MIME do arquivo baixado |
+| `path` | string | Local file path where the file was saved |
+| `size` | number | File size in bytes |
+| `content_type` | string | MIME type of the downloaded file |
 
 **Example:** Download a file from S3
 
@@ -87,11 +87,11 @@ key: data/report.csv
 output_path: /tmp/report.csv
 ```
 
-### Listar Objetos S3
+### S3 List Objects
 
 `aws.s3.list`
 
-Listar objetos em um bucket AWS S3 com filtro de prefixo opcional
+List objects in an AWS S3 bucket with optional prefix filter
 
 **Parameters:**
 
@@ -108,9 +108,9 @@ Listar objetos em um bucket AWS S3 com filtro de prefixo opcional
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `objects` | array | Lista de objetos S3 |
-| `count` | number | Número de objetos retornados |
-| `truncated` | boolean | Se os resultados estão truncados |
+| `objects` | array | List of S3 objects |
+| `count` | number | Number of objects returned |
+| `truncated` | boolean | Whether the results are truncated |
 
 **Example:** List objects with prefix
 
@@ -120,11 +120,11 @@ prefix: uploads/
 max_keys: 50
 ```
 
-### Upload para S3
+### S3 Upload
 
 `aws.s3.upload`
 
-Fazer upload de um arquivo local para um bucket AWS S3
+Upload a local file to an AWS S3 bucket
 
 **Parameters:**
 
@@ -142,10 +142,10 @@ Fazer upload de um arquivo local para um bucket AWS S3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bucket` | string | Nome do bucket S3 |
-| `key` | string | Chave do objeto S3 |
-| `url` | string | URL pública do objeto enviado |
-| `size` | number | Tamanho do arquivo em bytes |
+| `bucket` | string | S3 bucket name |
+| `key` | string | S3 object key |
+| `url` | string | Public URL of the uploaded object |
+| `size` | number | File size in bytes |
 
 **Example:** Upload a local file
 
@@ -155,22 +155,22 @@ key: data/report.csv
 file_path: /tmp/report.csv
 ```
 
-### Download AWS S3
+### AWS S3 Download
 
 `cloud.aws_s3.download`
 
-Baixar arquivo do bucket AWS S3
+Download a file from AWS S3 bucket
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `aws_access_key_id` | string | No | - | ID da chave de acesso AWS (padrao para env.AWS_ACCESS_KEY_ID) |
-| `aws_secret_access_key` | string | No | - | Chave de acesso secreta AWS (padrao para env.AWS_SECRET_ACCESS_KEY) |
-| `region` | string | No | `us-east-1` | Regiao AWS (padrao para env.AWS_REGION ou us-east-1) |
-| `bucket` | string | Yes | - | Nome do bucket S3 |
-| `key` | string | Yes | - | Nome do bucket S3 |
-| `file_path` | string | No | - | Chave do objeto S3 (caminho do arquivo no bucket) |
+| `aws_access_key_id` | string | No | - | AWS access key ID (defaults to env.AWS_ACCESS_KEY_ID) |
+| `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
+| `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
+| `bucket` | string | Yes | - | S3 bucket name |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to save downloaded content |
 
 **Output:**
 
@@ -196,34 +196,34 @@ key: backups/database.sql
 file_path: /tmp/downloaded.sql
 ```
 
-### Upload AWS S3
+### AWS S3 Upload
 
 `cloud.aws_s3.upload`
 
-Fazer upload de arquivo ou dados para bucket AWS S3
+Upload a file or data to AWS S3 bucket
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `aws_access_key_id` | string | No | - | ID da chave de acesso AWS (padrao para env.AWS_ACCESS_KEY_ID) |
-| `aws_secret_access_key` | string | No | - | Chave de acesso secreta AWS (padrao para env.AWS_SECRET_ACCESS_KEY) |
-| `region` | string | No | `us-east-1` | Regiao AWS (padrao para env.AWS_REGION ou us-east-1) |
-| `bucket` | string | Yes | - | Nome do bucket S3 |
-| `key` | string | Yes | - | Nome do bucket S3 |
-| `file_path` | string | No | - | Chave do objeto S3 (caminho do arquivo no bucket) |
-| `content` | string | No | - | Caminho do arquivo local para upload |
-| `content_type` | string | No | - | Tipo MIME do arquivo |
-| `acl` | string | No | `private` | Tipo MIME do arquivo |
+| `aws_access_key_id` | string | No | - | AWS access key ID (defaults to env.AWS_ACCESS_KEY_ID) |
+| `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
+| `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
+| `bucket` | string | Yes | - | S3 bucket name |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to upload |
+| `content` | string | No | - | File content to upload (as string or base64) |
+| `content_type` | string | No | - | MIME type of the file |
+| `acl` | string | No | `private` | Access control list for the object |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | URL S3 do objeto enviado |
-| `bucket` | string | URL S3 do objeto enviado |
-| `key` | string | URL S3 do objeto enviado |
-| `etag` | string | Nome do bucket |
+| `url` | string | S3 URL of uploaded object |
+| `bucket` | string | Bucket name |
+| `key` | string | Object key |
+| `etag` | string | ETag of uploaded object |
 
 **Example:** Upload text content
 
@@ -243,20 +243,20 @@ file_path: /tmp/backup.sql
 acl: private
 ```
 
-### Download Azure
+### Azure Download
 
 `cloud.azure.download`
 
-Baixar arquivo do Azure Blob Storage
+Download file from Azure Blob Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `connection_string` | string | No | - | String de conexao Azure Storage (use var env AZURE_STORAGE_CONNECTION_STRING) |
-| `container` | string | Yes | - | String de conexao Azure Storage (use var env AZURE_STORAGE_CONNECTION_STRING) |
-| `blob_name` | string | Yes | - | Nome do container Azure |
-| `destination_path` | string | Yes | - | Blob para baixar |
+| `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | Yes | - | Blob to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -283,30 +283,30 @@ blob_name: photos/vacation.jpg
 destination_path: /tmp/photo.jpg
 ```
 
-### Upload Azure
+### Azure Upload
 
 `cloud.azure.upload`
 
-Fazer upload de arquivo para Azure Blob Storage
+Upload file to Azure Blob Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `file_path` | string | Yes | - | Caminho do arquivo local para upload |
-| `connection_string` | string | No | - | Caminho do arquivo local para upload |
-| `container` | string | Yes | - | String de conexao Azure Storage (use var env AZURE_STORAGE_CONNECTION_STRING) |
-| `blob_name` | string | No | - | Nome do container Azure |
-| `content_type` | string | No | - | Nome para o blob enviado (padrao: nome do arquivo) |
+| `file_path` | string | Yes | - | Local file path to upload |
+| `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | No | - | Name for the uploaded blob (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | Tipo MIME (opcional) |
-| `container` | string | Tipo MIME (opcional) |
-| `blob_name` | string | Endereco URL |
-| `size` | number | O container |
+| `url` | string | URL address |
+| `container` | string | The container |
+| `blob_name` | string | The blob name |
+| `size` | number | Size in bytes |
 
 **Example:** Upload image
 
@@ -325,19 +325,19 @@ container: documents
 blob_name: reports/monthly.pdf
 ```
 
-### Download GCS
+### GCS Download
 
 `cloud.gcs.download`
 
-Baixar arquivo do Google Cloud Storage
+Download file from Google Cloud Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bucket` | string | Yes | - | Nome do bucket GCS |
-| `object_name` | string | Yes | - | Nome do bucket GCS |
-| `destination_path` | string | Yes | - | Objeto para baixar |
+| `bucket` | string | Yes | - | GCS bucket name |
+| `object_name` | string | Yes | - | Object to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -364,31 +364,31 @@ object_name: photos/vacation.jpg
 destination_path: /tmp/photo.jpg
 ```
 
-### Upload GCS
+### GCS Upload
 
 `cloud.gcs.upload`
 
-Fazer upload de arquivo para Google Cloud Storage
+Upload file to Google Cloud Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `file_path` | string | Yes | - | Caminho do arquivo local para upload |
-| `bucket` | string | Yes | - | Caminho do arquivo local para upload |
-| `object_name` | string | No | - | Nome do bucket GCS |
-| `content_type` | string | No | - | Nome para o objeto enviado (padrao: nome do arquivo) |
-| `public` | boolean | No | `False` | Tipo MIME (opcional) |
+| `file_path` | string | Yes | - | Local file path to upload |
+| `bucket` | string | Yes | - | GCS bucket name |
+| `object_name` | string | No | - | Name for the uploaded object (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
+| `public` | boolean | No | `False` | Make file publicly accessible |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | Tornar arquivo publicamente acessivel |
-| `bucket` | string | Tornar arquivo publicamente acessivel |
-| `object_name` | string | Endereco URL |
-| `size` | number | Nome do bucket de armazenamento |
-| `public_url` | string | Nome do objeto no armazenamento |
+| `url` | string | URL address |
+| `bucket` | string | Storage bucket name |
+| `object_name` | string | Object name in storage |
+| `size` | number | Size in bytes |
+| `public_url` | string | Public accessible URL |
 
 **Example:** Upload image
 
@@ -408,11 +408,11 @@ bucket: data-backup
 object_name: reports/daily.csv
 ```
 
-### Criar Evento no Calendário
+### Calendar Create Event
 
 `google.calendar.create_event`
 
-Criar um novo evento no Google Calendar
+Create a new event in Google Calendar
 
 **Parameters:**
 
@@ -431,11 +431,11 @@ Criar um novo evento no Google Calendar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `event_id` | string | ID do evento criado |
-| `summary` | string | Título do evento |
-| `start` | string | Hora de início do evento |
-| `end` | string | Hora de término do evento |
-| `html_link` | string | Link para ver o evento no Google Calendar |
+| `event_id` | string | Created event ID |
+| `summary` | string | Event title |
+| `start` | string | Event start time |
+| `end` | string | Event end time |
+| `html_link` | string | Link to view the event in Google Calendar |
 
 **Example:** Create a meeting event
 
@@ -448,11 +448,11 @@ attendees: alice@example.com, bob@example.com
 timezone: America/New_York
 ```
 
-### Listar Eventos do Calendário
+### Calendar List Events
 
 `google.calendar.list_events`
 
-Listar eventos futuros do Google Calendar
+List upcoming events from Google Calendar
 
 **Parameters:**
 
@@ -467,8 +467,8 @@ Listar eventos futuros do Google Calendar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `events` | array | Lista de eventos do calendário |
-| `count` | number | Número de eventos retornados |
+| `events` | array | List of calendar events |
+| `count` | number | Number of events returned |
 
 **Example:** List next 5 events
 
@@ -477,11 +477,11 @@ access_token: <oauth2-token>
 max_results: 5
 ```
 
-### Buscar no Gmail
+### Gmail Search
 
 `google.gmail.search`
 
-Buscar mensagens no Gmail usando a sintaxe de consulta do Gmail
+Search Gmail messages using Gmail search query syntax
 
 **Parameters:**
 
@@ -495,8 +495,8 @@ Buscar mensagens no Gmail usando a sintaxe de consulta do Gmail
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `messages` | array | Lista de mensagens correspondentes |
-| `total` | number | Número total de mensagens retornadas |
+| `messages` | array | List of matching messages |
+| `total` | number | Total number of messages returned |
 
 **Example:** Search for emails from a specific sender
 
@@ -506,11 +506,11 @@ query: from:boss@company.com is:unread
 max_results: 5
 ```
 
-### Enviar Gmail
+### Gmail Send
 
 `google.gmail.send`
 
-Enviar um email via API do Gmail
+Send an email via the Gmail API
 
 **Parameters:**
 
@@ -528,9 +528,9 @@ Enviar um email via API do Gmail
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `message_id` | string | ID da mensagem do Gmail |
-| `thread_id` | string | ID do thread do Gmail |
-| `to` | string | Endereço de email do destinatário |
+| `message_id` | string | Gmail message ID |
+| `thread_id` | string | Gmail thread ID |
+| `to` | string | Recipient email address |
 
 **Example:** Send a plain text email
 

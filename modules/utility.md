@@ -39,7 +39,7 @@ Add time to datetime
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | string | The operation result |
-| `timestamp` | number | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Add 7 days
 
@@ -74,7 +74,7 @@ Format datetime to string
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | string | The operation result |
-| `timestamp` | number | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Format current time
 
@@ -108,13 +108,13 @@ Parse string to datetime
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | string | The operation result |
-| `timestamp` | number | The operation result |
-| `year` | number | The operation result |
-| `month` | number | Unix timestamp |
-| `day` | number | Year component |
-| `hour` | number | Month component |
-| `minute` | number | Day component |
-| `second` | number | Hour component |
+| `timestamp` | number | Unix timestamp |
+| `year` | number | Year component |
+| `month` | number | Month component |
+| `day` | number | Day component |
+| `hour` | number | Hour component |
+| `minute` | number | Minute component |
+| `second` | number | Second component |
 
 **Example:** Parse ISO format
 
@@ -150,7 +150,7 @@ Subtract time from datetime
 | Field | Type | Description |
 |-------|------|-------------|
 | `result` | string | The operation result |
-| `timestamp` | number | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Subtract 7 days
 
@@ -178,16 +178,16 @@ Get current date and time
 |------|------|----------|---------|-------------|
 | `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | Output format |
 | `custom_format` | string | No | - | Python strftime format (if format=custom) |
-| `timezone` | string | No | `UTC` | Python strftime format (if format=custom) |
+| `timezone` | string | No | `UTC` | Timezone (default: UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Timezone (default: UTC) |
-| `datetime` | string | Operation status (success/error) |
-| `timestamp` | number | Operation status (success/error) |
-| `iso` | string | Formatted date/time |
+| `status` | string | Operation status (success/error) |
+| `datetime` | string | Formatted date/time |
+| `timestamp` | number | Unix timestamp |
+| `iso` | string | ISO format |
 
 **Example:** Example
 
@@ -218,8 +218,8 @@ Pause workflow execution for specified duration
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Alternative: duration in seconds |
-| `waited_ms` | number | Operation status (success/error) |
+| `status` | string | Operation status (success/error) |
+| `waited_ms` | number | Actual wait time in ms |
 
 **Example:** Example
 
@@ -244,14 +244,14 @@ Calculate MD5 hash of text
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | text | Yes | - | Text to hash |
-| `encoding` | string | No | `utf-8` | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Text encoding |
-| `hash` | string | Text encoding |
+| `status` | string | Operation status (success/error) |
+| `hash` | string | MD5 hash (hexadecimal) |
 
 **Example:** Example
 
@@ -270,15 +270,15 @@ Generate random number in range
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `min` | number | No | `0` | Minimum value (inclusive) |
-| `max` | number | No | `100` | Minimum value (inclusive) |
-| `decimals` | number | No | `0` | Maximum value (inclusive) |
+| `max` | number | No | `100` | Maximum value (inclusive) |
+| `decimals` | number | No | `0` | Number of decimal places (0 for integers) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Number of decimal places (0 for integers) |
-| `value` | number | Operation status (success/error) |
+| `status` | string | Operation status (success/error) |
+| `value` | number | Random number |
 
 **Example:** Example
 
@@ -307,14 +307,14 @@ Generate random string or UUID
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `length` | number | No | `16` | String length |
-| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | String length |
+| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | Which characters to use |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `status` | string | Operation status (success/error) |
-| `value` | string | Operation status (success/error) |
+| `value` | string | Random string |
 
 **Example:** Example
 

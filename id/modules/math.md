@@ -6,19 +6,19 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Module | Description |
 |--------|-------------|
-| [Nilai Absolut](#nilai-absolut) | Dapatkan nilai absolut dari angka |
-| [Ceiling Angka](#ceiling-angka) | Bulatkan angka ke atas ke integer terdekat |
-| [Floor Angka](#floor-angka) | Bulatkan angka ke bawah ke integer terdekat |
-| [Pangkat/Eksponen](#pangkateksponen) | Pangkatkan angka |
-| [Bulatkan Angka](#bulatkan-angka) | Bulatkan angka ke tempat desimal tertentu |
+| [Absolute Value](#absolute-value) | Get absolute value of a number |
+| [Ceiling Number](#ceiling-number) | Round number up to nearest integer |
+| [Floor Number](#floor-number) | Round number down to nearest integer |
+| [Power/Exponent](#powerexponent) | Raise number to a power |
+| [Round Number](#round-number) | Round number to specified decimal places |
 
 ## Modules
 
-### Nilai Absolut
+### Absolute Value
 
 `math.abs`
 
-Dapatkan nilai absolut dari angka
+Get absolute value of a number
 
 **Parameters:**
 
@@ -30,8 +30,8 @@ Dapatkan nilai absolut dari angka
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Nilai absolut |
-| `original` | number | Nilai absolut |
+| `result` | number | Absolute value |
+| `original` | number | Original number |
 
 **Example:** Absolute of negative number
 
@@ -45,11 +45,11 @@ number: -5
 number: 3.14
 ```
 
-### Ceiling Angka
+### Ceiling Number
 
 `math.ceil`
 
-Bulatkan angka ke atas ke integer terdekat
+Round number up to nearest integer
 
 **Parameters:**
 
@@ -61,8 +61,8 @@ Bulatkan angka ke atas ke integer terdekat
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Nilai ceiling |
-| `original` | number | Nilai ceiling |
+| `result` | number | Ceiling value |
+| `original` | number | Original number |
 
 **Example:** Ceiling positive number
 
@@ -76,11 +76,11 @@ number: 3.2
 number: -2.7
 ```
 
-### Floor Angka
+### Floor Number
 
 `math.floor`
 
-Bulatkan angka ke bawah ke integer terdekat
+Round number down to nearest integer
 
 **Parameters:**
 
@@ -92,8 +92,8 @@ Bulatkan angka ke bawah ke integer terdekat
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Nilai floor |
-| `original` | number | Nilai floor |
+| `result` | number | Floored value |
+| `original` | number | Original number |
 
 **Example:** Floor positive number
 
@@ -107,11 +107,11 @@ number: 3.7
 number: -2.3
 ```
 
-### Pangkat/Eksponen
+### Power/Exponent
 
 `math.power`
 
-Pangkatkan angka
+Raise number to a power
 
 **Parameters:**
 
@@ -124,9 +124,9 @@ Pangkatkan angka
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Hasil basis dipangkatkan eksponen |
-| `base` | number | Hasil basis dipangkatkan eksponen |
-| `exponent` | number | Hasil basis dipangkatkan eksponen |
+| `result` | number | Result of base raised to exponent |
+| `base` | number | Base number |
+| `exponent` | number | Exponent used |
 
 **Example:** Square a number
 
@@ -142,11 +142,11 @@ base: 27
 exponent: 0.333333
 ```
 
-### Bulatkan Angka
+### Round Number
 
 `math.round`
 
-Bulatkan angka ke tempat desimal tertentu
+Round number to specified decimal places
 
 **Parameters:**
 
@@ -159,9 +159,9 @@ Bulatkan angka ke tempat desimal tertentu
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Nilai yang dibulatkan |
-| `original` | number | Nilai yang dibulatkan |
-| `decimals` | number | Nilai yang dibulatkan |
+| `result` | number | Rounded value |
+| `original` | number | Original number |
+| `decimals` | number | Decimal places used |
 
 **Example:** Round to integer
 

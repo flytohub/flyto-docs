@@ -6,15 +6,15 @@ Execute reusable templates as workflow steps.
 
 | Module | Description |
 |--------|-------------|
-| [Kích hoạt Mẫu](#kích-hoạt-mẫu) | Thực hiện một mẫu từ thư viện của bạn như một bước trong quy trình làm việc |
+| [Invoke Template](#invoke-template) | Execute a template from your library as a workflow step |
 
 ## Modules
 
-### Kích hoạt Mẫu
+### Invoke Template
 
 `template.invoke`
 
-Thực hiện một mẫu từ thư viện của bạn như một bước trong quy trình làm việc
+Execute a template from your library as a workflow step
 
 **Parameters:**
 
@@ -29,10 +29,10 @@ Thực hiện một mẫu từ thư viện của bạn như một bước trong 
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ID của mục trong thư viện (mua/chia sẻ/sở hữu) |
-| `result` | any | Thời gian thực thi tối đa tính bằng giây |
-| `template_id` | string | Sự kiện để định tuyến (thành công/lỗi) |
-| `execution_time_ms` | number | Kết quả thực thi mẫu |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Template execution result |
+| `template_id` | string | Executed template ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 

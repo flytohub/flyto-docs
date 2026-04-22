@@ -6,28 +6,28 @@ AWS S3, Azure Blob, Google Cloud Storage, and Google Workspace integrations.
 
 | Module | Description |
 |--------|-------------|
-| [Xóa đối tượng S3](#xóa-đối-tượng-s3) | Xóa một đối tượng khỏi bucket AWS S3 |
-| [Tải xuống S3](#tải-xuống-s3) | Tải một tệp từ bucket AWS S3 về đường dẫn máy |
-| [Liệt kê đối tượng S3](#liệt-kê-đối-tượng-s3) | Liệt kê các đối tượng trong bucket AWS S3 với bộ lọc tiền tố tùy chọn |
-| [Tải lên S3](#tải-lên-s3) | Tải một tệp từ máy lên bucket AWS S3 |
-| [Tải xuống AWS S3](#tải-xuống-aws-s3) | Tải tệp từ bucket AWS S3 |
-| [Tải lên AWS S3](#tải-lên-aws-s3) | Tải tệp hoặc dữ liệu lên bucket AWS S3 |
-| [Tải xuống Azure](#tải-xuống-azure) | Tải tệp từ Azure Blob Storage |
-| [Tải lên Azure](#tải-lên-azure) | Tải tệp lên Azure Blob Storage |
-| [Tải xuống GCS](#tải-xuống-gcs) | Tải tệp từ Google Cloud Storage |
-| [Tải lên GCS](#tải-lên-gcs) | Tải tệp lên Google Cloud Storage |
-| [Tạo sự kiện Lịch](#tạo-sự-kiện-lịch) | Tạo sự kiện mới trong Google Calendar |
-| [Danh sách sự kiện Lịch](#danh-sách-sự-kiện-lịch) | Liệt kê sự kiện sắp tới từ Google Calendar |
-| [Tìm kiếm Gmail](#tìm-kiếm-gmail) | Tìm kiếm tin nhắn Gmail bằng cú pháp tìm kiếm Gmail |
-| [Gửi Gmail](#gửi-gmail) | Gửi email qua Gmail API |
+| [S3 Delete Object](#s3-delete-object) | Delete an object from an AWS S3 bucket |
+| [S3 Download](#s3-download) | Download a file from an AWS S3 bucket to a local path |
+| [S3 List Objects](#s3-list-objects) | List objects in an AWS S3 bucket with optional prefix filter |
+| [S3 Upload](#s3-upload) | Upload a local file to an AWS S3 bucket |
+| [AWS S3 Download](#aws-s3-download) | Download a file from AWS S3 bucket |
+| [AWS S3 Upload](#aws-s3-upload) | Upload a file or data to AWS S3 bucket |
+| [Azure Download](#azure-download) | Download file from Azure Blob Storage |
+| [Azure Upload](#azure-upload) | Upload file to Azure Blob Storage |
+| [GCS Download](#gcs-download) | Download file from Google Cloud Storage |
+| [GCS Upload](#gcs-upload) | Upload file to Google Cloud Storage |
+| [Calendar Create Event](#calendar-create-event) | Create a new event in Google Calendar |
+| [Calendar List Events](#calendar-list-events) | List upcoming events from Google Calendar |
+| [Gmail Search](#gmail-search) | Search Gmail messages using Gmail search query syntax |
+| [Gmail Send](#gmail-send) | Send an email via the Gmail API |
 
 ## Modules
 
-### Xóa đối tượng S3
+### S3 Delete Object
 
 `aws.s3.delete`
 
-Xóa một đối tượng khỏi bucket AWS S3
+Delete an object from an AWS S3 bucket
 
 **Parameters:**
 
@@ -43,9 +43,9 @@ Xóa một đối tượng khỏi bucket AWS S3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bucket` | string | Tên bucket S3 |
-| `key` | string | Khóa đối tượng đã xóa |
-| `deleted` | boolean | Đối tượng đã được xóa thành công hay chưa |
+| `bucket` | string | S3 bucket name |
+| `key` | string | Deleted object key |
+| `deleted` | boolean | Whether the object was deleted successfully |
 
 **Example:** Delete an object
 
@@ -54,11 +54,11 @@ bucket: my-bucket
 key: uploads/old-file.txt
 ```
 
-### Tải xuống S3
+### S3 Download
 
 `aws.s3.download`
 
-Tải một tệp từ bucket AWS S3 về đường dẫn máy
+Download a file from an AWS S3 bucket to a local path
 
 **Parameters:**
 
@@ -75,9 +75,9 @@ Tải một tệp từ bucket AWS S3 về đường dẫn máy
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | Đường dẫn tệp trên máy nơi tệp được lưu |
-| `size` | number | Kích thước tệp tính bằng byte |
-| `content_type` | string | Loại MIME của tệp đã tải xuống |
+| `path` | string | Local file path where the file was saved |
+| `size` | number | File size in bytes |
+| `content_type` | string | MIME type of the downloaded file |
 
 **Example:** Download a file from S3
 
@@ -87,11 +87,11 @@ key: data/report.csv
 output_path: /tmp/report.csv
 ```
 
-### Liệt kê đối tượng S3
+### S3 List Objects
 
 `aws.s3.list`
 
-Liệt kê các đối tượng trong bucket AWS S3 với bộ lọc tiền tố tùy chọn
+List objects in an AWS S3 bucket with optional prefix filter
 
 **Parameters:**
 
@@ -108,9 +108,9 @@ Liệt kê các đối tượng trong bucket AWS S3 với bộ lọc tiền tố
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `objects` | array | Danh sách các đối tượng S3 |
-| `count` | number | Số lượng đối tượng trả về |
-| `truncated` | boolean | Kết quả có bị cắt ngắn hay không |
+| `objects` | array | List of S3 objects |
+| `count` | number | Number of objects returned |
+| `truncated` | boolean | Whether the results are truncated |
 
 **Example:** List objects with prefix
 
@@ -120,11 +120,11 @@ prefix: uploads/
 max_keys: 50
 ```
 
-### Tải lên S3
+### S3 Upload
 
 `aws.s3.upload`
 
-Tải một tệp từ máy lên bucket AWS S3
+Upload a local file to an AWS S3 bucket
 
 **Parameters:**
 
@@ -142,10 +142,10 @@ Tải một tệp từ máy lên bucket AWS S3
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `bucket` | string | Tên bucket S3 |
-| `key` | string | Khóa đối tượng S3 |
-| `url` | string | URL công khai của đối tượng đã tải lên |
-| `size` | number | Kích thước tệp tính bằng byte |
+| `bucket` | string | S3 bucket name |
+| `key` | string | S3 object key |
+| `url` | string | Public URL of the uploaded object |
+| `size` | number | File size in bytes |
 
 **Example:** Upload a local file
 
@@ -155,22 +155,22 @@ key: data/report.csv
 file_path: /tmp/report.csv
 ```
 
-### Tải xuống AWS S3
+### AWS S3 Download
 
 `cloud.aws_s3.download`
 
-Tải tệp từ bucket AWS S3
+Download a file from AWS S3 bucket
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `aws_access_key_id` | string | No | - | AWS access key ID (mặc định là env.AWS_ACCESS_KEY_ID) |
-| `aws_secret_access_key` | string | No | - | AWS secret access key (mặc định là env.AWS_SECRET_ACCESS_KEY) |
-| `region` | string | No | `us-east-1` | Vùng AWS (mặc định là env.AWS_REGION hoặc us-east-1) |
-| `bucket` | string | Yes | - | Tên bucket S3 |
-| `key` | string | Yes | - | Tên bucket S3 |
-| `file_path` | string | No | - | Khóa đối tượng S3 (đường dẫn tệp trong bucket) |
+| `aws_access_key_id` | string | No | - | AWS access key ID (defaults to env.AWS_ACCESS_KEY_ID) |
+| `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
+| `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
+| `bucket` | string | Yes | - | S3 bucket name |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to save downloaded content |
 
 **Output:**
 
@@ -196,34 +196,34 @@ key: backups/database.sql
 file_path: /tmp/downloaded.sql
 ```
 
-### Tải lên AWS S3
+### AWS S3 Upload
 
 `cloud.aws_s3.upload`
 
-Tải tệp hoặc dữ liệu lên bucket AWS S3
+Upload a file or data to AWS S3 bucket
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `aws_access_key_id` | string | No | - | AWS access key ID (mặc định là env.AWS_ACCESS_KEY_ID) |
-| `aws_secret_access_key` | string | No | - | AWS secret access key (mặc định là env.AWS_SECRET_ACCESS_KEY) |
-| `region` | string | No | `us-east-1` | Vùng AWS (mặc định là env.AWS_REGION hoặc us-east-1) |
-| `bucket` | string | Yes | - | Tên bucket S3 |
-| `key` | string | Yes | - | Tên bucket S3 |
-| `file_path` | string | No | - | Khóa đối tượng S3 (đường dẫn tệp trong bucket) |
-| `content` | string | No | - | Đường dẫn tệp cục bộ để tải lên |
-| `content_type` | string | No | - | Loại MIME của tệp |
-| `acl` | string | No | `private` | Loại MIME của tệp |
+| `aws_access_key_id` | string | No | - | AWS access key ID (defaults to env.AWS_ACCESS_KEY_ID) |
+| `aws_secret_access_key` | string | No | - | AWS secret access key (defaults to env.AWS_SECRET_ACCESS_KEY) |
+| `region` | string | No | `us-east-1` | AWS region (defaults to env.AWS_REGION or us-east-1) |
+| `bucket` | string | Yes | - | S3 bucket name |
+| `key` | string | Yes | - | S3 object key (file path in bucket) |
+| `file_path` | string | No | - | Local file path to upload |
+| `content` | string | No | - | File content to upload (as string or base64) |
+| `content_type` | string | No | - | MIME type of the file |
+| `acl` | string | No | `private` | Access control list for the object |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | URL S3 của đối tượng đã tải lên |
-| `bucket` | string | URL S3 của đối tượng đã tải lên |
-| `key` | string | URL S3 của đối tượng đã tải lên |
-| `etag` | string | Tên bucket |
+| `url` | string | S3 URL of uploaded object |
+| `bucket` | string | Bucket name |
+| `key` | string | Object key |
+| `etag` | string | ETag of uploaded object |
 
 **Example:** Upload text content
 
@@ -243,20 +243,20 @@ file_path: /tmp/backup.sql
 acl: private
 ```
 
-### Tải xuống Azure
+### Azure Download
 
 `cloud.azure.download`
 
-Tải tệp từ Azure Blob Storage
+Download file from Azure Blob Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `connection_string` | string | No | - | Chuỗi kết nối Azure Storage (sử dụng biến env AZURE_STORAGE_CONNECTION_STRING) |
-| `container` | string | Yes | - | Chuỗi kết nối Azure Storage (sử dụng biến env AZURE_STORAGE_CONNECTION_STRING) |
-| `blob_name` | string | Yes | - | Tên container Azure |
-| `destination_path` | string | Yes | - | Blob cần tải xuống |
+| `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | Yes | - | Blob to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -283,30 +283,30 @@ blob_name: photos/vacation.jpg
 destination_path: /tmp/photo.jpg
 ```
 
-### Tải lên Azure
+### Azure Upload
 
 `cloud.azure.upload`
 
-Tải tệp lên Azure Blob Storage
+Upload file to Azure Blob Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `file_path` | string | Yes | - | Đường dẫn tệp cục bộ để tải lên |
-| `connection_string` | string | No | - | Đường dẫn tệp cục bộ để tải lên |
-| `container` | string | Yes | - | Chuỗi kết nối Azure Storage (sử dụng biến env AZURE_STORAGE_CONNECTION_STRING) |
-| `blob_name` | string | No | - | Tên container Azure |
-| `content_type` | string | No | - | Tên cho blob đã tải lên (mặc định: tên tệp) |
+| `file_path` | string | Yes | - | Local file path to upload |
+| `connection_string` | string | No | - | Azure Storage connection string (use env var AZURE_STORAGE_CONNECTION_STRING) |
+| `container` | string | Yes | - | Azure container name |
+| `blob_name` | string | No | - | Name for the uploaded blob (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | Loại MIME (tùy chọn) |
-| `container` | string | Loại MIME (tùy chọn) |
-| `blob_name` | string | Địa chỉ URL |
-| `size` | number | Container |
+| `url` | string | URL address |
+| `container` | string | The container |
+| `blob_name` | string | The blob name |
+| `size` | number | Size in bytes |
 
 **Example:** Upload image
 
@@ -325,19 +325,19 @@ container: documents
 blob_name: reports/monthly.pdf
 ```
 
-### Tải xuống GCS
+### GCS Download
 
 `cloud.gcs.download`
 
-Tải tệp từ Google Cloud Storage
+Download file from Google Cloud Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bucket` | string | Yes | - | Tên bucket GCS |
-| `object_name` | string | Yes | - | Tên bucket GCS |
-| `destination_path` | string | Yes | - | Đối tượng cần tải xuống |
+| `bucket` | string | Yes | - | GCS bucket name |
+| `object_name` | string | Yes | - | Object to download |
+| `destination_path` | string | Yes | - | Local path to save file |
 
 **Output:**
 
@@ -364,31 +364,31 @@ object_name: photos/vacation.jpg
 destination_path: /tmp/photo.jpg
 ```
 
-### Tải lên GCS
+### GCS Upload
 
 `cloud.gcs.upload`
 
-Tải tệp lên Google Cloud Storage
+Upload file to Google Cloud Storage
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `file_path` | string | Yes | - | Đường dẫn tệp cục bộ để tải lên |
-| `bucket` | string | Yes | - | Đường dẫn tệp cục bộ để tải lên |
-| `object_name` | string | No | - | Tên bucket GCS |
-| `content_type` | string | No | - | Tên cho đối tượng đã tải lên (mặc định: tên tệp) |
-| `public` | boolean | No | `False` | Loại MIME (tùy chọn) |
+| `file_path` | string | Yes | - | Local file path to upload |
+| `bucket` | string | Yes | - | GCS bucket name |
+| `object_name` | string | No | - | Name for the uploaded object (default: filename) |
+| `content_type` | string | No | - | MIME type (optional) |
+| `public` | boolean | No | `False` | Make file publicly accessible |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `url` | string | Làm cho tệp có thể truy cập công khai |
-| `bucket` | string | Làm cho tệp có thể truy cập công khai |
-| `object_name` | string | Địa chỉ URL |
-| `size` | number | Tên bucket lưu trữ |
-| `public_url` | string | Tên đối tượng trong lưu trữ |
+| `url` | string | URL address |
+| `bucket` | string | Storage bucket name |
+| `object_name` | string | Object name in storage |
+| `size` | number | Size in bytes |
+| `public_url` | string | Public accessible URL |
 
 **Example:** Upload image
 
@@ -408,11 +408,11 @@ bucket: data-backup
 object_name: reports/daily.csv
 ```
 
-### Tạo sự kiện Lịch
+### Calendar Create Event
 
 `google.calendar.create_event`
 
-Tạo sự kiện mới trong Google Calendar
+Create a new event in Google Calendar
 
 **Parameters:**
 
@@ -431,11 +431,11 @@ Tạo sự kiện mới trong Google Calendar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `event_id` | string | ID sự kiện đã tạo |
-| `summary` | string | Tiêu đề sự kiện |
-| `start` | string | Thời gian bắt đầu sự kiện |
-| `end` | string | Thời gian kết thúc sự kiện |
-| `html_link` | string | Liên kết để xem sự kiện trong Google Calendar |
+| `event_id` | string | Created event ID |
+| `summary` | string | Event title |
+| `start` | string | Event start time |
+| `end` | string | Event end time |
+| `html_link` | string | Link to view the event in Google Calendar |
 
 **Example:** Create a meeting event
 
@@ -448,11 +448,11 @@ attendees: alice@example.com, bob@example.com
 timezone: America/New_York
 ```
 
-### Danh sách sự kiện Lịch
+### Calendar List Events
 
 `google.calendar.list_events`
 
-Liệt kê sự kiện sắp tới từ Google Calendar
+List upcoming events from Google Calendar
 
 **Parameters:**
 
@@ -467,8 +467,8 @@ Liệt kê sự kiện sắp tới từ Google Calendar
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `events` | array | Danh sách sự kiện lịch |
-| `count` | number | Số lượng sự kiện trả về |
+| `events` | array | List of calendar events |
+| `count` | number | Number of events returned |
 
 **Example:** List next 5 events
 
@@ -477,11 +477,11 @@ access_token: <oauth2-token>
 max_results: 5
 ```
 
-### Tìm kiếm Gmail
+### Gmail Search
 
 `google.gmail.search`
 
-Tìm kiếm tin nhắn Gmail bằng cú pháp tìm kiếm Gmail
+Search Gmail messages using Gmail search query syntax
 
 **Parameters:**
 
@@ -495,8 +495,8 @@ Tìm kiếm tin nhắn Gmail bằng cú pháp tìm kiếm Gmail
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `messages` | array | Danh sách tin nhắn phù hợp |
-| `total` | number | Tổng số tin nhắn trả về |
+| `messages` | array | List of matching messages |
+| `total` | number | Total number of messages returned |
 
 **Example:** Search for emails from a specific sender
 
@@ -506,11 +506,11 @@ query: from:boss@company.com is:unread
 max_results: 5
 ```
 
-### Gửi Gmail
+### Gmail Send
 
 `google.gmail.send`
 
-Gửi email qua Gmail API
+Send an email via the Gmail API
 
 **Parameters:**
 
@@ -528,9 +528,9 @@ Gửi email qua Gmail API
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `message_id` | string | ID tin nhắn Gmail |
-| `thread_id` | string | ID chuỗi Gmail |
-| `to` | string | Địa chỉ email người nhận |
+| `message_id` | string | Gmail message ID |
+| `thread_id` | string | Gmail thread ID |
+| `to` | string | Recipient email address |
 
 **Example:** Send a plain text email
 

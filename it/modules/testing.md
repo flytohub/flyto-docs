@@ -2,147 +2,205 @@
 
 Assertion utilities: equal, contains, length, true, not null, greater than.
 
-**6 modules**
+**8 modules**
 
 | Module | Description |
 |--------|-------------|
-| [Verifica Contiene](#verifica-contiene) | Verifica che una collezione contenga un valore |
-| [Verifica Uguale](#verifica-uguale) | Verifica che due valori siano uguali |
-| [Verifica Maggiore Di](#verifica-maggiore-di) | Verifica che un valore sia maggiore di un altro |
-| [Verifica Lunghezza](#verifica-lunghezza) | Verifica che una collezione abbia lunghezza attesa |
-| [Verifica Non Null](#verifica-non-null) | Verifica che un valore non sia null o undefined |
-| [Verifica True](#verifica-true) | Verifica che una condizione sia vera |
+| [Assert Contains](#assert-contains) | Assert that a collection contains a value |
+| [Assert Equal](#assert-equal) | Assert that two values are equal |
+| [Assert Greater Than](#assert-greater-than) | Assert that a value is greater than another |
+| [Assert Length](#assert-length) | Assert that a collection has expected length |
+| [Assert Not Null](#assert-not-null) | Assert that a value is not null or undefined |
+| [Assert Status](#assert-status) | Compare probe statuses to a baseline to derive exploitable/sanitized verdict |
+| [Assert Timing](#assert-timing) | Compare probe duration to a baseline to detect time-based oracles |
+| [Assert True](#assert-true) | Assert that a condition is true |
 
 ## Modules
 
-### Verifica Contiene
+### Assert Contains
 
 `test.assert_contains`
 
-Verifica che una collezione contenga un valore
+Assert that a collection contains a value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `collection` | ['array', 'string'] | Yes | - | Collezione in cui cercare |
-| `value` | ['string', 'number', 'boolean'] | Yes | - | Collezione in cui cercare |
-| `message` | string | No | - | Valore da trovare |
+| `collection` | ['array', 'string'] | Yes | - | Collection to search in |
+| `value` | ['string', 'number', 'boolean'] | Yes | - | Value to find |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Messaggio errore personalizzato |
-| `collection` | ['array', 'string'] | Se l'asserzione e passata |
-| `value` | ['string', 'number', 'boolean'] | Verifica che una collezione contenga un valore |
-| `message` | string | Verifica che una collezione contenga un valore |
+| `passed` | boolean | Whether assertion passed |
+| `collection` | ['array', 'string'] | Collection searched |
+| `value` | ['string', 'number', 'boolean'] | Value searched for |
+| `message` | string | Result message |
 
-### Verifica Uguale
+### Assert Equal
 
 `test.assert_equal`
 
-Verifica che due valori siano uguali
+Assert that two values are equal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Valore effettivo |
-| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Valore effettivo |
-| `message` | string | No | - | Valore atteso |
+| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Actual value |
+| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Expected value |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Messaggio errore personalizzato |
-| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Se l'asserzione e passata |
-| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Verifica che due valori siano uguali |
-| `message` | string | Verifica che due valori siano uguali |
+| `passed` | boolean | Whether assertion passed |
+| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Actual value received |
+| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Expected value |
+| `message` | string | Result message |
 
-### Verifica Maggiore Di
+### Assert Greater Than
 
 `test.assert_greater_than`
 
-Verifica che un valore sia maggiore di un altro
+Assert that a value is greater than another
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | number | Yes | - | Valore effettivo |
-| `threshold` | number | Yes | - | Valore effettivo |
-| `message` | string | No | - | Valore soglia |
+| `actual` | number | Yes | - | Actual value |
+| `threshold` | number | Yes | - | Threshold value |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Messaggio errore personalizzato |
-| `actual` | number | Se l'asserzione e passata |
-| `threshold` | number | Verifica che un valore sia maggiore di un altro |
-| `message` | string | Verifica che un valore sia maggiore di un altro |
+| `passed` | boolean | Whether assertion passed |
+| `actual` | number | Actual value |
+| `threshold` | number | Threshold value |
+| `message` | string | Result message |
 
-### Verifica Lunghezza
+### Assert Length
 
 `test.assert_length`
 
-Verifica che una collezione abbia lunghezza attesa
+Assert that a collection has expected length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `collection` | ['array', 'string'] | Yes | - | Collezione da verificare |
-| `expected_length` | number | Yes | - | Collezione da verificare |
-| `message` | string | No | - | Lunghezza attesa |
+| `collection` | ['array', 'string'] | Yes | - | Collection to check |
+| `expected_length` | number | Yes | - | Expected length |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Messaggio errore personalizzato |
-| `actual_length` | number | Messaggio errore personalizzato |
-| `expected_length` | number | Verifica che una collezione abbia lunghezza attesa |
-| `message` | string | Verifica che una collezione abbia lunghezza attesa |
+| `passed` | boolean | Whether assertion passed |
+| `actual_length` | number | Actual length |
+| `expected_length` | number | Expected length |
+| `message` | string | Result message |
 
-### Verifica Non Null
+### Assert Not Null
 
 `test.assert_not_null`
 
-Verifica che un valore non sia null o undefined
+Assert that a value is not null or undefined
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | ['string', 'number', 'boolean', 'object', 'array', 'null'] | Yes | - | Valore da verificare |
-| `message` | string | No | - | Valore da verificare |
+| `value` | ['string', 'number', 'boolean', 'object', 'array', 'null'] | Yes | - | Value to check |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Verifica che un valore non sia null o undefined |
-| `message` | string | Verifica che un valore non sia null o undefined |
+| `passed` | boolean | Whether assertion passed |
+| `message` | string | Result message |
 
-### Verifica True
+### Assert Status
+
+`test.assert_status`
+
+Compare probe statuses to a baseline to derive exploitable/sanitized verdict
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `source` | ['array', 'object'] | Yes | - | Batch result data (array of {status,...} from http.batch) |
+| `baseline_index` | number | No | `0` |  |
+| `probe_indices` | array | No | - | Indices to compare against the baseline |
+| `expected_blocked` | array | No | `[401, 403]` |  |
+| `on_bypass` | string | No | `exploitable` |  |
+| `on_blocked` | string | No | `sanitized` |  |
+| `on_error` | string | No | `unreachable` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `passed` | boolean | True when verdict != on_bypass |
+| `verdict` | string | One of on_bypass/on_blocked/on_error values |
+| `baseline` | object | Baseline probe summary |
+| `probes` | array | Per-probe decision detail |
+
+### Assert Timing
+
+`test.assert_timing`
+
+Compare probe duration to a baseline to detect time-based oracles
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `source` | ['array', 'object'] | Yes | - | Batch result data (array of {duration_ms,...} from http.batch) |
+| `baseline_index` | number | No | `0` |  |
+| `probe_index` | number | Yes | - |  |
+| `threshold_ms` | number | No | `3000` | Minimum probe-vs-baseline delta to flag as exploitable |
+| `on_slow` | string | No | `exploitable` |  |
+| `on_normal` | string | No | `inconclusive` |  |
+| `on_error` | string | No | `unreachable` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `passed` | boolean | True when verdict != on_slow |
+| `verdict` | string | on_slow/on_normal/on_error value |
+| `baseline_ms` | number | Baseline duration in ms |
+| `probe_ms` | number | Probe duration in ms |
+| `delta_ms` | number | probe_ms - baseline_ms |
+| `threshold_ms` | number | Threshold used |
+
+### Assert True
 
 `test.assert_true`
 
-Verifica che una condizione sia vera
+Assert that a condition is true
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `condition` | boolean | Yes | - | Condizione da verificare |
-| `message` | string | No | - | Condizione da verificare |
+| `condition` | boolean | Yes | - | Condition to check |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | Verifica che una condizione sia vera |
-| `message` | string | Verifica che una condizione sia vera |
+| `passed` | boolean | Whether assertion passed |
+| `message` | string | Result message |

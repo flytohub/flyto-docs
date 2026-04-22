@@ -6,34 +6,34 @@ Execute GraphQL queries and mutations.
 
 | Module | Description |
 |--------|-------------|
-| [GraphQL 變更](#graphql-變更) | 對端點執行 GraphQL 變更 |
-| [GraphQL 查詢](#graphql-查詢) | 對端點執行 GraphQL 查詢 |
+| [GraphQL Mutation](#graphql-mutation) | Execute a GraphQL mutation against an endpoint |
+| [GraphQL Query](#graphql-query) | Execute a GraphQL query against an endpoint |
 
 ## Modules
 
-### GraphQL 變更
+### GraphQL Mutation
 
 `graphql.mutation`
 
-對端點執行 GraphQL 變更
+Execute a GraphQL mutation against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | GraphQL 端點 URL |
-| `mutation` | string | Yes | - | GraphQL 變更字串 |
-| `variables` | object | No | - | GraphQL 變更變數作為鍵值對 |
-| `headers` | object | No | - | 隨請求發送的額外 HTTP 標頭 |
-| `auth_token` | string | No | - | 用於驗證的 Bearer 令牌（作為 Authorization 標頭添加） |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `mutation` | string | Yes | - | GraphQL mutation string |
+| `variables` | object | No | - | GraphQL mutation variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | GraphQL 回應資料 |
-| `errors` | array | GraphQL 錯誤（若無錯誤則為 null） |
-| `status_code` | number | HTTP 狀態碼 |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Create user mutation
 
@@ -43,29 +43,29 @@ mutation: mutation CreateUser($input: UserInput!) { createUser(input: $input) { 
 variables: {"input": {"name": "John", "email": "john@example.com"}}
 ```
 
-### GraphQL 查詢
+### GraphQL Query
 
 `graphql.query`
 
-對端點執行 GraphQL 查詢
+Execute a GraphQL query against an endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | GraphQL 端點 URL |
-| `query` | string | Yes | - | GraphQL 查詢字串 |
-| `variables` | object | No | - | GraphQL 查詢變數作為鍵值對 |
-| `headers` | object | No | - | 隨請求發送的額外 HTTP 標頭 |
-| `auth_token` | string | No | - | 用於驗證的 Bearer 令牌（作為 Authorization 標頭添加） |
+| `url` | string | Yes | - | GraphQL endpoint URL |
+| `query` | string | Yes | - | GraphQL query string |
+| `variables` | object | No | - | GraphQL query variables as key-value pairs |
+| `headers` | object | No | - | Additional HTTP headers to send with the request |
+| `auth_token` | string | No | - | Bearer token for authentication (added as Authorization header) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | object | GraphQL 回應資料 |
-| `errors` | array | GraphQL 錯誤（若無錯誤則為 null） |
-| `status_code` | number | HTTP 狀態碼 |
+| `data` | object | GraphQL response data |
+| `errors` | array | GraphQL errors (null if no errors) |
+| `status_code` | number | HTTP status code |
 
 **Example:** Simple query
 

@@ -6,19 +6,19 @@ Basic math operations: abs, ceil, floor, power, round.
 
 | Module | Description |
 |--------|-------------|
-| [Valeur absolue](#valeur-absolue) | Obtenir la valeur absolue d'un nombre |
-| [Plafond](#plafond) | Arrondir un nombre vers le haut a l'entier le plus proche |
-| [Plancher](#plancher) | Arrondir un nombre vers le bas a l'entier le plus proche |
-| [Puissance/Exposant](#puissanceexposant) | Elever un nombre a une puissance |
-| [Arrondir](#arrondir) | Arrondir un nombre au nombre de decimales specifie |
+| [Absolute Value](#absolute-value) | Get absolute value of a number |
+| [Ceiling Number](#ceiling-number) | Round number up to nearest integer |
+| [Floor Number](#floor-number) | Round number down to nearest integer |
+| [Power/Exponent](#powerexponent) | Raise number to a power |
+| [Round Number](#round-number) | Round number to specified decimal places |
 
 ## Modules
 
-### Valeur absolue
+### Absolute Value
 
 `math.abs`
 
-Obtenir la valeur absolue d'un nombre
+Get absolute value of a number
 
 **Parameters:**
 
@@ -30,8 +30,8 @@ Obtenir la valeur absolue d'un nombre
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Valeur absolue |
-| `original` | number | Valeur absolue |
+| `result` | number | Absolute value |
+| `original` | number | Original number |
 
 **Example:** Absolute of negative number
 
@@ -45,11 +45,11 @@ number: -5
 number: 3.14
 ```
 
-### Plafond
+### Ceiling Number
 
 `math.ceil`
 
-Arrondir un nombre vers le haut a l'entier le plus proche
+Round number up to nearest integer
 
 **Parameters:**
 
@@ -61,8 +61,8 @@ Arrondir un nombre vers le haut a l'entier le plus proche
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Valeur plafond |
-| `original` | number | Valeur plafond |
+| `result` | number | Ceiling value |
+| `original` | number | Original number |
 
 **Example:** Ceiling positive number
 
@@ -76,11 +76,11 @@ number: 3.2
 number: -2.7
 ```
 
-### Plancher
+### Floor Number
 
 `math.floor`
 
-Arrondir un nombre vers le bas a l'entier le plus proche
+Round number down to nearest integer
 
 **Parameters:**
 
@@ -92,8 +92,8 @@ Arrondir un nombre vers le bas a l'entier le plus proche
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Valeur plancher |
-| `original` | number | Valeur plancher |
+| `result` | number | Floored value |
+| `original` | number | Original number |
 
 **Example:** Floor positive number
 
@@ -107,11 +107,11 @@ number: 3.7
 number: -2.3
 ```
 
-### Puissance/Exposant
+### Power/Exponent
 
 `math.power`
 
-Elever un nombre a une puissance
+Raise number to a power
 
 **Parameters:**
 
@@ -124,9 +124,9 @@ Elever un nombre a une puissance
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Resultat de la base elevee a l'exposant |
-| `base` | number | Resultat de la base elevee a l'exposant |
-| `exponent` | number | Resultat de la base elevee a l'exposant |
+| `result` | number | Result of base raised to exponent |
+| `base` | number | Base number |
+| `exponent` | number | Exponent used |
 
 **Example:** Square a number
 
@@ -142,11 +142,11 @@ base: 27
 exponent: 0.333333
 ```
 
-### Arrondir
+### Round Number
 
 `math.round`
 
-Arrondir un nombre au nombre de decimales specifie
+Round number to specified decimal places
 
 **Parameters:**
 
@@ -159,9 +159,9 @@ Arrondir un nombre au nombre de decimales specifie
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | number | Valeur arrondie |
-| `original` | number | Valeur arrondie |
-| `decimals` | number | Valeur arrondie |
+| `result` | number | Rounded value |
+| `original` | number | Original number |
+| `decimals` | number | Decimal places used |
 
 **Example:** Round to integer
 

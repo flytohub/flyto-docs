@@ -6,34 +6,34 @@ Create and extract ZIP, TAR, and gzip archives.
 
 | Module | Description |
 |--------|-------------|
-| [Gunzip 解壓縮](#gunzip-解壓縮) | 解壓縮 gzip 壓縮檔案 |
-| [Gzip 壓縮](#gzip-壓縮) | 使用 gzip 壓縮單一檔案 |
-| [建立 TAR 壓縮檔](#建立-tar-壓縮檔) | 建立具備選擇性 gzip/bz2/xz 壓縮的 TAR 壓縮檔 |
-| [解壓 TAR 封存](#解壓-tar-封存) | 從 TAR 封存中解壓檔案（自動偵測壓縮） |
-| [建立 ZIP 壓縮檔](#建立-zip-壓縮檔) | 從檔案列表建立 ZIP 壓縮檔 |
-| [解壓縮 ZIP 壓縮檔](#解壓縮-zip-壓縮檔) | 從 ZIP 壓縮檔中解壓縮檔案 |
+| [Gunzip Decompress](#gunzip-decompress) | Decompress a gzip-compressed file |
+| [Gzip Compress](#gzip-compress) | Compress a single file using gzip |
+| [Create TAR Archive](#create-tar-archive) | Create a TAR archive with optional gzip/bz2/xz compression |
+| [Extract TAR Archive](#extract-tar-archive) | Extract files from a TAR archive (auto-detects compression) |
+| [Create ZIP Archive](#create-zip-archive) | Create a ZIP archive from a list of files |
+| [Extract ZIP Archive](#extract-zip-archive) | Extract files from a ZIP archive |
 
 ## Modules
 
-### Gunzip 解壓縮
+### Gunzip Decompress
 
 `archive.gunzip`
 
-解壓縮 gzip 壓縮檔案
+Decompress a gzip-compressed file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | gzip 壓縮檔案的路徑 |
-| `output_path` | string | No | - | 解壓縮後檔案的路徑（預設為輸入路徑去除 .gz 副檔名） |
+| `input_path` | string | Yes | - | Path to the gzip-compressed file |
+| `output_path` | string | No | - | Path for the decompressed file (defaults to input without .gz extension) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 解壓縮後檔案的路徑 |
-| `size` | number | 解壓縮後檔案大小（位元組） |
+| `path` | string | Path to the decompressed file |
+| `size` | number | Decompressed file size in bytes |
 
 **Example:** Decompress a gzip file
 
@@ -41,27 +41,27 @@ Create and extract ZIP, TAR, and gzip archives.
 input_path: /tmp/data.txt.gz
 ```
 
-### Gzip 壓縮
+### Gzip Compress
 
 `archive.gzip`
 
-使用 gzip 壓縮單一檔案
+Compress a single file using gzip
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `input_path` | string | Yes | - | 要壓縮的檔案路徑 |
-| `output_path` | string | No | - | 壓縮後檔案的路徑（預設為輸入路徑 + .gz） |
+| `input_path` | string | Yes | - | Path to the file to compress |
+| `output_path` | string | No | - | Path for the compressed file (defaults to input_path + .gz) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 壓縮後檔案的路徑 |
-| `original_size` | number | 原始檔案大小（位元組） |
-| `compressed_size` | number | 壓縮後檔案大小（位元組） |
-| `ratio` | number | 壓縮比（壓縮後 / 原始） |
+| `path` | string | Path to the compressed file |
+| `original_size` | number | Original file size in bytes |
+| `compressed_size` | number | Compressed file size in bytes |
+| `ratio` | number | Compression ratio (compressed / original) |
 
 **Example:** Compress a file with gzip
 
@@ -69,27 +69,27 @@ input_path: /tmp/data.txt.gz
 input_path: /tmp/data.txt
 ```
 
-### 建立 TAR 壓縮檔
+### Create TAR Archive
 
 `archive.tar_create`
 
-建立具備選擇性 gzip/bz2/xz 壓縮的 TAR 壓縮檔
+Create a TAR archive with optional gzip/bz2/xz compression
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | Yes | - | 輸出 TAR 檔案的路徑 |
-| `files` | array | Yes | - | 要包含在壓縮檔中的檔案路徑列表 |
-| `compression` | select (`none`, `gzip`, `bz2`, `xz`) | No | `gzip` | 壓縮方法 |
+| `output_path` | string | Yes | - | Path for the output TAR file |
+| `files` | array | Yes | - | List of file paths to include in the archive |
+| `compression` | select (`none`, `gzip`, `bz2`, `xz`) | No | `gzip` | Compression method |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 建立的 TAR 檔案路徑 |
-| `size` | number | 封存大小（位元組） |
-| `file_count` | number | 封存中的檔案數量 |
+| `path` | string | Path to the created TAR file |
+| `size` | number | Archive size in bytes |
+| `file_count` | number | Number of files in the archive |
 
 **Example:** Create gzipped TAR archive
 
@@ -99,25 +99,25 @@ files: ["/tmp/file1.txt", "/tmp/file2.txt"]
 compression: gzip
 ```
 
-### 解壓 TAR 封存
+### Extract TAR Archive
 
 `archive.tar_extract`
 
-從 TAR 封存中解壓檔案（自動偵測壓縮）
+Extract files from a TAR archive (auto-detects compression)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `archive_path` | string | Yes | - | 要解壓的 TAR 封存路徑 |
-| `output_dir` | string | Yes | - | 要解壓檔案的目錄 |
+| `archive_path` | string | Yes | - | Path to the TAR archive to extract |
+| `output_dir` | string | Yes | - | Directory to extract files into |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted_files` | array | 已解壓檔案路徑列表 |
-| `total_size` | number | 已解壓檔案的總大小（位元組） |
+| `extracted_files` | array | List of extracted file paths |
+| `total_size` | number | Total size of extracted files in bytes |
 
 **Example:** Extract TAR.GZ archive
 
@@ -126,28 +126,28 @@ archive_path: /tmp/archive.tar.gz
 output_dir: /tmp/extracted/
 ```
 
-### 建立 ZIP 壓縮檔
+### Create ZIP Archive
 
 `archive.zip_create`
 
-從檔案列表建立 ZIP 壓縮檔
+Create a ZIP archive from a list of files
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `output_path` | string | Yes | - | 輸出 ZIP 檔案的路徑 |
-| `files` | array | Yes | - | 要包含在壓縮檔中的檔案路徑列表 |
-| `compression` | select (`stored`, `deflated`, `bzip2`, `lzma`) | No | `deflated` | 壓縮方法 |
-| `password` | string | No | - | 可選的密碼以保護壓縮檔（僅限解壓縮，支援有限） |
+| `output_path` | string | Yes | - | Path for the output ZIP file |
+| `files` | array | Yes | - | List of file paths to include in the archive |
+| `compression` | select (`stored`, `deflated`, `bzip2`, `lzma`) | No | `deflated` | Compression method |
+| `password` | string | No | - | Optional password to protect the archive (extraction only, limited support) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `path` | string | 建立的 ZIP 檔案路徑 |
-| `size` | number | 壓縮檔大小（位元組） |
-| `file_count` | number | 壓縮檔中的檔案數量 |
+| `path` | string | Path to the created ZIP file |
+| `size` | number | Archive size in bytes |
+| `file_count` | number | Number of files in the archive |
 
 **Example:** Create ZIP from files
 
@@ -157,26 +157,26 @@ files: ["/tmp/file1.txt", "/tmp/file2.txt"]
 compression: deflated
 ```
 
-### 解壓縮 ZIP 壓縮檔
+### Extract ZIP Archive
 
 `archive.zip_extract`
 
-從 ZIP 壓縮檔中解壓縮檔案
+Extract files from a ZIP archive
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `archive_path` | string | Yes | - | 要解壓縮的 ZIP 壓縮檔路徑 |
-| `output_dir` | string | Yes | - | 解壓縮檔案的目錄 |
-| `password` | string | No | - | 加密壓縮檔的密碼 |
+| `archive_path` | string | Yes | - | Path to the ZIP archive to extract |
+| `output_dir` | string | Yes | - | Directory to extract files into |
+| `password` | string | No | - | Password for encrypted archives |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `extracted_files` | array | 解壓縮後的檔案路徑列表 |
-| `total_size` | number | 解壓縮後檔案的總大小（位元組） |
+| `extracted_files` | array | List of extracted file paths |
+| `total_size` | number | Total size of extracted files in bytes |
 
 **Example:** Extract ZIP archive
 

@@ -6,68 +6,68 @@ Full web automation: navigation, interaction, data extraction, screenshots, and 
 
 | Module | Description |
 |--------|-------------|
-| [Xử Lý Thử Thách](#xử-lý-thử-thách) | Tự động phát hiện và xử lý thử thách chống bot (Cloudflare, CAPTCHA) |
-| [Nhấp phần tử](#nhấp-phần-tử) | Nhấp vào một phần tử trên trang |
-| [Đóng trình duyệt](#đóng-trình-duyệt) | Đóng phiên trình duyệt và giải phóng tài nguyên |
-| [Kết Nối Từ Xa](#kết-nối-từ-xa) | Kết nối dịch vụ trình duyệt từ xa (Browserless, BrowserBase). Fingerprint thật, vượt Cloudflare. |
-| [Chụp Console](#chụp-console) | Chụp nhật ký console trình duyệt (lỗi, cảnh báo, thông tin) |
-| [Quản lý Cookies](#quản-lý-cookies) | Lấy, đặt hoặc xóa cookie trình duyệt |
-| [Tệp Cookie](#tệp-cookie) | Nhập hoặc xuất cookie trình duyệt từ/đến tệp JSON. |
+| [Handle Challenge](#handle-challenge) | Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop. |
+| [Click Element](#click-element) | Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Close Browser](#close-browser) | Close the browser instance and release resources |
+| [Connect Remote](#connect-remote) | Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs. |
+| [Capture Console](#capture-console) | Capture browser console logs (errors, warnings, info) |
+| [Manage Cookies](#manage-cookies) | Get, set, or clear browser cookies |
+| [Cookies File](#cookies-file) | Import or export browser cookies to/from a JSON file for session persistence. |
 | [Smart Detect](#smart-detect) | Smart element detection with multi-strategy matching. Finds elements using text, selector, role, proximity, and fuzzy matching with automatic fallbacks. |
-| [Phát Hiện Danh Sách](#phát-hiện-danh-sách) | Tự động phát hiện mục lặp lại trên trang (bài viết, sản phẩm, kết quả tìm kiếm) |
-| [Xử lý hộp thoại](#xử-lý-hộp-thoại) | Xử lý hộp thoại alert, confirm và prompt |
-| [Tải tệp](#tải-tệp) | Tải tệp từ trình duyệt |
-| [Kéo và thả](#kéo-và-thả) | Kéo và thả các phần tử |
-| [Mô phỏng thiết bị](#mô-phỏng-thiết-bị) | Mô phỏng thiết bị hoặc đặt khung nhìn tùy chỉnh |
-| [Đảm bảo Trình duyệt](#đảm-bảo-trình-duyệt) | Đảm bảo phiên trình duyệt tồn tại (tái sử dụng hoặc khởi chạy) |
-| [Thực thi JavaScript](#thực-thi-javascript) | Thực thi mã JavaScript trong ngữ cảnh trang |
-| [Trích xuất dữ liệu](#trích-xuất-dữ-liệu) | Trích xuất dữ liệu có cấu trúc từ trang |
-| [Trích Xuất Lồng Nhau](#trích-xuất-lồng-nhau) | Trích xuất dữ liệu lồng nhau/dạng cây (bình luận, luồng, thư mục). |
-| [Tìm phần tử](#tìm-phần-tử) | Tìm các phần tử trong trang và trả về danh sách ID phần tử |
-| [Điền Biểu mẫu](#điền-biểu-mẫu) | Điền biểu mẫu thông minh với phát hiện trường tự động |
-| [Chuyển Frame](#chuyển-frame) | Chuyển sang ngữ cảnh iframe hoặc frame |
-| [Giả lập vị trí địa lý](#giả-lập-vị-trí-địa-lý) | Giả lập vị trí địa lý trình duyệt |
-| [Đi đến URL](#đi-đến-url) | Điều hướng đến một URL cụ thể |
-| [Di chuột qua phần tử](#di-chuột-qua-phần-tử) | Di chuột qua một phần tử |
-| [Tương Tác Trình Duyệt](#tương-tác-trình-duyệt) | Tạm dừng để người dùng tương tác với trang trình duyệt |
-| [Khởi chạy trình duyệt](#khởi-chạy-trình-duyệt) | Khởi chạy phiên trình duyệt mới với Playwright |
-| [Đăng Nhập](#đăng-nhập) | Tự động phát hiện và điền form đăng nhập với xác minh sau đăng nhập. |
-| [Điều hướng lịch sử](#điều-hướng-lịch-sử) | Điều hướng lịch sử trình duyệt (quay lại, tiến tới, tải lại) |
-| [Giám sát mạng](#giám-sát-mạng) | Giám sát và chặn các yêu cầu mạng |
-| [Danh sách Trang](#danh-sách-trang) | Liệt kê tất cả các trang/tab trình duyệt đang mở |
-| [Phân trang & Trích xuất](#phân-trang--trích-xuất) | Tự động phân trang và trích xuất dữ liệu |
-| [Tạo PDF](#tạo-pdf) | Tạo PDF từ trang hiện tại |
-| [Chỉ số Hiệu suất](#chỉ-số-hiệu-suất) | Thu thập các chỉ số hiệu suất trình duyệt |
-| [Nhóm Trình Duyệt](#nhóm-trình-duyệt) | Quản lý nhiều phiên trình duyệt cho tự động hóa song song. |
-| [Nhấn phím](#nhấn-phím) | Nhấn một phím bàn phím |
-| [Xoay Proxy](#xoay-proxy) | Luân chuyển danh sách proxy với phát hiện proxy lỗi. |
-| [Trích Xuất Bài Viết](#trích-xuất-bài-viết) | Trích xuất bài viết thông minh — lấy tiêu đề, tác giả, ngày và nội dung chính từ mọi trang web |
-| [Ghi hành động](#ghi-hành-động) | Ghi lại các hành động người dùng dưới dạng workflow |
-| [Giải phóng Trình duyệt](#giải-phóng-trình-duyệt) | Giải phóng phiên trình duyệt (chỉ đóng nếu sở hữu) |
-| [Bắt Phản Hồi](#bắt-phản-hồi) | Bắt nội dung phản hồi API (XHR/fetch). Trích xuất JSON từ lệnh gọi API trên trang. |
-| [Kiểm Tra Robots.txt](#kiểm-tra-robots.txt) | Kiểm tra tuân thủ robots.txt và khám phá sitemap. |
-| [Chụp màn hình](#chụp-màn-hình) | Chụp ảnh màn hình của trang hiện tại |
-| [Cuộn trang](#cuộn-trang) | Cuộn trang đến phần tử, vị trí hoặc hướng |
-| [Chọn tùy chọn](#chọn-tùy-chọn) | Chọn tùy chọn từ phần tử dropdown |
-| [Phân Tích Sitemap](#phân-tích-sitemap) | Phân tích sitemap.xml và trích xuất URL kèm metadata. |
-| [Ảnh chụp DOM](#ảnh-chụp-dom) | Chụp ảnh DOM của trang hiện tại |
-| [Lưu trữ trình duyệt](#lưu-trữ-trình-duyệt) | Truy cập localStorage và sessionStorage |
-| [Quản lý Tab](#quản-lý-tab) | Tạo, chuyển và đóng các tab trình duyệt |
-| [Trích Xuất Bảng](#trích-xuất-bảng) | Trích xuất bảng HTML thành dữ liệu có cấu trúc với tiêu đề tự động phát hiện. |
-| [Giới Hạn Tốc Độ](#giới-hạn-tốc-độ) | Giới hạn tốc độ theo tên miền. Chờ giữa các yêu cầu để tránh bị chặn. |
-| [Dấu vết Trình duyệt](#dấu-vết-trình-duyệt) | Bắt đầu, dừng hoặc lưu dấu vết hiệu suất trình duyệt |
-| [Gõ văn bản](#gõ-văn-bản) | Gõ văn bản vào trường input |
-| [Tải tệp lên](#tải-tệp-lên) | Tải tệp lên phần tử input file |
-| [Đặt khung nhìn](#đặt-khung-nhìn) | Lấy hoặc đặt kích thước khung nhìn trình duyệt |
-| [Chờ](#chờ) | Chờ một khoảng thời gian hoặc cho đến khi một phần tử xuất hiện |
+| [Detect List](#detect-list) | Auto-detect repeating items on any page (articles, products, search results). No selectors needed. |
+| [Handle Dialog](#handle-dialog) | Handle alert, confirm, and prompt dialogs |
+| [Download File](#download-file) | Download file from browser |
+| [Drag and Drop](#drag-and-drop) | Drag and drop elements |
+| [Device Emulation](#device-emulation) | Emulate mobile devices, tablets, and custom viewports |
+| [Ensure Browser](#ensure-browser) | Ensure a browser session exists (reuse or launch) |
+| [Execute JavaScript](#execute-javascript) | Execute JavaScript code in page context |
+| [Extract Data](#extract-data) | Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Extract Nested](#extract-nested) | Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children. |
+| [Find Elements](#find-elements) | Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Fill Form](#fill-form) | Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM. |
+| [Switch Frame](#switch-frame) | Switch to iframe or frame context |
+| [Mock Geolocation](#mock-geolocation) | Mock browser geolocation |
+| [Go to URL](#go-to-url) | Navigate to a specific URL |
+| [Hover Element](#hover-element) | Hover mouse over an element |
+| [Browser Interact](#browser-interact) | Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action. |
+| [Launch Browser](#launch-browser) | Launch a new browser instance with Playwright |
+| [Login](#login) | Auto-detect and fill login forms. Handles username + password + submit with post-login verification. |
+| [Page Navigation](#page-navigation) | Navigate back, forward, or reload the page |
+| [Network Monitor](#network-monitor) | Monitor and intercept network requests |
+| [List Pages](#list-pages) | List all open browser pages/tabs with details |
+| [Paginate & Extract](#paginate--extract) | Auto-paginate through pages and extract data. Supports retry and checkpoint resume. |
+| [Generate PDF](#generate-pdf) | Generate PDF from current page |
+| [Performance Metrics](#performance-metrics) | Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics |
+| [Browser Pool](#browser-pool) | Manage multiple named browser instances for parallel automation. |
+| [Press Key](#press-key) | Press a keyboard key |
+| [Rotate Proxy](#rotate-proxy) | Rotate through a list of proxies. Relaunches browser with the next proxy. |
+| [Extract Article](#extract-article) | Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode. |
+| [Record Actions](#record-actions) | Record user actions as workflow |
+| [Release Browser](#release-browser) | Release browser session (close only if owned) |
+| [Capture Response](#capture-response) | Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls. |
+| [Check Robots.txt](#check-robots.txt) | Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping. |
+| [Take Screenshot](#take-screenshot) | Take a screenshot of the current page |
+| [Scroll Page](#scroll-page) | Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Select Option](#select-option) | Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Parse Sitemap](#parse-sitemap) | Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering. |
+| [DOM Snapshot](#dom-snapshot) | Capture DOM snapshot in HTML, MHTML, or text format |
+| [Browser Storage](#browser-storage) | Access localStorage and sessionStorage |
+| [Manage Tabs](#manage-tabs) | Create, switch, and close browser tabs |
+| [Extract Table](#extract-table) | Extract HTML tables as structured data. Auto-detects headers from thead/th. |
+| [Throttle](#throttle) | Per-domain rate limiting. Waits between requests to the same domain to avoid bans. |
+| [Performance Trace](#performance-trace) | Start/stop Chrome DevTools performance tracing (Chromium only) |
+| [Type Text](#type-text) | Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM. |
+| [Upload File](#upload-file) | Upload file to file input element |
+| [Resize Viewport](#resize-viewport) | Resize browser viewport to specific dimensions |
+| [Wait](#wait) | Wait for a duration or until an element appears |
 
 ## Modules
 
-### Xử Lý Thử Thách
+### Handle Challenge
 
 `browser.challenge`
 
-Tự động phát hiện và xử lý thử thách chống bot (Cloudflare, CAPTCHA)
+Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto-resolution, falls back to human-in-the-loop.
 
 **Parameters:**
 
@@ -107,11 +107,11 @@ auto_wait_seconds: 30
 human_fallback: false
 ```
 
-### Nhấp phần tử
+### Click Element
 
 `browser.click`
 
-Nhấp vào một phần tử trên trang
+Click an element on the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -131,8 +131,8 @@ Nhấp vào một phần tử trên trang
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | Trạng thái thao tác (success/error) |
-| `selector` | string | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | Selector that was used |
 | `method` | string | Click method used |
 
 **Example:** Example
@@ -156,11 +156,11 @@ click_method: selector
 selector: #submit-button
 ```
 
-### Đóng trình duyệt
+### Close Browser
 
 `browser.close`
 
-Đóng phiên trình duyệt và giải phóng tài nguyên
+Close the browser instance and release resources
 
 **Parameters:**
 
@@ -172,19 +172,19 @@ selector: #submit-button
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Đóng phiên trình duyệt |
-| `message` | string | Đóng phiên trình duyệt |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
 
 **Example:** Example
 
 ```yaml
 ```
 
-### Kết Nối Từ Xa
+### Connect Remote
 
 `browser.connect`
 
-Kết nối dịch vụ trình duyệt từ xa (Browserless, BrowserBase). Fingerprint thật, vượt Cloudflare.
+Connect to a remote browser service (Browserless, BrowserBase, CDP). Real fingerprints, residential IPs.
 
 **Parameters:**
 
@@ -222,11 +222,11 @@ ws_endpoint: wss://connect.browserbase.com?apiKey=KEY
 ws_endpoint: ws://localhost:3000
 ```
 
-### Chụp Console
+### Capture Console
 
 `browser.console`
 
-Chụp nhật ký console trình duyệt (lỗi, cảnh báo, thông tin)
+Capture browser console logs (errors, warnings, info)
 
 **Parameters:**
 
@@ -240,9 +240,9 @@ Chụp nhật ký console trình duyệt (lỗi, cảnh báo, thông tin)
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `messages` | array | Trạng thái thao tác (success/error) |
-| `count` | number | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `messages` | array | The messages |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -257,11 +257,11 @@ level: error
 timeout: 5000
 ```
 
-### Quản lý Cookies
+### Manage Cookies
 
 `browser.cookies`
 
-Lấy, đặt hoặc xóa cookie trình duyệt
+Get, set, or clear browser cookies
 
 **Parameters:**
 
@@ -280,9 +280,9 @@ Lấy, đặt hoặc xóa cookie trình duyệt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `cookies` | array | Trạng thái thao tác (success/error) |
-| `count` | number | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `cookies` | array | Browser cookies |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -312,11 +312,11 @@ domain: example.com
 action: clear
 ```
 
-### Tệp Cookie
+### Cookies File
 
 `browser.cookies_file`
 
-Nhập hoặc xuất cookie trình duyệt từ/đến tệp JSON.
+Import or export browser cookies to/from a JSON file for session persistence.
 
 **Parameters:**
 
@@ -423,11 +423,11 @@ text: Login
 match_mode: best
 ```
 
-### Phát Hiện Danh Sách
+### Detect List
 
 `browser.detect_list`
 
-Tự động phát hiện mục lặp lại trên trang (bài viết, sản phẩm, kết quả tìm kiếm)
+Auto-detect repeating items on any page (articles, products, search results). No selectors needed.
 
 **Parameters:**
 
@@ -467,11 +467,11 @@ min_items: 5
 max_items: 50
 ```
 
-### Xử lý hộp thoại
+### Handle Dialog
 
 `browser.dialog`
 
-Xử lý hộp thoại alert, confirm và prompt
+Handle alert, confirm, and prompt dialogs
 
 **Parameters:**
 
@@ -485,10 +485,10 @@ Xử lý hộp thoại alert, confirm và prompt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `message` | string | Trạng thái thao tác (success/error) |
-| `type` | string | Trạng thái thao tác (success/error) |
-| `default_value` | string | Tin nhắn kết quả mô tả kết quả |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `type` | string | The type |
+| `default_value` | string | The default value |
 
 **Example:** Example
 
@@ -516,11 +516,11 @@ action: listen
 timeout: 5000
 ```
 
-### Tải tệp
+### Download File
 
 `browser.download`
 
-Tải tệp từ trình duyệt
+Download file from browser
 
 **Parameters:**
 
@@ -534,10 +534,10 @@ Tải tệp từ trình duyệt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `path` | string | Trạng thái thao tác (success/error) |
-| `filename` | string | Trạng thái thao tác (success/error) |
-| `size` | number | Đường dẫn tệp hoặc tài nguyên |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -554,11 +554,11 @@ save_path: /downloads/large-file.zip
 timeout_ms: 120000
 ```
 
-### Kéo và thả
+### Drag and Drop
 
 `browser.drag`
 
-Kéo và thả các phần tử
+Drag and drop elements
 
 **Parameters:**
 
@@ -574,9 +574,9 @@ Kéo và thả các phần tử
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Vị trí trong phần tử đích {x, y} theo phần trăm |
-| `source` | string | Vị trí trong phần tử đích {x, y} theo phần trăm |
-| `target` | string | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `source` | string | The source |
+| `target` | string | The target |
 
 **Example:** Example
 
@@ -593,32 +593,32 @@ target: .container
 target_position: {"x": 0.5, "y": 0.5}
 ```
 
-### Mô phỏng thiết bị
+### Device Emulation
 
 `browser.emulate`
 
-Mô phỏng thiết bị hoặc đặt khung nhìn tùy chỉnh
+Emulate mobile devices, tablets, and custom viewports
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | Tên thiết bị để mô phỏng (ví dụ: iPhone 13) |
-| `width` | number | No | - | Chiều rộng khung nhìn tính bằng pixel |
-| `height` | number | No | - | Chiều cao khung nhìn tính bằng pixel |
-| `user_agent` | string | No | - | Chuỗi user agent tùy chỉnh |
-| `device_scale_factor` | number | No | - | Tỷ lệ điểm ảnh của thiết bị |
-| `is_mobile` | boolean | No | - | Có mô phỏng thiết bị di động không |
-| `has_touch` | boolean | No | - | Thiết bị có hỗ trợ cảm ứng không |
+| `device` | select (`iphone_12`, `iphone_14`, `iphone_14_pro_max`, `iphone_se`, `pixel_7`, `pixel_5`, `galaxy_s21`, `galaxy_s23`, `ipad_pro`, `ipad_mini`, `galaxy_tab_s8`, `desktop_chrome`, `desktop_firefox`, `desktop_safari`, `desktop_edge`, `laptop`, `macbook_pro`, `custom`) | Yes | - | Device preset or "custom" for manual settings |
+| `width` | number | No | - | Custom viewport width (for custom device) |
+| `height` | number | No | - | Custom viewport height (for custom device) |
+| `user_agent` | string | No | - | Custom user agent string |
+| `device_scale_factor` | number | No | - | Device pixel ratio (1-3) |
+| `is_mobile` | boolean | No | - | Enable mobile browser behavior |
+| `has_touch` | boolean | No | - | Enable touch event support |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái hoạt động (thành công/lỗi) |
-| `device` | string | Tên thiết bị đã được mô phỏng |
-| `viewport` | object | Kích thước khung nhìn hiện tại |
-| `is_mobile` | boolean | Mô phỏng di động có đang hoạt động không |
+| `status` | string | Operation status |
+| `device` | string | Emulated device name |
+| `viewport` | object | Applied viewport dimensions |
+| `is_mobile` | boolean | Whether mobile mode is enabled |
 
 **Example:** Example
 
@@ -650,11 +650,11 @@ device: desktop_chrome
 user_agent: CustomBot/1.0
 ```
 
-### Đảm bảo Trình duyệt
+### Ensure Browser
 
 `browser.ensure`
 
-Đảm bảo phiên trình duyệt tồn tại (tái sử dụng hoặc khởi chạy)
+Ensure a browser session exists (reuse or launch)
 
 **Parameters:**
 
@@ -668,9 +668,9 @@ user_agent: CustomBot/1.0
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trình duyệt đã được khởi chạy hay tái sử dụng |
-| `message` | string | Trình duyệt đã được khởi chạy hay tái sử dụng |
-| `is_owner` | boolean | Trình duyệt đã được khởi chạy hay tái sử dụng |
+| `status` | string | Whether browser was launched or reused |
+| `message` | string | Result message |
+| `is_owner` | boolean | Whether this step owns the browser (responsible for closing) |
 
 **Example:** Example
 
@@ -684,11 +684,11 @@ headless: false
 headless: true
 ```
 
-### Thực thi JavaScript
+### Execute JavaScript
 
 `browser.evaluate`
 
-Thực thi mã JavaScript trong ngữ cảnh trang
+Execute JavaScript code in page context
 
 **Parameters:**
 
@@ -701,8 +701,8 @@ Thực thi mã JavaScript trong ngữ cảnh trang
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `result` | any | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `result` | any | The operation result |
 
 **Example:** Example
 
@@ -729,11 +729,11 @@ args: ["#header"]
 script: document.body.style.backgroundColor = "red"; return "done"
 ```
 
-### Trích xuất dữ liệu
+### Extract Data
 
 `browser.extract`
 
-Trích xuất dữ liệu có cấu trúc từ trang
+Extract structured data from the page. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -747,9 +747,9 @@ Trích xuất dữ liệu có cấu trúc từ trang
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `data` | array | Trạng thái thao tác (success/error) |
-| `count` | number | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
 
 **Example:** Example
 
@@ -759,11 +759,11 @@ limit: 10
 fields: {"title": {"selector": "h3", "type": "text"}, "url": {"selector": "a", "type": "attribute", "attribute": "href"}}
 ```
 
-### Trích Xuất Lồng Nhau
+### Extract Nested
 
 `browser.extract_nested`
 
-Trích xuất dữ liệu lồng nhau/dạng cây (bình luận, luồng, thư mục).
+Extract tree/nested data (comments, threads, folders). Returns hierarchical structure with children.
 
 **Parameters:**
 
@@ -797,11 +797,11 @@ fields: {"author": {"selector": ".author"}, "text": {"selector": ".body"}, "date
 root_selector: li.item
 ```
 
-### Tìm phần tử
+### Find Elements
 
 `browser.find`
 
-Tìm các phần tử trong trang và trả về danh sách ID phần tử
+Find elements in page and return element ID list. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -814,9 +814,9 @@ Tìm các phần tử trong trang và trả về danh sách ID phần tử
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `count` | number | Trạng thái thao tác (success/error) |
-| `element_ids` | array | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `count` | number | Number of items |
+| `element_ids` | array | The element ids |
 
 **Example:** Find search results
 
@@ -825,11 +825,11 @@ selector: div.tF2Cxc
 limit: 10
 ```
 
-### Điền Biểu mẫu
+### Fill Form
 
 `browser.form`
 
-Điền biểu mẫu thông minh với phát hiện trường tự động
+Smart form filling with automatic field detection. Run browser.snapshot first to find the correct selectors from the real page DOM.
 
 **Parameters:**
 
@@ -847,9 +847,9 @@ limit: 10
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `filled_fields` | array | Độ trễ giữa việc điền mỗi trường (để giống hành vi con người hơn) |
-| `failed_fields` | array | Danh sách các trường đã được điền |
-| `submitted` | boolean | Danh sách các trường đã được điền |
+| `filled_fields` | array | List of fields that were filled |
+| `failed_fields` | array | List of fields that failed to fill |
+| `submitted` | boolean | Whether form was submitted |
 
 **Example:** Example
 
@@ -865,11 +865,11 @@ data: {"username": "john_doe", "bio": "Hello world"}
 field_mapping: {"username": "#user-name-input", "bio": "textarea.bio-field"}
 ```
 
-### Chuyển Frame
+### Switch Frame
 
 `browser.frame`
 
-Chuyển sang ngữ cảnh iframe hoặc frame
+Switch to iframe or frame context
 
 **Parameters:**
 
@@ -885,10 +885,10 @@ Chuyển sang ngữ cảnh iframe hoặc frame
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Hành động frame (enter để chuyển sang frame, list để liệt kê tất cả frames) |
-| `frame_url` | string | Hành động frame (enter để chuyển sang frame, list để liệt kê tất cả frames) |
-| `frame_name` | string | Trạng thái thao tác (success/error) |
-| `frames` | array | URL Frame |
+| `status` | string | Operation status (success/error) |
+| `frame_url` | string | Frame URL |
+| `frame_name` | string | The frame name |
+| `frames` | array | List of frames |
 
 **Example:** Example
 
@@ -914,11 +914,11 @@ action: exit
 action: list
 ```
 
-### Giả lập vị trí địa lý
+### Mock Geolocation
 
 `browser.geolocation`
 
-Giả lập vị trí địa lý trình duyệt
+Mock browser geolocation
 
 **Parameters:**
 
@@ -932,8 +932,8 @@ Giả lập vị trí địa lý trình duyệt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Độ chính xác vị trí tính bằng mét |
-| `location` | object | Độ chính xác vị trí tính bằng mét |
+| `status` | string | Operation status (success/error) |
+| `location` | object | The location |
 
 **Example:** Example
 
@@ -957,11 +957,11 @@ latitude: 35.6762
 longitude: 139.6503
 ```
 
-### Đi đến URL
+### Go to URL
 
 `browser.goto`
 
-Điều hướng đến một URL cụ thể
+Navigate to a specific URL
 
 **Parameters:**
 
@@ -976,8 +976,8 @@ longitude: 139.6503
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `url` | string | Điều hướng đến một URL cụ thể |
+| `status` | string | Operation status (success/error) |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -986,11 +986,11 @@ url: https://www.google.com
 wait_until: domcontentloaded
 ```
 
-### Di chuột qua phần tử
+### Hover Element
 
 `browser.hover`
 
-Di chuột qua một phần tử
+Hover mouse over an element
 
 **Parameters:**
 
@@ -1004,8 +1004,8 @@ Di chuột qua một phần tử
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `selector` | string | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1020,11 +1020,11 @@ selector: #dropdown-trigger
 timeout_ms: 5000
 ```
 
-### Tương Tác Trình Duyệt
+### Browser Interact
 
 `browser.interact`
 
-Tạm dừng để người dùng tương tác với trang trình duyệt
+Pause for user to interact with the browser page. Shows page elements in a dialog for the user to choose an action.
 
 **Parameters:**
 
@@ -1038,11 +1038,11 @@ Tạm dừng để người dùng tương tác với trang trình duyệt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác |
-| `action` | string | Hành động đã thực hiện (click/select/type/toggle) |
-| `selector` | string | CSS selector của phần tử tương tác |
-| `value` | string | Giá trị sử dụng (cho hành động select/type) |
-| `url` | string | URL trang tại thời điểm tương tác |
+| `status` | string | Operation status |
+| `action` | string | Action executed (click/select/type/toggle) |
+| `selector` | string | CSS selector of the interacted element |
+| `value` | string | Value used (for select/type actions) |
+| `url` | string | Page URL at time of interaction |
 
 **Example:** Example
 
@@ -1051,11 +1051,11 @@ title: Choose a department
 description: Select the department you want to register for
 ```
 
-### Khởi chạy trình duyệt
+### Launch Browser
 
 `browser.launch`
 
-Khởi chạy phiên trình duyệt mới với Playwright
+Launch a new browser instance with Playwright
 
 **Parameters:**
 
@@ -1064,25 +1064,25 @@ Khởi chạy phiên trình duyệt mới với Playwright
 | `headless` | boolean | No | `False` | Run browser without visible window |
 | `width` | number | No | `1280` | Browser viewport width in pixels |
 | `height` | number | No | `720` | Browser viewport height in pixels |
-| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Công cụ trình duyệt để sử dụng (chromium, firefox, webkit) |
+| `browser_type` | select (`chromium`, `firefox`, `webkit`) | No | `chromium` | Browser engine to use |
 | `channel` | select (``, `chrome`, `msedge`) | No | - | Use system Chrome instead of bundled Chromium for better anti-detection bypass |
 | `behavior` | select (`fast`, `normal`, `careful`, `human_like`) | No | `fast` | How the browser interacts: fast (no delays), normal, careful (mouse movement), human_like (full simulation) |
 | `stealth` | boolean | No | `True` | Anti-detection patches: WebGL fingerprint, canvas noise, navigator fixes. Always recommended. |
-| `proxy` | string | No | - | URL máy chủ proxy |
-| `user_agent` | string | No | - | Chuỗi user agent tùy chỉnh |
+| `proxy` | string | No | - | HTTP/SOCKS proxy server URL. For rotation use browser.proxy_rotate. |
+| `user_agent` | string | No | - | Custom user agent string |
 | `locale` | string | No | `en-US` | Browser locale (e.g. en-US, zh-TW, ja-JP) |
-| `slow_mo` | number | No | `0` | Làm chậm hoạt động theo mili giây chỉ định |
+| `slow_mo` | number | No | `0` | Delay between Playwright actions in ms (low-level, prefer Behavior Profile) |
 | `record_video_dir` | string | No | - | Directory to save recorded videos (enables Playwright video recording) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `message` | string | Khởi chạy phiên trình duyệt mới |
-| `browser_type` | string | Loại trình duyệt đã khởi chạy |
-| `headless` | boolean | Trình duyệt có đang chạy chế độ không đầu không |
-| `viewport` | object | Kích thước khung nhìn hiện tại |
+| `status` | string | Operation status (success/error) |
+| `message` | string | Result message describing the outcome |
+| `browser_type` | string | Browser engine used |
+| `headless` | boolean | Whether browser is in headless mode |
+| `viewport` | object | Browser viewport dimensions |
 | `behavior` | string | Active behavior profile |
 
 **Example:** Example
@@ -1105,11 +1105,11 @@ behavior: human_like
 stealth: true
 ```
 
-### Đăng Nhập
+### Login
 
 `browser.login`
 
-Tự động phát hiện và điền form đăng nhập với xác minh sau đăng nhập.
+Auto-detect and fill login forms. Handles username + password + submit with post-login verification.
 
 **Parameters:**
 
@@ -1149,11 +1149,11 @@ password_selector: #pass
 submit_selector: #login-btn
 ```
 
-### Điều hướng lịch sử
+### Page Navigation
 
 `browser.navigation`
 
-Điều hướng lịch sử trình duyệt (quay lại, tiến tới, tải lại)
+Navigate back, forward, or reload the page
 
 **Parameters:**
 
@@ -1167,9 +1167,9 @@ submit_selector: #login-btn
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái hoạt động (thành công/lỗi) |
-| `action` | string | Hành động điều hướng đã thực hiện |
-| `url` | string | URL hiện tại sau khi điều hướng |
+| `status` | string | Operation status (success/error) |
+| `action` | string | Navigation action performed |
+| `url` | string | Current URL after navigation |
 
 **Example:** Example
 
@@ -1190,11 +1190,11 @@ action: reload
 wait_until: networkidle
 ```
 
-### Giám sát mạng
+### Network Monitor
 
 `browser.network`
 
-Giám sát và chặn các yêu cầu mạng
+Monitor and intercept network requests
 
 **Parameters:**
 
@@ -1210,9 +1210,9 @@ Giám sát và chặn các yêu cầu mạng
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Phản hồi trả về cho các yêu cầu bị chặn |
-| `requests` | array | Phản hồi trả về cho các yêu cầu bị chặn |
-| `blocked_count` | number | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `requests` | array | Captured network requests |
+| `blocked_count` | number | The blocked count |
 
 **Example:** Example
 
@@ -1237,27 +1237,27 @@ url_pattern: .*users.*
 mock_response: {"status": 200, "body": "{\"users\": []}"}
 ```
 
-### Danh sách Trang
+### List Pages
 
 `browser.pages`
 
-Liệt kê tất cả các trang/tab trình duyệt đang mở
+List all open browser pages/tabs with details
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `include_details` | boolean | No | `True` | Bao gồm thông tin chi tiết cho mỗi trang |
-| `include_content_info` | boolean | No | `False` | Bao gồm thông tin loại nội dung cho mỗi trang |
+| `include_details` | boolean | No | `True` | Include URL, title, and viewport info for each page |
+| `include_content_info` | boolean | No | `False` | Include page load state and frame count (slower) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái hoạt động (thành công/lỗi) |
-| `pages` | array | Danh sách các trang đang mở |
-| `count` | number | Số lượng trang đang mở |
-| `current_index` | number | Chỉ số của trang hiện tại đang hoạt động |
+| `status` | string | Operation status |
+| `pages` | array | List of page information |
+| `count` | number | Number of open pages |
+| `current_index` | number | Index of the current active page |
 
 **Example:** Example
 
@@ -1278,11 +1278,11 @@ include_details: true
 include_content_info: true
 ```
 
-### Phân trang & Trích xuất
+### Paginate & Extract
 
 `browser.pagination`
 
-Tự động phân trang và trích xuất dữ liệu
+Auto-paginate through pages and extract data. Supports retry and checkpoint resume.
 
 **Parameters:**
 
@@ -1307,10 +1307,10 @@ Tự động phân trang và trích xuất dữ liệu
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `items` | array | Chọn xuất hiện khi không còn trang nào nữa (dừng phân trang) |
-| `total_items` | integer | Tất cả các mục đã trích xuất từ tất cả các trang |
-| `pages_processed` | integer | Tất cả các mục đã trích xuất từ tất cả các trang |
-| `stopped_reason` | string | Số trang đã xử lý |
+| `items` | array | All extracted items from all pages |
+| `total_items` | integer | Total number of items extracted |
+| `pages_processed` | integer | Number of pages processed |
+| `stopped_reason` | string | Why pagination stopped (max_pages, max_items, no_more, error) |
 | `retries_used` | integer | Total number of retries across all pages |
 | `resumed` | boolean | Whether execution resumed from a checkpoint |
 
@@ -1334,11 +1334,11 @@ no_more_indicator: .end-of-feed
 checkpoint_path: /tmp/feed_checkpoint.json
 ```
 
-### Tạo PDF
+### Generate PDF
 
 `browser.pdf`
 
-Tạo PDF từ trang hiện tại
+Generate PDF from current page
 
 **Parameters:**
 
@@ -1357,9 +1357,9 @@ Tạo PDF từ trang hiện tại
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Tỷ lệ hiển thị trang web (0.1-2) |
-| `path` | string | Trạng thái thao tác (success/error) |
-| `size` | number | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `path` | string | File or resource path |
+| `size` | number | Size in bytes |
 
 **Example:** Example
 
@@ -1381,26 +1381,26 @@ path: /output/custom.pdf
 margin: {"top": "1cm", "bottom": "1cm", "left": "2cm", "right": "2cm"}
 ```
 
-### Chỉ số Hiệu suất
+### Performance Metrics
 
 `browser.performance`
 
-Thu thập các chỉ số hiệu suất trình duyệt
+Collect Web Vitals (LCP, FCP, CLS, TTFB) and performance metrics
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `metrics` | array | No | `['all']` | Chỉ số hiệu suất cần thu thập |
-| `timeout_ms` | number | No | `3000` | Thời gian chờ tính bằng mili giây |
-| `setup_observers` | boolean | No | `True` | Thiết lập quan sát hiệu suất trước khi thu thập |
+| `metrics` | array | No | `['all']` | Which metrics to collect (default: all) |
+| `timeout_ms` | number | No | `3000` | Time to wait for metrics collection (for LCP, CLS) |
+| `setup_observers` | boolean | No | `True` | Install PerformanceObservers for better metric tracking |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái hoạt động (thành công/lỗi) |
-| `metrics` | object | Các chỉ số hiệu suất đã thu thập |
+| `status` | string | Operation status |
+| `metrics` | object | Collected performance metrics |
 
 **Example:** Example
 
@@ -1422,11 +1422,11 @@ metrics: ["ttfb", "domContentLoaded", "load"]
 timeout_ms: 0
 ```
 
-### Nhóm Trình Duyệt
+### Browser Pool
 
 `browser.pool`
 
-Quản lý nhiều phiên trình duyệt cho tự động hóa song song.
+Manage multiple named browser instances for parallel automation.
 
 **Parameters:**
 
@@ -1466,11 +1466,11 @@ name: scraper1
 action: list
 ```
 
-### Nhấn phím
+### Press Key
 
 `browser.press`
 
-Nhấn một phím bàn phím
+Press a keyboard key
 
 **Parameters:**
 
@@ -1482,8 +1482,8 @@ Nhấn một phím bàn phím
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `key` | string | Nhấn một phím bàn phím |
+| `status` | string | Operation status (success/error) |
+| `key` | string | Key identifier |
 
 **Example:** Example
 
@@ -1497,11 +1497,11 @@ key: Enter
 key: Escape
 ```
 
-### Xoay Proxy
+### Rotate Proxy
 
 `browser.proxy_rotate`
 
-Luân chuyển danh sách proxy với phát hiện proxy lỗi.
+Rotate through a list of proxies. Relaunches browser with the next proxy.
 
 **Parameters:**
 
@@ -1538,11 +1538,11 @@ proxies: ["http://p1:8080", "http://p2:8080"]
 action: rotate
 ```
 
-### Trích Xuất Bài Viết
+### Extract Article
 
 `browser.readability`
 
-Trích xuất bài viết thông minh — lấy tiêu đề, tác giả, ngày và nội dung chính từ mọi trang web
+Smart article extraction — extracts title, author, date, and main content from any webpage. Works like Firefox Reader Mode.
 
 **Parameters:**
 
@@ -1551,7 +1551,7 @@ Trích xuất bài viết thông minh — lấy tiêu đề, tác giả, ngày v
 | `include_images` | boolean | No | `True` | Extract images from the article content. |
 | `include_links` | boolean | No | `False` | Extract links from the article content. |
 | `wait_ms` | number | No | `0` | Wait for dynamic content to load before extracting. 0 = no wait. |
-| `selector` | string | No | - | CSS selector cho vùng nội dung. Để trống để tự động phát hiện. |
+| `selector` | string | No | - | CSS selector for the content area. Leave empty for auto-detection. |
 | `title_selector` | string | No | - | CSS selector for the article title. Leave empty for auto-detection (og:title → h1 → document.title). |
 | `min_content_length` | number | No | `80` | Minimum character count to consider content valid. |
 | `clean_selectors` | array | No | `[]` | Additional CSS selectors to remove from content (e.g., site-specific ads or widgets). |
@@ -1603,11 +1603,11 @@ title_selector: .article-headline h1
 selector: .article-body
 ```
 
-### Ghi hành động
+### Record Actions
 
 `browser.record`
 
-Ghi lại các hành động người dùng dưới dạng workflow
+Record user actions as workflow
 
 **Parameters:**
 
@@ -1621,9 +1621,9 @@ Ghi lại các hành động người dùng dưới dạng workflow
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Định dạng cho workflow đã ghi (yaml hoặc json) |
-| `recording` | array | Định dạng cho workflow đã ghi (yaml hoặc json) |
-| `workflow` | string | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `recording` | array | Recording data or path |
+| `workflow` | string | The workflow |
 
 **Example:** Example
 
@@ -1644,25 +1644,25 @@ output_format: yaml
 action: get
 ```
 
-### Giải phóng Trình duyệt
+### Release Browser
 
 `browser.release`
 
-Giải phóng phiên trình duyệt (chỉ đóng nếu sở hữu)
+Release browser session (close only if owned)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `force` | boolean | No | `False` | Đóng trình duyệt ngay cả khi không thuộc mẫu này |
+| `force` | boolean | No | `False` | Close browser even if not owned by this template |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Đóng trình duyệt ngay cả khi không thuộc mẫu này |
-| `message` | string | Hành động đã thực hiện |
-| `was_owner` | boolean | Hành động đã thực hiện |
+| `status` | string | What action was taken |
+| `message` | string | Result message |
+| `was_owner` | boolean | Whether this template owned the browser |
 
 **Example:** Example
 
@@ -1675,11 +1675,11 @@ Giải phóng phiên trình duyệt (chỉ đóng nếu sở hữu)
 force: true
 ```
 
-### Bắt Phản Hồi
+### Capture Response
 
 `browser.response`
 
-Bắt nội dung phản hồi API (XHR/fetch). Trích xuất JSON từ lệnh gọi API trên trang.
+Capture API response bodies (XHR/fetch). Filter by URL pattern, extract JSON data from page API calls.
 
 **Parameters:**
 
@@ -1712,11 +1712,11 @@ url_pattern: graphql
 wait_ms: 3000
 ```
 
-### Kiểm Tra Robots.txt
+### Check Robots.txt
 
 `browser.robots`
 
-Kiểm tra tuân thủ robots.txt và khám phá sitemap.
+Check robots.txt compliance and discover sitemaps. Verify if a URL is allowed for scraping.
 
 **Parameters:**
 
@@ -1747,11 +1747,11 @@ check_url: /api/data
 ```yaml
 ```
 
-### Chụp màn hình
+### Take Screenshot
 
 `browser.screenshot`
 
-Chụp ảnh màn hình của trang hiện tại
+Take a screenshot of the current page
 
 **Parameters:**
 
@@ -1766,8 +1766,8 @@ Chụp ảnh màn hình của trang hiện tại
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `filepath` | string | Chụp ảnh màn hình của trang hiện tại |
+| `status` | string | Operation status (success/error) |
+| `filepath` | string | Path to the file |
 
 **Example:** Example
 
@@ -1775,11 +1775,11 @@ Chụp ảnh màn hình của trang hiện tại
 path: output/page.png
 ```
 
-### Cuộn trang
+### Scroll Page
 
 `browser.scroll`
 
-Cuộn trang đến phần tử, vị trí hoặc hướng
+Scroll page to element, position, or direction. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1794,8 +1794,8 @@ Cuộn trang đến phần tử, vị trí hoặc hướng
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `scrolled_to` | object | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `scrolled_to` | object | The scrolled to |
 
 **Example:** Example
 
@@ -1818,11 +1818,11 @@ amount: 10000
 behavior: smooth
 ```
 
-### Chọn tùy chọn
+### Select Option
 
 `browser.select`
 
-Chọn tùy chọn từ phần tử dropdown
+Select option from dropdown element. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -1838,9 +1838,9 @@ Chọn tùy chọn từ phần tử dropdown
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `selected` | array | Trạng thái thao tác (success/error) |
-| `selector` | string | Trạng thái thao tác (success/error) |
+| `status` | string | Operation status (success/error) |
+| `selected` | array | The selected |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -1866,11 +1866,11 @@ select_method: index
 index: 2
 ```
 
-### Phân Tích Sitemap
+### Parse Sitemap
 
 `browser.sitemap`
 
-Phân tích sitemap.xml và trích xuất URL kèm metadata.
+Parse sitemap.xml and extract URLs. Supports sitemap index files and URL filtering.
 
 **Parameters:**
 
@@ -1902,29 +1902,29 @@ url_pattern: /blog/
 max_urls: 100
 ```
 
-### Ảnh chụp DOM
+### DOM Snapshot
 
 `browser.snapshot`
 
-Chụp ảnh DOM của trang hiện tại
+Capture DOM snapshot in HTML, MHTML, or text format
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`html`, `mhtml`, `text`) | No | `html` | Định dạng đầu ra (html hoặc văn bản) |
-| `selector` | string | No | - | Bộ chọn CSS để chụp một phần tử cụ thể |
-| `path` | string | No | - | Đường dẫn để lưu ảnh chụp |
+| `format` | select (`html`, `mhtml`, `text`) | No | `html` | Snapshot format |
+| `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái hoạt động (thành công/lỗi) |
-| `format` | string | Định dạng của ảnh chụp |
-| `content` | string | Nội dung ảnh chụp |
-| `path` | string | Đường dẫn nơi lưu ảnh chụp |
-| `size_bytes` | number | Kích thước của ảnh chụp tính bằng byte |
+| `status` | string | Operation status |
+| `format` | string | Snapshot format used |
+| `content` | string | Snapshot content (if no path specified) |
+| `path` | string | Path to saved file |
+| `size_bytes` | number | Content size in bytes |
 
 **Example:** Example
 
@@ -1954,11 +1954,11 @@ selector: #main
 path: /tmp/section.html
 ```
 
-### Lưu trữ trình duyệt
+### Browser Storage
 
 `browser.storage`
 
-Truy cập localStorage và sessionStorage
+Access localStorage and sessionStorage
 
 **Parameters:**
 
@@ -1973,10 +1973,10 @@ Truy cập localStorage và sessionStorage
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `value` | any | Trạng thái thao tác (success/error) |
-| `keys` | array | Trạng thái thao tác (success/error) |
-| `length` | number | Giá trị trả về |
+| `status` | string | Operation status (success/error) |
+| `value` | any | The returned value |
+| `keys` | array | List of keys |
+| `length` | number | Length of data |
 
 **Example:** Example
 
@@ -2009,11 +2009,11 @@ action: keys
 type: local
 ```
 
-### Quản lý Tab
+### Manage Tabs
 
 `browser.tab`
 
-Tạo, chuyển và đóng các tab trình duyệt
+Create, switch, and close browser tabs
 
 **Parameters:**
 
@@ -2028,10 +2028,10 @@ Tạo, chuyển và đóng các tab trình duyệt
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Chỉ số tab để chuyển đến hoặc đóng (bắt đầu từ 0) |
-| `tab_count` | number | Chỉ số tab để chuyển đến hoặc đóng (bắt đầu từ 0) |
-| `current_index` | number | Trạng thái thao tác (success/error) |
-| `tabs` | array | Số lượng tab |
+| `status` | string | Operation status (success/error) |
+| `tab_count` | number | The tab count |
+| `current_index` | number | The current index |
+| `tabs` | array | List of open tabs |
 
 **Example:** Example
 
@@ -2059,11 +2059,11 @@ action: close
 action: list
 ```
 
-### Trích Xuất Bảng
+### Extract Table
 
 `browser.table`
 
-Trích xuất bảng HTML thành dữ liệu có cấu trúc với tiêu đề tự động phát hiện.
+Extract HTML tables as structured data. Auto-detects headers from thead/th.
 
 **Parameters:**
 
@@ -2095,11 +2095,11 @@ selector: #results-table
 max_rows: 100
 ```
 
-### Giới Hạn Tốc Độ
+### Throttle
 
 `browser.throttle`
 
-Giới hạn tốc độ theo tên miền. Chờ giữa các yêu cầu để tránh bị chặn.
+Per-domain rate limiting. Waits between requests to the same domain to avoid bans.
 
 **Parameters:**
 
@@ -2142,29 +2142,29 @@ min_interval_ms: 1500
 max_interval_ms: 8000
 ```
 
-### Dấu vết Trình duyệt
+### Performance Trace
 
 `browser.trace`
 
-Bắt đầu, dừng hoặc lưu dấu vết hiệu suất trình duyệt
+Start/stop Chrome DevTools performance tracing (Chromium only)
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `action` | string | Yes | - | Hành động dấu vết (bắt đầu, dừng, lưu) |
-| `categories` | array | No | `['devtools.timeline']` | Danh mục dấu vết cần chụp |
-| `screenshots` | boolean | No | `True` | Bao gồm ảnh chụp màn hình trong dấu vết |
-| `path` | string | No | - | Đường dẫn để lưu tệp dấu vết |
+| `action` | string | Yes | - | Start or stop tracing |
+| `categories` | array | No | `['devtools.timeline']` | CDP trace categories (default: devtools.timeline) |
+| `screenshots` | boolean | No | `True` | Include screenshots in trace (increases file size) |
+| `path` | string | No | - | Path where the output file will be saved |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái hoạt động (thành công/lỗi) |
-| `tracing` | boolean | Dấu vết hiện có đang hoạt động hay không |
-| `path` | string | Đường dẫn nơi lưu dấu vết |
-| `size_bytes` | number | Kích thước của tệp dấu vết tính bằng byte |
+| `status` | string | Operation status (success/error) |
+| `tracing` | boolean | Whether tracing is active |
+| `path` | string | Path to trace file (when stopped) |
+| `size_bytes` | number | Trace file size in bytes |
 
 **Example:** Example
 
@@ -2188,11 +2188,11 @@ action: stop
 path: /tmp/performance-trace.json
 ```
 
-### Gõ văn bản
+### Type Text
 
 `browser.type`
 
-Gõ văn bản vào trường input
+Type text into an input field. Run browser.snapshot first to find the correct selector from the real page DOM.
 
 **Parameters:**
 
@@ -2213,8 +2213,8 @@ Gõ văn bản vào trường input
 | Field | Type | Description |
 |-------|------|-------------|
 | `browser` | object | Browser session (pass-through for chaining) |
-| `status` | string | Trạng thái thao tác (success/error) |
-| `selector` | string | Gõ văn bản vào trường input |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was used |
 | `method` | string | Type method used |
 
 **Example:** Example
@@ -2250,11 +2250,11 @@ selector: #email
 text: user@example.com
 ```
 
-### Tải tệp lên
+### Upload File
 
 `browser.upload`
 
-Tải tệp lên phần tử input file
+Upload file to file input element
 
 **Parameters:**
 
@@ -2268,10 +2268,10 @@ Tải tệp lên phần tử input file
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `filename` | string | Trạng thái thao tác (success/error) |
-| `size` | number | Trạng thái thao tác (success/error) |
-| `selector` | string | Tên tệp |
+| `status` | string | Operation status (success/error) |
+| `filename` | string | Name of the file |
+| `size` | number | Size in bytes |
+| `selector` | string | CSS selector that was used |
 
 **Example:** Example
 
@@ -2287,26 +2287,26 @@ selector: #file-upload
 file_path: /path/to/document.pdf
 ```
 
-### Đặt khung nhìn
+### Resize Viewport
 
 `browser.viewport`
 
-Lấy hoặc đặt kích thước khung nhìn trình duyệt
+Resize browser viewport to specific dimensions
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `width` | number | Yes | `1280` | Chiều rộng khung nhìn tính bằng pixel |
-| `height` | number | Yes | `720` | Chiều cao khung nhìn tính bằng pixel |
+| `width` | number | Yes | `1280` | Viewport width in pixels |
+| `height` | number | Yes | `720` | Viewport height in pixels |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái hoạt động (thành công/lỗi) |
-| `viewport` | object | Kích thước khung nhìn hiện tại |
-| `previous_viewport` | object | Kích thước khung nhìn trước đó |
+| `status` | string | Operation status |
+| `viewport` | object | Applied viewport dimensions |
+| `previous_viewport` | object | Previous viewport dimensions |
 
 **Example:** Example
 
@@ -2336,11 +2336,11 @@ width: 1366
 height: 768
 ```
 
-### Chờ
+### Wait
 
 `browser.wait`
 
-Chờ một khoảng thời gian hoặc cho đến khi một phần tử xuất hiện
+Wait for a duration or until an element appears
 
 **Parameters:**
 
@@ -2348,16 +2348,16 @@ Chờ một khoảng thời gian hoặc cho đến khi một phần tử xuất 
 |------|------|----------|---------|-------------|
 | `duration_ms` | number | No | `1000` | Duration of the operation in milliseconds |
 | `selector` | string | No | - | CSS selector, XPath, or text selector to find the element |
-| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | Trạng thái cần chờ (hiển thị, ẩn, đính kèm, tách rời) |
+| `state` | select (`visible`, `hidden`, `attached`, `detached`) | No | `visible` | Element state to wait for |
 | `timeout_ms` | number | No | `30000` | Maximum time to wait in milliseconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (success/error) |
-| `selector` | string | Trạng thái thao tác (success/error) |
-| `duration_ms` | number | Chờ một khoảng thời gian hoặc phần tử xuất hiện |
+| `status` | string | Operation status (success/error) |
+| `selector` | string | CSS selector that was waited for |
+| `duration_ms` | number | Wait duration in milliseconds |
 
 **Example:** Example
 

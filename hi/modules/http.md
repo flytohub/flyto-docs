@@ -6,7 +6,7 @@ HTTP request utilities.
 
 | Module | Description |
 |--------|-------------|
-| [HTTP GET](#http-get) | HTTP GET अनुरोध भेजें और प्रतिक्रिया प्राप्त करें |
+| [HTTP GET](#http-get) | Send HTTP GET request to an API endpoint |
 
 ## Modules
 
@@ -14,16 +14,16 @@ HTTP request utilities.
 
 `http.get`
 
-HTTP GET अनुरोध भेजें और प्रतिक्रिया प्राप्त करें
+Send HTTP GET request to an API endpoint
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `url` | string | Yes | - | GET अनुरोध भेजने के लिए URL |
-| `headers` | object | No | `{}` | कुंजी-मूल्य वस्तु के रूप में अनुरोध हेडर्स |
-| `query` | object | No | `{}` | कुंजी-मूल्य वस्तु के रूप में क्वेरी स्ट्रिंग पैरामीटर |
-| `timeout` | number | No | `30` | मिलीसेकंड में अनुरोध टाइमआउट |
+| `url` | string | Yes | - | Target URL |
+| `headers` | object | No | `{}` | HTTP request headers as key-value pairs |
+| `query` | object | No | `{}` | URL query string parameters as key-value pairs |
+| `timeout` | number | No | `30` | Maximum time to wait in seconds |
 | `verify_ssl` | boolean | No | `True` | Verify SSL certificates |
 | `ssrf_protection` | boolean | No | `True` | Block requests to private/internal networks (localhost, 192.168.x.x, metadata endpoints). Disable only for trusted internal targets. |
 
@@ -31,7 +31,7 @@ HTTP GET अनुरोध भेजें और प्रतिक्रि�
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ok` | boolean | क्या अनुरोध सफल था (2xx स्थिति) |
-| `status` | number | HTTP स्थिति कोड |
-| `body` | any | प्रतिक्रिया बॉडी (पार्स किया गया JSON या टेक्स्ट) |
-| `headers` | object | प्रतिक्रिया हेडर्स |
+| `ok` | boolean | Whether the operation succeeded |
+| `status` | number | HTTP status code |
+| `body` | any | Response body content |
+| `headers` | object | Response headers |

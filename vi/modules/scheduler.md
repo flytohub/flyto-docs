@@ -6,74 +6,74 @@ Cron parsing, delay, and interval calculations.
 
 | Module | Description |
 |--------|-------------|
-| [Phân Tích Biểu Thức Cron](#phân-tích-biểu-thức-cron) | Phân tích biểu thức cron và tính toán N lần chạy tiếp theo |
-| [Trì Hoãn / Ngủ](#trì-hoãn--ngủ) | Tạm dừng thực thi trong một khoảng thời gian xác định |
-| [Tính Khoảng Thời Gian](#tính-khoảng-thời-gian) | Tính thời gian khoảng cách và lần xuất hiện tiếp theo |
+| [Parse Cron Expression](#parse-cron-expression) | Parse cron expression and calculate next N run times |
+| [Delay / Sleep](#delay--sleep) | Pause execution for a specified duration |
+| [Calculate Interval](#calculate-interval) | Calculate interval timing and next occurrences |
 
 ## Modules
 
-### Phân Tích Biểu Thức Cron
+### Parse Cron Expression
 
 `scheduler.cron_parse`
 
-Phân tích biểu thức cron và tính toán N lần chạy tiếp theo
+Parse cron expression and calculate next N run times
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `expression` | string | Yes | - | Biểu thức cron tiêu chuẩn 5 trường (ví dụ: "0 9 * * MON-FRI") |
-| `count` | number | No | `5` | Số lần chạy tiếp theo cần tính toán |
-| `timezone` | string | No | `0` | Múi giờ để tính toán (độ lệch UTC như "+8" hoặc "-5", mặc định "0" cho UTC) |
+| `expression` | string | Yes | - | Standard 5-field cron expression (e.g. "0 9 * * MON-FRI") |
+| `count` | number | No | `5` | Number of next run times to calculate |
+| `timezone` | string | No | `0` | Timezone for calculation (UTC offset like "+8" or "-5", default "0" for UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `expression` | string | Biểu thức cron đã phân tích |
-| `description` | string | Mô tả lịch trình dễ hiểu |
-| `next_runs` | array | Danh sách các lần chạy tiếp theo dưới dạng chuỗi ngày giờ ISO |
-| `is_valid` | boolean | Biểu thức có hợp lệ không |
+| `expression` | string | The parsed cron expression |
+| `description` | string | Human-readable description of the schedule |
+| `next_runs` | array | List of next run times as ISO datetime strings |
+| `is_valid` | boolean | Whether the expression is valid |
 
-### Trì Hoãn / Ngủ
+### Delay / Sleep
 
 `scheduler.delay`
 
-Tạm dừng thực thi trong một khoảng thời gian xác định
+Pause execution for a specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | Yes | - | Số giây cần trì hoãn |
-| `message` | string | No | - | Tin nhắn tùy chọn để đưa vào kết quả |
+| `seconds` | number | Yes | - | Number of seconds to delay |
+| `message` | string | No | - | Optional message to include in the result |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `delayed_seconds` | number | Số giây thực tế đã trì hoãn |
-| `message` | string | Tin nhắn đã cung cấp hoặc mặc định |
+| `delayed_seconds` | number | Actual number of seconds delayed |
+| `message` | string | The provided message or default |
 
-### Tính Khoảng Thời Gian
+### Calculate Interval
 
 `scheduler.interval`
 
-Tính thời gian khoảng cách và lần xuất hiện tiếp theo
+Calculate interval timing and next occurrences
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `seconds` | number | No | `0` | Thành phần giây của khoảng thời gian |
-| `minutes` | number | No | `0` | Thành phần phút của khoảng thời gian |
-| `hours` | number | No | `0` | Thành phần giờ của khoảng thời gian |
-| `start_time` | string | No | - | Thời gian bắt đầu theo định dạng ISO 8601 (mặc định: bây giờ) |
+| `seconds` | number | No | `0` | Interval seconds component |
+| `minutes` | number | No | `0` | Interval minutes component |
+| `hours` | number | No | `0` | Interval hours component |
+| `start_time` | string | No | - | Start time in ISO 8601 format (default: now) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `interval_seconds` | number | Tổng khoảng thời gian tính bằng giây |
-| `next_runs` | array | Danh sách 5 lần chạy tiếp theo dưới dạng chuỗi ngày giờ ISO |
-| `human_readable` | string | Mô tả khoảng thời gian dễ hiểu |
+| `interval_seconds` | number | Total interval in seconds |
+| `next_runs` | array | List of next 5 run times as ISO datetime strings |
+| `human_readable` | string | Human-readable interval description |

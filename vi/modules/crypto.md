@@ -6,37 +6,37 @@ AES encryption/decryption, HMAC, JWT tokens, and secure random generation.
 
 | Module | Description |
 |--------|-------------|
-| [Giải mã](#giải-mã) | Giải mã dữ liệu bằng mã hóa AES |
-| [Mã hóa](#mã-hóa) | Mã hóa dữ liệu bằng mã hóa AES |
+| [Decrypt](#decrypt) | AES symmetric decryption |
+| [Encrypt](#encrypt) | AES symmetric encryption |
 | [HMAC](#hmac) | Generate HMAC signature |
-| [Tạo JWT](#tạo-jwt) | Tạo mã thông báo JWT đã ký |
-| [Xác minh JWT](#xác-minh-jwt) | Xác minh và giải mã mã thông báo JWT |
+| [Create JWT](#create-jwt) | Create JWT (JSON Web Token) tokens |
+| [Verify JWT](#verify-jwt) | Verify and decode JWT tokens |
 | [Random Bytes](#random-bytes) | Generate cryptographically secure random bytes |
 | [Random String](#random-string) | Generate cryptographically secure random string |
 
 ## Modules
 
-### Giải mã
+### Decrypt
 
 `crypto.decrypt`
 
-Giải mã dữ liệu bằng mã hóa AES
+AES symmetric decryption
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `ciphertext` | string | Yes | - | Dữ liệu đã mã hóa cần giải mã |
-| `key` | string | Yes | - | Khóa mã hóa |
-| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Chế độ mã AES (CBC, GCM, v.v.) |
-| `input_format` | select (`base64`, `hex`) | No | `base64` | Định dạng của văn bản mã hóa đầu vào (hex hoặc base64) |
+| `ciphertext` | string | Yes | - | Encrypted ciphertext to decrypt |
+| `key` | string | Yes | - | Decryption passphrase (must match encryption passphrase) |
+| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Decryption mode (must match encryption mode) |
+| `input_format` | select (`base64`, `hex`) | No | `base64` | Encoding format of the ciphertext input |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `plaintext` | string | Văn bản gốc đã giải mã |
-| `algorithm` | string | Thuật toán dùng để giải mã |
+| `plaintext` | string | Decrypted plaintext |
+| `algorithm` | string | Decryption algorithm used |
 
 **Example:** Decrypt AES-GCM ciphertext
 
@@ -46,28 +46,28 @@ key: my-secret-passphrase
 mode: GCM
 ```
 
-### Mã hóa
+### Encrypt
 
 `crypto.encrypt`
 
-Mã hóa dữ liệu bằng mã hóa AES
+AES symmetric encryption
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `plaintext` | string | Yes | - | Dữ liệu cần mã hóa |
-| `key` | string | Yes | - | Khóa mã hóa |
-| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Chế độ mã AES (CBC, GCM, v.v.) |
-| `output_format` | select (`base64`, `hex`) | No | `base64` | Định dạng cho văn bản mã hóa đầu ra (hex hoặc base64) |
+| `plaintext` | string | Yes | - | Text to encrypt |
+| `key` | string | Yes | - | Encryption passphrase (key is derived via PBKDF2) |
+| `mode` | select (`CBC`, `GCM`) | No | `GCM` | Encryption mode |
+| `output_format` | select (`base64`, `hex`) | No | `base64` | Encoding format for the ciphertext output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `ciphertext` | string | Văn bản mã hóa đã mã hóa |
-| `algorithm` | string | Thuật toán dùng để mã hóa |
-| `mode` | string | Chế độ mã đã sử dụng |
+| `ciphertext` | string | Encrypted ciphertext |
+| `algorithm` | string | Encryption algorithm used |
+| `mode` | string | Encryption mode used |
 
 **Example:** Encrypt with AES-GCM
 
@@ -88,41 +88,41 @@ Generate HMAC signature
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `message` | string | Yes | - | Message to sign |
-| `key` | string | Yes | - | Message to sign |
-| `algorithm` | select (`sha256`, `sha512`, `sha1`, `md5`) | No | `sha256` | Secret key for HMAC |
+| `key` | string | Yes | - | Secret key for HMAC |
+| `algorithm` | select (`sha256`, `sha512`, `sha1`, `md5`) | No | `sha256` | Hash algorithm |
 | `encoding` | select (`hex`, `base64`) | No | `hex` | Output encoding format |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `signature` | string | Output encoding format |
-| `algorithm` | string | HMAC signature |
+| `signature` | string | HMAC signature |
+| `algorithm` | string | Algorithm used |
 
-### Tạo JWT
+### Create JWT
 
 `crypto.jwt_create`
 
-Tạo mã thông báo JWT đã ký
+Create JWT (JSON Web Token) tokens
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `payload` | object | Yes | - | Dữ liệu tải trọng JWT (đối tượng) |
-| `secret` | string | Yes | - | Khóa bí mật để ký mã thông báo |
-| `algorithm` | select (`HS256`, `HS384`, `HS512`, `RS256`) | No | `HS256` | Thuật toán ký JWT (HS256, RS256, v.v.) |
-| `expires_in` | number | No | - | Thời gian hết hạn của mã thông báo tính bằng giây |
-| `issuer` | string | No | - | Yêu cầu nhà phát hành mã thông báo |
-| `audience` | string | No | - | Đối tượng dự kiến của mã thông báo |
+| `payload` | object | Yes | - | JWT payload claims (JSON object) |
+| `secret` | string | Yes | - | Secret key for signing the token |
+| `algorithm` | select (`HS256`, `HS384`, `HS512`, `RS256`) | No | `HS256` | Signing algorithm |
+| `expires_in` | number | No | - | Token expiration time in seconds (optional) |
+| `issuer` | string | No | - | Token issuer (iss claim) |
+| `audience` | string | No | - | Token audience (aud claim) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `token` | string | Mã thông báo JWT đã tạo |
-| `algorithm` | string | Thuật toán dùng để ký |
-| `expires_at` | string | Thời điểm hết hạn của mã thông báo |
+| `token` | string | Signed JWT token |
+| `algorithm` | string | Algorithm used for signing |
+| `expires_at` | string | Token expiration timestamp (ISO 8601) or null |
 
 **Example:** Create a JWT with expiration
 
@@ -133,30 +133,30 @@ algorithm: HS256
 expires_in: 3600
 ```
 
-### Xác minh JWT
+### Verify JWT
 
 `crypto.jwt_verify`
 
-Xác minh và giải mã mã thông báo JWT
+Verify and decode JWT tokens
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `token` | string | Yes | - | Token JWT để xác minh |
-| `secret` | string | Yes | - | Khóa bí mật dùng để ký token |
-| `algorithms` | array | No | `['HS256']` | Các thuật toán ký được phép |
-| `verify_exp` | boolean | No | `True` | Có xác minh yêu cầu hết hạn không |
-| `audience` | string | No | - | Yêu cầu đối tượng dự kiến |
-| `issuer` | string | No | - | Yêu cầu nhà phát hành dự kiến |
+| `token` | string | Yes | - | JWT token to verify and decode |
+| `secret` | string | Yes | - | Secret key for verifying the token signature |
+| `algorithms` | array | No | `['HS256']` | List of allowed signing algorithms |
+| `verify_exp` | boolean | No | `True` | Whether to verify the token expiration |
+| `audience` | string | No | - | Expected audience (aud claim) |
+| `issuer` | string | No | - | Expected issuer (iss claim) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `valid` | boolean | Mã thông báo có hợp lệ không |
-| `payload` | object | Tải trọng JWT đã giải mã |
-| `header` | object | Dữ liệu tiêu đề JWT |
+| `valid` | boolean | Whether the token is valid |
+| `payload` | object | Decoded JWT payload |
+| `header` | object | Decoded JWT header |
 
 **Example:** Verify a JWT token
 
@@ -185,7 +185,7 @@ Generate cryptographically secure random bytes
 | Field | Type | Description |
 |-------|------|-------------|
 | `bytes` | string | Random bytes (encoded) |
-| `length` | number | Random bytes (encoded) |
+| `length` | number | Number of bytes generated |
 
 ### Random String
 
@@ -205,5 +205,5 @@ Generate cryptographically secure random string
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `string` | string | Convert to uppercase |
-| `length` | number | Random string |
+| `string` | string | Random string |
+| `length` | number | String length |

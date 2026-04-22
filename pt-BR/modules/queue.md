@@ -6,76 +6,76 @@ In-memory and Redis message queue operations.
 
 | Module | Description |
 |--------|-------------|
-| [Desenfileirar Item](#desenfileirar-item) | Remover e retornar um item de uma fila |
-| [Enfileirar Item](#enfileirar-item) | Adicionar um item a uma fila em memória ou Redis |
-| [Tamanho da Fila](#tamanho-da-fila) | Obter o tamanho atual de uma fila |
+| [Dequeue Item](#dequeue-item) | Remove and return an item from a queue |
+| [Enqueue Item](#enqueue-item) | Add an item to an in-memory or Redis queue |
+| [Queue Size](#queue-size) | Get the current size of a queue |
 
 ## Modules
 
-### Desenfileirar Item
+### Dequeue Item
 
 `queue.dequeue`
 
-Remover e retornar um item de uma fila
+Remove and return an item from a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nome da fila para desenfileirar |
-| `backend` | string | No | `memory` | Backend da fila a ser usado |
-| `redis_url` | string | No | `redis://localhost:6379` | URL de conexão do Redis |
-| `timeout` | number | No | `0` | Tempo limite em segundos (0 = não bloqueante) |
+| `queue_name` | string | Yes | - | Name of the queue to dequeue from |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
+| `timeout` | number | No | `0` | Timeout in seconds (0 = non-blocking) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `data` | any | O item desenfileirado (nulo se a fila estiver vazia) |
-| `queue_name` | string | Nome da fila |
-| `remaining` | number | Itens restantes na fila |
-| `empty` | boolean | Se a fila estava vazia |
+| `data` | any | The dequeued item (null if queue is empty) |
+| `queue_name` | string | Name of the queue |
+| `remaining` | number | Remaining items in the queue |
+| `empty` | boolean | Whether the queue was empty |
 
-### Enfileirar Item
+### Enqueue Item
 
 `queue.enqueue`
 
-Adicionar um item a uma fila em memória ou Redis
+Add an item to an in-memory or Redis queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nome da fila para adicionar o item |
-| `data` | string | Yes | - | Dados para enfileirar (qualquer valor serializável em JSON) |
-| `backend` | string | No | `memory` | Backend da fila a ser usado |
-| `redis_url` | string | No | `redis://localhost:6379` | URL de conexão do Redis |
+| `queue_name` | string | Yes | - | Name of the queue to add the item to |
+| `data` | string | Yes | - | Data to enqueue (any JSON-serializable value) |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Nome da fila |
-| `position` | number | Posição do item na fila |
-| `queue_size` | number | Tamanho atual da fila após enfileirar |
+| `queue_name` | string | Name of the queue |
+| `position` | number | Position of the item in the queue |
+| `queue_size` | number | Current size of the queue after enqueue |
 
-### Tamanho da Fila
+### Queue Size
 
 `queue.size`
 
-Obter o tamanho atual de uma fila
+Get the current size of a queue
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `queue_name` | string | Yes | - | Nome da fila para verificar |
-| `backend` | string | No | `memory` | Backend da fila a ser usado |
-| `redis_url` | string | No | `redis://localhost:6379` | URL de conexão do Redis |
+| `queue_name` | string | Yes | - | Name of the queue to check |
+| `backend` | string | No | `memory` | Queue backend to use |
+| `redis_url` | string | No | `redis://localhost:6379` | Redis connection URL |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `queue_name` | string | Nome da fila |
-| `size` | number | Número atual de itens na fila |
+| `queue_name` | string | Name of the queue |
+| `size` | number | Current number of items in the queue |

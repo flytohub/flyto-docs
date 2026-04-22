@@ -105,21 +105,21 @@ Get information about a GitHub repository
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `owner` | string | Yes | - | Repository owner (username or organization) |
-| `repo` | string | Yes | - | Repository owner (username or organization) |
-| `token` | string | No | - | Repository name |
+| `repo` | string | Yes | - | Repository name |
+| `token` | string | No | - | GitHub Personal Access Token (optional but recommended) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | GitHub Personal Access Token (optional but recommended) |
-| `repo` | object | Operation status (success/error) |
-| `name` | string | Operation status (success/error) |
-| `full_name` | string | Repository information |
-| `description` | string | Name of the item |
-| `stars` | number | Full repository name |
-| `forks` | number | Item description |
-| `url` | string | Fetch information about a GitHub repository |
+| `status` | string | Operation status (success/error) |
+| `repo` | object | Repository information |
+| `name` | string | Name of the item |
+| `full_name` | string | Full repository name |
+| `description` | string | Item description |
+| `stars` | number | Number of stars |
+| `forks` | number | Number of forks |
+| `url` | string | URL address |
 
 **Example:** Example
 
@@ -220,9 +220,9 @@ Use Google Custom Search API to search keywords
 | Field | Type | Description |
 |-------|------|-------------|
 | `status` | string | Operation status (success/error) |
-| `data` | array | Operation status (success/error) |
-| `count` | number | Operation status (success/error) |
-| `total_results` | number | Use Google Custom Search API to search keywords |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
+| `total_results` | number | Total number of search results available |
 
 **Example:** Search Python tutorials
 
@@ -252,9 +252,9 @@ Send HTTP GET request to any URL
 | Field | Type | Description |
 |-------|------|-------------|
 | `status_code` | number | HTTP status code |
-| `headers` | object | HTTP status code |
-| `body` | string | HTTP status code |
-| `json` | object | Send HTTP GET request to any URL |
+| `headers` | object | HTTP headers |
+| `body` | string | Response body content |
+| `json` | object | Parsed JSON response data |
 
 **Example:** Fetch API data
 

@@ -6,19 +6,19 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Module | Description |
 |--------|-------------|
-| [套用清單](#套用清單) | 透過 kubectl apply 套用 Kubernetes 清單 |
-| [描述資源](#描述資源) | 詳細描述 Kubernetes 資源 |
-| [取得 Pods](#取得-pods) | 列出命名空間中的 Kubernetes pods |
-| [取得 Pod 日誌](#取得-pod-日誌) | 從 Kubernetes pod 獲取日誌 |
-| [調整部署](#調整部署) | 將 Kubernetes 部署調整到指定的副本數量 |
+| [Apply Manifest](#apply-manifest) | Apply a Kubernetes manifest via kubectl apply |
+| [Describe Resource](#describe-resource) | Describe a Kubernetes resource in detail |
+| [Get Pods](#get-pods) | List Kubernetes pods in a namespace |
+| [Get Pod Logs](#get-pod-logs) | Retrieve logs from a Kubernetes pod |
+| [Scale Deployment](#scale-deployment) | Scale a Kubernetes deployment to a specified replica count |
 
 ## Modules
 
-### 套用清單
+### Apply Manifest
 
 `k8s.apply`
 
-透過 kubectl apply 套用 Kubernetes 清單
+Apply a Kubernetes manifest via kubectl apply
 
 **Parameters:**
 
@@ -32,16 +32,16 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `kind` | string | 資源類型（例如 Deployment, Service） |
-| `name` | string | 資源名稱 |
-| `namespace` | string | 資源命名空間 |
-| `action` | string | 執行的動作（已建立, 已配置, 未變更） |
+| `kind` | string | Resource kind (e.g. Deployment, Service) |
+| `name` | string | Resource name |
+| `namespace` | string | Resource namespace |
+| `action` | string | Action taken (created, configured, unchanged) |
 
-### 描述資源
+### Describe Resource
 
 `k8s.describe`
 
-詳細描述 Kubernetes 資源
+Describe a Kubernetes resource in detail
 
 **Parameters:**
 
@@ -56,16 +56,16 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `resource_type` | string | 被描述的資源類型 |
-| `name` | string | 資源名稱 |
-| `namespace` | string | Kubernetes 命名空間 |
-| `description` | string | 完整的 kubectl describe 輸出文字 |
+| `resource_type` | string | Resource type that was described |
+| `name` | string | Resource name |
+| `namespace` | string | Kubernetes namespace |
+| `description` | string | Full kubectl describe output text |
 
-### 取得 Pods
+### Get Pods
 
 `k8s.get_pods`
 
-列出命名空間中的 Kubernetes pods
+List Kubernetes pods in a namespace
 
 **Parameters:**
 
@@ -79,14 +79,14 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pods` | array | 包含狀態資訊的 pods 清單 |
-| `count` | number | 找到的 pods 總數 |
+| `pods` | array | List of pods with status information |
+| `count` | number | Total number of pods found |
 
-### 取得 Pod 日誌
+### Get Pod Logs
 
 `k8s.logs`
 
-從 Kubernetes pod 獲取日誌
+Retrieve logs from a Kubernetes pod
 
 **Parameters:**
 
@@ -103,15 +103,15 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `pod` | string | Pod 名稱 |
-| `logs` | string | 日誌輸出文字 |
-| `lines` | number | 返回的日誌行數 |
+| `pod` | string | Pod name |
+| `logs` | string | Log output text |
+| `lines` | number | Number of log lines returned |
 
-### 調整部署
+### Scale Deployment
 
 `k8s.scale`
 
-將 Kubernetes 部署調整到指定的副本數量
+Scale a Kubernetes deployment to a specified replica count
 
 **Parameters:**
 
@@ -126,7 +126,7 @@ Apply manifests, describe resources, get pods, logs, and scale deployments.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `deployment` | string | 部署名稱 |
-| `replicas` | number | 請求的副本數量 |
-| `namespace` | string | Kubernetes 命名空間 |
-| `scaled` | boolean | 調整操作是否成功 |
+| `deployment` | string | Deployment name |
+| `replicas` | number | Requested replica count |
+| `namespace` | string | Kubernetes namespace |
+| `scaled` | boolean | Whether the scale operation succeeded |

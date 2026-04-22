@@ -2,147 +2,205 @@
 
 Assertion utilities: equal, contains, length, true, not null, greater than.
 
-**6 modules**
+**8 modules**
 
 | Module | Description |
 |--------|-------------|
-| [포함 확인](#포함-확인) | 컬렉션에 값이 포함되어 있는지 확인 |
-| [동등 확인](#동등-확인) | 두 값이 같은지 확인 |
-| [크기 비교 확인](#크기-비교-확인) | 값이 다른 값보다 큰지 확인 |
-| [길이 확인](#길이-확인) | 컬렉션이 예상 길이를 가지는지 확인 |
-| [Null 아님 확인](#null-아님-확인) | 값이 null 또는 undefined가 아닌지 확인 |
-| [참 확인](#참-확인) | 조건이 참인지 확인 |
+| [Assert Contains](#assert-contains) | Assert that a collection contains a value |
+| [Assert Equal](#assert-equal) | Assert that two values are equal |
+| [Assert Greater Than](#assert-greater-than) | Assert that a value is greater than another |
+| [Assert Length](#assert-length) | Assert that a collection has expected length |
+| [Assert Not Null](#assert-not-null) | Assert that a value is not null or undefined |
+| [Assert Status](#assert-status) | Compare probe statuses to a baseline to derive exploitable/sanitized verdict |
+| [Assert Timing](#assert-timing) | Compare probe duration to a baseline to detect time-based oracles |
+| [Assert True](#assert-true) | Assert that a condition is true |
 
 ## Modules
 
-### 포함 확인
+### Assert Contains
 
 `test.assert_contains`
 
-컬렉션에 값이 포함되어 있는지 확인
+Assert that a collection contains a value
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `collection` | ['array', 'string'] | Yes | - | 검색할 컬렉션 |
-| `value` | ['string', 'number', 'boolean'] | Yes | - | 검색할 컬렉션 |
-| `message` | string | No | - | 찾을 값 |
+| `collection` | ['array', 'string'] | Yes | - | Collection to search in |
+| `value` | ['string', 'number', 'boolean'] | Yes | - | Value to find |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | 사용자 정의 오류 메시지 |
-| `collection` | ['array', 'string'] | 어설션 통과 여부 |
-| `value` | ['string', 'number', 'boolean'] | 컬렉션에 값이 포함되어 있는지 확인 |
-| `message` | string | 컬렉션에 값이 포함되어 있는지 확인 |
+| `passed` | boolean | Whether assertion passed |
+| `collection` | ['array', 'string'] | Collection searched |
+| `value` | ['string', 'number', 'boolean'] | Value searched for |
+| `message` | string | Result message |
 
-### 동등 확인
+### Assert Equal
 
 `test.assert_equal`
 
-두 값이 같은지 확인
+Assert that two values are equal
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | 실제 값 |
-| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | 실제 값 |
-| `message` | string | No | - | 예상 값 |
+| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Actual value |
+| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Yes | - | Expected value |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | 사용자 정의 오류 메시지 |
-| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | 어설션 통과 여부 |
-| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | 두 값이 같은지 확인 |
-| `message` | string | 두 값이 같은지 확인 |
+| `passed` | boolean | Whether assertion passed |
+| `actual` | ['string', 'number', 'boolean', 'object', 'array'] | Actual value received |
+| `expected` | ['string', 'number', 'boolean', 'object', 'array'] | Expected value |
+| `message` | string | Result message |
 
-### 크기 비교 확인
+### Assert Greater Than
 
 `test.assert_greater_than`
 
-값이 다른 값보다 큰지 확인
+Assert that a value is greater than another
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `actual` | number | Yes | - | 실제 값 |
-| `threshold` | number | Yes | - | 실제 값 |
-| `message` | string | No | - | 임계값 |
+| `actual` | number | Yes | - | Actual value |
+| `threshold` | number | Yes | - | Threshold value |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | 사용자 정의 오류 메시지 |
-| `actual` | number | 어설션 통과 여부 |
-| `threshold` | number | 값이 다른 값보다 큰지 확인 |
-| `message` | string | 값이 다른 값보다 큰지 확인 |
+| `passed` | boolean | Whether assertion passed |
+| `actual` | number | Actual value |
+| `threshold` | number | Threshold value |
+| `message` | string | Result message |
 
-### 길이 확인
+### Assert Length
 
 `test.assert_length`
 
-컬렉션이 예상 길이를 가지는지 확인
+Assert that a collection has expected length
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `collection` | ['array', 'string'] | Yes | - | 확인할 컬렉션 |
-| `expected_length` | number | Yes | - | 확인할 컬렉션 |
-| `message` | string | No | - | 예상 길이 |
+| `collection` | ['array', 'string'] | Yes | - | Collection to check |
+| `expected_length` | number | Yes | - | Expected length |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | 사용자 정의 오류 메시지 |
-| `actual_length` | number | 사용자 정의 오류 메시지 |
-| `expected_length` | number | 컬렉션이 예상 길이를 가지는지 확인 |
-| `message` | string | 컬렉션이 예상 길이를 가지는지 확인 |
+| `passed` | boolean | Whether assertion passed |
+| `actual_length` | number | Actual length |
+| `expected_length` | number | Expected length |
+| `message` | string | Result message |
 
-### Null 아님 확인
+### Assert Not Null
 
 `test.assert_not_null`
 
-값이 null 또는 undefined가 아닌지 확인
+Assert that a value is not null or undefined
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `value` | ['string', 'number', 'boolean', 'object', 'array', 'null'] | Yes | - | 확인할 값 |
-| `message` | string | No | - | 확인할 값 |
+| `value` | ['string', 'number', 'boolean', 'object', 'array', 'null'] | Yes | - | Value to check |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | 값이 null 또는 undefined가 아닌지 확인 |
-| `message` | string | 값이 null 또는 undefined가 아닌지 확인 |
+| `passed` | boolean | Whether assertion passed |
+| `message` | string | Result message |
 
-### 참 확인
+### Assert Status
+
+`test.assert_status`
+
+Compare probe statuses to a baseline to derive exploitable/sanitized verdict
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `source` | ['array', 'object'] | Yes | - | Batch result data (array of {status,...} from http.batch) |
+| `baseline_index` | number | No | `0` |  |
+| `probe_indices` | array | No | - | Indices to compare against the baseline |
+| `expected_blocked` | array | No | `[401, 403]` |  |
+| `on_bypass` | string | No | `exploitable` |  |
+| `on_blocked` | string | No | `sanitized` |  |
+| `on_error` | string | No | `unreachable` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `passed` | boolean | True when verdict != on_bypass |
+| `verdict` | string | One of on_bypass/on_blocked/on_error values |
+| `baseline` | object | Baseline probe summary |
+| `probes` | array | Per-probe decision detail |
+
+### Assert Timing
+
+`test.assert_timing`
+
+Compare probe duration to a baseline to detect time-based oracles
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `source` | ['array', 'object'] | Yes | - | Batch result data (array of {duration_ms,...} from http.batch) |
+| `baseline_index` | number | No | `0` |  |
+| `probe_index` | number | Yes | - |  |
+| `threshold_ms` | number | No | `3000` | Minimum probe-vs-baseline delta to flag as exploitable |
+| `on_slow` | string | No | `exploitable` |  |
+| `on_normal` | string | No | `inconclusive` |  |
+| `on_error` | string | No | `unreachable` |  |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `passed` | boolean | True when verdict != on_slow |
+| `verdict` | string | on_slow/on_normal/on_error value |
+| `baseline_ms` | number | Baseline duration in ms |
+| `probe_ms` | number | Probe duration in ms |
+| `delta_ms` | number | probe_ms - baseline_ms |
+| `threshold_ms` | number | Threshold used |
+
+### Assert True
 
 `test.assert_true`
 
-조건이 참인지 확인
+Assert that a condition is true
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `condition` | boolean | Yes | - | 확인할 조건 |
-| `message` | string | No | - | 확인할 조건 |
+| `condition` | boolean | Yes | - | Condition to check |
+| `message` | string | No | - | Custom error message |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `passed` | boolean | 조건이 참인지 확인 |
-| `message` | string | 조건이 참인지 확인 |
+| `passed` | boolean | Whether assertion passed |
+| `message` | string | Result message |

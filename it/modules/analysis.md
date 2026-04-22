@@ -6,20 +6,20 @@ HTML analysis modules for readability, forms, tables, and metadata extraction.
 
 | Module | Description |
 |--------|-------------|
-| [Leggibilita HTML](#leggibilita-html) | Analizza leggibilita del contenuto |
-| [Estrai Form](#estrai-form) | Estrai dati form da HTML |
-| [Estrai Metadati](#estrai-metadati) | Estrai metadati da HTML |
-| [Estrai Tabelle](#estrai-tabelle) | Estrai dati tabella da HTML |
-| [Trova Pattern](#trova-pattern) | Trova pattern dati ripetuti in HTML |
-| [Struttura HTML](#struttura-html) | Analizza struttura DOM HTML |
+| [HTML Readability](#html-readability) | Analyze content readability |
+| [Extract Forms](#extract-forms) | Extract form data from HTML |
+| [Extract Metadata](#extract-metadata) | Extract metadata from HTML |
+| [Extract Tables](#extract-tables) | Extract table data from HTML |
+| [Find Patterns](#find-patterns) | Find repeating data patterns in HTML |
+| [HTML Structure](#html-structure) | Analyze HTML DOM structure |
 
 ## Modules
 
-### Leggibilita HTML
+### HTML Readability
 
 `analysis.html.analyze_readability`
 
-Analizza leggibilita del contenuto
+Analyze content readability
 
 **Parameters:**
 
@@ -34,11 +34,11 @@ Analizza leggibilita del contenuto
 | `type` | any | object |
 | `properties` | any |  |
 
-### Estrai Form
+### Extract Forms
 
 `analysis.html.extract_forms`
 
-Estrai dati form da HTML
+Extract form data from HTML
 
 **Parameters:**
 
@@ -53,11 +53,11 @@ Estrai dati form da HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Estrai Metadati
+### Extract Metadata
 
 `analysis.html.extract_metadata`
 
-Estrai metadati da HTML
+Extract metadata from HTML
 
 **Parameters:**
 
@@ -72,11 +72,11 @@ Estrai metadati da HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Estrai Tabelle
+### Extract Tables
 
 `analysis.html.extract_tables`
 
-Estrai dati tabella da HTML
+Extract table data from HTML
 
 **Parameters:**
 
@@ -91,11 +91,11 @@ Estrai dati tabella da HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Trova Pattern
+### Find Patterns
 
 `analysis.html.find_patterns`
 
-Trova pattern dati ripetuti in HTML
+Find repeating data patterns in HTML
 
 **Parameters:**
 
@@ -110,11 +110,11 @@ Trova pattern dati ripetuti in HTML
 | `type` | any | object |
 | `properties` | any |  |
 
-### Struttura HTML
+### HTML Structure
 
 `analysis.html.structure`
 
-Analizza struttura DOM HTML
+Analyze HTML DOM structure
 
 **Parameters:**
 

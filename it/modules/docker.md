@@ -6,38 +6,38 @@ Build, run, inspect, and manage Docker containers.
 
 | Module | Description |
 |--------|-------------|
-| [Crea Immagine Docker](#crea-immagine-docker) | Crea un'immagine Docker da un Dockerfile |
-| [Ispeziona Contenitore Docker](#ispeziona-contenitore-docker) | Ottieni informazioni dettagliate su un contenitore Docker |
-| [Ottieni log del container](#ottieni-log-del-container) | Ottieni log da un container Docker |
-| [Elenca container Docker](#elenca-container-docker) | Elenca i container Docker |
-| [Esegui Contenitore Docker](#esegui-contenitore-docker) | Esegui un contenitore Docker da un'immagine |
-| [Ferma Contenitore Docker](#ferma-contenitore-docker) | Ferma un contenitore Docker in esecuzione |
+| [Build Docker Image](#build-docker-image) | Build a Docker image from a Dockerfile |
+| [Inspect Docker Container](#inspect-docker-container) | Get detailed information about a Docker container |
+| [Get Container Logs](#get-container-logs) | Get logs from a Docker container |
+| [List Docker Containers](#list-docker-containers) | List Docker containers |
+| [Run Docker Container](#run-docker-container) | Run a Docker container from an image |
+| [Stop Docker Container](#stop-docker-container) | Stop a running Docker container |
 
 ## Modules
 
-### Crea Immagine Docker
+### Build Docker Image
 
 `docker.build`
 
-Crea un'immagine Docker da un Dockerfile
+Build a Docker image from a Dockerfile
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | - | Percorso alla directory del contesto di build |
-| `tag` | string | Yes | - | Nome e opzionalmente tag dell'immagine (es. myapp:latest) |
-| `dockerfile` | string | No | - | Percorso al Dockerfile (relativo al contesto di build) |
-| `build_args` | object | No | - | Variabili di build-time (es. {"NODE_ENV": "production"}) |
-| `no_cache` | boolean | No | `False` | Non usare la cache durante la creazione dell'immagine |
+| `path` | string | Yes | - | Path to the build context directory |
+| `tag` | string | Yes | - | Name and optionally tag the image (e.g. myapp:latest) |
+| `dockerfile` | string | No | - | Path to the Dockerfile (relative to build context) |
+| `build_args` | object | No | - | Build-time variables (e.g. {"NODE_ENV": "production"}) |
+| `no_cache` | boolean | No | `False` | Do not use cache when building the image |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `image_id` | string | ID dell'immagine creata |
-| `tag` | string | Tag applicato all'immagine |
-| `size` | string | Dimensione dell'immagine creata |
+| `image_id` | string | ID of the built image |
+| `tag` | string | Tag applied to the image |
+| `size` | string | Size of the built image |
 
 **Example:** Build from current directory
 
@@ -56,29 +56,29 @@ build_args: {"NODE_ENV": "production"}
 no_cache: true
 ```
 
-### Ispeziona Contenitore Docker
+### Inspect Docker Container
 
 `docker.inspect_container`
 
-Ottieni informazioni dettagliate su un contenitore Docker
+Get detailed information about a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | ID o nome del contenitore da ispezionare |
+| `container` | string | Yes | - | Container ID or name to inspect |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | ID breve del contenitore |
-| `name` | string | Nome del container |
-| `state` | object | Stato del container (status, running, pid, exit_code, ecc.) |
-| `image` | string | Immagine usata dal container |
-| `network_settings` | object | Configurazione di rete (IP, porte, reti) |
-| `mounts` | array | Volume e mount bind |
-| `config` | object | Configurazione del container (env, cmd, etichette, ecc.) |
+| `id` | string | Short container ID |
+| `name` | string | Container name |
+| `state` | object | Container state (status, running, pid, exit_code, etc.) |
+| `image` | string | Image used by the container |
+| `network_settings` | object | Network configuration (IP, ports, networks) |
+| `mounts` | array | Volume and bind mounts |
+| `config` | object | Container configuration (env, cmd, labels, etc.) |
 
 **Example:** Inspect a container by name
 
@@ -92,27 +92,27 @@ container: my-nginx
 container: a1b2c3d4e5f6
 ```
 
-### Ottieni log del container
+### Get Container Logs
 
 `docker.logs`
 
-Ottieni log da un container Docker
+Get logs from a Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | ID o nome del container |
-| `tail` | number | No | `100` | Numero di linee da mostrare dalla fine dei log |
-| `follow` | boolean | No | `False` | Segui l'output dei log (stream fino al timeout) |
-| `timestamps` | boolean | No | `False` | Mostra timestamp nell'output dei log |
+| `container` | string | Yes | - | Container ID or name |
+| `tail` | number | No | `100` | Number of lines to show from the end of the logs |
+| `follow` | boolean | No | `False` | Follow log output (streams until timeout) |
+| `timestamps` | boolean | No | `False` | Show timestamps in log output |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `logs` | string | Output dei log del container |
-| `lines` | number | Numero di linee di log restituite |
+| `logs` | string | Container log output |
+| `lines` | number | Number of log lines returned |
 
 **Example:** Get last 50 lines
 
@@ -129,25 +129,25 @@ tail: 100
 timestamps: true
 ```
 
-### Elenca container Docker
+### List Docker Containers
 
 `docker.ps`
 
-Elenca i container Docker
+List Docker containers
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `all` | boolean | No | `False` | Mostra tutti i container (predefinito mostra solo quelli in esecuzione) |
-| `filters` | object | No | - | Filtra i container (es. {"name": "my-app", "status": "running"}) |
+| `all` | boolean | No | `False` | Show all containers (default shows just running) |
+| `filters` | object | No | - | Filter containers (e.g. {"name": "my-app", "status": "running"}) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `containers` | array | Elenco dei container con id, nome, immagine, stato, porte |
-| `count` | number | Numero di container trovati |
+| `containers` | array | List of containers with id, name, image, status, ports |
+| `count` | number | Number of containers found |
 
 **Example:** List running containers
 
@@ -166,32 +166,32 @@ all: true
 filters: {"name": "nginx"}
 ```
 
-### Esegui Contenitore Docker
+### Run Docker Container
 
 `docker.run`
 
-Esegui un contenitore Docker da un'immagine
+Run a Docker container from an image
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `image` | string | Yes | - | Immagine Docker da eseguire (es. nginx:latest) |
-| `command` | string | No | - | Comando da eseguire all'interno del contenitore |
-| `name` | string | No | - | Assegna un nome al contenitore |
-| `ports` | object | No | - | Mappature porte come host:contenitore (es. {"8080": "80"}) |
-| `volumes` | object | No | - | Mappature volumi come percorso_host:percorso_contenitore |
-| `env` | object | No | - | Variabili d'ambiente da impostare nel contenitore |
-| `detach` | boolean | No | `True` | Esegui il contenitore in background |
-| `remove` | boolean | No | `False` | Rimuovi automaticamente il contenitore quando termina |
-| `network` | string | No | - | Collega il contenitore a una rete |
+| `image` | string | Yes | - | Docker image to run (e.g. nginx:latest) |
+| `command` | string | No | - | Command to run inside the container |
+| `name` | string | No | - | Assign a name to the container |
+| `ports` | object | No | - | Port mappings as host:container (e.g. {"8080": "80"}) |
+| `volumes` | object | No | - | Volume mappings as host_path:container_path |
+| `env` | object | No | - | Environment variables to set in the container |
+| `detach` | boolean | No | `True` | Run container in background |
+| `remove` | boolean | No | `False` | Automatically remove the container when it exits |
+| `network` | string | No | - | Connect the container to a network |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | ID del contenitore creato |
-| `status` | string | Stato del contenitore dopo l'esecuzione |
+| `container_id` | string | ID of the created container |
+| `status` | string | Container status after run |
 
 **Example:** Run Nginx web server
 
@@ -211,25 +211,25 @@ remove: true
 detach: false
 ```
 
-### Ferma Contenitore Docker
+### Stop Docker Container
 
 `docker.stop`
 
-Ferma un contenitore Docker in esecuzione
+Stop a running Docker container
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `container` | string | Yes | - | ID o nome del contenitore da fermare |
-| `timeout` | number | No | `10` | Secondi da attendere prima di terminare il contenitore |
+| `container` | string | Yes | - | Container ID or name to stop |
+| `timeout` | number | No | `10` | Seconds to wait before killing the container |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `container_id` | string | ID o nome del contenitore fermato |
-| `stopped` | boolean | Se il contenitore è stato fermato con successo |
+| `container_id` | string | ID or name of the stopped container |
+| `stopped` | boolean | Whether the container was successfully stopped |
 
 **Example:** Stop a container by name
 

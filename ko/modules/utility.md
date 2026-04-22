@@ -6,23 +6,23 @@ Datetime operations, delay, MD5 hash, and random utilities.
 
 | Module | Description |
 |--------|-------------|
-| [시간 추가](#시간-추가) | 날짜/시간에 시간 추가 |
-| [날짜/시간 포맷](#날짜시간-포맷) | 날짜/시간을 문자열로 포맷 |
-| [날짜/시간 파싱](#날짜시간-파싱) | 문자열을 날짜/시간으로 파싱 |
-| [시간 빼기](#시간-빼기) | 날짜/시간에서 시간 빼기 |
-| [현재 날짜/시간](#현재-날짜시간) | 현재 날짜와 시간 가져오기 |
-| [지연/슬립](#지연슬립) | 지정된 시간 동안 워크플로우 실행 일시 중지 |
-| [MD5 해시](#md5-해시) | 텍스트의 MD5 해시 계산 |
-| [난수](#난수) | 범위 내 난수 생성 |
-| [랜덤 문자열](#랜덤-문자열) | 랜덤 문자열 또는 UUID 생성 |
+| [Add Time](#add-time) | Add time to datetime |
+| [Format DateTime](#format-datetime) | Format datetime to string |
+| [Parse DateTime](#parse-datetime) | Parse string to datetime |
+| [Subtract Time](#subtract-time) | Subtract time from datetime |
+| [Current Date/Time](#current-datetime) | Get current date and time |
+| [Delay/Sleep](#delaysleep) | Pause workflow execution for specified duration |
+| [MD5 Hash](#md5-hash) | Calculate MD5 hash of text |
+| [Random Number](#random-number) | Generate random number in range |
+| [Random String](#random-string) | Generate random string or UUID |
 
 ## Modules
 
-### 시간 추가
+### Add Time
 
 `datetime.add`
 
-날짜/시간에 시간 추가
+Add time to datetime
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ Datetime operations, delay, MD5 hash, and random utilities.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 작업 결과 |
-| `timestamp` | number | 작업 결과 |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Add 7 days
 
@@ -56,11 +56,11 @@ hours: 2
 minutes: 30
 ```
 
-### 날짜/시간 포맷
+### Format DateTime
 
 `datetime.format`
 
-날짜/시간을 문자열로 포맷
+Format datetime to string
 
 **Parameters:**
 
@@ -73,8 +73,8 @@ minutes: 30
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 작업 결과 |
-| `timestamp` | number | 작업 결과 |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Format current time
 
@@ -90,11 +90,11 @@ datetime: 2024-01-15T10:30:00
 format: %B %d, %Y
 ```
 
-### 날짜/시간 파싱
+### Parse DateTime
 
 `datetime.parse`
 
-문자열을 날짜/시간으로 파싱
+Parse string to datetime
 
 **Parameters:**
 
@@ -107,14 +107,14 @@ format: %B %d, %Y
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 작업 결과 |
-| `timestamp` | number | 작업 결과 |
-| `year` | number | 작업 결과 |
-| `month` | number | Unix 타임스탬프 |
-| `day` | number | 연도 구성요소 |
-| `hour` | number | 월 구성요소 |
-| `minute` | number | 일 구성요소 |
-| `second` | number | 시 구성요소 |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
+| `year` | number | Year component |
+| `month` | number | Month component |
+| `day` | number | Day component |
+| `hour` | number | Hour component |
+| `minute` | number | Minute component |
+| `second` | number | Second component |
 
 **Example:** Parse ISO format
 
@@ -129,11 +129,11 @@ datetime_string: January 15, 2024
 format: %B %d, %Y
 ```
 
-### 시간 빼기
+### Subtract Time
 
 `datetime.subtract`
 
-날짜/시간에서 시간 빼기
+Subtract time from datetime
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ format: %B %d, %Y
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | 작업 결과 |
-| `timestamp` | number | 작업 결과 |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Subtract 7 days
 
@@ -166,28 +166,28 @@ datetime: 2024-01-15T10:00:00
 hours: 1
 ```
 
-### 현재 날짜/시간
+### Current Date/Time
 
 `utility.datetime.now`
 
-현재 날짜와 시간 가져오기
+Get current date and time
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | 출력 형식 |
-| `custom_format` | string | No | - | Python strftime 형식 (format=custom인 경우) |
-| `timezone` | string | No | `UTC` | Python strftime 형식 (format=custom인 경우) |
+| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | Output format |
+| `custom_format` | string | No | - | Python strftime format (if format=custom) |
+| `timezone` | string | No | `UTC` | Timezone (default: UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 시간대 (기본값: UTC) |
-| `datetime` | string | 작업 상태 (성공/오류) |
-| `timestamp` | number | 작업 상태 (성공/오류) |
-| `iso` | string | 포맷된 날짜/시간 |
+| `status` | string | Operation status (success/error) |
+| `datetime` | string | Formatted date/time |
+| `timestamp` | number | Unix timestamp |
+| `iso` | string | ISO format |
 
 **Example:** Example
 
@@ -201,25 +201,25 @@ format: iso
 format: unix
 ```
 
-### 지연/슬립
+### Delay/Sleep
 
 `utility.delay`
 
-지정된 시간 동안 워크플로우 실행 일시 중지
+Pause workflow execution for specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `duration_ms` | number | No | `1000` | 밀리초 단위 대기 시간 |
-| `duration_seconds` | number | No | - | 대안: 초 단위 지속 시간 |
+| `duration_ms` | number | No | `1000` | How long to wait in milliseconds |
+| `duration_seconds` | number | No | - | Alternative: duration in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 대안: 초 단위 지속 시간 |
-| `waited_ms` | number | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `waited_ms` | number | Actual wait time in ms |
 
 **Example:** Example
 
@@ -233,25 +233,25 @@ duration_seconds: 2
 duration_ms: 500
 ```
 
-### MD5 해시
+### MD5 Hash
 
 `utility.hash.md5`
 
-텍스트의 MD5 해시 계산
+Calculate MD5 hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | 해시할 텍스트 |
-| `encoding` | string | No | `utf-8` | 해시할 텍스트 |
+| `text` | text | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 텍스트 인코딩 |
-| `hash` | string | 텍스트 인코딩 |
+| `status` | string | Operation status (success/error) |
+| `hash` | string | MD5 hash (hexadecimal) |
 
 **Example:** Example
 
@@ -259,26 +259,26 @@ duration_ms: 500
 text: Hello World
 ```
 
-### 난수
+### Random Number
 
 `utility.random.number`
 
-범위 내 난수 생성
+Generate random number in range
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `min` | number | No | `0` | 최소값 (포함) |
-| `max` | number | No | `100` | 최소값 (포함) |
-| `decimals` | number | No | `0` | 최대값 (포함) |
+| `min` | number | No | `0` | Minimum value (inclusive) |
+| `max` | number | No | `100` | Maximum value (inclusive) |
+| `decimals` | number | No | `0` | Number of decimal places (0 for integers) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 소수점 자릿수 (정수는 0) |
-| `value` | number | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `value` | number | Random number |
 
 **Example:** Example
 
@@ -296,25 +296,25 @@ max: 1
 decimals: 2
 ```
 
-### 랜덤 문자열
+### Random String
 
 `utility.random.string`
 
-랜덤 문자열 또는 UUID 생성
+Generate random string or UUID
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | No | `16` | 문자열 길이 |
-| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | 문자열 길이 |
+| `length` | number | No | `16` | String length |
+| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | Which characters to use |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | 작업 상태 (성공/오류) |
-| `value` | string | 작업 상태 (성공/오류) |
+| `status` | string | Operation status (success/error) |
+| `value` | string | Random string |
 
 **Example:** Example
 

@@ -6,15 +6,15 @@ Execute reusable templates as workflow steps.
 
 | Module | Description |
 |--------|-------------|
-| [Wywołaj szablon](#wywołaj-szablon) | Wykonaj szablon z biblioteki jako krok w procesie |
+| [Invoke Template](#invoke-template) | Execute a template from your library as a workflow step |
 
 ## Modules
 
-### Wywołaj szablon
+### Invoke Template
 
 `template.invoke`
 
-Wykonaj szablon z biblioteki jako krok w procesie
+Execute a template from your library as a workflow step
 
 **Parameters:**
 
@@ -29,10 +29,10 @@ Wykonaj szablon z biblioteki jako krok w procesie
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `__event__` | string | ID elementu biblioteki (zakup/rozgałęzienie/posiadany) |
-| `result` | any | Maksymalny czas wykonania w sekundach |
-| `template_id` | string | Zdarzenie do kierowania (sukces/błąd) |
-| `execution_time_ms` | number | Wynik wykonania szablonu |
+| `__event__` | string | Event for routing (success/error) |
+| `result` | any | Template execution result |
+| `template_id` | string | Executed template ID |
+| `execution_time_ms` | number | Execution time in milliseconds |
 
 **Example:** Example
 

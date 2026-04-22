@@ -6,32 +6,32 @@ Environment variable management and .env file loading.
 
 | Module | Description |
 |--------|-------------|
-| [Obtenir la variable d'environnement](#obtenir-la-variable-d'environnement) | Obtenir la valeur d'une variable d'environnement |
-| [Charger le fichier .env](#charger-le-fichier-.env) | Charger les variables d'environnement depuis un fichier .env |
-| [Définir la variable d'environnement](#définir-la-variable-d'environnement) | Définir une variable d'environnement dans le processus actuel |
+| [Get Environment Variable](#get-environment-variable) | Get the value of an environment variable |
+| [Load .env File](#load-.env-file) | Load environment variables from a .env file |
+| [Set Environment Variable](#set-environment-variable) | Set an environment variable in the current process |
 
 ## Modules
 
-### Obtenir la variable d'environnement
+### Get Environment Variable
 
 `env.get`
 
-Obtenir la valeur d'une variable d'environnement
+Get the value of an environment variable
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | Nom de la variable d'environnement |
-| `default` | string | No | - | Valeur par défaut si la variable n'est pas définie |
+| `name` | string | Yes | - | Name of the environment variable |
+| `default` | string | No | - | Default value if the variable is not set |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Nom de la variable |
-| `value` | string | Valeur de la variable (ou par défaut si non définie) |
-| `exists` | boolean | Si la variable existe dans l'environnement |
+| `name` | string | Variable name |
+| `value` | string | Variable value (or default if not set) |
+| `exists` | boolean | Whether the variable exists in the environment |
 
 **Example:** Get HOME variable
 
@@ -46,25 +46,25 @@ name: MY_APP_PORT
 default: 8080
 ```
 
-### Charger le fichier .env
+### Load .env File
 
 `env.load_dotenv`
 
-Charger les variables d'environnement depuis un fichier .env
+Load environment variables from a .env file
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `path` | string | Yes | `.env` | Chemin vers le fichier .env |
-| `override` | boolean | No | `False` | Si les variables d'environnement existantes doivent être remplacées |
+| `path` | string | Yes | `.env` | Path to the .env file |
+| `override` | boolean | No | `False` | Whether to override existing environment variables |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `loaded_count` | number | Nombre de variables chargées |
-| `variables` | array | Liste des noms de variables qui ont été chargées |
+| `loaded_count` | number | Number of variables loaded |
+| `variables` | array | List of variable names that were loaded |
 
 **Example:** Load .env file
 
@@ -73,26 +73,26 @@ path: .env
 override: false
 ```
 
-### Définir la variable d'environnement
+### Set Environment Variable
 
 `env.set`
 
-Définir une variable d'environnement dans le processus actuel
+Set an environment variable in the current process
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `name` | string | Yes | - | Nom de la variable d'environnement à définir |
-| `value` | string | Yes | - | Valeur à attribuer à la variable d'environnement |
+| `name` | string | Yes | - | Name of the environment variable to set |
+| `value` | string | Yes | - | Value to assign to the environment variable |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `name` | string | Nom de la variable |
-| `value` | string | Nouvelle valeur qui a été définie |
-| `previous_value` | string | Valeur précédente (nulle si non définie auparavant) |
+| `name` | string | Variable name |
+| `value` | string | New value that was set |
+| `previous_value` | string | Previous value (null if not previously set) |
 
 **Example:** Set an environment variable
 

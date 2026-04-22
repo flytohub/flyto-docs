@@ -6,23 +6,23 @@ Datetime operations, delay, MD5 hash, and random utilities.
 
 | Module | Description |
 |--------|-------------|
-| [Thêm thời gian](#thêm-thời-gian) | Thêm thời gian vào datetime |
-| [Định dạng DateTime](#định-dạng-datetime) | Định dạng datetime thành chuỗi |
-| [Phân tích DateTime](#phân-tích-datetime) | Phân tích chuỗi thành datetime |
-| [Trừ thời gian](#trừ-thời-gian) | Trừ thời gian từ datetime |
-| [Ngày/Giờ hiện tại](#ngàygiờ-hiện-tại) | Lấy ngày giờ hiện tại |
-| [Độ trễ/Nghỉ](#độ-trễnghỉ) | Tạm dừng thực thi workflow trong khoảng thời gian xác định |
-| [Hash MD5](#hash-md5) | Tính hash MD5 của văn bản |
-| [Số ngẫu nhiên](#số-ngẫu-nhiên) | Tạo số ngẫu nhiên trong khoảng |
-| [Chuỗi ngẫu nhiên](#chuỗi-ngẫu-nhiên) | Tạo chuỗi ngẫu nhiên hoặc UUID |
+| [Add Time](#add-time) | Add time to datetime |
+| [Format DateTime](#format-datetime) | Format datetime to string |
+| [Parse DateTime](#parse-datetime) | Parse string to datetime |
+| [Subtract Time](#subtract-time) | Subtract time from datetime |
+| [Current Date/Time](#current-datetime) | Get current date and time |
+| [Delay/Sleep](#delaysleep) | Pause workflow execution for specified duration |
+| [MD5 Hash](#md5-hash) | Calculate MD5 hash of text |
+| [Random Number](#random-number) | Generate random number in range |
+| [Random String](#random-string) | Generate random string or UUID |
 
 ## Modules
 
-### Thêm thời gian
+### Add Time
 
 `datetime.add`
 
-Thêm thời gian vào datetime
+Add time to datetime
 
 **Parameters:**
 
@@ -38,8 +38,8 @@ Thêm thời gian vào datetime
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Kết quả thao tác |
-| `timestamp` | number | Kết quả thao tác |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Add 7 days
 
@@ -56,11 +56,11 @@ hours: 2
 minutes: 30
 ```
 
-### Định dạng DateTime
+### Format DateTime
 
 `datetime.format`
 
-Định dạng datetime thành chuỗi
+Format datetime to string
 
 **Parameters:**
 
@@ -73,8 +73,8 @@ minutes: 30
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Kết quả thao tác |
-| `timestamp` | number | Kết quả thao tác |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Format current time
 
@@ -90,11 +90,11 @@ datetime: 2024-01-15T10:30:00
 format: %B %d, %Y
 ```
 
-### Phân tích DateTime
+### Parse DateTime
 
 `datetime.parse`
 
-Phân tích chuỗi thành datetime
+Parse string to datetime
 
 **Parameters:**
 
@@ -107,14 +107,14 @@ Phân tích chuỗi thành datetime
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Kết quả thao tác |
-| `timestamp` | number | Kết quả thao tác |
-| `year` | number | Kết quả thao tác |
-| `month` | number | Dấu thời gian Unix |
-| `day` | number | Thành phần năm |
-| `hour` | number | Thành phần tháng |
-| `minute` | number | Thành phần ngày |
-| `second` | number | Thành phần giờ |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
+| `year` | number | Year component |
+| `month` | number | Month component |
+| `day` | number | Day component |
+| `hour` | number | Hour component |
+| `minute` | number | Minute component |
+| `second` | number | Second component |
 
 **Example:** Parse ISO format
 
@@ -129,11 +129,11 @@ datetime_string: January 15, 2024
 format: %B %d, %Y
 ```
 
-### Trừ thời gian
+### Subtract Time
 
 `datetime.subtract`
 
-Trừ thời gian từ datetime
+Subtract time from datetime
 
 **Parameters:**
 
@@ -149,8 +149,8 @@ Trừ thời gian từ datetime
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `result` | string | Kết quả thao tác |
-| `timestamp` | number | Kết quả thao tác |
+| `result` | string | The operation result |
+| `timestamp` | number | Unix timestamp |
 
 **Example:** Subtract 7 days
 
@@ -166,28 +166,28 @@ datetime: 2024-01-15T10:00:00
 hours: 1
 ```
 
-### Ngày/Giờ hiện tại
+### Current Date/Time
 
 `utility.datetime.now`
 
-Lấy ngày giờ hiện tại
+Get current date and time
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | Định dạng đầu ra |
-| `custom_format` | string | No | - | Định dạng strftime Python (nếu format=custom) |
-| `timezone` | string | No | `UTC` | Định dạng strftime Python (nếu format=custom) |
+| `format` | select (`iso`, `unix`, `unix_ms`, `date`, `time`, `custom`) | No | `iso` | Output format |
+| `custom_format` | string | No | - | Python strftime format (if format=custom) |
+| `timezone` | string | No | `UTC` | Timezone (default: UTC) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Múi giờ (mặc định: UTC) |
-| `datetime` | string | Trạng thái thao tác (thành công/lỗi) |
-| `timestamp` | number | Trạng thái thao tác (thành công/lỗi) |
-| `iso` | string | Ngày/giờ đã định dạng |
+| `status` | string | Operation status (success/error) |
+| `datetime` | string | Formatted date/time |
+| `timestamp` | number | Unix timestamp |
+| `iso` | string | ISO format |
 
 **Example:** Example
 
@@ -201,25 +201,25 @@ format: iso
 format: unix
 ```
 
-### Độ trễ/Nghỉ
+### Delay/Sleep
 
 `utility.delay`
 
-Tạm dừng thực thi workflow trong khoảng thời gian xác định
+Pause workflow execution for specified duration
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `duration_ms` | number | No | `1000` | Thời gian chờ tính bằng mili giây |
-| `duration_seconds` | number | No | - | Thay thế: thời gian tính bằng giây |
+| `duration_ms` | number | No | `1000` | How long to wait in milliseconds |
+| `duration_seconds` | number | No | - | Alternative: duration in seconds |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Thay thế: thời gian tính bằng giây |
-| `waited_ms` | number | Trạng thái thao tác (thành công/lỗi) |
+| `status` | string | Operation status (success/error) |
+| `waited_ms` | number | Actual wait time in ms |
 
 **Example:** Example
 
@@ -233,25 +233,25 @@ duration_seconds: 2
 duration_ms: 500
 ```
 
-### Hash MD5
+### MD5 Hash
 
 `utility.hash.md5`
 
-Tính hash MD5 của văn bản
+Calculate MD5 hash of text
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `text` | text | Yes | - | Văn bản cần hash |
-| `encoding` | string | No | `utf-8` | Văn bản cần hash |
+| `text` | text | Yes | - | Text to hash |
+| `encoding` | string | No | `utf-8` | Text encoding |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Mã hóa văn bản |
-| `hash` | string | Mã hóa văn bản |
+| `status` | string | Operation status (success/error) |
+| `hash` | string | MD5 hash (hexadecimal) |
 
 **Example:** Example
 
@@ -259,26 +259,26 @@ Tính hash MD5 của văn bản
 text: Hello World
 ```
 
-### Số ngẫu nhiên
+### Random Number
 
 `utility.random.number`
 
-Tạo số ngẫu nhiên trong khoảng
+Generate random number in range
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `min` | number | No | `0` | Giá trị tối thiểu (bao gồm) |
-| `max` | number | No | `100` | Giá trị tối thiểu (bao gồm) |
-| `decimals` | number | No | `0` | Giá trị tối đa (bao gồm) |
+| `min` | number | No | `0` | Minimum value (inclusive) |
+| `max` | number | No | `100` | Maximum value (inclusive) |
+| `decimals` | number | No | `0` | Number of decimal places (0 for integers) |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Số chữ số thập phân (0 cho số nguyên) |
-| `value` | number | Trạng thái thao tác (thành công/lỗi) |
+| `status` | string | Operation status (success/error) |
+| `value` | number | Random number |
 
 **Example:** Example
 
@@ -296,25 +296,25 @@ max: 1
 decimals: 2
 ```
 
-### Chuỗi ngẫu nhiên
+### Random String
 
 `utility.random.string`
 
-Tạo chuỗi ngẫu nhiên hoặc UUID
+Generate random string or UUID
 
 **Parameters:**
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `length` | number | No | `16` | Độ dài chuỗi |
-| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | Độ dài chuỗi |
+| `length` | number | No | `16` | String length |
+| `charset` | select (`alphanumeric`, `letters`, `lowercase`, `uppercase`, `numbers`, `hex`, `uuid`) | No | `alphanumeric` | Which characters to use |
 
 **Output:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `status` | string | Trạng thái thao tác (thành công/lỗi) |
-| `value` | string | Trạng thái thao tác (thành công/lỗi) |
+| `status` | string | Operation status (success/error) |
+| `value` | string | Random string |
 
 **Example:** Example
 
