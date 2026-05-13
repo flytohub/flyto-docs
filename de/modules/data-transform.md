@@ -348,7 +348,7 @@ Generate XML string from Python dict
 | `root_tag` | string | No | `root` | Tag name for the root XML element |
 | `pretty` | boolean | No | `True` | Format XML with indentation for readability |
 | `encoding` | string | No | `utf-8` | XML encoding declaration value |
-| `declaration` | boolean | No | `True` | Include <?xml version="1.0"?> declaration at top |
+| `declaration` | boolean | No | `True` | Include XML declaration (&lt;?xml version="1.0"?&gt;) at top |
 
 **Output:**
 
