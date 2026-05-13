@@ -301,6 +301,7 @@ export default defineConfig({
           { text: 'flyto-blueprint', link: '/blueprint/' },
         ],
       },
+      { text: 'Warroom', link: '/warroom/' },
       { text: 'Blog', link: 'https://blog.flyto2.com' },
       { text: 'Flyto2', link: 'https://flyto2.com' },
     ],
@@ -383,6 +384,48 @@ export default defineConfig({
             { text: 'Learning & Scoring', link: '/blueprint/learning' },
             { text: 'Storage Backends', link: '/blueprint/storage' },
             { text: 'API Reference', link: '/blueprint/api' },
+          ],
+        },
+      ],
+      '/warroom/': [
+        {
+          text: 'Warroom',
+          items: [
+            { text: 'Overview', link: '/warroom/' },
+            { text: 'Product Tour', link: '/warroom/product-tour' },
+          ],
+        },
+        {
+          text: 'Products',
+          collapsed: false,
+          items: [
+            { text: 'Flyto Code (VA/PT)', link: '/warroom/flyto-code' },
+            { text: 'Flyto Domains (CTEM)', link: '/warroom/flyto-domains' },
+          ],
+        },
+        {
+          text: 'Scoring & Events',
+          collapsed: false,
+          items: [
+            { text: 'Scoring Methodology', link: '/warroom/scoring-methodology' },
+            { text: 'Score Events', link: '/warroom/score-events' },
+          ],
+        },
+        {
+          text: 'Workflows',
+          collapsed: false,
+          items: [
+            { text: 'Closed-Loop Verify', link: '/warroom/closed-loop' },
+            { text: 'Pulse', link: '/warroom/pulse' },
+            { text: 'Red Team', link: '/warroom/red-team' },
+          ],
+        },
+        {
+          text: 'Reference',
+          collapsed: false,
+          items: [
+            { text: 'API Reference', link: '/warroom/api' },
+            { text: 'Integrations', link: '/warroom/integrations' },
           ],
         },
       ],
