@@ -410,7 +410,6 @@ export default defineConfig({
             { text: 'Home', link: '/warroom/' },
             { text: 'Overview', link: '/warroom/overview' },
             { text: 'Getting Started', link: '/warroom/getting-started' },
-            { text: 'Why Flyto2', link: '/warroom/why-flyto2' },
             { text: 'Product Tour', link: '/warroom/product-tour' },
           ],
         },

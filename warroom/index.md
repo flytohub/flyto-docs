@@ -2,7 +2,7 @@
 
 **Your security tools don't talk to each other. Attackers don't care.**
 
-Your SAST tool found a critical CVE. Your external scanner says your API is exposed. Your Git log shows a developer is editing that exact file in an open PR right now. Three tools, three dashboards, zero correlation -- and you're the human glue holding it together.
+Your code scanner found a critical CVE. Your external scanner says your API is exposed. Your Git log shows a developer is editing that exact file in an open PR right now. Three tools, three dashboards, zero correlation -- and you're the human glue holding it together.
 
 Flyto2 Warroom connects the dots automatically.
 
@@ -10,13 +10,13 @@ Flyto2 Warroom connects the dots automatically.
 
 ## The Problem
 
-Most security teams juggle 3-5 separate tools:
+Most security teams juggle 3-5 separate tools. Each sees one dimension:
 
-| Tool | What it sees | What it misses |
-|------|-------------|----------------|
-| **Snyk / SonarQube** | Code vulnerabilities | Whether they're reachable from the internet |
-| **Bitsight / SecurityScorecard** | External posture | Whether internal code is actually affected |
-| **Trivy / Grype** | Container CVEs | Whether anyone is actively editing the vulnerable code |
+| What you have | What it sees | What it can't tell you |
+|--------------|-------------|----------------------|
+| Code scanner | Vulnerabilities in your repos | Whether they're reachable from the internet |
+| External rating | Your perimeter posture | Whether internal code is actually affected |
+| Container scanner | OS-package CVEs | Whether anyone is actively editing the vulnerable code |
 
 Each tool scores independently. None of them can answer: **"Is this critical CVE in my code actually exploitable through my public API, and is someone about to deploy a change that makes it worse?"**
 
@@ -88,7 +88,6 @@ Add your domains. 22 scanners discover TLS issues, DNS misconfigurations, open p
 | | |
 |---|---|
 | **New here?** | [Getting Started](/warroom/getting-started) -- Connect your first repo in 5 minutes |
-| **Evaluating?** | [Why Flyto2](/warroom/why-flyto2) -- How we compare to Bitsight, Snyk, and others |
 | **Want a tour?** | [Product Tour](/warroom/product-tour) -- 29 screenshots walking through every feature |
 
 ## Documentation
@@ -97,7 +96,6 @@ Add your domains. 22 scanners discover TLS issues, DNS misconfigurations, open p
 |-------|-------------|
 | [Overview](/warroom/overview) | Architecture, scoring model, and product capabilities at a glance |
 | [Getting Started](/warroom/getting-started) | Connect repos and domains, run your first scan, see your score |
-| [Why Flyto2](/warroom/why-flyto2) | Competitive positioning and unique value |
 | [Flyto2 Code](/warroom/flyto-code) | Internal VA/PT scanning, 9 scanner categories, AutoFix, CI gate |
 | [Flyto2 Domains](/warroom/flyto-domains) | External CTEM discovery (22 scanners), pentest projects, brand impersonation |
 | [Scoring Methodology](/warroom/scoring-methodology) | How scores are computed, grade boundaries, confidence levels, anti-gaming |

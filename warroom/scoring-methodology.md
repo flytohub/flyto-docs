@@ -8,13 +8,13 @@
 
 ## 1. Overview
 
-Your security score should reflect your actual risk, not your scanner's output volume. Most rating platforms either see only your external perimeter (Bitsight) or only your code (Snyk) -- and neither can tell you which internal vulnerability is actually exploitable from the outside.
+Your security score should reflect your actual risk, not your scanner's output volume. Most tools see only one dimension -- either your external perimeter or your code -- and neither can tell you which internal vulnerability is actually exploitable from the outside.
 
 Flyto2's scoring system combines internal code scanning, external attack surface monitoring, and operational diligence into a single number. The score penalizes what matters (exploitable, internet-facing, unpatched vulnerabilities) and discounts what doesn't (unreachable code, false positives, internal-only libraries).
 
 ![Scoring Breakdown](/warroom/21-scoring-breakdown.png)
 
-Flyto2's security scoring system provides a continuous, evidence-based assessment of an organization's security posture. Scores range from **250 to 900** (Bitsight-compatible scale), with letter grades **A through F**.
+Flyto2's security scoring system provides a continuous, evidence-based assessment of an organization's security posture. Scores range from **250 to 900** (industry-standard scale), with letter grades **A through F**.
 
 The system supports three deployment modes:
 
@@ -150,7 +150,7 @@ Code quality data (complexity, dead code, duplicates) is collected and displayed
 
 **Display score formula:** `floor((250 + raw * 6.5) / 10) * 10`
 
-This produces a 250-900 scale compatible with Bitsight's rating system. The formula is monotonic (higher raw = higher display, always) and rounds to the nearest 10.
+This produces a 250-900 scale compatible with industry-standard security rating systems. The formula is monotonic (higher raw = higher display, always) and rounds to the nearest 10.
 
 ---
 
@@ -227,7 +227,7 @@ Grade caps enforce non-negotiable security standards. They override both categor
 
 ## 9. Score Smoothing (30-Day Rolling Window)
 
-Scores change gradually over a 30-day rolling window, consistent with industry practice (Bitsight uses a similar approach):
+Scores change gradually over a 30-day rolling window, consistent with industry practice:
 
 | Time Since Last Score | Maximum Change |
 |----------------------|----------------|
@@ -242,7 +242,7 @@ Scores change gradually over a 30-day rolling window, consistent with industry p
 - Prevents "my score dropped 20 points overnight" panic
 - Prevents gaming by fixing-then-breaking repeatedly
 - Produces interpretable trends for executive reporting
-- Aligns with Bitsight's observed behavior
+- Aligns with industry-standard rating platform behavior
 
 **What is NOT smoothed:**
 - Grade caps (applied after smoothing, always take effect immediately)
@@ -355,20 +355,16 @@ Every computed score includes a `scoring_version` field (currently `"2.0"`). Whe
 
 ---
 
-## 16. Comparison with Industry Standards
+## 16. Industry Compatibility
 
-| Feature | Flyto2 | Bitsight | SecurityScorecard |
-|---------|-------|----------|-------------------|
-| Scale | 250-900 | 250-900 | 0-100 |
-| Grade system | A-F | A-F | A-F |
-| Smoothing window | 30 days | ~30 days | ~30 days |
-| Confidence levels | L0/L1/L2 (3-tier) | No | No |
-| Cross-dim correlation | Yes (5 modifiers) | No | No |
-| Time decay | Yes (30d+) | Yes | Yes |
-| Internal code scanning | Yes | No | No |
-| Grade caps | Yes (3 conditions) | Unknown | Unknown |
+Flyto2's scoring system is designed to be compatible with industry-standard rating scales:
 
-**Key differentiator:** Flyto2 is the only platform that combines internal code scanning (VA/PT) with external attack surface monitoring (CTEM) in a single unified score, with cross-dimensional correlation that penalizes organizations where internal vulnerabilities are exposed through external attack vectors.
+- **250-900 scale** -- Same range used by major security rating platforms, making scores directly comparable in vendor risk assessments and board reporting
+- **A-F grade system** -- Universal letter grades that map to clear thresholds
+- **30-day smoothing** -- Consistent with industry practice for trend stability
+- **Time decay** -- Aging penalties follow the same principle used across the industry
+
+**What Flyto2 adds on top of this foundation:** confidence levels (L0/L1/L2) that reduce false positive noise, cross-dimensional correlation that connects internal and external risk, and grade caps that enforce non-negotiable security standards.
 
 ---
 

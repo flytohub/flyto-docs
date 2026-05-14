@@ -85,7 +85,7 @@ Not all findings are equal. Flyto2 tracks how verified each finding is:
 
 ![Scoring Breakdown](/warroom/21-scoring-breakdown.png)
 
-One score across all dimensions, compatible with the Bitsight 250-900 scale:
+One score across all dimensions on an industry-standard 250-900 scale:
 
 - **A (740-900)** -- Strong security posture
 - **B (640-730)** -- Acceptable with improvements needed
@@ -139,5 +139,4 @@ See [Integrations](/warroom/integrations) for setup details.
 ## Next Steps
 
 - [Getting Started](/warroom/getting-started) -- Connect your first repo in 5 minutes
-- [Why Flyto2](/warroom/why-flyto2) -- How we compare to alternatives
 - [Product Tour](/warroom/product-tour) -- Visual walkthrough with 29 screenshots
