@@ -1,7 +1,7 @@
-<h1 align="center">Flyto Docs</h1>
+<h1 align="center">Flyto2 Docs</h1>
 
 <p align="center">
-  <b>Documentation for the Flyto Platform — core, cloud, cortex, engine, plugins.</b>
+  <b>Documentation for the Flyto2 Platform — core, cloud, cortex, engine, plugins.</b>
 </p>
 
 <p align="center">

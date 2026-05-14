@@ -116,14 +116,14 @@ Send messages to Slack channels via incoming webhook
 **Example:** Send simple message
 
 ```yaml
-message: Hello from Flyto!
+message: Hello from Flyto2!
 ```
 
 **Example:** Send with formatting
 
 ```yaml
 message: Task completed successfully
-username: Flyto Bot
+username: Flyto2 Bot
 icon_emoji: :white_check_mark:
 ```
 

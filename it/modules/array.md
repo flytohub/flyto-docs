@@ -308,7 +308,7 @@ operation: sum
 **Example:** Join strings
 
 ```yaml
-array: ["Hello", "World", "from", "Flyto"]
+array: ["Hello", "World", "from", "Flyto2"]
 operation: join
 separator:  
 ```

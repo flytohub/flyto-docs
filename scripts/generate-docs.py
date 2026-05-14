@@ -150,6 +150,13 @@ def i18n_get(translations: dict, key: str, fallback: str) -> str:
 # Rendering
 # ---------------------------------------------------------------------------
 
+def normalize_brand(text: str) -> str:
+    """Replace standalone 'Flyto' with 'Flyto2' in generated content (branding)."""
+    import re
+    # Match 'Flyto' not already followed by '2', '-', '_', 'Hub'
+    return re.sub(r'\bFlyto\b(?!2|[-_]|Hub)', 'Flyto2', text)
+
+
 def escape_vue(text: str) -> str:
     """Escape {{ }} and HTML-like angle brackets to prevent VitePress/Vue parse errors."""
     import re
@@ -386,6 +393,7 @@ def generate_for_locale(locale: str, by_category: dict):
     for category, modules in sorted(by_category.items()):
         slug = get_slug(category)
         page = generate_category_page(category, modules, t)
+        page = normalize_brand(page)
         out_path = docs_dir / f"{slug}.md"
         out_path.write_text(page, encoding="utf-8")
         total_modules += len(modules)
