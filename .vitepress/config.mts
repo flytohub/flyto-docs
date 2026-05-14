@@ -131,6 +131,22 @@ export default defineConfig({
   description: 'Documentation for Flyto2 — Automate Repetitive Tasks Without Coding',
   lang: 'en-US',
   cleanUrls: true,
+  markdown: {
+    // Disable Vue template compilation inside code blocks/YAML examples
+    // to prevent <token>, <name>, <users> etc from being parsed as HTML.
+    attrs: { disable: true },
+  },
+  vue: {
+    template: {
+      compilerOptions: {
+        // Safety net for auto-generated module docs: treat placeholder-like
+        // tags as custom elements so Vue won't error on missing end tags.
+        // Catches: <oauth2-token>, <TOKEN>, <?xml>, <base64-encoded-ciphertext>
+        // The generate script escapes most HTML patterns; this is a fallback.
+        isCustomElement: (tag) => /[-?]/.test(tag) || /^[A-Z][A-Z0-9_]*$/.test(tag),
+      },
+    },
+  },
   sitemap: {
     hostname: 'https://docs.flyto2.com',
     transformItems(items) {

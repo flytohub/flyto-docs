@@ -151,9 +151,21 @@ def i18n_get(translations: dict, key: str, fallback: str) -> str:
 # ---------------------------------------------------------------------------
 
 def escape_vue(text: str) -> str:
-    """Escape {{ }} in text to prevent VitePress treating them as Vue template syntax."""
+    """Escape {{ }} and HTML-like angle brackets to prevent VitePress/Vue parse errors."""
     import re
-    return re.sub(r'\{\{(.+?)\}\}', r'{<!-- -->{\1}<!-- -->}', text)
+    # 1) Escape Vue template syntax {{ }}
+    text = re.sub(r'\{\{(.+?)\}\}', r'{<!-- -->{\1}<!-- -->}', text)
+    # 2) Escape HTML-like <tag>, </tag>, <tag attr="..."> patterns.
+    #    Skip content already inside backtick code spans.
+    parts = re.split(r'(`[^`]+`)', text)
+    for i, part in enumerate(parts):
+        if not part.startswith('`'):
+            parts[i] = re.sub(
+                r'<(/?[a-zA-Z][a-zA-Z0-9\-]*(?:\s[^>]*)?)>',
+                lambda m: f'&lt;{m.group(1)}&gt;',
+                part,
+            )
+    return ''.join(parts)
 
 
 def render_param_type(param: dict) -> str:
@@ -270,7 +282,7 @@ def generate_category_page(category: str, modules: list[tuple[str, dict]], t: di
     for mid, meta in modules:
         i18n_prefix = f"modules.{mid}"
         label = i18n_get(t, f"{i18n_prefix}.label", meta.get("ui_label", mid))
-        desc = i18n_get(t, f"{i18n_prefix}.description", meta.get("ui_description", ""))
+        desc = escape_vue(i18n_get(t, f"{i18n_prefix}.description", meta.get("ui_description", "")))
         anchor = label.lower().replace(" ", "-").replace("/", "").replace("&", "").replace("(", "").replace(")", "")
         lines.append(f"| [{label}](#{anchor}) | {desc} |")
     lines.append("")
