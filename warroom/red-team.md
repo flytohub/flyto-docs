@@ -150,6 +150,6 @@ Accept: text/event-stream
 ## Related
 
 - [Closed-Loop Verify](/warroom/closed-loop) -- Verification workflow used in the Verify phase
-- [Flyto Domains](/warroom/flyto-domains) -- Pentest project types and discovery data
+- [Flyto2 Domains](/warroom/flyto-domains) -- Pentest project types and discovery data
 - [Scoring Methodology](/warroom/scoring-methodology) -- Pentest verdict modifier
 - [API Reference](/warroom/api) -- Full endpoint documentation

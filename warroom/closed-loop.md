@@ -137,6 +137,6 @@ Promoting a false positive from L0 to Excluded removes 30% of its penalty. Confi
 
 ## Related
 
-- [Flyto Code](/warroom/flyto-code) -- Scanner coverage and confidence system
+- [Flyto2 Code](/warroom/flyto-code) -- Scanner coverage and confidence system
 - [Red Team](/warroom/red-team) -- Dynamic verification at scale via campaigns
 - [Scoring Methodology](/warroom/scoring-methodology) -- How confidence affects scores

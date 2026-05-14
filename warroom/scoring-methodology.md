@@ -1,4 +1,4 @@
-# Flyto Scoring Methodology
+# Flyto2 Scoring Methodology
 
 **Version:** 2.0
 **Last Updated:** 2026-05-14
@@ -8,7 +8,7 @@
 
 ## 1. Overview
 
-Flyto's security scoring system provides a continuous, evidence-based assessment of an organization's security posture. Scores range from **250 to 900** (Bitsight-compatible scale), with letter grades **A through F**.
+Flyto2's security scoring system provides a continuous, evidence-based assessment of an organization's security posture. Scores range from **250 to 900** (Bitsight-compatible scale), with letter grades **A through F**.
 
 The system supports three deployment modes:
 
@@ -351,7 +351,7 @@ Every computed score includes a `scoring_version` field (currently `"2.0"`). Whe
 
 ## 16. Comparison with Industry Standards
 
-| Feature | Flyto | Bitsight | SecurityScorecard |
+| Feature | Flyto2 | Bitsight | SecurityScorecard |
 |---------|-------|----------|-------------------|
 | Scale | 250-900 | 250-900 | 0-100 |
 | Grade system | A-F | A-F | A-F |
@@ -362,7 +362,7 @@ Every computed score includes a `scoring_version` field (currently `"2.0"`). Whe
 | Internal code scanning | Yes | No | No |
 | Grade caps | Yes (3 conditions) | Unknown | Unknown |
 
-**Key differentiator:** Flyto is the only platform that combines internal code scanning (VA/PT) with external attack surface monitoring (CTEM) in a single unified score, with cross-dimensional correlation that penalizes organizations where internal vulnerabilities are exposed through external attack vectors.
+**Key differentiator:** Flyto2 is the only platform that combines internal code scanning (VA/PT) with external attack surface monitoring (CTEM) in a single unified score, with cross-dimensional correlation that penalizes organizations where internal vulnerabilities are exposed through external attack vectors.
 
 ---
 
@@ -402,4 +402,4 @@ SLA windows are the only scoring parameter that organizations can customize. The
 
 ---
 
-*This document describes the scoring methodology as implemented in Flyto Engine v2.0. For questions or audit requests, contact security@flyto.dev.*
+*This document describes the scoring methodology as implemented in Flyto2 Engine v2.0. For questions or audit requests, contact security@flyto.dev.*

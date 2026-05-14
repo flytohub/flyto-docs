@@ -1,29 +1,29 @@
 # Integrations
 
-Flyto Warroom integrates with source control, CI/CD systems, container scanners, and threat intelligence feeds.
+Flyto2 Warroom integrates with source control, CI/CD systems, container scanners, and threat intelligence feeds.
 
 ## GitHub
 
 ### OAuth Integration
 
-Flyto connects to GitHub via OAuth App authorization:
+Flyto2 connects to GitHub via OAuth App authorization:
 
-- Users authorize Flyto to access their GitHub account
-- Flyto requests `repo` and `read:org` scopes
+- Users authorize Flyto2 to access their GitHub account
+- Flyto2 requests `repo` and `read:org` scopes
 - Repositories and organizations are synced after authorization
 
 ### Org Proxy
 
 For organizations that require centralized control:
 
-- An org admin authorizes Flyto once for the entire organization
+- An org admin authorizes Flyto2 once for the entire organization
 - Individual developers do not need to separately authorize
 - Repo access is governed by the org-level GitHub App installation
 - Permissions are scoped to the repositories selected during installation
 
 ### PR Decoration
 
-Flyto posts scan results directly on pull requests:
+Flyto2 posts scan results directly on pull requests:
 
 - **Check Run** -- Creates a GitHub Check with pass/fail status based on [CI Gate](/warroom/flyto-code#ci-gate) policy
 - **PR Comment** -- Posts a summary comment with finding counts, severity breakdown, and score impact
@@ -35,7 +35,7 @@ PR decoration is triggered by the `pull_request` webhook event and runs automati
 
 ### PKCE OAuth
 
-Flyto connects to GitLab using OAuth 2.0 with PKCE (Proof Key for Code Exchange):
+Flyto2 connects to GitLab using OAuth 2.0 with PKCE (Proof Key for Code Exchange):
 
 - Supports both GitLab.com and self-managed GitLab instances
 - PKCE flow ensures secure authorization without exposing client secrets
@@ -51,7 +51,7 @@ GitLab integration supports the same features as GitHub:
 
 ## Trivy (Container Scanning)
 
-Flyto uses Trivy for container vulnerability scanning:
+Flyto2 uses Trivy for container vulnerability scanning:
 
 - Scans Docker images for OS-package CVEs
 - Integrates with flyto-indexer's container scanning category
@@ -68,7 +68,7 @@ Trivy scanning is triggered when:
 
 ## Threat Feeds (5 Sources)
 
-Flyto ingests threat intelligence from five external sources:
+Flyto2 ingests threat intelligence from five external sources:
 
 | Source | Data Type | Update Frequency |
 |--------|-----------|-----------------|
@@ -95,7 +95,7 @@ For CI pipelines that run flyto-indexer locally:
 
 ```yaml
 # GitHub Actions example
-- name: Flyto Scan
+- name: Flyto2 Scan
   run: |
     flyto-index scan .
     flyto-index export . --output flyto-results.json
@@ -144,10 +144,10 @@ The flyto-indexer exposes an MCP (Model Context Protocol) server that AI agents 
 - **Vulnerability context** -- Get CVE details with function-level reachability
 - **Taint analysis** -- Trace data flows from sources to sinks
 
-MCP integration allows AI tools (Claude Code, Cursor, etc.) to access Flyto's code analysis capabilities directly within the development workflow. See the [flyto-indexer documentation](/indexer/) for MCP tool details.
+MCP integration allows AI tools (Claude Code, Cursor, etc.) to access Flyto2's code analysis capabilities directly within the development workflow. See the [flyto-indexer documentation](/indexer/) for MCP tool details.
 
 ## Related
 
-- [Flyto Code](/warroom/flyto-code) -- Scanning features and CI gate
+- [Flyto2 Code](/warroom/flyto-code) -- Scanning features and CI gate
 - [API Reference](/warroom/api) -- Full endpoint documentation
 - [flyto-indexer](/indexer/) -- Code intelligence and MCP server

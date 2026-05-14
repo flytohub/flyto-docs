@@ -12,7 +12,7 @@ Traditional security tools operate in silos -- one tool for code scanning, anoth
 
 ## Products
 
-### [Flyto Code](/warroom/flyto-code) -- Internal Security (VA/PT)
+### [Flyto2 Code](/warroom/flyto-code) -- Internal Security (VA/PT)
 
 Connect your GitHub or GitLab repositories. Warroom scans for:
 - CVE vulnerabilities (SCA) with function-level reachability
@@ -21,7 +21,7 @@ Connect your GitHub or GitLab repositories. Warroom scans for:
 - License compliance risks
 - Container vulnerabilities via Trivy
 
-### [Flyto Domains](/warroom/flyto-domains) -- External Security (CTEM)
+### [Flyto2 Domains](/warroom/flyto-domains) -- External Security (CTEM)
 
 Add your domains. Warroom discovers:
 - SSL/TLS configuration and certificate health
@@ -44,8 +44,8 @@ When both internal and external data exist, Warroom computes:
 | Topic | Description |
 |-------|-------------|
 | [Product Tour](/warroom/product-tour) | Visual walkthrough with 29 screenshots covering every major feature |
-| [Flyto Code](/warroom/flyto-code) | Internal VA/PT scanning, 9 scanner categories, AutoFix, CI gate |
-| [Flyto Domains](/warroom/flyto-domains) | External CTEM discovery (22 scanners), pentest projects, brand impersonation |
+| [Flyto2 Code](/warroom/flyto-code) | Internal VA/PT scanning, 9 scanner categories, AutoFix, CI gate |
+| [Flyto2 Domains](/warroom/flyto-domains) | External CTEM discovery (22 scanners), pentest projects, brand impersonation |
 | [Scoring Methodology](/warroom/scoring-methodology) | How scores are computed, grade boundaries, confidence levels, anti-gaming |
 | [Score Events](/warroom/score-events) | Grade change tracking, reason generation, smoothing, caps |
 | [Closed-Loop Verify](/warroom/closed-loop) | Static + dynamic verification, confidence promotion, SSE events |

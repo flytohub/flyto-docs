@@ -1,6 +1,6 @@
 # Pulse -- Cross-Dimensional Feed
 
-Pulse is Flyto's cross-dimensional intelligence feed that correlates findings from multiple data sources, computes blast radius scores, and provides actionable insights with AI-generated summaries.
+Pulse is Flyto2's cross-dimensional intelligence feed that correlates findings from multiple data sources, computes blast radius scores, and provides actionable insights with AI-generated summaries.
 
 ## Overview
 
@@ -106,7 +106,7 @@ Actionable remediation guidance:
 
 ## Related
 
-- [Flyto Code](/warroom/flyto-code) -- Source of code vulnerability data
-- [Flyto Domains](/warroom/flyto-domains) -- Source of external attack surface data
+- [Flyto2 Code](/warroom/flyto-code) -- Source of code vulnerability data
+- [Flyto2 Domains](/warroom/flyto-domains) -- Source of external attack surface data
 - [Scoring Methodology](/warroom/scoring-methodology) -- How blast radius feeds into cross-dimensional modifiers
 - [Closed-Loop Verify](/warroom/closed-loop) -- Verification that promotes confidence levels

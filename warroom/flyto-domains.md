@@ -1,10 +1,10 @@
-# Flyto Domains -- External Security (CTEM)
+# Flyto2 Domains -- External Security (CTEM)
 
-Flyto Domains provides continuous threat exposure management (CTEM) for your organization's external attack surface. Add your domains and Flyto discovers, monitors, and scores your external security posture.
+Flyto2 Domains provides continuous threat exposure management (CTEM) for your organization's external attack surface. Add your domains and Flyto2 discovers, monitors, and scores your external security posture.
 
 ## Discovery (22 Scanner Types)
 
-When you add a domain, Flyto runs a comprehensive discovery pipeline with 22 specialized scanners:
+When you add a domain, Flyto2 runs a comprehensive discovery pipeline with 22 specialized scanners:
 
 | # | Scanner | What It Detects |
 |---|---------|-----------------|
@@ -35,7 +35,7 @@ Discovery results are stored as structured findings and feed into the [scoring e
 
 ## Pentest Projects
 
-Flyto supports four types of automated penetration testing projects:
+Flyto2 supports four types of automated penetration testing projects:
 
 | Type | Target | Method |
 |------|--------|--------|
@@ -117,7 +117,7 @@ Prioritized list of remediation actions ranked by scoring impact:
 
 ## Continuous Monitoring
 
-After initial discovery, Flyto continuously monitors domains:
+After initial discovery, Flyto2 continuously monitors domains:
 
 - **Hourly** -- Threat intelligence feeds (Shodan, URLhaus, Feodo, ThreatFox)
 - **Daily** -- TLS certificate expiry check, DNS record changes
@@ -128,7 +128,7 @@ Score changes from monitoring feed into the [Score Events](/warroom/score-events
 
 ## Brand Impersonation Detection
 
-Flyto monitors for brand impersonation threats:
+Flyto2 monitors for brand impersonation threats:
 
 - **Lookalike domains** -- Detects domains visually similar to yours (typosquatting, homoglyph)
 - **Phishing pages** -- Identifies pages mimicking your login or brand assets

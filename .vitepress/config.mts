@@ -415,8 +415,8 @@ export default defineConfig({
           text: 'Products',
           collapsed: false,
           items: [
-            { text: 'Flyto Code (VA/PT)', link: '/warroom/flyto-code' },
-            { text: 'Flyto Domains (CTEM)', link: '/warroom/flyto-domains' },
+            { text: 'Flyto2 Code (VA/PT)', link: '/warroom/flyto-code' },
+            { text: 'Flyto2 Domains (CTEM)', link: '/warroom/flyto-domains' },
           ],
         },
         {

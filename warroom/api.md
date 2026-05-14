@@ -1,18 +1,18 @@
 # API Reference
 
-Flyto Warroom exposes a RESTful API for all platform features. This page provides an overview of authentication, endpoint groups, SSE events, and webhooks.
+Flyto2 Warroom exposes a RESTful API for all platform features. This page provides an overview of authentication, endpoint groups, SSE events, and webhooks.
 
 ## Authentication
 
 ### Firebase Authentication
 
-For user-facing applications, Flyto uses Firebase Authentication:
+For user-facing applications, Flyto2 uses Firebase Authentication:
 
 ```
 Authorization: Bearer <firebase-id-token>
 ```
 
-Tokens are validated server-side against the Firebase project. The token's `uid` maps to a Flyto user, and org-level permissions are enforced per endpoint.
+Tokens are validated server-side against the Firebase project. The token's `uid` maps to a Flyto2 user, and org-level permissions are enforced per endpoint.
 
 ### API Keys
 
@@ -287,7 +287,7 @@ Frontend-friendly GitHub API proxy (avoids exposing org token to browser).
 
 ## Related
 
-- [Flyto Code](/warroom/flyto-code) -- Internal scanning features
-- [Flyto Domains](/warroom/flyto-domains) -- External discovery features
+- [Flyto2 Code](/warroom/flyto-code) -- Internal scanning features
+- [Flyto2 Domains](/warroom/flyto-domains) -- External discovery features
 - [Red Team](/warroom/red-team) -- Campaign management
 - [Integrations](/warroom/integrations) -- CI/CD and SCM integration details
