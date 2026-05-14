@@ -1,55 +1,110 @@
 # Flyto2 Warroom
 
-Flyto2 Warroom is an AI-powered security war room that unifies **vulnerability scanning (VA/PT)**, **external attack surface monitoring (CTEM)**, and **cloud security posture management (CSPM)** into a single platform with cross-dimensional correlation.
+**Your security tools don't talk to each other. Attackers don't care.**
+
+Your SAST tool found a critical CVE. Your external scanner says your API is exposed. Your Git log shows a developer is editing that exact file in an open PR right now. Three tools, three dashboards, zero correlation -- and you're the human glue holding it together.
+
+Flyto2 Warroom connects the dots automatically.
+
+![Scoring Breakdown](/warroom/21-scoring-breakdown.png)
+
+## The Problem
+
+Most security teams juggle 3-5 separate tools:
+
+| Tool | What it sees | What it misses |
+|------|-------------|----------------|
+| **Snyk / SonarQube** | Code vulnerabilities | Whether they're reachable from the internet |
+| **Bitsight / SecurityScorecard** | External posture | Whether internal code is actually affected |
+| **Trivy / Grype** | Container CVEs | Whether anyone is actively editing the vulnerable code |
+
+Each tool scores independently. None of them can answer: **"Is this critical CVE in my code actually exploitable through my public API, and is someone about to deploy a change that makes it worse?"**
+
+Flyto2 Warroom can.
+
+## How It Works
+
+```
+Repositories (GitHub/GitLab)          Domains (your attack surface)
+         │                                       │
+    flyto-indexer                          22 discovery scanners
+    CVE · SAST · Secrets                  TLS · DNS · Headers · Ports
+    Taint · IaC · License                 Breach · Threat Intel · WAF
+         │                                       │
+         └──────────────┬────────────────────────┘
+                        │
+              Flyto2 Warroom Engine
+              Cross-dimensional correlation
+              Unified scoring (250-900)
+                        │
+              ┌─────────┼─────────┐
+              │         │         │
+           Pulse    Score Card   Reports
+         (act now)  (A-F grade)  (PDF/compliance)
+```
+
+1. **Connect** -- Link your GitHub/GitLab repos and add your domains
+2. **Scan** -- Automatic scanning on push, daily, or on-demand
+3. **Correlate** -- Engine maps internal vulnerabilities to external exposure
+4. **Score** -- One unified score (250-900, A-F) across all dimensions
+5. **Act** -- Pulse feed tells you what to fix first, AutoFix generates PRs
 
 ## What Makes Warroom Different
 
-Traditional security tools operate in silos -- one tool for code scanning, another for external monitoring, a third for cloud. Warroom connects them:
+**Cross-dimensional correlation.** When both internal code and external domains are connected, Warroom computes signals that no single-dimension tool can:
 
-- A **critical CVE** in your code that is **reachable via a public API** and **being edited in an open PR** gets a higher blast radius score than the same CVE in an internal library.
-- An **expired SSL certificate** on your production domain combined with **leaked credentials** from a breach triggers a grade cap regardless of how clean your code is.
-- **Slow remediation speed** (MTTR >14 days) caps your grade at B -- because the best detection is worthless if you don't act on it.
+- **Blast Radius** -- A CVE in code that's exposed through a public API scores higher than the same CVE in an internal library
+- **PR Adjacency** -- A vulnerability in a file being actively edited in an open PR gets flagged immediately
+- **Taint Adjacency** -- User input flowing to a vulnerable function through an unsanitized path amplifies the risk
+- **Pentest Verdict** -- Dynamic probing confirms whether a vulnerability is actually exploitable, not just theoretically possible
+
+The result: your team fixes the things that actually matter, in the right order.
+
+## Who It's For
+
+| Role | What Warroom gives you |
+|------|----------------------|
+| **CISO / Security Lead** | Single dashboard with A-F grade, trend tracking, compliance reports, board-ready PDFs |
+| **DevSecOps Engineer** | Pulse feed with blast radius scores, AutoFix PRs, CI gate policies |
+| **Developer** | PR decorations showing which findings affect your code, one-click fixes |
+| **Compliance / GRC** | OWASP Top 10, ISO 27001, SOC 2, PCI-DSS control mapping with evidence |
 
 ## Products
 
 ### [Flyto2 Code](/warroom/flyto-code) -- Internal Security (VA/PT)
 
-Connect your GitHub or GitLab repositories. Warroom scans for:
-- CVE vulnerabilities (SCA) with function-level reachability
-- Leaked secrets with format detection
-- SAST findings with taint flow analysis
-- License compliance risks
-- Container vulnerabilities via Trivy
+Connect your repositories. 9 scanner categories detect CVEs, secrets, taint flows, license risks, and IaC misconfigurations. Every finding carries a confidence level (L0/L1/L2) that reflects how verified it is.
+
+![Repository Detail](/warroom/08-repo-detail.png)
 
 ### [Flyto2 Domains](/warroom/flyto-domains) -- External Security (CTEM)
 
-Add your domains. Warroom discovers:
-- SSL/TLS configuration and certificate health
-- DNS security (DNSSEC, CAA, SPF, DKIM, DMARC)
-- Open ports and exposed services
-- Web security headers (HSTS, CSP, X-Frame-Options)
-- Breach exposure and credential leaks
-- WAF detection, subdomain takeover risks
+Add your domains. 22 scanners discover TLS issues, DNS misconfigurations, open ports, breach exposure, and brand impersonation threats. Continuous monitoring catches changes before attackers do.
 
-### Cross-Dimensional Correlation
+![Domain Security](/warroom/23-domain-security.png)
 
-When both internal and external data exist, Warroom computes:
-- **Blast Radius** -- how exposed is this vulnerability to the internet?
-- **PR Adjacency** -- is someone actively editing the vulnerable code?
-- **Taint Adjacency** -- does user input flow to the vulnerable function?
-- **Pentest Verdict** -- did a dynamic probe confirm exploitability?
+## Quick Links
+
+| | |
+|---|---|
+| **New here?** | [Getting Started](/warroom/getting-started) -- Connect your first repo in 5 minutes |
+| **Evaluating?** | [Why Flyto2](/warroom/why-flyto2) -- How we compare to Bitsight, Snyk, and others |
+| **Want a tour?** | [Product Tour](/warroom/product-tour) -- 29 screenshots walking through every feature |
 
 ## Documentation
 
 | Topic | Description |
 |-------|-------------|
-| [Product Tour](/warroom/product-tour) | Visual walkthrough with 29 screenshots covering every major feature |
+| [Overview](/warroom/overview) | Architecture, scoring model, and product capabilities at a glance |
+| [Getting Started](/warroom/getting-started) | Connect repos and domains, run your first scan, see your score |
+| [Why Flyto2](/warroom/why-flyto2) | Competitive positioning and unique value |
 | [Flyto2 Code](/warroom/flyto-code) | Internal VA/PT scanning, 9 scanner categories, AutoFix, CI gate |
 | [Flyto2 Domains](/warroom/flyto-domains) | External CTEM discovery (22 scanners), pentest projects, brand impersonation |
 | [Scoring Methodology](/warroom/scoring-methodology) | How scores are computed, grade boundaries, confidence levels, anti-gaming |
 | [Score Events](/warroom/score-events) | Grade change tracking, reason generation, smoothing, caps |
-| [Closed-Loop Verify](/warroom/closed-loop) | Static + dynamic verification, confidence promotion, SSE events |
+| [Closed-Loop Verify](/warroom/closed-loop) | Static + dynamic verification, confidence promotion |
 | [Pulse](/warroom/pulse) | Cross-dimensional feed, blast radius scoring, PR matching, AI advisor |
 | [Red Team](/warroom/red-team) | 5-phase pipeline, campaign budgets, runner dispatch |
 | [API Reference](/warroom/api) | REST endpoints, SSE events (31 types), webhooks (5 types, HMAC) |
 | [Integrations](/warroom/integrations) | GitHub, GitLab, Trivy, threat feeds, CI/CD, MCP |
+| [Product Tour](/warroom/product-tour) | Visual walkthrough with 29 screenshots |

@@ -1,6 +1,8 @@
 # Flyto2 Code -- Internal Security (VA/PT)
 
-Flyto2 Code scans your connected repositories for security vulnerabilities, secrets, and code quality issues. It integrates with your existing GitHub or GitLab workflow.
+Flyto2 Code scans your connected repositories for security vulnerabilities, secrets, and code quality issues. It integrates with your existing GitHub or GitLab workflow and feeds findings into the [unified scoring system](/warroom/scoring-methodology).
+
+![Repository Detail](/warroom/08-repo-detail.png)
 
 ## How It Works
 

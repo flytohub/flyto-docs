@@ -1,6 +1,6 @@
 # API Reference
 
-Flyto2 Warroom exposes a RESTful API for all platform features. This page provides an overview of authentication, endpoint groups, SSE events, and webhooks.
+Everything you can do in the Warroom UI is available through the API. Flyto2 Warroom exposes a RESTful API for all platform features -- scanning, scoring, verification, red team campaigns, and real-time event streaming.
 
 ## Authentication
 

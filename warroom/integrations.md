@@ -1,6 +1,6 @@
 # Integrations
 
-Flyto2 Warroom integrates with source control, CI/CD systems, container scanners, and threat intelligence feeds.
+Flyto2 Warroom integrates with source control, CI/CD systems, container scanners, and threat intelligence feeds. Security works best when it's embedded in your existing workflow, not bolted on as a separate step.
 
 ## GitHub
 

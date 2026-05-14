@@ -8,6 +8,12 @@
 
 ## 1. Overview
 
+Your security score should reflect your actual risk, not your scanner's output volume. Most rating platforms either see only your external perimeter (Bitsight) or only your code (Snyk) -- and neither can tell you which internal vulnerability is actually exploitable from the outside.
+
+Flyto2's scoring system combines internal code scanning, external attack surface monitoring, and operational diligence into a single number. The score penalizes what matters (exploitable, internet-facing, unpatched vulnerabilities) and discounts what doesn't (unreachable code, false positives, internal-only libraries).
+
+![Scoring Breakdown](/warroom/21-scoring-breakdown.png)
+
 Flyto2's security scoring system provides a continuous, evidence-based assessment of an organization's security posture. Scores range from **250 to 900** (Bitsight-compatible scale), with letter grades **A through F**.
 
 The system supports three deployment modes:

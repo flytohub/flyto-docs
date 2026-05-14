@@ -1,6 +1,10 @@
 # Pulse -- Cross-Dimensional Feed
 
-Pulse is Flyto2's cross-dimensional intelligence feed that correlates findings from multiple data sources, computes blast radius scores, and provides actionable insights with AI-generated summaries.
+Your backlog has 300 findings. Which one do you fix first?
+
+Pulse answers that question. It correlates findings from code scanning, external discovery, threat intelligence, git activity, and pentest results into a single ranked feed. Each item gets a deterministic blast radius score (0-100) so your team works on the highest-impact issues first.
+
+![Pulse Feed](/warroom/04-pulse-feed.png)
 
 ## Overview
 

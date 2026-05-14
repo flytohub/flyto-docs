@@ -2,6 +2,8 @@
 
 Flyto2 Domains provides continuous threat exposure management (CTEM) for your organization's external attack surface. Add your domains and Flyto2 discovers, monitors, and scores your external security posture.
 
+![Domain Security](/warroom/23-domain-security.png)
+
 ## Discovery (22 Scanner Types)
 
 When you add a domain, Flyto2 runs a comprehensive discovery pipeline with 22 specialized scanners:

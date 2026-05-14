@@ -1,6 +1,6 @@
 # Red Team Pipeline
 
-The red team pipeline orchestrates automated penetration testing campaigns through a 5-phase state machine with budget controls and runner dispatch.
+Automated penetration testing that goes beyond scanning. The red team pipeline dispatches runners to actively probe your attack surface, attempt exploitation, and confirm whether vulnerabilities are real -- all within budget controls and a 5-phase state machine.
 
 ## 5-Phase State Machine
 
