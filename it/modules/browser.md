@@ -2069,7 +2069,7 @@ Extract HTML tables as structured data. Auto-detects headers from thead/th.
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `selector` | string | No | `table` | CSS selector for the table. Default: first `<table>` on page. |
+| `selector` | string | No | `table` | CSS selector for the table. Default: first &lt;table&gt; on page. |
 | `table_index` | number | No | `0` | If multiple tables match, which one to extract (0-based). |
 | `max_rows` | number | No | `0` | Maximum rows to extract. 0 = all rows. |
 | `include_html` | boolean | No | `False` | Include raw HTML for each cell (as field_name_html). |

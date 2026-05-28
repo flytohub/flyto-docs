@@ -25,7 +25,7 @@ Extract named groups from text
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `text` | string | Yes | - | Text to extract from |
-| `pattern` | string | Yes | - | Regex with named groups (e.g. `(?P&lt;name&gt;...)`) 
+| `pattern` | string | Yes | - | Regex with named groups (?P&lt;name&gt;...) |
 | `ignore_case` | boolean | No | `False` | Case-insensitive matching |
 
 **Output:**
