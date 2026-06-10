@@ -409,6 +409,8 @@ export default defineConfig({
           items: [
             { text: 'Home', link: '/warroom/' },
             { text: 'Overview', link: '/warroom/overview' },
+            { text: 'MSSP Overview', link: '/warroom/mssp-overview' },
+            { text: 'War-Room Concept', link: '/warroom/war-room-concept' },
             { text: 'Getting Started', link: '/warroom/getting-started' },
             { text: 'Product Tour', link: '/warroom/product-tour' },
           ],
@@ -419,6 +421,23 @@ export default defineConfig({
           items: [
             { text: 'Flyto2 Code (VA/PT)', link: '/warroom/flyto-code' },
             { text: 'Flyto2 Domains (CTEM)', link: '/warroom/flyto-domains' },
+          ],
+        },
+        {
+          text: 'Security Surfaces',
+          collapsed: false,
+          items: [
+            { text: 'Overview', link: '/warroom/surfaces/' },
+            { text: 'External Attack Surface', link: '/warroom/surfaces/attack-surface' },
+            { text: 'Code Intelligence', link: '/warroom/surfaces/code-intelligence' },
+            { text: 'MCP Security', link: '/warroom/surfaces/mcp-security' },
+            { text: 'Container & Cloud Identity', link: '/warroom/surfaces/container-cloud-identity' },
+            { text: 'Darkweb & Threat Intel', link: '/warroom/surfaces/darkweb-threat-intel' },
+            { text: 'Footprint & Attribution', link: '/warroom/surfaces/footprint-attribution' },
+            { text: 'Asset Map', link: '/warroom/surfaces/asset-map' },
+            { text: 'Pentest', link: '/warroom/surfaces/pentest' },
+            { text: 'Red-Team Simulation', link: '/warroom/surfaces/red-team' },
+            { text: 'Unified Scoring', link: '/warroom/surfaces/unified-scoring' },
           ],
         },
         {
@@ -444,6 +463,7 @@ export default defineConfig({
           items: [
             { text: 'API Reference', link: '/warroom/api' },
             { text: 'Integrations', link: '/warroom/integrations' },
+            { text: 'BYO Integration', link: '/warroom/byo-integration' },
           ],
         },
       ],
