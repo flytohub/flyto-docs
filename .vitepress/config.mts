@@ -127,10 +127,26 @@ function localeModulesConfig(prefix: string): DefaultTheme.Config {
 }
 
 export default defineConfig({
-  title: 'Flyto2 Docs - Automation Engine Documentation',
-  description: 'Documentation for Flyto2 — Automate Repetitive Tasks Without Coding',
+  title: 'Flyto2 Docs - Security War Room and CTEM Documentation',
+  description: 'Documentation for Flyto2 Warroom, evidence-backed CTEM, attack surface management, dark web monitoring, code risk, pentest, red-team workflows, and the deterministic execution engine.',
   lang: 'en-US',
   cleanUrls: true,
+  srcExclude: [
+    'ja/**',
+    'ko/**',
+    'zh-TW/**',
+    'de/**',
+    'es/**',
+    'fr/**',
+    'hi/**',
+    'id/**',
+    'it/**',
+    'pl/**',
+    'pt-BR/**',
+    'th/**',
+    'tr/**',
+    'vi/**',
+  ],
   markdown: {
     // Disable Vue template compilation inside code blocks/YAML examples
     // to prevent <token>, <name>, <users> etc from being parsed as HTML.
@@ -150,14 +166,12 @@ export default defineConfig({
   sitemap: {
     hostname: 'https://docs.flyto2.com',
     transformItems(items) {
-      // Only keep URLs where the source .md file actually exists
-      // Locale dirs (ja, ko, etc.) only have /modules/ pages
-      // Remove locale/guide/*, locale/core/*, locale/mcp/*, locale/ai/*, etc.
-      const localeOnlyModules = /^\/(ja|ko|zh-TW|de|es|fr|hi|id|it|pl|pt-BR|th|tr|vi)\/(guide|core|mcp|ai|blueprint|indexer)\//
+      // English-first public SEO: keep non-English pages reachable, but do
+      // not advertise them through the sitemap while they are noindexed.
+      const nonEnglish = /^\/?(ja|ko|zh-TW|de|es|fr|hi|id|it|pl|pt-BR|th|tr|vi)(\/|$)/
       return items.filter(item => {
-        // item.url may be a path or a full URL
         const path = item.url.startsWith('http') ? new URL(item.url).pathname : item.url
-        return !localeOnlyModules.test(path)
+        return !nonEnglish.test(path)
       })
     }
   },
@@ -165,22 +179,20 @@ export default defineConfig({
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
-    ['link', { rel: 'canonical', href: 'https://docs.flyto2.com' }],
     // Open Graph
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: 'Flyto2 Docs' }],
-    ['meta', { property: 'og:title', content: 'Flyto2 Docs — Automate Repetitive Tasks Without Coding' }],
-    ['meta', { property: 'og:description', content: 'Documentation for Flyto2 — 412+ modules, MCP server, AI agents, code intelligence, and workflow automation.' }],
-    ['meta', { property: 'og:url', content: 'https://docs.flyto2.com' }],
+    ['meta', { property: 'og:title', content: 'Flyto2 Docs — Security War Room and CTEM Documentation' }],
+    ['meta', { property: 'og:description', content: 'Warroom docs for CTEM, attack surface management, dark web monitoring, code risk, BYO integrations, pentest, red-team, and evidence-backed workflows.' }],
     ['meta', { property: 'og:image', content: 'https://docs.flyto2.com/og-image.png' }],
     ['meta', { property: 'og:locale', content: 'en_US' }],
     // Twitter Card
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:title', content: 'Flyto2 Docs — Automate Repetitive Tasks Without Coding' }],
-    ['meta', { name: 'twitter:description', content: 'Documentation for Flyto2 — 412+ modules, MCP server, AI agents, code intelligence, and workflow automation.' }],
+    ['meta', { name: 'twitter:title', content: 'Flyto2 Docs — Security War Room and CTEM Documentation' }],
+    ['meta', { name: 'twitter:description', content: 'Warroom docs for CTEM, attack surface management, dark web monitoring, code risk, BYO integrations, pentest, red-team, and evidence-backed workflows.' }],
     ['meta', { name: 'twitter:image', content: 'https://docs.flyto2.com/og-image.png' }],
     // SEO
-    ['meta', { name: 'keywords', content: 'flyto2, workflow automation, MCP server, modules, enterprise platform, code intelligence, AI agents, flyto-core, flyto-ai, flyto-indexer' }],
+    ['meta', { name: 'keywords', content: 'Flyto2, CTEM, Warroom, attack surface management, EASM, dark web monitoring, code risk, AI security, MCP security, MSSP, BYO security integrations, pentest, red team, evidence-backed security' }],
     ['meta', { name: 'author', content: 'Flyto2 Team' }],
     ['meta', { name: 'robots', content: 'index, follow' }],
     // JSON-LD structured data
@@ -188,7 +200,7 @@ export default defineConfig({
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'Flyto2 Docs',
-      description: 'Documentation for Flyto2 — Automate Repetitive Tasks Without Coding with 412+ modules.',
+      description: 'Documentation for Flyto2 Warroom, evidence-backed CTEM, attack surface management, dark web monitoring, code risk, pentest, red-team workflows, and the deterministic execution engine.',
       url: 'https://docs.flyto2.com',
       publisher: {
         '@type': 'Organization',
@@ -204,94 +216,29 @@ export default defineConfig({
     })],
   ],
 
+  transformPageData(pageData) {
+    const localePrefix = /^(ja|ko|zh-TW|de|es|fr|hi|id|it|pl|pt-BR|th|tr|vi)\//
+    const isNonEnglish = localePrefix.test(pageData.relativePath)
+    const englishRelativePath = pageData.relativePath.replace(localePrefix, '')
+    const canonicalPath = englishRelativePath === 'index.md'
+      ? ''
+      : englishRelativePath
+          .replace(/(^|\/)index\.md$/, '$1')
+          .replace(/\.md$/, '')
+          .replace(/\/$/, '')
+    const canonicalUrl = `https://docs.flyto2.com${canonicalPath ? `/${canonicalPath}` : ''}`
+
+    pageData.frontmatter.head = [
+      ...(pageData.frontmatter.head || []),
+      ['link', { rel: 'canonical', href: canonicalUrl }],
+      ...(isNonEnglish ? [['meta', { name: 'robots', content: 'noindex, follow' }] as [string, Record<string, string>]] : []),
+    ]
+  },
+
   locales: {
     root: {
       label: 'English',
       lang: 'en-US',
-    },
-    'zh-TW': {
-      label: '繁體中文',
-      lang: 'zh-TW',
-      link: '/zh-TW/modules/',
-      themeConfig: localeModulesConfig('zh-TW'),
-    },
-    ja: {
-      label: '日本語',
-      lang: 'ja',
-      link: '/ja/modules/',
-      themeConfig: localeModulesConfig('ja'),
-    },
-    ko: {
-      label: '한국어',
-      lang: 'ko',
-      link: '/ko/modules/',
-      themeConfig: localeModulesConfig('ko'),
-    },
-    fr: {
-      label: 'Français',
-      lang: 'fr',
-      link: '/fr/modules/',
-      themeConfig: localeModulesConfig('fr'),
-    },
-    es: {
-      label: 'Español',
-      lang: 'es',
-      link: '/es/modules/',
-      themeConfig: localeModulesConfig('es'),
-    },
-    de: {
-      label: 'Deutsch',
-      lang: 'de',
-      link: '/de/modules/',
-      themeConfig: localeModulesConfig('de'),
-    },
-    'pt-BR': {
-      label: 'Português (Brasil)',
-      lang: 'pt-BR',
-      link: '/pt-BR/modules/',
-      themeConfig: localeModulesConfig('pt-BR'),
-    },
-    hi: {
-      label: 'हिन्दी',
-      lang: 'hi',
-      link: '/hi/modules/',
-      themeConfig: localeModulesConfig('hi'),
-    },
-    vi: {
-      label: 'Tiếng Việt',
-      lang: 'vi',
-      link: '/vi/modules/',
-      themeConfig: localeModulesConfig('vi'),
-    },
-    id: {
-      label: 'Bahasa Indonesia',
-      lang: 'id',
-      link: '/id/modules/',
-      themeConfig: localeModulesConfig('id'),
-    },
-    th: {
-      label: 'ภาษาไทย',
-      lang: 'th',
-      link: '/th/modules/',
-      themeConfig: localeModulesConfig('th'),
-    },
-    tr: {
-      label: 'Türkçe',
-      lang: 'tr',
-      link: '/tr/modules/',
-      themeConfig: localeModulesConfig('tr'),
-    },
-    pl: {
-      label: 'Polski',
-      lang: 'pl',
-      link: '/pl/modules/',
-      themeConfig: localeModulesConfig('pl'),
-    },
-    it: {
-      label: 'Italiano',
-      lang: 'it',
-      link: '/it/modules/',
-      themeConfig: localeModulesConfig('it'),
     },
   },
 
@@ -300,10 +247,13 @@ export default defineConfig({
     siteTitle: 'Flyto2 Docs',
 
     nav: [
-      { text: 'Guide', link: '/guide/getting-started' },
+      { text: 'Warroom', link: '/warroom/' },
+      { text: 'CTEM', link: '/warroom/surfaces/attack-surface' },
+      { text: 'BYO Integrations', link: '/warroom/byo-integration' },
       {
-        text: 'Platform',
+        text: 'Engine',
         items: [
+          { text: 'Guide', link: '/guide/getting-started' },
           { text: 'Core Engine', link: '/core/' },
           { text: 'MCP Server', link: '/mcp/' },
           { text: 'Modules', link: '/modules/' },
@@ -317,7 +267,6 @@ export default defineConfig({
           { text: 'flyto-blueprint', link: '/blueprint/' },
         ],
       },
-      { text: 'Warroom', link: '/warroom/' },
       { text: 'Blog', link: 'https://blog.flyto2.com' },
       { text: 'Flyto2', link: 'https://flyto2.com' },
     ],

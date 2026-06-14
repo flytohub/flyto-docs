@@ -1,16 +1,16 @@
 # Flyto2 Warroom
 
-**Your security tools don't talk to each other. Attackers don't care.**
+**Security teams already have useful tools. The hard part is making their signals work together.**
 
-Your code scanner found a critical CVE. Your external scanner says your API is exposed. Your Git log shows a developer is editing that exact file in an open PR right now. Three tools, three dashboards, zero correlation -- and you're the human glue holding it together.
+Your code scanner found a critical CVE. Your external scanner says your API is exposed. Your Git log shows a developer is editing that exact file in an open PR right now. Three tools, three dashboards, limited correlation -- and the team still has to decide what matters first.
 
-Flyto2 Warroom connects the dots automatically.
+Flyto2 Warroom is built to complement that stack: ingest trusted signals, correlate them with assets and code, validate what matters, and keep the evidence attached to the action.
 
 ![Scoring Breakdown](/warroom/21-scoring-breakdown.png)
 
 ## The Problem
 
-Most security teams juggle 3-5 separate tools. Each sees one dimension:
+Most security teams already operate multiple tools. Each sees one dimension:
 
 | What you have | What it sees | What it can't tell you |
 |--------------|-------------|----------------------|
@@ -20,7 +20,7 @@ Most security teams juggle 3-5 separate tools. Each sees one dimension:
 
 Each tool scores independently. None of them can answer: **"Is this critical CVE in my code actually exploitable through my public API, and is someone about to deploy a change that makes it worse?"**
 
-Flyto2 Warroom can.
+Flyto2 Warroom helps answer that combined question without asking you to throw away the tools that produced the signals.
 
 ## How It Works
 
