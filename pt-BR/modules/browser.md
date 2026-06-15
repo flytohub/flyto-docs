@@ -1205,6 +1205,8 @@ Monitor and intercept network requests
 | `resource_type` | string | No | - | Filter by resource type (document, script, image, etc) |
 | `timeout` | number | No | `30000` | Maximum time to wait in milliseconds |
 | `mock_response` | object | No | - | Response to return for intercepted requests |
+| `include_headers` | boolean | No | `True` | Include request headers in captured output. Disable for reusable smoke artifacts. |
+| `strip_query` | boolean | No | `False` | Remove query strings and fragments from captured URLs. |
 
 **Output:**
 
