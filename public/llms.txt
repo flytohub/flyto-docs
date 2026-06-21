@@ -5,6 +5,7 @@
 ## Start here
 
 - https://docs.flyto2.com/warroom/
+- https://docs.flyto2.com/strategy/flyto2-product-lines
 - https://docs.flyto2.com/warroom/overview
 - https://docs.flyto2.com/warroom/byo-integration
 - https://docs.flyto2.com/warroom/closed-loop

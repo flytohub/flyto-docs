@@ -165,14 +165,18 @@ def escape_vue(text: str) -> str:
     # 2) Escape HTML-like <tag>, </tag>, <tag attr="..."> patterns.
     #    Skip content already inside backtick code spans.
     parts = re.split(r'(`[^`]+`)', text)
-    for i, part in enumerate(parts):
-        if not part.startswith('`'):
-            parts[i] = re.sub(
-                r'<(/?[a-zA-Z][a-zA-Z0-9\-]*(?:\s[^>]*)?)>',
-                lambda m: f'&lt;{m.group(1)}&gt;',
-                part,
-            )
+    parts = [part if part.startswith('`') else escape_html_like_tags(part) for part in parts]
     return ''.join(parts)
+
+
+def escape_html_like_tags(text: str) -> str:
+    """Escape HTML-like tags in non-code markdown spans."""
+    import re
+    return re.sub(
+        r'<(/?[a-zA-Z][a-zA-Z0-9\-]*(?:\s[^>]*)?)>',
+        lambda m: f'&lt;{m.group(1)}&gt;',
+        text,
+    )
 
 
 def render_param_type(param: dict) -> str:
@@ -186,6 +190,78 @@ def render_param_type(param: dict) -> str:
             opts = ", ".join(f'`{o}`' for o in options)
         return f"select ({opts})"
     return ptype
+
+
+def render_params_table(module_id: str, params: dict, t: dict) -> list[str]:
+    """Render parameter rows for a module."""
+    if not params:
+        return []
+
+    lines = [
+        "**Parameters:**",
+        "",
+        "| Name | Type | Required | Default | Description |",
+        "|------|------|----------|---------|-------------|",
+    ]
+    i18n_prefix = f"modules.{module_id}"
+    for pname, pinfo in params.items():
+        ptype = render_param_type(pinfo)
+        required = "Yes" if pinfo.get("required") else "No"
+        raw_default = str(pinfo['default']) if "default" in pinfo else ""
+        default = f"`{escape_vue(raw_default)}`" if raw_default else "-"
+        pdesc = escape_vue(i18n_get(
+            t,
+            f"{i18n_prefix}.params.{pname}.description",
+            pinfo.get("description", ""),
+        ))
+        lines.append(f"| `{pname}` | {ptype} | {required} | {default} | {pdesc} |")
+    lines.append("")
+    return lines
+
+
+def render_output_table(module_id: str, output: dict, t: dict) -> list[str]:
+    """Render output rows for a module."""
+    if not output:
+        return []
+
+    lines = [
+        "**Output:**",
+        "",
+        "| Field | Type | Description |",
+        "|-------|------|-------------|",
+    ]
+    i18n_prefix = f"modules.{module_id}"
+    for oname, oinfo in output.items():
+        if isinstance(oinfo, dict):
+            otype = oinfo.get("type", "any")
+            odesc_fallback = oinfo.get("description", "")
+        else:
+            otype = "any"
+            odesc_fallback = str(oinfo)
+        odesc = escape_vue(i18n_get(
+            t,
+            f"{i18n_prefix}.output.{oname}.description",
+            odesc_fallback,
+        ))
+        lines.append(f"| `{oname}` | {otype} | {odesc} |")
+    lines.append("")
+    return lines
+
+
+def render_examples(examples: list[dict]) -> list[str]:
+    """Render module examples."""
+    lines = []
+    for ex in examples:
+        title = ex.get("title", "Example")
+        params_ex = ex.get("params", {})
+        lines.append(f"**Example:** {title}")
+        lines.append("")
+        lines.append("```yaml")
+        for k, v in params_ex.items():
+            lines.append(f"{k}: {json.dumps(v) if not isinstance(v, str) else v}")
+        lines.append("```")
+        lines.append("")
+    return lines
 
 
 def render_module_section(module_id: str, meta: dict, t: dict) -> str:
@@ -204,61 +280,9 @@ def render_module_section(module_id: str, meta: dict, t: dict) -> str:
         lines.append(desc)
         lines.append("")
 
-    # Parameters
-    params = meta.get("params_schema", {})
-    if params:
-        lines.append("**Parameters:**")
-        lines.append("")
-        lines.append("| Name | Type | Required | Default | Description |")
-        lines.append("|------|------|----------|---------|-------------|")
-        for pname, pinfo in params.items():
-            ptype = render_param_type(pinfo)
-            required = "Yes" if pinfo.get("required") else "No"
-            raw_default = str(pinfo['default']) if "default" in pinfo else ""
-            default = f"`{escape_vue(raw_default)}`" if raw_default else "-"
-            pdesc = escape_vue(i18n_get(
-                t,
-                f"{i18n_prefix}.params.{pname}.description",
-                pinfo.get("description", ""),
-            ))
-            lines.append(f"| `{pname}` | {ptype} | {required} | {default} | {pdesc} |")
-        lines.append("")
-
-    # Output
-    output = meta.get("output_schema", {})
-    if output:
-        lines.append("**Output:**")
-        lines.append("")
-        lines.append("| Field | Type | Description |")
-        lines.append("|-------|------|-------------|")
-        for oname, oinfo in output.items():
-            if isinstance(oinfo, dict):
-                otype = oinfo.get("type", "any")
-                odesc_fallback = oinfo.get("description", "")
-            else:
-                otype = "any"
-                odesc_fallback = str(oinfo)
-            odesc = escape_vue(i18n_get(
-                t,
-                f"{i18n_prefix}.output.{oname}.description",
-                odesc_fallback,
-            ))
-            lines.append(f"| `{oname}` | {otype} | {odesc} |")
-        lines.append("")
-
-    # Examples
-    examples = meta.get("examples", [])
-    if examples:
-        for ex in examples:
-            title = ex.get("title", "Example")
-            params_ex = ex.get("params", {})
-            lines.append(f"**Example:** {title}")
-            lines.append("")
-            lines.append("```yaml")
-            for k, v in params_ex.items():
-                lines.append(f"{k}: {json.dumps(v) if not isinstance(v, str) else v}")
-            lines.append("```")
-            lines.append("")
+    lines.extend(render_params_table(module_id, meta.get("params_schema", {}), t))
+    lines.extend(render_output_table(module_id, meta.get("output_schema", {}), t))
+    lines.extend(render_examples(meta.get("examples", [])))
 
     return "\n".join(lines)
 
@@ -272,6 +296,56 @@ def group_modules_by_subcategory(modules: list[tuple[str, dict]]) -> dict:
     return dict(groups)
 
 
+def anchor_for_label(label: str) -> str:
+    """Return the VitePress anchor used for module headings."""
+    return (
+        label.lower()
+        .replace(" ", "-")
+        .replace("/", "")
+        .replace("&", "")
+        .replace("(", "")
+        .replace(")", "")
+    )
+
+
+def render_category_summary_rows(modules: list[tuple[str, dict]], t: dict) -> list[str]:
+    """Render the category summary table rows."""
+    lines = [
+        "| Module | Description |",
+        "|--------|-------------|",
+    ]
+    for mid, meta in modules:
+        i18n_prefix = f"modules.{mid}"
+        label = i18n_get(t, f"{i18n_prefix}.label", meta.get("ui_label", mid))
+        desc = escape_vue(i18n_get(t, f"{i18n_prefix}.description", meta.get("ui_description", "")))
+        lines.append(f"| [{label}](#{anchor_for_label(label)}) | {desc} |")
+    lines.append("")
+    return lines
+
+
+def render_module_sections(modules: list[tuple[str, dict]], t: dict) -> list[str]:
+    """Render module sections for a list of modules."""
+    lines = []
+    for mid, meta in modules:
+        lines.append(render_module_section(mid, meta, t))
+    return lines
+
+
+def render_category_modules(modules: list[tuple[str, dict]], t: dict) -> list[str]:
+    """Render grouped module sections for a category."""
+    lines = []
+    groups = group_modules_by_subcategory(modules) if len(modules) > 10 else {}
+    if len(groups) > 1:
+        for group_name, group_modules in groups.items():
+            lines.extend([f"## {group_name}", ""])
+            lines.extend(render_module_sections(group_modules, t))
+        return lines
+
+    lines.extend(["## Modules", ""])
+    lines.extend(render_module_sections(modules, t))
+    return lines
+
+
 def generate_category_page(category: str, modules: list[tuple[str, dict]], t: dict) -> str:
     """Generate a complete markdown page for a category."""
     title, description = CATEGORY_CONFIG.get(category, (category.title(), ""))
@@ -281,40 +355,34 @@ def generate_category_page(category: str, modules: list[tuple[str, dict]], t: di
     lines.append(description)
     lines.append("")
 
-    # Summary table
     lines.append(f"**{len(modules)} modules**")
     lines.append("")
-    lines.append("| Module | Description |")
-    lines.append("|--------|-------------|")
-    for mid, meta in modules:
-        i18n_prefix = f"modules.{mid}"
-        label = i18n_get(t, f"{i18n_prefix}.label", meta.get("ui_label", mid))
-        desc = escape_vue(i18n_get(t, f"{i18n_prefix}.description", meta.get("ui_description", "")))
-        anchor = label.lower().replace(" ", "-").replace("/", "").replace("&", "").replace("(", "").replace(")", "")
-        lines.append(f"| [{label}](#{anchor}) | {desc} |")
-    lines.append("")
-
-    # If large category (>10 modules), group by ui_group
-    if len(modules) > 10:
-        groups = group_modules_by_subcategory(modules)
-        if len(groups) > 1:
-            for group_name, group_modules in groups.items():
-                lines.append(f"## {group_name}")
-                lines.append("")
-                for mid, meta in group_modules:
-                    lines.append(render_module_section(mid, meta, t))
-        else:
-            lines.append("## Modules")
-            lines.append("")
-            for mid, meta in modules:
-                lines.append(render_module_section(mid, meta, t))
-    else:
-        lines.append("## Modules")
-        lines.append("")
-        for mid, meta in modules:
-            lines.append(render_module_section(mid, meta, t))
+    lines.extend(render_category_summary_rows(modules, t))
+    lines.extend(render_category_modules(modules, t))
 
     return "\n".join(lines)
+
+
+def append_category_rows(lines: list[str], by_category: dict, categories: list[str], link_prefix: str):
+    """Append table rows for categories present in registry data."""
+    for cat in categories:
+        if cat not in by_category:
+            continue
+        slug = get_slug(cat)
+        title = CATEGORY_CONFIG.get(cat, (cat.title(), ""))[0]
+        desc = CATEGORY_CONFIG.get(cat, ("", ""))[1]
+        count = len(by_category[cat])
+        lines.append(f"\n| [{title}]({link_prefix}/modules/{slug}) | {count} | {desc} |")
+
+
+def append_category_group(lines: list[str], group_name: str, categories: list[str],
+                          by_category: dict, link_prefix: str):
+    """Append one module-index group table."""
+    lines.append(f"\n### {group_name}\n")
+    lines.append("\n| Category | Modules | Description |")
+    lines.append("\n|----------|---------|-------------|")
+    append_category_rows(lines, by_category, categories, link_prefix)
+    lines.append("\n")
 
 
 def generate_modules_index(by_category: dict, docs_dir: Path, link_prefix: str = ""):
@@ -340,33 +408,13 @@ def generate_modules_index(by_category: dict, docs_dir: Path, link_prefix: str =
     ]
 
     for group_name, cats in groups.items():
-        lines.append(f"\n### {group_name}\n")
-        lines.append("\n| Category | Modules | Description |")
-        lines.append("\n|----------|---------|-------------|")
-        for cat in cats:
-            if cat not in by_category:
-                continue
-            slug = get_slug(cat)
-            title = CATEGORY_CONFIG.get(cat, (cat.title(), ""))[0]
-            desc = CATEGORY_CONFIG.get(cat, ("", ""))[1]
-            count = len(by_category[cat])
-            lines.append(f"\n| [{title}]({link_prefix}/modules/{slug}) | {count} | {desc} |")
-        lines.append("\n")
+        append_category_group(lines, group_name, cats, by_category, link_prefix)
 
     # Add any categories not in groups
     known = {c for cats in groups.values() for c in cats}
     extra = sorted(set(by_category.keys()) - known)
     if extra:
-        lines.append("\n### Other\n")
-        lines.append("\n| Category | Modules | Description |")
-        lines.append("\n|----------|---------|-------------|")
-        for cat in extra:
-            slug = get_slug(cat)
-            title = CATEGORY_CONFIG.get(cat, (cat.title(), ""))[0]
-            desc = CATEGORY_CONFIG.get(cat, ("", ""))[1]
-            count = len(by_category[cat])
-            lines.append(f"\n| [{title}]({link_prefix}/modules/{slug}) | {count} | {desc} |")
-        lines.append("\n")
+        append_category_group(lines, "Other", extra, by_category, link_prefix)
 
     (docs_dir / "index.md").write_text("".join(lines), encoding="utf-8")
 

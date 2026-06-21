@@ -2,8 +2,17 @@ import { defineConfig, type DefaultTheme } from 'vitepress'
 
 const SITE_URL = 'https://docs.flyto2.com'
 const NON_CONTENT_PATHS = new Set([
+  'AGENTS.md',
+  'ARCHITECTURE.md',
+  'CHANGELOG.md',
+  'CLAUDE.md',
+  'DECISIONS.md',
+  'PROJECT.md',
   'README.md',
+  'ROADMAP.md',
   'SECURITY.md',
+  'STATE.md',
+  'tasks.md',
   'public/images/CREDITS.md',
 ])
 
@@ -12,7 +21,10 @@ function toPublicPath(url: string) {
 }
 
 function isNonContentPath(relativePath: string) {
-  return NON_CONTENT_PATHS.has(relativePath) || relativePath.startsWith('public/')
+  return NON_CONTENT_PATHS.has(relativePath)
+    || relativePath.startsWith('public/')
+    || relativePath.startsWith('workflows/')
+    || relativePath.startsWith('handoffs/')
 }
 
 function titleFromSegment(segment: string) {
@@ -342,6 +354,7 @@ export default defineConfig({
 
     nav: [
       { text: 'Warroom', link: '/warroom/' },
+      { text: 'Product Lines', link: '/strategy/flyto2-product-lines' },
       { text: 'CTEM', link: '/warroom/surfaces/attack-surface' },
       { text: 'BYO Integrations', link: '/warroom/byo-integration' },
       {
@@ -381,6 +394,14 @@ export default defineConfig({
             { text: 'Your First Workflow', link: '/guide/first-workflow' },
             { text: 'Modules Overview', link: '/guide/modules-overview' },
             { text: 'Configuration', link: '/guide/configuration' },
+          ],
+        },
+      ],
+      '/strategy/': [
+        {
+          text: 'Strategy',
+          items: [
+            { text: 'Flyto2 Product Lines', link: '/strategy/flyto2-product-lines' },
           ],
         },
       ],
