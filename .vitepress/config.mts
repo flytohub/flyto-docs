@@ -1,5 +1,47 @@
 import { defineConfig, type DefaultTheme } from 'vitepress'
 
+const SITE_URL = 'https://docs.flyto2.com'
+const NON_CONTENT_PATHS = new Set([
+  'README.md',
+  'SECURITY.md',
+  'public/images/CREDITS.md',
+])
+
+function toPublicPath(url: string) {
+  return url.startsWith('http') ? new URL(url).pathname : url
+}
+
+function isNonContentPath(relativePath: string) {
+  return NON_CONTENT_PATHS.has(relativePath) || relativePath.startsWith('public/')
+}
+
+function titleFromSegment(segment: string) {
+  return segment
+    .split('-')
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(' ')
+}
+
+function breadcrumbItems(canonicalPath: string, title: string) {
+  const parts = canonicalPath.split('/').filter(Boolean)
+  const items = [
+    { '@type': 'ListItem', position: 1, name: 'Flyto2 Docs', item: `${SITE_URL}/` },
+  ]
+
+  parts.forEach((part, index) => {
+    const path = parts.slice(0, index + 1).join('/')
+    items.push({
+      '@type': 'ListItem',
+      position: index + 2,
+      name: index === parts.length - 1 ? title : titleFromSegment(part),
+      item: `${SITE_URL}/${path}`,
+    })
+  })
+
+  return items
+}
+
 // ---------------------------------------------------------------------------
 // Shared sidebar definition (reused across locales)
 // ---------------------------------------------------------------------------
@@ -164,14 +206,19 @@ export default defineConfig({
     },
   },
   sitemap: {
-    hostname: 'https://docs.flyto2.com',
+    hostname: SITE_URL,
     transformItems(items) {
       // English-first public SEO: keep non-English pages reachable, but do
       // not advertise them through the sitemap while they are noindexed.
       const nonEnglish = /^\/?(ja|ko|zh-TW|de|es|fr|hi|id|it|pl|pt-BR|th|tr|vi)(\/|$)/
       return items.filter(item => {
         const path = item.url.startsWith('http') ? new URL(item.url).pathname : item.url
-        return !nonEnglish.test(path)
+        const normalized = toPublicPath(item.url).replace(/^\/+/, '')
+        return !nonEnglish.test(path) && ![
+          'README',
+          'SECURITY',
+          'public/images/CREDITS',
+        ].includes(normalized)
       })
     }
   },
@@ -208,17 +255,13 @@ export default defineConfig({
         url: 'https://flyto2.com',
         logo: { '@type': 'ImageObject', url: 'https://docs.flyto2.com/logo.png' },
       },
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: 'https://docs.flyto2.com/?q={search_term_string}',
-        'query-input': 'required name=search_term_string',
-      },
     })],
   ],
 
   transformPageData(pageData) {
     const localePrefix = /^(ja|ko|zh-TW|de|es|fr|hi|id|it|pl|pt-BR|th|tr|vi)\//
     const isNonEnglish = localePrefix.test(pageData.relativePath)
+    const isNonContent = isNonContentPath(pageData.relativePath)
     const englishRelativePath = pageData.relativePath.replace(localePrefix, '')
     const canonicalPath = englishRelativePath === 'index.md'
       ? ''
@@ -226,13 +269,64 @@ export default defineConfig({
           .replace(/(^|\/)index\.md$/, '$1')
           .replace(/\.md$/, '')
           .replace(/\/$/, '')
-    const canonicalUrl = `https://docs.flyto2.com${canonicalPath ? `/${canonicalPath}` : ''}`
+    const canonicalUrl = `${SITE_URL}${canonicalPath ? `/${canonicalPath}` : ''}`
 
     pageData.frontmatter.head = [
       ...(pageData.frontmatter.head || []),
       ['link', { rel: 'canonical', href: canonicalUrl }],
-      ...(isNonEnglish ? [['meta', { name: 'robots', content: 'noindex, follow' }] as [string, Record<string, string>]] : []),
+      ...((isNonEnglish || isNonContent) ? [['meta', { name: 'robots', content: 'noindex, follow' }] as [string, Record<string, string>]] : []),
     ]
+
+    if (!isNonEnglish && !isNonContent && canonicalPath) {
+      const title = pageData.frontmatter.title || pageData.title
+      const description = pageData.frontmatter.description || pageData.description || ''
+      const dateModified = pageData.lastUpdated
+        ? new Date(pageData.lastUpdated).toISOString()
+        : undefined
+
+      pageData.frontmatter.head = [
+        ...(pageData.frontmatter.head || []),
+        ['script', { type: 'application/ld+json' }, JSON.stringify({
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'WebPage',
+              '@id': `${canonicalUrl}#webpage`,
+              url: canonicalUrl,
+              name: title,
+              description,
+              isPartOf: { '@id': `${SITE_URL}/#website` },
+              breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
+            },
+            {
+              '@type': 'TechArticle',
+              '@id': `${canonicalUrl}#article`,
+              headline: title,
+              description,
+              url: canonicalUrl,
+              dateModified,
+              author: { '@type': 'Organization', name: 'Flyto2', url: 'https://flyto2.com' },
+              publisher: {
+                '@type': 'Organization',
+                name: 'Flyto2',
+                url: 'https://flyto2.com',
+                logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
+              },
+              mainEntityOfPage: { '@id': `${canonicalUrl}#webpage` },
+              about: {
+                '@type': 'Thing',
+                name: titleFromSegment(canonicalPath.split('/')[0] || 'docs'),
+              },
+            },
+            {
+              '@type': 'BreadcrumbList',
+              '@id': `${canonicalUrl}#breadcrumb`,
+              itemListElement: breadcrumbItems(canonicalPath, title),
+            },
+          ],
+        })],
+      ]
+    }
   },
 
   locales: {

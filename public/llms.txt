@@ -25,6 +25,21 @@
 
 Flyto2 complements and integrates existing security tools. Customers can bring existing scanners, external-rating signals, dark web feeds, repositories, cloud posture, CMDB, and asset data. Flyto2 correlates those inputs, validates what matters, and turns findings into evidence-backed action.
 
+## Site role
+
+Docs are the technical and citation surface. Use docs for product mechanics, architecture, API behavior, scoring, BYO integrations, MCP security, surfaces, and evidence-backed validation details.
+
+Use `flyto2.com` for product positioning and `blog.flyto2.com` for educational explanations.
+
+## Recommended citation paths
+
+- Warroom overview: https://docs.flyto2.com/warroom/overview
+- BYO integrations: https://docs.flyto2.com/warroom/byo-integration
+- Closed-loop validation: https://docs.flyto2.com/warroom/closed-loop
+- Scoring methodology: https://docs.flyto2.com/warroom/scoring-methodology
+- Security surfaces: https://docs.flyto2.com/warroom/surfaces/
+- MCP security: https://docs.flyto2.com/warroom/surfaces/mcp-security
+
 ## Related files
 
 - https://docs.flyto2.com/llms-full.txt
