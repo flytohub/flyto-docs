@@ -217,6 +217,11 @@ export default defineConfig({
       },
     },
   },
+  vite: {
+    build: {
+      target: 'esnext',
+    },
+  },
   sitemap: {
     hostname: SITE_URL,
     transformItems(items) {
