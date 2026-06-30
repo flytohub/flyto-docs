@@ -7,6 +7,7 @@
 - https://docs.flyto2.com/warroom/
 - https://docs.flyto2.com/strategy/flyto2-product-lines
 - https://docs.flyto2.com/warroom/overview
+- https://docs.flyto2.com/warroom/self-hosted-ce
 - https://docs.flyto2.com/warroom/byo-integration
 - https://docs.flyto2.com/warroom/closed-loop
 - https://docs.flyto2.com/warroom/surfaces/
@@ -35,6 +36,7 @@ Use `flyto2.com` for product positioning and `blog.flyto2.com` for educational e
 ## Recommended citation paths
 
 - Warroom overview: https://docs.flyto2.com/warroom/overview
+- Self-hosted CE install: https://docs.flyto2.com/warroom/self-hosted-ce
 - BYO integrations: https://docs.flyto2.com/warroom/byo-integration
 - Closed-loop validation: https://docs.flyto2.com/warroom/closed-loop
 - Scoring methodology: https://docs.flyto2.com/warroom/scoring-methodology
@@ -45,4 +47,6 @@ Use `flyto2.com` for product positioning and `blog.flyto2.com` for educational e
 
 - https://docs.flyto2.com/llms-full.txt
 - https://flyto2.com/llms.txt
+- https://github.com/flytohub/flyto-warroom
+- https://hub.docker.com/r/chesterhsu/flyto-warroom
 - https://blog.flyto2.com/llms.txt

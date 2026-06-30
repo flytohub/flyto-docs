@@ -1,0 +1,29 @@
+# Scripts
+
+This directory contains local-only documentation verification helpers.
+
+## Public Docs Audit
+
+`audit-docs-public.mjs` verifies the public Warroom CE distribution surface:
+
+- `/warroom/self-hosted-ce` exists.
+- The VitePress sidebar exposes the self-hosted CE page.
+- `public/llms.txt` and `public/llms-full.txt` cite the same canonical product,
+  docs, GitHub, and Docker Hub links.
+- The GitHub social link points to the public Warroom CE repository.
+
+Run it directly with:
+
+```sh
+node scripts/audit-docs-public.mjs
+```
+
+The repository-level closed loop is:
+
+```sh
+npm run verify
+```
+
+That command runs the public docs audit, lint alias, and VitePress build before
+publishing.
+

@@ -88,6 +88,7 @@ Add your domains. 22 scanners discover TLS issues, DNS misconfigurations, open p
 | | |
 |---|---|
 | **New here?** | [Getting Started](/warroom/getting-started) -- Connect your first repo in 5 minutes |
+| **Want self-hosted?** | [Self-hosted CE](/warroom/self-hosted-ce) -- Install Flyto2 Warroom CE from GitHub and Docker Hub |
 | **Want a tour?** | [Product Tour](/warroom/product-tour) -- 29 screenshots walking through every feature |
 
 ## Documentation
@@ -96,6 +97,7 @@ Add your domains. 22 scanners discover TLS issues, DNS misconfigurations, open p
 |-------|-------------|
 | [Overview](/warroom/overview) | Architecture, scoring model, and product capabilities at a glance |
 | [Getting Started](/warroom/getting-started) | Connect repos and domains, run your first scan, see your score |
+| [Self-hosted CE](/warroom/self-hosted-ce) | GitHub, Docker Hub, local auth, local data, image tags, and Enterprise bridge boundaries |
 | [Flyto2 Code](/warroom/flyto-code) | Internal VA/PT scanning, 9 scanner categories, AutoFix, CI gate |
 | [Flyto2 Domains](/warroom/flyto-domains) | External CTEM discovery (22 scanners), pentest projects, brand impersonation |
 | [Scoring Methodology](/warroom/scoring-methodology) | How scores are computed, grade boundaries, confidence levels, anti-gaming |

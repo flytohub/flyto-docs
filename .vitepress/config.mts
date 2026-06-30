@@ -476,6 +476,7 @@ export default defineConfig({
             { text: 'MSSP Overview', link: '/warroom/mssp-overview' },
             { text: 'War-Room Concept', link: '/warroom/war-room-concept' },
             { text: 'Getting Started', link: '/warroom/getting-started' },
+            { text: 'Self-hosted CE', link: '/warroom/self-hosted-ce' },
             { text: 'Product Tour', link: '/warroom/product-tour' },
           ],
         },
@@ -534,7 +535,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/flytohub/flyto-core' },
+      { icon: 'github', link: 'https://github.com/flytohub/flyto-warroom' },
     ],
 
     editLink: {

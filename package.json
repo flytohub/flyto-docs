@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "test": "node scripts/audit-docs-public.mjs",
+    "lint": "node scripts/audit-docs-public.mjs",
+    "build": "vitepress build",
+    "verify": "npm run test && npm run lint && npm run build",
     "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
+    "docs:build": "npm run build",
     "docs:preview": "vitepress preview"
   },
   "devDependencies": {
