@@ -444,7 +444,7 @@ access_token: <oauth2-token>
 summary: Sprint Planning
 start_time: 2026-03-01T10:00:00
 end_time: 2026-03-01T11:00:00
-attendees: alice@example.com, bob@example.com
+attendees: alice@flyto2.com, bob@flyto2.com
 timezone: America/New_York
 ```
 
@@ -488,7 +488,7 @@ Search Gmail messages using Gmail search query syntax
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `access_token` | string | Yes | - | Google OAuth2 access token with Gmail read scope |
-| `query` | string | Yes | - | Gmail search query (e.g. "from:user@example.com subject:invoice") |
+| `query` | string | Yes | - | Gmail search query (e.g. "from:user@flyto2.com subject:invoice") |
 | `max_results` | number | No | `10` | Maximum number of messages to return |
 
 **Output:**
@@ -502,7 +502,7 @@ Search Gmail messages using Gmail search query syntax
 
 ```yaml
 access_token: <oauth2-token>
-query: from:boss@company.com is:unread
+query: from:boss@flyto2.com is:unread
 max_results: 5
 ```
 
@@ -536,7 +536,7 @@ Send an email via the Gmail API
 
 ```yaml
 access_token: <oauth2-token>
-to: user@example.com
+to: user@flyto2.com
 subject: Test Email
 body: Hello, this is a test email.
 ```

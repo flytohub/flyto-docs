@@ -154,8 +154,8 @@ Send email via SMTP
 ```yaml
 smtp_server: smtp.gmail.com
 smtp_port: 587
-from_email: bot@example.com
-to_email: user@example.com
+from_email: bot@flyto2.com
+to_email: user@flyto2.com
 subject: Workflow Complete
 body: Your automation workflow has finished successfully.
 ```

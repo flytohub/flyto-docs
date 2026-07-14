@@ -561,7 +561,7 @@ Pick specific keys from an object
 **Example:** Pick user fields
 
 ```yaml
-object: {"name": "John", "age": 30, "email": "john@example.com", "password": "secret"}
+object: {"name": "John", "age": 30, "email": "john@flyto2.com", "password": "secret"}
 keys: ["name", "email"]
 ```
 

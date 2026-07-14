@@ -292,7 +292,7 @@ Send HTTP POST request to any URL
 
 ```yaml
 url: https://api.example.com/users
-json: {"name": "John", "email": "john@example.com"}
+json: {"name": "John", "email": "john@flyto2.com"}
 ```
 
 ### Google Search (SerpAPI)

@@ -404,4 +404,4 @@ SLA windows are the only scoring parameter that organizations can customize. The
 
 ---
 
-*This document describes the scoring methodology as implemented in Flyto2 Engine v2.0. For questions or audit requests, contact security@flyto.dev.*
+*This document describes the scoring methodology as implemented in Flyto2 Engine v2.0. For questions or audit requests, contact security@flyto2.com.*

@@ -412,7 +412,7 @@ action: click
 text: Enter your email
 role: textbox
 action: type
-action_value: user@example.com
+action_value: user@flyto2.com
 ```
 
 **Example:** Example
@@ -854,7 +854,7 @@ Smart form filling with automatic field detection. Run browser.snapshot first to
 **Example:** Example
 
 ```yaml
-data: {"email": "user@example.com", "password": "secret123"}
+data: {"email": "user@flyto2.com", "password": "secret123"}
 submit: true
 ```
 
@@ -1135,7 +1135,7 @@ Auto-detect and fill login forms. Handles username + password + submit with post
 **Example:** Example
 
 ```yaml
-username: user@example.com
+username: user@flyto2.com
 password: secret
 ```
 
@@ -2224,7 +2224,7 @@ Type text into an input field. Run browser.snapshot first to find the correct se
 ```yaml
 type_method: placeholder
 target: Enter your email
-text: user@example.com
+text: user@flyto2.com
 ```
 
 **Example:** Example
@@ -2232,7 +2232,7 @@ text: user@example.com
 ```yaml
 type_method: label
 target: Email
-text: user@example.com
+text: user@flyto2.com
 ```
 
 **Example:** Example
@@ -2249,7 +2249,7 @@ sensitive_text: ${env.LOGIN_PASSWORD}
 ```yaml
 type_method: selector
 selector: #email
-text: user@example.com
+text: user@flyto2.com
 ```
 
 ### Upload File

@@ -84,7 +84,7 @@ Send email via SMTP server
 **Example:** Send simple email
 
 ```yaml
-to: user@example.com
+to: user@flyto2.com
 subject: Hello
 body: This is a test email.
 ```

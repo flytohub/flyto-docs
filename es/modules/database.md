@@ -50,7 +50,7 @@ Insert data into database tables
 
 ```yaml
 table: users
-data: {"name": "John", "email": "john@example.com"}
+data: {"name": "John", "email": "john@flyto2.com"}
 database_type: postgresql
 ```
 
@@ -200,7 +200,7 @@ Insert one or more documents into MongoDB collection
 ```yaml
 database: myapp
 collection: users
-document: {"name": "John Doe", "email": "john@example.com", "created_at": "${timestamp}"}
+document: {"name": "John Doe", "email": "john@flyto2.com", "created_at": "${timestamp}"}
 ```
 
 **Example:** Insert multiple documents
@@ -352,7 +352,7 @@ Set a value in Redis cache
 
 ```yaml
 key: user:123:profile
-value: {"name": "John", "email": "john@example.com"}
+value: {"name": "John", "email": "john@flyto2.com"}
 ttl: 3600
 ```
 

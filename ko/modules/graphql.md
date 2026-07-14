@@ -40,7 +40,7 @@ Execute a GraphQL mutation against an endpoint
 ```yaml
 url: https://api.example.com/graphql
 mutation: mutation CreateUser($input: UserInput!) { createUser(input: $input) { id name } }
-variables: {"input": {"name": "John", "email": "john@example.com"}}
+variables: {"input": {"name": "John", "email": "john@flyto2.com"}}
 ```
 
 ### GraphQL Query
