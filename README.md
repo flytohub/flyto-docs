@@ -20,7 +20,7 @@ Read online:
 | --- | --- |
 | `warroom/` | Warroom, CTEM, surfaces, scoring, BYO integrations, CE install, and APIs |
 | `core/` | Deterministic execution, evidence replay, and runtime architecture |
-| `modules/` | Flyto module reference generated from flyto-core |
+| `modules/` | Flyto2 module reference generated from flyto-core |
 | `mcp/` | MCP server setup and transport reference |
 | `indexer/` | flyto-indexer code intelligence and MCP tools |
 | `ai/` | flyto-ai providers, agents, prompts, and CLI |

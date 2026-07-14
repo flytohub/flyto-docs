@@ -10,7 +10,7 @@ It gives teams a local security cockpit for code intelligence, CTEM posture,
 external exposure, container and cloud posture inputs, automated security
 testing evidence, scoring, reports, and compliance surfaces.
 
-CE is designed to run without Flyto Cloud. Enterprise capabilities can be
+CE is designed to run without Flyto2 Cloud. Enterprise capabilities can be
 attached later through documented capability gates and signed evidence
 contracts.
 

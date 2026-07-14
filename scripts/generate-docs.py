@@ -151,9 +151,9 @@ def i18n_get(translations: dict, key: str, fallback: str) -> str:
 # ---------------------------------------------------------------------------
 
 def normalize_brand(text: str) -> str:
-    """Replace standalone 'Flyto' with 'Flyto2' in generated content (branding)."""
+    """Replace standalone 'Flyto2' with 'Flyto2' in generated content (branding)."""
     import re
-    # Match 'Flyto' not already followed by '2', '-', '_', 'Hub'
+    # Match 'Flyto2' not already followed by '2', '-', '_', 'Hub'
     return re.sub(r'\bFlyto\b(?!2|[-_]|Hub)', 'Flyto2', text)
 
 
