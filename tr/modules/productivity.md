@@ -80,7 +80,7 @@ Write data to Google Sheets spreadsheet
 ```yaml
 spreadsheet_id: 1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms
 range: Sheet1!A1
-values: [["Name", "Email", "Status"], ["John Doe", "john@flyto2.com", "Active"], ["Jane Smith", "jane@flyto2.com", "Active"]]
+values: [["Name", "Email", "Status"], ["John Doe", "dev@flyto2.com", "Active"], ["Jane Smith", "team@flyto2.com", "Active"]]
 ```
 
 ### Notion Create Page
@@ -286,7 +286,7 @@ Create a new record in Airtable table
 ```yaml
 base_id: appXXXXXXXXXXXXXX
 table_name: Customers
-fields: {"Name": "John Doe", "Email": "john@flyto2.com", "Status": "Active"}
+fields: {"Name": "John Doe", "Email": "dev@flyto2.com", "Status": "Active"}
 ```
 
 **Example:** Create task

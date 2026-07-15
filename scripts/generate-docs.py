@@ -18,16 +18,18 @@ import sys
 from pathlib import Path
 from collections import defaultdict
 
-# Try importing from installed package first, then from source
-try:
-    from flyto_core.modules.registry import get_registry
-except ImportError:
-    core_path = os.environ.get(
-        "FLYTO_CORE_PATH",
-        str(Path(__file__).resolve().parents[2] / "flyto-core"),
-    )
-    sys.path.insert(0, core_path)
-    from src.core.modules.registry import get_registry
+core_path_env = os.environ.get("FLYTO_CORE_PATH")
+if core_path_env:
+    sys.path.insert(0, str(Path(core_path_env) / "src"))
+    from core.modules.registry import get_registry
+else:
+    # Try importing from installed package first, then from a sibling source tree.
+    try:
+        from flyto_core.modules.registry import get_registry
+    except ImportError:
+        core_path = Path(__file__).resolve().parents[2] / "flyto-core"
+        sys.path.insert(0, str(core_path / "src"))
+        from core.modules.registry import get_registry
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 I18N_DIR = Path(
@@ -36,6 +38,9 @@ I18N_DIR = Path(
         str(Path(__file__).resolve().parents[2] / "flyto-i18n"),
     )
 ) / "locales"
+
+CORE_CATALOG_CATEGORY_COUNT = 84
+BUILT_IN_RECIPE_COUNT = 41
 
 # All supported locales
 ALL_LOCALES = [
@@ -55,6 +60,7 @@ CATEGORY_CONFIG = {
     "cache": ("Cache", "In-memory key-value cache with TTL support."),
     "check": ("Check", "Runtime type checking utilities."),
     "cloud": ("Cloud Services", "AWS S3, Azure Blob, Google Cloud Storage, and Google Workspace integrations."),
+    "communication": ("Communication", "Team communication helpers for Slack, webhooks, and outbound messages."),
     "compare": ("Compare", "Threshold-based change detection."),
     "convert": ("Convert", "Type casting between data types."),
     "crypto": ("Crypto", "AES encryption/decryption, HMAC, JWT tokens, and secure random generation."),
@@ -78,6 +84,7 @@ CATEGORY_CONFIG = {
     "markdown": ("Markdown", "Parse frontmatter, convert to HTML, and generate table of contents."),
     "math": ("Math", "Basic math operations: abs, ceil, floor, power, round."),
     "meta": ("Meta", "Module generation, listing, testing, and documentation."),
+    "mcp": ("MCP", "Model Context Protocol helpers for recipe and tool execution."),
     "network": ("Network", "Ping, port scan, traceroute, and WHOIS lookup."),
     "notification": ("Notifications", "Send messages via Slack, Discord, Teams, Telegram, email, SMS, and WhatsApp."),
     "object": ("Object Operations", "Deep merge, flatten, dot-path get/set, and unflatten."),
@@ -97,9 +104,12 @@ CATEGORY_CONFIG = {
     "template": ("Template", "Execute reusable templates as workflow steps."),
     "testing": ("Testing", "Assertion utilities: equal, contains, length, true, not null, greater than."),
     "text": ("Text", "Text analysis: word count, encoding detection, email/URL/number extraction."),
+    "training": ("Training", "Training data, fine-tuning, and evaluation helpers."),
     "utility": ("Utilities", "Datetime operations, delay, MD5 hash, and random utilities."),
     "validate": ("Validate", "Validate email, URL, phone, IP, UUID, credit card, and JSON Schema."),
     "verify": ("Verify", "Visual verification, Figma comparison, style capture, and report generation."),
+    "verification": ("Verification", "Deterministic verification primitives for discovery, scenario generation, run evidence, and reports."),
+    "warroom": ("Warroom", "Compatibility modules for Warroom deterministic verification workflows."),
 }
 
 # Map category to file slug
@@ -151,7 +161,7 @@ def i18n_get(translations: dict, key: str, fallback: str) -> str:
 # ---------------------------------------------------------------------------
 
 def normalize_brand(text: str) -> str:
-    """Replace standalone 'Flyto2' with 'Flyto2' in generated content (branding)."""
+    """Replace standalone 'Flyto' with 'Flyto2' in generated content."""
     import re
     # Match 'Flyto2' not already followed by '2', '-', '_', 'Hub'
     return re.sub(r'\bFlyto\b(?!2|[-_]|Hub)', 'Flyto2', text)
@@ -172,6 +182,11 @@ def escape_vue(text: str) -> str:
 def escape_html_like_tags(text: str) -> str:
     """Escape HTML-like tags in non-code markdown spans."""
     import re
+    text = re.sub(
+        r'<\?(.+?)\?>',
+        lambda m: f'&lt;?{m.group(1)}?&gt;',
+        text,
+    )
     return re.sub(
         r'<(/?[a-zA-Z][a-zA-Z0-9\-]*(?:\s[^>]*)?)>',
         lambda m: f'&lt;{m.group(1)}&gt;',
@@ -387,23 +402,25 @@ def append_category_group(lines: list[str], group_name: str, categories: list[st
 
 def generate_modules_index(by_category: dict, docs_dir: Path, link_prefix: str = ""):
     """Generate modules/index.md with category overview from registry data."""
-    # For the root (en) locale, don't overwrite the manually written index
-    if not link_prefix:
-        return
-
     # Group categories same as sidebar
     groups = {
-        "Core": ["browser", "atomic", "flow", "file", "sandbox", "element", "stealth"],
+        "Core": ["browser", "atomic", "flow", "file", "sandbox", "element", "mcp", "stealth"],
         "Data": ["data", "array", "string", "object", "text", "regex", "convert", "format", "set", "template", "markdown"],
         "Infrastructure": ["cloud", "api", "database", "docker", "k8s", "network", "cache", "queue", "storage", "graphql", "http"],
-        "Integrations": ["productivity", "notification", "ai", "image", "document"],
-        "Quality": ["verify", "validate", "check", "analysis", "testing", "compare"],
+        "Integrations": ["productivity", "notification", "communication", "ai", "image", "document"],
+        "Quality": ["verify", "verification", "warroom", "validate", "check", "analysis", "testing", "compare", "training"],
         "Utilities": ["utility", "stats", "crypto", "encode", "archive", "path", "math", "logic", "random", "meta", "env", "error", "scheduler", "hash", "output"],
     }
 
+    total_modules = sum(len(m) for m in by_category.values())
     lines = [
         "# Modules\n",
-        f"\nflyto-core ships {sum(len(m) for m in by_category.values())}+ modules. Each module is a self-contained unit of work with defined inputs, outputs, and evidence.\n",
+        (
+            f"\nflyto-core ships {total_modules} registry-backed modules. "
+            f"The full core catalog tracks {CORE_CATALOG_CATEGORY_COUNT} prefix categories; "
+            f"these docs group modules into stable documentation categories with defined inputs, outputs, and evidence. "
+            f"The runtime also includes {BUILT_IN_RECIPE_COUNT} built-in recipes.\n"
+        ),
         "\n## Browse by Category\n",
     ]
 

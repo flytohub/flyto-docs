@@ -74,7 +74,7 @@ posture (mcp-overview) ──> runtime telemetry (runtime-events / activity.logg
 
 ## How flyto-core's own MCP hardening informs this surface
 
-The controls this surface checks for are the controls we hardened on our own MCP server. [flyto-core](/) is itself an MCP server exposing 412+ modules over [stdio and streamable HTTP](/mcp/) — so the same three capability classes apply to it, and we fixed them on ourselves first:
+The controls this surface checks for are the controls we hardened on our own MCP server. [flyto-core](/) is itself an MCP server exposing 451 modules over [stdio and streamable HTTP](/mcp/) — so the same three capability classes apply to it, and we fixed them on ourselves first:
 
 - **Unauthenticated execution** — the MCP server's auth seam was made *fail-closed*: a missing or `None` auth requirement returns a 503 rather than serving tools unauthenticated, so a misconfiguration cannot silently become an open exec endpoint.
 - **Bind exposure** — an empty or wildcard bind address is treated as a guarded, fail-safe condition rather than fail-open, so a blank config does not quietly expose the server on every interface.

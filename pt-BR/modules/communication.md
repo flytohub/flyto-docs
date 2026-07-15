@@ -1,6 +1,6 @@
 # Communication
 
-
+Team communication helpers for Slack, webhooks, and outbound messages.
 
 **4 modules**
 
@@ -84,7 +84,7 @@ Send email via SMTP server
 **Example:** Send simple email
 
 ```yaml
-to: user@flyto2.com
+to: team@flyto2.com
 subject: Hello
 body: This is a test email.
 ```

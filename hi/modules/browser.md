@@ -74,7 +74,7 @@ Auto-detect and handle anti-bot challenges (Cloudflare, CAPTCHA). Waits for auto
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `auto_wait_seconds` | number | No | `15` | How long to wait for the challenge to auto-resolve before trying API solver or human help. 0 = skip auto-wait. |
-| `captcha_provider` | select (``, `2captcha`, `capsolver`) | No | - | Third-party API for automatic captcha solving. Leave empty to skip API solving. |
+| `captcha_provider` | select (``, `2captcha`, `capsolver`, `captchaai`) | No | - | Third-party API for automatic captcha solving. Leave empty to skip API solving. |
 | `captcha_api_key` | string | No | - | API key for the captcha solving service |
 | `human_fallback` | boolean | No | `True` | If auto-wait and API solver both fail, create a breakpoint for the user to solve manually. |
 | `human_timeout_seconds` | number | No | `120` | How long to wait for human to solve the challenge. 0 = wait indefinitely. |
@@ -412,7 +412,7 @@ action: click
 text: Enter your email
 role: textbox
 action: type
-action_value: user@flyto2.com
+action_value: team@flyto2.com
 ```
 
 **Example:** Example
@@ -854,7 +854,7 @@ Smart form filling with automatic field detection. Run browser.snapshot first to
 **Example:** Example
 
 ```yaml
-data: {"email": "user@flyto2.com", "password": "secret123"}
+data: {"email": "team@flyto2.com", "password": "secret123"}
 submit: true
 ```
 
@@ -1135,7 +1135,7 @@ Auto-detect and fill login forms. Handles username + password + submit with post
 **Example:** Example
 
 ```yaml
-username: user@flyto2.com
+username: team@flyto2.com
 password: secret
 ```
 
@@ -2224,7 +2224,7 @@ Type text into an input field. Run browser.snapshot first to find the correct se
 ```yaml
 type_method: placeholder
 target: Enter your email
-text: user@flyto2.com
+text: team@flyto2.com
 ```
 
 **Example:** Example
@@ -2232,7 +2232,7 @@ text: user@flyto2.com
 ```yaml
 type_method: label
 target: Email
-text: user@flyto2.com
+text: team@flyto2.com
 ```
 
 **Example:** Example
@@ -2249,7 +2249,7 @@ sensitive_text: ${env.LOGIN_PASSWORD}
 ```yaml
 type_method: selector
 selector: #email
-text: user@flyto2.com
+text: team@flyto2.com
 ```
 
 ### Upload File

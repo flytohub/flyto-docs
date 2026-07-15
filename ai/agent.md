@@ -59,7 +59,7 @@ result = await agent.chat("...", on_stream=on_stream)
 
 Three types of tools are wired together:
 
-1. **Core tools** — 412 flyto-core modules (browser, data, cloud, etc.)
+1. **Core tools** — 451 flyto-core modules (browser, data, cloud, etc.)
 2. **Blueprint tools** — Reuse learned workflows (`use_blueprint`, `get_blueprint_info`)
 3. **Inspect tools** — Smart browser page inspection
 

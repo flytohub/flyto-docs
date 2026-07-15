@@ -1,6 +1,6 @@
 # Modules
 
-flyto-core ships 438+ modules. Each module is a self-contained unit of work with defined inputs, outputs, and evidence.
+flyto-core ships 451 registry-backed modules. The full core catalog tracks 84 prefix categories; these docs group modules into stable documentation categories with defined inputs, outputs, and evidence. The runtime also includes 41 built-in recipes.
 
 ## Browse by Category
 
@@ -14,6 +14,7 @@ flyto-core ships 438+ modules. Each module is a self-contained unit of work with
 | [File Operations](/hi/modules/file-operations) | 3 | Copy, move, and delete files. |
 | [Sandbox](/hi/modules/sandbox) | 3 | Execute JavaScript, Python, or shell commands in isolated environments. |
 | [Element](/hi/modules/element) | 3 | DOM element query, attribute, and text extraction. |
+| [MCP](/hi/modules/mcp) | 1 | Model Context Protocol helpers for recipe and tool execution. |
 
 ### Data
 
@@ -53,6 +54,7 @@ flyto-core ships 438+ modules. Each module is a self-contained unit of work with
 |----------|---------|-------------|
 | [Productivity](/hi/modules/productivity) | 10 | Google Sheets, Notion, Airtable, and Stripe integrations. |
 | [Notifications](/hi/modules/notification) | 9 | Send messages via Slack, Discord, Teams, Telegram, email, SMS, and WhatsApp. |
+| [Communication](/hi/modules/communication) | 4 | Team communication helpers for Slack, webhooks, and outbound messages. |
 | [AI & LLM](/hi/modules/ai-llm) | 18 | AI model integration, text generation, embeddings, and autonomous agents. |
 | [Image Processing](/hi/modules/image) | 9 | Resize, crop, compress, convert, OCR, QR codes, and watermarks. |
 | [Document](/hi/modules/document) | 8 | Excel, PDF, and Word document read/write/convert. |
@@ -62,11 +64,14 @@ flyto-core ships 438+ modules. Each module is a self-contained unit of work with
 | Category | Modules | Description |
 |----------|---------|-------------|
 | [Verify](/hi/modules/verify) | 9 | Visual verification, Figma comparison, style capture, and report generation. |
+| [Verification](/hi/modules/verification) | 4 | Deterministic verification primitives for discovery, scenario generation, run evidence, and reports. |
+| [Warroom](/hi/modules/warroom) | 6 | Compatibility modules for Warroom deterministic verification workflows. |
 | [Validate](/hi/modules/validate) | 7 | Validate email, URL, phone, IP, UUID, credit card, and JSON Schema. |
 | [Check](/hi/modules/check) | 7 | Runtime type checking utilities. |
 | [Analysis](/hi/modules/analysis) | 6 | HTML analysis modules for readability, forms, tables, and metadata extraction. |
 | [Testing](/hi/modules/testing) | 8 | Assertion utilities: equal, contains, length, true, not null, greater than. |
 | [Compare](/hi/modules/compare) | 1 | Threshold-based change detection. |
+| [Training](/hi/modules/training) | 4 | Training data, fine-tuning, and evaluation helpers. |
 
 ### Utilities
 
@@ -81,16 +86,9 @@ flyto-core ships 438+ modules. Each module is a self-contained unit of work with
 | [Math](/hi/modules/math) | 5 | Basic math operations: abs, ceil, floor, power, round. |
 | [Logic](/hi/modules/logic) | 5 | Boolean logic operations: AND, OR, NOT, equals, contains. |
 | [Random](/hi/modules/random) | 4 | Random number, UUID, choice, and shuffle. |
-| [Meta](/hi/modules/meta) | 2 | Module generation, listing, testing, and documentation. |
+| [Meta](/hi/modules/meta) | 4 | Module generation, listing, testing, and documentation. |
 | [Environment](/hi/modules/env) | 3 | Environment variable management and .env file loading. |
 | [Error Handling](/hi/modules/error-handling) | 3 | Retry, fallback, and circuit breaker patterns. |
 | [Scheduler](/hi/modules/scheduler) | 3 | Cron parsing, delay, and interval calculations. |
 | [Hash](/hi/modules/hash) | 2 | SHA-256 and SHA-512 cryptographic hashing. |
 | [Output](/hi/modules/output) | 1 | Universal display and inspect node for debugging and workflow I/O. |
-
-### Other
-
-| Category | Modules | Description |
-|----------|---------|-------------|
-| [Communication](/hi/modules/communication) | 4 |  |
-| [Training](/hi/modules/training) | 4 |  |

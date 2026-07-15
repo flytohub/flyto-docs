@@ -1,21 +1,21 @@
 # Modules Overview
 
-flyto-core includes 412+ modules organized into 78 categories. Each module is a deterministic, self-contained unit of work.
+flyto-core includes 451 registry-backed modules. The generated core catalog tracks 84 prefix categories, the runtime ships 41 built-in recipes, and each module is a deterministic, self-contained unit of work.
 
 ## Categories
 
 | Category | Examples | Count |
 |----------|----------|-------|
-| Browser | goto, click, type, snapshot, scroll | 20+ |
-| File System | read, write, copy, move, delete, glob | 15+ |
-| Docker | run, build, exec, logs, compose | 10+ |
-| Data Parsing | json, csv, xml, yaml, toml | 12+ |
-| Crypto | hash, encrypt, decrypt, sign, verify | 10+ |
-| Scheduling | cron, delay, timeout, interval | 6+ |
-| Network | http, fetch, download, upload | 8+ |
-| Process | exec, spawn, kill, signal | 6+ |
-| Text | regex, replace, split, join, template | 10+ |
-| Math | calculate, random, statistics | 8+ |
+| Browser | goto, click, type, screenshot, performance | 54 |
+| Flow | branch, loop, parallel, retry, rate limit | 24 |
+| Data Parsing | json, csv, xml, yaml, transform | 13 |
+| API | HTTP, GitHub, OpenAI, Anthropic, Gemini | 13 |
+| Array | map, reduce, unique, chunk, flatten | 15 |
+| String | uppercase, replace, split, slugify, template | 11 |
+| AI | chat, model calls, vision, embeddings | 10 |
+| Image | resize, convert, crop, OCR, QR code | 9 |
+| Testing | assertions, scenarios, E2E steps, reports | 10 |
+| Crypto | hash, encrypt, decrypt, sign, verify | 7 |
 
 ## Module Naming
 
@@ -54,4 +54,4 @@ See individual module pages for details:
 - [Crypto](/modules/crypto)
 - [Scheduler](/modules/scheduler)
 
-Browse the full [module reference](/modules/) for all 55 categories.
+Browse the full [module reference](/modules/) or the generated core catalog for all 84 catalog categories and 41 built-in recipes.

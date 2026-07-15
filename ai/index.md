@@ -1,6 +1,6 @@
 # flyto-ai
 
-Natural language to executable automation. flyto-ai turns plain language descriptions into reusable YAML workflows using 412+ pre-built modules from flyto-core.
+Natural language to executable automation. flyto-ai turns plain language descriptions into reusable YAML workflows using 451 registry-backed modules from flyto-core.
 
 ## Why flyto-ai?
 
@@ -42,7 +42,7 @@ flyto-ai chat "scrape example.com" --plan
 ```
 User Message
   → LLM (OpenAI / Anthropic / Ollama)
-    → Tool Selection (412 flyto-core modules)
+    → Tool Selection (451 flyto-core modules)
       → Module Execution (deterministic)
         → Results + YAML Workflow
           → Blueprint Learning (self-improving)

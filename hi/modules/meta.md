@@ -2,14 +2,31 @@
 
 Module generation, listing, testing, and documentation.
 
-**2 modules**
+**4 modules**
 
 | Module | Description |
 |--------|-------------|
+| [Generate Module](#generate-module) | Generate new module from specification |
 | [List Available Modules](#list-available-modules) | List all available modules in the registry |
+| [Test Generator](#test-generator) | Test module generation capability |
 | [Update Module Documentation](#update-module-documentation) | Generate or update MODULES.md documentation from registry |
 
 ## Modules
+
+### Generate Module
+
+`meta.modules.generate`
+
+Generate new module from specification
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `status` | string | Operation status (stub/success/error) |
+| `message` | string | Human-readable result message |
+| `module_id` | string | Generated module ID |
+| `description` | string | Module description |
 
 ### List Available Modules
 
@@ -59,6 +76,20 @@ format: markdown
 ```yaml
 format: compact
 ```
+
+### Test Generator
+
+`meta.modules.test_generator`
+
+Test module generation capability
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `status` | string | Operation status (stub/success/error) |
+| `message` | string | Human-readable result message |
+| `spec_received` | boolean | Whether module spec was received |
 
 ### Update Module Documentation
 

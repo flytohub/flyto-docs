@@ -53,7 +53,7 @@ Independently, each surface answers one question. Converged, they answer the que
 
 ## How the loop is powered: data sources → engine → unified score
 
-The execution layer underneath the war-room is the **same** deterministic engine that powers the Flyto2 automation product line: 412+ deterministic modules, MCP-native over stdio and streamable-http, with YAML recipes and evidence/replay. Automation is the *how*; the war-room is the *what and why*. The same recipes that run an automation also run a scan, collect its evidence, and drive a red-team step.
+The execution layer underneath the war-room is the **same** deterministic engine that powers the Flyto2 automation product line: 451 deterministic modules, MCP-native over stdio and streamable-http, with YAML recipes and evidence/replay. Automation is the *how*; the war-room is the *what and why*. The same recipes that run an automation also run a scan, collect its evidence, and drive a red-team step.
 
 ```
    YOUR DATA (BYO)                    FLYTO2 SUPPLEMENTS
@@ -69,7 +69,7 @@ The execution layer underneath the war-room is the **same** deterministic engine
                                │
                 ┌──────────────┴───────────────┐
                 │   Flyto2 Warroom Engine       │
-                │   (412+ deterministic modules │
+                │   (451 deterministic modules │
                 │    · YAML recipes · evidence) │
                 │                               │
                 │   Confidence promote L0→L1→L2 │

@@ -223,8 +223,8 @@ Generate QR codes from text, URLs, or data
 **Example:** Generate URL QR code
 
 ```yaml
-data: https://flyto.dev
-output_path: /tmp/flyto_qr.png
+data: https://flyto2.com
+output_path: /tmp/flyto2_qr.png
 ```
 
 **Example:** Custom styled QR code
@@ -239,7 +239,7 @@ error_correction: H
 **Example:** SVG QR code
 
 ```yaml
-data: https://flyto.dev
+data: https://flyto2.com
 format: svg
 border: 2
 ```

@@ -8,7 +8,7 @@
 │         (STDIO / HTTP Transport)        │
 ├─────────────────────────────────────────┤
 │            Module Registry              │
-│     (412+ modules, 78 categories)       │
+│  (451 modules, 84 catalog categories)  │
 ├─────────────────────────────────────────┤
 │           Execution Engine              │
 │   (dispatch, validate, execute, trace)  │

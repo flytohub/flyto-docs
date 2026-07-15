@@ -1,6 +1,11 @@
 import { defineConfig, type DefaultTheme } from 'vitepress'
 
 const SITE_URL = 'https://docs.flyto2.com'
+const CORE_MODULE_COUNT = 451
+const CORE_CATALOG_CATEGORY_COUNT = 84
+const BUILT_IN_RECIPE_COUNT = 41
+const CORE_RUNTIME_SUMMARY = `${CORE_MODULE_COUNT} registry-backed modules across ${CORE_CATALOG_CATEGORY_COUNT} catalog categories, ${BUILT_IN_RECIPE_COUNT} built-in recipes, MCP transports, evidence capture, and replayable YAML execution`
+const SITE_DESCRIPTION = `Documentation for Flyto2 Warroom, evidence-backed CTEM, attack surface management, dark web monitoring, code risk, pentest, red-team workflows, and the deterministic core runtime with ${CORE_RUNTIME_SUMMARY}.`
 const NON_CONTENT_PATHS = new Set([
   'AGENTS.md',
   'ARCHITECTURE.md',
@@ -77,6 +82,7 @@ function modulesSidebar(prefix = ''): DefaultTheme.SidebarItem[] {
         { text: 'File Operations', link: `${p}/modules/file-operations` },
         { text: 'Sandbox', link: `${p}/modules/sandbox` },
         { text: 'Element', link: `${p}/modules/element` },
+        { text: 'MCP', link: `${p}/modules/mcp` },
       ],
     },
     {
@@ -119,6 +125,7 @@ function modulesSidebar(prefix = ''): DefaultTheme.SidebarItem[] {
       items: [
         { text: 'AI & LLM', link: `${p}/modules/ai-llm` },
         { text: 'Notifications', link: `${p}/modules/notification` },
+        { text: 'Communication', link: `${p}/modules/communication` },
         { text: 'Productivity', link: `${p}/modules/productivity` },
         { text: 'Document', link: `${p}/modules/document` },
         { text: 'Image Processing', link: `${p}/modules/image` },
@@ -129,11 +136,14 @@ function modulesSidebar(prefix = ''): DefaultTheme.SidebarItem[] {
       collapsed: false,
       items: [
         { text: 'Verify', link: `${p}/modules/verify` },
+        { text: 'Verification', link: `${p}/modules/verification` },
+        { text: 'Warroom', link: `${p}/modules/warroom` },
         { text: 'Validate', link: `${p}/modules/validate` },
         { text: 'Check', link: `${p}/modules/check` },
         { text: 'Analysis', link: `${p}/modules/analysis` },
         { text: 'Testing', link: `${p}/modules/testing` },
         { text: 'Compare', link: `${p}/modules/compare` },
+        { text: 'Training', link: `${p}/modules/training` },
       ],
     },
     {
@@ -181,8 +191,8 @@ function localeModulesConfig(prefix: string): DefaultTheme.Config {
 }
 
 export default defineConfig({
-  title: 'Flyto2 Docs - Security War Room and CTEM Documentation',
-  description: 'Documentation for Flyto2 Warroom, evidence-backed CTEM, attack surface management, dark web monitoring, code risk, pentest, red-team workflows, and the deterministic execution engine.',
+  title: 'Flyto2 Docs - CTEM War Room, MCP, and Core Modules',
+  description: SITE_DESCRIPTION,
   lang: 'en-US',
   cleanUrls: true,
   srcExclude: [
@@ -246,17 +256,17 @@ export default defineConfig({
     // Open Graph
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: 'Flyto2 Docs' }],
-    ['meta', { property: 'og:title', content: 'Flyto2 Docs — Security War Room and CTEM Documentation' }],
-    ['meta', { property: 'og:description', content: 'Warroom docs for CTEM, attack surface management, dark web monitoring, code risk, BYO integrations, pentest, red-team, and evidence-backed workflows.' }],
+    ['meta', { property: 'og:title', content: 'Flyto2 Docs - CTEM War Room, MCP, and Core Modules' }],
+    ['meta', { property: 'og:description', content: SITE_DESCRIPTION }],
     ['meta', { property: 'og:image', content: 'https://docs.flyto2.com/og-image.png' }],
     ['meta', { property: 'og:locale', content: 'en_US' }],
     // Twitter Card
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:title', content: 'Flyto2 Docs — Security War Room and CTEM Documentation' }],
-    ['meta', { name: 'twitter:description', content: 'Warroom docs for CTEM, attack surface management, dark web monitoring, code risk, BYO integrations, pentest, red-team, and evidence-backed workflows.' }],
+    ['meta', { name: 'twitter:title', content: 'Flyto2 Docs - CTEM War Room, MCP, and Core Modules' }],
+    ['meta', { name: 'twitter:description', content: SITE_DESCRIPTION }],
     ['meta', { name: 'twitter:image', content: 'https://docs.flyto2.com/og-image.png' }],
     // SEO
-    ['meta', { name: 'keywords', content: 'Flyto2, CTEM, Warroom, attack surface management, EASM, dark web monitoring, code risk, AI security, MCP security, MSSP, BYO security integrations, pentest, red team, evidence-backed security' }],
+    ['meta', { name: 'keywords', content: `Flyto2, CTEM, Warroom, attack surface management, EASM, dark web monitoring, code risk, AI security, MCP security, MCP server, MSSP, BYO security integrations, pentest, red team, evidence-backed security, ${CORE_MODULE_COUNT} modules, ${CORE_CATALOG_CATEGORY_COUNT} catalog categories, ${BUILT_IN_RECIPE_COUNT} recipes` }],
     ['meta', { name: 'author', content: 'Flyto2 Team' }],
     ['meta', { name: 'robots', content: 'index, follow' }],
     // JSON-LD structured data
@@ -264,8 +274,15 @@ export default defineConfig({
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'Flyto2 Docs',
-      description: 'Documentation for Flyto2 Warroom, evidence-backed CTEM, attack surface management, dark web monitoring, code risk, pentest, red-team workflows, and the deterministic execution engine.',
+      description: SITE_DESCRIPTION,
       url: 'https://docs.flyto2.com',
+      about: [
+        'CTEM',
+        'security war room',
+        'MCP security',
+        'deterministic automation',
+        CORE_RUNTIME_SUMMARY,
+      ],
       publisher: {
         '@type': 'Organization',
         name: 'Flyto2',

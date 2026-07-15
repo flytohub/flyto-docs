@@ -27,6 +27,13 @@
 
 Flyto2 complements and integrates existing security tools. Customers can bring existing scanners, external-rating signals, dark web feeds, repositories, cloud posture, CMDB, and asset data. Flyto2 correlates those inputs, validates what matters, and turns findings into evidence-backed action.
 
+## Core runtime facts
+
+- flyto-core is the deterministic execution kernel for Flyto2 workflows, modules, MCP transport, evidence capture, and replay.
+- The generated public module catalog currently covers 451 registry-backed modules across 84 catalog categories.
+- The runtime ships 41 built-in recipes and 54 browser automation modules.
+- Use `/modules/` for the generated module reference, `/core/` for execution behavior, `/core/evidence-replay` for replay and evidence, and `/mcp/` for MCP setup.
+
 ## Site role
 
 Docs are the technical and citation surface. Use docs for product mechanics, architecture, API behavior, scoring, BYO integrations, MCP security, surfaces, and evidence-backed validation details.

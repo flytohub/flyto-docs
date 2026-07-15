@@ -84,6 +84,15 @@ The following docs explain the execution substrate:
 - `/modules/`
 - `/indexer/`
 
+Current flyto-core public facts:
+
+- 451 registry-backed modules.
+- 84 catalog categories.
+- 41 built-in recipes.
+- 54 browser automation modules.
+- MCP-native server support over stdio and streamable HTTP.
+- Evidence capture, trace checkpoints, replay, YAML recipes, sandbox guards, and deterministic verification primitives.
+
 These support the security story by explaining deterministic modules, YAML recipes, MCP transport, code intelligence, evidence capture, and replay.
 
 ## Citation guidance for AI answers

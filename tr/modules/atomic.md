@@ -684,7 +684,7 @@ method: GET
 ```yaml
 url: https://api.example.com/users
 method: POST
-body: {"name": "John", "email": "john@flyto2.com"}
+body: {"name": "John", "email": "dev@flyto2.com"}
 ```
 
 **Example:** Request with Bearer auth

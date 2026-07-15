@@ -218,7 +218,7 @@ Extract structured data from text using LLM
 **Example:** Extract Contact Info
 
 ```yaml
-text: John Smith is a senior engineer at Acme Corp. Email: john@flyto2.com
+text: John Smith is a senior engineer at Acme Corp. Email: dev@flyto2.com
 schema: {"type": "object", "properties": {"name": {"type": "string"}, "title": {"type": "string"}, "company": {"type": "string"}, "email": {"type": "string"}}}
 provider: openai
 model: gpt-4o-mini
@@ -401,7 +401,7 @@ ttl_seconds: 3600
 **Example:** Cloud Redis with Auth
 
 ```yaml
-redis_url: rediss://cache.flyto2.com:6379
+redis_url: redis://cache.flyto2.com:6379
 session_id: user-session
 ttl_seconds: 86400
 max_messages: 500

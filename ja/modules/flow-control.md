@@ -164,7 +164,7 @@ description: Please review and approve the data export
 ```yaml
 title: Manager Approval Required
 description: Large transaction requires manager approval
-required_approvers: ["manager@flyto2.com"]
+required_approvers: ["oncall@flyto2.com"]
 timeout_seconds: 3600
 ```
 

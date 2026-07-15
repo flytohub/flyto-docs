@@ -1,6 +1,6 @@
 # Training
 
-
+Training data, fine-tuning, and evaluation helpers.
 
 **4 modules**
 
