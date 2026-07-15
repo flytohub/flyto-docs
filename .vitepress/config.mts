@@ -5,7 +5,29 @@ const CORE_MODULE_COUNT = 451
 const CORE_CATALOG_CATEGORY_COUNT = 84
 const BUILT_IN_RECIPE_COUNT = 41
 const CORE_RUNTIME_SUMMARY = `${CORE_MODULE_COUNT} registry-backed modules across ${CORE_CATALOG_CATEGORY_COUNT} catalog categories, ${BUILT_IN_RECIPE_COUNT} built-in recipes, MCP transports, evidence capture, and replayable YAML execution`
-const SITE_DESCRIPTION = `Documentation for Flyto2 Warroom, evidence-backed CTEM, attack surface management, dark web monitoring, code risk, pentest, red-team workflows, and the deterministic core runtime with ${CORE_RUNTIME_SUMMARY}.`
+const SITE_DESCRIPTION = `Technical documentation for Flyto2: open-source AI workflow automation with flyto-core, MCP server automation for AI agents, no-code browser workflows, evidence capture, replay, and Warroom CTEM security workflows powered by ${CORE_RUNTIME_SUMMARY}.`
+const SEO_KEYWORDS = [
+  'Flyto2 docs',
+  'AI workflow automation',
+  'open source AI agent framework',
+  'open source AI workflow automation',
+  'MCP server automation',
+  'MCP automation tools',
+  'flyto-core MCP server',
+  'no-code browser automation',
+  'self-hosted workflow automation',
+  'CTEM',
+  'security war room',
+  'attack surface management',
+  'EASM',
+  'dark web monitoring',
+  'code risk',
+  'AI security',
+  'MCP security',
+  `${CORE_MODULE_COUNT} modules`,
+  `${CORE_CATALOG_CATEGORY_COUNT} catalog categories`,
+  `${BUILT_IN_RECIPE_COUNT} recipes`,
+]
 const NON_CONTENT_PATHS = new Set([
   'AGENTS.md',
   'ARCHITECTURE.md',
@@ -191,7 +213,7 @@ function localeModulesConfig(prefix: string): DefaultTheme.Config {
 }
 
 export default defineConfig({
-  title: 'Flyto2 Docs - CTEM War Room, MCP, and Core Modules',
+  title: 'Flyto2 Docs - AI Workflow Automation, MCP, and CTEM War Room',
   description: SITE_DESCRIPTION,
   lang: 'en-US',
   cleanUrls: true,
@@ -256,17 +278,17 @@ export default defineConfig({
     // Open Graph
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: 'Flyto2 Docs' }],
-    ['meta', { property: 'og:title', content: 'Flyto2 Docs - CTEM War Room, MCP, and Core Modules' }],
+    ['meta', { property: 'og:title', content: 'Flyto2 Docs - AI Workflow Automation, MCP, and CTEM War Room' }],
     ['meta', { property: 'og:description', content: SITE_DESCRIPTION }],
     ['meta', { property: 'og:image', content: 'https://docs.flyto2.com/og-image.png' }],
     ['meta', { property: 'og:locale', content: 'en_US' }],
     // Twitter Card
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:title', content: 'Flyto2 Docs - CTEM War Room, MCP, and Core Modules' }],
+    ['meta', { name: 'twitter:title', content: 'Flyto2 Docs - AI Workflow Automation, MCP, and CTEM War Room' }],
     ['meta', { name: 'twitter:description', content: SITE_DESCRIPTION }],
     ['meta', { name: 'twitter:image', content: 'https://docs.flyto2.com/og-image.png' }],
     // SEO
-    ['meta', { name: 'keywords', content: `Flyto2, CTEM, Warroom, attack surface management, EASM, dark web monitoring, code risk, AI security, MCP security, MCP server, MSSP, BYO security integrations, pentest, red team, evidence-backed security, ${CORE_MODULE_COUNT} modules, ${CORE_CATALOG_CATEGORY_COUNT} catalog categories, ${BUILT_IN_RECIPE_COUNT} recipes` }],
+    ['meta', { name: 'keywords', content: SEO_KEYWORDS.join(', ') }],
     ['meta', { name: 'author', content: 'Flyto2 Team' }],
     ['meta', { name: 'robots', content: 'index, follow' }],
     // JSON-LD structured data
@@ -277,6 +299,10 @@ export default defineConfig({
       description: SITE_DESCRIPTION,
       url: 'https://docs.flyto2.com',
       about: [
+        'AI workflow automation',
+        'open source AI agent framework',
+        'MCP server automation',
+        'no-code browser automation',
         'CTEM',
         'security war room',
         'MCP security',

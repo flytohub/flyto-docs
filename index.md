@@ -2,34 +2,34 @@
 layout: home
 
 hero:
-  name: Flyto2 Warroom
-  text: Evidence-backed CTEM documentation
-  tagline: Connect existing ASM, dark web, code security, pentest, and red-team signals into one security workflow.
+  name: Flyto2 Docs
+  text: AI workflow automation, MCP, and evidence-backed security docs
+  tagline: Build with flyto-core, expose deterministic modules to AI agents through MCP, and connect automation evidence to CTEM, pentest, and red-team workflows.
   image:
     src: /logo.png
     alt: Flyto2
   actions:
     - theme: brand
-      text: Open Warroom Docs
+      text: Start with flyto-core
+      link: /core/
+    - theme: alt
+      text: MCP Server
+      link: /mcp/
+    - theme: alt
+      text: Warroom Docs
       link: /warroom/
-    - theme: alt
-      text: BYO Integration
-      link: /warroom/byo-integration
-    - theme: alt
-      text: Security Surfaces
-      link: /warroom/surfaces/
 
 features:
+  - icon: "⚙️"
+    title: Open-source Core
+    details: flyto-core documents 451 registry-backed modules, 84 catalog categories, 41 recipes, trace, evidence capture, and replayable YAML execution.
+  - icon: "🔌"
+    title: MCP Server Automation
+    details: Configure flyto-core as an MCP server so AI agents can call deterministic browser, file, API, data, AI, and verification tools.
+  - icon: "🤖"
+    title: AI Workflow Automation
+    details: Use modules and recipes as bounded agent tools for AI workflow automation instead of letting models generate unreviewed production code.
   - icon: "🛡️"
     title: Security War Room
-    details: CTEM, attack surface, code risk, dark web, pentest, red-team, scoring, reporting, and evidence in one operating picture.
-  - icon: "🔌"
-    title: BYO Integrations
-    details: Bring existing scanners, external ratings, dark web feeds, repos, cloud posture, CMDB, and asset data you already trust.
-  - icon: "🎯"
-    title: Closed-Loop Validation
-    details: Promote findings through validation workflows with replayable evidence instead of treating every alert as equally actionable.
-  - icon: "⚙️"
-    title: Deterministic Engine
-    details: flyto-core, MCP, modules, YAML recipes, evidence capture, and replay remain the substrate that runs security workflows.
+    details: Warroom docs connect CTEM, attack surface, code risk, dark web, pentest, red-team, scoring, reporting, and evidence into one operating picture.
 ---

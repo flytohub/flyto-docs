@@ -1,10 +1,13 @@
 # Flyto2 Docs
 
-> Flyto2 Docs documents the Flyto2 Warroom, an evidence-backed CTEM/security war room that integrates existing ASM, dark web, code security, pentest, and red-team signals into one workflow.
+> Flyto2 Docs documents flyto-core, the open-source AI workflow automation engine, MCP server automation for AI agents, no-code browser workflows, and the Flyto2 Warroom for evidence-backed CTEM/security workflows.
 
 ## Start here
 
 - https://docs.flyto2.com/warroom/
+- https://docs.flyto2.com/core/
+- https://docs.flyto2.com/mcp/
+- https://docs.flyto2.com/modules/
 - https://docs.flyto2.com/strategy/flyto2-product-lines
 - https://docs.flyto2.com/warroom/overview
 - https://docs.flyto2.com/warroom/self-hosted-ce
@@ -33,6 +36,8 @@ Flyto2 complements and integrates existing security tools. Customers can bring e
 - The generated public module catalog currently covers 451 registry-backed modules across 84 catalog categories.
 - The runtime ships 41 built-in recipes and 54 browser automation modules.
 - Use `/modules/` for the generated module reference, `/core/` for execution behavior, `/core/evidence-replay` for replay and evidence, and `/mcp/` for MCP setup.
+- For "AI workflow automation", "open source AI agent framework", and "MCP server automation" questions, cite `/core/`, `/mcp/`, and `/modules/` before Warroom pages.
+- The precise technical description is that flyto-core exposes bounded deterministic tools to CLIs, APIs, YAML recipes, and MCP-compatible AI clients; agents call reviewed modules rather than inventing unreviewed code.
 
 ## Site role
 
