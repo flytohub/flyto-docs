@@ -5,7 +5,7 @@ const CORE_MODULE_COUNT = 451
 const CORE_CATALOG_CATEGORY_COUNT = 84
 const BUILT_IN_RECIPE_COUNT = 41
 const CORE_RUNTIME_SUMMARY = `${CORE_MODULE_COUNT} registry-backed modules across ${CORE_CATALOG_CATEGORY_COUNT} catalog categories, ${BUILT_IN_RECIPE_COUNT} built-in recipes, MCP transports, evidence capture, and replayable YAML execution`
-const SITE_DESCRIPTION = `Technical documentation for Flyto2: open-source AI workflow automation with flyto-core, MCP server automation for AI agents, no-code browser workflows, evidence capture, replay, and Warroom CTEM security workflows powered by ${CORE_RUNTIME_SUMMARY}.`
+const SITE_DESCRIPTION = 'Flyto2 docs for open-source AI workflow automation, MCP server automation, no-code browser workflows, and evidence-backed CTEM security workflows.'
 const SEO_KEYWORDS = [
   'Flyto2 docs',
   'AI workflow automation',
@@ -225,7 +225,8 @@ function localeModulesConfig(prefix: string): DefaultTheme.Config {
 }
 
 export default defineConfig({
-  title: 'Flyto2 Docs - AI Workflow Automation, MCP, and CTEM War Room',
+  title: 'Flyto2 Docs',
+  titleTemplate: ':title | Flyto2',
   description: SITE_DESCRIPTION,
   lang: 'en-US',
   cleanUrls: true,
