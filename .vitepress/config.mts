@@ -33,6 +33,7 @@ const NON_CONTENT_PATHS = new Set([
   'ARCHITECTURE.md',
   'CHANGELOG.md',
   'CLAUDE.md',
+  'CONTRIBUTING.md',
   'DECISIONS.md',
   'PROJECT.md',
   'README.md',
@@ -40,6 +41,7 @@ const NON_CONTENT_PATHS = new Set([
   'SECURITY.md',
   'STATE.md',
   'tasks.md',
+  'docs/README.md',
   'public/images/CREDITS.md',
 ])
 
@@ -52,6 +54,16 @@ function isNonContentPath(relativePath: string) {
     || relativePath.startsWith('public/')
     || relativePath.startsWith('workflows/')
     || relativePath.startsWith('handoffs/')
+}
+
+function isNonContentPublicPath(publicPath: string) {
+  const normalized = publicPath
+    .replace(/^\/+/, '')
+    .replace(/\/$/, '')
+    .replace(/\.html$/, '')
+  const markdownPath = normalized ? `${normalized}.md` : 'index.md'
+
+  return isNonContentPath(normalized) || isNonContentPath(markdownPath)
 }
 
 function titleFromSegment(segment: string) {
@@ -89,13 +101,13 @@ function modulesSidebar(prefix = ''): DefaultTheme.SidebarItem[] {
   const p = prefix ? `/${prefix}` : ''
   return [
     {
-      text: 'Modules',
+      text: 'Modules Reference',
       items: [
         { text: 'Overview', link: `${p}/modules/` },
       ],
     },
     {
-      text: 'Core',
+      text: 'Core Runtime',
       collapsed: false,
       items: [
         { text: 'Browser Automation', link: `${p}/modules/browser` },
@@ -109,7 +121,7 @@ function modulesSidebar(prefix = ''): DefaultTheme.SidebarItem[] {
     },
     {
       text: 'Data',
-      collapsed: false,
+      collapsed: true,
       items: [
         { text: 'Data Transform', link: `${p}/modules/data-transform` },
         { text: 'Array Operations', link: `${p}/modules/array` },
@@ -125,8 +137,8 @@ function modulesSidebar(prefix = ''): DefaultTheme.SidebarItem[] {
       ],
     },
     {
-      text: 'Infrastructure',
-      collapsed: false,
+      text: 'Infrastructure & Cloud',
+      collapsed: true,
       items: [
         { text: 'Cloud Services', link: `${p}/modules/cloud` },
         { text: 'API Tools', link: `${p}/modules/api-tools` },
@@ -143,7 +155,7 @@ function modulesSidebar(prefix = ''): DefaultTheme.SidebarItem[] {
     },
     {
       text: 'Integrations',
-      collapsed: false,
+      collapsed: true,
       items: [
         { text: 'AI & LLM', link: `${p}/modules/ai-llm` },
         { text: 'Notifications', link: `${p}/modules/notification` },
@@ -154,8 +166,8 @@ function modulesSidebar(prefix = ''): DefaultTheme.SidebarItem[] {
       ],
     },
     {
-      text: 'Quality',
-      collapsed: false,
+      text: 'Quality & Security',
+      collapsed: true,
       items: [
         { text: 'Verify', link: `${p}/modules/verify` },
         { text: 'Verification', link: `${p}/modules/verification` },
@@ -262,12 +274,8 @@ export default defineConfig({
       const nonEnglish = /^\/?(ja|ko|zh-TW|de|es|fr|hi|id|it|pl|pt-BR|th|tr|vi)(\/|$)/
       return items.filter(item => {
         const path = item.url.startsWith('http') ? new URL(item.url).pathname : item.url
-        const normalized = toPublicPath(item.url).replace(/^\/+/, '')
-        return !nonEnglish.test(path) && ![
-          'README',
-          'SECURITY',
-          'public/images/CREDITS',
-        ].includes(normalized)
+        const normalized = toPublicPath(item.url)
+        return !nonEnglish.test(path) && !isNonContentPublicPath(normalized)
       })
     }
   },
@@ -401,35 +409,58 @@ export default defineConfig({
     siteTitle: 'Flyto2 Docs',
 
     nav: [
-      { text: 'Warroom', link: '/warroom/' },
-      { text: 'Product Lines', link: '/strategy/flyto2-product-lines' },
-      { text: 'CTEM', link: '/warroom/surfaces/attack-surface' },
-      { text: 'BYO Integrations', link: '/warroom/byo-integration' },
       {
-        text: 'Engine',
+        text: 'Start',
         items: [
-          { text: 'Guide', link: '/guide/getting-started' },
-          { text: 'Core Engine', link: '/core/' },
-          { text: 'MCP Server', link: '/mcp/' },
-          { text: 'Modules', link: '/modules/' },
+          { text: 'What is Flyto2?', link: '/guide/what-is-flyto2' },
+          { text: 'Getting Started', link: '/guide/getting-started' },
+          { text: 'Installation', link: '/guide/installation' },
+          { text: 'First Workflow', link: '/guide/first-workflow' },
         ],
       },
       {
-        text: 'Tools',
+        text: 'Build',
+        items: [
+          { text: 'Core Runtime', link: '/core/' },
+          { text: 'MCP Server', link: '/mcp/' },
+          { text: 'Modules Reference', link: '/modules/' },
+          { text: 'Configuration', link: '/guide/configuration' },
+        ],
+      },
+      {
+        text: 'Reference',
         items: [
           { text: 'flyto-ai', link: '/ai/' },
           { text: 'flyto-indexer', link: '/indexer/' },
           { text: 'flyto-blueprint', link: '/blueprint/' },
         ],
       },
-      { text: 'Blog', link: 'https://blog.flyto2.com' },
-      { text: 'Flyto2', link: 'https://flyto2.com' },
+      {
+        text: 'Security',
+        items: [
+          { text: 'Warroom Overview', link: '/warroom/' },
+          { text: 'Self-hosted CE', link: '/warroom/self-hosted-ce' },
+          { text: 'Security Surfaces', link: '/warroom/surfaces/' },
+          { text: 'BYO Integrations', link: '/warroom/byo-integration' },
+          { text: 'Scoring Methodology', link: '/warroom/scoring-methodology' },
+        ],
+      },
+      {
+        text: 'Resources',
+        items: [
+          { text: 'Product Lines', link: '/strategy/flyto2-product-lines' },
+          { text: 'Blog', link: 'https://blog.flyto2.com' },
+          { text: 'Product Site', link: 'https://flyto2.com' },
+          { text: 'Warroom CE on GitHub', link: 'https://github.com/flytohub/flyto-warroom' },
+        ],
+      },
     ],
 
     sidebar: {
       '/guide/': [
         {
-          text: 'Introduction',
+          text: 'Start Here',
+          collapsed: false,
           items: [
             { text: 'What is Flyto2?', link: '/guide/what-is-flyto2' },
             { text: 'Getting Started', link: '/guide/getting-started' },
@@ -437,11 +468,23 @@ export default defineConfig({
           ],
         },
         {
-          text: 'Basics',
+          text: 'Build A Workflow',
+          collapsed: false,
           items: [
             { text: 'Your First Workflow', link: '/guide/first-workflow' },
             { text: 'Modules Overview', link: '/guide/modules-overview' },
             { text: 'Configuration', link: '/guide/configuration' },
+          ],
+        },
+        {
+          text: 'Next Steps',
+          collapsed: true,
+          items: [
+            { text: 'Core Runtime', link: '/core/' },
+            { text: 'MCP Server', link: '/mcp/' },
+            { text: 'Modules Reference', link: '/modules/' },
+            { text: 'AI Tools', link: '/ai/' },
+            { text: 'Security Warroom', link: '/warroom/' },
           ],
         },
       ],
@@ -455,7 +498,8 @@ export default defineConfig({
       ],
       '/core/': [
         {
-          text: 'Core Engine',
+          text: 'Core Runtime',
+          collapsed: false,
           items: [
             { text: 'Overview', link: '/core/' },
             { text: 'Architecture', link: '/core/architecture' },
@@ -463,15 +507,34 @@ export default defineConfig({
             { text: 'Evidence & Replay', link: '/core/evidence-replay' },
           ],
         },
+        {
+          text: 'Related References',
+          collapsed: true,
+          items: [
+            { text: 'MCP Server', link: '/mcp/' },
+            { text: 'Modules Reference', link: '/modules/' },
+            { text: 'First Workflow', link: '/guide/first-workflow' },
+          ],
+        },
       ],
       '/mcp/': [
         {
           text: 'MCP Server',
+          collapsed: false,
           items: [
             { text: 'Overview', link: '/mcp/' },
             { text: 'STDIO Transport', link: '/mcp/stdio' },
             { text: 'Streamable HTTP', link: '/mcp/streamable-http' },
             { text: 'Client Configuration', link: '/mcp/client-config' },
+          ],
+        },
+        {
+          text: 'Related References',
+          collapsed: true,
+          items: [
+            { text: 'Core Runtime', link: '/core/' },
+            { text: 'Modules Reference', link: '/modules/' },
+            { text: 'MCP Security', link: '/warroom/surfaces/mcp-security' },
           ],
         },
       ],
@@ -517,7 +580,8 @@ export default defineConfig({
       ],
       '/warroom/': [
         {
-          text: 'Warroom',
+          text: 'Start Here',
+          collapsed: false,
           items: [
             { text: 'Home', link: '/warroom/' },
             { text: 'Overview', link: '/warroom/overview' },
@@ -530,7 +594,7 @@ export default defineConfig({
         },
         {
           text: 'Products',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'Flyto2 Code (VA/PT)', link: '/warroom/flyto-code' },
             { text: 'Flyto2 Domains (CTEM)', link: '/warroom/flyto-domains' },
@@ -538,7 +602,7 @@ export default defineConfig({
         },
         {
           text: 'Security Surfaces',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'Overview', link: '/warroom/surfaces/' },
             { text: 'External Attack Surface', link: '/warroom/surfaces/attack-surface' },
@@ -555,7 +619,7 @@ export default defineConfig({
         },
         {
           text: 'Scoring & Events',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'Scoring Methodology', link: '/warroom/scoring-methodology' },
             { text: 'Score Events', link: '/warroom/score-events' },
@@ -563,7 +627,7 @@ export default defineConfig({
         },
         {
           text: 'Workflows',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'Closed-Loop Verify', link: '/warroom/closed-loop' },
             { text: 'Pulse', link: '/warroom/pulse' },
@@ -572,7 +636,7 @@ export default defineConfig({
         },
         {
           text: 'Reference',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: 'API Reference', link: '/warroom/api' },
             { text: 'Integrations', link: '/warroom/integrations' },

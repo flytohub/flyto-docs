@@ -18,6 +18,7 @@ Read online:
 
 | Area | Purpose |
 | --- | --- |
+| `guide/` | Start path for onboarding, installation, first workflow, and configuration |
 | `warroom/` | Warroom, CTEM, surfaces, scoring, BYO integrations, CE install, and APIs |
 | `core/` | Deterministic execution, evidence replay, and runtime architecture |
 | `modules/` | Flyto2 module reference generated from flyto-core |
@@ -26,6 +27,20 @@ Read online:
 | `ai/` | flyto-ai providers, agents, prompts, and CLI |
 | `blueprint/` | Workflow blueprint docs |
 | `public/llms*.txt` | AI/search-readable citation indexes |
+
+## Navigation Model
+
+The public docs menu is organized by user intent:
+
+- `Start`: onboarding, installation, first workflow, and configuration.
+- `Build`: core runtime, MCP server, module reference, and workflow mechanics.
+- `Reference`: flyto-ai, flyto-indexer, and flyto-blueprint.
+- `Security`: Warroom, self-hosted CE, security surfaces, BYO integrations, and scoring.
+- `Resources`: product lines, blog, product site, and public repositories.
+
+Keep the top navigation short. Put deep module categories and Warroom surfaces
+in sidebars, with broad groups collapsed by default so the first screen remains
+scannable.
 
 ## Install
 

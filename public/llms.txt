@@ -4,16 +4,27 @@
 
 ## Start here
 
-- https://docs.flyto2.com/warroom/
+- https://docs.flyto2.com/guide/getting-started
+- https://docs.flyto2.com/guide/installation
+- https://docs.flyto2.com/guide/first-workflow
 - https://docs.flyto2.com/core/
 - https://docs.flyto2.com/mcp/
 - https://docs.flyto2.com/modules/
+- https://docs.flyto2.com/warroom/
 - https://docs.flyto2.com/strategy/flyto2-product-lines
 - https://docs.flyto2.com/warroom/overview
 - https://docs.flyto2.com/warroom/self-hosted-ce
 - https://docs.flyto2.com/warroom/byo-integration
 - https://docs.flyto2.com/warroom/closed-loop
 - https://docs.flyto2.com/warroom/surfaces/
+
+## Navigation model
+
+- Start: onboarding, installation, first workflow, and configuration.
+- Build: core runtime, MCP server, module reference, and workflow mechanics.
+- Reference: flyto-ai, flyto-indexer, and flyto-blueprint.
+- Security: Warroom, self-hosted CE, surfaces, BYO integrations, and scoring.
+- Resources: product lines, blog, product site, and public repositories.
 
 ## Core Warroom surfaces
 

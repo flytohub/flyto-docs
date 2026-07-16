@@ -1,12 +1,18 @@
 # State
 
-Current state on 2026-06-21:
+Current state on 2026-07-16:
 
 - Docs has VitePress SEO metadata, sitemap generation, canonical links, and
   structured data.
 - Docs homepage, metadata, and AI-readable indexes now position docs as the
   technical authority for flyto-core, AI workflow automation, MCP server
   automation, no-code browser workflows, and Warroom CTEM mechanics.
+- Top navigation is organized by user intent: Start, Build, Reference,
+  Security, and Resources.
+- Modules and Warroom sidebars keep high-volume reference groups collapsed by
+  default, so first-time readers are not dropped into an oversized menu.
+- Sitemap filtering uses the same non-content rules as page metadata, so
+  internal memory, workflows, and handoffs stay out of public discovery.
 - `public/robots.txt`, `public/llms.txt`, and `public/llms-full.txt` exist.
 - `strategy/flyto2-product-lines.md` documents the five Flyto2 product lines and
   repository boundaries.
