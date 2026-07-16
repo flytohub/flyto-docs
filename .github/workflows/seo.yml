@@ -61,6 +61,9 @@ jobs:
       - name: Check internal public links
         run: npm run check:links
 
+      - name: Generate external link manifest
+        run: npm run links:external -- .external-links.txt
+
       - name: Check external public links
         uses: lycheeverse/lychee-action@v2.9.0
         with:
@@ -77,12 +80,4 @@ jobs:
             --scheme https
             --exclude '^https://docs\.flyto2\.com'
             --accept 200,204,206,301,302,307,308,429
-            './*.md'
-            './guide/**/*.md'
-            './core/**/*.md'
-            './mcp/**/*.md'
-            './modules/**/*.md'
-            './warroom/**/*.md'
-            './strategy/**/*.md'
-            './public/**/*.txt'
-            './.seo/**/*.md'
+            './.external-links.txt'

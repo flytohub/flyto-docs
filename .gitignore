@@ -4,3 +4,4 @@ node_modules
 .flyto/
 .flyto-index/
 .lighthouseci/
+.external-links.txt

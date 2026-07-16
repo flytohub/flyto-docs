@@ -128,7 +128,7 @@ Create JWT (JSON Web Token) tokens
 
 ```yaml
 payload: {"sub": "user123", "role": "admin"}
-secret: my-jwt-secret
+secret: "${JWT_SECRET_FROM_ENV}"
 algorithm: HS256
 expires_in: 3600
 ```
@@ -162,7 +162,7 @@ Verify and decode JWT tokens
 
 ```yaml
 token: eyJhbGciOiJIUzI1NiIs...
-secret: my-jwt-secret
+secret: "${JWT_SECRET_FROM_ENV}"
 algorithms: ["HS256"]
 verify_exp: true
 ```

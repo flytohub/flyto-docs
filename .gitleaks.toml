@@ -1,0 +1,16 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Allow historical documentation-only truncated JWT token examples."
+condition = "AND"
+regexTarget = "match"
+commits = [
+  "c91a44652e10f3da7a6942440fad9966f10402c0",
+]
+regexes = [
+  '''token:\s*eyJhbGciOiJIUzI1NiIs\.\.\.''',
+]
+paths = [
+  '''(^|/)modules/crypto\.md$''',
+]
