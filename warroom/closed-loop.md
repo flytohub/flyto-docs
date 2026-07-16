@@ -2,7 +2,7 @@
 
 A scanner says you have a vulnerability. Is it real? Is it exploitable? Or is it a false positive wasting your team's time?
 
-Closed-loop verification answers these questions automatically. It promotes findings through [confidence levels](/warroom/flyto-code#confidence-system) (L0 to L1 to L2) by corroborating scanner results with static analysis or dynamic probing.
+Closed-loop verification answers these questions automatically. It promotes findings through [confidence levels](/warroom/flyto-code#confidence-system-l0-l1-l2) (L0 to L1 to L2) by corroborating scanner results with static analysis or dynamic probing.
 
 ## Overview
 

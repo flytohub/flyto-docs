@@ -21,7 +21,7 @@ Scoring is a cross-cutting layer, not a tenth independent surface. It **reads fr
 
 ### Routes and query keys
 
-- **`/score`** (query key `computed-score`) — the live, current unified score. It returns the raw score, the 250–900 display value, the A–F grade, and the per-category breakdown, **with 30-day smoothing already applied**, so the dashboard gauge and the API agree by construction (both call the same path). This is the real-time endpoint described in the methodology's [scoring cadence](/warroom/scoring-methodology#11-scoring-cadence).
+- **`/score`** (query key `computed-score`) — the live, current unified score. It returns the raw score, the 250–900 display value, the A–F grade, and the per-category breakdown, **with 30-day smoothing already applied**, so the dashboard gauge and the API agree by construction (both call the same path). This is the real-time endpoint described in the methodology's [scoring cadence](/warroom/scoring-methodology#_11-scoring-cadence).
 - **`/score-events`** (feeds `unified-score-history`) — the timeline of grade transitions. Each event records the previous/new grade, the raw and display deltas, and machine-generated reasons (category deltas >10 pts, grade-cap activation/lift, cross-dimensional changes). See [Score Events](/warroom/score-events) for the full schema and `GET /api/v1/code/orgs/{id}/score-events?days=90`.
 - **`/compliance`** (query key `org-compliance`) — the org-level compliance roll-up: coverage, triage state, remediation speed, and the diligence posture that feeds the Diligence category. This is the view exported for vendor-risk questionnaires and board packets.
 - **`/audit`** — the evidence trail. Every computed score carries a `scoring_version` and snapshots are stored indefinitely, so any number on the gauge traces back to the inputs, the formula version, and the surfaces that produced it.
@@ -48,7 +48,7 @@ The roll-up is replayable end-to-end as deterministic YAML on the same [flyto-co
 
 ## How nine surfaces become three categories
 
-The unified score is **not** an average of nine surface scores. The surfaces fold into the three top-level categories defined in the [methodology](/warroom/scoring-methodology#3-categories-weights) — the weighting below is the canonical breakdown from the [overview](/warroom/overview#unified-scoring-250-900-a-f), reproduced here only as a roll-up map, not redefined:
+The unified score is **not** an average of nine surface scores. The surfaces fold into the three top-level categories defined in the [methodology](/warroom/scoring-methodology#_3-categories-weights) — the weighting below is the canonical breakdown from the [overview](/warroom/overview#unified-scoring-250-900-a-f), reproduced here only as a roll-up map, not redefined:
 
 | Category | Weight | Which surfaces roll up | Sub-vectors |
 |----------|--------|------------------------|-------------|
@@ -66,7 +66,7 @@ A unified score is only worth folding nine surfaces into if it tells the truth a
 
 ### Sub-vectors in ModeObserving are not fake-scored
 
-A surface — or a sub-vector within a category — that is in **observing** mode (collecting data, not yet at a confident verdict) is reported as **observing**, not silently assigned a number. We do **not** manufacture a plausible-looking score to fill a gap. An unscanned facet shows an honest empty state ("尚未掃描" / insufficient data), and an observing sub-vector contributes its observing status to the breakdown rather than a fabricated value that would move the grade on data we don't have. This is the same [no-fake-data principle](/warroom/overview#confidence-system-l0-l1-l2) that governs the [L0/L1/L2 confidence system](/warroom/scoring-methodology#5-confidence-system-l0-l1-l2): scanner-only findings are weighted at 0.3×, and only objective corroboration promotes them — the score is honest about *how much it knows*, not just *what it found*.
+A surface — or a sub-vector within a category — that is in **observing** mode (collecting data, not yet at a confident verdict) is reported as **observing**, not silently assigned a number. We do **not** manufacture a plausible-looking score to fill a gap. An unscanned facet shows an honest empty state ("尚未掃描" / insufficient data), and an observing sub-vector contributes its observing status to the breakdown rather than a fabricated value that would move the grade on data we don't have. This is the same [no-fake-data principle](/warroom/overview#confidence-system-l0-l1-l2) that governs the [L0/L1/L2 confidence system](/warroom/scoring-methodology#_5-confidence-system-l0-l1-l2): scanner-only findings are weighted at 0.3×, and only objective corroboration promotes them — the score is honest about *how much it knows*, not just *what it found*.
 
 ### Retired workers do not log a lying unified score
 

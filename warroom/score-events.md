@@ -140,4 +140,4 @@ Score events are useful for:
 - **Executive reporting** -- Show grade trends and reasons over time
 - **Incident investigation** -- Trace why a grade dropped on a specific date
 - **Compliance** -- Demonstrate continuous monitoring and remediation progress
-- **Alerting** -- Trigger notifications on grade downgrades via [webhooks](/warroom/api#webhooks)
+- **Alerting** -- Trigger notifications on grade downgrades via [webhooks](/warroom/api#webhooks-5-event-types)

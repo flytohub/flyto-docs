@@ -163,4 +163,4 @@ The worst repository drives the org score. Clean repositories can lift the score
 
 ## Grade Cap
 
-If any repository has an **unpatched critical CVE**, the org-level grade is capped at **B (<=75)** regardless of other dimensions. This cap takes effect immediately and overrides smoothing. See [Scoring Methodology](/warroom/scoring-methodology#grade-caps) for all cap conditions.
+If any repository has an **unpatched critical CVE**, the org-level grade is capped at **B (<=75)** regardless of other dimensions. This cap takes effect immediately and overrides smoothing. See [Scoring Methodology](/warroom/scoring-methodology#_8-grade-caps-hard-floors) for all cap conditions.

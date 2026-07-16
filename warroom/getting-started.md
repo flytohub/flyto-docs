@@ -114,7 +114,7 @@ Once both are connected:
 |------|------------|
 | Understand how scoring works | [Scoring Methodology](/warroom/scoring-methodology) |
 | Set up continuous monitoring | [Flyto2 Domains](/warroom/flyto-domains) -- monitoring schedules |
-| Generate compliance reports | [Product Tour: Reports](/warroom/product-tour#reports--compliance) |
+| Generate compliance reports | [Product Tour: Reports](/warroom/product-tour#reports-compliance) |
 | Integrate with CI/CD | [Integrations](/warroom/integrations) |
 | Run a red team campaign | [Red Team](/warroom/red-team) |
 | Explore the full API | [API Reference](/warroom/api) |

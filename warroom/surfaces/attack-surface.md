@@ -91,7 +91,7 @@ These run on the [flyto-core](/) engine like any other recipe, which is what kee
 
 This is the MSSP move. If you already pay for an external-security rating service or an attack-surface monitor, you do **not** re-buy that capability here. You bring its data and the war-room ingests it:
 
-1. **Connect the feed** — Point your existing external-rating export (API or scheduled file) at the exposure surface via [Integrations](/warroom/integrations); see the ordered [BYO workflow](/warroom/byo-integration#step-2-connect-domains-asset-map).
+1. **Connect the feed** — Point your existing external-rating export (API or scheduled file) at the exposure surface via [Integrations](/warroom/integrations); see the ordered [BYO workflow](/warroom/byo-integration#the-entry-flow).
 2. **Reconcile into the asset map** — Imported assets and findings are deduplicated against the asset-map kernel by value, so your rating tool's inventory and Flyto2's discovery become one graph instead of two competing lists.
 3. **Supplement the gaps** — Whatever your tool doesn't cover — DNSSEC, multi-selector DKIM, subdomain-takeover candidates, sensitive-file exposure, IoC matches — is filled by the 22 native scanners.
 4. **Run the algorithms on the combined picture** — `/attack-paths`, `/external-posture`, and scoring run over the *merged* surface, not over Flyto2's slice alone.
@@ -100,7 +100,7 @@ We charge for the integration and the closed loop — the correlation, the attac
 
 ## Contribution to the unified score
 
-External attack surface contributes **~35%** of the unified score — the **Attack Surface** category in the [scoring methodology](/warroom/scoring-methodology#3-2-attack-surface-35). It is one of three top-level categories (Code Security 40%, Attack Surface 35%, Diligence 25%) and is decomposed into sub-vectors covering transport/TLS, DNS and mail-authentication hygiene, web-header posture, service and sensitive-file exposure, subdomain takeover risk, and threat-intel/leak exposure.
+External attack surface contributes **~35%** of the unified score — the **Attack Surface** category in the [scoring methodology](/warroom/scoring-methodology#_3-2-attack-surface-35). It is one of three top-level categories (Code Security 40%, Attack Surface 35%, Diligence 25%) and is decomposed into sub-vectors covering transport/TLS, DNS and mail-authentication hygiene, web-header posture, service and sensitive-file exposure, subdomain takeover risk, and threat-intel/leak exposure.
 
 Two properties matter for trust:
 

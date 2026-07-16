@@ -24,7 +24,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -47,7 +47,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check public links
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build docs for clean-url link validation
+        run: npm run build
+
+      - name: Check internal public links
+        run: npm run check:links
+
+      - name: Check external public links
         uses: lycheeverse/lychee-action@v2.9.0
         with:
           fail: true
@@ -59,6 +73,9 @@ jobs:
             --cache
             --max-cache-age 1d
             --max-concurrency 8
+            --scheme http
+            --scheme https
+            --exclude '^https://docs\.flyto2\.com'
             --accept 200,204,206,301,302,307,308,429
             './*.md'
             './guide/**/*.md'
