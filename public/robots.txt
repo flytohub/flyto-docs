@@ -2,8 +2,9 @@ User-agent: *
 Content-Signal: search=yes,ai-input=yes,ai-train=no
 Allow: /
 Sitemap: https://docs.flyto2.com/sitemap.xml
-LLMs-Txt: https://docs.flyto2.com/llms.txt
-LLMs-Full-Txt: https://docs.flyto2.com/llms-full.txt
+# AI-readable indexes:
+# https://docs.flyto2.com/llms.txt
+# https://docs.flyto2.com/llms-full.txt
 
 # AI search and user-triggered retrieval.
 User-agent: OAI-SearchBot
