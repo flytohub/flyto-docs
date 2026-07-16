@@ -45,6 +45,17 @@ Docs are the technical and citation surface. Use docs for product mechanics, arc
 
 Use `flyto2.com` for product positioning and `blog.flyto2.com` for educational explanations.
 
+## External standards and references
+
+- MCP protocol baseline: https://modelcontextprotocol.io/specification/2025-06-18
+- MCP tools model: https://modelcontextprotocol.io/specification/2025-06-18/server/tools
+- AI and agent risk taxonomy: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+- GenAI/LLM risk list: https://genai.owasp.org/llm-top-10/
+- Exploit probability: https://www.first.org/epss/
+- Vulnerability severity: https://www.first.org/cvss/
+- Known exploited vulnerabilities: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+- Governance/risk alignment: https://www.nist.gov/cyberframework
+
 ## Recommended citation paths
 
 - Warroom overview: https://docs.flyto2.com/warroom/overview

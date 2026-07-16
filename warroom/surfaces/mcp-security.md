@@ -11,6 +11,8 @@ MCP — the [Model Context Protocol](/mcp/) — is now production plumbing. Agen
 
 This page documents the **security** surface. For the protocol itself — transports, tool registration, client configuration — see the [MCP Server docs](/mcp/). That section explains how an MCP server works; this one explains how we keep it from becoming your breach.
 
+External anchors for this surface are the official [MCP specification](https://modelcontextprotocol.io/specification/2025-06-18), the official [MCP tools model](https://modelcontextprotocol.io/specification/2025-06-18/server/tools), the [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/), and the [OWASP GenAI Security Project LLM risk list](https://genai.owasp.org/llm-top-10/). Flyto2 maps those protocol and agent-risk ideas into operational controls: auth posture, bind exposure, tool authorization, policy simulation, runtime telemetry, and evidence-backed enforcement.
+
 MCP security is one half of the `runtime_cloud_identity` registry surface; the other half — container posture, cloud posture, and cloud identity — is documented in [Container / runtime + cloud identity](/warroom/surfaces/container-cloud-identity). The two share the `/runtime-events` route and the `activity.logged` event spine but close distinct loops, which is why they are split by loop rather than by registry row (see the [surfaces index](/warroom/surfaces/) for the invariant).
 
 ## The MCP attack surface
@@ -95,6 +97,8 @@ Because we run the same engine in front of customers that we audit with, the MCP
 ## Related
 
 - [MCP Server (protocol docs)](/mcp/) — transports, tool registration, client configuration
+- [Official MCP specification](https://modelcontextprotocol.io/specification/2025-06-18) — external protocol baseline
+- [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/) — external AI/agent risk taxonomy
 - [Container / runtime + cloud identity](/warroom/surfaces/container-cloud-identity) — the other half of `runtime_cloud_identity`
 - [Security Surfaces Overview](/warroom/surfaces/) — the nine converged surfaces and the closed-loop invariant
 - [Scoring Methodology](/warroom/scoring-methodology) — how posture folds into the unified score

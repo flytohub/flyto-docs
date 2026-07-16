@@ -2,6 +2,8 @@
 
 flyto-core implements the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/), exposing all 451 modules as tools that any MCP-compatible AI client can use.
 
+The protocol baseline for this section is the official [MCP specification](https://modelcontextprotocol.io/specification/2025-06-18). Tool registration follows the official [MCP tools model](https://modelcontextprotocol.io/specification/2025-06-18/server/tools): clients discover callable tools, review their schemas, and invoke them through the MCP session.
+
 ## Transports
 
 | Transport | Use Case | Command |
@@ -25,3 +27,5 @@ Every flyto-core module is automatically registered as an MCP tool. The tool nam
 - [STDIO Transport](/mcp/stdio) — Local connection setup
 - [Streamable HTTP](/mcp/streamable-http) — Remote connection setup
 - [Client Configuration](/mcp/client-config) — Configure popular MCP clients
+- [Official MCP specification](https://modelcontextprotocol.io/specification/2025-06-18) — protocol primitives, lifecycle, and security considerations
+- [Official MCP tools model](https://modelcontextprotocol.io/specification/2025-06-18/server/tools) — tool discovery, invocation, annotations, and client safety expectations

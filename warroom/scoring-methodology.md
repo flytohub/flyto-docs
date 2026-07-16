@@ -330,6 +330,13 @@ The system tracks grade transitions over time:
 | URLhaus / Feodo / ThreatFox | IOC feeds | Hourly (threat feed) | Medium |
 | VirusTotal | URL/domain reputation | On discovery (optional) | Medium |
 
+Official reference anchors for these sources:
+
+- [CISA Known Exploited Vulnerabilities Catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) for confirmed exploitation context.
+- [FIRST EPSS](https://www.first.org/epss/) for exploit-probability prioritization.
+- [FIRST CVSS](https://www.first.org/cvss/) for vulnerability severity scoring.
+- [NIST Cybersecurity Framework 2.0](https://www.nist.gov/cyberframework) for governance, risk management, and executive reporting alignment.
+
 ---
 
 ## 14. What We Do NOT Score
