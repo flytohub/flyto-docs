@@ -7,6 +7,9 @@
 - Added project memory files, workflow docs, and handoff registry.
 - Added `strategy/flyto2-product-lines.md` as the canonical technical page for
   the five Flyto2 product lines and shared `flyto-core` boundary.
+- Added `npm run audit:seo`, Lighthouse CI configuration, and a dedicated SEO
+  Gate workflow for built docs metadata, sitemap, robots, llms, keyword
+  freshness, and public link checks.
 
 ### Changed
 

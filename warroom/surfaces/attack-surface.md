@@ -1,6 +1,6 @@
 ---
 title: External Attack Surface & Exposure (CTEM)
-description: Deep dive on the exposure and asset-map surfaces — discovery scanners, /attack-surface, /external-posture, /attack-paths, /asset-map, their query keys, events, and recipes, what they see alone, BYO ingestion of an existing external-rating tool, how the loop closes, and the ~35% contribution to the unified score.
+description: "Deep dive on Flyto2 attack-surface docs: discovery scanners, attack paths, asset maps, BYO external ratings, events, recipes, and score impact."
 ---
 
 # External Attack Surface & Exposure (CTEM)

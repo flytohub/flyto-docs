@@ -2,6 +2,13 @@
 
 Current state on 2026-07-16:
 
+- `npm run audit:seo` now validates built docs pages for title/description
+  length, canonical URLs, index/noindex robots, OpenGraph, Twitter cards,
+  JSON-LD, sitemap coverage, robots, llms files, Flyto2 naming, `@flyto2.com`
+  email usage, and keyword-matrix freshness.
+- `.github/workflows/seo.yml` adds PR/push/scheduled docs SEO checks with
+  VitePress build-output validation, Lighthouse SEO score 1.0, and lychee
+  public link checking.
 - Docs has VitePress SEO metadata, sitemap generation, canonical links, and
   structured data.
 - Docs homepage, metadata, and AI-readable indexes now position docs as the
