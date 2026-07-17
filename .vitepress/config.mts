@@ -270,13 +270,9 @@ export default defineConfig({
   sitemap: {
     hostname: SITE_URL,
     transformItems(items) {
-      // English-first public SEO: keep non-English pages reachable, but do
-      // not advertise them through the sitemap while they are noindexed.
-      const nonEnglish = /^\/?(ja|ko|zh-TW|de|es|fr|hi|id|it|pl|pt-BR|th|tr|vi)(\/|$)/
       return items.filter(item => {
-        const path = item.url.startsWith('http') ? new URL(item.url).pathname : item.url
         const normalized = toPublicPath(item.url)
-        return !nonEnglish.test(path) && !isNonContentPublicPath(normalized)
+        return !isNonContentPublicPath(normalized)
       })
     }
   },
@@ -328,13 +324,10 @@ export default defineConfig({
   ],
 
   transformPageData(pageData) {
-    const localePrefix = /^(ja|ko|zh-TW|de|es|fr|hi|id|it|pl|pt-BR|th|tr|vi)\//
-    const isNonEnglish = localePrefix.test(pageData.relativePath)
     const isNonContent = isNonContentPath(pageData.relativePath)
-    const englishRelativePath = pageData.relativePath.replace(localePrefix, '')
-    const canonicalPath = englishRelativePath === 'index.md'
+    const canonicalPath = pageData.relativePath === 'index.md'
       ? ''
-      : englishRelativePath
+      : pageData.relativePath
           .replace(/(^|\/)index\.md$/, '$1')
           .replace(/\.md$/, '')
           .replace(/\/$/, '')
@@ -343,10 +336,10 @@ export default defineConfig({
     pageData.frontmatter.head = [
       ...(pageData.frontmatter.head || []),
       ['link', { rel: 'canonical', href: canonicalUrl }],
-      ...((isNonEnglish || isNonContent) ? [['meta', { name: 'robots', content: 'noindex, follow' }] as [string, Record<string, string>]] : []),
+      ...(isNonContent ? [['meta', { name: 'robots', content: 'noindex, follow' }] as [string, Record<string, string>]] : []),
     ]
 
-    if (!isNonEnglish && !isNonContent && canonicalPath) {
+    if (!isNonContent && canonicalPath) {
       const title = pageData.frontmatter.title || pageData.title
       const description = pageData.frontmatter.description || pageData.description || ''
       const dateModified = pageData.lastUpdated

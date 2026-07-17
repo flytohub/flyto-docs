@@ -20,6 +20,10 @@ const checkedPages = [
   { name: 'closed loop', file: 'warroom/closed-loop.html', canonical: 'https://docs.flyto2.com/warroom/closed-loop', terms: ['evidence'] },
   { name: 'attack surface docs', file: 'warroom/surfaces/attack-surface.html', canonical: 'https://docs.flyto2.com/warroom/surfaces/attack-surface', terms: ['attack surface'] },
 ];
+const checkedLocalizedPages = [
+  { name: 'zh-TW browser module', file: 'zh-TW/modules/browser.html', canonical: 'https://docs.flyto2.com/zh-TW/modules/browser' },
+  { name: 'ja browser module', file: 'ja/modules/browser.html', canonical: 'https://docs.flyto2.com/ja/modules/browser' },
+];
 
 const forbiddenSitemapTokens = ['/AGENTS', '/CLAUDE', '/PROJECT', '/STATE', '/ROADMAP', '/tasks'];
 const requiredRobotsTokens = [
@@ -147,12 +151,30 @@ function checkPage(page) {
   checkBrandAndEmails(page.name, html);
 }
 
+function checkLocalizedPage(page) {
+  const htmlPath = path.join(distDir, page.file);
+  if (!existsSync(htmlPath)) {
+    fail(`${page.name} build output missing: ${path.relative(root, htmlPath)}`);
+    return;
+  }
+
+  const html = readFileSync(htmlPath, 'utf8');
+  const canonical = findLink(html, 'canonical');
+  const robots = findMeta(html, 'name', 'robots');
+
+  if (canonical !== page.canonical) fail(`${page.name} canonical mismatch: expected ${page.canonical}, got ${canonical || '(missing)'}`);
+  if (robots.toLowerCase().includes('noindex')) fail(`${page.name} must be indexable for multilingual docs sitemap; got ${robots}`);
+  if (!robots.toLowerCase().includes('index')) fail(`${page.name} robots tag must be indexable; got ${robots || '(missing)'}`);
+  checkBrandAndEmails(page.name, html);
+}
+
 function checkDist() {
   if (!existsSync(distDir)) {
     fail('missing .vitepress/dist; run npm run build before npm run audit:seo');
     return;
   }
   for (const page of checkedPages) checkPage(page);
+  for (const page of checkedLocalizedPages) checkLocalizedPage(page);
 
   const claude = path.join(distDir, 'CLAUDE.html');
   if (existsSync(claude)) {
@@ -170,11 +192,17 @@ function checkSitemapRobotsLlms() {
   const full = readFileSync(path.join(distDir, 'llms-full.txt'), 'utf8');
 
   const locCount = (sitemap.match(/<loc>/g) ?? []).length;
-  if (locCount < 100) fail(`sitemap has too few URLs for docs: ${locCount}`);
+  if (locCount < 900) fail(`sitemap has too few URLs for multilingual docs: ${locCount}`);
   for (const page of checkedPages) {
     const variants = sitemapLocVariants(page.canonical);
     if (!variants.some((token) => sitemap.includes(token))) {
       fail(`sitemap missing ${variants.join(' or ')}`);
+    }
+  }
+  for (const page of checkedLocalizedPages) {
+    const variants = sitemapLocVariants(page.canonical);
+    if (!variants.some((token) => sitemap.includes(token))) {
+      fail(`sitemap missing localized page ${variants.join(' or ')}`);
     }
   }
   for (const token of forbiddenSitemapTokens) {
@@ -235,4 +263,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`docs SEO surface audit passed: ${checkedPages.length} pages, sitemap, robots, llms, keyword matrix`);
+console.log(`docs SEO surface audit passed: ${checkedPages.length + checkedLocalizedPages.length} pages, multilingual sitemap, robots, llms, keyword matrix`);
