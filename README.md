@@ -1,10 +1,19 @@
 # Flyto2 Docs
 
+[![Website](https://img.shields.io/badge/docs-docs.flyto2.com-06B6D4)](https://docs.flyto2.com)
+[![Product](https://img.shields.io/badge/product-flyto2.com-8B5CF6)](https://flyto2.com)
+[![GitHub](https://img.shields.io/badge/GitHub-flytohub%2Fflyto--docs-181717?logo=github)](https://github.com/flytohub/flyto-docs)
+
 Flyto2 Docs is the public technical documentation and citation surface for
 Flyto2 Warroom, evidence-backed CTEM, attack surface management, code
 intelligence, dark web and threat intelligence, automated security testing,
 red-team workflows, MCP security, scoring, reports, and the deterministic
 execution engine.
+
+Use this repo when you need source-of-truth docs for Flyto2 Core, Flyto2 AI,
+Flyto2 Indexer, Flyto2 Blueprint, Flyto2 Warroom CE, MCP transport, module
+reference, self-hosted deployment, AI-search citation files, or multilingual
+technical pages.
 
 Read online:
 
