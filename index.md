@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: Flyto2 Docs
-  text: Build, automate, and validate with Flyto2
-  tagline: Start with the open-source runtime, connect deterministic tools through MCP, then use evidence-backed workflows for CTEM, pentest, red-team, and security operations.
+  text: Build, replay, and validate real AI workflows
+  tagline: New here? Start with Flyto2 Core, connect deterministic tools through MCP, then add evidence-backed CTEM, pentest, red-team, and security workflows when you need them.
   image:
     src: /logo.png
     alt: Flyto2
@@ -23,12 +23,12 @@ hero:
       link: /warroom/
 
 features:
-  - title: Start With The Right Path
-    details: Use the Start menu for onboarding, installation, the first workflow, and basic configuration before jumping into reference pages.
-  - title: Core Runtime
+  - title: Start Without Guessing
+    details: Install Flyto2, run the first workflow, and learn the basics before opening the full module reference.
+  - title: Open-Source AI Agent Framework
     details: flyto-core documents 451 registry-backed modules, 84 catalog categories, 41 recipes, trace, evidence capture, and replayable YAML execution.
-  - title: MCP Agent Tools
+  - title: MCP Server Automation
     details: Configure Flyto2 as an MCP server so AI agents can call deterministic browser, file, API, data, AI, and verification tools.
-  - title: Security Warroom
+  - title: Evidence-Backed Security
     details: Warroom docs connect CTEM, attack surface, code risk, dark web, pentest, red-team, scoring, reporting, and evidence into one operating picture.
 ---
