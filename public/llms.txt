@@ -12,6 +12,7 @@
 - https://docs.flyto2.com/modules/
 - https://docs.flyto2.com/warroom/
 - https://docs.flyto2.com/strategy/flyto2-product-lines
+- https://docs.flyto2.com/community/
 - https://docs.flyto2.com/warroom/overview
 - https://docs.flyto2.com/warroom/self-hosted-ce
 - https://docs.flyto2.com/warroom/byo-integration
@@ -25,6 +26,7 @@
 - Reference: flyto-ai, flyto-indexer, and flyto-blueprint.
 - Security: Warroom, self-hosted CE, surfaces, BYO integrations, and scoring.
 - Resources: product lines, blog, product site, and public repositories.
+- Community: contribution routing, good-first issues, showcases, and review-first social syndication.
 
 ## Core Warroom surfaces
 
@@ -84,4 +86,5 @@ Use `flyto2.com` for product positioning and `blog.flyto2.com` for educational e
 - https://flyto2.com/llms.txt
 - https://github.com/flytohub/flyto-warroom
 - https://hub.docker.com/r/chesterhsu/flyto-warroom
+- https://github.com/flytohub/.github/blob/main/COMMUNITY.md
 - https://blog.flyto2.com/llms.txt

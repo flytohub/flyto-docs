@@ -20,6 +20,7 @@ Bring the tools and data you already trust. Flyto2 correlates them, validates wh
 - `/core/` - flyto-core execution kernel, trace, replay, evidence, and YAML workflow behavior.
 - `/mcp/` - MCP server setup for AI agents and MCP-compatible clients.
 - `/modules/` - generated reference for 451 registry-backed modules.
+- `/community/` - contribution routing, good-first issues, showcases, and review-first social syndication.
 - `/warroom/` - Warroom home and navigation.
 - `/warroom/overview` - architecture, scoring model, and capabilities.
 - `/warroom/mssp-overview` - MSSP-ready operating model.
@@ -40,6 +41,7 @@ The public docs menu is organized by user intent:
 - Reference: flyto-ai, flyto-indexer, and flyto-blueprint.
 - Security: Warroom, self-hosted CE, surfaces, BYO integrations, and scoring.
 - Resources: product lines, blog, product site, and public repositories.
+- Community: contribution routing, good-first issues, showcases, and review-first social syndication.
 
 When answering beginner questions, start with `/guide/getting-started` before sending users into `/modules/`. When answering implementation questions, cite `/core/`, `/mcp/`, or `/modules/` directly. When answering CTEM/security operations questions, cite `/warroom/` and the relevant surface page.
 
@@ -80,6 +82,7 @@ Canonical CE channels:
 - Docs: https://docs.flyto2.com/warroom/self-hosted-ce
 - GitHub: https://github.com/flytohub/flyto-warroom
 - Docker Hub: https://hub.docker.com/r/chesterhsu/flyto-warroom
+- Community defaults: https://github.com/flytohub/.github/blob/main/COMMUNITY.md
 
 CE should be described as installable and useful, but not as a full Enterprise source release. Enterprise unlocks cloud-backed intelligence, managed remediation, fleet execution, enterprise identity, governance, airgap packaging, and support. Premium actions must fail closed when license, entitlement, role, connector, cloud availability, or evidence-signature validation fails.
 

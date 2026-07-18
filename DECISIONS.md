@@ -1,5 +1,13 @@
 # Decisions
 
+## 2026-07-18 - Docs own the technical community rules
+
+Decision: `/community/` documents contribution routing, good-first issue
+criteria, showcase format, and social syndication safety rules.
+
+Reason: the landing page owns public positioning, but docs need the precise
+operational rules for contributors and maintainers.
+
 ## 2026-07-18 - Docs only advertise published localized equivalents
 
 Decision: docs reads `.seo/i18n-seo-manifest.json` from the shared Flyto2 i18n

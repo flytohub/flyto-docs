@@ -4,6 +4,8 @@
 
 ### Added
 
+- Added `/community/` as the technical guide for Flyto2 contribution routing,
+  good-first issues, showcases, and review-first social syndication.
 - Added project memory files, workflow docs, and handoff registry.
 - Added `strategy/flyto2-product-lines.md` as the canonical technical page for
   the five Flyto2 product lines and shared `flyto-core` boundary.

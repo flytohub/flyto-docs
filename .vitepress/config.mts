@@ -451,6 +451,7 @@ export default defineConfig({
         text: 'Resources',
         items: [
           { text: 'Product Lines', link: '/strategy/flyto2-product-lines' },
+          { text: 'Community', link: '/community/' },
           { text: 'Blog', link: 'https://blog.flyto2.com' },
           { text: 'Product Site', link: 'https://flyto2.com' },
           { text: 'Warroom CE on GitHub', link: 'https://github.com/flytohub/flyto-warroom' },
@@ -495,6 +496,14 @@ export default defineConfig({
           text: 'Strategy',
           items: [
             { text: 'Flyto2 Product Lines', link: '/strategy/flyto2-product-lines' },
+          ],
+        },
+      ],
+      '/community/': [
+        {
+          text: 'Community',
+          items: [
+            { text: 'Community Guide', link: '/community/' },
           ],
         },
       ],

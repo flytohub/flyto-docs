@@ -19,6 +19,8 @@ Current state on 2026-07-18:
   automation, no-code browser workflows, and Warroom CTEM mechanics.
 - Top navigation is organized by user intent: Start, Build, Reference,
   Security, and Resources.
+- `/community/` now documents contribution routing, good-first issues,
+  showcases, and review-first social syndication rules.
 - Modules and Warroom sidebars keep high-volume reference groups collapsed by
   default, so first-time readers are not dropped into an oversized menu.
 - Sitemap filtering uses the same non-content rules as page metadata, so

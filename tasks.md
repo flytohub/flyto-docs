@@ -7,3 +7,4 @@
   pages.
 - [ ] Update `public/llms-full.txt` after major docs navigation changes.
 - [x] Resolve multilingual docs indexing strategy for existing localized module pages.
+- [x] Add community contribution and social syndication docs.

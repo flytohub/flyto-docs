@@ -35,6 +35,7 @@ Read online:
 | `indexer/` | flyto-indexer code intelligence and MCP tools |
 | `ai/` | flyto-ai providers, agents, prompts, and CLI |
 | `blueprint/` | Workflow blueprint docs |
+| `community/` | Contribution routing, showcases, and social syndication rules |
 | `public/llms*.txt` | AI/search-readable citation indexes |
 
 ## Navigation Model
@@ -79,6 +80,8 @@ When adding public pages, update:
 
 - VitePress navigation/sidebar when the page should be discoverable;
 - `public/llms.txt` and `public/llms-full.txt` for AI/search citation;
+- `community/index.md` when contribution, showcase, or social syndication rules
+  change;
 - related landing/blog references when the page changes product positioning;
 - `scripts/audit-docs-public.mjs` when a new launch-critical route becomes
   mandatory.

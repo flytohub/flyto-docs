@@ -20,6 +20,7 @@ const checkedPages = [
   { name: 'modules', file: 'modules/index.html', canonical: `${siteUrl}/modules`, terms: ['modules'] },
   { name: 'getting started', file: 'guide/getting-started.html', canonical: `${siteUrl}/guide/getting-started`, terms: ['workflow'] },
   { name: 'installation', file: 'guide/installation.html', canonical: `${siteUrl}/guide/installation`, terms: ['install'] },
+  { name: 'community', file: 'community/index.html', canonical: `${siteUrl}/community`, terms: ['community', 'social syndication'] },
   { name: 'warroom', file: 'warroom/index.html', canonical: `${siteUrl}/warroom`, terms: ['Warroom'] },
   { name: 'self-hosted ce', file: 'warroom/self-hosted-ce.html', canonical: `${siteUrl}/warroom/self-hosted-ce`, terms: ['Warroom CE', 'Docker'] },
   { name: 'closed loop', file: 'warroom/closed-loop.html', canonical: `${siteUrl}/warroom/closed-loop`, terms: ['evidence'] },
