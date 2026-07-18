@@ -1,6 +1,12 @@
 import { defineConfig, type DefaultTheme } from 'vitepress'
+import {
+  defaultOgLocale,
+  manifestKeywordTerms,
+  publishedAlternateLinks,
+  siteUrl,
+} from './seo-contract'
 
-const SITE_URL = 'https://docs.flyto2.com'
+const SITE_URL = siteUrl
 const CORE_MODULE_COUNT = 451
 const CORE_CATALOG_CATEGORY_COUNT = 84
 const BUILT_IN_RECIPE_COUNT = 41
@@ -27,6 +33,7 @@ const SEO_KEYWORDS = [
   `${CORE_MODULE_COUNT} modules`,
   `${CORE_CATALOG_CATEGORY_COUNT} catalog categories`,
   `${BUILT_IN_RECIPE_COUNT} recipes`,
+  ...manifestKeywordTerms(),
 ]
 const NON_CONTENT_PATHS = new Set([
   'AGENTS.md',
@@ -286,7 +293,7 @@ export default defineConfig({
     ['meta', { property: 'og:title', content: 'Flyto2 Docs - AI Workflow Automation, MCP, and CTEM War Room' }],
     ['meta', { property: 'og:description', content: SITE_DESCRIPTION }],
     ['meta', { property: 'og:image', content: 'https://docs.flyto2.com/og-image.png' }],
-    ['meta', { property: 'og:locale', content: 'en_US' }],
+    ['meta', { property: 'og:locale', content: defaultOgLocale }],
     // Twitter Card
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:title', content: 'Flyto2 Docs - AI Workflow Automation, MCP, and CTEM War Room' }],
@@ -336,6 +343,7 @@ export default defineConfig({
     pageData.frontmatter.head = [
       ...(pageData.frontmatter.head || []),
       ['link', { rel: 'canonical', href: canonicalUrl }],
+      ...publishedAlternateLinks(canonicalPath),
       ...(isNonContent ? [['meta', { name: 'robots', content: 'noindex, follow' }] as [string, Record<string, string>]] : []),
     ]
 

@@ -1,6 +1,6 @@
 # Flyto2 Docs SEO Keyword Matrix
 
-Date: 2026-07-16
+Date: 2026-07-18
 Locale: US / English
 Source: Ubersuggest keyword ideas and keyword overview
 Scope: `https://docs.flyto2.com`
@@ -32,6 +32,19 @@ sitemap coverage.
 | MCP | MCP server automation | 10 | 34 | 68 | 16.50 | Low | `/mcp/`, `/modules/mcp` | `https://flyto2.com/api-docs/` | `https://blog.flyto2.com/posts/mcp-server-guide` |
 | MCP testing | MCP server automation testing | 10 | 25 | 64 | 0.00 | Low | `/mcp/`, `/modules/verify`, `/modules/testing` | `https://flyto2.com/api-docs/` | `https://blog.flyto2.com/posts/mcp-server-guide` |
 | Browser automation | no code browser automation | 20 | 23 | 56 | 16.13 | Low | `/modules/browser`, `/guide/getting-started` | `https://flyto2.com/` | `https://blog.flyto2.com/posts/no-code-browser-automation` |
+
+## flyto-i18n Manifest Addendum
+
+These terms are now carried by `.seo/i18n-seo-manifest.json`, synced from
+`flyto-i18n/dist/seo-manifest.json`, and audited with the public docs build.
+
+| Cluster | Manifest term | Volume | SD | PD | CPC | Docs routing |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| Open-source workflow automation | open source workflow automation | 70 | 47 | 28 | 11.47 | Route to `/core/`, `/mcp/`, `/modules/`, and open-source product pages. |
+| Open-source workflow automation | open source workflow automation tools | 590 | 44 | 21 | 12.13 | Route to modules reference and beginner guide pages. |
+| Open-source workflow automation | open source workflow automation tool | 390 | 42 | 19 | 9.60 | Route to concrete module docs and install path. |
+| Open-source workflow automation | open source workflow automation platform | 260 | 45 | 24 | 13.20 | Route to architecture and execution model docs. |
+| MCP native AI agent runtime | open source execution engine for AI agents | 0 | 0 | 0 | 0.00 | Emerging Flyto2-owned phrase routed to `/core/`, `/mcp/`, and `/modules/`. |
 | CTEM explainers | what is continuous threat exposure management | 20 | 15 | 31 | 0.00 | Low | `/warroom/closed-loop` | `https://flyto2.com/ctem/` | `https://blog.flyto2.com/posts/what-is-ctem-continuous-threat-exposure-management` |
 
 ## Long-Tail Docs Routing

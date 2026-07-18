@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -5,29 +6,33 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.join(root, '.vitepress', 'dist');
 const seoDir = path.join(root, '.seo');
+const seoContractPath = path.join(seoDir, 'i18n-seo-manifest.json');
+const expectedSurfaceKey = 'docs';
+const seoContract = loadSeoContract();
+const siteUrl = seoContract.surface.origin;
 const maxKeywordMatrixAgeDays = 100;
 const failures = [];
 
 const checkedPages = [
-  { name: 'home', file: 'index.html', canonical: 'https://docs.flyto2.com', terms: ['AI workflow automation', 'MCP server automation'] },
-  { name: 'core', file: 'core/index.html', canonical: 'https://docs.flyto2.com/core', terms: ['flyto-core', 'execution'] },
-  { name: 'mcp', file: 'mcp/index.html', canonical: 'https://docs.flyto2.com/mcp', terms: ['MCP'] },
-  { name: 'modules', file: 'modules/index.html', canonical: 'https://docs.flyto2.com/modules', terms: ['modules'] },
-  { name: 'getting started', file: 'guide/getting-started.html', canonical: 'https://docs.flyto2.com/guide/getting-started', terms: ['workflow'] },
-  { name: 'installation', file: 'guide/installation.html', canonical: 'https://docs.flyto2.com/guide/installation', terms: ['install'] },
-  { name: 'warroom', file: 'warroom/index.html', canonical: 'https://docs.flyto2.com/warroom', terms: ['Warroom'] },
-  { name: 'self-hosted ce', file: 'warroom/self-hosted-ce.html', canonical: 'https://docs.flyto2.com/warroom/self-hosted-ce', terms: ['Warroom CE', 'Docker'] },
-  { name: 'closed loop', file: 'warroom/closed-loop.html', canonical: 'https://docs.flyto2.com/warroom/closed-loop', terms: ['evidence'] },
-  { name: 'attack surface docs', file: 'warroom/surfaces/attack-surface.html', canonical: 'https://docs.flyto2.com/warroom/surfaces/attack-surface', terms: ['attack surface'] },
+  { name: 'home', file: 'index.html', canonical: siteUrl, terms: ['AI workflow automation', 'MCP server automation'] },
+  { name: 'core', file: 'core/index.html', canonical: `${siteUrl}/core`, terms: ['flyto-core', 'execution'] },
+  { name: 'mcp', file: 'mcp/index.html', canonical: `${siteUrl}/mcp`, terms: ['MCP'] },
+  { name: 'modules', file: 'modules/index.html', canonical: `${siteUrl}/modules`, terms: ['modules'] },
+  { name: 'getting started', file: 'guide/getting-started.html', canonical: `${siteUrl}/guide/getting-started`, terms: ['workflow'] },
+  { name: 'installation', file: 'guide/installation.html', canonical: `${siteUrl}/guide/installation`, terms: ['install'] },
+  { name: 'warroom', file: 'warroom/index.html', canonical: `${siteUrl}/warroom`, terms: ['Warroom'] },
+  { name: 'self-hosted ce', file: 'warroom/self-hosted-ce.html', canonical: `${siteUrl}/warroom/self-hosted-ce`, terms: ['Warroom CE', 'Docker'] },
+  { name: 'closed loop', file: 'warroom/closed-loop.html', canonical: `${siteUrl}/warroom/closed-loop`, terms: ['evidence'] },
+  { name: 'attack surface docs', file: 'warroom/surfaces/attack-surface.html', canonical: `${siteUrl}/warroom/surfaces/attack-surface`, terms: ['attack surface'] },
 ];
 const checkedLocalizedPages = [
-  { name: 'zh-TW browser module', file: 'zh-TW/modules/browser.html', canonical: 'https://docs.flyto2.com/zh-TW/modules/browser' },
-  { name: 'ja browser module', file: 'ja/modules/browser.html', canonical: 'https://docs.flyto2.com/ja/modules/browser' },
+  { name: 'zh-TW browser module', file: 'zh-TW/modules/browser.html', canonical: `${siteUrl}/zh-TW/modules/browser`, locale: 'zh-TW' },
+  { name: 'ja browser module', file: 'ja/modules/browser.html', canonical: `${siteUrl}/ja/modules/browser`, locale: 'ja' },
 ];
 
 const forbiddenSitemapTokens = ['/AGENTS', '/CLAUDE', '/PROJECT', '/STATE', '/ROADMAP', '/tasks'];
 const requiredRobotsTokens = [
-  'Sitemap: https://docs.flyto2.com/sitemap.xml',
+  `Sitemap: ${seoContract.surface.sitemap}`,
   'User-agent: OAI-SearchBot',
   'User-agent: ChatGPT-User',
   'User-agent: Claude-User',
@@ -49,6 +54,18 @@ const requiredKeywordMatrixTokens = ['Volume', 'SD', 'PD', 'CPC', 'Long-Tail Doc
 
 function fail(message) {
   failures.push(message);
+}
+
+function sha256(value) {
+  return createHash('sha256').update(value).digest('hex');
+}
+
+function loadSeoContract() {
+  if (!existsSync(seoContractPath)) {
+    throw new Error('missing .seo/i18n-seo-manifest.json; run npm run seo:sync');
+  }
+
+  return JSON.parse(readFileSync(seoContractPath, 'utf8'));
 }
 
 function decodeHtml(value) {
@@ -85,15 +102,32 @@ function findMeta(html, key, value) {
   return '';
 }
 
-function findLink(html, rel) {
+function findLink(html, rel, hrefLang = null) {
   const wanted = rel.toLowerCase();
+  const wantedLang = hrefLang?.toLowerCase();
   for (const raw of getTags(html, 'link')) {
     const attributes = attrs(raw);
     if ((attributes.rel ?? '').toLowerCase() === wanted) {
+      if (wantedLang && (attributes.hreflang ?? '').toLowerCase() !== wantedLang) continue;
       return attributes.href ?? '';
     }
   }
   return '';
+}
+
+function contractKeywordTerms() {
+  return seoContract.surface.keywordClusters.flatMap((cluster) => [
+    cluster.primary,
+    ...cluster.longTail,
+  ]);
+}
+
+function checkAlternateLinks(label, html, expectedHreflangs) {
+  for (const hreflang of expectedHreflangs) {
+    if (!findLink(html, 'alternate', hreflang)) {
+      fail(`${label} missing alternate hreflang=${hreflang}`);
+    }
+  }
 }
 
 function titleFrom(html) {
@@ -134,6 +168,7 @@ function checkPage(page) {
   checkLength(`${page.name} description`, description, 50, 180);
   if (canonical !== page.canonical) fail(`${page.name} canonical mismatch: expected ${page.canonical}, got ${canonical || '(missing)'}`);
   if (!robots.toLowerCase().includes('index')) fail(`${page.name} robots tag must be indexable; got ${robots || '(missing)'}`);
+  checkAlternateLinks(page.name, html, [seoContract.locales.en.hreflang, 'x-default']);
   for (const [label, value] of [
     ['og:title', findMeta(html, 'property', 'og:title')],
     ['og:description', findMeta(html, 'property', 'og:description')],
@@ -165,7 +200,44 @@ function checkLocalizedPage(page) {
   if (canonical !== page.canonical) fail(`${page.name} canonical mismatch: expected ${page.canonical}, got ${canonical || '(missing)'}`);
   if (robots.toLowerCase().includes('noindex')) fail(`${page.name} must be indexable for multilingual docs sitemap; got ${robots}`);
   if (!robots.toLowerCase().includes('index')) fail(`${page.name} robots tag must be indexable; got ${robots || '(missing)'}`);
+  checkAlternateLinks(page.name, html, [seoContract.locales[page.locale].hreflang, 'x-default']);
   checkBrandAndEmails(page.name, html);
+}
+
+function checkSeoContract() {
+  if (seoContract.surfaceKey !== expectedSurfaceKey) {
+    fail(`SEO contract surface mismatch: expected ${expectedSurfaceKey}, got ${seoContract.surfaceKey || '(missing)'}`);
+  }
+  if (seoContract.surface.origin !== 'https://docs.flyto2.com') {
+    fail(`SEO contract origin mismatch: ${seoContract.surface.origin || '(missing)'}`);
+  }
+  if (seoContract.surface.sitemap !== `${seoContract.surface.origin}/sitemap.xml`) {
+    fail(`SEO contract sitemap mismatch: ${seoContract.surface.sitemap || '(missing)'}`);
+  }
+
+  const requiredSignals = new Set(seoContract.surface.requiredSignals ?? []);
+  for (const signal of ['canonical', 'hreflang-alternates', 'x-default', 'sitemap', 'localized-title', 'localized-description', 'structured-data']) {
+    if (!requiredSignals.has(signal)) fail(`SEO contract missing required signal: ${signal}`);
+  }
+  if (Object.keys(seoContract.locales ?? {}).length < 16) {
+    fail('SEO contract must expose all 16 Flyto2 locale definitions');
+  }
+  for (const cluster of seoContract.surface.keywordClusters ?? []) {
+    if (!cluster.evidence?.source || !cluster.evidence.observedAt) {
+      fail(`SEO contract keyword cluster ${cluster.id} missing evidence`);
+    }
+    if (!Array.isArray(cluster.longTail) || cluster.longTail.length < 5) {
+      fail(`SEO contract keyword cluster ${cluster.id} must include long-tail terms`);
+    }
+  }
+
+  const upstreamPath = path.resolve(root, '..', 'flyto-i18n', 'dist', 'seo-manifest.json');
+  if (existsSync(upstreamPath)) {
+    const upstreamText = readFileSync(upstreamPath, 'utf8');
+    if (seoContract.source?.sha256 !== sha256(upstreamText)) {
+      fail('.seo/i18n-seo-manifest.json is stale; run npm run seo:sync');
+    }
+  }
 }
 
 function checkDist() {
@@ -246,9 +318,15 @@ function checkKeywordMatrix() {
   for (const token of requiredKeywordMatrixTokens) {
     if (!content.includes(token)) fail(`${matrix.file} missing keyword evidence token: ${token}`);
   }
+  for (const term of contractKeywordTerms().slice(0, 4)) {
+    if (!content.toLowerCase().includes(term.toLowerCase())) {
+      fail(`${matrix.file} missing manifest keyword term: ${term}`);
+    }
+  }
   checkBrandAndEmails(matrix.file, content);
 }
 
+checkSeoContract();
 checkDist();
 if (existsSync(path.join(distDir, 'sitemap.xml'))) {
   checkSitemapRobotsLlms();

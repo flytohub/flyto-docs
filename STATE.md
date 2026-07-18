@@ -1,7 +1,10 @@
 # State
 
-Current state on 2026-07-16:
+Current state on 2026-07-18:
 
+- Docs SEO now consumes `.seo/i18n-seo-manifest.json`, synced from
+  `flyto-i18n/dist/seo-manifest.json`. VitePress injects manifest-derived
+  hreflang alternates only when the equivalent localized Markdown file exists.
 - `npm run audit:seo` now validates built docs pages for title/description
   length, canonical URLs, index/noindex robots, OpenGraph, Twitter cards,
   JSON-LD, sitemap coverage, robots, llms files, Flyto2 naming, `@flyto2.com`
@@ -23,14 +26,18 @@ Current state on 2026-07-16:
 - `public/robots.txt`, `public/llms.txt`, and `public/llms-full.txt` exist.
 - `strategy/flyto2-product-lines.md` documents the five Flyto2 product lines and
   repository boundaries.
-- Locale mirrors exist for module pages, but non-English docs are currently
-  noindexed in config.
+- Locale mirrors exist for module pages. Published localized module pages are
+  now discoverable through hreflang alternates; missing locale equivalents are
+  deliberately not advertised.
 
 Known gaps:
 
 - Public docs remain security-heavy in deep sections, but homepage metadata and
   AI indexes now expose the core automation/MCP entry points. Additional
   Cloud / Apps / Automation how-to material can still be expanded.
+- Cloudflare/GitHub builds use the committed `.seo/i18n-seo-manifest.json`
+  cache; run `npm run seo:sync` locally after changing `flyto-i18n` SEO source
+  data.
 - Data, Zero-person Agent, and Big Data / Intelligence are documented as
   architecture reservations, not complete products.
 - Release readiness still depends on core repo health and product gate results.

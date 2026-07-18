@@ -6,6 +6,7 @@
     "test": "node scripts/audit-docs-public.mjs",
     "lint": "node --check scripts/check-public-links.mjs && node --check scripts/list-external-links.mjs && node scripts/audit-docs-public.mjs",
     "audit:seo": "node scripts/audit-seo-surface.mjs",
+    "seo:sync": "node scripts/sync-i18n-seo-manifest.mjs",
     "check:links": "node scripts/check-public-links.mjs",
     "links:external": "node scripts/list-external-links.mjs",
     "build": "vitepress build",

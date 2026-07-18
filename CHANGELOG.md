@@ -10,6 +10,9 @@
 - Added `npm run audit:seo`, Lighthouse CI configuration, and a dedicated SEO
   Gate workflow for built docs metadata, sitemap, robots, llms, keyword
   freshness, and public link checks.
+- Added `.seo/i18n-seo-manifest.json`, `.vitepress/seo-contract.ts`, and
+  `npm run seo:sync` so docs canonical/hreflang, keyword evidence, and SEO
+  audit checks stay aligned with `flyto-i18n`.
 
 ### Changed
 
@@ -22,3 +25,5 @@
   advertised as public docs pages.
 - Updated VitePress non-content path handling so repo memory does not enter the
   public sitemap.
+- Injected manifest-derived alternate links for published docs locales only, so
+  docs does not advertise untranslated pages as hreflang equivalents.

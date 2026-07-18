@@ -1,5 +1,15 @@
 # Decisions
 
+## 2026-07-18 - Docs only advertise published localized equivalents
+
+Decision: docs reads `.seo/i18n-seo-manifest.json` from the shared Flyto2 i18n
+SEO contract, but VitePress emits hreflang alternate links only for localized
+Markdown files that actually exist.
+
+Reason: `flyto-i18n` defines all supported locales, while docs currently has
+localized module mirrors for a subset of content. Advertising missing
+translated pages would be worse than having no alternate link.
+
 ## 2026-07-15 - Docs must be the Core/MCP technical citation surface
 
 Decision: docs homepage, metadata, and AI-readable files must cite flyto-core,
