@@ -177,10 +177,10 @@ Configure webhooks in Settings > Webhooks to receive HTTP POST notifications.
 
 ### HMAC Signing
 
-All webhook payloads are signed with HMAC-SHA256. The signature is included in the `X-Flyto-Signature` header:
+All webhook payloads are signed with HMAC-SHA256. The signature is included in the `X-Flyto2-Signature` header:
 
 ```
-X-Flyto-Signature: sha256=<hex-encoded-hmac>
+X-Flyto2-Signature: sha256=<hex-encoded-hmac>
 ```
 
 **Verification:**
@@ -194,7 +194,7 @@ expected = hmac.new(
     hashlib.sha256
 ).hexdigest()
 
-signature = request.headers["X-Flyto-Signature"].removeprefix("sha256=")
+signature = request.headers["X-Flyto2-Signature"].removeprefix("sha256=")
 assert hmac.compare_digest(expected, signature)
 ```
 

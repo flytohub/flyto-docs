@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/01-projects-home.png</image:loc>
+      <image:title>Flyto2 Warroom Projects Home</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/02-new-project.png</image:loc>
+      <image:title>Flyto2 Warroom New Project</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/03-onboarding-connect.png</image:loc>
+      <image:title>Flyto2 Warroom Onboarding Connect</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/04-pulse-feed.png</image:loc>
+      <image:title>Flyto2 Warroom Pulse Feed</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/05-issues-list.png</image:loc>
+      <image:title>Flyto2 Warroom Issues List</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/06-autofix.png</image:loc>
+      <image:title>Flyto2 Warroom Autofix</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/07-repositories.png</image:loc>
+      <image:title>Flyto2 Warroom Repositories</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/08-repo-detail.png</image:loc>
+      <image:title>Flyto2 Warroom Repo Detail</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/09-architecture-overview.png</image:loc>
+      <image:title>Flyto2 Warroom Architecture Overview</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/10-repo-breakdown.png</image:loc>
+      <image:title>Flyto2 Warroom Repo Breakdown</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/11-dead-code.png</image:loc>
+      <image:title>Flyto2 Warroom Dead Code</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/12-duplicate-code.png</image:loc>
+      <image:title>Flyto2 Warroom Duplicate Code</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/13-complexity.png</image:loc>
+      <image:title>Flyto2 Warroom Complexity</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/14-frameworks.png</image:loc>
+      <image:title>Flyto2 Warroom Frameworks</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/15-api-routes.png</image:loc>
+      <image:title>Flyto2 Warroom Api Routes</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/16-security-queue.png</image:loc>
+      <image:title>Flyto2 Warroom Security Queue</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/17-iac-scanning.png</image:loc>
+      <image:title>Flyto2 Warroom Iac Scanning</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/18-license-compliance.png</image:loc>
+      <image:title>Flyto2 Warroom License Compliance</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/19-malware-detection.png</image:loc>
+      <image:title>Flyto2 Warroom Malware Detection</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/20-taint-analysis.png</image:loc>
+      <image:title>Flyto2 Warroom Taint Analysis</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/21-scoring-breakdown.png</image:loc>
+      <image:title>Flyto2 Warroom Scoring Breakdown</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/22-repo-detail-full.png</image:loc>
+      <image:title>Flyto2 Warroom Repo Detail Full</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/23-domain-security.png</image:loc>
+      <image:title>Flyto2 Warroom Domain Security</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/24-domain-pagespeed.png</image:loc>
+      <image:title>Flyto2 Warroom Domain Pagespeed</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/25-domain-ai-score.png</image:loc>
+      <image:title>Flyto2 Warroom Domain Ai Score</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/26-asset-map.png</image:loc>
+      <image:title>Flyto2 Warroom Asset Map</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/27-reports-owasp.png</image:loc>
+      <image:title>Flyto2 Warroom Reports Owasp</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/28-reports-builder.png</image:loc>
+      <image:title>Flyto2 Warroom Reports Builder</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://docs.flyto2.com/warroom/</loc>
+    <image:image>
+      <image:loc>https://docs.flyto2.com/warroom/29-compliance-table.png</image:loc>
+      <image:title>Flyto2 Warroom Compliance Table</image:title>
+      <image:caption>Flyto2 docs screenshot for Warroom, CTEM, code audit, attack surface, and evidence workflows.</image:caption>
+    </image:image>
+  </url>
+</urlset>

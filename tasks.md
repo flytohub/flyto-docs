@@ -8,3 +8,7 @@
 - [ ] Update `public/llms-full.txt` after major docs navigation changes.
 - [x] Resolve multilingual docs indexing strategy for existing localized module pages.
 - [x] Add community contribution and social syndication docs.
+- [x] Add image sitemap, discovery manifest, social image, and `security.txt`
+  to docs discovery.
+- [x] Gate docs discovery files in `npm run build` and `npm run audit:seo`.
+- [ ] Recheck live Cloudflare deployment after the next automatic deploy.

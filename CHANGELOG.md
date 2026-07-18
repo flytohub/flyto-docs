@@ -4,6 +4,13 @@
 
 ### Added
 
+- Added build-generated docs discovery files: `public/image-sitemap.xml`,
+  `public/discovery-manifest.json`, `public/og-image.png`, and
+  `public/.well-known/security.txt`.
+- Added `npm run seo:discovery` and wired it into `npm run build` so docs image
+  discovery stays current with the committed Warroom screenshot set.
+- Added SEO audit checks for image sitemap coverage, social image reachability,
+  social image alt text, `security.txt`, and discovery manifest health.
 - Added `/community/` as the technical guide for Flyto2 contribution routing,
   good-first issues, showcases, and review-first social syndication.
 - Added project memory files, workflow docs, and handoff registry.

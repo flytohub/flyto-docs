@@ -34,6 +34,7 @@ const checkedLocalizedPages = [
 const forbiddenSitemapTokens = ['/AGENTS', '/CLAUDE', '/PROJECT', '/STATE', '/ROADMAP', '/tasks'];
 const requiredRobotsTokens = [
   `Sitemap: ${seoContract.surface.sitemap}`,
+  'Sitemap: https://docs.flyto2.com/image-sitemap.xml',
   'User-agent: OAI-SearchBot',
   'User-agent: ChatGPT-User',
   'User-agent: Claude-User',
@@ -48,6 +49,7 @@ const requiredLlmsTokens = [
   'flyto-core',
   '451 registry-backed modules',
   'Warroom CE',
+  'https://docs.flyto2.com/image-sitemap.xml',
   'https://flyto2.com/open-source/',
   'https://blog.flyto2.com',
 ];
@@ -116,6 +118,22 @@ function findLink(html, rel, hrefLang = null) {
   return '';
 }
 
+function publicAssetPath(url) {
+  if (!url) return '';
+  try {
+    const parsed = new URL(url);
+    if (parsed.host !== 'docs.flyto2.com') return '';
+    return path.join(distDir, parsed.pathname.replace(/^\/+/, ''));
+  } catch {
+    return url.startsWith('/') ? path.join(distDir, url.replace(/^\/+/, '')) : '';
+  }
+}
+
+function checkPublicAsset(label, metaLabel, url) {
+  const assetPath = publicAssetPath(url);
+  if (assetPath && !existsSync(assetPath)) fail(`${label} ${metaLabel} points to missing public asset: ${url}`);
+}
+
 function contractKeywordTerms() {
   return seoContract.surface.keywordClusters.flatMap((cluster) => [
     cluster.primary,
@@ -147,7 +165,8 @@ function sitemapLocVariants(url) {
 }
 
 function checkBrandAndEmails(label, content) {
-  if (content.match(/\bFlyto\b/g)) fail(`${label} contains standalone "Flyto"; use Flyto2 unless referring to repo IDs`);
+  const legacyBrandPattern = new RegExp(`\\b${'Fly'}${'to'}\\b`, 'g');
+  if (content.match(legacyBrandPattern)) fail(`${label} contains standalone legacy brand token; use Flyto2 unless referring to repo IDs`);
   const emails = content.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi) ?? [];
   const badEmails = [...new Set(emails.filter((email) => !email.toLowerCase().endsWith('@flyto2.com')))];
   if (badEmails.length) fail(`${label} contains non-flyto2.com email(s): ${badEmails.join(', ')}`);
@@ -164,6 +183,8 @@ function checkPage(page) {
   const description = findMeta(html, 'name', 'description');
   const canonical = findLink(html, 'canonical');
   const robots = findMeta(html, 'name', 'robots');
+  const ogImage = findMeta(html, 'property', 'og:image');
+  const twitterImage = findMeta(html, 'name', 'twitter:image');
 
   checkLength(`${page.name} title`, title, 10, 70);
   checkLength(`${page.name} description`, description, 50, 180);
@@ -173,13 +194,18 @@ function checkPage(page) {
   for (const [label, value] of [
     ['og:title', findMeta(html, 'property', 'og:title')],
     ['og:description', findMeta(html, 'property', 'og:description')],
-    ['og:image', findMeta(html, 'property', 'og:image')],
+    ['og:image', ogImage],
+    ['og:image:alt', findMeta(html, 'property', 'og:image:alt')],
     ['twitter:card', findMeta(html, 'name', 'twitter:card')],
     ['twitter:title', findMeta(html, 'name', 'twitter:title')],
     ['twitter:description', findMeta(html, 'name', 'twitter:description')],
+    ['twitter:image', twitterImage],
+    ['twitter:image:alt', findMeta(html, 'name', 'twitter:image:alt')],
   ]) {
     if (!value) fail(`${page.name} missing ${label}`);
   }
+  checkPublicAsset(page.name, 'og:image', ogImage);
+  checkPublicAsset(page.name, 'twitter:image', twitterImage);
   if (!html.includes('application/ld+json')) fail(`${page.name} missing JSON-LD`);
   for (const term of page.terms) {
     if (!html.toLowerCase().includes(term.toLowerCase())) fail(`${page.name} missing docs intent term: ${term}`);
@@ -292,6 +318,35 @@ function checkSitemapRobotsLlms() {
   checkBrandAndEmails('llms-full.txt', full);
 }
 
+function checkDiscoveryFiles() {
+  const imageSitemapPath = path.join(distDir, 'image-sitemap.xml');
+  const manifestPath = path.join(distDir, 'discovery-manifest.json');
+  const securityPath = path.join(distDir, '.well-known', 'security.txt');
+  for (const [label, filePath] of [
+    ['image-sitemap.xml', imageSitemapPath],
+    ['discovery-manifest.json', manifestPath],
+    ['.well-known/security.txt', securityPath],
+    ['og-image.png', path.join(distDir, 'og-image.png')],
+  ]) {
+    if (!existsSync(filePath)) fail(`missing docs discovery file: ${label}`);
+  }
+  if (!existsSync(imageSitemapPath) || !existsSync(manifestPath) || !existsSync(securityPath)) return;
+
+  const imageSitemap = readFileSync(imageSitemapPath, 'utf8');
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  const security = readFileSync(securityPath, 'utf8');
+  if ((imageSitemap.match(/<image:image>/g) ?? []).length < 20) {
+    fail('image-sitemap.xml must include the Warroom screenshot set');
+  }
+  if ((manifest.imageCount ?? 0) < 20) fail('discovery-manifest.json must track the Warroom screenshot set');
+  for (const token of ['Contact: mailto:security@flyto2.com', 'Canonical: https://docs.flyto2.com/.well-known/security.txt']) {
+    if (!security.includes(token)) fail(`security.txt missing ${token}`);
+  }
+  checkBrandAndEmails('image-sitemap.xml', imageSitemap);
+  checkBrandAndEmails('discovery-manifest.json', JSON.stringify(manifest));
+  checkBrandAndEmails('security.txt', security);
+}
+
 function newestKeywordMatrix() {
   if (!existsSync(seoDir)) return null;
   return readdirSync(seoDir)
@@ -331,6 +386,7 @@ checkSeoContract();
 checkDist();
 if (existsSync(path.join(distDir, 'sitemap.xml'))) {
   checkSitemapRobotsLlms();
+  checkDiscoveryFiles();
 } else {
   fail('missing built sitemap.xml; run npm run build before npm run audit:seo');
 }

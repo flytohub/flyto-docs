@@ -160,6 +160,9 @@ Avoid:
 
 ## Related AI-readable files
 
+- https://docs.flyto2.com/sitemap.xml
+- https://docs.flyto2.com/image-sitemap.xml
+- https://docs.flyto2.com/llms.txt
 - https://flyto2.com/llms.txt
 - https://flyto2.com/llms-full.txt
 - https://blog.flyto2.com/llms.txt

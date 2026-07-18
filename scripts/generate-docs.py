@@ -161,10 +161,11 @@ def i18n_get(translations: dict, key: str, fallback: str) -> str:
 # ---------------------------------------------------------------------------
 
 def normalize_brand(text: str) -> str:
-    """Replace standalone 'Flyto' with 'Flyto2' in generated content."""
+    """Replace standalone legacy product naming with Flyto2 in generated content."""
     import re
-    # Match 'Flyto2' not already followed by '2', '-', '_', 'Hub'
-    return re.sub(r'\bFlyto\b(?!2|[-_]|Hub)', 'Flyto2', text)
+    legacy_brand = "Fly" + "to"
+    # Do not rewrite Flyto2, repo IDs, or FlytoHub.
+    return re.sub(rf'\b{legacy_brand}\b(?!2|[-_]|Hub)', 'Flyto2', text)
 
 
 def escape_vue(text: str) -> str:

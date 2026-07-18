@@ -2,6 +2,14 @@
 
 This directory contains local-only documentation verification helpers.
 
+Important checks:
+
+- `generate-discovery.mjs` creates `public/image-sitemap.xml` and
+  `public/discovery-manifest.json` from the committed Warroom screenshots.
+- `audit-seo-surface.mjs` validates built docs metadata, sitemap, robots,
+  llms files, image sitemap coverage, social image assets, `security.txt`,
+  Flyto2 naming, `@flyto2.com` emails, and keyword evidence.
+
 ## Public Docs Audit
 
 `audit-docs-public.mjs` verifies the public Warroom CE distribution surface:
@@ -26,4 +34,3 @@ npm run verify
 
 That command runs the public docs audit, lint alias, and VitePress build before
 publishing.
-

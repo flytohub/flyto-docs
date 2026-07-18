@@ -2,6 +2,12 @@
 
 Current state on 2026-07-18:
 
+- Docs now publishes generated discovery surfaces for search and AI retrieval:
+  `sitemap.xml`, `image-sitemap.xml`, `llms.txt`, `llms-full.txt`,
+  `discovery-manifest.json`, an OpenGraph image, and `.well-known/security.txt`.
+- `npm run build` runs `npm run seo:discovery` before VitePress build, and
+  `npm run audit:seo` fails if image sitemap coverage, social image assets,
+  image alt metadata, or Flyto2 contact policy drift.
 - Docs SEO now consumes `.seo/i18n-seo-manifest.json`, synced from
   `flyto-i18n/dist/seo-manifest.json`. VitePress injects manifest-derived
   hreflang alternates only when the equivalent localized Markdown file exists.
@@ -37,6 +43,10 @@ Known gaps:
 - Public docs remain security-heavy in deep sections, but homepage metadata and
   AI indexes now expose the core automation/MCP entry points. Additional
   Cloud / Apps / Automation how-to material can still be expanded.
+- Backlink growth still depends on external publication channels such as
+  GitHub releases, PyPI package pages, Docker Hub descriptions, YouTube
+  descriptions, LinkedIn posts, and community discussions. The docs repo now
+  exposes the crawlable assets those channels should reference.
 - Cloudflare/GitHub builds use the committed `.seo/i18n-seo-manifest.json`
   cache; run `npm run seo:sync` locally after changing `flyto-i18n` SEO source
   data.

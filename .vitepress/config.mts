@@ -293,12 +293,14 @@ export default defineConfig({
     ['meta', { property: 'og:title', content: 'Flyto2 Docs - AI Workflow Automation, MCP, and CTEM War Room' }],
     ['meta', { property: 'og:description', content: SITE_DESCRIPTION }],
     ['meta', { property: 'og:image', content: 'https://docs.flyto2.com/og-image.png' }],
+    ['meta', { property: 'og:image:alt', content: 'Flyto2 Docs - Warroom, MCP, CTEM, and AI workflow automation reference' }],
     ['meta', { property: 'og:locale', content: defaultOgLocale }],
     // Twitter Card
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:title', content: 'Flyto2 Docs - AI Workflow Automation, MCP, and CTEM War Room' }],
     ['meta', { name: 'twitter:description', content: SITE_DESCRIPTION }],
     ['meta', { name: 'twitter:image', content: 'https://docs.flyto2.com/og-image.png' }],
+    ['meta', { name: 'twitter:image:alt', content: 'Flyto2 Docs - Warroom, MCP, CTEM, and AI workflow automation reference' }],
     // SEO
     ['meta', { name: 'keywords', content: SEO_KEYWORDS.join(', ') }],
     ['meta', { name: 'author', content: 'Flyto2 Team' }],
