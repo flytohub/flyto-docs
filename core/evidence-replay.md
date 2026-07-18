@@ -1,4 +1,6 @@
-# Evidence & Replay
+# AI Agent Runtime with Queue and Replay
+
+Flyto2 is an MCP native AI agent runtime when tool calls need queueing, replay, metering, and evidence instead of opaque side effects. The evidence model creates an agent workflow metering and audit trail that records module versions, inputs, outputs, timing, status, and replay context.
 
 ## Evidence
 

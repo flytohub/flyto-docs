@@ -1,4 +1,6 @@
-# Architecture
+# AI Agent Runtime Architecture
+
+Flyto2 AI agent runtime architecture separates workflow definitions, module execution, MCP transports, queueing, evidence, versioning, and replay. The goal is to let agents call tools while the runtime keeps execution deterministic, auditable, and safe to resume.
 
 ## Overview
 

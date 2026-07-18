@@ -1,4 +1,6 @@
-# Installation
+# Install Flyto2
+
+Install Flyto2 from PyPI when you want the fastest path to the open-source execution engine, MCP tools, browser automation modules, and repeatable workflow evidence. The commands below cover the base runtime, optional browser extras, source installs, version checks, and the minimum system requirements for local AI workflow automation.
 
 ## PyPI (Recommended)
 

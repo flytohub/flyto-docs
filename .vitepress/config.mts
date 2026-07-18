@@ -35,6 +35,116 @@ const SEO_KEYWORDS = [
   `${BUILT_IN_RECIPE_COUNT} recipes`,
   ...manifestKeywordTerms(),
 ]
+const PAGE_SEO: Record<string, { title: string; description: string }> = {
+  'guide/what-is-flyto2': {
+    title: 'Open Source AI Agent Framework',
+    description: 'Learn how Flyto2 works as an open source AI agent framework for deterministic modules, MCP server automation, workflow replay, and evidence.',
+  },
+  'guide/getting-started': {
+    title: 'AI Workflow Automation Getting Started',
+    description: 'Start Flyto2 AI workflow automation with install paths, recipes, MCP modules, browser workflows, evidence capture, and replay.',
+  },
+  'guide/installation': {
+    title: 'Install Flyto2',
+    description: 'Install Flyto2 with PyPI, optional browser automation extras, source checkout, version checks, and system requirements.',
+  },
+  'guide/first-workflow': {
+    title: 'AI Workflow Automation Examples',
+    description: 'Build AI workflow automation examples in Flyto2 with YAML steps, modules, inputs, evidence, replay, and CI-friendly output.',
+  },
+  'guide/modules-overview': {
+    title: 'MCP Server Automation Modules',
+    description: 'Explore MCP server automation modules in Flyto2 Core, including browser, file, HTTP, data, verification, and workflow tools.',
+  },
+  'guide/configuration': {
+    title: 'Workflow Automation Configuration',
+    description: 'Configure Flyto2 workflow automation configuration for local runs, MCP tools, environment values, retries, evidence, and replay.',
+  },
+  core: {
+    title: 'Open Source Execution Engine for AI Agents',
+    description: 'Flyto2 Core is an open source execution engine for AI agents with deterministic workflows, queueing, MCP tools, evidence, and replay.',
+  },
+  'core/architecture': {
+    title: 'AI Agent Runtime Architecture',
+    description: 'Understand the Flyto2 AI agent runtime architecture for modules, queues, triggers, MCP transports, evidence, versioning, and replay.',
+  },
+  'core/execution-model': {
+    title: 'Versioned Workflow Automation Engine',
+    description: 'Flyto2 is a versioned workflow automation engine for deterministic YAML runs, triggers, queues, module contracts, evidence, and replay.',
+  },
+  'core/evidence-replay': {
+    title: 'AI Agent Runtime with Queue and Replay',
+    description: 'Flyto2 Core is an AI agent runtime with queue and replay so workflow steps can be audited, resumed, verified, and cited.',
+  },
+  mcp: {
+    title: 'MCP Server Automation',
+    description: 'Use Flyto2 for MCP server automation with stdio, streamable HTTP, 451 registry-backed modules, client configuration, and tool evidence.',
+  },
+  'mcp/stdio': {
+    title: 'MCP Stdio Transport',
+    description: 'Configure the Flyto2 MCP stdio transport for local AI clients, module discovery, tool execution, schemas, and audit-friendly output.',
+  },
+  'mcp/streamable-http': {
+    title: 'MCP Streamable HTTP',
+    description: 'Configure Flyto2 MCP streamable HTTP for remote clients, multi-client automation, module execution, schemas, and evidence output.',
+  },
+  'mcp/client-config': {
+    title: 'MCP Client Configuration',
+    description: 'Set up MCP client configuration for Flyto2 across Claude Desktop, VS Code, local stdio, streamable HTTP, modules, and tool policies.',
+  },
+  modules: {
+    title: '451 Registry-Backed Modules',
+    description: 'Browse 451 registry-backed modules in Flyto2 Core across browser automation, MCP tools, verification, data, files, HTTP, and workflows.',
+  },
+  'modules/browser': {
+    title: 'No Code Browser Automation',
+    description: 'Use Flyto2 no code browser automation modules for browser actions, screenshots, extraction, replay, evidence, and Playwright-friendly workflows.',
+  },
+  'modules/mcp': {
+    title: 'MCP Automation Tools',
+    description: 'Use Flyto2 MCP automation tools to expose modules to AI agents with schemas, approvals, deterministic execution, evidence, and replay.',
+  },
+  'modules/verify': {
+    title: 'Workflow Verification',
+    description: 'Apply Flyto2 workflow verification modules to assert outputs, check evidence, validate browser runs, and keep automation reliable.',
+  },
+  warroom: {
+    title: 'Security War Room',
+    description: 'Flyto2 Warroom is a security war room for CTEM, attack surface management, evidence, remediation, reports, and self-hosted CE evaluation.',
+  },
+  'warroom/self-hosted-ce': {
+    title: 'Self-Hosted Security War Room',
+    description: 'Install the Flyto2 self-hosted security war room with Warroom CE, local data, Docker, evidence, CTEM workflows, and bridge-ready contracts.',
+  },
+  'warroom/closed-loop': {
+    title: 'Continuous Threat Exposure Management',
+    description: 'Use Flyto2 for continuous threat exposure management workflows that connect discovery, prioritization, validation, remediation, and evidence.',
+  },
+  'warroom/surfaces/attack-surface': {
+    title: 'Attack Surface Management',
+    description: 'Use Flyto2 attack surface management docs to connect assets, repositories, scanner findings, CTEM prioritization, evidence, and remediation.',
+  },
+  'warroom/surfaces/mcp-security': {
+    title: 'MCP Security',
+    description: 'Review Flyto2 MCP security guidance for tool exposure, client permissions, server transport, audit trails, and safe agent automation.',
+  },
+  ai: {
+    title: 'AI Agent Framework',
+    description: 'Use Flyto2 as an AI agent framework for deterministic tools, MCP server automation, workflow recipes, evidence, replay, and governance.',
+  },
+  indexer: {
+    title: 'Code Intelligence',
+    description: 'Use Flyto2 code intelligence with flyto-indexer for repository context, dependency impact, task planning, validation, and evidence.',
+  },
+  blueprint: {
+    title: 'Workflow Blueprint',
+    description: 'Use Flyto2 workflow blueprint docs to plan repeatable workflows, automation recipes, module boundaries, reviews, and execution evidence.',
+  },
+  community: {
+    title: 'Open-Source AI Workflow Automation Community',
+    description: 'Join the Flyto2 open-source AI workflow automation community for docs, good-first issues, recipes, MCP examples, and reviewed releases.',
+  },
+}
 const NON_CONTENT_PATHS = new Set([
   'AGENTS.md',
   'ARCHITECTURE.md',
@@ -341,11 +451,25 @@ export default defineConfig({
           .replace(/\.md$/, '')
           .replace(/\/$/, '')
     const canonicalUrl = `${SITE_URL}${canonicalPath ? `/${canonicalPath}` : ''}`
+    const seo = PAGE_SEO[canonicalPath]
+
+    if (seo) {
+      pageData.title = seo.title
+      pageData.description = seo.description
+      pageData.frontmatter.title = seo.title
+      pageData.frontmatter.description = seo.description
+    }
 
     pageData.frontmatter.head = [
       ...(pageData.frontmatter.head || []),
       ['link', { rel: 'canonical', href: canonicalUrl }],
       ...publishedAlternateLinks(canonicalPath),
+      ...(seo ? [
+        ['meta', { property: 'og:title', content: `${seo.title} | Flyto2` }],
+        ['meta', { property: 'og:description', content: seo.description }],
+        ['meta', { name: 'twitter:title', content: `${seo.title} | Flyto2` }],
+        ['meta', { name: 'twitter:description', content: seo.description }],
+      ] as [string, Record<string, string>][] : []),
       ...(isNonContent ? [['meta', { name: 'robots', content: 'noindex, follow' }] as [string, Record<string, string>]] : []),
     ]
 

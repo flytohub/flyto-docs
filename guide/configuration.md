@@ -1,4 +1,6 @@
-# Configuration
+# Workflow Automation Configuration
+
+Use Flyto2 workflow automation configuration to keep local runs, MCP server automation, browser modules, environment values, retries, evidence, and replay behavior predictable. Configuration should be small, reviewable, and tied to the workflow file so AI agents and human operators execute the same versioned automation.
 
 ## Environment Variables
 

@@ -1,12 +1,12 @@
 {
-  "version": "18527f774064",
+  "version": "d7b9cd243f7b",
   "sourceVersion": "2026-07-18",
   "defaultLocale": "en",
   "xDefaultLocale": "en",
   "source": {
     "repository": "flyto-i18n",
     "path": "dist/seo-manifest.json",
-    "sha256": "f732eed5e4c6b12bb77e684b660cc3722c3a4120e54539ba4db180a64933d60d"
+    "sha256": "d4f0f0828b15d05f7af8e07485c5323ad1dada6a4e50445e6ab866ea18f27b21"
   },
   "locales": {
     "en": {
@@ -211,6 +211,72 @@
           "open source workflow automation platform",
           "free open source workflow automation tool",
           "best open source workflow automation tools"
+        ]
+      },
+      {
+        "id": "open-source-ai-agent-framework",
+        "primary": "open source AI agent framework",
+        "intent": "developer evaluation",
+        "evidence": {
+          "source": "Ubersuggest",
+          "country": "US",
+          "language": "en",
+          "volume": 1600,
+          "seoDifficulty": 6,
+          "paidDifficulty": 3,
+          "cpcUsd": 7.05,
+          "observedAt": "2026-07-18"
+        },
+        "longTail": [
+          "best open source AI agent framework",
+          "open source AI agent framework Python",
+          "open source AI agent framework GitHub",
+          "free open source AI agent framework",
+          "open source execution engine for AI agents"
+        ]
+      },
+      {
+        "id": "mcp-server-automation",
+        "primary": "MCP server automation",
+        "intent": "developer implementation",
+        "evidence": {
+          "source": "Ubersuggest",
+          "country": "US",
+          "language": "en",
+          "volume": 10,
+          "seoDifficulty": 34,
+          "paidDifficulty": 68,
+          "cpcUsd": 16.5,
+          "observedAt": "2026-07-18"
+        },
+        "longTail": [
+          "mcp server automation testing",
+          "mcp server automation agent",
+          "MCP native workflow engine",
+          "AI agent runtime with queue and replay",
+          "agent workflow metering and audit trail"
+        ]
+      },
+      {
+        "id": "no-code-browser-automation",
+        "primary": "no code browser automation",
+        "intent": "technical implementation",
+        "evidence": {
+          "source": "Ubersuggest",
+          "country": "US",
+          "language": "en",
+          "volume": 20,
+          "seoDifficulty": 23,
+          "paidDifficulty": 56,
+          "cpcUsd": 16.13,
+          "observedAt": "2026-07-18"
+        },
+        "longTail": [
+          "no code browser automation tool",
+          "no code browser automation free",
+          "no code browser automation tools",
+          "free no code browser automation",
+          "browser automation tool open source"
         ]
       },
       {

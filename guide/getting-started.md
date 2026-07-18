@@ -1,4 +1,6 @@
-# Getting Started
+# AI Workflow Automation Getting Started
+
+Use this Flyto2 AI workflow automation getting started guide to move from install to a working MCP server, browser workflow, and evidence-backed replay. Flyto2 Core is open source, exposes modules through MCP server automation, and keeps workflow evidence durable enough for docs, CI, and operator review.
 
 ## Prerequisites
 

@@ -1,6 +1,6 @@
-# Core Engine
+# Open Source Execution Engine for AI Agents
 
-flyto-core is the deterministic execution engine that powers the Flyto2 platform. It provides a reliable, auditable runtime for executing workflows composed of modular steps.
+flyto-core is the open source execution engine for AI agents that powers the Flyto2 platform. It provides a reliable, auditable runtime for executing workflows composed of modular steps, MCP tools, queueable jobs, evidence capture, and replayable automation.
 
 ## Key Properties
 

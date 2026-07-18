@@ -1,6 +1,6 @@
-# Streamable HTTP Transport
+# MCP Streamable HTTP
 
-Streamable HTTP allows flyto-core to run as a remote MCP server, accessible over the network.
+MCP streamable HTTP lets Flyto2 run flyto-core as a remote MCP server that AI clients can access over the network. Use it when teams need shared MCP server automation, module discovery, tool execution, evidence output, and replayable workflow runs outside a single local process.
 
 ## Start the Server
 

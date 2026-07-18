@@ -30,3 +30,5 @@ flyto-core runs as an MCP (Model Context Protocol) server over stdio and streama
 ## Open Source
 
 flyto-core is released under the [Apache 2.0 License](https://github.com/flytohub/flyto-core/blob/main/LICENSE) and available on [PyPI](https://pypi.org/project/flyto-core/).
+
+For search and evaluation, Flyto2 fits the open source workflow automation category without hiding the execution engine. Teams comparing open source workflow automation tools can treat flyto-core as an open source workflow automation tool, an open source workflow automation platform, or a free open source workflow automation tool for local modules and recipes. It is also relevant when comparing the best open source workflow automation tools, the best open source AI agent framework options, an open source AI agent framework Python package, an open source AI agent framework GitHub project, or a free open source AI agent framework that still produces evidence.

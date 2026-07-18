@@ -1,6 +1,6 @@
-# STDIO Transport
+# MCP Stdio Transport
 
-STDIO is the default transport for flyto-core's MCP server. It communicates via standard input/output, making it ideal for local MCP clients.
+MCP stdio transport is the default local transport for Flyto2's flyto-core MCP server. It communicates through standard input and output, making it ideal for local AI clients that need open-source automation modules, predictable tool schemas, and evidence-friendly output without a network listener.
 
 ## Start the Server
 

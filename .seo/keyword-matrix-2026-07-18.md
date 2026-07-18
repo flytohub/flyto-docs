@@ -22,7 +22,7 @@ sitemap coverage.
 | Intent | Keyword | Volume | SD | PD | CPC | Heat | Primary Docs Path | Related Landing | Related Blog |
 | --- | --- | ---: | ---: | ---: | ---: | --- | --- | --- | --- |
 | Core runtime | open source AI agent framework | 1600 | 6 | 3 | 7.05 | High | `/core/`, `/mcp/` | `https://flyto2.com/open-source/` | `https://blog.flyto2.com/posts/mcp-server-guide` |
-| Core runtime | AI workflow automation | 1000 | 20 | 23 | 21.68 | High | `/core/`, `/guide/getting-started`, `/modules/` | `https://flyto2.com/` | `https://blog.flyto2.com/posts/ai-browser-automation-guide` |
+| Core runtime | AI workflow automation | 1000 | 59 | 40 | 42.24 | High | `/core/`, `/guide/getting-started`, `/modules/` | `https://flyto2.com/` | `https://blog.flyto2.com/posts/ai-browser-automation-guide` |
 | Modules | AI workflow automation tools | 480 | 32 | 11 | 33.65 | Medium | `/modules/`, `/modules/browser`, `/modules/ai-llm` | `https://flyto2.com/` | `https://blog.flyto2.com/posts/workflow-automation` |
 | Warroom | attack surface management | 880 | 44 | 25 | 32.48 | High | `/warroom/surfaces/attack-surface` | `https://flyto2.com/attack-surface-management/` | `https://blog.flyto2.com/posts/attack-surface-management-guide` |
 | Warroom | attack surface management tools | 390 | 46 | 14 | 43.46 | Medium | `/warroom/surfaces/attack-surface`, `/warroom/closed-loop` | `https://flyto2.com/attack-surface-management/` | `https://blog.flyto2.com/posts/attack-surface-management-guide` |
@@ -44,8 +44,15 @@ These terms are now carried by `.seo/i18n-seo-manifest.json`, synced from
 | Open-source workflow automation | open source workflow automation tools | 590 | 44 | 21 | 12.13 | Route to modules reference and beginner guide pages. |
 | Open-source workflow automation | open source workflow automation tool | 390 | 42 | 19 | 9.60 | Route to concrete module docs and install path. |
 | Open-source workflow automation | open source workflow automation platform | 260 | 45 | 24 | 13.20 | Route to architecture and execution model docs. |
+| Open-source AI agent framework | best open source AI agent framework | 10 | 14 | 27 | 6.03 | Route to `/core/`, `/mcp/`, and `/guide/what-is-flyto2`. |
+| Open-source AI agent framework | open source AI agent framework Python | 0 | 4 | 1 | 0.00 | Emerging implementation intent routed to `/core/` and `/modules/`. |
+| Open-source AI agent framework | open source AI agent framework GitHub | 0 | 4 | 1 | 0.00 | Route to `/core/` plus GitHub distribution links. |
+| MCP server automation | MCP server automation testing | 10 | 25 | 64 | 0.00 | Route to `/mcp/`, `/modules/verify`, and testing docs. |
+| MCP server automation | MCP server automation agent | 0 | 4 | 1 | 0.00 | Emerging agent-tool intent routed to `/mcp/` and `/modules/mcp`. |
 | MCP native AI agent runtime | open source execution engine for AI agents | 0 | 0 | 0 | 0.00 | Emerging Flyto2-owned phrase routed to `/core/`, `/mcp/`, and `/modules/`. |
-| CTEM explainers | what is continuous threat exposure management | 20 | 15 | 31 | 0.00 | Low | `/warroom/closed-loop` | `https://flyto2.com/ctem/` | `https://blog.flyto2.com/posts/what-is-ctem-continuous-threat-exposure-management` |
+| No-code browser automation | no code browser automation tool | 0 | 4 | 1 | 0.00 | Route to `/modules/browser` and beginner workflow docs. |
+| No-code browser automation | free no code browser automation | 0 | 4 | 1 | 0.00 | Route to `/modules/browser` plus landing/open-source pages. |
+| CTEM explainers | what is continuous threat exposure management | 20 | 15 | 31 | 0.00 | Route to `/warroom/closed-loop` plus landing `/ctem/` and the CTEM explainer post. |
 
 ## Long-Tail Docs Routing
 

@@ -1,4 +1,6 @@
-# flyto-blueprint
+# Workflow Blueprint
+
+A Flyto2 workflow blueprint is the planning layer for repeatable automation: capture the goal, module boundaries, input contracts, review points, execution evidence, and follow-up verification before the workflow becomes code or YAML.
 
 Self-evolving workflow pattern engine. flyto-blueprint enables AI agents to select pre-built workflow blueprints and fill in arguments rather than building workflows from scratch.
 

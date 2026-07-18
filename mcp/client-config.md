@@ -1,4 +1,6 @@
-# Client Configuration
+# MCP Client Configuration
+
+MCP client configuration connects Flyto2 Core to Claude Desktop, VS Code, Cursor, Windsurf, local stdio, and streamable HTTP. Keep the command, transport, module policy, and evidence expectations explicit so AI agents can call Flyto2 tools predictably.
 
 ## Claude Desktop
 

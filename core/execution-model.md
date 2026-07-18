@@ -1,4 +1,6 @@
-# Execution Model
+# Versioned Workflow Automation Engine
+
+Flyto2 Core is a versioned workflow automation engine: the workflow file, inputs, module versions, queue state, outputs, and evidence are treated as part of the execution contract. That contract lets AI agents and operators replay a run, inspect a failed step, and verify what changed.
 
 ## Lifecycle
 
