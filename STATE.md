@@ -1,7 +1,11 @@
 # State
 
-Current state on 2026-07-18:
+Current state on 2026-07-22:
 
+- GitHub Pages is enabled in Actions workflow mode, the custom domain is
+  `docs.flyto2.com`, and deployment run `29889676532` passed. The Warroom CE
+  install page returns HTTP 200 over HTTPS; HTTP redirects to HTTPS at
+  Cloudflare.
 - Docs now publishes generated discovery surfaces for search and AI retrieval:
   `sitemap.xml`, `image-sitemap.xml`, `llms.txt`, `llms-full.txt`,
   `discovery-manifest.json`, an OpenGraph image, and `.well-known/security.txt`.
@@ -40,6 +44,10 @@ Current state on 2026-07-18:
 
 Known gaps:
 
+- GitHub still reports the custom domain as unverified and has not issued its
+  own Pages origin certificate, so the Pages `https_enforced` flag cannot yet
+  be enabled. Cloudflare currently provides the public TLS certificate and
+  HTTPS redirect. Recheck domain verification and origin certificate issuance.
 - Public docs remain security-heavy in deep sections, but homepage metadata and
   AI indexes now expose the core automation/MCP entry points. Additional
   Cloud / Apps / Automation how-to material can still be expanded.

@@ -25,6 +25,9 @@
 
 ### Changed
 
+- Re-enabled GitHub Pages in Actions workflow mode, restored the
+  `docs.flyto2.com` custom domain, and republished the verified docs site after
+  the disabled Pages configuration caused public 404 responses.
 - Reorganized public docs navigation into Start, Build, Reference, Security,
   and Resources groups.
 - Collapsed high-volume Modules and Warroom sidebar groups by default to reduce
