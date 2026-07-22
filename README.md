@@ -59,6 +59,23 @@ Read online:
 - Sibling `flyto-core` and `flyto-i18n` checkouts only when regenerating their
   source-backed artifacts; normal site builds use committed generated output.
 
+## Configuration
+
+VitePress navigation, metadata, locale links, and build transforms live under
+`.vitepress/`. SEO thresholds and discovery inputs live under `.seo/` and
+`public/`; generator behavior lives under `scripts/`. Public builds must not
+depend on sibling repositories or private credentials because generated Core
+and locale artifacts are committed.
+
+## Architecture
+
+Authored guides are grouped by user intent, while generated module and Core
+references remain in dedicated trees. `scripts/generate-code-reference.py`
+documents this repository's own executable source;
+`scripts/sync-core-reference.py` imports reviewed Core references; VitePress
+then builds canonical, localized, search-indexed pages. See
+[`ARCHITECTURE.md`](./ARCHITECTURE.md) for ownership and dependency boundaries.
+
 ## Navigation Model
 
 The public docs menu is organized by user intent:
@@ -133,3 +150,11 @@ Small typo and clarity fixes can go directly through a pull request. Larger
 structural changes should keep docs, landing, blog, GitHub, and Docker Hub
 wording consistent. Do not publish credentials, customer data, private
 implementation details, or unreleased customer claims.
+
+## License And Reuse
+
+This documentation repository does not currently declare one blanket license
+for prose, screenshots, trademarks, generated references, and third-party
+assets. Linked open-source projects retain their own licenses, including
+Apache-2.0 for Flyto2 Core. Check the owning source or contact
+`team@flyto2.com` before reuse.
