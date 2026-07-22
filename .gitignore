@@ -4,5 +4,6 @@ node_modules
 .flyto/
 .flyto-index/
 .lighthouseci/
+.lycheecache
 .seo/reports/
 .external-links.txt

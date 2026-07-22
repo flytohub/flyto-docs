@@ -1,3 +1,4 @@
+/** Audit built metadata, crawler files, structured data, brand, and SEO evidence. */
 import { createHash } from 'node:crypto';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
@@ -16,6 +17,9 @@ const failures = [];
 const checkedPages = [
   { name: 'home', file: 'index.html', canonical: siteUrl, terms: ['AI workflow automation', 'MCP server automation'] },
   { name: 'core', file: 'core/index.html', canonical: `${siteUrl}/core`, terms: ['flyto-core', 'execution'] },
+  { name: 'core whitepaper', file: 'core/whitepaper.html', canonical: `${siteUrl}/core/whitepaper`, terms: ['module contract', 'security model'] },
+  { name: 'core reference', file: 'core/reference/index.html', canonical: `${siteUrl}/core/reference`, terms: ['Python declaration reference', 'HTTP route reference'] },
+  { name: 'python api', file: 'core/reference/python-api.html', canonical: `${siteUrl}/core/reference/python-api`, terms: ['5351 declarations', 'Workflow Engine'] },
   { name: 'mcp', file: 'mcp/index.html', canonical: `${siteUrl}/mcp`, terms: ['MCP'] },
   { name: 'modules', file: 'modules/index.html', canonical: `${siteUrl}/modules`, terms: ['modules'] },
   { name: 'getting started', file: 'guide/getting-started.html', canonical: `${siteUrl}/guide/getting-started`, terms: ['workflow'] },
@@ -48,6 +52,8 @@ const requiredLlmsTokens = [
   'MCP server automation',
   'flyto-core',
   '451 registry-backed modules',
+  '5,351 Python declarations',
+  'https://docs.flyto2.com/core/reference/',
   'Warroom CE',
   'https://docs.flyto2.com/image-sitemap.xml',
   'https://flyto2.com/open-source/',

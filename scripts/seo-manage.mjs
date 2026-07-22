@@ -1,3 +1,4 @@
+/** Build the Rank Math-style SEO management report from checked local evidence. */
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

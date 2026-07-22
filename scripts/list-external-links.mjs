@@ -1,3 +1,4 @@
+/** Produce the deduplicated external-link manifest consumed by CI link checks. */
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

@@ -2,6 +2,7 @@
 
 | Date | Topic | File |
 | --- | --- | --- |
+| 2026-07-22 | Source-backed Core and Docs reference | `2026-07-22-source-backed-reference.md` |
 | 2026-07-18 | SEO discovery surfaces | `2026-07-18-seo-discovery-surfaces.md` |
 | 2026-07-18 | Community guide | `2026-07-18-community-guide.md` |
 | 2026-07-18 | i18n SEO manifest wiring | `2026-07-18-i18n-seo-manifest.md` |

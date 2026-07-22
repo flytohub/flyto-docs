@@ -1,6 +1,6 @@
-# No Code Browser Automation
+# No-Code Browser Automation
 
-Flyto2 browser modules provide no code browser automation for navigation, interaction, data extraction, screenshots, and performance monitoring. Operators can use Flyto2 as a no code browser automation tool, developers can review it as browser automation tool open source infrastructure, and teams evaluating no code browser automation free paths or free no code browser automation can start locally before adding hosted scheduling. This page also covers no code browser automation tools for extraction, screenshots, forms, Web Vitals, and replay.
+Use open-source no-code browser automation modules for navigation, forms, extraction, screenshots, Web Vitals, evidence, and replay.
 
 **54 modules**
 

@@ -1,3 +1,4 @@
+/** Shared Flyto2 i18n SEO manifest reader and published hreflang resolver. */
 import { existsSync, readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'

@@ -27,11 +27,18 @@ jobs:
           node-version: 22
           cache: npm
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: Install dependencies
         run: npm ci
 
       - name: Build docs
         run: npm run build
+
+      - name: Check documentation contract
+        run: npm run docs:check
 
       - name: Audit SEO surface
         run: npm run audit:seo
@@ -52,11 +59,18 @@ jobs:
           node-version: 22
           cache: npm
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
       - name: Install dependencies
         run: npm ci
 
       - name: Build docs for clean-url link validation
         run: npm run build
+
+      - name: Check documentation contract
+        run: npm run docs:check
 
       - name: Check internal public links
         run: npm run check:links

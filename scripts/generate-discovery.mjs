@@ -1,3 +1,4 @@
+/** Generate deterministic image sitemap and discovery metadata from public media. */
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

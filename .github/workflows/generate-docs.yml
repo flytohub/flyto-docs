@@ -18,24 +18,24 @@ jobs:
         with:
           python-version: '3.12'
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
       - name: Clone flyto-core
         uses: actions/checkout@v4
         with:
           repository: flytohub/flyto-core
           path: _flyto-core
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
 
       - name: Clone flyto-i18n
         uses: actions/checkout@v4
         with:
           repository: flytohub/flyto-i18n
           path: _flyto-i18n
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
 
       - name: Install flyto-core dependencies
-        run: |
-          cd _flyto-core
-          pip install -e . 2>/dev/null || pip install -r requirements.txt 2>/dev/null || true
+        run: pip install -e ./_flyto-core
 
       - name: Generate module docs
         env:
@@ -44,11 +44,20 @@ jobs:
         run: |
           python scripts/generate-docs.py --all-locales
 
+      - name: Sync source-backed references
+        env:
+          FLYTO2_I18N_SEO_MANIFEST: ${{ github.workspace }}/_flyto-i18n/dist/seo-manifest.json
+        run: |
+          python scripts/sync-core-reference.py --core-path _flyto-core
+          node scripts/sync-i18n-seo-manifest.mjs
+          python scripts/generate-code-reference.py
+          python scripts/check-documentation.py
+
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add modules/ zh-TW/ ja/ ko/ fr/ es/ de/ pt-BR/ hi/ vi/ id/ th/ tr/ pl/ it/
+          git config user.email "noreply@flyto2.com"
+          git add modules/ zh-TW/ ja/ ko/ fr/ es/ de/ pt-BR/ hi/ vi/ id/ th/ tr/ pl/ it/ core/ reference/docs-code.md .seo/i18n-seo-manifest.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else

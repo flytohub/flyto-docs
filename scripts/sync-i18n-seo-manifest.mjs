@@ -1,3 +1,4 @@
+/** Sync the docs SEO surface from the versioned Flyto2 i18n manifest. */
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';

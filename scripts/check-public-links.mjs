@@ -1,3 +1,4 @@
+/** Resolve and validate every internal URL and anchor in the built docs site. */
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

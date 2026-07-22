@@ -56,7 +56,10 @@ CATEGORY_CONFIG = {
     "archive": ("Archive", "Create and extract ZIP, TAR, and gzip archives."),
     "array": ("Array Operations", "List manipulation — chunk, flatten, group, map, reduce, zip, and more."),
     "atomic": ("Atomic", "Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and testing."),
-    "browser": ("Browser Automation", "Full web automation: navigation, interaction, data extraction, screenshots, and performance monitoring."),
+    "browser": (
+        "No-Code Browser Automation",
+        "Use open-source no-code browser automation modules for navigation, forms, extraction, screenshots, Web Vitals, evidence, and replay.",
+    ),
     "cache": ("Cache", "In-memory key-value cache with TTL support."),
     "check": ("Check", "Runtime type checking utilities."),
     "cloud": ("Cloud Services", "AWS S3, Azure Blob, Google Cloud Storage, and Google Workspace integrations."),

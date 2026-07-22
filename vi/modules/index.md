@@ -8,7 +8,7 @@ flyto-core ships 451 registry-backed modules. The full core catalog tracks 84 pr
 
 | Category | Modules | Description |
 |----------|---------|-------------|
-| [Browser Automation](/vi/modules/browser) | 54 | Full web automation: navigation, interaction, data extraction, screenshots, and performance monitoring. |
+| [No-Code Browser Automation](/vi/modules/browser) | 54 | Use open-source no-code browser automation modules for navigation, forms, extraction, screenshots, Web Vitals, evidence, and replay. |
 | [Atomic](/vi/modules/atomic) | 45 | Low-level primitives: file I/O, git, HTTP, shell, SSH, process management, and testing. |
 | [Flow Control](/vi/modules/flow-control) | 24 | Branching, loops, parallelism, subflows, triggers, and error handling. |
 | [File Operations](/vi/modules/file-operations) | 3 | Copy, move, and delete files. |

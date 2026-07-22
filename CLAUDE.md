@@ -13,6 +13,8 @@ Workflow:
 4. Keep answer-engine pages structured with clear headings, direct answer
    blocks, and source-ready wording.
 5. Run `npm run verify`.
+6. Treat generated module/Core/code references as outputs; edit their source
+   generator and regenerate instead of patching an output page.
 
 Never infer or reuse login credentials from docs or handoffs.
 

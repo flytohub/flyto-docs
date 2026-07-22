@@ -1,6 +1,6 @@
-# Browser Automation
+# No-Code Browser Automation
 
-Full web automation: navigation, interaction, data extraction, screenshots, and performance monitoring.
+Use open-source no-code browser automation modules for navigation, forms, extraction, screenshots, Web Vitals, evidence, and replay.
 
 **54 modules**
 

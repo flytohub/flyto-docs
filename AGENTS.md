@@ -23,6 +23,15 @@ Rules:
   them noindexed/non-content in VitePress config.
 - Run `npm run verify` before publishing docs navigation, config, llms, or
   public launch-page changes.
+- Do not hand-edit generated module pages, `core/reference/`, synced Core
+  narrative pages, or `reference/docs-code.md`. Update the source/generator and
+  regenerate.
+- Run `python3 scripts/check-documentation.py` after changing scripts,
+  VitePress config, workflows, module inventories, Core references, branding,
+  or public email addresses.
+- Keep all public/example email addresses within the 16 approved
+  `@flyto2.com` aliases; generated Git commit identity is
+  `noreply@flyto2.com`.
 - After changing Warroom CE, Docker, GitHub, Enterprise bridge, or SEO content,
   verify that `warroom/self-hosted-ce.md`, sidebar, `public/llms.txt`, and
   `public/llms-full.txt` still cite the same canonical links.

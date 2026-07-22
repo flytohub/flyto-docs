@@ -9,6 +9,15 @@ Current state on 2026-07-22:
 - Docs now publishes generated discovery surfaces for search and AI retrieval:
   `sitemap.xml`, `image-sitemap.xml`, `llms.txt`, `llms-full.txt`,
   `discovery-manifest.json`, an OpenGraph image, and `.well-known/security.txt`.
+- The repository documentation corpus now contains 1,121 Markdown files. Core
+  synchronization owns 108 pages, including 91 split declaration-area pages
+  plus a Python index covering 5,351 declarations in 786 maintained files.
+- The Core runtime reference records the current 451 modules, 84 categories,
+  41 atomic categories, 932 source files, and the exact source commit used to
+  build each public page. Source drift fails `npm run verify`.
+- The Docs implementation reference covers 14 maintained source/configuration
+  files, 3,709 lines, and 155 declarations. Its links also satisfy Indexer's
+  exact source-line documentation contract.
 - `npm run build` runs `npm run seo:discovery` before VitePress build, and
   `npm run audit:seo` fails if image sitemap coverage, social image assets,
   image alt metadata, or Flyto2 contact policy drift.
@@ -41,6 +50,19 @@ Current state on 2026-07-22:
 - Locale mirrors exist for module pages. Published localized module pages are
   now discoverable through hreflang alternates; missing locale equivalents are
   deliberately not advertised.
+- All 15 module locales contain the same 60-page, 451-module inventory. Locale
+  navigation lands on an existing translated catalog instead of constructing
+  false localized URLs for English-only guides and source references.
+- Latest local quality evidence: `npm run verify` passes the documentation,
+  syntax, VitePress build, 87,844-link, SEO surface, SEO score, and SEO
+  management gates. The representative SEO score is 93 average / 88 minimum
+  across 31 routes, while SEO management scores 100.
+- Lighthouse passed all configured assertions across seven representative
+  routes: performance 98, SEO 100, best practices 100, and accessibility
+  96-100. `npm audit --audit-level=high` reports zero vulnerabilities.
+- Flyto2 Indexer strict verification passes 18/18 with zero warnings. Docs
+  coverage scores 99 with 100% source-reference and module-root coverage, and
+  secret and high-risk taint scans report no findings.
 
 Known gaps:
 
@@ -61,3 +83,7 @@ Known gaps:
 - Data, Zero-person Agent, and Big Data / Intelligence are documented as
   architecture reservations, not complete products.
 - Release readiness still depends on core repo health and product gate results.
+- The English local-search index is lazy-loaded but remains about 1.7 MB because
+  it includes declaration-level Core search. Each non-English locale index is
+  split into its own roughly 355 KB chunk; Vite still emits a non-blocking
+  500 KB chunk-size warning for the English search index.

@@ -4,6 +4,17 @@
 
 ### Added
 
+- Added public source-backed Core whitepaper, feature, API, CLI, configuration,
+  operations, security, testing, migration, recipe, route, parser, environment,
+  registration, source, and declaration references.
+- Added split public references for all 5,351 maintained Core Python
+  declarations across 786 files.
+- Added a generated reference for every maintained Docs script and VitePress
+  function plus a documentation ownership manifest.
+- Added a full documentation contract for 451-module locale parity, generated
+  drift, page identity, source ownership, Flyto2 naming, the 16 approved public
+  mailboxes, and stale 412/417 module totals.
+
 - Added build-generated docs discovery files: `public/image-sitemap.xml`,
   `public/discovery-manifest.json`, `public/og-image.png`, and
   `public/.well-known/security.txt`.
@@ -24,6 +35,14 @@
   audit checks stay aligned with `flyto-i18n`.
 
 ### Changed
+
+- Registered all 15 module translations as VitePress locales with their own
+  navigation and lazy search indexes, reducing the former 6.3 MB combined root
+  search index to per-locale artifacts.
+- Updated generated JWT examples to use `${JWT_SECRET_FROM_ENV}` and made the
+  no-code browser automation page title/description generator-owned.
+- Removed unnecessary cross-repository access tokens from public source sync
+  checkouts and changed generated commit identity to `noreply@flyto2.com`.
 
 - Re-enabled GitHub Pages in Actions workflow mode, restored the
   `docs.flyto2.com` custom domain, and republished the verified docs site after

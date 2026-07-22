@@ -1,3 +1,4 @@
+/** Validate launch-critical Warroom CE pages and canonical public references. */
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -7,6 +8,11 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const requiredFiles = [
   'warroom/self-hosted-ce.md',
   'warroom/index.md',
+  'core/whitepaper.md',
+  'core/reference/index.md',
+  'core/reference/python-api.md',
+  'reference/docs-code.md',
+  'docs/documentation-manifest.json',
   'public/llms.txt',
   'public/llms-full.txt',
   '.vitepress/config.mts',
@@ -17,6 +23,8 @@ const requiredReferences = [
   'https://docs.flyto2.com/warroom/self-hosted-ce',
   'https://github.com/flytohub/flyto-warroom',
   'https://hub.docker.com/r/chesterhsu/flyto-warroom',
+  'https://docs.flyto2.com/core/whitepaper',
+  'https://docs.flyto2.com/core/reference/',
 ];
 
 const failures = [];
@@ -33,6 +41,9 @@ if (!sidebar.includes("link: '/warroom/self-hosted-ce'")) {
 }
 if (!sidebar.includes('https://github.com/flytohub/flyto-warroom')) {
   failures.push('social link should point at flyto-warroom during CE launch');
+}
+if (!sidebar.includes("link: '/core/reference/python-api'")) {
+  failures.push('sidebar missing source-backed Core Python reference');
 }
 
 const warroomIndex = readFileSync(path.join(root, 'warroom/index.md'), 'utf8');

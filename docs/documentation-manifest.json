@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "repository": "flyto-docs",
+  "documentation": {
+    "source_reference": "reference/docs-code.md",
+    "module_roots": [".vitepress", "scripts"]
+  },
+  "owners": [
+    {
+      "area": "vitepress-runtime",
+      "paths": [".vitepress/**"],
+      "docs": ["ARCHITECTURE.md", "reference/docs-code.md"]
+    },
+    {
+      "area": "documentation-generators",
+      "paths": ["scripts/**"],
+      "docs": ["scripts/README.md", "reference/docs-code.md"]
+    },
+    {
+      "area": "package-and-build",
+      "paths": ["package.json", "package-lock.json", "lighthouserc.cjs"],
+      "docs": ["README.md", "docs/README.md"]
+    },
+    {
+      "area": "automation",
+      "paths": [".github/**"],
+      "docs": ["engineering/ci-standard.md", "docs/README.md"]
+    },
+    {
+      "area": "seo-contract",
+      "paths": [".seo/**", "public/*.txt", "public/*.xml", "public/*.json", "public/**/*.txt", "public/**/*.xml", "public/**/*.json", "public/robots.txt", "public/CNAME"],
+      "docs": ["scripts/README.md", "STATE.md"]
+    },
+    {
+      "area": "repository-policy",
+      "paths": [".flyto-rules.yaml", ".gitleaks.toml", ".env.example", "docs/documentation-manifest.json"],
+      "docs": ["AGENTS.md", "SECURITY.md", "docs/README.md"]
+    }
+  ]
+}

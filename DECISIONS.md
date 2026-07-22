@@ -1,5 +1,32 @@
 # Decisions
 
+## 2026-07-22 - Public references are source-backed and split by responsibility
+
+Decision: sync Core narrative/generated references from flyto-core, publish all
+5,351 declarations, and split Python declarations by runtime area and atomic
+module category. Generate a separate source map for Docs' own functions.
+
+Reason: hand-maintained totals and method lists drift. One giant declaration
+page is technically complete but difficult to load, browse, and review.
+
+## 2026-07-22 - Each generated module locale is a real VitePress locale
+
+Decision: register all 15 module locales in site and theme configuration with
+their own sidebar and lazy local-search index.
+
+Reason: placing translated files under locale-looking paths without registering
+them created one 6.3 MB root search index and did not provide a coherent
+language/navigation boundary.
+
+## 2026-07-22 - Documentation coverage is a release contract
+
+Decision: `npm run verify` rejects unowned source/config files, stale generated
+references, mismatched locale inventories, missing page identity, old module
+totals, legacy branding, unapproved email addresses, or broken built links.
+
+Reason: a green VitePress build alone does not prove that all features and
+methods remain documented or that public policy is consistent.
+
 ## 2026-07-18 - Docs own the technical community rules
 
 Decision: `/community/` documents contribution routing, good-first issue

@@ -1,3 +1,4 @@
+/** VitePress navigation, metadata, structured-data, locale, and sitemap contract. */
 import { defineConfig, type DefaultTheme } from 'vitepress'
 import {
   defaultOgLocale,
@@ -75,6 +76,18 @@ const PAGE_SEO: Record<string, { title: string; description: string }> = {
   'core/evidence-replay': {
     title: 'AI Agent Runtime with Queue and Replay',
     description: 'Flyto2 Core is an AI agent runtime with queue and replay so workflow steps can be audited, resumed, verified, and cited.',
+  },
+  'core/whitepaper': {
+    title: 'Flyto2 Core Technical Whitepaper',
+    description: 'Read the Flyto2 Core technical whitepaper for deterministic AI agent execution, module contracts, MCP transports, evidence, replay, security, and limitations.',
+  },
+  'core/reference': {
+    title: 'Flyto2 Core Source Reference',
+    description: 'Browse the Flyto2 Core source reference for Python declarations, module registrations, CLI parsers, HTTP routes, configuration, recipes, and maintained files.',
+  },
+  'core/reference/python-api': {
+    title: 'Flyto2 Core Python API Reference',
+    description: 'Use the Flyto2 Core Python API reference to find every maintained class, function, nested function, and method by runtime responsibility.',
   },
   mcp: {
     title: 'MCP Server Automation',
@@ -530,11 +543,45 @@ export default defineConfig({
       label: 'English',
       lang: 'en-US',
     },
+    'zh-TW': { label: 'Traditional Chinese', lang: 'zh-TW', link: '/zh-TW/' },
+    ja: { label: 'Japanese', lang: 'ja-JP', link: '/ja/' },
+    ko: { label: 'Korean', lang: 'ko-KR', link: '/ko/' },
+    fr: { label: 'French', lang: 'fr-FR', link: '/fr/' },
+    es: { label: 'Spanish', lang: 'es-ES', link: '/es/' },
+    hi: { label: 'Hindi', lang: 'hi-IN', link: '/hi/' },
+    de: { label: 'German', lang: 'de-DE', link: '/de/' },
+    'pt-BR': { label: 'Brazilian Portuguese', lang: 'pt-BR', link: '/pt-BR/' },
+    vi: { label: 'Vietnamese', lang: 'vi-VN', link: '/vi/' },
+    id: { label: 'Indonesian', lang: 'id-ID', link: '/id/' },
+    th: { label: 'Thai', lang: 'th-TH', link: '/th/' },
+    tr: { label: 'Turkish', lang: 'tr-TR', link: '/tr/' },
+    pl: { label: 'Polish', lang: 'pl-PL', link: '/pl/' },
+    it: { label: 'Italian', lang: 'it-IT', link: '/it/' },
   },
 
   themeConfig: {
     logo: '/logo.png',
     siteTitle: 'Flyto2 Docs',
+    // Only the module catalog is translated. Route language changes through each
+    // locale's landing page so English-only guides never produce a false 404.
+    i18nRouting: false,
+
+    locales: {
+      'zh-TW': localeModulesConfig('zh-TW'),
+      ja: localeModulesConfig('ja'),
+      ko: localeModulesConfig('ko'),
+      fr: localeModulesConfig('fr'),
+      es: localeModulesConfig('es'),
+      hi: localeModulesConfig('hi'),
+      de: localeModulesConfig('de'),
+      'pt-BR': localeModulesConfig('pt-BR'),
+      vi: localeModulesConfig('vi'),
+      id: localeModulesConfig('id'),
+      th: localeModulesConfig('th'),
+      tr: localeModulesConfig('tr'),
+      pl: localeModulesConfig('pl'),
+      it: localeModulesConfig('it'),
+    },
 
     nav: [
       {
@@ -645,12 +692,49 @@ export default defineConfig({
           ],
         },
         {
-          text: 'Related References',
+          text: 'Operate Core',
+          collapsed: true,
+          items: [
+            { text: 'Technical Whitepaper', link: '/core/whitepaper' },
+            { text: 'Feature Matrix', link: '/core/features' },
+            { text: 'Configuration', link: '/core/configuration' },
+            { text: 'CLI Guide', link: '/core/cli' },
+            { text: 'HTTP & MCP API', link: '/core/api' },
+            { text: 'Operations', link: '/core/operations' },
+            { text: 'Security Model', link: '/core/security-model' },
+            { text: 'Testing & Release Gates', link: '/core/testing' },
+            { text: 'Capability Status', link: '/core/migration-status' },
+          ],
+        },
+        {
+          text: 'Source Reference',
+          collapsed: true,
+          items: [
+            { text: 'Reference Index', link: '/core/reference/' },
+            { text: 'Python Declarations', link: '/core/reference/python-api' },
+            { text: 'Registered Modules', link: '/core/reference/registered-modules' },
+            { text: 'CLI Parsers', link: '/core/reference/cli' },
+            { text: 'HTTP Routes', link: '/core/reference/http-api' },
+            { text: 'Environment & Assets', link: '/core/reference/configuration' },
+            { text: 'Packaged Recipes', link: '/core/reference/recipes' },
+            { text: 'Source Inventory', link: '/core/reference/source-modules' },
+          ],
+        },
+        {
+          text: 'Related',
           collapsed: true,
           items: [
             { text: 'MCP Server', link: '/mcp/' },
             { text: 'Modules Reference', link: '/modules/' },
             { text: 'First Workflow', link: '/guide/first-workflow' },
+          ],
+        },
+      ],
+      '/reference/': [
+        {
+          text: 'Docs Implementation',
+          items: [
+            { text: 'Code Reference', link: '/reference/docs-code' },
           ],
         },
       ],

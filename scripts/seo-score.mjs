@@ -1,3 +1,4 @@
+/** Score representative built pages for metadata, content, links, and discovery. */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -21,6 +22,9 @@ const routes = [
   'guide/modules-overview',
   'guide/configuration',
   'core',
+  'core/whitepaper',
+  'core/reference',
+  'core/reference/python-api',
   'core/architecture',
   'core/execution-model',
   'core/evidence-replay',
@@ -52,6 +56,9 @@ const focusByRoute = new Map([
   ['guide/modules-overview', 'MCP server automation'],
   ['guide/configuration', 'workflow automation configuration'],
   ['core', 'open source execution engine for AI agents'],
+  ['core/whitepaper', 'Flyto2 Core technical whitepaper'],
+  ['core/reference', 'Flyto2 Core source reference'],
+  ['core/reference/python-api', 'Flyto2 Core Python API reference'],
   ['core/architecture', 'AI agent runtime architecture'],
   ['core/execution-model', 'versioned workflow automation engine'],
   ['core/evidence-replay', 'AI agent runtime with queue and replay'],
