@@ -12,7 +12,7 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-python@v5
         with:
@@ -23,13 +23,13 @@ jobs:
           node-version: 22
 
       - name: Clone flyto-core
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: flytohub/flyto-core
           path: _flyto-core
 
       - name: Clone flyto-i18n
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: flytohub/flyto-i18n
           path: _flyto-i18n
