@@ -11,6 +11,7 @@
     "state": "STATE.md",
     "security": "SECURITY.md",
     "changelog": "CHANGELOG.md",
+    "whitepaper": "core/whitepaper.md",
     "feature_reference": "docs/README.md",
     "source_reference": "reference/docs-code.md",
     "module_roots": [".vitepress", "scripts"]
