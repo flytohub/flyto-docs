@@ -2,7 +2,7 @@
 
 GitHub API, HTTP requests, and search engine integrations.
 
-**9 modules**
+**10 modules**
 
 | Module | Description |
 |--------|-------------|
@@ -15,6 +15,7 @@ GitHub API, HTTP requests, and search engine integrations.
 | [HTTP GET Request](#http-get-request) | Send HTTP GET request to any URL |
 | [HTTP POST Request](#http-post-request) | Send HTTP POST request to any URL |
 | [Google Search (SerpAPI)](#google-search-serpapi) | Use SerpAPI to search keywords (100 free searches/month) |
+| [Web Search (Tavily)](#web-search-tavily) | Use Tavily API for AI-optimized web search |
 
 ## Modules
 
@@ -317,6 +318,34 @@ Use SerpAPI to search keywords (100 free searches/month)
 | `count` | number | Number of items |
 
 **Example:** Search with SerpAPI
+
+```yaml
+keyword: machine learning
+limit: 10
+```
+
+### Web Search (Tavily)
+
+`core.api.tavily_search`
+
+Use Tavily API for AI-optimized web search
+
+**Parameters:**
+
+| Name | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `keyword` | string | Yes | - | Search keyword or query |
+| `limit` | number | No | `10` | Maximum number of results |
+
+**Output:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `status` | string | Operation status (success/error) |
+| `data` | array | Output data from the operation |
+| `count` | number | Number of items |
+
+**Example:** Search with Tavily
 
 ```yaml
 keyword: machine learning

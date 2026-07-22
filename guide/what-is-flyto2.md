@@ -2,7 +2,7 @@
 
 Flyto2 is a **security war room for evidence-backed CTEM**. It integrates existing ASM, EASM, dark web, code security, pentest, red-team, and AI/MCP signals into one workflow so teams can correlate, validate, and act with evidence.
 
-At its core is **flyto-core**, an open-source deterministic execution engine with 451 registry-backed modules across 84 catalog categories, 41 built-in recipes, MCP transports, evidence capture, and replayable YAML execution.
+At its core is **flyto-core**, an open-source deterministic execution engine with 452 registry-backed modules across 84 catalog categories, 41 built-in recipes, MCP transports, evidence capture, and replayable YAML execution.
 
 ## Key Concepts
 
@@ -16,7 +16,7 @@ A workflow chains modules together into a sequence of steps. Flyto2 executes the
 Every execution produces a full trace with evidence snapshots. You can replay from any step, making debugging and auditing straightforward.
 
 ### MCP Server
-flyto-core runs as an MCP (Model Context Protocol) server over stdio and streamable HTTP, making all 451 modules available as bounded tools for compatible AI agents.
+flyto-core runs as an MCP (Model Context Protocol) server over stdio and streamable HTTP, making all 452 modules available as bounded tools for compatible AI agents.
 
 ## Use Cases
 

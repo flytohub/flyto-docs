@@ -66,7 +66,7 @@ const focusByRoute = new Map([
   ['mcp/stdio', 'MCP stdio transport'],
   ['mcp/streamable-http', 'MCP streamable HTTP'],
   ['mcp/client-config', 'MCP client configuration'],
-  ['modules', '451 registry-backed modules'],
+  ['modules', '452 registry-backed modules'],
   ['modules/browser', 'no code browser automation'],
   ['modules/mcp', 'MCP automation tools'],
   ['modules/verify', 'workflow verification'],

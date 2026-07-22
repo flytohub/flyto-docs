@@ -1,8 +1,8 @@
-<!-- Synced from flytohub/flyto-core@df9a861d9e4addbf859ac07d03914d77b820c768 by scripts/sync-core-reference.py; do not edit here. -->
+<!-- Synced from flytohub/flyto-core@60881082b55d22ca915f3aa08f99f7cb822f17fb by scripts/sync-core-reference.py; do not edit here. -->
 
 # Python Declarations: Modules: Atomic / Document
 
-Source-backed signatures for **40 declarations** across **8 files** in the modules: atomic / document area.
+Source-backed signatures for **44 declarations** across **8 files** in the modules: atomic / document area.
 
 ## `src/core/modules/atomic/document/excel_read.py`
 
@@ -39,6 +39,10 @@ Source-backed signatures for **40 declarations** across **8 files** in the modul
 |---|---|---|---|
 | function | `async def pdf_generate(context: Dict&#91;str, Any&#93;) -> Dict&#91;str, Any&#93;` | Generate PDF from HTML or text content | [`src/core/modules/atomic/document/pdf_generate.py:88`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/document/pdf_generate.py#L88) |
 | method | `def pdf_generate._generate()` | Implements `pdf_generate._generate`; linked source is authoritative. | [`src/core/modules/atomic/document/pdf_generate.py:123`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/document/pdf_generate.py#L123) |
+| class | `class pdf_generate._generate.SimpleHTMLParser(HTMLParser)` | Defines the SimpleHTMLParser runtime contract. | [`src/core/modules/atomic/document/pdf_generate.py:146`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/document/pdf_generate.py#L146) |
+| method | `def pdf_generate._generate.SimpleHTMLParser.__init__(self)` | Implements `pdf_generate._generate.SimpleHTMLParser.__init__`; linked source is authoritative. | [`src/core/modules/atomic/document/pdf_generate.py:147`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/document/pdf_generate.py#L147) |
+| method | `def pdf_generate._generate.SimpleHTMLParser.handle_starttag(self, tag, attrs)` | Implements `pdf_generate._generate.SimpleHTMLParser.handle_starttag`; linked source is authoritative. | [`src/core/modules/atomic/document/pdf_generate.py:152`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/document/pdf_generate.py#L152) |
+| method | `def pdf_generate._generate.SimpleHTMLParser.handle_data(self, data)` | Implements `pdf_generate._generate.SimpleHTMLParser.handle_data`; linked source is authoritative. | [`src/core/modules/atomic/document/pdf_generate.py:158`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/document/pdf_generate.py#L158) |
 
 ## `src/core/modules/atomic/document/pdf_parse.py`
 

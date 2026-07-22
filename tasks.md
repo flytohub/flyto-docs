@@ -10,7 +10,7 @@
 - [x] Register all 15 module locales with separate navigation and search indexes.
 - [x] Publish the source-backed Core whitepaper, feature, API, CLI,
   configuration, operations, security, test, migration, and reference pages.
-- [x] Split and publish all 5,351 Core Python declarations by responsibility.
+- [x] Split and publish all 5,382 Core Python declarations by responsibility.
 - [x] Generate a function/method reference for Docs' own maintained code.
 - [x] Enforce documentation ownership, generated inventory, Flyto2 naming,
   approved mailboxes, and old module-count rejection in CI.

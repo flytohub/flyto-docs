@@ -7,13 +7,13 @@ current flyto-core source and for Docs' own generators and audits.
 
 ## Contracts
 
-- `scripts/generate-docs.py` produces 60 pages and 451 module IDs for each of
+- `scripts/generate-docs.py` produces 60 pages and 452 module IDs for each of
   15 locales from flyto-core and flyto-i18n.
 - `scripts/sync-core-reference.py` syncs nine narrative pages and generated
   CLI, HTTP, configuration, recipe, registration, source, and declaration data.
 - Python declarations are split into 91 responsibility/category pages plus an
-  index; the index total must remain 5,351 declarations across 786 files until
-  the next source change updates both source and docs.
+  index; the current total is 5,382 declarations across 786 files. The next
+  source change must update both source and docs.
 - `scripts/generate-code-reference.py` indexes Docs' own maintained functions.
 - `scripts/check-documentation.py` validates all files, ownership, inventories,
   brand identity, approved mailboxes, and generated drift.

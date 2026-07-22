@@ -27,7 +27,7 @@ Each scanner writes structured, evidence-bearing findings rather than raw output
 
 ### Discovery scanners as deterministic modules
 
-The discovery pipeline is not a black box. Every scanner is a deterministic module on the same [flyto-core](/) execution substrate (451 modules, MCP-native, YAML recipes, evidence and replay) that runs the automation product line. That is why discovery is replayable: the same domain, the same modules, the same evidence — re-runnable on demand or on a schedule (hourly threat feeds, daily TLS, weekly full re-discovery). Automation is the *how*; the attack-surface war-room is the *what and why*.
+The discovery pipeline is not a black box. Every scanner is a deterministic module on the same [flyto-core](/) execution substrate (452 modules, MCP-native, YAML recipes, evidence and replay) that runs the automation product line. That is why discovery is replayable: the same domain, the same modules, the same evidence — re-runnable on demand or on a schedule (hourly threat feeds, daily TLS, weekly full re-discovery). Automation is the *how*; the attack-surface war-room is the *what and why*.
 
 ## The two surfaces and their routes
 

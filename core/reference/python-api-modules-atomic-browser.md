@@ -1,8 +1,8 @@
-<!-- Synced from flytohub/flyto-core@df9a861d9e4addbf859ac07d03914d77b820c768 by scripts/sync-core-reference.py; do not edit here. -->
+<!-- Synced from flytohub/flyto-core@60881082b55d22ca915f3aa08f99f7cb822f17fb by scripts/sync-core-reference.py; do not edit here. -->
 
 # Python Declarations: Modules: Atomic / Browser
 
-Source-backed signatures for **213 declarations** across **55 files** in the modules: atomic / browser area.
+Source-backed signatures for **220 declarations** across **55 files** in the modules: atomic / browser area.
 
 ## `src/core/modules/atomic/browser/_hints.py`
 
@@ -252,6 +252,10 @@ Source-backed signatures for **213 declarations** across **55 files** in the mod
 | method | `def BrowserNetworkModule._matches_filter(self, request) -> bool` | Check if request matches filters | [`src/core/modules/atomic/browser/network.py:157`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/browser/network.py#L157) |
 | method | `def BrowserNetworkModule._safe_url(self, url: str) -> str` | Implements `BrowserNetworkModule._safe_url`; linked source is authoritative. | [`src/core/modules/atomic/browser/network.py:165`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/browser/network.py#L165) |
 | method | `async def BrowserNetworkModule.execute(self) -> Any` | Implements `BrowserNetworkModule.execute`; linked source is authoritative. | [`src/core/modules/atomic/browser/network.py:171`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/browser/network.py#L171) |
+| method | `def BrowserNetworkModule.execute.handle_request(request)` | Implements `BrowserNetworkModule.execute.handle_request`; linked source is authoritative. | [`src/core/modules/atomic/browser/network.py:183`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/browser/network.py#L183) |
+| method | `def BrowserNetworkModule.execute.handle_response(response)` | Implements `BrowserNetworkModule.execute.handle_response`; linked source is authoritative. | [`src/core/modules/atomic/browser/network.py:195`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/browser/network.py#L195) |
+| method | `async def BrowserNetworkModule.execute.handle_route(route)` | Implements `BrowserNetworkModule.execute.handle_route`; linked source is authoritative. | [`src/core/modules/atomic/browser/network.py:219`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/browser/network.py#L219) |
+| method | `async def BrowserNetworkModule.execute.handle_route(route)` | Implements `BrowserNetworkModule.execute.handle_route`; linked source is authoritative. | [`src/core/modules/atomic/browser/network.py:246`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/browser/network.py#L246) |
 
 ## `src/core/modules/atomic/browser/pages.py`
 
@@ -343,6 +347,9 @@ Source-backed signatures for **213 declarations** across **55 files** in the mod
 | class | `class BrowserRecordModule(BaseModule)` | Record Actions Module | [`src/core/modules/atomic/browser/record.py:91`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/browser/record.py#L91) |
 | method | `def BrowserRecordModule.validate_params(self) -> None` | Implements `BrowserRecordModule.validate_params`; linked source is authoritative. | [`src/core/modules/atomic/browser/record.py:102`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/browser/record.py#L102) |
 | method | `async def BrowserRecordModule.execute(self) -> Any` | Implements `BrowserRecordModule.execute`; linked source is authoritative. | [`src/core/modules/atomic/browser/record.py:113`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/browser/record.py#L113) |
+| method | `async def BrowserRecordModule.execute.on_click(element)` | Implements `BrowserRecordModule.execute.on_click`; linked source is authoritative. | [`src/core/modules/atomic/browser/record.py:125`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/browser/record.py#L125) |
+| method | `async def BrowserRecordModule.execute.on_input(element, value)` | Implements `BrowserRecordModule.execute.on_input`; linked source is authoritative. | [`src/core/modules/atomic/browser/record.py:132`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/browser/record.py#L132) |
+| method | `def BrowserRecordModule.execute.handle_console(msg)` | Implements `BrowserRecordModule.execute.handle_console`; linked source is authoritative. | [`src/core/modules/atomic/browser/record.py:140`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/browser/record.py#L140) |
 | method | `def BrowserRecordModule._generate_workflow(self, recording: List&#91;Dict&#91;str, Any&#93;&#93;) -> str` | Generate workflow from recorded actions | [`src/core/modules/atomic/browser/record.py:249`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/browser/record.py#L249) |
 | method | `async def BrowserRecordModule._get_selector(self, element) -> str` | Get unique selector for element | [`src/core/modules/atomic/browser/record.py:270`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/browser/record.py#L270) |
 

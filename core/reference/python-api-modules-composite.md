@@ -1,8 +1,8 @@
-<!-- Synced from flytohub/flyto-core@df9a861d9e4addbf859ac07d03914d77b820c768 by scripts/sync-core-reference.py; do not edit here. -->
+<!-- Synced from flytohub/flyto-core@60881082b55d22ca915f3aa08f99f7cb822f17fb by scripts/sync-core-reference.py; do not edit here. -->
 
 # Python Declarations: Modules: Composite
 
-Source-backed signatures for **54 declarations** across **17 files** in the modules: composite area.
+Source-backed signatures for **55 declarations** across **17 files** in the modules: composite area.
 
 ## `src/core/modules/composite/__init__.py`
 
@@ -40,6 +40,7 @@ Source-backed signatures for **54 declarations** across **17 files** in the modu
 | method | `async def CompositeModule._execute_step(self, step_config: Dict&#91;str, Any&#93;, step_id: str) -> Any` | Execute a single step within the composite | [`src/core/modules/composite/base/module.py:99`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/composite/base/module.py#L99) |
 | method | `def CompositeModule._resolve_params(self, params: Dict&#91;str, Any&#93;) -> Dict&#91;str, Any&#93;` | Resolve parameter variables | [`src/core/modules/composite/base/module.py:121`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/composite/base/module.py#L121) |
 | method | `def CompositeModule._resolve_params.resolve_value(value: Any) -> Any` | Implements `CompositeModule._resolve_params.resolve_value`; linked source is authoritative. | [`src/core/modules/composite/base/module.py:131`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/composite/base/module.py#L131) |
+| method | `def CompositeModule._resolve_params.resolve_value.replacer(match)` | Implements `CompositeModule._resolve_params.resolve_value.replacer`; linked source is authoritative. | [`src/core/modules/composite/base/module.py:136`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/composite/base/module.py#L136) |
 | method | `def CompositeModule._get_nested(data: Dict&#91;str, Any&#93;, path: str, default: Any=None) -> Any` | Get nested value from dict using dot notation | [`src/core/modules/composite/base/module.py:164`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/composite/base/module.py#L164) |
 | method | `def CompositeModule._build_output(self, metadata: Dict&#91;str, Any&#93;) -> Dict&#91;str, Any&#93;` | Build composite output based on output_schema | [`src/core/modules/composite/base/module.py:170`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/composite/base/module.py#L170) |
 

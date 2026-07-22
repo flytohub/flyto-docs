@@ -19,7 +19,7 @@ const checkedPages = [
   { name: 'core', file: 'core/index.html', canonical: `${siteUrl}/core`, terms: ['flyto-core', 'execution'] },
   { name: 'core whitepaper', file: 'core/whitepaper.html', canonical: `${siteUrl}/core/whitepaper`, terms: ['module contract', 'security model'] },
   { name: 'core reference', file: 'core/reference/index.html', canonical: `${siteUrl}/core/reference`, terms: ['Python declaration reference', 'HTTP route reference'] },
-  { name: 'python api', file: 'core/reference/python-api.html', canonical: `${siteUrl}/core/reference/python-api`, terms: ['5351 declarations', 'Workflow Engine'] },
+  { name: 'python api', file: 'core/reference/python-api.html', canonical: `${siteUrl}/core/reference/python-api`, terms: ['5382 declarations', 'Workflow Engine'] },
   { name: 'mcp', file: 'mcp/index.html', canonical: `${siteUrl}/mcp`, terms: ['MCP'] },
   { name: 'modules', file: 'modules/index.html', canonical: `${siteUrl}/modules`, terms: ['modules'] },
   { name: 'getting started', file: 'guide/getting-started.html', canonical: `${siteUrl}/guide/getting-started`, terms: ['workflow'] },
@@ -51,15 +51,24 @@ const requiredLlmsTokens = [
   'open source AI agent framework',
   'MCP server automation',
   'flyto-core',
-  '451 registry-backed modules',
-  '5,351 Python declarations',
+  '452 registry-backed modules',
+  '5,382 Python declarations',
   'https://docs.flyto2.com/core/reference/',
   'Warroom CE',
   'https://docs.flyto2.com/image-sitemap.xml',
   'https://flyto2.com/open-source/',
   'https://blog.flyto2.com',
 ];
-const requiredKeywordMatrixTokens = ['Volume', 'SD', 'PD', 'CPC', 'Long-Tail Docs Routing', 'Ubersuggest'];
+const requiredKeywordMatrixTokens = [
+  'Volume',
+  'SD',
+  'PD',
+  'CPC',
+  'Long-Tail Docs Routing',
+  'Evidence Caveats',
+  'MCP security',
+  'Ubersuggest',
+];
 
 function fail(message) {
   failures.push(message);

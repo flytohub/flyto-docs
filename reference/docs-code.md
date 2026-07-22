@@ -4,21 +4,21 @@
 
 Source map for every maintained function and configuration method in the Flyto2 Docs generators, audits, SEO gates, and VitePress configuration.
 
-Inventory: **14 files**, **3709 lines**, and **155 declarations**.
+Inventory: **14 files**, **3720 lines**, and **155 declarations**.
 
 ## `.vitepress/config.mts`
 
 | Kind | Signature | Responsibility | Source |
 |---|---|---|---|
-| function | `toPublicPath(url: string)` | Implements `toPublicPath` in this documentation surface. | [`.vitepress/config.mts:178`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L178) |
-| function | `isNonContentPath(relativePath: string)` | Implements `isNonContentPath` in this documentation surface. | [`.vitepress/config.mts:182`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L182) |
-| function | `isNonContentPublicPath(publicPath: string)` | Implements `isNonContentPublicPath` in this documentation surface. | [`.vitepress/config.mts:189`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L189) |
-| function | `titleFromSegment(segment: string)` | Implements `titleFromSegment` in this documentation surface. | [`.vitepress/config.mts:199`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L199) |
-| function | `breadcrumbItems(canonicalPath: string, title: string)` | Implements `breadcrumbItems` in this documentation surface. | [`.vitepress/config.mts:207`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L207) |
-| function | `modulesSidebar(prefix = '')` | Implements `modulesSidebar` in this documentation surface. | [`.vitepress/config.mts:230`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L230) |
-| function | `localeModulesConfig(prefix: string)` | Implements `localeModulesConfig` in this documentation surface. | [`.vitepress/config.mts:342`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L342) |
-| method | `transformItems(items)` | Implements `transformItems` in this documentation surface. | [`.vitepress/config.mts:402`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L402) |
-| method | `transformPageData(pageData)` | Implements `transformPageData` in this documentation surface. | [`.vitepress/config.mts:457`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L457) |
+| function | `toPublicPath(url: string)` | Implements `toPublicPath` in this documentation surface. | [`.vitepress/config.mts:180`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L180) |
+| function | `isNonContentPath(relativePath: string)` | Implements `isNonContentPath` in this documentation surface. | [`.vitepress/config.mts:184`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L184) |
+| function | `isNonContentPublicPath(publicPath: string)` | Implements `isNonContentPublicPath` in this documentation surface. | [`.vitepress/config.mts:191`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L191) |
+| function | `titleFromSegment(segment: string)` | Implements `titleFromSegment` in this documentation surface. | [`.vitepress/config.mts:201`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L201) |
+| function | `breadcrumbItems(canonicalPath: string, title: string)` | Implements `breadcrumbItems` in this documentation surface. | [`.vitepress/config.mts:209`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L209) |
+| function | `modulesSidebar(prefix = '')` | Implements `modulesSidebar` in this documentation surface. | [`.vitepress/config.mts:232`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L232) |
+| function | `localeModulesConfig(prefix: string)` | Implements `localeModulesConfig` in this documentation surface. | [`.vitepress/config.mts:344`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L344) |
+| method | `transformItems(items)` | Implements `transformItems` in this documentation surface. | [`.vitepress/config.mts:404`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L404) |
+| method | `transformPageData(pageData)` | Implements `transformPageData` in this documentation surface. | [`.vitepress/config.mts:459`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L459) |
 
 ## `.vitepress/seo-contract.ts`
 
@@ -41,30 +41,30 @@ Inventory: **14 files**, **3709 lines**, and **155 declarations**.
 
 | Kind | Signature | Responsibility | Source |
 |---|---|---|---|
-| function | `fail(message)` | Implements `fail` in this documentation surface. | [`scripts/audit-seo-surface.mjs:64`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L64) |
-| function | `sha256(value)` | Implements `sha256` in this documentation surface. | [`scripts/audit-seo-surface.mjs:68`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L68) |
-| function | `loadSeoContract()` | Implements `loadSeoContract` in this documentation surface. | [`scripts/audit-seo-surface.mjs:72`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L72) |
-| function | `decodeHtml(value)` | Implements `decodeHtml` in this documentation surface. | [`scripts/audit-seo-surface.mjs:80`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L80) |
-| function | `getTags(html, tagName)` | Implements `getTags` in this documentation surface. | [`scripts/audit-seo-surface.mjs:91`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L91) |
-| function | `attrs(rawAttrs)` | Implements `attrs` in this documentation surface. | [`scripts/audit-seo-surface.mjs:95`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L95) |
-| function | `findMeta(html, key, value)` | Implements `findMeta` in this documentation surface. | [`scripts/audit-seo-surface.mjs:103`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L103) |
-| function | `findLink(html, rel, hrefLang = null)` | Implements `findLink` in this documentation surface. | [`scripts/audit-seo-surface.mjs:114`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L114) |
-| function | `publicAssetPath(url)` | Implements `publicAssetPath` in this documentation surface. | [`scripts/audit-seo-surface.mjs:127`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L127) |
-| function | `checkPublicAsset(label, metaLabel, url)` | Implements `checkPublicAsset` in this documentation surface. | [`scripts/audit-seo-surface.mjs:138`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L138) |
-| function | `contractKeywordTerms()` | Implements `contractKeywordTerms` in this documentation surface. | [`scripts/audit-seo-surface.mjs:143`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L143) |
-| function | `checkAlternateLinks(label, html, expectedHreflangs)` | Implements `checkAlternateLinks` in this documentation surface. | [`scripts/audit-seo-surface.mjs:150`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L150) |
-| function | `titleFrom(html)` | Implements `titleFrom` in this documentation surface. | [`scripts/audit-seo-surface.mjs:158`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L158) |
-| function | `checkLength(label, value, min, max)` | Implements `checkLength` in this documentation surface. | [`scripts/audit-seo-surface.mjs:163`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L163) |
-| function | `sitemapLocVariants(url)` | Implements `sitemapLocVariants` in this documentation surface. | [`scripts/audit-seo-surface.mjs:169`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L169) |
-| function | `checkBrandAndEmails(label, content)` | Implements `checkBrandAndEmails` in this documentation surface. | [`scripts/audit-seo-surface.mjs:173`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L173) |
-| function | `checkPage(page)` | Implements `checkPage` in this documentation surface. | [`scripts/audit-seo-surface.mjs:181`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L181) |
-| function | `checkLocalizedPage(page)` | Implements `checkLocalizedPage` in this documentation surface. | [`scripts/audit-seo-surface.mjs:222`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L222) |
-| function | `checkSeoContract()` | Implements `checkSeoContract` in this documentation surface. | [`scripts/audit-seo-surface.mjs:240`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L240) |
-| function | `checkDist()` | Implements `checkDist` in this documentation surface. | [`scripts/audit-seo-surface.mjs:276`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L276) |
-| function | `checkSitemapRobotsLlms()` | Implements `checkSitemapRobotsLlms` in this documentation surface. | [`scripts/audit-seo-surface.mjs:293`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L293) |
-| function | `checkDiscoveryFiles()` | Implements `checkDiscoveryFiles` in this documentation surface. | [`scripts/audit-seo-surface.mjs:327`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L327) |
-| function | `newestKeywordMatrix()` | Implements `newestKeywordMatrix` in this documentation surface. | [`scripts/audit-seo-surface.mjs:356`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L356) |
-| function | `checkKeywordMatrix()` | Implements `checkKeywordMatrix` in this documentation surface. | [`scripts/audit-seo-surface.mjs:368`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L368) |
+| function | `fail(message)` | Implements `fail` in this documentation surface. | [`scripts/audit-seo-surface.mjs:73`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L73) |
+| function | `sha256(value)` | Implements `sha256` in this documentation surface. | [`scripts/audit-seo-surface.mjs:77`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L77) |
+| function | `loadSeoContract()` | Implements `loadSeoContract` in this documentation surface. | [`scripts/audit-seo-surface.mjs:81`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L81) |
+| function | `decodeHtml(value)` | Implements `decodeHtml` in this documentation surface. | [`scripts/audit-seo-surface.mjs:89`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L89) |
+| function | `getTags(html, tagName)` | Implements `getTags` in this documentation surface. | [`scripts/audit-seo-surface.mjs:100`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L100) |
+| function | `attrs(rawAttrs)` | Implements `attrs` in this documentation surface. | [`scripts/audit-seo-surface.mjs:104`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L104) |
+| function | `findMeta(html, key, value)` | Implements `findMeta` in this documentation surface. | [`scripts/audit-seo-surface.mjs:112`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L112) |
+| function | `findLink(html, rel, hrefLang = null)` | Implements `findLink` in this documentation surface. | [`scripts/audit-seo-surface.mjs:123`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L123) |
+| function | `publicAssetPath(url)` | Implements `publicAssetPath` in this documentation surface. | [`scripts/audit-seo-surface.mjs:136`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L136) |
+| function | `checkPublicAsset(label, metaLabel, url)` | Implements `checkPublicAsset` in this documentation surface. | [`scripts/audit-seo-surface.mjs:147`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L147) |
+| function | `contractKeywordTerms()` | Implements `contractKeywordTerms` in this documentation surface. | [`scripts/audit-seo-surface.mjs:152`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L152) |
+| function | `checkAlternateLinks(label, html, expectedHreflangs)` | Implements `checkAlternateLinks` in this documentation surface. | [`scripts/audit-seo-surface.mjs:159`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L159) |
+| function | `titleFrom(html)` | Implements `titleFrom` in this documentation surface. | [`scripts/audit-seo-surface.mjs:167`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L167) |
+| function | `checkLength(label, value, min, max)` | Implements `checkLength` in this documentation surface. | [`scripts/audit-seo-surface.mjs:172`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L172) |
+| function | `sitemapLocVariants(url)` | Implements `sitemapLocVariants` in this documentation surface. | [`scripts/audit-seo-surface.mjs:178`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L178) |
+| function | `checkBrandAndEmails(label, content)` | Implements `checkBrandAndEmails` in this documentation surface. | [`scripts/audit-seo-surface.mjs:182`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L182) |
+| function | `checkPage(page)` | Implements `checkPage` in this documentation surface. | [`scripts/audit-seo-surface.mjs:190`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L190) |
+| function | `checkLocalizedPage(page)` | Implements `checkLocalizedPage` in this documentation surface. | [`scripts/audit-seo-surface.mjs:231`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L231) |
+| function | `checkSeoContract()` | Implements `checkSeoContract` in this documentation surface. | [`scripts/audit-seo-surface.mjs:249`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L249) |
+| function | `checkDist()` | Implements `checkDist` in this documentation surface. | [`scripts/audit-seo-surface.mjs:285`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L285) |
+| function | `checkSitemapRobotsLlms()` | Implements `checkSitemapRobotsLlms` in this documentation surface. | [`scripts/audit-seo-surface.mjs:302`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L302) |
+| function | `checkDiscoveryFiles()` | Implements `checkDiscoveryFiles` in this documentation surface. | [`scripts/audit-seo-surface.mjs:336`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L336) |
+| function | `newestKeywordMatrix()` | Implements `newestKeywordMatrix` in this documentation surface. | [`scripts/audit-seo-surface.mjs:365`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L365) |
+| function | `checkKeywordMatrix()` | Implements `checkKeywordMatrix` in this documentation surface. | [`scripts/audit-seo-surface.mjs:377`](https://github.com/flytohub/flyto-docs/blob/main/scripts/audit-seo-surface.mjs#L377) |
 
 ## `scripts/check-documentation.py`
 

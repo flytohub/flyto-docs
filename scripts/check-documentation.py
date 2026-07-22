@@ -133,8 +133,8 @@ def check_module_mirrors() -> list[str]:
         path.read_text(encoding="utf-8") for path in english_dir.glob("*.md")
     )
     module_ids = set(re.findall(r"(?m)^`([a-z0-9_]+(?:\.[a-z0-9_]+)+)`$", english_text))
-    if len(module_ids) != 451:
-        failures.append(f"English module reference expected 451 module IDs, found {len(module_ids)}")
+    if len(module_ids) != 452:
+        failures.append(f"English module reference expected 452 module IDs, found {len(module_ids)}")
 
     for locale in LOCALES:
         directory = english_dir if locale == "en" else ROOT / locale / "modules"
@@ -148,7 +148,7 @@ def check_module_mirrors() -> list[str]:
         index = directory / "index.md"
         if index.exists():
             content = index.read_text(encoding="utf-8")
-            for token in ("451 registry-backed modules", "84 prefix categories", "41 built-in recipes"):
+            for token in ("452 registry-backed modules", "84 prefix categories", "41 built-in recipes"):
                 if token not in content:
                     failures.append(f"{locale}/modules/index.md missing inventory token: {token}")
     return failures
@@ -175,15 +175,15 @@ def check_core_reference() -> list[str]:
     if python_index.exists():
         content = python_index.read_text(encoding="utf-8")
         match = re.search(r"\*\*(\d[\d,]*) declarations across (\d[\d,]*) files\.\*\*", content)
-        if not match or tuple(value.replace(",", "") for value in match.groups()) != ("5351", "786"):
-            failures.append("core Python reference must report 5,351 declarations across 786 files")
+        if not match or tuple(value.replace(",", "") for value in match.groups()) != ("5382", "786"):
+            failures.append("core Python reference must report 5,382 declarations across 786 files")
         split_total = 0
         for page in reference_dir.glob("python-api-*.md"):
             page_match = re.search(r"\*\*(\d[\d,]*) declarations\*\*", page.read_text(encoding="utf-8"))
             if page_match:
                 split_total += int(page_match.group(1).replace(",", ""))
-        if split_total != 5351:
-            failures.append(f"split Python reference totals {split_total}, expected 5351")
+        if split_total != 5382:
+            failures.append(f"split Python reference totals {split_total}, expected 5382")
 
     for path in (ROOT / "core").glob("*.md"):
         if path.name == "index.md" or path.name in {"architecture.md", "evidence-replay.md", "execution-model.md"}:
@@ -230,7 +230,7 @@ def main() -> int:
         return 1
     print(
         f"documentation contract passed: {len(markdown)} Markdown files, "
-        f"{len(files)} maintained files, 451 modules, 5,351 Core declarations"
+        f"{len(files)} maintained files, 452 modules, 5,382 Core declarations"
     )
     return 0
 

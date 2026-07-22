@@ -1,6 +1,6 @@
 # Modules
 
-flyto-core ships 451 registry-backed modules. The full core catalog tracks 84 prefix categories; these docs group modules into stable documentation categories with defined inputs, outputs, and evidence. The runtime also includes 41 built-in recipes.
+flyto-core ships 452 registry-backed modules. The full core catalog tracks 84 prefix categories; these docs group modules into stable documentation categories with defined inputs, outputs, and evidence. The runtime also includes 41 built-in recipes.
 
 ## Browse by Category
 
@@ -37,7 +37,7 @@ flyto-core ships 451 registry-backed modules. The full core catalog tracks 84 pr
 | Category | Modules | Description |
 |----------|---------|-------------|
 | [Cloud Services](/de/modules/cloud) | 14 | AWS S3, Azure Blob, Google Cloud Storage, and Google Workspace integrations. |
-| [API Tools](/de/modules/api-tools) | 9 | GitHub API, HTTP requests, and search engine integrations. |
+| [API Tools](/de/modules/api-tools) | 10 | GitHub API, HTTP requests, and search engine integrations. |
 | [Database](/de/modules/database) | 9 | MongoDB, MySQL, PostgreSQL, and Redis database operations. |
 | [Docker](/de/modules/docker) | 6 | Build, run, inspect, and manage Docker containers. |
 | [Kubernetes](/de/modules/k8s) | 5 | Apply manifests, describe resources, get pods, logs, and scale deployments. |

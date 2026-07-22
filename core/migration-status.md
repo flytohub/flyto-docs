@@ -1,4 +1,4 @@
-<!-- Synced from flytohub/flyto-core@df9a861d9e4addbf859ac07d03914d77b820c768 by scripts/sync-core-reference.py; do not edit here. -->
+<!-- Synced from flytohub/flyto-core@60881082b55d22ca915f3aa08f99f7cb822f17fb by scripts/sync-core-reference.py; do not edit here. -->
 
 # Migration And Capability Status
 
@@ -6,11 +6,11 @@
 
 | Surface | Measured state |
 |---|---:|
-| Runtime catalog | 451 modules, 84 categories |
+| Runtime catalog | 452 modules, 84 categories |
 | Literal module registrations | 466 |
 | Packaged recipes | 41 |
 | Maintained Python source | 932 files, 190,753 lines |
-| Python declarations | 5,351 across 786 files |
+| Python declarations | 5,382 across 786 files |
 | Static CLI parsers | Generated in `reference/cli.md` |
 | Static HTTP operations | 22 |
 | Environment-variable names | 93 |

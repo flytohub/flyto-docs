@@ -1,8 +1,8 @@
-<!-- Synced from flytohub/flyto-core@df9a861d9e4addbf859ac07d03914d77b820c768 by scripts/sync-core-reference.py; do not edit here. -->
+<!-- Synced from flytohub/flyto-core@60881082b55d22ca915f3aa08f99f7cb822f17fb by scripts/sync-core-reference.py; do not edit here. -->
 
 # Python Declarations: Browser Runtime
 
-Source-backed signatures for **100 declarations** across **7 files** in the browser runtime area.
+Source-backed signatures for **101 declarations** across **7 files** in the browser runtime area.
 
 ## `src/core/browser/captcha.py`
 
@@ -60,6 +60,7 @@ Source-backed signatures for **100 declarations** across **7 files** in the brow
 | method | `async def BrowserDriver.get_hints(self, force: bool=False) -> Dict&#91;str, Any&#93;` | Get interactive element hints for current page, with URL-based caching. | [`src/core/browser/driver.py:1114`](https://github.com/flytohub/flyto-core/blob/main/src/core/browser/driver.py#L1114) |
 | method | `async def BrowserDriver.invalidate_hints(self, clear_stamps: bool=False)` | Clear cached hints. | [`src/core/browser/driver.py:1144`](https://github.com/flytohub/flyto-core/blob/main/src/core/browser/driver.py#L1144) |
 | method | `async def BrowserDriver.block_resources(self, resource_types: list)` | Block specified resource types to speed up page loads. | [`src/core/browser/driver.py:1169`](https://github.com/flytohub/flyto-core/blob/main/src/core/browser/driver.py#L1169) |
+| method | `async def BrowserDriver.block_resources._abort_blocked(route)` | Implements `BrowserDriver.block_resources._abort_blocked`; linked source is authoritative. | [`src/core/browser/driver.py:1183`](https://github.com/flytohub/flyto-core/blob/main/src/core/browser/driver.py#L1183) |
 | method | `async def BrowserDriver.unblock_resources(self)` | Remove all resource blocking rules. | [`src/core/browser/driver.py:1192`](https://github.com/flytohub/flyto-core/blob/main/src/core/browser/driver.py#L1192) |
 | method | `def BrowserDriver.human(self)` | Get HumanBehavior instance (or None if fast mode). | [`src/core/browser/driver.py:1200`](https://github.com/flytohub/flyto-core/blob/main/src/core/browser/driver.py#L1200) |
 | method | `async def BrowserDriver.rotate_proxy(self) -> Optional&#91;str&#93;` | Rotate to next proxy from pool. | [`src/core/browser/driver.py:1204`](https://github.com/flytohub/flyto-core/blob/main/src/core/browser/driver.py#L1204) |

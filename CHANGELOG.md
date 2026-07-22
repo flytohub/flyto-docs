@@ -7,7 +7,7 @@
 - Added public source-backed Core whitepaper, feature, API, CLI, configuration,
   operations, security, testing, migration, recipe, route, parser, environment,
   registration, source, and declaration references.
-- Added split public references for all 5,351 maintained Core Python
+- Added split public references for the then-current 5,351 maintained Core Python
   declarations across 786 files.
 - Added a generated reference for every maintained Docs script and VitePress
   function plus a documentation ownership manifest.

@@ -11,8 +11,8 @@ Current state on 2026-07-22:
   `discovery-manifest.json`, an OpenGraph image, and `.well-known/security.txt`.
 - The repository documentation corpus now contains 1,121 Markdown files. Core
   synchronization owns 108 pages, including 91 split declaration-area pages
-  plus a Python index covering 5,351 declarations in 786 maintained files.
-- The Core runtime reference records the current 451 modules, 84 categories,
+  plus a Python index covering 5,382 declarations in 786 maintained files.
+- The Core runtime reference records the current 452 modules, 84 categories,
   41 atomic categories, 932 source files, and the exact source commit used to
   build each public page. Source drift fails `npm run verify`.
 - The Docs implementation reference covers 14 maintained source/configuration
@@ -50,7 +50,7 @@ Current state on 2026-07-22:
 - Locale mirrors exist for module pages. Published localized module pages are
   now discoverable through hreflang alternates; missing locale equivalents are
   deliberately not advertised.
-- All 15 module locales contain the same 60-page, 451-module inventory. Locale
+- All 15 module locales contain the same 60-page, 452-module inventory. Locale
   navigation lands on an existing translated catalog instead of constructing
   false localized URLs for English-only guides and source references.
 - Latest local quality evidence: `npm run verify` passes the documentation,

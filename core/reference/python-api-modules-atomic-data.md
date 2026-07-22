@@ -1,8 +1,8 @@
-<!-- Synced from flytohub/flyto-core@df9a861d9e4addbf859ac07d03914d77b820c768 by scripts/sync-core-reference.py; do not edit here. -->
+<!-- Synced from flytohub/flyto-core@60881082b55d22ca915f3aa08f99f7cb822f17fb by scripts/sync-core-reference.py; do not edit here. -->
 
 # Python Declarations: Modules: Atomic / Data
 
-Source-backed signatures for **41 declarations** across **13 files** in the modules: atomic / data area.
+Source-backed signatures for **42 declarations** across **13 files** in the modules: atomic / data area.
 
 ## `src/core/modules/atomic/data/csv_read.py`
 
@@ -60,6 +60,7 @@ Source-backed signatures for **41 declarations** across **13 files** in the modu
 | method | `def DataPipelineModule._apply_filter(self, data: Any, filter_config: Any) -> List&#91;Any&#93;` | Apply filter operation. | [`src/core/modules/atomic/data/pipeline.py:381`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/data/pipeline.py#L381) |
 | method | `def DataPipelineModule._apply_map(self, data: Any, map_config: Any) -> List&#91;Any&#93;` | Apply map operation. | [`src/core/modules/atomic/data/pipeline.py:406`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/data/pipeline.py#L406) |
 | method | `def DataPipelineModule._apply_sort(self, data: Any, sort_config: Any) -> List&#91;Any&#93;` | Apply sort operation. | [`src/core/modules/atomic/data/pipeline.py:438`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/data/pipeline.py#L438) |
+| method | `def DataPipelineModule._apply_sort.sort_key(x)` | Implements `DataPipelineModule._apply_sort.sort_key`; linked source is authoritative. | [`src/core/modules/atomic/data/pipeline.py:453`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/data/pipeline.py#L453) |
 | method | `def DataPipelineModule._apply_unique(self, data: Any, unique_config: Any) -> List&#91;Any&#93;` | Apply unique operation. | [`src/core/modules/atomic/data/pipeline.py:464`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/data/pipeline.py#L464) |
 | method | `def DataPipelineModule._apply_flatten(self, data: Any, flatten_config: Any) -> List&#91;Any&#93;` | Apply flatten operation. | [`src/core/modules/atomic/data/pipeline.py:491`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/data/pipeline.py#L491) |
 | method | `def DataPipelineModule._apply_flatten._flatten(lst: List, d: int) -> List` | Implements `DataPipelineModule._apply_flatten._flatten`; linked source is authoritative. | [`src/core/modules/atomic/data/pipeline.py:502`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/data/pipeline.py#L502) |

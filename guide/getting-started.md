@@ -21,7 +21,7 @@ The fastest way to use flyto-core is as an MCP server:
 flyto-core mcp
 ```
 
-This starts an MCP server over STDIO, exposing all 451 modules as tools.
+This starts an MCP server over STDIO, exposing all 452 modules as tools.
 
 ### Connect with Claude Desktop
 

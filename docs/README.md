@@ -20,7 +20,7 @@ Frontend or public-surface documentation must follow the Flyto2 Frontend Quality
   operations, security, test, and migration pages.
 - `../core/reference/`: source-backed declarations, routes, parsers, recipes,
   environment readers, module registrations, and source inventory.
-- `../modules/` and locale mirrors: generated schemas and examples for all 451
+- `../modules/` and locale mirrors: generated schemas and examples for all 452
   active modules.
 - `../mcp/`, `../ai/`, `../indexer/`, and `../blueprint/`: product references.
 - `../warroom/`: security workflows, surfaces, APIs, scoring, and CE operations.

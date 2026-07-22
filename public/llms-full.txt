@@ -20,11 +20,11 @@ Bring the tools and data you already trust. Flyto2 correlates them, validates wh
 - `/core/` - flyto-core execution kernel, trace, replay, evidence, and YAML workflow behavior.
 - `/core/whitepaper` - technical thesis, architecture, module contract, security, evidence, and limitations.
 - `/core/reference/` - generated source-backed reference index.
-- `/core/reference/python-api` - 5,351 Python declarations split by responsibility.
+- `/core/reference/python-api` - 5,382 Python declarations split by responsibility.
 - `/core/reference/http-api` - every static HTTP operation and authentication boundary.
 - `/core/reference/cli` - every static CLI parser command and argument.
 - `/mcp/` - MCP server setup for AI agents and MCP-compatible clients.
-- `/modules/` - generated reference for 451 registry-backed modules.
+- `/modules/` - generated reference for 452 registry-backed modules.
 - `/community/` - contribution routing, good-first issues, showcases, and review-first social syndication.
 - `/warroom/` - Warroom home and navigation.
 - `/warroom/overview` - architecture, scoring model, and capabilities.
@@ -112,7 +112,7 @@ The following docs explain the execution substrate:
 
 Current flyto-core public facts:
 
-- 451 registry-backed modules.
+- 452 registry-backed modules.
 - 84 catalog categories.
 - 41 built-in recipes.
 - 54 browser automation modules.

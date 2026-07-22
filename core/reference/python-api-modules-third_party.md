@@ -1,8 +1,8 @@
-<!-- Synced from flytohub/flyto-core@df9a861d9e4addbf859ac07d03914d77b820c768 by scripts/sync-core-reference.py; do not edit here. -->
+<!-- Synced from flytohub/flyto-core@60881082b55d22ca915f3aa08f99f7cb822f17fb by scripts/sync-core-reference.py; do not edit here. -->
 
 # Python Declarations: Modules: Third Party
 
-Source-backed signatures for **157 declarations** across **39 files** in the modules: third party area.
+Source-backed signatures for **160 declarations** across **39 files** in the modules: third party area.
 
 ## `src/core/modules/third_party/ai/agents/autonomous.py`
 
@@ -293,14 +293,17 @@ Source-backed signatures for **157 declarations** across **39 files** in the mod
 
 | Kind | Signature | Responsibility | Source |
 |---|---|---|---|
-| function | `def _google_search_setup_error()` | Implements `_google_search_setup_error`; linked source is authoritative. | [`src/core/modules/third_party/developer/http/search.py:19`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L19) |
-| function | `def _parse_search_results(items)` | Implements `_parse_search_results`; linked source is authoritative. | [`src/core/modules/third_party/developer/http/search.py:34`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L34) |
-| class | `class GoogleSearchAPIModule(BaseModule)` | Google Search API Module - Use official Custom Search API | [`src/core/modules/third_party/developer/http/search.py:86`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L86) |
-| method | `def GoogleSearchAPIModule.validate_params(self) -> None` | Implements `GoogleSearchAPIModule.validate_params`; linked source is authoritative. | [`src/core/modules/third_party/developer/http/search.py:93`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L93) |
-| method | `async def GoogleSearchAPIModule.execute(self) -> Any` | Implements `GoogleSearchAPIModule.execute`; linked source is authoritative. | [`src/core/modules/third_party/developer/http/search.py:99`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L99) |
-| class | `class SerpAPISearchModule(BaseModule)` | SerpAPI Search Module - Use third-party API (with free tier) | [`src/core/modules/third_party/developer/http/search.py:161`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L161) |
-| method | `def SerpAPISearchModule.validate_params(self) -> None` | Implements `SerpAPISearchModule.validate_params`; linked source is authoritative. | [`src/core/modules/third_party/developer/http/search.py:168`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L168) |
-| method | `async def SerpAPISearchModule.execute(self) -> Any` | Implements `SerpAPISearchModule.execute`; linked source is authoritative. | [`src/core/modules/third_party/developer/http/search.py:174`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L174) |
+| function | `def _google_search_setup_error()` | Implements `_google_search_setup_error`; linked source is authoritative. | [`src/core/modules/third_party/developer/http/search.py:20`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L20) |
+| function | `def _parse_search_results(items)` | Implements `_parse_search_results`; linked source is authoritative. | [`src/core/modules/third_party/developer/http/search.py:41`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L41) |
+| class | `class GoogleSearchAPIModule(BaseModule)` | Google Search API Module - Use official Custom Search API | [`src/core/modules/third_party/developer/http/search.py:93`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L93) |
+| method | `def GoogleSearchAPIModule.validate_params(self) -> None` | Implements `GoogleSearchAPIModule.validate_params`; linked source is authoritative. | [`src/core/modules/third_party/developer/http/search.py:100`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L100) |
+| method | `async def GoogleSearchAPIModule.execute(self) -> Any` | Implements `GoogleSearchAPIModule.execute`; linked source is authoritative. | [`src/core/modules/third_party/developer/http/search.py:106`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L106) |
+| class | `class SerpAPISearchModule(BaseModule)` | SerpAPI Search Module - Use third-party API (with free tier) | [`src/core/modules/third_party/developer/http/search.py:171`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L171) |
+| method | `def SerpAPISearchModule.validate_params(self) -> None` | Implements `SerpAPISearchModule.validate_params`; linked source is authoritative. | [`src/core/modules/third_party/developer/http/search.py:178`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L178) |
+| method | `async def SerpAPISearchModule.execute(self) -> Any` | Implements `SerpAPISearchModule.execute`; linked source is authoritative. | [`src/core/modules/third_party/developer/http/search.py:184`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L184) |
+| class | `class TavilySearchModule(BaseModule)` | Tavily Search Module - Use Tavily API for web search | [`src/core/modules/third_party/developer/http/search.py:277`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L277) |
+| method | `def TavilySearchModule.validate_params(self) -> None` | Implements `TavilySearchModule.validate_params`; linked source is authoritative. | [`src/core/modules/third_party/developer/http/search.py:284`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L284) |
+| method | `async def TavilySearchModule.execute(self) -> Any` | Implements `TavilySearchModule.execute`; linked source is authoritative. | [`src/core/modules/third_party/developer/http/search.py:290`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/third_party/developer/http/search.py#L290) |
 
 ## `src/core/modules/third_party/payment/stripe.py`
 

@@ -10,7 +10,7 @@ Flyto2 AI agent runtime architecture separates workflow definitions, module exec
 │         (STDIO / HTTP Transport)        │
 ├─────────────────────────────────────────┤
 │            Module Registry              │
-│  (451 modules, 84 catalog categories)  │
+│  (452 modules, 84 catalog categories)  │
 ├─────────────────────────────────────────┤
 │           Execution Engine              │
 │   (dispatch, validate, execute, trace)  │

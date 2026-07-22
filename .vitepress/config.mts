@@ -8,7 +8,7 @@ import {
 } from './seo-contract'
 
 const SITE_URL = siteUrl
-const CORE_MODULE_COUNT = 451
+const CORE_MODULE_COUNT = 452
 const CORE_CATALOG_CATEGORY_COUNT = 84
 const BUILT_IN_RECIPE_COUNT = 41
 const CORE_RUNTIME_SUMMARY = `${CORE_MODULE_COUNT} registry-backed modules across ${CORE_CATALOG_CATEGORY_COUNT} catalog categories, ${BUILT_IN_RECIPE_COUNT} built-in recipes, MCP transports, evidence capture, and replayable YAML execution`
@@ -31,6 +31,8 @@ const SEO_KEYWORDS = [
   'code risk',
   'AI security',
   'MCP security',
+  'MCP security best practices',
+  'MCP security risks',
   `${CORE_MODULE_COUNT} modules`,
   `${CORE_CATALOG_CATEGORY_COUNT} catalog categories`,
   `${BUILT_IN_RECIPE_COUNT} recipes`,
@@ -139,7 +141,7 @@ const PAGE_SEO: Record<string, { title: string; description: string }> = {
   },
   'warroom/surfaces/mcp-security': {
     title: 'MCP Security',
-    description: 'Review Flyto2 MCP security guidance for tool exposure, client permissions, server transport, audit trails, and safe agent automation.',
+    description: 'Review MCP security best practices, risks, tool exposure, client permissions, server transports, policy simulation, audit trails, and safe agent automation.',
   },
   ai: {
     title: 'AI Agent Framework',

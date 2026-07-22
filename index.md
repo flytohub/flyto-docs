@@ -26,7 +26,7 @@ features:
   - title: Start Without Guessing
     details: Install Flyto2, run the first workflow, and learn the basics before opening the full module reference.
   - title: Open-Source AI Agent Framework
-    details: flyto-core documents 451 registry-backed modules, 84 catalog categories, 41 recipes, trace, evidence capture, and replayable YAML execution.
+    details: flyto-core documents 452 registry-backed modules, 84 catalog categories, 41 recipes, trace, evidence capture, and replayable YAML execution.
   - title: MCP Server Automation
     details: Configure Flyto2 as an MCP server so AI agents can call deterministic browser, file, API, data, AI, and verification tools.
   - title: Evidence-Backed Security

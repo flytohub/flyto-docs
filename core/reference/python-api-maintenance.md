@@ -1,8 +1,8 @@
-<!-- Synced from flytohub/flyto-core@df9a861d9e4addbf859ac07d03914d77b820c768 by scripts/sync-core-reference.py; do not edit here. -->
+<!-- Synced from flytohub/flyto-core@60881082b55d22ca915f3aa08f99f7cb822f17fb by scripts/sync-core-reference.py; do not edit here. -->
 
 # Python Declarations: Maintenance Scripts
 
-Source-backed signatures for **242 declarations** across **35 files** in the maintenance scripts area.
+Source-backed signatures for **244 declarations** across **35 files** in the maintenance scripts area.
 
 ## `scripts/analyze_module_returns.py`
 
@@ -45,9 +45,9 @@ Source-backed signatures for **242 declarations** across **35 files** in the mai
 | function | `def command(*args: str) -> None` | Implements `command`; linked source is authoritative. | [`scripts/check_documentation.py:59`](https://github.com/flytohub/flyto-core/blob/main/scripts/check_documentation.py#L59) |
 | function | `def repository_files() -> list&#91;str&#93;` | Implements `repository_files`; linked source is authoritative. | [`scripts/check_documentation.py:63`](https://github.com/flytohub/flyto-core/blob/main/scripts/check_documentation.py#L63) |
 | function | `def documentation_paths(manifest: dict) -> list&#91;str&#93;` | Implements `documentation_paths`; linked source is authoritative. | [`scripts/check_documentation.py:74`](https://github.com/flytohub/flyto-core/blob/main/scripts/check_documentation.py#L74) |
-| function | `def owned_source_files(files: list&#91;str&#93;) -> list&#91;str&#93;` | Implements `owned_source_files`; linked source is authoritative. | [`scripts/check_documentation.py:81`](https://github.com/flytohub/flyto-core/blob/main/scripts/check_documentation.py#L81) |
-| function | `def local_target(source: Path, raw_target: str) -> Optional&#91;Path&#93;` | Implements `local_target`; linked source is authoritative. | [`scripts/check_documentation.py:104`](https://github.com/flytohub/flyto-core/blob/main/scripts/check_documentation.py#L104) |
-| function | `def main() -> int` | Implements `main`; linked source is authoritative. | [`scripts/check_documentation.py:112`](https://github.com/flytohub/flyto-core/blob/main/scripts/check_documentation.py#L112) |
+| function | `def owned_source_files(files: list&#91;str&#93;) -> list&#91;str&#93;` | Implements `owned_source_files`; linked source is authoritative. | [`scripts/check_documentation.py:89`](https://github.com/flytohub/flyto-core/blob/main/scripts/check_documentation.py#L89) |
+| function | `def local_target(source: Path, raw_target: str) -> Optional&#91;Path&#93;` | Implements `local_target`; linked source is authoritative. | [`scripts/check_documentation.py:112`](https://github.com/flytohub/flyto-core/blob/main/scripts/check_documentation.py#L112) |
+| function | `def main() -> int` | Implements `main`; linked source is authoritative. | [`scripts/check_documentation.py:120`](https://github.com/flytohub/flyto-core/blob/main/scripts/check_documentation.py#L120) |
 
 ## `scripts/export_i18n_baseline.py`
 
@@ -65,15 +65,16 @@ Source-backed signatures for **242 declarations** across **35 files** in the mai
 | function | `def add_can_receive_from(content: str, category: str) -> tuple` | Add can_receive_from after can_connect_to. | [`scripts/fix_all_connection_rules.py:63`](https://github.com/flytohub/flyto-core/blob/main/scripts/fix_all_connection_rules.py#L63) |
 | method | `def add_can_receive_from.replacer(match)` | Implements `add_can_receive_from.replacer`; linked source is authoritative. | [`scripts/fix_all_connection_rules.py:70`](https://github.com/flytohub/flyto-core/blob/main/scripts/fix_all_connection_rules.py#L70) |
 | function | `def process_file(filepath: Path) -> bool` | Process a single file. | [`scripts/fix_all_connection_rules.py:80`](https://github.com/flytohub/flyto-core/blob/main/scripts/fix_all_connection_rules.py#L80) |
+| method | `def process_file.replacer(match)` | Implements `process_file.replacer`; linked source is authoritative. | [`scripts/fix_all_connection_rules.py:98`](https://github.com/flytohub/flyto-core/blob/main/scripts/fix_all_connection_rules.py#L98) |
 | function | `def main()` | Implements `main`; linked source is authoritative. | [`scripts/fix_all_connection_rules.py:121`](https://github.com/flytohub/flyto-core/blob/main/scripts/fix_all_connection_rules.py#L121) |
 
 ## `scripts/fix_credential_keys.py`
 
 | Kind | Signature | Responsibility | Source |
 |---|---|---|---|
-| function | `def get_credential_keys(module_id: str) -> list` | Get credential keys for a module based on its ID. | [`scripts/fix_credential_keys.py:66`](https://github.com/flytohub/flyto-core/blob/main/scripts/fix_credential_keys.py#L66) |
-| function | `def add_credential_keys_to_file(file_path: str) -> int` | Add credential_keys to @register_module decorators in a file. | [`scripts/fix_credential_keys.py:74`](https://github.com/flytohub/flyto-core/blob/main/scripts/fix_credential_keys.py#L74) |
-| function | `def main()` | Main entry point. | [`scripts/fix_credential_keys.py:122`](https://github.com/flytohub/flyto-core/blob/main/scripts/fix_credential_keys.py#L122) |
+| function | `def get_credential_keys(module_id: str) -> list` | Get credential keys for a module based on its ID. | [`scripts/fix_credential_keys.py:67`](https://github.com/flytohub/flyto-core/blob/main/scripts/fix_credential_keys.py#L67) |
+| function | `def add_credential_keys_to_file(file_path: str) -> int` | Add credential_keys to @register_module decorators in a file. | [`scripts/fix_credential_keys.py:75`](https://github.com/flytohub/flyto-core/blob/main/scripts/fix_credential_keys.py#L75) |
+| function | `def main()` | Main entry point. | [`scripts/fix_credential_keys.py:123`](https://github.com/flytohub/flyto-core/blob/main/scripts/fix_credential_keys.py#L123) |
 
 ## `scripts/fix_lint_warnings.py`
 
@@ -217,17 +218,17 @@ Source-backed signatures for **242 declarations** across **35 files** in the mai
 | function | `def callable_signature(node: ast.FunctionDef \| ast.AsyncFunctionDef) -> str` | Implements `callable_signature`; linked source is authoritative. | [`scripts/generate_reference.py:100`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L100) |
 | function | `def declarations(tree: ast.Module) -> list&#91;tuple&#91;int, str, str, str&#93;&#93;` | Implements `declarations`; linked source is authoritative. | [`scripts/generate_reference.py:106`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L106) |
 | method | `def declarations.visit(nodes: Iterable&#91;ast.stmt&#93;, owner: str='') -> None` | Implements `declarations.visit`; linked source is authoritative. | [`scripts/generate_reference.py:109`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L109) |
-| function | `def module_inventory() -> str` | Implements `module_inventory`; linked source is authoritative. | [`scripts/generate_reference.py:144`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L144) |
-| function | `def python_api() -> str` | Implements `python_api`; linked source is authoritative. | [`scripts/generate_reference.py:189`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L189) |
-| function | `def decorator_name(node: ast.AST) -> str` | Implements `decorator_name`; linked source is authoritative. | [`scripts/generate_reference.py:217`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L217) |
-| function | `def registered_modules() -> str` | Implements `registered_modules`; linked source is authoritative. | [`scripts/generate_reference.py:225`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L225) |
-| function | `def cli_reference() -> str` | Implements `cli_reference`; linked source is authoritative. | [`scripts/generate_reference.py:279`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L279) |
-| function | `def http_reference() -> str` | Implements `http_reference`; linked source is authoritative. | [`scripts/generate_reference.py:394`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L394) |
-| function | `def configuration_reference() -> str` | Implements `configuration_reference`; linked source is authoritative. | [`scripts/generate_reference.py:459`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L459) |
-| function | `def recipe_reference() -> str` | Implements `recipe_reference`; linked source is authoritative. | [`scripts/generate_reference.py:503`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L503) |
-| function | `def reference_index() -> str` | Implements `reference_index`; linked source is authoritative. | [`scripts/generate_reference.py:542`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L542) |
-| function | `def outputs() -> dict&#91;Path, str&#93;` | Implements `outputs`; linked source is authoritative. | [`scripts/generate_reference.py:559`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L559) |
-| function | `def main() -> int` | Implements `main`; linked source is authoritative. | [`scripts/generate_reference.py:573`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L573) |
+| function | `def module_inventory() -> str` | Implements `module_inventory`; linked source is authoritative. | [`scripts/generate_reference.py:149`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L149) |
+| function | `def python_api() -> str` | Implements `python_api`; linked source is authoritative. | [`scripts/generate_reference.py:194`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L194) |
+| function | `def decorator_name(node: ast.AST) -> str` | Implements `decorator_name`; linked source is authoritative. | [`scripts/generate_reference.py:222`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L222) |
+| function | `def registered_modules() -> str` | Implements `registered_modules`; linked source is authoritative. | [`scripts/generate_reference.py:230`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L230) |
+| function | `def cli_reference() -> str` | Implements `cli_reference`; linked source is authoritative. | [`scripts/generate_reference.py:284`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L284) |
+| function | `def http_reference() -> str` | Implements `http_reference`; linked source is authoritative. | [`scripts/generate_reference.py:399`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L399) |
+| function | `def configuration_reference() -> str` | Implements `configuration_reference`; linked source is authoritative. | [`scripts/generate_reference.py:464`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L464) |
+| function | `def recipe_reference() -> str` | Implements `recipe_reference`; linked source is authoritative. | [`scripts/generate_reference.py:510`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L510) |
+| function | `def reference_index() -> str` | Implements `reference_index`; linked source is authoritative. | [`scripts/generate_reference.py:549`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L549) |
+| function | `def outputs() -> dict&#91;Path, str&#93;` | Implements `outputs`; linked source is authoritative. | [`scripts/generate_reference.py:566`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L566) |
+| function | `def main() -> int` | Implements `main`; linked source is authoritative. | [`scripts/generate_reference.py:580`](https://github.com/flytohub/flyto-core/blob/main/scripts/generate_reference.py#L580) |
 
 ## `scripts/lint_modules.py`
 
@@ -258,6 +259,7 @@ Source-backed signatures for **242 declarations** across **35 files** in the mai
 | function | `def send(proc: subprocess.Popen, req: dict) -> dict` | Send one JSON-RPC request and read the matching response. | [`scripts/mcp_drive_demo.py:28`](https://github.com/flytohub/flyto-core/blob/main/scripts/mcp_drive_demo.py#L28) |
 | function | `def call_tool(proc, request_id: int, name: str, arguments: dict) -> dict` | Call a tool via tools/call and unwrap the structured content. | [`scripts/mcp_drive_demo.py:45`](https://github.com/flytohub/flyto-core/blob/main/scripts/mcp_drive_demo.py#L45) |
 | function | `def main(url: str, out_png: Path) -> int` | Implements `main`; linked source is authoritative. | [`scripts/mcp_drive_demo.py:67`](https://github.com/flytohub/flyto-core/blob/main/scripts/mcp_drive_demo.py#L67) |
+| method | `def main.assert_ok(label: str, resp: dict, code: int) -> None` | Implements `main.assert_ok`; linked source is authoritative. | [`scripts/mcp_drive_demo.py:109`](https://github.com/flytohub/flyto-core/blob/main/scripts/mcp_drive_demo.py#L109) |
 
 ## `scripts/mcp_drive_login.py`
 

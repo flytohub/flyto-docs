@@ -1,6 +1,6 @@
 # MCP Server Automation
 
-Flyto2 MCP server automation lets AI clients call flyto-core modules as deterministic tools with schemas, evidence, and replay. flyto-core implements the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/), exposing all 451 modules as tools that any MCP-compatible AI client can use.
+Flyto2 MCP server automation lets AI clients call flyto-core modules as deterministic tools with schemas, evidence, and replay. flyto-core implements the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/), exposing all 452 modules as tools that any MCP-compatible AI client can use.
 
 The protocol baseline for this section is the official [MCP specification](https://modelcontextprotocol.io/specification/2025-06-18). Tool registration follows the official [MCP tools model](https://modelcontextprotocol.io/specification/2025-06-18/server/tools): clients discover callable tools, review their schemas, and invoke them through the MCP session.
 

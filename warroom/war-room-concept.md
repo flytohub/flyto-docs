@@ -65,7 +65,7 @@ The same correlation logic spans the other surfaces. A [darkweb](/warroom/flyto-
 
 The war-room does not run on a bespoke pile of one-off integrations. It runs on the **same deterministic execution layer** that powers Flyto2's automation product line.
 
-The automation engine is built from 451 deterministic modules, composed into [YAML recipes](/guide/first-workflow), MCP-native over stdio and streamable-http, with built-in **evidence capture and replay** and human-in-the-loop control. That is not a separate technology from the war-room -- it *is* the war-room's execution layer:
+The automation engine is built from 452 deterministic modules, composed into [YAML recipes](/guide/first-workflow), MCP-native over stdio and streamable-http, with built-in **evidence capture and replay** and human-in-the-loop control. That is not a separate technology from the war-room -- it *is* the war-room's execution layer:
 
 | Automation substrate | War-room role |
 |----------------------|---------------|

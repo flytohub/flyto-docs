@@ -1,8 +1,8 @@
-<!-- Synced from flytohub/flyto-core@df9a861d9e4addbf859ac07d03914d77b820c768 by scripts/sync-core-reference.py; do not edit here. -->
+<!-- Synced from flytohub/flyto-core@60881082b55d22ca915f3aa08f99f7cb822f17fb by scripts/sync-core-reference.py; do not edit here. -->
 
 # Python Declarations: Modules: Atomic / Port
 
-Source-backed signatures for **5 declarations** across **2 files** in the modules: atomic / port area.
+Source-backed signatures for **6 declarations** across **2 files** in the modules: atomic / port area.
 
 ## `src/core/modules/atomic/port/check.py`
 
@@ -18,3 +18,4 @@ Source-backed signatures for **5 declarations** across **2 files** in the module
 |---|---|---|---|
 | function | `async def port_wait(context: Dict&#91;str, Any&#93;) -> Dict&#91;str, Any&#93;` | Wait for a network port to become available | [`src/core/modules/atomic/port/wait.py:164`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/port/wait.py#L164) |
 | function | `async def _check_port(host: str, port: int) -> bool` | Check if a port is open | [`src/core/modules/atomic/port/wait.py:230`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/port/wait.py#L230) |
+| method | `def _check_port.sync_check()` | Implements `_check_port.sync_check`; linked source is authoritative. | [`src/core/modules/atomic/port/wait.py:236`](https://github.com/flytohub/flyto-core/blob/main/src/core/modules/atomic/port/wait.py#L236) |

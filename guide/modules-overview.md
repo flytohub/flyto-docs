@@ -1,6 +1,6 @@
 # Modules Overview
 
-flyto-core includes 451 registry-backed modules. The generated core catalog tracks 84 prefix categories, the runtime ships 41 built-in recipes, and each module is a deterministic, self-contained unit of work.
+flyto-core includes 452 registry-backed modules. The generated core catalog tracks 84 prefix categories, the runtime ships 41 built-in recipes, and each module is a deterministic, self-contained unit of work.
 
 ## Categories
 

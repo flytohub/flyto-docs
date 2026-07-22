@@ -1,8 +1,8 @@
-<!-- Synced from flytohub/flyto-core@df9a861d9e4addbf859ac07d03914d77b820c768 by scripts/sync-core-reference.py; do not edit here. -->
+<!-- Synced from flytohub/flyto-core@60881082b55d22ca915f3aa08f99f7cb822f17fb by scripts/sync-core-reference.py; do not edit here. -->
 
 # Python Declarations: Core Services
 
-Source-backed signatures for **815 declarations** across **44 files** in the core services area.
+Source-backed signatures for **818 declarations** across **44 files** in the core services area.
 
 ## `src/core/analysis/html_analyzer.py`
 
@@ -53,21 +53,21 @@ Source-backed signatures for **815 declarations** across **44 files** in the cor
 | method | `def APIEndpoints.github_repo(cls, owner: str, repo: str) -> str` | Implements `APIEndpoints.github_repo`; linked source is authoritative. | [`src/core/constants.py:193`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L193) |
 | method | `def APIEndpoints.github_issues(cls, owner: str, repo: str) -> str` | Implements `APIEndpoints.github_issues`; linked source is authoritative. | [`src/core/constants.py:197`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L197) |
 | method | `def APIEndpoints.google_gemini_generate(cls, model: str) -> str` | Get Gemini API URL. | [`src/core/constants.py:205`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L205) |
-| method | `def APIEndpoints.airtable_table(cls, base_id: str, table_name: str) -> str` | Implements `APIEndpoints.airtable_table`; linked source is authoritative. | [`src/core/constants.py:216`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L216) |
-| method | `def APIEndpoints.notion_pages(cls) -> str` | Implements `APIEndpoints.notion_pages`; linked source is authoritative. | [`src/core/constants.py:225`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L225) |
-| method | `def APIEndpoints.notion_database_query(cls, database_id: str) -> str` | Implements `APIEndpoints.notion_database_query`; linked source is authoritative. | [`src/core/constants.py:229`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L229) |
-| method | `def APIEndpoints.twilio_messages(cls, account_sid: str) -> str` | Implements `APIEndpoints.twilio_messages`; linked source is authoritative. | [`src/core/constants.py:245`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L245) |
-| method | `def APIEndpoints.twilio_calls(cls, account_sid: str) -> str` | Implements `APIEndpoints.twilio_calls`; linked source is authoritative. | [`src/core/constants.py:249`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L249) |
-| class | `class EnvVars` | Environment variable names | [`src/core/constants.py:279`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L279) |
-| class | `class WorkflowStatus` | Workflow execution status values | [`src/core/constants.py:356`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L356) |
-| class | `class ErrorCode` | Standardized error codes for module execution. | [`src/core/constants.py:371`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L371) |
-| class | `class ErrorMessages` | Centralized error messages | [`src/core/constants.py:442`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L442) |
-| method | `def ErrorMessages.format(cls, message: str, **kwargs) -> str` | Format error message with parameters | [`src/core/constants.py:454`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L454) |
-| class | `class Capability` | Module capability declarations. | [`src/core/constants.py:463`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L463) |
-| class | `class ProductionPolicy` | Capability enforcement policy for each environment. | [`src/core/constants.py:506`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L506) |
-| method | `def ProductionPolicy.get_denied_capabilities(cls, env: str) -> set` | Get set of denied capabilities for an environment. | [`src/core/constants.py:537`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L537) |
-| method | `def ProductionPolicy.is_capability_allowed(cls, capability: str, env: str) -> bool` | Check if a capability is allowed in an environment. | [`src/core/constants.py:557`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L557) |
-| method | `def ProductionPolicy.check_capabilities(cls, capabilities: list, env: str) -> tuple` | Check if all capabilities are allowed. | [`src/core/constants.py:576`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L576) |
+| method | `def APIEndpoints.airtable_table(cls, base_id: str, table_name: str) -> str` | Implements `APIEndpoints.airtable_table`; linked source is authoritative. | [`src/core/constants.py:220`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L220) |
+| method | `def APIEndpoints.notion_pages(cls) -> str` | Implements `APIEndpoints.notion_pages`; linked source is authoritative. | [`src/core/constants.py:229`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L229) |
+| method | `def APIEndpoints.notion_database_query(cls, database_id: str) -> str` | Implements `APIEndpoints.notion_database_query`; linked source is authoritative. | [`src/core/constants.py:233`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L233) |
+| method | `def APIEndpoints.twilio_messages(cls, account_sid: str) -> str` | Implements `APIEndpoints.twilio_messages`; linked source is authoritative. | [`src/core/constants.py:249`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L249) |
+| method | `def APIEndpoints.twilio_calls(cls, account_sid: str) -> str` | Implements `APIEndpoints.twilio_calls`; linked source is authoritative. | [`src/core/constants.py:253`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L253) |
+| class | `class EnvVars` | Environment variable names | [`src/core/constants.py:283`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L283) |
+| class | `class WorkflowStatus` | Workflow execution status values | [`src/core/constants.py:361`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L361) |
+| class | `class ErrorCode` | Standardized error codes for module execution. | [`src/core/constants.py:376`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L376) |
+| class | `class ErrorMessages` | Centralized error messages | [`src/core/constants.py:447`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L447) |
+| method | `def ErrorMessages.format(cls, message: str, **kwargs) -> str` | Format error message with parameters | [`src/core/constants.py:459`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L459) |
+| class | `class Capability` | Module capability declarations. | [`src/core/constants.py:468`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L468) |
+| class | `class ProductionPolicy` | Capability enforcement policy for each environment. | [`src/core/constants.py:511`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L511) |
+| method | `def ProductionPolicy.get_denied_capabilities(cls, env: str) -> set` | Get set of denied capabilities for an environment. | [`src/core/constants.py:542`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L542) |
+| method | `def ProductionPolicy.is_capability_allowed(cls, capability: str, env: str) -> bool` | Check if a capability is allowed in an environment. | [`src/core/constants.py:562`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L562) |
+| method | `def ProductionPolicy.check_capabilities(cls, capabilities: list, env: str) -> tuple` | Check if all capabilities are allowed. | [`src/core/constants.py:581`](https://github.com/flytohub/flyto-core/blob/main/src/core/constants.py#L581) |
 
 ## `src/core/enterprise/ai_native/__init__.py`
 
@@ -609,6 +609,7 @@ Source-backed signatures for **815 declarations** across **44 files** in the cor
 | function | `def _collect_module_ids(obj: Any) -> set` | Collect every module id declared in a workflow, including ids smuggled inside inline workflow_source/template string payloads (flow.invoke vector). | [`src/core/mcp_handler.py:215`](https://github.com/flytohub/flyto-core/blob/main/src/core/mcp_handler.py#L215) |
 | function | `async def execute_module(module_id: str, params: Dict&#91;str, Any&#93;, context: Dict&#91;str, Any&#93;=None, browser_sessions: Dict&#91;str, Any&#93;=None) -> dict` | Execute a single module. | [`src/core/mcp_handler.py:231`](https://github.com/flytohub/flyto-core/blob/main/src/core/mcp_handler.py#L231) |
 | function | `def validate_params(module_id: str, params: Dict&#91;str, Any&#93;) -> dict` | Validate params and suggest corrections for common mistakes. | [`src/core/mcp_handler.py:341`](https://github.com/flytohub/flyto-core/blob/main/src/core/mcp_handler.py#L341) |
+| method | `def validate_params._sim(mid)` | Implements `validate_params._sim`; linked source is authoritative. | [`src/core/mcp_handler.py:365`](https://github.com/flytohub/flyto-core/blob/main/src/core/mcp_handler.py#L365) |
 | function | `def _try_alias_fix(field_name: str, params: Dict&#91;str, Any&#93;) -> Optional&#91;tuple&#93;` | Try to resolve a missing field via alias mapping. | [`src/core/mcp_handler.py:427`](https://github.com/flytohub/flyto-core/blob/main/src/core/mcp_handler.py#L427) |
 | function | `def _suggest_param_fixes(params: Dict&#91;str, Any&#93;, schema: Dict&#91;str, Any&#93;, error_msg: str) -> Dict&#91;str, Any&#93;` | Generate correction suggestions for invalid params. | [`src/core/mcp_handler.py:444`](https://github.com/flytohub/flyto-core/blob/main/src/core/mcp_handler.py#L444) |
 | function | `def get_module_examples(module_id: str) -> dict` | Implements `get_module_examples`; linked source is authoritative. | [`src/core/mcp_handler.py:494`](https://github.com/flytohub/flyto-core/blob/main/src/core/mcp_handler.py#L494) |
@@ -751,6 +752,7 @@ Source-backed signatures for **815 declarations** across **44 files** in the cor
 | function | `def _assert_no_stored_secrets(value: Any, forbidden: set&#91;str&#93;, path: tuple&#91;str, ...&#93;) -> None` | Implements `_assert_no_stored_secrets`; linked source is authoritative. | [`src/core/recipe_bundles.py:145`](https://github.com/flytohub/flyto-core/blob/main/src/core/recipe_bundles.py#L145) |
 | function | `def _is_forbidden_key(key: str, forbidden: set&#91;str&#93;) -> bool` | Implements `_is_forbidden_key`; linked source is authoritative. | [`src/core/recipe_bundles.py:164`](https://github.com/flytohub/flyto-core/blob/main/src/core/recipe_bundles.py#L164) |
 | function | `def _render(value: Any, args: dict&#91;str, Any&#93;) -> Any` | Implements `_render`; linked source is authoritative. | [`src/core/recipe_bundles.py:176`](https://github.com/flytohub/flyto-core/blob/main/src/core/recipe_bundles.py#L176) |
+| method | `def _render.replace(match: re.Match&#91;str&#93;) -> str` | Implements `_render.replace`; linked source is authoritative. | [`src/core/recipe_bundles.py:178`](https://github.com/flytohub/flyto-core/blob/main/src/core/recipe_bundles.py#L178) |
 | function | `def _render_list(value: Any, args: dict&#91;str, Any&#93;) -> list&#91;str&#93;` | Implements `_render_list`; linked source is authoritative. | [`src/core/recipe_bundles.py:192`](https://github.com/flytohub/flyto-core/blob/main/src/core/recipe_bundles.py#L192) |
 | function | `def _unique_folders(folders: list&#91;dict&#91;str, Any&#93;&#93;) -> list&#91;dict&#91;str, Any&#93;&#93;` | Implements `_unique_folders`; linked source is authoritative. | [`src/core/recipe_bundles.py:199`](https://github.com/flytohub/flyto-core/blob/main/src/core/recipe_bundles.py#L199) |
 
@@ -842,6 +844,7 @@ Source-backed signatures for **815 declarations** across **44 files** in the cor
 | method | `async def WorkflowTestRunner.run_test(self, test: TestCase) -> TestResult` | Run a single test. | [`src/core/testing/runner/executor.py:151`](https://github.com/flytohub/flyto-core/blob/main/src/core/testing/runner/executor.py#L151) |
 | method | `async def WorkflowTestRunner.run_all(self, report_name: Optional&#91;str&#93;=None) -> TestReport` | Run all loaded tests. | [`src/core/testing/runner/executor.py:244`](https://github.com/flytohub/flyto-core/blob/main/src/core/testing/runner/executor.py#L244) |
 | method | `async def WorkflowTestRunner.run_tests(self, test_names: List&#91;str&#93;, report_name: Optional&#91;str&#93;=None) -> TestReport` | Run specific tests by name. | [`src/core/testing/runner/executor.py:259`](https://github.com/flytohub/flyto-core/blob/main/src/core/testing/runner/executor.py#L259) |
+| method | `async def WorkflowTestRunner.run_tests.run_with_semaphore(test: TestCase) -> TestResult` | Implements `WorkflowTestRunner.run_tests.run_with_semaphore`; linked source is authoritative. | [`src/core/testing/runner/executor.py:285`](https://github.com/flytohub/flyto-core/blob/main/src/core/testing/runner/executor.py#L285) |
 | method | `async def WorkflowTestRunner.run_by_tags(self, tags: List&#91;str&#93;, match_all: bool=False, report_name: Optional&#91;str&#93;=None) -> TestReport` | Run tests matching tags. | [`src/core/testing/runner/executor.py:312`](https://github.com/flytohub/flyto-core/blob/main/src/core/testing/runner/executor.py#L312) |
 | method | `def WorkflowTestRunner.get_test_names(self) -> List&#91;str&#93;` | Get all test names | [`src/core/testing/runner/executor.py:343`](https://github.com/flytohub/flyto-core/blob/main/src/core/testing/runner/executor.py#L343) |
 | method | `def WorkflowTestRunner.get_tests_by_tag(self, tag: str) -> List&#91;str&#93;` | Get test names with specific tag | [`src/core/testing/runner/executor.py:347`](https://github.com/flytohub/flyto-core/blob/main/src/core/testing/runner/executor.py#L347) |
