@@ -4,7 +4,7 @@
 
 The Flyto2 Core Python API reference indexes every maintained class, function, nested function, and method below and splits them by responsibility so the public reference remains navigable.
 
-**5382 declarations across 786 files.**
+**5383 declarations across 786 files.**
 
 | Area | Files | Declarations |
 |---|---:|---:|
@@ -14,7 +14,7 @@ The Flyto2 Core Python API reference indexes every maintained class, function, n
 | [Core Services](/core/reference/python-api-core) | 44 | 818 |
 | [Workflow Engine](/core/reference/python-api-engine) | 55 | 796 |
 | [Examples](/core/reference/python-api-examples) | 8 | 23 |
-| [Maintenance Scripts](/core/reference/python-api-maintenance) | 35 | 244 |
+| [Maintenance Scripts](/core/reference/python-api-maintenance) | 35 | 245 |
 | [Module System](/core/reference/python-api-modules) | 11 | 249 |
 | [Modules: Atomic / AI](/core/reference/python-api-modules-atomic-ai) | 10 | 35 |
 | [Modules: Atomic / Analysis](/core/reference/python-api-modules-atomic-analysis) | 6 | 18 |

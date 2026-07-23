@@ -78,4 +78,4 @@ Add to your Windsurf MCP configuration:
 
 ## Verifying Connection
 
-After configuring your client, verify the connection by asking the AI to list available tools. You should see 451 flyto-core modules.
+After configuring your client, verify the connection by asking the AI to list available tools. You should see 452 flyto-core modules.

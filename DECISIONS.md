@@ -3,7 +3,7 @@
 ## 2026-07-22 - Public references are source-backed and split by responsibility
 
 Decision: sync Core narrative/generated references from flyto-core, publish all
-5,382 declarations, and split Python declarations by runtime area and atomic
+5,383 declarations, and split Python declarations by runtime area and atomic
 module category. Generate a separate source map for Docs' own functions.
 
 Reason: hand-maintained totals and method lists drift. One giant declaration

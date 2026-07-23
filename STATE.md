@@ -1,6 +1,6 @@
 # State
 
-Current state on 2026-07-22:
+Current state on 2026-07-23:
 
 - GitHub Pages is enabled in Actions workflow mode, the custom domain is
   `docs.flyto2.com`, and deployment run `29889676532` passed. The Warroom CE
@@ -9,14 +9,14 @@ Current state on 2026-07-22:
 - Docs now publishes generated discovery surfaces for search and AI retrieval:
   `sitemap.xml`, `image-sitemap.xml`, `llms.txt`, `llms-full.txt`,
   `discovery-manifest.json`, an OpenGraph image, and `.well-known/security.txt`.
-- The repository documentation corpus now contains 1,121 Markdown files. Core
+- The repository documentation corpus now contains 1,122 Markdown files. Core
   synchronization owns 108 pages, including 91 split declaration-area pages
-  plus a Python index covering 5,382 declarations in 786 maintained files.
+  plus a Python index covering 5,383 declarations in 786 maintained files.
 - The Core runtime reference records the current 452 modules, 84 categories,
   41 atomic categories, 932 source files, and the exact source commit used to
   build each public page. Source drift fails `npm run verify`.
 - The Docs implementation reference covers 14 maintained source/configuration
-  files, 3,709 lines, and 155 declarations. Its links also satisfy Indexer's
+  files, 3,787 lines, and 156 declarations. Its links also satisfy Indexer's
   exact source-line documentation contract.
 - `npm run build` runs `npm run seo:discovery` before VitePress build, and
   `npm run audit:seo` fails if image sitemap coverage, social image assets,

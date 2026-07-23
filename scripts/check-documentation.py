@@ -133,8 +133,31 @@ def check_module_mirrors() -> list[str]:
         path.read_text(encoding="utf-8") for path in english_dir.glob("*.md")
     )
     module_ids = set(re.findall(r"(?m)^`([a-z0-9_]+(?:\.[a-z0-9_]+)+)`$", english_text))
-    if len(module_ids) != 452:
-        failures.append(f"English module reference expected 452 module IDs, found {len(module_ids)}")
+    module_count = len(module_ids)
+    if module_count == 0:
+        failures.append("English module reference contains no module IDs")
+
+    english_index = english_dir / "index.md"
+    inventory_match = re.search(
+        r"(\d+) registry-backed modules.*?(\d+) prefix categories.*?"
+        r"(\d+) built-in recipes",
+        english_index.read_text(encoding="utf-8"),
+        re.DOTALL,
+    )
+    if not inventory_match:
+        failures.append("English module index does not expose generated inventory facts")
+        inventory_tokens = ()
+    else:
+        reported_modules, categories, recipes = inventory_match.groups()
+        if int(reported_modules) != module_count:
+            failures.append(
+                f"English module index reports {reported_modules}, found {module_count} module IDs"
+            )
+        inventory_tokens = (
+            f"{module_count} registry-backed modules",
+            f"{categories} prefix categories",
+            f"{recipes} built-in recipes",
+        )
 
     for locale in LOCALES:
         directory = english_dir if locale == "en" else ROOT / locale / "modules"
@@ -148,7 +171,7 @@ def check_module_mirrors() -> list[str]:
         index = directory / "index.md"
         if index.exists():
             content = index.read_text(encoding="utf-8")
-            for token in ("452 registry-backed modules", "84 prefix categories", "41 built-in recipes"):
+            for token in inventory_tokens:
                 if token not in content:
                     failures.append(f"{locale}/modules/index.md missing inventory token: {token}")
     return failures
@@ -175,21 +198,64 @@ def check_core_reference() -> list[str]:
     if python_index.exists():
         content = python_index.read_text(encoding="utf-8")
         match = re.search(r"\*\*(\d[\d,]*) declarations across (\d[\d,]*) files\.\*\*", content)
-        if not match or tuple(value.replace(",", "") for value in match.groups()) != ("5382", "786"):
-            failures.append("core Python reference must report 5,382 declarations across 786 files")
+        if not match:
+            failures.append("core Python reference must report declarations and files")
+            expected_declarations = None
+        else:
+            expected_declarations = int(match.group(1).replace(",", ""))
         split_total = 0
         for page in reference_dir.glob("python-api-*.md"):
             page_match = re.search(r"\*\*(\d[\d,]*) declarations\*\*", page.read_text(encoding="utf-8"))
             if page_match:
                 split_total += int(page_match.group(1).replace(",", ""))
-        if split_total != 5382:
-            failures.append(f"split Python reference totals {split_total}, expected 5382")
+        if expected_declarations is not None and split_total != expected_declarations:
+            failures.append(
+                f"split Python reference totals {split_total}, expected {expected_declarations}"
+            )
 
     for path in (ROOT / "core").glob("*.md"):
         if path.name == "index.md" or path.name in {"architecture.md", "evidence-replay.md", "execution-model.md"}:
             continue
         if "Synced from flytohub/flyto-core@" not in path.read_text(encoding="utf-8"):
             failures.append(f"synced core page missing provenance: {path.relative_to(ROOT)}")
+    return failures
+
+
+def check_current_inventory() -> list[str]:
+    """Keep current Docs prose aligned with generated Core inventory pages."""
+    english_text = "\n".join(
+        path.read_text(encoding="utf-8") for path in (ROOT / "modules").glob("*.md")
+    )
+    module_count = len(
+        set(re.findall(r"(?m)^`([a-z0-9_]+(?:\.[a-z0-9_]+)+)`$", english_text))
+    )
+    registered = (ROOT / "core" / "reference" / "registered-modules.md").read_text(
+        encoding="utf-8"
+    )
+    registration_match = re.search(r"\*\*(\d+) explicit, literal", registered)
+    python_index = (ROOT / "core" / "reference" / "python-api.md").read_text(
+        encoding="utf-8"
+    )
+    declaration_match = re.search(r"\*\*(\d[\d,]*) declarations across", python_index)
+    if not module_count or not registration_match or not declaration_match:
+        return ["generated Core references do not expose current inventory facts"]
+    registrations = int(registration_match.group(1))
+    declarations = int(declaration_match.group(1).replace(",", ""))
+    expected = {
+        "README.md": [
+            f"{module_count} active modules",
+            f"{registrations} literal module",
+            f"{declarations:,} Python declarations",
+        ],
+        "ai/agent.md": [f"{module_count} flyto-core modules"],
+        "mcp/client-config.md": [f"{module_count} flyto-core modules"],
+    }
+    failures: list[str] = []
+    for relative, tokens in expected.items():
+        content = (ROOT / relative).read_text(encoding="utf-8")
+        for token in tokens:
+            if token not in content:
+                failures.append(f"{relative} missing current inventory token: {token}")
     return failures
 
 
@@ -218,6 +284,7 @@ def main() -> int:
     failures.extend(check_manifest(files))
     failures.extend(check_module_mirrors())
     failures.extend(check_core_reference())
+    failures.extend(check_current_inventory())
     failures.extend(check_brand(files))
     for path in markdown:
         if not has_h1(ROOT / path):
@@ -230,7 +297,7 @@ def main() -> int:
         return 1
     print(
         f"documentation contract passed: {len(markdown)} Markdown files, "
-        f"{len(files)} maintained files, 452 modules, 5,382 Core declarations"
+        f"{len(files)} maintained files, generated Core inventory aligned"
     )
     return 0
 

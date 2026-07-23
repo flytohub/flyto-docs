@@ -12,7 +12,7 @@ current flyto-core source and for Docs' own generators and audits.
 - `scripts/sync-core-reference.py` syncs nine narrative pages and generated
   CLI, HTTP, configuration, recipe, registration, source, and declaration data.
 - Python declarations are split into 91 responsibility/category pages plus an
-  index; the current total is 5,382 declarations across 786 files. The next
+  index; the current total is 5,383 declarations across 786 files. The next
   source change must update both source and docs.
 - `scripts/generate-code-reference.py` indexes Docs' own maintained functions.
 - `scripts/check-documentation.py` validates all files, ownership, inventories,

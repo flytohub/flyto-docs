@@ -11,7 +11,7 @@
   declarations across 786 files.
 - Added a generated reference for every maintained Docs script and VitePress
   function plus a documentation ownership manifest.
-- Added a full documentation contract for 451-module locale parity, generated
+- Added a full documentation contract for the then-current 451-module locale parity, generated
   drift, page identity, source ownership, Flyto2 naming, the 16 approved public
   mailboxes, and stale 412/417 module totals.
 

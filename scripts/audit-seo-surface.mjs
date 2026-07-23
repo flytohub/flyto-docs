@@ -13,13 +13,18 @@ const seoContract = loadSeoContract();
 const siteUrl = seoContract.surface.origin;
 const maxKeywordMatrixAgeDays = 100;
 const failures = [];
+const corePythonReference = readFileSync(path.join(root, 'core', 'reference', 'python-api.md'), 'utf8');
+const coreDeclarationMatch = corePythonReference.match(/\*\*(\d[\d,]*) declarations across/);
+if (!coreDeclarationMatch) throw new Error('Core Python reference does not expose declaration inventory');
+const coreDeclarationCount = Number(coreDeclarationMatch[1].replaceAll(',', ''));
+const formattedCoreDeclarationCount = coreDeclarationCount.toLocaleString('en-US');
 
 const checkedPages = [
   { name: 'home', file: 'index.html', canonical: siteUrl, terms: ['AI workflow automation', 'MCP server automation'] },
   { name: 'core', file: 'core/index.html', canonical: `${siteUrl}/core`, terms: ['flyto-core', 'execution'] },
   { name: 'core whitepaper', file: 'core/whitepaper.html', canonical: `${siteUrl}/core/whitepaper`, terms: ['module contract', 'security model'] },
   { name: 'core reference', file: 'core/reference/index.html', canonical: `${siteUrl}/core/reference`, terms: ['Python declaration reference', 'HTTP route reference'] },
-  { name: 'python api', file: 'core/reference/python-api.html', canonical: `${siteUrl}/core/reference/python-api`, terms: ['5382 declarations', 'Workflow Engine'] },
+  { name: 'python api', file: 'core/reference/python-api.html', canonical: `${siteUrl}/core/reference/python-api`, terms: [`${coreDeclarationCount} declarations`, 'Workflow Engine'] },
   { name: 'mcp', file: 'mcp/index.html', canonical: `${siteUrl}/mcp`, terms: ['MCP'] },
   { name: 'modules', file: 'modules/index.html', canonical: `${siteUrl}/modules`, terms: ['modules'] },
   { name: 'getting started', file: 'guide/getting-started.html', canonical: `${siteUrl}/guide/getting-started`, terms: ['workflow'] },
@@ -52,7 +57,7 @@ const requiredLlmsTokens = [
   'MCP server automation',
   'flyto-core',
   '452 registry-backed modules',
-  '5,382 Python declarations',
+  `${formattedCoreDeclarationCount} Python declarations`,
   'https://docs.flyto2.com/core/reference/',
   'Warroom CE',
   'https://docs.flyto2.com/image-sitemap.xml',
