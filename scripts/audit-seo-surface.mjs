@@ -21,6 +21,10 @@ const formattedCoreDeclarationCount = coreDeclarationCount.toLocaleString('en-US
 
 const checkedPages = [
   { name: 'home', file: 'index.html', canonical: siteUrl, terms: ['AI workflow automation', 'MCP server automation'] },
+  { name: 'flow', file: 'flow/index.html', canonical: `${siteUrl}/flow`, terms: ['Flyto2 Flow', 'visual workflow'], schemaType: 'CollectionPage' },
+  { name: 'flow mcp builder', file: 'flow/mcp-builder.html', canonical: `${siteUrl}/flow/mcp-builder`, terms: ['Visual MCP builder', '/api/mcp'] },
+  { name: 'flow browser automation', file: 'flow/browser-automation.html', canonical: `${siteUrl}/flow/browser-automation`, terms: ['browser automation', 'evidence'] },
+  { name: 'flow evidence replay', file: 'flow/evidence-replay.html', canonical: `${siteUrl}/flow/evidence-replay`, terms: ['Evidence', 'Replay'] },
   { name: 'core', file: 'core/index.html', canonical: `${siteUrl}/core`, terms: ['flyto-core', 'execution'] },
   { name: 'core whitepaper', file: 'core/whitepaper.html', canonical: `${siteUrl}/core/whitepaper`, terms: ['module contract', 'security model'] },
   { name: 'core reference', file: 'core/reference/index.html', canonical: `${siteUrl}/core/reference`, terms: ['Python declaration reference', 'HTTP route reference'] },
@@ -30,10 +34,11 @@ const checkedPages = [
   { name: 'getting started', file: 'guide/getting-started.html', canonical: `${siteUrl}/guide/getting-started`, terms: ['workflow'] },
   { name: 'installation', file: 'guide/installation.html', canonical: `${siteUrl}/guide/installation`, terms: ['install'] },
   { name: 'community', file: 'community/index.html', canonical: `${siteUrl}/community`, terms: ['community', 'social syndication'] },
-  { name: 'warroom', file: 'warroom/index.html', canonical: `${siteUrl}/warroom`, terms: ['Warroom'] },
+  { name: 'warroom', file: 'warroom/index.html', canonical: `${siteUrl}/warroom`, terms: ['Warroom'], schemaType: 'CollectionPage' },
   { name: 'self-hosted ce', file: 'warroom/self-hosted-ce.html', canonical: `${siteUrl}/warroom/self-hosted-ce`, terms: ['Warroom CE', 'Docker'] },
   { name: 'closed loop', file: 'warroom/closed-loop.html', canonical: `${siteUrl}/warroom/closed-loop`, terms: ['evidence'] },
   { name: 'attack surface docs', file: 'warroom/surfaces/attack-surface.html', canonical: `${siteUrl}/warroom/surfaces/attack-surface`, terms: ['attack surface'] },
+  { name: 'security validation docs', file: 'warroom/surfaces/pentest.html', canonical: `${siteUrl}/warroom/surfaces/pentest`, terms: ['security validation', 'evidence'] },
 ];
 const checkedLocalizedPages = [
   { name: 'zh-TW browser module', file: 'zh-TW/modules/browser.html', canonical: `${siteUrl}/zh-TW/modules/browser`, locale: 'zh-TW' },
@@ -227,6 +232,9 @@ function checkPage(page) {
   checkPublicAsset(page.name, 'og:image', ogImage);
   checkPublicAsset(page.name, 'twitter:image', twitterImage);
   if (!html.includes('application/ld+json')) fail(`${page.name} missing JSON-LD`);
+  if (page.schemaType && !html.includes(`"@type":"${page.schemaType}"`)) {
+    fail(`${page.name} missing ${page.schemaType} JSON-LD`);
+  }
   for (const term of page.terms) {
     if (!html.toLowerCase().includes(term.toLowerCase())) fail(`${page.name} missing docs intent term: ${term}`);
   }

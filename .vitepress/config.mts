@@ -12,7 +12,7 @@ const CORE_MODULE_COUNT = 452
 const CORE_CATALOG_CATEGORY_COUNT = 84
 const BUILT_IN_RECIPE_COUNT = 41
 const CORE_RUNTIME_SUMMARY = `${CORE_MODULE_COUNT} registry-backed modules across ${CORE_CATALOG_CATEGORY_COUNT} catalog categories, ${BUILT_IN_RECIPE_COUNT} built-in recipes, MCP transports, evidence capture, and replayable YAML execution`
-const SITE_DESCRIPTION = 'Technical docs for Flyto2 Core, an open-source AI agent framework for AI workflow automation, MCP server automation, no-code browser workflows, replay, and CTEM evidence.'
+const SITE_DESCRIPTION = 'Technical documentation for Flyto2 Flow, Flyto2 Warroom, and the open-source flyto-core runtime, organized by product and implementation outcome.'
 const SEO_KEYWORDS = [
   'Flyto2 docs',
   'AI workflow automation',
@@ -39,6 +39,22 @@ const SEO_KEYWORDS = [
   ...manifestKeywordTerms(),
 ]
 const PAGE_SEO: Record<string, { title: string; description: string }> = {
+  flow: {
+    title: 'Flyto2 Flow Documentation',
+    description: 'Build local AI workflow automation with Flyto2 Flow, visual MCP tools, browser recording, execution evidence, replay, and the open-source flyto-core runtime.',
+  },
+  'flow/mcp-builder': {
+    title: 'Visual MCP Builder',
+    description: 'Use the Flyto2 visual MCP builder to turn a workflow into a typed tool with local Streamable HTTP, client setup, audit metadata, and operator controls.',
+  },
+  'flow/browser-automation': {
+    title: 'Self-Hosted Browser Automation',
+    description: 'Record, edit, run, and inspect self-hosted browser automation in Flyto2 Flow with visual steps, same-origin streaming, screenshots, assertions, and evidence.',
+  },
+  'flow/evidence-replay': {
+    title: 'Workflow Evidence and Replay',
+    description: 'Use Flyto2 workflow evidence and replay to inspect execution history, step outputs, screenshots, checkpoints, and reproduction limits.',
+  },
   'guide/what-is-flyto2': {
     title: 'Open Source AI Agent Framework',
     description: 'Learn how Flyto2 works as an open source AI agent framework for deterministic modules, MCP server automation, workflow replay, and evidence.',
@@ -134,6 +150,10 @@ const PAGE_SEO: Record<string, { title: string; description: string }> = {
   'warroom/closed-loop': {
     title: 'Continuous Threat Exposure Management',
     description: 'Use Flyto2 for continuous threat exposure management workflows that connect discovery, prioritization, validation, remediation, and evidence.',
+  },
+  'warroom/surfaces/pentest': {
+    title: 'Security Validation and Pentest',
+    description: 'Use Flyto2 Warroom security validation to connect prioritized findings, pentest evidence, remediation status, and repeatable verification.',
   },
   'warroom/surfaces/attack-surface': {
     title: 'Attack Surface Management',
@@ -494,6 +514,7 @@ export default defineConfig({
       const dateModified = pageData.lastUpdated
         ? new Date(pageData.lastUpdated).toISOString()
         : undefined
+      const isProductHub = canonicalPath === 'flow' || canonicalPath === 'warroom'
 
       pageData.frontmatter.head = [
         ...(pageData.frontmatter.head || []),
@@ -510,9 +531,9 @@ export default defineConfig({
               breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
             },
             {
-              '@type': 'TechArticle',
+              '@type': isProductHub ? 'CollectionPage' : 'TechArticle',
               '@id': `${canonicalUrl}#article`,
-              headline: title,
+              ...(isProductHub ? { name: title } : { headline: title }),
               description,
               url: canonicalUrl,
               dateModified,
@@ -596,40 +617,42 @@ export default defineConfig({
         ],
       },
       {
-        text: 'Build',
+        text: 'Flow',
+        items: [
+          { text: 'Flow Overview', link: '/flow/' },
+          { text: 'Visual MCP Builder', link: '/flow/mcp-builder' },
+          { text: 'Browser Automation', link: '/flow/browser-automation' },
+          { text: 'Evidence & Replay', link: '/flow/evidence-replay' },
+        ],
+      },
+      {
+        text: 'Warroom',
+        items: [
+          { text: 'Warroom Overview', link: '/warroom/' },
+          { text: 'CTEM Closed Loop', link: '/warroom/closed-loop' },
+          { text: 'Attack Surface Management', link: '/warroom/surfaces/attack-surface' },
+          { text: 'Security Validation', link: '/warroom/surfaces/pentest' },
+        ],
+      },
+      {
+        text: 'Core & MCP',
         items: [
           { text: 'Core Runtime', link: '/core/' },
           { text: 'MCP Server', link: '/mcp/' },
           { text: 'Modules Reference', link: '/modules/' },
-          { text: 'Configuration', link: '/guide/configuration' },
-        ],
-      },
-      {
-        text: 'Reference',
-        items: [
           { text: 'flyto-ai', link: '/ai/' },
           { text: 'flyto-indexer', link: '/indexer/' },
           { text: 'flyto-blueprint', link: '/blueprint/' },
         ],
       },
       {
-        text: 'Security',
-        items: [
-          { text: 'Warroom Overview', link: '/warroom/' },
-          { text: 'Self-hosted CE', link: '/warroom/self-hosted-ce' },
-          { text: 'Security Surfaces', link: '/warroom/surfaces/' },
-          { text: 'BYO Integrations', link: '/warroom/byo-integration' },
-          { text: 'Scoring Methodology', link: '/warroom/scoring-methodology' },
-        ],
-      },
-      {
         text: 'Resources',
         items: [
-          { text: 'Product Lines', link: '/strategy/flyto2-product-lines' },
           { text: 'Community', link: '/community/' },
-          { text: 'Blog', link: 'https://blog.flyto2.com' },
-          { text: 'Product Site', link: 'https://flyto2.com' },
-          { text: 'Warroom CE on GitHub', link: 'https://github.com/flytohub/flyto-warroom' },
+          { text: 'Flow Guides', link: 'https://blog.flyto2.com/flow/' },
+          { text: 'Security Guides', link: 'https://blog.flyto2.com/security/' },
+          { text: 'Flyto2 Product Site', link: 'https://flyto2.com' },
+          { text: 'GitHub Organization', link: 'https://github.com/flytohub' },
         ],
       },
     ],
@@ -679,6 +702,28 @@ export default defineConfig({
           text: 'Community',
           items: [
             { text: 'Community Guide', link: '/community/' },
+          ],
+        },
+      ],
+      '/flow/': [
+        {
+          text: 'Flyto2 Flow',
+          collapsed: false,
+          items: [
+            { text: 'Overview', link: '/flow/' },
+            { text: 'Visual MCP Builder', link: '/flow/mcp-builder' },
+            { text: 'Browser Automation', link: '/flow/browser-automation' },
+            { text: 'Evidence & Replay', link: '/flow/evidence-replay' },
+          ],
+        },
+        {
+          text: 'Runtime References',
+          collapsed: true,
+          items: [
+            { text: 'flyto-core', link: '/core/' },
+            { text: 'MCP Transports', link: '/mcp/' },
+            { text: 'Browser Modules', link: '/modules/browser' },
+            { text: 'Configuration', link: '/guide/configuration' },
           ],
         },
       ],
@@ -806,21 +851,21 @@ export default defineConfig({
           text: 'Start Here',
           collapsed: false,
           items: [
-            { text: 'Home', link: '/warroom/' },
-            { text: 'Overview', link: '/warroom/overview' },
-            { text: 'MSSP Overview', link: '/warroom/mssp-overview' },
-            { text: 'War-Room Concept', link: '/warroom/war-room-concept' },
+            { text: 'Warroom Overview', link: '/warroom/' },
             { text: 'Getting Started', link: '/warroom/getting-started' },
             { text: 'Self-hosted CE', link: '/warroom/self-hosted-ce' },
             { text: 'Product Tour', link: '/warroom/product-tour' },
           ],
         },
         {
-          text: 'Products',
-          collapsed: true,
+          text: 'CTEM Operations',
+          collapsed: false,
           items: [
-            { text: 'Flyto2 Code (VA/PT)', link: '/warroom/flyto-code' },
-            { text: 'Flyto2 Domains (CTEM)', link: '/warroom/flyto-domains' },
+            { text: 'Closed-Loop Verify', link: '/warroom/closed-loop' },
+            { text: 'Attack Surface Management', link: '/warroom/surfaces/attack-surface' },
+            { text: 'Security Validation', link: '/warroom/surfaces/pentest' },
+            { text: 'Unified Scoring', link: '/warroom/surfaces/unified-scoring' },
+            { text: 'Integrations', link: '/warroom/integrations' },
           ],
         },
         {
@@ -828,42 +873,29 @@ export default defineConfig({
           collapsed: true,
           items: [
             { text: 'Overview', link: '/warroom/surfaces/' },
-            { text: 'External Attack Surface', link: '/warroom/surfaces/attack-surface' },
             { text: 'Code Intelligence', link: '/warroom/surfaces/code-intelligence' },
             { text: 'MCP Security', link: '/warroom/surfaces/mcp-security' },
             { text: 'Container & Cloud Identity', link: '/warroom/surfaces/container-cloud-identity' },
             { text: 'Darkweb & Threat Intel', link: '/warroom/surfaces/darkweb-threat-intel' },
             { text: 'Footprint & Attribution', link: '/warroom/surfaces/footprint-attribution' },
             { text: 'Asset Map', link: '/warroom/surfaces/asset-map' },
-            { text: 'Pentest', link: '/warroom/surfaces/pentest' },
             { text: 'Red-Team Simulation', link: '/warroom/surfaces/red-team' },
-            { text: 'Unified Scoring', link: '/warroom/surfaces/unified-scoring' },
           ],
         },
         {
-          text: 'Scoring & Events',
+          text: 'Advanced & Reference',
           collapsed: true,
           items: [
+            { text: 'MSSP Overview', link: '/warroom/mssp-overview' },
+            { text: 'War-Room Concept', link: '/warroom/war-room-concept' },
+            { text: 'Flyto2 Code (VA/PT)', link: '/warroom/flyto-code' },
+            { text: 'Flyto2 Domains (CTEM)', link: '/warroom/flyto-domains' },
+            { text: 'BYO Integration', link: '/warroom/byo-integration' },
             { text: 'Scoring Methodology', link: '/warroom/scoring-methodology' },
             { text: 'Score Events', link: '/warroom/score-events' },
-          ],
-        },
-        {
-          text: 'Workflows',
-          collapsed: true,
-          items: [
-            { text: 'Closed-Loop Verify', link: '/warroom/closed-loop' },
             { text: 'Pulse', link: '/warroom/pulse' },
             { text: 'Red Team', link: '/warroom/red-team' },
-          ],
-        },
-        {
-          text: 'Reference',
-          collapsed: true,
-          items: [
             { text: 'API Reference', link: '/warroom/api' },
-            { text: 'Integrations', link: '/warroom/integrations' },
-            { text: 'BYO Integration', link: '/warroom/byo-integration' },
           ],
         },
       ],
@@ -883,7 +915,7 @@ export default defineConfig({
     },
 
     footer: {
-      message: 'Released under the Apache 2.0 License.',
+      message: 'Product licenses vary by repository; flyto-core is Apache 2.0.',
       copyright: `Copyright 2025-${new Date().getFullYear()} Flyto2`,
     },
   },
