@@ -6,7 +6,7 @@ hero:
   text: Build, replay, and validate real AI workflows
   tagline: New here? Start with Flyto2 Core, connect deterministic tools through MCP, then add evidence-backed CTEM, pentest, red-team, and security workflows when you need them.
   image:
-    src: /logo.png
+    src: /logo.webp
     alt: Flyto2
   actions:
     - theme: brand
