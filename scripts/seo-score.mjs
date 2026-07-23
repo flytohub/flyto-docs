@@ -15,6 +15,10 @@ const legacyBrandPattern = new RegExp(`\\b${['Fly', 'to'].join('')}\\b`);
 
 const routes = [
   '',
+  'flow',
+  'flow/mcp-builder',
+  'flow/browser-automation',
+  'flow/evidence-replay',
   'guide/what-is-flyto2',
   'guide/getting-started',
   'guide/installation',
@@ -41,6 +45,7 @@ const routes = [
   'warroom/closed-loop',
   'warroom/surfaces/attack-surface',
   'warroom/surfaces/mcp-security',
+  'warroom/surfaces/pentest',
   'ai',
   'indexer',
   'blueprint',
@@ -49,6 +54,10 @@ const routes = [
 
 const focusByRoute = new Map([
   ['', 'Flyto2 docs'],
+  ['flow', 'Flyto2 Flow'],
+  ['flow/mcp-builder', 'visual MCP builder'],
+  ['flow/browser-automation', 'self-hosted browser automation'],
+  ['flow/evidence-replay', 'workflow evidence and replay'],
   ['guide/what-is-flyto2', 'open source AI agent framework'],
   ['guide/getting-started', 'AI workflow automation'],
   ['guide/installation', 'install Flyto2'],
@@ -75,6 +84,7 @@ const focusByRoute = new Map([
   ['warroom/closed-loop', 'continuous threat exposure management'],
   ['warroom/surfaces/attack-surface', 'attack surface management'],
   ['warroom/surfaces/mcp-security', 'MCP security'],
+  ['warroom/surfaces/pentest', 'security validation'],
   ['ai', 'AI agent framework'],
   ['indexer', 'code intelligence'],
   ['blueprint', 'workflow blueprint'],
