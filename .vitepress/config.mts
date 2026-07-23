@@ -472,7 +472,7 @@ export default defineConfig({
         '@type': 'Organization',
         name: 'Flyto2',
         url: 'https://flyto2.com',
-        logo: { '@type': 'ImageObject', url: 'https://docs.flyto2.com/logo.webp' },
+        logo: { '@type': 'ImageObject', url: 'https://docs.flyto2.com/logo.png' },
       },
     })],
   ],
@@ -542,7 +542,7 @@ export default defineConfig({
                 '@type': 'Organization',
                 name: 'Flyto2',
                 url: 'https://flyto2.com',
-                logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.webp` },
+                logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
               },
               mainEntityOfPage: { '@id': `${canonicalUrl}#webpage` },
               about: {
@@ -583,7 +583,7 @@ export default defineConfig({
   },
 
   themeConfig: {
-    logo: '/logo.webp',
+    logo: '/logo.png',
     siteTitle: 'Flyto2 Docs',
     // Only the module catalog is translated. Route language changes through each
     // locale's landing page so English-only guides never produce a false 404.
