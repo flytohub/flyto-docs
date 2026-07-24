@@ -4,21 +4,21 @@
 
 Source map for every maintained function and configuration method in the Flyto2 Docs generators, audits, SEO gates, and VitePress configuration.
 
-Inventory: **14 files**, **3842 lines**, and **156 declarations**.
+Inventory: **14 files**, **3878 lines**, and **156 declarations**.
 
 ## `.vitepress/config.mts`
 
 | Kind | Signature | Responsibility | Source |
 |---|---|---|---|
-| function | `toPublicPath(url: string)` | Implements `toPublicPath` in this documentation surface. | [`.vitepress/config.mts:200`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L200) |
-| function | `isNonContentPath(relativePath: string)` | Implements `isNonContentPath` in this documentation surface. | [`.vitepress/config.mts:204`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L204) |
-| function | `isNonContentPublicPath(publicPath: string)` | Implements `isNonContentPublicPath` in this documentation surface. | [`.vitepress/config.mts:211`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L211) |
-| function | `titleFromSegment(segment: string)` | Implements `titleFromSegment` in this documentation surface. | [`.vitepress/config.mts:221`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L221) |
-| function | `breadcrumbItems(canonicalPath: string, title: string)` | Implements `breadcrumbItems` in this documentation surface. | [`.vitepress/config.mts:229`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L229) |
-| function | `modulesSidebar(prefix = '')` | Implements `modulesSidebar` in this documentation surface. | [`.vitepress/config.mts:252`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L252) |
-| function | `localeModulesConfig(prefix: string)` | Implements `localeModulesConfig` in this documentation surface. | [`.vitepress/config.mts:364`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L364) |
-| method | `transformItems(items)` | Implements `transformItems` in this documentation surface. | [`.vitepress/config.mts:424`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L424) |
-| method | `transformPageData(pageData)` | Implements `transformPageData` in this documentation surface. | [`.vitepress/config.mts:479`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L479) |
+| function | `toPublicPath(url: string)` | Implements `toPublicPath` in this documentation surface. | [`.vitepress/config.mts:204`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L204) |
+| function | `isNonContentPath(relativePath: string)` | Implements `isNonContentPath` in this documentation surface. | [`.vitepress/config.mts:208`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L208) |
+| function | `isNonContentPublicPath(publicPath: string)` | Implements `isNonContentPublicPath` in this documentation surface. | [`.vitepress/config.mts:215`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L215) |
+| function | `titleFromSegment(segment: string)` | Implements `titleFromSegment` in this documentation surface. | [`.vitepress/config.mts:225`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L225) |
+| function | `breadcrumbItems(canonicalPath: string, title: string)` | Implements `breadcrumbItems` in this documentation surface. | [`.vitepress/config.mts:233`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L233) |
+| function | `modulesSidebar(prefix = '')` | Implements `modulesSidebar` in this documentation surface. | [`.vitepress/config.mts:256`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L256) |
+| function | `localeModulesConfig(prefix: string)` | Implements `localeModulesConfig` in this documentation surface. | [`.vitepress/config.mts:368`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L368) |
+| method | `transformItems(items)` | Implements `transformItems` in this documentation surface. | [`.vitepress/config.mts:428`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L428) |
+| method | `transformPageData(pageData)` | Implements `transformPageData` in this documentation surface. | [`.vitepress/config.mts:483`](https://github.com/flytohub/flyto-docs/blob/main/.vitepress/config.mts#L483) |
 
 ## `.vitepress/seo-contract.ts`
 

@@ -43,6 +43,10 @@ const PAGE_SEO: Record<string, { title: string; description: string }> = {
     title: 'Flyto2 Flow Documentation',
     description: 'Build local AI workflow automation with Flyto2 Flow, visual MCP tools, browser recording, execution evidence, replay, and the open-source flyto-core runtime.',
   },
+  'flow/community-edition-docker': {
+    title: 'Flyto2 Flow Community Edition Docker',
+    description: 'Install Flyto2 Flow Community Edition with the reviewed multi-architecture Docker image, loopback binding, persistent storage, health checks, upgrades, and source builds.',
+  },
   'flow/mcp-builder': {
     title: 'Visual MCP Builder',
     description: 'Use the Flyto2 visual MCP builder to turn a workflow into a typed tool with local Streamable HTTP, client setup, audit metadata, and operator controls.',
@@ -620,6 +624,7 @@ export default defineConfig({
         text: 'Flow',
         items: [
           { text: 'Flow Overview', link: '/flow/' },
+          { text: 'CE Docker Install', link: '/flow/community-edition-docker' },
           { text: 'Visual MCP Builder', link: '/flow/mcp-builder' },
           { text: 'Browser Automation', link: '/flow/browser-automation' },
           { text: 'Evidence & Replay', link: '/flow/evidence-replay' },
@@ -711,6 +716,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Overview', link: '/flow/' },
+            { text: 'CE Docker Install', link: '/flow/community-edition-docker' },
             { text: 'Visual MCP Builder', link: '/flow/mcp-builder' },
             { text: 'Browser Automation', link: '/flow/browser-automation' },
             { text: 'Evidence & Replay', link: '/flow/evidence-replay' },

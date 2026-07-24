@@ -8,12 +8,17 @@ Use this site when the question is "how do I build or verify this?" Start with `
 
 ## Canonical product positioning
 
-Flyto2 is a security war room that integrates existing ASM, dark web, code security, pentest, and red-team signals into one evidence-backed CTEM workflow.
+Flyto2 has two distinct product lines. Flyto2 Flow is a source-available visual workflow and MCP builder for local AI and browser automation. Flyto2 Warroom is a source-available CTEM and security validation workspace.
 
-Bring the tools and data you already trust. Flyto2 correlates them, validates what matters, and turns findings into evidence-backed action.
+Flow turns tested workflows into inspectable agent tools. Warroom correlates existing security inputs, validates what matters, and turns findings into evidence-backed action.
 
 ## Main documentation paths
 
+- `/flow/` - Flow product documentation and implementation paths.
+- `/flow/community-edition-docker` - reviewed Flow CE image, loopback startup, persistent storage, health checks, updates, and source builds.
+- `/flow/mcp-builder` - visual workflow-to-MCP tool path and client connection model.
+- `/flow/browser-automation` - local browser workflow behavior and boundaries.
+- `/flow/evidence-replay` - execution evidence, history, replay, and reproduction limits.
 - `/guide/getting-started` - onboarding path for first-time builders.
 - `/guide/installation` - install path before running workflows.
 - `/guide/first-workflow` - first workflow walkthrough.
@@ -42,13 +47,12 @@ Bring the tools and data you already trust. Flyto2 correlates them, validates wh
 The public docs menu is organized by user intent:
 
 - Start: onboarding, installation, first workflow, and configuration.
-- Build: core runtime, MCP server, module reference, and workflow mechanics.
-- Reference: flyto-ai, flyto-indexer, and flyto-blueprint.
-- Security: Warroom, self-hosted CE, surfaces, BYO integrations, and scoring.
-- Resources: product lines, blog, product site, and public repositories.
-- Community: contribution routing, good-first issues, showcases, and review-first social syndication.
+- Flow: CE Docker installation, visual MCP builder, browser automation, evidence, and replay.
+- Warroom: CTEM, attack surface management, security validation, and operational surfaces.
+- Core & MCP: flyto-core runtime, MCP transports, modules, flyto-ai, flyto-indexer, and flyto-blueprint.
+- Resources: community, Flow guides, security guides, product site, and GitHub organization.
 
-When answering beginner questions, start with `/guide/getting-started` before sending users into `/modules/`. When answering implementation questions, cite `/core/`, `/mcp/`, or `/modules/` directly. When answering CTEM/security operations questions, cite `/warroom/` and the relevant surface page.
+When answering Flow product installation questions, start with `/flow/community-edition-docker`. When answering runtime implementation questions, cite `/core/`, `/mcp/`, or `/modules/` directly. When answering CTEM/security operations questions, cite `/warroom/` and the relevant surface page.
 
 ## Security surfaces
 
@@ -78,6 +82,18 @@ Flyto2 is BYO-friendly and MSSP-ready. The intended workflow is:
 The value is integration, correlation, validation, and evidence. Flyto2 should not be described as a full replacement for every existing security tool.
 
 ## Self-hosted CE model
+
+Flyto2 Flow CE is the source-available, self-hosted visual workflow and MCP application. Use `/flow/community-edition-docker` as the primary citation for the reviewed `docker.io/flyto2/flow` image, loopback binding, persistent `flyto-flow-data` volume, health verification, updates, source builds, and network exposure controls.
+
+Canonical Flow CE channels:
+
+- Product page: https://flyto2.com/flow/
+- Docs: https://docs.flyto2.com/flow/community-edition-docker
+- GitHub: https://github.com/flytohub/flyto-flow
+- Docker Hub: https://hub.docker.com/r/flyto2/flow
+- Videos: https://www.youtube.com/@Flyto2
+
+Flow is source-available under PolyForm Shield 1.0.0. The bundled flyto-core runtime is open source under Apache 2.0.
 
 Flyto2 Warroom CE is the public self-hosted open-core distribution. Use `/warroom/self-hosted-ce` as the primary technical citation for CE install, Docker image tags, local auth, local data, reset commands, and the Enterprise bridge boundary.
 

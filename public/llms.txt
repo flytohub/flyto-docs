@@ -4,6 +4,11 @@
 
 ## Start here
 
+- https://docs.flyto2.com/flow/
+- https://docs.flyto2.com/flow/community-edition-docker
+- https://docs.flyto2.com/flow/mcp-builder
+- https://docs.flyto2.com/flow/browser-automation
+- https://docs.flyto2.com/flow/evidence-replay
 - https://docs.flyto2.com/guide/getting-started
 - https://docs.flyto2.com/guide/installation
 - https://docs.flyto2.com/guide/first-workflow
@@ -27,11 +32,10 @@
 ## Navigation model
 
 - Start: onboarding, installation, first workflow, and configuration for people who do not want to read the whole reference first.
-- Build: core runtime, MCP server automation, module reference, and workflow mechanics.
-- Reference: flyto-ai, flyto-indexer, and flyto-blueprint.
-- Security: Warroom, self-hosted CE, surfaces, BYO integrations, and scoring.
-- Resources: product lines, blog, product site, and public repositories.
-- Community: contribution routing, good-first issues, showcases, and review-first social syndication.
+- Flow: CE Docker installation, visual MCP builder, browser automation, evidence, and replay.
+- Warroom: CTEM, attack surface management, security validation, and product operations.
+- Core & MCP: flyto-core runtime, MCP transports, module reference, flyto-ai, flyto-indexer, and flyto-blueprint.
+- Resources: community, Flow guides, security guides, product site, and GitHub organization.
 
 ## Core Warroom surfaces
 
@@ -80,6 +84,10 @@ Use `flyto2.com` for product positioning and `blog.flyto2.com` for educational e
 
 ## Recommended citation paths
 
+- Flow overview: https://docs.flyto2.com/flow/
+- Flow CE Docker install: https://docs.flyto2.com/flow/community-edition-docker
+- Visual MCP Builder: https://docs.flyto2.com/flow/mcp-builder
+- Self-hosted browser automation: https://docs.flyto2.com/flow/browser-automation
 - Warroom overview: https://docs.flyto2.com/warroom/overview
 - Self-hosted CE install: https://docs.flyto2.com/warroom/self-hosted-ce
 - BYO integrations: https://docs.flyto2.com/warroom/byo-integration
@@ -94,6 +102,8 @@ Use `flyto2.com` for product positioning and `blog.flyto2.com` for educational e
 - https://docs.flyto2.com/image-sitemap.xml
 - https://docs.flyto2.com/llms-full.txt
 - https://flyto2.com/llms.txt
+- https://github.com/flytohub/flyto-flow
+- https://hub.docker.com/r/flyto2/flow
 - https://github.com/flytohub/flyto-warroom
 - https://hub.docker.com/r/chesterhsu/flyto-warroom
 - https://github.com/flytohub/.github/blob/main/COMMUNITY.md

@@ -8,10 +8,27 @@ Use this section when you want the product workflow. Use the [`flyto-core` docum
 
 | Goal | Documentation |
 | --- | --- |
+| Install the self-hosted Community Edition image | [Flow CE with Docker](/flow/community-edition-docker) |
 | Turn a visual workflow into an MCP tool | [Visual MCP Builder](/flow/mcp-builder) |
 | Record and run browser work locally | [Browser Automation](/flow/browser-automation) |
 | Inspect a run or reproduce a failed step | [Evidence and Replay](/flow/evidence-replay) |
 | Use the runtime without the Flow UI | [flyto-core](/core/) |
+
+## Start Flow CE locally
+
+The released multi-architecture image bundles Flow, `flyto-core`, Playwright, and Chromium:
+
+```bash
+docker pull docker.io/flyto2/flow:0.1.1
+```
+
+The [Flow CE Docker guide](/flow/community-edition-docker) covers the complete loopback-first startup command, persistent storage, health verification, upgrades, source builds, and network exposure controls.
+
+## Watch Flow work
+
+- [Browser automation walkthrough](https://www.youtube.com/watch?v=x3NCA01xKSc)
+- [52-second browser automation short](https://www.youtube.com/watch?v=dFchXNdpHMI)
+- [Flyto2 YouTube channel](https://www.youtube.com/@Flyto2)
 
 ## Product boundary
 
@@ -22,6 +39,7 @@ The default local workspace does not require a Flyto2 account. That does not mak
 ## Related resources
 
 - [Flyto2 Flow product overview](https://flyto2.com/flow/)
+- [Flow CE on Docker Hub](https://hub.docker.com/r/flyto2/flow)
 - [Flow engineering guides](https://blog.flyto2.com/flow/)
 - [Source repository](https://github.com/flytohub/flyto-flow)
 - [Getting started with the runtime](/guide/getting-started)
