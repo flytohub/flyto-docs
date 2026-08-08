@@ -8,7 +8,6 @@ Before editing, read:
 - `ARCHITECTURE.md`
 - `STATE.md`
 - `DECISIONS.md`
-- `/Users/chester/flytohub/CODEX_HANDOFF_FLYTO_AUDIT.md`
 
 Rules:
 
@@ -69,3 +68,25 @@ Any frontend, website, dashboard, extension webview, app screen, or generated UI
 8. Hard-to-understand content: copy must be concrete, scannable, current, and consistent with Flyto2 terminology.
 
 Frontend verification must include the relevant automated checks plus manual or screenshot review for responsive layout, accessibility states, navigation clarity, loading/empty/error states, and content readability. Public pages must preserve SEO basics: canonical URL, sitemap coverage, metadata, structured data when relevant, and no broken internal or external links.
+
+## Repo notes
+
+Merged from `CLAUDE.md` so Codex and Claude read one set of rules.
+
+Flyto2 Docs is the canonical technical explanation surface. Use it for product
+mechanics, architecture, scoring, security surfaces, BYO integrations, and
+module references.
+
+Workflow:
+
+1. Read `PROJECT.md`, `ARCHITECTURE.md`, `STATE.md`, and `DECISIONS.md`.
+2. Use flyto-indexer search, audit, impact, and structure before broad public docs changes.
+3. If adding a public page, update navigation, sidebar, `public/llms.txt`, and
+   `public/llms-full.txt` when relevant.
+4. Keep answer-engine pages structured with clear headings, direct answer
+   blocks, and source-ready wording.
+5. Run `npm run verify`.
+6. Treat generated module/Core/code references as outputs; edit their source
+   generator and regenerate instead of patching an output page.
+
+Never infer or reuse login credentials from docs or handoffs.
