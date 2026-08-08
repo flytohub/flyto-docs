@@ -11,7 +11,8 @@
 
 ## P1 before controlled production
 
-- Add Cloud / Apps / Automation docs equal in quality to Security docs.
+- Expand the new Cloud / Apps / Automation architecture with authenticated
+  operator walkthroughs only after staging evidence exists.
 - Add enterprise, airgap, open-core, billing/entitlement, and audit-log docs.
 - Translate high-value onboarding and Core narrative pages beyond the generated
   module reference; advertise only translations that actually exist.

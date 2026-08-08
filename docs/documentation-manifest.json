@@ -13,6 +13,7 @@
     "changelog": "CHANGELOG.md",
     "whitepaper": "core/whitepaper.md",
     "feature_reference": "docs/README.md",
+    "cloud_architecture": "cloud/mission-stations.md",
     "source_reference": "reference/docs-code.md",
     "module_roots": [".vitepress", "scripts"]
   },

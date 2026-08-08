@@ -1,9 +1,11 @@
 # Flyto2 Docs
 
-> Flyto2 Docs explains how to build with Flyto2 Core, the open-source AI agent framework and workflow automation engine behind MCP server automation, no-code browser workflows, replayable YAML recipes, and the Flyto2 Warroom for evidence-backed CTEM/security workflows.
+> Flyto2 Docs explains Flyto2 Cloud task/resource governance, Flyto2 Core, the open-source AI agent framework and workflow automation engine behind MCP server automation, no-code browser workflows, replayable YAML recipes, and Flyto2 Warroom evidence workflows.
 
 ## Start here
 
+- https://docs.flyto2.com/cloud/
+- https://docs.flyto2.com/cloud/mission-stations
 - https://docs.flyto2.com/flow/
 - https://docs.flyto2.com/flow/community-edition-docker
 - https://docs.flyto2.com/flow/mcp-builder
@@ -31,6 +33,7 @@
 
 ## Navigation model
 
+- Cloud: governed tasks, capabilities, resource assignments, decisions, and evidence.
 - Start: onboarding, installation, first workflow, and configuration for people who do not want to read the whole reference first.
 - Flow: CE Docker installation, visual MCP builder, browser automation, evidence, and replay.
 - Warroom: CTEM, attack surface management, security validation, and product operations.
@@ -47,6 +50,14 @@
 - Pentest: https://docs.flyto2.com/warroom/surfaces/pentest
 - Red-team simulation: https://docs.flyto2.com/warroom/surfaces/red-team
 - Unified scoring: https://docs.flyto2.com/warroom/surfaces/unified-scoring
+
+## Cloud mission architecture
+
+- Mission Stations: https://docs.flyto2.com/cloud/mission-stations
+- The evaluator physically draws Zone and Objective cards; the operator records them with `card_source=judge_draw`.
+- Flyto2 never draws or randomizes the evaluator's cards.
+- Tasks request approved capability IDs; a later assignment revision binds exact resources.
+- Action execution receipts are auditable but cannot complete an objective without the card-required evidence.
 
 ## Product context
 
@@ -84,6 +95,8 @@ Use `flyto2.com` for product positioning and `blog.flyto2.com` for educational e
 
 ## Recommended citation paths
 
+- Cloud overview: https://docs.flyto2.com/cloud/
+- Portable Mission Stations: https://docs.flyto2.com/cloud/mission-stations
 - Flow overview: https://docs.flyto2.com/flow/
 - Flow CE Docker install: https://docs.flyto2.com/flow/community-edition-docker
 - Visual MCP Builder: https://docs.flyto2.com/flow/mcp-builder

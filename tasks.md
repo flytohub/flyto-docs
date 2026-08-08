@@ -2,7 +2,10 @@
 
 - [x] Run `npm run docs:build`.
 - [x] Sync docs SEO metadata and keyword evidence from `flyto-i18n`.
-- [ ] Expand Cloud / Apps / Automation docs.
+- [x] Add a Cloud / Apps / Automation overview and source-backed portable
+  Mission Stations architecture.
+- [ ] Add an authenticated Mission Control operator walkthrough after staging
+  and calibrated robot integration evidence exists.
 - [ ] Add enterprise, airgap, open-core, billing, entitlement, and audit-log
   pages.
 - [x] Update `public/llms-full.txt` after major docs navigation changes.

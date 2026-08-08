@@ -1,5 +1,18 @@
 # Decisions
 
+## 2026-08-08 - Mission docs preserve the evaluator/card authority boundary
+
+Decision: public Mission Stations documentation must state that the evaluator
+physically draws the Zone and Objective cards and the operator records them
+with `card_source=judge_draw`. Flyto2 never draws or randomizes those cards.
+Tasks request capabilities before exact resource assignment, plan and
+assignment revisions remain separate, and action execution evidence cannot
+complete the objective.
+
+Reason: reversing the card authority changes the competition scenario, while
+conflating action success with objective proof would document an unsafe and
+incorrect completion model.
+
 ## 2026-07-22 - Public references are source-backed and split by responsibility
 
 Decision: sync Core narrative/generated references from flyto-core, publish all

@@ -12,7 +12,7 @@ const CORE_MODULE_COUNT = 452
 const CORE_CATALOG_CATEGORY_COUNT = 84
 const BUILT_IN_RECIPE_COUNT = 41
 const CORE_RUNTIME_SUMMARY = `${CORE_MODULE_COUNT} registry-backed modules across ${CORE_CATALOG_CATEGORY_COUNT} catalog categories, ${BUILT_IN_RECIPE_COUNT} built-in recipes, MCP transports, evidence capture, and replayable YAML execution`
-const SITE_DESCRIPTION = 'Technical documentation for Flyto2 Flow, Flyto2 Warroom, and the open-source flyto-core runtime, organized by product and implementation outcome.'
+const SITE_DESCRIPTION = 'Technical documentation for Flyto2 Cloud, Flyto2 Flow, Flyto2 Warroom, and the open-source flyto-core runtime, organized by product and implementation outcome.'
 const SEO_KEYWORDS = [
   'Flyto2 docs',
   'AI workflow automation',
@@ -23,6 +23,8 @@ const SEO_KEYWORDS = [
   'flyto-core MCP server',
   'no-code browser automation',
   'self-hosted workflow automation',
+  'portable robot mission stations',
+  'task resource capability architecture',
   'CTEM',
   'security war room',
   'attack surface management',
@@ -39,6 +41,14 @@ const SEO_KEYWORDS = [
   ...manifestKeywordTerms(),
 ]
 const PAGE_SEO: Record<string, { title: string; description: string }> = {
+  cloud: {
+    title: 'Flyto2 Cloud Apps and Automation',
+    description: 'Use Flyto2 Cloud as the governed task, resource, capability, decision, and evidence control plane for apps and automation.',
+  },
+  'cloud/mission-stations': {
+    title: 'Portable Robot Mission Stations',
+    description: 'Build portable evaluator-drawn robot missions with fold-flat stations, venue calibration, approved capabilities, immutable revisions, and objective evidence.',
+  },
   flow: {
     title: 'Flyto2 Flow Documentation',
     description: 'Build local AI workflow automation with Flyto2 Flow, visual MCP tools, browser recording, execution evidence, replay, and the open-source flyto-core runtime.',
@@ -621,6 +631,13 @@ export default defineConfig({
         ],
       },
       {
+        text: 'Cloud',
+        items: [
+          { text: 'Cloud Overview', link: '/cloud/' },
+          { text: 'Mission Stations', link: '/cloud/mission-stations' },
+        ],
+      },
+      {
         text: 'Flow',
         items: [
           { text: 'Flow Overview', link: '/flow/' },
@@ -690,6 +707,7 @@ export default defineConfig({
             { text: 'MCP Server', link: '/mcp/' },
             { text: 'Modules Reference', link: '/modules/' },
             { text: 'AI Tools', link: '/ai/' },
+            { text: 'Cloud Apps', link: '/cloud/' },
             { text: 'Security Warroom', link: '/warroom/' },
           ],
         },
@@ -707,6 +725,25 @@ export default defineConfig({
           text: 'Community',
           items: [
             { text: 'Community Guide', link: '/community/' },
+          ],
+        },
+      ],
+      '/cloud/': [
+        {
+          text: 'Flyto2 Cloud',
+          collapsed: false,
+          items: [
+            { text: 'Overview', link: '/cloud/' },
+            { text: 'Portable Mission Stations', link: '/cloud/mission-stations' },
+          ],
+        },
+        {
+          text: 'Related Architecture',
+          collapsed: true,
+          items: [
+            { text: 'Product Lines', link: '/strategy/flyto2-product-lines' },
+            { text: 'AI Runtime', link: '/ai/' },
+            { text: 'Core Evidence & Replay', link: '/core/evidence-replay' },
           ],
         },
       ],
