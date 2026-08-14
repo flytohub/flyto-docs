@@ -44,7 +44,7 @@
     },
     {
       "area": "repository-policy",
-      "paths": [".flyto-rules.yaml", ".gitleaks.toml", ".env.example", "docs/documentation-manifest.json"],
+      "paths": [".flyto-rules.yaml", ".flyto/coding.yaml", ".gitleaks.toml", ".gitignore", ".env.example", "docs/documentation-manifest.json"],
       "docs": ["AGENTS.md", "SECURITY.md", "docs/README.md"]
     }
   ]

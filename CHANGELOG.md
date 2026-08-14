@@ -4,6 +4,9 @@
 
 ### Added
 
+- Added the governed Flyto2 coding contract for pinned dependency installation
+  and the complete public documentation verification suite.
+
 - Added public source-backed Core whitepaper, feature, API, CLI, configuration,
   operations, security, testing, migration, recipe, route, parser, environment,
   registration, source, and declaration references.
@@ -35,6 +38,9 @@
   audit checks stay aligned with `flyto-i18n`.
 
 ### Changed
+
+- Escaped handoff-template placeholders so VitePress does not parse them as
+  unclosed HTML tags during the required production build.
 
 - Registered all 15 module translations as VitePress locales with their own
   navigation and lazy search indexes, reducing the former 6.3 MB combined root

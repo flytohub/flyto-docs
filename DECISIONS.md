@@ -1,5 +1,16 @@
 # Decisions
 
+## 2026-08-14 - Public documentation changes use the governed coding route
+
+Decision: keep dependency installation and the repository's complete release
+verification command in `.flyto/coding.yaml`. Broad public documentation and
+positioning changes must pass that contract and an independent Codex audit
+before they can land.
+
+Reason: navigation, citation files, generated references, and public claims are
+one release surface. A committed verification entry prevents copy work from
+bypassing the same contracts that protect code and generated documentation.
+
 ## 2026-07-22 - Public references are source-backed and split by responsibility
 
 Decision: sync Core narrative/generated references from flyto-core, publish all

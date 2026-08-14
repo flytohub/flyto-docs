@@ -1,6 +1,10 @@
 # State
 
-Current state on 2026-07-23:
+Current state on 2026-08-14:
+
+- Governed coding jobs now install the pinned Node dependency graph and run
+  the complete `npm run verify` release contract from `.flyto/coding.yaml`
+  before an implementation can receive an independent Codex audit.
 
 - GitHub Pages is enabled in Actions workflow mode, the custom domain is
   `docs.flyto2.com`, and deployment run `29889676532` passed. The Warroom CE
