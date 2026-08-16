@@ -5,6 +5,14 @@ Current state on 2026-08-14:
 - Governed coding jobs now install the pinned Node dependency graph and run
   the complete `npm run verify` release contract from `.flyto/coding.yaml`
   before an implementation can receive an independent Codex audit.
+Current state on 2026-08-08:
+
+- Public Cloud documentation now includes a Cloud overview and portable
+  Mission Stations architecture. It states that evaluators physically draw
+  cards, operators record them with `card_source=judge_draw`, venue calibration
+  replaces fixed coordinates, and Objective-card evidence—not action success—
+  completes a task. The pages describe the verified source contract while
+  keeping authenticated browser and live robot integration as pending evidence.
 
 - GitHub Pages is enabled in Actions workflow mode, the custom domain is
   `docs.flyto2.com`, and deployment run `29889676532` passed. The Warroom CE

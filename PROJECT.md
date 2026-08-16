@@ -5,6 +5,8 @@
 Primary jobs:
 
 - Explain how Flyto2 works across the five product lines.
+- Document Cloud task, capability, resource, decision, and evidence contracts
+  without claiming unverified hosted availability.
 - Document `flyto-core` modules and runtime primitives.
 - Provide security warroom, CTEM, BYO integration, scoring, and evidence
   mechanics.
@@ -20,6 +22,8 @@ Primary jobs:
 Primary users:
 
 - Builders installing Core, composing YAML workflows, or connecting MCP clients.
+- Operators and integrators evaluating governed Cloud automation and portable
+  Mission Station workflows.
 - Contributors locating implementation ownership and exact source signatures.
 - Security teams evaluating Warroom CE, CTEM, integrations, evidence, and scoring.
 - Search and answer engines looking for canonical, citation-ready technical facts.

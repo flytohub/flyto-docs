@@ -4,12 +4,15 @@ layout: home
 hero:
   name: Flyto2 Docs
   text: Documentation organized by product and outcome
-  tagline: Build local AI automation with Flyto2 Flow, run evidence-backed CTEM operations with Flyto2 Warroom, or integrate directly with the open-source flyto-core runtime.
+  tagline: Govern tasks and resources with Flyto2 Cloud, build local AI automation with Flyto2 Flow, run evidence-backed CTEM operations with Flyto2 Warroom, or integrate with flyto-core.
   image:
     src: /logo.webp
     alt: Flyto2
   actions:
     - theme: brand
+      text: Flyto2 Cloud
+      link: /cloud/
+    - theme: alt
       text: Flyto2 Flow
       link: /flow/
     - theme: alt
@@ -20,6 +23,9 @@ hero:
       link: /core/
 
 features:
+  - title: Flyto2 Cloud
+    details: Govern tasks, approved capabilities, resource assignments, decisions, and evidence for apps and automation.
+    link: /cloud/
   - title: Flyto2 Flow
     details: Build visual workflows, expose typed MCP tools, automate browsers locally, inspect evidence, and replay execution.
     link: /flow/

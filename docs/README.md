@@ -15,6 +15,8 @@ Frontend or public-surface documentation must follow the Flyto2 Frontend Quality
 
 ## Public Documentation
 
+- `../cloud/`: Cloud task/resource/capability/evidence architecture and
+  portable Mission Stations.
 - `../guide/`: installation, first workflow, modules, and configuration.
 - `../core/`: runtime concepts plus synced whitepaper, feature, API, CLI,
   operations, security, test, and migration pages.

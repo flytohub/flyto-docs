@@ -12,6 +12,8 @@ Important paths:
 - `.vitepress/config.mts` controls navigation, sitemap filtering, canonical
   metadata, JSON-LD, and non-content path handling.
 - `warroom/` documents the security product line.
+- `cloud/` documents Cloud / Apps / Automation control-plane contracts,
+  including portable Mission Stations.
 - `modules/` documents `flyto-core` module categories.
 - Locale module mirrors live under `zh-TW/`, `ja/`, `ko/`, `fr/`, `es/`,
   `hi/`, `de/`, `pt-BR/`, `vi/`, `id/`, `th/`, `tr/`, `pl/`, and `it/`.
@@ -71,3 +73,8 @@ only when an equivalent Markdown file exists.
 
 Project memory files are present in the repo root but must remain non-content in
 VitePress sitemap and robots metadata.
+
+Cloud pages document cross-repository contracts but own no runtime authority.
+They distinguish evaluator intent, Cloud task state, AI interpretation,
+resource assignment, robotics execution, and objective evidence. Deployment
+claims require separate release evidence.

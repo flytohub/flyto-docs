@@ -27,6 +27,12 @@ Primary repos:
 Critical boundary: `flyto-cloud` owns the app automation and marketplace
 experience. It must not be treated as only billing or hosting infrastructure.
 
+Mission Stations demonstrates this line's governed automation model: an
+evaluator physically draws the task cards, Cloud records the authoritative
+task and evidence policy, AI selects only approved capability IDs, and exact
+resources are assigned in a separate immutable revision. Cloud does not draw
+the cards or send raw actuator commands.
+
 ## 2. Flyto2 Security
 
 Flyto2 Security is the CTEM, external attack surface, pentest validation,

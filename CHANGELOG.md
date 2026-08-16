@@ -6,6 +6,11 @@
 
 - Added the governed Flyto2 coding contract for pinned dependency installation
   and the complete public documentation verification suite.
+- Added `/cloud/` and `/cloud/mission-stations` as the public architecture for
+  governed tasks, approved capabilities, resource assignments, evaluator-drawn
+  cards, portable venue calibration, motion safety, and objective evidence.
+- Added Cloud navigation, homepage entry points, AI-readable citation paths,
+  and repository ownership for the new pages.
 
 - Added public source-backed Core whitepaper, feature, API, CLI, configuration,
   operations, security, testing, migration, recipe, route, parser, environment,

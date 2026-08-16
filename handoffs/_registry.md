@@ -2,6 +2,7 @@
 
 | Date | Topic | File |
 | --- | --- | --- |
+| 2026-08-08 | Mission Stations task/resource architecture | `2026-08-08-mission-stations-task-resource-architecture.md` |
 | 2026-07-22 | Source-backed Core and Docs reference | `2026-07-22-source-backed-reference.md` |
 | 2026-07-18 | SEO discovery surfaces | `2026-07-18-seo-discovery-surfaces.md` |
 | 2026-07-18 | Community guide | `2026-07-18-community-guide.md` |
