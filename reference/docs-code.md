@@ -4,7 +4,7 @@
 
 Source map for every maintained function and configuration method in the Flyto2 Docs generators, audits, SEO gates, and VitePress configuration.
 
-Inventory: **15 files**, **3987 lines**, and **157 declarations**.
+Inventory: **15 files**, **3999 lines**, and **157 declarations**.
 
 ## `.vitepress/config.mts`
 
@@ -99,7 +99,7 @@ Inventory: **15 files**, **3987 lines**, and **157 declarations**.
 
 | Kind | Signature | Responsibility | Source |
 |---|---|---|---|
-| function | `isPublic(owner, name)` | Implements `isPublic` in this documentation surface. | [`scripts/check-unpublished-links.mjs:29`](https://github.com/flytohub/flyto-docs/blob/main/scripts/check-unpublished-links.mjs#L29) |
+| function | `isPublic(owner, name)` | Implements `isPublic` in this documentation surface. | [`scripts/check-unpublished-links.mjs:34`](https://github.com/flytohub/flyto-docs/blob/main/scripts/check-unpublished-links.mjs#L34) |
 
 ## `scripts/generate-code-reference.py`
 

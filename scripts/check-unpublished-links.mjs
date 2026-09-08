@@ -26,10 +26,22 @@ const workflow = readFileSync(workflowPath, 'utf8');
 const failures = [];
 const notes = [];
 
+// GitHub's own shape for an owner or repository name. Interpolating anything
+// else would let an edit to the config file choose where this script sends a
+// request -- a path traversal, or a whole other host smuggled through a name.
+const SLUG = /^[A-Za-z0-9](?:[A-Za-z0-9._-]{0,98}[A-Za-z0-9])?$/;
+
 async function isPublic(owner, name) {
-  const url = `https://api.github.com/repos/${owner}/${name}`;
+  if (!SLUG.test(owner) || !SLUG.test(name)) {
+    throw new Error(`not a repository slug: ${JSON.stringify(`${owner}/${name}`)}`);
+  }
+  const url = new URL(`https://api.github.com/repos/${owner}/${name}`);
+  if (url.origin !== 'https://api.github.com' || !url.pathname.startsWith('/repos/')) {
+    throw new Error(`refusing to request ${url.origin}${url.pathname}`);
+  }
   const response = await fetch(url, {
     headers: { Accept: 'application/vnd.github+json', 'User-Agent': 'flyto-docs-link-audit' },
+    redirect: 'error',
   });
   if (response.status === 404) return false;
   if (response.status === 200) return true;
