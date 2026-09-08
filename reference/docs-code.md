@@ -4,7 +4,7 @@
 
 Source map for every maintained function and configuration method in the Flyto2 Docs generators, audits, SEO gates, and VitePress configuration.
 
-Inventory: **14 files**, **3915 lines**, and **156 declarations**.
+Inventory: **15 files**, **3987 lines**, and **157 declarations**.
 
 ## `.vitepress/config.mts`
 
@@ -94,6 +94,12 @@ Inventory: **14 files**, **3915 lines**, and **156 declarations**.
 | function | `hasAnchor(filePath, hash)` | Implements `hasAnchor` in this documentation surface. | [`scripts/check-public-links.mjs:83`](https://github.com/flytohub/flyto-docs/blob/main/scripts/check-public-links.mjs#L83) |
 | function | `checkUrl(rawUrl, fromFile)` | Implements `checkUrl` in this documentation surface. | [`scripts/check-public-links.mjs:92`](https://github.com/flytohub/flyto-docs/blob/main/scripts/check-public-links.mjs#L92) |
 | function | `checkHtmlFile(filePath)` | Implements `checkHtmlFile` in this documentation surface. | [`scripts/check-public-links.mjs:108`](https://github.com/flytohub/flyto-docs/blob/main/scripts/check-public-links.mjs#L108) |
+
+## `scripts/check-unpublished-links.mjs`
+
+| Kind | Signature | Responsibility | Source |
+|---|---|---|---|
+| function | `isPublic(owner, name)` | Implements `isPublic` in this documentation surface. | [`scripts/check-unpublished-links.mjs:29`](https://github.com/flytohub/flyto-docs/blob/main/scripts/check-unpublished-links.mjs#L29) |
 
 ## `scripts/generate-code-reference.py`
 

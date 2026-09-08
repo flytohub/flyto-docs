@@ -16,10 +16,11 @@
     "links:external": "node scripts/list-external-links.mjs",
     "seo:discovery": "node scripts/generate-discovery.mjs",
     "build": "npm run seo:discovery && vitepress build",
-    "verify": "npm run test && npm run lint && npm run build && npm run check:links && npm run audit:seo && npm run seo:score && npm run seo:manage",
+    "verify": "npm run test && npm run lint && npm run build && npm run check:links && npm run check:unpublished && npm run audit:seo && npm run seo:score && npm run seo:manage",
     "docs:dev": "vitepress dev",
     "docs:build": "npm run build",
-    "docs:preview": "vitepress preview"
+    "docs:preview": "vitepress preview",
+    "check:unpublished": "node scripts/check-unpublished-links.mjs"
   },
   "devDependencies": {
     "vitepress": "^1.6.4"

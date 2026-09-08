@@ -1,0 +1,26 @@
+{
+  "comment": [
+    "Repositories the documentation already describes and links to, that are not",
+    "public yet. Their links 404 for a reader today, which is why the external",
+    "link check excludes them.",
+    "",
+    "The exclusion is meant to expire. check-unpublished-links.mjs fails once a",
+    "repository here answers publicly, because at that moment the exclusion is",
+    "hiding a link that works and the docs should be checked against it again.",
+    "",
+    "Removing a repository from this list means removing its --exclude from the",
+    "lychee step in .github/workflows/seo.yml at the same time."
+  ],
+  "repositories": [
+    {
+      "owner": "flytohub",
+      "name": "flyto-flow",
+      "reason": "Flow CE source-available publication is prepared but paused"
+    },
+    {
+      "owner": "flytohub",
+      "name": "flyto-warroom",
+      "reason": "Warroom CE publication is prepared but paused"
+    }
+  ]
+}
