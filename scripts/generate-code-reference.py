@@ -123,6 +123,31 @@ def render() -> str:
     )
 
 
+def unresolved_source_links(content: str) -> list[str]:
+    """Self-links that name a file or line this working tree does not have.
+
+    These point at `blob/main`, so a file added by a pull request 404s until it
+    merges and the external link check cannot judge them. It is skipped for
+    that reason -- which leaves this as the only place they are checked at all,
+    against the tree that produced them.
+    """
+    prefix = "https://github.com/flytohub/flyto-docs/blob/main/"
+    failures = []
+    for match in re.finditer(re.escape(prefix) + r"([^)#\s]+)#L(\d+)", content):
+        relative, line = match.group(1), int(match.group(2))
+        path = ROOT / relative
+        if not path.is_file():
+            failures.append(f"source link names a missing file: {relative}")
+            continue
+        try:
+            total = len(path.read_text(encoding="utf-8").splitlines())
+        except (OSError, UnicodeDecodeError):
+            continue
+        if line > total:
+            failures.append(f"source link names line {line} of {relative}, which has {total}")
+    return failures
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
@@ -131,6 +156,11 @@ def main() -> int:
     if args.check:
         if not OUTPUT.exists() or OUTPUT.read_text(encoding="utf-8") != content:
             print(f"generated reference drift: {OUTPUT.relative_to(ROOT)}", file=sys.stderr)
+            return 1
+        broken = unresolved_source_links(OUTPUT.read_text(encoding="utf-8"))
+        if broken:
+            for failure in broken:
+                print(failure, file=sys.stderr)
             return 1
         print(f"docs code reference checked: {OUTPUT.relative_to(ROOT)}")
         return 0

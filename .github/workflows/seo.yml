@@ -93,5 +93,11 @@ jobs:
             --scheme http
             --scheme https
             --exclude '^https://docs\.flyto2\.com'
+            --exclude '^https://github\.com/flytohub/flyto-docs/blob/main/'
+            --exclude '^https://github\.com/flytohub/flyto-flow'
+            --exclude '^https://github\.com/flytohub/flyto-warroom'
             --accept 200,204,206,301,302,307,308,429
             './.external-links.txt'
+
+      - name: Check that link exclusions have not outlived their reason
+        run: npm run check:unpublished

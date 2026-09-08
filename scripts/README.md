@@ -27,6 +27,19 @@ Important checks:
   inventories, Core provenance, declaration totals, code-reference drift,
   source ownership, Flyto2 naming, and the 16 approved public mailboxes.
 - `check-public-links.mjs` resolves every built internal link and anchor.
+- `check-unpublished-links.mjs` retires the external-link exclusions. The
+  docs describe Flow CE and Warroom CE before those repositories are public,
+  so their links 404 today and the lychee step in `seo.yml` excludes them.
+  This reads `config/unpublished-repos.json` and fails once a listed
+  repository answers publicly, which is the moment the exclusion starts
+  hiding a link that works. Removing an entry there means removing its
+  matching `--exclude` in the same change.
+- The lychee step also excludes this repository's own
+  `blob/main/...` source links. A file added by a pull request does not
+  exist on `main` until it merges, so those links 404 for the run that
+  introduces them and no external check can judge them. They are checked
+  instead by `generate-code-reference.py --check`, against the working
+  tree that produced them, which is the only place the answer is knowable.
 - `seo-score.mjs` and `seo-manage.mjs` create page-level and portfolio-level
   reports from built evidence rather than subjective claims.
 

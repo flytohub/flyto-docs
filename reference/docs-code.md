@@ -4,7 +4,7 @@
 
 Source map for every maintained function and configuration method in the Flyto2 Docs generators, audits, SEO gates, and VitePress configuration.
 
-Inventory: **14 files**, **3915 lines**, and **156 declarations**.
+Inventory: **15 files**, **4029 lines**, and **158 declarations**.
 
 ## `.vitepress/config.mts`
 
@@ -95,6 +95,12 @@ Inventory: **14 files**, **3915 lines**, and **156 declarations**.
 | function | `checkUrl(rawUrl, fromFile)` | Implements `checkUrl` in this documentation surface. | [`scripts/check-public-links.mjs:92`](https://github.com/flytohub/flyto-docs/blob/main/scripts/check-public-links.mjs#L92) |
 | function | `checkHtmlFile(filePath)` | Implements `checkHtmlFile` in this documentation surface. | [`scripts/check-public-links.mjs:108`](https://github.com/flytohub/flyto-docs/blob/main/scripts/check-public-links.mjs#L108) |
 
+## `scripts/check-unpublished-links.mjs`
+
+| Kind | Signature | Responsibility | Source |
+|---|---|---|---|
+| function | `isPublic(owner, name)` | Implements `isPublic` in this documentation surface. | [`scripts/check-unpublished-links.mjs:34`](https://github.com/flytohub/flyto-docs/blob/main/scripts/check-unpublished-links.mjs#L34) |
+
 ## `scripts/generate-code-reference.py`
 
 | Kind | Signature | Responsibility | Source |
@@ -105,7 +111,8 @@ Inventory: **14 files**, **3915 lines**, and **156 declarations**.
 | function | `def javascript_declarations(path: Path)` | Implements `javascript_declarations`. | [`scripts/generate-code-reference.py:58`](https://github.com/flytohub/flyto-docs/blob/main/scripts/generate-code-reference.py#L58) |
 | function | `def escape(value: str)` | Implements `escape`. | [`scripts/generate-code-reference.py:79`](https://github.com/flytohub/flyto-docs/blob/main/scripts/generate-code-reference.py#L79) |
 | function | `def render()` | Implements `render`. | [`scripts/generate-code-reference.py:83`](https://github.com/flytohub/flyto-docs/blob/main/scripts/generate-code-reference.py#L83) |
-| function | `def main()` | Implements `main`. | [`scripts/generate-code-reference.py:126`](https://github.com/flytohub/flyto-docs/blob/main/scripts/generate-code-reference.py#L126) |
+| function | `def unresolved_source_links(content: str)` | Self-links that name a file or line this working tree does not have. | [`scripts/generate-code-reference.py:126`](https://github.com/flytohub/flyto-docs/blob/main/scripts/generate-code-reference.py#L126) |
+| function | `def main()` | Implements `main`. | [`scripts/generate-code-reference.py:151`](https://github.com/flytohub/flyto-docs/blob/main/scripts/generate-code-reference.py#L151) |
 
 ## `scripts/generate-discovery.mjs`
 

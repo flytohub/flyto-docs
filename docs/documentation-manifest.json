@@ -4,7 +4,12 @@
   "version": 1,
   "repository": "flyto-docs",
   "status": "active",
-  "audiences": ["Flyto2 users", "operators", "integrators", "documentation contributors"],
+  "audiences": [
+    "Flyto2 users",
+    "operators",
+    "integrators",
+    "documentation contributors"
+  ],
   "documentation": {
     "index": "docs/README.md",
     "architecture": "ARCHITECTURE.md",
@@ -15,38 +20,86 @@
     "feature_reference": "docs/README.md",
     "cloud_architecture": "cloud/mission-stations.md",
     "source_reference": "reference/docs-code.md",
-    "module_roots": [".vitepress", "scripts"]
+    "module_roots": [
+      ".vitepress",
+      "scripts"
+    ]
   },
   "owners": [
     {
       "area": "vitepress-runtime",
-      "paths": [".vitepress/**"],
-      "docs": ["ARCHITECTURE.md", "reference/docs-code.md"]
+      "paths": [
+        ".vitepress/**"
+      ],
+      "docs": [
+        "ARCHITECTURE.md",
+        "reference/docs-code.md"
+      ]
     },
     {
       "area": "documentation-generators",
-      "paths": ["scripts/**"],
-      "docs": ["scripts/README.md", "reference/docs-code.md"]
+      "paths": [
+        "scripts/**",
+        "config/**"
+      ],
+      "docs": [
+        "scripts/README.md",
+        "reference/docs-code.md"
+      ]
     },
     {
       "area": "package-and-build",
-      "paths": ["package.json", "package-lock.json", "lighthouserc.cjs"],
-      "docs": ["README.md", "docs/README.md"]
+      "paths": [
+        "package.json",
+        "package-lock.json",
+        "lighthouserc.cjs"
+      ],
+      "docs": [
+        "README.md",
+        "docs/README.md"
+      ]
     },
     {
       "area": "automation",
-      "paths": [".github/**"],
-      "docs": ["engineering/ci-standard.md", "docs/README.md"]
+      "paths": [
+        ".github/**"
+      ],
+      "docs": [
+        "engineering/ci-standard.md",
+        "docs/README.md"
+      ]
     },
     {
       "area": "seo-contract",
-      "paths": [".seo/**", "public/*.txt", "public/*.xml", "public/*.json", "public/**/*.txt", "public/robots.txt", "public/CNAME"],
-      "docs": ["scripts/README.md", "STATE.md"]
+      "paths": [
+        ".seo/**",
+        "public/*.txt",
+        "public/*.xml",
+        "public/*.json",
+        "public/**/*.txt",
+        "public/robots.txt",
+        "public/CNAME"
+      ],
+      "docs": [
+        "scripts/README.md",
+        "STATE.md"
+      ]
     },
     {
       "area": "repository-policy",
-      "paths": [".flyto-rules.yaml", ".flyto/coding.yaml", ".gitleaks.toml", ".gitignore", ".env.example", "docs/documentation-manifest.json"],
-      "docs": ["AGENTS.md", "SECURITY.md", "docs/README.md"]
+      "paths": [
+        ".flyto-rules.yaml",
+        ".flyto/coding.yaml",
+        ".gitleaks.toml",
+        ".gitignore",
+        ".env.example",
+        "docs/documentation-manifest.json"
+      ],
+      "docs": [
+        "AGENTS.md",
+        "SECURITY.md",
+        "docs/README.md"
+      ]
     }
   ]
 }
